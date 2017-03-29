@@ -17,33 +17,35 @@
  * @member {string} [httpCode]
  *
  */
-function C() {
-}
+class C {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of C
- *
- * @returns {object} metadata of C
- *
- */
-C.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'C',
-    type: {
-      name: 'Composite',
-      className: 'C',
-      modelProperties: {
-        httpCode: {
-          required: false,
-          serializedName: 'httpCode',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of C
+   *
+   * @returns {object} metadata of C
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'C',
+      type: {
+        name: 'Composite',
+        className: 'C',
+        modelProperties: {
+          httpCode: {
+            required: false,
+            serializedName: 'httpCode',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = C;

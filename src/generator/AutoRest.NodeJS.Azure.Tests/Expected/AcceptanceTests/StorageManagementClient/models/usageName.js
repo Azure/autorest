@@ -22,40 +22,42 @@
  * resource name.
  *
  */
-function UsageName() {
-}
+class UsageName {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of UsageName
- *
- * @returns {object} metadata of UsageName
- *
- */
-UsageName.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'UsageName',
-    type: {
-      name: 'Composite',
-      className: 'UsageName',
-      modelProperties: {
-        value: {
-          required: false,
-          serializedName: 'value',
-          type: {
-            name: 'String'
-          }
-        },
-        localizedValue: {
-          required: false,
-          serializedName: 'localizedValue',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of UsageName
+   *
+   * @returns {object} metadata of UsageName
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'UsageName',
+      type: {
+        name: 'Composite',
+        className: 'UsageName',
+        modelProperties: {
+          value: {
+            required: false,
+            serializedName: 'value',
+            type: {
+              name: 'String'
+            }
+          },
+          localizedValue: {
+            required: false,
+            serializedName: 'localizedValue',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = UsageName;

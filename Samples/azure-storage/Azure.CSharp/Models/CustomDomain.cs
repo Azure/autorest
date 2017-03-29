@@ -1,8 +1,6 @@
 
 namespace Petstore.Models
 {
-    using Microsoft.Rest;
-    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -29,8 +27,8 @@ namespace Petstore.Models
         /// set on updates</param>
         public CustomDomain(string name, bool? useSubDomain = default(bool?))
         {
-            Name = name;
-            UseSubDomain = useSubDomain;
+            this.Name = name;
+            this.UseSubDomain = useSubDomain;
             CustomInit();
         }
 
@@ -42,27 +40,27 @@ namespace Petstore.Models
         /// <summary>
         /// Gets or sets the custom domain name. Name is the CNAME source.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets indicates whether indirect CName validation is
         /// enabled. Default value is false. This should only be set on updates
         /// </summary>
-        [JsonProperty(PropertyName = "useSubDomain")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "useSubDomain")]
         public bool? UseSubDomain { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
-            if (Name == null)
+            if (this.Name == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
             }
         }
     }

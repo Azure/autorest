@@ -10,23 +10,8 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var WebResource = msRest.WebResource;
-
-/**
- * @class
- * Number
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestNumberTestService.
- * Initializes a new instance of the Number class.
- * @constructor
- *
- * @param {AutoRestNumberTestService} client Reference to the service client.
- */
-function Number(client) {
-  this.client = client;
-}
+const msRest = require('ms-rest');
+const WebResource = msRest.WebResource;
 
 /**
  * Get null Number value
@@ -36,20 +21,21 @@ function Number(client) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getNull = function (options, callback) {
-  var client = this.client;
+function _getNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -59,17 +45,17 @@ Number.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/null';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/null';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -78,48 +64,48 @@ Number.prototype.getNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -129,7 +115,7 @@ Number.prototype.getNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -138,7 +124,7 @@ Number.prototype.getNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get invalid float Number value
@@ -148,20 +134,21 @@ Number.prototype.getNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getInvalidFloat = function (options, callback) {
-  var client = this.client;
+function _getInvalidFloat(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -171,17 +158,17 @@ Number.prototype.getInvalidFloat = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/invalidfloat';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/invalidfloat';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -190,48 +177,48 @@ Number.prototype.getInvalidFloat = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -241,7 +228,7 @@ Number.prototype.getInvalidFloat = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -250,7 +237,7 @@ Number.prototype.getInvalidFloat = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get invalid double Number value
@@ -260,20 +247,21 @@ Number.prototype.getInvalidFloat = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getInvalidDouble = function (options, callback) {
-  var client = this.client;
+function _getInvalidDouble(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -283,17 +271,17 @@ Number.prototype.getInvalidDouble = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/invaliddouble';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/invaliddouble';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -302,48 +290,48 @@ Number.prototype.getInvalidDouble = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -353,7 +341,7 @@ Number.prototype.getInvalidDouble = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -362,7 +350,7 @@ Number.prototype.getInvalidDouble = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get invalid decimal Number value
@@ -372,20 +360,21 @@ Number.prototype.getInvalidDouble = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getInvalidDecimal = function (options, callback) {
-  var client = this.client;
+function _getInvalidDecimal(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -395,17 +384,17 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/invaliddecimal';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/invaliddecimal';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -414,48 +403,48 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -465,7 +454,7 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -474,7 +463,7 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put big float value 3.402823e+20
@@ -486,20 +475,21 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.putBigFloat = function (numberBody, options, callback) {
-  var client = this.client;
+function _putBigFloat(numberBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -517,17 +507,17 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/float/3.402823e+20';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/float/3.402823e+20';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -535,11 +525,11 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'numberBody',
         type: {
@@ -550,50 +540,50 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(numberBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get big float value 3.402823e+20
@@ -603,20 +593,21 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getBigFloat = function (options, callback) {
-  var client = this.client;
+function _getBigFloat(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -626,17 +617,17 @@ Number.prototype.getBigFloat = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/float/3.402823e+20';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/float/3.402823e+20';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -645,48 +636,48 @@ Number.prototype.getBigFloat = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -696,7 +687,7 @@ Number.prototype.getBigFloat = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -705,7 +696,7 @@ Number.prototype.getBigFloat = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put big double value 2.5976931e+101
@@ -717,20 +708,21 @@ Number.prototype.getBigFloat = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.putBigDouble = function (numberBody, options, callback) {
-  var client = this.client;
+function _putBigDouble(numberBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -748,17 +740,17 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/2.5976931e+101';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/2.5976931e+101';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -766,11 +758,11 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'numberBody',
         type: {
@@ -781,50 +773,50 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(numberBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get big double value 2.5976931e+101
@@ -834,20 +826,21 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getBigDouble = function (options, callback) {
-  var client = this.client;
+function _getBigDouble(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -857,17 +850,17 @@ Number.prototype.getBigDouble = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/2.5976931e+101';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/2.5976931e+101';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -876,48 +869,48 @@ Number.prototype.getBigDouble = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -927,7 +920,7 @@ Number.prototype.getBigDouble = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -936,7 +929,7 @@ Number.prototype.getBigDouble = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put big double value 99999999.99
@@ -948,20 +941,21 @@ Number.prototype.getBigDouble = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, callback) {
-  var client = this.client;
+function _putBigDoublePositiveDecimal(numberBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -979,17 +973,17 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/99999999.99';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/99999999.99';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -997,11 +991,11 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'numberBody',
         type: {
@@ -1012,50 +1006,50 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(numberBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get big double value 99999999.99
@@ -1065,20 +1059,21 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
-  var client = this.client;
+function _getBigDoublePositiveDecimal(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1088,17 +1083,17 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/99999999.99';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/99999999.99';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1107,48 +1102,48 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -1158,7 +1153,7 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1167,7 +1162,7 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put big double value -99999999.99
@@ -1179,20 +1174,21 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, callback) {
-  var client = this.client;
+function _putBigDoubleNegativeDecimal(numberBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1210,17 +1206,17 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/-99999999.99';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/-99999999.99';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1228,11 +1224,11 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'numberBody',
         type: {
@@ -1243,50 +1239,50 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(numberBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get big double value -99999999.99
@@ -1296,20 +1292,21 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
-  var client = this.client;
+function _getBigDoubleNegativeDecimal(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1319,17 +1316,17 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/-99999999.99';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/double/-99999999.99';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1338,48 +1335,48 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -1389,7 +1386,7 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1398,7 +1395,7 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put big decimal value 2.5976931e+101
@@ -1410,20 +1407,21 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.putBigDecimal = function (numberBody, options, callback) {
-  var client = this.client;
+function _putBigDecimal(numberBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1441,17 +1439,17 @@ Number.prototype.putBigDecimal = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/2.5976931e+101';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/2.5976931e+101';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1459,11 +1457,11 @@ Number.prototype.putBigDecimal = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'numberBody',
         type: {
@@ -1474,50 +1472,50 @@ Number.prototype.putBigDecimal = function (numberBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(numberBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get big decimal value 2.5976931e+101
@@ -1527,20 +1525,21 @@ Number.prototype.putBigDecimal = function (numberBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getBigDecimal = function (options, callback) {
-  var client = this.client;
+function _getBigDecimal(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1550,17 +1549,17 @@ Number.prototype.getBigDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/2.5976931e+101';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/2.5976931e+101';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1569,48 +1568,48 @@ Number.prototype.getBigDecimal = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -1620,7 +1619,7 @@ Number.prototype.getBigDecimal = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1629,7 +1628,7 @@ Number.prototype.getBigDecimal = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put big decimal value 99999999.99
@@ -1641,20 +1640,21 @@ Number.prototype.getBigDecimal = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, callback) {
-  var client = this.client;
+function _putBigDecimalPositiveDecimal(numberBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1672,17 +1672,17 @@ Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, c
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/99999999.99';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/99999999.99';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1690,11 +1690,11 @@ Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, c
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'numberBody',
         type: {
@@ -1705,50 +1705,50 @@ Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, c
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(numberBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get big decimal value 99999999.99
@@ -1758,20 +1758,21 @@ Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, c
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
-  var client = this.client;
+function _getBigDecimalPositiveDecimal(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1781,17 +1782,17 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/99999999.99';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/99999999.99';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1800,48 +1801,48 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -1851,7 +1852,7 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1860,7 +1861,7 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put big decimal value -99999999.99
@@ -1872,20 +1873,21 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, callback) {
-  var client = this.client;
+function _putBigDecimalNegativeDecimal(numberBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1903,17 +1905,17 @@ Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, c
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/-99999999.99';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/-99999999.99';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1921,11 +1923,11 @@ Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, c
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'numberBody',
         type: {
@@ -1936,50 +1938,50 @@ Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, c
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(numberBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get big decimal value -99999999.99
@@ -1989,20 +1991,21 @@ Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, c
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
-  var client = this.client;
+function _getBigDecimalNegativeDecimal(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2012,17 +2015,17 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/-99999999.99';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/big/decimal/-99999999.99';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2031,48 +2034,48 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -2082,7 +2085,7 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2091,7 +2094,7 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put small float value 3.402823e-20
@@ -2103,20 +2106,21 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.putSmallFloat = function (numberBody, options, callback) {
-  var client = this.client;
+function _putSmallFloat(numberBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2134,17 +2138,17 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/float/3.402823e-20';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/float/3.402823e-20';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2152,11 +2156,11 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'numberBody',
         type: {
@@ -2167,50 +2171,50 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(numberBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get big double value 3.402823e-20
@@ -2220,20 +2224,21 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getSmallFloat = function (options, callback) {
-  var client = this.client;
+function _getSmallFloat(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2243,17 +2248,17 @@ Number.prototype.getSmallFloat = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/float/3.402823e-20';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/float/3.402823e-20';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2262,48 +2267,48 @@ Number.prototype.getSmallFloat = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -2313,7 +2318,7 @@ Number.prototype.getSmallFloat = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2322,7 +2327,7 @@ Number.prototype.getSmallFloat = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put small double value 2.5976931e-101
@@ -2334,20 +2339,21 @@ Number.prototype.getSmallFloat = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.putSmallDouble = function (numberBody, options, callback) {
-  var client = this.client;
+function _putSmallDouble(numberBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2365,17 +2371,17 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/double/2.5976931e-101';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/double/2.5976931e-101';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2383,11 +2389,11 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'numberBody',
         type: {
@@ -2398,50 +2404,50 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(numberBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get big double value 2.5976931e-101
@@ -2451,20 +2457,21 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getSmallDouble = function (options, callback) {
-  var client = this.client;
+function _getSmallDouble(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2474,17 +2481,17 @@ Number.prototype.getSmallDouble = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/double/2.5976931e-101';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/double/2.5976931e-101';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2493,48 +2500,48 @@ Number.prototype.getSmallDouble = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -2544,7 +2551,7 @@ Number.prototype.getSmallDouble = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2553,7 +2560,7 @@ Number.prototype.getSmallDouble = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put small decimal value 2.5976931e-101
@@ -2565,20 +2572,21 @@ Number.prototype.getSmallDouble = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
-  var client = this.client;
+function _putSmallDecimal(numberBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2596,17 +2604,17 @@ Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/decimal/2.5976931e-101';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/decimal/2.5976931e-101';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2614,11 +2622,11 @@ Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'numberBody',
         type: {
@@ -2629,50 +2637,50 @@ Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(numberBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get small decimal value 2.5976931e-101
@@ -2682,20 +2690,21 @@ Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {number} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Number.prototype.getSmallDecimal = function (options, callback) {
-  var client = this.client;
+function _getSmallDecimal(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2705,17 +2714,17 @@ Number.prototype.getSmallDecimal = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/decimal/2.5976931e-101';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'number/small/decimal/2.5976931e-101';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2724,48 +2733,48 @@ Number.prototype.getSmallDecimal = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -2775,7 +2784,7 @@ Number.prototype.getSmallDecimal = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2784,7 +2793,1935 @@ Number.prototype.getSmallDecimal = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
+/**
+ * @class
+ * Number
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestNumberTestService.
+ * Initializes a new instance of the Number class.
+ * @constructor
+ *
+ * @param {AutoRestNumberTestService} client Reference to the service client.
+ */
+class Number {
+  constructor(client) {
+    this.client = client;
+    this._getNull = _getNull;
+    this._getInvalidFloat = _getInvalidFloat;
+    this._getInvalidDouble = _getInvalidDouble;
+    this._getInvalidDecimal = _getInvalidDecimal;
+    this._putBigFloat = _putBigFloat;
+    this._getBigFloat = _getBigFloat;
+    this._putBigDouble = _putBigDouble;
+    this._getBigDouble = _getBigDouble;
+    this._putBigDoublePositiveDecimal = _putBigDoublePositiveDecimal;
+    this._getBigDoublePositiveDecimal = _getBigDoublePositiveDecimal;
+    this._putBigDoubleNegativeDecimal = _putBigDoubleNegativeDecimal;
+    this._getBigDoubleNegativeDecimal = _getBigDoubleNegativeDecimal;
+    this._putBigDecimal = _putBigDecimal;
+    this._getBigDecimal = _getBigDecimal;
+    this._putBigDecimalPositiveDecimal = _putBigDecimalPositiveDecimal;
+    this._getBigDecimalPositiveDecimal = _getBigDecimalPositiveDecimal;
+    this._putBigDecimalNegativeDecimal = _putBigDecimalNegativeDecimal;
+    this._getBigDecimalNegativeDecimal = _getBigDecimalNegativeDecimal;
+    this._putSmallFloat = _putSmallFloat;
+    this._getSmallFloat = _getSmallFloat;
+    this._putSmallDouble = _putSmallDouble;
+    this._getSmallDouble = _getSmallDouble;
+    this._putSmallDecimal = _putSmallDecimal;
+    this._getSmallDecimal = _getSmallDecimal;
+  }
+
+  /**
+   * Get null Number value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get null Number value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get invalid float Number value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getInvalidFloatWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getInvalidFloat(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get invalid float Number value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getInvalidFloat(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getInvalidFloat(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getInvalidFloat(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get invalid double Number value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getInvalidDoubleWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getInvalidDouble(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get invalid double Number value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getInvalidDouble(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getInvalidDouble(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getInvalidDouble(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get invalid decimal Number value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getInvalidDecimalWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getInvalidDecimal(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get invalid decimal Number value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getInvalidDecimal(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getInvalidDecimal(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getInvalidDecimal(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put big float value 3.402823e+20
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putBigFloatWithHttpOperationResponse(numberBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putBigFloat(numberBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put big float value 3.402823e+20
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putBigFloat(numberBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putBigFloat(numberBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putBigFloat(numberBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get big float value 3.402823e+20
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBigFloatWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBigFloat(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get big float value 3.402823e+20
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBigFloat(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBigFloat(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBigFloat(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put big double value 2.5976931e+101
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putBigDoubleWithHttpOperationResponse(numberBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putBigDouble(numberBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put big double value 2.5976931e+101
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putBigDouble(numberBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putBigDouble(numberBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putBigDouble(numberBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get big double value 2.5976931e+101
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBigDoubleWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBigDouble(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get big double value 2.5976931e+101
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBigDouble(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBigDouble(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBigDouble(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put big double value 99999999.99
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putBigDoublePositiveDecimalWithHttpOperationResponse(numberBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putBigDoublePositiveDecimal(numberBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put big double value 99999999.99
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putBigDoublePositiveDecimal(numberBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putBigDoublePositiveDecimal(numberBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putBigDoublePositiveDecimal(numberBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get big double value 99999999.99
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBigDoublePositiveDecimalWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBigDoublePositiveDecimal(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get big double value 99999999.99
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBigDoublePositiveDecimal(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBigDoublePositiveDecimal(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBigDoublePositiveDecimal(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put big double value -99999999.99
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putBigDoubleNegativeDecimalWithHttpOperationResponse(numberBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putBigDoubleNegativeDecimal(numberBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put big double value -99999999.99
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putBigDoubleNegativeDecimal(numberBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putBigDoubleNegativeDecimal(numberBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putBigDoubleNegativeDecimal(numberBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get big double value -99999999.99
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBigDoubleNegativeDecimalWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBigDoubleNegativeDecimal(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get big double value -99999999.99
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBigDoubleNegativeDecimal(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBigDoubleNegativeDecimal(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBigDoubleNegativeDecimal(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put big decimal value 2.5976931e+101
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putBigDecimalWithHttpOperationResponse(numberBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putBigDecimal(numberBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put big decimal value 2.5976931e+101
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putBigDecimal(numberBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putBigDecimal(numberBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putBigDecimal(numberBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get big decimal value 2.5976931e+101
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBigDecimalWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBigDecimal(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get big decimal value 2.5976931e+101
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBigDecimal(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBigDecimal(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBigDecimal(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put big decimal value 99999999.99
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putBigDecimalPositiveDecimalWithHttpOperationResponse(numberBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putBigDecimalPositiveDecimal(numberBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put big decimal value 99999999.99
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putBigDecimalPositiveDecimal(numberBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putBigDecimalPositiveDecimal(numberBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putBigDecimalPositiveDecimal(numberBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get big decimal value 99999999.99
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBigDecimalPositiveDecimalWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBigDecimalPositiveDecimal(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get big decimal value 99999999.99
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBigDecimalPositiveDecimal(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBigDecimalPositiveDecimal(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBigDecimalPositiveDecimal(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put big decimal value -99999999.99
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putBigDecimalNegativeDecimalWithHttpOperationResponse(numberBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putBigDecimalNegativeDecimal(numberBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put big decimal value -99999999.99
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putBigDecimalNegativeDecimal(numberBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putBigDecimalNegativeDecimal(numberBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putBigDecimalNegativeDecimal(numberBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get big decimal value -99999999.99
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBigDecimalNegativeDecimalWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBigDecimalNegativeDecimal(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get big decimal value -99999999.99
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBigDecimalNegativeDecimal(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBigDecimalNegativeDecimal(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBigDecimalNegativeDecimal(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put small float value 3.402823e-20
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putSmallFloatWithHttpOperationResponse(numberBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putSmallFloat(numberBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put small float value 3.402823e-20
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putSmallFloat(numberBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putSmallFloat(numberBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putSmallFloat(numberBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get big double value 3.402823e-20
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getSmallFloatWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getSmallFloat(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get big double value 3.402823e-20
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getSmallFloat(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getSmallFloat(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getSmallFloat(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put small double value 2.5976931e-101
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putSmallDoubleWithHttpOperationResponse(numberBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putSmallDouble(numberBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put small double value 2.5976931e-101
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putSmallDouble(numberBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putSmallDouble(numberBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putSmallDouble(numberBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get big double value 2.5976931e-101
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getSmallDoubleWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getSmallDouble(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get big double value 2.5976931e-101
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getSmallDouble(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getSmallDouble(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getSmallDouble(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put small decimal value 2.5976931e-101
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putSmallDecimalWithHttpOperationResponse(numberBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putSmallDecimal(numberBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put small decimal value 2.5976931e-101
+   *
+   * @param {number} numberBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putSmallDecimal(numberBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putSmallDecimal(numberBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putSmallDecimal(numberBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get small decimal value 2.5976931e-101
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Number>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getSmallDecimalWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getSmallDecimal(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get small decimal value 2.5976931e-101
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Number} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {number} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getSmallDecimal(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getSmallDecimal(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getSmallDecimal(options, optionalCallback);
+    }
+  }
+
+}
 
 module.exports = Number;

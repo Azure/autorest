@@ -1,18 +1,14 @@
 namespace Petstore
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Xml;
-    using System.Xml.Linq;
     internal static class XmlSerialization
     {
-        internal delegate bool XmlRootDeserializer<T>( XElement root, out T result );
-        internal delegate bool XmlDeserializer<T>( XElement parent, string propertyName, out T result );
+        internal delegate bool XmlRootDeserializer<T>( System.Xml.Linq.XElement root, out T result );
+        internal delegate bool XmlDeserializer<T>( System.Xml.Linq.XElement parent, string propertyName, out T result );
         internal static XmlRootDeserializer<T> Root<T>( XmlDeserializer<T> deserializer ) =>
-            (XElement root, out T result) => deserializer(new XElement("artificialRoot", root), root.Name.LocalName, out result);
+            (System.Xml.Linq.XElement root, out T result) => deserializer(new System.Xml.Linq.XElement("artificialRoot", root), root.Name.LocalName, out result);
         private static XmlDeserializer<T> Unroot<T>( XmlRootDeserializer<T> deserializer )
         {
-            return (XElement parent, string propertyName, out T result) => {
+            return (System.Xml.Linq.XElement parent, string propertyName, out T result) => {
                 result = default(T);
                 var element = parent.Element(propertyName);
                 if (element == null)
@@ -22,8 +18,8 @@ namespace Petstore
                 return deserializer(element, out result);
             };
         }
-        private static XmlRootDeserializer<T> ToRootDeserializer<T>( System.Func<XElement, T> unsafeDeserializer )
-            => (XElement root, out T result) => {
+        private static XmlRootDeserializer<T> ToRootDeserializer<T>( System.Func<System.Xml.Linq.XElement, T> unsafeDeserializer )
+            => (System.Xml.Linq.XElement root, out T result) => {
                 try
                 {
                     result = unsafeDeserializer(root);
@@ -34,23 +30,23 @@ namespace Petstore
                     result = default(T);
                     return false;
                 }};
-        internal static XmlDeserializer<T> ToDeserializer<T>( System.Func<XElement, T> unsafeDeserializer )
+        internal static XmlDeserializer<T> ToDeserializer<T>( System.Func<System.Xml.Linq.XElement, T> unsafeDeserializer )
             => Unroot(ToRootDeserializer(unsafeDeserializer));
-        internal static XmlDeserializer<IList<T>> CreateListXmlDeserializer<T>( XmlDeserializer<T> elementDeserializer, string elementTagName = null /*if isWrapped = false*/ )
+        internal static XmlDeserializer<System.Collections.Generic.IList<T>> CreateListXmlDeserializer<T>( XmlDeserializer<T> elementDeserializer, string elementTagName = null /*if isWrapped = false*/ )
         {
             if (elementTagName != null)
             {
                 // create non-wrapped deserializer and forward
-                var slave = CreateListXmlDeserializer( elementDeserializer );
-                return (XElement parent, string propertyName, out IList<T> result) => {
+                var slave = CreateListXmlDeserializer<T>( elementDeserializer );
+                return (System.Xml.Linq.XElement parent, string propertyName, out System.Collections.Generic.IList<T> result) => {
                     result = null;
                     var wrapper = parent.Element(propertyName);
                     return wrapper != null && slave(wrapper, elementTagName, out result);
                 };
             }
             var rootElementDeserializer = Root(elementDeserializer);
-            return (XElement parent, string propertyName, out IList<T> result) => {
-                result = new List<T>();
+            return (System.Xml.Linq.XElement parent, string propertyName, out System.Collections.Generic.IList<T> result) => {
+                result = new System.Collections.Generic.List<T>();
                 foreach (var element in parent.Elements(propertyName))
                 {
                     T elementResult;
@@ -63,16 +59,16 @@ namespace Petstore
                 return true;
             };
         }
-        internal static XmlDeserializer<IDictionary<string, T>> CreateDictionaryXmlDeserializer<T>( XmlDeserializer<T> elementDeserializer )
+        internal static XmlDeserializer<System.Collections.Generic.IDictionary<string, T>> CreateDictionaryXmlDeserializer<T>( XmlDeserializer<T> elementDeserializer )
         {
-            return (XElement parent, string propertyName, out IDictionary<string, T> result) => {
+            return (System.Xml.Linq.XElement parent, string propertyName, out System.Collections.Generic.IDictionary<string, T> result) => {
                 result = null;
                 var childElement = parent.Element(propertyName);
                 if (childElement == null)
                 {
                     return false;
                 }
-                result = new Dictionary<string, T>();
+                result = new System.Collections.Generic.Dictionary<string, T>();
                 foreach (var element in childElement.Elements())
                 {
                     T elementResult;

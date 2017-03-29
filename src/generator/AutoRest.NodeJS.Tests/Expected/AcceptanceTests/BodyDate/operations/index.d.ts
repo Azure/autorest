@@ -8,7 +8,7 @@
  * regenerated.
 */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as models from '../models';
 
 
@@ -20,6 +20,7 @@ import * as models from '../models';
  */
 export interface DateModel {
 
+
     /**
      * Get null date value
      *
@@ -28,11 +29,47 @@ export interface DateModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Date>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getNullWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<Date>>;
+
+    /**
+     * Get null date value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Date} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Date} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getNull(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<Date>;
     getNull(callback: ServiceCallback<Date>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+
 
     /**
      * Get invalid date value
@@ -42,11 +79,47 @@ export interface DateModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Date>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getInvalidDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getInvalidDateWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<Date>>;
+
+    /**
+     * Get invalid date value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Date} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Date} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getInvalidDate(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<Date>;
     getInvalidDate(callback: ServiceCallback<Date>): void;
+    getInvalidDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+
 
     /**
      * Get overflow date value
@@ -56,11 +129,47 @@ export interface DateModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Date>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getOverflowDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getOverflowDateWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<Date>>;
+
+    /**
+     * Get overflow date value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Date} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Date} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getOverflowDate(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<Date>;
     getOverflowDate(callback: ServiceCallback<Date>): void;
+    getOverflowDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+
 
     /**
      * Get underflow date value
@@ -70,11 +179,47 @@ export interface DateModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Date>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getUnderflowDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getUnderflowDateWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<Date>>;
+
+    /**
+     * Get underflow date value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Date} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Date} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getUnderflowDate(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<Date>;
     getUnderflowDate(callback: ServiceCallback<Date>): void;
+    getUnderflowDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+
 
     /**
      * Put max date value 9999-12-31
@@ -86,11 +231,49 @@ export interface DateModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putMaxDate(dateBody: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putMaxDateWithHttpOperationResponse(dateBody: Date|string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put max date value 9999-12-31
+     *
+     * @param {date} dateBody
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putMaxDate(dateBody: Date|string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putMaxDate(dateBody: Date|string, callback: ServiceCallback<void>): void;
+    putMaxDate(dateBody: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get max date value 9999-12-31
@@ -100,11 +283,47 @@ export interface DateModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Date>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getMaxDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getMaxDateWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<Date>>;
+
+    /**
+     * Get max date value 9999-12-31
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Date} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Date} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getMaxDate(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<Date>;
     getMaxDate(callback: ServiceCallback<Date>): void;
+    getMaxDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+
 
     /**
      * Put min date value 0000-01-01
@@ -116,11 +335,49 @@ export interface DateModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putMinDate(dateBody: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putMinDateWithHttpOperationResponse(dateBody: Date|string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put min date value 0000-01-01
+     *
+     * @param {date} dateBody
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putMinDate(dateBody: Date|string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putMinDate(dateBody: Date|string, callback: ServiceCallback<void>): void;
+    putMinDate(dateBody: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get min date value 0000-01-01
@@ -130,9 +387,44 @@ export interface DateModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Date>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getMinDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getMinDateWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<Date>>;
+
+    /**
+     * Get min date value 0000-01-01
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Date} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Date} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getMinDate(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<Date>;
     getMinDate(callback: ServiceCallback<Date>): void;
+    getMinDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
 }

@@ -10,24 +10,9 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var WebResource = msRest.WebResource;
-var moment = require('moment');
-
-/**
- * @class
- * Dictionary
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestSwaggerBATdictionaryService.
- * Initializes a new instance of the Dictionary class.
- * @constructor
- *
- * @param {AutoRestSwaggerBATdictionaryService} client Reference to the service client.
- */
-function Dictionary(client) {
-  this.client = client;
-}
+const msRest = require('ms-rest');
+const WebResource = msRest.WebResource;
+const moment = require('moment');
 
 /**
  * Get null dictionary value
@@ -37,20 +22,21 @@ function Dictionary(client) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getNull = function (options, callback) {
-  var client = this.client;
+function _getNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -60,17 +46,17 @@ Dictionary.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/null';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/null';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -79,48 +65,48 @@ Dictionary.prototype.getNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -137,7 +123,7 @@ Dictionary.prototype.getNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -146,7 +132,7 @@ Dictionary.prototype.getNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get empty dictionary value {}
@@ -156,20 +142,21 @@ Dictionary.prototype.getNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getEmpty = function (options, callback) {
-  var client = this.client;
+function _getEmpty(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -179,17 +166,17 @@ Dictionary.prototype.getEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/empty';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/empty';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -198,48 +185,48 @@ Dictionary.prototype.getEmpty = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -256,7 +243,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -265,7 +252,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value empty {}
@@ -277,20 +264,21 @@ Dictionary.prototype.getEmpty = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putEmpty(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -303,7 +291,7 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement].valueOf() !== 'string') {
         throw new Error('arrayBody[valueElement] must be of type string.');
       }
@@ -313,17 +301,17 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/empty';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/empty';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -331,11 +319,11 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -353,50 +341,50 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get Dictionary with null value
@@ -406,20 +394,21 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getNullValue = function (options, callback) {
-  var client = this.client;
+function _getNullValue(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -429,17 +418,17 @@ Dictionary.prototype.getNullValue = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/nullvalue';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/nullvalue';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -448,48 +437,48 @@ Dictionary.prototype.getNullValue = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -506,7 +495,7 @@ Dictionary.prototype.getNullValue = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -515,7 +504,7 @@ Dictionary.prototype.getNullValue = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get Dictionary with null key
@@ -525,20 +514,21 @@ Dictionary.prototype.getNullValue = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getNullKey = function (options, callback) {
-  var client = this.client;
+function _getNullKey(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -548,17 +538,17 @@ Dictionary.prototype.getNullKey = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/nullkey';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/nullkey';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -567,48 +557,48 @@ Dictionary.prototype.getNullKey = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -625,7 +615,7 @@ Dictionary.prototype.getNullKey = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -634,7 +624,7 @@ Dictionary.prototype.getNullKey = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get Dictionary with key as empty string
@@ -644,20 +634,21 @@ Dictionary.prototype.getNullKey = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getEmptyStringKey = function (options, callback) {
-  var client = this.client;
+function _getEmptyStringKey(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -667,17 +658,17 @@ Dictionary.prototype.getEmptyStringKey = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/keyemptystring';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/keyemptystring';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -686,48 +677,48 @@ Dictionary.prototype.getEmptyStringKey = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -744,7 +735,7 @@ Dictionary.prototype.getEmptyStringKey = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -753,7 +744,7 @@ Dictionary.prototype.getEmptyStringKey = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get invalid Dictionary value
@@ -763,20 +754,21 @@ Dictionary.prototype.getEmptyStringKey = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getInvalid = function (options, callback) {
-  var client = this.client;
+function _getInvalid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -786,17 +778,17 @@ Dictionary.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/invalid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/invalid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -805,48 +797,48 @@ Dictionary.prototype.getInvalid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -863,7 +855,7 @@ Dictionary.prototype.getInvalid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -872,7 +864,7 @@ Dictionary.prototype.getInvalid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
@@ -882,20 +874,21 @@ Dictionary.prototype.getInvalid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getBooleanTfft = function (options, callback) {
-  var client = this.client;
+function _getBooleanTfft(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -905,17 +898,17 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/tfft';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/tfft';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -924,48 +917,48 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -982,7 +975,7 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -991,7 +984,7 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
@@ -1003,20 +996,21 @@ Dictionary.prototype.getBooleanTfft = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putBooleanTfft(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1029,7 +1023,7 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement] !== 'boolean') {
         throw new Error('arrayBody[valueElement] must be of type boolean.');
       }
@@ -1039,17 +1033,17 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/tfft';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/tfft';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1057,11 +1051,11 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -1079,50 +1073,50 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get boolean dictionary value {"0": true, "1": null, "2": false }
@@ -1132,20 +1126,21 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
-  var client = this.client;
+function _getBooleanInvalidNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1155,17 +1150,17 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/true.null.false';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/true.null.false';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1174,48 +1169,48 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -1232,7 +1227,7 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1241,7 +1236,7 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
@@ -1251,20 +1246,21 @@ Dictionary.prototype.getBooleanInvalidNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
-  var client = this.client;
+function _getBooleanInvalidString(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1274,17 +1270,17 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/true.boolean.false';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/boolean/true.boolean.false';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1293,48 +1289,48 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -1351,7 +1347,7 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1360,7 +1356,7 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -1370,20 +1366,21 @@ Dictionary.prototype.getBooleanInvalidString = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getIntegerValid = function (options, callback) {
-  var client = this.client;
+function _getIntegerValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1393,17 +1390,17 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.-1.3.300';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.-1.3.300';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1412,48 +1409,48 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -1470,7 +1467,7 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1479,7 +1476,7 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -1491,20 +1488,21 @@ Dictionary.prototype.getIntegerValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putIntegerValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1517,7 +1515,7 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement] !== 'number') {
         throw new Error('arrayBody[valueElement] must be of type number.');
       }
@@ -1527,17 +1525,17 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.-1.3.300';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.-1.3.300';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1545,11 +1543,11 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -1567,50 +1565,50 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get integer dictionary value {"0": 1, "1": null, "2": 0}
@@ -1620,20 +1618,21 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getIntInvalidNull = function (options, callback) {
-  var client = this.client;
+function _getIntInvalidNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1643,17 +1642,17 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.null.zero';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.null.zero';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1662,48 +1661,48 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -1720,7 +1719,7 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1729,7 +1728,7 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
@@ -1739,20 +1738,21 @@ Dictionary.prototype.getIntInvalidNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getIntInvalidString = function (options, callback) {
-  var client = this.client;
+function _getIntInvalidString(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1762,17 +1762,17 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.integer.0';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/integer/1.integer.0';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1781,48 +1781,48 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -1839,7 +1839,7 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1848,7 +1848,7 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -1858,20 +1858,21 @@ Dictionary.prototype.getIntInvalidString = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getLongValid = function (options, callback) {
-  var client = this.client;
+function _getLongValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1881,17 +1882,17 @@ Dictionary.prototype.getLongValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.-1.3.300';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.-1.3.300';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1900,48 +1901,48 @@ Dictionary.prototype.getLongValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -1958,7 +1959,7 @@ Dictionary.prototype.getLongValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1967,7 +1968,7 @@ Dictionary.prototype.getLongValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
@@ -1979,20 +1980,21 @@ Dictionary.prototype.getLongValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putLongValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2005,7 +2007,7 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement] !== 'number') {
         throw new Error('arrayBody[valueElement] must be of type number.');
       }
@@ -2015,17 +2017,17 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.-1.3.300';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.-1.3.300';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2033,11 +2035,11 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -2055,50 +2057,50 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get long dictionary value {"0": 1, "1": null, "2": 0}
@@ -2108,20 +2110,21 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getLongInvalidNull = function (options, callback) {
-  var client = this.client;
+function _getLongInvalidNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2131,17 +2134,17 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.null.zero';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.null.zero';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2150,48 +2153,48 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -2208,7 +2211,7 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2217,7 +2220,7 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
@@ -2227,20 +2230,21 @@ Dictionary.prototype.getLongInvalidNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getLongInvalidString = function (options, callback) {
-  var client = this.client;
+function _getLongInvalidString(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2250,17 +2254,17 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.integer.0';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/long/1.integer.0';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2269,48 +2273,48 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -2327,7 +2331,7 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2336,7 +2340,7 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -2346,20 +2350,21 @@ Dictionary.prototype.getLongInvalidString = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getFloatValid = function (options, callback) {
-  var client = this.client;
+function _getFloatValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2369,17 +2374,17 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/0--0.01-1.2e20';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/0--0.01-1.2e20';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2388,48 +2393,48 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -2446,7 +2451,7 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2455,7 +2460,7 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -2467,20 +2472,21 @@ Dictionary.prototype.getFloatValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putFloatValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2493,7 +2499,7 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement] !== 'number') {
         throw new Error('arrayBody[valueElement] must be of type number.');
       }
@@ -2503,17 +2509,17 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/0--0.01-1.2e20';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/0--0.01-1.2e20';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2521,11 +2527,11 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -2543,50 +2549,50 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
@@ -2596,20 +2602,21 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
-  var client = this.client;
+function _getFloatInvalidNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2619,17 +2626,17 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/0.0-null-1.2e20';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/0.0-null-1.2e20';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2638,48 +2645,48 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -2696,7 +2703,7 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2705,7 +2712,7 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
@@ -2715,20 +2722,21 @@ Dictionary.prototype.getFloatInvalidNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getFloatInvalidString = function (options, callback) {
-  var client = this.client;
+function _getFloatInvalidString(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2738,17 +2746,17 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/1.number.0';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/float/1.number.0';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2757,48 +2765,48 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -2815,7 +2823,7 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2824,7 +2832,7 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -2834,20 +2842,21 @@ Dictionary.prototype.getFloatInvalidString = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDoubleValid = function (options, callback) {
-  var client = this.client;
+function _getDoubleValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2857,17 +2866,17 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/0--0.01-1.2e20';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/0--0.01-1.2e20';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2876,48 +2885,48 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -2934,7 +2943,7 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2943,7 +2952,7 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
@@ -2955,20 +2964,21 @@ Dictionary.prototype.getDoubleValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putDoubleValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2981,7 +2991,7 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement] !== 'number') {
         throw new Error('arrayBody[valueElement] must be of type number.');
       }
@@ -2991,17 +3001,17 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/0--0.01-1.2e20';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/0--0.01-1.2e20';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -3009,11 +3019,11 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -3031,50 +3041,50 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
@@ -3084,20 +3094,21 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
-  var client = this.client;
+function _getDoubleInvalidNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -3107,17 +3118,17 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/0.0-null-1.2e20';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/0.0-null-1.2e20';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -3126,48 +3137,48 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -3184,7 +3195,7 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -3193,7 +3204,7 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
@@ -3203,20 +3214,21 @@ Dictionary.prototype.getDoubleInvalidNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
-  var client = this.client;
+function _getDoubleInvalidString(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -3226,17 +3238,17 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/1.number.0';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/double/1.number.0';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -3245,48 +3257,48 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -3303,7 +3315,7 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -3312,7 +3324,7 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
@@ -3322,20 +3334,21 @@ Dictionary.prototype.getDoubleInvalidString = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getStringValid = function (options, callback) {
-  var client = this.client;
+function _getStringValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -3345,17 +3358,17 @@ Dictionary.prototype.getStringValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo1.foo2.foo3';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo1.foo2.foo3';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -3364,48 +3377,48 @@ Dictionary.prototype.getStringValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -3422,7 +3435,7 @@ Dictionary.prototype.getStringValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -3431,7 +3444,7 @@ Dictionary.prototype.getStringValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
@@ -3443,20 +3456,21 @@ Dictionary.prototype.getStringValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putStringValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -3469,7 +3483,7 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] !== null && arrayBody[valueElement] !== undefined && typeof arrayBody[valueElement].valueOf() !== 'string') {
         throw new Error('arrayBody[valueElement] must be of type string.');
       }
@@ -3479,17 +3493,17 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo1.foo2.foo3';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo1.foo2.foo3';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -3497,11 +3511,11 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -3519,50 +3533,50 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
@@ -3572,20 +3586,21 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getStringWithNull = function (options, callback) {
-  var client = this.client;
+function _getStringWithNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -3595,17 +3610,17 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo.null.foo2';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo.null.foo2';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -3614,48 +3629,48 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -3672,7 +3687,7 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -3681,7 +3696,7 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
@@ -3691,20 +3706,21 @@ Dictionary.prototype.getStringWithNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getStringWithInvalid = function (options, callback) {
-  var client = this.client;
+function _getStringWithInvalid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -3714,17 +3730,17 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo.123.foo2';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/string/foo.123.foo2';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -3733,48 +3749,48 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -3791,7 +3807,7 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -3800,7 +3816,7 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2":
@@ -3811,20 +3827,21 @@ Dictionary.prototype.getStringWithInvalid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateValid = function (options, callback) {
-  var client = this.client;
+function _getDateValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -3834,17 +3851,17 @@ Dictionary.prototype.getDateValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -3853,48 +3870,48 @@ Dictionary.prototype.getDateValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -3911,7 +3928,7 @@ Dictionary.prototype.getDateValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -3920,7 +3937,7 @@ Dictionary.prototype.getDateValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
@@ -3933,20 +3950,21 @@ Dictionary.prototype.getDateValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putDateValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -3959,7 +3977,7 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] && !(arrayBody[valueElement] instanceof Date ||
           (typeof arrayBody[valueElement].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement]))))) {
             throw new Error('arrayBody[valueElement] must be of type date.');
@@ -3970,17 +3988,17 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -3988,11 +4006,11 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -4010,50 +4028,50 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
@@ -4063,20 +4081,21 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateInvalidNull = function (options, callback) {
-  var client = this.client;
+function _getDateInvalidNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -4086,17 +4105,17 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/invalidnull';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/invalidnull';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -4105,48 +4124,48 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -4163,7 +4182,7 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -4172,7 +4191,7 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get date dictionary value {"0": "2011-03-22", "1": "date"}
@@ -4182,20 +4201,21 @@ Dictionary.prototype.getDateInvalidNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateInvalidChars = function (options, callback) {
-  var client = this.client;
+function _getDateInvalidChars(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -4205,17 +4225,17 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/invalidchars';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date/invalidchars';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -4224,48 +4244,48 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -4282,7 +4302,7 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -4291,7 +4311,7 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
@@ -4302,20 +4322,21 @@ Dictionary.prototype.getDateInvalidChars = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateTimeValid = function (options, callback) {
-  var client = this.client;
+function _getDateTimeValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -4325,17 +4346,17 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -4344,48 +4365,48 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -4402,7 +4423,7 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -4411,7 +4432,7 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
@@ -4424,20 +4445,21 @@ Dictionary.prototype.getDateTimeValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putDateTimeValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -4450,7 +4472,7 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] && !(arrayBody[valueElement] instanceof Date ||
           (typeof arrayBody[valueElement].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement]))))) {
             throw new Error('arrayBody[valueElement] must be of type date.');
@@ -4461,17 +4483,17 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -4479,11 +4501,11 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -4501,50 +4523,50 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
@@ -4554,20 +4576,21 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
-  var client = this.client;
+function _getDateTimeInvalidNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -4577,17 +4600,17 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/invalidnull';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/invalidnull';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -4596,48 +4619,48 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -4654,7 +4677,7 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -4663,7 +4686,7 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
@@ -4673,20 +4696,21 @@ Dictionary.prototype.getDateTimeInvalidNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
-  var client = this.client;
+function _getDateTimeInvalidChars(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -4696,17 +4720,17 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/invalidchars';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time/invalidchars';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -4715,48 +4739,48 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -4773,7 +4797,7 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -4782,7 +4806,7 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
@@ -4794,20 +4818,21 @@ Dictionary.prototype.getDateTimeInvalidChars = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDateTimeRfc1123Valid = function (options, callback) {
-  var client = this.client;
+function _getDateTimeRfc1123Valid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -4817,17 +4842,17 @@ Dictionary.prototype.getDateTimeRfc1123Valid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time-rfc1123/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time-rfc1123/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -4836,48 +4861,48 @@ Dictionary.prototype.getDateTimeRfc1123Valid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -4894,7 +4919,7 @@ Dictionary.prototype.getDateTimeRfc1123Valid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -4903,7 +4928,7 @@ Dictionary.prototype.getDateTimeRfc1123Valid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed,
@@ -4916,20 +4941,21 @@ Dictionary.prototype.getDateTimeRfc1123Valid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putDateTimeRfc1123Valid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -4942,7 +4968,7 @@ Dictionary.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] && !(arrayBody[valueElement] instanceof Date ||
           (typeof arrayBody[valueElement].valueOf() === 'string' && !isNaN(Date.parse(arrayBody[valueElement]))))) {
             throw new Error('arrayBody[valueElement] must be of type date.');
@@ -4953,17 +4979,17 @@ Dictionary.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time-rfc1123/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/date-time-rfc1123/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -4971,11 +4997,11 @@ Dictionary.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -4993,50 +5019,50 @@ Dictionary.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
@@ -5047,20 +5073,21 @@ Dictionary.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDurationValid = function (options, callback) {
-  var client = this.client;
+function _getDurationValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -5070,17 +5097,17 @@ Dictionary.prototype.getDurationValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/duration/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/duration/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -5089,48 +5116,48 @@ Dictionary.prototype.getDurationValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -5147,7 +5174,7 @@ Dictionary.prototype.getDurationValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -5156,7 +5183,7 @@ Dictionary.prototype.getDurationValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
@@ -5168,20 +5195,21 @@ Dictionary.prototype.getDurationValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putDurationValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putDurationValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -5194,7 +5222,7 @@ Dictionary.prototype.putDurationValid = function (arrayBody, options, callback) 
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if(arrayBody[valueElement] && !moment.isDuration(arrayBody[valueElement])) {
         throw new Error('arrayBody[valueElement] must be of type moment.duration.');
       }
@@ -5204,17 +5232,17 @@ Dictionary.prototype.putDurationValid = function (arrayBody, options, callback) 
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/duration/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/duration/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -5222,11 +5250,11 @@ Dictionary.prototype.putDurationValid = function (arrayBody, options, callback) 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -5244,50 +5272,50 @@ Dictionary.prototype.putDurationValid = function (arrayBody, options, callback) 
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
@@ -5298,20 +5326,21 @@ Dictionary.prototype.putDurationValid = function (arrayBody, options, callback) 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getByteValid = function (options, callback) {
-  var client = this.client;
+function _getByteValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -5321,17 +5350,17 @@ Dictionary.prototype.getByteValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/byte/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/byte/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -5340,48 +5369,48 @@ Dictionary.prototype.getByteValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -5398,7 +5427,7 @@ Dictionary.prototype.getByteValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -5407,7 +5436,7 @@ Dictionary.prototype.getByteValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
@@ -5420,20 +5449,21 @@ Dictionary.prototype.getByteValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putByteValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -5446,7 +5476,7 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] && !Buffer.isBuffer(arrayBody[valueElement])) {
         throw new Error('arrayBody[valueElement] must be of type buffer.');
       }
@@ -5456,17 +5486,17 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/byte/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/byte/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -5474,11 +5504,11 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -5496,50 +5526,50 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first
@@ -5550,20 +5580,21 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getByteInvalidNull = function (options, callback) {
-  var client = this.client;
+function _getByteInvalidNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -5573,17 +5604,17 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/byte/invalidnull';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/byte/invalidnull';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -5592,48 +5623,48 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -5650,7 +5681,7 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -5659,7 +5690,7 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get base64url dictionary value {"0": "a string that gets encoded with
@@ -5670,20 +5701,21 @@ Dictionary.prototype.getByteInvalidNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getBase64Url = function (options, callback) {
-  var client = this.client;
+function _getBase64Url(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -5693,17 +5725,17 @@ Dictionary.prototype.getBase64Url = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/base64url/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/prim/base64url/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -5712,48 +5744,48 @@ Dictionary.prototype.getBase64Url = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -5770,7 +5802,7 @@ Dictionary.prototype.getBase64Url = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -5779,7 +5811,7 @@ Dictionary.prototype.getBase64Url = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get dictionary of complex type null value
@@ -5789,20 +5821,21 @@ Dictionary.prototype.getBase64Url = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getComplexNull = function (options, callback) {
-  var client = this.client;
+function _getComplexNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -5812,17 +5845,17 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/null';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/null';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -5831,48 +5864,48 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -5890,7 +5923,7 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -5899,7 +5932,7 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get empty dictionary of complex type {}
@@ -5909,20 +5942,21 @@ Dictionary.prototype.getComplexNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getComplexEmpty = function (options, callback) {
-  var client = this.client;
+function _getComplexEmpty(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -5932,17 +5966,17 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/empty';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/empty';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -5951,48 +5985,48 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -6010,7 +6044,7 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -6019,7 +6053,7 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get dictionary of complex type with null item {"0": {"integer": 1, "string":
@@ -6030,20 +6064,21 @@ Dictionary.prototype.getComplexEmpty = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getComplexItemNull = function (options, callback) {
-  var client = this.client;
+function _getComplexItemNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -6053,17 +6088,17 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/itemnull';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/itemnull';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -6072,48 +6107,48 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -6131,7 +6166,7 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -6140,7 +6175,7 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get dictionary of complex type with empty item {"0": {"integer": 1,
@@ -6151,20 +6186,21 @@ Dictionary.prototype.getComplexItemNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
-  var client = this.client;
+function _getComplexItemEmpty(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -6174,17 +6210,17 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/itemempty';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/itemempty';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -6193,48 +6229,48 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -6252,7 +6288,7 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -6261,7 +6297,7 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"},
@@ -6272,20 +6308,21 @@ Dictionary.prototype.getComplexItemEmpty = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getComplexValid = function (options, callback) {
-  var client = this.client;
+function _getComplexValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -6295,17 +6332,17 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -6314,48 +6351,48 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -6373,7 +6410,7 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -6382,7 +6419,7 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put an dictionary of complex type with values {"0": {"integer": 1, "string":
@@ -6396,20 +6433,21 @@ Dictionary.prototype.getComplexValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putComplexValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -6419,17 +6457,17 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/complex/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -6437,11 +6475,11 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -6460,50 +6498,50 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get a null array
@@ -6513,20 +6551,21 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getArrayNull = function (options, callback) {
-  var client = this.client;
+function _getArrayNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -6536,17 +6575,17 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/null';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/null';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -6555,48 +6594,48 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -6620,7 +6659,7 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -6629,7 +6668,7 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an empty dictionary {}
@@ -6639,20 +6678,21 @@ Dictionary.prototype.getArrayNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getArrayEmpty = function (options, callback) {
-  var client = this.client;
+function _getArrayEmpty(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -6662,17 +6702,17 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/empty';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/empty';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -6681,48 +6721,48 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -6746,7 +6786,7 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -6755,7 +6795,7 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2":
@@ -6766,20 +6806,21 @@ Dictionary.prototype.getArrayEmpty = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getArrayItemNull = function (options, callback) {
-  var client = this.client;
+function _getArrayItemNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -6789,17 +6830,17 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/itemnull';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/itemnull';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -6808,48 +6849,48 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -6873,7 +6914,7 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -6882,7 +6923,7 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7",
@@ -6893,20 +6934,21 @@ Dictionary.prototype.getArrayItemNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
-  var client = this.client;
+function _getArrayItemEmpty(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -6916,17 +6958,17 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/itemempty';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/itemempty';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -6935,48 +6977,48 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -7000,7 +7042,7 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -7009,7 +7051,7 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
@@ -7020,20 +7062,21 @@ Dictionary.prototype.getArrayItemEmpty = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getArrayValid = function (options, callback) {
-  var client = this.client;
+function _getArrayValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -7043,17 +7086,17 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -7062,48 +7105,48 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -7127,7 +7170,7 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -7136,7 +7179,7 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
@@ -7149,20 +7192,21 @@ Dictionary.prototype.getArrayValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putArrayValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -7175,9 +7219,9 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
-      if (util.isArray(arrayBody[valueElement])) {
-        for (var i = 0; i < arrayBody[valueElement].length; i++) {
+    for(let valueElement in arrayBody) {
+      if (Array.isArray(arrayBody[valueElement])) {
+        for (let i = 0; i < arrayBody[valueElement].length; i++) {
           if (arrayBody[valueElement][i] !== null && arrayBody[valueElement][i] !== undefined && typeof arrayBody[valueElement][i].valueOf() !== 'string') {
             throw new Error('arrayBody[valueElement][i] must be of type string.');
           }
@@ -7189,17 +7233,17 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/array/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -7207,11 +7251,11 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -7236,50 +7280,50 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an dictionaries of dictionaries with value null
@@ -7289,20 +7333,21 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDictionaryNull = function (options, callback) {
-  var client = this.client;
+function _getDictionaryNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -7312,17 +7357,17 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/null';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/null';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -7331,48 +7376,48 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -7396,7 +7441,7 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -7405,7 +7450,7 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an dictionaries of dictionaries of type <string, string> with value {}
@@ -7415,20 +7460,21 @@ Dictionary.prototype.getDictionaryNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
-  var client = this.client;
+function _getDictionaryEmpty(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -7438,17 +7484,17 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/empty';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/empty';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -7457,48 +7503,48 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -7522,7 +7568,7 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -7531,7 +7577,7 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an dictionaries of dictionaries of type <string, string> with value
@@ -7543,20 +7589,21 @@ Dictionary.prototype.getDictionaryEmpty = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
-  var client = this.client;
+function _getDictionaryItemNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -7566,17 +7613,17 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/itemnull';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/itemnull';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -7585,48 +7632,48 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -7650,7 +7697,7 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -7659,7 +7706,7 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an dictionaries of dictionaries of type <string, string> with value
@@ -7671,20 +7718,21 @@ Dictionary.prototype.getDictionaryItemNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
-  var client = this.client;
+function _getDictionaryItemEmpty(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -7694,17 +7742,17 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/itemempty';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/itemempty';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -7713,48 +7761,48 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -7778,7 +7826,7 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -7787,7 +7835,7 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an dictionaries of dictionaries of type <string, string> with value
@@ -7799,20 +7847,21 @@ Dictionary.prototype.getDictionaryItemEmpty = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.getDictionaryValid = function (options, callback) {
-  var client = this.client;
+function _getDictionaryValid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -7822,17 +7871,17 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -7841,48 +7890,48 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -7906,7 +7955,7 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -7915,7 +7964,7 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an dictionaries of dictionaries of type <string, string> with value
@@ -7929,20 +7978,21 @@ Dictionary.prototype.getDictionaryValid = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback) {
-  var client = this.client;
+function _putDictionaryValid(arrayBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -7955,9 +8005,9 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
     if (arrayBody === null || arrayBody === undefined || typeof arrayBody !== 'object') {
       throw new Error('arrayBody cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in arrayBody) {
+    for(let valueElement in arrayBody) {
       if (arrayBody[valueElement] && typeof arrayBody[valueElement] === 'object') {
-        for(var valueElement1 in arrayBody[valueElement]) {
+        for(let valueElement1 in arrayBody[valueElement]) {
           if (arrayBody[valueElement][valueElement1] !== null && arrayBody[valueElement][valueElement1] !== undefined && typeof arrayBody[valueElement][valueElement1].valueOf() !== 'string') {
             throw new Error('arrayBody[valueElement][valueElement1] must be of type string.');
           }
@@ -7969,17 +8019,17 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/valid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'dictionary/dictionary/valid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -7987,11 +8037,11 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'arrayBody',
         type: {
@@ -8016,50 +8066,5254 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(arrayBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
+/**
+ * @class
+ * Dictionary
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestSwaggerBATdictionaryService.
+ * Initializes a new instance of the Dictionary class.
+ * @constructor
+ *
+ * @param {AutoRestSwaggerBATdictionaryService} client Reference to the service client.
+ */
+class Dictionary {
+  constructor(client) {
+    this.client = client;
+    this._getNull = _getNull;
+    this._getEmpty = _getEmpty;
+    this._putEmpty = _putEmpty;
+    this._getNullValue = _getNullValue;
+    this._getNullKey = _getNullKey;
+    this._getEmptyStringKey = _getEmptyStringKey;
+    this._getInvalid = _getInvalid;
+    this._getBooleanTfft = _getBooleanTfft;
+    this._putBooleanTfft = _putBooleanTfft;
+    this._getBooleanInvalidNull = _getBooleanInvalidNull;
+    this._getBooleanInvalidString = _getBooleanInvalidString;
+    this._getIntegerValid = _getIntegerValid;
+    this._putIntegerValid = _putIntegerValid;
+    this._getIntInvalidNull = _getIntInvalidNull;
+    this._getIntInvalidString = _getIntInvalidString;
+    this._getLongValid = _getLongValid;
+    this._putLongValid = _putLongValid;
+    this._getLongInvalidNull = _getLongInvalidNull;
+    this._getLongInvalidString = _getLongInvalidString;
+    this._getFloatValid = _getFloatValid;
+    this._putFloatValid = _putFloatValid;
+    this._getFloatInvalidNull = _getFloatInvalidNull;
+    this._getFloatInvalidString = _getFloatInvalidString;
+    this._getDoubleValid = _getDoubleValid;
+    this._putDoubleValid = _putDoubleValid;
+    this._getDoubleInvalidNull = _getDoubleInvalidNull;
+    this._getDoubleInvalidString = _getDoubleInvalidString;
+    this._getStringValid = _getStringValid;
+    this._putStringValid = _putStringValid;
+    this._getStringWithNull = _getStringWithNull;
+    this._getStringWithInvalid = _getStringWithInvalid;
+    this._getDateValid = _getDateValid;
+    this._putDateValid = _putDateValid;
+    this._getDateInvalidNull = _getDateInvalidNull;
+    this._getDateInvalidChars = _getDateInvalidChars;
+    this._getDateTimeValid = _getDateTimeValid;
+    this._putDateTimeValid = _putDateTimeValid;
+    this._getDateTimeInvalidNull = _getDateTimeInvalidNull;
+    this._getDateTimeInvalidChars = _getDateTimeInvalidChars;
+    this._getDateTimeRfc1123Valid = _getDateTimeRfc1123Valid;
+    this._putDateTimeRfc1123Valid = _putDateTimeRfc1123Valid;
+    this._getDurationValid = _getDurationValid;
+    this._putDurationValid = _putDurationValid;
+    this._getByteValid = _getByteValid;
+    this._putByteValid = _putByteValid;
+    this._getByteInvalidNull = _getByteInvalidNull;
+    this._getBase64Url = _getBase64Url;
+    this._getComplexNull = _getComplexNull;
+    this._getComplexEmpty = _getComplexEmpty;
+    this._getComplexItemNull = _getComplexItemNull;
+    this._getComplexItemEmpty = _getComplexItemEmpty;
+    this._getComplexValid = _getComplexValid;
+    this._putComplexValid = _putComplexValid;
+    this._getArrayNull = _getArrayNull;
+    this._getArrayEmpty = _getArrayEmpty;
+    this._getArrayItemNull = _getArrayItemNull;
+    this._getArrayItemEmpty = _getArrayItemEmpty;
+    this._getArrayValid = _getArrayValid;
+    this._putArrayValid = _putArrayValid;
+    this._getDictionaryNull = _getDictionaryNull;
+    this._getDictionaryEmpty = _getDictionaryEmpty;
+    this._getDictionaryItemNull = _getDictionaryItemNull;
+    this._getDictionaryItemEmpty = _getDictionaryItemEmpty;
+    this._getDictionaryValid = _getDictionaryValid;
+    this._putDictionaryValid = _putDictionaryValid;
+  }
+
+  /**
+   * Get null dictionary value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get null dictionary value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get empty dictionary value {}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getEmptyWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getEmpty(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get empty dictionary value {}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getEmpty(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getEmpty(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getEmpty(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value empty {}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putEmptyWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putEmpty(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value empty {}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putEmpty(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putEmpty(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putEmpty(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get Dictionary with null value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getNullValueWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getNullValue(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get Dictionary with null value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getNullValue(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getNullValue(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getNullValue(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get Dictionary with null key
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getNullKeyWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getNullKey(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get Dictionary with null key
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getNullKey(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getNullKey(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getNullKey(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get Dictionary with key as empty string
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getEmptyStringKeyWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getEmptyStringKey(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get Dictionary with key as empty string
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getEmptyStringKey(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getEmptyStringKey(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getEmptyStringKey(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get invalid Dictionary value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getInvalidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getInvalid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get invalid Dictionary value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getInvalid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getInvalid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getInvalid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBooleanTfftWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBooleanTfft(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBooleanTfft(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBooleanTfft(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBooleanTfft(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putBooleanTfftWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putBooleanTfft(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putBooleanTfft(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putBooleanTfft(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putBooleanTfft(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get boolean dictionary value {"0": true, "1": null, "2": false }
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBooleanInvalidNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBooleanInvalidNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get boolean dictionary value {"0": true, "1": null, "2": false }
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBooleanInvalidNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBooleanInvalidNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBooleanInvalidNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBooleanInvalidStringWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBooleanInvalidString(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBooleanInvalidString(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBooleanInvalidString(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBooleanInvalidString(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getIntegerValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getIntegerValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getIntegerValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getIntegerValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getIntegerValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putIntegerValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putIntegerValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putIntegerValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putIntegerValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putIntegerValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get integer dictionary value {"0": 1, "1": null, "2": 0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getIntInvalidNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getIntInvalidNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get integer dictionary value {"0": 1, "1": null, "2": 0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getIntInvalidNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getIntInvalidNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getIntInvalidNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getIntInvalidStringWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getIntInvalidString(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getIntInvalidString(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getIntInvalidString(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getIntInvalidString(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getLongValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getLongValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getLongValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getLongValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getLongValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putLongValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putLongValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putLongValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putLongValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putLongValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get long dictionary value {"0": 1, "1": null, "2": 0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getLongInvalidNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getLongInvalidNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get long dictionary value {"0": 1, "1": null, "2": 0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getLongInvalidNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getLongInvalidNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getLongInvalidNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getLongInvalidStringWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getLongInvalidString(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get long dictionary value {"0": 1, "1": "integer", "2": 0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getLongInvalidString(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getLongInvalidString(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getLongInvalidString(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getFloatValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getFloatValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getFloatValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getFloatValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getFloatValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putFloatValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putFloatValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putFloatValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putFloatValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putFloatValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getFloatInvalidNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getFloatInvalidNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getFloatInvalidNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getFloatInvalidNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getFloatInvalidNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getFloatInvalidStringWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getFloatInvalidString(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getFloatInvalidString(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getFloatInvalidString(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getFloatInvalidString(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDoubleValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDoubleValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDoubleValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDoubleValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDoubleValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putDoubleValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putDoubleValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putDoubleValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putDoubleValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putDoubleValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDoubleInvalidNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDoubleInvalidNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDoubleInvalidNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDoubleInvalidNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDoubleInvalidNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDoubleInvalidStringWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDoubleInvalidString(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDoubleInvalidString(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDoubleInvalidString(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDoubleInvalidString(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getStringValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getStringValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getStringValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getStringValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getStringValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putStringValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putStringValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putStringValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putStringValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putStringValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getStringWithNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getStringWithNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getStringWithNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getStringWithNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getStringWithNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getStringWithInvalidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getStringWithInvalid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getStringWithInvalid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getStringWithInvalid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getStringWithInvalid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2":
+   * "1492-10-12"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDateValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDateValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2":
+   * "1492-10-12"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDateValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDateValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDateValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
+   * "1492-10-12"}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putDateValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putDateValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
+   * "1492-10-12"}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putDateValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putDateValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putDateValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDateInvalidNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDateInvalidNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDateInvalidNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDateInvalidNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDateInvalidNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get date dictionary value {"0": "2011-03-22", "1": "date"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDateInvalidCharsWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDateInvalidChars(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get date dictionary value {"0": "2011-03-22", "1": "date"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDateInvalidChars(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDateInvalidChars(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDateInvalidChars(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
+   * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDateTimeValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDateTimeValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
+   * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDateTimeValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDateTimeValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDateTimeValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
+   * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putDateTimeValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putDateTimeValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
+   * "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putDateTimeValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putDateTimeValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putDateTimeValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDateTimeInvalidNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDateTimeInvalidNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDateTimeInvalidNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDateTimeInvalidNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDateTimeInvalidNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDateTimeInvalidCharsWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDateTimeInvalidChars(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDateTimeInvalidChars(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDateTimeInvalidChars(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDateTimeInvalidChars(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
+   * GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01
+   * GMT"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDateTimeRfc1123ValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDateTimeRfc1123Valid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01
+   * GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01
+   * GMT"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDateTimeRfc1123Valid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDateTimeRfc1123Valid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDateTimeRfc1123Valid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed,
+   * 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putDateTimeRfc1123ValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putDateTimeRfc1123Valid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed,
+   * 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putDateTimeRfc1123Valid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putDateTimeRfc1123Valid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putDateTimeRfc1123Valid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
+   * "P5DT1H0M0S"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDurationValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDurationValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
+   * "P5DT1H0M0S"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDurationValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDurationValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDurationValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putDurationValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putDurationValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putDurationValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putDurationValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putDurationValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
+   * hex (25, 29, 43)} with each item encoded in base64
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getByteValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getByteValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
+   * hex (25, 29, 43)} with each item encoded in base64
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getByteValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getByteValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getByteValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
+   * hex (25, 29, 43)} with each elementencoded in base 64
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putByteValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putByteValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2":
+   * hex (25, 29, 43)} with each elementencoded in base 64
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putByteValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putByteValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putByteValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first
+   * item base64 encoded
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getByteInvalidNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getByteInvalidNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first
+   * item base64 encoded
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getByteInvalidNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getByteInvalidNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getByteInvalidNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get base64url dictionary value {"0": "a string that gets encoded with
+   * base64url", "1": "test string", "2": "Lorem ipsum"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getBase64UrlWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getBase64Url(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get base64url dictionary value {"0": "a string that gets encoded with
+   * base64url", "1": "test string", "2": "Lorem ipsum"}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getBase64Url(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getBase64Url(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getBase64Url(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get dictionary of complex type null value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getComplexNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getComplexNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get dictionary of complex type null value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getComplexNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getComplexNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getComplexNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get empty dictionary of complex type {}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getComplexEmptyWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getComplexEmpty(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get empty dictionary of complex type {}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getComplexEmpty(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getComplexEmpty(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getComplexEmpty(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get dictionary of complex type with null item {"0": {"integer": 1, "string":
+   * "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getComplexItemNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getComplexItemNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get dictionary of complex type with null item {"0": {"integer": 1, "string":
+   * "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getComplexItemNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getComplexItemNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getComplexItemNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get dictionary of complex type with empty item {"0": {"integer": 1,
+   * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getComplexItemEmptyWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getComplexItemEmpty(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get dictionary of complex type with empty item {"0": {"integer": 1,
+   * "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getComplexItemEmpty(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getComplexItemEmpty(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getComplexItemEmpty(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"},
+   * "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getComplexValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getComplexValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"},
+   * "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getComplexValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getComplexValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getComplexValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put an dictionary of complex type with values {"0": {"integer": 1, "string":
+   * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string":
+   * "6"}}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putComplexValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putComplexValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put an dictionary of complex type with values {"0": {"integer": 1, "string":
+   * "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string":
+   * "6"}}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putComplexValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putComplexValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putComplexValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get a null array
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getArrayNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getArrayNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get a null array
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getArrayNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getArrayNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getArrayNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an empty dictionary {}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getArrayEmptyWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getArrayEmpty(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an empty dictionary {}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getArrayEmpty(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getArrayEmpty(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getArrayEmpty(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2":
+   * ["7", "8", "9"]}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getArrayItemNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getArrayItemNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2":
+   * ["7", "8", "9"]}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getArrayItemNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getArrayItemNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getArrayItemNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7",
+   * "8", "9"]}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getArrayItemEmptyWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getArrayItemEmpty(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7",
+   * "8", "9"]}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getArrayItemEmpty(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getArrayItemEmpty(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getArrayItemEmpty(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
+   * "6"], "2": ["7", "8", "9"]}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getArrayValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getArrayValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
+   * "6"], "2": ["7", "8", "9"]}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getArrayValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getArrayValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getArrayValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
+   * "6"], "2": ["7", "8", "9"]}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putArrayValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putArrayValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5",
+   * "6"], "2": ["7", "8", "9"]}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putArrayValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putArrayValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putArrayValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an dictionaries of dictionaries with value null
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDictionaryNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDictionaryNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an dictionaries of dictionaries with value null
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDictionaryNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDictionaryNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDictionaryNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an dictionaries of dictionaries of type <string, string> with value {}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDictionaryEmptyWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDictionaryEmpty(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an dictionaries of dictionaries of type <string, string> with value {}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDictionaryEmpty(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDictionaryEmpty(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDictionaryEmpty(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an dictionaries of dictionaries of type <string, string> with value
+   * {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven",
+   * "8": "eight", "9": "nine"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDictionaryItemNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDictionaryItemNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an dictionaries of dictionaries of type <string, string> with value
+   * {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven",
+   * "8": "eight", "9": "nine"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDictionaryItemNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDictionaryItemNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDictionaryItemNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an dictionaries of dictionaries of type <string, string> with value
+   * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven",
+   * "8": "eight", "9": "nine"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDictionaryItemEmptyWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDictionaryItemEmpty(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an dictionaries of dictionaries of type <string, string> with value
+   * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven",
+   * "8": "eight", "9": "nine"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDictionaryItemEmpty(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDictionaryItemEmpty(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDictionaryItemEmpty(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an dictionaries of dictionaries of type <string, string> with value
+   * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+   * "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDictionaryValidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDictionaryValid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an dictionaries of dictionaries of type <string, string> with value
+   * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+   * "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDictionaryValid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDictionaryValid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDictionaryValid(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an dictionaries of dictionaries of type <string, string> with value
+   * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+   * "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putDictionaryValidWithHttpOperationResponse(arrayBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putDictionaryValid(arrayBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an dictionaries of dictionaries of type <string, string> with value
+   * {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5":
+   * "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
+   *
+   * @param {object} arrayBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putDictionaryValid(arrayBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putDictionaryValid(arrayBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putDictionaryValid(arrayBody, options, optionalCallback);
+    }
+  }
+
+}
 
 module.exports = Dictionary;

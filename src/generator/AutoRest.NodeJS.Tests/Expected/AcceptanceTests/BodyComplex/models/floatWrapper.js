@@ -19,40 +19,42 @@
  * @member {number} [field2]
  *
  */
-function FloatWrapper() {
-}
+class FloatWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of FloatWrapper
- *
- * @returns {object} metadata of FloatWrapper
- *
- */
-FloatWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'float-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'FloatWrapper',
-      modelProperties: {
-        field1: {
-          required: false,
-          serializedName: 'field1',
-          type: {
-            name: 'Number'
-          }
-        },
-        field2: {
-          required: false,
-          serializedName: 'field2',
-          type: {
-            name: 'Number'
+  /**
+   * Defines the metadata of FloatWrapper
+   *
+   * @returns {object} metadata of FloatWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'float-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'FloatWrapper',
+        modelProperties: {
+          field1: {
+            required: false,
+            serializedName: 'field1',
+            type: {
+              name: 'Number'
+            }
+          },
+          field2: {
+            required: false,
+            serializedName: 'field2',
+            type: {
+              name: 'Number'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = FloatWrapper;

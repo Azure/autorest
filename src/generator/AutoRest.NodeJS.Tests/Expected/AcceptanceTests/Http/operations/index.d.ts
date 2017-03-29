@@ -8,7 +8,7 @@
  * regenerated.
 */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as models from '../models';
 
 
@@ -20,19 +20,6 @@ import * as models from '../models';
  */
 export interface HttpFailure {
 
-    /**
-     * Get empty error form server
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    getEmptyError(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
-    getEmptyError(callback: ServiceCallback<boolean>): void;
 
     /**
      * Get empty error form server
@@ -42,11 +29,97 @@ export interface HttpFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Boolean>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getNoModelError(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
+    getEmptyErrorWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<boolean>>;
+
+    /**
+     * Get empty error form server
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Boolean} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Boolean} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getEmptyError(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<boolean>;
+    getEmptyError(callback: ServiceCallback<boolean>): void;
+    getEmptyError(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
+
+
+    /**
+     * Get empty error form server
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Boolean>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
+     */
+    getNoModelErrorWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<boolean>>;
+
+    /**
+     * Get empty error form server
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Boolean} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Boolean} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getNoModelError(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<boolean>;
     getNoModelError(callback: ServiceCallback<boolean>): void;
+    getNoModelError(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
+
 
     /**
      * Get empty response from server
@@ -56,11 +129,46 @@ export interface HttpFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Boolean>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getNoModelEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
+    getNoModelEmptyWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<boolean>>;
+
+    /**
+     * Get empty response from server
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Boolean} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Boolean} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getNoModelEmpty(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<boolean>;
     getNoModelEmpty(callback: ServiceCallback<boolean>): void;
+    getNoModelEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
 }
 
 /**
@@ -71,6 +179,7 @@ export interface HttpFailure {
  */
 export interface HttpSuccess {
 
+
     /**
      * Return 200 status code if successful
      *
@@ -79,11 +188,47 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    head200WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 200 status code if successful
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head200(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     head200(callback: ServiceCallback<void>): void;
+    head200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get 200 success
@@ -93,11 +238,47 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Boolean>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
+    get200WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<boolean>>;
+
+    /**
+     * Get 200 success
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Boolean} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Boolean} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<boolean>;
     get200(callback: ServiceCallback<boolean>): void;
+    get200(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
+
 
     /**
      * Put boolean value true returning 200 success
@@ -109,11 +290,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    put200WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put boolean value true returning 200 success
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put200(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     put200(callback: ServiceCallback<void>): void;
+    put200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Patch true Boolean value in request returning 200
@@ -125,11 +344,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    patch200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    patch200WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Patch true Boolean value in request returning 200
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    patch200(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     patch200(callback: ServiceCallback<void>): void;
+    patch200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Post bollean value true in request that returns a 200
@@ -141,11 +398,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post200WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Post bollean value true in request that returns a 200
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post200(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     post200(callback: ServiceCallback<void>): void;
+    post200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Delete simple boolean value true returns 200
@@ -157,11 +452,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    delete200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    delete200WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Delete simple boolean value true returns 200
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    delete200(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     delete200(callback: ServiceCallback<void>): void;
+    delete200(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Put true Boolean value in request returns 201
@@ -173,11 +506,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put201(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    put201WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put true Boolean value in request returns 201
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put201(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     put201(callback: ServiceCallback<void>): void;
+    put201(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Post true Boolean value in request returns 201 (Created)
@@ -189,11 +560,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post201(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post201WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Post true Boolean value in request returns 201 (Created)
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post201(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     post201(callback: ServiceCallback<void>): void;
+    post201(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Put true Boolean value in request returns 202 (Accepted)
@@ -205,11 +614,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    put202WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put true Boolean value in request returns 202 (Accepted)
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put202(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     put202(callback: ServiceCallback<void>): void;
+    put202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Patch true Boolean value in request returns 202
@@ -221,11 +668,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    patch202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    patch202WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Patch true Boolean value in request returns 202
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    patch202(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     patch202(callback: ServiceCallback<void>): void;
+    patch202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Post true Boolean value in request returns 202 (Accepted)
@@ -237,11 +722,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post202WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Post true Boolean value in request returns 202 (Accepted)
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post202(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     post202(callback: ServiceCallback<void>): void;
+    post202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Delete true Boolean value in request returns 202 (accepted)
@@ -253,11 +776,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    delete202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    delete202WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Delete true Boolean value in request returns 202 (accepted)
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    delete202(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     delete202(callback: ServiceCallback<void>): void;
+    delete202(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 204 status code if successful
@@ -267,11 +828,47 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head204(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    head204WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 204 status code if successful
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head204(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     head204(callback: ServiceCallback<void>): void;
+    head204(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Put true Boolean value in request returns 204 (no content)
@@ -283,11 +880,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    put204WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put true Boolean value in request returns 204 (no content)
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put204(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     put204(callback: ServiceCallback<void>): void;
+    put204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Patch true Boolean value in request returns 204 (no content)
@@ -299,11 +934,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    patch204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    patch204WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Patch true Boolean value in request returns 204 (no content)
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    patch204(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     patch204(callback: ServiceCallback<void>): void;
+    patch204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Post true Boolean value in request returns 204 (no content)
@@ -315,11 +988,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post204WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Post true Boolean value in request returns 204 (no content)
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post204(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     post204(callback: ServiceCallback<void>): void;
+    post204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Delete true Boolean value in request returns 204 (no content)
@@ -331,11 +1042,49 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    delete204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    delete204WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Delete true Boolean value in request returns 204 (no content)
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    delete204(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     delete204(callback: ServiceCallback<void>): void;
+    delete204(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 404 status code
@@ -345,11 +1094,46 @@ export interface HttpSuccess {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head404(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    head404WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 404 status code
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head404(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     head404(callback: ServiceCallback<void>): void;
+    head404(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -360,6 +1144,7 @@ export interface HttpSuccess {
  */
 export interface HttpRedirects {
 
+
     /**
      * Return 300 status code and redirect to /http/success/200
      *
@@ -368,11 +1153,47 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head300(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    head300WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 300 status code and redirect to /http/success/200
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head300(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     head300(callback: ServiceCallback<void>): void;
+    head300(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 300 status code and redirect to /http/success/200
@@ -382,11 +1203,47 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Array>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get300(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string[]>): void;
+    get300WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<string[]>>;
+
+    /**
+     * Return 300 status code and redirect to /http/success/200
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Array} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Array} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get300(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<string[]>;
     get300(callback: ServiceCallback<string[]>): void;
+    get300(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string[]>): void;
+
 
     /**
      * Return 301 status code and redirect to /http/success/200
@@ -396,11 +1253,47 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head301(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    head301WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 301 status code and redirect to /http/success/200
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head301(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     head301(callback: ServiceCallback<void>): void;
+    head301(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 301 status code and redirect to /http/success/200
@@ -410,11 +1303,47 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get301(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get301WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 301 status code and redirect to /http/success/200
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get301(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get301(callback: ServiceCallback<void>): void;
+    get301(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be
@@ -428,11 +1357,51 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put301(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    put301WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put true Boolean value in request returns 301.  This request should not be
+     * automatically redirected, but should return the received 301 to the caller
+     * for evaluation
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put301(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     put301(callback: ServiceCallback<void>): void;
+    put301(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 302 status code and redirect to /http/success/200
@@ -442,11 +1411,47 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head302(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    head302WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 302 status code and redirect to /http/success/200
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head302(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     head302(callback: ServiceCallback<void>): void;
+    head302(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 302 status code and redirect to /http/success/200
@@ -456,11 +1461,47 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get302(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get302WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 302 status code and redirect to /http/success/200
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get302(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get302(callback: ServiceCallback<void>): void;
+    get302(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be
@@ -474,11 +1515,51 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    patch302(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    patch302WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Patch true Boolean value in request returns 302.  This request should not be
+     * automatically redirected, but should return the received 302 to the caller
+     * for evaluation
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    patch302(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     patch302(callback: ServiceCallback<void>): void;
+    patch302(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Post true Boolean value in request returns 303.  This request should be
@@ -491,11 +1572,50 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post303(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post303WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Post true Boolean value in request returns 303.  This request should be
+     * automatically redirected usign a get, ultimately returning a 200 status code
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post303(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     post303(callback: ServiceCallback<void>): void;
+    post303(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Redirect with 307, resulting in a 200 success
@@ -505,11 +1625,47 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head307(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    head307WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Redirect with 307, resulting in a 200 success
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head307(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     head307(callback: ServiceCallback<void>): void;
+    head307(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Redirect get with 307, resulting in a 200 success
@@ -519,11 +1675,47 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get307(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get307WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Redirect get with 307, resulting in a 200 success
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get307(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get307(callback: ServiceCallback<void>): void;
+    get307(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect
@@ -535,11 +1727,49 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    put307WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put307(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     put307(callback: ServiceCallback<void>): void;
+    put307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect
@@ -551,11 +1781,49 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    patch307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    patch307WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    patch307(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     patch307(callback: ServiceCallback<void>): void;
+    patch307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect
@@ -567,11 +1835,49 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post307WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post307(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     post307(callback: ServiceCallback<void>): void;
+    post307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect
@@ -583,11 +1889,48 @@ export interface HttpRedirects {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    delete307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    delete307WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    delete307(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     delete307(callback: ServiceCallback<void>): void;
+    delete307(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -598,6 +1941,7 @@ export interface HttpRedirects {
  */
 export interface HttpClientFailure {
 
+
     /**
      * Return 400 status code - should be represented in the client as an error
      *
@@ -606,11 +1950,48 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    head400WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head400(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     head400(callback: ServiceCallback<models.ErrorModel>): void;
+    head400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -620,11 +2001,48 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    get400WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get400(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     get400(callback: ServiceCallback<models.ErrorModel>): void;
+    get400(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -636,11 +2054,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    put400WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put400(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     put400(callback: ServiceCallback<models.ErrorModel>): void;
+    put400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -652,11 +2109,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    patch400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    patch400WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    patch400(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     patch400(callback: ServiceCallback<models.ErrorModel>): void;
+    patch400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -668,11 +2164,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    post400WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post400(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     post400(callback: ServiceCallback<models.ErrorModel>): void;
+    post400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 400 status code - should be represented in the client as an error
@@ -684,11 +2219,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    delete400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    delete400WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 400 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    delete400(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     delete400(callback: ServiceCallback<models.ErrorModel>): void;
+    delete400(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 401 status code - should be represented in the client as an error
@@ -698,11 +2272,48 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head401(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    head401WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 401 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head401(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     head401(callback: ServiceCallback<models.ErrorModel>): void;
+    head401(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 402 status code - should be represented in the client as an error
@@ -712,11 +2323,48 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get402(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    get402WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 402 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get402(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     get402(callback: ServiceCallback<models.ErrorModel>): void;
+    get402(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 403 status code - should be represented in the client as an error
@@ -726,11 +2374,48 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get403(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    get403WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 403 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get403(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     get403(callback: ServiceCallback<models.ErrorModel>): void;
+    get403(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 404 status code - should be represented in the client as an error
@@ -742,11 +2427,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put404(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    put404WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 404 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put404(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     put404(callback: ServiceCallback<models.ErrorModel>): void;
+    put404(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 405 status code - should be represented in the client as an error
@@ -758,11 +2482,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    patch405(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    patch405WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 405 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    patch405(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     patch405(callback: ServiceCallback<models.ErrorModel>): void;
+    patch405(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 406 status code - should be represented in the client as an error
@@ -774,11 +2537,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post406(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    post406WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 406 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post406(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     post406(callback: ServiceCallback<models.ErrorModel>): void;
+    post406(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 407 status code - should be represented in the client as an error
@@ -790,11 +2592,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    delete407(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    delete407WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 407 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    delete407(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     delete407(callback: ServiceCallback<models.ErrorModel>): void;
+    delete407(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 409 status code - should be represented in the client as an error
@@ -806,11 +2647,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put409(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    put409WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 409 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put409(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     put409(callback: ServiceCallback<models.ErrorModel>): void;
+    put409(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 410 status code - should be represented in the client as an error
@@ -820,11 +2700,48 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head410(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    head410WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 410 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head410(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     head410(callback: ServiceCallback<models.ErrorModel>): void;
+    head410(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 411 status code - should be represented in the client as an error
@@ -834,11 +2751,48 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get411(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    get411WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 411 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get411(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     get411(callback: ServiceCallback<models.ErrorModel>): void;
+    get411(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 412 status code - should be represented in the client as an error
@@ -848,11 +2802,48 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get412(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    get412WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 412 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get412(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     get412(callback: ServiceCallback<models.ErrorModel>): void;
+    get412(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 413 status code - should be represented in the client as an error
@@ -864,11 +2855,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put413(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    put413WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 413 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put413(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     put413(callback: ServiceCallback<models.ErrorModel>): void;
+    put413(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 414 status code - should be represented in the client as an error
@@ -880,11 +2910,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    patch414(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    patch414WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 414 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    patch414(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     patch414(callback: ServiceCallback<models.ErrorModel>): void;
+    patch414(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 415 status code - should be represented in the client as an error
@@ -896,11 +2965,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post415(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    post415WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 415 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post415(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     post415(callback: ServiceCallback<models.ErrorModel>): void;
+    post415(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 416 status code - should be represented in the client as an error
@@ -910,11 +3018,48 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get416(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    get416WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 416 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get416(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     get416(callback: ServiceCallback<models.ErrorModel>): void;
+    get416(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 417 status code - should be represented in the client as an error
@@ -926,11 +3071,50 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    delete417(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    delete417WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 417 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    delete417(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     delete417(callback: ServiceCallback<models.ErrorModel>): void;
+    delete417(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 429 status code - should be represented in the client as an error
@@ -940,11 +3124,47 @@ export interface HttpClientFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head429(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    head429WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 429 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head429(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     head429(callback: ServiceCallback<models.ErrorModel>): void;
+    head429(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
 }
 
 /**
@@ -955,6 +3175,7 @@ export interface HttpClientFailure {
  */
 export interface HttpServerFailure {
 
+
     /**
      * Return 501 status code - should be represented in the client as an error
      *
@@ -963,11 +3184,48 @@ export interface HttpServerFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head501(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    head501WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 501 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head501(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     head501(callback: ServiceCallback<models.ErrorModel>): void;
+    head501(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 501 status code - should be represented in the client as an error
@@ -977,11 +3235,48 @@ export interface HttpServerFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get501(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    get501WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 501 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get501(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     get501(callback: ServiceCallback<models.ErrorModel>): void;
+    get501(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 505 status code - should be represented in the client as an error
@@ -993,11 +3288,50 @@ export interface HttpServerFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post505(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    post505WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 505 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post505(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     post505(callback: ServiceCallback<models.ErrorModel>): void;
+    post505(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Return 505 status code - should be represented in the client as an error
@@ -1009,11 +3343,49 @@ export interface HttpServerFailure {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    delete505(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    delete505WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Return 505 status code - should be represented in the client as an error
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    delete505(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     delete505(callback: ServiceCallback<models.ErrorModel>): void;
+    delete505(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
 }
 
 /**
@@ -1024,6 +3396,7 @@ export interface HttpServerFailure {
  */
 export interface HttpRetry {
 
+
     /**
      * Return 408 status code, then 200 after retry
      *
@@ -1032,11 +3405,47 @@ export interface HttpRetry {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    head408(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    head408WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 408 status code, then 200 after retry
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    head408(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     head408(callback: ServiceCallback<void>): void;
+    head408(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 500 status code, then 200 after retry
@@ -1048,11 +3457,49 @@ export interface HttpRetry {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put500(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    put500WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 500 status code, then 200 after retry
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put500(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     put500(callback: ServiceCallback<void>): void;
+    put500(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 500 status code, then 200 after retry
@@ -1064,11 +3511,49 @@ export interface HttpRetry {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    patch500(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    patch500WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 500 status code, then 200 after retry
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    patch500(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     patch500(callback: ServiceCallback<void>): void;
+    patch500(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 502 status code, then 200 after retry
@@ -1078,11 +3563,47 @@ export interface HttpRetry {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get502(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get502WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 502 status code, then 200 after retry
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get502(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get502(callback: ServiceCallback<void>): void;
+    get502(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 503 status code, then 200 after retry
@@ -1094,11 +3615,49 @@ export interface HttpRetry {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    post503(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    post503WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 503 status code, then 200 after retry
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    post503(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     post503(callback: ServiceCallback<void>): void;
+    post503(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 503 status code, then 200 after retry
@@ -1110,11 +3669,49 @@ export interface HttpRetry {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    delete503(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    delete503WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 503 status code, then 200 after retry
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    delete503(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     delete503(callback: ServiceCallback<void>): void;
+    delete503(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 504 status code, then 200 after retry
@@ -1126,11 +3723,49 @@ export interface HttpRetry {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    put504(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    put504WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 504 status code, then 200 after retry
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    put504(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     put504(callback: ServiceCallback<void>): void;
+    put504(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Return 504 status code, then 200 after retry
@@ -1142,11 +3777,48 @@ export interface HttpRetry {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    patch504(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    patch504WithHttpOperationResponse(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Return 504 status code, then 200 after retry
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {boolean} [options.booleanValue] Simple boolean value true
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    patch504(options?: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     patch504(callback: ServiceCallback<void>): void;
+    patch504(options: { booleanValue? : boolean, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -1157,6 +3829,7 @@ export interface HttpRetry {
  */
 export interface MultipleResponses {
 
+
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
      *
@@ -1165,11 +3838,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200Model204NoModelDefaultError200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError200ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200Model204NoModelDefaultError200Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200Model204NoModelDefaultError200Valid(callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 204 response with no payload
@@ -1179,11 +3889,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200Model204NoModelDefaultError204Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError204ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 204 response with no payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200Model204NoModelDefaultError204Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200Model204NoModelDefaultError204Valid(callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError204Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}
@@ -1193,11 +3940,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200Model204NoModelDefaultError201Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError201InvalidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 201 response with valid payload: {'statusCode': '201'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200Model204NoModelDefaultError201Invalid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200Model204NoModelDefaultError201Invalid(callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError201Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 202 response with no payload:
@@ -1207,11 +3991,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200Model204NoModelDefaultError202None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError202NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 202 response with no payload:
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200Model204NoModelDefaultError202None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200Model204NoModelDefaultError202None(callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError202None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message':
@@ -1222,11 +4043,49 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200Model204NoModelDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError400ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 400 response with valid error payload: {'status': 400, 'message':
+     * 'client error'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200Model204NoModelDefaultError400Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200Model204NoModelDefaultError400Valid(callback: ServiceCallback<models.A>): void;
+    get200Model204NoModelDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
@@ -1236,11 +4095,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200Model201ModelDefaultError200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200Model201ModelDefaultError200ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200Model201ModelDefaultError200Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200Model201ModelDefaultError200Valid(callback: ServiceCallback<models.A>): void;
+    get200Model201ModelDefaultError200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201',
@@ -1251,11 +4147,49 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200Model201ModelDefaultError201Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200Model201ModelDefaultError201ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 201 response with valid payload: {'statusCode': '201',
+     * 'textStatusCode': 'Created'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200Model201ModelDefaultError201Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200Model201ModelDefaultError201Valid(callback: ServiceCallback<models.A>): void;
+    get200Model201ModelDefaultError201Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client
@@ -1266,11 +4200,49 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200Model201ModelDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200Model201ModelDefaultError400ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client
+     * error'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200Model201ModelDefaultError400Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200Model201ModelDefaultError400Valid(callback: ServiceCallback<models.A>): void;
+    get200Model201ModelDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
@@ -1280,11 +4252,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA201ModelC404ModelDDefaultError200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError200ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<any>>;
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Object} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Object} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA201ModelC404ModelDDefaultError200Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<any>;
     get200ModelA201ModelC404ModelDDefaultError200Valid(callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
+
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}
@@ -1294,11 +4302,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA201ModelC404ModelDDefaultError201Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError201ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<any>>;
+
+    /**
+     * Send a 200 response with valid payload: {'httpCode': '201'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Object} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Object} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA201ModelC404ModelDDefaultError201Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<any>;
     get200ModelA201ModelC404ModelDDefaultError201Valid(callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError201Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
+
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}
@@ -1308,11 +4352,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA201ModelC404ModelDDefaultError404Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError404ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<any>>;
+
+    /**
+     * Send a 200 response with valid payload: {'httpStatusCode': '404'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Object} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Object} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA201ModelC404ModelDDefaultError404Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<any>;
     get200ModelA201ModelC404ModelDDefaultError404Valid(callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError404Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
+
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client
@@ -1323,11 +4403,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA201ModelC404ModelDDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError400ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<any>>;
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client
+     * error'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Object} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Object} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA201ModelC404ModelDDefaultError400Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<any>;
     get200ModelA201ModelC404ModelDDefaultError400Valid(callback: ServiceCallback<any>): void;
+    get200ModelA201ModelC404ModelDDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<any>): void;
+
 
     /**
      * Send a 202 response with no payload
@@ -1337,11 +4454,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get202None204NoneDefaultError202None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultError202NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 202 response with no payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get202None204NoneDefaultError202None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get202None204NoneDefaultError202None(callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultError202None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 204 response with no payload
@@ -1351,11 +4504,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get202None204NoneDefaultError204None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultError204NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 204 response with no payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get202None204NoneDefaultError204None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get202None204NoneDefaultError204None(callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultError204None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client
@@ -1366,11 +4555,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get202None204NoneDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultError400ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client
+     * error'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get202None204NoneDefaultError400Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get202None204NoneDefaultError400Valid(callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultError400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}
@@ -1380,11 +4606,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get202None204NoneDefaultNone202Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone202InvalidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 202 response with an unexpected payload {'property': 'value'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get202None204NoneDefaultNone202Invalid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get202None204NoneDefaultNone202Invalid(callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone202Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 204 response with no payload
@@ -1394,11 +4656,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get202None204NoneDefaultNone204None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone204NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 204 response with no payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get202None204NoneDefaultNone204None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get202None204NoneDefaultNone204None(callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone204None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 400 response with no payload
@@ -1408,11 +4706,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get202None204NoneDefaultNone400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone400NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 400 response with no payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get202None204NoneDefaultNone400None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get202None204NoneDefaultNone400None(callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}
@@ -1422,11 +4756,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get202None204NoneDefaultNone400Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone400InvalidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 400 response with an unexpected payload {'property': 'value'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get202None204NoneDefaultNone400Invalid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     get202None204NoneDefaultNone400Invalid(callback: ServiceCallback<void>): void;
+    get202None204NoneDefaultNone400Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}
@@ -1436,11 +4806,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDefaultModelA200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    getDefaultModelA200ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDefaultModelA200Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     getDefaultModelA200Valid(callback: ServiceCallback<models.A>): void;
+    getDefaultModelA200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 200 response with no payload
@@ -1450,11 +4857,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDefaultModelA200None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    getDefaultModelA200NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 200 response with no payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDefaultModelA200None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     getDefaultModelA200None(callback: ServiceCallback<models.A>): void;
+    getDefaultModelA200None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
@@ -1464,11 +4908,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDefaultModelA400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    getDefaultModelA400ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDefaultModelA400Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     getDefaultModelA400Valid(callback: ServiceCallback<models.A>): void;
+    getDefaultModelA400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 400 response with no payload
@@ -1478,11 +4959,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDefaultModelA400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    getDefaultModelA400NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 400 response with no payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDefaultModelA400None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     getDefaultModelA400None(callback: ServiceCallback<models.A>): void;
+    getDefaultModelA400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}
@@ -1492,11 +5010,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDefaultNone200Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getDefaultNone200InvalidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 200 response with invalid payload: {'statusCode': '200'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDefaultNone200Invalid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     getDefaultNone200Invalid(callback: ServiceCallback<void>): void;
+    getDefaultNone200Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 200 response with no payload
@@ -1506,11 +5060,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDefaultNone200None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getDefaultNone200NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 200 response with no payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDefaultNone200None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     getDefaultNone200None(callback: ServiceCallback<void>): void;
+    getDefaultNone200None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}
@@ -1520,11 +5110,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDefaultNone400Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getDefaultNone400InvalidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDefaultNone400Invalid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     getDefaultNone400Invalid(callback: ServiceCallback<void>): void;
+    getDefaultNone400Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 400 response with no payload
@@ -1534,11 +5160,47 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDefaultNone400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getDefaultNone400NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Send a 400 response with no payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDefaultNone400None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     getDefaultNone400None(callback: ServiceCallback<void>): void;
+    getDefaultNone400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client
@@ -1549,11 +5211,49 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA200None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200ModelA200NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 200 response with no payload, when a payload is expected - client
+     * should return a null object of thde type for model A
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA200None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200ModelA200None(callback: ServiceCallback<models.A>): void;
+    get200ModelA200None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}
@@ -1563,11 +5263,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200ModelA200ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 200 response with payload {'statusCode': '200'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA200Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200ModelA200Valid(callback: ServiceCallback<models.A>): void;
+    get200ModelA200Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
@@ -1577,11 +5314,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA200Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200ModelA200InvalidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA200Invalid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200ModelA200Invalid(callback: ServiceCallback<models.A>): void;
+    get200ModelA200Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 400 response with no payload client should treat as an http error
@@ -1592,11 +5366,49 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200ModelA400NoneWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 400 response with no payload client should treat as an http error
+     * with no error model
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA400None(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200ModelA400None(callback: ServiceCallback<models.A>): void;
+    get200ModelA400None(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}
@@ -1606,11 +5418,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200ModelA400ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 200 response with payload {'statusCode': '400'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA400Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200ModelA400Valid(callback: ServiceCallback<models.A>): void;
+    get200ModelA400Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
@@ -1620,11 +5469,48 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA400Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200ModelA400InvalidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA400Invalid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200ModelA400Invalid(callback: ServiceCallback<models.A>): void;
+    get200ModelA400Invalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}
@@ -1634,9 +5520,45 @@ export interface MultipleResponses {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<A>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    get200ModelA202Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
+    get200ModelA202ValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.A>>;
+
+    /**
+     * Send a 202 response with payload {'statusCode': '202'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {A} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {A} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link A} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    get200ModelA202Valid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.A>;
     get200ModelA202Valid(callback: ServiceCallback<models.A>): void;
+    get200ModelA202Valid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.A>): void;
 }

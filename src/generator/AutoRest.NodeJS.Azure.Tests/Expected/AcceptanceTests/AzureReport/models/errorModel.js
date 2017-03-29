@@ -19,40 +19,42 @@
  * @member {string} [message]
  *
  */
-function ErrorModel() {
-}
+class ErrorModel {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of ErrorModel
- *
- * @returns {object} metadata of ErrorModel
- *
- */
-ErrorModel.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Error',
-    type: {
-      name: 'Composite',
-      className: 'ErrorModel',
-      modelProperties: {
-        status: {
-          required: false,
-          serializedName: 'status',
-          type: {
-            name: 'Number'
-          }
-        },
-        message: {
-          required: false,
-          serializedName: 'message',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of ErrorModel
+   *
+   * @returns {object} metadata of ErrorModel
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Error',
+      type: {
+        name: 'Composite',
+        className: 'ErrorModel',
+        modelProperties: {
+          status: {
+            required: false,
+            serializedName: 'status',
+            type: {
+              name: 'Number'
+            }
+          },
+          message: {
+            required: false,
+            serializedName: 'message',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ErrorModel;

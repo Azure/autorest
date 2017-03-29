@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -23,41 +21,43 @@ var util = require('util');
  * @member {array} [value] Gets or sets the list Storage Resource Usages.
  *
  */
-function UsageListResult() {
-}
+class UsageListResult {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of UsageListResult
- *
- * @returns {object} metadata of UsageListResult
- *
- */
-UsageListResult.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'UsageListResult',
-    type: {
-      name: 'Composite',
-      className: 'UsageListResult',
-      modelProperties: {
-        value: {
-          required: false,
-          serializedName: 'value',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'UsageElementType',
-                type: {
-                  name: 'Composite',
-                  className: 'Usage'
-                }
+  /**
+   * Defines the metadata of UsageListResult
+   *
+   * @returns {object} metadata of UsageListResult
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'UsageListResult',
+      type: {
+        name: 'Composite',
+        className: 'UsageListResult',
+        modelProperties: {
+          value: {
+            required: false,
+            serializedName: 'value',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'UsageElementType',
+                  type: {
+                    name: 'Composite',
+                    className: 'Usage'
+                  }
+              }
             }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = UsageListResult;

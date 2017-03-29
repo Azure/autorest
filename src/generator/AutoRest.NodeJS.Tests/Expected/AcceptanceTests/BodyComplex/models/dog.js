@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -21,50 +19,50 @@ var util = require('util');
  * @member {string} [food]
  *
  */
-function Dog() {
-  Dog['super_'].call(this);
-}
+class Dog extends models['Pet'] {
+  constructor() {
+    super();
+  }
 
-util.inherits(Dog, models['Pet']);
-
-/**
- * Defines the metadata of Dog
- *
- * @returns {object} metadata of Dog
- *
- */
-Dog.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'dog',
-    type: {
-      name: 'Composite',
-      className: 'Dog',
-      modelProperties: {
-        id: {
-          required: false,
-          serializedName: 'id',
-          type: {
-            name: 'Number'
-          }
-        },
-        name: {
-          required: false,
-          serializedName: 'name',
-          type: {
-            name: 'String'
-          }
-        },
-        food: {
-          required: false,
-          serializedName: 'food',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of Dog
+   *
+   * @returns {object} metadata of Dog
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'dog',
+      type: {
+        name: 'Composite',
+        className: 'Dog',
+        modelProperties: {
+          id: {
+            required: false,
+            serializedName: 'id',
+            type: {
+              name: 'Number'
+            }
+          },
+          name: {
+            required: false,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
+          },
+          food: {
+            required: false,
+            serializedName: 'food',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Dog;

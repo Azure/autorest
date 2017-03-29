@@ -17,33 +17,35 @@
  * @member {moment.duration} [field]
  *
  */
-function DurationWrapper() {
-}
+class DurationWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of DurationWrapper
- *
- * @returns {object} metadata of DurationWrapper
- *
- */
-DurationWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'duration-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'DurationWrapper',
-      modelProperties: {
-        field: {
-          required: false,
-          serializedName: 'field',
-          type: {
-            name: 'TimeSpan'
+  /**
+   * Defines the metadata of DurationWrapper
+   *
+   * @returns {object} metadata of DurationWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'duration-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'DurationWrapper',
+        modelProperties: {
+          field: {
+            required: false,
+            serializedName: 'field',
+            type: {
+              name: 'TimeSpan'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = DurationWrapper;

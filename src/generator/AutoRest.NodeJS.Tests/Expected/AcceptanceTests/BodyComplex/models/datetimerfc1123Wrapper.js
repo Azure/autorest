@@ -19,40 +19,42 @@
  * @member {date} [now]
  *
  */
-function Datetimerfc1123Wrapper() {
-}
+class Datetimerfc1123Wrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Datetimerfc1123Wrapper
- *
- * @returns {object} metadata of Datetimerfc1123Wrapper
- *
- */
-Datetimerfc1123Wrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'datetimerfc1123-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'Datetimerfc1123Wrapper',
-      modelProperties: {
-        field: {
-          required: false,
-          serializedName: 'field',
-          type: {
-            name: 'DateTimeRfc1123'
-          }
-        },
-        now: {
-          required: false,
-          serializedName: 'now',
-          type: {
-            name: 'DateTimeRfc1123'
+  /**
+   * Defines the metadata of Datetimerfc1123Wrapper
+   *
+   * @returns {object} metadata of Datetimerfc1123Wrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'datetimerfc1123-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'Datetimerfc1123Wrapper',
+        modelProperties: {
+          field: {
+            required: false,
+            serializedName: 'field',
+            type: {
+              name: 'DateTimeRfc1123'
+            }
+          },
+          now: {
+            required: false,
+            serializedName: 'now',
+            type: {
+              name: 'DateTimeRfc1123'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Datetimerfc1123Wrapper;

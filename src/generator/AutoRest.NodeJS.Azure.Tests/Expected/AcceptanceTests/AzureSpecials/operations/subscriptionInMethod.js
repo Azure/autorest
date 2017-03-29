@@ -10,24 +10,9 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var msRestAzure = require('ms-rest-azure');
-var WebResource = msRest.WebResource;
-
-/**
- * @class
- * SubscriptionInMethod
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the SubscriptionInMethod class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
-function SubscriptionInMethod(client) {
-  this.client = client;
-}
+const msRest = require('ms-rest');
+const msRestAzure = require('ms-rest-azure');
+const WebResource = msRest.WebResource;
 
 /**
  * POST method with subscriptionId modeled in the method.  pass in subscription
@@ -41,20 +26,21 @@ function SubscriptionInMethod(client) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, options, callback) {
-  var client = this.client;
+function _postMethodLocalValid(subscriptionId, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -75,16 +61,16 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
-  var queryParameters = [];
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -96,7 +82,7 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -105,44 +91,44 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * POST method with subscriptionId modeled in the method.  pass in subscription
@@ -156,20 +142,21 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, options, callback) {
-  var client = this.client;
+function _postMethodLocalNull(subscriptionId, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -190,16 +177,16 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
-  var queryParameters = [];
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -211,7 +198,7 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -220,44 +207,44 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * POST method with subscriptionId modeled in the method.  pass in subscription
@@ -271,20 +258,21 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, options, callback) {
-  var client = this.client;
+function _postPathLocalValid(subscriptionId, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -305,16 +293,16 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
-  var queryParameters = [];
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -326,7 +314,7 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -335,44 +323,44 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * POST method with subscriptionId modeled in the method.  pass in subscription
@@ -386,20 +374,21 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId, options, callback) {
-  var client = this.client;
+function _postSwaggerLocalValid(subscriptionId, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -420,16 +409,16 @@ SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId,
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
-  var queryParameters = [];
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -441,7 +430,7 @@ SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId,
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -450,44 +439,404 @@ SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId,
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
+/**
+ * @class
+ * SubscriptionInMethod
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestAzureSpecialParametersTestClient.
+ * Initializes a new instance of the SubscriptionInMethod class.
+ * @constructor
+ *
+ * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+ */
+class SubscriptionInMethod {
+  constructor(client) {
+    this.client = client;
+    this._postMethodLocalValid = _postMethodLocalValid;
+    this._postMethodLocalNull = _postMethodLocalNull;
+    this._postPathLocalValid = _postPathLocalValid;
+    this._postSwaggerLocalValid = _postSwaggerLocalValid;
+  }
+
+  /**
+   * POST method with subscriptionId modeled in the method.  pass in subscription
+   * id = '1234-5678-9012-3456' to succeed
+   *
+   * @param {string} subscriptionId This should appear as a method parameter, use
+   * value '1234-5678-9012-3456'
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  postMethodLocalValidWithHttpOperationResponse(subscriptionId, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._postMethodLocalValid(subscriptionId, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * POST method with subscriptionId modeled in the method.  pass in subscription
+   * id = '1234-5678-9012-3456' to succeed
+   *
+   * @param {string} subscriptionId This should appear as a method parameter, use
+   * value '1234-5678-9012-3456'
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  postMethodLocalValid(subscriptionId, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._postMethodLocalValid(subscriptionId, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._postMethodLocalValid(subscriptionId, options, optionalCallback);
+    }
+  }
+
+  /**
+   * POST method with subscriptionId modeled in the method.  pass in subscription
+   * id = null, client-side validation should prevent you from making this call
+   *
+   * @param {string} subscriptionId This should appear as a method parameter, use
+   * value null, client-side validation should prvenet the call
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  postMethodLocalNullWithHttpOperationResponse(subscriptionId, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._postMethodLocalNull(subscriptionId, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * POST method with subscriptionId modeled in the method.  pass in subscription
+   * id = null, client-side validation should prevent you from making this call
+   *
+   * @param {string} subscriptionId This should appear as a method parameter, use
+   * value null, client-side validation should prvenet the call
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  postMethodLocalNull(subscriptionId, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._postMethodLocalNull(subscriptionId, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._postMethodLocalNull(subscriptionId, options, optionalCallback);
+    }
+  }
+
+  /**
+   * POST method with subscriptionId modeled in the method.  pass in subscription
+   * id = '1234-5678-9012-3456' to succeed
+   *
+   * @param {string} subscriptionId Should appear as a method parameter -use
+   * value '1234-5678-9012-3456'
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  postPathLocalValidWithHttpOperationResponse(subscriptionId, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._postPathLocalValid(subscriptionId, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * POST method with subscriptionId modeled in the method.  pass in subscription
+   * id = '1234-5678-9012-3456' to succeed
+   *
+   * @param {string} subscriptionId Should appear as a method parameter -use
+   * value '1234-5678-9012-3456'
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  postPathLocalValid(subscriptionId, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._postPathLocalValid(subscriptionId, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._postPathLocalValid(subscriptionId, options, optionalCallback);
+    }
+  }
+
+  /**
+   * POST method with subscriptionId modeled in the method.  pass in subscription
+   * id = '1234-5678-9012-3456' to succeed
+   *
+   * @param {string} subscriptionId The subscriptionId, which appears in the
+   * path, the value is always '1234-5678-9012-3456'
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  postSwaggerLocalValidWithHttpOperationResponse(subscriptionId, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._postSwaggerLocalValid(subscriptionId, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * POST method with subscriptionId modeled in the method.  pass in subscription
+   * id = '1234-5678-9012-3456' to succeed
+   *
+   * @param {string} subscriptionId The subscriptionId, which appears in the
+   * path, the value is always '1234-5678-9012-3456'
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  postSwaggerLocalValid(subscriptionId, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._postSwaggerLocalValid(subscriptionId, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._postSwaggerLocalValid(subscriptionId, options, optionalCallback);
+    }
+  }
+
+}
 
 module.exports = SubscriptionInMethod;

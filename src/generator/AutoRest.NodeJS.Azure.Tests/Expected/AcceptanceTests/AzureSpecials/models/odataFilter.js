@@ -19,40 +19,42 @@
  * @member {string} [name]
  *
  */
-function OdataFilter() {
-}
+class OdataFilter {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of OdataFilter
- *
- * @returns {object} metadata of OdataFilter
- *
- */
-OdataFilter.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'OdataFilter',
-    type: {
-      name: 'Composite',
-      className: 'OdataFilter',
-      modelProperties: {
-        id: {
-          required: false,
-          serializedName: 'id',
-          type: {
-            name: 'Number'
-          }
-        },
-        name: {
-          required: false,
-          serializedName: 'name',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of OdataFilter
+   *
+   * @returns {object} metadata of OdataFilter
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'OdataFilter',
+      type: {
+        name: 'Composite',
+        className: 'OdataFilter',
+        modelProperties: {
+          id: {
+            required: false,
+            serializedName: 'id',
+            type: {
+              name: 'Number'
+            }
+          },
+          name: {
+            required: false,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = OdataFilter;

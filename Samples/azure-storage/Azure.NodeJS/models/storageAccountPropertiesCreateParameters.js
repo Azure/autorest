@@ -12,34 +12,36 @@
  * 'Premium_LRS'
  *
  */
-function StorageAccountPropertiesCreateParameters() {
-}
+class StorageAccountPropertiesCreateParameters {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of StorageAccountPropertiesCreateParameters
- *
- * @returns {object} metadata of StorageAccountPropertiesCreateParameters
- *
- */
-StorageAccountPropertiesCreateParameters.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'StorageAccountPropertiesCreateParameters',
-    type: {
-      name: 'Composite',
-      className: 'StorageAccountPropertiesCreateParameters',
-      modelProperties: {
-        accountType: {
-          required: true,
-          serializedName: 'accountType',
-          type: {
-            name: 'Enum',
-            allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
+  /**
+   * Defines the metadata of StorageAccountPropertiesCreateParameters
+   *
+   * @returns {object} metadata of StorageAccountPropertiesCreateParameters
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'StorageAccountPropertiesCreateParameters',
+      type: {
+        name: 'Composite',
+        className: 'StorageAccountPropertiesCreateParameters',
+        modelProperties: {
+          accountType: {
+            required: true,
+            serializedName: 'accountType',
+            type: {
+              name: 'Enum',
+              allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = StorageAccountPropertiesCreateParameters;

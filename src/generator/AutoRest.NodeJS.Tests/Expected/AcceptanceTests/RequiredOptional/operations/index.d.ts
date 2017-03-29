@@ -8,7 +8,7 @@
  * regenerated.
 */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as models from '../models';
 
 
@@ -20,6 +20,7 @@ import * as models from '../models';
  */
 export interface Implicit {
 
+
     /**
      * Test implicitly required path parameter
      *
@@ -30,11 +31,50 @@ export interface Implicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getRequiredPath(pathParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredPathWithHttpOperationResponse(pathParameter: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test implicitly required path parameter
+     *
+     * @param {string} pathParameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getRequiredPath(pathParameter: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     getRequiredPath(pathParameter: string, callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredPath(pathParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test implicitly optional query parameter
@@ -46,11 +86,49 @@ export interface Implicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putOptionalQuery(options: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putOptionalQueryWithHttpOperationResponse(options?: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test implicitly optional query parameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {string} [options.queryParameter]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putOptionalQuery(options?: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putOptionalQuery(callback: ServiceCallback<void>): void;
+    putOptionalQuery(options: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test implicitly optional header parameter
@@ -62,11 +140,49 @@ export interface Implicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putOptionalHeader(options: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putOptionalHeaderWithHttpOperationResponse(options?: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test implicitly optional header parameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {string} [options.queryParameter]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putOptionalHeader(options?: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putOptionalHeader(callback: ServiceCallback<void>): void;
+    putOptionalHeader(options: { queryParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test implicitly optional body parameter
@@ -78,11 +194,49 @@ export interface Implicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putOptionalBody(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putOptionalBodyWithHttpOperationResponse(options?: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test implicitly optional body parameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {string} [options.bodyParameter]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putOptionalBody(options?: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putOptionalBody(callback: ServiceCallback<void>): void;
+    putOptionalBody(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test implicitly required path parameter
@@ -92,11 +246,48 @@ export interface Implicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getRequiredGlobalPath(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredGlobalPathWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test implicitly required path parameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getRequiredGlobalPath(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     getRequiredGlobalPath(callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredGlobalPath(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test implicitly required query parameter
@@ -106,11 +297,48 @@ export interface Implicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getRequiredGlobalQuery(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredGlobalQueryWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test implicitly required query parameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getRequiredGlobalQuery(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     getRequiredGlobalQuery(callback: ServiceCallback<models.ErrorModel>): void;
+    getRequiredGlobalQuery(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test implicitly optional query parameter
@@ -120,11 +348,47 @@ export interface Implicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getOptionalGlobalQuery(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    getOptionalGlobalQueryWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test implicitly optional query parameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getOptionalGlobalQuery(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     getOptionalGlobalQuery(callback: ServiceCallback<models.ErrorModel>): void;
+    getOptionalGlobalQuery(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
 }
 
 /**
@@ -134,6 +398,7 @@ export interface Implicit {
  * instance of the AutoRestRequiredOptionalTestService.
  */
 export interface Explicit {
+
 
     /**
      * Test explicitly required integer. Please put null and the client library
@@ -146,11 +411,51 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredIntegerParameter(bodyParameter: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerParameterWithHttpOperationResponse(bodyParameter: number, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required integer. Please put null and the client library
+     * should throw before the request is sent.
+     *
+     * @param {number} bodyParameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredIntegerParameter(bodyParameter: number, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredIntegerParameter(bodyParameter: number, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerParameter(bodyParameter: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -162,11 +467,49 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalIntegerParameter(options: { bodyParameter? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalIntegerParameterWithHttpOperationResponse(options?: { bodyParameter? : number, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {number} [options.bodyParameter]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalIntegerParameter(options?: { bodyParameter? : number, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalIntegerParameter(callback: ServiceCallback<void>): void;
+    postOptionalIntegerParameter(options: { bodyParameter? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with
@@ -180,11 +523,52 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredIntegerProperty(value: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerPropertyWithHttpOperationResponse(value: number, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required integer. Please put a valid int-wrapper with
+     * 'value' = null and the client library should throw before the request is
+     * sent.
+     *
+     * @param {number} value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredIntegerProperty(value: number, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredIntegerProperty(value: number, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerProperty(value: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with
@@ -197,11 +581,50 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalIntegerProperty(options: { value? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalIntegerPropertyWithHttpOperationResponse(options?: { value? : number, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with
+     * 'value' = null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {number} [options.value]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalIntegerProperty(options?: { value? : number, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalIntegerProperty(callback: ServiceCallback<void>): void;
+    postOptionalIntegerProperty(options: { value? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =>
@@ -214,11 +637,51 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredIntegerHeader(headerParameter: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerHeaderWithHttpOperationResponse(headerParameter: number, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required integer. Please put a header 'headerParameter' =>
+     * null and the client library should throw before the request is sent.
+     *
+     * @param {number} headerParameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredIntegerHeader(headerParameter: number, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredIntegerHeader(headerParameter: number, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredIntegerHeader(headerParameter: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =>
@@ -231,11 +694,50 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalIntegerHeader(options: { headerParameter? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalIntegerHeaderWithHttpOperationResponse(options?: { headerParameter? : number, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =>
+     * null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {number} [options.headerParameter]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalIntegerHeader(options?: { headerParameter? : number, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalIntegerHeader(callback: ServiceCallback<void>): void;
+    postOptionalIntegerHeader(options: { headerParameter? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test explicitly required string. Please put null and the client library
@@ -248,11 +750,51 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredStringParameter(bodyParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringParameterWithHttpOperationResponse(bodyParameter: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required string. Please put null and the client library
+     * should throw before the request is sent.
+     *
+     * @param {string} bodyParameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredStringParameter(bodyParameter: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredStringParameter(bodyParameter: string, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringParameter(bodyParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional string. Please put null.
@@ -264,11 +806,49 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalStringParameter(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalStringParameterWithHttpOperationResponse(options?: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {string} [options.bodyParameter]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalStringParameter(options?: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalStringParameter(callback: ServiceCallback<void>): void;
+    postOptionalStringParameter(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with
@@ -282,11 +862,52 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredStringProperty(value: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringPropertyWithHttpOperationResponse(value: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required string. Please put a valid string-wrapper with
+     * 'value' = null and the client library should throw before the request is
+     * sent.
+     *
+     * @param {string} value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredStringProperty(value: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredStringProperty(value: string, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringProperty(value: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with
@@ -299,11 +920,50 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalStringProperty(options: { value? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalStringPropertyWithHttpOperationResponse(options?: { value? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with
+     * 'value' = null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {string} [options.value]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalStringProperty(options?: { value? : string, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalStringProperty(callback: ServiceCallback<void>): void;
+    postOptionalStringProperty(options: { value? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =>
@@ -316,11 +976,51 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredStringHeader(headerParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringHeaderWithHttpOperationResponse(headerParameter: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required string. Please put a header 'headerParameter' =>
+     * null and the client library should throw before the request is sent.
+     *
+     * @param {string} headerParameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredStringHeader(headerParameter: string, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredStringHeader(headerParameter: string, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredStringHeader(headerParameter: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =>
@@ -333,11 +1033,50 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalStringHeader(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalStringHeaderWithHttpOperationResponse(options?: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =>
+     * null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {string} [options.bodyParameter]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalStringHeader(options?: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalStringHeader(callback: ServiceCallback<void>): void;
+    postOptionalStringHeader(options: { bodyParameter? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test explicitly required complex object. Please put null and the client
@@ -354,11 +1093,55 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredClassParameter(bodyParameter: models.Product, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredClassParameterWithHttpOperationResponse(bodyParameter: models.Product, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required complex object. Please put null and the client
+     * library should throw before the request is sent.
+     *
+     * @param {object} bodyParameter
+     *
+     * @param {number} bodyParameter.id
+     *
+     * @param {string} [bodyParameter.name]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredClassParameter(bodyParameter: models.Product, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredClassParameter(bodyParameter: models.Product, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredClassParameter(bodyParameter: models.Product, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -374,11 +1157,53 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalClassParameter(options: { bodyParameter? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalClassParameterWithHttpOperationResponse(options?: { bodyParameter? : models.Product, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.bodyParameter]
+     *
+     * @param {number} options.bodyParameter.id
+     *
+     * @param {string} [options.bodyParameter.name]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalClassParameter(options?: { bodyParameter? : models.Product, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalClassParameter(callback: ServiceCallback<void>): void;
+    postOptionalClassParameter(options: { bodyParameter? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper
@@ -396,11 +1221,56 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredClassProperty(value: models.Product, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredClassPropertyWithHttpOperationResponse(value: models.Product, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required complex object. Please put a valid class-wrapper
+     * with 'value' = null and the client library should throw before the request
+     * is sent.
+     *
+     * @param {object} value
+     *
+     * @param {number} value.id
+     *
+     * @param {string} [value.name]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredClassProperty(value: models.Product, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredClassProperty(value: models.Product, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredClassProperty(value: models.Product, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper
@@ -417,11 +1287,54 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalClassProperty(options: { value? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalClassPropertyWithHttpOperationResponse(options?: { value? : models.Product, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper
+     * with 'value' = null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.value]
+     *
+     * @param {number} options.value.id
+     *
+     * @param {string} [options.value.name]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalClassProperty(options?: { value? : models.Product, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalClassProperty(callback: ServiceCallback<void>): void;
+    postOptionalClassProperty(options: { value? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test explicitly required array. Please put null and the client library
@@ -434,11 +1347,51 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredArrayParameter(bodyParameter: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayParameterWithHttpOperationResponse(bodyParameter: string[], options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required array. Please put null and the client library
+     * should throw before the request is sent.
+     *
+     * @param {array} bodyParameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredArrayParameter(bodyParameter: string[], options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredArrayParameter(bodyParameter: string[], callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayParameter(bodyParameter: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional array. Please put null.
@@ -450,11 +1403,49 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalArrayParameter(options: { bodyParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalArrayParameterWithHttpOperationResponse(options?: { bodyParameter? : string[], customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {array} [options.bodyParameter]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalArrayParameter(options?: { bodyParameter? : string[], customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalArrayParameter(callback: ServiceCallback<void>): void;
+    postOptionalArrayParameter(options: { bodyParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with
@@ -468,11 +1459,52 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredArrayProperty(value: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayPropertyWithHttpOperationResponse(value: string[], options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required array. Please put a valid array-wrapper with
+     * 'value' = null and the client library should throw before the request is
+     * sent.
+     *
+     * @param {array} value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredArrayProperty(value: string[], options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredArrayProperty(value: string[], callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayProperty(value: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with
@@ -485,11 +1517,50 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalArrayProperty(options: { value? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalArrayPropertyWithHttpOperationResponse(options?: { value? : string[], customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with
+     * 'value' = null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {array} [options.value]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalArrayProperty(options?: { value? : string[], customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalArrayProperty(callback: ServiceCallback<void>): void;
+    postOptionalArrayProperty(options: { value? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =>
@@ -502,11 +1573,51 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ErrorModel>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postRequiredArrayHeader(headerParameter: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayHeaderWithHttpOperationResponse(headerParameter: string[], options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ErrorModel>>;
+
+    /**
+     * Test explicitly required array. Please put a header 'headerParameter' =>
+     * null and the client library should throw before the request is sent.
+     *
+     * @param {array} headerParameter
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ErrorModel} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ErrorModel} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ErrorModel} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postRequiredArrayHeader(headerParameter: string[], options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ErrorModel>;
     postRequiredArrayHeader(headerParameter: string[], callback: ServiceCallback<models.ErrorModel>): void;
+    postRequiredArrayHeader(headerParameter: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ErrorModel>): void;
+
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =>
@@ -519,9 +1630,47 @@ export interface Explicit {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    postOptionalArrayHeader(options: { headerParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postOptionalArrayHeaderWithHttpOperationResponse(options?: { headerParameter? : string[], customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =>
+     * null.
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {array} [options.headerParameter]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    postOptionalArrayHeader(options?: { headerParameter? : string[], customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     postOptionalArrayHeader(callback: ServiceCallback<void>): void;
+    postOptionalArrayHeader(options: { headerParameter? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 }

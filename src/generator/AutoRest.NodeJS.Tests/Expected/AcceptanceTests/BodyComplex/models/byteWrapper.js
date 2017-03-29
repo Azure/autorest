@@ -17,33 +17,35 @@
  * @member {buffer} [field]
  *
  */
-function ByteWrapper() {
-}
+class ByteWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of ByteWrapper
- *
- * @returns {object} metadata of ByteWrapper
- *
- */
-ByteWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'byte-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'ByteWrapper',
-      modelProperties: {
-        field: {
-          required: false,
-          serializedName: 'field',
-          type: {
-            name: 'ByteArray'
+  /**
+   * Defines the metadata of ByteWrapper
+   *
+   * @returns {object} metadata of ByteWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'byte-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'ByteWrapper',
+        modelProperties: {
+          field: {
+            required: false,
+            serializedName: 'field',
+            type: {
+              name: 'ByteArray'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ByteWrapper;

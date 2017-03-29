@@ -19,33 +19,35 @@
  * @member {string} [value] the product value
  *
  */
-function ProductWrapper() {
-}
+class ProductWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of ProductWrapper
- *
- * @returns {object} metadata of ProductWrapper
- *
- */
-ProductWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'ProductWrapper',
-    type: {
-      name: 'Composite',
-      className: 'ProductWrapper',
-      modelProperties: {
-        value: {
-          required: false,
-          serializedName: 'property.value',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of ProductWrapper
+   *
+   * @returns {object} metadata of ProductWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'ProductWrapper',
+      type: {
+        name: 'Composite',
+        className: 'ProductWrapper',
+        modelProperties: {
+          value: {
+            required: false,
+            serializedName: 'property.value',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ProductWrapper;

@@ -14,12 +14,12 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
+const msRest = require('ms-rest');
+const ServiceClient = msRest.ServiceClient;
 
-var models = require('./models');
-var operations = require('./operations');
+const models = require('./models');
+const operations = require('./operations');
+
 
 /**
  * @class
@@ -38,23 +38,25 @@ var operations = require('./operations');
  * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
  *
  */
-function AutoRestRFC1123DateTimeTestService(baseUri, options) {
+class AutoRestRFC1123DateTimeTestService extends ServiceClient {
+  constructor(baseUri, options) {
 
-  if (!options) options = {};
+    if (!options) options = {};
 
-  AutoRestRFC1123DateTimeTestService['super_'].call(this, null, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'https://localhost';
+    super(null, options);
+
+    this.baseUri = baseUri;
+    if (!this.baseUri) {
+      this.baseUri = 'https://localhost';
+    }
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    this.datetimerfc1123 = new operations.Datetimerfc1123(this);
+    this.models = models;
+    msRest.addSerializationMixin(this);
   }
 
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  this.datetimerfc1123 = new operations.Datetimerfc1123(this);
-  this.models = models;
-  msRest.addSerializationMixin(this);
 }
-
-util.inherits(AutoRestRFC1123DateTimeTestService, ServiceClient);
 
 module.exports = AutoRestRFC1123DateTimeTestService;

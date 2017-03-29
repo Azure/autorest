@@ -10,24 +10,9 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var WebResource = msRest.WebResource;
-var moment = require('moment');
-
-/**
- * @class
- * Duration
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestDurationTestService.
- * Initializes a new instance of the Duration class.
- * @constructor
- *
- * @param {AutoRestDurationTestService} client Reference to the service client.
- */
-function Duration(client) {
-  this.client = client;
-}
+const msRest = require('ms-rest');
+const WebResource = msRest.WebResource;
+const moment = require('moment');
 
 /**
  * Get null duration value
@@ -37,20 +22,21 @@ function Duration(client) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {moment.duration} [result]   - The deserialized result object.
+ *                      {moment.duration} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Duration.prototype.getNull = function (options, callback) {
-  var client = this.client;
+function _getNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -60,17 +46,17 @@ Duration.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/null';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/null';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -79,48 +65,48 @@ Duration.prototype.getNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -130,7 +116,7 @@ Duration.prototype.getNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -139,7 +125,7 @@ Duration.prototype.getNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put a positive duration value
@@ -151,20 +137,21 @@ Duration.prototype.getNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Duration.prototype.putPositiveDuration = function (durationBody, options, callback) {
-  var client = this.client;
+function _putPositiveDuration(durationBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -182,17 +169,17 @@ Duration.prototype.putPositiveDuration = function (durationBody, options, callba
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/positiveduration';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/positiveduration';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -200,11 +187,11 @@ Duration.prototype.putPositiveDuration = function (durationBody, options, callba
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (durationBody !== null && durationBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'durationBody',
         type: {
@@ -215,50 +202,50 @@ Duration.prototype.putPositiveDuration = function (durationBody, options, callba
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(durationBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(durationBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get a positive duration value
@@ -268,20 +255,21 @@ Duration.prototype.putPositiveDuration = function (durationBody, options, callba
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {moment.duration} [result]   - The deserialized result object.
+ *                      {moment.duration} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Duration.prototype.getPositiveDuration = function (options, callback) {
-  var client = this.client;
+function _getPositiveDuration(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -291,17 +279,17 @@ Duration.prototype.getPositiveDuration = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/positiveduration';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/positiveduration';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -310,48 +298,48 @@ Duration.prototype.getPositiveDuration = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -361,7 +349,7 @@ Duration.prototype.getPositiveDuration = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -370,7 +358,7 @@ Duration.prototype.getPositiveDuration = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get an invalid duration value
@@ -380,20 +368,21 @@ Duration.prototype.getPositiveDuration = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {moment.duration} [result]   - The deserialized result object.
+ *                      {moment.duration} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Duration.prototype.getInvalid = function (options, callback) {
-  var client = this.client;
+function _getInvalid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -403,17 +392,17 @@ Duration.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/invalid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'duration/invalid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -422,48 +411,48 @@ Duration.prototype.getInvalid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -473,7 +462,7 @@ Duration.prototype.getInvalid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -482,7 +471,339 @@ Duration.prototype.getInvalid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
+/**
+ * @class
+ * Duration
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestDurationTestService.
+ * Initializes a new instance of the Duration class.
+ * @constructor
+ *
+ * @param {AutoRestDurationTestService} client Reference to the service client.
+ */
+class Duration {
+  constructor(client) {
+    this.client = client;
+    this._getNull = _getNull;
+    this._putPositiveDuration = _putPositiveDuration;
+    this._getPositiveDuration = _getPositiveDuration;
+    this._getInvalid = _getInvalid;
+  }
+
+  /**
+   * Get null duration value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<moment.duration>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get null duration value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {moment.duration} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {moment.duration} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put a positive duration value
+   *
+   * @param {moment.duration} durationBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putPositiveDurationWithHttpOperationResponse(durationBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putPositiveDuration(durationBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put a positive duration value
+   *
+   * @param {moment.duration} durationBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putPositiveDuration(durationBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putPositiveDuration(durationBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putPositiveDuration(durationBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get a positive duration value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<moment.duration>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getPositiveDurationWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getPositiveDuration(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get a positive duration value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {moment.duration} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {moment.duration} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getPositiveDuration(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getPositiveDuration(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getPositiveDuration(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get an invalid duration value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<moment.duration>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getInvalidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getInvalid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get an invalid duration value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {moment.duration} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {moment.duration} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getInvalid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getInvalid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getInvalid(options, optionalCallback);
+    }
+  }
+
+}
 
 module.exports = Duration;

@@ -10,23 +10,8 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var WebResource = msRest.WebResource;
-
-/**
- * @class
- * Bool
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestBoolTestService.
- * Initializes a new instance of the Bool class.
- * @constructor
- *
- * @param {AutoRestBoolTestService} client Reference to the service client.
- */
-function Bool(client) {
-  this.client = client;
-}
+const msRest = require('ms-rest');
+const WebResource = msRest.WebResource;
 
 /**
  * Get true Boolean value
@@ -36,20 +21,21 @@ function Bool(client) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {boolean} [result]   - The deserialized result object.
+ *                      {boolean} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Bool.prototype.getTrue = function (options, callback) {
-  var client = this.client;
+function _getTrue(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -59,17 +45,17 @@ Bool.prototype.getTrue = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/true';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/true';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -78,48 +64,48 @@ Bool.prototype.getTrue = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -129,7 +115,7 @@ Bool.prototype.getTrue = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -138,7 +124,7 @@ Bool.prototype.getTrue = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set Boolean value true
@@ -150,20 +136,21 @@ Bool.prototype.getTrue = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Bool.prototype.putTrue = function (boolBody, options, callback) {
-  var client = this.client;
+function _putTrue(boolBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -181,17 +168,17 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/true';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/true';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -199,11 +186,11 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (boolBody !== null && boolBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'boolBody',
         type: {
@@ -214,50 +201,50 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(boolBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(boolBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get false Boolean value
@@ -267,20 +254,21 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {boolean} [result]   - The deserialized result object.
+ *                      {boolean} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Bool.prototype.getFalse = function (options, callback) {
-  var client = this.client;
+function _getFalse(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -290,17 +278,17 @@ Bool.prototype.getFalse = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/false';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/false';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -309,48 +297,48 @@ Bool.prototype.getFalse = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -360,7 +348,7 @@ Bool.prototype.getFalse = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -369,7 +357,7 @@ Bool.prototype.getFalse = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Set Boolean value false
@@ -381,20 +369,21 @@ Bool.prototype.getFalse = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Bool.prototype.putFalse = function (boolBody, options, callback) {
-  var client = this.client;
+function _putFalse(boolBody, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -412,17 +401,17 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/false';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/false';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -430,11 +419,11 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (boolBody !== null && boolBody !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'boolBody',
         type: {
@@ -445,50 +434,50 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(boolBody, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(boolBody, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get null Boolean value
@@ -498,20 +487,21 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {boolean} [result]   - The deserialized result object.
+ *                      {boolean} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Bool.prototype.getNull = function (options, callback) {
-  var client = this.client;
+function _getNull(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -521,17 +511,17 @@ Bool.prototype.getNull = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/null';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/null';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -540,48 +530,48 @@ Bool.prototype.getNull = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -591,7 +581,7 @@ Bool.prototype.getNull = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -600,7 +590,7 @@ Bool.prototype.getNull = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get invalid Boolean value
@@ -610,20 +600,21 @@ Bool.prototype.getNull = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {boolean} [result]   - The deserialized result object.
+ *                      {boolean} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Bool.prototype.getInvalid = function (options, callback) {
-  var client = this.client;
+function _getInvalid(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -633,17 +624,17 @@ Bool.prototype.getInvalid = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/invalid';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'bool/invalid';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -652,48 +643,48 @@ Bool.prototype.getInvalid = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -703,7 +694,7 @@ Bool.prototype.getInvalid = function (options, callback) {
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -712,7 +703,499 @@ Bool.prototype.getInvalid = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
+/**
+ * @class
+ * Bool
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestBoolTestService.
+ * Initializes a new instance of the Bool class.
+ * @constructor
+ *
+ * @param {AutoRestBoolTestService} client Reference to the service client.
+ */
+class Bool {
+  constructor(client) {
+    this.client = client;
+    this._getTrue = _getTrue;
+    this._putTrue = _putTrue;
+    this._getFalse = _getFalse;
+    this._putFalse = _putFalse;
+    this._getNull = _getNull;
+    this._getInvalid = _getInvalid;
+  }
+
+  /**
+   * Get true Boolean value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Boolean>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getTrueWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getTrue(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get true Boolean value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Boolean} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {boolean} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getTrue(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getTrue(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getTrue(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set Boolean value true
+   *
+   * @param {boolean} boolBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putTrueWithHttpOperationResponse(boolBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putTrue(boolBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set Boolean value true
+   *
+   * @param {boolean} boolBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putTrue(boolBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putTrue(boolBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putTrue(boolBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get false Boolean value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Boolean>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getFalseWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getFalse(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get false Boolean value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Boolean} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {boolean} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getFalse(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getFalse(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getFalse(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Set Boolean value false
+   *
+   * @param {boolean} boolBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putFalseWithHttpOperationResponse(boolBody, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putFalse(boolBody, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Set Boolean value false
+   *
+   * @param {boolean} boolBody
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putFalse(boolBody, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putFalse(boolBody, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putFalse(boolBody, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get null Boolean value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Boolean>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getNullWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getNull(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get null Boolean value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Boolean} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {boolean} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getNull(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getNull(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getNull(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get invalid Boolean value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Boolean>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getInvalidWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getInvalid(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get invalid Boolean value
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Boolean} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {boolean} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getInvalid(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getInvalid(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getInvalid(options, optionalCallback);
+    }
+  }
+
+}
 
 module.exports = Bool;

@@ -10,7 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
+const models = require('./index');
 
 /**
  * @class
@@ -27,41 +27,43 @@ var models = require('./index');
  * @member {string} [error.message] The detailed arror message
  *
  */
-function OperationResult() {
-}
+class OperationResult {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of OperationResult
- *
- * @returns {object} metadata of OperationResult
- *
- */
-OperationResult.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'OperationResult',
-    type: {
-      name: 'Composite',
-      className: 'OperationResult',
-      modelProperties: {
-        status: {
-          required: false,
-          serializedName: 'status',
-          type: {
-            name: 'String'
-          }
-        },
-        error: {
-          required: false,
-          serializedName: 'error',
-          type: {
-            name: 'Composite',
-            className: 'OperationResultError'
+  /**
+   * Defines the metadata of OperationResult
+   *
+   * @returns {object} metadata of OperationResult
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'OperationResult',
+      type: {
+        name: 'Composite',
+        className: 'OperationResult',
+        modelProperties: {
+          status: {
+            required: false,
+            serializedName: 'status',
+            type: {
+              name: 'String'
+            }
+          },
+          error: {
+            required: false,
+            serializedName: 'error',
+            type: {
+              name: 'Composite',
+              className: 'OperationResultError'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = OperationResult;

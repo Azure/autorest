@@ -17,33 +17,35 @@
  * @member {string} [value]
  *
  */
-function StringOptionalWrapper() {
-}
+class StringOptionalWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of StringOptionalWrapper
- *
- * @returns {object} metadata of StringOptionalWrapper
- *
- */
-StringOptionalWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'string-optional-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'StringOptionalWrapper',
-      modelProperties: {
-        value: {
-          required: false,
-          serializedName: 'value',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of StringOptionalWrapper
+   *
+   * @returns {object} metadata of StringOptionalWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'string-optional-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'StringOptionalWrapper',
+        modelProperties: {
+          value: {
+            required: false,
+            serializedName: 'value',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = StringOptionalWrapper;
