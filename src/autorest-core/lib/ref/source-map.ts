@@ -1,3 +1,4 @@
+import { Range } from '../message';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -9,7 +10,16 @@ import { Position } from "source-map";
 export { RawSourceMap } from "source-map";
 import { JsonPath } from "../ref/jsonpath";
 
-// internally, we will also use the *intersection* of both whenever both information is available!
+// information to attach to line/column based to get a richer experience
+export interface PositionEnhancements {
+  path?: JsonPath;
+  length?: number;
+  valueOffset?: number;
+  valueLength?: number;
+}
+
+export type EnhancedPosition = Position & PositionEnhancements;
+
 export type SmartPosition = Position | { path: JsonPath };
 
 export interface Mapping {

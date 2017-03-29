@@ -1,3 +1,4 @@
+import { DataHandleRead } from '../data-store/data-store';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -5,7 +6,7 @@
 
 const regexNewLine = /\r?\n/g;
 
-function LineIndices(text: string): number[] {
+export function LineIndices(text: string): number[] {
   let indices = [0];
 
   let match: RegExpExecArray | null;
@@ -20,8 +21,8 @@ export function Lines(text: string): string[] {
   return text.split(regexNewLine);
 }
 
-export function IndexToPosition(text: string, index: number): sourceMap.Position {
-  const startIndices = LineIndices(text);
+export async function IndexToPosition(text: DataHandleRead | string, index: number): Promise<sourceMap.Position> {
+  const startIndices = typeof text === "string" ? LineIndices(text) : await (await text.ReadMetadata()).lineIndices;
   // bin. search for last `<item> <= index`
   let lineIndexMin = 0;
   let lineIndexMax = startIndices.length;

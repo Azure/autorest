@@ -13,7 +13,7 @@ import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
 import { AutoRest } from './lib/autorest-core';
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
-import { CreateFileUri, ResolveUri, WriteString } from "./lib/ref/uri";
+import { CreateFolderUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { AutoRestConfigurationSwitches } from "./lib/configuration";
@@ -35,7 +35,7 @@ function awaitable(child: ChildProcess): Promise<number> {
 async function legacyMain(autorestArgs: string[]): Promise<void> {
   if (autorestArgs.indexOf("-FANCY") !== -1) {
     // generate virtual config file
-    const currentDirUri = CreateFileUri(currentDirectory()) + "/";
+    const currentDirUri = CreateFolderUri(currentDirectory());
     const dataStore = new DataStore();
     const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
     config["base-folder"] = currentDirUri;
@@ -43,6 +43,12 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     await api.AddConfiguration(config);
     const outstanding = new OutstandingTaskAwaiter();
     api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
+    //api.Debug.Subscribe((_, m) => console.log(m.Text));
+    //api.Verbose.Subscribe((_, m) => console.log(m.Text));
+    api.Information.Subscribe((_, m) => console.log(m.Text));
+    api.Warning.Subscribe((_, m) => console.warn(m.Text));
+    api.Error.Subscribe((_, m) => console.error(m.Text));
+    api.Fatal.Subscribe((_, m) => console.error(m.Text));
     await api.Process().finish; // TODO: care about return value?
     await outstanding.Wait();
   }
@@ -95,11 +101,17 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 
 async function currentMain(autorestArgs: string[]): Promise<void> {
   const args = parseArgs(autorestArgs);
-  const currentDirUri = CreateFileUri(currentDirectory()) + "/";
-  const api = new AutoRest(new RealFileSystem(), args.configFile);
+  const currentDirUri = CreateFolderUri(currentDirectory());
+  const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFile || "."));
   await api.AddConfiguration(args.switches);
   const outstanding = new OutstandingTaskAwaiter();
   api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
+  //api.Debug.Subscribe((_, m) => console.log(m.Text));
+  //api.Verbose.Subscribe((_, m) => console.log(m.Text));
+  api.Information.Subscribe((_, m) => console.log(m.Text));
+  api.Warning.Subscribe((_, m) => console.warn(m.Text));
+  api.Error.Subscribe((_, m) => console.error(m.Text));
+  api.Fatal.Subscribe((_, m) => console.error(m.Text));
   await api.Process().finish; // TODO: care about return value?
   await outstanding.Wait();
 }

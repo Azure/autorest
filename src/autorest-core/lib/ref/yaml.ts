@@ -31,17 +31,27 @@ export function ParseToAst(rawYaml: string): YAMLNode {
   return yamlAst.safeLoad(rawYaml, null) as YAMLNode;
 }
 
-export function* Descendants(yamlAstNode: YAMLNode, currentPath: JsonPath = []): Iterable<YAMLNodeWithPath> {
+export function* Descendants(yamlAstNode: YAMLNode, currentPath: JsonPath = [], deferResolvingMappings: boolean = false): Iterable<YAMLNodeWithPath> {
   yield { path: currentPath, node: yamlAstNode };
   switch (yamlAstNode.kind) {
     case Kind.MAPPING: {
       let astSub = yamlAstNode as YAMLMapping;
-      yield* Descendants(astSub.value, currentPath.concat([astSub.key.value]));
+      if (deferResolvingMappings) {
+        yield* Descendants(astSub.value, currentPath);
+      } else {
+        yield* Descendants(astSub.value, currentPath.concat([astSub.key.value]));
+      }
     }
       break;
     case Kind.MAP:
-      for (let mapping of (yamlAstNode as YAMLMap).mappings) {
-        yield* Descendants(mapping, currentPath);
+      if (deferResolvingMappings) {
+        for (let mapping of (yamlAstNode as YAMLMap).mappings) {
+          yield* Descendants(mapping, currentPath.concat([mapping.key.value]));
+        }
+      } else {
+        for (let mapping of (yamlAstNode as YAMLMap).mappings) {
+          yield* Descendants(mapping, currentPath);
+        }
       }
       break;
     case Kind.SEQ: {
