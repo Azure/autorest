@@ -43,6 +43,12 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     await api.AddConfiguration(config);
     const outstanding = new OutstandingTaskAwaiter();
     api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
+    //api.Debug.Subscribe((_, m) => console.log(m.Text));
+    //api.Verbose.Subscribe((_, m) => console.log(m.Text));
+    api.Information.Subscribe((_, m) => console.log(m.Text));
+    api.Warning.Subscribe((_, m) => console.warn(m.Text));
+    api.Error.Subscribe((_, m) => console.error(m.Text));
+    api.Fatal.Subscribe((_, m) => console.error(m.Text));
     await api.Process().finish; // TODO: care about return value?
     await outstanding.Wait();
   }
@@ -100,6 +106,12 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   await api.AddConfiguration(args.switches);
   const outstanding = new OutstandingTaskAwaiter();
   api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
+  //api.Debug.Subscribe((_, m) => console.log(m.Text));
+  //api.Verbose.Subscribe((_, m) => console.log(m.Text));
+  api.Information.Subscribe((_, m) => console.log(m.Text));
+  api.Warning.Subscribe((_, m) => console.warn(m.Text));
+  api.Error.Subscribe((_, m) => console.error(m.Text));
+  api.Fatal.Subscribe((_, m) => console.error(m.Text));
   await api.Process().finish; // TODO: care about return value?
   await outstanding.Wait();
 }
