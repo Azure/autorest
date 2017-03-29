@@ -47,7 +47,7 @@ import * as jp from "../lib/ref/jsonpath";
   }
 
   @test "round trip simplification"() {
-    assert.equal(this.roundTrip("$[\"asd\"]"), "$.asd");
-    assert.equal(this.roundTrip("$[1][\"asd\"][\"asd qwe\"]"), "$[1].asd[\"asd qwe\"]");
+    assert.equal(this.roundTrip("$[\"definitely\"][\"add\"][\"more\"][\"cowbell\"]"), "$.definitely.add.more.cowbell");
+    assert.equal(this.roundTrip("$[1][\"even\"][\"more cowbell\"]"), "$[1].even[\"more cowbell\"]");
   }
 }
