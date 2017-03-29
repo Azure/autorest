@@ -37,18 +37,6 @@ namespace AutoRest.Swagger.Validation
 
         private Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)$", RegexOptions.IgnoreCase);
 
-        /// <summary>
-        /// Get the paths that fits the child resource criteria.
-        /// </summary>
-        /// <param name="childResource">name of the child resource</param>
-        /// <param name="serviceDefinition">service definition</param>
-        /// <returns>the paths that fit the child resource criteria</returns>
-        private IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> GetChildResourcesPaths(string childResource, ServiceDefinition serviceDefinition)
-        {
-            IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> filteredPaths = serviceDefinition.Paths.Where(path => pathRegEx.IsMatch(path.Key));
-            return filteredPaths;
-        }
-
         private KeyValuePair<string, string> GetChildResourceName(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
         {
             Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
