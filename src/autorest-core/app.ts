@@ -38,6 +38,13 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     const currentDirUri = CreateFolderUri(currentDirectory());
     const dataStore = new DataStore();
     const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
+
+    // autorest init
+    if (autorestArgs[0] === "init") {
+      console.log(JSON.stringify(config, null, 2));
+      return;
+    }
+
     config["base-folder"] = currentDirUri;
     const api = new AutoRest(new RealFileSystem());
     await api.AddConfiguration(config);

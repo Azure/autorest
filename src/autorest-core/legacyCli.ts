@@ -33,7 +33,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   // parse
   let lastValue: string | null = null;
-  for (const arg of args.reverse()) {
+  for (const arg of args.slice().reverse()) {
     if (arg.startsWith("-")) {
       switches[arg.substr(1).toLowerCase()] = lastValue;
       lastValue = null;
