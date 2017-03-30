@@ -1,3 +1,4 @@
+import { PumpMessagesToConsole } from './test-utility';
 import { Artifact } from '../lib/artifact';
 import { Message } from '../lib/message';
 import { AutoRest } from '../lib/autorest-core';
@@ -13,6 +14,7 @@ import { parse } from "../lib/ref/jsonpath";
 
   @test @timeout(30000) async "end to end blaming with literate swagger"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-composite.md"));
+    // PumpMessagesToConsole(autoRest);
     const view = await autoRest.view;
     await autoRest.Process().finish;
 

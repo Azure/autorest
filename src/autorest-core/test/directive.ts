@@ -13,8 +13,8 @@ import { Message } from "../lib/message";
     autoRest.Fatal.Subscribe((_, m) => console.error(m.Text));
 
     // reference run
-    autoRest.ResetConfiguration();
-    autoRest.AddConfiguration({ "azure-arm": true });
+    await autoRest.ResetConfiguration();
+    await autoRest.AddConfiguration({ "azure-arm": true });
     let numWarningsRef: number;
     {
       const messages: Message[] = [];
@@ -28,9 +28,9 @@ import { Message } from "../lib/message";
     assert.notEqual(numWarningsRef, 0);
 
     // muted run
-    autoRest.ResetConfiguration();
-    autoRest.AddConfiguration({ "azure-arm": true });
-    autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"] } });
+    await autoRest.ResetConfiguration();
+    await autoRest.AddConfiguration({ "azure-arm": true });
+    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"] } });
     {
       const messages: Message[] = [];
       const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
@@ -47,9 +47,9 @@ import { Message } from "../lib/message";
 
     // makes sure that neither all nor nothing was returned
     const pickyRun = async (directive: any) => {
-      autoRest.ResetConfiguration();
-      autoRest.AddConfiguration({ "azure-arm": true });
-      autoRest.AddConfiguration({ directive: directive });
+      await autoRest.ResetConfiguration();
+      await autoRest.AddConfiguration({ "azure-arm": true });
+      await autoRest.AddConfiguration({ directive: directive });
       {
         const messages: Message[] = [];
         const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));

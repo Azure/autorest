@@ -35,11 +35,12 @@ export function CreateObject(jsonPath: JsonPath, leafObject: any): any {
       ? (() => { const result = Array.apply(null, Array(jsonPathComponent + 1)); result[jsonPathComponent] = obj; return result; })()
       : (() => { const result: any = {}; result[jsonPathComponent] = obj; return result; })();
   }
+  return obj;
 }
 
 export function matches(jsonQuery: string, jsonPath: JsonPath): boolean {
   // build dummy object from `jsonPath`
-  const leafNode = "leaf";
+  const leafNode = new Object();
   const obj = CreateObject(jsonPath, leafNode);
 
   // check that `jsonQuery` on that object returns the `leafNode`

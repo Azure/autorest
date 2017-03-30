@@ -5,10 +5,12 @@ import { AutoRest } from "../lib/autorest-core";
 import { RealFileSystem } from "../lib/file-system";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message } from "../lib/message";
+import { PumpMessagesToConsole } from './test-utility';
 
 @suite class EndToEnd {
-  @test @timeout(60000) async "network full game"() {
+  @test @skip @timeout(60000) async "network full game"() {
     const autoRest = new AutoRest(new RealFileSystem());
+    // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
       "input-file": [
         "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2017-03-01/swagger/applicationGateway.json",
@@ -29,13 +31,19 @@ import { Message } from "../lib/message";
         "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2017-03-01/swagger/vmssNetworkInterface.json"]
     });
 
+    autoRest.AddConfiguration({
+      __specials: { infoSectionOverride: { title: "Network" } } // TODO: adjust, as the config evolves
+    });
+
     // TODO: generate for all, probe results
 
-    await autoRest.Process().finish;
+    const success = await autoRest.Process().finish;
+    assert.strictEqual(success, true);
   }
 
   @test @timeout(60000) async "complicated configuration scenario"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-complicated.md"));
+    // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
       "cmd-line-true": true,
       "cmd-line-false": false,

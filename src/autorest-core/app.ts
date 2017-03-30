@@ -99,7 +99,9 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   const args = parseArgs(autorestArgs);
   const currentDirUri = CreateFolderUri(currentDirectory());
   const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFile || "."));
-  args.switches.forEach(s => api.AddConfiguration(s));
+  for (const s of args.switches) {
+    await api.AddConfiguration(s);
+  }
   const outstanding = new OutstandingTaskAwaiter();
   api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
   //api.Debug.Subscribe((_, m) => console.log(m.Text));
@@ -132,6 +134,7 @@ async function main() {
     } else {
       await currentMain(autorestArgs);
     }
+    // await new Promise(_ => { }); // uncomment for relaxed profiling
     process.exit(0);
   } catch (e) {
     console.error(e);

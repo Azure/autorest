@@ -8,9 +8,9 @@ import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message } from "../lib/message";
 
 @suite class Cancellation {
-  private CreateLongRunningAutoRest(): AutoRest {
+  private async CreateLongRunningAutoRest(): Promise<AutoRest> {
     const autoRest = new AutoRest(new RealFileSystem());
-    autoRest.AddConfiguration({
+    await autoRest.AddConfiguration({
       "input-file": [
         "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2017-03-01/swagger/applicationGateway.json",
         "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2017-03-01/swagger/checkDnsAvailability.json",
@@ -33,7 +33,7 @@ import { Message } from "../lib/message";
   }
 
   private async TestCancellationAfter(delay: number): Promise<void> {
-    const ar = this.CreateLongRunningAutoRest();
+    const ar = await this.CreateLongRunningAutoRest();
     const proc = ar.Process();
     await Sleep(delay);
     const ms1 = Date.now();
