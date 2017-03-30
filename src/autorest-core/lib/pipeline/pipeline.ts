@@ -45,6 +45,9 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // load Swaggers
   let inputs = From(config.InputFileUris).ToArray();
+  if (inputs.length === 0) {
+    throw new Error("No input files provided.");
+  }
 
   config.Debug.Dispatch({ Text: `Starting Pipeline - Loading literate swaggers ${inputs}` });
 
@@ -82,7 +85,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const azureValidator = config.AzureArm && !config.DisableValidation;
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
-  const usedCodeGenerators = allCodeGenerators.filter(cg => config.PluginSection(cg) !== null);
+  const usedCodeGenerators = allCodeGenerators.filter(cg => config.PluginSection(cg) !== undefined);
 
   config.Debug.Dispatch({ Text: `Just before autorest.dll realm.` });
   //
@@ -210,7 +213,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           const handle = await generatedFileScope.ReadStrict(fileName);
           const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
           const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
-          await emitArtifact(`source-files-${codeGenerator.toLowerCase()}`, // TODO: uhm yeah
+          await emitArtifact(`source-files-${usedCodeGenerator}`,
             outputFileUri, handle);
         }
       }
