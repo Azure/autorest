@@ -114,13 +114,20 @@ export class AutoRest extends EventEmitter {
     let earlyCancel = false;
     let cancel: () => void = () => earlyCancel = true;
     const processInternal = async () => {
+      let view: ConfigurationView = <ConfigurationView><any>null;
       try {
-        const view = await this.view;
+        // grab the current configuration view.
+        view = await this.view;
+
+        // you can't use this again!
+        this._view = undefined;
 
         // expose cancallation token
         cancel = () => {
-          view.removeAllListeners();
-          view.CancellationTokenSource.cancel();
+          if (view) {
+            view.CancellationTokenSource.cancel();
+            view.removeAllListeners();
+          }
         }
 
         if (earlyCancel) {
@@ -132,8 +139,11 @@ export class AutoRest extends EventEmitter {
         this.Debug.Dispatch({ Text: `Starting Process() Run Pipeline.` });
         await RunPipeline(view, <IFileSystem>this.fileSystem);
 
-        // finished cleanly
-        this.Finished.Dispatch(true);
+        // finished -- return status (if cancelled, returns false.)
+        this.Finished.Dispatch(!view.CancellationTokenSource.token.isCancellationRequested);
+
+        // 
+        view.removeAllListeners();
         return true;
       }
       catch (e) {
@@ -141,10 +151,10 @@ export class AutoRest extends EventEmitter {
         // finished not cleanly
         this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e}` });
         this.Finished.Dispatch(false);
+        if (view) {
+          view.removeAllListeners();
+        }
         return false;
-      }
-      finally {
-        this.Invalidate();
       }
     };
     return {
