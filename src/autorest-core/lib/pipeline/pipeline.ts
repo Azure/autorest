@@ -1,9 +1,10 @@
-import { IdentitySourceMapping } from '../source-map/merging';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ProcessCodeModel } from './commonmark-documentation';
+import { IdentitySourceMapping } from '../source-map/merging';
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { BlameTree } from '../source-map/blaming';
 import { Artifact } from '../artifact';
@@ -174,6 +175,9 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         },
         messageSink);
 
+      // GFMer
+      const codeModelGFM = await ProcessCodeModel(codeModel, config.DataStore.CreateScope("modelgfm"));
+
       for (const usedCodeGenerator of usedCodeGenerators) {
         // get internal name
         const languages = [
@@ -187,7 +191,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         const codeGenerator = (config.AzureArm ? "Azure." : "") + languages + (config.Fluent ? ".Fluent" : "");
 
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, config.DataStore.CreateScope("generate"),
+        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModelGFM, config.DataStore.CreateScope("generate"),
           {
             namespace: config.__specials.namespace || "",
             codeGenerator: codeGenerator,
