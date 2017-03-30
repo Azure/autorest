@@ -19,6 +19,8 @@ import { PlainTextVersion } from "../lib/pipeline/commonmark-documentation";
     compare("actual\n\nnewline", "actual\nnewline");
     compare("some **more** delicious *cowbell*", "some more delicious cowbell");
     compare("add some `code` in there", "add some code in there");
-    compare(`# Heading \n Body`, "Heading\nBody");
+    compare("# Heading \n Body", "Heading\nBody");
+    compare("Fancy <b>html</b> features", "Fancy html features");
+    compare("Even <code>fancier</code> <i>html</i> tags<br> and<hr> stuff", "Even fancier html tags and stuff");
   }
 }
