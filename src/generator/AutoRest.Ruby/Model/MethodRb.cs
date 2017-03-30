@@ -597,7 +597,7 @@ namespace AutoRest.Ruby.Model
         /// <param name="responseVariable">Response variable name.</param>
         /// <returns>Deserialization logic for the given <paramref name="type"/> as string.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
-        public string GetDeserializationString(IModelType type, string valueReference = "result", string responseVariable = "parsed_response")
+        public virtual string GetDeserializationString(IModelType type, string valueReference = "result", string responseVariable = "parsed_response")
         {
             if (type == null)
             {
