@@ -56,6 +56,11 @@ function DotNetPath() {
     return result;
   }
 
+  result = path.join(homedir(), ".autorest", "frameworks", "dotnet.exe")
+  if (fs.existsSync(result)) {
+    return result;
+  }
+
   // hope there is one in the PATH
   return "dotnet";
 }
