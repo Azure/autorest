@@ -41,8 +41,8 @@ import { Message } from "../lib/message";
     await proc.finish;
     const ms2 = Date.now();
 
-    assert.ok(ms2 - ms1 < 500);
     console.log(ms2 - ms1);
+    assert.ok(ms2 - ms1 < 500);
   }
 
   @test @timeout(60000) async "immediate"() { await this.TestCancellationAfter(0); }

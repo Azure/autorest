@@ -134,7 +134,10 @@ async function main() {
     } else {
       await currentMain(autorestArgs);
     }
-    // await new Promise(_ => { }); // uncomment for relaxed profiling
+
+    // for relaxed profiling (assuming that no one calls `main` from electron... use AAAL!)
+    if (require("process").versions.electron) await new Promise(_ => { });
+
     process.exit(0);
   } catch (e) {
     console.error(e);
