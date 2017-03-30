@@ -83,10 +83,13 @@ export class AutoRest extends EventEmitter {
   }
 
   public Invalidate() {
-    this._view = undefined;
+    if (this._view) {
+      this._view.removeAllListeners();
+      this._view = undefined;
+    }
   }
 
-  public async AddConfiguration(configuratuion: any): Promise<void> {
+  public AddConfiguration(configuratuion: any): void {
     this._configurations.push(configuratuion);
     this.Invalidate();
   }
@@ -115,7 +118,11 @@ export class AutoRest extends EventEmitter {
         const view = await this.view;
 
         // expose cancallation token
-        cancel = () => view.CancellationTokenSource.cancel();
+        cancel = () => {
+          view.removeAllListeners();
+          view.CancellationTokenSource.cancel();
+        }
+
         if (earlyCancel) {
           this.Finished.Dispatch(false);
           return false;

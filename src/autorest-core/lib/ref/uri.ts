@@ -10,9 +10,8 @@ import * as promisify from "pify";
 import { Readable } from "stream";
 import { parse } from "url";
 import { sep } from "path";
-if (!Symbol.asyncIterator) {
-  require("../../test/polyfill.min.js");
-}
+// polyfill for the AsyncIterator support
+require("../polyfill.min.js");
 
 const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");

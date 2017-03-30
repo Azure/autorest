@@ -1,9 +1,9 @@
 import { ResolveUri, CreateFileUri, NormalizeUri, FileUriToPath } from '../lib/ref/uri';
 
-import { DocumentContext } from './file-system';
+import { DocumentContext } from './document-context';
 import * as a from '../lib/ref/async'
 import { EventEmitter, IEvent, IFileSystem, AutoRest } from "autorest";
-// import { IConnection, TextDocumentIdentifier, TextDocumentChangeEvent, TextDocuments, DidChangeWatchedFilesParams, Diagnostic, DiagnosticSeverity, Range, Position } from "vscode-languageserver";
+import { File } from "./tracked-file"
 import { From } from '../lib/ref/linq'
 import * as vfs from 'vinyl-fs';
 import * as path from 'path';
@@ -30,7 +30,6 @@ interface Settings {
 interface AutoRestSettings {
   maxNumberOfProblems: number;
 }
-
 
 // After the server has started the client sends an initialize request. The server receives
 // in the passed params the rootPath of the workspace plus the client capabilities. 
@@ -97,90 +96,6 @@ connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
 });
 
 
-const md5 = (content: string) => content ? crypto.createHash('md5').update(content).digest("hex") : null;
-
-export class File extends EventEmitter {
-  private _content: string | null;
-  private _checksum: string | null;
-  public IsActive: boolean = false;
-  private diagnostics = new Map<string, Diagnostic>();
-  private queuedToSend: NodeJS.Timer | null = null;
-
-  @EventEmitter.Event public Changed: IEvent<File, boolean>;
-  @EventEmitter.Event public DiagnosticsToSend: IEvent<File, Map<string, Diagnostic>>;
-
-  public ClearDiagnostics() {
-    this.diagnostics.clear();
-  }
-
-  public PushDiagnostic(diagnostic: Diagnostic) {
-    let hash = md5(JSON.stringify(diagnostic))
-    if (!this.diagnostics.has(hash)) {
-      this.diagnostics.set(hash, diagnostic);
-    }
-
-    // Strategy #1 - queue up, but wait no longer than 25 milliseconds before sending it out.
-    if (!this.queuedToSend) {
-      this.queuedToSend = setTimeout(() => {
-        this.queuedToSend = null;
-        this.DiagnosticsToSend.Dispatch(this.diagnostics);
-      }, 25);
-
-    }
-
-    /*
-        // Strategy #2 - queue up, but reset the timeout to wait until at least 25 milliseconds has passed 
-        if (this.queuedToSend) {
-          clearTimeout(this.queuedToSend);
-          this.queuedToSend = setTimeout(() =>{ 
-            this.queuedToSend = null;
-            this.DiagnosticsToSend.Dispatch(this.diagnostics);
-          }, 25)
-        }
-    */
-
-  }
-
-  private async getContent(): Promise<string | null> {
-    if (this._content) {
-      return this._content;
-    }
-
-    try {
-      connection.console.log(`Reading content for ${this.fullPath} `)
-      // acquire the content and set the checksum.
-      this.SetContent(await a.readFile(FileUriToPath(this.fullPath), 'utf8'));
-    } catch (exception) {
-      connection.console.error(`Exception reading content for ${this.fullPath} `)
-      // failed! well, set the content to null. it'll try again later. 
-      this.SetContent(null);
-    }
-    return this._content;
-  }
-  public get content(): Promise<string | null> {
-    return this.getContent();
-  };
-
-  public SetContent(text: string | null) {
-    const ck = md5(text);
-    if (ck == this._checksum) {
-      // no change!
-      return;
-    }
-    this._content = text;
-    this._checksum = ck;
-    this.Changed.Dispatch(text == null);
-  };
-
-  public get checksum(): Promise<string> {
-    return (async () => this._checksum ? this._checksum : (this._checksum = md5(await this.content)))();
-  }
-
-  constructor(public readonly fullPath: string) {
-    super();
-  }
-}
-
 export class AutoRestManager extends TextDocuments {
   private trackedFiles = new Map<string, File>();
   private activeContexts = new Map<string, DocumentContext>();
@@ -192,30 +107,30 @@ export class AutoRestManager extends TextDocuments {
   }
 
   public information(text: string) {
-    this.connection.console.log(text);
+    this.connection.console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}:${new Date().getMilliseconds()}:-${text}`);
   }
 
   public verbose(text: string) {
-    this.connection.console.log(text);
+    this.connection.console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}:${new Date().getMilliseconds()}:-${text}`);
   }
 
   public debug(text: string) {
-    this.connection.console.log(text);
+    this.connection.console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}:${new Date().getMilliseconds()}:-${text}`);
   }
 
   public warn(text: string) {
-    this.connection.console.warn(text);
+    this.connection.console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}:${new Date().getMilliseconds()}:-${text}`);
   }
 
   public error(text: string) {
-    this.connection.console.error(text);
+    this.connection.console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}:${new Date().getMilliseconds()}:-${text}`);
   }
   public async SetRootUri(uri: string): Promise<void> {
     // when we set the RootURI we look to see if we have a configuration file 
     // there, and then we automatically start validating that folder.
 
     if (!uri || uri.length == 0) {
-      connection.console.log(`No workspace uri.`);
+      this.warn(`No workspace uri.`);
       return;
     }
 
@@ -235,7 +150,7 @@ export class AutoRestManager extends TextDocuments {
         ctx.Activate();
       } catch (exception) {
         // that's not good. 
-        connection.console.error(`Exception setting Workspace URI ${uri} `)
+        this.error(`Exception setting Workspace URI ${uri} `)
       }
     }
   }
@@ -372,19 +287,24 @@ export class AutoRestManager extends TextDocuments {
   }
 
   listenForResults(autorest: AutoRest) {
+    autorest.GeneratedFile.Subscribe((instance, args) => {
+
+      // args.
+    });
+
     autorest.Debug.Subscribe((instance, args) => {
       // on debug message
-      this.connection.console.warn(args.Text);
+      this.connection.console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}:${new Date().getMilliseconds()}:-${args.Text}`);
     });
 
     autorest.Fatal.Subscribe((instance, args) => {
       // on fatal message
-      this.connection.console.error(args.Text);
+      this.connection.console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}:${new Date().getMilliseconds()}:-${args.Text}`);
     });
 
     autorest.Verbose.Subscribe((instance, args) => {
       // on verbose message
-      this.connection.console.log(args.Text);
+      this.connection.console.log(`${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}:${new Date().getMilliseconds()}:-${args.Text}`);
     });
 
     autorest.Information.Subscribe(async (instance, args) => {
@@ -398,7 +318,7 @@ export class AutoRestManager extends TextDocuments {
               severity: DiagnosticSeverity.Information,
               range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
               message: args.Text,
-              source: args.Plugin
+              source: [...args.Key].join("/")
             });
           }
         }
@@ -416,7 +336,7 @@ export class AutoRestManager extends TextDocuments {
               severity: DiagnosticSeverity.Warning,
               range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
               message: args.Text,
-              source: args.Plugin
+              source: [...args.Key].join("/")
             });
           }
         }
@@ -435,7 +355,7 @@ export class AutoRestManager extends TextDocuments {
               severity: DiagnosticSeverity.Error,
               range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
               message: args.Text,
-              source: args.Plugin
+              source: [...args.Key].join("/")
             });
           }
         }

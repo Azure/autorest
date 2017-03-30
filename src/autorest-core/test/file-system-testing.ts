@@ -3,9 +3,8 @@ require('source-map-support').install({ hookRequire: true });
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import { IFileSystem, MemoryFileSystem } from "../lib/file-system"
 import * as assert from "assert";
-if (!Symbol.asyncIterator) {
-  require("./polyfill.min.js");
-}
+// polyfill for the AsyncIterator support
+require("../lib/polyfill.min.js");
 
 @suite class FileSystemTests {
   @test async "does async iterable work"() {

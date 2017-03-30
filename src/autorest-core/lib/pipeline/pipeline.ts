@@ -46,7 +46,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // load Swaggers
   let inputs = From(config.InputFileUris).ToArray();
 
-  config.Debug.Dispatch({ Text: `Starting Pipeline - Inputs are ${inputs}` });
+  config.Debug.Dispatch({ Text: `Starting Pipeline - Loading literate swaggers ${inputs}` });
 
   const swaggers = await LoadLiterateSwaggers(
     config,
@@ -54,7 +54,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     inputs, config.DataStore.CreateScope("loader"));
   // const rawSwaggers = await Promise.all(swaggers.map(async x => { return <Artifact>{ uri: x.key, content: await x.ReadData() }; }));
 
-  config.Debug.Dispatch({ Text: `Loading Literate Swaggers` });
+  config.Debug.Dispatch({ Text: `Done loading Literate Swaggers` });
 
   // compose Swaggers
   const swagger = config.__specials.infoSectionOverride || swaggers.length !== 1
@@ -62,24 +62,29 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     : swaggers[0];
   const rawSwagger = await swagger.ReadObject<any>();
 
-  config.Debug.Dispatch({ Text: `Composing Swaggers. ` });
+  config.Debug.Dispatch({ Text: `Done Composing Swaggers.` });
 
   // emit resolved swagger
   {
     const relPath =
       config.__specials.outputFile ||
       (config.__specials.namespace ? config.__specials.namespace + ".json" : GetFilename([...config.InputFileUris][0]));
+    config.Debug.Dispatch({ Text: `relPath: ${relPath}` });
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     const hw = await config.DataStore.Write("normalized-swagger.json");
+    config.Debug.Dispatch({ Text: `wrote normalized swagger` });
     const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, await swagger.ReadYamlAst()), [swagger]);
+    config.Debug.Dispatch({ Text: `wrote raw swagger and IdenitySourceMapping` });
     await emitArtifact("swagger-document", outputFileUri, h);
   }
+  config.Debug.Dispatch({ Text: `Done Emitting composed documents.` });
 
   const azureValidator = config.AzureArm && !config.DisableValidation;
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
   const usedCodeGenerators = allCodeGenerators.filter(cg => config.PluginSection(cg) !== null);
 
+  config.Debug.Dispatch({ Text: `Just before autorest.dll realm.` });
   //
   // AutoRest.dll realm
   //
