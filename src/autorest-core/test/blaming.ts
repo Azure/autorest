@@ -1,3 +1,6 @@
+// polyfills for language support 
+require("../lib/polyfill.min.js");
+
 import { PumpMessagesToConsole } from './test-utility';
 import { Artifact } from '../lib/artifact';
 import { Message } from '../lib/message';

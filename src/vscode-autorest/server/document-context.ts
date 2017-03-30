@@ -30,6 +30,7 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
 
         if (success) {
           this.FlushDiagnostics(true);
+          this.ClearDiagnostics();
         }
         this.Manager.verbose(`AutoRest Process Finished with '${success}'.`);
       })
@@ -123,7 +124,6 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
         const items = await a.readdir(folderPath);
         yield* From<string>(items).Where(each => AutoRest.IsConfigurationExtension(GetExtension(each))).Select(each => ResolveUri(folderUri, each));
       }
-
     }
   }
 

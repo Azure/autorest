@@ -265,7 +265,7 @@ export class DataStore extends DataStoreView {
 
   private ThrowIfCancelled(): void {
     if (this.cancellationToken.isCancellationRequested) {
-      throw new Error("cancelled");
+      throw "Cancellation requested.";
     }
   }
 

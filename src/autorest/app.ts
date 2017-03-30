@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// polyfills for language support 
+require("./lib/polyfill.min.js")
 import * as https from 'https';
 import { parse as parseUrl } from 'url';
 import { Asset, Release, Github } from './github'
@@ -15,8 +17,6 @@ import { rm } from 'shelljs'
 import * as chalk from 'chalk'
 import { Console } from './console'
 import * as fs from 'fs'
-// polyfill for the AsyncIterator support
-require("./lib/polyfill.min.js")
 
 class App {
   private static listAvailable: number = cli['list-available'] ? (Number.isInteger(cli['list-available']) ? cli['list-available'] : 10) : 0;

@@ -1,3 +1,6 @@
+// polyfills for language support 
+require("../lib/polyfill.min.js");
+
 import { Sleep } from '../lib/sleep';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
@@ -41,8 +44,8 @@ import { Message } from "../lib/message";
     await proc.finish;
     const ms2 = Date.now();
 
-    assert.ok(ms2 - ms1 < 500);
     console.log(ms2 - ms1);
+    assert.ok(ms2 - ms1 < 500);
   }
 
   @test @timeout(60000) async "immediate"() { await this.TestCancellationAfter(0); }

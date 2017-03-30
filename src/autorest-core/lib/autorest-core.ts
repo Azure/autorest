@@ -137,12 +137,14 @@ export class AutoRest extends EventEmitter {
 
         // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
         this.Debug.Dispatch({ Text: `Starting Process() Run Pipeline.` });
-        await RunPipeline(view, <IFileSystem>this.fileSystem);
+
+        await Promise.race([
+          RunPipeline(view, <IFileSystem>this.fileSystem),
+          new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej("Cancellation requested.")))]);
 
         // finished -- return status (if cancelled, returns false.)
         this.Finished.Dispatch(!view.CancellationTokenSource.token.isCancellationRequested);
 
-        // 
         view.removeAllListeners();
         return true;
       }

@@ -75,9 +75,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     config.Debug.Dispatch({ Text: `relPath: ${relPath}` });
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     const hw = await config.DataStore.Write("normalized-swagger.json");
-    config.Debug.Dispatch({ Text: `wrote normalized swagger` });
     const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, await swagger.ReadYamlAst()), [swagger]);
-    config.Debug.Dispatch({ Text: `wrote raw swagger and IdenitySourceMapping` });
     await emitArtifact("swagger-document", outputFileUri, h);
   }
   config.Debug.Dispatch({ Text: `Done Emitting composed documents.` });

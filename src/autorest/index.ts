@@ -1,6 +1,8 @@
-import { DocumentPatterns } from '../autorest-core/lib/document-type';
-// polyfill for the AsyncIterator support
+// polyfills for language support 
 require("./lib/polyfill.min.js")
+
+import { DocumentPatterns } from '../autorest-core/lib/document-type';
+
 
 // exports the public AutoRest definitions
 export { Installer } from "./installer";

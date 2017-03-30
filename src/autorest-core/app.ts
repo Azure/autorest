@@ -8,6 +8,7 @@
 // the console app starts for real here.
 
 // this file should get 'required' by the boostrapper
+require("./lib/polyfill.min.js");
 
 import { CreateObject, parse } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
@@ -19,7 +20,6 @@ import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
-
 
 /**
  * Legacy AutoRest
@@ -134,7 +134,10 @@ async function main() {
     } else {
       await currentMain(autorestArgs);
     }
-    // await new Promise(_ => { }); // uncomment for relaxed profiling
+
+    // for relaxed profiling (assuming that no one calls `main` from electron... use AAAL!)
+    if (require("process").versions.electron) await new Promise(_ => { });
+
     process.exit(0);
   } catch (e) {
     console.error(e);
