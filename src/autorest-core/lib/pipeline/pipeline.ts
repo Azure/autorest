@@ -1,3 +1,4 @@
+import { IdentitySourceMapping } from '../source-map/merging';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -22,7 +23,7 @@ import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { From } from "../ref/linq";
 import { IFileSystem } from "../file-system";
-import { TryDecodePathFromName } from "../source-map/source-map";
+import { TryDecodeEnhancedPositionFromName } from "../source-map/source-map";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
@@ -33,13 +34,20 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   outstandingTaskAwaiter.Enter();
 
   // artifact emitter
-  const emitArtifact: (artifactType: string, uri: string, content: string) => void = (artifactType, uri, content) =>
-    From(config.OutputArtifact).Contains(artifactType)
-      ? config.GeneratedFile.Dispatch({ uri: uri, content: content })
-      : null;
+  const emitArtifact: (artifactType: string, uri: string, handle: DataHandleRead) => Promise<void> = async (artifactType, uri, handle) => {
+    if (From(config.OutputArtifact).Contains(artifactType)) {
+      config.GeneratedFile.Dispatch({ uri: uri, content: await handle.ReadData() });
+    }
+    if (From(config.OutputArtifact).Contains(artifactType + ".map")) {
+      config.GeneratedFile.Dispatch({ uri: uri + ".map", content: JSON.stringify(await (await handle.ReadMetadata()).inputSourceMap, null, 2) });
+    }
+  };
 
   // load Swaggers
   let inputs = From(config.InputFileUris).ToArray();
+  if (inputs.length === 0) {
+    throw new Error("No input files provided.");
+  }
 
   config.Debug.Dispatch({ Text: `Starting Pipeline - Inputs are ${inputs}` });
 
@@ -65,13 +73,15 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       config.__specials.outputFile ||
       (config.__specials.namespace ? config.__specials.namespace + ".json" : GetFilename([...config.InputFileUris][0]));
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
-    emitArtifact("swagger-document", outputFileUri, JSON.stringify(rawSwagger, null, 2));
+    const hw = await config.DataStore.Write("normalized-swagger.json");
+    const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, await swagger.ReadYamlAst()), [swagger]);
+    await emitArtifact("swagger-document", outputFileUri, h);
   }
 
   const azureValidator = config.AzureArm && !config.DisableValidation;
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
-  const usedCodeGenerators = allCodeGenerators.filter(cg => config.PluginSection(cg) !== null);
+  const usedCodeGenerators = allCodeGenerators.filter(cg => config.PluginSection(cg) !== undefined);
 
   //
   // AutoRest.dll realm
@@ -83,6 +93,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     // setup message pipeline (source map resolution, filter, forward)
     const processMessage = async (sink: IEvent<ConfigurationView, Message>, m: Message) => {
       outstandingTaskAwaiter.Enter();
+      config.Debug.Dispatch({ Text: `Incoming validation message (${m.Text}) - starting processing` });
 
       try {
         // update source locations to point to loaded Swagger
@@ -92,7 +103,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
               const blameTree = await config.DataStore.Blame(s.document, s.Position);
               const result = [...blameTree.BlameInputs()];
               if (result.length > 0) {
-                return result.map(r => <SourceLocation>{ document: r.source, Position: { line: r.line, column: r.column, path: r.path } });
+                return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
               }
             } catch (e) {
               // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
@@ -102,17 +113,25 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
             return [s];
           }));
 
-          m.Source = blameSources.map(x => x[0]); // just take the first source of every issue (or take all of them? has impact on both supression and highlighting!)
+          //console.log("---");
+          //console.log(JSON.stringify(m.Source, null, 2));
+          m.Source = From(blameSources).SelectMany(x => x).ToArray();
+          //console.log(JSON.stringify(m.Source, null, 2));
+          //console.log("---");
         }
 
         // set range (dummy)
         if (m.Source) {
-          m.Range = m.Source.map(s =>
-            <Range>{
+          m.Range = m.Source.map(s => {
+            let positionStart = s.Position;
+            let positionEnd = <sourceMap.Position>{ line: s.Position.line, column: s.Position.column + (s.Position.length || 3) };
+
+            return <Range>{
               document: s.document,
-              start: s.Position,
-              end: { column: (s.Position as any).column + 3, line: (s.Position as any).line }
-            });
+              start: positionStart,
+              end: positionEnd
+            };
+          });
         }
 
         // filter
@@ -126,6 +145,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         console.error(e);
       }
 
+      config.Debug.Dispatch({ Text: `Incoming validation message (${m.Text}) - finished processing` });
       outstandingTaskAwaiter.Exit();
     };
 
@@ -188,8 +208,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           const handle = await generatedFileScope.ReadStrict(fileName);
           const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
           const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
-          emitArtifact(`source-files-${codeGenerator.toLowerCase()}`, // TODO: uhm yeah
-            outputFileUri, await handle.ReadData());
+          await emitArtifact(`source-files-${usedCodeGenerator}`,
+            outputFileUri, handle);
         }
       }
     }

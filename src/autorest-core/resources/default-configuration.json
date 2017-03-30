@@ -4,18 +4,11 @@
   "disable-validation": false,
   "output-artifact": [
     "source-files-csharp",
-    "source-files-azure.csharp",
     "source-files-ruby",
-    "source-files-azure.ruby",
     "source-files-nodejs",
-    "source-files-azure.nodejs",
     "source-files-python",
-    "source-files-azure.python",
     "source-files-go",
     "source-files-java",
-    "source-files-azure.java",
-    "source-files-azure.java.fluent",
-    "source-files-azureresourceschema",
-    "source-files-azure.csharp.fluent"
+    "source-files-azureresourceschema"
   ]
 }

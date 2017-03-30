@@ -12,7 +12,7 @@ import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
 // TODO: may want ASTy merge! (keeping circular structure and such?)
 function Merge(a: any, b: any, path: JsonPath = []): any {
   if (a === null || b === null) {
-    throw new Error("Argument cannot be null");
+    throw new Error(`Argument cannot be null ('${stringify(path)}')`);
   }
 
   // trivial case
@@ -60,6 +60,48 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
   }
 
   throw new Error(`'${stringify(path)}' has incomaptible values (${yaml.Stringify(a)}, ${yaml.Stringify(b)}).`);
+}
+
+export function MergeOverwrite(a: any, b: any, concatListPathFilter: (path: JsonPath) => boolean = _ => false, path: JsonPath = []): any {
+  if (a === null || b == null) {
+    return null; // TODO: overthink, we could use this to force mute something even if it's "concat" mode...
+  }
+
+  // scalars/arrays involved
+  if (typeof a !== "object" || a instanceof Array ||
+    typeof b !== "object" || b instanceof Array) {
+    if (!concatListPathFilter(path)) {
+      return a;
+    }
+    return a instanceof Array
+      ? a.concat(b)
+      : [a].concat(b);
+  }
+
+  // object nodes - iterate all members
+  const result: any = {};
+  let keys = Object.getOwnPropertyNames(a).concat(Object.getOwnPropertyNames(b));
+  keys = keys.filter((v, i) => { const idx = keys.indexOf(v); return idx === -1 || idx >= i; }); // distinct
+
+  for (const key of keys) {
+    const subpath = path.concat(key);
+
+    // forward if only present in one of the nodes
+    if (a[key] === undefined) {
+      result[key] = b[key];
+      continue;
+    }
+    if (b[key] === undefined) {
+      result[key] = a[key];
+      continue;
+    }
+
+    // try merge objects otherwise
+    const aMember = a[key];
+    const bMember = b[key];
+    result[key] = MergeOverwrite(aMember, bMember, concatListPathFilter, subpath);
+  }
+  return result;
 }
 
 export function* IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Mappings {

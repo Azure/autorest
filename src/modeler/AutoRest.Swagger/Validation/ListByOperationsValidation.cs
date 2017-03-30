@@ -41,45 +41,38 @@ namespace AutoRest.Swagger.Validation
             
             foreach (var pathObj in entity)
             {
-                var listOpIds = pathObj.Value
+                // populate valid list operation names for given path
+                List<string> opNames = GetValidListOpNames(pathObj.Key);
+
+                // if url does not match any of the predefined regexes, skip
+                if (opNames == null || opNames.Count == 0)
+                {
+                    continue;
+                }
+
+                var listOpMethods = pathObj.Value
                                         // operation should be a get or post
                                         .Where(pair => (pair.Key.ToLower().Equals("get") || pair.Key.ToLower().Equals("post")))
                                         // operation id should be of the form *_list(by)
                                         .Where(pair => (ListByRegex.IsMatch(pair.Value.OperationId) || pair.Value.OperationId.ToLower().EndsWith("_list")))
                                         // operation is xmspageable or returns an array
-                                        .Where(pair => (ValidationUtilities.IsArrayTypeResponseOperation(pair.Value, serviceDefinition)) 
-                                                        || (ValidationUtilities.IsXmsPageableResponseOperation(pair.Value)))
-                                        // select the operation id
-                                        .Select(pair => pair.Value.OperationId);
+                                        .Where(pair => (ValidationUtilities.IsArrayTypeResponseOperation(pair.Value, serviceDefinition))
+                                                        || (ValidationUtilities.IsXmsPageableResponseOperation(pair.Value)));
 
-                // if there are no operations matching our conditions, skip
-                if (IsNullOrEmpty(listOpIds))
+                foreach (var listOpMethod in listOpMethods)
                 {
-                    continue;
-                }
+                    // select the operation id
+                    var opId = listOpMethod.Value.OperationId;
 
-                // populate valid list operation names for given path
-                List<string> opNames = GetValidListOpNames(pathObj.Key);
-                
-                // if url does not match any of the predefined regexes, skip
-                if (opNames == null || opNames.Count==0)
-                {
-                    continue;
-                }
+                    // does listOpId violate the rule
+                    if (!string.IsNullOrEmpty(opId) && !opNames.Contains(opId.ToLower()))
+                    {
+                        // aggregate suggested op names in a single readable string for the formatter
+                        var suggestedNames = string.Join(", ", opNames);
 
-                // find if there are any operations that violate the rule
-                var errOpIds = listOpIds.Where(opId => !opNames.Contains(opId.ToLower()));
-                
-                // no violations found, skip
-                if (IsNullOrEmpty(errOpIds))
-                {
-                    continue;
-                }
-                // aggregate suggested op names in a single readable string for the formatter
-                var suggestedNames = string.Join(", ", opNames);
-                foreach (var errOpId in errOpIds)
-                {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, errOpId, suggestedNames);
+                        var blamePath = context.Path.AppendProperty(pathObj.Key).AppendProperty(listOpMethod.Key).AppendProperty("operationId");
+                        yield return new ValidationMessage(new FileObjectPath(context.File, blamePath), this, opId, suggestedNames);
+                    }
                 }
             }
         }
