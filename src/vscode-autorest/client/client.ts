@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 'use strict';
-
+require('../node_modules/autorest/lib/polyfill.min.js');
 import * as path from 'path';
 
 import { workspace, Disposable, ExtensionContext } from 'vscode';

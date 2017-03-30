@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 'use strict';
+// polyfills for language support 
+require('../node_modules/autorest/lib/polyfill.min.js');
 
 import {
   IPCMessageReader, IPCMessageWriter,

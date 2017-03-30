@@ -1,190 +1,29 @@
 import { ResolveUri, CreateFileUri, NormalizeUri, FileUriToPath } from '../lib/ref/uri';
 
-import { DocumentContext } from './file-system';
+import { DocumentContext } from './document-context';
 import * as a from '../lib/ref/async'
-import { EventEmitter, IEvent, IFileSystem, AutoRest } from "autorest";
-// import { IConnection, TextDocumentIdentifier, TextDocumentChangeEvent, TextDocuments, DidChangeWatchedFilesParams, Diagnostic, DiagnosticSeverity, Range, Position } from "vscode-languageserver";
+import { EventEmitter, IEvent, IFileSystem, AutoRest, Message } from "autorest";
+import { File } from "./tracked-file"
 import { From } from '../lib/ref/linq'
 import * as vfs from 'vinyl-fs';
 import * as path from 'path';
 import * as crypto from 'crypto'
-
+import { Settings, AutoRestSettings } from './interfaces'
 import {
   IPCMessageReader, IPCMessageWriter,
   createConnection, IConnection, TextDocumentSyncKind,
   TextDocuments, TextDocument, Diagnostic, DiagnosticSeverity,
-  InitializeParams, InitializeResult, TextDocumentPositionParams,
+  InitializeParams, InitializeResult, TextDocumentPositionParams, DidChangeConfigurationParams,
   CompletionItem, CompletionItemKind, Range, Position, DidChangeWatchedFilesParams, TextDocumentChangeEvent
 } from 'vscode-languageserver';
 
 // Create a connection for the server. The connection uses Node's IPC as a transport
 export const connection: IConnection = (<any>global).connection
 
-// The settings interface describe the server relevant settings part
-interface Settings {
-  autorest: AutoRestSettings;
-}
-
-// These are the settings we defined in the client's package.json
-// file
-interface AutoRestSettings {
-  maxNumberOfProblems: number;
-}
-
-
-// After the server has started the client sends an initialize request. The server receives
-// in the passed params the rootPath of the workspace plus the client capabilities. 
-connection.onInitialize(async (params): Promise<InitializeResult> => {
-  connection.console.log('Starting Server Side...');
-  manager.SetRootUri(params.rootUri);
-
-  return {
-    capabilities: {
-      // Tell the client that the server works in FULL text document sync mode
-      textDocumentSync: TextDocumentSyncKind.Full,
-
-      // Tell the client that the server support code complete
-      completionProvider: {
-        resolveProvider: true
-      }
-
-    }
-  }
-});
-
-
-// hold the maxNumberOfProblems setting
-let maxNumberOfProblems: number;
-// The settings have changed. Is send on server activation
-// as well.
-connection.onDidChangeConfiguration((change) => {
-  let settings = <Settings>change.settings;
-  maxNumberOfProblems = settings.autorest.maxNumberOfProblems || 100;
-  // Revalidate any open text documents
-  // documents.all().forEach(validateTextDocument);
-});
-
-// This handler provides the initial list of the completion items.
-connection.onCompletion((textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
-  // The pass parameter contains the position of the text document in 
-  // which code complete got requested. For the example we ignore this
-  // info and always provide the same completion items.
-  return [
-    {
-      label: 'TypeScript',
-      kind: CompletionItemKind.Text,
-      data: 1
-    },
-    {
-      label: 'JavaScript',
-      kind: CompletionItemKind.Text,
-      data: 2
-    }
-  ]
-});
-
-// This handler resolve additional information for the item selected in
-// the completion list.
-connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
-  if (item.data === 1) {
-    item.detail = 'TypeScript details',
-      item.documentation = 'TypeScript documentation'
-  } else if (item.data === 2) {
-    item.detail = 'JavaScript details',
-      item.documentation = 'JavaScript documentation'
-  }
-  return item;
-});
-
-
-const md5 = (content: string) => content ? crypto.createHash('md5').update(content).digest("hex") : null;
-
-export class File extends EventEmitter {
-  private _content: string | null;
-  private _checksum: string | null;
-  public IsActive: boolean = false;
-  private diagnostics = new Map<string, Diagnostic>();
-  private queuedToSend: NodeJS.Timer | null = null;
-
-  @EventEmitter.Event public Changed: IEvent<File, boolean>;
-  @EventEmitter.Event public DiagnosticsToSend: IEvent<File, Map<string, Diagnostic>>;
-
-  public ClearDiagnostics() {
-    this.diagnostics.clear();
-  }
-
-  public PushDiagnostic(diagnostic: Diagnostic) {
-    let hash = md5(JSON.stringify(diagnostic))
-    if (!this.diagnostics.has(hash)) {
-      this.diagnostics.set(hash, diagnostic);
-    }
-
-    // Strategy #1 - queue up, but wait no longer than 25 milliseconds before sending it out.
-    if (!this.queuedToSend) {
-      this.queuedToSend = setTimeout(() => {
-        this.queuedToSend = null;
-        this.DiagnosticsToSend.Dispatch(this.diagnostics);
-      }, 25);
-
-    }
-
-    /*
-        // Strategy #2 - queue up, but reset the timeout to wait until at least 25 milliseconds has passed 
-        if (this.queuedToSend) {
-          clearTimeout(this.queuedToSend);
-          this.queuedToSend = setTimeout(() =>{ 
-            this.queuedToSend = null;
-            this.DiagnosticsToSend.Dispatch(this.diagnostics);
-          }, 25)
-        }
-    */
-
-  }
-
-  private async getContent(): Promise<string | null> {
-    if (this._content) {
-      return this._content;
-    }
-
-    try {
-      connection.console.log(`Reading content for ${this.fullPath} `)
-      // acquire the content and set the checksum.
-      this.SetContent(await a.readFile(FileUriToPath(this.fullPath), 'utf8'));
-    } catch (exception) {
-      connection.console.error(`Exception reading content for ${this.fullPath} `)
-      // failed! well, set the content to null. it'll try again later. 
-      this.SetContent(null);
-    }
-    return this._content;
-  }
-  public get content(): Promise<string | null> {
-    return this.getContent();
-  };
-
-  public SetContent(text: string | null) {
-    const ck = md5(text);
-    if (ck == this._checksum) {
-      // no change!
-      return;
-    }
-    this._content = text;
-    this._checksum = ck;
-    this.Changed.Dispatch(text == null);
-  };
-
-  public get checksum(): Promise<string> {
-    return (async () => this._checksum ? this._checksum : (this._checksum = md5(await this.content)))();
-  }
-
-  constructor(public readonly fullPath: string) {
-    super();
-  }
-}
-
 export class AutoRestManager extends TextDocuments {
   private trackedFiles = new Map<string, File>();
   private activeContexts = new Map<string, DocumentContext>();
-
+  private maxNumberOfProblems: number = 100;
   private _rootUri: string | null = null;
 
   public get RootUri(): string {
@@ -192,30 +31,30 @@ export class AutoRestManager extends TextDocuments {
   }
 
   public information(text: string) {
-    this.connection.console.log(text);
+    this.connection.console.log(`[INFO: ${AutoRestManager.DateStamp}] ${text}`)
   }
 
   public verbose(text: string) {
-    this.connection.console.log(text);
+    this.connection.console.log(`[${AutoRestManager.DateStamp}] ${text}`)
   }
 
   public debug(text: string) {
-    this.connection.console.log(text);
+    this.connection.console.log(`[DEBUG: ${AutoRestManager.DateStamp}] ${text}`)
   }
 
   public warn(text: string) {
-    this.connection.console.warn(text);
+    this.connection.console.log(`[WARN: ${AutoRestManager.DateStamp}] ${text}`)
   }
 
   public error(text: string) {
-    this.connection.console.error(text);
+    this.connection.console.log(`[ERROR: ${AutoRestManager.DateStamp}] ${text}`)
   }
   public async SetRootUri(uri: string): Promise<void> {
     // when we set the RootURI we look to see if we have a configuration file 
     // there, and then we automatically start validating that folder.
 
     if (!uri || uri.length == 0) {
-      connection.console.log(`No workspace uri.`);
+      this.warn(`No workspace uri.`);
       return;
     }
 
@@ -235,25 +74,74 @@ export class AutoRestManager extends TextDocuments {
         ctx.Activate();
       } catch (exception) {
         // that's not good. 
-        connection.console.error(`Exception setting Workspace URI ${uri} `)
+        this.error(`Exception setting Workspace URI ${uri} `)
       }
     }
   }
 
-  constructor(private connection: IConnection) {
-    super();
-    this.debug("setting up AutoRestManager.")
-    // ask vscode to track 
-    this.onDidOpen((open) => this.opened(open));
-    this.onDidChangeContent((change) => this.changed(change));
-    this.onDidClose((close) => this.closed(close));
 
-    // we also get change notifications of files on disk:
-    connection.onDidChangeWatchedFiles((changes) => this.changedOnDisk(changes));
 
-    this.listen(connection);
-    this.verbose("AutoRestManager is Listening.")
+
+  // The settings have changed. Is send on server activation
+  // as well.
+  configurationChanged(configuration: DidChangeConfigurationParams) {
+    let settings = <Settings>configuration.settings;
+    this.maxNumberOfProblems = settings.autorest.maxNumberOfProblems || 100;
+    // Revalidate any open text documents
+    // documents.all().forEach(validateTextDocument);
+  };
+
+  // This handler resolve additional information for the item selected in
+  // the completion list.
+  onCompletionResolve(item: CompletionItem): CompletionItem {
+    if (item.data === 1) {
+      item.detail = 'TypeScript details',
+        item.documentation = 'TypeScript documentation'
+    } else if (item.data === 2) {
+      item.detail = 'JavaScript details',
+        item.documentation = 'JavaScript documentation'
+    }
+    return item;
+  };
+
+
+  // After the server has started the client sends an initialize request. The server receives
+  // in the passed params the rootPath of the workspace plus the client capabilities. 
+  async initialize(params: InitializeParams): Promise<InitializeResult> {
+    connection.console.log('Starting Server Side...');
+    manager.SetRootUri(params.rootUri);
+
+    return {
+      capabilities: {
+        // Tell the client that the server works in FULL text document sync mode
+        textDocumentSync: TextDocumentSyncKind.Full,
+
+        // Tell the client that the server support code complete
+        completionProvider: {
+          resolveProvider: true
+        }
+
+      }
+    }
   }
+
+  onCompletion(textDocumentPosition: TextDocumentPositionParams): CompletionItem[] {
+    // The pass parameter contains the position of the text document in 
+    // which code complete got requested. For the example we ignore this
+    // info and always provide the same completion items.
+    return [
+      {
+        label: 'TypeScript',
+        kind: CompletionItemKind.Text,
+        data: 1
+      },
+      {
+        label: 'JavaScript',
+        kind: CompletionItemKind.Text,
+        data: 2
+      }
+    ]
+  };
 
   private changedOnDisk(changes: DidChangeWatchedFilesParams) {
 
@@ -285,7 +173,7 @@ export class AutoRestManager extends TextDocuments {
       return doc;
     }
     // not tracked yet, let's do that now.
-    this.verbose(`Tracking file: ${documentUri}`);
+    this.debug(`Tracking file: ${documentUri}`);
 
     const f = new File(documentUri);
     this.trackedFiles.set(documentUri, f);
@@ -303,7 +191,7 @@ export class AutoRestManager extends TextDocuments {
 
     let configFile = await AutoRest.DetectConfigurationFile(new DocumentContext(this, folder), folder);
     if (configFile) {
-      this.verbose(`Configuration File Selected: ${configFile}`);
+      this.debug(`Configuration File Selected: ${configFile}`);
 
       folder = path.dirname(configFile);
       // do we have this config already?
@@ -371,76 +259,61 @@ export class AutoRestManager extends TextDocuments {
     }
   }
 
+  static PadDigits(number: number, digits: number): string {
+    return Array(Math.max(digits - String(number).length + 1, 0)).join('0') + number;
+  }
+
+  static get DateStamp(): string {
+    let d = new Date();
+    return `${this.PadDigits(d.getHours(), 2)}:${this.PadDigits(d.getMinutes(), 2)}:${this.PadDigits(d.getSeconds(), 2)}.${this.PadDigits(d.getMilliseconds(), 4)}`;
+  }
+
   listenForResults(autorest: AutoRest) {
-    autorest.Debug.Subscribe((instance, args) => {
-      // on debug message
-      this.connection.console.warn(args.Text);
-    });
+    autorest.Debug.Subscribe((instance, args) => this.debug(args.Text));
+    autorest.Fatal.Subscribe((instance, args) => this.error(args.Text));
+    autorest.Verbose.Subscribe((instance, args) => this.verbose(args.Text));
 
-    autorest.Fatal.Subscribe((instance, args) => {
-      // on fatal message
-      this.connection.console.error(args.Text);
-    });
+    autorest.Warning.Subscribe((instance, args) => this.PushDiagnostic(args, DiagnosticSeverity.Warning));
+    autorest.Information.Subscribe((instance, args) => this.PushDiagnostic(args, DiagnosticSeverity.Information));
+    autorest.Error.Subscribe((instance, args) => this.PushDiagnostic(args, DiagnosticSeverity.Error));
+  }
 
-    autorest.Verbose.Subscribe((instance, args) => {
-      // on verbose message
-      this.connection.console.log(args.Text);
-    });
-
-    autorest.Information.Subscribe(async (instance, args) => {
-      // information messages come from autorest and represent a document issue of some kind
-      if (args.Range) {
-        for await (const each of args.Range) {
-          // get the file reference first
-          let file = this.trackedFiles.get(each.document);
-          if (file) {
-            file.PushDiagnostic({
-              severity: DiagnosticSeverity.Information,
-              range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
-              message: args.Text,
-              source: args.Plugin
-            });
-          }
+  PushDiagnostic(args: Message, severity: DiagnosticSeverity) {
+    if (args.Range) {
+      for (const each of args.Range) {
+        // get the file reference first
+        let file = this.trackedFiles.get(each.document);
+        if (file) {
+          file.PushDiagnostic({
+            severity: severity,
+            range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+            message: args.Text,
+            source: [...args.Key].join("/")
+          });
         }
       }
-    });
+    }
+  }
 
-    autorest.Warning.Subscribe(async (instance, args) => {
-      // information messages come from autorest and represent a document issue of some kind
-      if (args.Range) {
-        for await (const each of args.Range) {
-          // get the file reference first
-          let file = this.trackedFiles.get(each.document);
-          if (file) {
-            file.PushDiagnostic({
-              severity: DiagnosticSeverity.Warning,
-              range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
-              message: args.Text,
-              source: args.Plugin
-            });
-          }
-        }
-      }
-    });
+  constructor(private connection: IConnection) {
+    super();
+    this.debug("setting up AutoRestManager.")
+    // ask vscode to track 
+    this.onDidOpen((p) => this.opened(p));
+    this.onDidChangeContent((p) => this.changed(p));
+    this.onDidClose((p) => this.closed(p));
 
-    autorest.Error.Subscribe(async (instance, args) => {
-      // information messages come from autorest and represent a document issue of some kind
+    // we also get change notifications of files on disk:
+    connection.onDidChangeWatchedFiles((p) => this.changedOnDisk(p));
 
-      if (args.Range) {
-        for await (const each of args.Range) {
-          // get the file reference first
-          let file = this.trackedFiles.get(each.document);
-          if (file) {
-            file.PushDiagnostic({
-              severity: DiagnosticSeverity.Error,
-              range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
-              message: args.Text,
-              source: args.Plugin
-            });
-          }
-        }
-      }
-    });
+    // other events we want to handle:
+    connection.onInitialize((p) => this.initialize(p));
+    connection.onCompletion((p) => this.onCompletion(p));
+    connection.onCompletionResolve((p) => this.onCompletionResolve(p));
+    connection.onDidChangeConfiguration((p) => this.configurationChanged(p));
+
+    this.listen(connection);
+    this.verbose("AutoRestManager is Listening.")
   }
 }
 
@@ -448,6 +321,7 @@ let manager: AutoRestManager = new AutoRestManager(connection);
 // Listen on the connection
 connection.listen();
 
+/// -------------------------------------------------------------------------------------------------------------
 /// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
 async function* yieldFromMap(): AsyncIterable<string> {
   yield* ["hello", "world"];

@@ -1,4 +1,4 @@
-#!/usr/bin / env node
+#!/usr/bin/env node
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -8,6 +8,7 @@
 // the console app starts for real here.
 
 // this file should get 'required' by the boostrapper
+require("./lib/polyfill.min.js");
 
 import { CreateObject, parse } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
@@ -19,7 +20,6 @@ import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
-
 
 /**
  * Legacy AutoRest

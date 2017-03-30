@@ -83,10 +83,13 @@ export class AutoRest extends EventEmitter {
   }
 
   public Invalidate() {
-    this._view = undefined;
+    if (this._view) {
+      this._view.removeAllListeners();
+      this._view = undefined;
+    }
   }
 
-  public async AddConfiguration(configuratuion: any): Promise<void> {
+  public AddConfiguration(configuratuion: any): void {
     this._configurations.push(configuratuion);
     this.Invalidate();
   }
@@ -111,11 +114,22 @@ export class AutoRest extends EventEmitter {
     let earlyCancel = false;
     let cancel: () => void = () => earlyCancel = true;
     const processInternal = async () => {
+      let view: ConfigurationView = <ConfigurationView><any>null;
       try {
-        const view = await this.view;
+        // grab the current configuration view.
+        view = await this.view;
+
+        // you can't use this again!
+        this._view = undefined;
 
         // expose cancallation token
-        cancel = () => view.CancellationTokenSource.cancel();
+        cancel = () => {
+          if (view) {
+            view.CancellationTokenSource.cancel();
+            view.removeAllListeners();
+          }
+        }
+
         if (earlyCancel) {
           this.Finished.Dispatch(false);
           return false;
@@ -128,8 +142,10 @@ export class AutoRest extends EventEmitter {
           RunPipeline(view, <IFileSystem>this.fileSystem),
           new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej("Cancellation requested.")))]);
 
-        // finished cleanly
-        this.Finished.Dispatch(true);
+        // finished -- return status (if cancelled, returns false.)
+        this.Finished.Dispatch(!view.CancellationTokenSource.token.isCancellationRequested);
+
+        view.removeAllListeners();
         return true;
       }
       catch (e) {
@@ -137,10 +153,10 @@ export class AutoRest extends EventEmitter {
         // finished not cleanly
         this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e}` });
         this.Finished.Dispatch(false);
+        if (view) {
+          view.removeAllListeners();
+        }
         return false;
-      }
-      finally {
-        this.Invalidate();
       }
     };
     return {

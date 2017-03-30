@@ -1,3 +1,6 @@
+// polyfills for language support 
+require("../lib/polyfill.min.js");
+
 import { Sleep } from '../lib/sleep';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
