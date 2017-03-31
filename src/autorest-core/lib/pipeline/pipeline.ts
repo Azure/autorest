@@ -67,8 +67,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   }
 
   // compose Swaggers
-  let swagger = config.__specials.infoSectionOverride || swaggers.length !== 1
-    ? await ComposeSwaggers(config.__specials.infoSectionOverride || {}, swaggers, config.DataStore.CreateScope("compose"), true)
+  let swagger = config.GetEntry("override-info") || swaggers.length !== 1
+    ? await ComposeSwaggers(config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
     : swaggers[0];
   const rawSwagger = await swagger.ReadObject<any>();
 
@@ -80,8 +80,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // emit resolved swagger
   {
     const relPath =
-      config.__specials.outputFile ||
-      (config.__specials.namespace ? config.__specials.namespace + ".json" : GetFilename([...config.InputFileUris][0]));
+      config.GetEntry("output-file") ||
+      (config.GetEntry("namespace") ? config.GetEntry("namespace") + ".json" : GetFilename([...config.InputFileUris][0]));
     config.Debug.Dispatch({ Text: `relPath: ${relPath}` });
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     const hw = await config.DataStore.Write("normalized-swagger.json");
@@ -93,7 +93,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const azureValidator = config.AzureArm && !config.DisableValidation;
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
-  const usedCodeGenerators = allCodeGenerators.filter(cg => config.PluginSection(cg) !== undefined);
+  const usedCodeGenerators = allCodeGenerators.filter(cg => config.GetEntry(cg as any) !== undefined);
 
   config.Debug.Dispatch({ Text: `Just before autorest.dll realm.` });
   //
@@ -178,7 +178,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       // modeler
       let codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
         {
-          namespace: config.__specials.namespace || ""
+          namespace: config.GetEntry("namespace") || ""
         },
         messageSink);
 
@@ -208,16 +208,16 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
         let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModelTransformed, scope.CreateScope("generate"),
           {
-            namespace: genConfig.__specials.namespace || "",
+            namespace: genConfig.GetEntry("namespace") || "",
             codeGenerator: codeGenerator,
             clientNameOverride: getXmsCodeGenSetting("name"),
             internalConstructors: getXmsCodeGenSetting("internalConstructors") || false,
             useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset") || false,
-            header: genConfig.__specials.header || null,
-            payloadFlatteningThreshold: genConfig.__specials.payloadFlatteningThreshold || getXmsCodeGenSetting("ft") || 0,
-            syncMethods: genConfig.__specials.syncMethods || getXmsCodeGenSetting("syncMethods") || "essential",
-            addCredentials: genConfig.__specials.addCredentials || false,
-            rubyPackageName: genConfig.__specials.rubyPackageName || "client"
+            header: genConfig.GetEntry("license-header") || null,
+            payloadFlatteningThreshold: genConfig.GetEntry("payload-flattening-threshold") || getXmsCodeGenSetting("ft") || 0,
+            syncMethods: genConfig.GetEntry("sync-methods") || getXmsCodeGenSetting("syncMethods") || "essential",
+            addCredentials: genConfig.GetEntry("add-credentials") || false,
+            rubyPackageName: genConfig.GetEntry("package-name") || "client"
           },
           messageSink);
 
