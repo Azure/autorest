@@ -6,6 +6,7 @@ using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Validation.Core;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
@@ -47,50 +48,33 @@ namespace AutoRest.Swagger.Validation
                 return false;
             }
 
-            foreach(KeyValuePair<string, SecurityDefinition> sd in securityDefinitions)
-            {
-                SecurityDefinition securityDefinition = sd.Value;
-                if(!sd.Key.Equals("azure_auth", StringComparison.CurrentCultureIgnoreCase) || !IsSecurityDefinitionModelValid(securityDefinition))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return securityDefinitions.Where(sdPair =>
+                sdPair.Key.Equals("azure_auth", StringComparison.CurrentCultureIgnoreCase)
+            &&  IsSecurityDefinitionModelValid(sdPair.Value)).Any();
         }
 
         private bool IsSecurityDefinitionModelValid(SecurityDefinition securityDefinition)
         {
-            if(
-                securityDefinition.SecuritySchemeType == SecuritySchemeType.OAuth2 && 
+            return (
+                securityDefinition.SecuritySchemeType == SecuritySchemeType.OAuth2 &&
                 securityDefinition.AuthorizationUrl.Equals("https://login.microsoftonline.com/common/oauth2/authorize", StringComparison.CurrentCultureIgnoreCase) &&
                 securityDefinition.Flow == OAuthFlow.Implicit &&
                 !String.IsNullOrEmpty(securityDefinition.Description) &&
                 IsSecurityDefinitionScopesValid(securityDefinition.Scopes)
-              )
-            {
-                return true;
-            }
-
-            return false;
+              );
         }
 
         private bool IsSecurityDefinitionScopesValid(Dictionary<string, string> scopes)
         {
-            if(scopes == null || scopes.Count != 1)
+            if(scopes?.Count != 1)
             {
                 return false;
             }
 
-            foreach(KeyValuePair<string, string> scope in scopes)
-            {
-                if(!scope.Key.Equals("user_impersonation", StringComparison.CurrentCultureIgnoreCase) || String.IsNullOrEmpty(scope.Value))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return scopes.Where(scope =>
+                    scope.Key.Equals("user_impersonation", StringComparison.CurrentCultureIgnoreCase)
+                &&  !String.IsNullOrEmpty(scope.Value)
+            ).Any();
         }
     }
 }
