@@ -6,7 +6,7 @@
 import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
-import { ReadUri, ResolveUri, WriteString } from "../ref/uri";
+import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from '../ref/uri';
 import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../ref/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
@@ -40,7 +40,7 @@ interface Data {
   metadata: Metadata;
 }
 
-type Store = { [key: string]: Data };
+type Store = { [uri: string]: Data };
 
 
 /********************************************
@@ -50,27 +50,27 @@ type Store = { [key: string]: Data };
  ********************************************/
 
 export abstract class DataStoreViewReadonly {
-  abstract Enum(): Promise<string[]>;
-  abstract Enum(prefix: string): Promise<string[]>;
-  abstract Read(key: string): Promise<DataHandleRead | null>;
+  public abstract Enum(): Promise<string[]>;
+  public abstract Read(uri: string): Promise<DataHandleRead | null>;
 
-  public async ReadStrict(key: string): Promise<DataHandleRead> {
-    const result = await this.Read(key);
+  public async ReadStrict(uri: string): Promise<DataHandleRead> {
+    const result = await this.Read(uri);
     if (result === null) {
-      throw new Error(`Failed to read '${key}'. Key not found.`);
+      throw new Error(`Failed to read '${uri}'. Key not found.`);
     }
     return result;
   }
 
   public async Dump(targetDirUri: string): Promise<void> {
+    targetDirUri = EnsureIsFolderUri(targetDirUri);
     const keys = await this.Enum();
     for (const key of keys) {
       const dataHandle = await this.ReadStrict(key);
       const data = await dataHandle.ReadData();
       const metadata = await dataHandle.ReadMetadata();
       const targetFileUri = ResolveUri(
-        targetDirUri.replace(/\/$/g, "") + "/",
-        key.replace(/%3A/g, "")); // bug: ResolveUri (or rather its internals) unescape "%3A" to ":"
+        targetDirUri,
+        key.replace(":", "")); // make key (URI) a descriptive relative path
       await WriteString(targetFileUri, data);
       await WriteString(targetFileUri + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
       await WriteString(targetFileUri + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
@@ -94,6 +94,8 @@ export class QuickScope extends DataStoreViewReadonly {
 }
 
 export abstract class DataStoreView extends DataStoreViewReadonly {
+  protected abstract get BaseUri(): string;
+
   abstract Write(key: string): Promise<DataHandleWrite>;
 
   public CreateScope(name: string): DataStoreView {
@@ -202,7 +204,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
       data = await this.fs.ReadFile(uri) || await ReadUri(uri);
     } finally {
       if (!data) {
-        throw new Error(`FileSystem unable to read file ${uri}.`)
+        throw new Error(`FileSystem does not contain file ${uri} and failed to physically load it.`);
       }
     }
     const writeHandle = await this.slave.Write(uri);
@@ -257,6 +259,7 @@ export class DataStoreFileView extends DataStoreView {
 }
 
 export class DataStore extends DataStoreView {
+  private baseUri = "mem://";
   private store: Store = {};
 
   public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {
@@ -273,21 +276,22 @@ export class DataStore extends DataStoreView {
    * Data access
    ***************/
 
-  public async Write(key: string): Promise<DataHandleWrite> {
+  public async Write(uri: string): Promise<DataHandleWrite> {
+    uri = ResolveUri(this.baseUri, uri);
     this.ThrowIfCancelled();
-    return new DataHandleWrite(key, async (data, sourceMapFactory) => {
+    return new DataHandleWrite(uri, async (data, sourceMapFactory) => {
       this.ThrowIfCancelled();
-      if (this.store[key]) {
-        throw new Error(`can only write '${key}' once`);
+      if (this.store[uri]) {
+        throw new Error(`can only write '${uri}' once`);
       }
       const storeEntry: Data = {
         data: data,
         metadata: <Metadata><Metadata | null>{}
       };
-      this.store[key] = storeEntry;
+      this.store[uri] = storeEntry;
 
       // metadata
-      const result = await this.ReadStrict(key);
+      const result = await this.ReadStrict(uri);
       storeEntry.metadata.sourceMap = new Lazy(async () => {
         const sourceMap = await sourceMapFactory(result);
 
@@ -295,7 +299,7 @@ export class DataStore extends DataStoreView {
         const inputFiles = sourceMap.sources.concat(sourceMap.file);
         for (const inputFile of inputFiles) {
           if (!this.store[inputFile]) {
-            throw new Error(`Source map of '${key}' references '${inputFile}' which does not exist`);
+            throw new Error(`Source map of '${uri}' references '${inputFile}' which does not exist`);
           }
         }
 
@@ -320,19 +324,20 @@ export class DataStore extends DataStoreView {
 
         return result;
       });
-      storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(key));
+      storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(uri));
       storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(async () => parseAst(data));
       storeEntry.metadata.lineIndices = new Lazy<number[]>(async () => LineIndices(data));
       return result;
     });
   }
 
-  public async Read(key: string): Promise<DataHandleRead | null> {
-    const data = this.store[key];
+  public async Read(uri: string): Promise<DataHandleRead | null> {
+    uri = ResolveUri(this.baseUri, uri);
+    const data = this.store[uri];
     if (!data) {
       return null;
     }
-    return new DataHandleRead(key, Promise.resolve(data));
+    return new DataHandleRead(uri, Promise.resolve(data));
   }
 
   public async Enum(): Promise<string[]> {
