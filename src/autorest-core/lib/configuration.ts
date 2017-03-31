@@ -224,13 +224,13 @@ export class ConfigurationView extends EventEmitter {
     const result = new ConfigurationView(this.configFileFolderUri, this.config[pluginName], this.config);
     result.DataStore = this.DataStore;
     result.cancellationTokenSource = this.cancellationTokenSource;
-    result.GeneratedFile = this.GeneratedFile;
-    result.Information = this.Information;
-    result.Warning = this.Warning;
-    result.Error = this.Error;
-    result.Debug = this.Debug;
-    result.Verbose = this.Verbose;
-    result.Fatal = this.Fatal;
+    result.GeneratedFile.Subscribe((_, m) => this.GeneratedFile.Dispatch(m));
+    result.Information.Subscribe((_, m) => this.Information.Dispatch(m));
+    result.Warning.Subscribe((_, m) => this.Warning.Dispatch(m));
+    result.Error.Subscribe((_, m) => this.Error.Dispatch(m));
+    result.Debug.Subscribe((_, m) => this.Debug.Dispatch(m));
+    result.Verbose.Subscribe((_, m) => this.Verbose.Dispatch(m));
+    result.Fatal.Subscribe((_, m) => this.Fatal.Dispatch(m));
     return result;
   }
 }

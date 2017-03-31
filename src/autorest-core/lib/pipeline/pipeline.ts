@@ -186,7 +186,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       const codeModelGFM = await ProcessCodeModel(codeModel, config.DataStore.CreateScope("modelgfm"));
 
       for (const usedCodeGenerator of usedCodeGenerators) {
-        const scope = config.DataStore.CreateScope(usedCodeGenerator);
+        const genConfig = config.GetPluginView(usedCodeGenerator);
+        const scope = genConfig.DataStore.CreateScope(usedCodeGenerator); // TODO: maybe make the plugin-config present that?
 
         // TRANSFORM
         const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/model.yaml");
@@ -202,21 +203,21 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           "Go",
           "Java",
           "AzureResourceSchema"].filter(x => x.toLowerCase() === usedCodeGenerator.toLowerCase())[0];
-        const codeGenerator = (config.AzureArm ? "Azure." : "") + languages + (config.Fluent ? ".Fluent" : "");
+        const codeGenerator = (genConfig.AzureArm ? "Azure." : "") + languages + (genConfig.Fluent ? ".Fluent" : "");
 
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
         let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModelTransformed, scope.CreateScope("generate"),
           {
-            namespace: config.__specials.namespace || "",
+            namespace: genConfig.__specials.namespace || "",
             codeGenerator: codeGenerator,
             clientNameOverride: getXmsCodeGenSetting("name"),
             internalConstructors: getXmsCodeGenSetting("internalConstructors") || false,
             useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset") || false,
-            header: config.__specials.header || null,
-            payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || getXmsCodeGenSetting("ft") || 0,
-            syncMethods: config.__specials.syncMethods || getXmsCodeGenSetting("syncMethods") || "essential",
-            addCredentials: config.__specials.addCredentials || false,
-            rubyPackageName: config.__specials.rubyPackageName || "client"
+            header: genConfig.__specials.header || null,
+            payloadFlatteningThreshold: genConfig.__specials.payloadFlatteningThreshold || getXmsCodeGenSetting("ft") || 0,
+            syncMethods: genConfig.__specials.syncMethods || getXmsCodeGenSetting("syncMethods") || "essential",
+            addCredentials: genConfig.__specials.addCredentials || false,
+            rubyPackageName: genConfig.__specials.rubyPackageName || "client"
           },
           messageSink);
 
@@ -228,7 +229,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         for (const fileName of await generatedFileScope.Enum()) {
           const handle = await generatedFileScope.ReadStrict(fileName);
           const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
-          const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
+          const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
           await emitArtifact(`source-files-${usedCodeGenerator}`,
             outputFileUri, handle);
         }
