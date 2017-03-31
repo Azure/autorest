@@ -134,18 +134,15 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const resultScope = await autorestPlugin.GenerateCode(
+      "csharp",
       codeModelHandle,
       pluginScope,
       <any>{
-        codeGenerator: "Azure.CSharp",
         namespace: "SomeNamespace",
-        header: null,
-        payloadFlatteningThreshold: 0,
-        internalConstructors: false,
-        syncMethods: "essential",
-        useDateTimeOffset: false,
-        addCredentials: false,
-        rubyPackageName: "rubyrubyrubyruby"
+        "license-header": null,
+        "payload-flattening-threshold": 0,
+        "add-credentials": false,
+        "package-name": "rubyrubyrubyruby"
       },
       m => null);
 

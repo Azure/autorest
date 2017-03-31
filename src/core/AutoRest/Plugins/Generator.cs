@@ -7,15 +7,35 @@ using Microsoft.Perks.JsonRPC;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core;
 using AutoRest.Core.Parsing;
+using System.Linq;
 
 public class Generator : NewPlugin
 {
-  public Generator(Connection connection, string sessionId) : base(connection, sessionId)
-  { }
+  private string codeGenerator;
+
+  public Generator(string codeGenerator, Connection connection, string sessionId) : base(connection, sessionId)
+  {
+    this.codeGenerator = codeGenerator;
+  }
 
   protected override async Task<bool> ProcessInternal()
   {
-    var codeGenerator = await GetValue("codeGenerator");
+    // get internal name
+    var language = new[] {
+        "CSharp",
+        "Ruby",
+        "NodeJS",
+        "Python",
+        "Go",
+        "Java",
+        "AzureResourceSchema" }
+      .Where(x => x.ToLowerInvariant() == codeGenerator)
+      .FirstOrDefault();
+
+    if (language == null)
+    {
+       throw new Exception($"Language '{codeGenerator}' unknown.");
+    }
 
     // build settings
     new Settings
@@ -45,7 +65,10 @@ public class Generator : NewPlugin
       return false;
     }
 
-    var plugin = ExtensionsLoader.GetPlugin(codeGenerator);
+    var plugin = ExtensionsLoader.GetPlugin(
+        (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") + 
+        language +
+        (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : ""));
     var modelAsJson = (await ReadFile(files[0])).EnsureYamlIsJson();
 
     using (plugin.Activate())

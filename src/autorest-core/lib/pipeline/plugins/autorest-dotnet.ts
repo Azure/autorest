@@ -52,17 +52,18 @@ export class AutoRestDotNetPlugin extends EventEmitter {
 
   public async Validate(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void): Promise<void> {
     const outputScope = workingScope.CreateScope("output");
-    await this.CautiousProcess("AzureValidator", _ => { }, new QuickScope([swagger]), outputScope, onMessage);
+    await this.CautiousProcess("azure-validator", _ => { }, new QuickScope([swagger]), outputScope, onMessage);
   }
 
   public async GenerateCode(
+    language: string,
     codeModel: DataHandleRead,
     workingScope: DataStoreView,
     settings: AutoRestConfigurationImpl,
     onMessage: (message: Message) => void): Promise<DataStoreViewReadonly> {
 
     const outputScope = workingScope.CreateScope("output");
-    await this.CautiousProcess(`Generator`, key => (settings as any)[key], new QuickScope([codeModel]), outputScope, onMessage);
+    await this.CautiousProcess(language, key => (settings as any)[key], new QuickScope([codeModel]), outputScope, onMessage);
     return outputScope;
   }
 
@@ -72,7 +73,7 @@ export class AutoRestDotNetPlugin extends EventEmitter {
     onMessage: (message: Message) => void): Promise<DataStoreViewReadonly> {
 
     const outputScope = workingScope.CreateScope("output");
-    await this.CautiousProcess(`CSharpSimplifier`, _ => null, inputScope, outputScope, onMessage);
+    await this.CautiousProcess(`csharp-simplifier`, _ => null, inputScope, outputScope, onMessage);
     return outputScope;
   }
 
@@ -83,7 +84,7 @@ export class AutoRestDotNetPlugin extends EventEmitter {
     onMessage: (message: Message) => void): Promise<DataHandleRead> {
 
     const outputScope = workingScope.CreateScope("output");
-    await this.CautiousProcess("Modeler", key => (settings as any)[key], new QuickScope([swagger]), outputScope, onMessage);
+    await this.CautiousProcess("modeler", key => (settings as any)[key], new QuickScope([swagger]), outputScope, onMessage);
     const results = await outputScope.Enum();
     if (results.length !== 1) {
       throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
