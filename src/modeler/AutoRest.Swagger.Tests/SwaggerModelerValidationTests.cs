@@ -425,6 +425,83 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-putgetpatch-response-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(PutGetPatchResponseValidation), 1);
         }
+
+        [Fact]
+        public void SecurityDefinitionStructurePresenceValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-1.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
+
+        [Fact]
+        public void SecurityDefinitionStructureEmptyValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-2.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
+
+        [Fact]
+        public void SecurityDefinitionStructureMultipleEntriesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-3.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
+
+        [Fact]
+        public void SecurityDefinitionStructureIncorrectKeyValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-4.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
+
+        [Fact]
+        public void SecurityDefinitionStructureMissingDescriptionValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-5.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
+
+        [Fact]
+        public void SecurityDefinitionStructureEmptyDescriptionValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-6.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
+
+        [Fact]
+        public void SecurityDefinitionStructureIncorrectDefValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-7.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
+
+        [Fact]
+        public void SecurityDefinitionStructureMissingScopesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-8.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
+
+        [Fact]
+        public void SecurityDefinitionStructureEmptyScopesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-9.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
+
+        [Fact]
+        public void SecurityDefinitionStructureMultipleScopesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-10.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
+
+        [Fact]
+        public void SecurityDefinitionStructureMissingScopesDescriptionValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-11.json"));
+            messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
+        }
     }
 
     #region Positive tests
