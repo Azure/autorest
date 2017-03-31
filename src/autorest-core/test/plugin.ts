@@ -136,7 +136,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const resultScope = await autorestPlugin.GenerateCode(
       codeModelHandle,
       pluginScope,
-      {
+      <any>{
         codeGenerator: "Azure.CSharp",
         namespace: "SomeNamespace",
         header: null,

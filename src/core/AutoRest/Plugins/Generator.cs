@@ -10,8 +10,6 @@ using AutoRest.Core.Parsing;
 
 public class Generator : NewPlugin
 {
-  private string codeGenerator;
-
   public Generator(Connection connection, string sessionId) : base(connection, sessionId)
   { }
 
@@ -22,22 +20,22 @@ public class Generator : NewPlugin
     // build settings
     new Settings
     {
-      Namespace = await GetValue("namespace"),
+      Namespace = await GetValue("namespace") ?? "",
       ClientName = await GetValue("clientNameOverride"),
-      PayloadFlatteningThreshold = await GetValue<int>("payloadFlatteningThreshold"),
-      AddCredentials = await GetValue<bool>("addCredentials"),
+      PayloadFlatteningThreshold = await GetValue<int?>("payload-flattening-threshold") ?? 0,
+      AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
     };
-    var header = await GetValue("header");
+    var header = await GetValue("license-header");
     if (header != null)
     {
       Settings.Instance.Header = header;
     }
-    Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool>("internalConstructors"));
-    Settings.Instance.CustomSettings.Add("SyncMethods", await GetValue<string>("syncMethods"));
-    Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool>("useDateTimeOffset"));
+    Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool?>("internalConstructors") ?? false);
+    Settings.Instance.CustomSettings.Add("SyncMethods", await GetValue("sync-methods") ?? "essential");
+    Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool?>("useDateTimeOffset") ?? false);
     if (codeGenerator.EndsWith("Ruby"))
     {
-      Settings.Instance.PackageName = await GetValue("rubyPackageName");
+      Settings.Instance.PackageName = await GetValue("package-name") ?? "client";
     }
 
     // process

@@ -204,6 +204,10 @@ export class ConfigurationView extends EventEmitter {
     return (this.config as any)[key];
   }
 
+  public get Raw(): AutoRestConfigurationImpl {
+    return this.config;
+  }
+
   public get DisableValidation(): boolean {
     return this.config["disable-validation"] || false;
   }

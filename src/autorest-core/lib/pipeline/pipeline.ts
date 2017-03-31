@@ -224,18 +224,16 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
         let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModelTransformed, scope.CreateScope("generate"),
-          {
-            namespace: genConfig.GetEntry("namespace") || "",
-            codeGenerator: codeGenerator,
-            clientNameOverride: getXmsCodeGenSetting("name"),
-            internalConstructors: getXmsCodeGenSetting("internalConstructors") || false,
-            useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset") || false,
-            header: genConfig.GetEntry("license-header") || null,
-            payloadFlatteningThreshold: genConfig.GetEntry("payload-flattening-threshold") || getXmsCodeGenSetting("ft") || 0,
-            syncMethods: genConfig.GetEntry("sync-methods") || getXmsCodeGenSetting("syncMethods") || "essential",
-            addCredentials: genConfig.GetEntry("add-credentials") || false,
-            rubyPackageName: genConfig.GetEntry("package-name") || "client"
-          },
+          Object.assign(
+            {
+              codeGenerator: codeGenerator,
+              clientNameOverride: getXmsCodeGenSetting("name"),
+              internalConstructors: getXmsCodeGenSetting("internalConstructors"),
+              useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset"),
+              "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
+              "sync-methods": getXmsCodeGenSetting("syncMethods")
+            },
+            genConfig.Raw),
           messageSink);
 
         // C# simplifier

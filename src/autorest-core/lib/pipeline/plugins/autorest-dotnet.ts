@@ -1,3 +1,4 @@
+import { AutoRestConfigurationImpl } from '../../configuration';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -57,18 +58,7 @@ export class AutoRestDotNetPlugin extends EventEmitter {
   public async GenerateCode(
     codeModel: DataHandleRead,
     workingScope: DataStoreView,
-    settings: {
-      codeGenerator: string,
-      namespace: string,
-      clientNameOverride?: string,
-      header: string | null,
-      payloadFlatteningThreshold: number,
-      syncMethods: "all" | "essential" | "none",
-      internalConstructors: boolean,
-      useDateTimeOffset: boolean,
-      addCredentials: boolean,
-      rubyPackageName: string
-    },
+    settings: AutoRestConfigurationImpl,
     onMessage: (message: Message) => void): Promise<DataStoreViewReadonly> {
 
     const outputScope = workingScope.CreateScope("output");

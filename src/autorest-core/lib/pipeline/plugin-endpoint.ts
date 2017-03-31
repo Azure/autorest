@@ -133,7 +133,8 @@ export class AutoRestPlugin extends EventEmitter {
         return await file.ReadData();
       },
       async GetValue(key: string): Promise<any> {
-        return configuration(key);
+        const result = configuration(key);
+        return result === undefined ? null : result;
       },
       async ListInputs(): Promise<string[]> {
         const result = await inputScope.Enum();
