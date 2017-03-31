@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { stringify } from '../ref/jsonpath';
 import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
 import { IdentitySourceMapping } from "../source-map/merging";
@@ -152,6 +153,22 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
         // forward
         if (mx !== null) {
+          // format message
+          switch (config.GetEntry("message-format")) {
+            case "json":
+              mx.Text = JSON.stringify(mx.Details, null, 2);
+              break;
+            default:
+              let text = (mx.Channel || Channel.Information).toString().toUpperCase() + ": " + mx.Text;
+              for (const source of mx.Source || []) {
+                if (source.Position && source.Position.path) {
+                  text += `\n        Path: ${source.document}#${stringify(source.Position.path)}`;
+                }
+              }
+              mx.Text = text;
+              break;
+          }
+
           sink.Dispatch(mx);
         }
       } catch (e) {

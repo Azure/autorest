@@ -30,6 +30,7 @@ export interface AutoRestConfigurationImpl {
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
+  "message-format"?: "json";
 
   // plugin specific
   "output-file"?: string;

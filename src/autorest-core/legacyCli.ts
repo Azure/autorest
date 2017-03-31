@@ -86,6 +86,8 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   result["output-file"] = switches["outputfilename"] || undefined;
 
+  result["message-format"] = switches["jsonvalidationmessages"] !== undefined ? "json" : undefined;
+
   if (codegenerator.toLowerCase() === "swaggerresolver") {
     result["output-artifact"] = "swagger-document";
     delete (result as any)[usedCodeGenerator];
