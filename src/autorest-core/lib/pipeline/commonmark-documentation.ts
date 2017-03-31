@@ -3,22 +3,23 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Mapping, SmartPosition } from '../ref/source-map';
-import { Parser, Node } from '../ref/commonmark';
-import { JsonPath } from '../ref/jsonpath';
+import { Mapping, SmartPosition } from "../ref/source-map";
+import { Parser, Node } from "../ref/commonmark";
+import { JsonPath } from "../ref/jsonpath";
 import {
   CloneAst,
   CreateYAMLMapping,
   CreateYAMLScalar,
   Descendants,
   Kind,
+  ParseNode,
   StringifyAst,
   YAMLMap,
   YAMLMapping
-} from '../ref/yaml';
-import { IdentitySourceMapping } from '../source-map/merging';
+} from "../ref/yaml";
+import { IdentitySourceMapping } from "../source-map/merging";
 import { From } from "../ref/linq";
-import { DataHandleRead, DataHandleWrite, DataStoreView } from '../data-store/data-store';
+import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
 
 function IsDocumentationField(path: JsonPath) {
   const last = path[path.length - 1];
@@ -77,5 +78,5 @@ export async function ProcessCodeModel(codeModel: DataHandleRead, scope: DataSto
   }
 
   const targetHandle = await scope.Write("codeModel.yaml");
-  return await targetHandle.WriteData(StringifyAst(ast), mapping, [codeModel]);
+  return await targetHandle.WriteData(JSON.stringify(ParseNode(ast), null, 4), mapping, [codeModel]);
 }

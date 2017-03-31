@@ -1,14 +1,14 @@
-import { Artifact } from '../artifact';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DirectiveView } from '../configuration';
-import { Message, SourceLocation } from '../message';
-import { ConfigurationView } from '../autorest-core';
-import { IsPrefix, JsonPath, paths, stringify, matches } from '../ref/jsonpath';
-import { From } from '../ref/linq';
+import { Artifact } from "../artifact";
+import { DirectiveView } from "../configuration";
+import { Message, SourceLocation } from "../message";
+import { ConfigurationView } from "../autorest-core";
+import { IsPrefix, JsonPath, paths, stringify, matches } from "../ref/jsonpath";
+import { From } from "../ref/linq";
 
 export class Supressor {
   private suppressions: DirectiveView[];

@@ -3,23 +3,22 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ProcessCodeModel } from './commonmark-documentation';
-import { IdentitySourceMapping } from '../source-map/merging';
+import { Manipulator } from "./manipulation";
+import { ProcessCodeModel } from "./commonmark-documentation";
+import { IdentitySourceMapping } from "../source-map/merging";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-import { BlameTree } from '../source-map/blaming';
-import { Artifact } from '../artifact';
-import { Supressor } from './supression';
-import { IEvent } from '../events';
-import { Channel, Message, SourceLocation, Range } from '../message';
+import { Supressor } from "./supression";
+import { IEvent } from "../events";
+import { Channel, Message, SourceLocation, Range } from "../message";
 import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
-import { GetFilename, ResolveUri } from '../ref/uri';
-import { ConfigurationView } from '../configuration';
+import { GetFilename, ResolveUri } from "../ref/uri";
+import { ConfigurationView } from "../configuration";
 import {
   DataHandleRead,
   DataStore,
   DataStoreViewReadonly,
   KnownScopes
-} from '../data-store/data-store';
+} from "../data-store/data-store";
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { From } from "../ref/linq";
@@ -44,6 +43,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     }
   };
 
+  const manipulator = new Manipulator(config);
+
   // load Swaggers
   let inputs = From(config.InputFileUris).ToArray();
   if (inputs.length === 0) {
@@ -60,13 +61,21 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   config.Debug.Dispatch({ Text: `Done loading Literate Swaggers` });
 
+  // TRANSFORM
+  for (let i = 0; i < swaggers.length; ++i) {
+    swaggers[i] = await manipulator.Process(swaggers[i], config.DataStore.CreateScope("loaded-transform"), inputs[i]);
+  }
+
   // compose Swaggers
-  const swagger = config.__specials.infoSectionOverride || swaggers.length !== 1
+  let swagger = config.__specials.infoSectionOverride || swaggers.length !== 1
     ? await ComposeSwaggers(config.__specials.infoSectionOverride || {}, swaggers, config.DataStore.CreateScope("compose"), true)
     : swaggers[0];
   const rawSwagger = await swagger.ReadObject<any>();
 
   config.Debug.Dispatch({ Text: `Done Composing Swaggers.` });
+
+  // TRANSFORM
+  swagger = await manipulator.Process(swagger, config.DataStore.CreateScope("composed-transform"), "/composed.yaml");
 
   // emit resolved swagger
   {
@@ -169,7 +178,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     // code generators
     if (usedCodeGenerators.length > 0) {
       // modeler
-      const codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
+      let codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
         {
           namespace: config.__specials.namespace || ""
         },
@@ -180,6 +189,9 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
       for (const usedCodeGenerator of usedCodeGenerators) {
         const scope = config.DataStore.CreateScope(usedCodeGenerator);
+
+        // TRANSFORM
+        const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/model.yaml");
 
         // get internal name
         const languages = [
@@ -193,7 +205,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         const codeGenerator = (config.AzureArm ? "Azure." : "") + languages + (config.Fluent ? ".Fluent" : "");
 
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModelGFM, scope.CreateScope("generate"),
+        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModelTransformed, scope.CreateScope("generate"),
           {
             namespace: config.__specials.namespace || "",
             codeGenerator: codeGenerator,
