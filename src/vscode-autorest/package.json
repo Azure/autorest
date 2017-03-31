@@ -1,22 +1,38 @@
 {
   "name": "autorest",
-  "displayName": "autorest",
-  "description": "AutoRest Langugage Service",
+  "displayName": "AutoRest",
+  "description": "AutoRest/Swagger Langugage Service",
   "author": "Microsoft Corporation",
   "license": "MIT",
-  "version": "0.9.12",
-  "publisher": "Microsoft",
+  "version": "0.9.17",
+  "publisher": "ms-vscode",
   "engines": {
     "vscode": "^1.10.0"
   },
   "categories": [
-    "Linters", "Languages","Other"
+    "Linters",
+    "Languages",
+    "Other"
   ],
   "activationEvents": [
     "onLanguage:json",
     "onLanguage:yaml",
     "onLanguage:markdown"
   ],
+  "preview": true,
+  "homepage": "https://github.com/azure/autorest/blob/master/README.md",
+  "icon": "images/logo.png",
+  "galleryBanner": {
+    "color": "#ACD1EC",
+    "theme": "light"
+  },
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azure/autorest"
+  },
   "main": "./client/client",
   "contributes": {
     "configuration": {
@@ -37,6 +53,21 @@
           "type": "number",
           "default": 100,
           "description": "Controls the maximum number of problems produced by the server."
+        },
+        "autorest.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shows AutoRest DEBUG messages in the console."
+        },
+        "autorest.verbose": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shows AutoRest VERBOSE messages in the console."
+        },
+        "autorest.information": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows AutoRest INFORMATION messages in the console."
         },
         "autorest.trace.server": {
           "type": "string",

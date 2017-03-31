@@ -20,5 +20,9 @@ Swagger/OpenAPI Documents can be in the following formats:
 
 Please feel free to visit our [github](https://aka.ms/autorest) repository and file issues for bugs, suggestions or even help contribute!
 
+# License
+
+This extension is licensed under the MIT License. Please see the third-party notices file for details on the third-party binaries that we include with releases of this project.
+
 ### Code of Conduct 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
