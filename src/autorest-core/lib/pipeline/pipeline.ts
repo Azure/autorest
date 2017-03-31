@@ -49,7 +49,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // load Swaggers
   let inputs = From(config.InputFileUris).ToArray();
   if (inputs.length === 0) {
-    throw new Error("No input files provided.");
+    throw "No input files provided.\n\nUse --help to get help information.";
   }
 
   config.Debug.Dispatch({ Text: `Starting Pipeline - Loading literate swaggers ${inputs}` });
