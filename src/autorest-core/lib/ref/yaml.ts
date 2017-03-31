@@ -138,6 +138,6 @@ export function Parse<T>(rawYaml: string): T {
 }
 
 export function Stringify<T>(object: T): string {
-  return "---\n" + yamlAst.safeDump(object, null);
+  return "---\n" + yamlAst.safeDump(object, { skipInvalid: true });
 }
 

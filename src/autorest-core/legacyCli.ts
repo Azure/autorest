@@ -76,7 +76,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   result["payload-flattening-threshold"] = parseInt(switches["fs"] || switches["payloadflatteningthreshold"] || "0");
 
-  result["sync-methods"] = <any>switches["syncmethods"] || null;
+  result["sync-methods"] = <any>switches["syncmethods"] || undefined;
 
   result["add-credentials"] = switches["addcredentials"] === null || ((switches["addcredentials"] + "").toLowerCase() === "true");
 

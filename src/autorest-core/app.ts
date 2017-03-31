@@ -55,6 +55,7 @@ ${Stringify(config).replace(/^---\n/, "")}
 `.replace(/~/g, "`"));
       return;
     }
+    // autorest init-cli
     if (autorestArgs[0] === "init-cli") {
       const args: string[] = [];
       for (const node of nodes(config, "$..*")) {
