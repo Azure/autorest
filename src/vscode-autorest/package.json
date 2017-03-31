@@ -4,23 +4,35 @@
   "description": "AutoRest Langugage Service",
   "author": "Microsoft Corporation",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.9.12",
   "publisher": "Microsoft",
   "engines": {
-    "vscode": "^1.8.0"
+    "vscode": "^1.10.0"
   },
   "categories": [
-    "Other"
+    "Linters", "Languages","Other"
   ],
   "activationEvents": [
-    "onLanguage:plaintext"
+    "onLanguage:json",
+    "onLanguage:yaml",
+    "onLanguage:markdown"
   ],
   "main": "./client/client",
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Default configuration",
+      "title": "AutoRest Configuration",
       "properties": {
+        "autorest.minimumAutoRestVersion": {
+          "type": "string",
+          "default": "1.0.1-20170328-1200",
+          "description": "forces the minimum version of the autorest-core to be installed."
+        },
+        "autorest.runtimeId": {
+          "type": "string",
+          "default": null,
+          "description": "forces the autorest-core to install a specific dotnet runtime."
+        },
         "autorest.maxNumberOfProblems": {
           "type": "number",
           "default": 100,

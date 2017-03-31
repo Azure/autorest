@@ -32,6 +32,98 @@ task 'publish', 'Builds, signs, publishes autorest binaries to GitHub Release',(
     'upload:github'
     -> done()
 
+task 'copy-vscode-files-to-work', '', ->
+  echo "Copying files into \n#{workdir}"
+  src = "#{basefolder}/src/vscode-autorest"
+  source ["#{src}/**",
+    "!#{src}/*.vsix"
+    "!#{src}/node_modules/autorest/node_modules/autorest-core/**"
+    "!#{src}/node_modules/autorest/node_modules/@types/**"
+    "!#{src}/node_modules/autorest/node_modules/del/**"
+    "!#{src}/node_modules/autorest/node_modules/mocha/**"
+    "!#{src}/node_modules/autorest/node_modules/mocha-typescript/**"
+    "!#{src}/node_modules/autorest/node_modules/typescript/**"
+    "!#{src}/node_modules/autorest/node_modules/browser-stdout/**"
+    "!#{src}/node_modules/autorest/node_modules/debug/**"
+    "!#{src}/node_modules/autorest/node_modules/diff/**"
+    "!#{src}/node_modules/autorest/node_modules/globby/**"
+    "!#{src}/node_modules/autorest/node_modules/growl/**"
+    "!#{src}/node_modules/autorest/node_modules/has-flag/**"
+    "!#{src}/node_modules/autorest/node_modules/is-path-cwd/**"
+    "!#{src}/node_modules/autorest/node_modules/is-path-in-cwd/**"
+    "!#{src}/node_modules/autorest/node_modules/json3/**"
+    "!#{src}/node_modules/autorest/node_modules/lodash.create/**"
+    "!#{src}/node_modules/autorest/node_modules/array-union/**"
+    "!#{src}/node_modules/autorest/node_modules/arrify/**"
+    "!#{src}/node_modules/autorest/node_modules/is-path-inside/**"
+    "!#{src}/node_modules/autorest/node_modules/lodash._baseassign/**"
+    "!#{src}/node_modules/autorest/node_modules/lodash._basecreate/**"
+    "!#{src}/node_modules/autorest/node_modules/lodash._isiterateecall/**"
+    "!#{src}/node_modules/autorest/node_modules/ms/**"
+    "!#{src}/node_modules/autorest/node_modules/object-assign/**"
+    "!#{src}/node_modules/autorest/node_modules/array-uniq/**"
+    "!#{src}/node_modules/autorest/node_modules/lodash._basecopy/**"
+    "!#{src}/node_modules/autorest/node_modules/lodash.keys/**"
+    "!#{src}/node_modules/autorest/node_modules/path-is-inside/**"
+    "!#{src}/node_modules/autorest/node_modules/lodash._getnative/**"
+    "!#{src}/node_modules/autorest/node_modules/lodash.isarguments/**"
+    "!#{src}/node_modules/autorest/node_modules/lodash.isarray/**"   
+
+    "!#{src}/node_modules/autorest/node_modules/autorest-core"
+    "!#{src}/node_modules/autorest/node_modules/@types"
+    "!#{src}/node_modules/autorest/node_modules/del"
+    "!#{src}/node_modules/autorest/node_modules/mocha"
+    "!#{src}/node_modules/autorest/node_modules/mocha-typescript"
+    "!#{src}/node_modules/autorest/node_modules/typescript"
+    "!#{src}/node_modules/autorest/node_modules/browser-stdout"
+    "!#{src}/node_modules/autorest/node_modules/debug"
+    "!#{src}/node_modules/autorest/node_modules/diff"
+    "!#{src}/node_modules/autorest/node_modules/globby"
+    "!#{src}/node_modules/autorest/node_modules/growl"
+    "!#{src}/node_modules/autorest/node_modules/has-flag"
+    "!#{src}/node_modules/autorest/node_modules/is-path-cwd"
+    "!#{src}/node_modules/autorest/node_modules/is-path-in-cwd"
+    "!#{src}/node_modules/autorest/node_modules/json3"
+    "!#{src}/node_modules/autorest/node_modules/lodash.create"
+    "!#{src}/node_modules/autorest/node_modules/array-union"
+    "!#{src}/node_modules/autorest/node_modules/arrify"
+    "!#{src}/node_modules/autorest/node_modules/is-path-inside"
+    "!#{src}/node_modules/autorest/node_modules/lodash._baseassign"
+    "!#{src}/node_modules/autorest/node_modules/lodash._basecreate"
+    "!#{src}/node_modules/autorest/node_modules/lodash._isiterateecall"
+    "!#{src}/node_modules/autorest/node_modules/ms"
+    "!#{src}/node_modules/autorest/node_modules/object-assign"
+    "!#{src}/node_modules/autorest/node_modules/array-uniq"
+    "!#{src}/node_modules/autorest/node_modules/lodash._basecopy"
+    "!#{src}/node_modules/autorest/node_modules/lodash.keys"
+    "!#{src}/node_modules/autorest/node_modules/path-is-inside"
+    "!#{src}/node_modules/autorest/node_modules/lodash._getnative"
+    "!#{src}/node_modules/autorest/node_modules/lodash.isarguments"
+    "!#{src}/node_modules/autorest/node_modules/lodash.isarray"       
+    "!#{src}/test"
+    "!#{src}/test/**"
+  ]
+    .pipe destination "#{workdir}/" 
+
+task 'package-vscode', "creates the autorest vscode extension package.",["build/typescript"],(done)-> 
+  echo "updating version in package.json file"
+  execute "npm version patch", {cwd: "#{basefolder}/src/vscode-autorest" },(c,o,e)->
+    run ["copy-vscode-files-to-work"], -> 
+      echo "patching package.json file to include autorest package"
+      pkg = require("#{workdir}/package.json")
+      pkg.dependencies.autorest="*"
+      JSON.stringify(pkg).to("#{workdir}/package.json");
+
+      execute "vsce package", {cwd: "#{workdir}" },(c,o,e)->
+        mv "#{workdir}/*.vsix","#{basefolder}/src/vscode-autorest/"
+        rm '-rf', workdir
+        name = "#{basefolder}/src/vscode-autorest/autorest-#{pkg.version}.vsix"
+        echo "Package Created:\n   #{name}"
+        done()
+
+  return null
+  
+
 task 'publish/autorest', '', ['build/typescript'], (done) ->
   execute "npm publish ", {cwd: "#{basefolder}/src/autorest" }, done
 

@@ -125,7 +125,6 @@ task 'autorest', 'Runs AutoRest', (done)->
   else  
     Fail "You must run #{ info 'gulp build'}' first"
 
-
 task 'init', "" ,(done)->
   return done() if initialized
   global.initialized = true

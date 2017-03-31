@@ -7,4 +7,9 @@ export interface Settings {
 // file
 export interface AutoRestSettings {
   maxNumberOfProblems: number;
+  information: boolean;
+  verbose: boolean;
+  debug: boolean;
+  runtimeId: string;
+  minimumAutoRestVersion: string;
 }

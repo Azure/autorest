@@ -18,28 +18,37 @@ import {
 } from 'vscode-languageserver';
 
 // Create a connection for the server. The connection uses Node's IPC as a transport
-export const connection: IConnection = (<any>global).connection
+export const connection: IConnection = (<any>global).connection;
+export const initializeParams: InitializeParams = (<any>global).initializeParams;
+export let settings: Settings = (<any>global).settings;
 
 export class AutoRestManager extends TextDocuments {
   private trackedFiles = new Map<string, File>();
   private activeContexts = new Map<string, DocumentContext>();
-  private maxNumberOfProblems: number = 100;
   private _rootUri: string | null = null;
-
+  public get settings(): Settings {
+    return <Settings>((<any>global).settings);
+  }
   public get RootUri(): string {
     return this._rootUri;
   }
 
   public information(text: string) {
-    this.connection.console.log(`[INFO: ${AutoRestManager.DateStamp}] ${text}`)
+    if (this.settings.autorest.information) {
+      this.connection.console.log(`[INFO: ${AutoRestManager.DateStamp}] ${text}`)
+    }
   }
 
   public verbose(text: string) {
-    this.connection.console.log(`[${AutoRestManager.DateStamp}] ${text}`)
+    if (this.settings.autorest.verbose) {
+      this.connection.console.log(`[${AutoRestManager.DateStamp}] ${text}`)
+    }
   }
 
   public debug(text: string) {
-    this.connection.console.log(`[DEBUG: ${AutoRestManager.DateStamp}] ${text}`)
+    if (this.settings.autorest.debug) {
+      this.connection.console.log(`[DEBUG: ${AutoRestManager.DateStamp}] ${text}`)
+    }
   }
 
   public warn(text: string) {
@@ -79,14 +88,10 @@ export class AutoRestManager extends TextDocuments {
     }
   }
 
-
-
-
   // The settings have changed. Is send on server activation
   // as well.
   configurationChanged(configuration: DidChangeConfigurationParams) {
-    let settings = <Settings>configuration.settings;
-    this.maxNumberOfProblems = settings.autorest.maxNumberOfProblems || 100;
+    (<any>global).settings = <Settings>configuration.settings;
     // Revalidate any open text documents
     // documents.all().forEach(validateTextDocument);
   };
@@ -105,25 +110,6 @@ export class AutoRestManager extends TextDocuments {
   };
 
 
-  // After the server has started the client sends an initialize request. The server receives
-  // in the passed params the rootPath of the workspace plus the client capabilities. 
-  async initialize(params: InitializeParams): Promise<InitializeResult> {
-    connection.console.log('Starting Server Side...');
-    manager.SetRootUri(params.rootUri);
-
-    return {
-      capabilities: {
-        // Tell the client that the server works in FULL text document sync mode
-        textDocumentSync: TextDocumentSyncKind.Full,
-
-        // Tell the client that the server support code complete
-        completionProvider: {
-          resolveProvider: true
-        }
-
-      }
-    }
-  }
 
   onCompletion(textDocumentPosition: TextDocumentPositionParams): CompletionItem[] {
     // The pass parameter contains the position of the text document in 
@@ -149,9 +135,13 @@ export class AutoRestManager extends TextDocuments {
     // changes.changes[0].type 1/2/3 == created/changed/deleted
     // changes.changes[0].uri
     for (const each of changes.changes) {
-      let docUri = NormalizeUri(each.uri);
-      this.debug(`Changed On Disk: ${docUri}`);
-      let doc = this.trackedFiles.get(docUri);
+      let documentUri = NormalizeUri(each.uri);
+      if (!documentUri.startsWith("file://")) {
+        return;
+      }
+
+      this.debug(`Changed On Disk: ${documentUri}`);
+      let doc = this.trackedFiles.get(documentUri);
       if (doc) {
         // we are currently tracking this file already.
         if (doc.IsActive) {
@@ -220,6 +210,9 @@ export class AutoRestManager extends TextDocuments {
   private async opened(open: TextDocumentChangeEvent): Promise<void> {
     if (AutoRest.IsConfigurationExtension(open.document.languageId) || AutoRest.IsSwaggerExtension(open.document.languageId)) {
       var documentUri = NormalizeUri(open.document.uri);
+      if (!documentUri.startsWith("file://")) {
+        return;
+      }
       let doc = this.trackedFiles.get(documentUri);
       // are we tracking this file?
       if (doc) {
@@ -241,6 +234,9 @@ export class AutoRestManager extends TextDocuments {
   private changed(change: TextDocumentChangeEvent) {
     if (AutoRest.IsConfigurationExtension(change.document.languageId) || AutoRest.IsSwaggerExtension(change.document.languageId)) {
       var documentUri = NormalizeUri(change.document.uri);
+      if (!documentUri.startsWith("file://")) {
+        return;
+      }
 
       let doc = this.trackedFiles.get(documentUri);
       if (doc) {
@@ -297,7 +293,9 @@ export class AutoRestManager extends TextDocuments {
 
   constructor(private connection: IConnection) {
     super();
-    this.debug("setting up AutoRestManager.")
+    this.debug("setting up AutoRestManager.");
+    this.SetRootUri(initializeParams.rootUri);
+
     // ask vscode to track 
     this.onDidOpen((p) => this.opened(p));
     this.onDidChangeContent((p) => this.changed(p));
@@ -307,9 +305,11 @@ export class AutoRestManager extends TextDocuments {
     connection.onDidChangeWatchedFiles((p) => this.changedOnDisk(p));
 
     // other events we want to handle:
-    connection.onInitialize((p) => this.initialize(p));
+    // connection.onInitialize((p) => this.initialize(p));
     connection.onCompletion((p) => this.onCompletion(p));
     connection.onCompletionResolve((p) => this.onCompletionResolve(p));
+
+    // take over configuration file change notifications.
     connection.onDidChangeConfiguration((p) => this.configurationChanged(p));
 
     this.listen(connection);
@@ -319,7 +319,7 @@ export class AutoRestManager extends TextDocuments {
 
 let manager: AutoRestManager = new AutoRestManager(connection);
 // Listen on the connection
-connection.listen();
+// connection.listen();
 
 /// -------------------------------------------------------------------------------------------------------------
 /// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
