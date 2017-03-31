@@ -199,7 +199,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
     // populate cache
     let data: string | null = null;
     try {
-      data = await this.fs.ReadFile(uri);
+      data = await this.fs.ReadFile(uri) || await ReadUri(uri);
     } finally {
       if (!data) {
         throw new Error(`FileSystem unable to read file ${uri}.`)

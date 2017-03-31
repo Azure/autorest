@@ -1,30 +1,73 @@
 {
   "name": "autorest",
-  "displayName": "autorest",
-  "description": "AutoRest Langugage Service",
+  "displayName": "AutoRest",
+  "description": "AutoRest/Swagger Langugage Service",
   "author": "Microsoft Corporation",
   "license": "MIT",
-  "version": "0.0.1",
-  "publisher": "Microsoft",
+  "version": "0.9.17",
+  "publisher": "ms-vscode",
   "engines": {
-    "vscode": "^1.8.0"
+    "vscode": "^1.10.0"
   },
   "categories": [
+    "Linters",
+    "Languages",
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:plaintext"
+    "onLanguage:json",
+    "onLanguage:yaml",
+    "onLanguage:markdown"
   ],
+  "preview": true,
+  "homepage": "https://github.com/azure/autorest/blob/master/README.md",
+  "icon": "images/logo.png",
+  "galleryBanner": {
+    "color": "#ACD1EC",
+    "theme": "light"
+  },
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azure/autorest"
+  },
   "main": "./client/client",
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Default configuration",
+      "title": "AutoRest Configuration",
       "properties": {
+        "autorest.minimumAutoRestVersion": {
+          "type": "string",
+          "default": "1.0.1-20170328-1200",
+          "description": "forces the minimum version of the autorest-core to be installed."
+        },
+        "autorest.runtimeId": {
+          "type": "string",
+          "default": null,
+          "description": "forces the autorest-core to install a specific dotnet runtime."
+        },
         "autorest.maxNumberOfProblems": {
           "type": "number",
           "default": 100,
           "description": "Controls the maximum number of problems produced by the server."
+        },
+        "autorest.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shows AutoRest DEBUG messages in the console."
+        },
+        "autorest.verbose": {
+          "type": "boolean",
+          "default": false,
+          "description": "Shows AutoRest VERBOSE messages in the console."
+        },
+        "autorest.information": {
+          "type": "boolean",
+          "default": true,
+          "description": "Shows AutoRest INFORMATION messages in the console."
         },
         "autorest.trace.server": {
           "type": "string",
