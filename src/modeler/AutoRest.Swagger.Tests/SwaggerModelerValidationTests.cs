@@ -502,6 +502,45 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "security-definitions-validations-11.json"));
             messages.AssertOnlyValidationMessage(typeof(SecurityDefinitionsStructureValidation), 1);
         }
+
+        public void RequiredReadOnlyPropertiesValidationInDefinitions()
+        {
+            // This test validates if a definition has required properties which are marked as readonly true
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "required-readonly-properties.json"));
+            messages.AssertOnlyValidationMessage(typeof(RequiredReadOnlyPropertiesValidation), 1);
+        }
+
+        [Fact]
+        public void RequiredReadOnlyPropertiesValidationInResponses()
+        {
+            // This test validates if a definition has required properties which are marked as readonly true
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "required-readonly-properties-2.json"));
+            messages.AssertOnlyValidationMessage(typeof(RequiredReadOnlyPropertiesValidation), 1);
+        }
+
+        [Fact]
+        public void RequiredReadOnlyPropertiesValidationInParameters()
+        {
+            // This test validates if a definition has required properties which are marked as readonly true
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "required-readonly-properties-3.json"));
+            messages.AssertOnlyValidationMessage(typeof(RequiredReadOnlyPropertiesValidation), 1);
+        }
+
+        [Fact]
+        public void RequiredReadOnlyPropertiesValidationInNestedSchema()
+        {
+            // This test validates if a definition has required properties which are marked as readonly true
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "required-readonly-properties-4.json"));
+            messages.AssertOnlyValidationMessage(typeof(RequiredReadOnlyPropertiesValidation), 1);
+        }
+
+        [Fact]
+        public void RequiredReadOnlyPropertiesValidationInItems()
+        {
+            // This test validates if a definition has required properties which are marked as readonly true
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "required-readonly-properties-5.json"));
+            messages.AssertOnlyValidationMessage(typeof(RequiredReadOnlyPropertiesValidation), 1);
+        }
     }
 
     #region Positive tests

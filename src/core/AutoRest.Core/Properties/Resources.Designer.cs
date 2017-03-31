@@ -638,6 +638,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Property &apos;{0}&apos; is a required property. It should not be marked as &apos;readonly&apos;..
+        /// </summary>
+        public static string RequiredReadOnlyPropertiesValidation {
+            get {
+                return ResourceManager.GetString("RequiredReadOnlyPropertiesValidation", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to A &apos;Resource&apos; definition must have x-ms-azure-resource extension enabled and set to true..
         /// </summary>
         public static string ResourceIsMsResourceNotValid {
