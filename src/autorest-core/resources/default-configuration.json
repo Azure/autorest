@@ -1,6 +1,6 @@
 {
   "azure-arm": false,
-  "output-folder": "$(base-folder)/generated",
+  "output-folder": "generated",
   "disable-validation": false,
   "output-artifact": [
     "source-files-csharp",
