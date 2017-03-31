@@ -41,7 +41,7 @@ public class Generator : NewPlugin
     new Settings
     {
       Namespace = await GetValue("namespace") ?? "",
-      ClientName = await GetValue("clientNameOverride"),
+      ClientName = await GetValue("override-client-name"),
       PayloadFlatteningThreshold = await GetValue<int?>("payload-flattening-threshold") ?? 0,
       AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
     };
@@ -50,12 +50,13 @@ public class Generator : NewPlugin
     {
       Settings.Instance.Header = header;
     }
-    Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool?>("internalConstructors") ?? false);
+    Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool?>("use-internal-constructors") ?? false);
     Settings.Instance.CustomSettings.Add("SyncMethods", await GetValue("sync-methods") ?? "essential");
-    Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool?>("useDateTimeOffset") ?? false);
+    Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool?>("use-datetimeoffset") ?? false);
     if (codeGenerator.EndsWith("Ruby"))
     {
       Settings.Instance.PackageName = await GetValue("package-name") ?? "client";
+      Settings.Instance.PackageVersion = await GetValue("package-version");
     }
 
     // process

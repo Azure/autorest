@@ -214,10 +214,10 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
         let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(usedCodeGenerator, codeModelTransformed, scope.CreateScope("generate"),
           Object.assign(
-            {
-              clientNameOverride: getXmsCodeGenSetting("name"),
-              internalConstructors: getXmsCodeGenSetting("internalConstructors"),
-              useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset"),
+            { // stuff that comes in via `x-ms-code-generation-settings`
+              "override-client-name": getXmsCodeGenSetting("name"),
+              "use-internal-constructors": getXmsCodeGenSetting("internalConstructors"),
+              "use-datetimeoffset": getXmsCodeGenSetting("useDateTimeOffset"),
               "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
               "sync-methods": getXmsCodeGenSetting("syncMethods")
             },
