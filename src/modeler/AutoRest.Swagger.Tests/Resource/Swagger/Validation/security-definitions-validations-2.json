@@ -1,0 +1,63 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Uses 'required' & 'readonly' properties.",
+    "description": "Show an error/warning if a definition property is marked readOnly: true plus it appears under the required array of properties.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+  },
+  "paths": {
+    "/foo": {
+      "get": {
+        "tags": [ "SampleTag" ],
+        "operationId": "Foo_Get",
+        "description": "Test Description",
+        "parameters": [
+          {
+            "name": "parameter_1",
+            "in": "path",
+            "required": true,
+            "description": "Test Description"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Response": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        }
+      },
+      "description": "The Response definition."
+    }
+  }
+}

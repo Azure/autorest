@@ -674,6 +674,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A swagger must have security definitions and must adhere to the specific structure..
+        /// </summary>
+        public static string SecurityDefinitionsStructureValidation {
+            get {
+                return ResourceManager.GetString("SecurityDefinitionsStructureValidation", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Parameter &quot;{0}&quot; is referenced but not defined in the global parameters section of Service Definition.
         /// </summary>
         public static string ServiceDefinitionParametersMissingMessage {

@@ -223,6 +223,9 @@ Modelers:
   <data name="AnonymousTypesDiscouraged" xml:space="preserve">
     <value>Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.</value>
   </data>
+  <data name="SecurityDefinitionsStructureValidation" xml:space="preserve">
+    <value>A swagger must have security definitions and must adhere to the specific structure.</value>
+  </data>
   <data name="MsdnReferencesDiscouraged" xml:space="preserve">
     <value>For better generated code quality, remove all references to "msdn.microsoft.com".</value>
   </data>
