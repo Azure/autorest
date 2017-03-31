@@ -78,5 +78,5 @@ export async function ProcessCodeModel(codeModel: DataHandleRead, scope: DataSto
   }
 
   const targetHandle = await scope.Write("codeModel.yaml");
-  return await targetHandle.WriteData(JSON.stringify(ParseNode(ast), null, 4), mapping, [codeModel]);
+  return await targetHandle.WriteData(StringifyAst(ast), mapping, [codeModel]);
 }

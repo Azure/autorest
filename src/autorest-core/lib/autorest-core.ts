@@ -39,6 +39,7 @@ export class AutoRest extends EventEmitter {
    */
   public constructor(private fileSystem?: IFileSystem, public configFileUri?: string) {
     super();
+    this.Fatal.Subscribe((_, m) => console.error(m.Text));
   }
 
 

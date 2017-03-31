@@ -38,12 +38,12 @@ export class Manipulator {
         for (const w of trans.where) {
           // transform
           for (const t of trans.transform) {
-            const target = await scope.Write("transform_" + nextId());
+            const target = await scope.Write(`transform_${nextId()}.yaml`);
             data = (await ManipulateObject(data, target, w, obj => safeEval(t, { $: obj }))).result;
           }
           // set
           for (const s of trans.set) {
-            const target = await scope.Write("set_" + nextId());
+            const target = await scope.Write(`set_${nextId()}.yaml`);
             data = (await ManipulateObject(data, target, w, obj => s)).result;
           }
         }

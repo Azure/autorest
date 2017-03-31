@@ -75,7 +75,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   config.Debug.Dispatch({ Text: `Done Composing Swaggers.` });
 
   // TRANSFORM
-  swagger = await manipulator.Process(swagger, config.DataStore.CreateScope("composed-transform"), "/composed.yaml");
+  swagger = await manipulator.Process(swagger, config.DataStore.CreateScope("composite-transform"), "/composite.yaml");
 
   // emit resolved swagger
   {
@@ -173,8 +173,6 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       }
     };
 
-
-
     // code generators
     if (usedCodeGenerators.length > 0) {
       // modeler
@@ -192,6 +190,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
         // TRANSFORM
         const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/model.yaml");
+
+        await emitArtifact("code-model-v1", "mem://code-model.yaml", codeModelTransformed);
 
         // get internal name
         const languages = [
