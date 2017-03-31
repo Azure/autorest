@@ -10,7 +10,8 @@
 // this file should get 'required' by the boostrapper
 require("./lib/polyfill.min.js");
 
-import { CreateObject, parse } from "./lib/ref/jsonpath";
+import { Stringify } from "./lib/ref/yaml";
+import { CreateObject, nodes } from './lib/ref/jsonpath';
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
 import { AutoRest } from "./lib/autorest-core";
 import { resolve as currentDirectory } from "path";
@@ -38,6 +39,35 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     const currentDirUri = CreateFolderUri(currentDirectory());
     const dataStore = new DataStore();
     const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
+
+    // autorest init
+    if (autorestArgs[0] === "init") {
+      console.log(`# AutoRest Configuration (auto-generated, please adjust title)
+
+> see https://aka.ms/autorest
+
+The following configuration was auto-generated and can be adjusted.
+
+~~~ yaml
+${Stringify(config).replace(/^---\n/, "")}
+~~~
+
+`.replace(/~/g, "`"));
+      return;
+    }
+    if (autorestArgs[0] === "init-cli") {
+      const args: string[] = [];
+      for (const node of nodes(config, "$..*")) {
+        const path = node.path.join(".");
+        const values = node.value instanceof Array ? node.value : (typeof node.value === "object" ? [] : [node.value]);
+        for (const value of values) {
+          args.push(`--${path}=${value}`);
+        }
+      }
+      console.log(args.join(" "));
+      return;
+    }
+
     config["base-folder"] = currentDirUri;
     const api = new AutoRest(new RealFileSystem());
     await api.AddConfiguration(config);

@@ -19,6 +19,9 @@ export type YAMLMap = yamlAst.YamlMap;
 export type YAMLSequence = yamlAst.YAMLSequence;
 export type YAMLAnchorReference = yamlAst.YAMLAnchorReference;
 
+export const CreateYAMLMapping: (key: YAMLScalar, value: YAMLNode) => YAMLMapping = yamlAst.newMapping;
+export const CreateYAMLScalar: (value: string) => YAMLScalar = yamlAst.newScalar;
+
 export interface YAMLNodeWithPath {
   path: JsonPath;
   node: YAMLNode;
@@ -116,8 +119,8 @@ export function ParseNode<T>(yamlNode: YAMLNode): T {
   return yamlNode.valueObject;
 }
 
-export function CloneAst(ast: YAMLNode): YAMLNode {
-  return ParseToAst(StringifyAst(ast));
+export function CloneAst<T extends YAMLNode>(ast: T): T {
+  return ParseToAst(StringifyAst(ast)) as T;
 }
 export function StringifyAst(ast: YAMLNode): string {
   return Stringify(ParseNode<any>(ast));

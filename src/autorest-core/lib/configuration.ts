@@ -24,29 +24,29 @@ import { Message } from "./message";
 import { Artifact } from "./artifact";
 import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
 
-export interface AutoRestConfigurationSpecials {
-  infoSectionOverride?: any; // from composite swagger file, no equivalent (yet) in config file; IF DOING THAT: also make sure source maps are pulling it! (see "composite swagger" method)
-  header?: string | null;
-  namespace?: string;
-  payloadFlatteningThreshold?: number;
-  syncMethods?: "all" | "essential" | "none";
-  addCredentials?: boolean;
-  rubyPackageName?: string; // TODO: figure out which settings are really just cared about by plugins and then DON'T specify them here (maybe give conventions)
-  outputFile?: string | null;
-}
-
 export interface AutoRestConfigurationImpl {
-  [key: string]: any;
   __info?: string | null;
-  __specials?: AutoRestConfigurationSpecials;
   "input-file": string[] | string;
-  "output-folder"?: string; // TODO: could also be generator specific! (also makes a ton of sense, if you wanna generate for multiple languages at once...)
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
-  "azure-arm"?: boolean | null;
-  "disable-validation"?: boolean | null;
-  "fluent"?: boolean | null;
+  "message-format"?: "json";
+
+  // plugin specific
+  "output-file"?: string;
+  "output-folder"?: string;
+  "disable-validation"?: boolean;
+
+  // from here on: CONVENTION, not cared about by the core
+  "fluent"?: boolean; // TODO: pass to generator instead of handling here
+  "azure-arm"?: boolean; // TODO: pass to generator instead of handling here & enable tooling using guard in default config!
+  "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
+  "namespace"?: string; // TODO: the modeler cares :( because it is badly designed
+  "license-header"?: string;
+  "add-credentials"?: boolean;
+  "package-name"?: string; // Ruby
+  "sync-methods"?: "all" | "essential" | "none";
+  "payload-flattening-threshold"?: number;
 }
 
 // TODO: operate on DataHandleRead and create source map!
@@ -149,7 +149,7 @@ export class ConfigurationView extends EventEmitter {
   }
 
   /* @internal */
-  public readonly DataStore: DataStore;
+  public DataStore: DataStore;
 
   private cancellationTokenSource = new CancellationTokenSource();
   /* @internal */
@@ -196,12 +196,12 @@ export class ConfigurationView extends EventEmitter {
     return this.ResolveAsFolder(this.config["output-folder"] || "generated");
   }
 
-  public get __specials(): AutoRestConfigurationSpecials {
-    return From(ValuesOf(this.config.__specials)).FirstOrDefault() || {};
+  public get OutputArtifact(): Iterable<string> {
+    return ValuesOf<string>(this.config["output-artifact"]);
   }
 
-  public PluginSection(pluginName: string): AutoRestConfigurationImpl {
-    return this.config[pluginName];
+  public GetEntry(key: keyof AutoRestConfigurationImpl): any {
+    return (this.config as any)[key];
   }
 
   public get DisableValidation(): boolean {
@@ -216,11 +216,19 @@ export class ConfigurationView extends EventEmitter {
     return this.config["fluent"] || false;
   }
 
-  public get OutputArtifact(): Iterable<string> {
-    return ValuesOf<string>(this.config["output-artifact"]);
+  public GetPluginView(pluginName: string): ConfigurationView {
+    const result = new ConfigurationView(this.configFileFolderUri, (this.config as any)[pluginName], this.config);
+    result.DataStore = this.DataStore;
+    result.cancellationTokenSource = this.cancellationTokenSource;
+    result.GeneratedFile.Subscribe((_, m) => this.GeneratedFile.Dispatch(m));
+    result.Information.Subscribe((_, m) => this.Information.Dispatch(m));
+    result.Warning.Subscribe((_, m) => this.Warning.Dispatch(m));
+    result.Error.Subscribe((_, m) => this.Error.Dispatch(m));
+    result.Debug.Subscribe((_, m) => this.Debug.Dispatch(m));
+    result.Verbose.Subscribe((_, m) => this.Verbose.Dispatch(m));
+    result.Fatal.Subscribe((_, m) => this.Fatal.Dispatch(m));
+    return result;
   }
-
-  // TODO: stuff like generator specific settings (= YAML merging root with generator's section)
 }
 
 

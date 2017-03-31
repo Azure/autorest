@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Perks.JsonRPC;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core;
+using AutoRest.Core.Parsing;
 
 public class Generator : NewPlugin
 {
@@ -47,7 +48,7 @@ public class Generator : NewPlugin
     }
 
     var plugin = ExtensionsLoader.GetPlugin(codeGenerator);
-    var modelAsJson = await ReadFile(files[0]);
+    var modelAsJson = (await ReadFile(files[0])).EnsureYamlIsJson();
 
     using (plugin.Activate())
     {
