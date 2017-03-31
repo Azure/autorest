@@ -179,6 +179,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       const codeModelGFM = await ProcessCodeModel(codeModel, config.DataStore.CreateScope("modelgfm"));
 
       for (const usedCodeGenerator of usedCodeGenerators) {
+        const scope = config.DataStore.CreateScope(usedCodeGenerator);
+
         // get internal name
         const languages = [
           "CSharp",
@@ -191,7 +193,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         const codeGenerator = (config.AzureArm ? "Azure." : "") + languages + (config.Fluent ? ".Fluent" : "");
 
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModelGFM, config.DataStore.CreateScope("generate"),
+        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModelGFM, scope.CreateScope("generate"),
           {
             namespace: config.__specials.namespace || "",
             codeGenerator: codeGenerator,
@@ -208,7 +210,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
         // C# simplifier
         if (codeGenerator.toLowerCase().indexOf("csharp") !== -1) {
-          generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, config.DataStore.CreateScope("simplify"), messageSink);
+          generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, scope.CreateScope("simplify"), messageSink);
         }
 
         for (const fileName of await generatedFileScope.Enum()) {

@@ -149,7 +149,7 @@ export class ConfigurationView extends EventEmitter {
   }
 
   /* @internal */
-  public readonly DataStore: DataStore;
+  public DataStore: DataStore;
 
   private cancellationTokenSource = new CancellationTokenSource();
   /* @internal */
@@ -196,6 +196,10 @@ export class ConfigurationView extends EventEmitter {
     return this.ResolveAsFolder(this.config["output-folder"] || "generated");
   }
 
+  public get OutputArtifact(): Iterable<string> {
+    return ValuesOf<string>(this.config["output-artifact"]);
+  }
+
   public get __specials(): AutoRestConfigurationSpecials {
     return From(ValuesOf(this.config.__specials)).FirstOrDefault() || {};
   }
@@ -216,11 +220,19 @@ export class ConfigurationView extends EventEmitter {
     return this.config["fluent"] || false;
   }
 
-  public get OutputArtifact(): Iterable<string> {
-    return ValuesOf<string>(this.config["output-artifact"]);
+  public GetPluginView(pluginName: string): ConfigurationView {
+    const result = new ConfigurationView(this.configFileFolderUri, this.config[pluginName], this.config);
+    result.DataStore = this.DataStore;
+    result.cancellationTokenSource = this.cancellationTokenSource;
+    result.GeneratedFile = this.GeneratedFile;
+    result.Information = this.Information;
+    result.Warning = this.Warning;
+    result.Error = this.Error;
+    result.Debug = this.Debug;
+    result.Verbose = this.Verbose;
+    result.Fatal = this.Fatal;
+    return result;
   }
-
-  // TODO: stuff like generator specific settings (= YAML merging root with generator's section)
 }
 
 
