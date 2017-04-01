@@ -541,6 +541,23 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "required-readonly-properties-5.json"));
             messages.AssertOnlyValidationMessage(typeof(RequiredReadOnlyPropertiesValidation), 1);
         }
+
+        [Fact]
+        public void DefaultValuedInPropertiesInPatchRequestValidation()
+        {
+            // This test validates if a definition has required properties which are marked as readonly true
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "default-valued-properties-in-patch-request.json"));
+            messages.AssertOnlyValidationMessage(typeof(PatchBodyParametersSchemaValidation), 1);
+        }
+
+        [Fact]
+        public void RequiredPropertiesInPatchRequestValidation()
+        {
+            // This test validates if a definition has required properties which are marked as readonly true
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "req-properties-in-patch-request.json"));
+            messages.AssertOnlyValidationMessage(typeof(PatchBodyParametersSchemaValidation), 1);
+        }
+
     }
 
     #region Positive tests

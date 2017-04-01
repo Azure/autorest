@@ -119,6 +119,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(SkuModelValidation))]
         [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
         [Rule(typeof(DescriptionMissing))]
+        [Rule(typeof(PatchBodyParametersSchemaValidation))]
         [CollectionRule(typeof(RequiredReadOnlyPropertiesValidation))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
