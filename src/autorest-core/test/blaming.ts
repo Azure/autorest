@@ -39,14 +39,6 @@ import { parse } from "../lib/ref/jsonpath";
     }
   }
 
-  @test @skip @timeout(60000) async "large swagger performance"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/large-input/"));
-    const messages: Message[] = [];
-    autoRest.Warning.Subscribe((_, m) => messages.push(m));
-    await autoRest.Process().finish;
-    assert.notEqual(messages.length, 0);
-  }
-
   @test @timeout(60000) async "generate resolved swagger with source map"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/small-input/"));
     await autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
@@ -54,5 +46,14 @@ import { parse } from "../lib/ref/jsonpath";
     autoRest.GeneratedFile.Subscribe((_, a) => files.push(a));
     await autoRest.Process().finish;
     assert.strictEqual(files.length, 2);
+  }
+
+  @test @timeout(60000) async "large swagger performance"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/large-input/"));
+    await autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
+    const messages: Message[] = [];
+    autoRest.Warning.Subscribe((_, m) => messages.push(m));
+    await autoRest.Process().finish;
+    assert.notEqual(messages.length, 0);
   }
 }

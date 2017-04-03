@@ -128,7 +128,7 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
   }
 }
 
-export function ParseNode<T>(yamlNode: YAMLNode, onError: (message: string, index: number) => void = message => { throw message; }): T {
+export function ParseNode<T>(yamlNode: YAMLNode, onError: (message: string, index: number) => void = message => { throw new Error(message); }): T {
   ParseNodeInternal(yamlNode, yamlNode, onError);
   return yamlNode.valueObject;
 }
@@ -146,7 +146,7 @@ export function ToAst<T>(object: T): YAMLNode {
   return ParseToAst(Stringify(object));
 }
 
-export function Parse<T>(rawYaml: string, onError: (message: string, index: number) => void = message => { throw message; }): T {
+export function Parse<T>(rawYaml: string, onError: (message: string, index: number) => void = message => { throw new Error(message); }): T {
   const node = ParseToAst(rawYaml);
   const result = ParseNode<T>(node, onError);
   return result;

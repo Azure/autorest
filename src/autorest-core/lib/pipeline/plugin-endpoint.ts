@@ -47,6 +47,7 @@ export class AutoRestPlugin extends EventEmitter {
     );
     childProc.stderr.pipe(process.stderr);
     const plugin = new AutoRestPlugin(channel);
+    channel.onClose(() => { throw "AutoRest plugin terminated."; });
     channel.listen();
     return plugin;
   }

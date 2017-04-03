@@ -280,9 +280,11 @@ export class Configuration {
       const configFiles = new Map<string, string>();
 
       for await (const name of fileSystem.EnumerateFileUris(uriToConfigFileOrWorkingFolder)) {
-        const content = await fileSystem.ReadFile(name);
-        if (content.indexOf(Constants.MagicString) > -1) {
-          configFiles.set(name, content);
+        if (name.endsWith(".md")) {
+          const content = await fileSystem.ReadFile(name);
+          if (content.indexOf(Constants.MagicString) > -1) {
+            configFiles.set(name, content);
+          }
         }
       }
 
