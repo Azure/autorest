@@ -38,7 +38,7 @@ export async function ManipulateObject(
 
   // process
   let ast: YAMLNode = await src.ReadYamlAst();
-  let mapping = From(IdentitySourceMapping(src.key, ast)).Where(m => hits.every(hit => !IsPrefix(hit.path, (m.generated as any).path)));
+  const mapping = IdentitySourceMapping(src.key, ast).filter(m => hits.every(hit => !IsPrefix(hit.path, (m.generated as any).path)));
   for (const hit of hits) {
     if (ast === undefined) {
       throw new Error("Cannot remove root node.");
@@ -52,8 +52,8 @@ export async function ManipulateObject(
 
     // patch source map
     if (newAst !== undefined && mappingInfo) {
-      mapping = mapping.Concat(
-        From(Descendants(newAst)).Select(descendant => {
+      mapping.push(
+        ...From(Descendants(newAst)).Select(descendant => {
           return <Mapping>{
             name: `Injected object at '${stringify(hit.path)}' (${mappingInfo.reason})`,
             source: mappingInfo.transformerSourceHandle.key,
@@ -61,12 +61,12 @@ export async function ManipulateObject(
             generated: { path: hit.path.concat(descendant.path) }
           };
         }));
-      mapping = mapping.Concat([{
+      mapping.push({
         name: `Original object at '${stringify(hit.path)}' (${mappingInfo.reason})`,
         source: src.key,
         original: { path: hit.path },
         generated: { path: hit.path }
-      }]);
+      });
     }
   }
 

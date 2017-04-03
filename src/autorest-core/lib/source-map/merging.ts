@@ -9,7 +9,7 @@ import { ConfigurationView } from "../autorest-core";
 import { From } from "../ref/linq";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import * as yaml from "../ref/yaml";
-import { Mappings } from "../ref/source-map";
+import { Mapping, Mappings } from '../ref/source-map';
 import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
 
 // TODO: may want ASTy merge! (keeping circular structure and such?)
@@ -107,22 +107,24 @@ export function MergeOverwrite(a: any, b: any, concatListPathFilter: (path: Json
   return result;
 }
 
-export function* IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Mappings {
+export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Mappings {
+  const result: Mappings = [];
   const descendantsWithPath = yaml.Descendants(sourceYamlAst);
   for (const descendantWithPath of descendantsWithPath) {
     const descendantPath = descendantWithPath.path;
-    yield {
+    result.push({
       generated: { path: descendantPath },
       original: { path: descendantPath },
       name: stringify(descendantPath),
       source: sourceYamlFileName
-    };
+    });
   }
+  return result;
 }
 
 export async function MergeYamls(config: ConfigurationView | null, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
-  const mappings: Mappings[] = [];
+  const mappings: Mappings = [];
   const outstanding = new OutstandingTaskAwaiter();
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = await yamlInputHandle.ReadData();
@@ -136,10 +138,10 @@ export async function MergeYamls(config: ConfigurationView | null, yamlInputHand
       }
       outstanding.Exit();
     }) || {});
-    mappings.push(IdentitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
+    mappings.push(...IdentitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
   }
   outstanding.Wait();
 
   const resultObjectRaw = yaml.Stringify(resultObject);
-  return await yamlOutputHandle.WriteData(resultObjectRaw, From(mappings).SelectMany(x => x), yamlInputHandles);
+  return await yamlOutputHandle.WriteData(resultObjectRaw, mappings, yamlInputHandles);
 }

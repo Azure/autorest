@@ -26,10 +26,11 @@ export async function Parse(hConfigFile: DataHandleRead, intermediateScope: Data
   return result;
 }
 
-function* GetSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Mappings {
+function GetSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Mappings {
+  const result: Mappings = [];
   const numLines = codeBlock.sourcepos[1][0] - codeBlock.sourcepos[0][0] + (codeBlock.info === null ? 1 : -1);
   for (var i = 0; i < numLines; ++i) {
-    yield {
+    result.push({
       generated: {
         line: i + 1,
         column: 0
@@ -40,8 +41,9 @@ function* GetSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark
       },
       source: sourceFileName,
       name: `Codeblock line '${i + 1}'`
-    };
+    });
   }
+  return result;
 }
 
 function* ParseCodeblocks(markdown: string): Iterable<commonmark.Node> {
