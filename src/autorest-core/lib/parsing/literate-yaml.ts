@@ -7,7 +7,7 @@ import { Descendants, Kind, CloneAst, YAMLMapping, newScalar, ParseNode } from "
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 import { Mapping } from "../ref/source-map";
 import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
-import { Parse as parseLiterate } from "./literate";
+import { Parse as ParseLiterate } from "./literate";
 import { Lines } from "./text-utility";
 import { ConfigurationView } from '../autorest-core';
 import { Channel, Message, SourceLocation } from '../message';
@@ -146,7 +146,7 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLitera
   if (TryMarkdown(rawMarkdown)) {
     const scopeRawCodeBlocks = intermediateScope.CreateScope("raw");
     const scopeEnlightenedCodeBlocks = intermediateScope.CreateScope("enlightened");
-    const hsConfigFileBlocksWithContext = await parseLiterate(hLiterate, scopeRawCodeBlocks);
+    const hsConfigFileBlocksWithContext = await ParseLiterate(hLiterate, scopeRawCodeBlocks);
 
     // resolve md documentation (ALPHA)
     let codeBlockIndex = 0;

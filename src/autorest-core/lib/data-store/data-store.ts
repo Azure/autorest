@@ -17,12 +17,6 @@ import { IFileSystem } from "../file-system";
 
 export const helloworld = "hi"; // TODO: wat?
 
-/* @internal */
-export module KnownScopes {
-  export const Input = "input";
-  export const Configuration = "config";
-}
-
 /********************************************
  * Data model section (not exposed)
  ********************************************/
@@ -94,24 +88,12 @@ export class QuickScope extends DataStoreViewReadonly {
 }
 
 export abstract class DataStoreView extends DataStoreViewReadonly {
-  protected abstract get BaseUri(): string;
+  public abstract get BaseUri(): string;
 
-  abstract Write(key: string): Promise<DataHandleWrite>;
+  public abstract Write(key: string): Promise<DataHandleWrite>;
 
   public CreateScope(name: string): DataStoreView {
     return new DataStoreViewScope(name, this);
-  }
-
-  public AsFileScope(): DataStoreFileView {
-    return new DataStoreFileView(this);
-  }
-
-  public AsFileScopeReadThrough(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
-    return new DataStoreViewReadThrough(this.AsFileScope(), customUriFilter);
-  }
-
-  public AsFileScopeReadThroughFileSystem(fs: IFileSystem): DataStoreViewReadonly {
-    return new DataStoreViewReadThroughFS(this.AsFileScope(), fs);
   }
 
   public AsReadonly(): DataStoreViewReadonly {
@@ -124,29 +106,37 @@ class DataStoreViewScope extends DataStoreView {
     super();
   }
 
-  private get Prefix(): string {
-    return `${this.name}/`;
+  public get BaseUri(): string {
+    return ResolveUri(this.slave.BaseUri, `${this.name}/`);
   }
 
-  public Write(key: string): Promise<DataHandleWrite> {
-    return this.slave.Write(this.Prefix + key);
+  public Write(uri: string): Promise<DataHandleWrite> {
+    uri = ResolveUri(this.BaseUri, uri);
+    return this.slave.Write(uri);
   }
 
-  public Read(key: string): Promise<DataHandleRead> {
-    return this.slave.Read(this.Prefix + key);
+  public Read(uri: string): Promise<DataHandleRead> {
+    uri = ResolveUri(this.BaseUri, uri);
+    if (!uri.startsWith(this.BaseUri)) {
+      throw new Error(`Cannot access '${uri}' because it is out of scope.`);
+    }
+    return this.slave.Read(uri);
   }
 
   public async Enum(): Promise<string[]> {
     const parentResult = await this.slave.Enum();
     return From(parentResult)
-      .Where(key => key.startsWith(this.Prefix))
-      .Select(key => key.substr(this.Prefix.length))
+      .Select(key => ResolveUri(this.slave.BaseUri, key))
+      .Where(key => key.startsWith(this.BaseUri))
+      .Select(key => key.substr(this.BaseUri.length))
       .ToArray();
   }
 }
 
 class DataStoreViewReadThrough extends DataStoreViewReadonly {
-  constructor(private slave: DataStoreFileView, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
+  private uris: string[] = [];
+
+  constructor(private slave: DataStore, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
     super();
   }
 
@@ -165,6 +155,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
     // prope cache
     const existingData = await this.slave.Read(uri);
     if (existingData !== null) {
+      this.uris.push(uri);
       return existingData;
     }
 
@@ -172,6 +163,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
     const data = await ReadUri(uri);
     const writeHandle = await this.slave.Write(uri);
     const readHandle = await writeHandle.WriteData(data);
+    this.uris.push(uri);
     return readHandle;
   }
 
@@ -181,7 +173,9 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 }
 
 class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
-  constructor(private slave: DataStoreFileView, private fs: IFileSystem) {
+  private uris: string[] = [];
+
+  constructor(private slave: DataStore, private fs: IFileSystem) {
     super();
   }
 
@@ -195,6 +189,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
     // prope cache
     const existingData = await this.slave.Read(uri);
     if (existingData !== null) {
+      this.uris.push(uri);
       return existingData;
     }
 
@@ -209,6 +204,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
     }
     const writeHandle = await this.slave.Write(uri);
     const readHandle = await writeHandle.WriteData(data);
+    this.uris.push(uri);
     return readHandle;
   }
 
@@ -217,49 +213,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
   }
 }
 
-export class DataStoreFileView extends DataStoreView {
-  private static isUri(uri: string): boolean {
-    return /^([a-z0-9+.-]+):(?:\/\/(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(\/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(\/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$/i.test(uri);
-  }
-
-  private static EncodeUri(uri: string): string {
-    return encodeURIComponent(uri);
-  }
-
-  private static DecodeUri(encodedUri: string): string {
-    return decodeURIComponent(encodedUri);
-  }
-
-  constructor(private slave: DataStoreView) {
-    super();
-  }
-
-  public async Read(uri: string): Promise<DataHandleRead | null> {
-    if (!DataStoreFileView.isUri(uri)) {
-      throw new Error(`Provided URI '${uri}' is invalid`);
-    }
-
-    const key = DataStoreFileView.EncodeUri(uri);
-    return await this.slave.Read(key);
-  }
-
-  public async Write(uri: string): Promise<DataHandleWrite> {
-    if (!DataStoreFileView.isUri(uri)) {
-      throw new Error(`Provided URI '${uri}' is invalid`);
-    }
-
-    const key = DataStoreFileView.EncodeUri(uri);
-    return await this.slave.Write(key);
-  }
-
-  public async Enum(): Promise<string[]> {
-    const slaveResult = await this.slave.Enum();
-    return From(slaveResult).Select(DataStoreFileView.DecodeUri).ToArray();
-  }
-}
-
 export class DataStore extends DataStoreView {
-  private baseUri = "mem://";
   private store: Store = {};
 
   public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {
@@ -272,12 +226,22 @@ export class DataStore extends DataStoreView {
     }
   }
 
+  public readonly BaseUri = "mem://";
+
+  public AsFileScopeReadThrough(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
+    return new DataStoreViewReadThrough(this, customUriFilter);
+  }
+
+  public AsFileScopeReadThroughFileSystem(fs: IFileSystem): DataStoreViewReadonly {
+    return new DataStoreViewReadThroughFS(this, fs);
+  }
+
   /****************
    * Data access
    ***************/
 
   public async Write(uri: string): Promise<DataHandleWrite> {
-    uri = ResolveUri(this.baseUri, uri);
+    uri = ResolveUri(this.BaseUri, uri);
     this.ThrowIfCancelled();
     return new DataHandleWrite(uri, async (data, sourceMapFactory) => {
       this.ThrowIfCancelled();
@@ -332,7 +296,7 @@ export class DataStore extends DataStoreView {
   }
 
   public async Read(uri: string): Promise<DataHandleRead | null> {
-    uri = ResolveUri(this.baseUri, uri);
+    uri = ResolveUri(this.BaseUri, uri);
     const data = this.store[uri];
     if (!data) {
       return null;

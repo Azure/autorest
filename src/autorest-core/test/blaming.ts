@@ -1,12 +1,11 @@
-// polyfills for language support 
+// polyfills for language support
 require("../lib/polyfill.min.js");
 
-import { PumpMessagesToConsole } from './test-utility';
-import { Artifact } from '../lib/artifact';
-import { Message } from '../lib/message';
-import { AutoRest } from '../lib/autorest-core';
-import { Configuration } from '../lib/configuration';
-import { RealFileSystem } from '../lib/file-system';
+import { PumpMessagesToConsole } from "./test-utility";
+import { Artifact } from "../lib/artifact";
+import { Message } from "../lib/message";
+import { AutoRest } from "../lib/autorest-core";
+import { RealFileSystem } from "../lib/file-system";
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 

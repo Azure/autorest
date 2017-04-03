@@ -4,12 +4,8 @@ require("../lib/polyfill.min.js");
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { AutoRest } from '../lib/autorest-core';
-import { Configuration } from "../lib/configuration";
-import { DataStore } from "../lib/data-store/data-store";
+import { AutoRest } from "../lib/autorest-core";
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
-import { CreateConfiguration } from "../legacyCli";
-import { LoadLiterateSwaggers, ComposeSwaggers } from "../lib/pipeline/swagger-loader";
 
 @suite class SwaggerLoading {
   @test @timeout(0) async "external reference resolving"() {
@@ -19,7 +15,7 @@ import { LoadLiterateSwaggers, ComposeSwaggers } from "../lib/pipeline/swagger-l
 
     const swaggerFile = await LoadLiterateSwagger(
       config,
-      dataStore.CreateScope("input").AsFileScopeReadThrough(),
+      dataStore.AsFileScopeReadThrough(),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-12-01/swagger/applicationGateway.json",
       dataStore.CreateScope("work"));
     const swaggerObj = await swaggerFile.ReadObject<any>();
@@ -32,7 +28,7 @@ import { LoadLiterateSwaggers, ComposeSwaggers } from "../lib/pipeline/swagger-l
     @test @timeout(0) async "composite Swagger"() {
       const dataStore = new DataStore();
   
-      const config = await CreateConfiguration("file:///", dataStore.CreateScope("input").AsFileScopeReadThrough(),
+      const config = await CreateConfiguration("file:///", dataStore.AsFileScopeReadThrough(),
         [
           "-i", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/compositeNetworkClient.json",
           "-m", "CompositeSwagger"

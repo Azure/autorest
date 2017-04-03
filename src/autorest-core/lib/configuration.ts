@@ -1,25 +1,18 @@
-import { matches } from './ref/jsonpath';
-import { MergeOverwrite } from './source-map/merging';
-import { safeEval } from './ref/safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  DataHandleRead,
-  DataHandleWrite,
-  DataStore,
-  DataStoreFileView,
-  DataStoreViewReadonly
-} from './data-store/data-store';
-
-import { EventEmitter, IEvent } from './events';
-import { CodeBlock, Parse as ParseLiterateYaml, ParseCodeBlocks } from './parsing/literate-yaml';
-import { EnsureIsFolderUri, ResolveUri } from './ref/uri';
-import { From, Enumerable as IEnumerable } from "./ref/linq";
+import { matches } from "./ref/jsonpath";
+import { MergeOverwrite } from "./source-map/merging";
+import { safeEval } from "./ref/safe-eval";
+import { DataStore } from "./data-store/data-store";
+import { EventEmitter, IEvent } from "./events";
+import { CodeBlock, ParseCodeBlocks } from "./parsing/literate-yaml";
+import { EnsureIsFolderUri, ResolveUri } from "./ref/uri";
+import { From } from "./ref/linq";
 import { IFileSystem } from "./file-system"
-import * as Constants from './constants';
+import * as Constants from "./constants";
 import { Message } from "./message";
 import { Artifact } from "./artifact";
 import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
@@ -248,7 +241,7 @@ export class Configuration {
     if (configFileUri === null) {
       return new ConfigurationView("file:///", ...configs, defaults);
     } else {
-      const inputView = workingScope.CreateScope("input").AsFileScopeReadThroughFileSystem(this.fileSystem as IFileSystem);
+      const inputView = workingScope.AsFileScopeReadThroughFileSystem(this.fileSystem as IFileSystem);
 
       // load config
       const hConfig = await ParseCodeBlocks(

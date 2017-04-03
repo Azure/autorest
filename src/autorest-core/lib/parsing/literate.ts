@@ -11,7 +11,7 @@ export async function Parse(hConfigFile: DataHandleRead, intermediateScope: Data
   const result: { data: DataHandleRead, codeBlock: commonmark.Node }[] = [];
   const rawMarkdown = await hConfigFile.ReadData();
   for (const codeBlock of ParseCodeblocks(rawMarkdown)) {
-    const codeBlockKey = `${hConfigFile.key}_codeBlock_${codeBlock.sourcepos[0][0]}`;
+    const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;
 
     const data = codeBlock.literal;
     const mappings = GetSourceMapForCodeBlock(hConfigFile.key, codeBlock);

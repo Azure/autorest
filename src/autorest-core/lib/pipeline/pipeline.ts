@@ -15,10 +15,7 @@ import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
 import { GetFilename, ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
 import {
-  DataHandleRead,
-  DataStore,
-  DataStoreViewReadonly,
-  KnownScopes
+  DataHandleRead
 } from "../data-store/data-store";
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
@@ -56,7 +53,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   const swaggers = await LoadLiterateSwaggers(
     config,
-    config.DataStore.CreateScope(KnownScopes.Input).AsFileScopeReadThroughFileSystem(fileSystem),
+    config.DataStore.AsFileScopeReadThroughFileSystem(fileSystem),
     inputs, config.DataStore.CreateScope("loader"));
   // const rawSwaggers = await Promise.all(swaggers.map(async x => { return <Artifact>{ uri: x.key, content: await x.ReadData() }; }));
 
