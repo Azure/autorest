@@ -204,7 +204,7 @@ function getArrayValues<T>(obj: ObjectWithPath<T[]>): ObjectWithPath<T>[] {
   return o.map((x, i) => { return { obj: x, path: obj.path.concat([i]) }; });
 }
 
-export async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[], workingScope: DataStoreView, azureMode: boolean): Promise<DataHandleRead> {
+export async function ComposeSwaggers(config: ConfigurationView, infoSection: any, inputSwaggers: DataHandleRead[], workingScope: DataStoreView, azureMode: boolean): Promise<DataHandleRead> {
   if (azureMode) {
     // prepare component Swaggers (override info, lift version param, ...)
     for (let i = 0; i < inputSwaggers.length; ++i) {
@@ -295,7 +295,7 @@ export async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandl
   }
 
   const hwSwagger = await workingScope.Write("swagger.yaml");
-  let hSwagger = await MergeYamls(inputSwaggers, hwSwagger);
+  let hSwagger = await MergeYamls(config, inputSwaggers, hwSwagger);
 
   // custom info section
   if (infoSection) {
@@ -303,7 +303,7 @@ export async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandl
     const hInfo = await hwInfo.WriteObject({ info: infoSection });
 
     const hwSwagger = await workingScope.Write("swagger_customInfo.yaml");
-    hSwagger = await MergeYamls([hSwagger, hInfo], hwSwagger);
+    hSwagger = await MergeYamls(config, [hSwagger, hInfo], hwSwagger);
   }
 
   return hSwagger;

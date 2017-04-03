@@ -133,7 +133,7 @@ export async function ParseCodeBlocks(config: ConfigurationView | null, literate
 async function ParseInternal(config: ConfigurationView | null, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
   // merge the parsed codeblocks
   const blocks = (await ParseCodeBlocksInternal(config, hLiterate, hResult, intermediateScope)).map(each => each.data);
-  return await MergeYamls(blocks, hResult);
+  return await MergeYamls(config, blocks, hResult);
 }
 
 

@@ -66,7 +66,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // compose Swaggers
   let swagger = config.GetEntry("override-info") || swaggers.length !== 1
-    ? await ComposeSwaggers(config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
+    ? await ComposeSwaggers(config, config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
     : swaggers[0];
   const rawSwagger = await swagger.ReadObject<any>();
 

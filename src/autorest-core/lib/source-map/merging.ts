@@ -1,8 +1,11 @@
+import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
+import { IndexToPosition } from '../parsing/text-utility';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ConfigurationView } from "../autorest-core";
 import { From } from "../ref/linq";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import * as yaml from "../ref/yaml";
@@ -117,14 +120,25 @@ export function* IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst
   }
 }
 
-export async function MergeYamls(yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
+export async function MergeYamls(config: ConfigurationView | null, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
   const mappings: Mappings[] = [];
+  const outstanding = new OutstandingTaskAwaiter();
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = await yamlInputHandle.ReadData();
-    resultObject = Merge(resultObject, yaml.Parse(rawYaml));
+    resultObject = Merge(resultObject, yaml.Parse(rawYaml, async (message, index) => {
+      outstanding.Enter();
+      if (config) {
+        config.Error.Dispatch({
+          Text: message,
+          Source: [{ document: yamlInputHandle.key, Position: await IndexToPosition(yamlInputHandle, index) }]
+        });
+      }
+      outstanding.Exit();
+    }) || {});
     mappings.push(IdentitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
   }
+  outstanding.Wait();
 
   const resultObjectRaw = yaml.Stringify(resultObject);
   return await yamlOutputHandle.WriteData(resultObjectRaw, From(mappings).SelectMany(x => x), yamlInputHandles);
