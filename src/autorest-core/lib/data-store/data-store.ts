@@ -214,6 +214,8 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
 }
 
 export class DataStore extends DataStoreView {
+  public static readonly BaseUri = "mem://";
+  public readonly BaseUri = DataStore.BaseUri;
   private store: Store = {};
 
   public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {
@@ -226,13 +228,11 @@ export class DataStore extends DataStoreView {
     }
   }
 
-  public readonly BaseUri = "mem://";
-
-  public AsFileScopeReadThrough(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
+  public GetReadThroughScope(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
     return new DataStoreViewReadThrough(this, customUriFilter);
   }
 
-  public AsFileScopeReadThroughFileSystem(fs: IFileSystem): DataStoreViewReadonly {
+  public GetReadThroughScopeFileSystem(fs: IFileSystem): DataStoreViewReadonly {
     return new DataStoreViewReadThroughFS(this, fs);
   }
 

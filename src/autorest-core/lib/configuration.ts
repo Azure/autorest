@@ -241,7 +241,7 @@ export class Configuration {
     if (configFileUri === null) {
       return new ConfigurationView("file:///", ...configs, defaults);
     } else {
-      const inputView = workingScope.AsFileScopeReadThroughFileSystem(this.fileSystem as IFileSystem);
+      const inputView = workingScope.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
 
       // load config
       const hConfig = await ParseCodeBlocks(

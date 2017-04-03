@@ -1,3 +1,4 @@
+import { IsUri } from '../ref/uri';
 import { JsonPath } from '../ref/jsonpath';
 import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from './source-map';
 /*---------------------------------------------------------------------------------------------
@@ -32,12 +33,12 @@ export class BlameTree {
 
   public * BlameInputs(): Iterable<sourceMap.MappedPosition> {
     // report self
-    if (this.node.source.startsWith("input/")) {
+    if (IsUri(this.node.source) && !this.node.source.startsWith(DataStore.BaseUri)) {
       yield {
         column: this.node.column,
         line: this.node.line,
         name: this.node.name,
-        source: decodeURIComponent(this.node.source.slice(6))
+        source: this.node.source
       };
     }
     // recurse

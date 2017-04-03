@@ -15,7 +15,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
     const swaggerFile = await LoadLiterateSwagger(
       config,
-      dataStore.AsFileScopeReadThrough(),
+      dataStore.GetReadThroughScope(),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-12-01/swagger/applicationGateway.json",
       dataStore.CreateScope("work"));
     const swaggerObj = await swaggerFile.ReadObject<any>();
@@ -38,7 +38,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       // load Swaggers
       const configMgr = await  Configuration.Create("file:///config.yaml",config )
       const swaggers = await LoadLiterateSwaggers(
-        dataStore.CreateScope("input").AsFileScopeReadThrough(),
+        dataStore.AsFileScopeReadThrough(),
         configMgr.inputFileUris, dataStore.CreateScope("loader"));
   
       // compose Swaggers
