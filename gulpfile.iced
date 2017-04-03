@@ -171,3 +171,24 @@ task 'init', "" ,(done)->
       next null
 
   return null
+
+task 'find-rogue-node-modules','Shows the unrecognized node_modules folders in the source tree', ->
+  source ["**/node_modules", 
+    "!node_modules"
+    "!node_modules/**"
+    "!src/autorest/node_modules"
+    "!src/autorest/node_modules/**"
+    "!src/autorest-core/node_modules"
+    "!src/autorest-core/node_modules/**"
+    "!src/vscode-autorest/node_modules"
+    "!src/vscode-autorest/node_modules/**"
+    "!src/generator/AutoRest.NodeJS.Azure.Tests/node_modules"
+    "!src/generator/AutoRest.NodeJS.Azure.Tests/node_modules/**"
+    "!src/generator/AutoRest.NodeJS.Tests/node_modules"
+    "!src/generator/AutoRest.NodeJS.Tests/node_modules/**"
+    "!src/dev/TestServer/server/node_modules"
+    "!src/dev/TestServer/server/node_modules/**"
+    "!src/core/AutoRest/**"
+  ]
+    .pipe showFiles()
+  
