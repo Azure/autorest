@@ -3,6 +3,7 @@ global.basefolder = "#{__dirname}"
 
 # use our tweaked version of gulp with iced coffee.
 require './src/gulp_modules/gulp.iced'
+semver = require 'semver'
 
 # tasks required for this build 
 Tasks "dotnet",  # compiling dotnet
@@ -126,6 +127,8 @@ task 'autorest', 'Runs AutoRest', (done)->
     Fail "You must run #{ info 'gulp build'}' first"
 
 task 'init', "" ,(done)->
+  Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 6.9.5" if semver.lt( process.versions.node , "6.9.5" )
+
   return done() if initialized
   global.initialized = true
   # if the node_modules isn't created, do it.
