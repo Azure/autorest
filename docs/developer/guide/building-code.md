@@ -143,7 +143,7 @@ To make sure you've set up all the prerequisites correctly, run `.\Tools\Verify-
 ### Visual Studio Build
 AutoRest.sln is used to build AutoRest code generator.
 
-###Command Line
+### Command Line
 We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
 
 >npm install gulp -g
@@ -211,13 +211,13 @@ You can run (and debug) AutoRest by providing the command line parameters in the
 
 #### Troubleshooting
 
-#####If the task runner window in Visual Studio does not show any tasks
+##### If the task runner window in Visual Studio does not show any tasks
 Make sure that you have run `npm install` in the root folder.
 
-#####If `AutoRest.exe` complains about not having generators for each language
+##### If `AutoRest.exe` complains about not having generators for each language
 Make sure that you have built the entire `AutoRest.sln` solution.
 
-#####If you see the error `gulp is not recognized as an internal or external command`
+##### If you see the error `gulp is not recognized as an internal or external command`
 `gulp` is located at `C:\Users\[user]\AppData\Roaming\npm\gulp` in Windows after you install it globally.
 
 # Releasing AutoRest
