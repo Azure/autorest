@@ -64,6 +64,8 @@ import { Message, Channel } from "../lib/message";
         assert.notEqual(messages.length, 0);
         assert.notEqual(messages.length, numWarningsRef);
 
+        // console.log(directive, messages.length);
+
         dispose();
       }
     };
@@ -73,7 +75,17 @@ import { Message, Channel } from "../lib/message";
     // certain paths
     await pickyRun({ suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"], where: "$..properties" });
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties" });
-    // // document
+    // multiple directives
+    await pickyRun([{ suppress: ["AvoidNestedProperties"], where: "$..properties.properties" }]);
+    await pickyRun([
+      { suppress: ["AvoidNestedProperties"] },
+      { suppress: ["ModelTypeIncomplete"] }
+    ]);
+    await pickyRun([
+      { suppress: ["DescriptionMissing"] },
+      { suppress: ["ModelTypeIncomplete"] }
+    ]);
+    // document
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties", from: "swagger.md" });
   }
 
