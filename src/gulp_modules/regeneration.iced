@@ -11,37 +11,44 @@ regenExpected = (opts,done) ->
     instances++
 
     optsMappingsValue = opts.mappings[key]
-    swaggerFile = if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue
+    swaggerFiles = (if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue).split(";")
     args = [
-      '-FANCY',
-      '-SkipValidation',
-      '-CodeGenerator', opts.codeGenerator,
-      '-OutputDirectory', "#{outputDir}/#{key}",
-      '-Input', (if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile),
-      '-Header', (if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION')      
+      '--skip-validation=true',
+      "--#{opts.language}",
+      "--output-folder=#{outputDir}/#{key}",
+      "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}"
     ]
 
-    if (opts.modeler)
-      args.push('-Modeler')
-      args.push(opts.modeler)
+    for swaggerFile in swaggerFiles
+      args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
 
     if (opts.addCredentials)
-      args.push('-AddCredentials')
+      args.push('--add-credentials=true')
+
+    if (opts.azureArm)
+      args.push('--azure-arm=true')
+
+    if (opts.fluent)
+      args.push('--fluent=true')
     
     if (opts.syncMethods)
-      args.push('-SyncMethods')
-      args.push(opts.syncMethods)
+      args.push("--sync-methods=#{opts.syncMethods}")
     
     if (opts.flatteningThreshold)
-      args.push('-PayloadFlatteningThreshold')
-      args.push(opts.flatteningThreshold)
+      args.push("--payload-flattening-threshold=#{opts.flatteningThreshold}")
 
     if (!!opts.nsPrefix)
-      args.push('-Namespace')
       if (optsMappingsValue instanceof Array && optsMappingsValue[1] != undefined)
-        args.push(optsMappingsValue[1])
+        args.push("--namespace=#{optsMappingsValue[1]}")
       else
-        args.push([opts.nsPrefix, key.replace(/\/|\./, '')].join('.'))
+        args.push("--namespace=#{[opts.nsPrefix, key.replace(/\/|\./, '')].join('.')}")
+
+    if (opts['override-info.version'])
+      args.push("--override-info.version=#{opts['override-info.version']}")
+    if (opts['override-info.title'])
+      args.push("--override-info.title=#{opts['override-info.title']}")
+    if (opts['override-info.description'])
+      args.push("--override-info.description=#{opts['override-info.description']}")
 
     autorest args,() =>
       instances = instances- 1
@@ -144,11 +151,11 @@ defaultAzureMappings = {
 }
 
 compositeMappings = {
-  'AcceptanceTests/CompositeBoolIntClient': 'composite-swagger.json'
+  'AcceptanceTests/CompositeBoolIntClient': 'body-boolean.json;body-integer.json'
 }
 
 azureCompositeMappings = {
-  'AcceptanceTests/AzureCompositeModelClient': 'azure-composite-swagger.json'
+  'AcceptanceTests/AzureCompositeModelClient': 'complex-model.json;body-complex.json'
 }
 
 nodeAzureMappings = {
@@ -186,9 +193,11 @@ task 'regenerate-nodecomposite', '', (done) ->
     'mappings': compositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
-    'codeGenerator': 'NodeJS',
+    'language': 'nodejs',
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'override-info.title': "Composite Bool Int",
+    'override-info.description': "Composite Swagger Client that represents merging body boolean and body integer swagger clients"
   },done
   return null
 
@@ -199,9 +208,13 @@ task 'regenerate-nodeazurecomposite', '', (done) ->
     'mappings': azureCompositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.NodeJS',
+    'language': 'nodejs',
+    'azureArm': true,
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'override-info.version': "1.0.0",
+    'override-info.title': "Azure Composite Model",
+    'override-info.description': "Composite Swagger Client that represents merging body complex and complex model swagger clients"
   },done
   return null
 
@@ -213,7 +226,8 @@ task 'regenerate-nodeazure', '', ['regenerate-nodeazurecomposite'], (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': nodeAzureMappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.NodeJS',
+    'language': 'nodejs',
+    'azureArm': true,
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
   },done
@@ -227,7 +241,7 @@ task 'regenerate-node', '', ['regenerate-nodecomposite'], (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': nodeMappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'NodeJS',
+    'language': 'nodejs',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
   },done
@@ -243,7 +257,7 @@ task 'regenerate-python', '', (done) ->
     'mappings': mappings,
     'nsPrefix': "Fixtures"
     'outputDir': 'Expected',
-    'codeGenerator': 'Python',
+    'language': 'python',
     'flatteningThreshold': '1'
   },done
   return null
@@ -259,7 +273,8 @@ task 'regenerate-pythonazure', '', (done) ->
     'mappings': mappings,
     'nsPrefix': "Fixtures"
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.Python',
+    'language': 'python',
+    'azureArm': true,
     'flatteningThreshold': '1'
   },done
   return null
@@ -270,7 +285,8 @@ task 'regenerate-rubyazure', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': rubyAzureMappings,
     'outputDir': 'RspecTests/Generated',
-    'codeGenerator': 'Azure.Ruby',
+    'language': 'ruby',
+    'azureArm': true,
     'nsPrefix': 'MyNamespace'
   },done
   return null
@@ -281,7 +297,7 @@ task 'regenerate-ruby', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': rubyMappings,
     'outputDir': 'RspecTests/Generated',
-    'codeGenerator': 'Ruby',
+    'language': 'ruby',
     'nsPrefix': 'MyNamespace'
   },done
   return null
@@ -295,7 +311,8 @@ task 'regenerate-javaazure', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'src/main/java/fixtures',
-    'codeGenerator': 'Azure.Java',
+    'language': 'java',
+    'azureArm': true,
     'nsPrefix': 'Fixtures'
   },done
   return null
@@ -309,7 +326,9 @@ task 'regenerate-javaazurefluent', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'src/main/java/fixtures',
-    'codeGenerator': 'Azure.Java.Fluent',
+    'language': 'java',
+    'azureArm': true,
+    'fluent': true,
     'nsPrefix': 'Fixtures'
   },done
   return null
@@ -323,7 +342,7 @@ task 'regenerate-java', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'src/main/java/fixtures',
-    'codeGenerator': 'Java',
+    'language': 'java',
     'nsPrefix': 'Fixtures'
   },done
   return null
@@ -337,7 +356,8 @@ task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazur
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.CSharp',
+    'language': 'csharp',
+    'azureArm': true,
     'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1'
   },done
@@ -352,7 +372,9 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.CSharp.Fluent',
+    'language': 'csharp',
+    'azureArm': true,
+    'fluent': true,
     'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1'
   },done
@@ -374,7 +396,7 @@ task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', '
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'CSharp',
+    'language': 'csharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
   },done
@@ -389,7 +411,7 @@ task 'regenerate-cswithcreds', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'CSharp',
+    'language': 'csharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'addCredentials': true
@@ -405,7 +427,7 @@ task 'regenerate-csallsync', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'CSharp',
+    'language': 'csharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
@@ -421,7 +443,7 @@ task 'regenerate-csnosync', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'CSharp',
+    'language': 'csharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'none'
@@ -437,7 +459,8 @@ task 'regenerate-csazureallsync', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.CSharp',
+    'language': 'csharp',
+    'azureArm': true,
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
@@ -453,7 +476,9 @@ task 'regenerate-csazurefluentallsync', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.CSharp.Fluent',
+    'language': 'csharp',
+    'azureArm': true,
+    'fluent': true,
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
@@ -469,7 +494,8 @@ task 'regenerate-csazurenosync', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.CSharp',
+    'language': 'csharp',
+    'azureArm': true,
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'none'
@@ -485,7 +511,9 @@ task 'regenerate-csazurefluentnosync', '', (done) ->
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.CSharp.Fluent',
+    'language': 'csharp',
+    'azureArm': true,
+    'fluent': true,
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'none'
@@ -499,9 +527,11 @@ task 'regenerate-cscomposite', '', (done) ->
     'mappings': compositeMappings,
     'modeler' : 'CompositeSwagger',
     'outputDir': 'Expected',
-    'codeGenerator': 'CSharp',
+    'language': 'csharp',
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'override-info.title': "Composite Bool Int",
+    'override-info.description': "Composite Swagger Client that represents merging body boolean and body integer swagger clients"
   },done
   return null
 
@@ -512,9 +542,13 @@ task 'regenerate-csazurecomposite', '', (done) ->
     'mappings': azureCompositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.CSharp',
+    'language': 'csharp',
+    'azureArm': true,
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'override-info.version': "1.0.0",
+    'override-info.title': "Azure Composite Model",
+    'override-info.description': "Composite Swagger Client that represents merging body complex and complex model swagger clients"
   },done
   return null
 
@@ -525,9 +559,14 @@ task 'regenerate-csazurefluentcomposite', '', (done) ->
     'mappings': azureCompositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
-    'codeGenerator': 'Azure.CSharp.Fluent',
+    'language': 'csharp',
+    'azureArm': true,
+    'fluent': true,
     'nsPrefix': 'Fixtures',
-    'flatteningThreshold': '1'
+    'flatteningThreshold': '1',
+    'override-info.version': "1.0.0",
+    'override-info.title': "Azure Composite Model",
+    'override-info.description': "Composite Swagger Client that represents merging body complex and complex model swagger clients"
   },done
   return null
 
@@ -538,7 +577,7 @@ task 'regenerate-go', '', (done) ->
     'mappings': goMappings,
     'outputDir': 'src/tests/generated',
     'nsPrefix': ' ',
-    'codeGenerator': 'Go'
+    'language': 'go'
   },done
   return null
 
@@ -589,62 +628,65 @@ task 'regenerate-ars', '', (done) ->
       'Web/2015-08-01':'Web/2015-08-01/web.json'
     },
     'outputDir': 'Resource/Expected',
-    'codeGenerator': 'AzureResourceSchema'
+    'language': 'azureresourceschema'
   },done
   return null
 
-languages = [
-  "CSharp",
-  "Azure.CSharp",
-  "Ruby",
-  "Azure.Ruby",
-  "NodeJS",
-  "Azure.NodeJS",
-  "Python",
-  "Azure.Python",
-  "Go",
-  "Java",
-  "Azure.Java",
-  "Azure.Java.Fluent",
-  "AzureResourceSchema",
-  "Azure.CSharp.Fluent"]
-
-task 'regenerate-samples', '', ['regenerate-samplesazure'],(done) ->
+task 'regenerate-samples', '', ['regenerate-samplesazure', 'regenerate-samplesazurefluent'],(done) ->
   count = 0
-  for lang in languages
-    if (!lang.match(/^Azure\..+/))
-      count++
-      regenExpected {
-        'modeler': 'Swagger',
-        'header': 'NONE',
-        'outputBaseDir': "#{basefolder}/Samples/petstore/#{lang}",
-        'inputBaseDir': 'Samples',
-        'mappings': { '': ['petstore/petstore.json', 'Petstore'] },
-        'nsPrefix': "Petstore",
-        'outputDir': "",
-        'codeGenerator': lang
-      }, () => 
-        count = count - 1
-        return done() if count is 0
+  for lang in ['CSharp', 'Java', 'Python', 'NodeJS', 'Ruby', 'Go', 'AzureResourceSchema']
+    count++
+    regenExpected {
+      'modeler': 'Swagger',
+      'header': 'NONE',
+      'outputBaseDir': "#{basefolder}/Samples/petstore/#{lang}",
+      'inputBaseDir': 'Samples',
+      'mappings': { '': ['petstore/petstore.json', 'Petstore'] },
+      'nsPrefix': "Petstore",
+      'outputDir': "",
+      'language': lang.toLowerCase()
+    }, () => 
+      count = count - 1
+      return done() if count is 0
   return null
 
 task 'regenerate-samplesazure', '', (done) ->
   count = 0
-  for lang in languages
-    if (lang.match(/^Azure\.[^.]+$/))
-      count++
-      regenExpected {
-        'modeler': 'Swagger',
-        'header': 'NONE',
-        'outputBaseDir': "#{basefolder}/Samples/azure-storage/#{lang}",
-        'inputBaseDir': 'Samples',
-        'mappings': { '': ['azure-storage/azure-storage.json', 'Petstore'] },
-        'nsPrefix': "Petstore",
-        'outputDir': "",
-        'codeGenerator': lang
-      },() => 
-        count = count - 1
-        return done() if count is 0 
+  for lang in ['CSharp', 'Java', 'Python', 'NodeJS', 'Ruby']
+    count++
+    regenExpected {
+      'modeler': 'Swagger',
+      'header': 'NONE',
+      'outputBaseDir': "#{basefolder}/Samples/azure-storage/Azure.#{lang}",
+      'inputBaseDir': 'Samples',
+      'mappings': { '': ['azure-storage/azure-storage.json', 'Petstore'] },
+      'nsPrefix': "Petstore",
+      'outputDir': "",
+      'azureArm': true,
+      'language': lang.toLowerCase()
+    },() => 
+      count = count - 1
+      return done() if count is 0 
+  return null
+
+task 'regenerate-samplesazurefluent', '', (done) ->
+  count = 0
+  for lang in ['CSharp', 'Java']
+    count++
+    regenExpected {
+      'modeler': 'Swagger',
+      'header': 'NONE',
+      'outputBaseDir': "#{basefolder}/Samples/azure-storage/Azure.#{lang}.Fluent",
+      'inputBaseDir': 'Samples',
+      'mappings': { '': ['azure-storage/azure-storage.json', 'Petstore'] },
+      'nsPrefix': "Petstore",
+      'outputDir': "",
+      'azureArm': true,
+      'fluent': true,
+      'language': lang.toLowerCase()
+    },() => 
+      count = count - 1
+      return done() if count is 0 
   return null
 
 

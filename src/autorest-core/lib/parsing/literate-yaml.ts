@@ -7,10 +7,11 @@ import { Descendants, Kind, CloneAst, YAMLMapping, newScalar, ParseNode } from "
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 import { Mapping } from "../ref/source-map";
 import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
-import { Parse as parseLiterate } from "./literate";
+import { Parse as ParseLiterate } from "./literate";
 import { Lines } from "./text-utility";
 import { ConfigurationView } from '../autorest-core';
 import { Channel, Message, SourceLocation } from '../message';
+import { safeEval } from "../ref/safe-eval";
 
 export class CodeBlock {
   info: string | null;
@@ -65,7 +66,9 @@ function CommonmarkHeadingText(headingNode: commonmark.Node): string {
 function CommonmarkHeadingFollowingText(rawMarkdown: string, headingNode: commonmark.Node): [number, number] {
   let subNode = headingNode.next;
   const startPos = subNode.sourcepos[0];
-  while (subNode.next && subNode.next.type !== "code_block" && subNode.next.type !== commonmarkHeadingNodeType) {
+  while (subNode.next
+    && subNode.next.type !== "code_block"
+    && (subNode.next.type !== commonmarkHeadingNodeType || subNode.next.level > headingNode.level)) {
     subNode = subNode.next;
   }
   const endPos = subNode.sourcepos[1];
@@ -133,30 +136,33 @@ export async function ParseCodeBlocks(config: ConfigurationView | null, literate
 async function ParseInternal(config: ConfigurationView | null, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
   // merge the parsed codeblocks
   const blocks = (await ParseCodeBlocksInternal(config, hLiterate, hResult, intermediateScope)).map(each => each.data);
-  return await MergeYamls(blocks, hResult);
+  return await MergeYamls(config, blocks, hResult);
 }
 
 
 async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<CodeBlock[]> {
   let hsConfigFileBlocks: CodeBlock[] = [];
 
-  const rawMarkdown = await hLiterate.ReadData();
+  const rawMarkdown = hLiterate.ReadData();
 
   // try parsing as literate YAML
   if (TryMarkdown(rawMarkdown)) {
     const scopeRawCodeBlocks = intermediateScope.CreateScope("raw");
     const scopeEnlightenedCodeBlocks = intermediateScope.CreateScope("enlightened");
-    const hsConfigFileBlocksWithContext = await parseLiterate(hLiterate, scopeRawCodeBlocks);
+    const hsConfigFileBlocksWithContext = await ParseLiterate(hLiterate, scopeRawCodeBlocks);
 
     // resolve md documentation (ALPHA)
     let codeBlockIndex = 0;
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
-      ++codeBlockIndex;
+      // only consider YAML/JSON blocks
+      if (!/^(yaml|json)/i.test(codeBlock.info)) {
+        continue;
+      }
 
       const deferredErrors: Message[] = []; // ...because the file we wanna blame is not yet written
 
-      const yamlAst = CloneAst(await data.ReadYamlAst());
-      let mapping: Mapping[] = [];
+      const yamlAst = CloneAst(data.ReadYamlAst());
+      const mapping: Mapping[] = [];
       for (const { path, node } of Descendants(yamlAst)) {
         // RESOLVE MARKDOWN INTO THE YAML
         if ((path[path.length - 1] === "description" || path[path.length - 1] === "summary") && node.kind === Kind.SEQ) {
@@ -195,8 +201,8 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLitera
 
       // detect changes. If any, remap, otherwise forward data
       if (mapping.length > 0) {
-        mapping = mapping.concat([...IdentitySourceMapping(data.key, yamlAst)]);
-        const hTarget = await scopeEnlightenedCodeBlocks.Write(`${codeBlockIndex}.yaml`);
+        mapping.push(...IdentitySourceMapping(data.key, yamlAst));
+        const hTarget = await scopeEnlightenedCodeBlocks.Write(`${++codeBlockIndex}.yaml`);
         hsConfigFileBlocks.push({ info: codeBlock.info, data: await hTarget.WriteObject(ParseNode(yamlAst), mapping, [hLiterate, data]) });
         outputKey = hTarget.key;
       } else {
@@ -217,4 +223,24 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLitera
   }
 
   return hsConfigFileBlocks;
+}
+
+export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolean {
+  const match = /\$\((.*)\)/.exec(rawFenceGuard);
+  const guardExpression = match && match[1];
+  if (!guardExpression) {
+    return true;
+  }
+  const context = Object.assign({ $: contextObject }, contextObject);
+  let guardResult = false;
+  try {
+    guardResult = safeEval<boolean>(guardExpression, context);
+  } catch (e) {
+    try {
+      guardResult = safeEval<boolean>("$['" + guardExpression + "']", context);
+    } catch (e) {
+      console.error(`Could not evaulate guard expression '${guardExpression}'.`);
+    }
+  }
+  return guardResult;
 }

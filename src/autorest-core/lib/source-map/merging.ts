@@ -1,12 +1,15 @@
+import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
+import { IndexToPosition } from '../parsing/text-utility';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ConfigurationView } from "../autorest-core";
 import { From } from "../ref/linq";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import * as yaml from "../ref/yaml";
-import { Mappings } from "../ref/source-map";
+import { Mapping, Mappings } from '../ref/source-map';
 import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
 
 // TODO: may want ASTy merge! (keeping circular structure and such?)
@@ -104,28 +107,37 @@ export function MergeOverwrite(a: any, b: any, concatListPathFilter: (path: Json
   return result;
 }
 
-export function* IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Mappings {
+export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Mappings {
+  const result: Mappings = [];
   const descendantsWithPath = yaml.Descendants(sourceYamlAst);
   for (const descendantWithPath of descendantsWithPath) {
     const descendantPath = descendantWithPath.path;
-    yield {
+    result.push({
       generated: { path: descendantPath },
       original: { path: descendantPath },
       name: stringify(descendantPath),
       source: sourceYamlFileName
-    };
+    });
   }
+  return result;
 }
 
-export async function MergeYamls(yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
+export async function MergeYamls(config: ConfigurationView | null, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
-  const mappings: Mappings[] = [];
+  const mappings: Mappings = [];
   for (const yamlInputHandle of yamlInputHandles) {
-    const rawYaml = await yamlInputHandle.ReadData();
-    resultObject = Merge(resultObject, yaml.Parse(rawYaml));
-    mappings.push(IdentitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
+    const rawYaml = yamlInputHandle.ReadData();
+    resultObject = Merge(resultObject, yaml.Parse(rawYaml, (message, index) => {
+      if (config) {
+        config.Error.Dispatch({
+          Text: message,
+          Source: [{ document: yamlInputHandle.key, Position: IndexToPosition(yamlInputHandle, index) }]
+        });
+      }
+    }) || {});
+    mappings.push(...IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
   }
 
   const resultObjectRaw = yaml.Stringify(resultObject);
-  return await yamlOutputHandle.WriteData(resultObjectRaw, From(mappings).SelectMany(x => x), yamlInputHandles);
+  return await yamlOutputHandle.WriteData(resultObjectRaw, mappings, yamlInputHandles);
 }

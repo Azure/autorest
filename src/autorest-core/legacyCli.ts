@@ -16,7 +16,7 @@ export function isLegacy(args: string[]): boolean {
 
 async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: string, targetConfig: AutoRestConfigurationImpl): Promise<void> {
   const compositeSwaggerFile = await inputScope.ReadStrict(uri);
-  const data = await compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
+  const data = compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
   const documents = data.documents;
   targetConfig["input-file"] = documents.map(d => ResolveUri(uri, d));
 
@@ -76,11 +76,11 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   result["payload-flattening-threshold"] = parseInt(switches["fs"] || switches["payloadflatteningthreshold"] || "0");
 
-  result["sync-methods"] = <any>switches["syncmethods"] || null;
+  result["sync-methods"] = <any>switches["syncmethods"] || undefined;
 
   result["add-credentials"] = switches["addcredentials"] === null || ((switches["addcredentials"] + "").toLowerCase() === "true");
 
-  if (usedCodeGenerator === "ruby") {
+  if (usedCodeGenerator === "ruby" || usedCodeGenerator === "python") {
     result["package-name"] = GetFilenameWithoutExtension(inputFile).replace(/[^a-zA-Z0-9-_]/g, "").replace(/-/g, '_').replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
   }
 

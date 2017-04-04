@@ -6,22 +6,16 @@
 import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
-import { ReadUri, ResolveUri, WriteString } from "../ref/uri";
+import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from '../ref/uri';
 import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../ref/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
 import { BlameTree } from "../source-map/blaming";
-import { Lazy } from "../lazy";
+import { Lazy, LazyPromise } from '../lazy';
 import { IFileSystem } from "../file-system";
 
 export const helloworld = "hi"; // TODO: wat?
-
-/* @internal */
-export module KnownScopes {
-  export const Input = "input";
-  export const Configuration = "config";
-}
 
 /********************************************
  * Data model section (not exposed)
@@ -40,7 +34,7 @@ interface Data {
   metadata: Metadata;
 }
 
-type Store = { [key: string]: Data };
+type Store = { [uri: string]: Data };
 
 
 /********************************************
@@ -50,27 +44,27 @@ type Store = { [key: string]: Data };
  ********************************************/
 
 export abstract class DataStoreViewReadonly {
-  abstract Enum(): Promise<string[]>;
-  abstract Enum(prefix: string): Promise<string[]>;
-  abstract Read(key: string): Promise<DataHandleRead | null>;
+  public abstract Enum(): Promise<string[]>;
+  public abstract Read(uri: string): Promise<DataHandleRead | null>;
 
-  public async ReadStrict(key: string): Promise<DataHandleRead> {
-    const result = await this.Read(key);
+  public async ReadStrict(uri: string): Promise<DataHandleRead> {
+    const result = await this.Read(uri);
     if (result === null) {
-      throw new Error(`Failed to read '${key}'. Key not found.`);
+      throw new Error(`Failed to read '${uri}'. Key not found.`);
     }
     return result;
   }
 
   public async Dump(targetDirUri: string): Promise<void> {
+    targetDirUri = EnsureIsFolderUri(targetDirUri);
     const keys = await this.Enum();
     for (const key of keys) {
       const dataHandle = await this.ReadStrict(key);
-      const data = await dataHandle.ReadData();
-      const metadata = await dataHandle.ReadMetadata();
+      const data = dataHandle.ReadData();
+      const metadata = dataHandle.ReadMetadata();
       const targetFileUri = ResolveUri(
-        targetDirUri.replace(/\/$/g, "") + "/",
-        key.replace(/%3A/g, "")); // bug: ResolveUri (or rather its internals) unescape "%3A" to ":"
+        targetDirUri,
+        key.replace(":", "")); // make key (URI) a descriptive relative path
       await WriteString(targetFileUri, data);
       await WriteString(targetFileUri + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
       await WriteString(targetFileUri + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
@@ -94,22 +88,12 @@ export class QuickScope extends DataStoreViewReadonly {
 }
 
 export abstract class DataStoreView extends DataStoreViewReadonly {
-  abstract Write(key: string): Promise<DataHandleWrite>;
+  public abstract get BaseUri(): string;
+
+  public abstract Write(key: string): Promise<DataHandleWrite>;
 
   public CreateScope(name: string): DataStoreView {
     return new DataStoreViewScope(name, this);
-  }
-
-  public AsFileScope(): DataStoreFileView {
-    return new DataStoreFileView(this);
-  }
-
-  public AsFileScopeReadThrough(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
-    return new DataStoreViewReadThrough(this.AsFileScope(), customUriFilter);
-  }
-
-  public AsFileScopeReadThroughFileSystem(fs: IFileSystem): DataStoreViewReadonly {
-    return new DataStoreViewReadThroughFS(this.AsFileScope(), fs);
   }
 
   public AsReadonly(): DataStoreViewReadonly {
@@ -122,29 +106,37 @@ class DataStoreViewScope extends DataStoreView {
     super();
   }
 
-  private get Prefix(): string {
-    return `${this.name}/`;
+  public get BaseUri(): string {
+    return ResolveUri(this.slave.BaseUri, `${this.name}/`);
   }
 
-  public Write(key: string): Promise<DataHandleWrite> {
-    return this.slave.Write(this.Prefix + key);
+  public Write(uri: string): Promise<DataHandleWrite> {
+    uri = ResolveUri(this.BaseUri, uri);
+    return this.slave.Write(uri);
   }
 
-  public Read(key: string): Promise<DataHandleRead> {
-    return this.slave.Read(this.Prefix + key);
+  public Read(uri: string): Promise<DataHandleRead> {
+    uri = ResolveUri(this.BaseUri, uri);
+    if (!uri.startsWith(this.BaseUri)) {
+      throw new Error(`Cannot access '${uri}' because it is out of scope.`);
+    }
+    return this.slave.Read(uri);
   }
 
   public async Enum(): Promise<string[]> {
     const parentResult = await this.slave.Enum();
     return From(parentResult)
-      .Where(key => key.startsWith(this.Prefix))
-      .Select(key => key.substr(this.Prefix.length))
+      .Select(key => ResolveUri(this.slave.BaseUri, key))
+      .Where(key => key.startsWith(this.BaseUri))
+      .Select(key => key.substr(this.BaseUri.length))
       .ToArray();
   }
 }
 
 class DataStoreViewReadThrough extends DataStoreViewReadonly {
-  constructor(private slave: DataStoreFileView, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
+  private uris: string[] = [];
+
+  constructor(private slave: DataStore, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
     super();
   }
 
@@ -163,6 +155,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
     // prope cache
     const existingData = await this.slave.Read(uri);
     if (existingData !== null) {
+      this.uris.push(uri);
       return existingData;
     }
 
@@ -170,6 +163,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
     const data = await ReadUri(uri);
     const writeHandle = await this.slave.Write(uri);
     const readHandle = await writeHandle.WriteData(data);
+    this.uris.push(uri);
     return readHandle;
   }
 
@@ -179,7 +173,9 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 }
 
 class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
-  constructor(private slave: DataStoreFileView, private fs: IFileSystem) {
+  private uris: string[] = [];
+
+  constructor(private slave: DataStore, private fs: IFileSystem) {
     super();
   }
 
@@ -193,6 +189,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
     // prope cache
     const existingData = await this.slave.Read(uri);
     if (existingData !== null) {
+      this.uris.push(uri);
       return existingData;
     }
 
@@ -202,11 +199,12 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
       data = await this.fs.ReadFile(uri) || await ReadUri(uri);
     } finally {
       if (!data) {
-        throw new Error(`FileSystem unable to read file ${uri}.`)
+        throw new Error(`FileSystem does not contain file ${uri} and failed to physically load it.`);
       }
     }
     const writeHandle = await this.slave.Write(uri);
     const readHandle = await writeHandle.WriteData(data);
+    this.uris.push(uri);
     return readHandle;
   }
 
@@ -215,48 +213,9 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
   }
 }
 
-export class DataStoreFileView extends DataStoreView {
-  private static isUri(uri: string): boolean {
-    return /^([a-z0-9+.-]+):(?:\/\/(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(\/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(\/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$/i.test(uri);
-  }
-
-  private static EncodeUri(uri: string): string {
-    return encodeURIComponent(uri);
-  }
-
-  private static DecodeUri(encodedUri: string): string {
-    return decodeURIComponent(encodedUri);
-  }
-
-  constructor(private slave: DataStoreView) {
-    super();
-  }
-
-  public async Read(uri: string): Promise<DataHandleRead | null> {
-    if (!DataStoreFileView.isUri(uri)) {
-      throw new Error(`Provided URI '${uri}' is invalid`);
-    }
-
-    const key = DataStoreFileView.EncodeUri(uri);
-    return await this.slave.Read(key);
-  }
-
-  public async Write(uri: string): Promise<DataHandleWrite> {
-    if (!DataStoreFileView.isUri(uri)) {
-      throw new Error(`Provided URI '${uri}' is invalid`);
-    }
-
-    const key = DataStoreFileView.EncodeUri(uri);
-    return await this.slave.Write(key);
-  }
-
-  public async Enum(): Promise<string[]> {
-    const slaveResult = await this.slave.Enum();
-    return From(slaveResult).Select(DataStoreFileView.DecodeUri).ToArray();
-  }
-}
-
 export class DataStore extends DataStoreView {
+  public static readonly BaseUri = "mem://";
+  public readonly BaseUri = DataStore.BaseUri;
   private store: Store = {};
 
   public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {
@@ -269,42 +228,51 @@ export class DataStore extends DataStoreView {
     }
   }
 
+  public GetReadThroughScope(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
+    return new DataStoreViewReadThrough(this, customUriFilter);
+  }
+
+  public GetReadThroughScopeFileSystem(fs: IFileSystem): DataStoreViewReadonly {
+    return new DataStoreViewReadThroughFS(this, fs);
+  }
+
   /****************
    * Data access
    ***************/
 
-  public async Write(key: string): Promise<DataHandleWrite> {
+  public async Write(uri: string): Promise<DataHandleWrite> {
+    uri = ResolveUri(this.BaseUri, uri);
     this.ThrowIfCancelled();
-    return new DataHandleWrite(key, async (data, sourceMapFactory) => {
+    return new DataHandleWrite(uri, async (data, sourceMapFactory) => {
       this.ThrowIfCancelled();
-      if (this.store[key]) {
-        throw new Error(`can only write '${key}' once`);
+      if (this.store[uri]) {
+        throw new Error(`can only write '${uri}' once`);
       }
       const storeEntry: Data = {
         data: data,
         metadata: <Metadata><Metadata | null>{}
       };
-      this.store[key] = storeEntry;
+      this.store[uri] = storeEntry;
 
       // metadata
-      const result = await this.ReadStrict(key);
-      storeEntry.metadata.sourceMap = new Lazy(async () => {
-        const sourceMap = await sourceMapFactory(result);
+      const result = await this.ReadStrict(uri);
+      storeEntry.metadata.sourceMap = new Lazy(() => {
+        const sourceMap = sourceMapFactory(result);
 
         // validate
         const inputFiles = sourceMap.sources.concat(sourceMap.file);
         for (const inputFile of inputFiles) {
           if (!this.store[inputFile]) {
-            throw new Error(`Source map of '${key}' references '${inputFile}' which does not exist`);
+            throw new Error(`Source map of '${uri}' references '${inputFile}' which does not exist`);
           }
         }
 
         return sourceMap;
       });
-      storeEntry.metadata.sourceMapEachMappingByLine = new Lazy<sourceMap.MappingItem[][]>(async () => {
+      storeEntry.metadata.sourceMapEachMappingByLine = new Lazy<sourceMap.MappingItem[][]>(() => {
         const result: sourceMap.MappingItem[][] = [];
 
-        const sourceMapConsumer = new SourceMapConsumer(await storeEntry.metadata.sourceMap);
+        const sourceMapConsumer = new SourceMapConsumer(storeEntry.metadata.sourceMap.Value);
 
         // const singleResult = sourceMapConsumer.originalPositionFor(position);
         // does NOT support multiple sources :(
@@ -320,49 +288,54 @@ export class DataStore extends DataStoreView {
 
         return result;
       });
-      storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(key));
-      storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(async () => parseAst(data));
-      storeEntry.metadata.lineIndices = new Lazy<number[]>(async () => LineIndices(data));
+      storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(uri));
+      storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(() => parseAst(data));
+      storeEntry.metadata.lineIndices = new Lazy<number[]>(() => LineIndices(data));
       return result;
     });
   }
 
-  public async Read(key: string): Promise<DataHandleRead | null> {
-    const data = this.store[key];
+  public ReadStrictSync(absoluteUri: string): DataHandleRead {
+    return new DataHandleRead(absoluteUri, this.store[absoluteUri]);
+  }
+
+  public async Read(uri: string): Promise<DataHandleRead | null> {
+    uri = ResolveUri(this.BaseUri, uri);
+    const data = this.store[uri];
     if (!data) {
       return null;
     }
-    return new DataHandleRead(key, Promise.resolve(data));
+    return new DataHandleRead(uri, data);
   }
 
   public async Enum(): Promise<string[]> {
     return Object.getOwnPropertyNames(this.store);
   }
 
-  public async Blame(key: string, position: SmartPosition): Promise<BlameTree> {
-    const data = await this.ReadStrict(key);
-    const resolvedPosition = await CompilePosition(position, data);
+  public Blame(absoluteUri: string, position: SmartPosition): BlameTree {
+    const data = this.ReadStrictSync(absoluteUri);
+    const resolvedPosition = CompilePosition(position, data);
     return BlameTree.Create(this, {
-      source: key,
+      source: absoluteUri,
       column: resolvedPosition.column,
       line: resolvedPosition.line,
       name: `blameRoot (${JSON.stringify(position)})`
     });
   }
 
-  private async CreateInputSourceMapFor(key: string): Promise<RawSourceMap> {
-    const data = await this.ReadStrict(key);
+  private CreateInputSourceMapFor(absoluteUri: string): RawSourceMap {
+    const data = this.ReadStrictSync(absoluteUri);
 
     // retrieve all target positions
     const targetPositions: SmartPosition[] = [];
-    const metadata = await data.ReadMetadata();
-    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
+    const metadata = data.ReadMetadata();
+    const sourceMapConsumer = new SourceMapConsumer(metadata.sourceMap.Value);
     sourceMapConsumer.eachMapping(m => targetPositions.push(<Position>{ column: m.generatedColumn, line: m.generatedLine }));
 
     // collect blame
     const mappings: Mapping[] = [];
     for (const targetPosition of targetPositions) {
-      const blameTree = await this.Blame(key, targetPosition);
+      const blameTree = this.Blame(absoluteUri, targetPosition);
       const inputPositions = blameTree.BlameInputs();
       for (const inputPosition of inputPositions) {
         mappings.push({
@@ -373,8 +346,8 @@ export class DataStore extends DataStoreView {
         })
       }
     }
-    const sourceMapGenerator = new SourceMapGenerator({ file: key });
-    await Compile(mappings, sourceMapGenerator);
+    const sourceMapGenerator = new SourceMapGenerator({ file: absoluteUri });
+    Compile(mappings, sourceMapGenerator);
     return sourceMapGenerator.toJSON();
   }
 }
@@ -387,17 +360,17 @@ export class DataStore extends DataStoreView {
  ********************************************/
 
 export class DataHandleWrite {
-  constructor(public readonly key: string, private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => Promise<RawSourceMap>) => Promise<DataHandleRead>) {
+  constructor(public readonly key: string, private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => RawSourceMap) => Promise<DataHandleRead>) {
   }
 
-  public async WriteDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => Promise<RawSourceMap>): Promise<DataHandleRead> {
+  public async WriteDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => RawSourceMap): Promise<DataHandleRead> {
     return await this.write(data, sourceMapFactory);
   }
 
   public async WriteData(data: string, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
-    return await this.WriteDataWithSourceMap(data, async readHandle => {
+    return await this.WriteDataWithSourceMap(data, readHandle => {
       const sourceMapGenerator = new SourceMapGenerator({ file: this.key });
-      await Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
+      Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
       return sourceMapGenerator.toJSON();
     });
   }
@@ -409,32 +382,28 @@ export class DataHandleWrite {
 
 /* @internal */
 export class DataHandleRead {
-  constructor(public readonly key: string, private read: Promise<Data>) {
+  constructor(public readonly key: string, private read: Data) {
   }
 
-  public async ReadData(): Promise<string> {
-    const data = await this.read;
-    return data.data;
+  public ReadData(): string {
+    return this.read.data;
   }
 
-  public async ReadMetadata(): Promise<Metadata> {
-    const data = await this.read;
-    return data.metadata;
+  public ReadMetadata(): Metadata {
+    return this.read.metadata;
   }
 
-  public async ReadObject<T>(): Promise<T> {
-    const data = await this.ReadData();
-    return Parse<T>(data);
+  public ReadObject<T>(): T {
+    return Parse<T>(this.ReadData());
   }
 
-  public async ReadYamlAst(): Promise<YAMLNode> {
-    const data = await this.ReadMetadata();
-    return await data.yamlAst;
+  public ReadYamlAst(): YAMLNode {
+    return this.ReadMetadata().yamlAst.Value;
   }
 
-  public async Blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
-    const metadata = await this.ReadMetadata();
-    const sameLineResults = ((await metadata.sourceMapEachMappingByLine)[position.line] || [])
+  public Blame(position: sourceMap.Position): sourceMap.MappedPosition[] {
+    const metadata = this.ReadMetadata();
+    const sameLineResults = (metadata.sourceMapEachMappingByLine.Value[position.line] || [])
       .filter(mapping => mapping.generatedColumn <= position.column);
     const maxColumn = sameLineResults.reduce((c, m) => Math.max(c, m.generatedColumn), 0);
     const columnDelta = position.column - maxColumn;
