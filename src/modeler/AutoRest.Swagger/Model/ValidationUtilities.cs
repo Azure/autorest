@@ -5,7 +5,6 @@ using AutoRest.Swagger;
 using AutoRest.Core.Utilities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using AutoRest.Swagger.Validation;
 
@@ -342,38 +341,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="name">String to check for style</param>
         /// <returns>true if "name" follows camel case style (allows for 2 consecutive upper case characters), false otherwise.</returns>
-        public static bool isNameCamelCase(string name) => PropNameRegEx.IsMatch(name);
-
-        /// <summary>
-        /// Returns a suggestion of camel case styled string based on the string passed as parameter.
-        /// </summary>
-        /// <param name="name">String to convert to camel case style</param>
-        /// <returns>A string that conforms with camel case style based on the string passed as parameter.</returns>
-        public static string ToCamelCase(string name)
-        {
-            StringBuilder sb = new StringBuilder(name);
-            if (sb.Length > 0)
-            {
-                sb[0] = sb[0].ToString().ToLower()[0];
-            }
-            bool firstUpper = true;
-            for (int i = 1; i < name.Length; i++)
-            {
-                if (char.IsUpper(sb[i]) && firstUpper)
-                {
-                    firstUpper = false;
-                }
-                else
-                {
-                    firstUpper = true;
-                    if (char.IsUpper(sb[i]))
-                    {
-                        sb[i] = sb[i].ToString().ToLower()[0];
-                    }
-                }
-            }
-            return sb.ToString();
-        }
+        public static bool IsNameCamelCase(string name) => PropNameRegEx.IsMatch(name);
 
         /// <summary>
         /// Evaluates if the reference is of the provided data type.

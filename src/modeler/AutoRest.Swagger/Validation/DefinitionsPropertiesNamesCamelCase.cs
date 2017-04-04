@@ -54,9 +54,9 @@ namespace AutoRest.Swagger.Validation
                 {
                     foreach (KeyValuePair<string, Schema> prop in definition.Value.Properties)
                     {
-                        if (!ValidationUtilities.isNameCamelCase(prop.Key))
+                        if (!ValidationUtilities.IsNameCamelCase(prop.Key))
                         {
-                            yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, prop.Key, definition.Key, ValidationUtilities.ToCamelCase(prop.Key));
+                            yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, prop.Key, definition.Key, prop.Key.ToCamelCase());
                         }
                     }
                 }
