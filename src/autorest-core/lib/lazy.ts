@@ -3,7 +3,21 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-export class Lazy<T> implements PromiseLike<T> {
+export class Lazy<T> {
+  private promise: { obj: T } | null = null;
+
+  public constructor(private factory: () => T) {
+  }
+
+  public get Value(): T {
+    if (this.promise === null) {
+      this.promise = { obj: this.factory() };
+    }
+    return this.promise.obj;
+  }
+}
+
+export class LazyPromise<T> implements PromiseLike<T> {
   private promise: Promise<T> | null = null;
 
   public constructor(private factory: () => Promise<T>) {

@@ -200,8 +200,6 @@ public class StorageManagementClientImpl extends AzureServiceClient {
      */
     @Override
     public String userAgent() {
-        return String.format("Azure-SDK-For-Java/%s (%s)",
-                getClass().getPackage().getImplementationVersion(),
-                "StorageManagementClient, 2015-06-15");
+        return String.format("%s (%s, %s)", super.userAgent(), "StorageManagementClient", "2015-06-15");
     }
 }

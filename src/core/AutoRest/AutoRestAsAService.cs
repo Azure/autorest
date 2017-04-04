@@ -35,38 +35,29 @@ namespace AutoRest
 
     public async Task<IEnumerable<string>> GetPluginNames()
     {
-      return new[] { nameof(AzureValidator), nameof(Modeler), nameof(Generator), nameof(CSharpSimplifier) };
+      return new[] { "azure-validator", "modeler", "csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema", "csharp-simplifier" };
     }
 
     public async Task<bool> Process(string plugin, string sessionId)
     {
       switch (plugin)
       {
-        case nameof(AzureValidator):
+        case "azure-validator":
           return await new AzureValidator(connection, sessionId).Process();
-        case nameof(Modeler):
+        case "modeler":
           return await new Modeler(connection, sessionId).Process();
-        case nameof(Generator):
-          return await new Generator(connection, sessionId).Process();
-        case nameof(CSharpSimplifier):
+        case "csharp":
+        case "ruby":
+        case "nodejs":
+        case "python":
+        case "go":
+        case "java":
+        case "azureresourceschema":
+          return await new Generator(plugin, connection, sessionId).Process();
+        case "csharp-simplifier":
           return await new CSharpSimplifier(connection, sessionId).Process();
       }
       return false;
-      /*
-      Console.Error.WriteLine("Getting some values");
-      var v = await GetValue(sessionId, "key");
-      Console.Error.WriteLine($"Value was : '{v}'");
-
-      var f = await ReadFile(sessionId, "filename");
-      Console.Error.WriteLine($"File was : '{f}'");
-
-      WriteFile(sessionId, "somefile.txt", "this is the file content", null);
-      Message(sessionId, "this is some details","nothing for you");
-
-      f = await ReadFile(sessionId, "lastfile");
-      Console.Error.WriteLine("Done Process on client");
-      return false;
-       */
     }
   }
 

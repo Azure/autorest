@@ -35,14 +35,14 @@ export function EncodeEnhancedPositionInName(name: string | undefined, pos: Enha
   return (name || "") + enhancedPositionSeparator + JSON.stringify(pos, null, 2) + enhancedPositionEndMark;
 }
 
-export async function CompilePosition(position: SmartPosition, yamlFile: DataHandleRead): Promise<EnhancedPosition> {
+export function CompilePosition(position: SmartPosition, yamlFile: DataHandleRead): EnhancedPosition {
   if (!(position as EnhancedPosition).line) {
     return yaml.ResolvePath(yamlFile, (position as any).path);
   }
   return position as EnhancedPosition;
 }
 
-export async function Compile(mappings: Mappings, target: sourceMap.SourceMapGenerator, yamlFiles: DataHandleRead[] = []): Promise<void> {
+export function Compile(mappings: Mappings, target: sourceMap.SourceMapGenerator, yamlFiles: DataHandleRead[] = []): void {
   // build lookup
   const yamlFileLookup: { [key: string]: DataHandleRead } = {};
   for (const yamlFile of yamlFiles) {
@@ -58,8 +58,8 @@ export async function Compile(mappings: Mappings, target: sourceMap.SourceMapGen
   };
 
   for (const mapping of mappings) {
-    const compiledGenerated = await compilePos(mapping.generated, generatedFile);
-    const compiledOriginal = await compilePos(mapping.original, mapping.source);
+    const compiledGenerated = compilePos(mapping.generated, generatedFile);
+    const compiledOriginal = compilePos(mapping.original, mapping.source);
     target.addMapping({
       generated: compiledGenerated,
       original: compiledOriginal,
@@ -69,13 +69,15 @@ export async function Compile(mappings: Mappings, target: sourceMap.SourceMapGen
   }
 }
 
-export function* CreateAssignmentMapping(assignedObject: any, sourceKey: string, sourcePath: JsonPath, targetPath: JsonPath, subject: string): Mappings {
+export function CreateAssignmentMapping(assignedObject: any, sourceKey: string, sourcePath: JsonPath, targetPath: JsonPath, subject: string): Mappings {
+  const result: Mappings = [];
   for (const descendant of Descendants(ToAst(assignedObject))) {
     const path = descendant.path;
-    yield {
+    result.push({
       name: `${subject} (${stringify(path)})`, source: sourceKey,
       original: { path: sourcePath.concat(path) },
       generated: { path: targetPath.concat(path) }
-    };
+    });
   }
+  return result;
 }

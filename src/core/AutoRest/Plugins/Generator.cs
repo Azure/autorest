@@ -7,37 +7,59 @@ using Microsoft.Perks.JsonRPC;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core;
 using AutoRest.Core.Parsing;
+using System.Linq;
 
 public class Generator : NewPlugin
 {
   private string codeGenerator;
 
-  public Generator(Connection connection, string sessionId) : base(connection, sessionId)
-  { }
+  public Generator(string codeGenerator, Connection connection, string sessionId) : base(connection, sessionId)
+  {
+    this.codeGenerator = codeGenerator;
+  }
 
   protected override async Task<bool> ProcessInternal()
   {
-    var codeGenerator = await GetValue("codeGenerator");
+    // get internal name
+    var language = new[] {
+        "CSharp",
+        "Ruby",
+        "NodeJS",
+        "Python",
+        "Go",
+        "Java",
+        "AzureResourceSchema" }
+      .Where(x => x.ToLowerInvariant() == codeGenerator)
+      .FirstOrDefault();
+
+    if (language == null)
+    {
+       throw new Exception($"Language '{codeGenerator}' unknown.");
+    }
 
     // build settings
     new Settings
     {
-      Namespace = await GetValue("namespace"),
-      ClientName = await GetValue("clientNameOverride"),
-      PayloadFlatteningThreshold = await GetValue<int>("payloadFlatteningThreshold"),
-      AddCredentials = await GetValue<bool>("addCredentials"),
+      Namespace = await GetValue("namespace") ?? "",
+      ClientName = await GetValue("override-client-name"),
+      PayloadFlatteningThreshold = await GetValue<int?>("payload-flattening-threshold") ?? 0,
+      AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
     };
-    var header = await GetValue("header");
+    var header = await GetValue("license-header");
     if (header != null)
     {
       Settings.Instance.Header = header;
     }
-    Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool>("internalConstructors"));
-    Settings.Instance.CustomSettings.Add("SyncMethods", await GetValue<string>("syncMethods"));
-    Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool>("useDateTimeOffset"));
-    if (codeGenerator.EndsWith("Ruby"))
+    Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool?>("use-internal-constructors") ?? false);
+    Settings.Instance.CustomSettings.Add("SyncMethods", await GetValue("sync-methods") ?? "essential");
+    Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool?>("use-datetimeoffset") ?? false);
+    if (codeGenerator == "ruby" || codeGenerator == "python")
     {
-      Settings.Instance.PackageName = await GetValue("rubyPackageName");
+      // TODO: sort out matters here entirely instead of relying on Input being read somewhere...
+      var inputFile = await GetValue<string[]>("input-file");
+      Settings.Instance.Input = (inputFile as string[]).FirstOrDefault();
+      Settings.Instance.PackageName = await GetValue("package-name");
+      Settings.Instance.PackageVersion = await GetValue("package-version");
     }
 
     // process
@@ -47,7 +69,10 @@ public class Generator : NewPlugin
       return false;
     }
 
-    var plugin = ExtensionsLoader.GetPlugin(codeGenerator);
+    var plugin = ExtensionsLoader.GetPlugin(
+        (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") + 
+        language +
+        (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : ""));
     var modelAsJson = (await ReadFile(files[0])).EnsureYamlIsJson();
 
     using (plugin.Activate())
