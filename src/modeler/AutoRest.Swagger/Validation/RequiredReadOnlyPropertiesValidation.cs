@@ -46,7 +46,7 @@ namespace AutoRest.Swagger.Validation
             {
                 foreach (KeyValuePair<string, Schema> property in definition.Properties)
                 {
-                    if (property.Value.ReadOnly && definition.Required.Contains(property.Key))
+                    if (property.Value.ReadOnly && definition.Required?.Contains(property.Key) == true)
                     {
                         yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, property.Key);
                     }
