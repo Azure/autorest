@@ -413,6 +413,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void TrackedResourceListByImmediateParentValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-list-by-immediate-parent.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceListByImmediateParent), 1);
+        }
+
+        [Fact]
         public void PutGetPatchResponseValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-putgetpatch-response-validation.json"));

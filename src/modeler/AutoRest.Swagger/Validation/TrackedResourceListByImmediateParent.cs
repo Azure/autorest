@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
-    class TrackedResourceListByImmediateParent : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class TrackedResourceListByImmediateParent : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         /// <summary>
         /// Id of the Rule.
@@ -35,7 +35,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
-        private Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)$", RegexOptions.IgnoreCase);
+        private static Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)$", RegexOptions.IgnoreCase);
 
         private KeyValuePair<string, string> GetChildResourceName(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
         {
@@ -106,7 +106,7 @@ namespace AutoRest.Swagger.Validation
         /// <param name="definitions"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context, out object[] formatParameters)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
         {
             foreach(KeyValuePair<string, Dictionary<string, Operation>> pathDefinition in paths)
             {
@@ -119,17 +119,15 @@ namespace AutoRest.Swagger.Validation
                     );
                     if (!listByImmediateParent)
                     {
-                        formatParameters = new object[2];
+                        object[] formatParameters = new object[2];
                         formatParameters[0] = childResourceMapping.Key;
                         formatParameters[1] = childResourceMapping.Value;
-                        return false;
+
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, formatParameters);
                     }
 
                 }
             }
-
-            formatParameters = new object[0];
-            return true;
         }
     }
 }

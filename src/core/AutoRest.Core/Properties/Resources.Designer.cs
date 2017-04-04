@@ -123,7 +123,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("BodyParametersNotValid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, must follow camelCase style. Example: &quot;{1}&quot;..
         /// </summary>
@@ -654,7 +654,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("RequiredReadOnlyPropertiesValidation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to A &apos;Resource&apos; definition must have x-ms-azure-resource extension enabled and set to true..
         /// </summary>
@@ -681,7 +681,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("SecurityDefinitionsStructureValidation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Parameter &quot;{0}&quot; is referenced but not defined in the global parameters section of Service Definition.
         /// </summary>
@@ -742,7 +742,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The child tracked resource, &quot;{0}&quot; with immediate parent &quot;{1}&quot;, must have a list by immediate parent operation..
+        ///   Looks up a localized string similar to The child tracked resource, &apos;{0}&apos; with immediate parent &apos;{1}&apos;, must have a list by immediate parent operation..
         /// </summary>
         public static string TrackedResourceListByImmediateParentOperationMissing {
             get {
@@ -751,7 +751,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The tracked resource, &quot;{0}&quot;, must have a list by resource group operation..
+        ///   Looks up a localized string similar to The tracked resource, &apos;{0}&apos;, must have a list by resource group operation..
         /// </summary>
         public static string TrackedResourceListByResourceGroupOperationMissing {
             get {
@@ -760,7 +760,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The tracked resource, &quot;{0}&quot;, must have a list by subscriptions operation..
+        ///   Looks up a localized string similar to The tracked resource, &apos;{0}&apos;, must have a list by subscriptions operation..
         /// </summary>
         public static string TrackedResourceListBySubscriptionsOperationMissing {
             get {

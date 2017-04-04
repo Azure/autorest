@@ -413,12 +413,15 @@ namespace AutoRest.Swagger.Model.Utilities
                        IsXmsPageableResponseOperation(operation) &&
                        operation.Responses.Any(
                            response => response.Key.Equals("200") &&
-                           response.Value.Schema != null && IsArrayOf(response.Value.Schema.Reference, definitionKey, definitions))
+                           IsArrayOf(response.Value.Schema?.Reference, definitionKey, definitions))
                     );
         }
 
         private static bool IsArrayOf(string reference, string referenceToMatch, Dictionary<string, Schema> definitions)
         {
+            if (reference == null)
+                return false;
+
             Schema schema = Schema.FindReferencedSchema(reference, definitions);
             return schema.Properties.Any(property => property.Value.Type == DataType.Array && (bool)property.Value.Items?.Reference?.EndsWith("/" + referenceToMatch));
         }

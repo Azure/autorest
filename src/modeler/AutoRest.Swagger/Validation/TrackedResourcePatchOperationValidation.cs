@@ -38,8 +38,13 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
-        // Verifies if a tracked resource has a corresponding patch operation
-        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
+        /// <summary>
+        /// Verifies if a tracked resource has a corresponding patch operation
+        /// </summary>
+        /// <param name="definitions"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             // Retrieve the list of TrackedResources
             IEnumerable<string> trackedResources = context.TrackedResourceModels;
@@ -52,14 +57,9 @@ namespace AutoRest.Swagger.Validation
                 // check for 200 status response models since they correspond to a successful get operation
                 if (!patchOperations.Any(op => op.Responses.ContainsKey("200") && (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()).Equals(trackedResource)))
                 {
-                    formatParameters = new object[1];
-                    formatParameters[0] = trackedResource;
-                    return false;
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(trackedResource)), this, trackedResource);
                 }
             }
-
-            formatParameters = new object[0];
-            return true;
         }
     }
 }

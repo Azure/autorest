@@ -11,6 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Resource\Swagger\Validation\swagger-list-by-immediate-parent.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resource\Swagger\Validation\security-definitions-validations-11.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
