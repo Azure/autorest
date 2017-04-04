@@ -239,7 +239,7 @@ export class Configuration {
     const defaults = require("../resources/default-configuration.json");
 
     if (configFileUri === null) {
-      return new ConfigurationView("file:///", ...configs, defaults);
+      return new ConfigurationView(this.uriToConfigFileOrWorkingFolder || "file:///", ...configs, defaults);
     } else {
       const inputView = workingScope.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
 

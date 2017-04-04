@@ -80,7 +80,9 @@ ${Stringify(config).replace(/^---\n/, "")}
     api.Warning.Subscribe((_, m) => console.warn(m.Text));
     api.Error.Subscribe((_, m) => console.error(m.Text));
     api.Fatal.Subscribe((_, m) => console.error(m.Text));
-    await api.Process().finish; // TODO: care about return value?
+    if (!await api.Process().finish) {
+      throw "AutoRest failed.";
+    }
     await outstanding.Wait();
   }
   else {
@@ -119,7 +121,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 
     // switch
     const key = match[1];
-    const value = match[3] || null;
+    const value = match[3] || {};
     result.switches.push(CreateObject(key.split("."), value));
   }
 
@@ -141,7 +143,9 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   api.Warning.Subscribe((_, m) => console.warn(m.Text));
   api.Error.Subscribe((_, m) => console.error(m.Text));
   api.Fatal.Subscribe((_, m) => console.error(m.Text));
-  await api.Process().finish; // TODO: care about return value?
+  if (!await api.Process().finish) {
+    throw "AutoRest failed.";
+  }
   await outstanding.Wait();
 }
 

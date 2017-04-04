@@ -80,7 +80,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   result["add-credentials"] = switches["addcredentials"] === null || ((switches["addcredentials"] + "").toLowerCase() === "true");
 
-  if (usedCodeGenerator === "ruby") {
+  if (usedCodeGenerator === "ruby" || usedCodeGenerator === "python") {
     result["package-name"] = GetFilenameWithoutExtension(inputFile).replace(/[^a-zA-Z0-9-_]/g, "").replace(/-/g, '_').replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
   }
 

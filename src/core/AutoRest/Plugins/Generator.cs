@@ -53,9 +53,15 @@ public class Generator : NewPlugin
     Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool?>("use-internal-constructors") ?? false);
     Settings.Instance.CustomSettings.Add("SyncMethods", await GetValue("sync-methods") ?? "essential");
     Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool?>("use-datetimeoffset") ?? false);
-    if (codeGenerator.EndsWith("Ruby"))
+    if (codeGenerator == "ruby" || codeGenerator == "python")
     {
-      Settings.Instance.PackageName = await GetValue("package-name") ?? "client";
+      // TODO: sort out matters here entirely instead of relying on Input being read somewhere...
+      var inputFile = await GetValue<object>("input-file");
+      if (inputFile is string)
+      {
+        Settings.Instance.Input = inputFile as string;
+      }
+      Settings.Instance.PackageName = await GetValue("package-name");
       Settings.Instance.PackageVersion = await GetValue("package-version");
     }
 

@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -12,7 +13,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Endpoints class.
         /// </summary>
-        public Endpoints() { }
+        public Endpoints()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Endpoints class.
@@ -27,30 +31,36 @@ namespace Petstore.Models
             Queue = queue;
             Table = table;
             File = file;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets the blob endpoint.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "blob")]
+        [JsonProperty(PropertyName = "blob")]
         public string Blob { get; set; }
 
         /// <summary>
         /// Gets the queue endpoint.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "queue")]
+        [JsonProperty(PropertyName = "queue")]
         public string Queue { get; set; }
 
         /// <summary>
         /// Gets the table endpoint.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "table")]
+        [JsonProperty(PropertyName = "table")]
         public string Table { get; set; }
 
         /// <summary>
         /// Gets the file endpoint.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "file")]
+        [JsonProperty(PropertyName = "file")]
         public string File { get; set; }
 
     }

@@ -1,6 +1,9 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -12,28 +15,37 @@ namespace Petstore.Models
         /// Initializes a new instance of the
         /// StorageAccountUpdateParametersInner class.
         /// </summary>
-        public StorageAccountUpdateParametersInner() { }
+        public StorageAccountUpdateParametersInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
         /// StorageAccountUpdateParametersInner class.
         /// </summary>
         /// <param name="tags">Resource tags</param>
-        public StorageAccountUpdateParametersInner(System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), StorageAccountPropertiesUpdateParameters properties = default(StorageAccountPropertiesUpdateParameters))
+        public StorageAccountUpdateParametersInner(IDictionary<string, string> tags = default(IDictionary<string, string>), StorageAccountPropertiesUpdateParameters properties = default(StorageAccountPropertiesUpdateParameters))
         {
             Tags = tags;
             Properties = properties;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets resource tags
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
-        public System.Collections.Generic.IDictionary<string, string> Tags { get; set; }
+        [JsonProperty(PropertyName = "tags")]
+        public IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties")]
+        [JsonProperty(PropertyName = "properties")]
         public StorageAccountPropertiesUpdateParameters Properties { get; set; }
 
         /// <summary>
@@ -44,9 +56,9 @@ namespace Petstore.Models
         /// </exception>
         public virtual void Validate()
         {
-            if (this.Properties != null)
+            if (Properties != null)
             {
-                this.Properties.Validate();
+                Properties.Validate();
             }
         }
     }
