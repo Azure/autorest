@@ -13,7 +13,7 @@ namespace AutoRest.Swagger.Validation
 {
     public class TrackedResourceListBySubscription : TypedRule<Dictionary<string, Schema>>
     {
-        private readonly Regex listBySidRegEx = new Regex(@".+_(List|ListBySubscriptionId|ListBySubscription|ListBySubscriptions)$", RegexOptions.IgnoreCase);
+        private static readonly Regex listBySidRegEx = new Regex(@".+_(List|ListBySubscriptionId|ListBySubscription|ListBySubscriptions)$", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Id of the Rule.

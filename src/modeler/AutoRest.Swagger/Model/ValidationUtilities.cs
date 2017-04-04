@@ -266,7 +266,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="op">Operation for which to check the x-ms-pageable extension</param>
         /// <returns>true if operation is x-ms-pageable</returns>
-        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions != null && op.Extensions.GetValue<object>(XmsPageable) != null);
+        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions?.GetValue<object>(XmsPageable) != null);
 
         /// <summary>
         /// Determines if an operation returns an object of array type
@@ -420,7 +420,7 @@ namespace AutoRest.Swagger.Model.Utilities
         private static bool IsArrayOf(string reference, string referenceToMatch, Dictionary<string, Schema> definitions)
         {
             Schema schema = Schema.FindReferencedSchema(reference, definitions);
-            return schema.Properties.Any(property => property.Value.Type == DataType.Array && property.Value.Items != null && property.Value.Items.Reference.EndsWith("/" + referenceToMatch));
+            return schema.Properties.Any(property => property.Value.Type == DataType.Array && (bool)property.Value.Items?.Reference?.EndsWith("/" + referenceToMatch));
         }
 
         /// <summary>
