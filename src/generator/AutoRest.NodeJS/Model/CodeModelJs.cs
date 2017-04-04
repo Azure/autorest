@@ -135,7 +135,7 @@ namespace AutoRest.NodeJS.Model
                         builder.AppendLine(",");
                     }
                 }
-                
+
                 return builder.ToString();
             }
         }
