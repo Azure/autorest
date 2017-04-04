@@ -51,7 +51,7 @@ export class BlameTree {
       todos.push(...todo.blaming);
     }
 
-    return result; //From(result).Distinct(x => JSON.stringify(x)).ToArray();
+    return From(result).Distinct(x => JSON.stringify(x)).ToArray();
   }
 }
 

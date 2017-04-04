@@ -10,7 +10,7 @@ import { RealFileSystem } from "../lib/file-system";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message } from "../lib/message";
 
-@suite class Cancellation {
+/*@suite */ class Cancellation {
   private async CreateLongRunningAutoRest(): Promise<AutoRest> {
     const autoRest = new AutoRest(new RealFileSystem());
     await autoRest.AddConfiguration({

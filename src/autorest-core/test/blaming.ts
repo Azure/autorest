@@ -23,7 +23,7 @@ import { parse } from "../lib/ref/jsonpath";
     // regular description
     {
       const blameTree = await view.DataStore.Blame(
-        "compose/swagger.yaml",
+        "mem:///compose/swagger.yaml",
         { path: parse("$.securityDefinitions.azure_auth.description") });
       const blameInputs = [...blameTree.BlameInputs()];
       assert.equal(blameInputs.length, 1);
@@ -32,7 +32,7 @@ import { parse } from "../lib/ref/jsonpath";
     // markdown description (blames both the swagger's json path and the markdown source of the description)
     {
       const blameTree = await view.DataStore.Blame(
-        "compose/swagger.yaml",
+        "mem:///compose/swagger.yaml",
         { path: parse("$.definitions.SearchServiceListResult.description") });
       const blameInputs = [...blameTree.BlameInputs()];
       assert.equal(blameInputs.length, 2);
