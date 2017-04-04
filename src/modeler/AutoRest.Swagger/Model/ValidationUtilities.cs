@@ -15,14 +15,16 @@ namespace AutoRest.Swagger.Model.Utilities
     {
         private static readonly string XmsPageable = "x-ms-pageable";
         private static readonly Regex UrlResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
-        private static readonly IEnumerable<string> baseResourceModelNames = 
+        private static readonly IEnumerable<string> BaseResourceModelNames = 
             new List<string>() { "trackedresource", "proxyresource", "resource" };
 
         private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
 
         public static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<resource>[^{/]+))");
 
-        private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
+        private static readonly Regex ResourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
+
+        private static readonly Regex PropNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)*[A-Z]{1,2}$");
 
         // This needs to be deprecated in favor of context.TrackedResources
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
@@ -88,7 +90,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="modelName">model name to check</param>
         /// <returns> true if model is a base resource type </returns>
-        public static bool IsBaseResourceModelName(string modelName) => baseResourceModelNames.Contains(modelName.ToLower());
+        public static bool IsBaseResourceModelName(string modelName) => BaseResourceModelNames.Contains(modelName.ToLower());
 
         /// <summary>
         /// Returns the cumulative list of all 'allOfed' references for a model
@@ -340,11 +342,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="name">String to check for style</param>
         /// <returns>true if "name" follows camel case style (allows for 2 consecutive upper case characters), false otherwise.</returns>
-        public static bool isNameCamelCase(string name)
-        {
-            Regex propNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)*[A-Z]{1,2}$");
-            return (propNameRegEx.IsMatch(name));
-        }
+        public static bool isNameCamelCase(string name) => PropNameRegEx.IsMatch(name);
 
         /// <summary>
         /// Returns a suggestion of camel case styled string based on the string passed as parameter.
@@ -413,7 +411,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <returns>Array of resource providers</returns>
         public static IEnumerable<string> GetResourceProviders(Dictionary<string, Dictionary<string, Operation>> paths)
         {
-            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
+            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => ResourceProviderPathPattern.Matches(path)
                                                     .OfType<Match>()
                                                     .Select(match => match.Groups["resPath"].Value.ToString()))
                                                     .Distinct()
