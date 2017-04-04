@@ -250,7 +250,7 @@ export class Configuration {
         workingScope.CreateScope("config"));
 
       const blocks = await Promise.all(From<CodeBlock>(hConfig).Select(async each => {
-        const block = await each.data.ReadObject<AutoRestConfigurationImpl>();
+        const block = each.data.ReadObject<AutoRestConfigurationImpl>();
         block.__info = each.info;
         return block;
       }));

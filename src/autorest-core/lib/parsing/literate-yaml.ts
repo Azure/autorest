@@ -140,7 +140,7 @@ async function ParseInternal(config: ConfigurationView | null, hLiterate: DataHa
 async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<CodeBlock[]> {
   let hsConfigFileBlocks: CodeBlock[] = [];
 
-  const rawMarkdown = await hLiterate.ReadData();
+  const rawMarkdown = hLiterate.ReadData();
 
   // try parsing as literate YAML
   if (TryMarkdown(rawMarkdown)) {
@@ -155,7 +155,7 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLitera
 
       const deferredErrors: Message[] = []; // ...because the file we wanna blame is not yet written
 
-      const yamlAst = CloneAst(await data.ReadYamlAst());
+      const yamlAst = CloneAst(data.ReadYamlAst());
       let mapping: Mapping[] = [];
       for (const { path, node } of Descendants(yamlAst)) {
         // RESOLVE MARKDOWN INTO THE YAML

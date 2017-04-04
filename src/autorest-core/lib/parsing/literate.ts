@@ -9,7 +9,7 @@ import { DataHandleRead, DataStoreView } from "../data-store/data-store";
 
 export async function Parse(hConfigFile: DataHandleRead, intermediateScope: DataStoreView): Promise<{ data: DataHandleRead, codeBlock: commonmark.Node }[]> {
   const result: { data: DataHandleRead, codeBlock: commonmark.Node }[] = [];
-  const rawMarkdown = await hConfigFile.ReadData();
+  const rawMarkdown = hConfigFile.ReadData();
   for (const codeBlock of ParseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;
 

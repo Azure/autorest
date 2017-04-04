@@ -34,10 +34,10 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // artifact emitter
   const emitArtifact: (artifactType: string, uri: string, handle: DataHandleRead) => Promise<void> = async (artifactType, uri, handle) => {
     if (From(config.OutputArtifact).Contains(artifactType)) {
-      config.GeneratedFile.Dispatch({ uri: uri, content: await handle.ReadData() });
+      config.GeneratedFile.Dispatch({ uri: uri, content: handle.ReadData() });
     }
     if (From(config.OutputArtifact).Contains(artifactType + ".map")) {
-      config.GeneratedFile.Dispatch({ uri: uri + ".map", content: JSON.stringify(await (await handle.ReadMetadata()).inputSourceMap, null, 2) });
+      config.GeneratedFile.Dispatch({ uri: uri + ".map", content: JSON.stringify(await handle.ReadMetadata().inputSourceMap, null, 2) });
     }
   };
 
@@ -68,7 +68,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   let swagger = config.GetEntry("override-info") || swaggers.length !== 1
     ? await ComposeSwaggers(config, config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
     : swaggers[0];
-  const rawSwagger = await swagger.ReadObject<any>();
+  const rawSwagger = swagger.ReadObject<any>();
 
   config.Debug.Dispatch({ Text: `Done Composing Swaggers.` });
 
@@ -83,7 +83,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     config.Debug.Dispatch({ Text: `relPath: ${relPath}` });
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     const hw = await config.DataStore.Write("normalized-swagger.json");
-    const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, await swagger.ReadYamlAst()), [swagger]);
+    const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, swagger.ReadYamlAst()), [swagger]);
     await emitArtifact("swagger-document", outputFileUri, h);
   }
   config.Debug.Dispatch({ Text: `Done Emitting composed documents.` });

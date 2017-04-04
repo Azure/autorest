@@ -118,7 +118,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope, { namespace: "SomeNamespace" }, m => null);
 
     // check results
-    const codeModel = await codeModelHandle.ReadData();
+    const codeModel = codeModelHandle.ReadData();
     assert.notEqual(codeModel.indexOf("isPolymorphicDiscriminator"), -1);
   }
 

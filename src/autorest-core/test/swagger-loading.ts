@@ -18,7 +18,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       dataStore.GetReadThroughScope(),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-12-01/swagger/applicationGateway.json",
       dataStore.CreateScope("work"));
-    const swaggerObj = await swaggerFile.ReadObject<any>();
+    const swaggerObj = swaggerFile.ReadObject<any>();
 
     // check presence of SubResource (imported from "./network.json")
     assert.strictEqual(swaggerObj.definitions.SubResource != null, true);

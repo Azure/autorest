@@ -131,7 +131,7 @@ export class AutoRestPlugin extends EventEmitter {
       FinishNotifications(): Promise<void> { return finishNotifications; },
       async ReadFile(filename: string): Promise<string> {
         const file = await inputScope.ReadStrict(filename);
-        return await file.ReadData();
+        return file.ReadData();
       },
       async GetValue(key: string): Promise<any> {
         const result = configuration(key);
@@ -152,7 +152,7 @@ export class AutoRestPlugin extends EventEmitter {
 
         const file = await outputScope.Write(filename);
         if (typeof (sourceMap as any).mappings === "string") {
-          await file.WriteDataWithSourceMap(content, async () => sourceMap);
+          await file.WriteDataWithSourceMap(content, () => sourceMap as any);
         } else {
           await file.WriteData(content, sourceMap as Mappings, await inputFileHandles());
         }

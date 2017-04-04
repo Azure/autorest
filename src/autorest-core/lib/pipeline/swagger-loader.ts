@@ -34,7 +34,7 @@ async function EnsureCompleteDefinitionIsPresent(
     currentFileUri = sourceFileUri;
   }
 
-  var currentDoc = await externalFiles[currentFileUri].ReadYamlAst();
+  var currentDoc = externalFiles[currentFileUri].ReadYamlAst();
   if (entityType == null || modelName == null) {
     // external references
     for (const node of Descendants(currentDoc)) {
@@ -86,7 +86,7 @@ async function EnsureCompleteDefinitionIsPresent(
       if (sourceDocObj[referencedEntityType][referencedModelName] === undefined) {
         if (fileUri != null) {
           sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, fileUri, referencedEntityType, referencedModelName);
-          const extObj = await externalFiles[fileUri].ReadObject<any>();
+          const extObj = externalFiles[fileUri].ReadObject<any>();
           inputs.push(externalFiles[fileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = extObj[referencedEntityType][referencedModelName];
           sourceDocMappings.push(...CreateAssignmentMapping(
@@ -96,7 +96,7 @@ async function EnsureCompleteDefinitionIsPresent(
         }
         else {
           sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, referencedEntityType, referencedModelName);
-          const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
+          const currentObj = externalFiles[currentFileUri].ReadObject<any>();
           inputs.push(externalFiles[currentFileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = currentObj[referencedEntityType][referencedModelName];
           sourceDocMappings.push(...CreateAssignmentMapping(
@@ -128,7 +128,7 @@ async function EnsureCompleteDefinitionIsPresent(
       if (typeof defSec === "string" && typeof model === "string" && visitedEntities.indexOf(model) === -1) {
         //recursively check if the model is completely defined.
         sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, defSec, model);
-        const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
+        const currentObj = externalFiles[currentFileUri].ReadObject<any>();
         inputs.push(externalFiles[currentFileUri]);
         sourceDocObj[defSec][model] = currentObj[defSec][model];
         sourceDocMappings.push(...CreateAssignmentMapping(
@@ -148,7 +148,7 @@ async function EnsureCompleteDefinitionIsPresent(
 
 async function StripExternalReferences(swagger: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
   const result = await workingScope.Write("result.yaml");
-  const ast = CloneAst(await swagger.ReadYamlAst());
+  const ast = CloneAst(swagger.ReadYamlAst());
   const mapping = IdentitySourceMapping(swagger.key, ast);
   for (const node of Descendants(ast)) {
     if (node.path[node.path.length - 1] === "$ref") {
@@ -172,8 +172,8 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
     [],
     externalFiles,
     inputFileUri,
-    await data.ReadObject<any>(),
-    IdentitySourceMapping(data.key, await data.ReadYamlAst()));
+    data.ReadObject<any>(),
+    IdentitySourceMapping(data.key, data.ReadYamlAst()));
   const result = await StripExternalReferences(externalFiles[inputFileUri], workingScope.CreateScope("strip-ext-references"));
   //WriteString(`file:///C:/output/${(<any>workingScope).name}_after.yaml`, await result.ReadData());
   return result;
@@ -210,7 +210,7 @@ export async function ComposeSwaggers(config: ConfigurationView, infoSection: an
     for (let i = 0; i < inputSwaggers.length; ++i) {
       const inputSwagger = inputSwaggers[i];
       const outputSwagger = await workingScope.Write(`prepared_${i}.yaml`);
-      const swagger = await inputSwagger.ReadObject<any>();
+      const swagger = inputSwagger.ReadObject<any>();
       const mapping: Mappings = [];
       const populate: (() => void)[] = []; // populate swagger; deferred in order to simplify source map generation
 

@@ -127,7 +127,7 @@ export async function MergeYamls(config: ConfigurationView | null, yamlInputHand
   const mappings: Mappings = [];
   const outstanding = new OutstandingTaskAwaiter();
   for (const yamlInputHandle of yamlInputHandles) {
-    const rawYaml = await yamlInputHandle.ReadData();
+    const rawYaml = yamlInputHandle.ReadData();
     resultObject = Merge(resultObject, yaml.Parse(rawYaml, async (message, index) => {
       outstanding.Enter();
       if (config) {
@@ -138,7 +138,7 @@ export async function MergeYamls(config: ConfigurationView | null, yamlInputHand
       }
       outstanding.Exit();
     }) || {});
-    mappings.push(...IdentitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
+    mappings.push(...IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
   }
   outstanding.Wait();
 

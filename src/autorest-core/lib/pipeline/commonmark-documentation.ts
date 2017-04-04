@@ -45,7 +45,7 @@ export function PlainTextVersion(commonmarkAst: Node): string {
 }
 
 export async function ProcessCodeModel(codeModel: DataHandleRead, scope: DataStoreView): Promise<DataHandleRead> {
-  const ast = CloneAst(await codeModel.ReadYamlAst());
+  const ast = CloneAst(codeModel.ReadYamlAst());
   let mapping = IdentitySourceMapping(codeModel.key, ast);
 
   const cmParser = new Parser();

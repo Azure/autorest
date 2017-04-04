@@ -12,7 +12,7 @@ import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
 import { BlameTree } from "../source-map/blaming";
-import { Lazy } from "../lazy";
+import { Lazy, LazyPromise } from '../lazy';
 import { IFileSystem } from "../file-system";
 
 export const helloworld = "hi"; // TODO: wat?
@@ -22,7 +22,7 @@ export const helloworld = "hi"; // TODO: wat?
  ********************************************/
 
 export interface Metadata {
-  inputSourceMap: Lazy<RawSourceMap>;
+  inputSourceMap: LazyPromise<RawSourceMap>;
   sourceMap: Lazy<RawSourceMap>;
   sourceMapEachMappingByLine: Lazy<sourceMap.MappingItem[][]>;
   yamlAst: Lazy<YAMLNode>;
@@ -60,8 +60,8 @@ export abstract class DataStoreViewReadonly {
     const keys = await this.Enum();
     for (const key of keys) {
       const dataHandle = await this.ReadStrict(key);
-      const data = await dataHandle.ReadData();
-      const metadata = await dataHandle.ReadMetadata();
+      const data = dataHandle.ReadData();
+      const metadata = dataHandle.ReadMetadata();
       const targetFileUri = ResolveUri(
         targetDirUri,
         key.replace(":", "")); // make key (URI) a descriptive relative path
@@ -256,8 +256,8 @@ export class DataStore extends DataStoreView {
 
       // metadata
       const result = await this.ReadStrict(uri);
-      storeEntry.metadata.sourceMap = new Lazy(async () => {
-        const sourceMap = await sourceMapFactory(result);
+      storeEntry.metadata.sourceMap = new Lazy(() => {
+        const sourceMap = sourceMapFactory(result);
 
         // validate
         const inputFiles = sourceMap.sources.concat(sourceMap.file);
@@ -269,10 +269,10 @@ export class DataStore extends DataStoreView {
 
         return sourceMap;
       });
-      storeEntry.metadata.sourceMapEachMappingByLine = new Lazy<sourceMap.MappingItem[][]>(async () => {
+      storeEntry.metadata.sourceMapEachMappingByLine = new Lazy<sourceMap.MappingItem[][]>(() => {
         const result: sourceMap.MappingItem[][] = [];
 
-        const sourceMapConsumer = new SourceMapConsumer(await storeEntry.metadata.sourceMap);
+        const sourceMapConsumer = new SourceMapConsumer(storeEntry.metadata.sourceMap.Value);
 
         // const singleResult = sourceMapConsumer.originalPositionFor(position);
         // does NOT support multiple sources :(
@@ -288,9 +288,9 @@ export class DataStore extends DataStoreView {
 
         return result;
       });
-      storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(uri));
-      storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(async () => parseAst(data));
-      storeEntry.metadata.lineIndices = new Lazy<number[]>(async () => LineIndices(data));
+      storeEntry.metadata.inputSourceMap = new LazyPromise(() => this.CreateInputSourceMapFor(uri));
+      storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(() => parseAst(data));
+      storeEntry.metadata.lineIndices = new Lazy<number[]>(() => LineIndices(data));
       return result;
     });
   }
@@ -301,7 +301,7 @@ export class DataStore extends DataStoreView {
     if (!data) {
       return null;
     }
-    return new DataHandleRead(uri, Promise.resolve(data));
+    return new DataHandleRead(uri, data);
   }
 
   public async Enum(): Promise<string[]> {
@@ -324,8 +324,8 @@ export class DataStore extends DataStoreView {
 
     // retrieve all target positions
     const targetPositions: SmartPosition[] = [];
-    const metadata = await data.ReadMetadata();
-    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
+    const metadata = data.ReadMetadata();
+    const sourceMapConsumer = new SourceMapConsumer(metadata.sourceMap.Value);
     sourceMapConsumer.eachMapping(m => targetPositions.push(<Position>{ column: m.generatedColumn, line: m.generatedLine }));
 
     // collect blame
@@ -356,17 +356,17 @@ export class DataStore extends DataStoreView {
  ********************************************/
 
 export class DataHandleWrite {
-  constructor(public readonly key: string, private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => Promise<RawSourceMap>) => Promise<DataHandleRead>) {
+  constructor(public readonly key: string, private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => RawSourceMap) => Promise<DataHandleRead>) {
   }
 
-  public async WriteDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => Promise<RawSourceMap>): Promise<DataHandleRead> {
+  public async WriteDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => RawSourceMap): Promise<DataHandleRead> {
     return await this.write(data, sourceMapFactory);
   }
 
   public async WriteData(data: string, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
-    return await this.WriteDataWithSourceMap(data, async readHandle => {
+    return await this.WriteDataWithSourceMap(data, readHandle => {
       const sourceMapGenerator = new SourceMapGenerator({ file: this.key });
-      await Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
+      Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
       return sourceMapGenerator.toJSON();
     });
   }
@@ -378,32 +378,28 @@ export class DataHandleWrite {
 
 /* @internal */
 export class DataHandleRead {
-  constructor(public readonly key: string, private read: Promise<Data>) {
+  constructor(public readonly key: string, private read: Data) {
   }
 
-  public async ReadData(): Promise<string> {
-    const data = await this.read;
-    return data.data;
+  public ReadData(): string {
+    return this.read.data;
   }
 
-  public async ReadMetadata(): Promise<Metadata> {
-    const data = await this.read;
-    return data.metadata;
+  public ReadMetadata(): Metadata {
+    return this.read.metadata;
   }
 
-  public async ReadObject<T>(): Promise<T> {
-    const data = await this.ReadData();
-    return Parse<T>(data);
+  public ReadObject<T>(): T {
+    return Parse<T>(this.ReadData());
   }
 
-  public async ReadYamlAst(): Promise<YAMLNode> {
-    const data = await this.ReadMetadata();
-    return await data.yamlAst;
+  public ReadYamlAst(): YAMLNode {
+    return this.ReadMetadata().yamlAst.Value;
   }
 
   public async Blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
-    const metadata = await this.ReadMetadata();
-    const sameLineResults = ((await metadata.sourceMapEachMappingByLine)[position.line] || [])
+    const metadata = this.ReadMetadata();
+    const sameLineResults = (metadata.sourceMapEachMappingByLine.Value[position.line] || [])
       .filter(mapping => mapping.generatedColumn <= position.column);
     const maxColumn = sameLineResults.reduce((c, m) => Math.max(c, m.generatedColumn), 0);
     const columnDelta = position.column - maxColumn;

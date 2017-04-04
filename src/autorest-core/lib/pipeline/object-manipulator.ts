@@ -23,7 +23,7 @@ export async function ManipulateObject(
   }): Promise<{ anyHit: boolean, result: DataHandleRead }> {
 
   // find paths matched by `whereJsonQuery`
-  const allHits = nodes(await src.ReadObject<any>(), whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
+  const allHits = nodes(src.ReadObject<any>(), whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
   if (allHits.length === 0) {
     return { anyHit: false, result: src };
   }
@@ -37,7 +37,7 @@ export async function ManipulateObject(
   }
 
   // process
-  let ast: YAMLNode = await src.ReadYamlAst();
+  let ast: YAMLNode = src.ReadYamlAst();
   const mapping = IdentitySourceMapping(src.key, ast).filter(m => hits.every(hit => !IsPrefix(hit.path, (m.generated as any).path)));
   for (const hit of hits) {
     if (ast === undefined) {
