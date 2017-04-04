@@ -1,7 +1,7 @@
 // polyfills for language support 
 require("../lib/polyfill.min.js");
 
-import { Sleep } from '../lib/sleep';
+import { Delay } from '../lib/sleep';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
@@ -38,7 +38,7 @@ import { Message } from "../lib/message";
   private async TestCancellationAfter(delay: number): Promise<void> {
     const ar = await this.CreateLongRunningAutoRest();
     const proc = ar.Process();
-    await Sleep(delay);
+    await Delay(delay);
     const ms1 = Date.now();
     proc.cancel();
     await proc.finish;
