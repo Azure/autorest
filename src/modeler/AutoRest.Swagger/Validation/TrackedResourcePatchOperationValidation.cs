@@ -59,7 +59,7 @@ namespace AutoRest.Swagger.Validation
 
             foreach (var modelName in violatingModels)
             {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, modelName);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelName)), this, modelName);
             }
         }
     }
