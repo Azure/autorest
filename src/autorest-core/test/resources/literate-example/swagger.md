@@ -88,6 +88,9 @@ definitions:
 #### Description
 Response containing the query API keys for a given Azure Search service.
 
+##### Examples
+I am content under a subheading 
+
 #### Property: value
 The query keys for the Azure Search service.
 
@@ -389,7 +392,7 @@ parameters:
 ### Method Parameter: SearchServiceName
 The name of the Search service to operate on.
 
-```yaml
+``` yaml
 parameters:
   SearchServiceName:
     name: serviceName
@@ -404,7 +407,7 @@ parameters:
 
 The default response will be deserialized as per the Error defintion and will be part of the exception.
 
-```yaml
+```  yaml
 definitions:
   Error:
     type: object

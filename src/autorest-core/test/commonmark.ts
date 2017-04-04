@@ -37,9 +37,13 @@ import { PlainTextVersion } from "../lib/pipeline/commonmark-documentation";
     assert.strictEqual(await autoRest.Process().finish, true);
     assert.notEqual(swaggerDoc, "");
 
+    // check that all descriptions have been resolved
     const swaggerDocObj = JSON.parse(swaggerDoc);
     for (const descrNode of nodes(swaggerDocObj, "$..description")) {
       assert.strictEqual(typeof descrNode.value, "string");
     }
+
+    // check that subheading was included
+    assert.ok(swaggerDocObj.definitions.ListQueryKeysResult.description.indexOf("content under a subheading") !== -1);
   }
 }

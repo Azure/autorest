@@ -65,7 +65,9 @@ function CommonmarkHeadingText(headingNode: commonmark.Node): string {
 function CommonmarkHeadingFollowingText(rawMarkdown: string, headingNode: commonmark.Node): [number, number] {
   let subNode = headingNode.next;
   const startPos = subNode.sourcepos[0];
-  while (subNode.next && subNode.next.type !== "code_block" && subNode.next.type !== commonmarkHeadingNodeType) {
+  while (subNode.next
+    && subNode.next.type !== "code_block"
+    && (subNode.next.type !== commonmarkHeadingNodeType || subNode.next.level > headingNode.level)) {
     subNode = subNode.next;
   }
   const endPos = subNode.sourcepos[1];
@@ -151,12 +153,15 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLitera
     // resolve md documentation (ALPHA)
     let codeBlockIndex = 0;
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
-      ++codeBlockIndex;
+      // only consider YAML/JSON blocks
+      if (!/^(yaml|json)/i.test(codeBlock.info)) {
+        continue;
+      }
 
       const deferredErrors: Message[] = []; // ...because the file we wanna blame is not yet written
 
       const yamlAst = CloneAst(data.ReadYamlAst());
-      let mapping: Mapping[] = [];
+      const mapping: Mapping[] = [];
       for (const { path, node } of Descendants(yamlAst)) {
         // RESOLVE MARKDOWN INTO THE YAML
         if ((path[path.length - 1] === "description" || path[path.length - 1] === "summary") && node.kind === Kind.SEQ) {
@@ -195,8 +200,8 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLitera
 
       // detect changes. If any, remap, otherwise forward data
       if (mapping.length > 0) {
-        mapping = mapping.concat([...IdentitySourceMapping(data.key, yamlAst)]);
-        const hTarget = await scopeEnlightenedCodeBlocks.Write(`${codeBlockIndex}.yaml`);
+        mapping.push(...IdentitySourceMapping(data.key, yamlAst));
+        const hTarget = await scopeEnlightenedCodeBlocks.Write(`${++codeBlockIndex}.yaml`);
         hsConfigFileBlocks.push({ info: codeBlock.info, data: await hTarget.WriteObject(ParseNode(yamlAst), mapping, [hLiterate, data]) });
         outputKey = hTarget.key;
       } else {

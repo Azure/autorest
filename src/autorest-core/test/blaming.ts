@@ -46,6 +46,12 @@ import { parse } from "../lib/ref/jsonpath";
     autoRest.GeneratedFile.Subscribe((_, a) => files.push(a));
     await autoRest.Process().finish;
     assert.strictEqual(files.length, 2);
+
+    // briefly inspect source map
+    const sourceMap = files.filter(x => x.type === "swagger-document.map")[0].content;
+    const sourceMapObj = JSON.parse(sourceMap);
+    assert.ok(sourceMap.length > 100000);
+    assert.ok(sourceMapObj.mappings.split(";").length > 1000);
   }
 
   @test @timeout(60000) async "large swagger performance"() {

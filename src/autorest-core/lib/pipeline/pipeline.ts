@@ -37,7 +37,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       config.GeneratedFile.Dispatch({ type: artifactType, uri: uri, content: handle.ReadData() });
     }
     if (From(config.OutputArtifact).Contains(artifactType + ".map")) {
-      config.GeneratedFile.Dispatch({ type: artifactType + ".map", uri: uri + ".map", content: JSON.stringify(await handle.ReadMetadata().inputSourceMap, null, 2) });
+      config.GeneratedFile.Dispatch({ type: artifactType + ".map", uri: uri + ".map", content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2) });
     }
   };
 
