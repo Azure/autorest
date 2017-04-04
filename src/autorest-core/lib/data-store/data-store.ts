@@ -22,7 +22,7 @@ export const helloworld = "hi"; // TODO: wat?
  ********************************************/
 
 export interface Metadata {
-  inputSourceMap: LazyPromise<RawSourceMap>;
+  inputSourceMap: Lazy<RawSourceMap>;
   sourceMap: Lazy<RawSourceMap>;
   sourceMapEachMappingByLine: Lazy<sourceMap.MappingItem[][]>;
   yamlAst: Lazy<YAMLNode>;
@@ -288,11 +288,15 @@ export class DataStore extends DataStoreView {
 
         return result;
       });
-      storeEntry.metadata.inputSourceMap = new LazyPromise(() => this.CreateInputSourceMapFor(uri));
+      storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(uri));
       storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(() => parseAst(data));
       storeEntry.metadata.lineIndices = new Lazy<number[]>(() => LineIndices(data));
       return result;
     });
+  }
+
+  public ReadStrictSync(absoluteUri: string): DataHandleRead {
+    return new DataHandleRead(absoluteUri, this.store[absoluteUri]);
   }
 
   public async Read(uri: string): Promise<DataHandleRead | null> {
@@ -308,19 +312,19 @@ export class DataStore extends DataStoreView {
     return Object.getOwnPropertyNames(this.store);
   }
 
-  public async Blame(key: string, position: SmartPosition): Promise<BlameTree> {
-    const data = await this.ReadStrict(key);
-    const resolvedPosition = await CompilePosition(position, data);
+  public Blame(absoluteUri: string, position: SmartPosition): BlameTree {
+    const data = this.ReadStrictSync(absoluteUri);
+    const resolvedPosition = CompilePosition(position, data);
     return BlameTree.Create(this, {
-      source: key,
+      source: absoluteUri,
       column: resolvedPosition.column,
       line: resolvedPosition.line,
       name: `blameRoot (${JSON.stringify(position)})`
     });
   }
 
-  private async CreateInputSourceMapFor(key: string): Promise<RawSourceMap> {
-    const data = await this.ReadStrict(key);
+  private CreateInputSourceMapFor(absoluteUri: string): RawSourceMap {
+    const data = this.ReadStrictSync(absoluteUri);
 
     // retrieve all target positions
     const targetPositions: SmartPosition[] = [];
@@ -331,7 +335,7 @@ export class DataStore extends DataStoreView {
     // collect blame
     const mappings: Mapping[] = [];
     for (const targetPosition of targetPositions) {
-      const blameTree = await this.Blame(key, targetPosition);
+      const blameTree = this.Blame(absoluteUri, targetPosition);
       const inputPositions = blameTree.BlameInputs();
       for (const inputPosition of inputPositions) {
         mappings.push({
@@ -342,8 +346,8 @@ export class DataStore extends DataStoreView {
         })
       }
     }
-    const sourceMapGenerator = new SourceMapGenerator({ file: key });
-    await Compile(mappings, sourceMapGenerator);
+    const sourceMapGenerator = new SourceMapGenerator({ file: absoluteUri });
+    Compile(mappings, sourceMapGenerator);
     return sourceMapGenerator.toJSON();
   }
 }
@@ -397,7 +401,7 @@ export class DataHandleRead {
     return this.ReadMetadata().yamlAst.Value;
   }
 
-  public async Blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
+  public Blame(position: sourceMap.Position): sourceMap.MappedPosition[] {
     const metadata = this.ReadMetadata();
     const sameLineResults = (metadata.sourceMapEachMappingByLine.Value[position.line] || [])
       .filter(mapping => mapping.generatedColumn <= position.column);

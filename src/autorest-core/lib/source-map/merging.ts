@@ -125,22 +125,18 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
 export async function MergeYamls(config: ConfigurationView | null, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
   const mappings: Mappings = [];
-  const outstanding = new OutstandingTaskAwaiter();
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = yamlInputHandle.ReadData();
-    resultObject = Merge(resultObject, yaml.Parse(rawYaml, async (message, index) => {
-      outstanding.Enter();
+    resultObject = Merge(resultObject, yaml.Parse(rawYaml, (message, index) => {
       if (config) {
         config.Error.Dispatch({
           Text: message,
-          Source: [{ document: yamlInputHandle.key, Position: await IndexToPosition(yamlInputHandle, index) }]
+          Source: [{ document: yamlInputHandle.key, Position: IndexToPosition(yamlInputHandle, index) }]
         });
       }
-      outstanding.Exit();
     }) || {});
     mappings.push(...IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
   }
-  outstanding.Wait();
 
   const resultObjectRaw = yaml.Stringify(resultObject);
   return await yamlOutputHandle.WriteData(resultObjectRaw, mappings, yamlInputHandles);
