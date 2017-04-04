@@ -34,7 +34,7 @@ or you could have it in a JSON block:
 ## CSharp Settings - Generates the c# version of the API
 
 ~~~ yaml  enabled: $longRunningTest, filename: foo.yaml 
-cSharp:
+csharp:
     output-folder: csharp # relative to base-output 
     namespace: Microsoft.Api.Mysample
 

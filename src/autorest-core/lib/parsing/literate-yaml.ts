@@ -11,6 +11,7 @@ import { Parse as ParseLiterate } from "./literate";
 import { Lines } from "./text-utility";
 import { ConfigurationView } from '../autorest-core';
 import { Channel, Message, SourceLocation } from '../message';
+import { safeEval } from "../ref/safe-eval";
 
 export class CodeBlock {
   info: string | null;
@@ -222,4 +223,24 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLitera
   }
 
   return hsConfigFileBlocks;
+}
+
+export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolean {
+  const match = /\$\((.*)\)/.exec(rawFenceGuard);
+  const guardExpression = match && match[1];
+  if (!guardExpression) {
+    return true;
+  }
+  const context = Object.assign({ $: contextObject }, contextObject);
+  let guardResult = false;
+  try {
+    guardResult = safeEval<boolean>(guardExpression, context);
+  } catch (e) {
+    try {
+      guardResult = safeEval<boolean>("$['" + guardExpression + "']", context);
+    } catch (e) {
+      console.error(`Could not evaulate guard expression '${guardExpression}'.`);
+    }
+  }
+  return guardResult;
 }

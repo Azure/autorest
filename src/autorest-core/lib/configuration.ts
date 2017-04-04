@@ -5,13 +5,12 @@
 
 import { matches } from "./ref/jsonpath";
 import { MergeOverwrite } from "./source-map/merging";
-import { safeEval } from "./ref/safe-eval";
 import { DataStore } from "./data-store/data-store";
 import { EventEmitter, IEvent } from "./events";
-import { CodeBlock, ParseCodeBlocks } from "./parsing/literate-yaml";
+import { CodeBlock, EvaluateGuard, ParseCodeBlocks } from './parsing/literate-yaml';
 import { EnsureIsFolderUri, ResolveUri } from "./ref/uri";
 import { From } from "./ref/linq";
-import { IFileSystem } from "./file-system"
+import { IFileSystem } from "./file-system";
 import * as Constants from "./constants";
 import { Message } from "./message";
 import { Artifact } from "./artifact";
@@ -31,13 +30,13 @@ export interface AutoRestConfigurationImpl {
   "disable-validation"?: boolean;
 
   // from here on: CONVENTION, not cared about by the core
-  "fluent"?: boolean; // TODO: pass to generator instead of handling here
-  "azure-arm"?: boolean; // TODO: pass to generator instead of handling here & enable tooling using guard in default config!
+  "fluent"?: boolean;
+  "azure-arm"?: boolean; // TODO: enable tooling using guard in default config!
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
   "namespace"?: string; // TODO: the modeler cares :( because it is badly designed
   "license-header"?: string;
   "add-credentials"?: boolean;
-  "package-name"?: string; // Ruby
+  "package-name"?: string; // Ruby, Python
   "sync-methods"?: "all" | "essential" | "none";
   "payload-flattening-threshold"?: number;
 }
@@ -45,26 +44,9 @@ export interface AutoRestConfigurationImpl {
 // TODO: operate on DataHandleRead and create source map!
 function MergeConfigurations(a: AutoRestConfigurationImpl, b: AutoRestConfigurationImpl): AutoRestConfigurationImpl {
   // check guard
-  if (b.__info) {
-    const match = /\$\((.*)\)/.exec(b.__info);
-    const guardExpression = match && match[1];
-    if (guardExpression) {
-      const context = Object.assign({ $: a }, a);
-      let guardResult = false;
-      try {
-        guardResult = safeEval<boolean>(guardExpression, context);
-      } catch (e) {
-        try {
-          guardResult = safeEval<boolean>("$['" + guardExpression + "']", context);
-        } catch (e) {
-          console.error(`Could not evaulate guard expression '${guardExpression}'.`);
-        }
-      }
-      // guard false? => skip
-      if (!guardExpression) {
-        return a;
-      }
-    }
+  if (b.__info && !EvaluateGuard(b.__info, a)) {
+    // guard false? => skip
+    return a;
   }
 
   // merge
@@ -134,7 +116,11 @@ export class ConfigurationView extends EventEmitter {
     // for loading in here as all connection to the sources is lost when passing `Array<AutoRestConfigurationImpl>` instead of `DataHandleRead`s...
     // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
     // long term, we simply gotta write a `Merge` method that adheres to the rules we need in here.
-    this.config = <any>{};
+    this.config = <any>{
+      "directive": [],
+      "input-file": [],
+      "output-artifact": []
+    };
     for (const config of configs) {
       this.config = MergeConfigurations(this.config, config);
     }

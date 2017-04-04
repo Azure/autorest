@@ -57,9 +57,9 @@ public class Generator : NewPlugin
     {
       // TODO: sort out matters here entirely instead of relying on Input being read somewhere...
       var inputFile = await GetValue<object>("input-file");
-      if (inputFile is string)
+      if (inputFile is string[])
       {
-        Settings.Instance.Input = inputFile as string;
+        Settings.Instance.Input = (inputFile as string[]).FirstOrDefault();
       }
       Settings.Instance.PackageName = await GetValue("package-name");
       Settings.Instance.PackageVersion = await GetValue("package-version");
