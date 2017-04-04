@@ -13,7 +13,7 @@ import {
   IPCMessageReader, IPCMessageWriter,
   createConnection, IConnection, TextDocumentSyncKind,
   TextDocuments, TextDocument, Diagnostic, DiagnosticSeverity,
-  InitializeParams, InitializeResult, TextDocumentPositionParams, DidChangeConfigurationParams,
+  InitializeParams, InitializeResult, TextDocumentPositionParams, DidChangeConfigurationParams, TextDocumentWillSaveEvent,
   CompletionItem, CompletionItemKind, Range, Position, DidChangeWatchedFilesParams, TextDocumentChangeEvent
 } from 'vscode-languageserver';
 
@@ -314,6 +314,25 @@ export class AutoRestManager extends TextDocuments {
     }
   }
 
+  async onSaving(saving: TextDocumentChangeEvent) {
+    let documentUri = saving.document.uri;
+    let documentContent = saving.document.getText();
+    if (documentUri.endsWith(".md")) {
+      let autorest = new AutoRest({
+        EnumerateFileUris: async function* (folderUri: string): AsyncIterable<string> { },
+        ReadFile: async (f: string): Promise<string> => f == "mem:///foo.md" ? documentContent : null
+      });
+
+      autorest.AddConfiguration({ "input-file": "mem:///foo.md", "output-artifact": ["swagger-document"] });
+      autorest.GeneratedFile.Subscribe(async (source, artifact) => {
+        let localPath = FileUriToPath(documentUri.replace(".md", ".json"));
+        await a.writeFile(localPath, artifact.content);
+      })
+      // run autorest and wait.
+      await (await autorest.Process()).finish;
+    }
+  }
+
   constructor(private connection: IConnection) {
     super();
     this.debug("setting up AutoRestManager.");
@@ -335,6 +354,8 @@ export class AutoRestManager extends TextDocuments {
     // take over configuration file change notifications.
     connection.onDidChangeConfiguration((p) => this.configurationChanged(p));
 
+    // on save
+    this.onDidSave((p) => this.onSaving(p));
     this.listen(connection);
     this.verbose("AutoRestManager is Listening.")
   }
