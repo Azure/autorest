@@ -3,16 +3,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 'use strict';
-
+require('../node_modules/autorest/lib/polyfill.min.js');
 import * as path from 'path';
 
 import { workspace, Disposable, ExtensionContext } from 'vscode';
 import { LanguageClient, LanguageClientOptions, SettingMonitor, ServerOptions, TransportKind } from 'vscode-languageclient';
 import StatusBar from './statusbar/setup';
 
+
 export function activate(context: ExtensionContext) {
   // Set up status bar
-  StatusBar.setup();
+
 
   // The server is implemented in node
   let serverModule = context.asAbsolutePath(path.join('server', 'server.js'));
@@ -43,6 +44,7 @@ export function activate(context: ExtensionContext) {
       ]
 
     }
+
   }
 
   // Create the language client and start the client.
@@ -51,4 +53,6 @@ export function activate(context: ExtensionContext) {
   // Push the disposable to the context's subscriptions so that the 
   // client can be deactivated on extension deactivation
   context.subscriptions.push(disposable);
+
+  StatusBar.setup();
 }

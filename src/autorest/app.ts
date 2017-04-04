@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// polyfills for language support 
+require("./lib/polyfill.min.js")
 import * as https from 'https';
 import { parse as parseUrl } from 'url';
 import { Asset, Release, Github } from './github'
@@ -15,9 +17,6 @@ import { rm } from 'shelljs'
 import * as chalk from 'chalk'
 import { Console } from './console'
 import * as fs from 'fs'
-if (!Symbol.asyncIterator) {
-  require("./lib/polyfill.min.js")
-}
 
 class App {
   private static listAvailable: number = cli['list-available'] ? (Number.isInteger(cli['list-available']) ? cli['list-available'] : 10) : 0;
@@ -246,26 +245,20 @@ class App {
         }));
       }
 
-
       await Promise.all(installs);
 
       // call autorest-core in the target folder
-      if (process.argv.length > 2) {
-        Console.Debug(process.argv);
-        let startPath = join(Installer.AutorestFolder, this.version, 'node_modules', 'autorest-core', 'app.js');
+      let startPath = join(Installer.AutorestFolder, this.version, 'node_modules', 'autorest-core', 'app.js');
+      if (fs.existsSync(startPath)) {
+        require(startPath);
+        return
+      } else {
+        startPath = join(Installer.AutorestFolder, this.version, 'node_modules', 'autorest-app', 'app.js');
         if (fs.existsSync(startPath)) {
           require(startPath);
           return
-        } else {
-          startPath = join(Installer.AutorestFolder, this.version, 'node_modules', 'autorest-app', 'app.js');
-          if (fs.existsSync(startPath)) {
-            require(startPath);
-            return
-          }
         }
         Console.Error("Unable to find start path for AutoRest Core Module.");
-      } else {
-        Console.Log('Use --help to get help information.');
       }
     } catch (exception) {
       Console.Error(exception);

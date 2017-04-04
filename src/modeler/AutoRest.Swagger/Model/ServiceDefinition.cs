@@ -122,6 +122,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(TrackedResourceListBySubscription))]
         [Rule(typeof(TrackedResourcePatchOperationValidation))]
         [Rule(typeof(DescriptionMissing))]
+        [CollectionRule(typeof(RequiredReadOnlyPropertiesValidation))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>
@@ -140,6 +141,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger security definition.
         /// </summary>
+        [Rule(typeof(SecurityDefinitionsStructureValidation))]
         public Dictionary<string, SecurityDefinition> SecurityDefinitions { get; set; }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace AutoRest.Swagger.Validation
             {
                 if (string.IsNullOrWhiteSpace(definition.Value.Description))
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, string.Format(ModelTypeFormatter, definition.Key));
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(definition.Key)), this, string.Format(ModelTypeFormatter, definition.Key));
                 }
             }
         }

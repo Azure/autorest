@@ -16,6 +16,7 @@ namespace AutoRest.Swagger.Model
     /// </summary>
     [Rule(typeof(ParameterDescriptionRequired))]
     [Rule(typeof(XmsClientNameParameterValidation))]
+    [Rule(typeof(BodyParametersValidation))]
     public class SwaggerParameter : SwaggerObject
     {
         private bool _isRequired;
@@ -39,6 +40,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The schema defining the type used for the body parameter.
         /// </summary>
+        [Rule(typeof(RequiredReadOnlyPropertiesValidation))]
         public Schema Schema { get; set; }
 
         /// <summary>

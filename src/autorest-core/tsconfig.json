@@ -11,6 +11,7 @@
     "strictNullChecks": true,
     "declaration": true,
     "stripInternal": true,
+    "noEmitHelpers": true,
     "target": "es2016",
     "types": [
       "node"

@@ -1,0 +1,85 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Checks if the body parameter is named 'parameters'",
+    "description": "Show an error/warning if a body parameter is not named 'parameters'",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/foo": {
+      "get": {
+        "tags": [ "SampleTag" ],
+        "operationId": "Foo_Get",
+        "description": "Test Description",
+        "parameters": [
+          {
+            "name": "parameter_1",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "Test Description"
+          },
+          {
+            "$ref": "#/parameters/SecondParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Response": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        }
+      },
+      "description": "The Response definition."
+    }
+  },
+  "parameters": {
+    "SecondParameter": {
+      "name": "parameter_2",
+      "in": "body",
+      "type": "string",
+      "required": true,
+      "description": "Test Description"
+    }
+  }
+}

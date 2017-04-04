@@ -1,5 +1,5 @@
 import { JsonPath } from '../ref/jsonpath';
-import { EncodePathInName, TryDecodePathFromName } from './source-map';
+import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from './source-map';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -14,13 +14,12 @@ export class BlameTree {
     const blames = await data.Blame(position);
 
     // propagate smart position
-    const jsonPath = TryDecodePathFromName(position.name);
-    if (jsonPath !== undefined) {
+    const enhanced = TryDecodeEnhancedPositionFromName(position.name);
+    if (enhanced !== undefined) {
       for (const blame of blames) {
-        if (!TryDecodePathFromName(blame.name)) {
-          blame.name = EncodePathInName(blame.name, jsonPath);
-          blame.path = jsonPath;
-        }
+        blame.name = EncodeEnhancedPositionInName(blame.name, Object.assign(
+          JSON.parse(JSON.stringify(enhanced)),
+          TryDecodeEnhancedPositionFromName(blame.name) || {}));
       }
     }
 
@@ -31,14 +30,13 @@ export class BlameTree {
     public readonly node: sourceMap.MappedPosition & { path?: JsonPath },
     public readonly blaming: BlameTree[]) { }
 
-  public * BlameInputs(): Iterable<sourceMap.MappedPosition & { path?: JsonPath }> {
+  public * BlameInputs(): Iterable<sourceMap.MappedPosition> {
     // report self
     if (this.node.source.startsWith("input/")) {
       yield {
         column: this.node.column,
         line: this.node.line,
         name: this.node.name,
-        path: this.node.path,
         source: decodeURIComponent(this.node.source.slice(6))
       };
     }

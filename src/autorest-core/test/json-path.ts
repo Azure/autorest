@@ -2,6 +2,8 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+// polyfills for language support 
+require("../lib/polyfill.min.js");
 
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
@@ -47,7 +49,7 @@ import * as jp from "../lib/ref/jsonpath";
   }
 
   @test "round trip simplification"() {
-    assert.equal(this.roundTrip("$[\"asd\"]"), "$.asd");
-    assert.equal(this.roundTrip("$[1][\"asd\"][\"asd qwe\"]"), "$[1].asd[\"asd qwe\"]");
+    assert.equal(this.roundTrip("$[\"definitely\"][\"add\"][\"more\"][\"cowbell\"]"), "$.definitely.add.more.cowbell");
+    assert.equal(this.roundTrip("$[1][\"even\"][\"more cowbell\"]"), "$[1].even[\"more cowbell\"]");
   }
 }

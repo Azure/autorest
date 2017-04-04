@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { JsonPath } from '../ref/jsonpath';
+import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
 import { ReadUri, ResolveUri, WriteString } from "../ref/uri";
@@ -30,7 +30,9 @@ export module KnownScopes {
 export interface Metadata {
   inputSourceMap: Lazy<RawSourceMap>;
   sourceMap: Lazy<RawSourceMap>;
+  sourceMapEachMappingByLine: Lazy<sourceMap.MappingItem[][]>;
   yamlAst: Lazy<YAMLNode>;
+  lineIndices: Lazy<number[]>;
 }
 
 interface Data {
@@ -154,8 +156,8 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 
     // special URI handlers
     // - GitHub
-    if (uri.startsWith('https://github')) {
-      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, 'https://raw.githubusercontent.com$2$3');
+    if (uri.startsWith("https://github")) {
+      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
     }
 
     // prope cache
@@ -184,8 +186,8 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
   public async Read(uri: string): Promise<DataHandleRead> {
     // special URI handlers
     // - GitHub
-    if (uri.startsWith('https://github')) {
-      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, 'https://raw.githubusercontent.com$2$3');
+    if (uri.startsWith("https://github")) {
+      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
     }
 
     // prope cache
@@ -197,7 +199,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
     // populate cache
     let data: string | null = null;
     try {
-      data = await this.fs.ReadFile(uri);
+      data = await this.fs.ReadFile(uri) || await ReadUri(uri);
     } finally {
       if (!data) {
         throw new Error(`FileSystem unable to read file ${uri}.`)
@@ -263,7 +265,7 @@ export class DataStore extends DataStoreView {
 
   private ThrowIfCancelled(): void {
     if (this.cancellationToken.isCancellationRequested) {
-      throw new Error("cancelled");
+      throw "Cancellation requested.";
     }
   }
 
@@ -299,8 +301,28 @@ export class DataStore extends DataStoreView {
 
         return sourceMap;
       });
+      storeEntry.metadata.sourceMapEachMappingByLine = new Lazy<sourceMap.MappingItem[][]>(async () => {
+        const result: sourceMap.MappingItem[][] = [];
+
+        const sourceMapConsumer = new SourceMapConsumer(await storeEntry.metadata.sourceMap);
+
+        // const singleResult = sourceMapConsumer.originalPositionFor(position);
+        // does NOT support multiple sources :(
+        // `singleResult` has null-properties if there is no original
+
+        // get coinciding sources
+        sourceMapConsumer.eachMapping(mapping => {
+          while (result.length <= mapping.generatedLine) {
+            result.push([]);
+          }
+          result[mapping.generatedLine].push(mapping);
+        });
+
+        return result;
+      });
       storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(key));
       storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(async () => parseAst(data));
+      storeEntry.metadata.lineIndices = new Lazy<number[]>(async () => LineIndices(data));
       return result;
     });
   }
@@ -410,21 +432,10 @@ export class DataHandleRead {
     return await data.yamlAst;
   }
 
-  public async Blame(position: sourceMap.Position): Promise<(sourceMap.MappedPosition & { path?: JsonPath })[]> {
+  public async Blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
     const metadata = await this.ReadMetadata();
-    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
-
-    // const singleResult = sourceMapConsumer.originalPositionFor(position);
-    // does NOT support multiple sources :(
-    // `singleResult` has null-properties if there is no original
-
-    // get coinciding sources
-    const sameLineResults: sourceMap.MappingItem[] = [];
-    sourceMapConsumer.eachMapping(mapping => {
-      if (mapping.generatedLine === position.line && mapping.generatedColumn <= position.column) {
-        sameLineResults.push(mapping);
-      }
-    });
+    const sameLineResults = ((await metadata.sourceMapEachMappingByLine)[position.line] || [])
+      .filter(mapping => mapping.generatedColumn <= position.column);
     const maxColumn = sameLineResults.reduce((c, m) => Math.max(c, m.generatedColumn), 0);
     const columnDelta = position.column - maxColumn;
     return sameLineResults.filter(m => m.generatedColumn === maxColumn).map(m => {

@@ -3,18 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CreateAssignmentMapping } from '../source-map/source-map';
-import { IdentitySourceMapping } from '../source-map/merging';
-import { Descendants, StringifyAst, ToAst, YAMLNode } from '../ref/yaml';
-import { ReplaceNode, ResolvePath, ResolveRelativeNode } from '../parsing/yaml';
-import { DataHandleRead, DataStoreView } from '../data-store/data-store';
-import { IsPrefix, JsonPath, nodes, stringify } from '../ref/jsonpath';
-import { Mapping, SmartPosition } from '../ref/source-map';
-import { From } from '../ref/linq';
+import { IdentitySourceMapping } from "../source-map/merging";
+import { Descendants, StringifyAst, ToAst, YAMLNode } from "../ref/yaml";
+import { ReplaceNode, ResolveRelativeNode } from "../parsing/yaml";
+import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
+import { IsPrefix, JsonPath, nodes, stringify } from "../ref/jsonpath";
+import { Mapping, SmartPosition } from "../ref/source-map";
+import { From } from "../ref/linq";
 
 export async function ManipulateObject(
   src: DataHandleRead,
-  workingScope: DataStoreView,
+  target: DataHandleWrite,
   whereJsonQuery: string,
   transformer: (obj: any) => any, // transforming to `undefined` results in removal
   mappingInfo?: {
@@ -72,8 +71,7 @@ export async function ManipulateObject(
   }
 
   // write back
-  const targetHandle = await workingScope.Write("transformed");
-  const resultHandle = await targetHandle.WriteData(StringifyAst(ast), mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
+  const resultHandle = await target.WriteData(StringifyAst(ast), mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
   return {
     anyHit: true,
     result: resultHandle

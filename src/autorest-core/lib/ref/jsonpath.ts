@@ -28,15 +28,20 @@ export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean {
   return prefix.length <= path.length && path.slice(0, prefix.length).every((pc, i) => pc === prefix[i]);
 }
 
-export function matches(jsonQuery: string, jsonPath: JsonPath): boolean {
-  // build dummy object from `jsonPath`
-  const leafNode = "leaf";
-  let obj = leafNode;
+export function CreateObject(jsonPath: JsonPath, leafObject: any): any {
+  let obj = leafObject;
   for (const jsonPathComponent of jsonPath.reverse()) {
     obj = typeof jsonPathComponent === "number"
       ? (() => { const result = Array.apply(null, Array(jsonPathComponent + 1)); result[jsonPathComponent] = obj; return result; })()
       : (() => { const result: any = {}; result[jsonPathComponent] = obj; return result; })();
   }
+  return obj;
+}
+
+export function matches(jsonQuery: string, jsonPath: JsonPath): boolean {
+  // build dummy object from `jsonPath`
+  const leafNode = new Object();
+  const obj = CreateObject(jsonPath, leafNode);
 
   // check that `jsonQuery` on that object returns the `leafNode`
   return nodes(obj, jsonQuery).some(res => res.value === leafNode);

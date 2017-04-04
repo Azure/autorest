@@ -1,3 +1,6 @@
+// polyfills for language support 
+require("../lib/polyfill.min.js");
+
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
@@ -13,8 +16,8 @@ import { Message } from "../lib/message";
     autoRest.Fatal.Subscribe((_, m) => console.error(m.Text));
 
     // reference run
-    autoRest.ResetConfiguration();
-    autoRest.AddConfiguration({ "azure-arm": true });
+    await autoRest.ResetConfiguration();
+    await autoRest.AddConfiguration({ "azure-arm": true });
     let numWarningsRef: number;
     {
       const messages: Message[] = [];
@@ -28,9 +31,9 @@ import { Message } from "../lib/message";
     assert.notEqual(numWarningsRef, 0);
 
     // muted run
-    autoRest.ResetConfiguration();
-    autoRest.AddConfiguration({ "azure-arm": true });
-    autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"] } });
+    await autoRest.ResetConfiguration();
+    await autoRest.AddConfiguration({ "azure-arm": true });
+    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"] } });
     {
       const messages: Message[] = [];
       const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
@@ -47,9 +50,9 @@ import { Message } from "../lib/message";
 
     // makes sure that neither all nor nothing was returned
     const pickyRun = async (directive: any) => {
-      autoRest.ResetConfiguration();
-      autoRest.AddConfiguration({ "azure-arm": true });
-      autoRest.AddConfiguration({ directive: directive });
+      await autoRest.ResetConfiguration();
+      await autoRest.AddConfiguration({ "azure-arm": true });
+      await autoRest.AddConfiguration({ directive: directive });
       {
         const messages: Message[] = [];
         const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
@@ -72,5 +75,45 @@ import { Message } from "../lib/message";
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties" });
     // // document
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties", from: "swagger.md" });
+  }
+
+  @test @timeout(60000) async "set descriptions on different levels"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
+
+    const GenerateCodeModel = async (config: any) => {
+      await autoRest.ResetConfiguration();
+      await autoRest.AddConfiguration({ "output-artifact": "code-model-v1" });
+      await autoRest.AddConfiguration(config);
+
+      let resolve: (content: string) => void;
+      const result = new Promise<string>(res => resolve = res);
+
+      const dispose = autoRest.GeneratedFile.Subscribe((_, a) => { resolve(a.content); dispose(); });
+      await autoRest.Process().finish;
+
+      return result;
+    };
+
+    // reference run
+    const codeModelRef = await GenerateCodeModel({});
+
+    // set descriptions in resolved swagger
+    const codeModelSetDescr1 = await GenerateCodeModel({ directive: { from: "composite", where: "$..description", set: "cowbell" } });
+
+    // set descriptions in code model
+    const codeModelSetDescr2 = await GenerateCodeModel({ directive: { from: "model", where: ["$..description", "$..documentation", "$..['#documentation']"], set: "cowbell" } });
+
+    // transform descriptions in resolved swagger
+    const codeModelSetDescr3 = await GenerateCodeModel({ directive: { from: "composite", where: "$..description", transform: "'cowbell'" } });
+
+    assert.ok(codeModelRef.indexOf("description: cowbell") === -1);
+    assert.ok(codeModelSetDescr1.indexOf("description: cowbell") !== -1);
+    assert.strictEqual(codeModelSetDescr1, codeModelSetDescr2);
+    assert.strictEqual(codeModelSetDescr1, codeModelSetDescr3);
+
+    // transform descriptions in resolved swagger to uppercase
+    const codeModelSetDescr4 = await GenerateCodeModel({ directive: { from: "composite", where: "$..description", transform: "$.toUpperCase()" } });
+    assert.notEqual(codeModelRef, codeModelSetDescr4);
+    assert.strictEqual(codeModelRef.toLowerCase(), codeModelSetDescr4.toLowerCase());
   }
 }

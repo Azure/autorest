@@ -120,7 +120,7 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
   @EmptyLine
 }
 
-  path_template = '@Model.Url'
+  path_template = '@((Model.Url.StartsWith("/") ? Model.Url.TrimStart('/') : (string)Model.Url))'
 
 @EmptyLine
   request_url = @@base_url || @(Model.ClientReference).base_url

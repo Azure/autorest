@@ -10,6 +10,9 @@ import * as promisify from "pify";
 import { Readable } from "stream";
 import { parse } from "url";
 import { sep } from "path";
+// polyfills for language support 
+require("../polyfill.min.js");
+
 const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");
 const getUriAsync: (uri: string) => Promise<Readable> = promisify(getUri);
@@ -120,6 +123,15 @@ export function ParentFolderUri(uri: string): string | null {
  * OS abstraction (writing files, enumerating files)
  ***********************/
 import { readdir, mkdir, exists, writeFile } from "./async";
+import { lstatSync } from "fs";
+
+function isAccessibleFile(localPath: string) {
+  try {
+    return lstatSync(localPath).isFile();
+  } catch (e) {
+    return false;
+  }
+}
 
 function FileUriToLocalPath(fileUri: string): string {
   const uri = parse(fileUri);
@@ -139,8 +151,15 @@ function FileUriToLocalPath(fileUri: string): string {
 }
 
 export async function* EnumerateFiles(folderUri: string, probeFiles: string[] = []): AsyncIterable<string> {
+  folderUri = EnsureIsFolderUri(folderUri);
   if (folderUri.startsWith("file:")) {
-    yield* (await readdir(FileUriToLocalPath(folderUri))).map(f => ResolveUri(folderUri, f));
+    let files: string[] = [];
+    try {
+      files = await readdir(FileUriToLocalPath(folderUri));
+    } catch (e) { }
+    yield* files
+      .map(f => ResolveUri(folderUri, f))
+      .filter(f => isAccessibleFile(FileUriToLocalPath(f)));
   } else {
     for (const candid of probeFiles.map(f => ResolveUri(folderUri, f))) {
       if (await ExistsUri(candid)) {

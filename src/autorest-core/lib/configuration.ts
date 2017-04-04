@@ -1,3 +1,6 @@
+import { matches } from './ref/jsonpath';
+import { MergeOverwrite } from './source-map/merging';
+import { safeEval } from './ref/safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -21,55 +24,68 @@ import { Message } from "./message";
 import { Artifact } from "./artifact";
 import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
 
-export interface AutoRestConfigurationSwitches {
-  [key: string]: string | null;
-}
-
-export interface AutoRestConfigurationSpecials {
-  infoSectionOverride?: any; // from composite swagger file, no equivalent (yet) in config file; IF DOING THAT: also make sure source maps are pulling it! (see "composite swagger" method)
-  header?: string | null;
-  namespace?: string;
-  payloadFlatteningThreshold?: number;
-  syncMethods?: "all" | "essential" | "none";
-  addCredentials?: boolean;
-  rubyPackageName?: string; // TODO: figure out which settings are really just cared about by plugins and then DON'T specify them here (maybe give conventions)
-  outputFile?: string | null;
-}
-
 export interface AutoRestConfigurationImpl {
-  [key: string]: any;
   __info?: string | null;
-  __specials?: AutoRestConfigurationSpecials;
   "input-file": string[] | string;
-  "output-folder"?: string; // TODO: could also be generator specific! (also makes a ton of sense, if you wanna generate for multiple languages at once...)
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
-  "azure-arm"?: boolean | null;
-  "disable-validation"?: boolean | null;
-  "fluent"?: boolean | null;
+  "message-format"?: "json";
+
+  // plugin specific
+  "output-file"?: string;
+  "output-folder"?: string;
+  "disable-validation"?: boolean;
+
+  // from here on: CONVENTION, not cared about by the core
+  "fluent"?: boolean; // TODO: pass to generator instead of handling here
+  "azure-arm"?: boolean; // TODO: pass to generator instead of handling here & enable tooling using guard in default config!
+  "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
+  "namespace"?: string; // TODO: the modeler cares :( because it is badly designed
+  "license-header"?: string;
+  "add-credentials"?: boolean;
+  "package-name"?: string; // Ruby
+  "sync-methods"?: "all" | "essential" | "none";
+  "payload-flattening-threshold"?: number;
 }
 
-function ValuesOf(objs: Iterable<any>, fieldName: string): IEnumerable<any> {
-  return From(objs).Select(o => o[fieldName]).Where(o => o !== undefined);
-}
-
-function SingleValue<T>(objs: Iterable<any>, fieldName: string): T | null {
-  return ValuesOf(objs, fieldName).LastOrDefault() || null;
-}
-
-function MultipleValues<T>(objs: Iterable<any>, fieldName: string): Iterable<T> {
-  return [...(function* () {
-    for (const each of ValuesOf(objs, fieldName)) {
-      if (typeof each === "string") {
-        yield <T><any>each;
-      } else if (each[Symbol.iterator]) {
-        yield* each;
-      } else {
-        yield each;
+// TODO: operate on DataHandleRead and create source map!
+function MergeConfigurations(a: AutoRestConfigurationImpl, b: AutoRestConfigurationImpl): AutoRestConfigurationImpl {
+  // check guard
+  if (b.__info) {
+    const match = /\$\((.*)\)/.exec(b.__info);
+    const guardExpression = match && match[1];
+    if (guardExpression) {
+      const context = Object.assign({ $: a }, a);
+      let guardResult = false;
+      try {
+        guardResult = safeEval<boolean>(guardExpression, context);
+      } catch (e) {
+        try {
+          guardResult = safeEval<boolean>("$['" + guardExpression + "']", context);
+        } catch (e) {
+          console.error(`Could not evaulate guard expression '${guardExpression}'.`);
+        }
+      }
+      // guard false? => skip
+      if (!guardExpression) {
+        return a;
       }
     }
-  })()];
+  }
+
+  // merge
+  return MergeOverwrite(a, b, p => matches("$.directive", p) || matches("$['input-file']", p) || matches("$['output-artifact']", p));
+}
+
+function ValuesOf<T>(obj: any): Iterable<T> {
+  if (obj === undefined) {
+    return [];
+  }
+  if (obj instanceof Array) {
+    return obj;
+  }
+  return [obj];
 }
 
 export interface Directive {
@@ -78,7 +94,7 @@ export interface Directive {
   reason?: string;
 
   // one of:
-  supress?: string[] | string;
+  suppress?: string[] | string;
   set?: string[] | string;
   transform?: string[] | string;
 }
@@ -88,11 +104,11 @@ export class DirectiveView {
   }
 
   public get from(): Iterable<string> {
-    return MultipleValues<string>([this.directive], "from");
+    return ValuesOf<string>(this.directive["from"]);
   }
 
   public get where(): Iterable<string> {
-    return MultipleValues<string>([this.directive], "where");
+    return ValuesOf<string>(this.directive["where"]);
   }
 
   public get reason(): string | null {
@@ -100,15 +116,15 @@ export class DirectiveView {
   }
 
   public get suppress(): Iterable<string> {
-    return MultipleValues<string>([this.directive], "suppress");
+    return ValuesOf<string>(this.directive["suppress"]);
   }
 
   public get set(): Iterable<string> {
-    return MultipleValues<string>([this.directive], "set");
+    return ValuesOf<string>(this.directive["set"]);
   }
 
   public get transform(): Iterable<string> {
-    return MultipleValues<string>([this.directive], "transform");
+    return ValuesOf<string>(this.directive["transform"]);
   }
 }
 
@@ -117,7 +133,7 @@ export class ConfigurationView extends EventEmitter {
   /* @internal */ constructor(
     /* @internal */
     private configFileFolderUri: string,
-    ...configs: Array<AutoRestConfigurationImpl>
+    ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
   ) {
     super();
     this.DataStore = new DataStore(this.CancellationToken);
@@ -125,12 +141,15 @@ export class ConfigurationView extends EventEmitter {
     // for loading in here as all connection to the sources is lost when passing `Array<AutoRestConfigurationImpl>` instead of `DataHandleRead`s...
     // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
     // long term, we simply gotta write a `Merge` method that adheres to the rules we need in here.
-    this.config = configs;
+    this.config = <any>{};
+    for (const config of configs) {
+      this.config = MergeConfigurations(this.config, config);
+    }
     this.Debug.Dispatch({ Text: `Creating ConfigurationView : ${configs.length} sections.` });
   }
 
   /* @internal */
-  public readonly DataStore: DataStore;
+  public DataStore: DataStore;
 
   private cancellationTokenSource = new CancellationTokenSource();
   /* @internal */
@@ -147,7 +166,7 @@ export class ConfigurationView extends EventEmitter {
   @EventEmitter.Event public Verbose: IEvent<ConfigurationView, Message>;
   @EventEmitter.Event public Fatal: IEvent<ConfigurationView, Message>;
 
-  private config: Array<AutoRestConfigurationImpl>;
+  private config: AutoRestConfigurationImpl;
 
   private ResolveAsFolder(path: string): string {
     return EnsureIsFolderUri(ResolveUri(this.BaseFolderUri, path));
@@ -158,50 +177,58 @@ export class ConfigurationView extends EventEmitter {
   }
 
   private get BaseFolderUri(): string {
-    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, SingleValue<string>(this.config, "base-folder") || "."));
+    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, this.config["base-folder"] || "."));
   }
 
   // public methods
 
   public get Directives(): Iterable<DirectiveView> {
-    return From(MultipleValues<Directive>(this.config, "directive"))
+    return From(ValuesOf<Directive>(this.config["directive"]))
       .Select(each => new DirectiveView(each));
   }
 
   public get InputFileUris(): Iterable<string> {
-    return From<string>(MultipleValues<string>(this.config, "input-file"))
+    return From<string>(ValuesOf<string>(this.config["input-file"]))
       .Select(each => this.ResolveAsPath(each));
   }
 
   public get OutputFolderUri(): string {
-    return this.ResolveAsFolder(SingleValue<string>(this.config, "output-folder") || "generated");
-  }
-
-  public get __specials(): AutoRestConfigurationSpecials {
-    return ValuesOf(this.config, "__specials").FirstOrDefault() || {};
-  }
-
-  public PluginSection(pluginName: string): any {
-    return SingleValue<any>(this.config, pluginName);
-  }
-
-  public get DisableValidation(): boolean {
-    return SingleValue<boolean>(this.config, "disable-validation") || false;
-  }
-
-  public get AzureArm(): boolean {
-    return SingleValue<boolean>(this.config, "azure-arm") || false;
-  }
-
-  public get Fluent(): boolean {
-    return SingleValue<boolean>(this.config, "fluent") || false;
+    return this.ResolveAsFolder(this.config["output-folder"] || "generated");
   }
 
   public get OutputArtifact(): Iterable<string> {
-    return MultipleValues<string>(this.config, "output-artifact");
+    return ValuesOf<string>(this.config["output-artifact"]);
   }
 
-  // TODO: stuff like generator specific settings (= YAML merging root with generator's section)
+  public GetEntry(key: keyof AutoRestConfigurationImpl): any {
+    return (this.config as any)[key];
+  }
+
+  public get DisableValidation(): boolean {
+    return this.config["disable-validation"] || false;
+  }
+
+  public get AzureArm(): boolean {
+    return this.config["azure-arm"] || false;
+  }
+
+  public get Fluent(): boolean {
+    return this.config["fluent"] || false;
+  }
+
+  public GetPluginView(pluginName: string): ConfigurationView {
+    const result = new ConfigurationView(this.configFileFolderUri, (this.config as any)[pluginName], this.config);
+    result.DataStore = this.DataStore;
+    result.cancellationTokenSource = this.cancellationTokenSource;
+    result.GeneratedFile.Subscribe((_, m) => this.GeneratedFile.Dispatch(m));
+    result.Information.Subscribe((_, m) => this.Information.Dispatch(m));
+    result.Warning.Subscribe((_, m) => this.Warning.Dispatch(m));
+    result.Error.Subscribe((_, m) => this.Error.Dispatch(m));
+    result.Debug.Subscribe((_, m) => this.Debug.Dispatch(m));
+    result.Verbose.Subscribe((_, m) => this.Verbose.Dispatch(m));
+    result.Fatal.Subscribe((_, m) => this.Fatal.Dispatch(m));
+    return result;
+  }
 }
 
 
@@ -215,7 +242,7 @@ export class Configuration {
     const defaults = require("../resources/default-configuration.json");
 
     if (configFileUri === null) {
-      return new ConfigurationView("file:///", defaults, ...configs);
+      return new ConfigurationView("file:///", ...configs, defaults);
     } else {
       const inputView = workingScope.CreateScope("input").AsFileScopeReadThroughFileSystem(this.fileSystem as IFileSystem);
 
@@ -231,7 +258,7 @@ export class Configuration {
         return block;
       }));
 
-      return new ConfigurationView(ResolveUri(configFileUri, "."), defaults, ...configs, ...blocks);
+      return new ConfigurationView(ResolveUri(configFileUri, "."), ...configs, ...blocks, defaults);
     }
   }
 
@@ -272,13 +299,12 @@ export class Configuration {
       }
 
       // walk up
-      uriToConfigFileOrWorkingFolder = ResolveUri(uriToConfigFileOrWorkingFolder, "..");
+      const newUriToConfigFileOrWorkingFolder = ResolveUri(uriToConfigFileOrWorkingFolder, "..");
+      uriToConfigFileOrWorkingFolder = newUriToConfigFileOrWorkingFolder === uriToConfigFileOrWorkingFolder
+        ? null
+        : newUriToConfigFileOrWorkingFolder;
     }
 
-    return null
+    return null;
   }
-
-  // public async HasConfiguration(): Promise<boolean> {
-  //   return await this.DetectConfigurationFile() !== null;
-  // }
 }

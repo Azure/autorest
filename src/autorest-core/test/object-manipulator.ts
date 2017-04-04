@@ -2,6 +2,8 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+// polyfills for language support 
+require("../lib/polyfill.min.js");
 
 import { safeEval } from "../lib/ref/safe-eval";
 import { DataStore } from "../lib/data-store/data-store";
@@ -42,7 +44,7 @@ definitions:
     const input = await inputWrite.WriteData(this.exampleObject);
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
-      const result = await ManipulateObject(input, dataStore.CreateScope(`manip${(await dataStore.Enum()).length}`), jsonQuery, x => x);
+      const result = await ManipulateObject(input, await dataStore.Write(`manip${(await dataStore.Enum()).length}`), jsonQuery, x => x);
       assert.strictEqual(result.anyHit, anyHit, jsonQuery);
     };
 
@@ -67,7 +69,7 @@ definitions:
     const input = await inputWrite.WriteData(this.exampleObject);
 
     // remove all models that don't have a description
-    const result = await ManipulateObject(input, dataStore.CreateScope(`manip1`), "$.definitions[?(!@.description)]", x => undefined);
+    const result = await ManipulateObject(input, await dataStore.Write(`manip1`), "$.definitions[?(!@.description)]", x => undefined);
     assert.strictEqual(result.anyHit, true);
     const resultRaw = await result.result.ReadData();
     assert.ok(resultRaw.indexOf("NodeA") !== -1);
@@ -83,7 +85,7 @@ definitions:
     {
       // override all existing model descriptions
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, dataStore.CreateScope(`manip1`), "$.definitions.*.description", x => bestDescriptionEver);
+      const result = await ManipulateObject(input, await dataStore.Write(`manip1`), "$.definitions.*.description", x => bestDescriptionEver);
       assert.strictEqual(result.anyHit, true);
       const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
@@ -91,7 +93,7 @@ definitions:
     {
       // override & insert all model descriptions
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, dataStore.CreateScope(`manip2`), "$.definitions.*", x => { x.description = bestDescriptionEver; return x; });
+      const result = await ManipulateObject(input, await dataStore.Write(`manip2`), "$.definitions.*", x => { x.description = bestDescriptionEver; return x; });
       assert.strictEqual(result.anyHit, true);
       const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
@@ -100,7 +102,7 @@ definitions:
     {
       // make all descriptions upper case
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, dataStore.CreateScope(`manip3`), "$..description", x => (x as string).toUpperCase());
+      const result = await ManipulateObject(input, await dataStore.Write(`manip3`), "$..description", x => (x as string).toUpperCase());
       assert.strictEqual(result.anyHit, true);
       const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, "DESCRIPTION");
@@ -109,7 +111,7 @@ definitions:
     {
       // make all descriptions upper case by using safe-eval
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, dataStore.CreateScope(`manip4`), "$..description", x => safeEval("$.toUpperCase()", { $: x }));
+      const result = await ManipulateObject(input, await dataStore.Write(`manip4`), "$..description", x => safeEval("$.toUpperCase()", { $: x }));
       assert.strictEqual(result.anyHit, true);
       const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, "DESCRIPTION");

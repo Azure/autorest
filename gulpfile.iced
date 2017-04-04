@@ -3,6 +3,7 @@ global.basefolder = "#{__dirname}"
 
 # use our tweaked version of gulp with iced coffee.
 require './src/gulp_modules/gulp.iced'
+semver = require 'semver'
 
 # tasks required for this build 
 Tasks "dotnet",  # compiling dotnet
@@ -125,8 +126,9 @@ task 'autorest', 'Runs AutoRest', (done)->
   else  
     Fail "You must run #{ info 'gulp build'}' first"
 
-
 task 'init', "" ,(done)->
+  Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 6.9.5" if semver.lt( process.versions.node , "6.9.5" )
+
   return done() if initialized
   global.initialized = true
   # if the node_modules isn't created, do it.
@@ -172,3 +174,24 @@ task 'init', "" ,(done)->
       next null
 
   return null
+
+task 'find-rogue-node-modules','Shows the unrecognized node_modules folders in the source tree', ->
+  source ["**/node_modules", 
+    "!node_modules"
+    "!node_modules/**"
+    "!src/autorest/node_modules"
+    "!src/autorest/node_modules/**"
+    "!src/autorest-core/node_modules"
+    "!src/autorest-core/node_modules/**"
+    "!src/vscode-autorest/node_modules"
+    "!src/vscode-autorest/node_modules/**"
+    "!src/generator/AutoRest.NodeJS.Azure.Tests/node_modules"
+    "!src/generator/AutoRest.NodeJS.Azure.Tests/node_modules/**"
+    "!src/generator/AutoRest.NodeJS.Tests/node_modules"
+    "!src/generator/AutoRest.NodeJS.Tests/node_modules/**"
+    "!src/dev/TestServer/server/node_modules"
+    "!src/dev/TestServer/server/node_modules/**"
+    "!src/core/AutoRest/**"
+  ]
+    .pipe showFiles()
+  

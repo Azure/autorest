@@ -223,6 +223,9 @@ Modelers:
   <data name="AnonymousTypesDiscouraged" xml:space="preserve">
     <value>Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.</value>
   </data>
+  <data name="SecurityDefinitionsStructureValidation" xml:space="preserve">
+    <value>A swagger must have security definitions and must adhere to the specific structure.</value>
+  </data>
   <data name="MsdnReferencesDiscouraged" xml:space="preserve">
     <value>For better generated code quality, remove all references to "msdn.microsoft.com".</value>
   </data>
@@ -231,6 +234,12 @@ Modelers:
   </data>
   <data name="HttpVerbIsNotValid" xml:space="preserve">
     <value>Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. </value>
+  </data>
+  <data name="BodyParametersNotValid" xml:space="preserve">
+    <value>A body parameter must be named 'parameters'.</value>
+  </data>
+  <data name="RequiredReadOnlyPropertiesValidation" xml:space="preserve">
+    <value>Property '{0}' is a required property. It should not be marked as 'readonly'.</value>
   </data>
   <data name="ResourceModelIsNotValid" xml:space="preserve">
     <value>The id, name, type, location and tags properties of the Resource must be present with id, name and type as read-only</value>

@@ -1,0 +1,1348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on entities like API, Product, and Subscription associated with your Azure API Management deployment.",
+    "version": "2016-07-07"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/{quotaPeriodKey}": {
+      "get": {
+        "tags": [
+          "QuotaByPeriodKeys"
+        ],
+        "operationId": "QuotaByPeriodKeys_Get",
+        "description": "Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies",
+          "description": "Document describing how to configure the quota policies."
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the Quota counter details for the specified period.",
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "QuotaByPeriodKeys"
+        ],
+        "operationId": "QuotaByPeriodKeys_Update",
+        "description": "Updates an existing quota counter value in the specified service instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaCounterKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaCounterValueContract"
+            },
+            "description": "The value of the Quota counter to be applied on the specified period."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The quota counter value was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorBodyContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OAuth2AuthenticationSettingsContract": {
+      "properties": {
+        "authorizationServerId": {
+          "type": "string",
+          "description": "OAuth authorization server identifier."
+        },
+        "scope": {
+          "type": "string",
+          "description": "operations scope."
+        }
+      },
+      "description": "API OAuth2 Authentication settings details."
+    },
+    "AuthenticationSettingsContract": {
+      "properties": {
+        "oAuth2": {
+          "$ref": "#/definitions/OAuth2AuthenticationSettingsContract"
+        }
+      },
+      "description": "API Authentication Settings."
+    },
+    "SubscriptionKeyParameterNamesContract": {
+      "properties": {
+        "header": {
+          "type": "string",
+          "description": "Subscription key header name."
+        },
+        "query": {
+          "type": "string",
+          "description": "Subscription key query string parameter name."
+        }
+      },
+      "description": "Subscription key parameter names details.",
+      "example": {
+        "subscriptionKeyParameterNames": {
+          "query": "customQueryParameterName",
+          "header": "customHeaderParameterName"
+        }
+      }
+    },
+    "ApiContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "API identifier path: /apis/{apiId}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "API name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the API. May include HTML formatting tags."
+        },
+        "serviceUrl": {
+          "type": "string",
+          "description": "Absolute URL of the backend service implementing this API.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.",
+          "minLength": 0,
+          "maxLength": 400
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Http",
+              "Https"
+            ],
+            "x-ms-enum": {
+              "name": "ApiProtocolContract",
+              "modelAsString": false
+            }
+          },
+          "description": "Describes on which protocols the operations in this API can be invoked."
+        },
+        "authenticationSettings": {
+          "$ref": "#/definitions/AuthenticationSettingsContract",
+          "description": "Collection of authentication settings included into this API."
+        },
+        "subscriptionKeyParameterNames": {
+          "$ref": "#/definitions/SubscriptionKeyParameterNamesContract",
+          "description": "Protocols over which API is made available."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of API.",
+          "enum": [
+            "Http",
+            "Soap"
+          ],
+          "x-ms-enum": {
+            "name": "ApiTypeContract",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name",
+        "serviceUrl",
+        "path",
+        "protocols"
+      ],
+      "description": "API details."
+    },
+    "ApiCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Api list representation."
+    },
+    "PatchParameters": {
+      "properties": {
+        "RawJson": {
+          "type": "object",
+          "description": "json value."
+        }
+      },
+      "required": [
+        "RawJson"
+      ],
+      "description": "Parameters supplied to the Patch operations."
+    },
+    "ApiExportResult": {
+      "properties": {
+        "content": {
+          "type": "string",
+          "format": "byte",
+          "description": "Response content bytes."
+        },
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "Continue",
+            "OK",
+            "Created",
+            "Accepted",
+            "NotFound",
+            "Conflict"
+          ],
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": false
+          }
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "description": "The response model for the export API output operation."
+    },
+    "ParameterContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Parameter description."
+        },
+        "type": {
+          "type": "string",
+          "description": "Parameter type."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default parameter value."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "whether parameter is required or not."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Parameter values."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "Operation parameters details."
+    },
+    "RepresentationContract": {
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "Specifies a registered or custom content type for this representation, e.g. application/xml."
+        },
+        "sample": {
+          "type": "string",
+          "description": "An example of the representation."
+        }
+      },
+      "required": [
+        "contentType"
+      ],
+      "description": "Operation request/response representation details."
+    },
+    "RequestContract": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Operation request description."
+        },
+        "queryParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterContract"
+          },
+          "description": "Collection of operation request query parameters."
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterContract"
+          },
+          "description": "Collection of operation request headers."
+        },
+        "representations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RepresentationContract"
+          },
+          "description": "Collection of operation request representations."
+        }
+      },
+      "description": "Operation request details."
+    },
+    "ResultContract": {
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Operation response HTTP status code.",
+          "minimum": 100,
+          "maximum": 599
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation response description."
+        },
+        "representations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RepresentationContract"
+          },
+          "description": "Collection of operation response representations."
+        }
+      },
+      "required": [
+        "statusCode"
+      ],
+      "description": "Operation response details."
+    },
+    "OperationContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the operation within the current API Management service instance. The value is a valid relative URL in the format of /apis/{aid}/operations/{id} where {aid} is an API identifier and {id} is an operation identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation Name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "method": {
+          "type": "string",
+          "description": "A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.",
+          "externalDocs": {
+            "description": "As defined by RFC.",
+            "url": "http://www.rfc-editor.org/rfc/rfc7230.txt"
+          }
+        },
+        "urlTemplate": {
+          "type": "string",
+          "description": "Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "templateParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParameterContract"
+          },
+          "description": "Collection of URL template parameters."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation. May include HTML formatting tags.",
+          "maxLength": 1000
+        },
+        "request": {
+          "$ref": "#/definitions/RequestContract",
+          "description": "An entity containing request details."
+        },
+        "responses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResultContract"
+          },
+          "description": "Array of Operation responses."
+        }
+      },
+      "required": [
+        "name",
+        "method",
+        "urlTemplate"
+      ],
+      "description": "Api Operation details."
+    },
+    "OperationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Operation list representation."
+    },
+    "ProductContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the product within the current API Management service instance. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Product name.",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "description": {
+          "type": "string",
+          "description": "Product description. May include HTML formatting tags.",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "terms": {
+          "type": "string",
+          "description": "Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true.",
+          "default": true
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false."
+        },
+        "subscriptionsLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+        },
+        "state": {
+          "type": "string",
+          "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is NotPublished.",
+          "enum": [
+            "NotPublished",
+            "Published"
+          ],
+          "default": "NotPublished",
+          "x-ms-enum": {
+            "name": "ProductStateContract",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Product profile."
+    },
+    "ProductCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Products list representation."
+    },
+    "SubscriptionContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the subscription within the current API Management service instance. The value is a valid relative URL in the format of /subscriptions/{sid} where {sid} is a subscription identifier.",
+          "readOnly": true
+        },
+        "userId": {
+          "type": "string",
+          "description": "The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier."
+        },
+        "productId": {
+          "type": "string",
+          "description": "The product resource identifier of the subscribed product. The value is a valid relative URL in the format of /products/{productId} where {productId} is a product identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the subscription, or null if the subscription has no name.",
+          "minLength": 0,
+          "maxLength": 100
+        },
+        "state": {
+          "type": "string",
+          "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
+          "enum": [
+            "Suspended",
+            "Active",
+            "Expired",
+            "Submitted",
+            "Rejected",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionStateContract",
+            "modelAsString": false
+          }
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription creation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n",
+          "readOnly": true
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription activation date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription expiration date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when subscription was cancelled or expired. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "notificationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Subscription primary key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Subscription secondary key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "stateComment": {
+          "type": "string",
+          "description": "Optional subscription comment added by an administrator."
+        }
+      },
+      "description": "Subscription details."
+    },
+    "SubscriptionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Subsctions list representation."
+    },
+    "SubscriptionCreateParameters": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User (user id path) for whom subscription is being created in form /users/{uid}"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product (product id path) for which subscription is being created in form /products/{productid}"
+        },
+        "name": {
+          "type": "string",
+          "description": "Subscription name.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary subscription key. If not specified during request key will be generated automatically.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Secondary subscription key. If not specified during request key will be generated automatically.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "state": {
+          "type": "string",
+          "description": "Initial subscription state. If no value is specified, subscription is created with Submitted state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
+          "enum": [
+            "Suspended",
+            "Active",
+            "Expired",
+            "Submitted",
+            "Rejected",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionStateContract",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "userId",
+        "productId",
+        "name"
+      ],
+      "description": "Parameters supplied to the Create subscription operation."
+    },
+    "SubscriptionUpdateParameters": {
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User identifier path: /users/{uid}"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product identifier path: /products/{productId}"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "New subscription expiration date."
+        },
+        "name": {
+          "type": "string",
+          "description": "Subscription name."
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary subscription key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Secondary subscription key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "state": {
+          "type": "string",
+          "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
+          "enum": [
+            "Suspended",
+            "Active",
+            "Expired",
+            "Submitted",
+            "Rejected",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionStateContract",
+            "modelAsString": false
+          }
+        },
+        "stateComment": {
+          "type": "string",
+          "description": "Comments describing subscription state change by the administrator."
+        }
+      },
+      "description": "Parameters supplied to the Update subscription operation."
+    },
+    "ProductUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Product name.",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Product description.",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "terms": {
+          "type": "string",
+          "description": "Product terms and conditions. Developer will have to accept these terms before he's allowed to call product API."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true."
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false."
+        },
+        "subscriptionsLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+        },
+        "state": {
+          "type": "string",
+          "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators.",
+          "enum": [
+            "NotPublished",
+            "Published"
+          ],
+          "x-ms-enum": {
+            "name": "ProductStateContract",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Parameters supplied to the CreateOrUpdate Product operation."
+    },
+    "GroupContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the group within the current API Management service instance. The value is a valid relative URL in the format of /groups/{groupid} where {groupid} is a group identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Group name.",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Group description. Can contain HTML formatting tags.",
+          "maxLength": 1000
+        },
+        "builtIn": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "true if the group is one of the three system groups (Administrators, Developers, or Guests); otherwise false."
+        },
+        "type": {
+          "type": "string",
+          "description": "Group type.",
+          "readOnly": true,
+          "enum": [
+            "Custom",
+            "System",
+            "External"
+          ],
+          "x-ms-enum": {
+            "name": "GroupTypeContract",
+            "modelAsString": false
+          }
+        },
+        "externalId": {
+          "type": "string",
+          "description": "For external groups, this property contains the id of the group from the external identity provider, e.g. Azure Active Directory; otherwise the value is null.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Developer group."
+    },
+    "GroupCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Group list representation."
+    },
+    "GroupCreateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Group name.",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Group description."
+        },
+        "type": {
+          "type": "string",
+          "description": "Group type.",
+          "enum": [
+            "Custom",
+            "System",
+            "External"
+          ],
+          "x-ms-enum": {
+            "name": "GroupTypeContract",
+            "modelAsString": false
+          }
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Identifier for an external group."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Parameters supplied to the Create Group operation."
+    },
+    "GroupUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Group name.",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Group description."
+        },
+        "type": {
+          "type": "string",
+          "description": "Group type.",
+          "enum": [
+            "Custom",
+            "System",
+            "External"
+          ],
+          "x-ms-enum": {
+            "name": "GroupTypeContract",
+            "modelAsString": false
+          }
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Identifier for an external group."
+        }
+      },
+      "description": "Parameters supplied to the Update Group operation."
+    },
+    "UserIdentityContract": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Identity provider name."
+        },
+        "id": {
+          "type": "string",
+          "description": "Identifier value within provider."
+        }
+      },
+      "description": "User identity details."
+    },
+    "UserContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "User identifier path."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address."
+        },
+        "state": {
+          "type": "string",
+          "description": "User state.",
+          "enum": [
+            "Active",
+            "Blocked"
+          ],
+          "x-ms-enum": {
+            "name": "UserStateContract",
+            "modelAsString": false
+          }
+        },
+        "registrationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "note": {
+          "type": "string",
+          "description": "Administrator's note about given user."
+        },
+        "identities": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserIdentityContract"
+          },
+          "description": "Collection of user identities."
+        }
+      },
+      "description": "User profile."
+    },
+    "UserCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Users list representation."
+    },
+    "CertificateContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Certificate identifier path: /certificates/{certificateId}",
+          "readOnly": true
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject attribute of the certificate."
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the certificate."
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        }
+      },
+      "required": [
+        "subject",
+        "thumbprint",
+        "expirationDate"
+      ],
+      "description": "Certificate details."
+    },
+    "CertificateCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total records count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Certificates list representation."
+    },
+    "CertificateCreateOrUpdateParameters": {
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Base 64 encoded certificate using the application/x-pkcs12 representation."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password for the Certificate"
+        }
+      },
+      "required": [
+        "data",
+        "password"
+      ],
+      "description": "Parameters supplied to the CreateOrUpdate certificate operation."
+    },
+    "PolicySnippetContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Snippet name.",
+          "readOnly": true
+        },
+        "content": {
+          "type": "string",
+          "description": "Snippet content.",
+          "readOnly": true
+        },
+        "toolTip": {
+          "type": "string",
+          "description": "Snippet toolTip.",
+          "readOnly": true
+        },
+        "scope": {
+          "type": "string",
+          "description": "Snippet scope.",
+          "enum": [
+            "Tenant",
+            "Product",
+            "Api",
+            "Operation",
+            "All"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PolicyScopeContract",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Policy snippet."
+    },
+    "UserCreateParameters": {
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email address. Must not be empty and must be unique within the service instance.",
+          "minLength": 1,
+          "maxLength": 254
+        },
+        "password": {
+          "type": "string",
+          "description": "User Password."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "state": {
+          "type": "string",
+          "description": "Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.",
+          "enum": [
+            "Active",
+            "Blocked"
+          ],
+          "default": "Active",
+          "x-ms-enum": {
+            "name": "UserStateContract",
+            "modelAsString": false
+          }
+        },
+        "note": {
+          "type": "string",
+          "description": "Optional note about a user set by the administrator."
+        }
+      },
+      "required": [
+        "email",
+        "password",
+        "firstName",
+        "lastName"
+      ],
+      "description": "Parameters supplied to the Create User operation."
+    },
+    "ErrorFieldContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Property level error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of property-level error."
+        },
+        "target": {
+          "type": "string",
+          "description": "Property name."
+        }
+      },
+      "description": "Error Field contract."
+    },
+    "ErrorBodyContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "description": "The list of invalid fields send in request, in case of validation error."
+        }
+      },
+      "description": "Error Body contract."
+    },
+    "QuotaCounterContract": {
+      "properties": {
+        "counterKey": {
+          "type": "string",
+          "description": "The Key value of the Counter. Must not be empty.",
+          "minLength": 1
+        },
+        "periodKey": {
+          "type": "string",
+          "description": "Identifier of the Period for which the counter was collected. Must not be empty.",
+          "minLength": 1
+        },
+        "periodStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        },
+        "periodEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/QuotaCounterValueContract"
+        }
+      ],
+      "required": [
+        "counterKey",
+        "periodKey",
+        "periodStartTime",
+        "periodEndTime"
+      ],
+      "description": "Quota counter details."
+    },
+    "QuotaCounterValueContract": {
+      "properties": {
+        "callsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times Counter was called."
+        },
+        "kbTransferred": {
+          "type": "number",
+          "format": "double",
+          "description": "Data Transferred in KiloBytes."
+        }
+      },
+      "description": "Quota counter value details."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request."
+    },
+    "ServiceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the API Management service.",
+      "minLength": 1,
+      "maxLength": 50,
+      "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "TopQueryParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to return.",
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaCounterKeyParameter": {
+      "name": "quotaCounterKey",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Quota counter key identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaPeriodKeyParameter": {
+      "name": "quotaPeriodKey",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Quota period key identifier.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

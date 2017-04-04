@@ -1,3 +1,6 @@
+// polyfills for language support 
+require("../node_modules/autorest/lib/polyfill.min.js");
+
 // 
 // Note: This example test is leveraging the Mocha test framework.
 // Please refer to their documentation on https://mochajs.org/ for help.

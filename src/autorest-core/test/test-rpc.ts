@@ -1,3 +1,6 @@
+// polyfills for language support 
+require("../lib/polyfill.min.js");
+
 import * as cp from 'child_process';
 import * as rpc from 'vscode-jsonrpc';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";

@@ -1,3 +1,6 @@
+// polyfills for language support 
+require("../lib/polyfill.min.js");
+
 import { Sleep } from '../lib/sleep';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
@@ -8,9 +11,9 @@ import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message } from "../lib/message";
 
 @suite class Cancellation {
-  private CreateLongRunningAutoRest(): AutoRest {
+  private async CreateLongRunningAutoRest(): Promise<AutoRest> {
     const autoRest = new AutoRest(new RealFileSystem());
-    autoRest.AddConfiguration({
+    await autoRest.AddConfiguration({
       "input-file": [
         "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2017-03-01/swagger/applicationGateway.json",
         "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2017-03-01/swagger/checkDnsAvailability.json",
@@ -33,7 +36,7 @@ import { Message } from "../lib/message";
   }
 
   private async TestCancellationAfter(delay: number): Promise<void> {
-    const ar = this.CreateLongRunningAutoRest();
+    const ar = await this.CreateLongRunningAutoRest();
     const proc = ar.Process();
     await Sleep(delay);
     const ms1 = Date.now();
@@ -41,8 +44,8 @@ import { Message } from "../lib/message";
     await proc.finish;
     const ms2 = Date.now();
 
-    assert.ok(ms2 - ms1 < 500);
     console.log(ms2 - ms1);
+    assert.ok(ms2 - ms1 < 500);
   }
 
   @test @timeout(60000) async "immediate"() { await this.TestCancellationAfter(0); }

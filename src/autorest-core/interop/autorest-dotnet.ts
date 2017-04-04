@@ -56,14 +56,22 @@ function DotNetPath() {
     return result;
   }
 
+  result = path.join(homedir(), ".autorest", "frameworks", "dotnet.exe")
+  if (fs.existsSync(result)) {
+    return result;
+  }
+
   // hope there is one in the PATH
   return "dotnet";
 }
 
 export function SpawnLegacyAutoRest(args: string[]): ChildProcess {
+  const autorestdll = AutoRestDllPath();
+  const dotnet = /autorest.src.core/ig.test(autorestdll) ? "dotnet" : DotNetPath();
+
   return spawn(
-    DotNetPath(),
-    [AutoRestDllPath(), ...args]);
+    dotnet,
+    [autorestdll, ...args]);
 }
 
 export function SpawnJsonRpcAutoRest(): ChildProcess {
