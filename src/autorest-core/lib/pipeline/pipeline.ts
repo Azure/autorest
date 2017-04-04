@@ -34,10 +34,10 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // artifact emitter
   const emitArtifact: (artifactType: string, uri: string, handle: DataHandleRead) => Promise<void> = async (artifactType, uri, handle) => {
     if (From(config.OutputArtifact).Contains(artifactType)) {
-      config.GeneratedFile.Dispatch({ uri: uri, content: handle.ReadData() });
+      config.GeneratedFile.Dispatch({ type: artifactType, uri: uri, content: handle.ReadData() });
     }
     if (From(config.OutputArtifact).Contains(artifactType + ".map")) {
-      config.GeneratedFile.Dispatch({ uri: uri + ".map", content: JSON.stringify(await handle.ReadMetadata().inputSourceMap, null, 2) });
+      config.GeneratedFile.Dispatch({ type: artifactType + ".map", uri: uri + ".map", content: JSON.stringify(await handle.ReadMetadata().inputSourceMap, null, 2) });
     }
   };
 
