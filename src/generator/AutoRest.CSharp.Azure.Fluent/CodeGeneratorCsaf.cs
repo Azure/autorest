@@ -109,6 +109,13 @@ namespace AutoRest.CSharp.Azure.Fluent
                 await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName,
                      $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
             }
+
+            // Xml Serialization
+            if (codeModel.ShouldGenerateXmlSerialization)
+            {
+                var xmlSerializationTemplate = new XmlSerializationTemplate { Model = null };
+                await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
+            }
         }
     }
 }
