@@ -35,12 +35,12 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
-        private static Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)$", RegexOptions.IgnoreCase);
+        private static readonly Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)$", RegexOptions.IgnoreCase);
+        private static readonly Regex childPathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
 
         private KeyValuePair<string, string> GetChildResourceName(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
         {
-            Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
-            Match match = pathRegEx.Match(path);
+            Match match = childPathRegEx.Match(path);
             KeyValuePair<string, string> result = new KeyValuePair<string, string>();
             if (match.Success)
             {

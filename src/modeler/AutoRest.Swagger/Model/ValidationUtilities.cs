@@ -25,26 +25,6 @@ namespace AutoRest.Swagger.Model.Utilities
 
         private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
 
-        // This needs to be deprecated in favor of context.TrackedResources
-        public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
-        {
-            if (schema.AllOf != null)
-            {
-                foreach (Schema item in schema.AllOf)
-                {
-                    if (UrlResRegEx.IsMatch(item.Reference))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return IsTrackedResource(Schema.FindReferencedSchema(item.Reference, definitions), definitions);
-                    }
-                }
-            }
-            return false;
-        }
-
         /// <summary>
         /// Populates a list of 'Resource' models found in the service definition
         /// </summary>
