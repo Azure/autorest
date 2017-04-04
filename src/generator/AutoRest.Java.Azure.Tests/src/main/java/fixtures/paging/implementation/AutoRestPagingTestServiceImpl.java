@@ -159,8 +159,6 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
      */
     @Override
     public String userAgent() {
-        return String.format("Azure-SDK-For-Java/%s (%s)",
-                getClass().getPackage().getImplementationVersion(),
-                "AutoRestPagingTestService, 1.0.0");
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestPagingTestService", "1.0.0");
     }
 }

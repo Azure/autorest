@@ -165,9 +165,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     @Override
     public String userAgent() {
-        return String.format("Azure-SDK-For-Java/%s (%s)",
-                getClass().getPackage().getImplementationVersion(),
-                "AutoRestResourceFlatteningTestService, 1.0.0");
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestResourceFlatteningTestService", "1.0.0");
     }
 
     private void initializeService() {
