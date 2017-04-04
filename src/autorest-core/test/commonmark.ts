@@ -28,7 +28,7 @@ import { PlainTextVersion } from "../lib/pipeline/commonmark-documentation";
     compare("Even <code>fancier</code> <i>html</i> tags<br> and<hr> stuff", "Even fancier html tags and stuff");
   }
 
-  @test @timeout(10000) async "resolve markdown descriptions"() {
+  @test @timeout(60000) async "resolve markdown descriptions"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
     autoRest.AddConfiguration({ "output-artifact": "swagger-document" });
 
