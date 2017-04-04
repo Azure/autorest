@@ -17,7 +17,6 @@ import {
 import { Enumerable as IEnumerable, From } from 'linq-es2015';
 import { Installer } from "../node_modules/autorest/installer";
 import { Asset, Github, Release } from '../node_modules/autorest/github'
-// import { AutoRestManager } from './autorest-manager';
 import { Settings, AutoRestSettings } from './interfaces'
 import * as semver from 'semver'
 
@@ -41,6 +40,10 @@ connection.onDidChangeConfiguration((config: DidChangeConfigurationParams) => {
     }
   });
 })
+
+
+let x: Settings = ((<any>global).settings);
+const debug = (text) => ((<any>global).settings).autorest.debug ? connection.console.log(text) : null;
 
 const log = (text) => connection.console.log(text);
 const warn = (text) => connection.console.warn(text);
@@ -94,7 +97,9 @@ async function main(): Promise<boolean> {
 
   try {
     if (fw) {
+      log("awaiting dotnet-framework installation.")
       await fw;
+      log("dotnet-framework installation complete.")
     }
   }
   catch (exception) {
@@ -104,7 +109,9 @@ async function main(): Promise<boolean> {
 
   try {
     if (ar) {
+      log("awaiting autorest-core installation.")
       await ar;
+      log("autorest-core installation complete.")
     }
   }
   catch (exception) {

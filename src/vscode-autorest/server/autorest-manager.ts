@@ -156,7 +156,7 @@ export class AutoRestManager extends TextDocuments {
     }
   }
 
-  public async AcquireTrackedFile(documentUri: string): Promise<File> {
+  public async AcquireTrackedFile(documentUri: string, documentContent?: string): Promise<File> {
     documentUri = NormalizeUri(documentUri);
     let doc = this.trackedFiles.get(documentUri);
     if (doc) {
@@ -169,8 +169,12 @@ export class AutoRestManager extends TextDocuments {
     this.trackedFiles.set(documentUri, f);
     f.DiagnosticsToSend.Subscribe((file, diags) => this.connection.sendDiagnostics({ uri: file.fullPath, diagnostics: [...diags.values()] }));
 
+    if (documentContent) {
+      f.SetContent(documentContent);
+    }
+
     // check if it's a swagger?
-    let contnet = await (await f).content; // get the content to see if we should be doing something with this.
+    let content = await (await f).content; // get the content to see if we should be doing something with this.
     return f;
   }
 
@@ -187,23 +191,42 @@ export class AutoRestManager extends TextDocuments {
       // do we have this config already?
       let ctx = this.activeContexts.get(folder);
       if (!ctx) {
-        ctx = new DocumentContext(this, folder, configFile)
+        ctx = new DocumentContext(this, folder, configFile);
         this.activeContexts.set(folder, ctx);
-
-        // since we're creating a new context, might as well activate it now.
-        ctx.Activate();
-        ctx.Track(await this.AcquireTrackedFile(configFile));
       }
+
+      let files = [...(await ctx.autorest.view).InputFileUris];
+      for (const fn of files) {
+        if (fn == documentUri) {
+
+          // found the document inside this context.
+          // since we're creating a new context, might as well activate it now.
+          ctx.Activate();
+          ctx.Track(await this.AcquireTrackedFile(configFile));
+          return ctx;
+        }
+      }
+    }
+    // there was no configuration file for that file.
+    // or the configuration that we found didn't contain that file.
+
+    // let's look for or create a faux one at that level
+    configFile = ResolveUri(documentUri + "/", "readme.md");
+    let ctx = this.activeContexts.get(configFile);
+    if (ctx) {
+      // we found the previous faux one for this file ctx.Activate();
+      ctx.Track(await this.AcquireTrackedFile(configFile));
       return ctx;
     }
 
-    // there was no configuration file for that file.
-    // let's create a faux one at that level and call it readme.md
-    configFile = ResolveUri(folder, "readme.md");
-    let file = await this.AcquireTrackedFile(configFile);
-    file.SetContent("");
-    let ctx = new DocumentContext(this, folder, configFile);
-    this.activeContexts.set(folder, ctx);
+    // we don't have one here - create a faux file
+    let file = await this.AcquireTrackedFile(configFile, "");
+    file.IsActive = true;
+    ctx = new DocumentContext(this, folder, configFile);
+    ctx.autorest.AddConfiguration({ "input-file": documentUri, "azure-arm": true });
+    this.activeContexts.set(configFile, ctx);
+    ctx.Activate();
+
     return ctx;
   }
 

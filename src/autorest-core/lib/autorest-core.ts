@@ -150,13 +150,16 @@ export class AutoRest extends EventEmitter {
         return true;
       }
       catch (e) {
-        console.error(e);
+        if (e != "Cancellation requested.") {
+          console.error(e);
+        }
         // finished not cleanly
         this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e}` });
         this.Finished.Dispatch(false);
         if (view) {
           view.removeAllListeners();
         }
+
         return false;
       }
     };
