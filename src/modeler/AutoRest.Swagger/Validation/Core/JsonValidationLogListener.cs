@@ -27,7 +27,7 @@ namespace AutoRest.Swagger.Logging.Core
                     .FirstOrDefault();
                 var pathComponents = AutoRest.Swagger.Model.Utilities.ValidationUtilities.ResourcePathPattern.Match(path ?? "");
                 var pathComponentProviderNamespace = pathComponents.Groups["providerNamespace"];
-                var pathComponentResourceType = pathComponents.Groups["resourceType"];
+                var pathComponentResourceType = pathComponents.Groups["resource"];
 
                 var rawMessage = new Dictionary<string, string>();
                 rawMessage["type"] = validationMessage.Severity.ToString();

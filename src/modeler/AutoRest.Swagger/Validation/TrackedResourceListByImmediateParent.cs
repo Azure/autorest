@@ -35,19 +35,16 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
-        private static readonly Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)$", RegexOptions.IgnoreCase);
-        private static readonly Regex childPathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
-
         private KeyValuePair<string, string> GetChildResourceName(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
         {
-            Match match = childPathRegEx.Match(path);
+            Match match = ValidationUtilities.ResourcePathPattern.Match(path);
             KeyValuePair<string, string> result = new KeyValuePair<string, string>();
-            if (match.Success)
+            if (match.Success && match.Groups["unparameterizedresource"].Success)
             {
-                string childresourcename = match.Groups[1].Value;
-                string immediateparentresourcename_path = GetImmediateParentResourceName(path);
-                string immediateparentresourcename_actual = GetActualParentResourceName(immediateparentresourcename_path, paths, definitions);
-                result = new KeyValuePair<string, string>(childresourcename, immediateparentresourcename_actual);
+                string childResourceName = match.Groups["unparameterizedresource"].Value;
+                string immediateParentResourceNameInPath = match.Groups["resource"].Value;
+                string immediateParentResourceNameActual = GetActualParentResourceName(immediateParentResourceNameInPath, paths, definitions);
+                result = new KeyValuePair<string, string>(childResourceName, immediateParentResourceNameActual);
             }
 
             return result;
@@ -86,18 +83,6 @@ namespace AutoRest.Swagger.Validation
             }
             
             return GetReferencedModel(referencedSchema.Reference, definitions);
-        }
-
-        /// <summary>
-        /// Gets the immediate parent resource name
-        /// </summary>
-        /// <param name="childResourcePaths">paths that fits the child resource criteria</param>
-        /// <returns>name of the immediate parent resource name</returns>
-        private string GetImmediateParentResourceName(string pathToEvaluate)
-        {
-            pathToEvaluate = pathToEvaluate.Substring(0, pathToEvaluate.LastIndexOf("/{"));
-            pathToEvaluate = pathToEvaluate.Substring(0, pathToEvaluate.LastIndexOf("/{"));
-            return pathToEvaluate.Substring(pathToEvaluate.LastIndexOf("/") + 1);
         }
 
         /// <summary>
