@@ -14,6 +14,7 @@ import { Compile, CompilePosition } from "../source-map/source-map";
 import { BlameTree } from "../source-map/blaming";
 import { Lazy, LazyPromise } from '../lazy';
 import { IFileSystem } from "../file-system";
+import { OperationCanceledException } from "../exception";
 
 export const helloworld = "hi"; // TODO: wat?
 
@@ -224,7 +225,7 @@ export class DataStore extends DataStoreView {
 
   private ThrowIfCancelled(): void {
     if (this.cancellationToken.isCancellationRequested) {
-      throw "Cancellation requested.";
+      throw new OperationCanceledException();
     }
   }
 
