@@ -1,4 +1,4 @@
-# Scenario: Validate a Swagger file according to the ARM guidelines 
+# Scenario: Supressing a validation message
 
 > see https://aka.ms/autorest
 
