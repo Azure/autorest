@@ -1,0 +1,42 @@
+WARNING (NonAppJsonTypeWarning/S2004/SDKViolation): Please make sure that media types other than 'application/json' are supported by your service.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.consumes[1]
+WARNING (NonAppJsonTypeWarning/S2004/SDKViolation): Please make sure that media types other than 'application/json' are supported by your service.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.produces[1]
+ERROR (ListByOperationsValidation/M1003/SDKViolation): Operation Usage_List must be one of: usages_listbysubscriptionid, usages_list
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get.operationId
+ERROR (OperationsAPIImplementationValidation/M3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Storage/operations'.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths
+ERROR (BodyParametersValidation/M2063/SDKViolation): A body parameter must be named 'parameters'.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.parameters[0].name
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.parameters[0]
+ERROR (BodyParametersValidation/M2063/SDKViolation): A body parameter must be named 'parameters'.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.parameters[2].name
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.parameters[2]
+WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountCheckNameAvailabilityParameters' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCheckNameAvailabilityParameters
+WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountPropertiesCreateParameters' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountPropertiesCreateParameters
+WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountProperties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountProperties
+WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountPropertiesUpdateParameters' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountPropertiesUpdateParameters
+WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountRegenerateKeyParameters' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountRegenerateKeyParameters
+WARNING (DescriptionMissing/M4000/SDKViolation): 'Resource' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.Resource
+WARNING (DescriptionMissing/M4000/SDKViolation): 'name' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCheckNameAvailabilityParameters.properties.name
+WARNING (DescriptionMissing/M4000/SDKViolation): 'type' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCheckNameAvailabilityParameters.properties.type
+WARNING (BooleanPropertyNotRecommended/M3018/RPCViolation): Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: 'nameAvailable'.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.CheckNameAvailabilityResult
+WARNING (DescriptionMissing/M4000/SDKViolation): 'properties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCreateParameters.properties.properties
+WARNING (BooleanPropertyNotRecommended/M3018/RPCViolation): Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: 'useSubDomain'.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.CustomDomain
+WARNING (DescriptionMissing/M4000/SDKViolation): 'properties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccount.properties.properties
+WARNING (DescriptionMissing/M4000/SDKViolation): 'properties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountUpdateParameters.properties.properties
+WARNING (DescriptionMissing/M4000/SDKViolation): 'keyName' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountRegenerateKeyParameters.properties.keyName

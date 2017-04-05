@@ -684,7 +684,12 @@ task 'regenerate-samplesazurefluent', '', (done) ->
 task 'regenerate-samples2', '', (done) ->
   source 'Samples/**/readme.md'
     .pipe foreach (each,next)->
-      autorest [each.path], ->
+      autorest [each.path], (code,stdout,stderr) ->
+        outputFolder = path.join(each.path, "../shell")
+        mkdir outputFolder
+        ShellString(code).to(path.join(outputFolder, "code.txt"))
+        ShellString(stdout).to(path.join(outputFolder, "stdout.txt"))
+        ShellString(stderr).to(path.join(outputFolder, "stderr.txt"))
         next null 
   return null
 
@@ -713,8 +718,7 @@ task 'regenerate-delete', '', (done)->
   source 'Samples/*/**/'
     .pipe foreach (each, next) ->
       configFile = path.join(each.path, "../readme.md")
-      console.log "rm -rf '#{each.path}" if fs.existsSync configFile
-      # execute "rm -rf '#{each.path}" if fs.existsSync configFile
+      execute "rm -rf '#{each.path}" if fs.existsSync configFile
       next null
   rm "-rf",
     'src/generator/AutoRest.CSharp.Tests/Expected'

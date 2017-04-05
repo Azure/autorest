@@ -17,6 +17,10 @@ azure-arm: true
 
 ## Suppression
 
-
-
-TODO
+``` yaml
+directive:
+  - suppress: M3018
+    from: storage.json
+    where: $.definitions.CustomDomain
+    reason: We really want that boolean property there or our customers will go nuts.
+```
