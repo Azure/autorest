@@ -178,14 +178,6 @@ rubyAzureMappings = {
   'parameter_grouping':['azure-parameter-grouping.json', 'ParameterGroupingModule']
 }
 
-mergeOptions = (obj1, obj2) ->
-  obj3 = {}
-  for attrname of obj1
-    obj3[attrname] = obj1[attrname]
-  for attrname of obj2
-    obj3[attrname] = obj2[attrname]
-  return obj3
-
 task 'regenerate-nodecomposite', '', (done) ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.NodeJS.Tests',
@@ -248,7 +240,7 @@ task 'regenerate-node', '', ['regenerate-nodecomposite'], (done) ->
   return null
 
 task 'regenerate-python', '', (done) ->
-  mappings = mergeOptions({ 
+  mappings = Object.assign({ 
     'AcceptanceTests/UrlMultiCollectionFormat' : 'url-multi-collectionFormat.json'
   }, defaultMappings)
   regenExpected {
@@ -263,7 +255,7 @@ task 'regenerate-python', '', (done) ->
   return null
 
 task 'regenerate-pythonazure', '', (done) ->
-  mappings = mergeOptions({ 
+  mappings = Object.assign({ 
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json',
     'AcceptanceTests/StorageManagementClient': 'storage.json'
   }, defaultAzureMappings)
@@ -348,7 +340,7 @@ task 'regenerate-java', '', (done) ->
   return null
 
 task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync'], (done) ->
-  mappings = mergeOptions({
+  mappings = Object.assign({
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
   regenExpected {
@@ -364,7 +356,7 @@ task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazur
   return null
 
 task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regenerate-csazurefluentallsync', 'regenerate-csazurefluentnosync'], (done) ->
-  mappings = mergeOptions({
+  mappings = Object.assign({
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
   regenExpected {
@@ -381,7 +373,7 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
   return null
 
 task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
-  mappings = mergeOptions({
+  mappings = Object.assign({
     'Mirror.RecursiveTypes': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-primitives.json',
     'Mirror.Sequences': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-sequences.json',
@@ -689,6 +681,12 @@ task 'regenerate-samplesazurefluent', '', (done) ->
       return done() if count is 0 
   return null
 
+task 'regenerate-samples2', '', (done) ->
+  source 'Samples/**/readme.md'
+    .pipe foreach (each,next)->
+      autorest [each.path], ->
+        next null 
+  return null
 
 task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], (done) ->
   run ['regenerate-ars',
@@ -709,7 +707,15 @@ task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], 
   return null
   
 
+path = require('path')
+
 task 'regenerate-delete', '', (done)->
+  source 'Samples/*/**/'
+    .pipe foreach (each, next) ->
+      configFile = path.join(each.path, "../readme.md")
+      console.log "rm -rf '#{each.path}" if fs.existsSync configFile
+      # execute "rm -rf '#{each.path}" if fs.existsSync configFile
+      next null
   rm "-rf",
     'src/generator/AutoRest.CSharp.Tests/Expected'
     'src/generator/AutoRest.CSharp.Azure.Tests/Expected'

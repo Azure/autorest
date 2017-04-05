@@ -194,38 +194,39 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       const codeModelGFM = await ProcessCodeModel(codeModel, config.DataStore.CreateScope("modelgfm"));
 
       for (const usedCodeGenerator of usedCodeGenerators) {
-        const genConfig = config.GetPluginView(usedCodeGenerator);
-        const scope = genConfig.DataStore.CreateScope(usedCodeGenerator); // TODO: maybe make the plugin-config present that?
+        for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
+          const scope = genConfig.DataStore.CreateScope("plugin_" + (await genConfig.DataStore.Enum()).length);
 
-        // TRANSFORM
-        const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/model.yaml");
+          // TRANSFORM
+          const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/model.yaml");
 
-        await emitArtifact("code-model-v1", "mem://code-model.yaml", codeModelTransformed);
+          await emitArtifact("code-model-v1", "mem://code-model.yaml", codeModelTransformed);
 
-        const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(usedCodeGenerator, codeModelTransformed, scope.CreateScope("generate"),
-          Object.assign(
-            { // stuff that comes in via `x-ms-code-generation-settings`
-              "override-client-name": getXmsCodeGenSetting("name"),
-              "use-internal-constructors": getXmsCodeGenSetting("internalConstructors"),
-              "use-datetimeoffset": getXmsCodeGenSetting("useDateTimeOffset"),
-              "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
-              "sync-methods": getXmsCodeGenSetting("syncMethods")
-            },
-            genConfig.Raw),
-          messageSink);
+          const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
+          let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(usedCodeGenerator, codeModelTransformed, scope.CreateScope("generate"),
+            Object.assign(
+              { // stuff that comes in via `x-ms-code-generation-settings`
+                "override-client-name": getXmsCodeGenSetting("name"),
+                "use-internal-constructors": getXmsCodeGenSetting("internalConstructors"),
+                "use-datetimeoffset": getXmsCodeGenSetting("useDateTimeOffset"),
+                "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
+                "sync-methods": getXmsCodeGenSetting("syncMethods")
+              },
+              genConfig.Raw),
+            messageSink);
 
-        // C# simplifier
-        if (usedCodeGenerator === "csharp") {
-          generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, scope.CreateScope("simplify"), messageSink);
-        }
+          // C# simplifier
+          if (usedCodeGenerator === "csharp") {
+            generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, scope.CreateScope("simplify"), messageSink);
+          }
 
-        for (const fileName of await generatedFileScope.Enum()) {
-          const handle = await generatedFileScope.ReadStrict(fileName);
-          const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
-          const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
-          await emitArtifact(`source-files-${usedCodeGenerator}`,
-            outputFileUri, handle);
+          for (const fileName of await generatedFileScope.Enum()) {
+            const handle = await generatedFileScope.ReadStrict(fileName);
+            const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
+            const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
+            await emitArtifact(`source-files-${usedCodeGenerator}`,
+              outputFileUri, handle);
+          }
         }
       }
     }
