@@ -42,8 +42,9 @@ namespace AutoRest.Swagger.Validation
             // Look for unparameterized resource. If it is not available, pick the last resource provided it has a parent resource
             if (match.Success && (match.Groups["unparameterizedresource"].Success || (match.Groups["resource"].Success && match.Groups["resource"].Captures.Count > 1)))
             {
-                string childResourceName = match.Groups["unparameterizedresource"].Success? match.Groups["unparameterizedresource"].Value: match.Groups["resource"].Captures[match.Groups["resource"].Captures.Count - 1].Value;
-                string immediateParentResourceNameInPath = match.Groups["resource"].Captures[match.Groups["resource"].Captures.Count - 2].Value;
+                int previousResourceLocation = match.Groups["resource"].Captures.Count - 1;
+                string childResourceName = match.Groups["unparameterizedresource"].Success? match.Groups["unparameterizedresource"].Value: match.Groups["resource"].Captures[previousResourceLocation].Value;
+                string immediateParentResourceNameInPath = match.Groups["unparameterizedresource"].Success? match.Groups["resource"].Captures[previousResourceLocation].Value : match.Groups["resource"].Captures[previousResourceLocation - 1].Value;
                 string immediateParentResourceNameActual = GetActualParentResourceName(immediateParentResourceNameInPath, paths, definitions);
                 result = new KeyValuePair<string, string>(childResourceName, immediateParentResourceNameActual);
             }
@@ -101,7 +102,7 @@ namespace AutoRest.Swagger.Validation
                 {
                     string operationIdToFind = childResourceMapping.Key + "_ListBy" + childResourceMapping.Value;
                     bool listByImmediateParent = paths.Any(filteredPath =>
-                        filteredPath.Value.Where(operationKeyValuePair => operationKeyValuePair.Value.OperationId.Equals(operationIdToFind, StringComparison.CurrentCultureIgnoreCase)).Count() == 1
+                        filteredPath.Value.Any(operationKeyValuePair => operationKeyValuePair.Value.OperationId.Equals(operationIdToFind, StringComparison.CurrentCultureIgnoreCase))
                     );
                     if (!listByImmediateParent)
                     {
