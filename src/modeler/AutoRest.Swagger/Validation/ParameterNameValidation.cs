@@ -40,6 +40,6 @@ namespace AutoRest.Swagger.Validation
         /// <param name="swaggerParameter"></param>
         /// <returns></returns>
         public override bool IsValid(SwaggerParameter swaggerParameter) 
-            => (!string.IsNullOrWhiteSpace(swaggerParameter.Name));
+            => !string.IsNullOrWhiteSpace(swaggerParameter.Reference) || !string.IsNullOrWhiteSpace(swaggerParameter.Name);
     }
 }
