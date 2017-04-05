@@ -393,4 +393,7 @@ Modelers:
   <data name="LongRunningResponseNotValid" xml:space="preserve">
     <value>A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.</value>
   </data>
+  <data name="PutOperationResourceResponseValidationMessage" xml:space="preserve">
+    <value>Put operation '{0}' has response model '{1}' which does not have x-ms-azure-resource extension set to true in its hierarchy</value>
+  </data>
 </root>

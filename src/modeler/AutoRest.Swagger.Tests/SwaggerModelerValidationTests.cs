@@ -555,6 +555,12 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-parameters-validation-2.json"));
             messages.AssertOnlyValidationMessage(typeof(BodyParametersValidation), 1);
         }
+        [Fact]
+        public void PutResponseResourceValidationTest()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-response-resource-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(PutResponseResourceValidation), 1);
+        }
     }
 
     #region Positive tests

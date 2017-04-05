@@ -219,7 +219,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="definitions">model definitions in which to find the x-ms-azure-resource extension</param>
         /// <returns>list of model names that have the x-ms-azure-resource extension set on them</returns>
-        private static IEnumerable<string> GetXmsAzureResourceModels(Dictionary<string, Schema> definitions)
+        public static IEnumerable<string> GetXmsAzureResourceModels(Dictionary<string, Schema> definitions)
             => definitions.Where(defPair =>
                             defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource") == true &&
                             defPair.Value.Extensions["x-ms-azure-resource"].Equals(true))
