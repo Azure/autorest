@@ -71,7 +71,7 @@ export class File extends EventEmitter {
       // acquire the content and set the checksum.
       this.SetContent(await a.readFile(FileUriToPath(this.fullPath), 'utf8'));
     } catch (exception) {
-      connection.console.error(`Exception reading content for ${this.fullPath} `)
+      //connection.console.error(`Exception reading content for ${this.fullPath} `)
       // failed! well, set the content to null. it'll try again later. 
       this.SetContent(null);
     }

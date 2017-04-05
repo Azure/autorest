@@ -62,8 +62,10 @@ export class AutoRestPlugin extends EventEmitter {
           return await (endpoint as any)[fnName](...rest);
         }
       } catch (e) {
-        console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
-        console.error(e);
+        if (e != "Cancellation requested.") {
+          console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
+          console.error(e);
+        }
       }
     };
     this.apiInitiator = {
