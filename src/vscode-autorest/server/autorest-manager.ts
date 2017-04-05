@@ -318,18 +318,16 @@ export class AutoRestManager extends TextDocuments {
     let documentUri = saving.document.uri;
     let documentContent = saving.document.getText();
     if (documentUri.endsWith(".md")) {
-      let autorest = new AutoRest({
-        EnumerateFileUris: async function* (folderUri: string): AsyncIterable<string> { },
-        ReadFile: async (f: string): Promise<string> => f == "mem:///foo.md" ? documentContent : null
-      });
-
-      autorest.AddConfiguration({ "input-file": "mem:///foo.md", "output-artifact": ["swagger-document"] });
-      autorest.GeneratedFile.Subscribe(async (source, artifact) => {
+      let content = await AutoRest.LiterateToJson(saving.document.getText());
+      if (content && await AutoRest.IsSwaggerFile(content)) {
         let localPath = FileUriToPath(documentUri.replace(".md", ".json"));
-        await a.writeFile(localPath, artifact.content);
-      })
-      // run autorest and wait.
-      await (await autorest.Process()).finish;
+        const ctx = await this.GetDocumentContextForDocument(documentUri);
+        const settings = (await ctx.autorest.view).GetEntry("vscode");
+        if ((settings && settings.sync == true) ||
+          (await a.exists(localPath) && !(settings && settings.sync == false))) {
+          await a.writeFile(localPath, content);
+        }
+      }
     }
   }
 

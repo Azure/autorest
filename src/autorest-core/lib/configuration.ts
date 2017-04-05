@@ -23,6 +23,7 @@ export interface AutoRestConfigurationImpl {
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
+  "vscode"?: any;
 
   // plugin specific
   "output-file"?: string;
