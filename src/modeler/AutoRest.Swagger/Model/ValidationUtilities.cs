@@ -417,7 +417,7 @@ namespace AutoRest.Swagger.Model.Utilities
                 return false;
 
             Schema schema = Schema.FindReferencedSchema(reference, definitions);
-            return schema.Properties.Any(property => property.Value.Type == DataType.Array && (bool)property.Value.Items?.Reference?.EndsWith("/" + referenceToMatch));
+            return schema.Properties.Any(property => property.Value.Type == DataType.Array && property.Value.Items?.Reference?.EndsWith("/" + referenceToMatch) == true);
         }
 
         /// <summary>
