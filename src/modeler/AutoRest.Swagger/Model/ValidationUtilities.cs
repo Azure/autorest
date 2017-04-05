@@ -386,6 +386,14 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
+        /// <summary>
+        /// Checks if there is an operation that matches the given regex
+        /// </summary>
+        /// <param name="getOperations"></param>
+        /// <param name="regEx"></param>
+        /// <param name="definitionKey"></param>
+        /// <param name="definitions"></param>
+        /// <returns></returns>
         public static bool ListByXCheck(IEnumerable<Operation> getOperations, Regex regEx, string definitionKey, Dictionary<string, Schema> definitions)
         {
             return getOperations.Any(operation =>
@@ -397,6 +405,13 @@ namespace AutoRest.Swagger.Model.Utilities
                     );
         }
 
+        /// <summary>
+        /// Checks if the reference to match is an array response of the reference
+        /// </summary>
+        /// <param name="reference"></param>
+        /// <param name="referenceToMatch"></param>
+        /// <param name="definitions"></param>
+        /// <returns></returns>
         private static bool IsArrayOf(string reference, string referenceToMatch, Dictionary<string, Schema> definitions)
         {
             if (reference == null)
