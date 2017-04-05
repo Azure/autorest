@@ -123,7 +123,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("BodyParametersNotValid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, must follow camelCase style. Example: &quot;{1}&quot;..
         /// </summary>
@@ -593,6 +593,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter Must have the &quot;name&quot; property defined with non-empty string as its value.
+        /// </summary>
+        public static string ParametersPropertiesValidation {
+            get {
+                return ResourceManager.GetString("ParametersPropertiesValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is required..
         /// </summary>
         public static string ParameterValueIsMissing {
@@ -654,7 +663,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("RequiredReadOnlyPropertiesValidation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to A &apos;Resource&apos; definition must have x-ms-azure-resource extension enabled and set to true..
         /// </summary>
@@ -681,7 +690,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("SecurityDefinitionsStructureValidation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Parameter &quot;{0}&quot; is referenced but not defined in the global parameters section of Service Definition.
         /// </summary>
