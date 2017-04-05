@@ -35,14 +35,15 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
-        private KeyValuePair<string, string> GetChildResourceName(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
+        private KeyValuePair<string, string> GetChildAndImmediateParentResource(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
         {
             Match match = ValidationUtilities.ResourcePathPattern.Match(path);
             KeyValuePair<string, string> result = new KeyValuePair<string, string>();
-            if (match.Success && match.Groups["unparameterizedresource"].Success)
+            // Look for unparameterized resource. If it is not available, pick the last resource provided it has a parent resource
+            if (match.Success && (match.Groups["unparameterizedresource"].Success || (match.Groups["resource"].Success && match.Groups["resource"].Captures.Count > 1)))
             {
-                string childResourceName = match.Groups["unparameterizedresource"].Value;
-                string immediateParentResourceNameInPath = match.Groups["resource"].Value;
+                string childResourceName = match.Groups["unparameterizedresource"].Success? match.Groups["unparameterizedresource"].Value: match.Groups["resource"].Captures[match.Groups["resource"].Captures.Count - 1].Value;
+                string immediateParentResourceNameInPath = match.Groups["resource"].Captures[match.Groups["resource"].Captures.Count - 2].Value;
                 string immediateParentResourceNameActual = GetActualParentResourceName(immediateParentResourceNameInPath, paths, definitions);
                 result = new KeyValuePair<string, string>(childResourceName, immediateParentResourceNameActual);
             }
@@ -50,20 +51,20 @@ namespace AutoRest.Swagger.Validation
             return result;
         }
 
-        private string GetActualParentResourceName(string nameinpath, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
+        private string GetActualParentResourceName(string nameInPath, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
         {
-            Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/.*/" + nameinpath + "/{[^/]+}$", RegexOptions.IgnoreCase);
+            Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/.*/" + nameInPath + "/{[^/]+}$", RegexOptions.IgnoreCase);
 
-            IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> pths = paths.Where((KeyValuePair<string, Dictionary<string, Operation>> pth) => pathRegEx.IsMatch(pth.Key));
-            if (pths.Count() == 0) return null;
-            KeyValuePair<string, Dictionary<string, Operation>> path = pths.First();
+            IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> matchingPaths = paths.Where((KeyValuePair<string, Dictionary<string, Operation>> pth) => pathRegEx.IsMatch(pth.Key));
+            if (!matchingPaths.Any()) return null;
+            KeyValuePair<string, Dictionary<string, Operation>> path = matchingPaths.First();
 
             IEnumerable<KeyValuePair<string, Operation>> operations = path.Value.Where(op => op.Key.Equals("get", StringComparison.CurrentCultureIgnoreCase));
-            if (operations.Count() == 0) return null;
+            if (!operations.Any()) return null;
             KeyValuePair<string, Operation>  operation = operations.First();
 
             IEnumerable<KeyValuePair<string, OperationResponse>> responses = operation.Value.Responses.Where(resp => resp.Key.Equals("200"));
-            if (responses.Count() == 0) return null;
+            if (!responses.Any()) return null;
             KeyValuePair<string, OperationResponse> response = responses.First();
 
             return GetReferencedModel(response.Value.Schema.Reference, definitions);
@@ -78,7 +79,7 @@ namespace AutoRest.Swagger.Validation
             if (referencedSchema.Reference == null)
             {
                 IEnumerable<KeyValuePair<string, Schema>> definition = definitions.Where(def => def.Value == referencedSchema);
-                if (definition.Count() == 0) return null;
+                if (!definition.Any()) return null;
                 return definition.First().Key;
             }
             
@@ -95,7 +96,7 @@ namespace AutoRest.Swagger.Validation
         {
             foreach(KeyValuePair<string, Dictionary<string, Operation>> pathDefinition in paths)
             {
-                KeyValuePair<string, string> childResourceMapping = GetChildResourceName(pathDefinition.Key, paths, context.Root.Definitions);
+                KeyValuePair<string, string> childResourceMapping = GetChildAndImmediateParentResource(pathDefinition.Key, paths, context.Root.Definitions);
                 if(childResourceMapping.Key != null && childResourceMapping.Value != null)
                 {
                     string operationIdToFind = childResourceMapping.Key + "_ListBy" + childResourceMapping.Value;
