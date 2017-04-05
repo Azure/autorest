@@ -47,6 +47,7 @@ export class AutoRestPlugin extends EventEmitter {
     );
     childProc.stderr.pipe(process.stderr);
     const plugin = new AutoRestPlugin(channel);
+    channel.onClose(() => { throw "AutoRest plugin terminated."; });
     channel.listen();
     return plugin;
   }
@@ -61,8 +62,10 @@ export class AutoRestPlugin extends EventEmitter {
           return await (endpoint as any)[fnName](...rest);
         }
       } catch (e) {
-        console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
-        console.error(e);
+        if (e != "Cancellation requested.") {
+          console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
+          console.error(e);
+        }
       }
     };
     this.apiInitiator = {
@@ -130,10 +133,11 @@ export class AutoRestPlugin extends EventEmitter {
       FinishNotifications(): Promise<void> { return finishNotifications; },
       async ReadFile(filename: string): Promise<string> {
         const file = await inputScope.ReadStrict(filename);
-        return await file.ReadData();
+        return file.ReadData();
       },
       async GetValue(key: string): Promise<any> {
-        return configuration(key);
+        const result = configuration(key);
+        return result === undefined ? null : result;
       },
       async ListInputs(): Promise<string[]> {
         const result = await inputScope.Enum();
@@ -150,7 +154,7 @@ export class AutoRestPlugin extends EventEmitter {
 
         const file = await outputScope.Write(filename);
         if (typeof (sourceMap as any).mappings === "string") {
-          await file.WriteDataWithSourceMap(content, async () => sourceMap);
+          await file.WriteDataWithSourceMap(content, () => sourceMap as any);
         } else {
           await file.WriteData(content, sourceMap as Mappings, await inputFileHandles());
         }

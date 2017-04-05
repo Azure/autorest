@@ -15,10 +15,7 @@ import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
 import { GetFilename, ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
 import {
-  DataHandleRead,
-  DataStore,
-  DataStoreViewReadonly,
-  KnownScopes
+  DataHandleRead
 } from "../data-store/data-store";
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
@@ -37,10 +34,10 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // artifact emitter
   const emitArtifact: (artifactType: string, uri: string, handle: DataHandleRead) => Promise<void> = async (artifactType, uri, handle) => {
     if (From(config.OutputArtifact).Contains(artifactType)) {
-      config.GeneratedFile.Dispatch({ uri: uri, content: await handle.ReadData() });
+      config.GeneratedFile.Dispatch({ type: artifactType, uri: uri, content: handle.ReadData() });
     }
     if (From(config.OutputArtifact).Contains(artifactType + ".map")) {
-      config.GeneratedFile.Dispatch({ uri: uri + ".map", content: JSON.stringify(await (await handle.ReadMetadata()).inputSourceMap, null, 2) });
+      config.GeneratedFile.Dispatch({ type: artifactType + ".map", uri: uri + ".map", content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2) });
     }
   };
 
@@ -56,7 +53,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   const swaggers = await LoadLiterateSwaggers(
     config,
-    config.DataStore.CreateScope(KnownScopes.Input).AsFileScopeReadThroughFileSystem(fileSystem),
+    config.DataStore.GetReadThroughScopeFileSystem(fileSystem),
     inputs, config.DataStore.CreateScope("loader"));
   // const rawSwaggers = await Promise.all(swaggers.map(async x => { return <Artifact>{ uri: x.key, content: await x.ReadData() }; }));
 
@@ -69,9 +66,9 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // compose Swaggers
   let swagger = config.GetEntry("override-info") || swaggers.length !== 1
-    ? await ComposeSwaggers(config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
+    ? await ComposeSwaggers(config, config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
     : swaggers[0];
-  const rawSwagger = await swagger.ReadObject<any>();
+  const rawSwagger = swagger.ReadObject<any>();
 
   config.Debug.Dispatch({ Text: `Done Composing Swaggers.` });
 
@@ -86,7 +83,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     config.Debug.Dispatch({ Text: `relPath: ${relPath}` });
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     const hw = await config.DataStore.Write("normalized-swagger.json");
-    const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, await swagger.ReadYamlAst()), [swagger]);
+    const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, swagger.ReadYamlAst()), [swagger]);
     await emitArtifact("swagger-document", outputFileUri, h);
   }
   config.Debug.Dispatch({ Text: `Done Emitting composed documents.` });
@@ -211,35 +208,21 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
         await emitArtifact("code-model-v1", "mem://code-model.yaml", codeModelTransformed);
 
-        // get internal name
-        const languages = [
-          "CSharp",
-          "Ruby",
-          "NodeJS",
-          "Python",
-          "Go",
-          "Java",
-          "AzureResourceSchema"].filter(x => x.toLowerCase() === usedCodeGenerator.toLowerCase())[0];
-        const codeGenerator = (genConfig.AzureArm ? "Azure." : "") + languages + (genConfig.Fluent ? ".Fluent" : "");
-
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModelTransformed, scope.CreateScope("generate"),
-          {
-            namespace: genConfig.GetEntry("namespace") || "",
-            codeGenerator: codeGenerator,
-            clientNameOverride: getXmsCodeGenSetting("name"),
-            internalConstructors: getXmsCodeGenSetting("internalConstructors") || false,
-            useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset") || false,
-            header: genConfig.GetEntry("license-header") || null,
-            payloadFlatteningThreshold: genConfig.GetEntry("payload-flattening-threshold") || getXmsCodeGenSetting("ft") || 0,
-            syncMethods: genConfig.GetEntry("sync-methods") || getXmsCodeGenSetting("syncMethods") || "essential",
-            addCredentials: genConfig.GetEntry("add-credentials") || false,
-            rubyPackageName: genConfig.GetEntry("package-name") || "client"
-          },
+        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(usedCodeGenerator, codeModelTransformed, scope.CreateScope("generate"),
+          Object.assign(
+            { // stuff that comes in via `x-ms-code-generation-settings`
+              "override-client-name": getXmsCodeGenSetting("name"),
+              "use-internal-constructors": getXmsCodeGenSetting("internalConstructors"),
+              "use-datetimeoffset": getXmsCodeGenSetting("useDateTimeOffset"),
+              "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
+              "sync-methods": getXmsCodeGenSetting("syncMethods")
+            },
+            genConfig.Raw),
           messageSink);
 
         // C# simplifier
-        if (codeGenerator.toLowerCase().indexOf("csharp") !== -1) {
+        if (usedCodeGenerator === "csharp") {
           generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, scope.CreateScope("simplify"), messageSink);
         }
 

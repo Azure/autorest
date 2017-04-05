@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -12,16 +13,19 @@ namespace Petstore.Models
         /// Initializes a new instance of the CheckNameAvailabilityResultInner
         /// class.
         /// </summary>
-        public CheckNameAvailabilityResultInner() { }
+        public CheckNameAvailabilityResultInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the CheckNameAvailabilityResultInner
         /// class.
         /// </summary>
         /// <param name="nameAvailable">Gets a boolean value that indicates
-        /// whether the name is available for you to use. If true, the name
-        /// is available. If false, the name has already been taken or
-        /// invalid and cannot be used.</param>
+        /// whether the name is available for you to use. If true, the name is
+        /// available. If false, the name has already been taken or invalid and
+        /// cannot be used.</param>
         /// <param name="reason">Gets the reason that a storage account name
         /// could not be used. The Reason element is only returned if
         /// NameAvailable is false. Possible values include:
@@ -33,28 +37,34 @@ namespace Petstore.Models
             NameAvailable = nameAvailable;
             Reason = reason;
             Message = message;
+            CustomInit();
         }
 
         /// <summary>
-        /// Gets a boolean value that indicates whether the name is available
-        /// for you to use. If true, the name is available. If false, the
-        /// name has already been taken or invalid and cannot be used.
+        /// An initialization method that performs custom operations like setting defaults
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "nameAvailable")]
+        partial void CustomInit();
+
+        /// <summary>
+        /// Gets a boolean value that indicates whether the name is available
+        /// for you to use. If true, the name is available. If false, the name
+        /// has already been taken or invalid and cannot be used.
+        /// </summary>
+        [JsonProperty(PropertyName = "nameAvailable")]
         public bool? NameAvailable { get; set; }
 
         /// <summary>
         /// Gets the reason that a storage account name could not be used. The
-        /// Reason element is only returned if NameAvailable is false.
-        /// Possible values include: 'AccountNameInvalid', 'AlreadyExists'
+        /// Reason element is only returned if NameAvailable is false. Possible
+        /// values include: 'AccountNameInvalid', 'AlreadyExists'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "reason")]
+        [JsonProperty(PropertyName = "reason")]
         public Reason? Reason { get; set; }
 
         /// <summary>
         /// Gets an error message explaining the Reason value in more detail.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
 
     }

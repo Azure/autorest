@@ -82,8 +82,8 @@ import { Message } from "../lib/message";
 
     const GenerateCodeModel = async (config: any) => {
       await autoRest.ResetConfiguration();
-      await autoRest.AddConfiguration({ "output-artifact": "code-model-v1" });
-      await autoRest.AddConfiguration(config);
+      autoRest.AddConfiguration({ "output-artifact": "code-model-v1" });
+      autoRest.AddConfiguration(config);
 
       let resolve: (content: string) => void;
       const result = new Promise<string>(res => resolve = res);
