@@ -16,9 +16,9 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
   public cancel: () => boolean = () => true;
   private _outputs = new Map<string, string>();
 
-  private get autorest(): AutoRest {
+  public get autorest(): AutoRest {
     if (!this._autoRest) {
-      this._autoRest = new AutoRest(this);
+      this._autoRest = new AutoRest(this, this.configurationFile);
       this._autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
 
       this.Manager.listenForResults(this._autoRest);
@@ -35,7 +35,7 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
         this.Manager.verbose(`AutoRest Process Finished with '${success}'.`);
       })
     }
-    return this._autoRest || (this._autoRest = new AutoRest(this));
+    return this._autoRest;
   }
 
   constructor(public Manager: AutoRestManager, public RootUri: string, public configurationFile?: string) {
@@ -110,7 +110,7 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
           this.ClearDiagnostics();
           return true;
         };
-      }, 25);
+      }, 100);
     });
   }
 
@@ -118,8 +118,8 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
     folderUri = NormalizeUri(folderUri)
     if (folderUri && folderUri.startsWith("file:")) {
       const folderPath = FileUriToPath(folderUri);
-      var st = await a.stat(folderPath);
-      var isdir = st.isDirectory();
+      var isdir = await a.isDirectory(folderPath);
+
       if (isdir) {
         const items = await a.readdir(folderPath);
         yield* From<string>(items).Where(each => AutoRest.IsConfigurationExtension(GetExtension(each))).Select(each => ResolveUri(folderUri, each));
@@ -135,13 +135,5 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
       this.Track(file);
     }
     return await file.content;
-  }
-}
-/// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
-async function* yieldFromMap(): AsyncIterable<string> {
-  yield* ["hello", "world"];
-};
-async function foo() {
-  for await (const each of yieldFromMap()) {
   }
 }

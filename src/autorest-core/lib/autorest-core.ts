@@ -48,12 +48,45 @@ export class AutoRest extends EventEmitter {
    *
    * @param content - the file content to evaluate
    */
-  public async IsSwaggerFile(documentType: DocumentType, content: string): Promise<boolean> {
-    // this checks to see if the document is a 
-    return true;
+  public static async IsSwaggerFile(content: string): Promise<boolean> {
+    // this checks to see if the document is a swagger document 
+    try {
+      // quick check to see if it's json already
+      let doc = JSON.parse(content);
+      return (doc && doc.swagger && doc.swagger == "2.0")
+    } catch (e) {
+      try {
+        // maybe it's yaml or literate swagger
+        let doc = JSON.parse(await AutoRest.LiterateToJson(content));
+        return (doc && doc.swagger && doc.swagger == "2.0")
+      } catch (e) {
+        // nope
+      }
+    }
+
+    return false;
   }
 
-  public async IsConfigurationFile(content: string): Promise<boolean> {
+  public static async LiterateToJson(content: string): Promise<string> {
+    let autorest = new AutoRest({
+      EnumerateFileUris: async function* (folderUri: string): AsyncIterable<string> { },
+      ReadFile: async (f: string): Promise<string> => f == "mem:///foo.md" ? content : ""
+    });
+    let result = "";
+    autorest.AddConfiguration({ "input-file": "mem:///foo.md", "output-artifact": ["swagger-document"] });
+    autorest.GeneratedFile.Subscribe((source, artifact) => {
+      result = artifact.content;
+    });
+    // run autorest and wait.
+    try {
+      await (await autorest.Process()).finish;
+      return result;
+    } catch (x) {
+    }
+    return "";
+  }
+
+  public static async IsConfigurationFile(content: string): Promise<boolean> {
     // this checks to see if the document is an autorest markdown configuration file
     return content.indexOf(Constants.MagicString) > -1;
   }
@@ -150,13 +183,16 @@ export class AutoRest extends EventEmitter {
         return true;
       }
       catch (e) {
-        console.error(e);
+        if (e != "Cancellation requested.") {
+          console.error(e);
+        }
         // finished not cleanly
         this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e}` });
         this.Finished.Dispatch(false);
         if (view) {
           view.removeAllListeners();
         }
+
         return false;
       }
     };
