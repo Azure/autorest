@@ -1,3 +1,4 @@
+import { IsUri } from '../ref/uri';
 import { JsonPath } from '../ref/jsonpath';
 import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from './source-map';
 /*---------------------------------------------------------------------------------------------
@@ -9,9 +10,9 @@ import { DataStore } from "../data-store/data-store";
 import { From } from "../ref/linq";
 
 export class BlameTree {
-  public static async Create(dataStore: DataStore, position: sourceMap.MappedPosition): Promise<BlameTree> {
-    const data = await dataStore.ReadStrict(position.source);
-    const blames = await data.Blame(position);
+  public static Create(dataStore: DataStore, position: sourceMap.MappedPosition): BlameTree {
+    const data = dataStore.ReadStrictSync(position.source);
+    const blames = data.Blame(position);
 
     // propagate smart position
     const enhanced = TryDecodeEnhancedPositionFromName(position.name);
@@ -23,25 +24,34 @@ export class BlameTree {
       }
     }
 
-    return new BlameTree(position, await Promise.all(blames.map(pos => BlameTree.Create(dataStore, pos))));
+    return new BlameTree(position, blames.map(pos => BlameTree.Create(dataStore, pos)));
   }
 
   private constructor(
     public readonly node: sourceMap.MappedPosition & { path?: JsonPath },
     public readonly blaming: BlameTree[]) { }
 
-  public * BlameInputs(): Iterable<sourceMap.MappedPosition> {
-    // report self
-    if (this.node.source.startsWith("input/")) {
-      yield {
-        column: this.node.column,
-        line: this.node.line,
-        name: this.node.name,
-        source: decodeURIComponent(this.node.source.slice(6))
-      };
+  public BlameInputs(): sourceMap.MappedPosition[] {
+    const result: sourceMap.MappedPosition[] = [];
+
+    const todos: BlameTree[] = [this];
+    let todo: BlameTree | undefined;
+    while (todo = todos.pop()) {
+      // report self
+      if (IsUri(todo.node.source) && !todo.node.source.startsWith(DataStore.BaseUri)) {
+        result.push({
+          column: todo.node.column,
+          line: todo.node.line,
+          name: todo.node.name,
+          source: todo.node.source
+        });
+        continue;
+      }
+      // recurse
+      todos.push(...todo.blaming);
     }
-    // recurse
-    yield* From(this.blaming).SelectMany(child => child.BlameInputs()).Distinct(x => JSON.stringify(x));
+
+    return From(result).Distinct(x => JSON.stringify(x)).ToArray();
   }
 }
 

@@ -29,4 +29,4 @@ export interface Mapping {
   name?: string;
 }
 
-export type Mappings = Iterable<Mapping>;
+export type Mappings = Array<Mapping>;

@@ -4,6 +4,7 @@ namespace Petstore
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// The Storage Management Client.
@@ -18,17 +19,17 @@ namespace Petstore
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
+        JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
+        JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        Microsoft.Rest.ServiceClientCredentials Credentials { get; }
+        ServiceClientCredentials Credentials { get; }
 
         /// <summary>
         /// Gets subscription credentials which uniquely identify Microsoft
@@ -54,8 +55,8 @@ namespace Petstore
         int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
-        /// When set to true a unique x-ms-client-request-id value is
-        /// generated and included in each request. Default is true.
+        /// When set to true a unique x-ms-client-request-id value is generated
+        /// and included in each request. Default is true.
         /// </summary>
         bool? GenerateClientRequestId { get; set; }
 

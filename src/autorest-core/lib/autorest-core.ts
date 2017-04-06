@@ -11,6 +11,7 @@ export { ConfigurationView } from './configuration';
 import { Message } from './message';
 import * as Constants from './constants';
 import { Artifact } from './artifact';
+import { Exception, OperationCanceledException } from './exception';
 
 export class AutoRest extends EventEmitter {
   private _configurations = new Array<any>();
@@ -48,12 +49,45 @@ export class AutoRest extends EventEmitter {
    *
    * @param content - the file content to evaluate
    */
-  public async IsSwaggerFile(documentType: DocumentType, content: string): Promise<boolean> {
-    // this checks to see if the document is a 
-    return true;
+  public static async IsSwaggerFile(content: string): Promise<boolean> {
+    // this checks to see if the document is a swagger document 
+    try {
+      // quick check to see if it's json already
+      let doc = JSON.parse(content);
+      return (doc && doc.swagger && doc.swagger == "2.0")
+    } catch (e) {
+      try {
+        // maybe it's yaml or literate swagger
+        let doc = JSON.parse(await AutoRest.LiterateToJson(content));
+        return (doc && doc.swagger && doc.swagger == "2.0")
+      } catch (e) {
+        // nope
+      }
+    }
+
+    return false;
   }
 
-  public async IsConfigurationFile(content: string): Promise<boolean> {
+  public static async LiterateToJson(content: string): Promise<string> {
+    let autorest = new AutoRest({
+      EnumerateFileUris: async function* (folderUri: string): AsyncIterable<string> { },
+      ReadFile: async (f: string): Promise<string> => f == "mem:///foo.md" ? content : ""
+    });
+    let result = "";
+    autorest.AddConfiguration({ "input-file": "mem:///foo.md", "output-artifact": ["swagger-document"] });
+    autorest.GeneratedFile.Subscribe((source, artifact) => {
+      result = artifact.content;
+    });
+    // run autorest and wait.
+    try {
+      await (await autorest.Process()).finish;
+      return result;
+    } catch (x) {
+    }
+    return "";
+  }
+
+  public static async IsConfigurationFile(content: string): Promise<boolean> {
     // this checks to see if the document is an autorest markdown configuration file
     return content.indexOf(Constants.MagicString) > -1;
   }
@@ -111,7 +145,7 @@ export class AutoRest extends EventEmitter {
   /**
    * Called to start processing of the files.
    */
-  public Process(): { finish: Promise<boolean>, cancel: () => void } {
+  public Process(): { finish: Promise<boolean | Error>, cancel: () => void } {
     let earlyCancel = false;
     let cancel: () => void = () => earlyCancel = true;
     const processInternal = async () => {
@@ -150,9 +184,21 @@ export class AutoRest extends EventEmitter {
         return true;
       }
       catch (e) {
-        console.error(e);
-        // finished not cleanly
-        this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e}` });
+        if (e instanceof Error) {
+          /* if (!(e instanceof OperationCanceledException)) {
+            console.error(e.message);
+          } */
+
+          this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e.message}` });
+          this.Finished.Dispatch(e);
+
+          if (view) {
+            view.removeAllListeners();
+          }
+          return e;
+        }
+
+        // console.error(e);
         this.Finished.Dispatch(false);
         if (view) {
           view.removeAllListeners();
@@ -166,7 +212,7 @@ export class AutoRest extends EventEmitter {
     }
   }
 
-  @EventEmitter.Event public Finished: IEvent<AutoRest, boolean>;
+  @EventEmitter.Event public Finished: IEvent<AutoRest, boolean | Error>;
 
   @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
 
