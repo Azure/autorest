@@ -4,7 +4,6 @@
 using System;
 using System.Globalization;
 using System.Net;
-using System.Text;
 using AutoRest.Core.Model;
 
 namespace AutoRest.Swagger
@@ -62,38 +61,6 @@ namespace AutoRest.Swagger
 
             return reference;
         }
-
-        /// <summary>
-        /// Returns a suggestion of camel case styled string
-        /// </summary>
-        /// <param name="reference">String to convert to camel case style</param>
-        /// <returns>A string that conforms with camel case style based on the string passed as parameter.</returns>
-        public static string ToCamelCase(this string reference)
-        {
-            StringBuilder sb = new StringBuilder(reference);
-            if (sb.Length > 0)
-            {
-                sb[0] = sb[0].ToString().ToLower()[0];
-            }
-            bool firstUpper = true;
-            for (int i = 1; i < reference.Length; i++)
-            {
-                if (char.IsUpper(sb[i]) && firstUpper)
-                {
-                    firstUpper = false;
-                }
-                else
-                {
-                    firstUpper = true;
-                    if (char.IsUpper(sb[i]))
-                    {
-                        sb[i] = sb[i].ToString().ToLower()[0];
-                    }
-                }
-            }
-            return sb.ToString();
-        }
-
 
         /// <summary>
         /// Removes #/parameters/ or url#/parameters from the reference path.

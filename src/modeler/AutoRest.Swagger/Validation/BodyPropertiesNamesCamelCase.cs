@@ -60,7 +60,7 @@ namespace AutoRest.Swagger.Validation
                             {
                                 if (!ValidationUtilities.IsNameCamelCase(prop.Key))
                                 {
-                                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, prop.Key, prop.Key.ToCamelCase());
+                                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, prop.Key, ValidationUtilities.GetCamelCasedSuggestion(prop.Key));
                                 }
                             }
                         }

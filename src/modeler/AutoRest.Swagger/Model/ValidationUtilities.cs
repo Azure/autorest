@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.Swagger.Validation;
+using System.Text;
 
 namespace AutoRest.Swagger.Model.Utilities
 {
@@ -314,6 +315,38 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <returns>list if operations that match the httpverb</returns>
         private static IEnumerable<Operation> SelectOperationsFromPaths(string id, Dictionary<string, Dictionary<string, Operation>> paths)
             => paths.Values.SelectMany(pathObjs=>pathObjs.Where(pair => pair.Key.ToLower().Equals(id.ToLower())).Select(pair => pair.Value));
+
+
+        /// <summary>
+        /// Returns a suggestion of camel case styled string based on the string passed as parameter.
+        /// </summary>
+        /// <param name="name">String to convert to camel case style</param>
+        /// <returns>A string that conforms with camel case style based on the string passed as parameter.</returns>
+        public static string GetCamelCasedSuggestion(string name)
+        {
+            StringBuilder sb = new StringBuilder(name);
+            if (sb.Length > 0)
+            {
+                sb[0] = sb[0].ToString().ToLower()[0];
+            }
+            bool firstUpper = true;
+            for (int i = 1; i<name.Length; i++)
+            {
+                if (char.IsUpper(sb[i]) && firstUpper)
+                {
+                    firstUpper = false;
+                }
+                else
+                {
+                    firstUpper = true;
+                    if (char.IsUpper(sb[i]))
+                    {
+                        sb[i] = sb[i].ToString().ToLower()[0];
+                    }
+                }
+            }
+            return sb.ToString();
+        }
 
         /// <summary>
         /// Returns whether a string follows camel case style, allowing for 2 consecutive upper case characters for acronyms.
