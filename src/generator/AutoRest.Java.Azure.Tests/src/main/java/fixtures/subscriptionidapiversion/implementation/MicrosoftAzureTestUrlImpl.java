@@ -195,8 +195,6 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
      */
     @Override
     public String userAgent() {
-        return String.format("Azure-SDK-For-Java/%s (%s)",
-                getClass().getPackage().getImplementationVersion(),
-                "MicrosoftAzureTestUrl, 2014-04-01-preview");
+        return String.format("%s (%s, %s)", super.userAgent(), "MicrosoftAzureTestUrl", "2014-04-01-preview");
     }
 }

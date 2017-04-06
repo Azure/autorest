@@ -291,8 +291,6 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
      */
     @Override
     public String userAgent() {
-        return String.format("Azure-SDK-For-Java/%s (%s)",
-                getClass().getPackage().getImplementationVersion(),
-                "AutoRestAzureSpecialParametersTestClient, 2015-07-01-preview");
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestAzureSpecialParametersTestClient", "2015-07-01-preview");
     }
 }

@@ -1,15 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core.Properties;
 using AutoRest.Core.Logging;
-using AutoRest.Swagger.Model.Utilities;
-using System.Collections.Generic;
+using AutoRest.Core.Properties;
+using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
 using AutoRest.Swagger.Model;
-using System.Text.RegularExpressions;
-using System.Linq;
+using AutoRest.Swagger.Model.Utilities;
 using AutoRest.Swagger.Validation.Core;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -38,7 +38,12 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
-        // Verifies if a tracked resource has a corresponding PATCH operation
+        /// <summary>
+        /// Verifies if a tracked resource has a corresponding patch operation
+        /// </summary>
+        /// <param name="definitions"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             ServiceDefinition serviceDefinition = (ServiceDefinition)context.Root;
@@ -46,15 +51,15 @@ namespace AutoRest.Swagger.Validation
             IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", serviceDefinition);
 
             // enumerate all the models returned by all PATCH operations (200/201 responses)
-            var respModels = patchOperations.Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath());
-            respModels.Union(patchOperations.Select(op => op.Responses["201"]?.Schema?.Reference?.StripDefinitionPath())).Where(modelName=>!string.IsNullOrEmpty(modelName));
+            var respModels = patchOperations.Select(op => op.Responses.GetValueOrNull("200")?.Schema?.Reference?.StripDefinitionPath());
+            respModels.Union(patchOperations.Select(op => op.Responses.GetValueOrNull("201")?.Schema?.Reference?.StripDefinitionPath())).Where(modelName => !string.IsNullOrEmpty(modelName));
 
             // find models that are not being returned by any of the PATCH operations
             var violatingModels = context.TrackedResourceModels.Except(respModels);
 
             foreach (var modelName in violatingModels)
             {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, modelName);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelName)), this, modelName);
             }
         }
     }

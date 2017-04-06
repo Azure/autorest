@@ -23,7 +23,7 @@ async function EnsureCompleteDefinitionIsPresent(
   externalFiles: { [uri: string]: DataHandleRead },
   sourceFileUri: string,
   sourceDocObj: any,
-  sourceDocMappings: Enumerable<Mapping>,
+  sourceDocMappings: Mapping[],
   currentFileUri?: string,
   entityType?: string,
   modelName?: string) {
@@ -34,7 +34,7 @@ async function EnsureCompleteDefinitionIsPresent(
     currentFileUri = sourceFileUri;
   }
 
-  var currentDoc = await externalFiles[currentFileUri].ReadYamlAst();
+  var currentDoc = externalFiles[currentFileUri].ReadYamlAst();
   if (entityType == null || modelName == null) {
     // external references
     for (const node of Descendants(currentDoc)) {
@@ -86,20 +86,20 @@ async function EnsureCompleteDefinitionIsPresent(
       if (sourceDocObj[referencedEntityType][referencedModelName] === undefined) {
         if (fileUri != null) {
           sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, fileUri, referencedEntityType, referencedModelName);
-          const extObj = await externalFiles[fileUri].ReadObject<any>();
+          const extObj = externalFiles[fileUri].ReadObject<any>();
           inputs.push(externalFiles[fileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = extObj[referencedEntityType][referencedModelName];
-          sourceDocMappings = sourceDocMappings.Concat(CreateAssignmentMapping(
+          sourceDocMappings.push(...CreateAssignmentMapping(
             extObj[referencedEntityType][referencedModelName], externalFiles[fileUri].key,
             [referencedEntityType, referencedModelName], [referencedEntityType, referencedModelName],
             `resolving '${refPath}' in '${currentFileUri}'`));
         }
         else {
           sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, referencedEntityType, referencedModelName);
-          const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
+          const currentObj = externalFiles[currentFileUri].ReadObject<any>();
           inputs.push(externalFiles[currentFileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = currentObj[referencedEntityType][referencedModelName];
-          sourceDocMappings = sourceDocMappings.Concat(CreateAssignmentMapping(
+          sourceDocMappings.push(...CreateAssignmentMapping(
             currentObj[referencedEntityType][referencedModelName], externalFiles[currentFileUri].key,
             [referencedEntityType, referencedModelName], [referencedEntityType, referencedModelName],
             `resolving '${refPath}' in '${currentFileUri}'`));
@@ -128,10 +128,10 @@ async function EnsureCompleteDefinitionIsPresent(
       if (typeof defSec === "string" && typeof model === "string" && visitedEntities.indexOf(model) === -1) {
         //recursively check if the model is completely defined.
         sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, defSec, model);
-        const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
+        const currentObj = externalFiles[currentFileUri].ReadObject<any>();
         inputs.push(externalFiles[currentFileUri]);
         sourceDocObj[defSec][model] = currentObj[defSec][model];
-        sourceDocMappings = sourceDocMappings.Concat(CreateAssignmentMapping(
+        sourceDocMappings.push(...CreateAssignmentMapping(
           currentObj[defSec][model], externalFiles[currentFileUri].key,
           [defSec, model], [defSec, model],
           `resolving '${stringify(dependentRef.path)}' (has allOf on '${reference}') in '${currentFileUri}'`));
@@ -148,7 +148,7 @@ async function EnsureCompleteDefinitionIsPresent(
 
 async function StripExternalReferences(swagger: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
   const result = await workingScope.Write("result.yaml");
-  const ast = CloneAst(await swagger.ReadYamlAst());
+  const ast = CloneAst(swagger.ReadYamlAst());
   const mapping = IdentitySourceMapping(swagger.key, ast);
   for (const node of Descendants(ast)) {
     if (node.path[node.path.length - 1] === "$ref") {
@@ -172,8 +172,8 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
     [],
     externalFiles,
     inputFileUri,
-    await data.ReadObject<any>(),
-    From(IdentitySourceMapping(data.key, await data.ReadYamlAst())));
+    data.ReadObject<any>(),
+    IdentitySourceMapping(data.key, data.ReadYamlAst()));
   const result = await StripExternalReferences(externalFiles[inputFileUri], workingScope.CreateScope("strip-ext-references"));
   //WriteString(`file:///C:/output/${(<any>workingScope).name}_after.yaml`, await result.ReadData());
   return result;
@@ -204,14 +204,14 @@ function getArrayValues<T>(obj: ObjectWithPath<T[]>): ObjectWithPath<T>[] {
   return o.map((x, i) => { return { obj: x, path: obj.path.concat([i]) }; });
 }
 
-export async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[], workingScope: DataStoreView, azureMode: boolean): Promise<DataHandleRead> {
+export async function ComposeSwaggers(config: ConfigurationView, infoSection: any, inputSwaggers: DataHandleRead[], workingScope: DataStoreView, azureMode: boolean): Promise<DataHandleRead> {
   if (azureMode) {
     // prepare component Swaggers (override info, lift version param, ...)
     for (let i = 0; i < inputSwaggers.length; ++i) {
       const inputSwagger = inputSwaggers[i];
       const outputSwagger = await workingScope.Write(`prepared_${i}.yaml`);
-      const swagger = await inputSwagger.ReadObject<any>();
-      let mapping = From([] as Mappings);
+      const swagger = inputSwagger.ReadObject<any>();
+      const mapping: Mappings = [];
       const populate: (() => void)[] = []; // populate swagger; deferred in order to simplify source map generation
 
       // digest "info"
@@ -242,24 +242,23 @@ export async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandl
 
           // forward client param
           populate.push(() => Object.assign(apiVersionParameter.obj, apiVersionClientParam));
-          mapping = mapping.Concat(CreateAssignmentMapping(
+          mapping.push(...CreateAssignmentMapping(
             apiVersionClientParam, inputSwagger.key,
             ["parameters", apiVersionClientParamName], apiVersionParameter.path,
             "inlining api-version"));
 
           // make constant
           populate.push(() => apiVersionParameter.obj.enum = [version]);
-          mapping = mapping.Concat([
-            {
-              name: "inlining api-version", source: inputSwagger.key,
-              original: { path: [<JsonPathComponent>"info", "version"] },
-              generated: { path: apiVersionParameter.path.concat("enum") }
-            },
-            {
-              name: "inlining api-version", source: inputSwagger.key,
-              original: { path: [<JsonPathComponent>"info", "version"] },
-              generated: { path: apiVersionParameter.path.concat("enum", 0) }
-            }]);
+          mapping.push({
+            name: "inlining api-version", source: inputSwagger.key,
+            original: { path: [<JsonPathComponent>"info", "version"] },
+            generated: { path: apiVersionParameter.path.concat("enum") }
+          });
+          mapping.push({
+            name: "inlining api-version", source: inputSwagger.key,
+            original: { path: [<JsonPathComponent>"info", "version"] },
+            generated: { path: apiVersionParameter.path.concat("enum", 0) }
+          });
         }
 
         // remove api-version client param
@@ -273,7 +272,7 @@ export async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandl
           for (const method of methods) {
             if (!method.obj[pc]) {
               populate.push(() => method.obj[pc] = clientPC);
-              mapping = mapping.Concat(CreateAssignmentMapping(
+              mapping.push(...CreateAssignmentMapping(
                 clientPC, inputSwagger.key,
                 [pc], method.path.concat([pc]),
                 `inlining ${pc}`));
@@ -284,7 +283,7 @@ export async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandl
       }
 
       // finish source map
-      mapping = mapping.Concat(IdentitySourceMapping(inputSwagger.key, ToAst(swagger)));
+      mapping.push(...IdentitySourceMapping(inputSwagger.key, ToAst(swagger)));
 
       // populate object
       populate.forEach(f => f());
@@ -295,7 +294,7 @@ export async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandl
   }
 
   const hwSwagger = await workingScope.Write("swagger.yaml");
-  let hSwagger = await MergeYamls(inputSwaggers, hwSwagger);
+  let hSwagger = await MergeYamls(config, inputSwaggers, hwSwagger);
 
   // custom info section
   if (infoSection) {
@@ -303,7 +302,7 @@ export async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandl
     const hInfo = await hwInfo.WriteObject({ info: infoSection });
 
     const hwSwagger = await workingScope.Write("swagger_customInfo.yaml");
-    hSwagger = await MergeYamls([hSwagger, hInfo], hwSwagger);
+    hSwagger = await MergeYamls(config, [hSwagger, hInfo], hwSwagger);
   }
 
   return hSwagger;

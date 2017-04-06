@@ -29,7 +29,7 @@ namespace AutoRest.Swagger.Validation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
             // get all operation objects that are either of get or post type
-            ServiceDefinition serviceDefinition = (ServiceDefinition)context.Root;
+            ServiceDefinition serviceDefinition = context.Root;
             var listOperations = entity.Values.SelectMany(opDict => opDict.Where(pair => pair.Key.ToLower().Equals("get") || pair.Key.ToLower().Equals("post")));
             foreach (var opPair in listOperations)
             {
@@ -38,8 +38,8 @@ namespace AutoRest.Swagger.Validation
                 {
                     continue;
                 }
-                
-                string collType = opPair.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath();
+
+                string collType = opPair.Value.Responses.GetValueOrNull("200")?.Schema?.Reference?.StripDefinitionPath();
                 // if no response type defined skip
                 if (collType == null)
                 {

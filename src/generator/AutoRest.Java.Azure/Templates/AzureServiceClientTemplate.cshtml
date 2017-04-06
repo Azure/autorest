@@ -182,9 +182,14 @@ else
      */
     @@Override
     public String userAgent() {
-        return String.format("Azure-SDK-For-Java/%s (%s)",
-                getClass().getPackage().getImplementationVersion(),
-                "@Model.Name, @Model.ApiVersion");
+@if (Model.ApiVersion == null)
+{
+@:        return String.format("%s (%s)", super.userAgent(), "@Model.Name");
+}
+else
+{
+@:        return String.format("%s (%s, %s)", super.userAgent(), "@Model.Name", "@Model.ApiVersion");
+}
     }
 @if (Model.RootMethods.Any())
 {

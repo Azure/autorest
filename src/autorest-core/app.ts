@@ -21,6 +21,7 @@ import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
+import { Exception } from "./lib/exception";
 
 /**
  * Legacy AutoRest
@@ -38,7 +39,7 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     // generate virtual config file
     const currentDirUri = CreateFolderUri(currentDirectory());
     const dataStore = new DataStore();
-    const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
+    const config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(x => true /*unsafe*/), autorestArgs);
 
     // autorest init
     if (autorestArgs[0] === "init") {
@@ -55,6 +56,7 @@ ${Stringify(config).replace(/^---\n/, "")}
 `.replace(/~/g, "`"));
       return;
     }
+    // autorest init-cli
     if (autorestArgs[0] === "init-cli") {
       const args: string[] = [];
       for (const node of nodes(config, "$..*")) {
@@ -79,7 +81,10 @@ ${Stringify(config).replace(/^---\n/, "")}
     api.Warning.Subscribe((_, m) => console.warn(m.Text));
     api.Error.Subscribe((_, m) => console.error(m.Text));
     api.Fatal.Subscribe((_, m) => console.error(m.Text));
-    await api.Process().finish; // TODO: care about return value?
+    const result = await api.Process().finish;
+    if (result != true) {
+      throw result;
+    }
     await outstanding.Wait();
   }
   else {
@@ -118,7 +123,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 
     // switch
     const key = match[1];
-    const value = match[3] || null;
+    const value = match[3] || {};
     result.switches.push(CreateObject(key.split("."), value));
   }
 
@@ -140,10 +145,12 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   api.Warning.Subscribe((_, m) => console.warn(m.Text));
   api.Error.Subscribe((_, m) => console.error(m.Text));
   api.Fatal.Subscribe((_, m) => console.error(m.Text));
-  await api.Process().finish; // TODO: care about return value?
+  const result = await api.Process().finish;
+  if (result != true) {
+    throw result;
+  }
   await outstanding.Wait();
 }
-
 
 /**
  * Entry point
@@ -170,6 +177,16 @@ async function main() {
 
     process.exit(0);
   } catch (e) {
+    if (e instanceof Exception) {
+      console.error(e.message);
+      process.exit(e.exitCode);
+    }
+
+    if (e instanceof Error) {
+      console.error(e.message);
+      process.exit(1);
+    }
+
     console.error(e);
     process.exit(1);
   }

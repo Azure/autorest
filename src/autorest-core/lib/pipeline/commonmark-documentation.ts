@@ -45,8 +45,8 @@ export function PlainTextVersion(commonmarkAst: Node): string {
 }
 
 export async function ProcessCodeModel(codeModel: DataHandleRead, scope: DataStoreView): Promise<DataHandleRead> {
-  const ast = CloneAst(await codeModel.ReadYamlAst());
-  let mapping = From(IdentitySourceMapping(codeModel.key, ast));
+  const ast = CloneAst(codeModel.ReadYamlAst());
+  let mapping = IdentitySourceMapping(codeModel.key, ast);
 
   const cmParser = new Parser();
 
@@ -63,12 +63,12 @@ export async function ProcessCodeModel(codeModel: DataHandleRead, scope: DataSto
       const origKey = key + "_Original";
       nodeOriginal.key.value = origKey
       parent.mappings.push(nodeOriginal);
-      mapping = mapping.Concat([<Mapping>{
+      mapping.push({
         name: "original gfm",
         generated: <SmartPosition>{ path: d.path.map((x, i) => i === d.path.length - 1 ? origKey : x) },
         original: <SmartPosition>{ path: d.path },
         source: codeModel.key
-      }]);
+      });
 
       // sanitize
       const parsed = cmParser.parse(rawMarkdown);

@@ -21,7 +21,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
   @test async "plugin loading and communication"() {
     const cancellationToken = CancellationToken.None;
     const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.CreateScope("input");
+    const scopeInput = dataStore.GetReadThroughScope();
     const scopeWork = dataStore.CreateScope("working");
 
     const dummyPlugin = await AutoRestPlugin.FromModule(`${__dirname}/../lib/pipeline/plugins/dummy`);
@@ -45,7 +45,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
   @skip @test @timeout(10000) async "openapi-validation-tools"() {
     const cancellationToken = CancellationToken.None;
     const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.CreateScope("input").AsFileScopeReadThrough();
+    const scopeInput = dataStore.GetReadThroughScope();
 
     const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json";
     await scopeInput.Read(inputFileUri);
@@ -77,7 +77,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     // load swagger
     const swagger = await LoadLiterateSwagger(
       config,
-      dataStore.CreateScope("input").AsFileScopeReadThrough(),
+      dataStore.GetReadThroughScope(),
       "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
@@ -96,7 +96,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       assert.ok(message.Details.jsonref);
       assert.ok(message.Details["json-path"]);
       assert.ok(message.Details.validationCategory);
-      assert.strictEqual(message.Plugin, "AzureValidator");
+      assert.strictEqual(message.Plugin, "azure-validator");
     }
   }
 
@@ -108,7 +108,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     // load swagger
     const swagger = await LoadLiterateSwagger(
       config,
-      dataStore.CreateScope("input").AsFileScopeReadThrough(),
+      dataStore.GetReadThroughScope(),
       "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
@@ -118,7 +118,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope, { namespace: "SomeNamespace" }, m => null);
 
     // check results
-    const codeModel = await codeModelHandle.ReadData();
+    const codeModel = codeModelHandle.ReadData();
     assert.notEqual(codeModel.indexOf("isPolymorphicDiscriminator"), -1);
   }
 
@@ -127,25 +127,22 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
     // load code model
     const codeModelUri = ResolveUri(CreateFileUri(__dirname) + "/", "resources/code-model.yaml");
-    const inputScope = dataStore.CreateScope("input").AsFileScopeReadThrough(uri => uri === codeModelUri);
+    const inputScope = dataStore.GetReadThroughScope(uri => uri === codeModelUri);
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 
     // call generator
     const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const resultScope = await autorestPlugin.GenerateCode(
+      "csharp",
       codeModelHandle,
       pluginScope,
-      {
-        codeGenerator: "Azure.CSharp",
+      <any>{
         namespace: "SomeNamespace",
-        header: null,
-        payloadFlatteningThreshold: 0,
-        internalConstructors: false,
-        syncMethods: "essential",
-        useDateTimeOffset: false,
-        addCredentials: false,
-        rubyPackageName: "rubyrubyrubyruby"
+        "license-header": null,
+        "payload-flattening-threshold": 0,
+        "add-credentials": false,
+        "package-name": "rubyrubyrubyruby"
       },
       m => null);
 
@@ -161,7 +158,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
   @test @skip @timeout(0) async "custom plugin module"() {
     const cancellationToken = CancellationToken.None;
     const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.CreateScope("input").AsFileScopeReadThrough();
+    const scopeInput = dataStore.GetReadThroughScope();
 
     const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json";
     await scopeInput.Read(inputFileUri);

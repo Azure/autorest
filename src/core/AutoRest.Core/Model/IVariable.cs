@@ -95,7 +95,56 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual bool IsConstant
         {
-            get { return true == (_isConstant ?? ModelType?.IsConstant); }
+            get
+            {
+                // logic: true == (_isConstant ?? ModelType?.IsConstant)
+
+                if (_isConstant.HasValue)
+                {
+                    return _isConstant.Value;
+                }
+                // circular reference safe traversal of properties
+                var seen = new HashSet<IModelType>();
+                var todo = new Queue<IModelType>();
+                todo.Enqueue(ModelType);
+                while (todo.Count > 0)
+                {
+                    var type = todo.Dequeue();
+                    if (type == null)
+                    {
+                        return false;
+                    }
+                    else if (!seen.Contains(type))
+                    {
+                        seen.Add(type);
+                        var typeComp = type as CompositeType;
+                        if (typeComp != null)
+                        {
+                            var props = typeComp.ComposedProperties;
+                            if (!props.Any())
+                            {
+                                return false;
+                            }
+                            foreach (var prop in props)
+                            {
+                                if (prop._isConstant == false)
+                                {
+                                    return false;
+                                }
+                                else if (prop._isConstant == null)
+                                {
+                                    todo.Enqueue(prop.ModelType);
+                                }
+                            }
+                        }
+                        else if (!type.IsConstant)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
             set { _isConstant = value; }
         }
 

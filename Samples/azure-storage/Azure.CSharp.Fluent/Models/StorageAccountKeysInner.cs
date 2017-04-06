@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -11,7 +12,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the StorageAccountKeysInner class.
         /// </summary>
-        public StorageAccountKeysInner() { }
+        public StorageAccountKeysInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the StorageAccountKeysInner class.
@@ -22,18 +26,24 @@ namespace Petstore.Models
         {
             Key1 = key1;
             Key2 = key2;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets the value of key 1.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "key1")]
+        [JsonProperty(PropertyName = "key1")]
         public string Key1 { get; set; }
 
         /// <summary>
         /// Gets the value of key 2.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "key2")]
+        [JsonProperty(PropertyName = "key2")]
         public string Key2 { get; set; }
 
     }
