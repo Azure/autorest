@@ -21,7 +21,7 @@ namespace AutoRest.Swagger.Tests
     {
         public SwaggerModelerTests()
         {
-            Directory.SetCurrentDirectory( Core.Utilities.Extensions.CodeBaseDirectory );
+            Directory.SetCurrentDirectory(Core.Utilities.Extensions.CodeBaseDirectory);
         }
 
         private string CreateCSharpDeclarationString(Parameter parameter)
@@ -246,6 +246,32 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal("Color", codeModel.ModelTypes.First(m => m.Name == "Cat").Properties[1].Name);
                 Assert.Equal("Siamese", codeModel.ModelTypes.First(m => m.Name == "Siamese").Name);
                 Assert.Equal("Cat", codeModel.ModelTypes.First(m => m.Name == "Siamese").BaseModelType.Name);
+            }
+        }
+
+        [Fact]
+        public void TestcodeModelWithXmsDiscriminatorValue()
+        {
+            using (NewContext)
+            {
+                new Settings
+                {
+                    Namespace = "Test",
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-x-ms-discriminator-value.json")
+                };
+                var modeler = new SwaggerModeler();
+                var codeModel = modeler.Build();
+
+                Assert.NotNull(codeModel);
+                Assert.Equal("Pet", codeModel.ModelTypes.First(m => m.Name == "Pet").Name);
+                Assert.Equal("Microsoft.Models.MSPet", codeModel.ModelTypes.First(m => m.Name == "Pet").Extensions["x-ms-discriminator-value"]);
+                Assert.Equal("type", codeModel.ModelTypes.First(m => m.Name == "Pet").PolymorphicDiscriminator);
+                Assert.Equal(true, codeModel.ModelTypes.First(m => m.Name == "Pet").IsPolymorphic);
+                Assert.Equal(true, codeModel.ModelTypes.First(m => m.Name == "Pet").BaseIsPolymorphic);
+                Assert.Equal("Cat", codeModel.ModelTypes.First(m => m.Name == "Cat").Name);
+                Assert.Equal("Microsoft.Models.MSCat", codeModel.ModelTypes.First(m => m.Name == "Cat").Extensions["x-ms-discriminator-value"]);
+                Assert.Equal(true, codeModel.ModelTypes.First(m => m.Name == "Cat").BaseIsPolymorphic);
+                Assert.Equal("Pet", codeModel.ModelTypes.First(m => m.Name == "Cat").BaseModelType.Name);
             }
         }
 
@@ -530,12 +556,12 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal("IList<String> array", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[14]));
 
                 var variableEnumInPath =
-                    codeModel.Methods.First(m => m.Name == "List" && m.Group .IsNullOrEmpty())
+                    codeModel.Methods.First(m => m.Name == "List" && m.Group.IsNullOrEmpty())
                         .Parameters.First(p => p.Name == "color" && p.Location == ParameterLocation.Path)
                         .ModelType as EnumType;
                 Assert.NotNull(variableEnumInPath);
                 Assert.Equal(variableEnumInPath.Values,
-                    new[] {new EnumValue {Name = "red"}, new EnumValue {Name = "blue"}, new EnumValue {Name = "green"}}
+                    new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" } }
                         .ToList());
                 Assert.True(variableEnumInPath.ModelAsString);
                 Assert.Empty(variableEnumInPath.Name.RawValue);
@@ -560,7 +586,7 @@ namespace AutoRest.Swagger.Tests
                         .ModelType as EnumType;
                 Assert.NotNull(differentEnum);
                 Assert.Equal(differentEnum.Values,
-                    new[] {new EnumValue {Name = "cyan"}, new EnumValue {Name = "yellow"}}.ToList());
+                    new[] { new EnumValue { Name = "cyan" }, new EnumValue { Name = "yellow" } }.ToList());
                 Assert.True(differentEnum.ModelAsString);
                 Assert.Empty(differentEnum.Name.RawValue);
 
@@ -570,7 +596,7 @@ namespace AutoRest.Swagger.Tests
                         .ModelType as EnumType;
                 Assert.NotNull(sameEnum);
                 Assert.Equal(sameEnum.Values,
-                    new[] {new EnumValue {Name = "blue"}, new EnumValue {Name = "green"}, new EnumValue {Name = "red"}}
+                    new[] { new EnumValue { Name = "blue" }, new EnumValue { Name = "green" }, new EnumValue { Name = "red" } }
                         .ToList());
                 Assert.True(sameEnum.ModelAsString);
                 Assert.Empty(sameEnum.Name.RawValue);
@@ -581,7 +607,7 @@ namespace AutoRest.Swagger.Tests
                         .ModelType as EnumType;
                 Assert.NotNull(modelEnum);
                 Assert.Equal(modelEnum.Values,
-                    new[] {new EnumValue {Name = "red"}, new EnumValue {Name = "blue"}, new EnumValue {Name = "green"}}
+                    new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" } }
                         .ToList());
                 Assert.True(modelEnum.ModelAsString);
                 Assert.Empty(modelEnum.Name.RawValue);
@@ -592,7 +618,7 @@ namespace AutoRest.Swagger.Tests
                         .ModelType as EnumType;
                 Assert.NotNull(fixedEnum);
                 Assert.Equal(fixedEnum.Values,
-                    new[] {new EnumValue {Name = "red"}, new EnumValue {Name = "blue"}, new EnumValue {Name = "green"}}
+                    new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "blue" }, new EnumValue { Name = "green" } }
                         .ToList());
                 Assert.False(fixedEnum.ModelAsString);
                 Assert.Equal("Colors", fixedEnum.Name);
@@ -609,7 +635,7 @@ namespace AutoRest.Swagger.Tests
                         .ModelType as EnumType;
                 Assert.NotNull(refEnum);
                 Assert.Equal(refEnum.Values,
-                    new[] {new EnumValue {Name = "red"}, new EnumValue {Name = "green"}, new EnumValue {Name = "blue"}}
+                    new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "green" }, new EnumValue { Name = "blue" } }
                         .ToList());
                 Assert.True(refEnum.ModelAsString);
                 Assert.Equal("RefColors", refEnum.Name);
@@ -688,7 +714,7 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal("100", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[3].Constraints[Constraint.ExclusiveMaximum]);
                 Assert.Equal("0", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[3].Constraints[Constraint.ExclusiveMinimum]);
             }
-	    }
+        }
 
         [Fact]
         public void TestConstants()
@@ -766,7 +792,7 @@ namespace AutoRest.Swagger.Tests
             }
         }
 
-[Fact]
+        [Fact]
         public void TestcodeModelWithResponseHeaders()
         {
             using (NewContext)
@@ -783,22 +809,22 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal(2, codeModel.Methods.Count);
                 Assert.Equal(2, codeModel.Methods[0].Responses.Count);
                 Assert.Equal("ListHeaders", codeModel.Methods[0].Responses[HttpStatusCode.OK].Headers.Name);
-                Assert.Equal(3,((CompositeType) codeModel.Methods[0].Responses[HttpStatusCode.OK].Headers).Properties.Count);
+                Assert.Equal(3, ((CompositeType)codeModel.Methods[0].Responses[HttpStatusCode.OK].Headers).Properties.Count);
                 Assert.Equal("ListHeaders", codeModel.Methods[0].Responses[HttpStatusCode.Created].Headers.Name);
-                Assert.Equal(3,((CompositeType) codeModel.Methods[0].Responses[HttpStatusCode.Created].Headers).Properties.Count);
+                Assert.Equal(3, ((CompositeType)codeModel.Methods[0].Responses[HttpStatusCode.Created].Headers).Properties.Count);
                 Assert.Equal("ListHeaders", codeModel.Methods[0].ReturnType.Headers.Name);
-                Assert.Equal(3, ((CompositeType) codeModel.Methods[0].ReturnType.Headers).Properties.Count);
+                Assert.Equal(3, ((CompositeType)codeModel.Methods[0].ReturnType.Headers).Properties.Count);
 
                 Assert.Equal(1, codeModel.Methods[1].Responses.Count);
                 Assert.Equal("CreateHeaders", codeModel.Methods[1].Responses[HttpStatusCode.OK].Headers.Name);
-                Assert.Equal(3,((CompositeType) codeModel.Methods[1].Responses[HttpStatusCode.OK].Headers).Properties.Count);
+                Assert.Equal(3, ((CompositeType)codeModel.Methods[1].Responses[HttpStatusCode.OK].Headers).Properties.Count);
                 Assert.Equal("CreateHeaders", codeModel.Methods[1].ReturnType.Headers.Name);
-                Assert.Equal(3, ((CompositeType) codeModel.Methods[1].ReturnType.Headers).Properties.Count);
+                Assert.Equal(3, ((CompositeType)codeModel.Methods[1].ReturnType.Headers).Properties.Count);
                 Assert.True(codeModel.HeaderTypes.Any(c => c.Name == "ListHeaders"));
                 Assert.True(codeModel.HeaderTypes.Any(c => c.Name == "CreateHeaders"));
             }
         }
-        
+
         [Fact]
         public void TestCustomPaths()
         {
