@@ -56,9 +56,7 @@ namespace AutoRest.Swagger.Validation
 
                     if (!this.validateSchemaProperty(resourceSchema, "id", true)   ||
                         !this.validateSchemaProperty(resourceSchema, "name", true) ||
-                        !this.validateSchemaProperty(resourceSchema, "type", true) ||
-                        !this.validateSchemaProperty(resourceSchema, "location", false) ||
-                        !this.validateSchemaProperty(resourceSchema, "tags", false))
+                        !this.validateSchemaProperty(resourceSchema, "type", true))
                         return false;
                 }
             }
