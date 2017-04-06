@@ -43,6 +43,18 @@ directive:
   reason: Our new guidelines require upper case descriptions here. Customers love it.
 ```
 
+### Swagger: Rename methods
+
+``` yaml 
+directive:
+  from: composite # do it globally (in case there are multiple input Swaggers)
+  where: $.paths..operationId
+  # Replace operation IDs ending in "...ies" with "...y", because that's the safest way to make stuff singular.
+  transform: >
+    $.replace(/ies$/, "y")
+  reason: I don't like plural.
+```
+
 ### CodeModel: Use endpoint URIs to determine operation group names
 
 ``` yaml 

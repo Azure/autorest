@@ -172,9 +172,9 @@ namespace
             /// Storage account names must be between 3 and 24 characters in length and use
             /// numbers and lower-case letters only.
             /// </param>
-            public static StorageAccount GetProperties(this ICheckNameAvailabilityOperations operations, string resourceGroupName, string accountName)
+            public static StorageAccount GetProperty(this ICheckNameAvailabilityOperations operations, string resourceGroupName, string accountName)
             {
-                return operations.GetPropertiesAsync(resourceGroupName, accountName).GetAwaiter().GetResult();
+                return operations.GetPropertyAsync(resourceGroupName, accountName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -196,9 +196,9 @@ namespace
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<StorageAccount> GetPropertiesAsync(this ICheckNameAvailabilityOperations operations, string resourceGroupName, string accountName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<StorageAccount> GetPropertyAsync(this ICheckNameAvailabilityOperations operations, string resourceGroupName, string accountName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetPropertiesWithHttpMessagesAsync(resourceGroupName, accountName, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetPropertyWithHttpMessagesAsync(resourceGroupName, accountName, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
