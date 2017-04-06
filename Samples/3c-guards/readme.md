@@ -1,4 +1,4 @@
-# Scenario: Custom transformations
+# Scenario: Guards for conditional configuration
 
 > see https://aka.ms/autorest
 
@@ -25,11 +25,20 @@ csharp:
 
 ## More fun with guards
 
+Defining custom flags...
+
 ``` yaml $(csharp["output-folder"] == "Client")
 please-generate-java-too: true
 ```
 
+...and depending on them:
+
 ``` yaml $(please-generate-java-too)
 java:
   output-folder: OtherClient
+```
+
+``` yaml $(please-generate-go-too)
+go:
+  output-folder: YetAnotherClient
 ```

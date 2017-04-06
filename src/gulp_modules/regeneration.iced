@@ -624,64 +624,7 @@ task 'regenerate-ars', '', (done) ->
   },done
   return null
 
-task 'regenerate-samples', '', ['regenerate-samplesazure', 'regenerate-samplesazurefluent'],(done) ->
-  count = 0
-  for lang in ['CSharp', 'Java', 'Python', 'NodeJS', 'Ruby', 'Go', 'AzureResourceSchema']
-    count++
-    regenExpected {
-      'modeler': 'Swagger',
-      'header': 'NONE',
-      'outputBaseDir': "#{basefolder}/Samples/petstore/#{lang}",
-      'inputBaseDir': 'Samples',
-      'mappings': { '': ['petstore/petstore.json', 'Petstore'] },
-      'nsPrefix': "Petstore",
-      'outputDir': "",
-      'language': lang.toLowerCase()
-    }, () => 
-      count = count - 1
-      return done() if count is 0
-  return null
-
-task 'regenerate-samplesazure', '', (done) ->
-  count = 0
-  for lang in ['CSharp', 'Java', 'Python', 'NodeJS', 'Ruby']
-    count++
-    regenExpected {
-      'modeler': 'Swagger',
-      'header': 'NONE',
-      'outputBaseDir': "#{basefolder}/Samples/azure-storage/Azure.#{lang}",
-      'inputBaseDir': 'Samples',
-      'mappings': { '': ['azure-storage/azure-storage.json', 'Petstore'] },
-      'nsPrefix': "Petstore",
-      'outputDir': "",
-      'azureArm': true,
-      'language': lang.toLowerCase()
-    },() => 
-      count = count - 1
-      return done() if count is 0 
-  return null
-
-task 'regenerate-samplesazurefluent', '', (done) ->
-  count = 0
-  for lang in ['CSharp', 'Java']
-    count++
-    regenExpected {
-      'modeler': 'Swagger',
-      'header': 'NONE',
-      'outputBaseDir': "#{basefolder}/Samples/azure-storage/Azure.#{lang}.Fluent",
-      'inputBaseDir': 'Samples',
-      'mappings': { '': ['azure-storage/azure-storage.json', 'Petstore'] },
-      'nsPrefix': "Petstore",
-      'outputDir': "",
-      'azureArm': true,
-      'fluent': true,
-      'language': lang.toLowerCase()
-    },() => 
-      count = count - 1
-      return done() if count is 0 
-  return null
-
-task 'regenerate-samples2', '', (done) ->
+task 'regenerate-samples', '', (done) ->
   source 'Samples/**/readme.md'
     .pipe foreach (each,next)->
       autorest [each.path], (code,stdout,stderr) ->
