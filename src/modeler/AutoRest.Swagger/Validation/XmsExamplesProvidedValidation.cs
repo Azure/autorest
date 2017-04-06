@@ -42,12 +42,16 @@ namespace AutoRest.Swagger.Validation
         /// <returns>ValidationMessage</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
         {
+            // find all operations that do not have the x-ms-examples extension or those which have x-ms-examples extension as empty
+            // but ignore operations_list
             var violatingOps = paths.SelectMany(pathObj => pathObj.Value.Where(opPair 
-                                                            => opPair.Value.Extensions?.ContainsKey("x-ms-examples") != true || string.IsNullOrWhiteSpace((string)opPair.Value.Extensions["x-ms-examples"])));
+                                                            => (opPair.Value.Extensions?.ContainsKey("x-ms-examples") != true 
+                                                               || string.IsNullOrWhiteSpace((string)opPair.Value.Extensions["x-ms-examples"]))
+                                                               && !opPair.Value.OperationId.ToLower().Equals("operations_list")));
             foreach (var opPair in violatingOps)
             {
                 var violatingPath = paths.First(pathObj => pathObj.Value.Values.Select(op => op.OperationId).Contains(opPair.Value.OperationId)).Key;
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath).AppendProperty(opPair.Key)), this, opPair.Value.OperationId);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath).AppendProperty(opPair.Key).AppendProperty("operationId")), this, opPair.Value.OperationId);
             }
         }
     }

@@ -555,6 +555,18 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-parameters-validation-2.json"));
             messages.AssertOnlyValidationMessage(typeof(BodyParametersValidation), 1);
         }
+
+
+        /// <summary>
+        /// Verifies that sku object
+        /// </summary>
+        [Fact]
+        public void XmsExamplesProvidedValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "x-ms-examples-absent.json"));
+            messages.AssertOnlyValidationMessage(typeof(XmsExamplesProvidedValidation), 1);
+        }
+
     }
 
     #region Positive tests
@@ -719,6 +731,7 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
         }
+
     }
 
     #endregion
