@@ -22,6 +22,7 @@ import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { From } from "../ref/linq";
 import { IFileSystem } from "../file-system";
 import { TryDecodeEnhancedPositionFromName } from "../source-map/source-map";
+import { Exception } from '../exception';
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
@@ -46,7 +47,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // load Swaggers
   let inputs = From(config.InputFileUris).ToArray();
   if (inputs.length === 0) {
-    throw "No input files provided.\n\nUse --help to get help information.";
+    throw new Exception("No input files provided.\n\nUse --help to get help information.", 0)
   }
 
   config.Debug.Dispatch({ Text: `Starting Pipeline - Loading literate swaggers ${inputs}` });
