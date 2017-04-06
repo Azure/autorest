@@ -5,6 +5,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Validation.Core;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
@@ -16,6 +17,8 @@ namespace AutoRest.Swagger.Validation
     /// </summary>
     public class ResourceModelValidation: TypedRule<Dictionary<string, Schema>>
     {
+
+        private static readonly IEnumerable<string> ReadonlyProps = new List<string>() { "name", "id", "type" };
         /// <summary>
         /// Id of the Rule.
         /// </summary>
@@ -44,31 +47,14 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="definitions">Operation Definition to validate</param>
         /// <returns>true if the resource model is valid.false otherwise.</returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> entity, RuleContext context)
         {
-            foreach(string key in definitions.Keys)
+            var resModel = entity.First(pair => pair.Key.ToLower().Equals("resource"));
+            if (resModel.Value.Properties.Keys.Intersect(ReadonlyProps).Count() < 3)
             {
-                if (key.ToLower().Equals("resource"))
-                {
-                    Schema resourceSchema = definitions.GetValueOrNull(key);
-                    if (resourceSchema == null || resourceSchema.Properties.Count == 0)
-                        return false;
-
-                    if (!this.validateSchemaProperty(resourceSchema, "id", true)   ||
-                        !this.validateSchemaProperty(resourceSchema, "name", true) ||
-                        !this.validateSchemaProperty(resourceSchema, "type", true))
-                        return false;
-                }
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(resModel.Key)), this, resModel.Key);
             }
-            return true;
         }
-
-        private bool validateSchemaProperty(Schema resourceSchema, string propertyName, bool checkForReadOnly)
-        {
-            Schema resultSchema = resourceSchema.Properties.GetValueOrNull(propertyName);
-            if (resultSchema == null || (checkForReadOnly && !resultSchema.ReadOnly))
-                return false;
-            return true;
-        }
+        
     }
 }
