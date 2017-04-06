@@ -3,41 +3,71 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+// polyfills for language support
+require("../../polyfill.min.js");
+
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types } from "../plugin-api";
-import { SmartPosition, Mapping, RawSourceMap } from "../../ref/source-map";
+import { EnhancedPosition, Mapping, RawSourceMap, SmartPosition } from '../../ref/source-map';
 import { Parse, Stringify } from "../../ref/yaml";
-import { Message } from "../../message";
-const utils = require("../../../../../../openapi-validation-tools/lib/util/utils");
-const validation = require("../../../../../../openapi-validation-tools/index");
+import { Message, Channel } from "../../message";
+const utils = require("../../../node_modules/oav/lib/util/utils");
+const validation = require("../../../node_modules/oav/index");
 
 class OpenApiValidationSemantic {
-  public static readonly Name = "semantic validation";
+  public static readonly Name = "semantic-validatior";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
     const swaggerFileNames = await initiator.ListInputs(sessionId);
     for (const swaggerFileName of swaggerFileNames) {
       const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
       const swagger = Parse<any>(swaggerFile);
-      utils.docCache[swaggerFileName] = swagger;
-      const specValidationResult = await validation.validateSpec(swaggerFileName, "off");
-      initiator.WriteFile(sessionId, swaggerFileName, Stringify(specValidationResult));
+
+      utils.clearCache();
+      utils.docCache["cache.json"] = swagger;
+      const specValidationResult = await validation.validateSpec("cache.json", "off");
+      const messages = specValidationResult.validateSpec;
+      for (const message of messages.errors) {
+        initiator.Message(sessionId, {
+          Channel: Channel.Error,
+          Details: message,
+          Text: message.message,
+          Source: [{ document: swaggerFileName, Position: <any>{ path: message["jsonref"].split("#/")[1].split("/") } }]
+        });
+      }
+      for (const message of messages.warnings) {
+        initiator.Message(sessionId, {
+          Channel: Channel.Warning,
+          Details: message,
+          Text: message.message,
+          Source: [{ document: swaggerFileName, Position: <any>{ path: message["jsonref"].split("#/")[1].split("/") } }]
+        });
+      }
     }
     return true;
   }
 }
 
 class OpenApiValidationExample {
-  public static readonly Name = "example validation";
+  public static readonly Name = "example-validatior";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
     const swaggerFileNames = await initiator.ListInputs(sessionId);
     for (const swaggerFileName of swaggerFileNames) {
       const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
       const swagger = Parse<any>(swaggerFile);
-      utils.docCache[swaggerFileName] = swagger;
-      const specValidationResult = await validation.validateExamples(swaggerFileName, null, "off");
-      initiator.WriteFile(sessionId, swaggerFileName, Stringify(specValidationResult));
+
+      utils.clearCache();
+      utils.docCache["cache.json"] = swagger;
+      const specValidationResult = await validation.validateExamples("cache.json", null, "off");
+
+      for (const op in specValidationResult.operations) {
+        const opObj = specValidationResult.operations[op]["x-ms-examples"];
+        if (opObj.isValid === false) {
+          console.error(opObj);
+          // TODO: dispatch meaningful messages at the right spots
+        }
+      }
     }
     return true;
   }

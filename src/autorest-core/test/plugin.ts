@@ -8,6 +8,7 @@ require("../lib/polyfill.min.js");
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
+import { RealFileSystem } from '../lib/file-system';
 import { AutoRest } from '../lib/autorest-core';
 import { CancellationToken } from "../lib/ref/cancallation";
 import { CreateFileUri, ResolveUri } from "../lib/ref/uri";
@@ -41,32 +42,16 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     assert.strictEqual(message.Details, 42);
   }
 
-  // SKIPPING because Amar's tool is resolved hacky right now (waiting for "getting plugin bits to disk part")
-  @skip @test @timeout(10000) async "openapi-validation-tools"() {
-    const cancellationToken = CancellationToken.None;
-    const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.GetReadThroughScope();
+  // TODO: remodel if we figure out acquisition story
+  @test @timeout(60000) async "openapi-validation-tools"() {
+    const autoRest = new AutoRest(new RealFileSystem());
+    autoRest.AddConfiguration({ "input-file": "https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json" });
+    autoRest.AddConfiguration({ amar: true });
 
-    const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json";
-    await scopeInput.Read(inputFileUri);
-
-    const validationPlugin = await AutoRestPlugin.FromModule("./lib/pipeline/plugins/openapi-validation-tools");
-    const pluginNames = await validationPlugin.GetPluginNames(cancellationToken);
-    assert.deepStrictEqual(pluginNames.length, 2);
-
-    for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
-      const scopeWork = dataStore.CreateScope(`working_${pluginIndex}`);
-      const messages: Message[] = [];
-      const result = await validationPlugin.Process(
-        pluginNames[pluginIndex], _ => null,
-        scopeInput,
-        scopeWork.CreateScope("output"),
-        m => messages.push(m),
-        cancellationToken);
-      assert.strictEqual(result, true);
-      assert.strictEqual(messages.length, (await scopeInput.Enum()).length);
-      const message = messages[0];
-    }
+    const messages: Message[] = [];
+    autoRest.Error.Subscribe((_, m) => messages.push(m));
+    assert.strictEqual(await autoRest.Process().finish, true);
+    assert.strictEqual(messages.length, 2);
   }
 
   @test @timeout(10000) async "AutoRest.dll AzureValidator"() {
