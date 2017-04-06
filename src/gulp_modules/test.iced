@@ -5,7 +5,7 @@ task 'test', "runs all tests", (done) ->
       'test-go'
       'test-java'
       'test-node'
-      #'test-python'
+      'test-python'
       #'test-ruby'
       -> done()
    
