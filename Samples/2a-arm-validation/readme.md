@@ -11,8 +11,25 @@ input-file:
 
 ## Validation
 
-This time, we do not want to generate any code.
+This time, we not only want to generate code, we also want to validate.
 
 ``` yaml
 azure-arm: true # enables validation messages
+```
+
+## Generation
+
+Also generate for some languages.
+
+``` yaml 
+csharp:
+  output-folder: CSharp
+java:
+  output-folder: Java
+nodejs:
+  output-folder: NodeJS
+python:
+  output-folder: Python
+ruby:
+  output-folder: Ruby
 ```
