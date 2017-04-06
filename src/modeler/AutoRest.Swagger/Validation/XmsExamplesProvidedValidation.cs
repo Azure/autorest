@@ -42,7 +42,13 @@ namespace AutoRest.Swagger.Validation
         /// <returns>ValidationMessage</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
         {
-            var violatingOps = paths.Select(pathObj=>pathObj.Value.Values.Where(op=>!op.Extensions?.ContainsKey("x-ms-examples") || string.IsNullOrWhiteSpace((string)op.Extensions["x-ms-examples"]))
+            var violatingOps = paths.SelectMany(pathObj => pathObj.Value.Where(opPair 
+                                                            => opPair.Value.Extensions?.ContainsKey("x-ms-examples") != true || string.IsNullOrWhiteSpace((string)opPair.Value.Extensions["x-ms-examples"])));
+            foreach (var opPair in violatingOps)
+            {
+                var violatingPath = paths.First(pathObj => pathObj.Value.Values.Select(op => op.OperationId).Contains(opPair.Value.OperationId)).Key;
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath).AppendProperty(opPair.Key)), this, opPair.Value.OperationId);
+            }
         }
     }
 }
