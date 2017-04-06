@@ -49,9 +49,10 @@ namespace AutoRest.Swagger.Validation
         /// <returns>true if the resource model is valid.false otherwise.</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> entity, RuleContext context)
         {
-            var resModel = entity.First(pair => pair.Key.ToLower().Equals("resource"));
-            if (resModel.Value.Properties.Keys.Intersect(ReadonlyProps).Count() < 3)
+            var resModelList = entity.Where(pair => pair.Key.ToLower().Equals("resource"));
+            if (resModelList.Any() && (resModelList.First().Value.Properties?.Keys.Intersect(ReadonlyProps).Count()??0) < 3)
             {
+                var resModel = resModelList.First();
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(resModel.Key)), this, resModel.Key);
             }
         }
