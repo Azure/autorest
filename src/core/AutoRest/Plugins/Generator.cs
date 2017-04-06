@@ -38,9 +38,11 @@ public class Generator : NewPlugin
     }
 
     // build settings
+    var altNamespace = (await GetValue<string[]>("input-file")).FirstOrDefault().Split('/').Last().Split('\\').Last().Split('.').First();
+
     new Settings
     {
-      Namespace = await GetValue("namespace") ?? "",
+      Namespace = await GetValue("namespace") ?? altNamespace,
       ClientName = await GetValue("override-client-name"),
       PayloadFlatteningThreshold = await GetValue<int?>("payload-flattening-threshold") ?? 0,
       AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
@@ -57,7 +59,7 @@ public class Generator : NewPlugin
     {
       // TODO: sort out matters here entirely instead of relying on Input being read somewhere...
       var inputFile = await GetValue<string[]>("input-file");
-      Settings.Instance.Input = (inputFile as string[]).FirstOrDefault();
+      Settings.Instance.Input = inputFile.FirstOrDefault();
       Settings.Instance.PackageName = await GetValue("package-name");
       Settings.Instance.PackageVersion = await GetValue("package-version");
     }
