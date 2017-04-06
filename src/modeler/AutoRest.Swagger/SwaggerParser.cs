@@ -172,7 +172,7 @@ namespace AutoRest.Swagger
             }
             catch (JsonException ex)
             {
-                throw ErrorManager.CreateError("{0}. {1}", Resources.ErrorParsingSpec, ex.Message);
+                throw ErrorManager.CreateError("{0}. {1}\n{2}", Resources.ErrorParsingSpec, ex.Message,swaggerDocument);
             }
         }
     }

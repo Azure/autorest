@@ -160,9 +160,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      */
     @Override
     public String userAgent() {
-        return String.format("Azure-SDK-For-Java/%s (%s)",
-                getClass().getPackage().getImplementationVersion(),
-                "AutoRestReportServiceForAzure, 1.0.0");
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestReportServiceForAzure", "1.0.0");
     }
 
     private void initializeService() {

@@ -37,7 +37,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The template message for this Rule.
         /// </summary>
-         public override string MessageTemplate => Resources.LongRunningResponseNotValid;
+        public override string MessageTemplate => Resources.LongRunningResponseNotValid;
 
         protected static bool AreValidResponseCodes(RuleContext context, IEnumerable<string> statusCodes)
             => statusCodes.Any(statusCode => context?.GetFirstAncestor<Operation>()?.Responses?.GetValueOrNull(statusCode) != null);

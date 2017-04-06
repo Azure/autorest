@@ -15,6 +15,10 @@
       "description": "The title in the swagger spec that uniquely identifies the swagger spec.",
       "type": "string"
     },
+    "description": {
+      "description": "A brief explanation about the current scenario.",
+      "type": "string"
+    },
     "parameters": {
       "$ref": "#/xmsParametersExample"
     },

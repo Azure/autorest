@@ -78,8 +78,8 @@ class PagingTests(unittest.TestCase):
         eq = [e for e in items if e not in more_items]
         self.assertEqual(len(eq), 0)
 
-        with self.assertRaises(GeneratorExit):
-            pages.next()
+        with self.assertRaises(StopIteration):
+            next(pages)
 
         pages = self.client.paging.get_odata_multiple_pages()
         self.assertIsNotNone(pages.next_link)
