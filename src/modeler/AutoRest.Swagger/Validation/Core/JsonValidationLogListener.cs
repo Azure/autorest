@@ -13,7 +13,7 @@ namespace AutoRest.Swagger.Logging.Core
     public class JsonValidationLogListener : ILogListener
     {
         private readonly List<Dictionary<string, string>> rawMessageCollection = new List<Dictionary<string, string>>();
-        public static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<unparameterizedresource>[^{/]+))?");
+        private static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<unparameterizedresource>[^{/]+))?");
 
         public void Log(LogMessage message)
         {
