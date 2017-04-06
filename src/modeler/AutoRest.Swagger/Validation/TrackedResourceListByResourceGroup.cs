@@ -6,13 +6,15 @@ using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
-using System.Linq;
+using System.Text.RegularExpressions;
 using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class TrackedResourceGetOperationValidation : TypedRule<Dictionary<string, Schema>>
+    public class TrackedResourceListByResourceGroup : TypedRule<Dictionary<string, Schema>>
     {
+        private static readonly Regex listByRgRegEx = new Regex(@".+_ListByResourceGroup$", RegexOptions.IgnoreCase);
+
         /// <summary>
         /// Id of the Rule.
         /// </summary>
@@ -29,7 +31,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.TrackedResourceGetOperationMissing;
+        public override string MessageTemplate => Resources.TrackedResourceListByResourceGroupOperationMissing;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -37,7 +39,7 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         /// <summary>
-        /// Verifies if a tracked resource has a corresponding get operation
+        /// Verifies if a tracked resource has a corresponding ListByResourceGroup operation
         /// </summary>
         /// <param name="definitions"></param>
         /// <param name="context"></param>
@@ -52,8 +54,9 @@ namespace AutoRest.Swagger.Validation
 
             foreach (string trackedResource in trackedResources)
             {
-                // check for 200 status response models since they correspond to a successful get operation
-                if (!getOperations.Any(op => op.Responses.ContainsKey("200") && (trackedResource).Equals(op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath())))
+                bool listByResourceGroupCheck = ValidationUtilities.ListByXCheck(getOperations, listByRgRegEx, trackedResource, definitions);
+
+                if (!listByResourceGroupCheck)
                 {
                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(trackedResource)), this, trackedResource);
                 }

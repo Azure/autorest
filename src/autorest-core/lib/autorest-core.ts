@@ -11,6 +11,7 @@ export { ConfigurationView } from './configuration';
 import { Message } from './message';
 import * as Constants from './constants';
 import { Artifact } from './artifact';
+import { Exception, OperationCanceledException } from './exception';
 
 export class AutoRest extends EventEmitter {
   private _configurations = new Array<any>();
@@ -144,7 +145,7 @@ export class AutoRest extends EventEmitter {
   /**
    * Called to start processing of the files.
    */
-  public Process(): { finish: Promise<boolean>, cancel: () => void } {
+  public Process(): { finish: Promise<boolean | Error>, cancel: () => void } {
     let earlyCancel = false;
     let cancel: () => void = () => earlyCancel = true;
     const processInternal = async () => {
@@ -183,16 +184,25 @@ export class AutoRest extends EventEmitter {
         return true;
       }
       catch (e) {
-        if (e != "Cancellation requested.") {
-          console.error(e);
+        if (e instanceof Error) {
+          /* if (!(e instanceof OperationCanceledException)) {
+            console.error(e.message);
+          } */
+
+          this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e.message}` });
+          this.Finished.Dispatch(e);
+
+          if (view) {
+            view.removeAllListeners();
+          }
+          return e;
         }
-        // finished not cleanly
-        this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e}` });
+
+        // console.error(e);
         this.Finished.Dispatch(false);
         if (view) {
           view.removeAllListeners();
         }
-
         return false;
       }
     };
@@ -202,7 +212,7 @@ export class AutoRest extends EventEmitter {
     }
   }
 
-  @EventEmitter.Event public Finished: IEvent<AutoRest, boolean>;
+  @EventEmitter.Event public Finished: IEvent<AutoRest, boolean | Error>;
 
   @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
 

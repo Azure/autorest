@@ -22,11 +22,9 @@ namespace AutoRest.Swagger.Validation
         {
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                string key = definition.Key;
-                Schema schema = definition.Value;
-                if (string.IsNullOrWhiteSpace(schema.Description))
+                if (string.IsNullOrWhiteSpace(definition.Value.Description))
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(key)), this, string.Format(ModelTypeFormatter, key));
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(definition.Key)), this, string.Format(ModelTypeFormatter, definition.Key));
                 }
             }
         }

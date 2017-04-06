@@ -38,7 +38,12 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
-        // Verifies if a tracked resource has a corresponding PATCH operation
+        /// <summary>
+        /// Verifies if a tracked resource has a corresponding patch operation
+        /// </summary>
+        /// <param name="definitions"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             ServiceDefinition serviceDefinition = (ServiceDefinition)context.Root;
@@ -47,14 +52,14 @@ namespace AutoRest.Swagger.Validation
 
             // enumerate all the models returned by all PATCH operations (200/201 responses)
             var respModels = patchOperations.Select(op => op.Responses.GetValueOrNull("200")?.Schema?.Reference?.StripDefinitionPath());
-            respModels.Union(patchOperations.Select(op => op.Responses.GetValueOrNull("201")?.Schema?.Reference?.StripDefinitionPath())).Where(modelName=>!string.IsNullOrEmpty(modelName));
+            respModels.Union(patchOperations.Select(op => op.Responses.GetValueOrNull("201")?.Schema?.Reference?.StripDefinitionPath())).Where(modelName => !string.IsNullOrEmpty(modelName));
 
             // find models that are not being returned by any of the PATCH operations
             var violatingModels = context.TrackedResourceModels.Except(respModels);
 
             foreach (var modelName in violatingModels)
             {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, modelName);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelName)), this, modelName);
             }
         }
     }

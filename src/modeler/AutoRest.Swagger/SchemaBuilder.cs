@@ -166,20 +166,20 @@ namespace AutoRest.Swagger
             // Copy over extensions
             _schema.Extensions.ForEach(e => objectType.Extensions[e.Key] = e.Value);
 
+            // Optionally override the discriminator value for polymorphic types. We expect this concept to be
+            // added to Swagger at some point, but until it is, we use an extension.
+            object discriminatorValueExtension;
+            if (objectType.Extensions.TryGetValue(DiscriminatorValueExtension, out discriminatorValueExtension))
+            {
+                string discriminatorValue = discriminatorValueExtension as string;
+                if (discriminatorValue != null)
+                {
+                    objectType.SerializedName = discriminatorValue;
+                }
+            }
+
             if (_schema.Extends != null)
             {
-                // Optionally override the discriminator value for polymorphic types. We expect this concept to be
-                // added to Swagger at some point, but until it is, we use an extension.
-                object discriminatorValueExtension;
-                if (objectType.Extensions.TryGetValue(DiscriminatorValueExtension, out discriminatorValueExtension))
-                {
-                    string discriminatorValue = discriminatorValueExtension as string;
-                    if (discriminatorValue != null)
-                    {
-                        objectType.SerializedName = discriminatorValue;
-                    }
-                }
-
                 // Put this in the extended type serializationProperty for building method return type in the end
                 Modeler.ExtendedTypes[serviceTypeName] = _schema.Extends.StripDefinitionPath();
             }

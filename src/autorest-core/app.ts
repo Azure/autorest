@@ -21,6 +21,7 @@ import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
+import { Exception } from "./lib/exception";
 
 /**
  * Legacy AutoRest
@@ -80,8 +81,9 @@ ${Stringify(config).replace(/^---\n/, "")}
     api.Warning.Subscribe((_, m) => console.warn(m.Text));
     api.Error.Subscribe((_, m) => console.error(m.Text));
     api.Fatal.Subscribe((_, m) => console.error(m.Text));
-    if (!await api.Process().finish) {
-      throw "AutoRest failed.";
+    const result = await api.Process().finish;
+    if (result != true) {
+      throw result;
     }
     await outstanding.Wait();
   }
@@ -143,12 +145,12 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   api.Warning.Subscribe((_, m) => console.warn(m.Text));
   api.Error.Subscribe((_, m) => console.error(m.Text));
   api.Fatal.Subscribe((_, m) => console.error(m.Text));
-  if (!await api.Process().finish) {
-    throw "AutoRest failed.";
+  const result = await api.Process().finish;
+  if (result != true) {
+    throw result;
   }
   await outstanding.Wait();
 }
-
 
 /**
  * Entry point
@@ -175,6 +177,16 @@ async function main() {
 
     process.exit(0);
   } catch (e) {
+    if (e instanceof Exception) {
+      console.error(e.message);
+      process.exit(e.exitCode);
+    }
+
+    if (e instanceof Error) {
+      console.error(e.message);
+      process.exit(1);
+    }
+
     console.error(e);
     process.exit(1);
   }
