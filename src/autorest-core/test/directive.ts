@@ -7,13 +7,13 @@ import * as assert from "assert";
 import { AutoRest } from "../lib/autorest-core";
 import { RealFileSystem } from "../lib/file-system";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
-import { Message } from "../lib/message";
+import { Message, Channel } from "../lib/message";
 
 @suite class Directive {
 
   @test @timeout(60000) async "suppression"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
-    autoRest.Fatal.Subscribe((_, m) => console.error(m.Text));
+    autoRest.Message.Subscribe((_, m) => m.Channel == Channel.Fatal ? console.error(m.Text) : "");
 
     // reference run
     await autoRest.ResetConfiguration();
@@ -21,7 +21,7 @@ import { Message } from "../lib/message";
     let numWarningsRef: number;
     {
       const messages: Message[] = [];
-      const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
+      const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
 
       await autoRest.Process().finish;
       numWarningsRef = messages.length;
@@ -36,7 +36,7 @@ import { Message } from "../lib/message";
     await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"] } });
     {
       const messages: Message[] = [];
-      const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
+      const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
 
       await autoRest.Process().finish;
       if (messages.length > 0) {
@@ -55,7 +55,7 @@ import { Message } from "../lib/message";
       await autoRest.AddConfiguration({ directive: directive });
       {
         const messages: Message[] = [];
-        const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
+        const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
 
         await autoRest.Process().finish;
         if (messages.length === 0 || messages.length === numWarningsRef) {

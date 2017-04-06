@@ -28,7 +28,7 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
       this._autoRest.Finished.Subscribe((autorest, success) => {
         this.cancel = () => true;
 
-        if (success) {
+        if (success != false) {
           this.FlushDiagnostics(true);
           this.ClearDiagnostics();
         }

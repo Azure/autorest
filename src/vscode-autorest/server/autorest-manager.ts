@@ -2,7 +2,7 @@ import { ResolveUri, CreateFileUri, NormalizeUri, FileUriToPath } from '../lib/r
 
 import { DocumentContext } from './document-context';
 import * as a from '../lib/ref/async'
-import { EventEmitter, IEvent, IFileSystem, AutoRest, Message } from "autorest";
+import { EventEmitter, IEvent, IFileSystem, AutoRest, Message, Channel } from "autorest";
 import { File } from "./tracked-file"
 import { From } from '../lib/ref/linq'
 import * as vfs from 'vinyl-fs';
@@ -187,6 +187,7 @@ export class AutoRestManager extends TextDocuments {
     if (configFile) {
       this.debug(`Configuration File Selected: ${configFile}`);
 
+
       folder = path.dirname(configFile);
       // do we have this config already?
       let ctx = this.activeContexts.get(folder);
@@ -195,14 +196,22 @@ export class AutoRestManager extends TextDocuments {
         this.activeContexts.set(folder, ctx);
       }
 
+      // if the file is the config file itself.
+      if (configFile == documentUri) {
+        // since we're creating a new context, might as well activate it now.
+        ctx.Track(await this.AcquireTrackedFile(configFile));
+        ctx.Activate();
+        return ctx;
+      }
+
+      // or is in in this found configuration file?
       let files = [...(await ctx.autorest.view).InputFileUris];
       for (const fn of files) {
         if (fn == documentUri) {
-
           // found the document inside this context.
           // since we're creating a new context, might as well activate it now.
-          ctx.Activate();
           ctx.Track(await this.AcquireTrackedFile(configFile));
+          ctx.Activate();
           return ctx;
         }
       }
@@ -216,6 +225,7 @@ export class AutoRestManager extends TextDocuments {
     if (ctx) {
       // we found the previous faux one for this file ctx.Activate();
       ctx.Track(await this.AcquireTrackedFile(configFile));
+      ctx.Activate();
       return ctx;
     }
 
@@ -226,7 +236,6 @@ export class AutoRestManager extends TextDocuments {
     ctx.autorest.AddConfiguration({ "input-file": documentUri, "azure-arm": true });
     this.activeContexts.set(configFile, ctx);
     ctx.Activate();
-
     return ctx;
   }
 
@@ -288,13 +297,29 @@ export class AutoRestManager extends TextDocuments {
   }
 
   listenForResults(autorest: AutoRest) {
-    autorest.Debug.Subscribe((instance, args) => this.debug(args.Text));
-    autorest.Fatal.Subscribe((instance, args) => this.error(args.Text));
-    autorest.Verbose.Subscribe((instance, args) => this.verbose(args.Text));
+    autorest.Message.Subscribe((_, m) => {
+      switch (m.Channel) {
+        case Channel.Debug:
+          this.debug(m.Text)
+          break;
+        case Channel.Fatal:
+          this.error(m.Text)
+          break;
+        case Channel.Verbose:
+          this.verbose(m.Text)
+          break;
 
-    autorest.Warning.Subscribe((instance, args) => this.PushDiagnostic(args, DiagnosticSeverity.Warning));
-    autorest.Information.Subscribe((instance, args) => this.PushDiagnostic(args, DiagnosticSeverity.Information));
-    autorest.Error.Subscribe((instance, args) => this.PushDiagnostic(args, DiagnosticSeverity.Error));
+        case Channel.Warning:
+          this.PushDiagnostic(m, DiagnosticSeverity.Warning);
+          break;
+        case Channel.Error:
+          this.PushDiagnostic(m, DiagnosticSeverity.Error);
+          break;
+        case Channel.Information:
+          this.PushDiagnostic(m, DiagnosticSeverity.Warning);
+          break;
+      }
+    });
   }
 
   PushDiagnostic(args: Message, severity: DiagnosticSeverity) {
@@ -307,7 +332,7 @@ export class AutoRestManager extends TextDocuments {
             severity: severity,
             range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
             message: args.Text,
-            source: [...args.Key].join("/")
+            source: args.Key ? [...args.Key].join("/") : ""
           });
         }
       }
@@ -338,7 +363,7 @@ export class AutoRestManager extends TextDocuments {
 
     // ask vscode to track 
     this.onDidOpen((p) => this.opened(p));
-    this.onDidChangeContent((p) => this.changed(p));
+    this.onDidChangeContent((p) => this.opened(p));
     this.onDidClose((p) => this.closed(p));
 
     // we also get change notifications of files on disk:
@@ -355,6 +380,7 @@ export class AutoRestManager extends TextDocuments {
     // on save
     this.onDidSave((p) => this.onSaving(p));
     this.listen(connection);
+
     this.verbose("AutoRestManager is Listening.")
   }
 }

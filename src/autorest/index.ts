@@ -3,7 +3,6 @@ require("./lib/polyfill.min.js")
 
 import { DocumentPatterns } from '../autorest-core/lib/document-type';
 
-
 // exports the public AutoRest definitions
 export { Installer } from "./installer";
 export { IEvent } from '../autorest-core/lib/events';
@@ -11,7 +10,7 @@ export { IFileSystem, Message } from 'autorest-core';
 export { Asset, Release, Github } from './github'
 
 // the local class definition of the AutoRest Interface and the EventEmitter signatures
-import { AutoRest as IAutoRest } from 'autorest-core';
+import { AutoRest as IAutoRest, Channel as IChannel } from 'autorest-core';
 import { EventEmitter as IEventEmitter } from '../autorest-core/lib/events';
 
 // export the selected implementation of the AutoRest interface.
@@ -22,6 +21,9 @@ let impl = require(modulePath);
 
 export const AutoRest: typeof IAutoRest = <typeof IAutoRest><any>impl.AutoRest
 export declare type AutoRest = IAutoRest;
+
+export const Channel: typeof IChannel = <typeof IChannel><any>impl.Channel
+export declare type Channel = IChannel;
 
 let event_impl = require(modulePath + "/lib/events");
 export const EventEmitter: typeof IEventEmitter = <typeof IEventEmitter><any>event_impl.EventEmitter

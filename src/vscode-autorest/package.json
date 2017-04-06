@@ -4,7 +4,7 @@
   "description": "AutoRest/Swagger Langugage Service",
   "author": "Microsoft Corporation",
   "license": "MIT",
-  "version": "0.9.17",
+  "version": "0.10.12",
   "publisher": "ms-vscode",
   "engines": {
     "vscode": "^1.10.0"
@@ -41,7 +41,7 @@
       "properties": {
         "autorest.minimumAutoRestVersion": {
           "type": "string",
-          "default": "1.0.1-20170328-1200",
+          "default": "1.0.1-20170405-1200",
           "description": "forces the minimum version of the autorest-core to be installed."
         },
         "autorest.runtimeId": {

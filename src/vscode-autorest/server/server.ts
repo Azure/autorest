@@ -34,7 +34,16 @@ connection.onDidChangeConfiguration((config: DidChangeConfigurationParams) => {
     if (result) {
       // we have a version of AutoRest installed that we can use.
       // let's start the extension
-      require("./autorest-manager");
+      log("Starting AutoRest-Manager.")
+      try {
+        require("./autorest-manager");
+      } catch (e) {
+        if (e instanceof Error) {
+          error(`Error Starting Autorest-Manager : ${e.message}`);
+        } else {
+          error(`Error Starting Autorest-Manager : ${e}`);
+        }
+      }
     } else {
       error("Unable to install components for autorest-core -- extension is disabled (reload the window to retry)")
     }

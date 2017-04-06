@@ -14,6 +14,7 @@ import { Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from './lib/ref/jsonpath';
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
 import { AutoRest } from "./lib/autorest-core";
+import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
 import { CreateFolderUri, ResolveUri, WriteString } from "./lib/ref/uri";
@@ -21,6 +22,7 @@ import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
+import { Exception } from "./lib/exception";
 
 /**
  * Legacy AutoRest
@@ -76,12 +78,26 @@ ${Stringify(config).replace(/^---\n/, "")}
     api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
     //api.Debug.Subscribe((_, m) => console.log(m.Text));
     //api.Verbose.Subscribe((_, m) => console.log(m.Text));
-    api.Information.Subscribe((_, m) => console.log(m.Text));
-    api.Warning.Subscribe((_, m) => console.warn(m.Text));
-    api.Error.Subscribe((_, m) => console.error(m.Text));
-    api.Fatal.Subscribe((_, m) => console.error(m.Text));
-    if (!await api.Process().finish) {
-      throw "AutoRest failed.";
+    api.Message.Subscribe((_, m) => {
+      switch (m.Channel) {
+        case Channel.Information:
+          console.log(m.Text);
+          break;
+        case Channel.Warning:
+          console.warn(m.Text);
+          break;
+        case Channel.Error:
+          console.error(m.Text);
+          break;
+        case Channel.Fatal:
+          console.error(m.Text);
+          break;
+      }
+    });
+
+    const result = await api.Process().finish;
+    if (result != true) {
+      throw result;
     }
     await outstanding.Wait();
   }
@@ -139,16 +155,28 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
   //api.Debug.Subscribe((_, m) => console.log(m.Text));
   //api.Verbose.Subscribe((_, m) => console.log(m.Text));
-  api.Information.Subscribe((_, m) => console.log(m.Text));
-  api.Warning.Subscribe((_, m) => console.warn(m.Text));
-  api.Error.Subscribe((_, m) => console.error(m.Text));
-  api.Fatal.Subscribe((_, m) => console.error(m.Text));
-  if (!await api.Process().finish) {
-    throw "AutoRest failed.";
+  api.Message.Subscribe((_, m) => {
+    switch (m.Channel) {
+      case Channel.Information:
+        console.log(m.Text);
+        break;
+      case Channel.Warning:
+        console.warn(m.Text);
+        break;
+      case Channel.Error:
+        console.error(m.Text);
+        break;
+      case Channel.Fatal:
+        console.error(m.Text);
+        break;
+    }
+  });
+  const result = await api.Process().finish;
+  if (result != true) {
+    throw result;
   }
   await outstanding.Wait();
 }
-
 
 /**
  * Entry point
@@ -175,6 +203,16 @@ async function main() {
 
     process.exit(0);
   } catch (e) {
+    if (e instanceof Exception) {
+      console.error(e.message);
+      process.exit(e.exitCode);
+    }
+
+    if (e instanceof Error) {
+      console.error(e.message);
+      process.exit(1);
+    }
+
     console.error(e);
     process.exit(1);
   }

@@ -5,12 +5,13 @@ import { DataStore, Metadata } from './data-store/data-store';
 import { IEnumerable, From } from './ref/linq';
 import { IEvent, EventDispatcher, EventEmitter } from "./events";
 import { IFileSystem } from "./file-system";
-import { Configuration, ConfigurationView } from './configuration';
+import { Configuration, ConfigurationView, MessageEmitter } from './configuration';
 import { DocumentType } from "./document-type";
 export { ConfigurationView } from './configuration';
-import { Message } from './message';
+import { Message, Channel } from './message';
 import * as Constants from './constants';
 import { Artifact } from './artifact';
+import { Exception, OperationCanceledException } from './exception';
 
 export class AutoRest extends EventEmitter {
   private _configurations = new Array<any>();
@@ -18,16 +19,12 @@ export class AutoRest extends EventEmitter {
   public get view(): Promise<ConfigurationView> {
     return (async () => {
       if (!this._view) {
-        this._view = await new Configuration(this.fileSystem, this.configFileUri).CreateView(...this._configurations);
+        const messageEmitter = new MessageEmitter();
+        this._view = await new Configuration(this.fileSystem, this.configFileUri).CreateView(messageEmitter, ...this._configurations);
 
         // subscribe to the events for the current configuration view
-        this._view.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
-        this._view.Debug.Subscribe((cfg, message) => this.Debug.Dispatch(message));
-        this._view.Verbose.Subscribe((cfg, message) => this.Verbose.Dispatch(message));
-        this._view.Fatal.Subscribe((cfg, message) => this.Fatal.Dispatch(message));
-        this._view.Information.Subscribe((cfg, message) => this.Information.Dispatch(message));
-        this._view.Error.Subscribe((cfg, message) => this.Error.Dispatch(message));
-        this._view.Warning.Subscribe((cfg, message) => this.Warning.Dispatch(message));
+        messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
+        messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
       }
       return this._view;
     })();
@@ -39,7 +36,7 @@ export class AutoRest extends EventEmitter {
    */
   public constructor(private fileSystem?: IFileSystem, public configFileUri?: string) {
     super();
-    this.Fatal.Subscribe((_, m) => console.error(m.Text));
+    // this.Fatal.Subscribe((_, m) => console.error(m.Text));
   }
 
 
@@ -118,7 +115,7 @@ export class AutoRest extends EventEmitter {
 
   public Invalidate() {
     if (this._view) {
-      this._view.removeAllListeners();
+      this._view.messageEmitter.removeAllListeners();
       this._view = undefined;
     }
   }
@@ -144,7 +141,7 @@ export class AutoRest extends EventEmitter {
   /**
    * Called to start processing of the files.
    */
-  public Process(): { finish: Promise<boolean>, cancel: () => void } {
+  public Process(): { finish: Promise<boolean | Error>, cancel: () => void } {
     let earlyCancel = false;
     let cancel: () => void = () => earlyCancel = true;
     const processInternal = async () => {
@@ -160,7 +157,7 @@ export class AutoRest extends EventEmitter {
         cancel = () => {
           if (view) {
             view.CancellationTokenSource.cancel();
-            view.removeAllListeners();
+            view.messageEmitter.removeAllListeners();
           }
         }
 
@@ -170,7 +167,7 @@ export class AutoRest extends EventEmitter {
         }
 
         // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
-        this.Debug.Dispatch({ Text: `Starting Process() Run Pipeline.` });
+        this.Message.Dispatch({ Channel: Channel.Debug, Text: `Starting Process() Run Pipeline.` });
 
         await Promise.race([
           RunPipeline(view, <IFileSystem>this.fileSystem),
@@ -179,20 +176,29 @@ export class AutoRest extends EventEmitter {
         // finished -- return status (if cancelled, returns false.)
         this.Finished.Dispatch(!view.CancellationTokenSource.token.isCancellationRequested);
 
-        view.removeAllListeners();
+        view.messageEmitter.removeAllListeners();
         return true;
       }
       catch (e) {
-        if (e != "Cancellation requested.") {
-          console.error(e);
-        }
-        // finished not cleanly
-        this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e}` });
-        this.Finished.Dispatch(false);
-        if (view) {
-          view.removeAllListeners();
+        if (e instanceof Error) {
+          /* if (!(e instanceof OperationCanceledException)) {
+            console.error(e.message);
+          } */
+
+          this.Message.Dispatch({ Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` });
+          this.Finished.Dispatch(e);
+
+          if (view) {
+            view.messageEmitter.removeAllListeners();
+          }
+          return e;
         }
 
+        // console.error(e);
+        this.Finished.Dispatch(false);
+        if (view) {
+          view.messageEmitter.removeAllListeners();
+        }
         return false;
       }
     };
@@ -202,19 +208,17 @@ export class AutoRest extends EventEmitter {
     }
   }
 
-  @EventEmitter.Event public Finished: IEvent<AutoRest, boolean>;
-
-  @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
-
-  @EventEmitter.Event public Information: IEvent<AutoRest, Message>;
-  @EventEmitter.Event public Warning: IEvent<AutoRest, Message>;
-  @EventEmitter.Event public Error: IEvent<AutoRest, Message>;
   /**
-   * Event: Signals when a debug message is sent from AutoRest
+   * Event: Signals when a Process() finishes.
    */
-  @EventEmitter.Event public Debug: IEvent<AutoRest, Message>;
-  @EventEmitter.Event public Verbose: IEvent<AutoRest, Message>;
-  @EventEmitter.Event public Fatal: IEvent<AutoRest, Message>;
+  @EventEmitter.Event public Finished: IEvent<AutoRest, boolean | Error>;
 
-
+  /**
+  * Event: Signals when a File is generated 
+  */
+  @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
+  /**
+   * Event: Signals when a message is generated
+   */
+  @EventEmitter.Event public Message: IEvent<AutoRest, Message>;
 }
