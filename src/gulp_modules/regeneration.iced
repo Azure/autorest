@@ -625,7 +625,7 @@ task 'regenerate-ars', '', (done) ->
   return null
 
 task 'regenerate-samples', '', (done) ->
-  source 'Samples/**/readme.md'
+  source 'Samples/*/**/readme.md'
     .pipe foreach (each,next)->
       autorest [each.path], (code,stdout,stderr) ->
         outputFolder = path.join(each.path, "../shell")
