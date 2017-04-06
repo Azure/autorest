@@ -715,11 +715,6 @@ task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], 
 path = require('path')
 
 task 'regenerate-delete', '', (done)->
-  source 'Samples/*/**/'
-    .pipe foreach (each, next) ->
-      configFile = path.join(each.path, "../readme.md")
-      execute "rm -rf '#{each.path}" if fs.existsSync configFile
-      next null
   rm "-rf",
     'src/generator/AutoRest.CSharp.Tests/Expected'
     'src/generator/AutoRest.CSharp.Azure.Tests/Expected'
@@ -733,8 +728,12 @@ task 'regenerate-delete', '', (done)->
     'src/generator/AutoRest.Python.Tests/Expected'
     'src/generator/AutoRest.Python.Azure.Tests/Expected'
     'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Expected'
-  echo typeof done
-  done()
+  source 'Samples/*/**/'
+    .pipe foreach (each, next) ->
+      configFile = path.join(each.path, "../readme.md")
+      console.log "rm -rf #{each.path}" if fs.existsSync configFile
+      rm "-rf", '#{each.path}' if fs.existsSync configFile
+      next null
 
 task 'autorest-preview-build', '', ->
   exec "dotnet build #{basefolder}/src/dev/AutoRest.Preview/"

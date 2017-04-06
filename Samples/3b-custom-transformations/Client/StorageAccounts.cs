@@ -17,12 +17,12 @@ namespace
     using System.Threading.Tasks;
 
     /// <summary>
-    /// UsageOperations operations.
+    /// StorageAccounts operations.
     /// </summary>
-    internal partial class UsageOperations : IServiceOperations<StorageManagementClient>, IUsageOperations
+    internal partial class StorageAccounts : IServiceOperations<StorageManagementClient>, IStorageAccounts
     {
         /// <summary>
-        /// Initializes a new instance of the UsageOperations class.
+        /// Initializes a new instance of the StorageAccounts class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -30,7 +30,7 @@ namespace
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal UsageOperations(StorageManagementClient client)
+        internal StorageAccounts(StorageManagementClient client)
         {
             if (client == null)
             {
@@ -45,108 +45,23 @@ namespace
         public StorageManagementClient Client { get; private set; }
 
         /// <summary>
-        /// {
-        /// "parameters": [
-        /// {
-        /// "$id": "174",
-        /// "isClientProperty": true,
-        /// "clientProperty": {
-        /// "$ref": "106"
-        /// },
-        /// "location": "query",
-        /// "collectionFormat": "none",
-        /// "isRequired": true,
-        /// "isConstant": false,
-        /// "modelTypeName": "String",
-        /// "modelType": {
-        /// "$id": "175",
-        /// "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-        /// "$actualType": "AutoRest.Core.Model.PrimaryType",
-        /// "knownFormat": "none",
-        /// "knownPrimaryType": "string",
-        /// "className": "String",
-        /// "declarationName": "String",
-        /// "isConstant": false,
-        /// "#name": "String"
-        /// },
-        /// "#documentation": "Client Api Version.",
-        /// "#name": "api-version",
-        /// "#serializedName": "api-version"
-        /// },
-        /// {
-        /// "$id": "176",
-        /// "isClientProperty": true,
-        /// "clientProperty": {
-        /// "$ref": "104"
-        /// },
-        /// "location": "path",
-        /// "collectionFormat": "none",
-        /// "isRequired": true,
-        /// "isConstant": false,
-        /// "modelTypeName": "String",
-        /// "modelType": {
-        /// "$id": "177",
-        /// "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-        /// "$actualType": "AutoRest.Core.Model.PrimaryType",
-        /// "knownFormat": "none",
-        /// "knownPrimaryType": "string",
-        /// "className": "String",
-        /// "declarationName": "String",
-        /// "isConstant": false,
-        /// "#name": "String"
-        /// },
-        /// "#documentation": "Gets subscription credentials which uniquely identify
-        /// Microsoft Azure subscription. The subscription ID forms part of the URI for
-        /// every service call.",
-        /// "#name": "subscriptionId",
-        /// "#serializedName": "subscriptionId"
-        /// }
-        /// ],
-        /// "isAbsoluteUrl": false,
-        /// "httpMethod": "get",
-        /// "requestSerializationFormat": "none",
-        /// "responseSerializationFormat": "none",
-        /// "responses": {
-        /// "OK": {
-        /// "body": {
-        /// "$ref": "101"
-        /// },
-        /// "isNullable": true
-        /// }
-        /// },
-        /// "defaultResponse": {
-        /// "isNullable": true
-        /// },
-        /// "returnType": {
-        /// "body": {
-        /// "$ref": "101"
-        /// },
-        /// "isNullable": true
-        /// },
-        /// "description": "Gets the current usage count and the limit for the
-        /// resources under the subscription.",
-        /// "requestContentType": "application/json; charset=utf-8",
-        /// "responseContentTypes": [
-        /// "application/json",
-        /// "text/json"
-        /// ],
-        /// "extensions": {
-        /// "x-ms-pageable": {
-        /// "nextLinkName": null
-        /// }
-        /// },
-        /// "deprecated": false,
-        /// "#name": "List",
-        /// "#group": "usages",
-        /// "#serializedName": "usages_List",
-        /// "#url":
-        /// "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"
-        /// }
+        /// Asynchronously creates a new storage account with the specified parameters.
+        /// Existing accounts cannot be updated with this API and should instead use
+        /// the Update Storage Account API. If an account is already created and
+        /// subsequent PUT request is issued with exact same set of properties, then
+        /// HTTP 200 would be returned.  Make sure you add that extra cowbell.
         /// </summary>
-        /// <remarks>
-        /// Gets the current usage count and the limit for the resources under the
-        /// subscription.
-        /// </remarks>
+        /// <param name='resourceGroupName'>
+        /// The name of the resource group within the user's subscription.
+        /// </param>
+        /// <param name='accountName'>
+        /// The name of the storage account within the specified resource group.
+        /// Storage account names must be between 3 and 24 characters in length and use
+        /// numbers and lower-case letters only.
+        /// </param>
+        /// <param name='parameters'>
+        /// The parameters to provide for the created account.
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -168,8 +83,35 @@ namespace
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<IEnumerable<Usage>>> ListWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<StorageAccount>> BeginCreateWithHttpMessagesAsync(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (resourceGroupName == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
+            }
+            if (accountName == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "accountName");
+            }
+            if (accountName != null)
+            {
+                if (accountName.Length > 24)
+                {
+                    throw new ValidationException(ValidationRules.MaxLength, "accountName", 24);
+                }
+                if (accountName.Length < 3)
+                {
+                    throw new ValidationException(ValidationRules.MinLength, "accountName", 3);
+                }
+            }
+            if (parameters == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "parameters");
+            }
+            if (parameters != null)
+            {
+                parameters.Validate();
+            }
             if (Client.ApiVersion == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
@@ -185,12 +127,17 @@ namespace
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("resourceGroupName", resourceGroupName);
+                tracingParameters.Add("accountName", accountName);
+                tracingParameters.Add("parameters", parameters);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "List", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "BeginCreate", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}").ToString();
+            _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
+            _url = _url.Replace("{accountName}", System.Uri.EscapeDataString(accountName));
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(Client.SubscriptionId));
             List<string> _queryParameters = new List<string>();
             if (Client.ApiVersion != null)
@@ -204,7 +151,7 @@ namespace
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.Method = new HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
@@ -235,6 +182,12 @@ namespace
 
             // Serialize Request
             string _requestContent = null;
+            if(parameters != null)
+            {
+                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(parameters, Client.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            }
             // Set Credentials
             if (Client.Credentials != null)
             {
@@ -255,7 +208,7 @@ namespace
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
-            if ((int)_statusCode != 200)
+            if ((int)_statusCode != 200 && (int)_statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
@@ -290,7 +243,7 @@ namespace
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<IEnumerable<Usage>>();
+            var _result = new AzureOperationResponse<StorageAccount>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -303,7 +256,7 @@ namespace
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Usage>>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccount>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

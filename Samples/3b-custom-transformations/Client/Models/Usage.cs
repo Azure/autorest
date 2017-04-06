@@ -9,7 +9,7 @@ namespace .Models
     using System.Linq;
 
     /// <summary>
-    /// Describes Storage Resource Usage.
+    /// DESCRIBES STORAGE RESOURCE USAGE.
     /// </summary>
     public partial class Usage
     {

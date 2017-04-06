@@ -42,7 +42,7 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_CheckNameAvailability",
-        "description": "Checks that account name is valid and is not in use.",
+        "description": "Checks that the account name has sufficient cowbell (in order to prevent fevers).",
         "parameters": [
           {
             "name": "accountName",
@@ -76,7 +76,7 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_Create",
-        "description": "Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned. ",
+        "description": "Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.  Make sure you add that extra cowbell.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -783,7 +783,7 @@
         "limit",
         "name"
       ],
-      "description": "Describes Storage Resource Usage."
+      "description": "DESCRIBES STORAGE RESOURCE USAGE."
     },
     "UsageListResult": {
       "properties": {

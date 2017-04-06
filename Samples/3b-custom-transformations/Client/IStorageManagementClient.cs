@@ -65,14 +65,19 @@ namespace
 
 
         /// <summary>
-        /// Gets the IStorageAccountsOperations.
+        /// Gets the ICheckNameAvailabilityOperations.
         /// </summary>
-        IStorageAccountsOperations StorageAccounts { get; }
+        ICheckNameAvailabilityOperations CheckNameAvailability { get; }
 
         /// <summary>
-        /// Gets the IUsageOperations.
+        /// Gets the IUsagesOperations.
         /// </summary>
-        IUsageOperations Usage { get; }
+        IUsagesOperations Usages { get; }
+
+        /// <summary>
+        /// Gets the IStorageAccounts.
+        /// </summary>
+        IStorageAccounts StorageAccounts { get; }
 
     }
 }

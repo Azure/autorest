@@ -18,7 +18,7 @@ csharp:
 
 ``` yaml 
 directive:
-  from: swagger.md
+  from: storage.json
   where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.description
   # The description will be set to the following:
   set: Checks that the account name has sufficient cowbell (in order to prevent fevers).
@@ -29,7 +29,7 @@ directive:
 
 ``` yaml 
 directive:
-- from: swagger.md
+- from: storage.json
   where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.description
   # The following can be an arbitrary JavaScript expression that will be evaluated to determine the new value.
   # The original value is accessible via variable "$".
@@ -37,26 +37,25 @@ directive:
   transform: >
     $ + " Make sure you add that extra cowbell."
   reason: Make sure people know.
-- from: swagger.md
-  where: $.definitions.UsageListResult.description
+- from: storage.json
+  where: $.definitions.Usage.description
   transform: $.toUpperCase()
   reason: Our new guidelines require upper case descriptions here. Customers love it.
 ```
 
-### CodeModel: Use the methods API endpoint to determine a group name
+### CodeModel: Use endpoint URIs to determine operation group names
 
 ``` yaml 
 directive:
   from: model
-  where: $.operations[*].methods[*]
+  where: $.operations[*]
   transform: >
     (() => {
-      const url = $["#url"];
+      const url = $.methods[0]["#url"];
       const res = url.split("/Microsoft.Storage/")[1].split("/")[0];
-      $["#group"] = res;
-      $["#serializedName"] = res + "_" + $["#serializedName"].split("_")[1];
+      $["#name"] = res;
       $.summary = JSON.stringify($, null, 2);
       return $;
     })()
-  reason: We wanna group methods by tags.
+  reason: We wanna group methods by URI.
 ```
