@@ -14,7 +14,7 @@ csharp:
 
 ## Transformations
 
-### Swagger: Override a description
+### OpenAPI definition: Override a description
 
 ``` yaml 
 directive:
@@ -25,7 +25,7 @@ directive:
   reason: We've experienced a lack of cowbell in storage account names.
 ```
 
-### Swagger: Mutate descriptions
+### OpenAPI definition: Mutate descriptions
 
 ``` yaml 
 directive:
@@ -43,11 +43,11 @@ directive:
   reason: Our new guidelines require upper case descriptions here. Customers love it.
 ```
 
-### Swagger: Rename methods
+### OpenAPI definition: Rename methods
 
 ``` yaml 
 directive:
-  from: composite # do it globally (in case there are multiple input Swaggers)
+  from: composite # do it globally (in case there are multiple input OpenAPI definitions)
   where: $.paths..operationId
   # Replace operation IDs ending in "...ies" with "...y", because that's the safest way to make stuff singular.
   transform: >

@@ -1,4 +1,4 @@
-# Scenario: Validate a Swagger file according to the ARM guidelines 
+# Scenario: Validate a OpenAPI definition file according to the ARM guidelines 
 
 > see https://aka.ms/autorest
 

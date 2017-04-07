@@ -1,10 +1,10 @@
-# Scenario: Literate Swagger
+# Scenario: Literate OpenAPI definition
 
 > see https://aka.ms/autorest
 
 This example combines multiple AutoRest features:
-- Swagger validation
-- Swagger resolution with source map
+- OpenAPI definition validation
+- OpenAPI definition resolution with source map
 - client code generation
 
 ## Configuration
