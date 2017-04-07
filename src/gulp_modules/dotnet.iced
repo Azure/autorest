@@ -1,5 +1,3 @@
-# through = require 'through2'
-
 # tools
 csu = "c:/ci-signing/adxsdk/tools/csu/csu.exe"
 
@@ -18,7 +16,6 @@ dotnet = (cmd) ->
 
 ###############################################
 # Common Tasks
-
 
 ############################################### 
 task 'reset-dotnet-cache', 'removes installed dotnet-packages so restore is clean', ->  
@@ -88,14 +85,15 @@ task 'sign-assemblies','', (done) ->
 task 'restore','restores the dotnet packages for the projects', (done) -> 
   if ! test '-d', "#{os.homedir()}/.nuget"
     global.force = true
-  instances = 0 
+  instances = 1
   _done = () ->
     if instances is 0
       instances--
       done();
 
   projects()
-    .on 'end', -> 
+    .on 'end', ->
+      instances--
       _done() 
     .pipe where (each) ->  # check for project.assets.json files are up to date  
       return true if force
@@ -103,9 +101,8 @@ task 'restore','restores the dotnet packages for the projects', (done) ->
       return false if (exists assets) and (newer assets, each.path)
       return true
     .pipe foreach (each,next)->
-      any = true
       instances++
-      execute "dotnet restore #{ each.path } /nologo",{retry:1} ,(code,stderr,stdout) ->
+      execute "dotnet restore #{ each.path } /nologo", {retry:1},(code,stderr,stdout) ->
         instances--
         _done()
       next null  
@@ -124,7 +121,6 @@ task 'test-dotnet', 'runs dotnet tests',['restore'] , (done) ->
         done() if instances is 0
       next null  
   return null
-
 
 global['codesign'] = (description, keywords, input, output, certificate1, certificate2, done)-> 
   done = if done? then done else if certificate2? then certificate2 else if certificate1? then certificate1 else ()->
