@@ -6,10 +6,10 @@ ERROR (ListByOperationsValidation/M1003/SDKViolation): Operation Usage_List must
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get.operationId
 ERROR (OperationsAPIImplementationValidation/M3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Storage/operations'.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths
-ERROR (BodyParametersValidation/M2063/SDKViolation): A body parameter must be named 'parameters'.
+WARNING (BodyParametersValidation/M2063/SDKViolation): A body parameter must be named 'parameters'.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.parameters[0].name
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.parameters[0]
-ERROR (BodyParametersValidation/M2063/SDKViolation): A body parameter must be named 'parameters'.
+WARNING (BodyParametersValidation/M2063/SDKViolation): A body parameter must be named 'parameters'.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.parameters[2].name
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.parameters[2]
 WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountCheckNameAvailabilityParameters' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
