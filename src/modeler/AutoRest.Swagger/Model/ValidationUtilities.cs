@@ -5,24 +5,21 @@ using AutoRest.Swagger;
 using AutoRest.Core.Utilities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using AutoRest.Swagger.Validation;
+using System.Text;
 
 namespace AutoRest.Swagger.Model.Utilities
 {
     public static class ValidationUtilities
     {
         private static readonly string XmsPageable = "x-ms-pageable";
-        private static readonly Regex UrlResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
-        private static readonly IEnumerable<string> baseResourceModelNames = 
+        private static readonly IEnumerable<string> BaseResourceModelNames = 
             new List<string>() { "trackedresource", "proxyresource", "resource" };
 
-        private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
+        private static readonly Regex ResourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
+        private static readonly Regex PropNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)*[A-Z]{1,2}$");
 
-        public static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<unparameterizedresource>[^{/]+))?");
-
-        private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Populates a list of 'Resource' models found in the service definition
@@ -68,7 +65,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="modelName">model name to check</param>
         /// <returns> true if model is a base resource type </returns>
-        public static bool IsBaseResourceModelName(string modelName) => baseResourceModelNames.Contains(modelName.ToLower());
+        public static bool IsBaseResourceModelName(string modelName) => BaseResourceModelNames.Contains(modelName.ToLower());
 
         /// <summary>
         /// Returns the cumulative list of all 'allOfed' references for a model
@@ -317,23 +314,13 @@ namespace AutoRest.Swagger.Model.Utilities
         private static IEnumerable<Operation> SelectOperationsFromPaths(string id, Dictionary<string, Dictionary<string, Operation>> paths)
             => paths.Values.SelectMany(pathObjs=>pathObjs.Where(pair => pair.Key.ToLower().Equals(id.ToLower())).Select(pair => pair.Value));
 
-        /// <summary>
-        /// Returns whether a string follows camel case style, allowing for 2 consecutive upper case characters for acronyms.
-        /// </summary>
-        /// <param name="name">String to check for style</param>
-        /// <returns>true if "name" follows camel case style (allows for 2 consecutive upper case characters), false otherwise.</returns>
-        public static bool isNameCamelCase(string name)
-        {
-            Regex propNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)*[A-Z]{1,2}$");
-            return (propNameRegEx.IsMatch(name));
-        }
 
         /// <summary>
         /// Returns a suggestion of camel case styled string based on the string passed as parameter.
         /// </summary>
         /// <param name="name">String to convert to camel case style</param>
         /// <returns>A string that conforms with camel case style based on the string passed as parameter.</returns>
-        public static string ToCamelCase(string name)
+        public static string GetCamelCasedSuggestion(string name)
         {
             StringBuilder sb = new StringBuilder(name);
             if (sb.Length > 0)
@@ -341,7 +328,7 @@ namespace AutoRest.Swagger.Model.Utilities
                 sb[0] = sb[0].ToString().ToLower()[0];
             }
             bool firstUpper = true;
-            for (int i = 1; i < name.Length; i++)
+            for (int i = 1; i<name.Length; i++)
             {
                 if (char.IsUpper(sb[i]) && firstUpper)
                 {
@@ -358,6 +345,13 @@ namespace AutoRest.Swagger.Model.Utilities
             }
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Returns whether a string follows camel case style, allowing for 2 consecutive upper case characters for acronyms.
+        /// </summary>
+        /// <param name="name">String to check for style</param>
+        /// <returns>true if "name" follows camel case style (allows for 2 consecutive upper case characters), false otherwise.</returns>
+        public static bool IsNameCamelCase(string name) => PropNameRegEx.IsMatch(name);
 
         /// <summary>
         /// Evaluates if the reference is of the provided data type.
@@ -430,7 +424,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <returns>Array of resource providers</returns>
         public static IEnumerable<string> GetResourceProviders(Dictionary<string, Dictionary<string, Operation>> paths)
         {
-            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
+            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => ResourceProviderPathPattern.Matches(path)
                                                     .OfType<Match>()
                                                     .Select(match => match.Groups["resPath"].Value.ToString()))
                                                     .Distinct()

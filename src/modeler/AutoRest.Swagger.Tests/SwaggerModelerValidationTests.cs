@@ -420,6 +420,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void TrackedResourceListByImmediateParentWithOperationValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-list-by-immediate-parent-2.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceListByImmediateParent), 1);
+        }
+
+        [Fact]
         public void PutGetPatchResponseValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-putgetpatch-response-validation.json"));
@@ -572,6 +579,12 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(BodyParametersValidation), 1);
         }
 
+        [Fact]
+        public void EmptyParameterNameValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-parameter-name.json"));
+            messages.AssertOnlyValidationMessage(typeof(ParameterNameValidation), 2);
+        }
     }
 
     #region Positive tests

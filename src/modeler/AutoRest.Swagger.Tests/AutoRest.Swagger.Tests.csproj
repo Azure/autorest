@@ -16,6 +16,9 @@
     <Content Include="Resource\Swagger\swagger-x-ms-discriminator-value.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resource\Swagger\Validation\swagger-list-by-immediate-parent-2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resource\Swagger\Validation\swagger-list-by-immediate-parent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

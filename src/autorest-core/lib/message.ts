@@ -21,7 +21,7 @@ export interface Range {
 }
 
 export interface Message {
-  Channel?: Channel;
+  Channel: Channel;
   Key?: Iterable<string>;
   Details?: any;
   Text: string;
