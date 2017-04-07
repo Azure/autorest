@@ -6,7 +6,7 @@ task 'test', "runs all tests", (done) ->
       'test-java'
       'test-node'
       'test-python'
-      #'test-ruby'
+      'test-ruby'
       -> done()
    
 
