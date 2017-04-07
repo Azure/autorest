@@ -1,8 +1,8 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Azure Redis Cache Management API",
-    "description": "Some cool documentation.",
+    "title": "Validating 200 response of PUT operation",
+    "description": "200 response of a PUT operation must have the x-ms-azure-resource extension set to true",
     "version": "2014-04-01-preview"
   },
   "host": "management.azure.com",

@@ -647,7 +647,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Put operation &apos;{0}&apos; has response model &apos;{1}&apos; which does not have x-ms-azure-resource extension set to true in its hierarchy.
+        ///   Looks up a localized string similar to The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: &apos;{0}&apos; Model: &apos;{1}&apos;..
         /// </summary>
         public static string PutOperationResourceResponseValidationMessage {
             get {
