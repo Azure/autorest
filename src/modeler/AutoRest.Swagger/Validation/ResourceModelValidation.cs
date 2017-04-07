@@ -48,7 +48,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// for each model, find if its allOfs on another model, and traverse that model
         /// </summary>
-        /// <param name="resourceModels">list of resource models found in the doc</param>
+        /// <param name="modelName">model for which to find the root</param>
         /// <param name="definitions">models defined in the doc</param>
         /// <returns>true if the resource model is valid.false otherwise.</returns>
         private string GetRootModel(string modelName, Dictionary<string, Schema> definitions)
