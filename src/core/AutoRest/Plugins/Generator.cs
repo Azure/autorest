@@ -38,7 +38,7 @@ public class Generator : NewPlugin
     }
 
     // build settings
-    var altNamespace = (await GetValue<string[]>("input-file")).FirstOrDefault().Split('/').Last().Split('\\').Last().Split('.').First();
+    var altNamespace = (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault().Split('/').Last().Split('\\').Last().Split('.').First();
 
     new Settings
     {
