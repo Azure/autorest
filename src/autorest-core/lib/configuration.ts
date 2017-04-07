@@ -215,9 +215,10 @@ export class ConfigurationView {
     return this.config["fluent"] || false;
   }
 
-  public GetPluginView(pluginName: string): ConfigurationView {
-    const result = new ConfigurationView(this.messageEmitter, this.configFileFolderUri, (this.config as any)[pluginName], this.config);
-    return result;
+  public * GetPluginViews(pluginName: string): Iterable<ConfigurationView> {
+    for (const section of ValuesOf<any>((this.config as any)[pluginName])) {
+      yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section, this.config);
+    }
   }
 }
 
