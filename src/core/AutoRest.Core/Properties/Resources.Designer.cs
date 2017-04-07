@@ -449,6 +449,24 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is not expected..
+        /// </summary>
+        public static string ParameterIsNotValid {
+            get {
+                return ResourceManager.GetString("ParameterIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter Must have the &quot;name&quot; property defined with non-empty string as its value.
+        /// </summary>
+        public static string ParametersPropertiesValidation {
+            get {
+                return ResourceManager.GetString("ParametersPropertiesValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is required..
         /// </summary>
         public static string ParameterValueIsMissing {

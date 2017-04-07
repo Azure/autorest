@@ -6,7 +6,7 @@ import { IndexToPosition } from '../parsing/text-utility';
 
 import * as yamlAst from "yaml-ast-parser";
 import { JsonPath } from "./jsonpath";
-import { Message, SourceLocation } from '../message';
+import { Message, SourceLocation, Channel } from '../message';
 import { NewEmptyObject } from "../parsing/stable-object";
 
 /**
@@ -44,34 +44,36 @@ export function* Descendants(yamlAstNode: YAMLNode, currentPath: JsonPath = [], 
     yield todo;
 
     // traverse
-    switch (todo.node.kind) {
-      case Kind.MAPPING: {
-        let astSub = todo.node as YAMLMapping;
-        if (deferResolvingMappings) {
-          todos.push({ node: astSub.value, path: todo.path });
-        } else {
-          todos.push({ node: astSub.value, path: todo.path.concat([astSub.key.value]) });
-        }
-      }
-        break;
-      case Kind.MAP:
-        if (deferResolvingMappings) {
-          for (let mapping of (todo.node as YAMLMap).mappings) {
-            todos.push({ node: mapping, path: todo.path.concat([mapping.key.value]) });
-          }
-        } else {
-          for (let mapping of (todo.node as YAMLMap).mappings) {
-            todos.push({ node: mapping, path: todo.path });
+    if (todo.node) {
+      switch (todo.node.kind) {
+        case Kind.MAPPING: {
+          let astSub = todo.node as YAMLMapping;
+          if (deferResolvingMappings) {
+            todos.push({ node: astSub.value, path: todo.path });
+          } else {
+            todos.push({ node: astSub.value, path: todo.path.concat([astSub.key.value]) });
           }
         }
-        break;
-      case Kind.SEQ: {
-        let astSub = todo.node as YAMLSequence;
-        for (let i = 0; i < astSub.items.length; ++i) {
-          todos.push({ node: astSub.items[i], path: todo.path.concat([i]) });
+          break;
+        case Kind.MAP:
+          if (deferResolvingMappings) {
+            for (let mapping of (todo.node as YAMLMap).mappings) {
+              todos.push({ node: mapping, path: todo.path.concat([mapping.key.value]) });
+            }
+          } else {
+            for (let mapping of (todo.node as YAMLMap).mappings) {
+              todos.push({ node: mapping, path: todo.path });
+            }
+          }
+          break;
+        case Kind.SEQ: {
+          let astSub = todo.node as YAMLSequence;
+          for (let i = 0; i < astSub.items.length; ++i) {
+            todos.push({ node: astSub.items[i], path: todo.path.concat([i]) });
+          }
         }
+          break;
       }
-        break;
     }
   }
 

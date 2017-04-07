@@ -105,25 +105,30 @@ task 'copy-vscode-files-to-work', '', ->
   ]
     .pipe destination "#{workdir}/" 
 
-task 'package-vscode', "creates the autorest vscode extension package.",["build/typescript"],(done)-> 
-  echo "updating version in package.json file"
-  execute "npm version patch", {cwd: "#{basefolder}/src/vscode-autorest" },(c,o,e)->
-    run ["copy-vscode-files-to-work"], -> 
-      echo "patching package.json file to include autorest package"
-      pkg = require("#{workdir}/package.json")
-      pkg.dependencies.autorest="*"
-      JSON.stringify(pkg).to("#{workdir}/package.json");
+task 'package/vscode', "creates the autorest vscode extension package.",(done)-> 
+  run "clean", "build", -> 
+    echo "updating version in package.json file"
+    execute "npm version patch", {cwd: "#{basefolder}/src/vscode-autorest" },(c,o,e)->
+      run "copy-vscode-files-to-work", -> 
+        echo "patching package.json file to include autorest package"
+        pkg = require("#{workdir}/package.json")
+        pkg.dependencies.autorest="*"
+        JSON.stringify(pkg).to("#{workdir}/package.json");
 
-      execute "vsce package", {cwd: "#{workdir}" },(c,o,e)->
-        mv "#{workdir}/*.vsix","#{basefolder}/src/vscode-autorest/"
-        rm '-rf', workdir
-        name = "#{basefolder}/src/vscode-autorest/autorest-#{pkg.version}.vsix"
-        echo "Package Created:\n   #{name}"
-        done()
+        execute "vsce package", {cwd: "#{workdir}" },(c,o,e)->
+          mv "#{workdir}/*.vsix","#{basefolder}/src/vscode-autorest/"
+          rm '-rf', workdir
+          name = "#{basefolder}/src/vscode-autorest/autorest-#{pkg.version}.vsix"
+          echo "Package Created:\n   #{name}"
+          done()
 
   return null
   
-
+task 'publish/vscode', "uploads the autorest vscode extension package.",(done)-> 
+  pkg = require("#{basefolder}/src/vscode-autorest/package.json")
+  execute "vsce publish --packagePath #{basefolder}/src/vscode-autorest/autorest-#{pkg.version}.vsix", {silent:false},(c,o,e)->
+    done()
+    
 task 'publish/autorest', '', ['build/typescript'], (done) ->
   execute "npm publish ", {cwd: "#{basefolder}/src/autorest" }, done
 

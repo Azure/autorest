@@ -9,7 +9,7 @@ require("../lib/polyfill.min.js");
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { Message } from "../lib/message";
+import { Message, Channel } from "../lib/message";
 import { AutoRest } from "../lib/autorest-core";
 import { MemoryFileSystem } from "../lib/file-system";
 
@@ -22,7 +22,8 @@ import { MemoryFileSystem } from "../lib/file-system";
     const autoRest = new AutoRest(memFS);
     autoRest.AddConfiguration({ "input-file": uri });
     const messages: Message[] = [];
-    autoRest.Error.Subscribe((_, m) => messages.push(m));
+
+    autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Error) { messages.push(m) } });
     await autoRest.Process().finish;
     return messages;
   }

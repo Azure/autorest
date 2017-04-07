@@ -14,6 +14,7 @@ import { Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from './lib/ref/jsonpath';
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
 import { AutoRest } from "./lib/autorest-core";
+import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
 import { CreateFolderUri, ResolveUri, WriteString } from "./lib/ref/uri";
@@ -77,10 +78,23 @@ ${Stringify(config).replace(/^---\n/, "")}
     api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
     //api.Debug.Subscribe((_, m) => console.log(m.Text));
     //api.Verbose.Subscribe((_, m) => console.log(m.Text));
-    api.Information.Subscribe((_, m) => console.log(m.Text));
-    api.Warning.Subscribe((_, m) => console.warn(m.Text));
-    api.Error.Subscribe((_, m) => console.error(m.Text));
-    api.Fatal.Subscribe((_, m) => console.error(m.Text));
+    api.Message.Subscribe((_, m) => {
+      switch (m.Channel) {
+        case Channel.Information:
+          console.log(m.Text);
+          break;
+        case Channel.Warning:
+          console.warn(m.Text);
+          break;
+        case Channel.Error:
+          console.error(m.Text);
+          break;
+        case Channel.Fatal:
+          console.error(m.Text);
+          break;
+      }
+    });
+
     const result = await api.Process().finish;
     if (result != true) {
       throw result;
@@ -141,10 +155,22 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
   //api.Debug.Subscribe((_, m) => console.log(m.Text));
   //api.Verbose.Subscribe((_, m) => console.log(m.Text));
-  api.Information.Subscribe((_, m) => console.log(m.Text));
-  api.Warning.Subscribe((_, m) => console.warn(m.Text));
-  api.Error.Subscribe((_, m) => console.error(m.Text));
-  api.Fatal.Subscribe((_, m) => console.error(m.Text));
+  api.Message.Subscribe((_, m) => {
+    switch (m.Channel) {
+      case Channel.Information:
+        console.log(m.Text);
+        break;
+      case Channel.Warning:
+        console.warn(m.Text);
+        break;
+      case Channel.Error:
+        console.error(m.Text);
+        break;
+      case Channel.Fatal:
+        console.error(m.Text);
+        break;
+    }
+  });
   const result = await api.Process().finish;
   if (result != true) {
     throw result;

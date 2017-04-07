@@ -14,6 +14,7 @@ namespace AutoRest.Swagger.Model
     /// Describes a single operation parameter.
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject 
     /// </summary>
+    [Rule(typeof(ParameterNameValidation))]
     [Rule(typeof(ParameterDescriptionRequired))]
     [Rule(typeof(XmsClientNameParameterValidation))]
     [Rule(typeof(BodyParametersValidation))]
