@@ -1,24 +1,24 @@
 ERROR (ListByOperationsValidation/M1003/SDKViolation): Operation QueryKeys_List must be one of: listquerykeys_listbysubscriptionid, listquerykeys_list, listquerykeys_listbyresourcegroup, listquerykeys_listbysearchservices
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys"].get.operationId
+        Path: listQueryKeys"].get.operationId
 ERROR (ListByOperationsValidation/M1003/SDKViolation): Operation Services_List must be one of: searchservices_listbysubscriptionid, searchservices_list, searchservices_listbyresourcegroup, searchservices_listbymicrosoftsearch
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get.operationId
+        Path: searchServices"].get.operationId
 ERROR (OperationsAPIImplementationValidation/M3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Search/operations'.
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.paths
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.paths
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.paths
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.paths
+        Path: swagger.md#$.paths
+        Path: swagger.md#$.paths
+        Path: swagger.md#$.paths
+        Path: swagger.md#$.paths
 WARNING (DescriptionMissing/M4000/SDKViolation): 'Error' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.definitions.Error
+        Path: swagger.md#$.definitions.Error
 WARNING (DescriptionMissing/M4000/SDKViolation): 'ErrorDetails' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json#$.definitions.ErrorDetails
 WARNING (AvoidNestedProperties/S2001/SDKViolation): Consider using x-ms-client-flatten to provide a better end user experience
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.definitions.SearchServiceCreateOrUpdateParameters.properties.properties
+        Path: swagger.md#$.definitions.SearchServiceCreateOrUpdateParameters.properties.properties
 WARNING (DescriptionMissing/M4000/SDKViolation): 'code' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.definitions.Error.properties.code
+        Path: swagger.md#$.definitions.Error.properties.code
 WARNING (DescriptionMissing/M4000/SDKViolation): 'message' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.definitions.Error.properties.message
+        Path: swagger.md#$.definitions.Error.properties.message
 WARNING (DescriptionMissing/M4000/SDKViolation): 'details' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: file:///C:/work/autorest/Samples/3a-literate-swagger/swagger.md#$.definitions.Error.properties.details
+        Path: swagger.md#$.definitions.Error.properties.details
 WARNING (DescriptionMissing/M4000/SDKViolation): 'code' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json#$.definitions.ErrorDetails.properties.code
 WARNING (DescriptionMissing/M4000/SDKViolation): 'target' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.

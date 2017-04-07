@@ -633,6 +633,11 @@ task 'regenerate-samples', '', (done) ->
         ShellString(code).to(path.join(outputFolder, "code.txt"))
         ShellString(stdout).to(path.join(outputFolder, "stdout.txt"))
         ShellString(stderr).to(path.join(outputFolder, "stderr.txt"))
+
+        # sanitize generated files (source maps and shell stuff may contain file:/// paths)
+        (find path.join(each.path, ".."))
+          .filter((file) -> file.match(/.(map|txt)$/))
+          .forEach((file) -> sed "-i", /\bfile:\/\/.*\/(.*)\b/g, "$1", file)
         next null 
   return null
 
