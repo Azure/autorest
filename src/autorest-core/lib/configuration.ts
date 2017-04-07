@@ -154,6 +154,13 @@ export class ConfigurationView {
 
   /* @internal */ public get CancellationTokenSource(): CancellationTokenSource { return this.messageEmitter.CancellationTokenSource; }
 
+  /* @internal */ public get Message(): IEvent<MessageEmitter, Message> {
+    return this.messageEmitter.Message;
+  }
+  /* @internal */ public get GeneratedFile(): IEvent<MessageEmitter, Artifact> {
+    return this.messageEmitter.GeneratedFile;
+  }
+
   private config: AutoRestConfigurationImpl;
 
   private ResolveAsFolder(path: string): string {

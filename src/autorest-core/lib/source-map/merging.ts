@@ -129,7 +129,7 @@ export async function MergeYamls(config: ConfigurationView | MessageEmitter, yam
     const rawYaml = yamlInputHandle.ReadData();
     resultObject = Merge(resultObject, yaml.Parse(rawYaml, (message, index) => {
       if (config) {
-        config.messageEmitter.Message.Dispatch({
+        config.Message.Dispatch({
           Channel: Channel.Error,
           Text: message,
           Source: [{ document: yamlInputHandle.key, Position: IndexToPosition(yamlInputHandle, index) }]

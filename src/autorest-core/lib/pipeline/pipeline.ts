@@ -35,10 +35,10 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // artifact emitter
   const emitArtifact: (artifactType: string, uri: string, handle: DataHandleRead) => Promise<void> = async (artifactType, uri, handle) => {
     if (From(config.OutputArtifact).Contains(artifactType)) {
-      config.messageEmitter.GeneratedFile.Dispatch({ type: artifactType, uri: uri, content: handle.ReadData() });
+      config.GeneratedFile.Dispatch({ type: artifactType, uri: uri, content: handle.ReadData() });
     }
     if (From(config.OutputArtifact).Contains(artifactType + ".map")) {
-      config.messageEmitter.GeneratedFile.Dispatch({ type: artifactType + ".map", uri: uri + ".map", content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2) });
+      config.GeneratedFile.Dispatch({ type: artifactType + ".map", uri: uri + ".map", content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2) });
     }
   };
 
@@ -50,7 +50,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     throw new Exception("No input files provided.\n\nUse --help to get help information.", 0)
   }
 
-  config.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Starting Pipeline - Loading literate swaggers ${inputs}` });
+  config.Message.Dispatch({ Channel: Channel.Debug, Text: `Starting Pipeline - Loading literate swaggers ${inputs}` });
 
   const swaggers = await LoadLiterateSwaggers(
     config,
@@ -58,7 +58,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     inputs, config.DataStore.CreateScope("loader"));
   // const rawSwaggers = await Promise.all(swaggers.map(async x => { return <Artifact>{ uri: x.key, content: await x.ReadData() }; }));
 
-  config.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Done loading Literate Swaggers` });
+  config.Message.Dispatch({ Channel: Channel.Debug, Text: `Done loading Literate Swaggers` });
 
   // TRANSFORM
   for (let i = 0; i < swaggers.length; ++i) {
@@ -71,7 +71,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     : swaggers[0];
   const rawSwagger = swagger.ReadObject<any>();
 
-  config.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Done Composing Swaggers.` });
+  config.Message.Dispatch({ Channel: Channel.Debug, Text: `Done Composing Swaggers.` });
 
   // TRANSFORM
   swagger = await manipulator.Process(swagger, config.DataStore.CreateScope("composite-transform"), "/composite.yaml");
@@ -81,20 +81,20 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const relPath =
       config.GetEntry("output-file") ||
       (config.GetEntry("namespace") ? config.GetEntry("namespace") + ".json" : GetFilename([...config.InputFileUris][0]));
-    config.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `relPath: ${relPath}` });
+    config.Message.Dispatch({ Channel: Channel.Debug, Text: `relPath: ${relPath}` });
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     const hw = await config.DataStore.Write("normalized-swagger.json");
     const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, swagger.ReadYamlAst()), [swagger]);
     await emitArtifact("swagger-document", outputFileUri, h);
   }
-  config.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Done Emitting composed documents.` });
+  config.Message.Dispatch({ Channel: Channel.Debug, Text: `Done Emitting composed documents.` });
 
   const azureValidator = config.AzureArm && !config.DisableValidation;
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
   const usedCodeGenerators = allCodeGenerators.filter(cg => config.GetEntry(cg as any) !== undefined);
 
-  config.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Just before autorest.dll realm.` });
+  config.Message.Dispatch({ Channel: Channel.Debug, Text: `Just before autorest.dll realm.` });
   //
   // AutoRest.dll realm
   //
@@ -105,7 +105,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     // setup message pipeline (source map resolution, filter, forward)
     const processMessage = async (sink: IEvent<MessageEmitter, Message>, m: Message) => {
       outstandingTaskAwaiter.Enter();
-      config.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - starting processing` });
+      config.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - starting processing` });
 
       try {
         // update source locations to point to loaded Swagger
@@ -173,12 +173,12 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         console.error(e);
       }
 
-      config.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - finished processing` });
+      config.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - finished processing` });
       outstandingTaskAwaiter.Exit();
     };
 
     const messageSink = (m: Message) => {
-      processMessage(config.messageEmitter.Message, m);
+      processMessage(config.Message, m);
     };
 
     // code generators
