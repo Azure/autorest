@@ -31,7 +31,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "PATCH operation '{0}' has reference to model definition '{1}' as request body parameter which has {2} properties";
+        public override string MessageTemplate => "Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}'";
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -60,13 +60,13 @@ namespace AutoRest.Swagger.Validation
                     foreach (var reqProp in reqProps)
                     {
                         var modelContainingReqProp = definitions.Where(pair => pair.Value.Required.Contains(reqProp)).Select(pair => pair.Key).First();
-                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelContainingReqProp)), this, op.OperationId, modelContainingReqProp, "required");
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelContainingReqProp).AppendProperty("required")), this, "required", op.OperationId, modelContainingReqProp, reqProp);
                     }
                     
                     foreach (var defValProp in defValProps)
                     {
                         var modelContainingDefValProp = definitions.Where(pair => pair.Value.Properties?.ContainsKey(defValProp.Key) == true && pair.Value.Properties[defValProp.Key] == defValProp.Value).Select(pair => pair.Key).First();
-                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelContainingDefValProp)), this, op.OperationId, modelContainingDefValProp, "default-valued");
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelContainingDefValProp).AppendProperty("properties").AppendProperty(defValProp.Key)), this, "default-valued", op.OperationId, modelContainingDefValProp, defValProp.Key);
                     }
                     
                 }

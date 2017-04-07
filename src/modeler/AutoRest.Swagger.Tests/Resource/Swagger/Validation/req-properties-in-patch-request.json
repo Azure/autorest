@@ -1,8 +1,8 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "Uses 'required' & 'readonly' properties.",
-    "description": "Show an error/warning if a definition property is marked readOnly: true plus it appears under the required array of properties.",
+    "title": "'required' properties in patch request",
+    "description": "Flag validation rule if there is a 'required' property in a patch request model",
     "version": "2014-04-01-preview"
   },
   "host": "management.azure.com",
