@@ -5,11 +5,10 @@
 
 regenExpected = (opts,done) ->
   outputDir = if !!opts.outputBaseDir then "#{opts.outputBaseDir}/#{opts.outputDir}" else opts.outputDir
-  instances = 0    
+  keys = Object.getOwnPropertyNames(opts.mappings)
+  instances = keys.length
 
-  for key of opts.mappings
-    instances++
-
+  for key in keys
     optsMappingsValue = opts.mappings[key]
     swaggerFiles = (if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue).split(";")
     args = [
@@ -51,7 +50,7 @@ regenExpected = (opts,done) ->
       args.push("--override-info.description=#{opts['override-info.description']}")
 
     autorest args,() =>
-      instances = instances- 1
+      instances--
       return done() if instances is 0 
 
 defaultMappings = {
