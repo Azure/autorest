@@ -65,25 +65,10 @@
           "description": "Resource Id"
         },
         "type": {
-          "readOnly": true,
           "type": "string",
           "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true
     }
   },

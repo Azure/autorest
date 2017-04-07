@@ -221,7 +221,7 @@ Modelers:
     <value>Property '{0}' is a required property. It should not be marked as 'readonly'.</value>
   </data>
   <data name="ResourceModelIsNotValid" xml:space="preserve">
-    <value>The properties 'id', 'name' and 'type' in resource definition '{0}' must be marked as readonly</value>
+    <value>Model definition '{0}' must have the properties 'name', 'id' and 'type' and these properties must be marked as readonly.</value>
   </data>
   <data name="ResourceIsMsResourceNotValid" xml:space="preserve">
     <value>A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.</value>
