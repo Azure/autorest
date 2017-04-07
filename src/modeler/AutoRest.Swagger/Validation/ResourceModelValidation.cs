@@ -43,20 +43,32 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         /// <summary>
+        /// Get the root resource models on which we need to run the validation rule
+        /// All resource models that do not have an allOf on any other model should be the root ones
+        /// </summary>
+        /// <param name="resourceModels">list of resource models found in the doc</param>
+        /// <param name="definitions">models defined in the doc</param>
+        /// <returns>true if the resource model is valid.false otherwise.</returns>
+
+        private IEnumerable<string> GetBaseResourceModels(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions) =>
+            resourceModels.Where(resModel => !definitions[resModel].AllOf.Any(modelRef=>!string.IsNullOrEmpty(modelRef.Reference)));
+
+        /// <summary>
         /// Validates the structure of Resource Model
         /// </summary>
         /// <param name="definitions">Operation Definition to validate</param>
         /// <returns>true if the resource model is valid.false otherwise.</returns>
-        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> entity, RuleContext context)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            var resModelList = entity.Where(pair => pair.Key.ToLower().Equals("resource"));
-            if (resModelList.Any())
+            var baseResourceModels = GetBaseResourceModels(context.ResourceModels, definitions);
+            // It'd be strange to have more than one base resource model definitions in the same doc, 
+            // but let's do our due diligence
+            foreach (var baseResourceModel in baseResourceModels)
             {
-                var resModel = resModelList.First();
-                var resModelReadonlyProps = resModel.Value.Properties?.Where(prop => prop.Value.ReadOnly).Select(prop=>prop.Key);
-                if (resModelReadonlyProps != null && resModelReadonlyProps.Intersect(ReadonlyProps).Count() < 3)
+                var modelReadonlyProps = definitions[baseResourceModel].Properties?.Where(prop => prop.Value.ReadOnly).Select(prop => prop.Key);
+                if ((modelReadonlyProps?.Intersect(ReadonlyProps).Count()??0) < 3)
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(resModel.Key)), this, resModel.Key);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(baseResourceModel)), this, baseResourceModel);
                 }
             }
         }
