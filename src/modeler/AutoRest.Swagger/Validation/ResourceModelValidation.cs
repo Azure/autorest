@@ -42,17 +42,40 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
+
+
+
         /// <summary>
-        /// Get the root resource models on which we need to run the validation rule
-        /// All resource models that do not have an allOf on any other model should be the root ones
+        /// for each model, find if its allOfs on another model, and traverse that model
         /// </summary>
         /// <param name="resourceModels">list of resource models found in the doc</param>
         /// <param name="definitions">models defined in the doc</param>
         /// <returns>true if the resource model is valid.false otherwise.</returns>
+        private string GetRootModel(string modelName, Dictionary<string, Schema> definitions)
+        {
+            if (definitions[modelName].AllOf?.Any(modelRef => !string.IsNullOrEmpty(modelRef.Reference) && definitions.ContainsKey(modelRef.Reference.StripDefinitionPath())) != true)
+            {
+                return modelName;
+            }
+            return GetRootModel(definitions[modelName].AllOf.First().Reference.StripDefinitionPath(), definitions);
+        }
 
-        private IEnumerable<string> GetBaseResourceModels(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions) =>
-            resourceModels.Where(resModel => !definitions[resModel].AllOf.Any(modelRef=>!string.IsNullOrEmpty(modelRef.Reference)));
 
+
+        /// <summary>
+        /// For each resource model, traverse its tree, find its root
+        /// </summary>
+        /// <param name="resourceModels">list of resource models found in the doc</param>
+        /// <param name="definitions">models defined in the doc</param>
+        /// <returns>true if the resource model is valid.false otherwise.</returns>
+        private IEnumerable<string> GetRootResourceModels(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions)
+        {
+            foreach (var resourceModel in resourceModels)
+            {
+                yield return GetRootModel(resourceModel, definitions);
+            }
+        }
+        
         /// <summary>
         /// Validates the structure of Resource Model
         /// </summary>
@@ -60,15 +83,15 @@ namespace AutoRest.Swagger.Validation
         /// <returns>true if the resource model is valid.false otherwise.</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            var baseResourceModels = GetBaseResourceModels(context.ResourceModels, definitions);
-            // It'd be strange to have more than one base resource model definitions in the same doc, 
+            var rootResourceModels = GetRootResourceModels(context.ResourceModels, definitions).Distinct();
+            // It'd be strange to have more than one root resource model definitions in the same doc, 
             // but let's do our due diligence
-            foreach (var baseResourceModel in baseResourceModels)
+            foreach (var rootResourceModel in rootResourceModels)
             {
-                var modelReadonlyProps = definitions[baseResourceModel].Properties?.Where(prop => prop.Value.ReadOnly).Select(prop => prop.Key);
+                var modelReadonlyProps = definitions[rootResourceModel].Properties?.Where(prop => prop.Value.ReadOnly).Select(prop => prop.Key);
                 if ((modelReadonlyProps?.Intersect(ReadonlyProps).Count()??0) < 3)
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(baseResourceModel)), this, baseResourceModel);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(rootResourceModel)), this, rootResourceModel);
                 }
             }
         }

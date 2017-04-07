@@ -70,6 +70,13 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "MyResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     }
   },
   "parameters": {
