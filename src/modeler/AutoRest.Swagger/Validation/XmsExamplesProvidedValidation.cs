@@ -23,13 +23,15 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override string Id => "M2022";
 
+        private string OperationIdMessageSuffix => " Operation: '{0}'";
+
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations";
+        public override string MessageTemplate => "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations.{0}";
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -43,7 +45,8 @@ namespace AutoRest.Swagger.Validation
         /// <param name="entity">Operation name to be verified.</param>
         /// <param name="context">Rule context.</param>
         /// <returns>ValidationMessage</returns>
-        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
+        /// (Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
         {
             // find all operations that do not have the x-ms-examples extension or those which have x-ms-examples extension as empty
             // but ignore operations_list
@@ -51,7 +54,20 @@ namespace AutoRest.Swagger.Validation
                                                             => (opPair.Value.Extensions?.ContainsKey("x-ms-examples") != true 
                                                                || string.IsNullOrWhiteSpace((string)opPair.Value.Extensions["x-ms-examples"]))
                                                                && !opPair.Value.OperationId.ToLower().Equals("operations_list")));
-            return violatingOps.Count() <= magicNumber;
+
+            // if number of violations exceeds magicNumber, simply aggregate the message
+            if (violatingOps.Count() > magicNumber)
+            {
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, string.Empty);
+            }
+            else
+            {
+                foreach (var violatingOp in violatingOps)
+                {
+                    var violatingPath = paths.First(pathObj => pathObj.Value.Values.Select(op => op.OperationId).Contains(violatingOp.Value.OperationId)).Key;
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath).AppendProperty(violatingOp.Key).AppendProperty("operationId")), this, string.Format(OperationIdMessageSuffix, violatingOp.Value.OperationId));
+                }
+            }
         }
     }
 }
