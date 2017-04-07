@@ -7,8 +7,8 @@ vfs = require('vinyl-fs');
 
 module.exports =
   # lets us just handle each item in a stream easily.
-  foreach: (delegate) -> 
-    through.obj ( each, enc, done ) -> 
+  foreach: (delegate) ->
+    through.obj { concurrency: threshold }, ( each, enc, done ) -> 
       delegate each, done, this
 
   toArray: (result,passthru) => 

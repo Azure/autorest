@@ -2,7 +2,7 @@
 csu = "c:/ci-signing/adxsdk/tools/csu/csu.exe"
 
 dotnet = (cmd) ->
-  through.obj (file, enc, callback) ->
+  foreach (file, callback) ->
     # check if the file is an actual file. 
     # if it's not, just skip this tool.
     if !file or !file.path
