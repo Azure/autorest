@@ -3,10 +3,10 @@
 task 'test', "runs all tests", (done) ->
     run 'test-dotnet',
       'test-go'
-      'test-java'
+#      'test-java'
       'test-node'
       'test-python'
-      #'test-ruby'
+      'test-ruby'
       -> done()
    
 

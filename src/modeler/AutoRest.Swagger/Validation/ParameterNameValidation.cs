@@ -9,12 +9,12 @@ using System;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class BodyParametersValidation : TypedRule<SwaggerParameter>
+    public class ParameterNameValidation : TypedRule<SwaggerParameter>
     {
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M2063";
+        public override string Id => "M2047";
 
         /// <summary>
         /// Violation category of the Rule.
@@ -27,19 +27,19 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.BodyParametersNotValid;
+        public override string MessageTemplate => Resources.ParametersPropertiesValidation;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
         /// <summary>
-        /// Validates if the 'body' parameter is named 'parameters'.
+        /// Validates if the swagger parameter has the "name" property set
         /// </summary>
         /// <param name="swaggerParameter"></param>
         /// <returns></returns>
-        public override bool IsValid(SwaggerParameter swaggerParameter) =>
-            (swaggerParameter.In != ParameterLocation.Body) || (swaggerParameter.Name.Equals("parameters", StringComparison.CurrentCultureIgnoreCase));
+        public override bool IsValid(SwaggerParameter swaggerParameter) 
+            => !string.IsNullOrWhiteSpace(swaggerParameter.Reference) || !string.IsNullOrWhiteSpace(swaggerParameter.Name);
     }
 }

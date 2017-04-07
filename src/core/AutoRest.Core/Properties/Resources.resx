@@ -402,4 +402,7 @@ Modelers:
   <data name="LongRunningResponseNotValid" xml:space="preserve">
     <value>A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.</value>
   </data>
+  <data name="ParametersPropertiesValidation" xml:space="preserve">
+    <value>Parameter Must have the "name" property defined with non-empty string as its value</value>
+  </data>
 </root>

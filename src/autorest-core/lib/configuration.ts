@@ -12,7 +12,7 @@ import { EnsureIsFolderUri, ResolveUri } from "./ref/uri";
 import { From } from "./ref/linq";
 import { IFileSystem } from "./file-system";
 import * as Constants from "./constants";
-import { Message } from "./message";
+import { Message, Channel } from "./message";
 import { Artifact } from "./artifact";
 import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
 
@@ -104,15 +104,35 @@ export class DirectiveView {
   }
 }
 
-export class ConfigurationView extends EventEmitter {
+export class MessageEmitter extends EventEmitter {
+  /**
+  * Event: Signals when a File is generated 
+  */
+  @EventEmitter.Event public GeneratedFile: IEvent<MessageEmitter, Artifact>;
+  /**
+   * Event: Signals when a message is generated
+   */
+  @EventEmitter.Event public Message: IEvent<MessageEmitter, Message>;
+  private cancellationTokenSource = new CancellationTokenSource();
 
-  /* @internal */ constructor(
-    /* @internal */
-    private configFileFolderUri: string,
-    ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
-  ) {
+  constructor() {
     super();
     this.DataStore = new DataStore(this.CancellationToken);
+  }
+  /* @internal */ public DataStore: DataStore;
+  /* @internal */ public get messageEmitter() { return this; }
+  /* @internal */ public get CancellationTokenSource(): CancellationTokenSource { return this.cancellationTokenSource; }
+  /* @internal */ public get CancellationToken(): CancellationToken { return this.cancellationTokenSource.token; }
+}
+
+export class ConfigurationView {
+
+  /* @internal */ constructor(
+    /* @internal */public messageEmitter: MessageEmitter,
+    /* @internal */public configFileFolderUri: string,
+    ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
+  ) {
+
     // TODO: fix configuration loading, note that there was no point in passing that DataStore used 
     // for loading in here as all connection to the sources is lost when passing `Array<AutoRestConfigurationImpl>` instead of `DataHandleRead`s...
     // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
@@ -125,26 +145,21 @@ export class ConfigurationView extends EventEmitter {
     for (const config of configs) {
       this.config = MergeConfigurations(this.config, config);
     }
-    this.Debug.Dispatch({ Text: `Creating ConfigurationView : ${configs.length} sections.` });
+    this.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
   }
 
-  /* @internal */
-  public DataStore: DataStore;
+  /* @internal */ public get DataStore(): DataStore { return this.messageEmitter.DataStore }
 
-  private cancellationTokenSource = new CancellationTokenSource();
-  /* @internal */
-  public get CancellationTokenSource(): CancellationTokenSource { return this.cancellationTokenSource; }
-  /* @internal */
-  public get CancellationToken(): CancellationToken { return this.cancellationTokenSource.token; }
+  /* @internal */ public get CancellationToken(): CancellationToken { return this.messageEmitter.CancellationToken; }
 
-  @EventEmitter.Event public GeneratedFile: IEvent<ConfigurationView, Artifact>;
+  /* @internal */ public get CancellationTokenSource(): CancellationTokenSource { return this.messageEmitter.CancellationTokenSource; }
 
-  @EventEmitter.Event public Information: IEvent<ConfigurationView, Message>;
-  @EventEmitter.Event public Warning: IEvent<ConfigurationView, Message>;
-  @EventEmitter.Event public Error: IEvent<ConfigurationView, Message>;
-  @EventEmitter.Event public Debug: IEvent<ConfigurationView, Message>;
-  @EventEmitter.Event public Verbose: IEvent<ConfigurationView, Message>;
-  @EventEmitter.Event public Fatal: IEvent<ConfigurationView, Message>;
+  /* @internal */ public get Message(): IEvent<MessageEmitter, Message> {
+    return this.messageEmitter.Message;
+  }
+  /* @internal */ public get GeneratedFile(): IEvent<MessageEmitter, Artifact> {
+    return this.messageEmitter.GeneratedFile;
+  }
 
   private config: AutoRestConfigurationImpl;
 
@@ -201,23 +216,14 @@ export class ConfigurationView extends EventEmitter {
   }
 
   public GetPluginView(pluginName: string): ConfigurationView {
-    const result = new ConfigurationView(this.configFileFolderUri, (this.config as any)[pluginName], this.config);
-    result.DataStore = this.DataStore;
-    result.cancellationTokenSource = this.cancellationTokenSource;
-    result.GeneratedFile.Subscribe((_, m) => this.GeneratedFile.Dispatch(m));
-    result.Information.Subscribe((_, m) => this.Information.Dispatch(m));
-    result.Warning.Subscribe((_, m) => this.Warning.Dispatch(m));
-    result.Error.Subscribe((_, m) => this.Error.Dispatch(m));
-    result.Debug.Subscribe((_, m) => this.Debug.Dispatch(m));
-    result.Verbose.Subscribe((_, m) => this.Verbose.Dispatch(m));
-    result.Fatal.Subscribe((_, m) => this.Fatal.Dispatch(m));
+    const result = new ConfigurationView(this.messageEmitter, this.configFileFolderUri, (this.config as any)[pluginName], this.config);
     return result;
   }
 }
 
 
 export class Configuration {
-  public async CreateView(...configs: Array<any>): Promise<ConfigurationView> {
+  public async CreateView(messageEmitter: MessageEmitter, ...configs: Array<any>): Promise<ConfigurationView> {
     const workingScope: DataStore = new DataStore();
     const configFileUri = this.fileSystem && this.uriToConfigFileOrWorkingFolder
       ? await Configuration.DetectConfigurationFile(this.fileSystem, this.uriToConfigFileOrWorkingFolder)
@@ -226,13 +232,13 @@ export class Configuration {
     const defaults = require("../resources/default-configuration.json");
 
     if (configFileUri === null) {
-      return new ConfigurationView(this.uriToConfigFileOrWorkingFolder || "file:///", ...configs, defaults);
+      return new ConfigurationView(messageEmitter, this.uriToConfigFileOrWorkingFolder || "file:///", ...configs, defaults);
     } else {
       const inputView = workingScope.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
 
       // load config
       const hConfig = await ParseCodeBlocks(
-        null,
+        messageEmitter,
         await inputView.ReadStrict(configFileUri),
         workingScope.CreateScope("config"));
 
@@ -242,7 +248,7 @@ export class Configuration {
         return block;
       }));
 
-      return new ConfigurationView(ResolveUri(configFileUri, "."), ...configs, ...blocks, defaults);
+      return new ConfigurationView(messageEmitter, ResolveUri(configFileUri, "."), ...configs, ...blocks, defaults);
     }
   }
 

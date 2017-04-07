@@ -7,7 +7,7 @@ import * as assert from "assert";
 import { AutoRest } from "../lib/autorest-core";
 import { RealFileSystem } from "../lib/file-system";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
-import { Message } from "../lib/message";
+import { Message, Channel } from "../lib/message";
 import { PumpMessagesToConsole } from './test-utility';
 
 @suite class EndToEnd {
@@ -61,7 +61,8 @@ import { PumpMessagesToConsole } from './test-utility';
     assert.strictEqual([...config.InputFileUris].length, 1);
 
     const messages: Message[] = [];
-    autoRest.Warning.Subscribe((_, m) => messages.push(m));
+
+    autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
     await autoRest.Process().finish;
     assert.notEqual(messages.length, 0);
   }
