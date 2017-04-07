@@ -86,14 +86,14 @@ class OpenApiValidationExample {
         // invalid?
         if (opObj.isValid === false) {
           // get path to x-ms-examples in swagger
-          const xmsexPath = From(nodes(swagger, `$.paths[*][*][?(@.operationId===${op})]["x-ms-examples"]`))
+          const xmsexPath = From(nodes(swagger, `$.paths[*][?(@.operationId==='${op}')]["x-ms-examples"]`))
             .Select(x => x.path)
             .FirstOrDefault();
           if (!xmsexPath) {
-            throw new Error("Path to x-ms-examples not found.");
+            throw new Error("Model Validator: Path to x-ms-examples not found.");
           }
 
-          console.error(JSON.stringify(opObj, null, 2));
+          // console.error(JSON.stringify(opObj, null, 2));
           initiator.Message(sessionId, {
             Channel: Channel.Verbose,
             Details: opObj,
@@ -105,7 +105,28 @@ class OpenApiValidationExample {
           const request = opObj.request;
           if (request.isValid === false) {
             const error = request.error;
+            const innerErrors = error.innerErrors;
 
+            if (!innerErrors || !innerErrors.length) {
+              throw new Error("Model Validator: Unexpected format.");
+            }
+
+            for (const error of innerErrors) {
+              const path = UnAmarifyPath(error.path);
+              // console.error(JSON.stringify(error, null, 2));
+              initiator.Message(sessionId, {
+                Channel: Channel.Error,
+                Details: error,
+                Text: error.message,
+                Key: [error.code],
+                Source: [
+                  { document: swaggerFileName, Position: <any>{ path: xmsexPath } },
+                  { document: swaggerFileName, Position: <any>{ path: path } }
+                ]
+              });
+
+              // TODO: more detailed error by traversing into "error.errors"? Can Amar make this easier?
+            }
           }
 
           // responses
@@ -113,19 +134,28 @@ class OpenApiValidationExample {
           for (const responseCode of responseCodes) {
             const response = opObj.responses[responseCode];
             if (response.isValid === false) {
+              const error = response.error;
+              const innerErrors = error.innerErrors;
 
+              if (!innerErrors || !innerErrors.length) {
+                throw new Error("Model Validator: Unexpected format.");
+              }
+
+              for (const error of innerErrors) {
+                // console.error(JSON.stringify(error, null, 2));
+                initiator.Message(sessionId, {
+                  Channel: Channel.Error,
+                  Details: error,
+                  Text: error.message,
+                  Key: [error.code],
+                  Source: [
+                    { document: swaggerFileName, Position: <any>{ path: xmsexPath } }
+                  ]
+                });
+
+                // TODO: more detailed error by traversing into "error.errors"? Can Amar make this easier?
+              }
             }
-          }
-
-          for (const node of nodes(opObj, "$..*[?(@.code && @.path && @.path.length > 0)]")) {
-            const error = node.value;
-            // initiator.Message(sessionId, {
-            //   Key: [error.code],
-            //   Channel: Channel.Error,
-            //   Details: error,
-            //   Text: error.message,
-            //   Source: [{ document: swaggerFileName, Position: <any>{ path: UnAmarifyPath(error.path) } }]
-            // });
           }
         }
       }

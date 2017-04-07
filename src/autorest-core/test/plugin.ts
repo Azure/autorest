@@ -51,7 +51,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const messages: Message[] = [];
     autoRest.Error.Subscribe((_, m) => messages.push(m));
     assert.strictEqual(await autoRest.Process().finish, true);
-    assert.strictEqual(messages.length, 2);
+    assert.strictEqual(messages.length, 7);
   }
 
   @test @timeout(10000) async "AutoRest.dll AzureValidator"() {
