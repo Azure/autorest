@@ -16,7 +16,7 @@ namespace AutoRest.Swagger.Validation
     public class XmsExamplesProvidedValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         // the maximum number of non-xms-examples operations to allow.
-        private static int magicNumber = 10;
+        private static const int magicNumber = 10;
         
         /// <summary>
         /// Id of the Rule.
