@@ -14,17 +14,10 @@ namespace AutoRest.Swagger.Model.Utilities
     public static class ValidationUtilities
     {
         private static readonly string XmsPageable = "x-ms-pageable";
-        private static readonly Regex UrlResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
-        private static readonly IEnumerable<string> BaseResourceModelNames = 
+        private static readonly IEnumerable<string> baseResourceModelNames = 
             new List<string>() { "trackedresource", "proxyresource", "resource" };
 
-        private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
-
-        public static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<unparameterizedresource>[^{/]+))?");
-
-        private static readonly Regex ResourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
-
-        private static readonly Regex PropNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)*[A-Z]{1,2}$");
+        private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Populates a list of 'Resource' models found in the service definition

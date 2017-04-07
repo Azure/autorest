@@ -35,21 +35,81 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
+        /*
+         * This regular expression tries to filter the paths which has child resources. Now we could take the following paths:
+         *
+         *      Case 1: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}
+         *      Case 2: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/poweroff
+         *      Case 3: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases
+         *      Case 4: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{database1}
+         *      Case 5: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{database1}/restart
+         *
+         * Case 1 does not have a child resource. So, this can be rejected.
+         *
+         * Case 2 & Case 3 are special cases. Here, Case 3 does have a child resource - 'databases'. But, Case 2 does not have a child resource. The 'poweroff' is 
+         * an operation - not a child resource. But, it is difficult to determine, using regular expressions, whether the 'poweroff' is an operation or child resource.
+         * We could filter both and determine based on the response whether it is a child resource. While this is valid, it seems to be complex. So, a decision has been
+         * made to reject this pattern altogether and not look for child resource in this path pattern. Note: Case 5 is also rejected for the same reason.
+         *
+         * Case 4 is a valid scenario which has a child resource. Also, in this pattern, there is no ambiguity about any operation. So, in order to find the path, with 
+         * child resources, we use only this pattern. i.e. the path must have atleast one parent resource similar to '/servers/{server1}' followed by any number of child
+         * resources and end with the child resource pattern - similar to '/databases/{database1}'.
+         *
+         * Note: If in a swagger file, there are the following paths:
+         *
+         *      1: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}
+         *      2: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases
+         *
+         * and do not have the following path:
+         *
+         *      3: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{database1}
+         *
+         * then we will miss the child resource 'databases'. But, the possibility of such an occurence is extremely rare, if not impossible. It is quite possible that 
+         * 1 & 3 are present without 2 and 1-2-3 are present. So, it is fine to use this logic.
+         *
+         * Immediate Parent Resource Logic
+         * ===============================
+         * The path with the child resource has been determined and the name of the child resource has been identified. Now, in order to find the immediate parent resource,
+         * consider the following cases:
+         *
+         *      1. /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{databases1} - Child: databases-Immediate Parent: servers
+         *      2. /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{databases1}/disks/{disk1} - Child: disks-Immediate Parent: databases
+         *
+         *  So, we do string manipulation to determine the immediate parent. We find the last index of "/{" twice and remove after that. Then we find the last index of "/" and find the string after that.
+         *  To visualize it:
+         *
+         *      Start: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{databases1}/disks/{disk1}
+         *      Step 1: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{databases1}/disks
+         *      Step 2: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases
+         *      Step 3: databases
+         */
+        private static readonly Regex resourcePathPattern = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(?<childresource>\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
+
         private KeyValuePair<string, string> GetChildAndImmediateParentResource(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
         {
-            Match match = ValidationUtilities.ResourcePathPattern.Match(path);
+            Match match = resourcePathPattern.Match(path);
             KeyValuePair<string, string> result = new KeyValuePair<string, string>();
-            // Look for unparameterized resource. If it is not available, pick the last resource provided it has a parent resource
-            if (match.Success && (match.Groups["unparameterizedresource"].Success || (match.Groups["resource"].Success && match.Groups["resource"].Captures.Count > 1)))
+            if (match.Success)
             {
-                int previousResourceLocation = match.Groups["resource"].Captures.Count - 1;
-                string childResourceName = match.Groups["unparameterizedresource"].Success? match.Groups["unparameterizedresource"].Value: match.Groups["resource"].Captures[previousResourceLocation].Value;
-                string immediateParentResourceNameInPath = match.Groups["unparameterizedresource"].Success? match.Groups["resource"].Captures[previousResourceLocation].Value : match.Groups["resource"].Captures[previousResourceLocation - 1].Value;
+                string childResourceName = match.Groups["childresource"].Value;
+                string immediateParentResourceNameInPath = GetImmediateParentResourceName(path);
                 string immediateParentResourceNameActual = GetActualParentResourceName(immediateParentResourceNameInPath, paths, definitions);
                 result = new KeyValuePair<string, string>(childResourceName, immediateParentResourceNameActual);
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets the immediate parent resource name
+        /// </summary>
+        /// <param name="childResourcePaths">paths that fits the child resource criteria</param>
+        /// <returns>name of the immediate parent resource name</returns>
+        private string GetImmediateParentResourceName(string pathToEvaluate)
+        {
+            pathToEvaluate = pathToEvaluate.Substring(0, pathToEvaluate.LastIndexOf("/{"));
+            pathToEvaluate = pathToEvaluate.Substring(0, pathToEvaluate.LastIndexOf("/{"));
+            return pathToEvaluate.Substring(pathToEvaluate.LastIndexOf("/") + 1);
         }
 
         private string GetActualParentResourceName(string nameInPath, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)

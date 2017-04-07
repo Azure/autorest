@@ -6,12 +6,14 @@ using AutoRest.Swagger.Validation.Core;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Logging.Core
 {
     public class JsonValidationLogListener : ILogListener
     {
         private readonly List<Dictionary<string, string>> rawMessageCollection = new List<Dictionary<string, string>>();
+        private static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<unparameterizedresource>[^{/]+))?");
 
         public void Log(LogMessage message)
         {
@@ -24,7 +26,7 @@ namespace AutoRest.Swagger.Logging.Core
                     .SkipWhile(p => p != "paths")
                     .Skip(1)
                     .FirstOrDefault();
-                var pathComponents = AutoRest.Swagger.Model.Utilities.ValidationUtilities.ResourcePathPattern.Match(path ?? "");
+                var pathComponents = ResourcePathPattern.Match(path ?? "");
                 var pathComponentProviderNamespace = pathComponents.Groups["providerNamespace"];
                 var pathComponentResourceType = pathComponents.Groups["resource"];
 
