@@ -34,6 +34,9 @@ module.exports =
     options.follow = true
     vfs.src( globs, options) 
 
+  watchFiles: (src,tasks) ->
+    gulp.watch( src,tasks) 
+
   destination: (globs, options ) -> 
     gulp.dest( globs, options) 
 
@@ -58,7 +61,7 @@ module.exports =
     
     # add the new task.
     # gulp.task name, deps, fn
-    if name isnt "init" and name isnt "npm-install" and ! name.startsWith "clean"
+    if name isnt "init" and name isnt "npm-install" and name isnt "copy-dts-files" and ! name.startsWith "clean"
       deps.unshift "init" 
 
     if fn.length # see if the task function has arguments (betcha never saw that before!)
@@ -216,8 +219,8 @@ module.exports.task 'build', 'builds project', ->
 
 module.exports.task 'clean', 'cleans the project files', -> 
 
-# task for vscode
-module.exports.task 'code', 'launches vscode', -> 
+# task for vs code
+module.exports.task 'code', 'launches vs code', -> 
   exec "code #{basefolder}"
 
 module.exports.task 'release-only', '', (done)-> 

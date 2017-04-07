@@ -58,7 +58,7 @@ import { parse } from "../lib/ref/jsonpath";
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/large-input/"));
     await autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const messages: Message[] = [];
-    autoRest.Warning.Subscribe((_, m) => messages.push(m));
+    autoRest.Message.Subscribe((_, m) => messages.push(m)); // was warning.
     await autoRest.Process().finish;
     assert.notEqual(messages.length, 0);
   }

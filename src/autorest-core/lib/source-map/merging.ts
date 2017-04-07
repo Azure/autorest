@@ -1,11 +1,11 @@
-import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
-import { IndexToPosition } from '../parsing/text-utility';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
-import { ConfigurationView } from "../autorest-core";
+import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
+import { IndexToPosition } from '../parsing/text-utility';
+import { ConfigurationView, MessageEmitter } from "../configuration";
+import { Message, Channel } from "../message"
 import { From } from "../ref/linq";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import * as yaml from "../ref/yaml";
@@ -122,14 +122,15 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
   return result;
 }
 
-export async function MergeYamls(config: ConfigurationView | null, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
+export async function MergeYamls(config: ConfigurationView | MessageEmitter, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
   const mappings: Mappings = [];
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = yamlInputHandle.ReadData();
     resultObject = Merge(resultObject, yaml.Parse(rawYaml, (message, index) => {
       if (config) {
-        config.Error.Dispatch({
+        config.Message.Dispatch({
+          Channel: Channel.Error,
           Text: message,
           Source: [{ document: yamlInputHandle.key, Position: IndexToPosition(yamlInputHandle, index) }]
         });
