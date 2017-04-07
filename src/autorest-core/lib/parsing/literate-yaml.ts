@@ -197,6 +197,7 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | MessageEmitte
         continue;
       }
 
+      // super-quick JSON block syntax check.
       if (/^(json)/i.test(codeBlock.info)) {
         // check syntax on JSON blocks with simple check first
         try {
@@ -204,7 +205,7 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | MessageEmitte
           JSON.parse(data.ReadData());
         } catch (e) {
           DoBlame(
-            (e.message.substring(0, e.message.lastIndexOf("position")).trim()),
+            (e.message.substring(0, e.message.lastIndexOf("at")).trim()),
             <number>(e.message.substring(e.message.lastIndexOf(" ")).trim()),
             data,
             config,
@@ -216,51 +217,17 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | MessageEmitte
       let failing = false;
       const ast = data.ReadYamlAst();
 
-      // syntax check!
+      // quick syntax check.
       ParseNode(ast, async (message, index) => {
         failing = true;
         DoBlame(message, index, data, config, hLiterate);
-        /*
-        let Source = [<SourceLocation>{ Position: IndexToPosition(data, index), document: data.key }];
-
-        const blameSources = await Promise.all(Source.map(async s => {
-          try {
-            const blameTree = await config.DataStore.Blame(s.document, s.Position);
-            const result = [...blameTree.BlameInputs()];
-            if (result.length > 0) {
-              return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
-            }
-          } catch (e) {
-
-          }
-          return [s];
-        }));
-
-        Source = From(blameSources).SelectMany(x => x).ToArray();
-
-        config.messageEmitter.Message.Dispatch({
-          Channel: Channel.Error,
-          Text: message,
-          Source: Source,
-          Range: Source.map(s => {
-            let positionStart = s.Position;
-            let positionEnd = <sourceMap.Position>{ line: s.Position.line, column: s.Position.column + (s.Position.length || 3) };
-
-            return <Range>{
-              document: hLiterate.key,
-              start: positionStart,
-              end: positionEnd
-            }
-          })
-
-        });
-        */
       });
 
       if (failing) {
         throw new Error("Syntax Errors Encountered.")
       }
 
+      // fairly confident of no immediate syntax errors.
       const yamlAst = CloneAst(ast);
 
       const deferredErrors: Message[] = []; // ...because the file we wanna blame is not yet written
