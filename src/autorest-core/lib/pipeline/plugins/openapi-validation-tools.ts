@@ -12,6 +12,7 @@ import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPlug
 import { EnhancedPosition, Mapping, RawSourceMap, SmartPosition } from "../../ref/source-map";
 import { Parse, Stringify } from "../../ref/yaml";
 import { Message, Channel } from "../../message";
+import { From } from "../../ref/linq";
 const utils = require("../../../node_modules/oav/lib/util/utils");
 const validation = require("../../../node_modules/oav/index");
 
@@ -65,7 +66,7 @@ class OpenApiValidationSemantic {
 }
 
 class OpenApiValidationExample {
-  public static readonly Name = "example-validatior";
+  public static readonly Name = "model-validatior";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
     const swaggerFileNames = await initiator.ListInputs(sessionId);
@@ -81,8 +82,41 @@ class OpenApiValidationExample {
         const opObj = specValidationResult.operations[op]["x-ms-examples"];
         // remove circular reference...
         opObj.scenarios = null;
+
+        // invalid?
         if (opObj.isValid === false) {
+          // get path to x-ms-examples in swagger
+          const xmsexPath = From(nodes(swagger, `$.paths[*][*][?(@.operationId===${op})]["x-ms-examples"]`))
+            .Select(x => x.path)
+            .FirstOrDefault();
+          if (!xmsexPath) {
+            throw new Error("Path to x-ms-examples not found.");
+          }
+
           console.error(JSON.stringify(opObj, null, 2));
+          initiator.Message(sessionId, {
+            Channel: Channel.Verbose,
+            Details: opObj,
+            Text: "Model validator found issue (see details).",
+            Source: [{ document: swaggerFileName, Position: <any>{ path: xmsexPath } }]
+          });
+
+          // request
+          const request = opObj.request;
+          if (request.isValid === false) {
+            const error = request.error;
+
+          }
+
+          // responses
+          const responseCodes = Object.getOwnPropertyNames(opObj.responses);
+          for (const responseCode of responseCodes) {
+            const response = opObj.responses[responseCode];
+            if (response.isValid === false) {
+
+            }
+          }
+
           for (const node of nodes(opObj, "$..*[?(@.code && @.path && @.path.length > 0)]")) {
             const error = node.value;
             // initiator.Message(sessionId, {
