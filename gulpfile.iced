@@ -50,12 +50,11 @@ Import
       .pipe onlyFiles()
   
   typescriptProjectFolders: ()->
-    source ["src/autorest-core", "src/autorest","src/vscode-autorest" ]
+    source ["src/autorest-core", "src/autorest" ]
 
   npminstalls: ()->
     source ["src/autorest-core", 
       "src/autorest" 
-      "src/vscode-autorest"
       "src/generator/AutoRest.NodeJS.Tests"
       "src/generator/AutoRest.NodeJS.Azure.Tests" 
       "src/dev/TestServer/server"
@@ -83,7 +82,6 @@ Import
         
   typescriptFiles: () -> 
     typescriptProjectFolders()
-      .pipe except /src.vscode-autorest.server/ # covered in vscode-autorest
       .pipe foreach (each,next,more)=>
         source(["#{each.path}/**/*.ts", "#{each.path}/**/*.json", "!#{each.path}/node_modules/**"])
           .on 'end', -> 
@@ -134,34 +132,12 @@ task 'init', "" ,(done)->
   # if the node_modules isn't created, do it.
   doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
 
-  # make sure the node_modules folder is created for vscode-autorest
-  if ! test '-d', "#{basefolder}/src/vscode-autorest/node_modules"
-    doit = true 
-    mkdir "-p",  "#{basefolder}/src/vscode-autorest/node_modules"
-
-  # make sure the node_modules folder is created for autorest
-  if ! test '-d', "#{basefolder}/src/autorest/node_modules"
-    doit = true
-    mkdir "-p",  "#{basefolder}/src/autorest/node_modules"
-
-  # symlink autorest-core into autorest
-  if ! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core"
-    doit = true
-    fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/autorest/node_modules/autorest-core",'junction' 
-
-  # symlink autorest into vscode-autorest
-  if ! test '-d', "#{basefolder}/src/vscode-autorest/node_modules/autorest"
-    doit = true
-    fs.symlinkSync "#{basefolder}/src/autorest", "#{basefolder}/src/vscode-autorest/node_modules/autorest",'junction' 
-
   typescriptProjectFolders()
     .on 'end', -> 
       if doit
         echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
         exec "npm install",{silent:false},(c,o,e)->
           # after npm, hookup symlinks/junctions for dependent packages in projects
-          #if ! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core"
-          #  fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/autorest/node_modules/autorest-core",'junction' 
           echo warning "\n#{ info 'NOTE:' } it also seems prudent to do a 'gulp clean' at this point.\n"
           exec "gulp clean", (c,o,e) -> 
             done null
@@ -183,8 +159,6 @@ task 'find-rogue-node-modules','Shows the unrecognized node_modules folders in t
     "!src/autorest/node_modules/**"
     "!src/autorest-core/node_modules"
     "!src/autorest-core/node_modules/**"
-    "!src/vscode-autorest/node_modules"
-    "!src/vscode-autorest/node_modules/**"
     "!src/generator/AutoRest.NodeJS.Azure.Tests/node_modules"
     "!src/generator/AutoRest.NodeJS.Azure.Tests/node_modules/**"
     "!src/generator/AutoRest.NodeJS.Tests/node_modules"

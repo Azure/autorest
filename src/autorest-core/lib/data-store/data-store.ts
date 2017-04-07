@@ -30,7 +30,7 @@ export interface Metadata {
   lineIndices: Lazy<number[]>;
 }
 
-interface Data {
+export interface Data {
   data: string;
   metadata: Metadata;
 }
@@ -381,7 +381,6 @@ export class DataHandleWrite {
   }
 }
 
-/* @internal */
 export class DataHandleRead {
   constructor(public readonly key: string, private read: Data) {
   }

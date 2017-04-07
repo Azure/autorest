@@ -20,29 +20,9 @@ namespace AutoRest.Swagger.Model.Utilities
 
         private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
 
-        public static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<resource>[^{/]+))");
+        public static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<unparameterizedresource>[^{/]+))?");
 
         private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
-
-        // This needs to be deprecated in favor of context.TrackedResources
-        public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
-        {
-            if (schema.AllOf != null)
-            {
-                foreach (Schema item in schema.AllOf)
-                {
-                    if (UrlResRegEx.IsMatch(item.Reference))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return IsTrackedResource(Schema.FindReferencedSchema(item.Reference, definitions), definitions);
-                    }
-                }
-            }
-            return false;
-        }
 
         /// <summary>
         /// Populates a list of 'Resource' models found in the service definition
@@ -265,8 +245,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="op">Operation for which to check the x-ms-pageable extension</param>
         /// <returns>true if operation is x-ms-pageable</returns>
-        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions.GetValue<object>(XmsPageable) != null);
-
+        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions?.GetValue<object>(XmsPageable) != null);
 
         /// <summary>
         /// Determines if an operation returns an object of array type
@@ -404,6 +383,41 @@ namespace AutoRest.Swagger.Model.Utilities
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Checks if there is an operation that matches the given regex
+        /// </summary>
+        /// <param name="getOperations"></param>
+        /// <param name="regEx"></param>
+        /// <param name="definitionKey"></param>
+        /// <param name="definitions"></param>
+        /// <returns></returns>
+        public static bool ListByXCheck(IEnumerable<Operation> getOperations, Regex regEx, string definitionKey, Dictionary<string, Schema> definitions)
+        {
+            return getOperations.Any(operation =>
+                       regEx.IsMatch(operation.OperationId) &&
+                       IsXmsPageableResponseOperation(operation) &&
+                       operation.Responses.Any(
+                           response => response.Key.Equals("200") &&
+                           IsArrayOf(response.Value.Schema?.Reference, definitionKey, definitions))
+                    );
+        }
+
+        /// <summary>
+        /// Checks if the reference to match is an array response of the reference
+        /// </summary>
+        /// <param name="reference"></param>
+        /// <param name="referenceToMatch"></param>
+        /// <param name="definitions"></param>
+        /// <returns></returns>
+        private static bool IsArrayOf(string reference, string referenceToMatch, Dictionary<string, Schema> definitions)
+        {
+            if (reference == null)
+                return false;
+
+            Schema schema = Schema.FindReferencedSchema(reference, definitions);
+            return schema.Properties.Any(property => property.Value.Type == DataType.Array && property.Value.Items?.Reference?.EndsWith("/" + referenceToMatch) == true);
         }
 
         /// <summary>
