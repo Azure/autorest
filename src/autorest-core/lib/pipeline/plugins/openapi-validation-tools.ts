@@ -6,13 +6,29 @@
 // polyfills for language support
 require("../../polyfill.min.js");
 
+import { JsonPath, nodes } from '../../ref/jsonpath';
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types } from "../plugin-api";
-import { EnhancedPosition, Mapping, RawSourceMap, SmartPosition } from '../../ref/source-map';
+import { EnhancedPosition, Mapping, RawSourceMap, SmartPosition } from "../../ref/source-map";
 import { Parse, Stringify } from "../../ref/yaml";
 import { Message, Channel } from "../../message";
 const utils = require("../../../node_modules/oav/lib/util/utils");
 const validation = require("../../../node_modules/oav/index");
+
+/**
+ * The tools report paths in a way that does not represent indices as numbers.
+ * This method tries to recover this information.
+ */
+function UnAmarifyPath(path: string[]): JsonPath {
+  const result: JsonPath = path.slice();
+  for (let i = 1; i < result.length; ++i) {
+    const num = +result[i];
+    if (!isNaN(num) && result[i - 1] === "parameters") {
+      result[i] = num;
+    }
+  }
+  return result;
+}
 
 class OpenApiValidationSemantic {
   public static readonly Name = "semantic-validatior";
@@ -32,7 +48,7 @@ class OpenApiValidationSemantic {
           Channel: Channel.Error,
           Details: message,
           Text: message.message,
-          Source: [{ document: swaggerFileName, Position: <any>{ path: message["jsonref"].split("#/")[1].split("/") } }]
+          Source: [{ document: swaggerFileName, Position: <any>{ path: UnAmarifyPath(message["jsonref"].split("#/")[1].split("/")) } }]
         });
       }
       for (const message of messages.warnings) {
@@ -40,7 +56,7 @@ class OpenApiValidationSemantic {
           Channel: Channel.Warning,
           Details: message,
           Text: message.message,
-          Source: [{ document: swaggerFileName, Position: <any>{ path: message["jsonref"].split("#/")[1].split("/") } }]
+          Source: [{ document: swaggerFileName, Position: <any>{ path: UnAmarifyPath(message["jsonref"].split("#/")[1].split("/")) } }]
         });
       }
     }
@@ -61,11 +77,22 @@ class OpenApiValidationExample {
       utils.docCache["cache.json"] = swagger;
       const specValidationResult = await validation.validateExamples("cache.json", null, "off");
 
-      for (const op in specValidationResult.operations) {
+      for (const op of Object.getOwnPropertyNames(specValidationResult.operations)) {
         const opObj = specValidationResult.operations[op]["x-ms-examples"];
+        // remove circular reference...
+        opObj.scenarios = null;
         if (opObj.isValid === false) {
-          console.error(opObj);
-          // TODO: dispatch meaningful messages at the right spots
+          console.error(JSON.stringify(opObj, null, 2));
+          for (const node of nodes(opObj, "$..*[?(@.code && @.path && @.path.length > 0)]")) {
+            const error = node.value;
+            // initiator.Message(sessionId, {
+            //   Key: [error.code],
+            //   Channel: Channel.Error,
+            //   Details: error,
+            //   Text: error.message,
+            //   Source: [{ document: swaggerFileName, Position: <any>{ path: UnAmarifyPath(error.path) } }]
+            // });
+          }
         }
       }
     }
