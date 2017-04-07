@@ -127,6 +127,11 @@ task 'autorest', 'Runs AutoRest', (done)->
 task 'init', "" ,(done)->
   Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 6.9.5" if semver.lt( process.versions.node , "6.9.5" )
 
+  if (! test "-d","#{basefolder}/src/autorest-core") 
+    echo warning "\n#{ error 'NOTE:' } #{ info 'src/autorest-core'} appears to be missing \n      fixing with #{ info 'git checkout src/autorest-core'}"
+    echo warning "      in the future do a #{ info 'gulp clean'} before using #{ info 'git clean'} .\n"
+    exec "git checkout #{basefolder}/src/autorest-core"
+
   return done() if initialized
   global.initialized = true
   # if the node_modules isn't created, do it.
