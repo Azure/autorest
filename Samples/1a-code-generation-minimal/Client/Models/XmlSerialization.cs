@@ -1,4 +1,4 @@
-namespace
+namespace Petstore
 {
     using System.Collections;
     using System.Collections.Generic;

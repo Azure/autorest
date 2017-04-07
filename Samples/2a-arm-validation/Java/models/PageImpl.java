@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package .models;
+package storage.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.azure.Page;

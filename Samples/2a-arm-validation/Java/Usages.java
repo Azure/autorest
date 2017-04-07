@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package ;
+package storage;
 
 import .models.Usage;
 import com.microsoft.azure.CloudException;

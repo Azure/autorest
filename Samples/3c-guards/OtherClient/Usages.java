@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package ;
+package storage;
 
 import .models.UsageListResult;
 import com.microsoft.rest.RestException;

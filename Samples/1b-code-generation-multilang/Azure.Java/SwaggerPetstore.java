@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package ;
+package petstore;
 
 import .models.ErrorException;
 import .models.ListPetsHeaders;

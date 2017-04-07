@@ -2,7 +2,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace
+namespace swagger
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

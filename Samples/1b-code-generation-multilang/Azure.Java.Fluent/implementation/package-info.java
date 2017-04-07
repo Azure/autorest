@@ -5,4 +5,4 @@
 /**
  * This package contains the implementation classes for SwaggerPetstore.
  */
-package .implementation;
+package petstore.implementation;

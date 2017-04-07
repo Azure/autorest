@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package .implementation;
+package petstore.implementation;
 
 import .SwaggerPetstore;
 import com.microsoft.rest.ServiceClient;

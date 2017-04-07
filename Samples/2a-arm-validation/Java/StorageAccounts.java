@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package ;
+package storage;
 
 import .models.CheckNameAvailabilityResult;
 import .models.StorageAccount;

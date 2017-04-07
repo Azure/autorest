@@ -3,7 +3,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is
 # regenerated.
 
-module
+module petstore
   #
   # A service client - single point of access to the REST API.
   #
@@ -338,8 +338,8 @@ module
     #
     def add_telemetry
         sdk_information = 'petstore'
-        if defined? ::VERSION
-          sdk_information = "#{sdk_information}/#{::VERSION}"
+        if defined? petstore::VERSION
+          sdk_information = "#{sdk_information}/#{petstore::VERSION}"
         end
         add_user_agent_information(sdk_information)
     end

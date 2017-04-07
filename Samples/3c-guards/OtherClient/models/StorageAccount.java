@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package .models;
+package storage.models;
 
 import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;

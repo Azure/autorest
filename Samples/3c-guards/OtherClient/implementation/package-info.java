@@ -6,4 +6,4 @@
  * This package contains the implementation classes for StorageManagementClient.
  * The Storage Management Client.
  */
-package .implementation;
+package storage.implementation;

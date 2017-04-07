@@ -3,7 +3,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is
 # regenerated.
 
-module
+module storage
   module Models
     #
     # The parameters to update on the account.

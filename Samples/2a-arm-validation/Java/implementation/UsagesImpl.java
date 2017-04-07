@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package .implementation;
+package storage.implementation;
 
 import retrofit2.Retrofit;
 import .Usages;

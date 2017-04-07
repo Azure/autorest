@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package .models;
+package storage.models;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;

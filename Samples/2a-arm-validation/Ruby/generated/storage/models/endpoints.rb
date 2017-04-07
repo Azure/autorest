@@ -3,7 +3,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is
 # regenerated.
 
-module
+module storage
   module Models
     #
     # The URIs that are used to perform a retrieval of a public blob, queue or

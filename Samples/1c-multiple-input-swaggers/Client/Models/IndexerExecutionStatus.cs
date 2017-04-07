@@ -2,7 +2,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace .Models
+namespace searchservice.Models
 {
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;

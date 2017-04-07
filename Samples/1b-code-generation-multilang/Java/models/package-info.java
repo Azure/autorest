@@ -5,4 +5,4 @@
 /**
  * This package contains the models classes for SwaggerPetstore.
  */
-package .models;
+package petstore.models;

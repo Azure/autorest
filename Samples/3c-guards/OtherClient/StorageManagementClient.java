@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package ;
+package storage;
 
 import com.microsoft.rest.RestClient;
 

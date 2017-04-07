@@ -16,9 +16,10 @@ require 'faraday'
 require 'faraday-cookie_jar'
 require 'concurrent'
 require 'ms_rest'
+require 'generated/petstore/module_definition'
 require 'ms_rest_azure'
 
-module
+module petstore
   autoload :SwaggerPetstore,                                    'generated/petstore/swagger_petstore.rb'
 
   module Models
