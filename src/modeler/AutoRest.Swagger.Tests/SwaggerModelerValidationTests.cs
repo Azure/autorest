@@ -559,7 +559,7 @@ namespace AutoRest.Swagger.Tests
         public void EmptyParameterNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-parameter-name.json"));
-            messages.AssertOnlyValidationMessage(typeof(BodyParametersValidation), 2);
+            messages.AssertOnlyValidationMessage(typeof(ParameterNameValidation), 2);
         }
     }
 

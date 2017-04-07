@@ -1,8 +1,8 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "Checks if the body parameter is named 'parameters'",
-    "description": "Show an error/warning if a body parameter is not named 'parameters'",
+    "title": "check if the 'name' of a parameter is empty",
+    "description": "parameters cannot have an empty 'name' property",
     "version": "2014-04-01-preview"
   },
   "host": "management.azure.com",
