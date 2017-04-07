@@ -1,0 +1,85 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "check if the 'name' of a parameter is empty",
+    "description": "parameters cannot have an empty 'name' property",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/foo": {
+      "get": {
+        "tags": [ "SampleTag" ],
+        "operationId": "Foo_Get",
+        "description": "Test Description",
+        "parameters": [
+          {
+            "name": " ",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "Test Description"
+          },
+          {
+            "$ref": "#/parameters/SecondParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Response": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        }
+      },
+      "description": "The Response definition."
+    }
+  },
+  "parameters": {
+    "SecondParameter": {
+      "name": "",
+      "in": "body",
+      "type": "string",
+      "required": true,
+      "description": "Test Description"
+    }
+  }
+}
