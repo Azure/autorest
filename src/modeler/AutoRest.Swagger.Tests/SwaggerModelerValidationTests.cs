@@ -378,21 +378,21 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void TrackedResource1Validation()
+        public void TrackedResourceGetOperationValidation2()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-tracked-resource-1-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(TrackedResourceValidation), 1);
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-tracked-resource-1-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceGetOperationValidation), 1);
         }
 
         [Fact]
-        public void TrackedResource2Validation()
+        public void TrackedResourceListByResourceGroupValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-tracked-resource-2-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(TrackedResourceValidation), 1);
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-tracked-resource-2-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceListByResourceGroup), 1);
         }
 
         [Fact]
-        public void TrackedResourcePatchOperationValidation()
+        public void TrackedResourcePatchOperationValidationValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "tracked-resource-patch-operation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 1);
@@ -406,17 +406,24 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void TrackedResource3Validation()
+        public void TrackedResourceListBySubscriptionValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-tracked-resource-3-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(TrackedResourceValidation), 1);
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-tracked-resource-3-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceListBySubscription), 1);
         }
 
         [Fact]
-        public void TrackedResource4Validation()
+        public void TrackedResourceListByImmediateParentValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-tracked-resource-4-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(TrackedResourceValidation), 1);
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-list-by-immediate-parent.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceListByImmediateParent), 1);
+        }
+
+        [Fact]
+        public void TrackedResourceListByImmediateParentWithOperationValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-list-by-immediate-parent-2.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceListByImmediateParent), 1);
         }
 
         [Fact]
@@ -560,6 +567,12 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-response-resource-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(PutResponseResourceValidation), 1);
+        }
+        [Fact]
+        public void EmptyParameterNameValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-parameter-name.json"));
+            messages.AssertOnlyValidationMessage(typeof(ParameterNameValidation), 2);
         }
     }
 

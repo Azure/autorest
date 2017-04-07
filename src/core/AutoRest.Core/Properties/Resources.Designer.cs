@@ -593,6 +593,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter Must have the &quot;name&quot; property defined with non-empty string as its value.
+        /// </summary>
+        public static string ParametersPropertiesValidation {
+            get {
+                return ResourceManager.GetString("ParametersPropertiesValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is required..
         /// </summary>
         public static string ParameterValueIsMissing {
@@ -747,6 +756,33 @@ namespace AutoRest.Core.Properties {
         public static string TrackedResourceIsNotValid {
             get {
                 return ResourceManager.GetString("TrackedResourceIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The child tracked resource, &apos;{0}&apos; with immediate parent &apos;{1}&apos;, must have a list by immediate parent operation..
+        /// </summary>
+        public static string TrackedResourceListByImmediateParentOperationMissing {
+            get {
+                return ResourceManager.GetString("TrackedResourceListByImmediateParentOperationMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The tracked resource, &apos;{0}&apos;, must have a list by resource group operation..
+        /// </summary>
+        public static string TrackedResourceListByResourceGroupOperationMissing {
+            get {
+                return ResourceManager.GetString("TrackedResourceListByResourceGroupOperationMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The tracked resource, &apos;{0}&apos;, must have a list by subscriptions operation..
+        /// </summary>
+        public static string TrackedResourceListBySubscriptionsOperationMissing {
+            get {
+                return ResourceManager.GetString("TrackedResourceListBySubscriptionsOperationMissing", resourceCulture);
             }
         }
         

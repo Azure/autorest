@@ -7,10 +7,14 @@ import { Descendants, Kind, CloneAst, YAMLMapping, newScalar, ParseNode } from "
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 import { Mapping } from "../ref/source-map";
 import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
-import { Parse as parseLiterate } from "./literate";
-import { Lines } from "./text-utility";
+import { Parse as ParseLiterate } from "./literate";
+import { IndexToPosition, Lines } from './text-utility';
 import { ConfigurationView } from '../autorest-core';
-import { Channel, Message, SourceLocation } from '../message';
+import { Channel, Message, SourceLocation, Range } from '../message';
+import { safeEval } from "../ref/safe-eval";
+import { MessageEmitter } from "../configuration"
+import { From } from "../ref/linq"
+import { TryDecodeEnhancedPositionFromName } from "../source-map/source-map";
 
 export class CodeBlock {
   info: string | null;
@@ -65,7 +69,9 @@ function CommonmarkHeadingText(headingNode: commonmark.Node): string {
 function CommonmarkHeadingFollowingText(rawMarkdown: string, headingNode: commonmark.Node): [number, number] {
   let subNode = headingNode.next;
   const startPos = subNode.sourcepos[0];
-  while (subNode.next && subNode.next.type !== "code_block" && subNode.next.type !== commonmarkHeadingNodeType) {
+  while (subNode.next
+    && subNode.next.type !== "code_block"
+    && (subNode.next.type !== commonmarkHeadingNodeType || subNode.next.level > headingNode.level)) {
     subNode = subNode.next;
   }
   const endPos = subNode.sourcepos[1];
@@ -124,39 +130,108 @@ export async function Parse(config: ConfigurationView, literate: DataHandleRead,
   return hRawDoc;
 }
 
-export async function ParseCodeBlocks(config: ConfigurationView | null, literate: DataHandleRead, workingScope: DataStoreView): Promise<Array<CodeBlock>> {
+export async function ParseCodeBlocks(config: MessageEmitter | ConfigurationView, literate: DataHandleRead, workingScope: DataStoreView): Promise<Array<CodeBlock>> {
   const docScope = workingScope.CreateScope(`doc_tmp`);
   const hwRawDoc = await workingScope.Write(`doc.yaml`);
   return await ParseCodeBlocksInternal(config, literate, hwRawDoc, docScope);
 }
 
-async function ParseInternal(config: ConfigurationView | null, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
+async function ParseInternal(config: ConfigurationView | MessageEmitter, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
   // merge the parsed codeblocks
   const blocks = (await ParseCodeBlocksInternal(config, hLiterate, hResult, intermediateScope)).map(each => each.data);
-  return await MergeYamls(blocks, hResult);
+  return await MergeYamls(config, blocks, hResult);
 }
 
+async function DoBlame(message: string, index: number, data: DataHandleRead, config: ConfigurationView | MessageEmitter, hLiterate: DataHandleRead) {
+  let Source = [<SourceLocation>{ Position: IndexToPosition(data, index), document: data.key }];
 
-async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<CodeBlock[]> {
+  const blameSources = await Promise.all(Source.map(async s => {
+    try {
+      const blameTree = await config.DataStore.Blame(s.document, s.Position);
+      const result = [...blameTree.BlameInputs()];
+      if (result.length > 0) {
+        return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
+      }
+    } catch (e) {
+
+    }
+    return [s];
+  }));
+
+  Source = From(blameSources).SelectMany(x => x).ToArray();
+
+  config.messageEmitter.Message.Dispatch({
+    Channel: Channel.Error,
+    Text: message,
+    Source: Source,
+    Range: Source.map(s => {
+      let positionStart = s.Position;
+      let positionEnd = <sourceMap.Position>{ line: s.Position.line, column: s.Position.column + (s.Position.length || 3) };
+
+      return <Range>{
+        document: hLiterate.key,
+        start: positionStart,
+        end: positionEnd
+      }
+    })
+  });
+
+}
+
+async function ParseCodeBlocksInternal(config: ConfigurationView | MessageEmitter, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<CodeBlock[]> {
   let hsConfigFileBlocks: CodeBlock[] = [];
 
-  const rawMarkdown = await hLiterate.ReadData();
+  const rawMarkdown = hLiterate.ReadData();
 
   // try parsing as literate YAML
   if (TryMarkdown(rawMarkdown)) {
     const scopeRawCodeBlocks = intermediateScope.CreateScope("raw");
     const scopeEnlightenedCodeBlocks = intermediateScope.CreateScope("enlightened");
-    const hsConfigFileBlocksWithContext = await parseLiterate(hLiterate, scopeRawCodeBlocks);
+    const hsConfigFileBlocksWithContext = await ParseLiterate(hLiterate, scopeRawCodeBlocks);
 
     // resolve md documentation (ALPHA)
     let codeBlockIndex = 0;
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
-      ++codeBlockIndex;
+      // only consider YAML/JSON blocks
+      if (!/^(yaml|json)/i.test(codeBlock.info)) {
+        continue;
+      }
+
+      // super-quick JSON block syntax check.
+      if (/^(json)/i.test(codeBlock.info)) {
+        // check syntax on JSON blocks with simple check first
+        try {
+          // quick check on data.
+          JSON.parse(data.ReadData());
+        } catch (e) {
+          DoBlame(
+            (e.message.substring(0, e.message.lastIndexOf("at")).trim()),
+            <number>(e.message.substring(e.message.lastIndexOf(" ")).trim()),
+            data,
+            config,
+            hLiterate);
+          throw new Error("Syntax Error Encountered.")
+        }
+      }
+
+      let failing = false;
+      const ast = data.ReadYamlAst();
+
+      // quick syntax check.
+      ParseNode(ast, async (message, index) => {
+        failing = true;
+        DoBlame(message, index, data, config, hLiterate);
+      });
+
+      if (failing) {
+        throw new Error("Syntax Errors Encountered.")
+      }
+
+      // fairly confident of no immediate syntax errors.
+      const yamlAst = CloneAst(ast);
 
       const deferredErrors: Message[] = []; // ...because the file we wanna blame is not yet written
-
-      const yamlAst = CloneAst(await data.ReadYamlAst());
-      let mapping: Mapping[] = [];
+      const mapping: Mapping[] = [];
       for (const { path, node } of Descendants(yamlAst)) {
         // RESOLVE MARKDOWN INTO THE YAML
         if ((path[path.length - 1] === "description" || path[path.length - 1] === "summary") && node.kind === Kind.SEQ) {
@@ -195,8 +270,8 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLitera
 
       // detect changes. If any, remap, otherwise forward data
       if (mapping.length > 0) {
-        mapping = mapping.concat([...IdentitySourceMapping(data.key, yamlAst)]);
-        const hTarget = await scopeEnlightenedCodeBlocks.Write(`${codeBlockIndex}.yaml`);
+        mapping.push(...IdentitySourceMapping(data.key, yamlAst));
+        const hTarget = await scopeEnlightenedCodeBlocks.Write(`${++codeBlockIndex}.yaml`);
         hsConfigFileBlocks.push({ info: codeBlock.info, data: await hTarget.WriteObject(ParseNode(yamlAst), mapping, [hLiterate, data]) });
         outputKey = hTarget.key;
       } else {
@@ -206,7 +281,7 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLitera
 
       // post errors
       if (config !== null) {
-        deferredErrors.forEach(err => config.Error.Dispatch(err));
+        deferredErrors.forEach(err => config.messageEmitter.Message.Dispatch(err));
       }
     }
   }
@@ -217,4 +292,24 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLitera
   }
 
   return hsConfigFileBlocks;
+}
+
+export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolean {
+  const match = /\$\((.*)\)/.exec(rawFenceGuard);
+  const guardExpression = match && match[1];
+  if (!guardExpression) {
+    return true;
+  }
+  const context = Object.assign({ $: contextObject }, contextObject);
+  let guardResult = false;
+  try {
+    guardResult = safeEval<boolean>(guardExpression, context);
+  } catch (e) {
+    try {
+      guardResult = safeEval<boolean>("$['" + guardExpression + "']", context);
+    } catch (e) {
+      console.error(`Could not evaulate guard expression '${guardExpression}'.`);
+    }
+  }
+  return guardResult;
 }

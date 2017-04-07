@@ -6,12 +6,27 @@
 require("../lib/polyfill.min.js");
 
 import { AutoRest } from '../lib/autorest-core';
+import { Message, Channel } from '../lib/message';
 
 export function PumpMessagesToConsole(autoRest: AutoRest): void {
-  autoRest.Debug.Subscribe((_, m) => console.log(m.Text));
-  autoRest.Verbose.Subscribe((_, m) => console.log(m.Text));
-  autoRest.Information.Subscribe((_, m) => console.log(m.Text));
-  autoRest.Warning.Subscribe((_, m) => console.warn(m.Text));
-  autoRest.Error.Subscribe((_, m) => console.error(m.Text));
-  autoRest.Fatal.Subscribe((_, m) => console.error(m.Text));
+
+  autoRest.Message.Subscribe((_, m) => {
+    switch (m.Channel) {
+      case Channel.Information:
+      case Channel.Debug:
+      case Channel.Verbose:
+        console.log(m.Text);
+        break;
+      case Channel.Warning:
+        console.warn(m.Text);
+        break;
+      case Channel.Error:
+        console.error(m.Text);
+        break;
+      case Channel.Fatal:
+        console.error(m.Text);
+        break;
+    }
+  });
+
 }

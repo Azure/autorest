@@ -92,6 +92,7 @@ namespace AutoRest.Swagger.Model
         [CollectionRule(typeof(HttpVerbValidation))]
         [CollectionRule(typeof(DeleteMustNotHaveRequestBody))]
         [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
+        [Rule(typeof(TrackedResourceListByImmediateParent))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
         /// <summary>
@@ -112,13 +113,14 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(BooleanPropertyNotRecommended))]
         [CollectionRule(typeof(BooleanPropertyNotRecommended))]
         [Rule(typeof(ResourceModelValidation))]
-        [Rule(typeof(TrackedResourceValidation))]
-        [Rule(typeof(TrackedResourcePatchOperationValidation))]
-        [Rule(typeof(TrackedResourceGetOperationValidation))]
         [Rule(typeof(ResourceIsMsResourceValidation))]
         [Rule(typeof(GuidValidation))]
         [Rule(typeof(SkuModelValidation))]
         [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
+        [Rule(typeof(TrackedResourceGetOperationValidation))]
+        [Rule(typeof(TrackedResourceListByResourceGroup))]
+        [Rule(typeof(TrackedResourceListBySubscription))]
+        [Rule(typeof(TrackedResourcePatchOperationValidation))]
         [Rule(typeof(DescriptionMissing))]
         [CollectionRule(typeof(RequiredReadOnlyPropertiesValidation))]
         public Dictionary<string, Schema> Definitions { get; set; }

@@ -262,6 +262,15 @@ Modelers:
   <data name="OperationsAPINotImplemented" xml:space="preserve">
     <value>Operations API must be implemented for '{0}'.</value>
   </data>
+  <data name="TrackedResourceListByImmediateParentOperationMissing" xml:space="preserve">
+    <value>The child tracked resource, '{0}' with immediate parent '{1}', must have a list by immediate parent operation.</value>
+  </data>
+  <data name="TrackedResourceListByResourceGroupOperationMissing" xml:space="preserve">
+    <value>The tracked resource, '{0}', must have a list by resource group operation.</value>
+  </data>
+  <data name="TrackedResourceListBySubscriptionsOperationMissing" xml:space="preserve">
+    <value>The tracked resource, '{0}', must have a list by subscriptions operation.</value>
+  </data>
   <data name="TrackedResourceIsNotValid" xml:space="preserve">
     <value>Tracked Resource failing validation is: "{0}". Validation Failed: {1}.
     A Tracked Resource must have: 
@@ -395,5 +404,8 @@ Modelers:
   </data>
   <data name="PutOperationResourceResponseValidationMessage" xml:space="preserve">
     <value>The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'.</value>
+  </data>
+  <data name="ParametersPropertiesValidation" xml:space="preserve">
+    <value>Parameter Must have the "name" property defined with non-empty string as its value</value>
   </data>
 </root>

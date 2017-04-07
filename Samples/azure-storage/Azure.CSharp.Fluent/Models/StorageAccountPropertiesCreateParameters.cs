@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     public partial class StorageAccountPropertiesCreateParameters
@@ -9,7 +10,10 @@ namespace Petstore.Models
         /// Initializes a new instance of the
         /// StorageAccountPropertiesCreateParameters class.
         /// </summary>
-        public StorageAccountPropertiesCreateParameters() { }
+        public StorageAccountPropertiesCreateParameters()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -21,14 +25,20 @@ namespace Petstore.Models
         public StorageAccountPropertiesCreateParameters(AccountType accountType)
         {
             AccountType = accountType;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets the account type. Possible values include:
         /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
         /// 'Premium_LRS'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "accountType")]
+        [JsonProperty(PropertyName = "accountType")]
         public AccountType AccountType { get; set; }
 
         /// <summary>

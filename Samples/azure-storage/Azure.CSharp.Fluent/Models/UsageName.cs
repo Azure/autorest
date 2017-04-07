@@ -1,6 +1,7 @@
 
 namespace Petstore.Models
 {
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -11,31 +12,40 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the UsageName class.
         /// </summary>
-        public UsageName() { }
+        public UsageName()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the UsageName class.
         /// </summary>
         /// <param name="value">Gets a string describing the resource
         /// name.</param>
-        /// <param name="localizedValue">Gets a localized string describing
-        /// the resource name.</param>
+        /// <param name="localizedValue">Gets a localized string describing the
+        /// resource name.</param>
         public UsageName(string value = default(string), string localizedValue = default(string))
         {
             Value = value;
             LocalizedValue = localizedValue;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets a string describing the resource name.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
 
         /// <summary>
         /// Gets a localized string describing the resource name.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "localizedValue")]
+        [JsonProperty(PropertyName = "localizedValue")]
         public string LocalizedValue { get; set; }
 
     }
