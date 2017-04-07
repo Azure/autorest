@@ -55,7 +55,7 @@ Do you love curlies? Let's use JSON for a change.
       "output-folder": "Azure.Java.Fluent",
       "azure-arm": true,
       "fluent": true
-    },
+    }
   ]
 }
 ```

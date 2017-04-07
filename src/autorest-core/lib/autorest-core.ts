@@ -20,11 +20,12 @@ export class AutoRest extends EventEmitter {
     return (async () => {
       if (!this._view) {
         const messageEmitter = new MessageEmitter();
-        this._view = await new Configuration(this.fileSystem, this.configFileUri).CreateView(messageEmitter, ...this._configurations);
 
         // subscribe to the events for the current configuration view
         messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
         messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
+
+        this._view = await new Configuration(this.fileSystem, this.configFileUri).CreateView(messageEmitter, ...this._configurations);
       }
       return this._view;
     })();
@@ -50,12 +51,12 @@ export class AutoRest extends EventEmitter {
     try {
       // quick check to see if it's json already
       let doc = JSON.parse(content);
-      return (doc && doc.swagger && doc.swagger == "2.0")
+      return (doc && doc.swagger && doc.swagger === "2.0")
     } catch (e) {
       try {
         // maybe it's yaml or literate swagger
         let doc = JSON.parse(await AutoRest.LiterateToJson(content));
-        return (doc && doc.swagger && doc.swagger == "2.0")
+        return (doc && doc.swagger && doc.swagger === "2.0")
       } catch (e) {
         // nope
       }
@@ -169,7 +170,7 @@ export class AutoRest extends EventEmitter {
         // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
         this.Message.Dispatch({ Channel: Channel.Debug, Text: `Starting Process() Run Pipeline.` });
 
-        await Promise.race([
+        const result = await Promise.race([
           RunPipeline(view, <IFileSystem>this.fileSystem),
           new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej("Cancellation requested.")))]);
 
