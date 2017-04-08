@@ -569,7 +569,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void XmsExamplesProvidedValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "x-ms-examples-absent.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "xms-examples-absent.json"));
             messages.AssertOnlyValidationMessage(typeof(XmsExamplesProvidedValidation), 1);
         }
 
