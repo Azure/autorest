@@ -51,8 +51,7 @@ namespace AutoRest.Swagger.Validation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             var resourceModels = context.ResourceModels;
-            // It'd be strange to have more than one root resource model definitions in the same doc, 
-            // but let's do our due diligence
+
             foreach (var resourceModel in resourceModels)
             {
                 if(!ValidationUtilities.ContainsReadOnlyProperties(resourceModel, definitions, ReadonlyProps))
