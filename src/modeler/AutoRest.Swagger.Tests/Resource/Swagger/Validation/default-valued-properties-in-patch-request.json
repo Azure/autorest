@@ -1,0 +1,60 @@
+﻿{
+    "swagger": "2.0",
+    "info": {
+        "title": "default-valued properties in patch request",
+        "description": "Flag validation rule if there is a default-valued property in a patch request model",
+        "version": "2014-04-01-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/",
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "paths": {
+        "/foo": {
+            "patch": {
+                "tags": [ "SampleTag" ],
+                "operationId": "Foo_Update",
+                "description": "Test Description",
+                "parameters": [
+                  {
+                    "name": "foo_patch",
+                    "in": "body",
+                    "schema": {
+                      "$ref": "#/definitions/FooRequestParams"
+                    },
+                    "description": "foo patch request"
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+      "FooRequestParams": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/FooProps"
+          }
+        ]
+      },
+      "FooProps": {
+        "properties": {
+          "prop0": {
+            "type": "string",
+            "default": "my def val"
+          }
+        }
+      }
+    }
+}
