@@ -580,6 +580,12 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void PutResponseResourceValidationTest()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-response-resource-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(PutResponseResourceValidation), 1);
+        }
+        [Fact]
         public void EmptyParameterNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-parameter-name.json"));

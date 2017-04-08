@@ -656,6 +656,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: &apos;{0}&apos; Model: &apos;{1}&apos;..
+        /// </summary>
+        public static string PutOperationResourceResponseValidationMessage {
+            get {
+                return ResourceManager.GetString("PutOperationResourceResponseValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Property &apos;{0}&apos; is a required property. It should not be marked as &apos;readonly&apos;..
         /// </summary>
         public static string RequiredReadOnlyPropertiesValidation {
