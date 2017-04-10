@@ -113,13 +113,13 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="modelName">model for which to check the required properties</param>
         /// <param name="definitions">dictionary of model definitions</param>
         /// <param name="propertyList">List of required properties found in model hierarchy</param>
-        private static IEnumerable<string> EnumerateRequiredProperties(string modelName, Dictionary<string, Schema> definitions)
+        public static IEnumerable<string> EnumerateRequiredProperties(string modelName, Dictionary<string, Schema> definitions)
         {
             var modelsToCheck = EnumerateModelHierarchy(modelName, definitions);
             var propertiesList = new List<string>();
             foreach (var modelRef in modelsToCheck)
             {
-                if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Properties?.Any() != true) continue;
+                if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Required?.Any() != true) continue;
                 
                 propertiesList = propertiesList.Union(definitions[modelRef].Required.Where(reqProp => !string.IsNullOrEmpty(reqProp))).ToList();
             }
@@ -132,9 +132,12 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="modelName">model for which to find the read only properties</param>
         /// <param name="definitions">dictionary of model definitions</param>
         /// <param name="propertyList">List of read only properties found in model hierarchy</param>
-        private static IEnumerable<string> EnumerateReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions)
+        public static IEnumerable<string> EnumerateReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions)
             => EnumerateProperties(modelName, definitions).Where(prop => prop.Value.ReadOnly).Select(prop => prop.Key);
 
+
+        public static IEnumerable<KeyValuePair<string, Schema>> EnumerateDefaultValuedProperties(string modelName, Dictionary<string, Schema> definitions) 
+            => EnumerateProperties(modelName, definitions).Where(prop => prop.Value.Default != null);
 
         /// <summary>
         /// Checks if model hierarchy consists of given set of properties
@@ -196,7 +199,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="definitions">model definitions in which to find the x-ms-azure-resource extension</param>
         /// <returns>list of model names that have the x-ms-azure-resource extension set on them</returns>
-        private static IEnumerable<string> GetXmsAzureResourceModels(Dictionary<string, Schema> definitions)
+        public static IEnumerable<string> GetXmsAzureResourceModels(Dictionary<string, Schema> definitions)
             => definitions.Where(defPair =>
                             defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource") == true &&
                             defPair.Value.Extensions["x-ms-azure-resource"].Equals(true))

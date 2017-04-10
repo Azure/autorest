@@ -550,6 +550,22 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void DefaultValuedInPropertiesInPatchRequestValidation()
+        {
+            // This test validates if a definition has required properties which are marked as readonly true
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "default-valued-properties-in-patch-request.json"));
+            messages.AssertOnlyValidationMessage(typeof(PatchBodyParametersSchemaValidation), 1);
+        }
+
+        [Fact]
+        public void RequiredPropertiesInPatchRequestValidation()
+        {
+            // This test validates if a definition has required properties which are marked as readonly true
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "req-properties-in-patch-request.json"));
+            messages.AssertOnlyValidationMessage(typeof(PatchBodyParametersSchemaValidation), 1);
+        }
+
+        [Fact]
         public void BodyParametersInlineValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-parameters-validation-1.json"));
@@ -561,6 +577,13 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-parameters-validation-2.json"));
             messages.AssertOnlyValidationMessage(typeof(BodyParametersValidation), 1);
+        }
+
+        [Fact]
+        public void PutResponseResourceValidationTest()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-response-resource-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(PutResponseResourceValidation), 1);
         }
         [Fact]
         public void EmptyParameterNameValidation()

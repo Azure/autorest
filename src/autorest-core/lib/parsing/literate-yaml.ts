@@ -153,7 +153,6 @@ async function DoBlame(message: string, index: number, data: DataHandleRead, con
         return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
       }
     } catch (e) {
-
     }
     return [s];
   }));
@@ -210,7 +209,7 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | MessageEmitte
             data,
             config,
             hLiterate);
-          throw new Error("Syntax Error Encountered.")
+          throw new Error("Syntax Error Encountered.");
         }
       }
 
