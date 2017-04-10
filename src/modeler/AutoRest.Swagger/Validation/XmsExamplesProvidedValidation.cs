@@ -8,7 +8,8 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
-using AutoRest.Swagger.Model.Utilities;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using System.Linq;
 
 namespace AutoRest.Swagger.Validation
@@ -39,6 +40,23 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
 
+        private bool IsValidJson(string jsonString)
+        {
+            try
+            {
+                var jObject = JObject.Parse(jsonString);
+                if (jObject == null)
+                {
+                    return false;
+                }
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
         /// <summary>
         /// Validates whether operation has corresponding x-ms-examples
         /// </summary>
@@ -52,8 +70,11 @@ namespace AutoRest.Swagger.Validation
             // but ignore operations_list
             var violatingOps = paths.SelectMany(pathObj => pathObj.Value.Where(opPair 
                                                             => (opPair.Value.Extensions?.ContainsKey("x-ms-examples") != true 
-                                                               || string.IsNullOrWhiteSpace(opPair.Value.Extensions["x-ms-examples"].ToString()))
+                                                               || string.IsNullOrWhiteSpace(opPair.Value.Extensions["x-ms-examples"].ToString())
+                                                               || !IsValidJson(opPair.Value.Extensions["x-ms-examples"].ToString()))
                                                                && !opPair.Value.OperationId.ToLower().Equals("operations_list")));
+
+            
 
             // if number of violations exceeds magicNumber, simply aggregate the message
             if (violatingOps.Count() > magicNumber)
