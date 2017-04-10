@@ -35,6 +35,11 @@
         "summary": "Lists all foo.",
         "description": "foo",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "Get operations": {
+
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -69,6 +74,11 @@
         "tags": [
           "pets"
         ],
+        "x-ms-examples": {
+          "The pet we get": {
+
+          }
+        },
         "parameters": [
           {
             "name": "limit",
@@ -107,6 +117,11 @@
         "tags": [
           "pets"
         ],
+        "x-ms-examples": {
+          "The pet we post": {
+
+          }
+        },
         "responses": {
           "201": {
             "description": "Null response"
@@ -128,6 +143,11 @@
         "tags": [
           "pets"
         ],
+        "x-ms-examples": {
+          "The pet we get": {
+
+          }
+        },
         "parameters": [
           {
             "name": "petId",
@@ -156,6 +176,11 @@
     "/foo": {
       "get": {
         "operationId": "Foo_Get",
+        "x-ms-examples": {
+          "The foo we get": {
+
+          }
+        },
         "description": "foo",
         "responses": {
           "default": {
@@ -166,6 +191,11 @@
       "post": {
         "operationId": "Foo_Post",
         "description": "foo",
+        "x-ms-examples": {
+          "The foo we post": {
+
+          }
+        },
         "parameters": [
           {
             "in": "body",
@@ -193,6 +223,11 @@
       "post": {
         "operationId": "Foo_PostOverload",
         "description": "foo",
+        "x-ms-examples": {
+          "The foo we post": {
+
+          }
+        },
         "parameters": [
           {
             "in": "body",

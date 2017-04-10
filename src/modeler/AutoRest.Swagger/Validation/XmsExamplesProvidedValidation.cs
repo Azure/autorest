@@ -52,7 +52,7 @@ namespace AutoRest.Swagger.Validation
             // but ignore operations_list
             var violatingOps = paths.SelectMany(pathObj => pathObj.Value.Where(opPair 
                                                             => (opPair.Value.Extensions?.ContainsKey("x-ms-examples") != true 
-                                                               || string.IsNullOrWhiteSpace((string)opPair.Value.Extensions["x-ms-examples"]))
+                                                               || string.IsNullOrWhiteSpace(opPair.Value.Extensions["x-ms-examples"].ToString()))
                                                                && !opPair.Value.OperationId.ToLower().Equals("operations_list")));
 
             // if number of violations exceeds magicNumber, simply aggregate the message
