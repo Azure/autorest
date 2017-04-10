@@ -83,7 +83,9 @@ func New(@(Model.GlobalParameters))@(Model.BaseClient) {
                     if (p.DefaultValue.FixedValue.IsNullOrEmpty())
                     {
                         @:@(string.Format("{0}: {1},", p.Name, p.Name.Value.ToSentence()))
-                    } else {
+                    }
+                    else
+                    {
                         @:@(string.Format("{0}: Default{1},", p.Name, p.Name.Value.ToPascalCase()))
                     }
                 }
