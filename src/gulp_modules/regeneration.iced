@@ -177,14 +177,6 @@ rubyAzureMappings = {
   'parameter_grouping':['azure-parameter-grouping.json', 'ParameterGroupingModule']
 }
 
-mergeOptions = (obj1, obj2) ->
-  obj3 = {}
-  for attrname of obj1
-    obj3[attrname] = obj1[attrname]
-  for attrname of obj2
-    obj3[attrname] = obj2[attrname]
-  return obj3
-
 task 'regenerate-nodecomposite', '', (done) ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.NodeJS.Tests',
@@ -247,7 +239,7 @@ task 'regenerate-node', '', ['regenerate-nodecomposite'], (done) ->
   return null
 
 task 'regenerate-python', '', (done) ->
-  mappings = mergeOptions({ 
+  mappings = Object.assign({ 
     'AcceptanceTests/UrlMultiCollectionFormat' : 'url-multi-collectionFormat.json'
   }, defaultMappings)
   regenExpected {
@@ -262,7 +254,7 @@ task 'regenerate-python', '', (done) ->
   return null
 
 task 'regenerate-pythonazure', '', (done) ->
-  mappings = mergeOptions({ 
+  mappings = Object.assign({ 
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json',
     'AcceptanceTests/StorageManagementClient': 'storage.json'
   }, defaultAzureMappings)
@@ -347,7 +339,7 @@ task 'regenerate-java', '', (done) ->
   return null
 
 task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync'], (done) ->
-  mappings = mergeOptions({
+  mappings = Object.assign({
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
   regenExpected {
@@ -363,7 +355,7 @@ task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazur
   return null
 
 task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regenerate-csazurefluentallsync', 'regenerate-csazurefluentnosync'], (done) ->
-  mappings = mergeOptions({
+  mappings = Object.assign({
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
   regenExpected {
@@ -380,7 +372,7 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
   return null
 
 task 'regenerate-cs', '', ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
-  mappings = mergeOptions({
+  mappings = Object.assign({
     'Mirror.RecursiveTypes': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-primitives.json',
     'Mirror.Sequences': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-sequences.json',
@@ -631,63 +623,22 @@ task 'regenerate-ars', '', (done) ->
   },done
   return null
 
-task 'regenerate-samples', '', ['regenerate-samplesazure', 'regenerate-samplesazurefluent'],(done) ->
-  count = 0
-  for lang in ['CSharp', 'Java', 'Python', 'NodeJS', 'Ruby', 'Go', 'AzureResourceSchema']
-    count++
-    regenExpected {
-      'modeler': 'Swagger',
-      'header': 'NONE',
-      'outputBaseDir': "#{basefolder}/Samples/petstore/#{lang}",
-      'inputBaseDir': 'Samples',
-      'mappings': { '': ['petstore/petstore.json', 'Petstore'] },
-      'nsPrefix': "Petstore",
-      'outputDir': "",
-      'language': lang.toLowerCase()
-    }, () => 
-      count = count - 1
-      return done() if count is 0
-  return null
+task 'regenerate-samples', '', (done) ->
+  source 'Samples/*/**/readme.md'
+    .pipe foreach (each,next)->
+      autorest [each.path], (code,stdout,stderr) ->
+        outputFolder = path.join(each.path, "../shell")
+        mkdir outputFolder
+        ShellString(code).to(path.join(outputFolder, "code.txt"))
+        ShellString(stdout).to(path.join(outputFolder, "stdout.txt"))
+        ShellString(stderr).to(path.join(outputFolder, "stderr.txt"))
 
-task 'regenerate-samplesazure', '', (done) ->
-  count = 0
-  for lang in ['CSharp', 'Java', 'Python', 'NodeJS', 'Ruby']
-    count++
-    regenExpected {
-      'modeler': 'Swagger',
-      'header': 'NONE',
-      'outputBaseDir': "#{basefolder}/Samples/azure-storage/Azure.#{lang}",
-      'inputBaseDir': 'Samples',
-      'mappings': { '': ['azure-storage/azure-storage.json', 'Petstore'] },
-      'nsPrefix': "Petstore",
-      'outputDir': "",
-      'azureArm': true,
-      'language': lang.toLowerCase()
-    },() => 
-      count = count - 1
-      return done() if count is 0 
+        # sanitize generated files (source maps and shell stuff may contain file:/// paths)
+        (find path.join(each.path, ".."))
+          .filter((file) -> file.match(/.(map|txt)$/))
+          .forEach((file) -> sed "-i", /\bfile:\/\/.*\/(.*)\b/g, "$1", file)
+        next null 
   return null
-
-task 'regenerate-samplesazurefluent', '', (done) ->
-  count = 0
-  for lang in ['CSharp', 'Java']
-    count++
-    regenExpected {
-      'modeler': 'Swagger',
-      'header': 'NONE',
-      'outputBaseDir': "#{basefolder}/Samples/azure-storage/Azure.#{lang}.Fluent",
-      'inputBaseDir': 'Samples',
-      'mappings': { '': ['azure-storage/azure-storage.json', 'Petstore'] },
-      'nsPrefix': "Petstore",
-      'outputDir': "",
-      'azureArm': true,
-      'fluent': true,
-      'language': lang.toLowerCase()
-    },() => 
-      count = count - 1
-      return done() if count is 0 
-  return null
-
 
 task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], (done) ->
   run ['regenerate-ars',
@@ -708,6 +659,8 @@ task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], 
   return null
   
 
+path = require('path')
+
 task 'regenerate-delete', '', (done)->
   rm "-rf",
     'src/generator/AutoRest.CSharp.Tests/Expected'
@@ -722,8 +675,12 @@ task 'regenerate-delete', '', (done)->
     'src/generator/AutoRest.Python.Tests/Expected'
     'src/generator/AutoRest.Python.Azure.Tests/Expected'
     'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Expected'
-  echo typeof done
-  done()
+  source 'Samples/*/**/'
+    .pipe foreach (each, next) ->
+      configFile = path.join(each.path, "../readme.md")
+      console.log "rm -rf #{each.path}" if fs.existsSync configFile
+      rm "-rf", '#{each.path}' if fs.existsSync configFile
+      next null
 
 task 'autorest-preview-build', '', ->
   exec "dotnet build #{basefolder}/src/dev/AutoRest.Preview/"

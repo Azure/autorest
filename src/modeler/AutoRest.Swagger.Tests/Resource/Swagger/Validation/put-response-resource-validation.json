@@ -1,0 +1,92 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Validating 200 response of PUT operation",
+    "description": "200 response of a PUT operation must have the x-ms-azure-resource extension set to true",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/foo": {
+      "put": {
+        "operationId": "SampleModel_CreateOrUpdate",
+        "description": "creates a sample model",
+        "parameters": [
+          {
+            "name": "sampleModel",
+            "required": true,
+            "description": "sample model to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SampleProxyResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the resource",
+            "schema": {
+              "$ref": "#/definitions/SampleProxyResource"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "proxy resource without a location property",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "SampleProxyResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "sample proxy resource",
+      "properties": {
+        "prop0": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
