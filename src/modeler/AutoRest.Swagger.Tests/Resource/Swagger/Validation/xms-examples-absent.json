@@ -45,31 +45,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/operations": {
-      "get": {
-        "summary": "Lists all foo.",
-        "description": "foo",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "limit",
-            "type": "string",
-            "description": "foo"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationsListResult"
-            }
-          }
-        }
-      }
     }
   },
   "x-ms-paths": {
