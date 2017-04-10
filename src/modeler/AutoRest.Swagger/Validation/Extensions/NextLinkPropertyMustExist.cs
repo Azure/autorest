@@ -54,7 +54,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "The property '{0}' specified by nextLinkName does not exist in the 200 response schema.";
+        public override string MessageTemplate => "The property '{0}' specified by nextLinkName does not exist in the 200 response schema. \nFor the method to return an IEnumerable, set nextLinkName to null. \nFor a method to return a chained object, set nextLinkName to appropriate field in the list object.";
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
