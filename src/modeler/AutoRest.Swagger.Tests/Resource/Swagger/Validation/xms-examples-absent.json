@@ -33,11 +33,6 @@
         "operationId": "Models_list",
         "summary": "Foo path",
         "description": "Foo operation",
-        "x-ms-examples": {
-          "The models listed": {
-
-          }
-        },
         "responses": {
           "default": {
             "description": "Unexpected error"
@@ -50,47 +45,12 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/operations": {
-      "get": {
-        "summary": "Lists all foo.",
-        "description": "foo",
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "The operations listed": {
-
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "limit",
-            "type": "string",
-            "description": "foo"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationsListResult"
-            }
-          }
-        }
-      }
     }
   },
   "x-ms-paths": {
     "/foo?{id}": {
       "get": {
         "operationId": "foo_listByID",
-        "x-ms-examples": {
-          "The foos listed": {
-
-          }
-        },
         "summary": "Foo get path",
         "description": "Foo get operation",
         "responses": {

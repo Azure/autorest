@@ -580,11 +580,19 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void XmsExamplesProvidedValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "xms-examples-absent.json"));
+            messages.AssertOnlyValidationMessage(typeof(XmsExamplesProvidedValidation), 2);
+        }
+
+        [Fact]
         public void PutResponseResourceValidationTest()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-response-resource-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(PutResponseResourceValidation), 1);
         }
+
         [Fact]
         public void EmptyParameterNameValidation()
         {
@@ -763,6 +771,7 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
         }
+
     }
 
     #endregion
