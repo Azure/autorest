@@ -7,6 +7,10 @@ ERROR (OperationsAPIImplementationValidation/M3023/RPCViolation): Operations API
         Path: swagger.md#$.paths
         Path: swagger.md#$.paths
         Path: swagger.md#$.paths
+ERROR (PutResponseResourceValidation/M2062/RPCViolation): The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: 'Services_CreateOrUpdate' Model: 'SearchServiceResource'.
+        Path: {serviceName}"].put.operationId
+ERROR (ResourceModelValidation/M3001/RPCViolation): Model definition 'SearchServiceResource' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
+        Path: swagger.md#$.definitions.SearchServiceResource
 WARNING (DescriptionMissing/M4000/SDKViolation): 'Error' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
         Path: swagger.md#$.definitions.Error
 WARNING (DescriptionMissing/M4000/SDKViolation): 'ErrorDetails' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.

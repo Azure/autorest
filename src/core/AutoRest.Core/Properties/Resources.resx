@@ -157,21 +157,6 @@ Modelers:
     TypeName: CompositeSwaggerModeler, AutoRest.CompositeSwagger
     </value>
   </data>
-  <data name="CodeGenerationFailed" xml:space="preserve">
-    <value>Code generation failed with errors. See inner exceptions for details.</value>
-  </data>
-  <data name="CodeGenSettingsFileInvalid" xml:space="preserve">
-    <value>Could not load CodeGenSettings file '{0}'. Exception: '{1}'.</value>
-  </data>
-  <data name="CommentString" xml:space="preserve">
-    <value>\\\\</value>
-  </data>
-  <data name="DirectoryNotExist" xml:space="preserve">
-    <value>Directory {0} does not exist.</value>
-  </data>
-  <data name="EntityConflictTitleMessage" xml:space="preserve">
-    <value>{0} with name '{1}' was renamed to '{2}' because it conflicts with following entities: {3}</value>
-  </data>
   <data name="ErrorGeneratingClientModel" xml:space="preserve">
     <value>Error generating client model: {0}</value>
   </data>
@@ -205,12 +190,6 @@ Modelers:
   <data name="NamespaceConflictReasonMessage" xml:space="preserve">
     <value>{0} (already used in {1})</value>
   </data>
-  <data name="NamingConflictsSuggestion" xml:space="preserve">
-    <value>Please consider changing your swagger specification to avoid naming conflicts.</value>
-  </data>
-  <data name="ParameterIsNotValid" xml:space="preserve">
-    <value>Parameter '{0}' is not expected.</value>
-  </data>
   <data name="ParameterValueIsMissing" xml:space="preserve">
     <value>Parameter '{0}' is required.</value>
   </data>
@@ -242,7 +221,7 @@ Modelers:
     <value>Property '{0}' is a required property. It should not be marked as 'readonly'.</value>
   </data>
   <data name="ResourceModelIsNotValid" xml:space="preserve">
-    <value>The id, name, type, location and tags properties of the Resource must be present with id, name and type as read-only</value>
+    <value>Model definition '{0}' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.</value>
   </data>
   <data name="ResourceIsMsResourceNotValid" xml:space="preserve">
     <value>A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.</value>
@@ -271,31 +250,11 @@ Modelers:
   <data name="TrackedResourceListBySubscriptionsOperationMissing" xml:space="preserve">
     <value>The tracked resource, '{0}', must have a list by subscriptions operation.</value>
   </data>
-  <data name="TrackedResourceIsNotValid" xml:space="preserve">
-    <value>Tracked Resource failing validation is: "{0}". Validation Failed: {1}.
-    A Tracked Resource must have: 
-    1. A Get Operation 
-    2. A ListByResourceGroup operation with x-ms-pageable extension and 
-    3. A ListBySubscriptionId operation with x-ms-pageable extension.
-    4. "type","location","tags" should not be used in the RP property bag named "properties".</value>
-  </data>
-  <data name="BodyMustHaveSchema" xml:space="preserve">
-    <value>Each body parameter must have a schema</value>
-  </data>
-  <data name="BodyWithType" xml:space="preserve">
-    <value>A body parameter cannot have a type, format, or any other properties describing its type.</value>
-  </data>
   <data name="EmptyClientName" xml:space="preserve">
     <value>Empty x-ms-client-name property.</value>
   </data>
-  <data name="HeaderShouldHaveClientName" xml:space="preserve">
-    <value>Each header parameter should have an explicit client name defined for improved code generation output quality.</value>
-  </data>
   <data name="InvalidDefault" xml:space="preserve">
     <value>The default value is not one of the values enumerated as valid for this element.</value>
-  </data>
-  <data name="InvalidSchemaParameter" xml:space="preserve">
-    <value>Only body parameters can have a schema defined.</value>
   </data>
   <data name="UnknownFormat" xml:space="preserve">
     <value>'{0}' is not a known format.</value>
@@ -303,23 +262,11 @@ Modelers:
   <data name="MissingDescription" xml:space="preserve">
     <value>{0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.</value>
   </data>
-  <data name="MissingRequiredProperty" xml:space="preserve">
-    <value>'{0}' is supposedly required, but no such property exists.</value>
-  </data>
-  <data name="NoDefinitionForPathParameter" xml:space="preserve">
-    <value>Could not find a definition for the path parameter '{0}'</value>
-  </data>
   <data name="OnlyOneUnderscoreAllowedInOperationId" xml:space="preserve">
     <value>Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.</value>
   </data>
   <data name="OperationIdMissing" xml:space="preserve">
     <value>OperationId is required for all operations. Please add it for '{0}' operation of '{1}' path.</value>
-  </data>
-  <data name="TooManyBodyParameters" xml:space="preserve">
-    <value>Operations can not have more than one 'body' parameter. The following were found: '{0}'</value>
-  </data>
-  <data name="CodeGenerationError" xml:space="preserve">
-    <value>Errors found during Swagger document validation.</value>
   </data>
   <data name="XMSPathBaseNotInPaths" xml:space="preserve">
     <value>Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.</value>
@@ -329,9 +276,6 @@ Modelers:
   </data>
   <data name="OperationIdNounInVerb" xml:space="preserve">
     <value>Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore.</value>
-  </data>
-  <data name="InvalidConstraint" xml:space="preserve">
-    <value>Constraint is not supported for this type and will be ignored.</value>
   </data>
   <data name="NonAppJsonTypeNotSupported" xml:space="preserve">
     <value>Please make sure that media types other than 'application/json' are supported by your service.</value>
@@ -356,9 +300,6 @@ Modelers:
   </data>
   <data name="GetOperationNameNotValid" xml:space="preserve">
     <value>'GET' operation '{0}' must use method name 'Get' or Method name start with 'List'</value>
-  </data>
-  <data name="InvalidMutabilityValues" xml:space="preserve">
-    <value>Valid values for an x-ms-mutability extension are 'create', 'read' and 'update'. Applied extension contains invalid value(s): '{0}'.</value>
   </data>
   <data name="InvalidMutabilityValueForReadOnly" xml:space="preserve">
     <value>When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'.</value>
