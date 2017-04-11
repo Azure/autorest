@@ -107,15 +107,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Each body parameter must have a schema.
-        /// </summary>
-        public static string BodyMustHaveSchema {
-            get {
-                return ResourceManager.GetString("BodyMustHaveSchema", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A body parameter must be named &apos;parameters&apos;..
         /// </summary>
         public static string BodyParametersNotValid {
@@ -134,15 +125,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A body parameter cannot have a type, format, or any other properties describing its type..
-        /// </summary>
-        public static string BodyWithType {
-            get {
-                return ResourceManager.GetString("BodyWithType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: &apos;{0}&apos;..
         /// </summary>
         public static string BooleanPropertyNotRecommended {
@@ -152,47 +134,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Errors found during Swagger document validation..
-        /// </summary>
-        public static string CodeGenerationError {
-            get {
-                return ResourceManager.GetString("CodeGenerationError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Code generation failed with errors. See inner exceptions for details..
-        /// </summary>
-        public static string CodeGenerationFailed {
-            get {
-                return ResourceManager.GetString("CodeGenerationFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Could not load CodeGenSettings file &apos;{0}&apos;. Exception: &apos;{1}&apos;..
-        /// </summary>
-        public static string CodeGenSettingsFileInvalid {
-            get {
-                return ResourceManager.GetString("CodeGenSettingsFileInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Collection object {0} returned by list operation {1} with &apos;x-ms-pageable&apos; extension, has no property named &apos;value&apos;..
         /// </summary>
         public static string CollectionObjectPropertiesNamingMessage {
             get {
                 return ResourceManager.GetString("CollectionObjectPropertiesNamingMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to \\\\.
-        /// </summary>
-        public static string CommentString {
-            get {
-                return ResourceManager.GetString("CommentString", resourceCulture);
             }
         }
         
@@ -260,29 +206,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Directory {0} does not exist..
-        /// </summary>
-        public static string DirectoryNotExist {
-            get {
-                return ResourceManager.GetString("DirectoryNotExist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Empty x-ms-client-name property..
         /// </summary>
         public static string EmptyClientName {
             get {
                 return ResourceManager.GetString("EmptyClientName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} with name &apos;{1}&apos; was renamed to &apos;{2}&apos; because it conflicts with following entities: {3}.
-        /// </summary>
-        public static string EntityConflictTitleMessage {
-            get {
-                return ResourceManager.GetString("EntityConflictTitleMessage", resourceCulture);
             }
         }
         
@@ -350,15 +278,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Each header parameter should have an explicit client name defined for improved code generation output quality..
-        /// </summary>
-        public static string HeaderShouldHaveClientName {
-            get {
-                return ResourceManager.GetString("HeaderShouldHaveClientName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. .
         /// </summary>
         public static string HttpVerbIsNotValid {
@@ -386,15 +305,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Constraint is not supported for this type and will be ignored..
-        /// </summary>
-        public static string InvalidConstraint {
-            get {
-                return ResourceManager.GetString("InvalidConstraint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The default value is not one of the values enumerated as valid for this element..
         /// </summary>
         public static string InvalidDefault {
@@ -418,24 +328,6 @@ namespace AutoRest.Core.Properties {
         public static string InvalidMutabilityValueForReadOnly {
             get {
                 return ResourceManager.GetString("InvalidMutabilityValueForReadOnly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Valid values for an x-ms-mutability extension are &apos;create&apos;, &apos;read&apos; and &apos;update&apos;. Applied extension contains invalid value(s): &apos;{0}&apos;..
-        /// </summary>
-        public static string InvalidMutabilityValues {
-            get {
-                return ResourceManager.GetString("InvalidMutabilityValues", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Only body parameters can have a schema defined..
-        /// </summary>
-        public static string InvalidSchemaParameter {
-            get {
-                return ResourceManager.GetString("InvalidSchemaParameter", resourceCulture);
             }
         }
         
@@ -476,15 +368,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; is supposedly required, but no such property exists..
-        /// </summary>
-        public static string MissingRequiredProperty {
-            get {
-                return ResourceManager.GetString("MissingRequiredProperty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Successfully initialized modeler {0} v {1}..
         /// </summary>
         public static string ModelerInitialized {
@@ -508,24 +391,6 @@ namespace AutoRest.Core.Properties {
         public static string NamespaceConflictReasonMessage {
             get {
                 return ResourceManager.GetString("NamespaceConflictReasonMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please consider changing your swagger specification to avoid naming conflicts..
-        /// </summary>
-        public static string NamingConflictsSuggestion {
-            get {
-                return ResourceManager.GetString("NamingConflictsSuggestion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Could not find a definition for the path parameter &apos;{0}&apos;.
-        /// </summary>
-        public static string NoDefinitionForPathParameter {
-            get {
-                return ResourceManager.GetString("NoDefinitionForPathParameter", resourceCulture);
             }
         }
         
@@ -580,15 +445,6 @@ namespace AutoRest.Core.Properties {
         public static string OperationsAPINotImplemented {
             get {
                 return ResourceManager.GetString("OperationsAPINotImplemented", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is not expected..
-        /// </summary>
-        public static string ParameterIsNotValid {
-            get {
-                return ResourceManager.GetString("ParameterIsNotValid", resourceCulture);
             }
         }
         
@@ -683,7 +539,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The id, name, type, location and tags properties of the Resource must be present with id, name and type as read-only.
+        ///   Looks up a localized string similar to Model definition &apos;{0}&apos; must have the properties &apos;name&apos;, &apos;id&apos; and &apos;type&apos; in its hierarchy and these properties must be marked as readonly..
         /// </summary>
         public static string ResourceModelIsNotValid {
             get {
@@ -728,34 +584,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operations can not have more than one &apos;body&apos; parameter. The following were found: &apos;{0}&apos;.
-        /// </summary>
-        public static string TooManyBodyParameters {
-            get {
-                return ResourceManager.GetString("TooManyBodyParameters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Tracked resource &apos;{0}&apos; must have a get operation..
         /// </summary>
         public static string TrackedResourceGetOperationMissing {
             get {
                 return ResourceManager.GetString("TrackedResourceGetOperationMissing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tracked Resource failing validation is: &quot;{0}&quot;. Validation Failed: {1}.
-        ///    A Tracked Resource must have: 
-        ///    1. A Get Operation 
-        ///    2. A ListByResourceGroup operation with x-ms-pageable extension and 
-        ///    3. A ListBySubscriptionId operation with x-ms-pageable extension.
-        ///    4. &quot;type&quot;,&quot;location&quot;,&quot;tags&quot; should not be used in the RP property bag named &quot;properties&quot;..
-        /// </summary>
-        public static string TrackedResourceIsNotValid {
-            get {
-                return ResourceManager.GetString("TrackedResourceIsNotValid", resourceCulture);
             }
         }
         
