@@ -66,19 +66,15 @@ namespace AutoRest.Swagger.Validation
                         reqBodySchema = opGlobalParams.First(p => p.In == ParameterLocation.Body).Schema?.Reference?.StripDefinitionPath();
                     }
                 }
+                
                 // if no body parameters were found, skip, let some other validation handle an empty body put operation
-                if (string.IsNullOrEmpty(reqBodySchema))
+                if (string.IsNullOrEmpty(reqBodySchema) || !serviceDefinition.Definitions.ContainsKey(reqBodySchema))
                 {
                     continue;
                 }
-
-                if (!serviceDefinition.Definitions.ContainsKey(op.Responses["200"].Schema?.Reference?.StripDefinitionPath()))
-                {
-                    continue;
-                }
-
+                
                 // if the 200 response schema does not match the request body parameter schema, flag violation
-                if (op.Responses["200"].Schema.Reference.StripDefinitionPath() != reqBodySchema)
+                if (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() != reqBodySchema)
                 {
                     var violatingPath = ValidationUtilities.GetOperationIdPath(op.OperationId, paths);
                     var violatingOpVerb = ValidationUtilities.GetOperationIdVerb(op.OperationId, violatingPath);
