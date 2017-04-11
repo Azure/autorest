@@ -3,8 +3,6 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Utilities;
-using AutoRest.Swagger;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Model.Utilities;
 using AutoRest.Swagger.Validation.Core;
@@ -31,7 +29,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => PutOperationRequestResponseSchemaMessage;
+        public override string MessageTemplate => Resources.PutOperationRequestResponseSchemaMessage;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -58,14 +56,14 @@ namespace AutoRest.Swagger.Validation
                 string reqBodySchema = null;
                 if (op.Parameters.Where(p => p.In == ParameterLocation.Body).Any())
                 {
-                    reqBodySchema = op.Parameters.First(p => p.In == ParameterLocation.Body).Reference?.StripDefinitionPath();
+                    reqBodySchema = op.Parameters.First(p => p.In == ParameterLocation.Body).Schema?.Reference?.StripDefinitionPath();
                 }
                 else
                 {
-                    var opGlobalParams = op.Parameters.Where(p => serviceDefinition.Parameters.ContainsKey(p.Reference?.StripDefinitionPath()));
+                    var opGlobalParams = op.Parameters.Where(p => serviceDefinition.Parameters.ContainsKey(p.Reference?.StripParameterPath()));
                     if (opGlobalParams.Any())
                     {
-                        reqBodySchema = opGlobalParams.First(p => p.In == ParameterLocation.Body).Reference?.StripDefinitionPath();
+                        reqBodySchema = opGlobalParams.First(p => p.In == ParameterLocation.Body).Schema?.Reference?.StripDefinitionPath();
                     }
                 }
                 // if no body parameters were found, skip, let some other validation handle an empty body put operation

@@ -19,7 +19,7 @@
         "description": "creates a sample model",
         "parameters": [
           {
-            "name": "sampleModel",
+            "name": "parameters",
             "required": true,
             "description": "sample model to put",
             "in": "body",
@@ -58,7 +58,8 @@
           "type": "string",
           "description": "Resource type"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "ProxyResource": {
       "description": "proxy resource without a location property",
