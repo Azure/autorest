@@ -432,5 +432,24 @@ namespace AutoRest.Swagger.Model.Utilities
 
             return resourceProviders;
         }
+
+
+        /// <summary>
+        /// Given an operation Id, returns the path where it is found
+        /// </summary>
+        /// <param name="operationId">operationId to look for</param>
+        /// <param name="paths">Dictionary of paths to look for</param>
+        /// <returns>path object which contains the operationId</returns>
+        public static KeyValuePair<string, Dictionary<string, Operation>>  GetOperationIdPath(string operationId, Dictionary<string, Dictionary<string, Operation>> paths)
+            => paths.Where(pathObj => pathObj.Value.Values.Where(op => op.OperationId == operationId).Any()).First();
+
+        /// <summary>
+        /// Given an operation Id, returns the corresponding verb for it
+        /// </summary>
+        /// <param name="operationId">operationId to look for</param>
+        /// <param name="paths">Dictionary of paths</param>
+        /// <returns>HTTP verb corresponding to the operationId</returns>
+        public static string GetOperationIdVerb(string operationId, KeyValuePair<string, Dictionary<string, Operation>> pathObj)
+            => pathObj.Value.First(opObj => opObj.Value.OperationId == operationId).Key;
     }
 }

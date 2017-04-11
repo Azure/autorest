@@ -31,7 +31,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "A PUT operation request body schema must be the same as the 200 response schema. Operation: {0}";
+        public override string MessageTemplate => PutOperationRequestResponseSchemaMessage;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -46,7 +46,10 @@ namespace AutoRest.Swagger.Validation
             var ops = ValidationUtilities.GetOperationsByRequestMethod("put", serviceDefinition);
             foreach (var op in ops)
             {
-                if (op.Parameters?.Any() != true)
+
+                // if PUT operation does not have any request parameters, skip, let some other validation rule handle it
+                // if no 200 response exists, skip, let some other validation rule handle empty PUT response operations
+                if (op.Parameters?.Any() != true || op.Responses?.ContainsKey("200") != true)
                 {
                     continue;
                 }
@@ -71,11 +74,6 @@ namespace AutoRest.Swagger.Validation
                     continue;
                 }
 
-                // if no 200 response exists, skip, let some other validation rule handle empty PUT response operations
-                if (op.Responses?.ContainsKey("200")!=true)
-                {
-                    continue;
-                }
                 if (!serviceDefinition.Definitions.ContainsKey(op.Responses["200"].Schema?.Reference?.StripDefinitionPath()))
                 {
                     continue;
@@ -84,7 +82,9 @@ namespace AutoRest.Swagger.Validation
                 // if the 200 response schema does not match the request body parameter schema, flag violation
                 if (op.Responses["200"].Schema.Reference.StripDefinitionPath() != reqBodySchema)
                 {
-                    yield return null;
+                    var violatingPath = ValidationUtilities.GetOperationIdPath(op.OperationId, paths);
+                    var violatingOpVerb = ValidationUtilities.GetOperationIdVerb(op.OperationId, violatingPath);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath.Key).AppendProperty(violatingOpVerb).AppendProperty("operationId")), this, op.OperationId);
                 }
             }
         }

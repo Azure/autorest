@@ -656,6 +656,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;A PUT operation request body schema must be the same as its 200 response schema. Operation: {0}&quot;.
+        /// </summary>
+        public static string PutOperationRequestResponseSchemaMessage {
+            get {
+                return ResourceManager.GetString("PutOperationRequestResponseSchemaMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: &apos;{0}&apos; Model: &apos;{1}&apos;..
         /// </summary>
         public static string PutOperationResourceResponseValidationMessage {
