@@ -39,6 +39,7 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         // Verifies if a PUT operation request and response schemas match
+        // TODO: apply on single spec level and ARM specs only
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
         {
             var serviceDefinition = (ServiceDefinition)context.Root;
@@ -70,16 +71,16 @@ namespace AutoRest.Swagger.Validation
                     continue;
                 }
 
-                // if no 200 response exists, flag violation
+                // if no 200 response exists, skip, let some other validation rule handle empty PUT response operations
                 if (op.Responses?.ContainsKey("200")!=true)
                 {
-                    yield return null;
+                    continue;
                 }
-                // if definitions does not contain the schema referenced in a 200 response, flag violation
                 if (!serviceDefinition.Definitions.ContainsKey(op.Responses["200"].Schema?.Reference?.StripDefinitionPath()))
                 {
-                    yield return null;
+                    continue;
                 }
+
                 // if the 200 response schema does not match the request body parameter schema, flag violation
                 if (op.Responses["200"].Schema.Reference.StripDefinitionPath() != reqBodySchema)
                 {
