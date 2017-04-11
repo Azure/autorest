@@ -47,7 +47,7 @@ namespace AutoRest.Swagger.Validation
 
                 // if PUT operation does not have any request parameters, skip, let some other validation rule handle it
                 // if no 200 response exists, skip, let some other validation rule handle empty PUT response operations
-                if (op.Parameters?.Any() != true || op.Responses?.ContainsKey("200") != true)
+                if (op.Parameters?.Any() != true || op.Responses?.ContainsKey("200") != true || serviceDefinition.Definitions?.Any()!=true)
                 {
                     continue;
                 }
