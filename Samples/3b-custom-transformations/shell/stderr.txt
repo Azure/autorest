@@ -6,6 +6,8 @@ ERROR (ListByOperationsValidation/M1003/SDKViolation): Operation Usage_List must
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get.operationId
 ERROR (OperationsAPIImplementationValidation/M3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Storage/operations'.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths
+ERROR (PutRequestResponseValidation/M2017/SDKViolation): "A PUT operation request body schema must be the same as its 200 response schema. Operation: StorageAccounts_Create"
+        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.operationId
 ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_CheckNameAvailability'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.operationId
 ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Create'
