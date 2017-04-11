@@ -65,8 +65,7 @@
           },
           "description": "Resource tags"
         }
-      },
-      "x-ms-azure-resource": "true"
+      }
     },
     "ProxyResource": {
       "description": "proxy resource without a location property",
