@@ -1,7 +1,3 @@
-ERROR (ListByOperationsValidation/M1003/SDKViolation): Operation QueryKeys_List must be one of: listquerykeys_listbysubscriptionid, listquerykeys_list, listquerykeys_listbyresourcegroup, listquerykeys_listbysearchservices
-        Path: listQueryKeys"].get.operationId
-ERROR (ListByOperationsValidation/M1003/SDKViolation): Operation Services_List must be one of: searchservices_listbysubscriptionid, searchservices_list, searchservices_listbyresourcegroup, searchservices_listbymicrosoftsearch
-        Path: searchServices"].get.operationId
 ERROR (OperationsAPIImplementationValidation/M3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Search/operations'.
         Path: swagger.md#$.paths
         Path: swagger.md#$.paths
