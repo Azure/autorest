@@ -22,7 +22,7 @@ Import
   autorest: (args,done) ->
     # Run AutoRest from the original current directory.
     echo info "AutoRest #{args.join(' ')}"
-    execute "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true}, (code,stdout,stderr) ->
+    execute "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true, ignoreexitcode:true}, (code,stdout,stderr) ->
       return done(code,stdout,stderr)
 
   # which projects to care about

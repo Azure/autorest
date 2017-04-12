@@ -1,0 +1,5 @@
+Syntax error: bad indentation of a mapping entry
+Syntax error: incomplete explicit mapping pair; a key node is missed
+Syntax error: bad indentation of a mapping entry
+Syntax error: bad indentation of a mapping entry
+Syntax Errors Encountered.

@@ -197,7 +197,7 @@ module.exports =
         fn = (queue.shift())
         fn() 
 
-      if code            
+      if code and !options.ignoreexitcode
         echo error "Exec Failed #{quiet_info options.cwd} :: #{info cmdline}"  
         if( stderr.length )
           echo error "(stderr)"
