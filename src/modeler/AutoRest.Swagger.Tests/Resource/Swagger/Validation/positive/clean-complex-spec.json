@@ -175,7 +175,7 @@
     },
     "/foo": {
       "get": {
-        "operationId": "Foo_Get",
+        "operationId": "Foos_Get",
         "x-ms-examples": {
           "The foo we get": {
 
@@ -189,7 +189,7 @@
         }
       },
       "post": {
-        "operationId": "Foo_Post",
+        "operationId": "Foos_Post",
         "description": "foo",
         "x-ms-examples": {
           "The foo we post": {
@@ -221,7 +221,7 @@
   "x-ms-paths": {
     "/foo?overload=true": {
       "post": {
-        "operationId": "Foo_PostOverload",
+        "operationId": "Foos_PostOverload",
         "description": "foo",
         "x-ms-examples": {
           "The foo we post": {
