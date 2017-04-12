@@ -49,7 +49,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     autoRest.AddConfiguration({ amar: true });
 
     const messages: Message[] = [];
-    autoRest.Error.Subscribe((_, m) => messages.push(m));
+    autoRest.Message.Subscribe((_, m) => messages.push(m));
     assert.strictEqual(await autoRest.Process().finish, true);
     assert.strictEqual(messages.length, 7);
   }
