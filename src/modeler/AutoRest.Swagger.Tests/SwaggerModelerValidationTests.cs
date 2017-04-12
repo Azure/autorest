@@ -599,6 +599,13 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-parameter-name.json"));
             messages.AssertOnlyValidationMessage(typeof(ParameterNameValidation), 2);
         }
+
+        [Fact]
+        public void OperationIdNounPluralizedValidationTest()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operationid-pluralized-noun-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationIdNounPluralizedFormValidation), 1);
+        }
     }
 
     #region Positive tests

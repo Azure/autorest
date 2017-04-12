@@ -1,0 +1,57 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Azure Redis Cache Management API",
+    "description": "Some cool documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/foo": {
+      "get": {
+        "operationId": "Model_Get",
+        "description": "gets a model",
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Model": {
+      "properties": {
+        "prop1": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParamterer": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "apiVersion",
+      "in": "path",
+      "description": "API ID.",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

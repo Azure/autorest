@@ -349,4 +349,7 @@ Modelers:
   <data name="ParametersPropertiesValidation" xml:space="preserve">
     <value>Parameter Must have the "name" property defined with non-empty string as its value</value>
   </data>
+  <data name="OperationIdNounPluralizedMessage" xml:space="preserve">
+    <value>OperationId has a noun that conflicts with one of the model names in definitions section. Consider using the pluralized form for '{0}'</value>
+  </data>
 </root>

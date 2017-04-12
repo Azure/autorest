@@ -431,6 +431,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OperationId has a noun that conflicts with one of the model names in definitions section. Consider using the pluralized form for &apos;{0}&apos;.
+        /// </summary>
+        public static string OperationIdNounPluralizedMessage {
+            get {
+                return ResourceManager.GetString("OperationIdNounPluralizedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section, define these in the global parameters section instead.
         /// </summary>
         public static string OperationParametersNotAllowedMessage {
