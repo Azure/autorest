@@ -232,14 +232,7 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "collection-objects-naming.json"));
             messages.AssertOnlyValidationMessage(typeof(CollectionObjectPropertiesNamingValidation), 2);
         }
-
-        [Fact]
-        public void BodyTopLevelPropertiesValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-top-level-properties.json"));
-            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 2);
-        }
-
+        
         [Fact]
         public void PropertyNameCasingValidation()
         {
