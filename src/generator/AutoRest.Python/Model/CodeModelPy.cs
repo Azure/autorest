@@ -181,11 +181,12 @@ namespace AutoRest.Python.Model
             {
                 if (value != _namespace)
                 {
-                    // In Python, we want tthe original Namespace.
-                    // So we change the setter to keep the value (Core Model change it),
-                    // and we put the initial value in the Python
-                    // transformer
-                    _namespace = value;
+                    // In Python, the Autorest Code normalisation is not good.
+                    // So we change the setter to keep the value
+                    // and we put the initial Namespace value back from the Python
+                    // transformer.
+                    // We lower it to respect PEP8
+                    _namespace = value.ToLower();
                 }
             }
         }
