@@ -417,7 +417,7 @@ namespace AutoRest.Python.Model
             return (type as IExtendedModelTypePy)?.TypeDocumentation ?? PythonConstants.None;
         }
 
-        public string TypeDocumentation =>       $":class:`{Name} <{((CodeModelPy)CodeModel)?.modelNamespace}.models.{Name}>`";
-        public string ReturnTypeDocumentation => $":class:`{Name} <{((CodeModelPy)CodeModel)?.modelNamespace}.models.{Name}>`";
+        public string TypeDocumentation =>       $":class:`{Name} <{((CodeModelPy)CodeModel)?.Namespace}.models.{Name}>`";
+        public string ReturnTypeDocumentation => $":class:`{Name} <{((CodeModelPy)CodeModel)?.Namespace}.models.{Name}>`";
     }
 }

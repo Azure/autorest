@@ -20,6 +20,9 @@ namespace AutoRest.Python
         {
             var codeModel = cm as CodeModelPy;
 
+            // Put the initial namespace value, not transformed by the Core
+            codeModel.Namespace = Settings.Instance.Namespace.Else(codeModel.Name.ToPythonCase().ToLower());
+
             TransformGroupApiVersionToLocal(codeModel);
             SwaggerExtensions.NormalizeClientModel(codeModel);
             PopulateAdditionalProperties(codeModel);
