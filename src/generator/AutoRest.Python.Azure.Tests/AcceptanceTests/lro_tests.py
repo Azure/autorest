@@ -41,6 +41,10 @@ log_level = int(os.environ.get('PythonLogLevel', 30))
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Lro"))
 
+# Import mock from Autorest.Python.Tests
+mockfiles = realpath(join(cwd, pardir, pardir, "AutoRest.Python.Tests", "AcceptanceTests"))
+sys.path.append(mockfiles)
+
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
@@ -49,15 +53,16 @@ from msrestazure.azure_exceptions import CloudError, CloudErrorData
 from autorestlongrunningoperationtestservice import AutoRestLongRunningOperationTestService
 from autorestlongrunningoperationtestservice.models import *
 
+from http_tests import TestAuthentication
+
 class LroTests(unittest.TestCase):
 
     def setUp(self):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         self.client = AutoRestLongRunningOperationTestService(cred, base_url="http://localhost:3000")
-
+        self.client._client.creds = TestAuthentication()
         self.client.config.long_running_operation_timeout = 0
-        self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
         return super(LroTests, self).setUp()
 
     def assertRaisesWithMessage(self, msg, func, *args, **kwargs):
