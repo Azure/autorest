@@ -81,7 +81,8 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
   result["add-credentials"] = switches["addcredentials"] === null || ((switches["addcredentials"] + "").toLowerCase() === "true");
 
   if (usedCodeGenerator === "ruby" || usedCodeGenerator === "python") {
-    result["package-name"] = GetFilenameWithoutExtension(inputFile).replace(/[^a-zA-Z0-9-_]/g, "").replace(/-/g, '_').replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
+    result["package-version"] = switches["pv"] || switches["packageversion"] || undefined;
+    result["package-name"] = switches["pn"] || switches["packagename"] || GetFilenameWithoutExtension(inputFile).replace(/[^a-zA-Z0-9-_]/g, "").replace(/-/g, '_').replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
   }
 
   result["output-file"] = switches["outputfilename"] || undefined;

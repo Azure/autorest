@@ -12,7 +12,7 @@ import { RealFileSystem } from '../lib/file-system';
 import { AutoRest } from '../lib/autorest-core';
 import { CancellationToken } from "../lib/ref/cancallation";
 import { CreateFileUri, ResolveUri } from "../lib/ref/uri";
-import { Message } from "../lib/message";
+import { Message, Channel } from "../lib/message";
 import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
 import { DataStore } from "../lib/data-store/data-store";
@@ -48,10 +48,18 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     autoRest.AddConfiguration({ "input-file": "https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json" });
     autoRest.AddConfiguration({ amar: true });
 
-    const messages: Message[] = [];
-    autoRest.Message.Subscribe((_, m) => messages.push(m));
+    const errorMessages: Message[] = [];
+    autoRest.Message.Subscribe((_, m) => {
+      if (m.Channel === Channel.Error) {
+        errorMessages.push(m);
+      }
+    });
     assert.strictEqual(await autoRest.Process().finish, true);
-    assert.strictEqual(messages.length, 7);
+    const expectedNumErrors = 7;
+    if (errorMessages.length !== expectedNumErrors) {
+      console.log(JSON.stringify(errorMessages, null, 2));
+    }
+    assert.strictEqual(errorMessages.length, expectedNumErrors);
   }
 
   @test @timeout(10000) async "AutoRest.dll AzureValidator"() {

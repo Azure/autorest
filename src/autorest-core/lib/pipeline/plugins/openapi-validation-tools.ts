@@ -149,7 +149,8 @@ class OpenApiValidationExample {
                   Text: error.message,
                   Key: [error.code],
                   Source: [
-                    { document: swaggerFileName, Position: <any>{ path: xmsexPath } }
+                    { document: swaggerFileName, Position: <any>{ path: xmsexPath } },
+                    { document: swaggerFileName, Position: <any>{ path: xmsexPath.slice(0, xmsexPath.length - 1).concat(["responses", responseCode]) } }
                   ]
                 });
 

@@ -37,7 +37,8 @@ export interface AutoRestConfigurationImpl {
   "namespace"?: string; // TODO: the modeler cares :( because it is badly designed
   "license-header"?: string;
   "add-credentials"?: boolean;
-  "package-name"?: string; // Ruby, Python
+  "package-name"?: string; // Ruby, Python, ...
+  "package-version"?: string;
   "sync-methods"?: "all" | "essential" | "none";
   "payload-flattening-threshold"?: number;
 }
