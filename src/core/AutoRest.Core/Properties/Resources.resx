@@ -350,6 +350,6 @@ Modelers:
     <value>Parameter Must have the "name" property defined with non-empty string as its value</value>
   </data>
   <data name="PutOperationRequestResponseSchemaMessage" xml:space="preserve">
-    <value>A PUT operation request body schema must be the same as its 200 response schema. Operation: {0} Request Model: {1} Response Model: {2}</value>
+    <value>A PUT operation request body schema must be the same as its 200 response schema. Operation: '{0}' Request Model: '{1}' Response Model: '{2}'</value>
   </data>
 </root>

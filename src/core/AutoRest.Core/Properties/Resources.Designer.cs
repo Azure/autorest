@@ -512,7 +512,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A PUT operation request body schema must be the same as its 200 response schema. Operation: {0} Request Model: {1} Response Model: {2}.
+        ///   Looks up a localized string similar to A PUT operation request body schema must be the same as its 200 response schema. Operation: &apos;{0}&apos; Request Model: &apos;{1}&apos; Response Model: &apos;{2}&apos;.
         /// </summary>
         public static string PutOperationRequestResponseSchemaMessage {
             get {
