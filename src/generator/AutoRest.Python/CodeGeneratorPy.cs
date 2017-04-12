@@ -44,7 +44,7 @@ namespace AutoRest.Python
             }
 
             // Service client
-            var folderName = codeModel.Name.ToPythonCase().ToLower();
+            var folderName = codeModel.Name.ToPythonCase().ToLower().Replace("_", "");
             var setupTemplate = new SetupTemplate { Model = codeModel };
             await Write(setupTemplate, "setup.py");
 
