@@ -40,8 +40,11 @@ class OpenApiValidationSemantic {
       const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
       const swagger = Parse<any>(swaggerFile);
 
-      utils.clearCache();
-      utils.docCache["cache.json"] = swagger;
+      Object.defineProperty(utils, "docCache", {
+        configurable: true,
+        get: () => <any>{ "cache.json": swagger },
+        set: () => { }
+      });
       const specValidationResult = await validation.validateSpec("cache.json", "off");
       const messages = specValidationResult.validateSpec;
       for (const message of messages.errors) {
@@ -74,8 +77,11 @@ class OpenApiValidationExample {
       const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
       const swagger = Parse<any>(swaggerFile);
 
-      utils.clearCache();
-      utils.docCache["cache.json"] = swagger;
+      Object.defineProperty(utils, "docCache", {
+        configurable: true,
+        get: () => <any>{ "cache.json": swagger },
+        set: () => { }
+      });
       const specValidationResult = await validation.validateExamples("cache.json", null, "off");
 
       for (const op of Object.getOwnPropertyNames(specValidationResult.operations)) {
