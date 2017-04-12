@@ -8,9 +8,9 @@ import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 import { Mapping } from "../ref/source-map";
 import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
 import { Parse as ParseLiterate } from "./literate";
-import { IndexToPosition, Lines } from './text-utility';
-import { ConfigurationView } from '../autorest-core';
-import { Channel, Message, SourceLocation, Range } from '../message';
+import { IndexToPosition, Lines } from "./text-utility";
+import { ConfigurationView } from "../autorest-core";
+import { Channel, Message, SourceLocation, Range } from "../message";
 import { safeEval } from "../ref/safe-eval";
 import { MessageEmitter } from "../configuration"
 import { From } from "../ref/linq"
@@ -188,7 +188,6 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | MessageEmitte
     const scopeEnlightenedCodeBlocks = intermediateScope.CreateScope("enlightened");
     const hsConfigFileBlocksWithContext = await ParseLiterate(hLiterate, scopeRawCodeBlocks);
 
-    // resolve md documentation (ALPHA)
     let codeBlockIndex = 0;
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
       // only consider YAML/JSON blocks
@@ -229,11 +228,12 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | MessageEmitte
       // fairly confident of no immediate syntax errors.
       const yamlAst = CloneAst(ast);
 
+      // resolve md documentation (ALPHA)
       const deferredErrors: Message[] = []; // ...because the file we wanna blame is not yet written
       const mapping: Mapping[] = [];
       for (const { path, node } of Descendants(yamlAst)) {
         // RESOLVE MARKDOWN INTO THE YAML
-        if ((path[path.length - 1] === "description" || path[path.length - 1] === "summary") && node.kind === Kind.SEQ) {
+        if ((path[path.length - 1] === "description") && node.kind === Kind.SEQ) {
           // resolve documentation
           const mdPath = ParseNode<string[]>(node);
           const heading = ResolveMarkdownPath(codeBlock, mdPath);
