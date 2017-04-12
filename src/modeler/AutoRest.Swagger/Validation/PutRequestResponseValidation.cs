@@ -72,13 +72,13 @@ namespace AutoRest.Swagger.Validation
                 {
                     continue;
                 }
-                
+                var respModel = op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()??string.Empty;
                 // if the 200 response schema does not match the request body parameter schema, flag violation
-                if (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() != reqBodySchema)
+                if (respModel != reqBodySchema)
                 {
                     var violatingPath = ValidationUtilities.GetOperationIdPath(op.OperationId, paths);
                     var violatingOpVerb = ValidationUtilities.GetOperationIdVerb(op.OperationId, violatingPath);
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath.Key).AppendProperty(violatingOpVerb).AppendProperty("operationId")), this, op.OperationId);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath.Key).AppendProperty(violatingOpVerb).AppendProperty("operationId")), this, op.OperationId, reqBodySchema, respModel);
                 }
             }
         }
