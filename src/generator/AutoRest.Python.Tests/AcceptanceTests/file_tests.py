@@ -94,7 +94,7 @@ class FileTests(unittest.TestCase):
             response.headers['Content-Length'] = str(3000 * 1024 * 1024)
 
         file_length = 0
-        client._client.add_hook('response', add_headers)
+        # client._client.add_hook('response', add_headers)
         stream = client.files.get_file_large(callback=test_callback)
         #for data in stream:
         #    file_length += len(data)

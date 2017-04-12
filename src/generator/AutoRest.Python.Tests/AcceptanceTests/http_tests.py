@@ -30,6 +30,12 @@ import sys
 import isodate
 import tempfile
 import requests
+from requests.packages.urllib3 import HTTPConnectionPool, Retry
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.poolmanager import (
+    PoolManager,
+    HTTPPoolKey,
+)
 from datetime import date, datetime, timedelta
 import os
 from os.path import dirname, pardir, join, realpath
@@ -47,12 +53,92 @@ from autoresthttpinfrastructuretestservice.models import (
     A, B, C, D, ErrorException)
 
 
+class TestRetry(Retry):
+    """Wrapper for urllib3 Retry object.
+    """
+
+    def __init__(self, **kwargs):
+        self.retry_cookie = None
+
+        return super(TestRetry, self).__init__(**kwargs)
+
+    def increment(self, method=None, url=None, response=None,
+                  error=None, _pool=None, _stacktrace=None):
+        increment = super(TestRetry, self).increment(
+            method, url, response, error, _pool, _stacktrace)
+
+        if response:
+            # Fixes open socket warnings in Python 3.
+            response.close()
+            response.release_conn()
+
+            # Collect retry cookie - we only do this for the test server
+            # at this point, unless we implement a proper cookie policy.
+            increment.retry_cookie = response.getheader("Set-Cookie")
+        return increment
+
+class TestHTTPConnectionPool(HTTPConnectionPool):
+    """Cookie logic only used for test server (localhost)"""
+
+    def _add_test_cookie(self, retries, headers):
+        host = self.host.strip('.')
+        if retries.retry_cookie and host == 'localhost':
+            if headers:
+                headers['cookie'] = retries.retry_cookie
+            else:
+                self.headers['cookie'] = retries.retry_cookie
+
+    def _remove_test_cookie(self, retries, headers):
+        host = self.host.strip('.')
+        if retries.retry_cookie and host == 'localhost':
+            retries.retry_cookie = None
+            if headers:
+                del headers['cookie']
+            else:
+                del self.headers['cookie']
+
+    def urlopen(self, method, url, body=None, headers=None,
+                retries=None, *args, **kwargs):
+        if hasattr(retries, 'retry_cookie'):
+            self._add_test_cookie(retries, headers)
+
+        response = super(TestHTTPConnectionPool, self).urlopen(
+            method, url, body, headers, retries, *args, **kwargs)
+
+        if hasattr(retries, 'retry_cookie'):
+            self._remove_test_cookie(retries, headers)
+        return response
+
+class TestAdapter(HTTPAdapter):
+
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = PoolManager(
+            num_pools=connections, maxsize=maxsize,
+            block=block)
+        test_hosts = [HTTPPoolKey('http', 'localhost', 3000, None, None, None, block, None),
+                      HTTPPoolKey('http', 'localhost.', 3000, None, None, None, block, None)]
+        for host in test_hosts:
+            self.poolmanager.pools[host] = \
+                TestHTTPConnectionPool(host[1], port=host[2])
+        self.max_retries = TestRetry()
+        self.max_retries.status_forcelist.add(408)
+        self.max_retries.status_forcelist.add(500)
+        self.max_retries.status_forcelist.add(502)
+        self.max_retries.status_forcelist.add(503)
+        self.max_retries.status_forcelist.add(504)
+        self.max_retries.method_whitelist = {'HEAD', 'GET', 'PUT', 'DELETE', 'OPTIONS', 'TRACE', 'PATCH', 'POST'}
+
+class TestAuthentication(object):
+    def signed_session(self):
+        session = requests.Session()
+        session.mount('http://localhost:3000/', TestAdapter())
+        return session
+
 class HttpTests(unittest.TestCase):
 
     def setUp(self):
         self.client = AutoRestHttpInfrastructureTestService(base_url="http://localhost:3000")
-        self.client.config.retry_policy.retries = 3
-        self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
+        self.client._client.creds = TestAuthentication()
         return super(HttpTests, self).setUp()
 
     def assertStatus(self, code, func, *args, **kwargs):
@@ -195,8 +281,6 @@ class HttpTests(unittest.TestCase):
         self.assertRaisesWithStatus(202,
             self.client.multiple_responses.get200_model_a202_valid)
 
-    @unittest.skipIf(int(requests.__version__.split('.')[1]) > 10,
-                     "The Pipeline hook is broken after 2.10.0")
     def test_server_error_status_codes(self):
 
         self.assertRaisesWithStatus(requests.codes.not_implemented,
