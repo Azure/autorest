@@ -23,7 +23,7 @@ export interface AutoRestConfigurationImpl {
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
-  "vscode"?: any;
+  "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   // plugin specific
   "output-file"?: string;
