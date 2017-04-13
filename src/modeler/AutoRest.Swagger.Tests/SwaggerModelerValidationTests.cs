@@ -213,13 +213,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void ListByOperationsValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "listby-operations.json"));
-            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 3);
-        }
-
-        [Fact]
         public void ArmResourcePropertiesBagValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "arm-resource-properties-bag.json"));
@@ -232,7 +225,14 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "collection-objects-naming.json"));
             messages.AssertOnlyValidationMessage(typeof(CollectionObjectPropertiesNamingValidation), 2);
         }
-        
+
+        [Fact]
+        public void BodyTopLevelPropertiesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-top-level-properties.json"));
+            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 2);
+        }
+
         [Fact]
         public void PropertyNameCasingValidation()
         {
@@ -666,16 +666,6 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "tracked-resource-get-valid-operation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourceGetOperationValidation), 0);
-        }
-
-        /// <summary>
-        /// Verifies that list by operations (operations that are named as *_listby*) are correctly named
-        /// </summary>
-        [Fact]
-        public void ListByOperationsCorrectlyNamed()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "listby-operations-valid-naming.json"));
-            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 0);
         }
 
         /// <summary>
