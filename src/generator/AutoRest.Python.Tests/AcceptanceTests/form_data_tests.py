@@ -41,7 +41,7 @@ sys.path.append(join(tests, "BodyFormData"))
 
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatformdataservice import AutoRestSwaggerBATFormDataService
+from auto_rest_swagger_bat_form_data_service import AutoRestSwaggerBATFormDataService
 
 class FormDataTests(unittest.TestCase):
 

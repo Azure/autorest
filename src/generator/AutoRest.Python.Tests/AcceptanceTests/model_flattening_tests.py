@@ -43,8 +43,8 @@ sys.path.append(join(tests, "ModelFlattening"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestresourceflatteningtestservice import AutoRestResourceFlatteningTestService
-from autorestresourceflatteningtestservice.models import (
+from auto_rest_resource_flattening_test_service import AutoRestResourceFlatteningTestService
+from auto_rest_resource_flattening_test_service.models import (
     FlattenedProduct,
     ErrorException,
     ResourceCollection,

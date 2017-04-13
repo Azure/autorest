@@ -42,9 +42,9 @@ sys.path.append(join(tests, "UrlMultiCollectionFormat"))
 
 from msrest.exceptions import DeserializationError, ValidationError
 
-from autoresturltestservice import AutoRestUrlTestService
-from autoresturlmutlicollectionformattestservice import AutoRestUrlMutliCollectionFormatTestService
-from autoresturltestservice.models.auto_rest_url_test_service_enums import UriColor
+from auto_rest_url_test_service import AutoRestUrlTestService
+from auto_rest_url_mutli_collection_format_test_service import AutoRestUrlMutliCollectionFormatTestService
+from auto_rest_url_test_service.models.auto_rest_url_test_service_enums import UriColor
 
 
 class UrlTests(unittest.TestCase):
