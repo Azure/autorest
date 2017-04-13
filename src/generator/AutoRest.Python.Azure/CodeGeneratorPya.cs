@@ -38,7 +38,15 @@ namespace AutoRest.Python.Azure
             }
 
             // Service client
-            var folderName = codeModel.Name.ToPythonCase().ToLower().Replace("_", "");
+            string[] namespaceParts = codeModel.Namespace.Split('.');
+            for (int i=1; i<namespaceParts.Length; ++i)
+            {
+                string initFolderName = Path.Combine(namespaceParts.Take(i).ToArray());
+                await Write("__import__('pkg_resources').declare_namespace(__name__)",
+                            Path.Combine(initFolderName, "__init__.py"), true);
+            }
+
+            var folderName = Path.Combine(codeModel.Namespace.Split('.'));
             var setupTemplate = new SetupTemplate { Model = codeModel };
             await Write(setupTemplate, "setup.py");
 
