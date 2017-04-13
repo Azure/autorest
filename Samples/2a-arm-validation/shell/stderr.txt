@@ -2,8 +2,6 @@ WARNING (NonAppJsonTypeWarning/S2004/SDKViolation): Please make sure that media 
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.consumes[1]
 WARNING (NonAppJsonTypeWarning/S2004/SDKViolation): Please make sure that media types other than 'application/json' are supported by your service.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.produces[1]
-ERROR (ListByOperationsValidation/M1003/SDKViolation): Operation Usage_List must be one of: usages_listbysubscriptionid, usages_list
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get.operationId
 ERROR (OperationsAPIImplementationValidation/M3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Storage/operations'.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths
 ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_CheckNameAvailability'
