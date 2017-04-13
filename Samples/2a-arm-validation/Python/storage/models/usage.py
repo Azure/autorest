@@ -14,8 +14,7 @@ class Usage(Model):
     :param unit: Gets the unit of measurement. Possible values include:
      'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
      'BytesPerSecond'
-    :type unit: str or :class:`UsageUnit
-     <storage_management_client.models.UsageUnit>`
+    :type unit: str or :class:`UsageUnit <storage.models.UsageUnit>`
     :param current_value: Gets the current count of the allocated resources in
      the subscription.
     :type current_value: int
@@ -23,8 +22,7 @@ class Usage(Model):
      allocated in the subscription.
     :type limit: int
     :param name: Gets the name of the type of usage.
-    :type name: :class:`UsageName
-     <storage_management_client.models.UsageName>`
+    :type name: :class:`UsageName <storage.models.UsageName>`
     """
 
     _validation = {
