@@ -11,7 +11,7 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class OperationIdNounPluralizedFormValidation : TypedRule<string>
+    public class OperationIdNounConflictingModelNames : TypedRule<string>
     {
         private readonly Regex NounVerbPattern = new Regex("^(?<noun>\\w+)?_(\\w+)$");
 
@@ -26,10 +26,7 @@ namespace AutoRest.Swagger.Validation
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         /// <summary>
-        /// This rule passes if the operation id doesn't contain a repeated value before and after the underscore
-        ///   e.g. User_GetUser
-        ///     or Users_DeleteUser
-        ///     or User_ListUsers
+        /// Check if the noun part of an operationId (Noun_Verb) conflicts with any model names provided in the spec
         /// </summary>
         /// <param name="entity">The operation id to test</param>
         /// <param name="formatParameters">The noun to be put in the failure message</param>
@@ -64,7 +61,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.OperationIdNounPluralizedMessage;
+        public override string MessageTemplate => Resources.OperationIdNounConflictingModelNamesMessage;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)

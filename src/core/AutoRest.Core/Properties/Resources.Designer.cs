@@ -433,7 +433,7 @@ namespace AutoRest.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to OperationId has a noun that conflicts with one of the model names in definitions section. Consider using the pluralized form for &apos;{0}&apos;.
         /// </summary>
-        public static string OperationIdNounPluralizedMessage {
+        public static string OperationIdNounConflictingModelNamesMessage {
             get {
                 return ResourceManager.GetString("OperationIdNounPluralizedMessage", resourceCulture);
             }

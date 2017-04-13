@@ -597,7 +597,7 @@ namespace AutoRest.Swagger.Tests
         public void OperationIdNounPluralizedValidationTest()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operationid-pluralized-noun-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(OperationIdNounPluralizedFormValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(OperationIdNounConflictingModelNames), 1);
         }
     }
 

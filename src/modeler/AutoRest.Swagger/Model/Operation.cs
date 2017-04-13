@@ -40,7 +40,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(PutOperationNameValidation))]
         [Rule(typeof(PatchOperationNameValidation))]
         [Rule(typeof(DeleteOperationNameValidation))]
-        [Rule(typeof(OperationIdNounPluralizedFormValidation))]
+        [Rule(typeof(OperationIdNounConflictingModelNames))]
         public string OperationId { get; set; }
 
         public string Summary
