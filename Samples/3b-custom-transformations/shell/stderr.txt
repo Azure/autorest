@@ -30,7 +30,7 @@ WARNING (BodyParametersValidation/M2063/SDKViolation): A body parameter must be 
 WARNING (BodyParametersValidation/M2063/SDKViolation): A body parameter must be named 'parameters'.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.parameters[2].name
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.parameters[2]
-ERROR (OperationIdNounPluralizedFormValidation/M2063/SDKViolation): OperationId has a noun that conflicts with one of the model names in definitions section. Consider using the pluralized form for 'Usage'
+ERROR (OperationIdNounConflictingModelNames/M2063/SDKViolation): OperationId has a noun that conflicts with one of the model names in definitions section. Consider using the pluralized form for 'Usage'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get.operationId
 ERROR (ResourceModelValidation/M3001/RPCViolation): Model definition 'StorageAccount' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccount
