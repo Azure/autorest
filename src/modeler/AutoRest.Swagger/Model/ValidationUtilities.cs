@@ -262,20 +262,23 @@ namespace AutoRest.Swagger.Model.Utilities
             if (op.Responses["200"]?.Schema?.Reference?.Equals(string.Empty) == false)
             {
                 var modelLink = op.Responses["200"].Schema.Reference;
+
+                var def = entity.Definitions.GetValueOrNull(modelLink.StripDefinitionPath());
+
                 // if the object has more than 2 properties, we can assume its a composite object
                 // that does not represent a collection of some type
-                if ((entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Count ?? 2) >= 2)
+                if ((def?.Properties?.Values?.Count ?? 2) >= 2)
                 {
                     return false;
                 }
 
                 // if the object is an allof on some other object, let's consider it to be a composite object
-                if (entity.Definitions[modelLink.StripDefinitionPath()].AllOf != null)
+                if (def.AllOf != null)
                 {
                     return false;
                 }
 
-                if (entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Any(type => type.Type == DataType.Array) ?? false)
+                if (def.Properties?.Values?.Any(type => type.Type == DataType.Array) ?? false)
                 {
                     return true;
                 }
