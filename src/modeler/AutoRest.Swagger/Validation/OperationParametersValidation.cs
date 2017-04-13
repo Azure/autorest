@@ -11,7 +11,6 @@ namespace AutoRest.Swagger.Validation
     public class OperationParametersValidation : TypedRule<SwaggerParameter>
     {
         private const string SubscriptionId = "subscriptionid";
-        private const string ApiVersion = "api-version";
 
         /// <summary>
         /// Id of the Rule.
@@ -30,7 +29,7 @@ namespace AutoRest.Swagger.Validation
         /// <param name="paths"></param>
         /// <returns></returns>
         public override bool IsValid(SwaggerParameter Parameter) => 
-           (!string.IsNullOrEmpty(Parameter.Reference) ||Parameter?.Schema != null || !(Parameter?.Name?.ToLower().Equals(SubscriptionId) == true || Parameter?.Name?.ToLower().Equals(ApiVersion) == true));
+           (!string.IsNullOrEmpty(Parameter.Reference) || Parameter.Schema != null || Parameter.Name?.ToLower().Equals(SubscriptionId) == false);
         
         /// <summary>
         /// The template message for this Rule. 
