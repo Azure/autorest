@@ -22,7 +22,7 @@ import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
-import { Exception } from "./lib/exception";
+import { Exception, OperationCanceledException } from './lib/exception';
 
 /**
  * Legacy AutoRest
@@ -209,7 +209,7 @@ async function main() {
     }
 
     if (e instanceof Error) {
-      console.error(e.message);
+      console.error(e);
       process.exit(1);
     }
 

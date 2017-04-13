@@ -178,7 +178,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
     super();
   }
 
-  public async Read(uri: string): Promise<DataHandleRead> {
+  public async Read(uri: string): Promise<DataHandleRead | null> {
     // special URI handlers
     // - GitHub
     if (uri.startsWith("https://github")) {
@@ -198,7 +198,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
       data = await this.fs.ReadFile(uri) || await ReadUri(uri);
     } finally {
       if (!data) {
-        throw new Error(`FileSystem does not contain file ${uri} and failed to physically load it.`);
+        return null;
       }
     }
     const writeHandle = await this.slave.Write(uri);

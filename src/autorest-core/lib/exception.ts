@@ -18,3 +18,10 @@ export class OutstandingTaskAlreadyCompletedException extends Exception {
     Object.setPrototypeOf(this, OutstandingTaskAlreadyCompletedException.prototype);
   }
 }
+
+export class OperationAbortedException extends Exception {
+  constructor() {
+    super("Error occurred. Exiting.", 1);
+    Object.setPrototypeOf(this, OperationAbortedException.prototype);
+  }
+}

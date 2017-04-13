@@ -1,3 +1,4 @@
+import { OperationAbortedException } from '../exception';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -130,54 +131,19 @@ export async function Parse(config: ConfigurationView, literate: DataHandleRead,
   return hRawDoc;
 }
 
-export async function ParseCodeBlocks(config: MessageEmitter | ConfigurationView, literate: DataHandleRead, workingScope: DataStoreView): Promise<Array<CodeBlock>> {
+export async function ParseCodeBlocks(config: ConfigurationView, literate: DataHandleRead, workingScope: DataStoreView): Promise<Array<CodeBlock>> {
   const docScope = workingScope.CreateScope(`doc_tmp`);
   const hwRawDoc = await workingScope.Write(`doc.yaml`);
   return await ParseCodeBlocksInternal(config, literate, hwRawDoc, docScope);
 }
 
-async function ParseInternal(config: ConfigurationView | MessageEmitter, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
+async function ParseInternal(config: ConfigurationView, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
   // merge the parsed codeblocks
   const blocks = (await ParseCodeBlocksInternal(config, hLiterate, hResult, intermediateScope)).map(each => each.data);
   return await MergeYamls(config, blocks, hResult);
 }
 
-async function DoBlame(message: string, index: number, data: DataHandleRead, config: ConfigurationView | MessageEmitter, hLiterate: DataHandleRead) {
-  let Source = [<SourceLocation>{ Position: IndexToPosition(data, index), document: data.key }];
-
-  const blameSources = await Promise.all(Source.map(async s => {
-    try {
-      const blameTree = await config.DataStore.Blame(s.document, s.Position);
-      const result = [...blameTree.BlameInputs()];
-      if (result.length > 0) {
-        return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
-      }
-    } catch (e) {
-    }
-    return [s];
-  }));
-
-  Source = From(blameSources).SelectMany(x => x).ToArray();
-
-  config.messageEmitter.Message.Dispatch({
-    Channel: Channel.Error,
-    Text: message,
-    Source: Source,
-    Range: Source.map(s => {
-      let positionStart = s.Position;
-      let positionEnd = <sourceMap.Position>{ line: s.Position.line, column: s.Position.column + (s.Position.length || 3) };
-
-      return <Range>{
-        document: hLiterate.key,
-        start: positionStart,
-        end: positionEnd
-      }
-    })
-  });
-
-}
-
-async function ParseCodeBlocksInternal(config: ConfigurationView | MessageEmitter, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<CodeBlock[]> {
+async function ParseCodeBlocksInternal(config: ConfigurationView, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<CodeBlock[]> {
   let hsConfigFileBlocks: CodeBlock[] = [];
 
   const rawMarkdown = hLiterate.ReadData();
@@ -202,13 +168,13 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | MessageEmitte
           // quick check on data.
           JSON.parse(data.ReadData());
         } catch (e) {
-          DoBlame(
-            (e.message.substring(0, e.message.lastIndexOf("at")).trim()),
-            <number>(e.message.substring(e.message.lastIndexOf(" ")).trim()),
-            data,
-            config,
-            hLiterate);
-          throw new Error("Syntax Error Encountered.");
+          const index = parseInt(e.message.substring(e.message.lastIndexOf(" ")).trim());
+          config.Message({
+            Channel: Channel.Error,
+            Text: "Syntax Error Encountered: " + e.message.substring(0, e.message.lastIndexOf("at")).trim(),
+            Source: [<SourceLocation>{ Position: IndexToPosition(data, index), document: data.key }],
+          });
+          throw new OperationAbortedException();
         }
       }
 
@@ -218,11 +184,15 @@ async function ParseCodeBlocksInternal(config: ConfigurationView | MessageEmitte
       // quick syntax check.
       ParseNode(ast, async (message, index) => {
         failing = true;
-        DoBlame(message, index, data, config, hLiterate);
+        config.Message({
+          Channel: Channel.Error,
+          Text: "Syntax Error Encountered: " + message,
+          Source: [<SourceLocation>{ Position: IndexToPosition(data, index), document: data.key }],
+        });
       });
 
       if (failing) {
-        throw new Error("Syntax Errors Encountered.")
+        throw new OperationAbortedException();
       }
 
       // fairly confident of no immediate syntax errors.
