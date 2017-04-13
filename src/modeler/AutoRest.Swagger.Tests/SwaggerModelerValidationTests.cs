@@ -230,7 +230,7 @@ namespace AutoRest.Swagger.Tests
         public void BodyTopLevelPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-top-level-properties.json"));
-            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 2);
+            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 1);
         }
 
         [Fact]

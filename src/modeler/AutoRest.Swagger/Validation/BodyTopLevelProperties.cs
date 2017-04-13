@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class BodyTopLevelProperties : TypedRule<Dictionary<string, Operation>>
+    public class BodyTopLevelProperties : TypedRule<Dictionary<string, Schema>>
     {
 
         private static readonly IEnumerable<string> AllowedTopLevelProperties = new List<string>()
@@ -35,10 +35,16 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="definitions">The model definitions</param>
         /// <param name="context">The context object</param>
-        /// <returns></returns>
-        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Operation> entity, RuleContext context)
+        /// <returns>validation messages</returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            return base.GetValidationMessages(entity, context);
+            var resModels = context.ResourceModels;
+            var violatingModels = resModels.Where(resModel => definitions[resModel].Properties.Keys.Except(AllowedTopLevelProperties).Any());
+            foreach (var violatingModel in violatingModels)
+            {
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingModel).AppendProperty("properties")), this, 
+                    violatingModel, string.Join(",", definitions[violatingModel].Properties.Keys.Except(AllowedTopLevelProperties)));
+            }
         }
         
         /// <summary>
