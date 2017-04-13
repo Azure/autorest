@@ -20,8 +20,7 @@ paths:
         name: body
         required: true
         schema:
-          type: 
-            $ref: '#/definitions/Cowball'
+          $ref: '#/definitions/Cowball'
       responses:
         '200':
           description: Cowbell was added.

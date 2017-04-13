@@ -34,6 +34,11 @@ namespace tiny
         public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
+        /// Gets the ICowbellOps.
+        /// </summary>
+        public virtual ICowbellOps CowbellOps { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the CowbellFactory class.
         /// </summary>
         /// <param name='handlers'>
@@ -112,6 +117,7 @@ namespace tiny
         /// </summary>
         private void Initialize()
         {
+            CowbellOps = new CowbellOps(this);
             BaseUri = new System.Uri("https://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

@@ -1,57 +1,29 @@
-# Cowbell Factory
-
-## General
-
-``` yaml
 swagger: '2.0'
 info:
   description: This is a sample.
   version: 1.0.0
   title: Cowbell Factory
+host: localhost
 schemes:
 - https
 consumes:
 - application/json
 produces:
 - application/json
-```
-
-Host definition in JSON, because we can.
-
-``` json
-{ "host": "localhost" }
-```
-
-## Operations
-
-### Add Cowbell
-
-A good description.
-
-``` yaml
 paths:
   "/cowbell":
     post:
-      description: []
+      description: A good description.
       operationId: Cowbell_Add
       parameters:
       - in: body
         name: body
         required: true
         schema:
-          $ref: '#/definitions/Cowbell'
+          $ref: 'i-do-not-exist.json#/definitions/Cowbell'
       responses:
         '200':
           description: Cowbell was added.
-```
-
-## Definitions
-
-### Cowbell
-
-A cowbell.
-
-``` yaml
 definitions:
   Cowbell:
     required:
@@ -62,5 +34,4 @@ definitions:
         format: int64
       name:
         type: string
-    description: []
-```
+    description: A cowbell.

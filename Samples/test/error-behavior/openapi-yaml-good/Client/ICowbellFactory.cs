@@ -28,5 +28,10 @@ namespace tiny
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the ICowbellOperations.
+        /// </summary>
+        ICowbellOperations Cowbell { get; }
+
     }
 }

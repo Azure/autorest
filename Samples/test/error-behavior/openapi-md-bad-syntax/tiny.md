@@ -39,7 +39,7 @@ paths:
         name: body
         required: true
         schema:
-          type: Cowbell
+          $ref: '#/definitions/Cowbell'
       responses:
         '200':
           description: Cowbell was added.

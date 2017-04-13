@@ -1,4 +1,4 @@
-# Test: Syntactically valid OpenAPI definition in YAML
+# Test: Invalid $ref
 
 > see https://aka.ms/autorest
 
