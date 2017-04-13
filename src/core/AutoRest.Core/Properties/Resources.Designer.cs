@@ -341,7 +341,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Since operation &apos;{0}&apos; response has model definition &apos;{1}&apos;, it should be named as &quot;list_*&quot;.
+        ///   Looks up a localized string similar to Since operation &apos;{0}&apos; response has model definition &apos;{1}&apos;, it should be of the form &quot;*_list*&quot;.
         /// </summary>
         public static string ListOperationsNamingWarningMessage {
             get {

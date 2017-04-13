@@ -338,7 +338,7 @@ Modelers:
     <value>Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
   </data>
   <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
-    <value>Since operation '{0}' response has model definition '{1}', it should be named as "list_*"</value>
+    <value>Since operation '{0}' response has model definition '{1}', it should be of the form "*_list*"</value>
   </data>
   <data name="LongRunningResponseNotValid" xml:space="preserve">
     <value>A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.</value>
