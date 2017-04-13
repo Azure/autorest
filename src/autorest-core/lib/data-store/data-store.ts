@@ -16,8 +16,6 @@ import { Lazy, LazyPromise } from '../lazy';
 import { IFileSystem } from "../file-system";
 import { OperationCanceledException } from "../exception";
 
-export const helloworld = "hi"; // TODO: wat?
-
 /********************************************
  * Data model section (not exposed)
  ********************************************/

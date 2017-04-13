@@ -167,7 +167,6 @@ export class AutoRest extends EventEmitter {
           return false;
         }
 
-        // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
         this.Message.Dispatch({ Channel: Channel.Debug, Text: `Starting Process() Run Pipeline.` });
 
         const result = await Promise.race([

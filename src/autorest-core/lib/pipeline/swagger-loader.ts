@@ -16,6 +16,8 @@ import { CreateAssignmentMapping } from "../source-map/source-map";
 import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 
+let ctr = 0;
+
 async function EnsureCompleteDefinitionIsPresent(
   config: ConfigurationView,
   inputScope: DataStoreViewReadonly,
@@ -160,8 +162,7 @@ async function EnsureCompleteDefinitionIsPresent(
   }
 
   // commit back
-  const id = (await workingScope.Enum()).length;
-  const target = await workingScope.Write(`revision_${id}.yaml`);
+  const target = await workingScope.Write(`revision_${++ctr}.yaml`);
   externalFiles[sourceFileUri] = await target.WriteObject(sourceDocObj, sourceDocMappings, inputs);
   return sourceDocMappings;
 }
