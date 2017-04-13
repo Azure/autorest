@@ -422,20 +422,20 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OperationId has a noun that conflicts with one of the model names in definitions section. Consider using the pluralized form for &apos;{0}&apos;.
+        /// </summary>
+        public static string OperationIdNounConflictingModelNamesMessage {
+            get {
+                return ResourceManager.GetString("OperationIdNounConflictingModelNamesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Per the Noun_Verb convention for Operation Ids, the noun &apos;{0}&apos; should not appear after the underscore..
         /// </summary>
         public static string OperationIdNounInVerb {
             get {
                 return ResourceManager.GetString("OperationIdNounInVerb", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OperationId has a noun that conflicts with one of the model names in definitions section. Consider using the pluralized form for &apos;{0}&apos;.
-        /// </summary>
-        public static string OperationIdNounConflictingModelNamesMessage {
-            get {
-                return ResourceManager.GetString("OperationIdNounPluralizedMessage", resourceCulture);
             }
         }
         
