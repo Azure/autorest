@@ -28,6 +28,8 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
+        // TODO: api-version validation needs to be added once the feature to distinguish rules between
+        // single and composite swaggers has been implemented.
         public override bool IsValid(SwaggerParameter Parameter) => 
            (!string.IsNullOrEmpty(Parameter.Reference) || Parameter.Schema != null || Parameter.Name?.ToLower().Equals(SubscriptionId) == false);
         

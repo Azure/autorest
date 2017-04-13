@@ -431,7 +431,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section, define these in the global parameters section instead.
+        ///   Looks up a localized string similar to Parameter &quot;subscriptionId&quot; is not allowed in the operations section, define it in the global parameters section instead.
         /// </summary>
         public static string OperationParametersNotAllowedMessage {
             get {
