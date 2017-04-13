@@ -295,7 +295,11 @@ export class DataStore extends DataStoreView {
   }
 
   public ReadStrictSync(absoluteUri: string): DataHandleRead {
-    return new DataHandleRead(absoluteUri, this.store[absoluteUri]);
+    const entry = this.store[absoluteUri];
+    if (entry === undefined) {
+      throw new Error(`Object '${absoluteUri}' does not exist.`);
+    }
+    return new DataHandleRead(absoluteUri, entry);
   }
 
   public async Read(uri: string): Promise<DataHandleRead | null> {

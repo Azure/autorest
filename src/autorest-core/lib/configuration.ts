@@ -1,3 +1,4 @@
+import { OperationAbortedException } from './exception';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -242,7 +243,7 @@ export class ConfigurationView {
           } catch (e) {
             // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
             //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
-            //console.log(e);
+            console.log(e);
           }
           return [s];
         });
@@ -281,8 +282,11 @@ export class ConfigurationView {
           default:
             let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join("/")})` : ""}: ${mx.Text}`;
             for (const source of mx.Source || []) {
-              if (source.Position && source.Position.path) {
-                text += `\n        Path: ${source.document}#${stringify(source.Position.path)}`;
+              if (source.Position) {
+                text += `\n        ${source.document}:${source.Position.line}:${source.Position.column}`;
+                if (source.Position.path) {
+                  text += ` (${stringify(source.Position.path)})`;
+                }
               }
             }
             mx.Text = text;
@@ -302,7 +306,6 @@ export class ConfigurationView {
 
 export class Configuration {
   public async CreateView(messageEmitter: MessageEmitter, ...configs: Array<any>): Promise<ConfigurationView> {
-    const workingScope: DataStore = new DataStore();
     const configFileUri = this.fileSystem && this.uriToConfigFileOrWorkingFolder
       ? await Configuration.DetectConfigurationFile(this.fileSystem, this.uriToConfigFileOrWorkingFolder)
       : null;
@@ -312,7 +315,7 @@ export class Configuration {
     if (configFileUri === null) {
       return new ConfigurationView(messageEmitter, this.uriToConfigFileOrWorkingFolder || "file:///", ...configs, defaults);
     } else {
-      const inputView = workingScope.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
+      const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
 
       const tmpConfig = new ConfigurationView(messageEmitter, ResolveUri(configFileUri, "."), ...configs);
 
@@ -320,10 +323,18 @@ export class Configuration {
       const hConfig = await ParseCodeBlocks(
         tmpConfig,
         await inputView.ReadStrict(configFileUri),
-        workingScope.CreateScope("config"));
+        messageEmitter.DataStore.CreateScope("config"));
 
       const blocks = await Promise.all(From<CodeBlock>(hConfig).Select(async each => {
         const block = each.data.ReadObject<AutoRestConfigurationImpl>();
+        if (typeof block !== "object") {
+          tmpConfig.Message({
+            Channel: Channel.Error,
+            Text: "Syntax error: Invalid YAML object.",
+            Source: [<SourceLocation>{ document: each.data.key, Position: { line: 1, column: 0 } }]
+          });
+          throw new OperationAbortedException();
+        }
         block.__info = each.info;
         return block;
       }));

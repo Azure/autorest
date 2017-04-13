@@ -13,7 +13,7 @@ import { Message, Channel } from "../lib/message";
 
   @test @timeout(60000) async "suppression"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
-    autoRest.Message.Subscribe((_, m) => m.Channel == Channel.Fatal ? console.error(m.Text) : "");
+    autoRest.Message.Subscribe((_, m) => m.Channel === Channel.Fatal ? console.error(m.Text) : "");
 
     // reference run
     await autoRest.ResetConfiguration();
