@@ -10,7 +10,7 @@ import { ConfigurationView } from "../autorest-core";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/data-store";
 import { IsPrefix, JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { ResolvePath, ResolveRelativeNode } from "../parsing/yaml";
-import { Descendants, YAMLNodeWithPath, ToAst, StringifyAst, CloneAst } from "../ref/yaml";
+import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNodeWithPath } from '../ref/yaml';
 import { ResolveUri } from "../ref/uri";
 import { From } from "../ref/linq";
 import { Mappings, Mapping } from "../ref/source-map";
@@ -303,7 +303,7 @@ export async function ComposeSwaggers(config: ConfigurationView, infoSection: an
         if (clientPC) {
           for (const method of methods) {
             if (!method.obj[pc]) {
-              populate.push(() => method.obj[pc] = clientPC);
+              populate.push(() => method.obj[pc] = Clone(clientPC));
               mapping.push(...CreateAssignmentMapping(
                 clientPC, inputSwagger.key,
                 [pc], method.path.concat([pc]),
