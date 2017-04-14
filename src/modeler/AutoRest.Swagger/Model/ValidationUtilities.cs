@@ -174,7 +174,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <returns>true if the model hierarchy contains all of the read only properties</returns>
         public static bool ContainsReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> readOnlyPropertiesToCheck)
         {
-            var propertyList = EnumerateRequiredProperties(modelName, definitions);
+            var propertyList = EnumerateReadOnlyProperties(modelName, definitions);
             return !readOnlyPropertiesToCheck.Except(propertyList).Any();
         }
 
