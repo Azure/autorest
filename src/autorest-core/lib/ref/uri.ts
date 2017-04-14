@@ -54,9 +54,16 @@ export async function ExistsUri(uri: string): Promise<boolean> {
 /***********************
  * URI manipulation
  ***********************/
-import { isAbsolute, dirname } from "path";
+import { dirname } from "path";
 const URI = require("urijs");
 const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
+
+// remake of path.isAbsolute... because it's platform dependent:
+// Windows: C:\\... -> true    /... -> true
+// Linux:   C:\\... -> false   /... -> true
+function isAbsolute(path: string): boolean {
+  return !!path.match(/^(\/|[a-zA-Z]:\\)/);
+}
 
 /**
  * Create a 'file:///' URI from given absolute path.
