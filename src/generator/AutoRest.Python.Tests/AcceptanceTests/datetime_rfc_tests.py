@@ -43,7 +43,7 @@ sys.path.append(join(tests, "BodyDateTimeRfc1123"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestrfc1123datetimetestservice import AutoRestRFC1123DateTimeTestService
+from auto_rest_rfc1123_date_time_test_service import AutoRestRFC1123DateTimeTestService
 
 
 class DateTimeRfcTests(unittest.TestCase):

@@ -173,8 +173,23 @@ namespace AutoRest.Python.Model
 
         public string PackageName => Settings.Instance.PackageName.Else(Name.ToPythonCase().Replace("_", ""));
 
-        //TODO: Proper namespace validation and formatting
-        public string modelNamespace => Namespace.Else(Name.ToPythonCase()).ToLower();
+        private string _namespace;
+        public override string Namespace
+        {
+            get { return _namespace; }
+            set
+            {
+                if (value != _namespace)
+                {
+                    // In Python, the Autorest Code normalisation is not good.
+                    // So we change the setter to keep the value
+                    // and we put the initial Namespace value back from the Python
+                    // transformer.
+                    // We lower it to respect PEP8
+                    _namespace = value.ToLower();
+                }
+            }
+        }
 
         public string ServiceDocument
         {

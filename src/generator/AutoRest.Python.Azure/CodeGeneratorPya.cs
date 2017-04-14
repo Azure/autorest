@@ -38,23 +38,32 @@ namespace AutoRest.Python.Azure
             }
 
             // Service client
+            string[] namespaceParts = codeModel.Namespace.Split('.');
+            for (int i=1; i<namespaceParts.Length; ++i)
+            {
+                string initFolderName = Path.Combine(namespaceParts.Take(i).ToArray());
+                await Write("__import__('pkg_resources').declare_namespace(__name__)",
+                            Path.Combine(initFolderName, "__init__.py"), true);
+            }
+
+            var folderName = Path.Combine(codeModel.Namespace.Split('.'));
             var setupTemplate = new SetupTemplate { Model = codeModel };
             await Write(setupTemplate, "setup.py");
 
             var serviceClientInitTemplate = new ServiceClientInitTemplate { Model = codeModel };
-            await Write(serviceClientInitTemplate, Path.Combine(codeModel.PackageName, "__init__.py"));
+            await Write(serviceClientInitTemplate, Path.Combine(folderName, "__init__.py"));
 
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel, };
-            await Write(serviceClientTemplate, Path.Combine(codeModel.PackageName, codeModel.Name.ToPythonCase() + ".py"));
+            await Write(serviceClientTemplate, Path.Combine(folderName, codeModel.Name.ToPythonCase() + ".py"));
 
             var versionTemplate = new VersionTemplate { Model = codeModel, };
-            await Write(versionTemplate, Path.Combine(codeModel.PackageName, "version.py"));
+            await Write(versionTemplate, Path.Combine(folderName, "version.py"));
 
             var exceptionTemplate = new ExceptionTemplate { Model = codeModel, };
-            await Write(exceptionTemplate, Path.Combine(codeModel.PackageName, "exceptions.py"));
+            await Write(exceptionTemplate, Path.Combine(folderName, "exceptions.py"));
 
             var credentialTemplate = new CredentialTemplate { Model = codeModel, };
-            await Write(credentialTemplate, Path.Combine(codeModel.PackageName, "credentials.py"));
+            await Write(credentialTemplate, Path.Combine(folderName, "credentials.py"));
 
             //Models
             var models = codeModel.ModelTemplateModels.Where(each => !each.Extensions.ContainsKey(AzureExtensions.ExternalExtension));
@@ -64,12 +73,12 @@ namespace AutoRest.Python.Azure
                 {
                     Model = codeModel
                 };
-                await Write(modelInitTemplate, Path.Combine(codeModel.PackageName, "models", "__init__.py"));
+                await Write(modelInitTemplate, Path.Combine(folderName, "models", "__init__.py"));
 
                 foreach (var modelType in models)
                 {
                     var modelTemplate = new ModelTemplate { Model = modelType };
-                    await Write(modelTemplate, Path.Combine(codeModel.PackageName, "models", modelType.Name.ToPythonCase() + ".py"));
+                    await Write(modelTemplate, Path.Combine(folderName, "models", modelType.Name.ToPythonCase() + ".py"));
                 }
             }
 
@@ -80,7 +89,7 @@ namespace AutoRest.Python.Azure
                 {
                     Model = codeModel
                 };
-                await Write(methodGroupIndexTemplate, Path.Combine(codeModel.PackageName, "operations", "__init__.py"));
+                await Write(methodGroupIndexTemplate, Path.Combine(folderName, "operations", "__init__.py"));
 
                 foreach (var methodGroupModel in codeModel.MethodGroupModels)
                 {
@@ -88,7 +97,7 @@ namespace AutoRest.Python.Azure
                     {
                         Model = methodGroupModel as MethodGroupPya
                     };
-                    await Write(methodGroupTemplate, Path.Combine(codeModel.PackageName, "operations", ((string) methodGroupModel.TypeName).ToPythonCase() + ".py"));
+                    await Write(methodGroupTemplate, Path.Combine(folderName, "operations", ((string) methodGroupModel.TypeName).ToPythonCase() + ".py"));
                 }
             }
 
@@ -96,7 +105,7 @@ namespace AutoRest.Python.Azure
             if (codeModel.EnumTypes.Any())
             {
                 var enumTemplate = new EnumTemplate { Model = codeModel.EnumTypes };
-                await Write(enumTemplate, Path.Combine(codeModel.PackageName, "models", codeModel.Name.ToPythonCase() + "_enums.py"));
+                await Write(enumTemplate, Path.Combine(folderName, "models", codeModel.Name.ToPythonCase() + "_enums.py"));
             }
 
             // Page class
@@ -106,7 +115,7 @@ namespace AutoRest.Python.Azure
                 {
                     Model = pageModel
                 };
-                await Write(pageTemplate, Path.Combine(codeModel.PackageName, "models", pageModel.TypeDefinitionName.ToPythonCase() + ".py"));
+                await Write(pageTemplate, Path.Combine(folderName, "models", pageModel.TypeDefinitionName.ToPythonCase() + ".py"));
             }
         }
     }

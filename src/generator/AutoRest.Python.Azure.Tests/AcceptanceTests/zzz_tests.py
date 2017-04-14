@@ -40,11 +40,11 @@ cwd = dirname(realpath(__file__))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
-sys.path.append(join(tests, "AzureReport"))
+sys.modules['fixtures'].__path__.append(join(tests, "AzureReport", "fixtures"))
 
 from msrest.exceptions import DeserializationError
 
-from autorestreportserviceforazure import AutoRestReportServiceForAzure
+from fixtures.acceptancetestsazurereport import AutoRestReportServiceForAzure
 from msrest.authentication import BasicTokenAuthentication
 
 

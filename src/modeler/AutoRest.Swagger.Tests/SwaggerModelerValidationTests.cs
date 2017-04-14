@@ -123,7 +123,7 @@ namespace AutoRest.Swagger.Tests
             // ignore ServiceDefinitionParameters validation rule since it overlaps with this
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operations-invalid-parameters.json"))
                             .Where(msg => msg.Rule.GetType().Name != "ServiceDefinitionParameters");
-            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 2);
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 1);
         }
 
         [Fact]
@@ -753,6 +753,17 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
         }
+
+        /// <summary>
+        /// Verifies resource model readonly properties
+        /// </summary>
+        [Fact]
+        public void ValidResourceModelReadOnlyProperties()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-readonly-props.json"));
+            messages.AssertOnlyValidationMessage(typeof(ResourceModelValidation), 0);
+        }
+
 
     }
 

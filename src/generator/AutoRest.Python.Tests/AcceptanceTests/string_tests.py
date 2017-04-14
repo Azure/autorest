@@ -44,8 +44,8 @@ sys.path.append(join(tests, "BodyString"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError, SerializationError
 
-from autorestswaggerbatservice import AutoRestSwaggerBATService
-from autorestswaggerbatservice.models.auto_rest_swagger_bat_service_enums import *
+from auto_rest_swagger_bat_service import AutoRestSwaggerBATService
+from auto_rest_swagger_bat_service.models.auto_rest_swagger_bat_service_enums import *
 
 class StringTests(unittest.TestCase):
 
