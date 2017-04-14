@@ -9,7 +9,7 @@ namespace applicationGateway.Models
     using System.Linq;
 
     /// <summary>
-    /// Vpn Client Parameters for package generation
+    /// VpnClientParameters
     /// </summary>
     public partial class VpnClientParameters
     {
@@ -42,7 +42,7 @@ namespace applicationGateway.Models
         /// Gets or sets VPN client Processor Architecture. Possible values
         /// are: 'AMD64' and 'X86'. Possible values include: 'Amd64', 'X86'
         /// </summary>
-        [JsonProperty(PropertyName = "processorArchitecture")]
+        [JsonProperty(PropertyName = "ProcessorArchitecture")]
         public string ProcessorArchitecture { get; set; }
 
         /// <summary>

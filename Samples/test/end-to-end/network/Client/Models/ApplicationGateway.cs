@@ -37,8 +37,9 @@ namespace applicationGateway.Models
         /// <param name="sslPolicy">SSL policy of the application gateway
         /// resource.</param>
         /// <param name="operationalState">Operational state of the application
-        /// gateway resource. Possible values include: 'Stopped', 'Starting',
-        /// 'Running', 'Stopping'</param>
+        /// gateway resource. Possible values are: 'Stopped', 'Started',
+        /// 'Running', and 'Stopping'. Possible values include: 'Stopped',
+        /// 'Starting', 'Running', 'Stopping'</param>
         /// <param name="gatewayIPConfigurations">Subnets of application the
         /// gateway resource.</param>
         /// <param name="authenticationCertificates">Authentication
@@ -113,8 +114,9 @@ namespace applicationGateway.Models
 
         /// <summary>
         /// Gets operational state of the application gateway resource.
-        /// Possible values include: 'Stopped', 'Starting', 'Running',
-        /// 'Stopping'
+        /// Possible values are: 'Stopped', 'Started', 'Running', and
+        /// 'Stopping'. Possible values include: 'Stopped', 'Starting',
+        /// 'Running', 'Stopping'
         /// </summary>
         [JsonProperty(PropertyName = "properties.operationalState")]
         public string OperationalState { get; private set; }

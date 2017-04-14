@@ -7,9 +7,6 @@ namespace applicationGateway.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    /// <summary>
-    /// Gateway routing details
-    /// </summary>
     public partial class GatewayRoute
     {
         /// <summary>

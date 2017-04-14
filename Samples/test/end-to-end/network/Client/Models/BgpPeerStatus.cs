@@ -7,9 +7,6 @@ namespace applicationGateway.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    /// <summary>
-    /// BGP peer status details
-    /// </summary>
     public partial class BgpPeerStatus
     {
         /// <summary>
@@ -37,7 +34,7 @@ namespace applicationGateway.Models
         /// <param name="messagesSent">The number of BGP messages sent</param>
         /// <param name="messagesReceived">The number of BGP messages
         /// received</param>
-        public BgpPeerStatus(string localAddress = default(string), string neighbor = default(string), int? asn = default(int?), string state = default(string), string connectedDuration = default(string), long? routesReceived = default(long?), long? messagesSent = default(long?), long? messagesReceived = default(long?))
+        public BgpPeerStatus(string localAddress = default(string), string neighbor = default(string), int? asn = default(int?), string state = default(string), string connectedDuration = default(string), long? routesReceived = default(long?), long? messagesSent = default(long?), int? messagesReceived = default(int?))
         {
             LocalAddress = localAddress;
             Neighbor = neighbor;
@@ -102,7 +99,7 @@ namespace applicationGateway.Models
         /// Gets the number of BGP messages received
         /// </summary>
         [JsonProperty(PropertyName = "messagesReceived")]
-        public long? MessagesReceived { get; private set; }
+        public int? MessagesReceived { get; private set; }
 
     }
 }

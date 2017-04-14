@@ -28,8 +28,9 @@ namespace applicationGateway.Models
         /// <param name="address">IP address or FQDN of backend server.</param>
         /// <param name="ipConfiguration">Reference of IP configuration of
         /// backend server.</param>
-        /// <param name="health">Health of backend server. Possible values
-        /// include: 'Unknown', 'Up', 'Down', 'Partial', 'Draining'</param>
+        /// <param name="health">Health of backend server. Possible values are:
+        /// 'Unknown', 'Up', 'Down', and 'Partial'. Possible values include:
+        /// 'Unknown', 'Up', 'Down', 'Partial'</param>
         public ApplicationGatewayBackendHealthServer(string address = default(string), SubResource ipConfiguration = default(SubResource), string health = default(string))
         {
             Address = address;
@@ -56,8 +57,9 @@ namespace applicationGateway.Models
         public SubResource IpConfiguration { get; set; }
 
         /// <summary>
-        /// Gets or sets health of backend server. Possible values include:
-        /// 'Unknown', 'Up', 'Down', 'Partial', 'Draining'
+        /// Gets or sets health of backend server. Possible values are:
+        /// 'Unknown', 'Up', 'Down', and 'Partial'. Possible values include:
+        /// 'Unknown', 'Up', 'Down', 'Partial'
         /// </summary>
         [JsonProperty(PropertyName = "health")]
         public string Health { get; set; }

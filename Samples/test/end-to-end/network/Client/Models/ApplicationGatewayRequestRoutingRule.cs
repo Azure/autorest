@@ -29,7 +29,8 @@ namespace applicationGateway.Models
         /// ApplicationGatewayRequestRoutingRule class.
         /// </summary>
         /// <param name="id">Resource ID.</param>
-        /// <param name="ruleType">Rule type. Possible values include: 'Basic',
+        /// <param name="ruleType">Rule type. Possible values are: 'Basic' and
+        /// 'PathBasedRouting'. Possible values include: 'Basic',
         /// 'PathBasedRouting'</param>
         /// <param name="backendAddressPool">Backend address pool resource of
         /// the application gateway. </param>
@@ -67,7 +68,8 @@ namespace applicationGateway.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets rule type. Possible values include: 'Basic',
+        /// Gets or sets rule type. Possible values are: 'Basic' and
+        /// 'PathBasedRouting'. Possible values include: 'Basic',
         /// 'PathBasedRouting'
         /// </summary>
         [JsonProperty(PropertyName = "properties.ruleType")]

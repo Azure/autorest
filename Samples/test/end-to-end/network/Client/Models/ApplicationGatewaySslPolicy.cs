@@ -28,7 +28,8 @@ namespace applicationGateway.Models
         /// class.
         /// </summary>
         /// <param name="disabledSslProtocols">SSL protocols to be disabled on
-        /// application gateway.</param>
+        /// application gateway. Possible values are: 'TLSv1_0', 'TLSv1_1', and
+        /// 'TLSv1_2'.</param>
         public ApplicationGatewaySslPolicy(IList<string> disabledSslProtocols = default(IList<string>))
         {
             DisabledSslProtocols = disabledSslProtocols;
@@ -42,6 +43,7 @@ namespace applicationGateway.Models
 
         /// <summary>
         /// Gets or sets SSL protocols to be disabled on application gateway.
+        /// Possible values are: 'TLSv1_0', 'TLSv1_1', and 'TLSv1_2'.
         /// </summary>
         [JsonProperty(PropertyName = "disabledSslProtocols")]
         public IList<string> DisabledSslProtocols { get; set; }

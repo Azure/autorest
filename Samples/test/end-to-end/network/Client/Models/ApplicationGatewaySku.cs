@@ -24,10 +24,13 @@ namespace applicationGateway.Models
         /// Initializes a new instance of the ApplicationGatewaySku class.
         /// </summary>
         /// <param name="name">Name of an application gateway SKU. Possible
-        /// values include: 'Standard_Small', 'Standard_Medium',
-        /// 'Standard_Large', 'WAF_Medium', 'WAF_Large'</param>
+        /// values are: 'Standard_Small', 'Standard_Medium', 'Standard_Large',
+        /// 'WAF_Medium', and 'WAF_Large'. Possible values include:
+        /// 'Standard_Small', 'Standard_Medium', 'Standard_Large',
+        /// 'WAF_Medium', 'WAF_Large'</param>
         /// <param name="tier">Tier of an application gateway. Possible values
-        /// include: 'Standard', 'WAF'</param>
+        /// are: 'Standard' and 'WAF'. Possible values include: 'Standard',
+        /// 'WAF'</param>
         /// <param name="capacity">Capacity (instance count) of an application
         /// gateway.</param>
         public ApplicationGatewaySku(string name = default(string), string tier = default(string), int? capacity = default(int?))
@@ -45,15 +48,17 @@ namespace applicationGateway.Models
 
         /// <summary>
         /// Gets or sets name of an application gateway SKU. Possible values
-        /// include: 'Standard_Small', 'Standard_Medium', 'Standard_Large',
+        /// are: 'Standard_Small', 'Standard_Medium', 'Standard_Large',
+        /// 'WAF_Medium', and 'WAF_Large'. Possible values include:
+        /// 'Standard_Small', 'Standard_Medium', 'Standard_Large',
         /// 'WAF_Medium', 'WAF_Large'
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets tier of an application gateway. Possible values
-        /// include: 'Standard', 'WAF'
+        /// Gets or sets tier of an application gateway. Possible values are:
+        /// 'Standard' and 'WAF'. Possible values include: 'Standard', 'WAF'
         /// </summary>
         [JsonProperty(PropertyName = "tier")]
         public string Tier { get; set; }

@@ -32,7 +32,8 @@ namespace applicationGateway.Models
         /// <param name="privateIPAddress">PrivateIPAddress of the network
         /// interface IP Configuration.</param>
         /// <param name="privateIPAllocationMethod">PrivateIP allocation
-        /// method. Possible values include: 'Static', 'Dynamic'</param>
+        /// method. Possible values are: 'Static' and 'Dynamic'. Possible
+        /// values include: 'Static', 'Dynamic'</param>
         /// <param name="subnet">Reference of the subnet resource.</param>
         /// <param name="publicIPAddress">Reference of the PublicIP
         /// resource.</param>
@@ -70,8 +71,9 @@ namespace applicationGateway.Models
         public string PrivateIPAddress { get; set; }
 
         /// <summary>
-        /// Gets or sets privateIP allocation method. Possible values include:
-        /// 'Static', 'Dynamic'
+        /// Gets or sets privateIP allocation method. Possible values are:
+        /// 'Static' and 'Dynamic'. Possible values include: 'Static',
+        /// 'Dynamic'
         /// </summary>
         [JsonProperty(PropertyName = "properties.privateIPAllocationMethod")]
         public string PrivateIPAllocationMethod { get; set; }
