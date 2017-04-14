@@ -104,8 +104,9 @@ task 'install/binaries', '', (done)->
 task 'install/bootstrapper', 'Build and install the bootstrapper into the global node.js', (done) ->
   run [ 'build/typescript' ],
     ->
-      execute "npm install -g .", {cwd:"#{basefolder}/src/autorest"}, (c,o,e) -> 
-        done()
+      execute "npm version patch", {cwd:"#{basefolder}/src/autorest"}, (c,o,e) -> 
+        execute "npm install -g .", {cwd:"#{basefolder}/src/autorest"}, (c,o,e) -> 
+          done()
 
 task 'install', 'build and install the dev version of autorest',(done)->
   run [ 'build/typescript', 'build/dotnet/binaries' ],

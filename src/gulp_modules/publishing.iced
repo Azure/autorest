@@ -8,7 +8,7 @@ task 'zip-autorest', '', () ->
     .pipe zip package_name
     .pipe destination packages
 
-task 'install-node-files' ,'', (done)->
+task 'install/node-files' ,'', (done)->
   if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules"
     mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules"
   
@@ -21,7 +21,7 @@ task 'package','From scratch build, sign, and package autorest', (done) ->
   run 'clean',
     'restore'
     [ 'build/typescript', 'build/dotnet/binaries' ],
-    [ 'sign-assemblies', 'install-node-files' ],
+    [ 'sign-assemblies', 'install/node-files' ],
     'zip-autorest' 
     -> done()
 
