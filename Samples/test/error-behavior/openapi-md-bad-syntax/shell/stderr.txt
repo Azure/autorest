@@ -1,5 +1,9 @@
-Syntax error: bad indentation of a mapping entry
-Syntax error: incomplete explicit mapping pair; a key node is missed
-Syntax error: bad indentation of a mapping entry
-Syntax error: bad indentation of a mapping entry
-Syntax Errors Encountered.
+ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
+    - tiny.md:59:14
+ERROR: Syntax Error Encountered: Syntax error: incomplete explicit mapping pair; a key node is missed
+    - tiny.md:59:15
+ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
+    - tiny.md:65:4
+ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
+    - tiny.md:65:18
+Error occurred. Exiting.

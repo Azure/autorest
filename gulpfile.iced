@@ -19,10 +19,10 @@ Import
   packages: "#{basefolder}/packages"
   release_name: if argv.nightly then "#{version}-#{today}-2300-nightly"              else if argv.preview then "#{version}-#{now}-preview"              else "#{version}"
   package_name: if argv.nightly then "autorest-#{version}-#{today}-2300-nightly.zip" else if argv.preview then "autorest-#{version}-#{now}-preview.zip" else "autorest-#{version}.zip"
-  autorest: (args,done) ->
+  autorest: (args,done,ignoreexitcode) ->
     # Run AutoRest from the original current directory.
     echo info "AutoRest #{args.join(' ')}"
-    execute "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true, ignoreexitcode:true}, (code,stdout,stderr) ->
+    execute "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
       return done(code,stdout,stderr)
 
   # which projects to care about

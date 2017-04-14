@@ -1,4 +1,3 @@
-Syntax error: bad indentation of a mapping entry
-Syntax error: incomplete explicit mapping pair; a key node is missed
-Syntax error: bad indentation of a mapping entry
-Syntax error: can not read an implicit mapping pair; a colon is missed
+ERROR: Syntax error: Invalid YAML object.
+    - readme.md:6:0
+Error occurred. Exiting.

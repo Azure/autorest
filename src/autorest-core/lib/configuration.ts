@@ -283,7 +283,7 @@ export class ConfigurationView {
             let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join("/")})` : ""}: ${mx.Text}`;
             for (const source of mx.Source || []) {
               if (source.Position) {
-                text += `\n        ${source.document}:${source.Position.line}:${source.Position.column}`;
+                text += `\n    - ${source.document}:${source.Position.line}:${source.Position.column}`;
                 if (source.Position.path) {
                   text += ` (${stringify(source.Position.path)})`;
                 }

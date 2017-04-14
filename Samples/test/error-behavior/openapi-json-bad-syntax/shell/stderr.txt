@@ -1,1 +1,2 @@
-Syntax error: missed comma between flow collection entries
+ERROR: Syntax error: missed comma between flow collection entries
+    - tiny.json:45:6

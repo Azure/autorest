@@ -1,4 +1,8 @@
-Syntax error: bad indentation of a mapping entry
-Syntax error: incomplete explicit mapping pair; a key node is missed
-Syntax error: bad indentation of a mapping entry
-Syntax error: can not read an implicit mapping pair; a colon is missed
+ERROR: Syntax error: bad indentation of a mapping entry
+    - tiny.yaml:31:14
+ERROR: Syntax error: incomplete explicit mapping pair; a key node is missed
+    - tiny.yaml:31:15
+ERROR: Syntax error: bad indentation of a mapping entry
+    - tiny.yaml:37:4
+ERROR: Syntax error: can not read an implicit mapping pair; a colon is missed
+    - tiny.yaml:37:27
