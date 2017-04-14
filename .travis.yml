@@ -62,13 +62,11 @@ script:
   - |-
     if [[ $MODE == 'main' ]]; then
       gulp test
-    fi
-    if [[ $MODE == 'diffRegenExpected' ]]; then 
+    elif [[ $MODE == 'diffRegenExpected' ]]; then
       gulp regenerate
       git diff -w
       ! git diff -w | grep -q "@@"
-    fi
-    if [[ $MODE == 'diffRegenSpecsRepo' ]]; then
+    elif [[ $MODE == 'diffRegenSpecsRepo' ]]; then
       gens=(CSharp Azure.CSharp Azure.CSharp.Fluent Ruby Azure.Ruby NodeJS Azure.NodeJS Python Azure.Python Go Java Azure.Java Azure.Java.Fluent AzureResourceSchema)
       specs=/tmp/repos/specs
       arRef=/tmp/repos/autorest
