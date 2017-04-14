@@ -39,7 +39,7 @@ tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Report"))
 
 
-from autorestreportservice import AutoRestReportService
+from auto_rest_report_service import AutoRestReportService
 
 
 class AcceptanceTests(unittest.TestCase):

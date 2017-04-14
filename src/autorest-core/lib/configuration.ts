@@ -23,7 +23,7 @@ export interface AutoRestConfigurationImpl {
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
-  "vscode"?: any;
+  "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   // plugin specific
   "output-file"?: string;
@@ -37,7 +37,8 @@ export interface AutoRestConfigurationImpl {
   "namespace"?: string; // TODO: the modeler cares :( because it is badly designed
   "license-header"?: string;
   "add-credentials"?: boolean;
-  "package-name"?: string; // Ruby, Python
+  "package-name"?: string; // Ruby, Python, ...
+  "package-version"?: string;
   "sync-methods"?: "all" | "essential" | "none";
   "payload-flattening-threshold"?: number;
 }

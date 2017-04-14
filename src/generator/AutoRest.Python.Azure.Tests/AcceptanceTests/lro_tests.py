@@ -39,7 +39,7 @@ cwd = dirname(realpath(__file__))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
-sys.path.append(join(tests, "Lro"))
+sys.modules['fixtures'].__path__.append(join(tests, "Lro", "fixtures"))
 
 # Import mock from Autorest.Python.Tests
 mockfiles = realpath(join(cwd, pardir, pardir, "AutoRest.Python.Tests", "AcceptanceTests"))
@@ -50,8 +50,8 @@ from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
-from autorestlongrunningoperationtestservice import AutoRestLongRunningOperationTestService
-from autorestlongrunningoperationtestservice.models import *
+from fixtures.acceptancetestslro import AutoRestLongRunningOperationTestService
+from fixtures.acceptancetestslro.models import *
 
 from http_tests import TestAuthentication
 

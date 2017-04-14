@@ -1,3 +1,4 @@
+import { safeEval } from '../ref/safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -5,8 +6,8 @@
 
 import { ConfigurationView } from '../autorest-core';
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/data-store";
-import { JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
-import { ResolveRelativeNode } from "../parsing/yaml";
+import { IsPrefix, JsonPath, JsonPathComponent, stringify } from '../ref/jsonpath';
+import { ResolvePath, ResolveRelativeNode } from '../parsing/yaml';
 import { Descendants, YAMLNodeWithPath, ToAst, StringifyAst, CloneAst } from "../ref/yaml";
 import { ResolveUri } from "../ref/uri";
 import { From, Enumerable } from "../ref/linq";
@@ -27,6 +28,16 @@ async function EnsureCompleteDefinitionIsPresent(
   currentFileUri?: string,
   entityType?: string,
   modelName?: string) {
+
+  const ensureExtFilePresent: (fileUri: string) => Promise<void> = async (fileUri: string) => {
+    if (!externalFiles[fileUri]) {
+      const externalFile = await ParseLiterateYaml(config, await inputScope.ReadStrict(fileUri), workingScope.CreateScope(`ext_${Object.getOwnPropertyNames(externalFiles).length}`));
+      if (externalFile === null) {
+        throw new Error(`File ${fileUri} not found.`);
+      }
+      externalFiles[fileUri] = externalFile;
+    }
+  };
 
   const references: YAMLNodeWithPath[] = [];
   const sourceDoc = externalFiles[sourceFileUri];
@@ -58,7 +69,22 @@ async function EnsureCompleteDefinitionIsPresent(
   for (const { node, path } of references) {
     const refPath = node.value as string;
     if (refPath.indexOf("#") === -1) {
-      continue; // TODO: could inject entire referenced file here
+      // inject entire file right here
+      const fileUri = ResolveUri(sourceFileUri, refPath);
+      await ensureExtFilePresent(fileUri);
+      // console.error("Resolving ", fileUri);
+      const targetPath = path.slice(0, path.length - 1);
+      const extObj = await externalFiles[fileUri].ReadObject();
+      safeEval(`${stringify(targetPath)} = extObj`, { $: sourceDocObj, extObj: extObj });
+      //// performance hit:
+      // sourceDocMappings.push(...CreateAssignmentMapping(
+      //   extObj, externalFiles[fileUri].key,
+      //   [], targetPath,
+      //   `resolving '${refPath}' in '${currentFileUri}'`));
+
+      // remove $ref
+      sourceDocMappings = sourceDocMappings.filter(m => !IsPrefix(path, (m.generated as any).path));
+      continue;
     }
     const refPathParts = refPath.split("#").filter(s => s.length > 0);
     let fileUri: string | null = null;
@@ -67,13 +93,7 @@ async function EnsureCompleteDefinitionIsPresent(
       fileUri = refPathParts[0];
       entityPath = "#" + refPathParts[1];
       fileUri = ResolveUri(sourceFileUri, fileUri);
-      if (!externalFiles[fileUri]) {
-        const externalFile = await ParseLiterateYaml(config, await inputScope.ReadStrict(fileUri), workingScope.CreateScope(`ext_${Object.getOwnPropertyNames(externalFiles).length}`));
-        if (externalFile === null) {
-          throw new Error(`File ${fileUri} not found.`);
-        }
-        externalFiles[fileUri] = externalFile;
-      }
+      await ensureExtFilePresent(fileUri);
     }
 
     const entityPathParts = entityPath.split("/").filter(s => s.length > 0);

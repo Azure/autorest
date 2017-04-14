@@ -43,8 +43,8 @@ sys.path.append(join(tests, "Header"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatheaderservice import AutoRestSwaggerBATHeaderService
-from autorestswaggerbatheaderservice.models.auto_rest_swagger_bat_header_service_enums import GreyscaleColors
+from auto_rest_swagger_bat_header_service import AutoRestSwaggerBATHeaderService
+from auto_rest_swagger_bat_header_service.models.auto_rest_swagger_bat_header_service_enums import GreyscaleColors
 
 
 class HeaderTests(unittest.TestCase):

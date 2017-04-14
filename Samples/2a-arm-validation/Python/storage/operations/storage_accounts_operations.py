@@ -41,14 +41,14 @@ class StorageAccountsOperations(object):
          24 characters in length and use numbers and lower-case letters only.
         :type account_name:
          :class:`StorageAccountCheckNameAvailabilityParameters
-         <storage_management_client.models.StorageAccountCheckNameAvailabilityParameters>`
+         <storage.models.StorageAccountCheckNameAvailabilityParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`CheckNameAvailabilityResult
-         <storage_management_client.models.CheckNameAvailabilityResult>`
+         <storage.models.CheckNameAvailabilityResult>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -115,14 +115,14 @@ class StorageAccountsOperations(object):
         :type account_name: str
         :param parameters: The parameters to provide for the created account.
         :type parameters: :class:`StorageAccountCreateParameters
-         <storage_management_client.models.StorageAccountCreateParameters>`
+         <storage.models.StorageAccountCreateParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`StorageAccount
-         <storage_management_client.models.StorageAccount>`
+         <storage.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -272,8 +272,7 @@ class StorageAccountsOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`StorageAccount
-         <storage_management_client.models.StorageAccount>`
+        :rtype: :class:`StorageAccount <storage.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -347,14 +346,13 @@ class StorageAccountsOperations(object):
         :param parameters: The parameters to update on the account. Note that
          only one property can be changed at a time using this API.
         :type parameters: :class:`StorageAccountUpdateParameters
-         <storage_management_client.models.StorageAccountUpdateParameters>`
+         <storage.models.StorageAccountUpdateParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`StorageAccount
-         <storage_management_client.models.StorageAccount>`
+        :rtype: :class:`StorageAccount <storage.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -420,7 +418,7 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountKeys
-         <storage_management_client.models.StorageAccountKeys>`
+         <storage.models.StorageAccountKeys>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -480,7 +478,7 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountPaged
-         <storage_management_client.models.StorageAccountPaged>`
+         <storage.models.StorageAccountPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -548,7 +546,7 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountPaged
-         <storage_management_client.models.StorageAccountPaged>`
+         <storage.models.StorageAccountPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
         def internal_paging(next_link=None, raw=False):
@@ -616,14 +614,14 @@ class StorageAccountsOperations(object):
         :param regenerate_key: Specifies name of the key which should be
          regenerated. key1 or key2 for the default keys
         :type regenerate_key: :class:`StorageAccountRegenerateKeyParameters
-         <storage_management_client.models.StorageAccountRegenerateKeyParameters>`
+         <storage.models.StorageAccountRegenerateKeyParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountKeys
-         <storage_management_client.models.StorageAccountKeys>`
+         <storage.models.StorageAccountKeys>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`

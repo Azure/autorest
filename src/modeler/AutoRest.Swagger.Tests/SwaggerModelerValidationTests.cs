@@ -747,6 +747,17 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
         }
 
+        /// <summary>
+        /// Verifies resource model readonly properties
+        /// </summary>
+        [Fact]
+        public void ValidResourceModelReadOnlyProperties()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-readonly-props.json"));
+            messages.AssertOnlyValidationMessage(typeof(ResourceModelValidation), 0);
+        }
+
+
     }
 
     #endregion

@@ -42,8 +42,8 @@ sys.path.append(join(tests, "BodyFile"))
 
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatfileservice import AutoRestSwaggerBATFileService
-from autorestswaggerbatfileservice.models import ErrorException
+from auto_rest_swagger_bat_file_service import AutoRestSwaggerBATFileService
+from auto_rest_swagger_bat_file_service.models import ErrorException
 
 
 class FileTests(unittest.TestCase):
