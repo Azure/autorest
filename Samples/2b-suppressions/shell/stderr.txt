@@ -48,10 +48,12 @@ WARNING (DescriptionMissing/M4000/SDKViolation): 'name' model/property lacks 'de
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCheckNameAvailabilityParameters.properties.name
 WARNING (DescriptionMissing/M4000/SDKViolation): 'type' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCheckNameAvailabilityParameters.properties.type
-WARNING (BooleanPropertyNotRecommended/M3018/RPCViolation): Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: 'nameAvailable'.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.CheckNameAvailabilityResult.definitions
+WARNING (BooleanPropertyNotRecommended/M3018/RPCViolation): Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.nameAvailable.properties.CheckNameAvailabilityResult.definitions
 WARNING (DescriptionMissing/M4000/SDKViolation): 'properties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCreateParameters.properties.properties
+WARNING (BooleanPropertyNotRecommended/M3018/RPCViolation): Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined.
+        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.useSubDomain.properties.CustomDomain.definitions
 WARNING (DescriptionMissing/M4000/SDKViolation): 'properties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccount.properties.properties
 WARNING (DescriptionMissing/M4000/SDKViolation): 'properties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
