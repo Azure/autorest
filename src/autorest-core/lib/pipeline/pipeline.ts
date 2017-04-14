@@ -30,7 +30,7 @@ function CreateMessageProcessor(config: ConfigurationView, outstandingTaskAwaite
 
   // setup message pipeline (source map resolution, filter, forward)
   return async (m: Message) => {
-    outstandingTaskAwaiter.Enter();
+
     config.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - starting processing` });
 
     try {
@@ -100,7 +100,6 @@ function CreateMessageProcessor(config: ConfigurationView, outstandingTaskAwaite
     }
 
     config.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - finished processing` });
-    outstandingTaskAwaiter.Exit();
   };
 }
 
@@ -109,7 +108,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   const outstandingTaskAwaiter = new OutstandingTaskAwaiter();
   const processMessage = CreateMessageProcessor(config, outstandingTaskAwaiter);
-  outstandingTaskAwaiter.Enter();
+
 
   // artifact emitter
   const emitArtifact: (artifactType: string, uri: string, handle: DataHandleRead) => Promise<void> = async (artifactType, uri, handle) => {

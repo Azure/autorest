@@ -96,15 +96,22 @@ task "list","",->
   generatedFiles()
     .pipe showFiles()
 
-task 'install-binaries', '', (done)->
+task 'install/binaries', '', (done)->
   mkdir "-p", "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private"
   source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**"
     .pipe destination "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private" 
 
+task 'install/bootstrapper', 'Build and install the bootstrapper into the global node.js', (done) ->
+  run [ 'build/typescript' ],
+    ->
+      execute "npm version patch", {cwd:"#{basefolder}/src/autorest"}, (c,o,e) -> 
+        execute "npm install -g .", {cwd:"#{basefolder}/src/autorest"}, (c,o,e) -> 
+          done()
+
 task 'install', 'build and install the dev version of autorest',(done)->
   run [ 'build/typescript', 'build/dotnet/binaries' ],
-    'install-node-files',
-    'install-binaries',
+    'install/node-files',
+    'install/binaries',
     -> done()
 
 task 'autorest', 'Runs AutoRest', (done)->

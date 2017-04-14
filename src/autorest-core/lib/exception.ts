@@ -11,3 +11,10 @@ export class OperationCanceledException extends Exception {
     Object.setPrototypeOf(this, OperationCanceledException.prototype);
   }
 }
+
+export class OutstandingTaskAlreadyCompletedException extends Exception {
+  constructor() {
+    super("The OutstandingTaskAwaiter is already completed, may not Enter() again.", 1);
+    Object.setPrototypeOf(this, OutstandingTaskAlreadyCompletedException.prototype);
+  }
+}

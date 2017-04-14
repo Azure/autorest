@@ -198,18 +198,3 @@ async function WriteStringInternal(fileName: string, data: string): Promise<void
 export function WriteString(fileUri: string, data: string): Promise<void> {
   return WriteStringInternal(FileUriToLocalPath(fileUri), data);
 }
-
-
-
-
-
-
-
-/// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
-async function* yieldFromMap(): AsyncIterable<string> {
-  yield* ["hello", "world"];
-};
-async function foo() {
-  for await (const each of yieldFromMap()) {
-  }
-}
