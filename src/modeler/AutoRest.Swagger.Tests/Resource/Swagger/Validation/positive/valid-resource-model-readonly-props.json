@@ -65,10 +65,12 @@
           "description": "Resource Id"
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Resource type"
         },
         "name": {
+          "readOnly": true,
           "type": "string",
           "description": "Resource type"
         }
