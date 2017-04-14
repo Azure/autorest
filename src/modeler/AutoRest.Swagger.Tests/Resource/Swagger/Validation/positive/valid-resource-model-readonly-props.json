@@ -18,7 +18,7 @@
         "tags": [
           "Redis"
         ],
-        "operationId": "Redis_Delete",
+        "operationId": "Foo_Get",
         "description": "Deletes a Redis cache.",
         "x-ms-long-running-operation": true,
         "parameters": [
@@ -30,13 +30,6 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Redis cache."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -45,7 +38,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MyResource"
+            }
           },
           "204": {
             "description": ""
