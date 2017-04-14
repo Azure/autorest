@@ -107,7 +107,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A body parameter must be named &apos;parameters&apos;..
+        ///   Looks up a localized string similar to Consider naming the body parameter &apos;parameters&apos;..
         /// </summary>
         public static string BodyParametersNotValid {
             get {
