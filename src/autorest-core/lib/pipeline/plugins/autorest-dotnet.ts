@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { Lazy } from "../../lazy";
 import { AutoRestConfigurationImpl } from "../../configuration";
 import { ChildProcess } from "child_process";
 import { EventEmitter } from "../../events";
@@ -12,9 +13,12 @@ import { AutoRestPlugin } from "../plugin-endpoint";
 import { DataHandleRead, DataStoreViewReadonly, QuickScope, DataStoreView } from "../../data-store/data-store";
 import { Message } from "../../message";
 
+// SEE ServiceDefinitionCategory in ServiceDefinitionMetadata.cs
+export type ValidationCategory = "ARM";
+
 export class AutoRestDotNetPlugin extends EventEmitter {
-  private static instance: AutoRestDotNetPlugin | null;
-  public static Get(): AutoRestDotNetPlugin { return AutoRestDotNetPlugin.instance ? AutoRestDotNetPlugin.instance : (AutoRestDotNetPlugin.instance = new AutoRestDotNetPlugin()); }
+  private static instance = new Lazy<AutoRestDotNetPlugin>(() => new AutoRestDotNetPlugin());
+  public static Get(): AutoRestDotNetPlugin { return AutoRestDotNetPlugin.instance.Value; }
 
   private childProc: ChildProcess;
   private pluginEndpoint: Promise<AutoRestPlugin>;
@@ -49,9 +53,23 @@ export class AutoRestDotNetPlugin extends EventEmitter {
     }
   }
 
-  public async Validate(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void): Promise<void> {
+  async Validate(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void, isIndividual: boolean, categories: ValidationCategory[]): Promise<void> {
     const outputScope = workingScope.CreateScope("output");
-    await this.CautiousProcess("azure-validator", _ => { }, new QuickScope([swagger]), outputScope, onMessage);
+    await this.CautiousProcess("azure-validator", key => {
+      switch (key) {
+        case "validation-category": return categories.length === 0 ? null : categories.join(", ");
+        case "validation-is-individual": return isIndividual;
+        default: return null;
+      }
+    }, new QuickScope([swagger]), outputScope, onMessage);
+  }
+
+  public async ValidateIndividual(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void): Promise<void> {
+    await this.Validate(swagger, workingScope, onMessage, true, ["ARM"] /* TODO: derive from stuff */);
+  }
+
+  public async ValidateComposite(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void): Promise<void> {
+    await this.Validate(swagger, workingScope, onMessage, false, ["ARM"] /* TODO: derive from stuff */);
   }
 
   public async GenerateCode(
