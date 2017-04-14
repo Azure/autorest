@@ -11,7 +11,7 @@ addons:
 env:
   matrix:
   - MODE=main
-  - MODE=diffRegenExpected
+  #- MODE=diffRegenExpected
   #- MODE=diffRegenSpecsRepo
 matrix:
   fast_finish: true
