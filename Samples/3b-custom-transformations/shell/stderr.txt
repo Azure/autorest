@@ -4,25 +4,25 @@ WARNING (NonAppJsonTypeWarning/S2004/SDKViolation): Please make sure that media 
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.produces[1]
 ERROR (OperationsAPIImplementationValidation/M3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Storage/operations'.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_CheckNameAvailability'
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_CheckNameAvailability'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Create'
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Create'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Delete'
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Delete'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].delete.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_GetProperty'
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_GetProperty'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].get.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Update'
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Update'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].patch.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListKeys'
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListKeys'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys"].post.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_List'
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_List'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts"].get.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListByResourceGroup'
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListByResourceGroup'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts"].get.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_RegenerateKey'
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_RegenerateKey'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Usage_List'
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Usage_List'
         Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get.operationId
 WARNING (BodyParametersValidation/M2063/SDKViolation): A body parameter must be named 'parameters'.
         Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.parameters[0].name

@@ -38,7 +38,11 @@ namespace AutoRest.Swagger.Validation
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override Category Severity => Category.Error;
-
+        
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         private bool IsValidJson(string jsonString)
         {
