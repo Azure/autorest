@@ -16,12 +16,14 @@ namespace AutoRest.AzureResourceSchema.Tests
             RunSwaggerTest("ApiManagement", "2016-07-07", "apimanagement.json");
         }
 
+/*
         [Fact]
         public static void ApiManagement_2016_07_07b()
         {
             RunSwaggerTest("ApiManagement", "2016-07-07b", "apimanagement.json");
         }
-
+ */
+ 
         [Fact]
         public static void Authorization_2015_07_01()
         {
@@ -70,12 +72,13 @@ namespace AutoRest.AzureResourceSchema.Tests
             RunSwaggerTest("Compute", "2016-03-30", "compute.json");
         }
 
+/*
         [Fact]
         public static void Compute_2016_03_30b()
         {
             RunSwaggerTest("Compute", "2016-03-30b", "compute.json");
         }
-
+ */
         [Fact]
         public static void ContainerService_2016_03_30()
         {
