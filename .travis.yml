@@ -12,7 +12,7 @@ env:
   matrix:
   - MODE=main
   - MODE=diffRegenExpected
-  - MODE=diffRegenSpecsRepo
+  #- MODE=diffRegenSpecsRepo
 matrix:
   fast_finish: true
   allow_failures:
