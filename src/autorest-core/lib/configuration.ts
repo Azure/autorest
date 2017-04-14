@@ -306,14 +306,14 @@ export class ConfigurationView {
 
 export class Configuration {
   public async CreateView(messageEmitter: MessageEmitter, ...configs: Array<any>): Promise<ConfigurationView> {
-    const configFileUri = this.fileSystem && this.uriToConfigFileOrWorkingFolder
-      ? await Configuration.DetectConfigurationFile(this.fileSystem, this.uriToConfigFileOrWorkingFolder)
+    const configFileUri = this.fileSystem && this.configFileOrFolderUri
+      ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri)
       : null;
 
     const defaults = require("../resources/default-configuration.json");
 
     if (configFileUri === null) {
-      return new ConfigurationView(messageEmitter, this.uriToConfigFileOrWorkingFolder || "file:///", ...configs, defaults);
+      return new ConfigurationView(messageEmitter, this.configFileOrFolderUri || "file:///", ...configs, defaults);
     } else {
       const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
 
@@ -345,7 +345,7 @@ export class Configuration {
 
   public constructor(
     private fileSystem?: IFileSystem,
-    private uriToConfigFileOrWorkingFolder?: string
+    private configFileOrFolderUri?: string
   ) {
     this.FileChanged();
   }
@@ -353,17 +353,17 @@ export class Configuration {
   public FileChanged() {
   }
 
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, uriToConfigFileOrWorkingFolder: string | null): Promise<string | null> {
-    if (!uriToConfigFileOrWorkingFolder || !uriToConfigFileOrWorkingFolder.endsWith("/")) {
-      return uriToConfigFileOrWorkingFolder;
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null): Promise<string | null> {
+    if (!configFileOrFolderUri || !configFileOrFolderUri.endsWith("/")) {
+      return configFileOrFolderUri;
     }
 
     // search for a config file, walking up the folder tree
-    while (uriToConfigFileOrWorkingFolder !== null) {
+    while (configFileOrFolderUri !== null) {
       // scan the filesystem items for the configuration.
       const configFiles = new Map<string, string>();
 
-      for await (const name of fileSystem.EnumerateFileUris(uriToConfigFileOrWorkingFolder)) {
+      for await (const name of fileSystem.EnumerateFileUris(configFileOrFolderUri)) {
         if (name.endsWith(".md")) {
           const content = await fileSystem.ReadFile(name);
           if (content.indexOf(Constants.MagicString) > -1) {
@@ -382,8 +382,8 @@ export class Configuration {
       }
 
       // walk up
-      const newUriToConfigFileOrWorkingFolder = ResolveUri(uriToConfigFileOrWorkingFolder, "..");
-      uriToConfigFileOrWorkingFolder = newUriToConfigFileOrWorkingFolder === uriToConfigFileOrWorkingFolder
+      const newUriToConfigFileOrWorkingFolder = ResolveUri(configFileOrFolderUri, "..");
+      configFileOrFolderUri = newUriToConfigFileOrWorkingFolder === configFileOrFolderUri
         ? null
         : newUriToConfigFileOrWorkingFolder;
     }

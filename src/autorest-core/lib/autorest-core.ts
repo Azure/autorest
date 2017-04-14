@@ -25,7 +25,7 @@ export class AutoRest extends EventEmitter {
         messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
         messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
-        this._view = await new Configuration(this.fileSystem, this.configFileUri).CreateView(messageEmitter, ...this._configurations);
+        this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, ...this._configurations);
       }
       return this._view;
     })();
@@ -35,9 +35,8 @@ export class AutoRest extends EventEmitter {
    * @param rootUri The rootUri of the workspace. Is null if no workspace is open.
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    */
-  public constructor(private fileSystem?: IFileSystem, public configFileUri?: string) {
+  public constructor(private fileSystem?: IFileSystem, public configFileOrFolderUri?: string) {
     super();
-    // this.Fatal.Subscribe((_, m) => console.error(m.Text));
   }
 
 

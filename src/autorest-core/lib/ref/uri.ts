@@ -71,14 +71,17 @@ function isAbsolute(path: string): boolean {
  * - "C:\swagger\storage.yaml" -> "file:///C:/swagger/storage.yaml"
  * - "/input/swagger.yaml" -> "file:///input/swagger.yaml"
  */
-export function CreateFileUri(absolutePath: string): string {
+export function CreateFileOrFolderUri(absolutePath: string): string {
   if (!isAbsolute(absolutePath)) {
     throw new Error("Can only create file URIs from absolute paths.");
   }
-  return EnsureIsFileUri(fileUri(absolutePath, { resolve: false }));
+  return fileUri(absolutePath, { resolve: false });
+}
+export function CreateFileUri(absolutePath: string): string {
+  return EnsureIsFileUri(CreateFileOrFolderUri(absolutePath));
 }
 export function CreateFolderUri(absolutePath: string): string {
-  return EnsureIsFolderUri(CreateFileUri(absolutePath));
+  return EnsureIsFolderUri(CreateFileOrFolderUri(absolutePath));
 }
 
 export function EnsureIsFolderUri(uri: string) {
@@ -107,7 +110,7 @@ export function GetFilenameWithoutExtension(uri: string) {
  */
 export function ResolveUri(baseUri: string, pathOrUri: string): string {
   if (isAbsolute(pathOrUri)) {
-    return CreateFileUri(pathOrUri);
+    return CreateFileOrFolderUri(pathOrUri);
   }
   pathOrUri = pathOrUri.replace(/\\/g, "/");
   if (!baseUri) {
