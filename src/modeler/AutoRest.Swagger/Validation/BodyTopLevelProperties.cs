@@ -39,7 +39,7 @@ namespace AutoRest.Swagger.Validation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             var resModels = context.ResourceModels;
-            var violatingModels = resModels.Where(resModel => definitions[resModel].Properties.Keys.Except(AllowedTopLevelProperties).Any());
+            var violatingModels = resModels.Where(resModel => definitions[resModel].Properties?.Keys.Except(AllowedTopLevelProperties).Any() == true);
             foreach (var violatingModel in violatingModels)
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingModel).AppendProperty("properties")), this, 
