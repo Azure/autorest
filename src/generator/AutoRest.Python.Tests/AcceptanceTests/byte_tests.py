@@ -43,7 +43,7 @@ sys.path.append(join(tests, "BodyByte"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatbyteservice import AutoRestSwaggerBATByteService
+from auto_rest_swagger_bat_byte_service import AutoRestSwaggerBATByteService
 
 
 class ByteTests(unittest.TestCase):

@@ -45,9 +45,9 @@ from msrest.exceptions import (
     ClientRequestError,
     ValidationError)
 
-from autorestparameterizedhosttestclient import AutoRestParameterizedHostTestClient
-from autorestparameterizedhosttestclient.models import Error, ErrorException
-from autorestparameterizedcustomhosttestclient import AutoRestParameterizedCustomHostTestClient
+from auto_rest_parameterized_host_test_client import AutoRestParameterizedHostTestClient
+from auto_rest_parameterized_host_test_client.models import Error, ErrorException
+from auto_rest_parameterized_custom_host_test_client import AutoRestParameterizedCustomHostTestClient
 
 
 class CustomBaseUriTests(unittest.TestCase):

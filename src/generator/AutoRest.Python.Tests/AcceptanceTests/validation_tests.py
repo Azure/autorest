@@ -43,8 +43,8 @@ sys.path.append(join(tests, "Validation"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError, ValidationError
 
-from autorestvalidationtest import AutoRestValidationTest
-from autorestvalidationtest.models import (
+from auto_rest_validation_test import AutoRestValidationTest
+from auto_rest_validation_test.models import (
     Product,
     ConstantProduct,
     ChildProduct)
