@@ -4,19 +4,19 @@ FATAL: System.ArgumentException: Reference path 'Cowball' does not exist in the 
    at AutoRest.Swagger.SchemaResolver.Unwrap(Schema schema) in SchemaResolver.cs:line 71
    at AutoRest.Swagger.SwaggerModeler.Unwrap(SwaggerParameter swaggerParameter) in SwaggerModeler.cs:line 401
    at AutoRest.Swagger.ParameterBuilder.BuildServiceType(String serviceTypeName) in ParameterBuilder.cs:line 69
-   at AutoRest.Swagger.ParameterBuilder.Build() in ParameterBuilder.cs:line 47
+   at AutoRest.Swagger.ParameterBuilder.Build() in ParameterBuilder.cs:line 47
    at AutoRest.Swagger.OperationBuilder.BuildMethodParameters(Method method) in OperationBuilder.cs:line 212
-   at AutoRest.Swagger.OperationBuilder.BuildMethod(HttpMethod httpMethod, String url, String methodName, String methodGroup) in OperationBuilder.cs:line 94
+   at AutoRest.Swagger.OperationBuilder.BuildMethod(HttpMethod httpMethod, String url, String methodName, String methodGroup) in OperationBuilder.cs:line 94
    at AutoRest.Swagger.SwaggerModeler.BuildMethod(HttpMethod httpMethod, String url, String name, Operation operation) in SwaggerModeler.cs:line 326
    at AutoRest.Swagger.SwaggerModeler.Build(ServiceDefinition serviceDefinition) in SwaggerModeler.cs:line 134
    at Modeler.<ProcessInternal>d__1.MoveNext() in Modeler.cs:line 37
 --- End of stack trace from previous location where exception was thrown ---
    at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
-   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
    at NewPlugin.<Process>d__11.MoveNext() in NewPlugin.cs:line 67
 Error: Plugin modeler failed.
-    at AutoRestDotNetPlugin.<anonymous> (autorest-dotnet.ts:48:13)
-    at Generator.next (<anonymous>)
-    at fulfilled (polyfill.min.js:10:59)
-    at process._tickCallback (next_tick.js:103:7)
+    at AutoRestDotNetPlugin.<anonymous> (autorest-dotnet.ts:48:13)
+    at Generator.next (<anonymous>)
+    at fulfilled (polyfill.min.js:10:59)
+    at process._tickCallback (next_tick.js:109:7)
