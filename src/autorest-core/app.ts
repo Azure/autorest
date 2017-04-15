@@ -22,7 +22,7 @@ import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
-import { Exception } from "./lib/exception";
+import { Exception, OperationCanceledException } from './lib/exception';
 
 /**
  * Legacy AutoRest
@@ -116,7 +116,7 @@ ${Stringify(config).replace(/^---\n/, "")}
  * Current AutoRest
  */
 
-type CommandLineArgs = { configFile?: string, switches: any[] };
+type CommandLineArgs = { configFileOrFolder?: string, switches: any[] };
 
 function parseArgs(autorestArgs: string[]): CommandLineArgs {
   const result: CommandLineArgs = {
@@ -128,10 +128,10 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 
     // configuration file?
     if (match === null) {
-      if (result.configFile) {
-        throw new Error(`Found multiple configuration file arguments: '${result.configFile}', '${arg}'`);
+      if (result.configFileOrFolder) {
+        throw new Error(`Found multiple configuration file arguments: '${result.configFileOrFolder}', '${arg}'`);
       }
-      result.configFile = arg;
+      result.configFileOrFolder = arg;
       continue;
     }
 
@@ -147,7 +147,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 async function currentMain(autorestArgs: string[]): Promise<void> {
   const args = parseArgs(autorestArgs);
   const currentDirUri = CreateFolderUri(currentDirectory());
-  const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFile || "."));
+  const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
   for (const s of args.switches) {
     await api.AddConfiguration(s);
   }
@@ -209,7 +209,7 @@ async function main() {
     }
 
     if (e instanceof Error) {
-      console.error(e.message);
+      console.error(e);
       process.exit(1);
     }
 

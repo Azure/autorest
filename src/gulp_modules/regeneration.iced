@@ -626,18 +626,24 @@ task 'regenerate-ars', '', (done) ->
 task 'regenerate-samples', '', (done) ->
   source 'Samples/*/**/readme.md'
     .pipe foreach (each,next)->
-      autorest [each.path], (code,stdout,stderr) ->
-        outputFolder = path.join(each.path, "../shell")
-        mkdir outputFolder
-        ShellString(code).to(path.join(outputFolder, "code.txt"))
-        ShellString(stdout).to(path.join(outputFolder, "stdout.txt"))
-        ShellString(stderr).to(path.join(outputFolder, "stderr.txt"))
+      autorest [each.path]
+        , (code,stdout,stderr) ->
+          outputFolder = path.join(each.path, "../shell")
+          mkdir outputFolder if !(test "-d", outputFolder)
+          ShellString(code).to(path.join(outputFolder, "code.txt"))
+          ShellString(stdout).to(path.join(outputFolder, "stdout.txt"))
+          ShellString(stderr).to(path.join(outputFolder, "stderr.txt"))
 
-        # sanitize generated files (source maps and shell stuff may contain file:/// paths)
-        (find path.join(each.path, ".."))
-          .filter((file) -> file.match(/.(map|txt)$/))
-          .forEach((file) -> sed "-i", /\bfile:\/\/.*\/(.*)\b/g, "$1", file)
-        next null 
+          # sanitize generated files (source maps and shell stuff may contain file:/// paths)
+          (find path.join(each.path, ".."))
+            .filter((file) -> file.match(/.(map|txt)$/))
+            .forEach((file) -> 
+              sed "-i", /\bfile:\/\/[^\s]*\/autorest/g, "", file  # blame locations
+              sed "-i", /(at .* in )([^\s]*(\/|\\))/g, "$1", file # exception stack traces (.cs)
+              sed "-i", /at .* \(.*\)/g, "at ...", file           # exception stack traces (.ts)
+            )
+          next null
+        , true # don't fail on failures (since we wanna record them)
   return null
 
 task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], (done) ->

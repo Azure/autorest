@@ -122,14 +122,14 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
   return result;
 }
 
-export async function MergeYamls(config: ConfigurationView | MessageEmitter, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
+export async function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
   const mappings: Mappings = [];
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = yamlInputHandle.ReadData();
     resultObject = Merge(resultObject, yaml.Parse(rawYaml, (message, index) => {
       if (config) {
-        config.Message.Dispatch({
+        config.Message({
           Channel: Channel.Error,
           Text: message,
           Source: [{ document: yamlInputHandle.key, Position: IndexToPosition(yamlInputHandle, index) }]

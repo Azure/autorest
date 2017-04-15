@@ -1,0 +1,3 @@
+ERROR: Syntax error: Invalid YAML object.
+    - /Samples/test/error-behavior/config-bad-syntax/readme.md:6:0
+Error occurred. Exiting.

@@ -8,10 +8,10 @@ require("../lib/polyfill.min.js");
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { RealFileSystem } from '../lib/file-system';
-import { AutoRest } from '../lib/autorest-core';
+import { RealFileSystem } from "../lib/file-system";
+import { AutoRest } from "../lib/autorest-core";
 import { CancellationToken } from "../lib/ref/cancallation";
-import { CreateFileUri, ResolveUri } from "../lib/ref/uri";
+import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message, Channel } from "../lib/message";
 import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
@@ -119,7 +119,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const dataStore = new DataStore(CancellationToken.None);
 
     // load code model
-    const codeModelUri = ResolveUri(CreateFileUri(__dirname) + "/", "resources/code-model.yaml");
+    const codeModelUri = ResolveUri(CreateFolderUri(__dirname), "resources/code-model.yaml");
     const inputScope = dataStore.GetReadThroughScope(uri => uri === codeModelUri);
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 

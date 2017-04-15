@@ -1,20 +1,24 @@
-import { safeEval } from '../ref/safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ConfigurationView } from '../autorest-core';
+import { Channel, SourceLocation } from '../message';
+import { OperationAbortedException } from "../exception";
+import { safeEval } from "../ref/safe-eval";
+import { ConfigurationView } from "../autorest-core";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/data-store";
-import { IsPrefix, JsonPath, JsonPathComponent, stringify } from '../ref/jsonpath';
-import { ResolvePath, ResolveRelativeNode } from '../parsing/yaml';
+import { IsPrefix, JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
+import { ResolvePath, ResolveRelativeNode } from "../parsing/yaml";
 import { Descendants, YAMLNodeWithPath, ToAst, StringifyAst, CloneAst } from "../ref/yaml";
 import { ResolveUri } from "../ref/uri";
-import { From, Enumerable } from "../ref/linq";
+import { From } from "../ref/linq";
 import { Mappings, Mapping } from "../ref/source-map";
 import { CreateAssignmentMapping } from "../source-map/source-map";
 import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
+
+let ctr = 0;
 
 async function EnsureCompleteDefinitionIsPresent(
   config: ConfigurationView,
@@ -29,12 +33,18 @@ async function EnsureCompleteDefinitionIsPresent(
   entityType?: string,
   modelName?: string) {
 
-  const ensureExtFilePresent: (fileUri: string) => Promise<void> = async (fileUri: string) => {
+  const ensureExtFilePresent: (fileUri: string, config: ConfigurationView, complaintLocation: SourceLocation) => Promise<void> = async (fileUri: string, config: ConfigurationView, complaintLocation: SourceLocation) => {
     if (!externalFiles[fileUri]) {
-      const externalFile = await ParseLiterateYaml(config, await inputScope.ReadStrict(fileUri), workingScope.CreateScope(`ext_${Object.getOwnPropertyNames(externalFiles).length}`));
-      if (externalFile === null) {
-        throw new Error(`File ${fileUri} not found.`);
+      const file = await inputScope.Read(fileUri);
+      if (file === null) {
+        config.Message({
+          Channel: Channel.Error,
+          Source: [complaintLocation],
+          Text: `Referenced file '${fileUri}' not found`
+        })
+        throw new OperationAbortedException();
       }
+      const externalFile = await ParseLiterateYaml(config, file, workingScope.CreateScope(`ext_${Object.getOwnPropertyNames(externalFiles).length}`));
       externalFiles[fileUri] = externalFile;
     }
   };
@@ -67,11 +77,14 @@ async function EnsureCompleteDefinitionIsPresent(
 
   const inputs: DataHandleRead[] = [sourceDoc];
   for (const { node, path } of references) {
+
+    const complaintLocation: SourceLocation = { document: currentFileUri, Position: <any>{ path: path } };
+
     const refPath = node.value as string;
     if (refPath.indexOf("#") === -1) {
       // inject entire file right here
       const fileUri = ResolveUri(sourceFileUri, refPath);
-      await ensureExtFilePresent(fileUri);
+      await ensureExtFilePresent(fileUri, config, complaintLocation);
       // console.error("Resolving ", fileUri);
       const targetPath = path.slice(0, path.length - 1);
       const extObj = await externalFiles[fileUri].ReadObject();
@@ -93,7 +106,7 @@ async function EnsureCompleteDefinitionIsPresent(
       fileUri = refPathParts[0];
       entityPath = "#" + refPathParts[1];
       fileUri = ResolveUri(sourceFileUri, fileUri);
-      await ensureExtFilePresent(fileUri);
+      await ensureExtFilePresent(fileUri, config, complaintLocation);
     }
 
     const entityPathParts = entityPath.split("/").filter(s => s.length > 0);
@@ -160,8 +173,7 @@ async function EnsureCompleteDefinitionIsPresent(
   }
 
   // commit back
-  const id = (await workingScope.Enum()).length;
-  const target = await workingScope.Write(`revision_${id}.yaml`);
+  const target = await workingScope.Write(`revision_${++ctr}.yaml`);
   externalFiles[sourceFileUri] = await target.WriteObject(sourceDocObj, sourceDocMappings, inputs);
   return sourceDocMappings;
 }
@@ -172,9 +184,9 @@ async function StripExternalReferences(swagger: DataHandleRead, workingScope: Da
   const mapping = IdentitySourceMapping(swagger.key, ast);
   for (const node of Descendants(ast)) {
     if (node.path[node.path.length - 1] === "$ref") {
-      const parts = (node.node.value as string).split('#');
+      const parts = (node.node.value as string).split("#");
       if (parts.length === 2) {
-        node.node.value = "#" + (node.node.value as string).split('#')[1];
+        node.node.value = "#" + (node.node.value as string).split("#")[1];
       }
     }
   }
