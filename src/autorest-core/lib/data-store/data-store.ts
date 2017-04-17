@@ -16,8 +16,6 @@ import { Lazy, LazyPromise } from '../lazy';
 import { IFileSystem } from "../file-system";
 import { OperationCanceledException } from "../exception";
 
-export const helloworld = "hi"; // TODO: wat?
-
 /********************************************
  * Data model section (not exposed)
  ********************************************/
@@ -180,7 +178,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
     super();
   }
 
-  public async Read(uri: string): Promise<DataHandleRead> {
+  public async Read(uri: string): Promise<DataHandleRead | null> {
     // special URI handlers
     // - GitHub
     if (uri.startsWith("https://github")) {
@@ -200,7 +198,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
       data = await this.fs.ReadFile(uri) || await ReadUri(uri);
     } finally {
       if (!data) {
-        throw new Error(`FileSystem does not contain file ${uri} and failed to physically load it.`);
+        return null;
       }
     }
     const writeHandle = await this.slave.Write(uri);
@@ -297,7 +295,11 @@ export class DataStore extends DataStoreView {
   }
 
   public ReadStrictSync(absoluteUri: string): DataHandleRead {
-    return new DataHandleRead(absoluteUri, this.store[absoluteUri]);
+    const entry = this.store[absoluteUri];
+    if (entry === undefined) {
+      throw new Error(`Object '${absoluteUri}' does not exist.`);
+    }
+    return new DataHandleRead(absoluteUri, entry);
   }
 
   public async Read(uri: string): Promise<DataHandleRead | null> {

@@ -8,10 +8,11 @@ require("../lib/polyfill.min.js");
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { AutoRest } from '../lib/autorest-core';
+import { RealFileSystem } from "../lib/file-system";
+import { AutoRest } from "../lib/autorest-core";
 import { CancellationToken } from "../lib/ref/cancallation";
-import { CreateFileUri, ResolveUri } from "../lib/ref/uri";
-import { Message } from "../lib/message";
+import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
+import { Message, Channel } from "../lib/message";
 import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
 import { DataStore } from "../lib/data-store/data-store";
@@ -41,32 +42,24 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     assert.strictEqual(message.Details, 42);
   }
 
-  // SKIPPING because Amar's tool is resolved hacky right now (waiting for "getting plugin bits to disk part")
-  @skip @test @timeout(10000) async "openapi-validation-tools"() {
-    const cancellationToken = CancellationToken.None;
-    const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.GetReadThroughScope();
+  // TODO: remodel if we figure out acquisition story
+  @test @timeout(60000) async "openapi-validation-tools"() {
+    const autoRest = new AutoRest(new RealFileSystem());
+    autoRest.AddConfiguration({ "input-file": "https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json" });
+    autoRest.AddConfiguration({ amar: true });
 
-    const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json";
-    await scopeInput.Read(inputFileUri);
-
-    const validationPlugin = await AutoRestPlugin.FromModule("./lib/pipeline/plugins/openapi-validation-tools");
-    const pluginNames = await validationPlugin.GetPluginNames(cancellationToken);
-    assert.deepStrictEqual(pluginNames.length, 2);
-
-    for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
-      const scopeWork = dataStore.CreateScope(`working_${pluginIndex}`);
-      const messages: Message[] = [];
-      const result = await validationPlugin.Process(
-        pluginNames[pluginIndex], _ => null,
-        scopeInput,
-        scopeWork.CreateScope("output"),
-        m => messages.push(m),
-        cancellationToken);
-      assert.strictEqual(result, true);
-      assert.strictEqual(messages.length, (await scopeInput.Enum()).length);
-      const message = messages[0];
+    const errorMessages: Message[] = [];
+    autoRest.Message.Subscribe((_, m) => {
+      if (m.Channel === Channel.Error) {
+        errorMessages.push(m);
+      }
+    });
+    assert.strictEqual(await autoRest.Process().finish, true);
+    const expectedNumErrors = 7;
+    if (errorMessages.length !== expectedNumErrors) {
+      console.log(JSON.stringify(errorMessages, null, 2));
     }
+    assert.strictEqual(errorMessages.length, expectedNumErrors);
   }
 
   @test @timeout(10000) async "AutoRest.dll AzureValidator"() {
@@ -126,7 +119,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const dataStore = new DataStore(CancellationToken.None);
 
     // load code model
-    const codeModelUri = ResolveUri(CreateFileUri(__dirname) + "/", "resources/code-model.yaml");
+    const codeModelUri = ResolveUri(CreateFolderUri(__dirname), "resources/code-model.yaml");
     const inputScope = dataStore.GetReadThroughScope(uri => uri === codeModelUri);
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 

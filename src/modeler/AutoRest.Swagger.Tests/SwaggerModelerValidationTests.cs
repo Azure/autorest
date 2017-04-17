@@ -123,7 +123,7 @@ namespace AutoRest.Swagger.Tests
             // ignore ServiceDefinitionParameters validation rule since it overlaps with this
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operations-invalid-parameters.json"))
                             .Where(msg => msg.Rule.GetType().Name != "ServiceDefinitionParameters");
-            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 2);
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 1);
         }
 
         [Fact]
@@ -210,13 +210,6 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "list-operations-naming.json"));
             messages.AssertOnlyValidationMessage(typeof(ListOperationNamingWarning), 2);
-        }
-
-        [Fact]
-        public void ListByOperationsValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "listby-operations.json"));
-            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 3);
         }
 
         [Fact]
@@ -684,16 +677,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
-        /// Verifies that list by operations (operations that are named as *_listby*) are correctly named
-        /// </summary>
-        [Fact]
-        public void ListByOperationsCorrectlyNamed()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "listby-operations-valid-naming.json"));
-            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 0);
-        }
-
-        /// <summary>
         /// Verifies that listing operations (any operation that returns an array or is of xmspageable type) 
         /// are correctly named
         /// </summary>
@@ -771,6 +754,17 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
         }
+
+        /// <summary>
+        /// Verifies resource model readonly properties
+        /// </summary>
+        [Fact]
+        public void ValidResourceModelReadOnlyProperties()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-readonly-props.json"));
+            messages.AssertOnlyValidationMessage(typeof(ResourceModelValidation), 0);
+        }
+
 
     }
 

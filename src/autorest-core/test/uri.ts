@@ -80,7 +80,7 @@ import * as uri from "../lib/ref/uri";
     assert.ok((await uri.ReadUri(CreateFileUri(__filename))).length > 0);
   }
 
-  @test @skip async "ResolveUri"() {
+  @test async "ResolveUri"() {
     assert.strictEqual(
       uri.ResolveUri("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/", "README.md"),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/README.md");

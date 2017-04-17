@@ -8,9 +8,7 @@ task 'zip-autorest', '', () ->
     .pipe zip package_name
     .pipe destination packages
 
-task 'install-node-files' ,'', (done)->
-  # install autorest files into dotnet-output-folder
-  # install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish",done
+task 'install/node-files' ,'', (done)->
   if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules"
     mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules"
   
@@ -23,13 +21,13 @@ task 'package','From scratch build, sign, and package autorest', (done) ->
   run 'clean',
     'restore'
     [ 'build/typescript', 'build/dotnet/binaries' ],
-    [ 'sign-assemblies', 'install-node-files' ],
+    [ 'sign-assemblies', 'install/node-files' ],
     'zip-autorest' 
     -> done()
 
 task 'publish', 'Builds, signs, publishes autorest binaries to GitHub Release',(done) ->
   run 'package',
-    'upload:github'
+    'upload/github'
     -> done()
 
 task 'copy-vscode-files-to-work', '', ->
@@ -132,7 +130,7 @@ task 'publish/vscode', "uploads the autorest vscode extension package.",(done)->
 task 'publish/autorest', '', ['build/typescript'], (done) ->
   execute "npm publish ", {cwd: "#{basefolder}/src/autorest" }, done
 
-task 'upload:github','', ->
+task 'upload/github','', ->
   Fail "needs --github_apikey=... or GITHUB_APIKEY set" if !github_apikey
   Fail "Missing package file #{packages}/#{package_name}" if !exists("#{packages}/#{package_name}")
 

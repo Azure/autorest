@@ -1,9 +1,12 @@
+import { OperationAbortedException } from './exception';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { matches } from "./ref/jsonpath";
+import { TryDecodeEnhancedPositionFromName } from './source-map/source-map';
+import { Supressor } from './pipeline/supression';
+import { matches, stringify } from "./ref/jsonpath";
 import { MergeOverwrite } from "./source-map/merging";
 import { DataStore } from "./data-store/data-store";
 import { EventEmitter, IEvent } from "./events";
@@ -12,7 +15,7 @@ import { EnsureIsFolderUri, ResolveUri } from "./ref/uri";
 import { From } from "./ref/linq";
 import { IFileSystem } from "./file-system";
 import * as Constants from "./constants";
-import { Message, Channel } from "./message";
+import { Channel, Message, SourceLocation, Range } from './message';
 import { Artifact } from "./artifact";
 import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
 
@@ -23,7 +26,7 @@ export interface AutoRestConfigurationImpl {
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
-  "vscode"?: any;
+  "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   // plugin specific
   "output-file"?: string;
@@ -37,7 +40,8 @@ export interface AutoRestConfigurationImpl {
   "namespace"?: string; // TODO: the modeler cares :( because it is badly designed
   "license-header"?: string;
   "add-credentials"?: boolean;
-  "package-name"?: string; // Ruby, Python
+  "package-name"?: string; // Ruby, Python, ...
+  "package-version"?: string;
   "sync-methods"?: "all" | "essential" | "none";
   "payload-flattening-threshold"?: number;
 }
@@ -127,6 +131,8 @@ export class MessageEmitter extends EventEmitter {
 
 export class ConfigurationView {
 
+  private suppressor: Supressor;
+
   /* @internal */ constructor(
     /* @internal */public messageEmitter: MessageEmitter,
     /* @internal */public configFileFolderUri: string,
@@ -145,7 +151,9 @@ export class ConfigurationView {
     for (const config of configs) {
       this.config = MergeConfigurations(this.config, config);
     }
-    this.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
+
+    this.suppressor = new Supressor(this);
+    this.Message({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
   }
 
   /* @internal */ public get DataStore(): DataStore { return this.messageEmitter.DataStore }
@@ -154,9 +162,6 @@ export class ConfigurationView {
 
   /* @internal */ public get CancellationTokenSource(): CancellationTokenSource { return this.messageEmitter.CancellationTokenSource; }
 
-  /* @internal */ public get Message(): IEvent<MessageEmitter, Message> {
-    return this.messageEmitter.Message;
-  }
   /* @internal */ public get GeneratedFile(): IEvent<MessageEmitter, Artifact> {
     return this.messageEmitter.GeneratedFile;
   }
@@ -220,31 +225,116 @@ export class ConfigurationView {
       yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section, this.config);
     }
   }
+
+  // message pipeline (source map resolution, filter, ...)
+  public Message(m: Message): void {
+    this.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - starting processing` });
+
+    try {
+      // update source locations to point to loaded Swagger
+      if (m.Source) {
+        const blameSources = m.Source.map(s => {
+          try {
+            const blameTree = this.DataStore.Blame(s.document, s.Position);
+            const result = [...blameTree.BlameInputs()];
+            if (result.length > 0) {
+              return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
+            }
+          } catch (e) {
+            // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
+            //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
+            console.log(e);
+          }
+          return [s];
+        });
+
+        //console.log("---");
+        //console.log(JSON.stringify(m.Source, null, 2));
+        m.Source = From(blameSources).SelectMany(x => x).ToArray();
+        //console.log(JSON.stringify(m.Source, null, 2));
+        //console.log("---");
+      }
+
+      // set range (dummy)
+      if (m.Source) {
+        m.Range = m.Source.map(s => {
+          const positionStart = s.Position;
+          const positionEnd = <sourceMap.Position>{ line: s.Position.line, column: s.Position.column + (s.Position.length || 3) };
+
+          return <Range>{
+            document: s.document,
+            start: positionStart,
+            end: positionEnd
+          };
+        });
+      }
+
+      // filter
+      const mx = this.suppressor.Filter(m);
+
+      // forward
+      if (mx !== null) {
+        // format message
+        switch (this.GetEntry("message-format")) {
+          case "json":
+            mx.Text = JSON.stringify(mx.Details, null, 2);
+            break;
+          default:
+            let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join("/")})` : ""}: ${mx.Text}`;
+            for (const source of mx.Source || []) {
+              if (source.Position) {
+                text += `\n    - ${source.document}:${source.Position.line}:${source.Position.column}`;
+                if (source.Position.path) {
+                  text += ` (${stringify(source.Position.path)})`;
+                }
+              }
+            }
+            mx.Text = text;
+            break;
+        }
+
+        this.messageEmitter.Message.Dispatch(mx);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    this.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - finished processing` });
+  }
 }
 
 
 export class Configuration {
   public async CreateView(messageEmitter: MessageEmitter, ...configs: Array<any>): Promise<ConfigurationView> {
-    const workingScope: DataStore = new DataStore();
-    const configFileUri = this.fileSystem && this.uriToConfigFileOrWorkingFolder
-      ? await Configuration.DetectConfigurationFile(this.fileSystem, this.uriToConfigFileOrWorkingFolder)
+    const configFileUri = this.fileSystem && this.configFileOrFolderUri
+      ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri)
       : null;
 
     const defaults = require("../resources/default-configuration.json");
 
     if (configFileUri === null) {
-      return new ConfigurationView(messageEmitter, this.uriToConfigFileOrWorkingFolder || "file:///", ...configs, defaults);
+      return new ConfigurationView(messageEmitter, this.configFileOrFolderUri || "file:///", ...configs, defaults);
     } else {
-      const inputView = workingScope.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
+      const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
+
+      const tmpConfig = new ConfigurationView(messageEmitter, ResolveUri(configFileUri, "."), ...configs);
 
       // load config
       const hConfig = await ParseCodeBlocks(
-        messageEmitter,
+        tmpConfig,
         await inputView.ReadStrict(configFileUri),
-        workingScope.CreateScope("config"));
+        messageEmitter.DataStore.CreateScope("config"));
 
       const blocks = await Promise.all(From<CodeBlock>(hConfig).Select(async each => {
         const block = each.data.ReadObject<AutoRestConfigurationImpl>();
+        if (typeof block !== "object") {
+          tmpConfig.Message({
+            Channel: Channel.Error,
+            Text: "Syntax error: Invalid YAML object.",
+            Source: [<SourceLocation>{ document: each.data.key, Position: { line: 1, column: 0 } }]
+          });
+          throw new OperationAbortedException();
+        }
         block.__info = each.info;
         return block;
       }));
@@ -255,7 +345,7 @@ export class Configuration {
 
   public constructor(
     private fileSystem?: IFileSystem,
-    private uriToConfigFileOrWorkingFolder?: string
+    private configFileOrFolderUri?: string
   ) {
     this.FileChanged();
   }
@@ -263,17 +353,17 @@ export class Configuration {
   public FileChanged() {
   }
 
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, uriToConfigFileOrWorkingFolder: string | null): Promise<string | null> {
-    if (!uriToConfigFileOrWorkingFolder || !uriToConfigFileOrWorkingFolder.endsWith("/")) {
-      return uriToConfigFileOrWorkingFolder;
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null): Promise<string | null> {
+    if (!configFileOrFolderUri || !configFileOrFolderUri.endsWith("/")) {
+      return configFileOrFolderUri;
     }
 
     // search for a config file, walking up the folder tree
-    while (uriToConfigFileOrWorkingFolder !== null) {
+    while (configFileOrFolderUri !== null) {
       // scan the filesystem items for the configuration.
       const configFiles = new Map<string, string>();
 
-      for await (const name of fileSystem.EnumerateFileUris(uriToConfigFileOrWorkingFolder)) {
+      for await (const name of fileSystem.EnumerateFileUris(configFileOrFolderUri)) {
         if (name.endsWith(".md")) {
           const content = await fileSystem.ReadFile(name);
           if (content.indexOf(Constants.MagicString) > -1) {
@@ -292,8 +382,8 @@ export class Configuration {
       }
 
       // walk up
-      const newUriToConfigFileOrWorkingFolder = ResolveUri(uriToConfigFileOrWorkingFolder, "..");
-      uriToConfigFileOrWorkingFolder = newUriToConfigFileOrWorkingFolder === uriToConfigFileOrWorkingFolder
+      const newUriToConfigFileOrWorkingFolder = ResolveUri(configFileOrFolderUri, "..");
+      configFileOrFolderUri = newUriToConfigFileOrWorkingFolder === configFileOrFolderUri
         ? null
         : newUriToConfigFileOrWorkingFolder;
     }

@@ -42,8 +42,8 @@ sys.path.append(join(tests, "BodyFile"))
 
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatfileservice import AutoRestSwaggerBATFileService
-from autorestswaggerbatfileservice.models import ErrorException
+from auto_rest_swagger_bat_file_service import AutoRestSwaggerBATFileService
+from auto_rest_swagger_bat_file_service.models import ErrorException
 
 
 class FileTests(unittest.TestCase):
@@ -94,7 +94,7 @@ class FileTests(unittest.TestCase):
             response.headers['Content-Length'] = str(3000 * 1024 * 1024)
 
         file_length = 0
-        client._client.add_hook('response', add_headers)
+        # client._client.add_hook('response', add_headers)
         stream = client.files.get_file_large(callback=test_callback)
         #for data in stream:
         #    file_length += len(data)

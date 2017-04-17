@@ -284,7 +284,7 @@ Modelers:
     <value>Azure Resource Management only supports HTTPS scheme.</value>
   </data>
   <data name="OperationParametersNotAllowedMessage" xml:space="preserve">
-    <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section, define these in the global parameters section instead</value>
+    <value>Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead</value>
   </data>
   <data name="ServiceDefinitionParametersMissingMessage" xml:space="preserve">
     <value>Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition</value>
@@ -305,7 +305,7 @@ Modelers:
     <value>When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'.</value>
   </data>
   <data name="BooleanPropertyNotRecommended" xml:space="preserve">
-    <value>Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: '{0}'.</value>
+    <value>Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined.</value>
   </data>
   <data name="AllowedTopLevelProperties" xml:space="preserve">
     <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}".</value>
@@ -338,7 +338,7 @@ Modelers:
     <value>Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
   </data>
   <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
-    <value>Since operation '{0}' response has model definition '{1}', it should be named as "list_*"</value>
+    <value>Since operation '{0}' response has model definition '{1}', it should be of the form "*_list*"</value>
   </data>
   <data name="LongRunningResponseNotValid" xml:space="preserve">
     <value>A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.</value>

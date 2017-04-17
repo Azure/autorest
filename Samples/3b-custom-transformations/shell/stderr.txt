@@ -1,66 +1,62 @@
 WARNING (NonAppJsonTypeWarning/S2004/SDKViolation): Please make sure that media types other than 'application/json' are supported by your service.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.consumes[1]
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:14:4 ($.consumes[1])
 WARNING (NonAppJsonTypeWarning/S2004/SDKViolation): Please make sure that media types other than 'application/json' are supported by your service.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.produces[1]
-ERROR (ListByOperationsValidation/M1003/SDKViolation): Operation Usage_List must be one of: usages_listbysubscriptionid, usages_list
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get.operationId
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:18:4 ($.produces[1])
 ERROR (OperationsAPIImplementationValidation/M3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Storage/operations'.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:38:2 ($.paths)
 WARNING (PutRequestResponseValidation/M2017/SDKViolation): A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: 'StorageAccounts_Create' Request Model: 'StorageAccountCreateParameters' Response Model: 'StorageAccount'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_CheckNameAvailability'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Create'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Delete'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].delete.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_GetProperty'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].get.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Update'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].patch.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListKeys'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys"].post.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_List'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts"].get.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListByResourceGroup'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts"].get.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_RegenerateKey'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
-ERROR (XmsExamplesProvidedValidation/M2022/None): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Usage_List'
-        Path: mem:///composite-transform/transform_1.yaml#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get.operationId
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.operationId)
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_CheckNameAvailability'
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.operationId)
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Create'
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.operationId)
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Delete'
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].delete.operationId)
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_GetProperty'
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].get.operationId)
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Update'
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].patch.operationId)
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListKeys'
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys"].post.operationId)
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_List'
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts"].get.operationId)
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListByResourceGroup'
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts"].get.operationId)
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_RegenerateKey'
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId)
+ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Usage_List'
+    - mem:///composite-transform/transform_1.yaml:undefined:undefined ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get.operationId)
 WARNING (BodyParametersValidation/M2063/SDKViolation): A body parameter must be named 'parameters'.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.parameters[0].name
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.parameters[0]
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:48:12 ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.parameters[0].name)
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:47:10 ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.parameters[0])
 WARNING (BodyParametersValidation/M2063/SDKViolation): A body parameter must be named 'parameters'.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.parameters[2].name
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.parameters[2]
-ERROR (ResourceModelValidation/M3001/RPCViolation): Model definition 'StorageAccount' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccount
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:382:12 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.parameters[2].name)
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:381:10 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.parameters[2])
 WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountCheckNameAvailabilityParameters' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCheckNameAvailabilityParameters
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:437:4 ($.definitions.StorageAccountCheckNameAvailabilityParameters)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountPropertiesCreateParameters' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountPropertiesCreateParameters
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:476:4 ($.definitions.StorageAccountPropertiesCreateParameters)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountProperties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountProperties
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:559:4 ($.definitions.StorageAccountProperties)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountPropertiesUpdateParameters' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountPropertiesUpdateParameters
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:684:4 ($.definitions.StorageAccountPropertiesUpdateParameters)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'StorageAccountRegenerateKeyParameters' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountRegenerateKeyParameters
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:724:4 ($.definitions.StorageAccountRegenerateKeyParameters)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'Resource' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.Resource
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:800:4 ($.definitions.Resource)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'name' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCheckNameAvailabilityParameters.properties.name
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:439:8 ($.definitions.StorageAccountCheckNameAvailabilityParameters.properties.name)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'type' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCheckNameAvailabilityParameters.properties.type
-WARNING (BooleanPropertyNotRecommended/M3018/RPCViolation): Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: 'nameAvailable'.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.CheckNameAvailabilityResult
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:442:8 ($.definitions.StorageAccountCheckNameAvailabilityParameters.properties.type)
+WARNING (BooleanPropertyNotRecommended/M3018/RPCViolation): Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined.
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:453:8 ($.definitions.CheckNameAvailabilityResult.properties.nameAvailable)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'properties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountCreateParameters.properties.properties
-WARNING (BooleanPropertyNotRecommended/M3018/RPCViolation): Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: 'useSubDomain'.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.CustomDomain
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:511:8 ($.definitions.StorageAccountCreateParameters.properties.properties)
+WARNING (BooleanPropertyNotRecommended/M3018/RPCViolation): Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined.
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:549:8 ($.definitions.CustomDomain.properties.useSubDomain)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'properties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccount.properties.properties
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:647:8 ($.definitions.StorageAccount.properties.properties)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'properties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountUpdateParameters.properties.properties
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:716:8 ($.definitions.StorageAccountUpdateParameters.properties.properties)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'keyName' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-        Path: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json#$.definitions.StorageAccountRegenerateKeyParameters.properties.keyName
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json:726:8 ($.definitions.StorageAccountRegenerateKeyParameters.properties.keyName)

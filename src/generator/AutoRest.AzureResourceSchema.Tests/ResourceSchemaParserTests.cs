@@ -39,7 +39,7 @@ namespace AutoRest.AzureResourceSchema.Tests
 
             codeModel.Add(method);
 
-            IDictionary<string, ResourceSchema> schemas = ResourceSchemaParser.Parse(codeModel);
+            IDictionary<string, ResourceSchema> schemas = ResourceSchemaParser.Parse(codeModel,codeModel.ApiVersion);
             Assert.NotNull(schemas);
             Assert.Equal(1, schemas.Count);
 

@@ -82,7 +82,6 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [Rule(typeof(UniqueResourcePaths))]
         [Rule(typeof(ListOperationNamingWarning))]
-        [Rule(typeof(ListByOperationsValidation))]
         [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
         [Rule(typeof(PutGetPatchResponseValidation))]
         [Rule(typeof(OperationsAPIImplementationValidation))]

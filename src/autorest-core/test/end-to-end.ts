@@ -11,7 +11,7 @@ import { Message, Channel } from "../lib/message";
 import { PumpMessagesToConsole } from './test-utility';
 
 @suite class EndToEnd {
-  @test @skip @timeout(60000) async "network full game"() {
+  @test @timeout(120000) async "network full game"() {
     const autoRest = new AutoRest(new RealFileSystem());
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
@@ -35,7 +35,9 @@ import { PumpMessagesToConsole } from './test-utility';
     });
 
     autoRest.AddConfiguration({
-      __specials: { infoSectionOverride: { title: "Network" } } // TODO: adjust, as the config evolves
+      "override-info": {
+        title: "Network"
+      }
     });
 
     // TODO: generate for all, probe results

@@ -1,8 +1,6 @@
 // polyfills for language support 
 require("../lib/polyfill.min.js");
 
-require('source-map-support').install({ hookRequire: true });
-
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import { IFileSystem, MemoryFileSystem } from "../lib/file-system"
 import * as assert from "assert";

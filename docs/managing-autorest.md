@@ -7,7 +7,7 @@ Once you have AutoRest installed using `npm`, it should be available on the PATH
 > autorest 
 
 AutoRest
-Downloading https://github.com/Azure/autorest/releases/.../dotnet-win7-x64.1.0.3.zip
+Downloading https://github.com/Azure/autorest/releases/.../dotnet-win7-x64.1.0.4.zip
         to  c:\users\...\.autorest\frameworks
 Downloading https://github.com/Azure/autorest/releases/.../autorest-1.0.1-20170223-1007-preview.zip
         to  c:\users\...\.autorest\plugins\autorest\1.0.1-20170223-1007-preview
@@ -23,7 +23,7 @@ You can get some help from the command line:
 AutoRest
   Build Information
   Bootstrapper :        0.9.10
-  NetCore framework :   1.0.3
+  NetCore framework :   1.0.4
   AutoRest core :       1.0.1-20170223-1007-preview
 
 Output Verbosity
@@ -69,7 +69,7 @@ You can see what versions of AutoRest that are available to install:
 AutoRest
   Build Information
   Bootstrapper :        0.9.10
-  NetCore framework :   1.0.3
+  NetCore framework :   1.0.4
   AutoRest core :       1.0.1-20170223-1007-preview
 
 Output Verbosity
@@ -108,7 +108,7 @@ autorest --list-installed
 AutoRest
   Build Information
   Bootstrapper :        0.9.10                      # current npm package version
-  NetCore framework :   1.0.3                       # current version of the .NET Core framework
+  NetCore framework :   1.0.4                       # current version of the .NET Core framework
   AutoRest core :       1.0.1-20170223-1007-preview # current version of the AutoRest tool itself.
 
 Installed versions of AutoRest :
@@ -123,7 +123,7 @@ If you want to remove all versions of AutoRest and install the just latest versi
 > autorest --reset <...args>
 
 AutoRest
-Downloading https://github.com/Azure/autorest/releases/.../dotnet-win7-x64.1.0.3.zip
+Downloading https://github.com/Azure/autorest/releases/.../dotnet-win7-x64.1.0.4.zip
         to  ~\.autorest\frameworks
 Downloading https://github.com/Azure/autorest/releases/.../autorest-1.0.1-20170223-1007-preview.zip
         to  ~\.autorest\plugins\autorest\1.0.1-20170223-1007-preview

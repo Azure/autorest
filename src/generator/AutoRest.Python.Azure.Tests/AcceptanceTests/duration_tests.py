@@ -39,13 +39,13 @@ cwd = dirname(realpath(__file__))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
-sys.path.append(join(tests, "AzureBodyDuration"))
+sys.modules['fixtures'].__path__.append(join(tests, "AzureBodyDuration", "fixtures"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 
-from autorestdurationtestservice import AutoRestDurationTestService
+from fixtures.acceptancetestsazurebodyduration import AutoRestDurationTestService
 
 
 class DurationTests(unittest.TestCase):

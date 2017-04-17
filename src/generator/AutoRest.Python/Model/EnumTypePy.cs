@@ -9,10 +9,10 @@ namespace AutoRest.Python.Model
 {
     public class EnumTypePy : EnumType, IExtendedModelTypePy
     {
-        public string TypeDocumentation => Parent == null || Name.IsNullOrEmpty() ? "str" : $"str or :class:`{Name} <{((CodeModelPy)CodeModel)?.modelNamespace}.models.{Name}>`";
+        public string TypeDocumentation => Parent == null || Name.IsNullOrEmpty() ? "str" : $"str or :class:`{Name} <{((CodeModelPy)CodeModel)?.Namespace}.models.{Name}>`";
         //ModelAsString ? 
         //"str" : 
-        public string ReturnTypeDocumentation => ModelAsString || Parent == null ? "str" :  $":class:`{Name} <{((CodeModelPy)CodeModel)?.modelNamespace}.models.{Name}>`";
+        public string ReturnTypeDocumentation => ModelAsString || Parent == null ? "str" :  $":class:`{Name} <{((CodeModelPy)CodeModel)?.Namespace}.models.{Name}>`";
 
     }
 }

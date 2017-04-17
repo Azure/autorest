@@ -245,12 +245,17 @@ namespace AutoRest.Go.Model
               );
         }
 
-        if (RequestHeaders.Any())
+        if (HeaderParameters.Any())
         {
           foreach (var param in Parameters.Where(p => p.IsRequired && p.Location == ParameterLocation.Header))
           {
-            decorators.Add(string.Format("autorest.WithHeader(\"{0}\",autorest.String({1}))",
-               param.SerializedName, param.Name));
+            if (param.IsClientProperty) {
+              decorators.Add(string.Format("autorest.WithHeader(\"{0}\",client.{1})", param.SerializedName, param.Name.ToPascalCase().ToString()));
+            }
+            else
+            {
+              decorators.Add(string.Format("autorest.WithHeader(\"{0}\",autorest.String({1}))", param.SerializedName, param.Name.ToString()));
+            }
           }
         }
 
