@@ -325,7 +325,7 @@ export class Configuration {
         await inputView.ReadStrict(configFileUri),
         messageEmitter.DataStore.CreateScope("config"));
 
-      const blocks = await Promise.all(From<CodeBlock>(hConfig).Select(async each => {
+      const blocks = hConfig.map(each => {
         const block = each.data.ReadObject<AutoRestConfigurationImpl>();
         if (typeof block !== "object") {
           tmpConfig.Message({
@@ -337,7 +337,7 @@ export class Configuration {
         }
         block.__info = each.info;
         return block;
-      }));
+      });
 
       return new ConfigurationView(messageEmitter, ResolveUri(configFileUri, "."), ...configs, ...blocks, defaults);
     }

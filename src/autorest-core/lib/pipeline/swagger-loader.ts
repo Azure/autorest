@@ -87,7 +87,7 @@ async function EnsureCompleteDefinitionIsPresent(
       await ensureExtFilePresent(fileUri, config, complaintLocation);
       // console.error("Resolving ", fileUri);
       const targetPath = path.slice(0, path.length - 1);
-      const extObj = await externalFiles[fileUri].ReadObject();
+      const extObj = externalFiles[fileUri].ReadObject();
       safeEval(`${stringify(targetPath)} = extObj`, { $: sourceDocObj, extObj: extObj });
       //// performance hit:
       // sourceDocMappings.push(...CreateAssignmentMapping(

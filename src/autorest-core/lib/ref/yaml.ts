@@ -147,13 +147,13 @@ export function CloneAst<T extends YAMLNode>(ast: T): T {
   return ParseToAst(StringifyAst(ast)) as T;
 }
 export function StringifyAst(ast: YAMLNode): string {
-  return Stringify(ParseNode<any>(ast));
+  return FastStringify(ParseNode<any>(ast));
 }
 export function Clone<T>(object: T): T {
-  return Parse<T>(Stringify(object));
+  return Parse<T>(FastStringify(object));
 }
 export function ToAst<T>(object: T): YAMLNode {
-  return ParseToAst(Stringify(object));
+  return ParseToAst(FastStringify(object));
 }
 
 export function Parse<T>(rawYaml: string, onError: (message: string, index: number) => void = message => { throw new Error(message); }): T {
@@ -166,3 +166,10 @@ export function Stringify<T>(object: T): string {
   return "---\n" + yamlAst.safeDump(object, { skipInvalid: true });
 }
 
+export function FastStringify<T>(obj: T): string {
+  try {
+    return JSON.stringify(obj);
+  } catch (e) {
+    return Stringify(obj);
+  }
+}
