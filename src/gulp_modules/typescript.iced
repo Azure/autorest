@@ -84,7 +84,7 @@ task 'test', 'typescript',['build/typescript'], (done)->
         next null
 
 task 'npm-install', 'typescript', (done)-> 
-  count = 7
+  count = 5
   npminstalls()
     .pipe foreach (each,next)-> 
       #count++
