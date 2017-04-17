@@ -146,7 +146,7 @@ namespace AutoRest.Core.Utilities
         }
 #endif 
 
-        public static string ToTypesString(this Type[] types) => types?.Aggregate("", (current, type) => $"{current}, {type?.FullName ?? "«null»" }").Trim(',') ?? "";
+        public static string ToTypesString(this Type[] types) => types?.Aggregate("", (current, type) => $"{current}, {type?.FullName ?? "ï¿½nullï¿½" }").Trim(',') ?? "";
 
         public static Type[] ParameterTypes(this IEnumerable<ParameterInfo> parameterInfos) => parameterInfos?.Select(p => p.ParameterType).ToArray();
 
@@ -522,7 +522,7 @@ namespace AutoRest.Core.Utilities
             x.SetResult(result);
             return x.Task;
         }
-        private static string[] LFOnly = new[] { ".py", ".rb", ".ts", ".js", ".java", ".go" };
+        private static string[] LFOnly = new[] { ".py", ".rb", ".ts", ".js", ".java", ".go",".json" };
         public static bool IsFileLineFeedOnly(this string filename) => LFOnly.Any(each => filename.EndsWith(each, StringComparison.OrdinalIgnoreCase));
         public static string LineEnding(this string filename) => filename.IsFileLineFeedOnly() ? "\n" : "\r\n";
 

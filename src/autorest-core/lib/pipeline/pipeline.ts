@@ -1,115 +1,28 @@
-import { AutoRestPlugin } from './plugin-endpoint';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { stringify } from '../ref/jsonpath';
+import { AutoRestPlugin } from "./plugin-endpoint";
 import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
 import { IdentitySourceMapping } from "../source-map/merging";
-import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-import { Supressor } from "./supression";
-import { IEvent } from "../events";
 import { Channel, Message, SourceLocation, Range } from "../message";
-import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
+import { MultiPromise } from "../multi-promise";
 import { GetFilename, ResolveUri } from "../ref/uri";
-import { ConfigurationView, MessageEmitter } from "../configuration";
-import { DataHandleRead, QuickScope } from '../data-store/data-store';
+import { ConfigurationView } from "../configuration";
+import { DataHandleRead, QuickScope } from "../data-store/data-store";
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { From } from "../ref/linq";
 import { IFileSystem } from "../file-system";
-import { TryDecodeEnhancedPositionFromName } from "../source-map/source-map";
-import { Exception } from '../exception';
+import { Exception } from "../exception";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
-function CreateMessageProcessor(config: ConfigurationView, outstandingTaskAwaiter: OutstandingTaskAwaiter): (m: Message) => Promise<void> {
-  const supressor = new Supressor(config);
-
-  // setup message pipeline (source map resolution, filter, forward)
-  return async (m: Message) => {
-    outstandingTaskAwaiter.Enter();
-    config.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - starting processing` });
-
-    try {
-      // update source locations to point to loaded Swagger
-      if (m.Source) {
-        const blameSources = await Promise.all(m.Source.map(async s => {
-          try {
-            const blameTree = await config.DataStore.Blame(s.document, s.Position);
-            const result = [...blameTree.BlameInputs()];
-            if (result.length > 0) {
-              return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
-            }
-          } catch (e) {
-            // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
-            //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
-            //console.log(e);
-          }
-          return [s];
-        }));
-
-        //console.log("---");
-        //console.log(JSON.stringify(m.Source, null, 2));
-        m.Source = From(blameSources).SelectMany(x => x).ToArray();
-        //console.log(JSON.stringify(m.Source, null, 2));
-        //console.log("---");
-      }
-
-      // set range (dummy)
-      if (m.Source) {
-        m.Range = m.Source.map(s => {
-          let positionStart = s.Position;
-          let positionEnd = <sourceMap.Position>{ line: s.Position.line, column: s.Position.column + (s.Position.length || 3) };
-
-          return <Range>{
-            document: s.document,
-            start: positionStart,
-            end: positionEnd
-          };
-        });
-      }
-
-      // filter
-      const mx = supressor.Filter(m);
-
-      // forward
-      if (mx !== null) {
-        // format message
-        switch (config.GetEntry("message-format")) {
-          case "json":
-            mx.Text = JSON.stringify(mx.Details, null, 2);
-            break;
-          default:
-            let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join('/')})` : ""}: ${mx.Text}`;
-            for (const source of mx.Source || []) {
-              if (source.Position && source.Position.path) {
-                text += `\n        Path: ${source.document}#${stringify(source.Position.path)}`;
-              }
-            }
-            mx.Text = text;
-            break;
-        }
-
-        config.Message.Dispatch(mx);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-
-    config.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - finished processing` });
-    outstandingTaskAwaiter.Exit();
-  };
-}
-
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   const cancellationToken = config.CancellationToken;
-
-  const outstandingTaskAwaiter = new OutstandingTaskAwaiter();
-  const processMessage = CreateMessageProcessor(config, outstandingTaskAwaiter);
-  outstandingTaskAwaiter.Enter();
+  const processMessage = config.Message.bind(config);
 
   // artifact emitter
   const emitArtifact: (artifactType: string, uri: string, handle: DataHandleRead) => Promise<void> = async (artifactType, uri, handle) => {
@@ -129,7 +42,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     throw new Exception("No input files provided.\n\nUse --help to get help information.", 0)
   }
 
-  config.Message.Dispatch({ Channel: Channel.Debug, Text: `Starting Pipeline - Loading literate swaggers ${inputs}` });
+  config.Message({ Channel: Channel.Debug, Text: `Starting Pipeline - Loading literate swaggers ${inputs}` });
 
   const swaggers = await LoadLiterateSwaggers(
     config,
@@ -137,7 +50,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     inputs, config.DataStore.CreateScope("loader"));
   // const rawSwaggers = await Promise.all(swaggers.map(async x => { return <Artifact>{ uri: x.key, content: await x.ReadData() }; }));
 
-  config.Message.Dispatch({ Channel: Channel.Debug, Text: `Done loading Literate Swaggers` });
+  config.Message({ Channel: Channel.Debug, Text: `Done loading Literate Swaggers` });
 
   // TRANSFORM
   for (let i = 0; i < swaggers.length; ++i) {
@@ -150,7 +63,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     : swaggers[0];
   const rawSwagger = swagger.ReadObject<any>();
 
-  config.Message.Dispatch({ Channel: Channel.Debug, Text: `Done Composing Swaggers.` });
+  config.Message({ Channel: Channel.Debug, Text: `Done Composing Swaggers.` });
 
   // TRANSFORM
   swagger = await manipulator.Process(swagger, config.DataStore.CreateScope("composite-transform"), "/composite.yaml");
@@ -160,13 +73,13 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const relPath =
       config.GetEntry("output-file") ||
       (config.GetEntry("namespace") ? config.GetEntry("namespace") + ".json" : GetFilename([...config.InputFileUris][0]));
-    config.Message.Dispatch({ Channel: Channel.Debug, Text: `relPath: ${relPath}` });
+    config.Message({ Channel: Channel.Debug, Text: `relPath: ${relPath}` });
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     const hw = await config.DataStore.Write("normalized-swagger.json");
     const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, swagger.ReadYamlAst()), [swagger]);
     await emitArtifact("swagger-document", outputFileUri, h);
   }
-  config.Message.Dispatch({ Channel: Channel.Debug, Text: `Done Emitting composed documents.` });
+  config.Message({ Channel: Channel.Debug, Text: `Done Emitting composed documents.` });
 
   // AMAR WORLD
   if (!config.DisableValidation && config.GetEntry("amar" as any)) {
@@ -195,7 +108,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
   const usedCodeGenerators = allCodeGenerators.filter(cg => config.GetEntry(cg as any) !== undefined);
 
-  config.Message.Dispatch({ Channel: Channel.Debug, Text: `Just before autorest.dll realm.` });
+  config.Message({ Channel: Channel.Debug, Text: `Just before autorest.dll realm.` });
   //
   // AutoRest.dll realm
   //
@@ -214,9 +127,11 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       // GFMer
       const codeModelGFM = await ProcessCodeModel(codeModel, config.DataStore.CreateScope("modelgfm"));
 
+      let pluginCtr = 0;
       for (const usedCodeGenerator of usedCodeGenerators) {
         for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
-          const scope = genConfig.DataStore.CreateScope("plugin_" + (await genConfig.DataStore.Enum()).length);
+          const processMessage = genConfig.Message.bind(genConfig);
+          const scope = genConfig.DataStore.CreateScope("plugin_" + ++pluginCtr);
 
           // TRANSFORM
           const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/model.yaml");
@@ -257,7 +172,4 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"), processMessage);
     }
   }
-
-  outstandingTaskAwaiter.Exit();
-  await outstandingTaskAwaiter.Wait();
 }
