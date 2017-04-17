@@ -23,6 +23,7 @@ export type DataPromise = MultiPromise<DataHandleRead>;
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   const cancellationToken = config.CancellationToken;
   const processMessage = config.Message.bind(config);
+  const azureValidator = config.AzureArm && !config.DisableValidation;
 
   // artifact emitter
   const emitArtifact: (artifactType: string, uri: string, handle: DataHandleRead) => Promise<void> = async (artifactType, uri, handle) => {
@@ -55,6 +56,15 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // TRANSFORM
   for (let i = 0; i < swaggers.length; ++i) {
     swaggers[i] = await manipulator.Process(swaggers[i], config.DataStore.CreateScope("loaded-transform"), inputs[i]);
+  }
+
+  // validator
+  if (azureValidator) {
+    const autoRestDotNetPlugin = AutoRestDotNetPlugin.Get();
+
+    for (let i = 0; i < swaggers.length; ++i) {
+      await autoRestDotNetPlugin.ValidateIndividual(swaggers[i], config.DataStore.CreateScope("validate_individual_" + i), processMessage);
+    }
   }
 
   // compose Swaggers
@@ -102,8 +112,6 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       }
     }
   }
-
-  const azureValidator = config.AzureArm && !config.DisableValidation;
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
   const usedCodeGenerators = allCodeGenerators.filter(cg => config.GetEntry(cg as any) !== undefined);
@@ -169,7 +177,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
     // validator
     if (azureValidator) {
-      await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"), processMessage);
+      await autoRestDotNetPlugin.ValidateComposite(swagger, config.DataStore.CreateScope("validate"), processMessage);
     }
   }
 }
