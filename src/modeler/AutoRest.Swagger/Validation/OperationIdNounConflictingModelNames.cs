@@ -48,7 +48,7 @@ namespace AutoRest.Swagger.Validation
             var serviceDefinition = (ServiceDefinition)context.Root;
             if (serviceDefinition.Definitions.Keys.Any(key => key.ToLower().Equals(noun.ToLower())))
             {
-                formatParameters = new object[] { noun };
+                formatParameters = new object[] { noun, noun };
                 return false;
             }
 
