@@ -59,13 +59,13 @@ namespace AutoRest.Swagger.Validation
                     
                     foreach (var reqProp in reqProps)
                     {
-                        var modelContainingReqProp = definitions.Where(pair => pair.Value.Required.Contains(reqProp)).Select(pair => pair.Key).First();
+                        var modelContainingReqProp = ValidationUtilities.EnumerateModelHierarchy(reqModel, definitions).First(model => definitions[model].Required?.Contains(reqProp)==true);
                         yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelContainingReqProp).AppendProperty("required")), this, "required", op.OperationId, modelContainingReqProp, reqProp);
                     }
                     
                     foreach (var defValProp in defValProps)
                     {
-                        var modelContainingDefValProp = definitions.Where(pair => pair.Value.Properties?.ContainsKey(defValProp.Key) == true && pair.Value.Properties[defValProp.Key] == defValProp.Value).Select(pair => pair.Key).First();
+                        var modelContainingDefValProp = ValidationUtilities.EnumerateModelHierarchy(reqModel, definitions).First(model => definitions[model].Properties?.Contains(defValProp) == true);
                         yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelContainingDefValProp).AppendProperty("properties").AppendProperty(defValProp.Key)), this, "default-valued", op.OperationId, modelContainingDefValProp, defValProp.Key);
                     }
                     
