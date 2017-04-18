@@ -422,7 +422,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to &apos;{0)Model&apos;. Consider using the plural form of &apos;{1}&apos; to avoid this..
+        ///   Looks up a localized string similar to OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to &apos;{0}Model&apos;. Consider using the plural form of &apos;{1}&apos; to avoid this..
         /// </summary>
         public static string OperationIdNounConflictingModelNamesMessage {
             get {

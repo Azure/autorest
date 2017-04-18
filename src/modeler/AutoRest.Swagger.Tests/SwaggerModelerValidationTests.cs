@@ -596,7 +596,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void OperationIdNounConflictingModelNameValidationTest()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operationid-noun-conflicting-model"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operationid-noun-conflicting-model.json"));
             messages.AssertOnlyValidationMessage(typeof(OperationIdNounConflictingModelNames), 1);
         }
     }
