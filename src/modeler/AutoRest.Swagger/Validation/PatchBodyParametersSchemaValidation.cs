@@ -56,16 +56,18 @@ namespace AutoRest.Swagger.Validation
                     
                     // select all models that have properties with default values
                     var defValProps = ValidationUtilities.EnumerateDefaultValuedProperties(reqModel, definitions);
-                    
+
+                    var modelHierarchy = ValidationUtilities.EnumerateModelHierarchy(reqModel, definitions);
+
                     foreach (var reqProp in reqProps)
                     {
-                        var modelContainingReqProp = ValidationUtilities.EnumerateModelHierarchy(reqModel, definitions).First(model => definitions[model].Required?.Contains(reqProp)==true);
+                        var modelContainingReqProp = modelHierarchy.First(model => definitions[model].Required?.Contains(reqProp) == true);
                         yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelContainingReqProp).AppendProperty("required")), this, "required", op.OperationId, modelContainingReqProp, reqProp);
                     }
                     
                     foreach (var defValProp in defValProps)
                     {
-                        var modelContainingDefValProp = ValidationUtilities.EnumerateModelHierarchy(reqModel, definitions).First(model => definitions[model].Properties?.Contains(defValProp) == true);
+                        var modelContainingDefValProp = modelHierarchy.First(model => definitions[model].Properties?.Contains(defValProp) == true);
                         yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelContainingDefValProp).AppendProperty("properties").AppendProperty(defValProp.Key)), this, "default-valued", op.OperationId, modelContainingDefValProp, defValProp.Key);
                     }
                     
