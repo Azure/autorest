@@ -168,7 +168,7 @@ export function Stringify<T>(object: T): string {
 
 export function FastStringify<T>(obj: T): string {
   try {
-    return JSON.stringify(obj);
+    return JSON.stringify(obj, null, 1);
   } catch (e) {
     return Stringify(obj);
   }
