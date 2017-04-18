@@ -1,0 +1,73 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "path parameters and minlens",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo/{param1}/{param2}/{param3}": {
+      "post": {
+        "operationId": "PostFoo",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "parameters": [
+          {
+            "name": "param1",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "my eg param1"
+          },
+          {
+            "name": "param2",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "my eg param2",
+            "minLength": "abc"
+          },
+          {
+            "name": "param3",
+            "type": "string",
+            "in": "path",
+            "required": true,
+            "description": "my eg param3",
+            "minLength": -1
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

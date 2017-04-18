@@ -600,6 +600,13 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(PutRequestResponseValidation), 1);
         }
 
+        [Fact]
+        public void PathParametersMinLengthValidationTest()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "path-param-min-len.json"));
+            messages.AssertOnlyValidationMessage(typeof(PathParametersMinLengthValidation), 3);
+        }
+
     }
 
     #region Positive tests
