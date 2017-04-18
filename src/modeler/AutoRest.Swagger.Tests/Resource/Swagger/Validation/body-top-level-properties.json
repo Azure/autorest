@@ -28,17 +28,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Resource"
-                }
-              ],
-              "properties": {
-                "extraprop": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/ParameterWithExtraProperty"
             },
             "description": "The parameters to provide for the updated account."
           }
