@@ -125,7 +125,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined..
         /// </summary>
         public static string BooleanPropertyNotRecommended {
             get {
@@ -418,6 +418,15 @@ namespace AutoRest.Core.Properties {
         public static string OperationIdMissing {
             get {
                 return ResourceManager.GetString("OperationIdMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to &apos;{0}Model&apos;. Consider using the plural form of &apos;{1}&apos; to avoid this..
+        /// </summary>
+        public static string OperationIdNounConflictingModelNamesMessage {
+            get {
+                return ResourceManager.GetString("OperationIdNounConflictingModelNamesMessage", resourceCulture);
             }
         }
         

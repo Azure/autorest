@@ -45,7 +45,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Models"
+              "$ref": "#/definitions/ModelsCollection"
             }
           }
         }
@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Models"
+              "$ref": "#/definitions/ModelsCollection"
             }
           }
         },
@@ -140,7 +140,7 @@
     }
   },
   "definitions": {
-    "Models": {
+    "ModelsCollection": {
       "description": "the models to return",
       "properties": {
         "value": {
