@@ -63,7 +63,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const autoRestDotNetPlugin = AutoRestDotNetPlugin.Get();
 
     for (let i = 0; i < swaggers.length; ++i) {
-      await autoRestDotNetPlugin.ValidateIndividual(swaggers[i], config.DataStore.CreateScope("validate_individual_" + i), processMessage);
+      await autoRestDotNetPlugin.ValidateIndividual(swaggers[i], config.DataStore.CreateScope("validate_individual_" + i), processMessage, config.GetEntry("openapi-type"));
     }
   }
 
@@ -177,7 +177,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
     // validator
     if (azureValidator) {
-      await autoRestDotNetPlugin.ValidateComposite(swagger, config.DataStore.CreateScope("validate"), processMessage);
+      await autoRestDotNetPlugin.ValidateComposite(swagger, config.DataStore.CreateScope("validate"), processMessage, config.GetEntry("openapi-type"));
     }
   }
 }

@@ -57,19 +57,19 @@ export class AutoRestDotNetPlugin extends EventEmitter {
     const outputScope = workingScope.CreateScope("output");
     await this.CautiousProcess("azure-validator", key => {
       switch (key) {
-        case "validation-category": return categories.length === 0 ? null : categories.join(", ");
-        case "validation-is-individual": return isIndividual;
+        case "spec-type": return categories.length === 0 ? null : categories.join(", ");
+        case "validation-mode": return isIndividual;
         default: return null;
       }
     }, new QuickScope([swagger]), outputScope, onMessage);
   }
 
-  public async ValidateIndividual(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void): Promise<void> {
-    await this.Validate(swagger, workingScope, onMessage, true, ["ARM"] /* TODO: derive from stuff */);
+  public async ValidateIndividual(swagger: DataHandleRead, workingScope: DataStoreView, categories: ValidationCategory[], onMessage: (message: Message) => void): Promise<void> {
+    await this.Validate(swagger, workingScope, onMessage, true, categories /* TODO: derive from stuff */);
   }
 
-  public async ValidateComposite(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void): Promise<void> {
-    await this.Validate(swagger, workingScope, onMessage, false, ["ARM"] /* TODO: derive from stuff */);
+  public async ValidateComposite(swagger: DataHandleRead, workingScope: DataStoreView, categories: ValidationCategory[], onMessage: (message: Message) => void): Promise<void> {
+    await this.Validate(swagger, workingScope, onMessage, false, categories /* TODO: derive from stuff */);
   }
 
   public async GenerateCode(

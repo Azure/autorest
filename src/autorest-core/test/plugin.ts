@@ -78,7 +78,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const messages: Message[] = [];
-    const resultScope = await autorestPlugin.ValidateComposite(swagger, pluginScope, m => messages.push(m));
+    const resultScope = await autorestPlugin.ValidateComposite(swagger, pluginScope, m => messages.push(m), config.GetEntry("openapi-type"));
 
     // check results
     assert.notEqual(messages.length, 0);

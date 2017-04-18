@@ -24,7 +24,8 @@ namespace AutoRest.Swagger.Model
     public enum ServiceDefinitionCategory
     {
         Regular = 0,
-        ARM = 1 << 0
+        ARM = 1,
+        DataPlain = 2 
     }
 
     /// <summary>
