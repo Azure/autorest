@@ -521,6 +521,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: &apos;{0}&apos; Request Model: &apos;{1}&apos; Response Model: &apos;{2}&apos;.
+        /// </summary>
+        public static string PutOperationRequestResponseSchemaMessage {
+            get {
+                return ResourceManager.GetString("PutOperationRequestResponseSchemaMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: &apos;{0}&apos; Model: &apos;{1}&apos;..
         /// </summary>
         public static string PutOperationResourceResponseValidationMessage {

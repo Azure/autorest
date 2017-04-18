@@ -599,6 +599,14 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operationid-noun-conflicting-model.json"));
             messages.AssertOnlyValidationMessage(typeof(OperationIdNounConflictingModelNames), 1);
         }
+
+        [Fact]
+        public void PutRequestResponseBodySchemaValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-request-response-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(PutRequestResponseValidation), 1);
+        }
+
     }
 
     #region Positive tests
