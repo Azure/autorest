@@ -62,7 +62,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: &quot;{0}&quot;..
+        ///   Looks up a localized string similar to Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Model definition &apos;{0}&apos; has extra properties [&apos;{1}&apos;]..
         /// </summary>
         public static string AllowedTopLevelProperties {
             get {
