@@ -139,6 +139,5 @@ export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHand
     mappings.push(...IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
   }
 
-  const resultObjectRaw = yaml.FastStringify(resultObject);
-  return yamlOutputHandle.WriteData(resultObjectRaw, mappings, yamlInputHandles);
+  return yamlOutputHandle.WriteObject(resultObject, mappings, yamlInputHandles);
 }

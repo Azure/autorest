@@ -49,12 +49,12 @@ async function EnsureCompleteDefinitionIsPresent(
     }
   };
 
-  const references: YAMLNodeWithPath[] = [];
   const sourceDoc = externalFiles[sourceFileUri];
   if (currentFileUri == null) {
     currentFileUri = sourceFileUri;
   }
 
+  const references: YAMLNodeWithPath[] = [];
   var currentDoc = externalFiles[currentFileUri].ReadYamlAst();
   if (entityType == null || modelName == null) {
     // external references
@@ -90,6 +90,7 @@ async function EnsureCompleteDefinitionIsPresent(
       const extObj = externalFiles[fileUri].ReadObject();
       safeEval(`${stringify(targetPath)} = extObj`, { $: sourceDocObj, extObj: extObj });
       //// performance hit:
+      // inputs.push(externalFiles[fileUri]);
       // sourceDocMappings.push(...CreateAssignmentMapping(
       //   extObj, externalFiles[fileUri].key,
       //   [], targetPath,
@@ -174,7 +175,7 @@ async function EnsureCompleteDefinitionIsPresent(
 
   // commit back
   const target = await workingScope.Write(`revision_${++ctr}.yaml`);
-  externalFiles[sourceFileUri] = await target.WriteObject(sourceDocObj, sourceDocMappings, inputs);
+  externalFiles[sourceFileUri] = await target.WriteObject(sourceDocObj, sourceDocMappings, [...Object.getOwnPropertyNames(externalFiles).map(x => externalFiles[x]), sourceDoc] /* inputs */ /*TODO: fix*/);
   return sourceDocMappings;
 }
 
