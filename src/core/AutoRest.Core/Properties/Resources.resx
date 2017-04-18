@@ -349,4 +349,7 @@ Modelers:
   <data name="ParametersPropertiesValidation" xml:space="preserve">
     <value>Parameter Must have the "name" property defined with non-empty string as its value</value>
   </data>
+  <data name="PutOperationRequestResponseSchemaMessage" xml:space="preserve">
+    <value>A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}'</value>
+  </data>
 </root>
