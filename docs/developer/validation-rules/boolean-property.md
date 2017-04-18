@@ -1,4 +1,4 @@
-# BooleanPropertyNotRecommended
+# M3018 - BooleanPropertyNotRecommended
 ## Description
 Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined.
 
