@@ -35,3 +35,9 @@ WARNING (DescriptionMissing/M4000/SDKViolation): 'target' model/property lacks '
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'message' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)
+ERROR (PathParametersMinLengthValidation/M2064/RPCViolation): Path Parameter 'subscriptionId' must have a minimum length specified in integer format.
+    - /Samples/3a-literate-swagger/swagger.md:357:2 ($.parameters.SubscriptionId)
+ERROR (PathParametersMinLengthValidation/M2064/RPCViolation): Path Parameter 'resourceGroupName' must have a minimum length specified in integer format.
+    - /Samples/3a-literate-swagger/swagger.md:383:2 ($.parameters.ResourceGroupName)
+ERROR (PathParametersMinLengthValidation/M2064/RPCViolation): Path Parameter 'serviceName' must have a minimum length specified in integer format.
+    - /Samples/3a-literate-swagger/swagger.md:397:2 ($.parameters.SearchServiceName)
