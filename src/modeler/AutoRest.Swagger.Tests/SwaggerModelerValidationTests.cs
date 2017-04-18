@@ -559,20 +559,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void BodyParametersInlineValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-parameters-validation-1.json"));
-            messages.AssertOnlyValidationMessage(typeof(BodyParametersValidation), 1);
-        }
-
-        [Fact]
-        public void BodyParametersReferencedValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-parameters-validation-2.json"));
-            messages.AssertOnlyValidationMessage(typeof(BodyParametersValidation), 1);
-        }
-
-        [Fact]
         public void XmsExamplesProvidedValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "xms-examples-absent.json"));

@@ -214,9 +214,6 @@ Modelers:
   <data name="HttpVerbIsNotValid" xml:space="preserve">
     <value>Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. </value>
   </data>
-  <data name="BodyParametersNotValid" xml:space="preserve">
-    <value>A body parameter must be named 'parameters'.</value>
-  </data>
   <data name="RequiredReadOnlyPropertiesValidation" xml:space="preserve">
     <value>Property '{0}' is a required property. It should not be marked as 'readonly'.</value>
   </data>
