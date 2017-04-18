@@ -38,7 +38,7 @@ export async function ManipulateObject(
 
   // process
   let ast: YAMLNode = src.ReadYamlAst();
-  const mapping = IdentitySourceMapping(src.key, ast).filter(m => hits.every(hit => !IsPrefix(hit.path, (m.generated as any).path)));
+  const mapping = IdentitySourceMapping(src.key, ast).filter(m => !hits.some(hit => IsPrefix(hit.path, (m.generated as any).path)));
   for (const hit of hits) {
     if (ast === undefined) {
       throw new Error("Cannot remove root node.");

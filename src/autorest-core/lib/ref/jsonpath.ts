@@ -25,7 +25,15 @@ export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: an
 }
 
 export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean {
-  return prefix.length <= path.length && path.slice(0, prefix.length).every((pc, i) => pc === prefix[i]);
+  if (prefix.length > path.length) {
+    return false;
+  }
+  for (let i = 0; i < prefix.length; ++i) {
+    if (prefix[i] !== path[i]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 export function CreateObject(jsonPath: JsonPath, leafObject: any): any {
