@@ -277,6 +277,16 @@ export class ConfigurationView {
         // format message
         switch (this.GetEntry("message-format")) {
           case "json":
+            // TODO: WHAT THE FUDGE, check with the consumers whether this has to be like that... otherwise, consider changing the format to something less generic
+            if (mx.Details) {
+              mx.Details.sources = (mx.Source || []).filter(x => x.Position).map(source => {
+                let text = `${source.document}:${source.Position.line}:${source.Position.column}`;
+                if (source.Position.path) {
+                  text += ` (${stringify(source.Position.path)})`;
+                }
+                return text;
+              });
+            }
             mx.Text = JSON.stringify(mx.Details, null, 2);
             break;
           default:
