@@ -55,13 +55,8 @@ namespace AutoRest.Swagger.Tests
                     OpenApiDocumentType = openapiDocType,
                     MergeState = ServiceDefinitionMergeState.After
                 };
-
-                Logger.Instance.AddListener(new SignalingLogListener(Category.Info, messages.Add));
-                foreach (var validationEx in validator.GetValidationExceptions(new Uri(input), serviceDefinition, metaData))
-                {
-                    Logger.Instance.Log(validationEx);
-                }
-                return messages.OfType<ValidationMessage>();
+                
+                return validator.GetValidationExceptions(new Uri(input), serviceDefinition, metaData).OfType<ValidationMessage>();
             }
         }
 
