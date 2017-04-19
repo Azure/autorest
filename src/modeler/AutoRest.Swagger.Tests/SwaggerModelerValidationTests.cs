@@ -42,7 +42,8 @@ namespace AutoRest.Swagger.Tests
     [Collection("Validation Tests")]
     public partial class SwaggerModelerValidationTests
     {
-        private IEnumerable<ValidationMessage> ValidateSwagger(string input, ServiceDefinitionDocumentType openapiDocType = ServiceDefinitionDocumentType.ARM)
+        private IEnumerable<ValidationMessage> ValidateSwagger(string input, ServiceDefinitionDocumentType openapiDocType = ServiceDefinitionDocumentType.ARM, 
+            ServiceDefinitionMergeState mergeState = ServiceDefinitionMergeState.After)
         {
             using (NewContext)
             {
@@ -53,7 +54,7 @@ namespace AutoRest.Swagger.Tests
                 var metaData = new ServiceDefinitionMetadata
                 {
                     OpenApiDocumentType = openapiDocType,
-                    MergeState = ServiceDefinitionMergeState.After
+                    MergeState = mergeState
                 };
                 
                 return validator.GetValidationExceptions(new Uri(input), serviceDefinition, metaData).OfType<ValidationMessage>();
@@ -188,7 +189,9 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void NonHttpsOperationsForScheme()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-operations-scheme.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-operations-scheme.json"),
+                ServiceDefinitionDocumentType.ARM,
+                ServiceDefinitionMergeState.Before);
             messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
         }
 

@@ -23,12 +23,6 @@ namespace AutoRest.Swagger.Validation
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         /// <summary>
-        /// When to apply the validation rule, before or after it has been merged as a part of its composite document
-        /// By default consider all rules to be applied for After only
-        /// </summary>
-        public override ServiceDefinitionMergeState ValidationRuleMergeState => ServiceDefinitionMergeState.After;
-
-        /// <summary>
         /// This rule passes if the parameters are not subscriptionId or api-version
         /// </summary>
         /// <param name="paths"></param>
