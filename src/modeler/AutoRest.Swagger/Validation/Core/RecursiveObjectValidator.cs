@@ -10,6 +10,7 @@ using System;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Swagger.Validation.Core
 {
@@ -122,7 +123,9 @@ namespace AutoRest.Swagger.Validation.Core
             // Determine if anything about this property indicates that it shouldn't be traversed further 
             var shouldTraverseObject = prop.IsTraversableProperty();
             // Create the context that's available to rules that validate this value
-            var ruleContext = parentContext.CreateChild(value, propName);
+            var ruleContext = prop.GetCustomAttribute<JsonExtensionDataAttribute>(true) == null
+                ? parentContext.CreateChild(value, propName)
+                : parentContext.CreateChild(value, -1);
 
             // Get any rules defined on this property and any defined as applying to the collection
             var propertyRules = prop.GetValidationRules();

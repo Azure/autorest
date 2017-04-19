@@ -243,7 +243,7 @@ export class ConfigurationView {
           } catch (e) {
             // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
             //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
-            console.log(e);
+            //console.log(e);
           }
           return [s];
         });
@@ -277,6 +277,16 @@ export class ConfigurationView {
         // format message
         switch (this.GetEntry("message-format")) {
           case "json":
+            // TODO: WHAT THE FUDGE, check with the consumers whether this has to be like that... otherwise, consider changing the format to something less generic
+            if (mx.Details) {
+              mx.Details.sources = (mx.Source || []).filter(x => x.Position).map(source => {
+                let text = `${source.document}:${source.Position.line}:${source.Position.column}`;
+                if (source.Position.path) {
+                  text += ` (${stringify(source.Position.path)})`;
+                }
+                return text;
+              });
+            }
             mx.Text = JSON.stringify(mx.Details, null, 2);
             break;
           default:
@@ -325,7 +335,7 @@ export class Configuration {
         await inputView.ReadStrict(configFileUri),
         messageEmitter.DataStore.CreateScope("config"));
 
-      const blocks = await Promise.all(From<CodeBlock>(hConfig).Select(async each => {
+      const blocks = hConfig.map(each => {
         const block = each.data.ReadObject<AutoRestConfigurationImpl>();
         if (typeof block !== "object") {
           tmpConfig.Message({
@@ -337,7 +347,7 @@ export class Configuration {
         }
         block.__info = each.info;
         return block;
-      }));
+      });
 
       return new ConfigurationView(messageEmitter, ResolveUri(configFileUri, "."), ...configs, ...blocks, defaults);
     }

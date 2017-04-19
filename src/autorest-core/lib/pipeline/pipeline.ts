@@ -78,6 +78,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const hw = await config.DataStore.Write("normalized-swagger.json");
     const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, swagger.ReadYamlAst()), [swagger]);
     await emitArtifact("swagger-document", outputFileUri, h);
+    await emitArtifact("swagger-document.yaml", outputFileUri.replace(".json", ".yaml"), swagger);
   }
   config.Message({ Channel: Channel.Debug, Text: `Done Emitting composed documents.` });
 
