@@ -10,7 +10,7 @@ import { ConfigurationView } from "../autorest-core";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/data-store";
 import { IsPrefix, JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { ResolvePath, ResolveRelativeNode } from "../parsing/yaml";
-import { Descendants, YAMLNodeWithPath, ToAst, StringifyAst, CloneAst } from "../ref/yaml";
+import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNodeWithPath } from '../ref/yaml';
 import { ResolveUri } from "../ref/uri";
 import { From } from "../ref/linq";
 import { Mappings, Mapping } from "../ref/source-map";
@@ -49,12 +49,12 @@ async function EnsureCompleteDefinitionIsPresent(
     }
   };
 
-  const references: YAMLNodeWithPath[] = [];
   const sourceDoc = externalFiles[sourceFileUri];
   if (currentFileUri == null) {
     currentFileUri = sourceFileUri;
   }
 
+  const references: YAMLNodeWithPath[] = [];
   var currentDoc = externalFiles[currentFileUri].ReadYamlAst();
   if (entityType == null || modelName == null) {
     // external references
@@ -87,9 +87,10 @@ async function EnsureCompleteDefinitionIsPresent(
       await ensureExtFilePresent(fileUri, config, complaintLocation);
       // console.error("Resolving ", fileUri);
       const targetPath = path.slice(0, path.length - 1);
-      const extObj = await externalFiles[fileUri].ReadObject();
+      const extObj = externalFiles[fileUri].ReadObject();
       safeEval(`${stringify(targetPath)} = extObj`, { $: sourceDocObj, extObj: extObj });
       //// performance hit:
+      // inputs.push(externalFiles[fileUri]);
       // sourceDocMappings.push(...CreateAssignmentMapping(
       //   extObj, externalFiles[fileUri].key,
       //   [], targetPath,
@@ -174,7 +175,7 @@ async function EnsureCompleteDefinitionIsPresent(
 
   // commit back
   const target = await workingScope.Write(`revision_${++ctr}.yaml`);
-  externalFiles[sourceFileUri] = await target.WriteObject(sourceDocObj, sourceDocMappings, inputs);
+  externalFiles[sourceFileUri] = await target.WriteObject(sourceDocObj, sourceDocMappings, [...Object.getOwnPropertyNames(externalFiles).map(x => externalFiles[x]), sourceDoc] /* inputs */ /*TODO: fix*/);
   return sourceDocMappings;
 }
 
@@ -303,7 +304,7 @@ export async function ComposeSwaggers(config: ConfigurationView, infoSection: an
         if (clientPC) {
           for (const method of methods) {
             if (!method.obj[pc]) {
-              populate.push(() => method.obj[pc] = clientPC);
+              populate.push(() => method.obj[pc] = Clone(clientPC));
               mapping.push(...CreateAssignmentMapping(
                 clientPC, inputSwagger.key,
                 [pc], method.path.concat([pc]),

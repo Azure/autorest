@@ -1,11 +1,11 @@
-import { IsUri } from '../ref/uri';
-import { JsonPath } from '../ref/jsonpath';
-import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from './source-map';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { IsUri } from "../ref/uri";
+import { JsonPath } from "../ref/jsonpath";
+import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from "./source-map";
 import { DataStore } from "../data-store/data-store";
 import { From } from "../ref/linq";
 
@@ -19,7 +19,8 @@ export class BlameTree {
     if (enhanced !== undefined) {
       for (const blame of blames) {
         blame.name = EncodeEnhancedPositionInName(blame.name, Object.assign(
-          JSON.parse(JSON.stringify(enhanced)),
+          {},
+          enhanced,
           TryDecodeEnhancedPositionFromName(blame.name) || {}));
       }
     }
@@ -50,7 +51,6 @@ export class BlameTree {
       // recurse
       todos.push(...todo.blaming);
     }
-
     return From(result).Distinct(x => JSON.stringify(x)).ToArray();
   }
 }

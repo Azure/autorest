@@ -62,7 +62,7 @@ const fileUri: (path: string, options: { resolve: boolean }) => string = require
 // Windows: C:\\... -> true    /... -> true
 // Linux:   C:\\... -> false   /... -> true
 function isAbsolute(path: string): boolean {
-  return !!path.match(/^(\/|[a-zA-Z]:\\)/);
+  return !!path.match(/^([a-zA-Z]:)?(\/|\\)/);
 }
 
 /**
