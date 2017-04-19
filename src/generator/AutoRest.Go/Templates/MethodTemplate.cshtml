@@ -198,40 +198,39 @@ if (!Model.NextAlreadyDefined)
 }
 
 @:@EmptyLine
-@:// @(Model.LazyMethodName) gets all results from the list and puts them inside a channel.
-@:func (client @(Model.Owner)) @(Model.LazyMethodName) @(Model.MethodParametersSignatureLazy) @(Model.MethodReturnSignatureLazy) {
-    @:respChan := make(chan @((Model.ListElement.ModelType as SequenceTypeGo).GetElement), 1)
-    @:errChan := make(chan error, 1)
-
-    @:go func() {
-        @:defer close(respChan)
+@:// @(Model.ListCompleteMethodName) gets all elements from the list without paging.
+@:func (client @(Model.Owner)) @(Model.ListCompleteMethodName) @(Model.MethodParametersSignatureComplete) @(Model.MethodReturnSignatureComplete) {
+    @:respSlice := @((Model.ListElement.ModelType as SequenceTypeGo).Name){}
+    if (Model.IsLongRunningOperation())
+    {
+    @:resp, err := client.@(Model.Name)(@(Model.HelperInvocationParameters))
+    }
+    else
+    {
+    @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters))
+    }
+    @:for err == nil {
+        @:select {
+        @:case <- stop:
+            @:return &respSlice, nil
+        @:default:
         if (Model.IsLongRunningOperation())
         {
-        @:resp, err := client.@(Model.Name)(@(Model.HelperInvocationParameters))
-        }
-        else
-        {
-        @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters))
-        }
-        @:for err == nil {
-            if (Model.IsLongRunningOperation())
-            {
             @:list := @(Model.ReturnValue().Body.Name){}
             @:err = autorest.Respond(
-                @:resp.Response,
+                    @:resp.Response,
                 @:autorest.ByUnmarshallingJSON(&list),
 		        @:autorest.ByClosing())
-            }
+            @:if err != nil {
+                @:return nil, err
+            @:}
+        }
             @:if list.@(Model.ListElement.Name) != nil {
-                @:for _, element := range *list.@(Model.ListElement.Name) {
-                    @:select {
-                        @:case respChan <- element:
-                        @:case <- stop:
-                            @:return
-                    @:}
+                @:for _, item := range *list.@(Model.ListElement.Name) {
+                    @:respSlice = append(respSlice, item)
                 @:}
             @:}
-            @: if list.@(Model.NextLink()) != nil {
+            @:if list.@(Model.NextLink()) != nil {
             if (Model.IsLongRunningOperation())
             {
                 if (!Model.NextAlreadyDefined)
@@ -254,12 +253,12 @@ if (!Model.NextAlreadyDefined)
                 @:list, err = client.@(Model.NextOperationName)(*list.@(Model.NextLink()))
                 }
             }
-            @:} else {
-                @:return
+                @:if err != nil {
+                    @:return nil, err
+                @:}
             @:}
         @:}
-		@:errChan <- err
-    @:}()
-    @:return respChan, errChan
+    @:}
+    @:return &respSlice, err
 @:}
 }

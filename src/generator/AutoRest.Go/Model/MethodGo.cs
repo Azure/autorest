@@ -103,7 +103,7 @@ namespace AutoRest.Go.Model
       }
     }
 
-    public string MethodParametersSignatureLazy
+    public string MethodParametersSignatureComplete
     {
       get
       {     
@@ -126,13 +126,13 @@ namespace AutoRest.Go.Model
       }
     }
 
-    public string MethodReturnSignatureLazy
+    public string MethodReturnSignatureComplete
     {
       get
       {
-        var signature = new StringBuilder("(<- chan ");
-        signature.Append((ListElement.ModelType as SequenceTypeGo).GetElement);
-        signature.Append(", <-chan error)");
+        var signature = new StringBuilder("(*");
+        signature.Append((ListElement.ModelType as SequenceTypeGo).Name);
+        signature.Append(", error)");
         return signature.ToString();
       }
     }
@@ -155,7 +155,7 @@ namespace AutoRest.Go.Model
 
     public string NextMethodName => $"{Name}NextResults";
 
-    public string LazyMethodName => $"{Name}Lazy";
+    public string ListCompleteMethodName => $"{Name}Complete";
 
     public string PreparerMethodName => $"{Name}Preparer";
 
@@ -414,7 +414,6 @@ namespace AutoRest.Go.Model
           return methods.Any(m => m.Name.Value.EqualsIgnoreCase(next));
       }
       return false;
-      // return string.IsNullOrEmpty(NextMethodName);
     }
 
     public string NextOperationName
