@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Utilities.Collections;
-using Newtonsoft.Json;
 using AutoRest.Core.Utilities;
 
 namespace AutoRest.Swagger.Validation.Core
 {
     internal static class RulesExtensions
     {
-        private static readonly Type JsonExtensionDataType = typeof(JsonExtensionDataAttribute);
-
         /// <summary>
         /// Gets an enumerable of properties for <paramref name="entity" /> that can be validated
         /// </summary>
