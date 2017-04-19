@@ -22,6 +22,8 @@ namespace AutoRest.Go.Model
       ElementType.AddImports(imports);
     }
 
+    public string GetElement => $"{ElementType.Name}";
+
     public string GetEmptyCheck(string valueReference, bool asEmpty)
     {
       return string.Format(asEmpty

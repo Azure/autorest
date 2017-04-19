@@ -192,4 +192,56 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
     @EmptyLine
     @:return
 @:}
+
+@:@EmptyLine
+@:// @(Model.LazyMethodName) gets all results from the list and puts them inside a channel.
+@:func (client @(Model.Owner)) @(Model.LazyMethodName) @(Model.MethodParametersSignatureLazy) @(Model.MethodReturnSignatureLazy) {
+    @:respChan := make(chan @((Model.ListElement.ModelType as SequenceTypeGo).GetElement), 1)
+    @:errChan := make(chan error, 1)
+
+    @:go func() {
+        @:defer close(respChan)
+        if (Model.IsLongRunningOperation())
+        {
+        @:resp, err := client.@(Model.Name)(@(Model.HelperInvocationParameters))
+        }
+        else
+        {
+        @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters))
+        }
+        @:for err == nil {
+            if (Model.IsLongRunningOperation())
+            {
+            @:list := @(Model.ReturnValue().Body.Name){}
+            @:err = autorest.Respond(
+                @:resp.Response,
+                @:autorest.ByUnmarshallingJSON(&list),
+		        @:autorest.ByClosing())
+            }
+            @:if list.@(Model.ListElement.Name) != nil {
+                @:for _, element := range *list.@(Model.ListElement.Name) {
+                    @:select {
+                        @:case respChan <- element:
+                        @:case <- stop:
+                            @:return
+                    @:}
+                @:}
+            @:}
+            @: if list.@(Model.NextLink()) != nil {
+            if (Model.IsLongRunningOperation())
+            {
+                @:resp, err = client.@(Model.NextMethodName)(list)
+            }
+            else
+            {
+                @:list, err = client.@(Model.NextMethodName)(list)
+            }
+            @:} else {
+                @:return
+            @:}
+        @:}
+		@:errChan <- err
+    @:}()
+    @:return respChan, errChan
+@:}
 }

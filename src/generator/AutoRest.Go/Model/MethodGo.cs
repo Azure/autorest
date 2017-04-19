@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text;
 
 namespace AutoRest.Go.Model
 {
@@ -102,6 +103,19 @@ namespace AutoRest.Go.Model
       }
     }
 
+    public string MethodParametersSignatureLazy
+    {
+      get
+      {     
+        var signature = new StringBuilder("(");
+        signature.Append(MethodParametersSignature);
+        signature.Append(MethodParametersSignature.Length > 0
+          ? ", stop <-chan struct{})"
+          : "stop <-chan struct{})");
+        return signature.ToString();
+      }
+    }
+
     public string MethodReturnSignature
     {
       get
@@ -112,7 +126,36 @@ namespace AutoRest.Go.Model
       }
     }
 
+    public string MethodReturnSignatureLazy
+    {
+      get
+      {
+        var signature = new StringBuilder("(<- chan ");
+        signature.Append((ListElement.ModelType as SequenceTypeGo).GetElement);
+        signature.Append(", <-chan error)");
+        return signature.ToString();
+      }
+    }
+
+    public PropertyGo ListElement
+    {
+      get
+      {
+        var properties = (ReturnType.Body as CompositeTypeGo).Properties.Cast<PropertyGo>().ToList();
+        foreach (PropertyGo p in properties)
+        {
+          if (p.ModelType is SequenceTypeGo)
+          {
+            return p;
+          }
+        }
+        return null;
+      }
+    }
+
     public string NextMethodName => $"{Name}NextResults";
+
+    public string LazyMethodName => $"{Name}Lazy";
 
     public string PreparerMethodName => $"{Name}Preparer";
 
