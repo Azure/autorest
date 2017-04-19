@@ -21,9 +21,9 @@ namespace AutoRest.Swagger.Model
     /// Represents categories for OpenAPI definitions that are associated with special treatment with regards to validation.
     /// </summary>
     [Flags]
-    public enum ServiceDefinitionCategory
+    public enum ServiceDefinitionDocumentType
     {
-        Regular = 0,
+        Default = 0,
         ARM = 1,
         DataPlain = 2 
     }
@@ -35,6 +35,6 @@ namespace AutoRest.Swagger.Model
     {
         public ServiceDefinitionMergeState MergeState { get; set; }
 
-        public ServiceDefinitionCategory Categories { get; set; }
+        public ServiceDefinitionDocumentType OpenApiDocumentType { get; set; }
     }
 }

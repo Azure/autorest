@@ -82,7 +82,7 @@ namespace AutoRest.Swagger
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
                 foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition, new ServiceDefinitionMetadata
                 {   // LEGACY MODE! (we will NOT seriously make categorization and individual validation work in legacy mode)
-                    Categories = ServiceDefinitionCategory.ARM, 
+                    OpenApiDocumentType = ServiceDefinitionDocumentType.ARM, 
                     MergeState = ServiceDefinitionMergeState.After
                 }))
                 {
@@ -192,7 +192,7 @@ namespace AutoRest.Swagger
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
             var LogMessages = validator.GetValidationExceptions(newDefintion.FilePath, newDefintion, new ServiceDefinitionMetadata
             {
-                Categories = ServiceDefinitionCategory.ARM,
+                OpenApiDocumentType = ServiceDefinitionDocumentType.ARM,
                 MergeState = ServiceDefinitionMergeState.After
             }).ToList();
 

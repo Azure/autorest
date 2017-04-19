@@ -87,9 +87,17 @@ public class AzureValidator : NewPlugin
     var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
     var metadata = new ServiceDefinitionMetadata
         {
-            Categories = (ServiceDefinitionCategory)Enum.Parse(typeof(ServiceDefinitionCategory), await GetValue("openapi-type") ?? ServiceDefinitionCategory.Regular.ToString()),
+            OpenApiDocumentType = (ServiceDefinitionDocumentType)Enum.Parse(typeof(ServiceDefinitionDocumentType), await GetValue("openapi-type") ?? ServiceDefinitionDocumentType.Default.ToString()),
             MergeState = await GetValue<bool?>("merge-state") == true ? ServiceDefinitionMergeState.Before : ServiceDefinitionMergeState.After
         };
+
+    // filter out the suppressed rules
+
+    // filter rules based on the openapi-type 
+    
+
+    // filter rules based on whether they should be run pre/post merge 
+
     foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition, metadata))
     {
       LogValidationMessage(validationEx);
