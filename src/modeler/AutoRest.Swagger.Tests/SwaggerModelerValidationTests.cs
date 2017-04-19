@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using AutoRest.Swagger.Validation.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
+using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -41,20 +42,25 @@ namespace AutoRest.Swagger.Tests
     [Collection("Validation Tests")]
     public partial class SwaggerModelerValidationTests
     {
-        private IEnumerable<ValidationMessage> ValidateSwagger(string input)
+        private IEnumerable<ValidationMessage> ValidateSwagger(string input, ServiceDefinitionDocumentType openapiDocType = ServiceDefinitionDocumentType.ARM)
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    CodeGenerator = "None",
-                    Namespace = "Test",
-                    Input = input
-                };
-                var modeler = new SwaggerModeler();
                 var messages = new List<LogMessage>();
+                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                var serviceDefinition = SwaggerParser.Parse(input, File.ReadAllText(input));
+
+                var metaData = new ServiceDefinitionMetadata
+                {
+                    OpenApiDocumentType = openapiDocType,
+                    MergeState = ServiceDefinitionMergeState.After
+                };
+
                 Logger.Instance.AddListener(new SignalingLogListener(Category.Info, messages.Add));
-                modeler.Build();
+                foreach (var validationEx in validator.GetValidationExceptions(new Uri(input), serviceDefinition, metaData))
+                {
+                    Logger.Instance.Log(validationEx);
+                }
                 return messages.OfType<ValidationMessage>();
             }
         }
