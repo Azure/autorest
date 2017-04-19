@@ -51,18 +51,21 @@ export async function ManipulateObject(
     ast = ReplaceNode(ast, oldAst, newAst) || (() => { throw new Error("Cannot remove root node."); })();
 
     // patch source map
-    if (newAst !== undefined && mappingInfo) {
-      mapping.push(
-        ...From(Descendants(newAst)).Select(descendant => {
-          return <Mapping>{
-            name: `Injected object at '${stringify(hit.path)}' (${mappingInfo.reason})`,
-            source: mappingInfo.transformerSourceHandle.key,
-            original: mappingInfo.transformerSourcePosition,
-            generated: { path: hit.path.concat(descendant.path) }
-          };
-        }));
+    if (newAst !== undefined) {
+      const reasonSuffix = mappingInfo ? ` (${mappingInfo.reason})` : "";
+      if (mappingInfo) {
+        mapping.push(
+          ...From(Descendants(newAst)).Select(descendant => {
+            return <Mapping>{
+              name: `Injected object at '${stringify(hit.path)}'${reasonSuffix}`,
+              source: mappingInfo.transformerSourceHandle.key,
+              original: mappingInfo.transformerSourcePosition,
+              generated: { path: hit.path.concat(descendant.path) }
+            };
+          }));
+      }
       mapping.push({
-        name: `Original object at '${stringify(hit.path)}' (${mappingInfo.reason})`,
+        name: `Original object at '${stringify(hit.path)}'${reasonSuffix}`,
         source: src.key,
         original: { path: hit.path },
         generated: { path: hit.path }
