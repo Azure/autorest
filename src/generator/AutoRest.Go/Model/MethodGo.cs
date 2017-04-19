@@ -408,15 +408,30 @@ namespace AutoRest.Go.Model
     /// <returns></returns>
     public bool NextMethodExists(IEnumerable<MethodGo> methods)
     {
-      if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
+      string next = NextOperationName;
+      if (!string.IsNullOrEmpty(next))
       {
-        var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
-        if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
-        {
-          return methods.Any(m => m.SerializedName.EqualsIgnoreCase(pageableExtension.OperationName));
-        }
+          return methods.Any(m => m.Name.Value.EqualsIgnoreCase(next));
       }
       return false;
+      // return string.IsNullOrEmpty(NextMethodName);
+    }
+
+    public string NextOperationName
+    {
+      get
+      {
+        if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
+        {
+          var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
+          if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
+          {
+            var method = CodeModel.Methods.First(m => m.SerializedName.EqualsIgnoreCase(pageableExtension.OperationName));
+            return method.Name.Value;
+          }
+        }
+        return null;
+      }
     }
 
     /// <summary>

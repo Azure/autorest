@@ -163,9 +163,12 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
     return
 }
 
-@if (Model.IsPageable && !Model.NextAlreadyDefined)
+@if (Model.IsPageable)
 {
 @:@EmptyLine
+
+if (!Model.NextAlreadyDefined)
+{
 @:// @(Model.NextMethodName) retrieves the next set of results, if any.
 @:func (client @(Model.Owner)) @(Model.NextMethodName)(lastResults @(Model.ReturnValue().Body.Name)) (@Model.MethodReturnSignature) {
     @:req, err := lastResults.@((Model.ReturnValue().Body as CompositeTypeGo).PreparerMethodName)()
@@ -192,6 +195,7 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
     @EmptyLine
     @:return
 @:}
+}
 
 @:@EmptyLine
 @:// @(Model.LazyMethodName) gets all results from the list and puts them inside a channel.
@@ -230,11 +234,25 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
             @: if list.@(Model.NextLink()) != nil {
             if (Model.IsLongRunningOperation())
             {
+                if (!Model.NextAlreadyDefined)
+                {
                 @:resp, err = client.@(Model.NextMethodName)(list)
+                }
+                else
+                {
+                @:resp, err = client.@(Model.NextOperationName)(*list.@(Model.NextLink()))
+                }
             }
             else
             {
+                if (!Model.NextAlreadyDefined)
+                {
                 @:list, err = client.@(Model.NextMethodName)(list)
+                }
+                else
+                {
+                @:list, err = client.@(Model.NextOperationName)(*list.@(Model.NextLink()))
+                }
             }
             @:} else {
                 @:return
