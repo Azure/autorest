@@ -70,17 +70,17 @@
       <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-mgmt-resources</artifactId>
-        <version>1.0.0-beta6-SNAPSHOT</version>
+        <version>1.0.0</version>
       </dependency>
       <dependency>
         <groupId>com.microsoft.rest</groupId>
         <artifactId>client-runtime</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.2-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-client-runtime</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.2-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>commons-codec</groupId>
@@ -124,7 +124,7 @@
           <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>autorest-build-tools</artifactId>
-            <version>1.0.0-beta4</version>
+            <version>1.0.0</version>
           </dependency>
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
