@@ -243,7 +243,7 @@ export class ConfigurationView {
           } catch (e) {
             // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
             //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
-            console.log(e);
+            //console.log(e);
           }
           return [s];
         });

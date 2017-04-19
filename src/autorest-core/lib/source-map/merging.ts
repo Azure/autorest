@@ -73,7 +73,7 @@ export function MergeOverwrite(a: any, b: any, concatListPathFilter: (path: Json
   // scalars/arrays involved
   if (typeof a !== "object" || a instanceof Array ||
     typeof b !== "object" || b instanceof Array) {
-    if (!concatListPathFilter(path)) {
+    if (!(a instanceof Array) && !(b instanceof Array) && !concatListPathFilter(path)) {
       return a;
     }
     return a instanceof Array
