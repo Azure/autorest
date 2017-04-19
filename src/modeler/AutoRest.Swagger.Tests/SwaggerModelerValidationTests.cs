@@ -182,7 +182,9 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void NonHttpsServiceDefinitionForScheme()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-service-def-scheme.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-service-def-scheme.json"),
+                                           ServiceDefinitionDocumentType.ARM,
+                                           ServiceDefinitionMergeState.Before);
             messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
         }
 
@@ -190,8 +192,8 @@ namespace AutoRest.Swagger.Tests
         public void NonHttpsOperationsForScheme()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-operations-scheme.json"),
-                ServiceDefinitionDocumentType.ARM,
-                ServiceDefinitionMergeState.Before);
+                                           ServiceDefinitionDocumentType.ARM,
+                                           ServiceDefinitionMergeState.Before);
             messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
         }
 
