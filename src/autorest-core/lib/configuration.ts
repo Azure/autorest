@@ -44,6 +44,7 @@ export interface AutoRestConfigurationImpl {
   "package-version"?: string;
   "sync-methods"?: "all" | "essential" | "none";
   "payload-flattening-threshold"?: number;
+  "openapi-type"?: string
 }
 
 // TODO: operate on DataHandleRead and create source map!

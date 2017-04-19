@@ -13,9 +13,6 @@ import { AutoRestPlugin } from "../plugin-endpoint";
 import { DataHandleRead, DataStoreViewReadonly, QuickScope, DataStoreView } from "../../data-store/data-store";
 import { Message } from "../../message";
 
-// SEE ServiceDefinitionCategory in ServiceDefinitionMetadata.cs
-export type ValidationCategory = "ARM";
-
 export class AutoRestDotNetPlugin extends EventEmitter {
   private static instance = new Lazy<AutoRestDotNetPlugin>(() => new AutoRestDotNetPlugin());
   public static Get(): AutoRestDotNetPlugin { return AutoRestDotNetPlugin.instance.Value; }

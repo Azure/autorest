@@ -40,6 +40,11 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.ServiceDefinitionParametersMissingMessage;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType OpenApiDocumentValidationType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
         /// This rule passes if the parameters section contains both subscriptionId and api-version parameters
         /// </summary>
         /// <param name="paths"></param>
