@@ -75,12 +75,12 @@
       <dependency>
         <groupId>com.microsoft.rest</groupId>
         <artifactId>client-runtime</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-client-runtime</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>commons-codec</groupId>
