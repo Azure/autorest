@@ -7,7 +7,7 @@ import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
 import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from '../ref/uri';
-import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../ref/yaml";
+import { FastStringify, Parse, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
@@ -65,8 +65,8 @@ export abstract class DataStoreViewReadonly {
         targetDirUri,
         key.replace(":", "")); // make key (URI) a descriptive relative path
       await WriteString(targetFileUri, data);
-      await WriteString(targetFileUri + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
-      await WriteString(targetFileUri + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
+      await WriteString(targetFileUri + ".map", JSON.stringify(metadata.sourceMap.Value, null, 2));
+      await WriteString(targetFileUri + ".input.map", JSON.stringify(metadata.inputSourceMap.Value, null, 2));
     }
   }
 }
@@ -379,7 +379,7 @@ export class DataHandleWrite {
   }
 
   public WriteObject<T>(obj: T, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
-    return this.WriteData(Stringify(obj), mappings, mappingSources);
+    return this.WriteData(FastStringify(obj), mappings, mappingSources);
   }
 }
 

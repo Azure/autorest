@@ -118,8 +118,8 @@ import { Message, Channel } from "../lib/message";
     // transform descriptions in resolved swagger
     const codeModelSetDescr3 = await GenerateCodeModel({ directive: { from: "composite", where: "$..description", transform: "'cowbell'" } });
 
-    assert.ok(codeModelRef.indexOf("description: cowbell") === -1);
-    assert.ok(codeModelSetDescr1.indexOf("description: cowbell") !== -1);
+    assert.ok(codeModelRef.indexOf("description: cowbell") === -1 && codeModelRef.indexOf("\"description\": \"cowbell\"") === -1);
+    assert.ok(codeModelSetDescr1.indexOf("description: cowbell") !== -1 || codeModelSetDescr1.indexOf("\"description\": \"cowbell\"") !== -1);
     assert.strictEqual(codeModelSetDescr1, codeModelSetDescr2);
     assert.strictEqual(codeModelSetDescr1, codeModelSetDescr3);
 
