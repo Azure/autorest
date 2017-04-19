@@ -37,20 +37,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// <param name="entity">The object to validate</param>
         public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, ServiceDefinition entity, ServiceDefinitionMetadata metadata)
         {
-            // BEGIN TEMP
-            // @Deepak:
-            // - this is just so validation isn't happening twice - since `RecursiveValidate` doesn't understand the metadata yet...
-            // - I'd classify "I don't care when I'm applied"-rules as ServiceDefinitionMergeState.After (rather than Before), because:
-            //        Imagine files A, B and C. C contains a common definition "Pet" that is referenced by A and B.
-            //        When validation A and B (i.e. individually), "Pet" is resolved both times, i.e. the ServiceDefinition will contain it both times!
-            //        You can see where this goes... if there's a validation issue in "Pet", it will be caught two times...
-            //        That's not a huge deal, but classifying a rule as After will elegantly solve that.
-            if (metadata.MergeState == ServiceDefinitionMergeState.Before)
-            {
-                return Enumerable.Empty<LogMessage>();
-            }
-            // END TEMP
-
+            // TODO: By default, set validation rule merge state to After
             return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity, filePath), Enumerable.Empty<Rule>(), metadata);
         }
 

@@ -81,8 +81,8 @@ namespace AutoRest.Swagger
                 // Look for semantic errors and warnings in the document.
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
                 foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition, new ServiceDefinitionMetadata
-                {   // LEGACY MODE! (we will NOT seriously make categorization and individual validation work in legacy mode)
-                    OpenApiDocumentType = ServiceDefinitionDocumentType.ARM, 
+                {   // LEGACY MODE! set defaults for the metadata, the validator doesn't care from this codepath
+                    OpenApiDocumentType = ServiceDefinitionDocumentType.Default, 
                     MergeState = ServiceDefinitionMergeState.After
                 }))
                 {
