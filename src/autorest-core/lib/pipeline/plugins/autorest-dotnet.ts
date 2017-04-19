@@ -53,23 +53,23 @@ export class AutoRestDotNetPlugin extends EventEmitter {
     }
   }
 
-  async Validate(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void, isIndividual: boolean, categories: ValidationCategory[]): Promise<void> {
+  async Validate(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void, isIndividual: boolean, openapiType: string): Promise<void> {
     const outputScope = workingScope.CreateScope("output");
     await this.CautiousProcess("azure-validator", key => {
       switch (key) {
-        case "spec-type": return categories.length === 0 ? null : categories.join(", ");
-        case "validation-mode": return isIndividual;
+        case "openapi-type": return openapiType;
+        case "merge-state": return isIndividual;
         default: return null;
       }
     }, new QuickScope([swagger]), outputScope, onMessage);
   }
 
-  public async ValidateIndividual(swagger: DataHandleRead, workingScope: DataStoreView, categories: ValidationCategory[], onMessage: (message: Message) => void): Promise<void> {
-    await this.Validate(swagger, workingScope, onMessage, true, categories /* TODO: derive from stuff */);
+  public async ValidateIndividual(swagger: DataHandleRead, workingScope: DataStoreView, openapiType: string, onMessage: (message: Message) => void): Promise<void> {
+    await this.Validate(swagger, workingScope, onMessage, true, openapiType /* TODO: derive from stuff */);
   }
 
-  public async ValidateComposite(swagger: DataHandleRead, workingScope: DataStoreView, categories: ValidationCategory[], onMessage: (message: Message) => void): Promise<void> {
-    await this.Validate(swagger, workingScope, onMessage, false, categories /* TODO: derive from stuff */);
+  public async ValidateComposite(swagger: DataHandleRead, workingScope: DataStoreView, openapiType: string, onMessage: (message: Message) => void): Promise<void> {
+    await this.Validate(swagger, workingScope, onMessage, false, openapiType /* TODO: derive from stuff */);
   }
 
   public async GenerateCode(

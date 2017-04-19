@@ -177,7 +177,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
     // validator
     if (azureValidator) {
-      await autoRestDotNetPlugin.ValidateComposite(swagger, config.DataStore.CreateScope("validate"), processMessage, config.GetEntry("openapi-type"));
+      await autoRestDotNetPlugin.ValidateComposite(swagger, config.DataStore.CreateScope("validate"), config.GetEntry("openapi-type"), processMessage);
     }
   }
 }
