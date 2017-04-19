@@ -308,7 +308,7 @@ Modelers:
     <value>Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined.</value>
   </data>
   <data name="AllowedTopLevelProperties" xml:space="preserve">
-    <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}".</value>
+    <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Model definition '{0}' has extra properties ['{1}'].</value>
   </data>
   <data name="TrackedResourceGetOperationMissing" xml:space="preserve">
     <value>Tracked resource '{0}' must have a get operation.</value>
@@ -348,5 +348,11 @@ Modelers:
   </data>
   <data name="ParametersPropertiesValidation" xml:space="preserve">
     <value>Parameter Must have the "name" property defined with non-empty string as its value</value>
+  </data>
+  <data name="OperationIdNounConflictingModelNamesMessage" xml:space="preserve">
+    <value>OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to '{0}Model'. Consider using the plural form of '{1}' to avoid this.</value>
+  </data>
+  <data name="PutOperationRequestResponseSchemaMessage" xml:space="preserve">
+    <value>A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}'</value>
   </data>
 </root>

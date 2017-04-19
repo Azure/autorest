@@ -50,8 +50,8 @@ namespace AutoRest.Swagger.Validation
             foreach (var model in violatingModels)
             {
                 var violatingOp = ops.Where(op => (op.Responses?.ContainsKey("200") == true) && op.Responses["200"].Schema.Reference.StripDefinitionPath() == model).First();
-                var violatingPath = paths.Where(pathObj => pathObj.Value.Values.Where(op => op.OperationId == violatingOp.OperationId).Any()).First();
-                var violatingOpVerb = violatingPath.Value.Keys.Where(key => key.EqualsIgnoreCase("put")).First();
+                var violatingPath = ValidationUtilities.GetOperationIdPath(violatingOp.OperationId, paths);
+                var violatingOpVerb = ValidationUtilities.GetOperationIdVerb(violatingOp.OperationId, violatingPath);
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath.Key).AppendProperty(violatingOpVerb).AppendProperty("operationId")), this, violatingOp.OperationId, model);
             }
         }

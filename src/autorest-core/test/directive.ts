@@ -33,7 +33,7 @@ import { Message, Channel } from "../lib/message";
     // muted run
     await autoRest.ResetConfiguration();
     await autoRest.AddConfiguration({ "azure-arm": true });
-    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"] } });
+    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing", "PutRequestResponseValidation"] } });
     {
       const messages: Message[] = [];
       const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });

@@ -62,7 +62,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: &quot;{0}&quot;..
+        ///   Looks up a localized string similar to Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Model definition &apos;{0}&apos; has extra properties [&apos;{1}&apos;]..
         /// </summary>
         public static string AllowedTopLevelProperties {
             get {
@@ -125,7 +125,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: &apos;{0}&apos;..
+        ///   Looks up a localized string similar to Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined..
         /// </summary>
         public static string BooleanPropertyNotRecommended {
             get {
@@ -422,6 +422,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to &apos;{0}Model&apos;. Consider using the plural form of &apos;{1}&apos; to avoid this..
+        /// </summary>
+        public static string OperationIdNounConflictingModelNamesMessage {
+            get {
+                return ResourceManager.GetString("OperationIdNounConflictingModelNamesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Per the Noun_Verb convention for Operation Ids, the noun &apos;{0}&apos; should not appear after the underscore..
         /// </summary>
         public static string OperationIdNounInVerb {
@@ -508,6 +517,15 @@ namespace AutoRest.Core.Properties {
         public static string PutOperationNameNotValid {
             get {
                 return ResourceManager.GetString("PutOperationNameNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: &apos;{0}&apos; Request Model: &apos;{1}&apos; Response Model: &apos;{2}&apos;.
+        /// </summary>
+        public static string PutOperationRequestResponseSchemaMessage {
+            get {
+                return ResourceManager.GetString("PutOperationRequestResponseSchemaMessage", resourceCulture);
             }
         }
         

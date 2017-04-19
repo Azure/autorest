@@ -230,7 +230,7 @@ namespace AutoRest.Swagger.Tests
         public void BodyTopLevelPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-top-level-properties.json"));
-            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 2);
+            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 1);
         }
 
         [Fact]
@@ -592,6 +592,21 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-parameter-name.json"));
             messages.AssertOnlyValidationMessage(typeof(ParameterNameValidation), 2);
         }
+
+        [Fact]
+        public void OperationIdNounConflictingModelNameValidationTest()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operationid-noun-conflicting-model.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationIdNounConflictingModelNames), 1);
+        }
+
+        [Fact]
+        public void PutRequestResponseBodySchemaValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-request-response-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(PutRequestResponseValidation), 1);
+        }
+
     }
 
     #region Positive tests
