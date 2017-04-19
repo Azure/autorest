@@ -287,7 +287,7 @@ export class ConfigurationView {
                 return text;
               });
             }
-            mx.Text = JSON.stringify(mx.Details, null, 2);
+            mx.Text = JSON.stringify(mx.Details || mx, null, 2);
             break;
           default:
             let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join("/")})` : ""}: ${mx.Text}`;
