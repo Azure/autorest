@@ -73,6 +73,7 @@ public class AzureValidator : NewPlugin
 
   protected override async Task<bool> ProcessInternal()
   {
+        Console.Error.WriteLine("error form processintwernal");
     var files = await ListInputs();
     if (files.Length != 1)
     {
@@ -90,7 +91,6 @@ public class AzureValidator : NewPlugin
             OpenApiDocumentType = (ServiceDefinitionDocumentType)Enum.Parse(typeof(ServiceDefinitionDocumentType), (await GetValue("openapi-type")).ToString().ToUpper() ?? ServiceDefinitionDocumentType.Default.ToString()),
             MergeState = await GetValue<bool?>("merge-state") == true ? ServiceDefinitionMergeState.Before : ServiceDefinitionMergeState.After
         };
-        
     foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition, metadata))
     {
       LogValidationMessage(validationEx);

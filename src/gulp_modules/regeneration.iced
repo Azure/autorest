@@ -14,6 +14,7 @@ regenExpected = (opts,done) ->
     
     swaggerFiles = (if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue).split(";")
     args = [
+      #'--disable-validation=true',
       '--skip-validation=true',
       "--#{opts.language}",
       "--output-folder=#{outputDir}/#{key}",
