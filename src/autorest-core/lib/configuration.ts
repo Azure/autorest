@@ -286,6 +286,10 @@ export class ConfigurationView {
                 }
                 return text;
               });
+              if (mx.Details.length > 0) {
+                mx.Details["jsonref"] = mx.Details[0];
+                mx.Details["json-path"] = mx.Details[0];
+              }
             }
             mx.Text = JSON.stringify(mx.Details || mx, null, 2);
             break;

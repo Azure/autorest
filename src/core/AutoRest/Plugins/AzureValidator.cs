@@ -36,8 +36,6 @@ public class AzureValidator : NewPlugin
         { "type", validationMessage.Severity.ToString() },
         { "code", validationMessage.Rule.GetType().Name },
         { "message", validationMessage.Message },
-        { "jsonref", validationMessage.Path.JsonReference },
-        { "json-path", validationMessage.Path.ReadablePath },
         { "id", validationMessage.Rule.Id },
         { "validationCategory", validationMessage.Rule.ValidationCategory.ToString() },
         { "providerNamespace", pathComponentProviderNamespace.Success ? pathComponentProviderNamespace.Value : null },
