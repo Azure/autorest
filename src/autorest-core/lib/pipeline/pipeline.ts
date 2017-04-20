@@ -38,7 +38,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // load Swaggers
   let inputs = From(config.InputFileUris).ToArray();
   if (inputs.length === 0) {
-    throw new Exception("No input files provided.\n\nUse --help to get help information.", 0)
+    throw new Exception("No input files provided.\n\nUse --help to get help information.", 0);
   }
 
   config.Message({ Channel: Channel.Debug, Text: `Starting Pipeline - Loading literate swaggers ${inputs}` });
@@ -112,64 +112,60 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   //
   // AutoRest.dll realm
   //
-  if (azureValidator || usedCodeGenerators.length > 0) {
-    const autoRestDotNetPlugin = AutoRestDotNetPlugin.Get();
+  // validator
+  if (azureValidator) {
+    await AutoRestDotNetPlugin.Get().Validate(swagger, config.DataStore.CreateScope("validate"), processMessage);
+  }
 
-    // code generators
-    if (usedCodeGenerators.length > 0) {
-      // modeler
-      let codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
-        {
-          namespace: config.GetEntry("namespace") || ""
-        },
-        processMessage);
+  // code generators
+  if (usedCodeGenerators.length > 0) {
+    // modeler
+    let codeModel = await AutoRestDotNetPlugin.Get().Model(swagger, config.DataStore.CreateScope("model"),
+      {
+        namespace: config.GetEntry("namespace") || ""
+      },
+      processMessage);
 
-      // GFMer
-      const codeModelGFM = await ProcessCodeModel(codeModel, config.DataStore.CreateScope("modelgfm"));
+    // GFMer
+    const codeModelGFM = await ProcessCodeModel(codeModel, config.DataStore.CreateScope("modelgfm"));
 
-      let pluginCtr = 0;
-      for (const usedCodeGenerator of usedCodeGenerators) {
-        for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
-          const manipulator = new Manipulator(genConfig);
-          const processMessage = genConfig.Message.bind(genConfig);
-          const scope = genConfig.DataStore.CreateScope("plugin_" + ++pluginCtr);
+    let pluginCtr = 0;
+    for (const usedCodeGenerator of usedCodeGenerators) {
+      for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
+        const manipulator = new Manipulator(genConfig);
+        const processMessage = genConfig.Message.bind(genConfig);
+        const scope = genConfig.DataStore.CreateScope("plugin_" + ++pluginCtr);
 
-          // TRANSFORM
-          const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/code-model-v1.yaml");
+        // TRANSFORM
+        const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/code-model-v1.yaml");
 
-          emitArtifact(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
+        emitArtifact(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
 
-          const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-          let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(usedCodeGenerator, codeModelTransformed, scope.CreateScope("generate"),
-            Object.assign(
-              { // stuff that comes in via `x-ms-code-generation-settings`
-                "override-client-name": getXmsCodeGenSetting("name"),
-                "use-internal-constructors": getXmsCodeGenSetting("internalConstructors"),
-                "use-datetimeoffset": getXmsCodeGenSetting("useDateTimeOffset"),
-                "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
-                "sync-methods": getXmsCodeGenSetting("syncMethods")
-              },
-              genConfig.Raw),
-            processMessage);
+        const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
+        let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(usedCodeGenerator, codeModelTransformed, scope.CreateScope("generate"),
+          Object.assign(
+            { // stuff that comes in via `x-ms-code-generation-settings`
+              "override-client-name": getXmsCodeGenSetting("name"),
+              "use-internal-constructors": getXmsCodeGenSetting("internalConstructors"),
+              "use-datetimeoffset": getXmsCodeGenSetting("useDateTimeOffset"),
+              "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
+              "sync-methods": getXmsCodeGenSetting("syncMethods")
+            },
+            genConfig.Raw),
+          processMessage);
 
-          // C# simplifier
-          if (usedCodeGenerator === "csharp") {
-            generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, scope.CreateScope("simplify"), processMessage);
-          }
+        // C# simplifier
+        if (usedCodeGenerator === "csharp") {
+          generatedFileScope = await AutoRestDotNetPlugin.Get().SimplifyCSharpCode(generatedFileScope, scope.CreateScope("simplify"), processMessage);
+        }
 
-          for (const fileName of await generatedFileScope.Enum()) {
-            const handle = await generatedFileScope.ReadStrict(fileName);
-            const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
-            const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
-            emitArtifact(genConfig, `source-files-${usedCodeGenerator}`, outputFileUri, handle);
-          }
+        for (const fileName of await generatedFileScope.Enum()) {
+          const handle = await generatedFileScope.ReadStrict(fileName);
+          const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
+          const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
+          await emitArtifact(genConfig, `source-file-${usedCodeGenerator}`, outputFileUri, handle);
         }
       }
-    }
-
-    // validator
-    if (azureValidator) {
-      await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"), processMessage);
     }
   }
 }

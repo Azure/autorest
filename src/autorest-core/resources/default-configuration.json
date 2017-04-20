@@ -3,12 +3,12 @@
   "output-folder": "generated",
   "disable-validation": false,
   "output-artifact": [
-    "source-files-csharp",
-    "source-files-ruby",
-    "source-files-nodejs",
-    "source-files-python",
-    "source-files-go",
-    "source-files-java",
-    "source-files-azureresourceschema"
+    "source-file-csharp",
+    "source-file-ruby",
+    "source-file-nodejs",
+    "source-file-python",
+    "source-file-go",
+    "source-file-java",
+    "source-file-azureresourceschema"
   ]
 }
