@@ -44,10 +44,10 @@ namespace AutoRest.Swagger.Validation
 
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            var violatingModels = definitions.Where(defPair=>defPair.Value.Properties.Values.Any(schema => schema.Enum != null));
+            var violatingModels = definitions.Where(defPair=>defPair.Value.Properties?.Values.Any(schema => schema.Enum != null)??false);
             foreach (var modelPair in violatingModels)
             {
-                var violatingProps = modelPair.Value.Properties.Where(prop => prop.Value.Enum != null && !prop.Value.Extensions.ContainsKey("x-ms-enum"));
+                var violatingProps = modelPair.Value.Properties.Where(prop => prop.Value.Enum != null && (!prop.Value.Extensions?.ContainsKey("x-ms-enum")??false));
                 foreach (var prop in violatingProps)
                 {
                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(modelPair.Key).AppendProperty("properties").AppendProperty(prop.Key)), this, prop.Key);
