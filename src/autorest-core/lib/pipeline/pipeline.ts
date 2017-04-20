@@ -22,7 +22,7 @@ export type DataPromise = MultiPromise<DataHandleRead>;
 
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   const cancellationToken = config.CancellationToken;
-  const processMessage = config.Message.bind(config);
+  const processMessage: (m: Message) => void = config.Message.bind(config);
   const azureValidator = config.AzureArm && !config.DisableValidation;
 
   // artifact emitter
@@ -63,7 +63,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const autoRestDotNetPlugin = AutoRestDotNetPlugin.Get();
 
     for (let i = 0; i < swaggers.length; ++i) {
-      await autoRestDotNetPlugin.ValidateIndividual(swaggers[i], config.DataStore.CreateScope("validate_individual_" + i), processMessage, config.GetEntry("openapi-type"));
+      await autoRestDotNetPlugin.ValidateIndividual(swaggers[i], config.DataStore.CreateScope("validate_individual_" + i), config.GetEntry("openapi-type"), processMessage);
     }
   }
 
@@ -139,7 +139,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       let pluginCtr = 0;
       for (const usedCodeGenerator of usedCodeGenerators) {
         for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
-          const processMessage = genConfig.Message.bind(genConfig);
+          const processMessage: (m: Message) => void = genConfig.Message.bind(genConfig);
           const scope = genConfig.DataStore.CreateScope("plugin_" + ++pluginCtr);
 
           // TRANSFORM
