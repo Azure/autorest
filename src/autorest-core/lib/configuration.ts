@@ -7,7 +7,7 @@ import { OperationAbortedException } from './exception';
 import { TryDecodeEnhancedPositionFromName } from './source-map/source-map';
 import { Supressor } from './pipeline/supression';
 import { matches, stringify } from "./ref/jsonpath";
-import { MergeOverwrite } from "./source-map/merging";
+import { MergeOverwriteOrAppend } from "./source-map/merging";
 import { DataStore } from "./data-store/data-store";
 import { EventEmitter, IEvent } from "./events";
 import { CodeBlock, EvaluateGuard, ParseCodeBlocks } from './parsing/literate-yaml';
@@ -55,7 +55,7 @@ function MergeConfigurations(a: AutoRestConfigurationImpl, b: AutoRestConfigurat
   }
 
   // merge
-  return MergeOverwrite(a, b, p => matches("$.directive", p) || matches("$['input-file']", p) || matches("$['output-artifact']", p));
+  return MergeOverwriteOrAppend(a, b);
 }
 
 function ValuesOf<T>(obj: any): Iterable<T> {
