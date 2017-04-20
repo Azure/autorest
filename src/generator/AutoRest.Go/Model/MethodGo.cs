@@ -106,7 +106,7 @@ namespace AutoRest.Go.Model
     {
       get
       {
-        return !IsLongRunningOperation() && HasReturnValue()
+        return HasReturnValue()
             ? string.Format("result {0}, err error", ReturnValue().Body.Name)
             : "result autorest.Response, err error";
       }
@@ -290,7 +290,7 @@ namespace AutoRest.Go.Model
         decorators.Add("client.ByInspecting()");
         decorators.Add(string.Format("azure.WithErrorUnlessStatusCode({0})", string.Join(",", ResponseCodes.ToArray())));
 
-        if (!IsLongRunningOperation() && HasReturnValue() && !ReturnValue().Body.IsStreamType())
+        if (HasReturnValue() && !ReturnValue().Body.IsStreamType())
         {
           if (((CompositeTypeGo)ReturnValue().Body).IsWrapperType)
           {
@@ -315,7 +315,7 @@ namespace AutoRest.Go.Model
     {
       get
       {
-        return !IsLongRunningOperation() && HasReturnValue()
+        return HasReturnValue()
             ? "result.Response = autorest.Response{Response: resp}"
             : "result.Response = resp";
       }
