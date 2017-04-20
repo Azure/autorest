@@ -1,3 +1,4 @@
+import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -32,6 +33,7 @@ function emitArtifact(config: ConfigurationView, artifactType: string, uri: stri
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   const cancellationToken = config.CancellationToken;
   const processMessage = config.Message.bind(config);
+  const barrier = new OutstandingTaskAwaiter();
 
   const manipulator = new Manipulator(config);
 
@@ -90,16 +92,18 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     }
 
     for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
-      const scopeWork = config.DataStore.CreateScope(`amar_${pluginIndex}`);
-      const result = await validationPlugin.Process(
-        pluginNames[pluginIndex], _ => null,
-        new QuickScope([swagger]),
-        scopeWork.CreateScope("output"),
-        processMessage,
-        cancellationToken);
-      if (!result) {
-        throw new Error("Amar's plugin failed us!");
-      }
+      barrier.Await((async () => {
+        const scopeWork = config.DataStore.CreateScope(`amar_${pluginIndex}`);
+        const result = await validationPlugin.Process(
+          pluginNames[pluginIndex], _ => null,
+          new QuickScope([swagger]),
+          scopeWork.CreateScope("output"),
+          processMessage,
+          cancellationToken);
+        if (!result) {
+          throw new Error("Amar's plugin failed us!");
+        }
+      })());
     }
   }
 
@@ -114,7 +118,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   //
   // validator
   if (azureValidator) {
-    await AutoRestDotNetPlugin.Get().Validate(swagger, config.DataStore.CreateScope("validate"), processMessage);
+    barrier.Await(AutoRestDotNetPlugin.Get().Validate(swagger, config.DataStore.CreateScope("validate"), processMessage));
   }
 
   // code generators
@@ -136,36 +140,40 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         const processMessage = genConfig.Message.bind(genConfig);
         const scope = genConfig.DataStore.CreateScope("plugin_" + ++pluginCtr);
 
-        // TRANSFORM
-        const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/code-model-v1.yaml");
+        barrier.Await((async () => {
+          // TRANSFORM
+          const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/code-model-v1.yaml");
 
-        emitArtifact(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
+          emitArtifact(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
 
-        const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-        let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(usedCodeGenerator, codeModelTransformed, scope.CreateScope("generate"),
-          Object.assign(
-            { // stuff that comes in via `x-ms-code-generation-settings`
-              "override-client-name": getXmsCodeGenSetting("name"),
-              "use-internal-constructors": getXmsCodeGenSetting("internalConstructors"),
-              "use-datetimeoffset": getXmsCodeGenSetting("useDateTimeOffset"),
-              "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
-              "sync-methods": getXmsCodeGenSetting("syncMethods")
-            },
-            genConfig.Raw),
-          processMessage);
+          const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
+          let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(usedCodeGenerator, codeModelTransformed, scope.CreateScope("generate"),
+            Object.assign(
+              { // stuff that comes in via `x-ms-code-generation-settings`
+                "override-client-name": getXmsCodeGenSetting("name"),
+                "use-internal-constructors": getXmsCodeGenSetting("internalConstructors"),
+                "use-datetimeoffset": getXmsCodeGenSetting("useDateTimeOffset"),
+                "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
+                "sync-methods": getXmsCodeGenSetting("syncMethods")
+              },
+              genConfig.Raw),
+            processMessage);
 
-        // C# simplifier
-        if (usedCodeGenerator === "csharp") {
-          generatedFileScope = await AutoRestDotNetPlugin.Get().SimplifyCSharpCode(generatedFileScope, scope.CreateScope("simplify"), processMessage);
-        }
+          // C# simplifier
+          if (usedCodeGenerator === "csharp") {
+            generatedFileScope = await AutoRestDotNetPlugin.Get().SimplifyCSharpCode(generatedFileScope, scope.CreateScope("simplify"), processMessage);
+          }
 
-        for (const fileName of await generatedFileScope.Enum()) {
-          const handle = await generatedFileScope.ReadStrict(fileName);
-          const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
-          const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
-          await emitArtifact(genConfig, `source-file-${usedCodeGenerator}`, outputFileUri, handle);
-        }
+          for (const fileName of await generatedFileScope.Enum()) {
+            const handle = await generatedFileScope.ReadStrict(fileName);
+            const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
+            const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
+            await emitArtifact(genConfig, `source-file-${usedCodeGenerator}`, outputFileUri, handle);
+          }
+        })());
       }
     }
   }
+
+  await barrier.Wait();
 }
