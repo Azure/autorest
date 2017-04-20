@@ -60,10 +60,10 @@ namespace AutoRest.Swagger.Validation
                 }
                 else
                 {
-                    var opGlobalParams = op.Parameters.Where(p => serviceDefinition.Parameters.ContainsKey(p.Reference?.StripParameterPath()));
+                    var opGlobalParams = op.Parameters.Where(p => serviceDefinition.Parameters.ContainsKey(p.Reference?.StripParameterPath() ?? ""));
                     if (opGlobalParams.Any())
                     {
-                        reqBodySchema = opGlobalParams.First(p => p.In == ParameterLocation.Body).Schema?.Reference?.StripDefinitionPath();
+                        reqBodySchema = opGlobalParams.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema?.Reference?.StripDefinitionPath();
                     }
                 }
                 
