@@ -21,9 +21,6 @@ namespace AutoRest.Swagger.Model.Utilities
         private static readonly Regex ResourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
         private static readonly Regex PropNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,3}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,3}[a-z0-9\$-]+)*[A-Z]{1,3}$");
 
-        public static readonly string ODataPrefix = "@odata.";
-
-
         /// <summary>
         /// Populates a list of 'Resource' models found in the service definition
         /// </summary>
@@ -63,7 +60,7 @@ namespace AutoRest.Swagger.Model.Utilities
 
         }
 
-        public static bool IsODataProperty(string propName) => propName.ToLower().StartsWith(ODataPrefix);
+        public static bool IsODataProperty(string propName) => propName.ToLower().StartsWith("@");
        
         /// <summary>
         /// checks if a model is a base resource type (resource, trackedresource or proxyresource)
