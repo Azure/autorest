@@ -132,7 +132,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         partial void CustomInit();
         
         @EmptyLine
-        @foreach (var property in Model.Properties.Where(p => !p.IsConstant))
+        @foreach (PropertyCs property in Model.Properties.Where(p => !p.IsConstant))
         {
         @:/// <summary>
         @:@WrapComment("/// ", property.GetFormattedPropertySummary())
@@ -168,7 +168,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
             }
-        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }@property.InitialValueAssignment
         @EmptyLine
         }
 

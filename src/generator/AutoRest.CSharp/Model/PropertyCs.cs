@@ -13,5 +13,7 @@ namespace AutoRest.CSharp.Model
 
         public string HeaderCollectionPrefix => Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
         public bool IsHeaderCollection => !string.IsNullOrEmpty(HeaderCollectionPrefix);
+
+        public string InitialValueAssignment => IsRequired && DefaultValue != null ? $" = {DefaultValue};" : "";
     }
 }
