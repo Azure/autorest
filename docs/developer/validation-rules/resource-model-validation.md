@@ -2,13 +2,14 @@
 ## Description
 A model definition is considered as a resource model definition if:
 
-- For each model, check if that model is returned by a PUT operation as a part of 200 or 201 response codes.
-- If the model has an 'allOf' Resource at any level [name of the root model is 'Resource'] AND the model is returned by a GET operation in 200 response.
-- If the model has 'x-ms-azure-resource': true or if any model has an 'x-ms-azure-resource' set to true in its model hierarchy and is not named either of 'Resource', 'TrackedResource' or 'ProxyResource', consider this as a resource
+- The model is returned by a PUT operation as a part of 200 or 201 response codes.
+- The model has an 'allOf' Resource at any level [name of the root model is 'Resource'] AND the model is returned by a GET operation in 200 response.
+- The model has 'x-ms-azure-resource': true or if any model has an 'x-ms-azure-resource' set to true in its model hierarchy and is not named either of 'Resource', 'TrackedResource' or 'ProxyResource'.
 
 ## Types of resource models
-1. TrackedResource: A resource is considered a tracked resource if a model hierarchy has a property named 'location' which is marked as required.
-2. ProxyResource: Proxy resources are all resources without a required 'location' property in their model hierarchy
+Any resource can be categorized into 2 types: `TrackedResources` and `ProxyResources`.
+1. TrackedResource: A resource is considered a tracked resource if a model hierarchy has a property named 'location' which is marked as __required__.
+2. ProxyResource: Proxy resources are all resources without a required 'location' property in their model hierarchy.
 
 ## Validation rules for resource models
 
@@ -23,9 +24,9 @@ A PUT operation request body schema should be the same as its 200 response schem
 Ensure the PUT operation request and response schemas are the same. If they are not the same, ensure there is a PATCH operation to make the resource updatable.
 
 ### ResourceIsMsResourceValidation
-Every `Resource` Model MUST be tagged with `x-ms-azure-resource`. This will indicate Autorest to make the Resource model inherit from the Resource definition in the client runtime.
+Every `Resource` Model MUST be tagged with `x-ms-azure-resource`. For auto-generated sdks of certain languages, this indicates Autorest to make the Resource model inherit from the Resource definition in the client runtime.
 ### How to fix it
-Ensure the `x-ms-azure-resource` extension is set to true in the model hierarchy of the resource, preferably at the route of the model hierarchy (i.e., the models named `Resource`, `TrackedResource` or `ProxyResource`)
+Ensure the `x-ms-azure-resource` extension is set to true in the model hierarchy of the resource, preferably at the root of the model hierarchy (i.e., the models named `Resource`, `TrackedResource` or `ProxyResource`)
 
 ### ResourceModelValidation
 A "Resource" model definition *MUST* have `id`, `name` and `type` properties marked as `"readOnly": true` in its model hierarchy.
