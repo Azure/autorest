@@ -133,6 +133,10 @@ export function ParentFolderUri(uri: string): string | null {
   return uri.slice(0, uri.length - compLen);
 }
 
+export function MakeRelativeUri(baseUri: string, absoluteUri: string): string {
+  return new URI(absoluteUri).relativeTo(baseUri).toString();
+}
+
 /***********************
  * OS abstraction (writing files, enumerating files)
  ***********************/

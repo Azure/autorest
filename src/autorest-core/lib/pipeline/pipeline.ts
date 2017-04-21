@@ -37,8 +37,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   type PipelinePlugin = (input: DataStoreViewReadonly, output: DataStoreView) => Promise<void>;
   type PipelineNode = { outputArtifact: string, plugin: PipelinePlugin, inputs: PipelineNode[] };
-  type PipelineSchedule = 
-  const plugins
+  // type PipelineSchedule = 
+  // const plugins
 
   const manipulator = new Manipulator(config);
 
