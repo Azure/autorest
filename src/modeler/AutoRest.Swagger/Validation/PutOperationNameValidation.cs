@@ -39,5 +39,10 @@ namespace AutoRest.Swagger.Validation
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, operationId);
             }
         }
+
+        /// <summary>
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override Category Severity => Category.Warning;
     }
 }

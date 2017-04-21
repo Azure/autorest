@@ -26,6 +26,11 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.GetOperationNameNotValid;
 
         /// <summary>
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override Category Severity => Category.Warning;
+
+        /// <summary>
         /// Validates whether GET operation name is named correctly
         /// </summary>
         /// <param name="entity">Operation name to be verified.</param>
