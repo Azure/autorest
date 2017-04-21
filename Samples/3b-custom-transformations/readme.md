@@ -46,7 +46,7 @@ directive:
 
 ``` yaml 
 directive:
-  from: composite # do it globally (in case there are multiple input OpenAPI definitions)
+  from: swagger-document # do it globally (in case there are multiple input OpenAPI definitions)
   where: $.paths..operationId
   # Replace operation IDs ending in "...ies" with "...y", because that's the safest way to make stuff singular.
   transform: return $.replace(/ies$/, "y")
@@ -59,7 +59,7 @@ By default (without an explicit return statement), `$` is considered the result 
 
 ``` yaml 
 directive:
-  from: model
+  from: code-model-v1
   where: $.operations[*]
   transform: >
       const url = $.methods[0]["#url"];

@@ -65,7 +65,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   config.Message({ Channel: Channel.Debug, Text: `Done Composing Swaggers.` });
 
   // TRANSFORM
-  swagger = await manipulator.Process(swagger, config.DataStore.CreateScope("composite-transform"), "/composite.yaml");
+  swagger = await manipulator.Process(swagger, config.DataStore.CreateScope("composite-transform"), "/swagger-document.yaml");
 
   // emit resolved swagger
   {
@@ -135,7 +135,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           const scope = genConfig.DataStore.CreateScope("plugin_" + ++pluginCtr);
 
           // TRANSFORM
-          const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/model.yaml");
+          const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/code-model-v1.yaml");
 
           emitArtifact(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
 
