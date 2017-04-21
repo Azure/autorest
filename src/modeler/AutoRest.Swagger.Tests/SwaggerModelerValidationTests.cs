@@ -587,6 +587,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void LROStatusCodesValidationTest()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "lro-status-codes-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(LROStatusCodesValidation), 2);
+        }
+
+        [Fact]
         public void EmptyParameterNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-parameter-name.json"));
