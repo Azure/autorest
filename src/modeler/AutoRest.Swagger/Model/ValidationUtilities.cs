@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.Swagger.Validation;
 using System.Text;
+using System;
 
 namespace AutoRest.Swagger.Model.Utilities
 {
@@ -19,6 +20,8 @@ namespace AutoRest.Swagger.Model.Utilities
 
         private static readonly Regex ResourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
         private static readonly Regex PropNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)*[A-Z]{1,2}$");
+
+        public static readonly string ODataPrefix = "@odata."
 
 
         /// <summary>
@@ -60,6 +63,8 @@ namespace AutoRest.Swagger.Model.Utilities
 
         }
 
+        public static bool IsODataProperty(string propName) => propName.ToLower().StartsWith(ODataPrefix);
+       
         /// <summary>
         /// checks if a model is a base resource type (resource, trackedresource or proxyresource)
         /// </summary>

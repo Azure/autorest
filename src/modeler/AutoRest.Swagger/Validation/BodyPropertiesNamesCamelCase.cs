@@ -41,7 +41,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Error;
+        public override Category Severity => Category.Warning;
 
         ///// <summary>
         ///// Validates whether property names are camelCase in body parameters.
@@ -58,7 +58,7 @@ namespace AutoRest.Swagger.Validation
                         {
                             foreach (KeyValuePair<string, Schema> prop in param.Schema?.Properties)
                             {
-                                if (!ValidationUtilities.IsNameCamelCase(prop.Key))
+                                if (!ValidationUtilities.IsODataProperty(prop.Key) && !ValidationUtilities.IsNameCamelCase(prop.Key))
                                 {
                                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, prop.Key, ValidationUtilities.GetCamelCasedSuggestion(prop.Key));
                                 }
