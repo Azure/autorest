@@ -93,9 +93,13 @@
           "type": "string",
           "description": "The ETag of the synonym map."
         },
-        "tripleCAPitalCASe": {
+        "publicIPAddress": {
           "type": "string",
           "description": "testing 3 capitalized letters in camelCase"
+        },
+        "moreThanThreeCAPITALLetters": {
+          "type": "string",
+          "description": "testing more than 3 capitalized letters in camelCase"
         },
         "tags": {
           "type": "object",
