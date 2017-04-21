@@ -4,6 +4,7 @@
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using Newtonsoft.Json;
 
 namespace AutoRest.CSharp.Model
 {
@@ -14,6 +15,8 @@ namespace AutoRest.CSharp.Model
         public string HeaderCollectionPrefix => Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);
         public bool IsHeaderCollection => !string.IsNullOrEmpty(HeaderCollectionPrefix);
 
-        public string InitialValueAssignment => IsRequired && DefaultValue != null ? $" = {DefaultValue};" : "";
+        // not spec copmpliant
+        [JsonProperty("useDefaultInConstructor")]
+        public bool UseDefaultInConstructor { get; set; } = false;
     }
 }

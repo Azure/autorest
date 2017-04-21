@@ -31,7 +31,6 @@ export class Manipulator {
 
   public async Process(data: DataHandleRead, scope: DataStoreView, documentId?: string): Promise<DataHandleRead> {
     let nextId = (() => { let i = 0; return () => ++i; })();
-
     for (const trans of this.transformations) {
       // matches filter?
       if (this.MatchesSourceFilter(documentId || data.key, trans)) {

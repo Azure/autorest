@@ -20,19 +20,18 @@ import { Exception } from "../exception";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
+function emitArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): void {
+  if (From(config.OutputArtifact).Contains(artifactType)) {
+    config.GeneratedFile.Dispatch({ type: artifactType, uri: uri, content: handle.ReadData() });
+  }
+  if (From(config.OutputArtifact).Contains(artifactType + ".map")) {
+    config.GeneratedFile.Dispatch({ type: artifactType + ".map", uri: uri + ".map", content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2) });
+  }
+}
+
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   const cancellationToken = config.CancellationToken;
   const processMessage = config.Message.bind(config);
-
-  // artifact emitter
-  const emitArtifact: (artifactType: string, uri: string, handle: DataHandleRead) => Promise<void> = async (artifactType, uri, handle) => {
-    if (From(config.OutputArtifact).Contains(artifactType)) {
-      config.GeneratedFile.Dispatch({ type: artifactType, uri: uri, content: handle.ReadData() });
-    }
-    if (From(config.OutputArtifact).Contains(artifactType + ".map")) {
-      config.GeneratedFile.Dispatch({ type: artifactType + ".map", uri: uri + ".map", content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2) });
-    }
-  };
 
   const manipulator = new Manipulator(config);
 
@@ -77,8 +76,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     const hw = await config.DataStore.Write("normalized-swagger.json");
     const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, swagger.ReadYamlAst()), [swagger]);
-    await emitArtifact("swagger-document", outputFileUri, h);
-    await emitArtifact("swagger-document.yaml", outputFileUri.replace(".json", ".yaml"), swagger);
+    emitArtifact(config, "swagger-document", outputFileUri, h);
+    emitArtifact(config, "swagger-document.yaml", outputFileUri.replace(".json", ".yaml"), swagger);
   }
   config.Message({ Channel: Channel.Debug, Text: `Done Emitting composed documents.` });
 
@@ -131,13 +130,14 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       let pluginCtr = 0;
       for (const usedCodeGenerator of usedCodeGenerators) {
         for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
+          const manipulator = new Manipulator(genConfig);
           const processMessage = genConfig.Message.bind(genConfig);
           const scope = genConfig.DataStore.CreateScope("plugin_" + ++pluginCtr);
 
           // TRANSFORM
           const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/model.yaml");
 
-          await emitArtifact("code-model-v1", "mem://code-model.yaml", codeModelTransformed);
+          emitArtifact(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
 
           const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
           let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(usedCodeGenerator, codeModelTransformed, scope.CreateScope("generate"),
@@ -161,8 +161,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
             const handle = await generatedFileScope.ReadStrict(fileName);
             const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
             const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
-            await emitArtifact(`source-files-${usedCodeGenerator}`,
-              outputFileUri, handle);
+            emitArtifact(genConfig, `source-files-${usedCodeGenerator}`, outputFileUri, handle);
           }
         }
       }
