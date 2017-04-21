@@ -1,3 +1,27 @@
-ERROR: Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found
-    - /Samples/test/error-behavior/openapi-yaml-bad-file-reference/tiny.yaml:23:10
-Error occurred. Exiting.
+FATAL: Error generating client model: System.ArgumentException: Reference path 'Cowball' does not exist in the definition section of the Swagger document.
+   at AutoRest.Swagger.SchemaResolver.DereferenceInner(String referencePath, List`1 visitedReferences) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SchemaResolver.cs:line 354
+   at AutoRest.Swagger.SchemaResolver.Dereference(String referencePath) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SchemaResolver.cs:line 323
+   at AutoRest.Swagger.SchemaResolver.Unwrap(Schema schema) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SchemaResolver.cs:line 71
+   at AutoRest.Swagger.SwaggerModeler.Unwrap(SwaggerParameter swaggerParameter) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SwaggerModeler.cs:line 401
+   at AutoRest.Swagger.ParameterBuilder.BuildServiceType(String serviceTypeName) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\ParameterBuilder.cs:line 69
+   at AutoRest.Swagger.ParameterBuilder.Build() in C:\workspace\autorest\src\modeler\AutoRest.Swagger\ParameterBuilder.cs:line 47
+   at AutoRest.Swagger.OperationBuilder.BuildMethodParameters(Method method) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\OperationBuilder.cs:line 212
+   at AutoRest.Swagger.OperationBuilder.BuildMethod(HttpMethod httpMethod, String url, String methodName, String methodGroup) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\OperationBuilder.cs:line 94
+   at AutoRest.Swagger.SwaggerModeler.BuildMethod(HttpMethod httpMethod, String url, String name, Operation operation) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SwaggerModeler.cs:line 326
+   at AutoRest.Swagger.SwaggerModeler.Build(ServiceDefinition serviceDefinition) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SwaggerModeler.cs:line 134
+   at AutoRest.Swagger.SwaggerModeler.Build() in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SwaggerModeler.cs:line 72
+   at AutoRest.Core.AutoRestController.Generate() in C:\workspace\autorest\src\core\AutoRest.Core\AutoRestController.cs:line 56
+ERROR: Error generating client model: System.ArgumentException: Reference path 'Cowball' does not exist in the definition section of the Swagger document.
+   at AutoRest.Swagger.SchemaResolver.DereferenceInner(String referencePath, List`1 visitedReferences) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SchemaResolver.cs:line 354
+   at AutoRest.Swagger.SchemaResolver.Dereference(String referencePath) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SchemaResolver.cs:line 323
+   at AutoRest.Swagger.SchemaResolver.Unwrap(Schema schema) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SchemaResolver.cs:line 71
+   at AutoRest.Swagger.SwaggerModeler.Unwrap(SwaggerParameter swaggerParameter) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SwaggerModeler.cs:line 401
+   at AutoRest.Swagger.ParameterBuilder.BuildServiceType(String serviceTypeName) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\ParameterBuilder.cs:line 69
+   at AutoRest.Swagger.ParameterBuilder.Build() in C:\workspace\autorest\src\modeler\AutoRest.Swagger\ParameterBuilder.cs:line 47
+   at AutoRest.Swagger.OperationBuilder.BuildMethodParameters(Method method) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\OperationBuilder.cs:line 212
+   at AutoRest.Swagger.OperationBuilder.BuildMethod(HttpMethod httpMethod, String url, String methodName, String methodGroup) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\OperationBuilder.cs:line 94
+   at AutoRest.Swagger.SwaggerModeler.BuildMethod(HttpMethod httpMethod, String url, String name, Operation operation) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SwaggerModeler.cs:line 326
+   at AutoRest.Swagger.SwaggerModeler.Build(ServiceDefinition serviceDefinition) in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SwaggerModeler.cs:line 134
+   at AutoRest.Swagger.SwaggerModeler.Build() in C:\workspace\autorest\src\modeler\AutoRest.Swagger\SwaggerModeler.cs:line 72
+   at AutoRest.Core.AutoRestController.Generate() in C:\workspace\autorest\src\core\AutoRest.Core\AutoRestController.cs:line 56
+ERROR: Code generation failed.
