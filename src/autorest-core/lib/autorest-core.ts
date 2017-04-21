@@ -159,7 +159,7 @@ export class AutoRest extends EventEmitter {
             view.CancellationTokenSource.cancel();
             view.messageEmitter.removeAllListeners();
           }
-        }
+        };
 
         if (earlyCancel) {
           this.Finished.Dispatch(false);

@@ -156,7 +156,7 @@ export class ConfigurationView {
     this.Message({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
   }
 
-  /* @internal */ public get DataStore(): DataStore { return this.messageEmitter.DataStore }
+  /* @internal */ public get DataStore(): DataStore { return this.messageEmitter.DataStore; }
 
   /* @internal */ public get CancellationToken(): CancellationToken { return this.messageEmitter.CancellationToken; }
 
@@ -214,10 +214,6 @@ export class ConfigurationView {
 
   public get AzureArm(): boolean {
     return this.config["azure-arm"] || false;
-  }
-
-  public get Fluent(): boolean {
-    return this.config["fluent"] || false;
   }
 
   public * GetPluginViews(pluginName: string): Iterable<ConfigurationView> {

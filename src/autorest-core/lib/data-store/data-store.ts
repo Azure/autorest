@@ -242,16 +242,19 @@ export class DataStore extends DataStoreView {
   public async Write(uri: string): Promise<DataHandleWrite> {
     uri = ResolveUri(this.BaseUri, uri);
     this.ThrowIfCancelled();
-    return new DataHandleWrite(uri, async (data, sourceMapFactory) => {
+    const setData = (data: Data) => {
       this.ThrowIfCancelled();
       if (this.store[uri]) {
         throw new Error(`can only write '${uri}' once`);
       }
+      this.store[uri] = data;
+    };
+    return new DataHandleWrite(uri, async (data, sourceMapFactory) => {
       const storeEntry: Data = {
         data: data,
         metadata: <Metadata><Metadata | null>{}
       };
-      this.store[uri] = storeEntry;
+      setData(storeEntry);
 
       // metadata
       const result = await this.ReadStrict(uri);
@@ -291,6 +294,8 @@ export class DataStore extends DataStoreView {
       storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(() => parseAst(data));
       storeEntry.metadata.lineIndices = new Lazy<number[]>(() => LineIndices(data));
       return result;
+    }, async data => {
+      setData(this.store[data.key]);
     });
   }
 
@@ -363,7 +368,9 @@ export class DataStore extends DataStoreView {
  ********************************************/
 
 export class DataHandleWrite {
-  constructor(public readonly key: string, private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => RawSourceMap) => Promise<DataHandleRead>) {
+  constructor(public readonly key: string,
+    private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => RawSourceMap) => Promise<DataHandleRead>,
+    public Forward: (data: DataHandleRead) => Promise<void>) {
   }
 
   public async WriteDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => RawSourceMap): Promise<DataHandleRead> {

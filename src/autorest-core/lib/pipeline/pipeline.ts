@@ -12,7 +12,7 @@ import { Channel, Message, SourceLocation, Range } from "../message";
 import { MultiPromise } from "../multi-promise";
 import { GetFilename, ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
-import { DataHandleRead, QuickScope } from "../data-store/data-store";
+import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from '../data-store/data-store';
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { From } from "../ref/linq";
@@ -34,6 +34,11 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const cancellationToken = config.CancellationToken;
   const processMessage = config.Message.bind(config);
   const barrier = new OutstandingTaskAwaiter();
+
+  type PipelinePlugin = (input: DataStoreViewReadonly, output: DataStoreView) => Promise<void>;
+  type PipelineNode = { outputArtifact: string, plugin: PipelinePlugin, inputs: PipelineNode[] };
+  type PipelineSchedule = 
+  const plugins
 
   const manipulator = new Manipulator(config);
 
@@ -113,9 +118,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const usedCodeGenerators = allCodeGenerators.filter(cg => config.GetEntry(cg as any) !== undefined);
 
   config.Message({ Channel: Channel.Debug, Text: `Just before autorest.dll realm.` });
-  //
-  // AutoRest.dll realm
-  //
+
   // validator
   if (azureValidator) {
     barrier.Await(AutoRestDotNetPlugin.Get().Validate(swagger, config.DataStore.CreateScope("validate"), processMessage));
@@ -176,4 +179,6 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   }
 
   await barrier.Wait();
+
+
 }
