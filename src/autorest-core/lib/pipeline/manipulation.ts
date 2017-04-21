@@ -38,7 +38,7 @@ export class Manipulator {
           // transform
           for (const t of trans.transform) {
             const target = await scope.Write(`transform_${nextId()}.yaml`);
-            data = (await ManipulateObject(data, target, w, obj => safeEval(t, { $: obj, $doc: data.ReadObject() }))).result;
+            data = (await ManipulateObject(data, target, w, obj => safeEval(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: data.ReadObject() }))).result;
           }
           // set
           for (const s of trans.set) {
