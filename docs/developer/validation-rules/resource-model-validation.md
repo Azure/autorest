@@ -18,22 +18,22 @@ For a Given Resource, GET/PUT/PATCH MUST return the same `Resource` Model. The G
 ### How to fix it
 Ensure GET/PUT/PATCH operations under a path reference the same resource model in their response model schemas.
 
-### PutRequestResponseValidation
+### M3007 - PutRequestResponseValidation
 A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, there must be a PATCH operation to make the resource updatable.
 ### How to fix it
 Ensure the PUT operation request and response schemas are the same. If they are not the same, ensure there is a PATCH operation to make the resource updatable.
 
-### ResourceIsMsResourceValidation
+### M2019 - ResourceIsMsResourceValidation
 Every `Resource` Model MUST be tagged with `x-ms-azure-resource`. For auto-generated sdks of certain languages, this indicates Autorest to make the Resource model inherit from the Resource definition in the client runtime.
 ### How to fix it
 Ensure the `x-ms-azure-resource` extension is set to true in the model hierarchy of the resource, preferably at the root of the model hierarchy (i.e., the models named `Resource`, `TrackedResource` or `ProxyResource`)
 
-### ResourceModelValidation
+### M2020 - ResourceModelValidation
 A "Resource" model definition *MUST* have `id`, `name` and `type` properties marked as `"readOnly": true` in its model hierarchy.
 ### How to fix it
 Ensure the properties `id`, `name` and `type` are marked as `"readOnly": true` in the resource model hierarchy, preferably at the root level of the model hierarchy (i.e., `Resource`, `TrackedResource` or `ProxyResource`)
 
-### PutResponseResourceValidation
+### M2062 - PutResponseResourceValidation
 PUT operation response models (200/201) status codes must have the extension `"x-ms-azure-resource" : true` in its model hierarchy.
 ### How to fix it
 Ensure the extension `"x-ms-azure-resource" : true` is set in the PUT response model hierarchy, preferably at the root level (i.e., model named `Resource`, `TrackedResource` or `ProxyResource`)
