@@ -15,9 +15,9 @@ ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-ex
     - /Samples/3a-literate-swagger/swagger.md:176:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete.operationId)
 ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_List'
     - /Samples/3a-literate-swagger/swagger.md:207:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get.operationId)
-ERROR (LROStatusCodesValidation/blah/SDKViolation): 200/201 Responses of long running operations must have a schema definition for return type. OperationId: 'Services_CreateOrUpdate', Response code: '200'
+WARNING (LROStatusCodesValidation/blah/SDKViolation): 200/201 Responses of long running operations must have a schema definition for return type. OperationId: 'Services_CreateOrUpdate', Response code: '200'
     - /Samples/3a-literate-swagger/swagger.md:149:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put.responses["200"])
-ERROR (LROStatusCodesValidation/blah/SDKViolation): 200/201 Responses of long running operations must have a schema definition for return type. OperationId: 'Services_CreateOrUpdate', Response code: '201'
+WARNING (LROStatusCodesValidation/blah/SDKViolation): 200/201 Responses of long running operations must have a schema definition for return type. OperationId: 'Services_CreateOrUpdate', Response code: '201'
     - /Samples/3a-literate-swagger/swagger.md:153:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put.responses["201"])
 ERROR (ResourceModelValidation/M2020/RPCViolation): Model definition 'SearchServiceResource' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
     - /Samples/3a-literate-swagger/swagger.md:291:2 ($.definitions.SearchServiceResource)
