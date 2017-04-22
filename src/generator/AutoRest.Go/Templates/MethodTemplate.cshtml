@@ -239,7 +239,7 @@ if (!Model.NextAlreadyDefined)
                 }
                 else
                 {
-                @:resp, err = client.@(Model.NextOperationName)(*list.@(Model.NextLink()))
+                @:resp, err = client.@(Model.NextOperationName)(@(Model.NextOperationParameters))
                 }
             }
             else
@@ -250,7 +250,7 @@ if (!Model.NextAlreadyDefined)
                 }
                 else
                 {
-                @:list, err = client.@(Model.NextOperationName)(*list.@(Model.NextLink()))
+                @:list, err = client.@(Model.NextOperationName)(@(Model.NextOperationParameters))
                 }
             }
                 @:if err != nil {

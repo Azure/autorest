@@ -353,7 +353,6 @@ namespace AutoRest.Go.Model
       }
     }
 
-
     public string Response
     {
       get
@@ -430,6 +429,46 @@ namespace AutoRest.Go.Model
           }
         }
         return null;
+      }
+    }
+
+     public Method NextOperation
+    {
+      get
+      {
+        if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
+        {
+          var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
+          if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
+          {
+            return CodeModel.Methods.First(m => m.SerializedName.EqualsIgnoreCase(pageableExtension.OperationName));
+          }
+        }
+        return null;
+      }
+    }
+
+    public string NextOperationParameters
+    {
+      get
+      {
+        List<string> invocationParams = new List<string>();
+        foreach (ParameterGo p in (NextOperation as MethodGo).LocalParameters)
+        {
+          if (p.Name.EqualsIgnoreCase("nextlink"))
+          {
+            invocationParams.Add(string.Format("*list.{0}", NextLink()));
+          }
+          else
+          {
+            invocationParams.Add(p.Name);
+          }
+        }
+        if (IsLongRunningOperation())
+        {
+          invocationParams.Add("cancel");
+        }
+        return string.Join(", ", invocationParams);
       }
     }
 
