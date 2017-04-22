@@ -573,6 +573,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void XmsEnumExtensionValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "x-ms-enum-absent.json"));
+            messages.AssertOnlyValidationMessage(typeof(XmsEnumValidation), 1);
+        }
+
+        [Fact]
         public void XmsExamplesProvidedValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "xms-examples-absent.json"));
@@ -778,8 +785,7 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-readonly-props.json"));
             messages.AssertOnlyValidationMessage(typeof(ResourceModelValidation), 0);
         }
-
-
+        
     }
 
     #endregion
