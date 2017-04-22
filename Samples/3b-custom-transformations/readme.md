@@ -31,15 +31,14 @@ directive:
 directive:
 - from: storage.json
   where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.description
-  # The following can be an arbitrary JavaScript expression that will be evaluated to determine the new value.
+  # The following can be arbitrary JavaScript code that will be evaluated to determine the new value.
   # The original value is accessible via variable "$".
   # Here: We append a string to the existing value.
-  transform: >
-    $ + " Make sure you add that extra cowbell."
+  transform: $ += " Make sure you add that extra cowbell."
   reason: Make sure people know.
 - from: storage.json
   where: $.definitions.Usage.description
-  transform: $.toUpperCase()
+  transform: return $.toUpperCase()
   reason: Our new guidelines require upper case descriptions here. Customers love it.
 ```
 
@@ -47,27 +46,25 @@ directive:
 
 ``` yaml 
 directive:
-  from: composite # do it globally (in case there are multiple input OpenAPI definitions)
+  from: swagger-document # do it globally (in case there are multiple input OpenAPI definitions)
   where: $.paths..operationId
   # Replace operation IDs ending in "...ies" with "...y", because that's the safest way to make stuff singular.
-  transform: >
-    $.replace(/ies$/, "y")
+  transform: return $.replace(/ies$/, "y")
   reason: I don't like plural.
 ```
 
 ### CodeModel: Use endpoint URIs to determine operation group names
 
+By default (without an explicit return statement), `$` is considered the result of the transformation.
+
 ``` yaml 
 directive:
-  from: model
+  from: code-model-v1
   where: $.operations[*]
   transform: >
-    (() => {
       const url = $.methods[0]["#url"];
       const res = url.split("/Microsoft.Storage/")[1].split("/")[0];
       $["#name"] = res;
       $.summary = JSON.stringify($, null, 2);
-      return $;
-    })()
   reason: We wanna group methods by URI.
 ```
