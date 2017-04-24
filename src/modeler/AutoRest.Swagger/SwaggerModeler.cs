@@ -82,7 +82,7 @@ namespace AutoRest.Swagger
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
                 foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition, new ServiceDefinitionMetadata
                 {   // LEGACY MODE! set defaults for the metadata, the validator doesn't care from this codepath
-                    OpenApiDocumentType = ServiceDefinitionDocumentType.Default, 
+                    OpenApiDocumentType = ServiceDefinitionDocumentType.ARM, 
                     MergeState = ServiceDefinitionMergeState.After
                 }))
                 {

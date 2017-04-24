@@ -47,7 +47,6 @@ namespace AutoRest.Swagger.Tests
         {
             using (NewContext)
             {
-                var messages = new List<LogMessage>();
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
                 var serviceDefinition = SwaggerParser.Parse(input, File.ReadAllText(input));
 

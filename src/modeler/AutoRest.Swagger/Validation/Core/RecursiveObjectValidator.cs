@@ -34,7 +34,9 @@ namespace AutoRest.Swagger.Validation.Core
         /// <summary>
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
-        /// <param name="entity">The object to validate</param>
+        /// 
+        /// <param name="entity">The object to validate</param><param name="entity">The object to validate</param>
+        /// <param name="metaData">The metadata associated with serviceDefinition to which <paramref name="entity"/> belongs to</param>
         public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, ServiceDefinition entity, ServiceDefinitionMetadata metadata)
         {
             // TODO: By default, set validation rule merge state to After
@@ -45,6 +47,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
         /// <param name="entity">The object to validate</param>
+        /// <param name="metaData">metaData associated with the serviceDefinition</param>
         public IEnumerable<Rule> GetFilteredRules(IEnumerable<Rule> rules, ServiceDefinitionMetadata metaData)
         {
             // Filter by document type
@@ -52,7 +55,7 @@ namespace AutoRest.Swagger.Validation.Core
             var openapiTypeRules = rules.Where(rule => rule.OpenApiDocumentValidationType == ServiceDefinitionDocumentType.Default);
             if (metaData.OpenApiDocumentType != ServiceDefinitionDocumentType.Default)
             {
-                openapiTypeRules = openapiTypeRules.Concat(rules.Where(rule => rule.OpenApiDocumentValidationType == metaData.OpenApiDocumentType));
+                openapiTypeRules = openapiTypeRules.Concat(rules.Where(rule => (rule.OpenApiDocumentValidationType & metaData.OpenApiDocumentType)!=0));
             }
 
             // Filter by the current merge state, and return
@@ -66,6 +69,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// <param name="entity">The object to validate</param>
         /// <param name="parentContext">The rule context of the object that <paramref name="entity"/> belongs to</param>
         /// <param name="rules">The set of rules from the parent object to apply to <paramref name="entity"/></param>
+        /// <param name="metaData">The metadata associated with serviceDefinition to which <paramref name="entity"/> belongs to</param>
         /// <param name="traverseProperties">Whether or not to traverse this <paramref name="entity"/>'s properties</param>
         /// <returns></returns>
         private IEnumerable<LogMessage> RecursiveValidate(object entity, ObjectPath entityPath, RuleContext parentContext, IEnumerable<Rule> rules, ServiceDefinitionMetadata metaData, bool traverseProperties = true)
@@ -122,6 +126,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// <param name="entity"></param>
         /// <param name="collectionRules"></param>
         /// <param name="parentContext"></param>
+        /// <param name="metaData">The metadata associated with corresponding serviceDefinition</param>
         /// <returns></returns>
         private IEnumerable<LogMessage> ValidateObjectValue(object entity,
             IEnumerable<Rule> collectionRules, RuleContext parentContext,
@@ -137,6 +142,16 @@ namespace AutoRest.Swagger.Validation.Core
             return classRules.SelectMany(rule => rule.GetValidationMessages(entity, parentContext));
         }
 
+
+
+        /// <summary>
+        /// Validates an object property
+        /// </summary>
+        /// <param name="prop">The property metadata</param>
+        /// <param name="value">The property object to validate</param>
+        /// <param name="entityPath">Path to the property object in the serviceDefinition</param>
+        /// <param name="metaData">The metadata associated with corresponding serviceDefinition</param>
+        /// <returns></returns>
         private IEnumerable<LogMessage> ValidateProperty(PropertyInfo prop, object value, ObjectPath entityPath, RuleContext parentContext, ServiceDefinitionMetadata metaData)
         {
             // Uses the property name resolver to get the name to use in the path of messages
