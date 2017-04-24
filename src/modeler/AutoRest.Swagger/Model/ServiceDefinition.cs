@@ -125,6 +125,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(DescriptionMissing))]
         [Rule(typeof(PatchBodyParametersSchemaValidation))]
         [Rule(typeof(BodyTopLevelProperties))]
+        [Rule(typeof(XmsEnumValidation))]
         [CollectionRule(typeof(RequiredReadOnlyPropertiesValidation))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
