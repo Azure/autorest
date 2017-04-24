@@ -136,7 +136,7 @@ namespace AutoRest.Go.Model
     {
       get
       {
-        var signature = new StringBuilder("(*");
+        var signature = new StringBuilder("(");
         signature.Append((ListElement.ModelType as SequenceTypeGo).Name);
         signature.Append(", error)");
         return signature.ToString();

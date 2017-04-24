@@ -205,7 +205,7 @@ if (!Model.NextAlreadyDefined)
     @:for err == nil {
         @:select {
         @:case <- cancel:
-            @:return &respSlice, nil
+            @:return respSlice, nil
         @:default:
             @:if list.@(Model.ListElement.Name) != nil {
                 @:for _, item := range *list.@(Model.ListElement.Name) {
@@ -222,11 +222,11 @@ if (!Model.NextAlreadyDefined)
                 @:list, err = client.@(Model.NextOperationName)(@(Model.NextOperationParameters))
             }
                 @:if err != nil {
-                    @:return nil, err
+                    @:return respSlice, err
                 @:}
             @:}
         @:}
     @:}
-    @:return &respSlice, err
+    @:return respSlice, err
 @:}
 }
