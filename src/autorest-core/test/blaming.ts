@@ -18,7 +18,7 @@ import { parse } from "../lib/ref/jsonpath";
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-composite.md"));
     // PumpMessagesToConsole(autoRest);
     const view = await autoRest.view;
-    await autoRest.Process().finish;
+    assert.equal(await autoRest.Process().finish, true);
 
     // regular description
     {
@@ -44,7 +44,7 @@ import { parse } from "../lib/ref/jsonpath";
     await autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const files: Artifact[] = [];
     autoRest.GeneratedFile.Subscribe((_, a) => files.push(a));
-    await autoRest.Process().finish;
+    assert.equal(await autoRest.Process().finish, true);
     assert.strictEqual(files.length, 2);
 
     // briefly inspect source map
@@ -59,7 +59,7 @@ import { parse } from "../lib/ref/jsonpath";
     await autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const messages: Message[] = [];
     autoRest.Message.Subscribe((_, m) => messages.push(m)); // was warning.
-    await autoRest.Process().finish;
+    assert.equal(await autoRest.Process().finish, true);
     assert.notEqual(messages.length, 0);
   }
 }

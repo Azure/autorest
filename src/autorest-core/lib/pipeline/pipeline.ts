@@ -30,46 +30,50 @@ function emitArtifact(config: ConfigurationView, artifactType: string, uri: stri
   }
 }
 
+type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
+type PipelineNode = { outputArtifact: string, plugin: PipelinePlugin, inputs: PipelineNode[] };
+
+function CreatePluginLoader(): PipelinePlugin {
+  return async (config, input, working, output) => {
+    let inputs = From(config.InputFileUris).ToArray();
+    if (inputs.length === 0) {
+      throw new Exception("No input files provided.\n\nUse --help to get help information.", 0);
+    }
+    const swaggers = await LoadLiterateSwaggers(
+      config,
+      input,
+      inputs, working);
+    for (let i = 0; i < inputs.length; ++i) {
+      await (await output.Write(`./${i}/_` + encodeURIComponent(inputs[i]))).Forward(swaggers[i]);
+    }
+  }
+}
+
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   const cancellationToken = config.CancellationToken;
   const processMessage = config.Message.bind(config);
   const barrier = new OutstandingTaskAwaiter();
 
-  type PipelinePlugin = (input: DataStoreViewReadonly, output: DataStoreView) => Promise<void>;
   const plugins: { [name: string]: PipelinePlugin } = {
-    "loader": async (input, output) => {
-
-    }
-  };
-  type PipelineNode = { outputArtifact: string, plugin: PipelinePlugin, inputs: PipelineNode[] };
-
-  const nodeLoader: PipelineNode = {
-    plugin: plugins["loader"],
-    inputs: [],
-    outputArtifact: "swagger-document"
+    "loader": CreatePluginLoader()
   };
 
   const manipulator = new Manipulator(config);
 
-  // load Swaggers
-  let inputs = From(config.InputFileUris).ToArray();
-  if (inputs.length === 0) {
-    throw new Exception("No input files provided.\n\nUse --help to get help information.", 0);
-  }
-
-  config.Message({ Channel: Channel.Debug, Text: `Starting Pipeline - Loading literate swaggers ${inputs}` });
-
-  const swaggers = await LoadLiterateSwaggers(
-    config,
+  const swaggersScope = config.DataStore.CreateScope("loader");
+  const swaggersScopeOutput = swaggersScope.CreateScope("output");
+  await plugins["loader"](config,
     config.DataStore.GetReadThroughScopeFileSystem(fileSystem),
-    inputs, config.DataStore.CreateScope("loader"));
-  // const rawSwaggers = await Promise.all(swaggers.map(async x => { return <Artifact>{ uri: x.key, content: await x.ReadData() }; }));
+    swaggersScope.CreateScope("working"),
+    swaggersScopeOutput);
 
   config.Message({ Channel: Channel.Debug, Text: `Done loading Literate Swaggers` });
 
+  const swaggers = await Promise.all((await swaggersScopeOutput.Enum()).map(x => swaggersScopeOutput.ReadStrict(x)));
+
   // TRANSFORM
   for (let i = 0; i < swaggers.length; ++i) {
-    swaggers[i] = await manipulator.Process(swaggers[i], config.DataStore.CreateScope("loaded-transform"), inputs[i]);
+    swaggers[i] = await manipulator.Process(swaggers[i], config.DataStore.CreateScope("loaded-transform"), decodeURIComponent(swaggers[i].key.split("/_").reverse()[0]));
   }
 
   // compose Swaggers
@@ -186,6 +190,4 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   }
 
   await barrier.Wait();
-
-
 }

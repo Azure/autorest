@@ -24,7 +24,7 @@ import { MemoryFileSystem } from "../lib/file-system";
     const messages: Message[] = [];
 
     autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Error) { messages.push(m) } });
-    await autoRest.Process().finish;
+    assert.equal(await autoRest.Process().finish, true);
     return messages;
   }
 
