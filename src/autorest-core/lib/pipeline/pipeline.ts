@@ -89,18 +89,18 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   config.Message({ Channel: Channel.Debug, Text: `Done Emitting composed documents.` });
 
   // AMAR WORLD
-  if (!config.DisableValidation && config.GetEntry("amar" as any)) {
+  if (!config.DisableValidation && (config.GetEntry("model-validator") || config.GetEntry("semantic-validator"))) {
     const validationPlugin = await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`);
     const pluginNames = await validationPlugin.GetPluginNames(cancellationToken);
     if (pluginNames.length != 2) {
       throw new Error("Amar's plugin betrayed us!");
     }
 
-    for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
+    for (let pluginName of pluginNames.filter(name => config.GetEntry(name as any))) {
       barrier.Await((async () => {
-        const scopeWork = config.DataStore.CreateScope(`amar_${pluginIndex}`);
+        const scopeWork = config.DataStore.CreateScope(`amar_${pluginName}`);
         const result = await validationPlugin.Process(
-          pluginNames[pluginIndex], _ => null,
+          pluginName, _ => null,
           new QuickScope([swagger]),
           scopeWork.CreateScope("output"),
           processMessage,
@@ -112,15 +112,13 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     }
   }
 
-  const azureValidator = config.AzureArm && !config.DisableValidation;
-
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
   const usedCodeGenerators = allCodeGenerators.filter(cg => config.GetEntry(cg as any) !== undefined);
 
   config.Message({ Channel: Channel.Debug, Text: `Just before autorest.dll realm.` });
 
   // validator
-  if (azureValidator) {
+  if (config.GetEntry("azure-validator") && !config.DisableValidation) {
     barrier.Await(AutoRestDotNetPlugin.Get().Validate(swagger, config.DataStore.CreateScope("validate"), processMessage));
   }
 

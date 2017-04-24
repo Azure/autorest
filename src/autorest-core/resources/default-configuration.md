@@ -25,7 +25,7 @@ plugins:
 
 ``` yaml
 plugins:
-  swagger-loader:
+  swagger-loader: 42
 ```
 
 ## Output Artifacts
@@ -41,4 +41,12 @@ output-artifact:
 - source-file-go
 - source-file-java
 - source-file-azureresourceschema
+```
+
+## Azure Validation
+
+Activate `azure-validator` when setting `azure-arm`!?
+
+``` yaml $(azure-arm)
+azure-validator: true
 ```

@@ -1,21 +1,21 @@
-import { OperationAbortedException } from './exception';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { TryDecodeEnhancedPositionFromName } from './source-map/source-map';
-import { Supressor } from './pipeline/supression';
+import { OperationAbortedException } from "./exception";
+import { TryDecodeEnhancedPositionFromName } from "./source-map/source-map";
+import { Supressor } from "./pipeline/supression";
 import { matches, stringify } from "./ref/jsonpath";
 import { MergeOverwriteOrAppend } from "./source-map/merging";
-import { DataStore } from "./data-store/data-store";
+import { DataHandleRead, DataStore } from './data-store/data-store';
 import { EventEmitter, IEvent } from "./events";
-import { CodeBlock, EvaluateGuard, ParseCodeBlocks } from './parsing/literate-yaml';
-import { EnsureIsFolderUri, ResolveUri } from "./ref/uri";
+import { CodeBlock, EvaluateGuard, ParseCodeBlocks } from "./parsing/literate-yaml";
+import { CreateFolderUri, EnsureIsFolderUri, ReadUri, ResolveUri } from './ref/uri';
 import { From } from "./ref/linq";
 import { IFileSystem } from "./file-system";
 import * as Constants from "./constants";
-import { Channel, Message, SourceLocation, Range } from './message';
+import { Channel, Message, SourceLocation, Range } from "./message";
 import { Artifact } from "./artifact";
 import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
 
@@ -35,7 +35,10 @@ export interface AutoRestConfigurationImpl {
 
   // from here on: CONVENTION, not cared about by the core
   "fluent"?: boolean;
-  "azure-arm"?: boolean; // TODO: enable tooling using guard in default config!
+  "azure-arm"?: boolean;
+  "azure-validator"?: boolean;
+  "model-validator"?: boolean;
+  "semantic-validator"?: boolean;
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
   "namespace"?: string; // TODO: the modeler cares :( because it is badly designed
   "license-header"?: string;
@@ -315,42 +318,58 @@ export class ConfigurationView {
 
 
 export class Configuration {
+  private async ParseCodeBlocks(configFile: DataHandleRead, contextConfig: ConfigurationView, scope: string) {
+    // load config
+    const hConfig = await ParseCodeBlocks(
+      contextConfig,
+      configFile,
+      contextConfig.DataStore.CreateScope("config"));
+
+    const blocks = hConfig.map(each => {
+      const block = each.data.ReadObject<AutoRestConfigurationImpl>();
+      if (typeof block !== "object") {
+        contextConfig.Message({
+          Channel: Channel.Error,
+          Text: "Syntax error: Invalid YAML object.",
+          Source: [<SourceLocation>{ document: each.data.key, Position: { line: 1, column: 0 } }]
+        });
+        throw new OperationAbortedException();
+      }
+      block.__info = each.info;
+      return block;
+    });
+    return blocks;
+  }
+
   public async CreateView(messageEmitter: MessageEmitter, ...configs: Array<any>): Promise<ConfigurationView> {
     const configFileUri = this.fileSystem && this.configFileOrFolderUri
       ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri)
       : null;
+    const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, "./") : (this.configFileOrFolderUri || "file:///");
 
-    const defaults = require("../resources/default-configuration.json");
-
-    if (configFileUri === null) {
-      return new ConfigurationView(messageEmitter, this.configFileOrFolderUri || "file:///", ...configs, defaults);
-    } else {
+    const configSegments: any[] = [];
+    // 1. overrides (CLI, ...)
+    configSegments.push(...configs);
+    // 2. file
+    if (configFileUri !== null) {
       const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
-
-      const tmpConfig = new ConfigurationView(messageEmitter, ResolveUri(configFileUri, "."), ...configs);
-
-      // load config
-      const hConfig = await ParseCodeBlocks(
-        tmpConfig,
+      const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(configFileUri),
-        messageEmitter.DataStore.CreateScope("config"));
-
-      const blocks = hConfig.map(each => {
-        const block = each.data.ReadObject<AutoRestConfigurationImpl>();
-        if (typeof block !== "object") {
-          tmpConfig.Message({
-            Channel: Channel.Error,
-            Text: "Syntax error: Invalid YAML object.",
-            Source: [<SourceLocation>{ document: each.data.key, Position: { line: 1, column: 0 } }]
-          });
-          throw new OperationAbortedException();
-        }
-        block.__info = each.info;
-        return block;
-      });
-
-      return new ConfigurationView(messageEmitter, ResolveUri(configFileUri, "."), ...configs, ...blocks, defaults);
+        new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments),
+        "config");
+      configSegments.push(...blocks);
     }
+    // 3. default configuration
+    {
+      const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
+      const blocks = await this.ParseCodeBlocks(
+        await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../resources/default-configuration.md")),
+        new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments),
+        "default-config");
+      configSegments.push(...blocks);
+    }
+
+    return new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments);
   }
 
   public constructor(
