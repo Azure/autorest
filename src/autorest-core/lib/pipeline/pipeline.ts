@@ -1,9 +1,11 @@
-import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { Lazy } from "../lazy";
+import { Stringify, YAMLNode } from '../ref/yaml';
+import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { AutoRestPlugin } from "./plugin-endpoint";
 import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
@@ -12,7 +14,7 @@ import { Channel, Message, SourceLocation, Range } from "../message";
 import { MultiPromise } from "../multi-promise";
 import { GetFilename, ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
-import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from '../data-store/data-store';
+import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { From } from "../ref/linq";
@@ -21,17 +23,40 @@ import { Exception } from "../exception";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
-function emitArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): void {
-  if (From(config.OutputArtifact).Contains(artifactType)) {
+async function emitArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): Promise<void> {
+  if (config.IsOutputArtifactRequested(artifactType)) {
     config.GeneratedFile.Dispatch({ type: artifactType, uri: uri, content: handle.ReadData() });
   }
-  if (From(config.OutputArtifact).Contains(artifactType + ".map")) {
+  if (config.IsOutputArtifactRequested(artifactType + ".map")) {
     config.GeneratedFile.Dispatch({ type: artifactType + ".map", uri: uri + ".map", content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2) });
+  }
+}
+let emitCtr = 0;
+async function emitObjectArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): Promise<void> {
+  await emitArtifact(config, artifactType, uri, handle);
+
+  const scope = config.DataStore.CreateScope("emitObjectArtifact");
+  const object = new Lazy<any>(() => handle.ReadObject<any>());
+  const ast = new Lazy<YAMLNode>(() => handle.ReadYamlAst());
+
+  if (config.IsOutputArtifactRequested(artifactType + ".yaml")
+    || config.IsOutputArtifactRequested(artifactType + ".yaml.map")) {
+
+    const hw = await scope.Write(`${++emitCtr}.yaml`);
+    const h = await hw.WriteData(Stringify(object.Value), IdentitySourceMapping(handle.key, ast.Value), [handle]);
+    await emitArtifact(config, artifactType + ".yaml", uri + ".yaml", h);
+  }
+  if (config.IsOutputArtifactRequested(artifactType + ".json")
+    || config.IsOutputArtifactRequested(artifactType + ".json.map")) {
+
+    const hw = await scope.Write(`${++emitCtr}.json`);
+    const h = await hw.WriteData(JSON.stringify(object.Value, null, 2), IdentitySourceMapping(handle.key, ast.Value), [handle]);
+    await emitArtifact(config, artifactType + ".json", uri + ".json", h);
   }
 }
 
 type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
-type PipelineNode = { outputArtifact: string, plugin: PipelinePlugin, inputs: PipelineNode[] };
+type PipelineNode = { id: string, outputArtifact: string, plugin: PipelinePlugin, inputs: PipelineNode[] };
 
 function CreatePluginLoader(): PipelinePlugin {
   return async (config, input, working, output) => {
@@ -46,7 +71,23 @@ function CreatePluginLoader(): PipelinePlugin {
     for (let i = 0; i < inputs.length; ++i) {
       await (await output.Write(`./${i}/_` + encodeURIComponent(inputs[i]))).Forward(swaggers[i]);
     }
-  }
+  };
+}
+function CreateTransformer(documentIdResolver: (key: string) => string): PipelinePlugin {
+  return async (config, input, working, output) => {
+    const manipulator = new Manipulator(config);
+    const files = await input.Enum();
+    for (const file of files) {
+      const fileIn = await input.ReadStrict(file);
+      const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
+      await (await output.Write("./" + file)).Forward(fileOut);
+    }
+  };
+}
+function CreateComposer(): PipelinePlugin {
+  return async (config, input, working, output) => {
+
+  };
 }
 
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
@@ -55,7 +96,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const barrier = new OutstandingTaskAwaiter();
 
   const plugins: { [name: string]: PipelinePlugin } = {
-    "loader": CreatePluginLoader()
+    "loader": CreatePluginLoader(),
+    "transform1": CreateTransformer(key => decodeURIComponent(key.split("/_").reverse()[0]))
   };
 
   const manipulator = new Manipulator(config);
@@ -69,12 +111,15 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   config.Message({ Channel: Channel.Debug, Text: `Done loading Literate Swaggers` });
 
-  const swaggers = await Promise.all((await swaggersScopeOutput.Enum()).map(x => swaggersScopeOutput.ReadStrict(x)));
-
   // TRANSFORM
-  for (let i = 0; i < swaggers.length; ++i) {
-    swaggers[i] = await manipulator.Process(swaggers[i], config.DataStore.CreateScope("loaded-transform"), decodeURIComponent(swaggers[i].key.split("/_").reverse()[0]));
-  }
+  const transform1Scope = config.DataStore.CreateScope("transform1");
+  const transform1ScopeOutput = transform1Scope.CreateScope("output");
+  await plugins["transform1"](config,
+    swaggersScopeOutput,
+    transform1Scope.CreateScope("working"),
+    transform1ScopeOutput);
+
+  const swaggers = await Promise.all((await transform1ScopeOutput.Enum()).map(x => transform1ScopeOutput.ReadStrict(x)));
 
   // compose Swaggers
   let swagger = config.GetEntry("override-info") || swaggers.length !== 1
@@ -96,8 +141,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     const hw = await config.DataStore.Write("normalized-swagger.json");
     const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, swagger.ReadYamlAst()), [swagger]);
-    emitArtifact(config, "swagger-document", outputFileUri, h);
-    emitArtifact(config, "swagger-document.yaml", outputFileUri.replace(".json", ".yaml"), swagger);
+    await emitObjectArtifact(config, "swagger-document", outputFileUri, h);
   }
   config.Message({ Channel: Channel.Debug, Text: `Done Emitting composed documents.` });
 
@@ -158,20 +202,9 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           // TRANSFORM
           const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/code-model-v1.yaml");
 
-          emitArtifact(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
+          await emitArtifact(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
 
-          const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-          let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(usedCodeGenerator, codeModelTransformed, scope.CreateScope("generate"),
-            Object.assign(
-              { // stuff that comes in via `x-ms-code-generation-settings`
-                "override-client-name": getXmsCodeGenSetting("name"),
-                "use-internal-constructors": getXmsCodeGenSetting("internalConstructors"),
-                "use-datetimeoffset": getXmsCodeGenSetting("useDateTimeOffset"),
-                "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
-                "sync-methods": getXmsCodeGenSetting("syncMethods")
-              },
-              genConfig.Raw),
-            processMessage);
+          let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(genConfig, usedCodeGenerator, swagger, codeModelTransformed, scope.CreateScope("generate"), processMessage);
 
           // C# simplifier
           if (usedCodeGenerator === "csharp") {

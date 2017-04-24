@@ -183,7 +183,6 @@ export class AutoRest extends EventEmitter {
           /* if (!(e instanceof OperationCanceledException)) {
             console.error(e.message);
           } */
-
           this.Message.Dispatch({ Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` });
           this.Finished.Dispatch(e);
 

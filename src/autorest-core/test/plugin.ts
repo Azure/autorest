@@ -115,7 +115,23 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
   }
 
   @test @timeout(10000) async "AutoRest.dll Generator"() {
+    const autoRest = new AutoRest(new RealFileSystem());
+    autoRest.AddConfiguration({
+      namespace: "SomeNamespace",
+      "license-header": null,
+      "payload-flattening-threshold": 0,
+      "add-credentials": false,
+      "package-name": "rubyrubyrubyruby"
+    });
+    const config = await autoRest.view;
     const dataStore = new DataStore(CancellationToken.None);
+
+    // load swagger
+    const swagger = await LoadLiterateSwagger(
+      config,
+      dataStore.GetReadThroughScope(),
+      "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
+      dataStore.CreateScope("loader"));
 
     // load code model
     const codeModelUri = ResolveUri(CreateFolderUri(__dirname), "resources/code-model.yaml");
@@ -126,16 +142,11 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const resultScope = await autorestPlugin.GenerateCode(
+      config,
       "csharp",
+      swagger,
       codeModelHandle,
       pluginScope,
-      <any>{
-        namespace: "SomeNamespace",
-        "license-header": null,
-        "payload-flattening-threshold": 0,
-        "add-credentials": false,
-        "package-name": "rubyrubyrubyruby"
-      },
       m => null);
 
     // check results

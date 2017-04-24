@@ -199,8 +199,8 @@ export class ConfigurationView {
     return this.ResolveAsFolder(this.config["output-folder"] || "generated");
   }
 
-  public get OutputArtifact(): Iterable<string> {
-    return ValuesOf<string>(this.config["output-artifact"]);
+  public IsOutputArtifactRequested(artifact: string): boolean {
+    return From(ValuesOf<string>(this.config["output-artifact"])).Contains(artifact);
   }
 
   public GetEntry(key: keyof AutoRestConfigurationImpl): any {

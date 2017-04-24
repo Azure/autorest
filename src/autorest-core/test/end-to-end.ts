@@ -65,7 +65,7 @@ import { PumpMessagesToConsole } from './test-utility';
     const messages: Message[] = [];
 
     autoRest.Message.Subscribe((_, m) => { if (m.Channel === Channel.Warning) { messages.push(m); } });
-    await autoRest.Process().finish;
+    assert.equal(await autoRest.Process().finish, true);
     assert.notEqual(messages.length, 0);
   }
 }

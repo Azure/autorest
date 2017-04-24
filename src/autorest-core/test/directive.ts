@@ -23,7 +23,7 @@ import { Message, Channel } from "../lib/message";
       const messages: Message[] = [];
       const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
 
-      await autoRest.Process().finish;
+      assert.equal(await autoRest.Process().finish, true);
       numWarningsRef = messages.length;
 
       dispose();
@@ -38,7 +38,7 @@ import { Message, Channel } from "../lib/message";
       const messages: Message[] = [];
       const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
 
-      await autoRest.Process().finish;
+      assert.equal(await autoRest.Process().finish, true);
       if (messages.length > 0) {
         console.log("Should have been muted but found:");
         console.log(JSON.stringify(messages, null, 2));
@@ -57,7 +57,7 @@ import { Message, Channel } from "../lib/message";
         const messages: Message[] = [];
         const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
 
-        await autoRest.Process().finish;
+        assert.equal(await autoRest.Process().finish, true);
         if (messages.length === 0 || messages.length === numWarningsRef) {
           console.log(JSON.stringify(messages, null, 2));
         }
@@ -101,7 +101,7 @@ import { Message, Channel } from "../lib/message";
       const result = new Promise<string>(res => resolve = res);
 
       const dispose = autoRest.GeneratedFile.Subscribe((_, a) => { resolve(a.content); dispose(); });
-      await autoRest.Process().finish;
+      assert.equal(await autoRest.Process().finish, true);
 
       return result;
     };
