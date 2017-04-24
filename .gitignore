@@ -10,7 +10,6 @@ compare-results/*
 *.user
 *.sln.docstates
 .vs
-developer/
 launchSettings.json
 
 # Build results

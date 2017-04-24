@@ -16,11 +16,11 @@ import { MergeOverwrite } from "../lib/source-map/merging";
     // list overwriting and concatenation
     assert.deepStrictEqual(MergeOverwrite(1, 2, _ => false), 1);
     assert.deepStrictEqual(MergeOverwrite(1, 2, _ => true), [1, 2]);
-    assert.deepStrictEqual(MergeOverwrite(1, [2], _ => false), 1);
+    assert.deepStrictEqual(MergeOverwrite(1, [2], _ => false), [1, 2]);
     assert.deepStrictEqual(MergeOverwrite(1, [2], _ => true), [1, 2]);
-    assert.deepStrictEqual(MergeOverwrite([1], 2, _ => false), [1]);
+    assert.deepStrictEqual(MergeOverwrite([1], 2, _ => false), [1, 2]);
     assert.deepStrictEqual(MergeOverwrite([1], 2, _ => true), [1, 2]);
-    assert.deepStrictEqual(MergeOverwrite([1], [2], _ => false), [1]);
+    assert.deepStrictEqual(MergeOverwrite([1], [2], _ => false), [1, 2]);
     assert.deepStrictEqual(MergeOverwrite([1], [2], _ => true), [1, 2]);
 
     // picky concatenation
@@ -33,6 +33,6 @@ import { MergeOverwrite } from "../lib/source-map/merging";
     assert.deepStrictEqual(MergeOverwrite(
       { a: 1, b: 1, c: { a: 1, b: { a: 1, b: 1 } }, d: [{ a: 1, b: 1 }] },
       { a: 2, bx: 2, c: { ax: 2, b: { c: 2 } }, d: [{ a: 2, b: 2 }] }),
-      { a: 1, b: 1, bx: 2, c: { a: 1, ax: 2, b: { a: 1, b: 1, c: 2 } }, d: [{ a: 1, b: 1 }] });
+      { a: 1, b: 1, bx: 2, c: { a: 1, ax: 2, b: { a: 1, b: 1, c: 2 } }, d: [{ a: 1, b: 1 }, { a: 2, b: 2 }] });
   }
 }

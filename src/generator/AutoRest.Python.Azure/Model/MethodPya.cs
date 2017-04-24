@@ -33,7 +33,7 @@ namespace AutoRest.Python.Azure.Model
                     return string.Empty;
                 }
 
-                return "models." + (string)ext["className"];
+                return "models." + this.ReturnType.Body.Name;
             }
         }
 

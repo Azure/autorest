@@ -145,9 +145,14 @@ namespace AutoRest.CSharp.Model
                 get
                 {
                     var declarations = new List<string>();
-                    foreach (var property in Parameters.Where(p => !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty))
+                    foreach (PropertyCs property in Parameters.Where(p => !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty))
                     {
                         string format = (property.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
+                        // for people who really want defaults to properties (be aware of the PATCH operation consequences!)
+                        if (property.UseDefaultInConstructor && property.DefaultValue != null)
+                        {
+                            format = "{0} {1} = " + property.DefaultValue;
+                        }
                         declarations.Add(string.Format(CultureInfo.InvariantCulture,
                             format, property.ModelTypeName, CodeNamer.Instance.CamelCase(property.Name)));
                     }
