@@ -318,12 +318,12 @@ export class ConfigurationView {
 
 
 export class Configuration {
-  private async ParseCodeBlocks(configFile: DataHandleRead, contextConfig: ConfigurationView, scope: string) {
+  private async ParseCodeBlocks(configFile: DataHandleRead, contextConfig: ConfigurationView, scope: string): Promise<AutoRestConfigurationImpl[]> {
     // load config
     const hConfig = await ParseCodeBlocks(
       contextConfig,
       configFile,
-      contextConfig.DataStore.CreateScope("config"));
+      contextConfig.DataStore.CreateScope(scope));
 
     const blocks = hConfig.map(each => {
       const block = each.data.ReadObject<AutoRestConfigurationImpl>();
