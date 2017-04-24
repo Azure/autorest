@@ -375,7 +375,7 @@ export class Configuration {
   }
 
   public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null): Promise<string | null> {
-    if (!configFileOrFolderUri || !configFileOrFolderUri.endsWith("/")) {
+    if (!configFileOrFolderUri || configFileOrFolderUri.endsWith(".md")) {
       return configFileOrFolderUri;
     }
 
@@ -384,7 +384,7 @@ export class Configuration {
       // scan the filesystem items for the configuration.
       const configFiles = new Map<string, string>();
 
-      for await (const name of fileSystem.EnumerateFileUris(configFileOrFolderUri)) {
+      for await (const name of fileSystem.EnumerateFileUris(EnsureIsFolderUri(configFileOrFolderUri))) {
         if (name.endsWith(".md")) {
           const content = await fileSystem.ReadFile(name);
           if (content.indexOf(Constants.MagicString) > -1) {
