@@ -37,7 +37,7 @@ true4: true
 ```
 
 ``` yaml $(true4)
-azure-validator: true
+azure-arm: true
 input-file:
 - swagger.md
 ```
