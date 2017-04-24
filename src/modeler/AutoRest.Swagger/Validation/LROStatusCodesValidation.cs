@@ -18,7 +18,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "blah";
+        public override string Id => "M2064";
 
         /// <summary>
         /// Violation category of the Rule.
@@ -39,7 +39,8 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
 
         /// <summary>
-        /// Verifies if a tracked resource has a corresponding ListBySubscription operation
+        /// Verifies whether an LRO PUT operation returns response models for 
+        /// 200/201 status codes
         /// </summary>
         /// <param name="definitions"></param>
         /// <param name="context"></param>
@@ -63,15 +64,13 @@ namespace AutoRest.Swagger.Validation
                         if (resp.Key == "200" || resp.Key == "201")
                         {
                             var modelRef = resp.Value?.Schema?.Reference?? string.Empty;
-                            if (!serviceDefinition.Definitions.ContainsKey(modelRef))
+                            if (!serviceDefinition.Definitions.ContainsKey(modelRef.StripDefinitionPath()))
                             {
                                 var violatingVerb = ValidationUtilities.GetOperationIdVerb(op.OperationId, path);
                                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(path.Key).AppendProperty(violatingVerb).AppendProperty("responses").AppendProperty(resp.Key)), 
                                     this, op.OperationId, resp.Key);
-
                             }
                         }
-
                     }
                 }
             }
