@@ -36,9 +36,18 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const barrier = new OutstandingTaskAwaiter();
 
   type PipelinePlugin = (input: DataStoreViewReadonly, output: DataStoreView) => Promise<void>;
+  const plugins: { [name: string]: PipelinePlugin } = {
+    "loader": async (input, output) => {
+
+    }
+  };
   type PipelineNode = { outputArtifact: string, plugin: PipelinePlugin, inputs: PipelineNode[] };
-  // type PipelineSchedule = 
-  // const plugins
+
+  const nodeLoader: PipelineNode = {
+    plugin: plugins["loader"],
+    inputs: [],
+    outputArtifact: "swagger-document"
+  };
 
   const manipulator = new Manipulator(config);
 

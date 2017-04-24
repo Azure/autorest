@@ -87,8 +87,6 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       assert.ok(message);
       assert.ok(message.Details.code);
       assert.ok(message.Text);
-      assert.ok(message.Details.jsonref);
-      assert.ok(message.Details["json-path"]);
       assert.ok(message.Details.validationCategory);
       assert.strictEqual(message.Plugin, "azure-validator");
     }
