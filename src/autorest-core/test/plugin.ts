@@ -46,7 +46,8 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
   @test @timeout(0) async "openapi-validation-tools"() {
     const autoRest = new AutoRest(new RealFileSystem());
     autoRest.AddConfiguration({ "input-file": "https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json" });
-    autoRest.AddConfiguration({ amar: true });
+    autoRest.AddConfiguration({ "model-validator": true });
+    autoRest.AddConfiguration({ "semantic-validator": true });
 
     const errorMessages: Message[] = [];
     autoRest.Message.Subscribe((_, m) => {

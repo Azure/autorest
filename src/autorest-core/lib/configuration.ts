@@ -215,10 +215,6 @@ export class ConfigurationView {
     return this.config["disable-validation"] || false;
   }
 
-  public get AzureArm(): boolean {
-    return this.config["azure-arm"] || false;
-  }
-
   public * GetPluginViews(pluginName: string): Iterable<ConfigurationView> {
     for (const section of ValuesOf<any>((this.config as any)[pluginName])) {
       yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section, this.config);
@@ -376,10 +372,6 @@ export class Configuration {
     private fileSystem?: IFileSystem,
     private configFileOrFolderUri?: string
   ) {
-    this.FileChanged();
-  }
-
-  public FileChanged() {
   }
 
   public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null): Promise<string | null> {

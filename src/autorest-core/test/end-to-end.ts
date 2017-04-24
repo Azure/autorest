@@ -59,12 +59,12 @@ import { PumpMessagesToConsole } from './test-utility';
     });
 
     const config = await autoRest.view;
-    assert.strictEqual(config.AzureArm, true);
+    assert.strictEqual(config.GetEntry("azure-arm"), true);
     assert.strictEqual([...config.InputFileUris].length, 1);
 
     const messages: Message[] = [];
 
-    autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
+    autoRest.Message.Subscribe((_, m) => { if (m.Channel === Channel.Warning) { messages.push(m); } });
     await autoRest.Process().finish;
     assert.notEqual(messages.length, 0);
   }
