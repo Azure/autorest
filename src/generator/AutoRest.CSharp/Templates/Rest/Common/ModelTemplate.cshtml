@@ -132,7 +132,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         partial void CustomInit();
         
         @EmptyLine
-        @foreach (var property in Model.Properties.Where(p => !p.IsConstant))
+        @foreach (PropertyCs property in Model.Properties.Where(p => !p.IsConstant))
         {
         @:/// <summary>
         @:@WrapComment("/// ", property.GetFormattedPropertySummary())
