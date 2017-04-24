@@ -109,9 +109,14 @@ namespace AutoRest.Go.Model
       {     
         var signature = new StringBuilder("(");
         signature.Append(MethodParametersSignature);
-        signature.Append(MethodParametersSignature.Length > 0
-          ? ", stop <-chan struct{})"
-          : "stop <-chan struct{})");
+        if (!IsLongRunningOperation())
+        {
+          if (MethodParametersSignature.Length > 0)
+          {
+            signature.Append( ", ");
+          }
+           signature.Append("cancel <-chan struct{})");
+        }
         return signature.ToString();
       }
     }
