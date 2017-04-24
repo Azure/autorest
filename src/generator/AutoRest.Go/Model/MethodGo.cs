@@ -408,11 +408,11 @@ namespace AutoRest.Go.Model
     public bool NextMethodExists(IEnumerable<MethodGo> methods)
     {
       string next = NextOperationName;
-      if (!string.IsNullOrEmpty(next))
+      if (string.IsNullOrEmpty(next))
       {
-          return methods.Any(m => m.Name.Value.EqualsIgnoreCase(next));
+        return false;
       }
-      return false;
+      return methods.Any(m => m.Name.Value.EqualsIgnoreCase(next));
     }
 
     public string NextOperationName
