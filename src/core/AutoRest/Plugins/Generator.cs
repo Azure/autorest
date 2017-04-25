@@ -38,7 +38,7 @@ public class Generator : NewPlugin
     }
 
     // build settings
-    var altNamespace = (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault().Split('/').Last().Split('\\').Last().Split('.').First();
+    var altNamespace = (await GetValue<string[]>("input-file") ?? new[] { "" }).FirstOrDefault()?.Split('/').Last().Split('\\').Last().Split('.').First();
 
     new Settings
     {
@@ -66,7 +66,7 @@ public class Generator : NewPlugin
 
     // process
     var files = await ListInputs();
-    if (files.Length != 1)
+    if (files.Length != 2)
     {
       return false;
     }
@@ -75,7 +75,7 @@ public class Generator : NewPlugin
         (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") + 
         language +
         (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : ""));
-    var modelAsJson = (await ReadFile(files[0])).EnsureYamlIsJson();
+    var modelAsJson = (await ReadFile(files[1])).EnsureYamlIsJson();
 
     using (plugin.Activate())
     {

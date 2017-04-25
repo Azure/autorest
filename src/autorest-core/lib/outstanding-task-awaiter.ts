@@ -4,6 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 import { OutstandingTaskAlreadyCompletedException } from './exception';
 
+// TODO: simply collect promises...
+
 export class OutstandingTaskAwaiter {
   private outstandingTaskCount: number = 1;
   private awaiter: Promise<void>;

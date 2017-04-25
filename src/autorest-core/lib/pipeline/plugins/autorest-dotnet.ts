@@ -77,7 +77,7 @@ export class AutoRestDotNetPlugin extends EventEmitter {
         config.Raw);
 
     const outputScope = workingScope.CreateScope("output");
-    await this.CautiousProcess(language, key => (settings as any)[key], new QuickScope([codeModel]), outputScope, onMessage);
+    await this.CautiousProcess(language, key => (settings as any)[key], new QuickScope([swaggerDocument, codeModel]), outputScope, onMessage);
     return outputScope;
   }
 

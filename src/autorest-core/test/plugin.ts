@@ -7,6 +7,7 @@ require("../lib/polyfill.min.js");
 
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
+import { PumpMessagesToConsole } from './test-utility';
 
 import { RealFileSystem } from "../lib/file-system";
 import { AutoRest } from "../lib/autorest-core";
