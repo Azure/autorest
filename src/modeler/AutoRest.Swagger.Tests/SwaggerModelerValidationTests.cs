@@ -238,7 +238,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "property-names-casing.json"));
             messages.AssertOnlyValidationMessage(typeof(BodyPropertiesNamesCamelCase), 1);
-            messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 1);
+            messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 2);
         }
 
         [Fact]
