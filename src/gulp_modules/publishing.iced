@@ -139,7 +139,7 @@ task 'upload:github','', ->
   source "#{packages}/#{package_name}"
     .pipe ghrelease {
       token: github_apikey,   
-      owner: 'azure',
+      owner: github_feed,
       repo: 'autorest',
       tag: "v#{release_name}",       
       name: "#{release_name}", 

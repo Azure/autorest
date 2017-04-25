@@ -60,12 +60,12 @@ export class Release {
 }
 
 let hosts = [
-  "https://api.github.com/repos/azure/autorest",
+  "https://api.github.com/repos/$FEED/autorest",
   "https://autorest-feed.azureedge.net",
 ]
 
-function RestCall(url: string, i: number, resolve, reject) {
-  let stream = request.get(`${hosts[i]}${url}`, {
+function RestCall(url: string, i: number, feed: string, resolve, reject) {
+  let stream = request.get(`${hosts[i].replace("$FEED", feed)}${url}`, {
     strictSSL: true,
     timeout: 15000,
     headers: {
@@ -88,7 +88,7 @@ function RestCall(url: string, i: number, resolve, reject) {
     Console.Error(`Failed to access data at ${url}.`);
     if (i < hosts.length - 1) {
       Console.Error(`Retrying alternate url.`);
-      return RestCall(url, i + 1, resolve, reject)
+      return RestCall(url, i + 1, feed, resolve, reject)
     }
 
     Console.Error(`${err}`);
@@ -96,21 +96,21 @@ function RestCall(url: string, i: number, resolve, reject) {
   });
 }
 
-async function Rest(url: string, i: number = 0): Promise<any> {
+async function Rest(url: string, feed: string, i: number = 0): Promise<any> {
   return new Promise<string>((resolve, reject) => {
-    RestCall(url, i, resolve, reject);
+    RestCall(url, i, feed, resolve, reject);
   });
 }
 
 export class Github {
-  static async GetAssets(tag: string): Promise<IEnumerable<Asset>> {
-    var response = await Rest(`/releases/tags/${tag}`);
+  static async GetAssets(tag: string, feed: string = "azure"): Promise<IEnumerable<Asset>> {
+    var response = await Rest(`/releases/tags/${tag}`, feed);
     Console.Debug(inspect(response));
     return From(<Array<Asset>>response.assets);
   }
 
-  static async List(): Promise<IEnumerable<Release>> {
-    const response = await Rest(`/releases`);
+  static async List(feed: string = "azure"): Promise<IEnumerable<Release>> {
+    const response = await Rest(`/releases`, feed);
     Console.Debug(inspect(response));
     return From<Release>(response);
   }
