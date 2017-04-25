@@ -24,11 +24,20 @@ import { Exception } from "../exception";
 export type DataPromise = MultiPromise<DataHandleRead>;
 
 async function emitArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): Promise<void> {
+  config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
   if (config.IsOutputArtifactRequested(artifactType)) {
-    config.GeneratedFile.Dispatch({ type: artifactType, uri: uri, content: handle.ReadData() });
+    config.GeneratedFile.Dispatch({
+      type: artifactType,
+      uri: uri,
+      content: handle.ReadData()
+    });
   }
   if (config.IsOutputArtifactRequested(artifactType + ".map")) {
-    config.GeneratedFile.Dispatch({ type: artifactType + ".map", uri: uri + ".map", content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2) });
+    config.GeneratedFile.Dispatch({
+      type: artifactType + ".map",
+      uri: uri + ".map",
+      content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2)
+    });
   }
 }
 let emitCtr = 0;
@@ -73,7 +82,7 @@ function CreatePluginLoader(): PipelinePlugin {
     }
   };
 }
-function CreateTransformer(): PipelinePlugin {
+function CreatePluginTransformer(): PipelinePlugin {
   return async (config, input, working, output) => {
     const documentIdResolver: (key: string) => string = key => {
       const parts = key.split("/_");
@@ -88,7 +97,7 @@ function CreateTransformer(): PipelinePlugin {
     }
   };
 }
-function CreateComposer(): PipelinePlugin {
+function CreatePluginComposer(): PipelinePlugin {
   return async (config, input, working, output) => {
     const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
     const swagger = config.GetEntry("override-info") || swaggers.length !== 1
@@ -97,64 +106,59 @@ function CreateComposer(): PipelinePlugin {
     await (await output.Write("swagger-document")).Forward(swagger);
   };
 }
+function CreatePluginExternal(modulePath: string, ) {
+
+}
 
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   const cancellationToken = config.CancellationToken;
   const processMessage = config.Message.bind(config);
   const barrier = new OutstandingTaskAwaiter();
 
+  // TODO: enhance with custom declared plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     "loader": CreatePluginLoader(),
-    "transform": CreateTransformer(),
-    "compose": CreateComposer(),
+    "transform": CreatePluginTransformer(),
+    "compose": CreatePluginComposer(),
   };
 
 
   // to be replaced with scheduler
   let scopeCtr = 0;
-  const RunPluginHelper: (pluginName: string, inputScope: DataStoreViewReadonly) => Promise<DataStoreViewReadonly> =
+  const RunPlugin: (pluginName: string, inputScope: DataStoreViewReadonly) => Promise<DataStoreViewReadonly> =
     async (pluginName, inputScope) => {
-      const scope = config.DataStore.CreateScope(`${++scopeCtr}_${pluginName}`);
-      const scopeWorking = scope.CreateScope("working");
-      const scopeOutput = scope.CreateScope("output");
-      await plugins[pluginName](config,
-        inputScope,
-        scopeWorking,
-        scopeOutput);
-      return scopeOutput;
+      try {
+        config.Message({ Channel: Channel.Debug, Text: `${pluginName} - START` });
+
+        const scope = config.DataStore.CreateScope(`${++scopeCtr}_${pluginName}`);
+        const scopeWorking = scope.CreateScope("working");
+        const scopeOutput = scope.CreateScope("output");
+        await plugins[pluginName](config,
+          inputScope,
+          scopeWorking,
+          scopeOutput);
+
+        config.Message({ Channel: Channel.Debug, Text: `${pluginName} - END` });
+        return scopeOutput;
+      } catch (e) {
+        config.Message({ Channel: Channel.Fatal, Text: `${pluginName} - FAILED` });
+        throw e;
+      }
     };
 
+  const scopeLoadedSwaggers = await RunPlugin("loader", config.DataStore.GetReadThroughScopeFileSystem(fileSystem));
+  const scopeLoadedSwaggersTransformed = await RunPlugin("transform", scopeLoadedSwaggers);
+  const scopeComposedSwagger = await RunPlugin("compose", scopeLoadedSwaggersTransformed);
+  const scopeComposedSwaggerTransformed = await RunPlugin("transform", scopeComposedSwagger);
 
-  const manipulator = new Manipulator(config);
-
-  const scopeLoadedSwaggers = await RunPluginHelper("loader", config.DataStore.GetReadThroughScopeFileSystem(fileSystem));
-
-  config.Message({ Channel: Channel.Debug, Text: `Done loading Literate Swaggers` });
-
-  // TRANSFORM
-  const scopeLoadedSwaggersTransformed = await RunPluginHelper("transform", scopeLoadedSwaggers);
-
-  // compose Swaggers
-  const scopeComposedSwagger = await RunPluginHelper("compose", scopeLoadedSwaggersTransformed);
-
-  config.Message({ Channel: Channel.Debug, Text: `Done Composing Swaggers.` });
-
-  // TRANSFORM
-  const scopeComposedSwaggerTransformed = await RunPluginHelper("transform", scopeComposedSwagger);
   const swagger = await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]);
 
-  // emit resolved swagger
   {
     const relPath =
-      config.GetEntry("output-file") ||
-      (config.GetEntry("namespace") ? config.GetEntry("namespace") + ".json" : GetFilename([...config.InputFileUris][0]));
-    config.Message({ Channel: Channel.Debug, Text: `relPath: ${relPath}` });
-    const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
-    const hw = await config.DataStore.Write("normalized-swagger.json");
-    const h = await hw.WriteData(JSON.stringify(swagger.ReadObject<any>(), null, 2), IdentitySourceMapping(swagger.key, swagger.ReadYamlAst()), [swagger]);
-    await emitObjectArtifact(config, "swagger-document", outputFileUri, h);
+      config.GetEntry("output-file") || // TODO: overthink
+      (config.GetEntry("namespace") ? config.GetEntry("namespace") : GetFilename([...config.InputFileUris][0]).replace(/\.json$/, ""));
+    await emitObjectArtifact(config, "swagger-document", ResolveUri(config.OutputFolderUri, relPath), swagger);
   }
-  config.Message({ Channel: Channel.Debug, Text: `Done Emitting composed documents.` });
 
   // AMAR WORLD
   if (!config.DisableValidation && (config.GetEntry("model-validator") || config.GetEntry("semantic-validator"))) {
@@ -169,7 +173,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         const scopeWork = config.DataStore.CreateScope(`amar_${pluginName}`);
         const result = await validationPlugin.Process(
           pluginName, _ => null,
-          new QuickScope([swagger]),
+          scopeComposedSwaggerTransformed,
           scopeWork.CreateScope("output"),
           processMessage,
           cancellationToken);

@@ -37,7 +37,9 @@ output-folder: Artifacts
 To support tools unable to process multiple OpenAPI definitions or definitions with external references (`$ref: "<URI to another OpenAPI definition>#/definitions/SomeModel"`), AutoRest allows exporting a single, fully resolved OpenAPI definition without any external references that tools should be able to consume.
 
 ``` yaml
-output-artifact: swagger-document
+output-artifact: 
+  - swagger-document.json
+  - swagger-document.yaml
 ```
 
 ### Source maps
@@ -46,5 +48,7 @@ AutoRest tries to create source maps for output artifacts. These will relate the
 For example, AutoRest uses the source map internally in order to relate validation messages back to the original files.
 
 ``` yaml
-output-artifact: swagger-document.map
+output-artifact:
+  - swagger-document.json.map
+  - swagger-document.yaml.map
 ```

@@ -14,25 +14,25 @@ using System;
 
 public class AzureValidator : NewPlugin
 {
-  public AzureValidator(Connection connection, string sessionId) : base(connection, sessionId)
-  { }
+    public AzureValidator(Connection connection, string sessionId) : base(connection, sessionId)
+    { }
 
-  private readonly Regex resPathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)/((?<resourceType>[^{/]+)/)?");
+    private readonly Regex resPathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)/((?<resourceType>[^{/]+)/)?");
 
-  private void LogValidationMessage(ValidationMessage validationMessage)
-  {
-    string path = validationMessage.Path.ObjectPath.Path
-        .OfType<ObjectPathPartProperty>()
-        .Select(p => p.Property)
-        .SkipWhile(p => p != "paths")
-        .Skip(1)
-        .FirstOrDefault();
-    var pathComponents = resPathPattern.Match(path ?? "");
-    var pathComponentProviderNamespace = pathComponents.Groups["providerNamespace"];
-    var pathComponentResourceType = pathComponents.Groups["resourceType"];
+    private void LogValidationMessage(ValidationMessage validationMessage)
+    {
+        string path = validationMessage.Path.ObjectPath.Path
+            .OfType<ObjectPathPartProperty>()
+            .Select(p => p.Property)
+            .SkipWhile(p => p != "paths")
+            .Skip(1)
+            .FirstOrDefault();
+        var pathComponents = resPathPattern.Match(path ?? "");
+        var pathComponentProviderNamespace = pathComponents.Groups["providerNamespace"];
+        var pathComponentResourceType = pathComponents.Groups["resourceType"];
 
-    // create the raw message
-    var rawMessageDetails = new Dictionary<string, string>() {
+        // create the raw message
+        var rawMessageDetails = new Dictionary<string, string>() {
         { "type", validationMessage.Severity.ToString() },
         { "code", validationMessage.Rule.GetType().Name },
         { "message", validationMessage.Message },
@@ -42,20 +42,20 @@ public class AzureValidator : NewPlugin
         { "resourceType", pathComponentResourceType.Success ? pathComponentResourceType.Value : null }
     };
 
-    // post it to the pipe
-    Message(new Message
-    {
-        Text = validationMessage.Message,
-        Channel = validationMessage.Severity.ToString().ToLowerInvariant(),
-        Details = rawMessageDetails,
-        Key = new string[] 
+        // post it to the pipe
+        Message(new Message
         {
+            Text = validationMessage.Message,
+            Channel = validationMessage.Severity.ToString().ToLowerInvariant(),
+            Details = rawMessageDetails,
+            Key = new string[]
+            {
             validationMessage.Rule.GetType().Name,
             validationMessage.Rule.Id,
             validationMessage.Rule.ValidationCategory.ToString()
-        },
-        Source = new[]
-        {
+            },
+            Source = new[]
+            {
             new SourceLocation
             {
                 document = validationMessage.Path.FilePath.ToString(),
@@ -65,28 +65,28 @@ public class AzureValidator : NewPlugin
                 }
             }
         }
-    }, new object[0]);
-  }
-
-  protected override async Task<bool> ProcessInternal()
-  {
-    var files = await ListInputs();
-    if (files.Length != 1)
-    {
-      return false;
+        }, new object[0]);
     }
 
-    var content = await ReadFile(files[0]);
-    var fs = new MemoryFileSystem();
-    fs.WriteAllText(files[0], content);
-
-    var serviceDefinition = SwaggerParser.Load(files[0], fs);
-    var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-    foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition))
+    protected override async Task<bool> ProcessInternal()
     {
-      LogValidationMessage(validationEx);
-    }
+        var files = await ListInputs();
+        if (files.Length != 1)
+        {
+            return false;
+        }
 
-    return true;
-  }
+        var content = await ReadFile(files[0]);
+        var fs = new MemoryFileSystem();
+        fs.WriteAllText(files[0], content);
+
+        var serviceDefinition = SwaggerParser.Load(files[0], fs);
+        var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+        foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition))
+        {
+            LogValidationMessage(validationEx);
+        }
+
+        return true;
+    }
 }
