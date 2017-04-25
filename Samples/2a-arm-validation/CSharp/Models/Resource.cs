@@ -2,7 +2,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace storage.Models
+namespace Storage.Models
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

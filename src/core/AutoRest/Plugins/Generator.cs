@@ -42,7 +42,7 @@ public class Generator : NewPlugin
 
         new Settings
         {
-            Namespace = await GetValue("namespace") ?? altNamespace,
+            Namespace = await GetValue("namespace"),
             ClientName = await GetValue("override-client-name"),
             PayloadFlatteningThreshold = await GetValue<int?>("payload-flattening-threshold") ?? 0,
             AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
@@ -79,7 +79,7 @@ public class Generator : NewPlugin
 
         using (plugin.Activate())
         {
-            Settings.Instance.Namespace = CodeNamer.Instance.GetNamespaceName(Settings.Instance.Namespace);
+            Settings.Instance.Namespace = Settings.Instance.Namespace ?? CodeNamer.Instance.GetNamespaceName(altNamespace);
             var codeModel = plugin.Serializer.Load(modelAsJson);
             codeModel = plugin.Transformer.TransformCodeModel(codeModel);
             plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();

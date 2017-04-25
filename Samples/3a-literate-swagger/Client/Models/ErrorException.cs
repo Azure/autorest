@@ -2,7 +2,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace swagger.Models
+namespace Swagger.Models
 {
     using Microsoft.Rest;
 

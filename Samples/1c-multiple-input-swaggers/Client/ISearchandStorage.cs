@@ -2,7 +2,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace searchservice
+namespace Searchservice
 {
     using Models;
     using Newtonsoft.Json;
