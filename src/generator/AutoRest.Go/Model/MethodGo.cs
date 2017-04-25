@@ -159,8 +159,6 @@ namespace AutoRest.Go.Model
       }
     }
 
-    public string NextMethodName => $"{Name}NextResults";
-
     public string ListCompleteMethodName => $"{Name}Complete";
 
     public string PreparerMethodName => $"{Name}Preparer";

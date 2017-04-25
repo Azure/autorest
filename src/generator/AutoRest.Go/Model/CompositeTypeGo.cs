@@ -190,6 +190,17 @@ namespace AutoRest.Go.Model
 
     public IModelType BaseType { get; private set; }
 
+    public string PackageName;
+    public string AutorestError(string phase, string response = null, string parameter = null)
+    {
+      return !string.IsNullOrEmpty(parameter)
+                  ? string.Format("autorest.NewErrorWithError(err, \"{0}\", \"{1}\", nil , \"{2}\'{3}\'\")", PackageName, Name, phase, parameter)
+                  : string.IsNullOrEmpty(response)
+                           ? string.Format("autorest.NewErrorWithError(err, \"{0}\", \"{1}\", nil , \"{2}\")", PackageName, Name, phase)
+                           : string.Format("autorest.NewErrorWithError(err, \"{0}\", \"{1}\", {2}, \"{3}\")", PackageName, Name, response, phase);
+
+    }
+
     public IModelType GetElementType(IModelType type)
     {
       if (type is SequenceTypeGo)
@@ -207,8 +218,6 @@ namespace AutoRest.Go.Model
         return type;
       }
     }
-
-    public string PreparerMethodName => $"{Name}Preparer";
 
     public void SetName(string name)
     {

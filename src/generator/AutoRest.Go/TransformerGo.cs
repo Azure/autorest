@@ -176,6 +176,7 @@ namespace AutoRest.Go
             {
               mtm.NextLink = CodeNamerGo.PascalCaseWithoutChar(cmg.PagedTypes[mtm], '.');
               mtm.PreparerNeeded = cmg.NextMethodUndefined.Contains(mtm);
+              mtm.PackageName = cmg.Namespace;
             }
           });
     }

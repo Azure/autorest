@@ -166,38 +166,6 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
 @if (Model.IsPageable)
 {
 @:@EmptyLine
-
-if (!Model.NextAlreadyDefined)
-{
-@:// @(Model.NextMethodName) retrieves the next set of results, if any.
-@:func (client @(Model.Owner)) @(Model.NextMethodName)(lastResults @(Model.ReturnValue().Body.Name)) (@Model.MethodReturnSignature) {
-    @:req, err := lastResults.@((Model.ReturnValue().Body as CompositeTypeGo).PreparerMethodName)()
-    @:if err != nil {
-        @:return result, @(Model.AutorestError("Failure preparing next results request"))
-    @:}
-    @:if req == nil {
-        @:return
-    @:}
-
-    @:@EmptyLine
-    @:resp, err := client.@(Model.SenderMethodName)(req)
-    @:if err != nil {
-        @:@(Model.Response)
-        @:return result, @(Model.AutorestError("Failure sending next results request", "resp"))
-    @:}
-
-    @:@EmptyLine
-    @:result, err = client.@(Model.ResponderMethodName)(resp)
-    @:if err != nil {
-        @:err = @(Model.AutorestError("Failure responding to next results request", "resp"))
-    @:}
-
-    @EmptyLine
-    @:return
-@:}
-}
-
-@:@EmptyLine
 @:// @(Model.ListCompleteMethodName) gets all elements from the list without paging.
 @:func (client @(Model.Owner)) @(Model.ListCompleteMethodName) @(Model.MethodParametersSignatureComplete) @(Model.MethodReturnSignatureComplete) {
     @:respSlice := @((Model.ListElement.ModelType as SequenceTypeGo).Name){}
@@ -215,7 +183,7 @@ if (!Model.NextAlreadyDefined)
             @:if list.@(Model.NextLink()) != nil {
             if (!Model.NextAlreadyDefined)
             {
-                @:list, err = client.@(Model.NextMethodName)(list)
+                @:list, err = list.Next()
             }
             else
             {
