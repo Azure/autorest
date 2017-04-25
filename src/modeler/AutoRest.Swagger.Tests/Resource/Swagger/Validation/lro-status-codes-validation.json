@@ -1,0 +1,78 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Operations schemes has non-http/https type",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "Https"
+  ],
+  "basePath": "/",
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}": {
+      "put": {
+        "operationId": "Redis_Create",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "create params",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  },
+  "definitions": {
+    "OperationsListResult": {
+      "description": "List of operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "the operation"
+          },
+          "description": "List of Operations"
+        }
+      }
+    },
+    "Model": {
+      "properties": {
+        "prop1": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
