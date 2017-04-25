@@ -73,8 +73,12 @@ function CreatePluginLoader(): PipelinePlugin {
     }
   };
 }
-function CreateTransformer(documentIdResolver: (key: string) => string): PipelinePlugin {
+function CreateTransformer(): PipelinePlugin {
   return async (config, input, working, output) => {
+    const documentIdResolver: (key: string) => string = key => {
+      const parts = key.split("/_");
+      return parts.length === 1 ? parts[0] : decodeURIComponent(parts[parts.length - 1]);
+    };
     const manipulator = new Manipulator(config);
     const files = await input.Enum();
     for (const file of files) {
@@ -86,7 +90,11 @@ function CreateTransformer(documentIdResolver: (key: string) => string): Pipelin
 }
 function CreateComposer(): PipelinePlugin {
   return async (config, input, working, output) => {
-
+    const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
+    const swagger = config.GetEntry("override-info") || swaggers.length !== 1
+      ? await ComposeSwaggers(config, config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
+      : swaggers[0];
+    await (await output.Write("swagger-document")).Forward(swagger);
   };
 }
 
@@ -97,40 +105,43 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   const plugins: { [name: string]: PipelinePlugin } = {
     "loader": CreatePluginLoader(),
-    "transform1": CreateTransformer(key => decodeURIComponent(key.split("/_").reverse()[0]))
+    "transform": CreateTransformer(),
+    "compose": CreateComposer(),
   };
+
+
+  // to be replaced with scheduler
+  let scopeCtr = 0;
+  const RunPluginHelper: (pluginName: string, inputScope: DataStoreViewReadonly) => Promise<DataStoreViewReadonly> =
+    async (pluginName, inputScope) => {
+      const scope = config.DataStore.CreateScope(`${++scopeCtr}_${pluginName}`);
+      const scopeWorking = scope.CreateScope("working");
+      const scopeOutput = scope.CreateScope("output");
+      await plugins[pluginName](config,
+        inputScope,
+        scopeWorking,
+        scopeOutput);
+      return scopeOutput;
+    };
+
 
   const manipulator = new Manipulator(config);
 
-  const swaggersScope = config.DataStore.CreateScope("loader");
-  const swaggersScopeOutput = swaggersScope.CreateScope("output");
-  await plugins["loader"](config,
-    config.DataStore.GetReadThroughScopeFileSystem(fileSystem),
-    swaggersScope.CreateScope("working"),
-    swaggersScopeOutput);
+  const scopeLoadedSwaggers = await RunPluginHelper("loader", config.DataStore.GetReadThroughScopeFileSystem(fileSystem));
 
   config.Message({ Channel: Channel.Debug, Text: `Done loading Literate Swaggers` });
 
   // TRANSFORM
-  const transform1Scope = config.DataStore.CreateScope("transform1");
-  const transform1ScopeOutput = transform1Scope.CreateScope("output");
-  await plugins["transform1"](config,
-    swaggersScopeOutput,
-    transform1Scope.CreateScope("working"),
-    transform1ScopeOutput);
-
-  const swaggers = await Promise.all((await transform1ScopeOutput.Enum()).map(x => transform1ScopeOutput.ReadStrict(x)));
+  const scopeLoadedSwaggersTransformed = await RunPluginHelper("transform", scopeLoadedSwaggers);
 
   // compose Swaggers
-  let swagger = config.GetEntry("override-info") || swaggers.length !== 1
-    ? await ComposeSwaggers(config, config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
-    : swaggers[0];
-  const rawSwagger = swagger.ReadObject<any>();
+  const scopeComposedSwagger = await RunPluginHelper("compose", scopeLoadedSwaggersTransformed);
 
   config.Message({ Channel: Channel.Debug, Text: `Done Composing Swaggers.` });
 
   // TRANSFORM
-  swagger = await manipulator.Process(swagger, config.DataStore.CreateScope("composite-transform"), "/swagger-document.yaml");
+  const scopeComposedSwaggerTransformed = await RunPluginHelper("transform", scopeComposedSwagger);
+  const swagger = await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]);
 
   // emit resolved swagger
   {
@@ -140,7 +151,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     config.Message({ Channel: Channel.Debug, Text: `relPath: ${relPath}` });
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     const hw = await config.DataStore.Write("normalized-swagger.json");
-    const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, swagger.ReadYamlAst()), [swagger]);
+    const h = await hw.WriteData(JSON.stringify(swagger.ReadObject<any>(), null, 2), IdentitySourceMapping(swagger.key, swagger.ReadYamlAst()), [swagger]);
     await emitObjectArtifact(config, "swagger-document", outputFileUri, h);
   }
   config.Message({ Channel: Channel.Debug, Text: `Done Emitting composed documents.` });
