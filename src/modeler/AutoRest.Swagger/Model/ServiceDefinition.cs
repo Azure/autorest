@@ -82,17 +82,18 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [Rule(typeof(UniqueResourcePaths))]
         [Rule(typeof(ListOperationNamingWarning))]
-        [Rule(typeof(ListByOperationsValidation))]
         [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
         [Rule(typeof(PutGetPatchResponseValidation))]
         [Rule(typeof(OperationsAPIImplementationValidation))]
         [Rule(typeof(ProvidersPathValidation))]
         [Rule(typeof(PutResponseResourceValidation))]
-        [CollectionRule(typeof(BodyTopLevelProperties))]
         [CollectionRule(typeof(HttpVerbValidation))]
         [CollectionRule(typeof(DeleteMustNotHaveRequestBody))]
         [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
+        [Rule(typeof(PutRequestResponseValidation))]
         [Rule(typeof(TrackedResourceListByImmediateParent))]
+        [Rule(typeof(XmsExamplesProvidedValidation))]
+        [Rule(typeof(LROStatusCodesValidation))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
         /// <summary>
@@ -104,6 +105,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(ProvidersPathValidation))]
         [CollectionRule(typeof(XmsPathsMustOverloadPaths))]
         [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
+        [Rule(typeof(XmsExamplesProvidedValidation))]
         public Dictionary<string, Dictionary<string, Operation>> CustomPaths { get; set; }
 
         /// <summary>
@@ -123,6 +125,8 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(TrackedResourcePatchOperationValidation))]
         [Rule(typeof(DescriptionMissing))]
         [Rule(typeof(PatchBodyParametersSchemaValidation))]
+        [Rule(typeof(BodyTopLevelProperties))]
+        [Rule(typeof(XmsEnumValidation))]
         [CollectionRule(typeof(RequiredReadOnlyPropertiesValidation))]
         public Dictionary<string, Schema> Definitions { get; set; }
 

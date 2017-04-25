@@ -123,7 +123,7 @@ namespace AutoRest.Swagger.Tests
             // ignore ServiceDefinitionParameters validation rule since it overlaps with this
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operations-invalid-parameters.json"))
                             .Where(msg => msg.Rule.GetType().Name != "ServiceDefinitionParameters");
-            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 2);
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 1);
         }
 
         [Fact]
@@ -213,13 +213,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void ListByOperationsValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "listby-operations.json"));
-            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 3);
-        }
-
-        [Fact]
         public void ArmResourcePropertiesBagValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "arm-resource-properties-bag.json"));
@@ -237,7 +230,7 @@ namespace AutoRest.Swagger.Tests
         public void BodyTopLevelPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-top-level-properties.json"));
-            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 2);
+            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 1);
         }
 
         [Fact]
@@ -245,7 +238,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "property-names-casing.json"));
             messages.AssertOnlyValidationMessage(typeof(BodyPropertiesNamesCamelCase), 1);
-            messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 1);
+            messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 2);
         }
 
         [Fact]
@@ -580,17 +573,54 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void XmsEnumExtensionValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "x-ms-enum-absent.json"));
+            messages.AssertOnlyValidationMessage(typeof(XmsEnumValidation), 1);
+        }
+
+        [Fact]
+        public void XmsExamplesProvidedValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "xms-examples-absent.json"));
+            messages.AssertOnlyValidationMessage(typeof(XmsExamplesProvidedValidation), 2);
+        }
+
+        [Fact]
         public void PutResponseResourceValidationTest()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-response-resource-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(PutResponseResourceValidation), 1);
         }
+
+        [Fact]
+        public void LROStatusCodesValidationTest()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "lro-status-codes-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(LROStatusCodesValidation), 2);
+        }
+
         [Fact]
         public void EmptyParameterNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-parameter-name.json"));
             messages.AssertOnlyValidationMessage(typeof(ParameterNameValidation), 2);
         }
+
+        [Fact]
+        public void OperationIdNounConflictingModelNameValidationTest()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operationid-noun-conflicting-model.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationIdNounConflictingModelNames), 1);
+        }
+
+        [Fact]
+        public void PutRequestResponseBodySchemaValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-request-response-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(PutRequestResponseValidation), 1);
+        }
+
     }
 
     #region Positive tests
@@ -665,16 +695,6 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "tracked-resource-get-valid-operation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourceGetOperationValidation), 0);
-        }
-
-        /// <summary>
-        /// Verifies that list by operations (operations that are named as *_listby*) are correctly named
-        /// </summary>
-        [Fact]
-        public void ListByOperationsCorrectlyNamed()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "listby-operations-valid-naming.json"));
-            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 0);
         }
 
         /// <summary>
@@ -755,6 +775,17 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
         }
+
+        /// <summary>
+        /// Verifies resource model readonly properties
+        /// </summary>
+        [Fact]
+        public void ValidResourceModelReadOnlyProperties()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-readonly-props.json"));
+            messages.AssertOnlyValidationMessage(typeof(ResourceModelValidation), 0);
+        }
+        
     }
 
     #endregion

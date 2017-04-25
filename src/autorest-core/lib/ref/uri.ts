@@ -54,9 +54,16 @@ export async function ExistsUri(uri: string): Promise<boolean> {
 /***********************
  * URI manipulation
  ***********************/
-import { isAbsolute, dirname } from "path";
+import { dirname } from "path";
 const URI = require("urijs");
 const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
+
+// remake of path.isAbsolute... because it's platform dependent:
+// Windows: C:\\... -> true    /... -> true
+// Linux:   C:\\... -> false   /... -> true
+function isAbsolute(path: string): boolean {
+  return !!path.match(/^([a-zA-Z]:)?(\/|\\)/);
+}
 
 /**
  * Create a 'file:///' URI from given absolute path.
@@ -64,14 +71,17 @@ const fileUri: (path: string, options: { resolve: boolean }) => string = require
  * - "C:\swagger\storage.yaml" -> "file:///C:/swagger/storage.yaml"
  * - "/input/swagger.yaml" -> "file:///input/swagger.yaml"
  */
-export function CreateFileUri(absolutePath: string): string {
+export function CreateFileOrFolderUri(absolutePath: string): string {
   if (!isAbsolute(absolutePath)) {
     throw new Error("Can only create file URIs from absolute paths.");
   }
-  return EnsureIsFileUri(fileUri(absolutePath, { resolve: false }));
+  return fileUri(absolutePath, { resolve: false });
+}
+export function CreateFileUri(absolutePath: string): string {
+  return EnsureIsFileUri(CreateFileOrFolderUri(absolutePath));
 }
 export function CreateFolderUri(absolutePath: string): string {
-  return EnsureIsFolderUri(CreateFileUri(absolutePath));
+  return EnsureIsFolderUri(CreateFileOrFolderUri(absolutePath));
 }
 
 export function EnsureIsFolderUri(uri: string) {
@@ -100,7 +110,7 @@ export function GetFilenameWithoutExtension(uri: string) {
  */
 export function ResolveUri(baseUri: string, pathOrUri: string): string {
   if (isAbsolute(pathOrUri)) {
-    return CreateFileUri(pathOrUri);
+    return CreateFileOrFolderUri(pathOrUri);
   }
   pathOrUri = pathOrUri.replace(/\\/g, "/");
   if (!baseUri) {
@@ -197,19 +207,4 @@ async function WriteStringInternal(fileName: string, data: string): Promise<void
  */
 export function WriteString(fileUri: string, data: string): Promise<void> {
   return WriteStringInternal(FileUriToLocalPath(fileUri), data);
-}
-
-
-
-
-
-
-
-/// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
-async function* yieldFromMap(): AsyncIterable<string> {
-  yield* ["hello", "world"];
-};
-async function foo() {
-  for await (const each of yieldFromMap()) {
-  }
 }

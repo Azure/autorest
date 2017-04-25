@@ -1,0 +1,3 @@
+ERROR: Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found
+    - /Samples/test/error-behavior/openapi-yaml-bad-file-reference/tiny.yaml:23:10
+Error occurred. Exiting.

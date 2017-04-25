@@ -2,24 +2,24 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
-import { IndexToPosition } from '../parsing/text-utility';
+import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
+import { IndexToPosition } from "../parsing/text-utility";
 import { ConfigurationView, MessageEmitter } from "../configuration";
-import { Message, Channel } from "../message"
+import { Message, Channel } from "../message";
 import { From } from "../ref/linq";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import * as yaml from "../ref/yaml";
-import { Mapping, Mappings } from '../ref/source-map';
+import { Mapping, Mappings } from "../ref/source-map";
 import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
 
-// TODO: may want ASTy merge! (keeping circular structure and such?)
+// // TODO: may want ASTy merge! (supporting circular structure and such?)
 function Merge(a: any, b: any, path: JsonPath = []): any {
   if (a === null || b === null) {
     throw new Error(`Argument cannot be null ('${stringify(path)}')`);
   }
 
   // trivial case
-  if (yaml.Stringify(a) === yaml.Stringify(b)) {
+  if (a === b || JSON.stringify(a) === JSON.stringify(b)) {
     return a;
   }
 
@@ -73,7 +73,7 @@ export function MergeOverwrite(a: any, b: any, concatListPathFilter: (path: Json
   // scalars/arrays involved
   if (typeof a !== "object" || a instanceof Array ||
     typeof b !== "object" || b instanceof Array) {
-    if (!concatListPathFilter(path)) {
+    if (!(a instanceof Array) && !(b instanceof Array) && !concatListPathFilter(path)) {
       return a;
     }
     return a instanceof Array
@@ -115,21 +115,21 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
     result.push({
       generated: { path: descendantPath },
       original: { path: descendantPath },
-      name: stringify(descendantPath),
+      name: JSON.stringify(descendantPath),
       source: sourceYamlFileName
     });
   }
   return result;
 }
 
-export async function MergeYamls(config: ConfigurationView | MessageEmitter, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
+export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
   const mappings: Mappings = [];
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = yamlInputHandle.ReadData();
     resultObject = Merge(resultObject, yaml.Parse(rawYaml, (message, index) => {
       if (config) {
-        config.Message.Dispatch({
+        config.Message({
           Channel: Channel.Error,
           Text: message,
           Source: [{ document: yamlInputHandle.key, Position: IndexToPosition(yamlInputHandle, index) }]
@@ -139,6 +139,5 @@ export async function MergeYamls(config: ConfigurationView | MessageEmitter, yam
     mappings.push(...IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
   }
 
-  const resultObjectRaw = yaml.Stringify(resultObject);
-  return await yamlOutputHandle.WriteData(resultObjectRaw, mappings, yamlInputHandles);
+  return yamlOutputHandle.WriteObject(resultObject, mappings, yamlInputHandles);
 }

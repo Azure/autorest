@@ -1,2 +1,2 @@
-requests==2.10.0
-msrestazure==0.4.7
+requests>=2.11.0
+msrestazure>=0.4.7

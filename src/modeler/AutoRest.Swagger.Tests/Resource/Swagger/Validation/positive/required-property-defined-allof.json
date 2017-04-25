@@ -50,6 +50,11 @@
               "$ref": "#/definitions/Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get operations": {
+            
+          }
         }
       }
     },
@@ -64,6 +69,11 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Post Foo": {
+
           }
         }
       }

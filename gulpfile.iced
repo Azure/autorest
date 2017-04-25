@@ -19,10 +19,10 @@ Import
   packages: "#{basefolder}/packages"
   release_name: if argv.nightly then "#{version}-#{today}-2300-nightly"              else if argv.preview then "#{version}-#{now}-preview"              else "#{version}"
   package_name: if argv.nightly then "autorest-#{version}-#{today}-2300-nightly.zip" else if argv.preview then "autorest-#{version}-#{now}-preview.zip" else "autorest-#{version}.zip"
-  autorest: (args,done) ->
+  autorest: (args,done,ignoreexitcode) ->
     # Run AutoRest from the original current directory.
     echo info "AutoRest #{args.join(' ')}"
-    execute "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true}, (code,stdout,stderr) ->
+    execute "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
       return done(code,stdout,stderr)
 
   # which projects to care about
@@ -96,15 +96,22 @@ task "list","",->
   generatedFiles()
     .pipe showFiles()
 
-task 'install-binaries', '', (done)->
+task 'install/binaries', '', (done)->
   mkdir "-p", "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private"
   source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**"
     .pipe destination "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private" 
 
+task 'install/bootstrapper', 'Build and install the bootstrapper into the global node.js', (done) ->
+  run [ 'build/typescript' ],
+    ->
+      execute "npm version patch", {cwd:"#{basefolder}/src/autorest"}, (c,o,e) -> 
+        execute "npm install -g .", {cwd:"#{basefolder}/src/autorest"}, (c,o,e) -> 
+          done()
+
 task 'install', 'build and install the dev version of autorest',(done)->
   run [ 'build/typescript', 'build/dotnet/binaries' ],
-    'install-node-files',
-    'install-binaries',
+    'install/node-files',
+    'install/binaries',
     -> done()
 
 task 'autorest', 'Runs AutoRest', (done)->

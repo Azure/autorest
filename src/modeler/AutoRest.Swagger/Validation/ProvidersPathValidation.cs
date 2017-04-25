@@ -44,7 +44,7 @@ namespace AutoRest.Swagger.Validation
                 typeValueTokens = typeValueTokens.Where(token => !(token.Contains("{") && token.Contains("}")));
                 if (typeValueTokens.Any())
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, string.Join(", ", typeValueTokens), pathObj.Key);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(pathObj.Key)), this, string.Join(", ", typeValueTokens));
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "Type values \"{0}\" in path \"{1}\" have default value(s), please consider parameterizing them";
+        public override string MessageTemplate => "Type values \"{0}\" have default value(s), please consider parameterizing them";
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)

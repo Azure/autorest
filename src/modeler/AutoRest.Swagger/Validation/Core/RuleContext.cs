@@ -109,7 +109,7 @@ namespace AutoRest.Swagger.Validation.Core
             Parent == null
                 ? ObjectPath.Empty
                 : Key == null
-                    ? Parent.Path.AppendIndex(Index.Value)
+                    ? (Index.Value == -1 ? Parent.Path : Parent.Path.AppendIndex(Index.Value))
                     : Parent.Path.AppendProperty(Key);
 
         public Uri File { get; private set;  }

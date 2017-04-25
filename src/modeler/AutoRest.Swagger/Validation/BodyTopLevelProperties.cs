@@ -11,12 +11,12 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class BodyTopLevelProperties : TypedRule<Dictionary<string, Operation>>
+    public class BodyTopLevelProperties : TypedRule<Dictionary<string, Schema>>
     {
 
-        private readonly Regex resourceRefRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
-        private readonly string[] allowedTopLevelProperties = { "name", "type", "id", "location", "properties", "tags", "plan", "sku", "etag",
-                                                                "managedBy", "identity", "kind"};
+        private static readonly IEnumerable<string> AllowedTopLevelProperties = new List<string>()
+            { "name", "type", "id", "location", "properties", "tags", "plan", "sku", "etag",
+              "managedBy", "identity", "kind"};
 
         /// <summary>
         /// Id of the Rule.
@@ -28,62 +28,25 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
 
+
         /// <summary>
         /// This rule passes if the body parameter contains top level properties only from the allowed set: name, type,
         /// id, location, properties, tags, plan, sku, etag, managedBy, identity
         /// </summary>
-        /// <param name="paths"></param>
-        /// <returns></returns>
-        public override bool IsValid( Dictionary<string, Operation> path, RuleContext context, out object[] formatParameters)
+        /// <param name="definitions">The model definitions</param>
+        /// <param name="context">The context object</param>
+        /// <returns>validation messages</returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            List<string> notAllowedProperties = new List<string>();
-            foreach (string operation in path.Keys)
+            var resModels = context.ResourceModels;
+            var violatingModels = resModels.Where(resModel => definitions[resModel].Properties?.Keys.Except(AllowedTopLevelProperties).Any() == true);
+            foreach (var violatingModel in violatingModels)
             {
-                if ((operation.ToLower().Equals("get") ||
-                    operation.ToLower().Equals("put") ||
-                    operation.ToLower().Equals("patch")) && path[operation]?.Parameters != null)
-                {
-                    foreach (SwaggerParameter param in path[operation].Parameters)
-                    {
-                        if (param.In == ParameterLocation.Body)
-                        {
-                            if (param?.Schema?.Reference != null)
-                            {
-                                string defName = Extensions.StripDefinitionPath(param.Schema.Reference);
-                                var definition = ((ServiceDefinition)context.Root).Definitions[defName];
-                                if (definition?.AllOf != null && definition.Properties != null &&
-                                    definition.AllOf.Select(s => s.Reference).Where(reference => resourceRefRegEx.IsMatch(reference)) != null)
-                                {
-                                    //Model is allOf Resource
-                                    foreach (KeyValuePair<string, Schema> prop in definition.Properties)
-                                    {
-                                        if (!allowedTopLevelProperties.Contains(prop.Key.ToLower()))
-                                        {
-                                            notAllowedProperties.Add(defName + "/" + prop.Key);
-                                        }
-                                    }
-                                }    
-                            }
-                            if (param?.Schema?.AllOf != null && param.Schema.Properties != null &&
-                                param.Schema.AllOf.Select(s => s.Reference).Where(reference => resourceRefRegEx.IsMatch(reference)) != null)
-                            {
-                                //Model is allOf Resource
-                                foreach (KeyValuePair<string, Schema> prop in param.Schema.Properties)
-                                {
-                                    if (!allowedTopLevelProperties.Contains(prop.Key.ToLower()))
-                                    {
-                                        notAllowedProperties.Add(path[operation].OperationId + ":" + prop.Key);
-                                    }
-                                }
-                            }
-                          }  
-                        }
-                    }
-                }
-            formatParameters = new[] { string.Join(", ", notAllowedProperties.ToArray()) };
-            return (notAllowedProperties.Count() == 0);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingModel).AppendProperty("properties")), this, 
+                    violatingModel, string.Join(",", definitions[violatingModel].Properties.Keys.Except(AllowedTopLevelProperties)));
+            }
         }
-
+        
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>

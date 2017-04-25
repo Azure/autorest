@@ -13,7 +13,7 @@ import { Message, Channel } from "../lib/message";
 
   @test @timeout(60000) async "suppression"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
-    autoRest.Message.Subscribe((_, m) => m.Channel == Channel.Fatal ? console.error(m.Text) : "");
+    autoRest.Message.Subscribe((_, m) => m.Channel === Channel.Fatal ? console.error(m.Text) : "");
 
     // reference run
     await autoRest.ResetConfiguration();
@@ -33,7 +33,7 @@ import { Message, Channel } from "../lib/message";
     // muted run
     await autoRest.ResetConfiguration();
     await autoRest.AddConfiguration({ "azure-arm": true });
-    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"] } });
+    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing", "PutRequestResponseValidation"] } });
     {
       const messages: Message[] = [];
       const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
@@ -110,21 +110,21 @@ import { Message, Channel } from "../lib/message";
     const codeModelRef = await GenerateCodeModel({});
 
     // set descriptions in resolved swagger
-    const codeModelSetDescr1 = await GenerateCodeModel({ directive: { from: "composite", where: "$..description", set: "cowbell" } });
+    const codeModelSetDescr1 = await GenerateCodeModel({ directive: { from: "swagger-document", where: "$..description", set: "cowbell" } });
 
     // set descriptions in code model
-    const codeModelSetDescr2 = await GenerateCodeModel({ directive: { from: "model", where: ["$..description", "$..documentation", "$..['#documentation']"], set: "cowbell" } });
+    const codeModelSetDescr2 = await GenerateCodeModel({ directive: { from: "code-model-v1", where: ["$..description", "$..documentation", "$..['#documentation']"], set: "cowbell" } });
 
     // transform descriptions in resolved swagger
-    const codeModelSetDescr3 = await GenerateCodeModel({ directive: { from: "composite", where: "$..description", transform: "'cowbell'" } });
+    const codeModelSetDescr3 = await GenerateCodeModel({ directive: { from: "swagger-document", where: "$..description", transform: "return 'cowbell'" } });
 
-    assert.ok(codeModelRef.indexOf("description: cowbell") === -1);
-    assert.ok(codeModelSetDescr1.indexOf("description: cowbell") !== -1);
+    assert.ok(codeModelRef.indexOf("description: cowbell") === -1 && codeModelRef.indexOf("\"description\": \"cowbell\"") === -1);
+    assert.ok(codeModelSetDescr1.indexOf("description: cowbell") !== -1 || codeModelSetDescr1.indexOf("\"description\": \"cowbell\"") !== -1);
     assert.strictEqual(codeModelSetDescr1, codeModelSetDescr2);
     assert.strictEqual(codeModelSetDescr1, codeModelSetDescr3);
 
     // transform descriptions in resolved swagger to uppercase
-    const codeModelSetDescr4 = await GenerateCodeModel({ directive: { from: "composite", where: "$..description", transform: "$.toUpperCase()" } });
+    const codeModelSetDescr4 = await GenerateCodeModel({ directive: { from: "swagger-document", where: "$..description", transform: "return $.toUpperCase()" } });
     assert.notEqual(codeModelRef, codeModelSetDescr4);
     assert.strictEqual(codeModelRef.toLowerCase(), codeModelSetDescr4.toLowerCase());
   }

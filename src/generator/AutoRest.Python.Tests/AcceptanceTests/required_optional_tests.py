@@ -40,8 +40,8 @@ sys.path.append(join(tests, "RequiredOptional"))
 
 from msrest.exceptions import DeserializationError, SerializationError, ValidationError
 
-from autorestrequiredoptionaltestservice import AutoRestRequiredOptionalTestService
-from autorestrequiredoptionaltestservice.models import StringWrapper, ArrayWrapper, ClassWrapper
+from auto_rest_required_optional_test_service import AutoRestRequiredOptionalTestService
+from auto_rest_required_optional_test_service.models import StringWrapper, ArrayWrapper, ClassWrapper
 
 
 class RequiredOptionalTests(unittest.TestCase):

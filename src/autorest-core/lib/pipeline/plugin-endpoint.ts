@@ -1,3 +1,4 @@
+import { LazyPromise } from '../lazy';
 import { EventEmitter, IEvent } from '../events';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -122,11 +123,11 @@ export class AutoRestPlugin extends EventEmitter {
   private static CreateEndpointFor(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, onMessage: (message: Message) => void, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
     let messageId: number = 0;
 
-    const inputFileHandles = async () => {
-      const inputFileNames = [...await inputScope.Enum()];
-      const inputFiles = await Promise.all(inputFileNames.map(fn => inputScope.ReadStrict(fn)));
-      return inputFiles;
-    }
+    const inputFileNames = new LazyPromise(async () => inputScope.Enum());
+    const inputFileHandles = new LazyPromise(async () => {
+      const names = await inputFileNames;
+      return await Promise.all(names.map(fn => inputScope.ReadStrict(fn)));
+    });
 
     let finishNotifications: Promise<void> = Promise.resolve();
     const apiInitiator: IAutoRestPluginInitiatorEndpoint = {
@@ -140,8 +141,7 @@ export class AutoRestPlugin extends EventEmitter {
         return result === undefined ? null : result;
       },
       async ListInputs(): Promise<string[]> {
-        const result = await inputScope.Enum();
-        return [...result];
+        return await inputFileNames;
       },
 
       async WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void> {
@@ -156,7 +156,7 @@ export class AutoRestPlugin extends EventEmitter {
         if (typeof (sourceMap as any).mappings === "string") {
           await file.WriteDataWithSourceMap(content, () => sourceMap as any);
         } else {
-          await file.WriteData(content, sourceMap as Mappings, await inputFileHandles());
+          await file.WriteData(content, sourceMap as Mappings, await inputFileHandles);
         }
 
         await finishPrev;

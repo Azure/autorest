@@ -37,6 +37,9 @@ import * as jp from "../lib/ref/jsonpath";
     assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$..a").length, 1);
     assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$.a").length, 1);
     assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$.d").length, 0);
+
+    assert.strictEqual(jp.paths({ x: { $ref: "x" }, y: { $re: "x" } }, "$[?(@.$ref)]").length, 1);
+    assert.strictEqual(jp.paths({ a: { x: { $ref: "x" } }, b: { x: { $re: "x" } } }, "$..*[?(@.$ref)]").length, 1);
   }
 
   private roundTrip(s: string): string { return jp.stringify(jp.parse(s)); }

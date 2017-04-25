@@ -31,7 +31,6 @@ export class Manipulator {
 
   public async Process(data: DataHandleRead, scope: DataStoreView, documentId?: string): Promise<DataHandleRead> {
     let nextId = (() => { let i = 0; return () => ++i; })();
-
     for (const trans of this.transformations) {
       // matches filter?
       if (this.MatchesSourceFilter(documentId || data.key, trans)) {
@@ -39,7 +38,7 @@ export class Manipulator {
           // transform
           for (const t of trans.transform) {
             const target = await scope.Write(`transform_${nextId()}.yaml`);
-            data = (await ManipulateObject(data, target, w, obj => safeEval(t, { $: obj }))).result;
+            data = (await ManipulateObject(data, target, w, obj => safeEval(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: data.ReadObject() }))).result;
           }
           // set
           for (const s of trans.set) {

@@ -197,14 +197,14 @@ module.exports =
         fn = (queue.shift())
         fn() 
 
-      if code            
+      if code and !options.ignoreexitcode
         echo error "Exec Failed #{quiet_info options.cwd} :: #{info cmdline}"  
         if( stderr.length )
           echo error "(stderr)"
           echo marked  ">> #{error stderr}"
         if( stdout.length ) 
           echo warning "(stdout)" 
-          echo marked ">> #{ warning stdout}" 
+          echo warning stdout
 
         Fail "Execute Task failed, fast exit"
       callback(code,stdout,stderr)

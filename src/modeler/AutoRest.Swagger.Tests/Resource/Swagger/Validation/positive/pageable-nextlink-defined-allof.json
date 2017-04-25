@@ -33,6 +33,11 @@
         "summary": "Lists all foo.",
         "description": "foo",
         "operationId": "Operations_List",
+        "x-ms-examples": {
+          "The operations listed": {
+
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -66,6 +71,11 @@
         "description": "Foo operation",
         "x-ms-pageable": {
           "nextLinkName": "bar"
+        },
+        "x-ms-examples": {
+          "The foos listed": {
+
+          }
         },
         "responses": {
           "200": {

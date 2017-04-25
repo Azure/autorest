@@ -4,8 +4,8 @@ First, download the petstore.json example file:
 
 | Platform | Command |
 |----|---|
-|PowerShell|`iwr https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json -o petstore.json`|
-|Linux/OS X|`curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json`|
+|PowerShell|`iwr https://raw.githubusercontent.com/Azure/autorest/master/Samples/1a-code-generation-minimal/petstore.json -o petstore.json`|
+|Linux/OS X|`curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/1a-code-generation-minimal/petstore.json`|
 
 Next, generate the client:
  

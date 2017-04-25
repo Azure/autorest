@@ -7,7 +7,7 @@ import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
 import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from '../ref/uri';
-import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../ref/yaml";
+import { FastStringify, Parse, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
@@ -15,8 +15,6 @@ import { BlameTree } from "../source-map/blaming";
 import { Lazy, LazyPromise } from '../lazy';
 import { IFileSystem } from "../file-system";
 import { OperationCanceledException } from "../exception";
-
-export const helloworld = "hi"; // TODO: wat?
 
 /********************************************
  * Data model section (not exposed)
@@ -67,8 +65,8 @@ export abstract class DataStoreViewReadonly {
         targetDirUri,
         key.replace(":", "")); // make key (URI) a descriptive relative path
       await WriteString(targetFileUri, data);
-      await WriteString(targetFileUri + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
-      await WriteString(targetFileUri + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
+      await WriteString(targetFileUri + ".map", JSON.stringify(metadata.sourceMap.Value, null, 2));
+      await WriteString(targetFileUri + ".input.map", JSON.stringify(metadata.inputSourceMap.Value, null, 2));
     }
   }
 }
@@ -180,7 +178,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
     super();
   }
 
-  public async Read(uri: string): Promise<DataHandleRead> {
+  public async Read(uri: string): Promise<DataHandleRead | null> {
     // special URI handlers
     // - GitHub
     if (uri.startsWith("https://github")) {
@@ -200,7 +198,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
       data = await this.fs.ReadFile(uri) || await ReadUri(uri);
     } finally {
       if (!data) {
-        throw new Error(`FileSystem does not contain file ${uri} and failed to physically load it.`);
+        return null;
       }
     }
     const writeHandle = await this.slave.Write(uri);
@@ -297,7 +295,11 @@ export class DataStore extends DataStoreView {
   }
 
   public ReadStrictSync(absoluteUri: string): DataHandleRead {
-    return new DataHandleRead(absoluteUri, this.store[absoluteUri]);
+    const entry = this.store[absoluteUri];
+    if (entry === undefined) {
+      throw new Error(`Object '${absoluteUri}' does not exist.`);
+    }
+    return new DataHandleRead(absoluteUri, entry);
   }
 
   public async Read(uri: string): Promise<DataHandleRead | null> {
@@ -377,7 +379,7 @@ export class DataHandleWrite {
   }
 
   public WriteObject<T>(obj: T, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
-    return this.WriteData(Stringify(obj), mappings, mappingSources);
+    return this.WriteData(FastStringify(obj), mappings, mappingSources);
   }
 }
 

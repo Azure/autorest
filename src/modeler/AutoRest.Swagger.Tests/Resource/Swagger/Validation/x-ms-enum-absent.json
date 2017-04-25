@@ -1,0 +1,69 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Definition missing description",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "PostFoo",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "200": {
+            "description": "Some model returned",
+            "schema": {
+              "$ref": "#/definitions/Foo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Foo": {
+      "description": "Foo model",
+      "properties": {
+        "bar": {
+          "description": "bar property",
+          "type": "string",
+          "enum": [
+            "bar0",
+            "bar1",
+            "bar2",
+            "bar3"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  }
+}

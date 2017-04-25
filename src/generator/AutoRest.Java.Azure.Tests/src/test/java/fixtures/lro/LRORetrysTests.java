@@ -20,7 +20,7 @@ public class LRORetrysTests {
             .withResponseBuilderFactory(new AzureResponseBuilder.Factory())
             .build();
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
-        client.getAzureClient().withLongRunningOperationRetryTimeout(0);
+        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
     }
 
     @Test

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.Swagger.Validation;
 using System.Text;
+using System;
 
 namespace AutoRest.Swagger.Model.Utilities
 {
@@ -18,8 +19,7 @@ namespace AutoRest.Swagger.Model.Utilities
             new List<string>() { "trackedresource", "proxyresource", "resource" };
 
         private static readonly Regex ResourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
-        private static readonly Regex PropNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)*[A-Z]{1,2}$");
-
+        private static readonly Regex PropNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,3}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,3}[a-z0-9\$-]+)*[A-Z]{1,3}$");
 
         /// <summary>
         /// Populates a list of 'Resource' models found in the service definition
@@ -60,6 +60,8 @@ namespace AutoRest.Swagger.Model.Utilities
 
         }
 
+        public static bool IsODataProperty(string propName) => propName.ToLower().StartsWith("@");
+       
         /// <summary>
         /// checks if a model is a base resource type (resource, trackedresource or proxyresource)
         /// </summary>
@@ -174,7 +176,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <returns>true if the model hierarchy contains all of the read only properties</returns>
         public static bool ContainsReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> readOnlyPropertiesToCheck)
         {
-            var propertyList = EnumerateRequiredProperties(modelName, definitions);
+            var propertyList = EnumerateReadOnlyProperties(modelName, definitions);
             return !readOnlyPropertiesToCheck.Except(propertyList).Any();
         }
 
@@ -262,20 +264,23 @@ namespace AutoRest.Swagger.Model.Utilities
             if (op.Responses["200"]?.Schema?.Reference?.Equals(string.Empty) == false)
             {
                 var modelLink = op.Responses["200"].Schema.Reference;
+
+                var def = entity.Definitions.GetValueOrNull(modelLink.StripDefinitionPath());
+
                 // if the object has more than 2 properties, we can assume its a composite object
                 // that does not represent a collection of some type
-                if ((entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Count ?? 2) >= 2)
+                if ((def?.Properties?.Values?.Count ?? 2) >= 2)
                 {
                     return false;
                 }
 
                 // if the object is an allof on some other object, let's consider it to be a composite object
-                if (entity.Definitions[modelLink.StripDefinitionPath()].AllOf != null)
+                if (def.AllOf != null)
                 {
                     return false;
                 }
 
-                if (entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Any(type => type.Type == DataType.Array) ?? false)
+                if (def.Properties?.Values?.Any(type => type.Type == DataType.Array) ?? false)
                 {
                     return true;
                 }
@@ -432,5 +437,24 @@ namespace AutoRest.Swagger.Model.Utilities
 
             return resourceProviders;
         }
+
+
+        /// <summary>
+        /// Given an operation Id, returns the path where it is found
+        /// </summary>
+        /// <param name="operationId">operationId to look for</param>
+        /// <param name="paths">Dictionary of paths to look for</param>
+        /// <returns>path object which contains the operationId</returns>
+        public static KeyValuePair<string, Dictionary<string, Operation>>  GetOperationIdPath(string operationId, Dictionary<string, Dictionary<string, Operation>> paths)
+            => paths.Where(pathObj => pathObj.Value.Values.Where(op => op.OperationId == operationId).Any()).First();
+
+        /// <summary>
+        /// Given an operation Id, returns the corresponding verb for it
+        /// </summary>
+        /// <param name="operationId">operationId to look for</param>
+        /// <param name="paths">Dictionary of paths</param>
+        /// <returns>HTTP verb corresponding to the operationId</returns>
+        public static string GetOperationIdVerb(string operationId, KeyValuePair<string, Dictionary<string, Operation>> pathObj)
+            => pathObj.Value.First(opObj => opObj.Value.OperationId == operationId).Key;
     }
 }

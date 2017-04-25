@@ -24,7 +24,7 @@ namespace AutoRest.AzureResourceSchema
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <returns></returns>
-        public static IDictionary<string, ResourceSchema> Parse(CodeModel serviceClient)
+        public static IDictionary<string, ResourceSchema> Parse(CodeModel serviceClient, string version)
         {
             if (serviceClient == null)
             {
@@ -33,7 +33,7 @@ namespace AutoRest.AzureResourceSchema
 
             Dictionary<string, ResourceSchema> resourceSchemas = new Dictionary<string, ResourceSchema>();
 
-            foreach (Method method in serviceClient.Methods)
+            foreach (Method method in serviceClient.Methods.Where( method => method.Parameters.FirstOrDefault(p => p.SerializedName == "api-version")?.DefaultValue.Value == version || version == serviceClient.ApiVersion))
             {
                 if (method.HttpMethod != HttpMethod.Put ||
                     string.IsNullOrWhiteSpace(method.Url) ||

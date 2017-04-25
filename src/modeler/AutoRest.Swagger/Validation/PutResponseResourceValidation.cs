@@ -41,7 +41,7 @@ namespace AutoRest.Swagger.Validation
         // Verifies if a tracked resource has a corresponding PATCH operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
         {
-            var serviceDefinition = (ServiceDefinition)context.Root;
+            var serviceDefinition = context.Root;
             var ops = ValidationUtilities.GetOperationsByRequestMethod("put", serviceDefinition);
             var putRespModels = ops.Select(op => (op.Responses?.ContainsKey("200") != true) ? null : op.Responses["200"].Schema?.Reference?.StripDefinitionPath());
             putRespModels = putRespModels.Where(modelName => !string.IsNullOrEmpty(modelName));
@@ -49,9 +49,9 @@ namespace AutoRest.Swagger.Validation
             var violatingModels = putRespModels.Where(respModel => !ValidationUtilities.EnumerateModelHierarchy(respModel, serviceDefinition.Definitions).Intersect(xmsResModels).Any());
             foreach (var model in violatingModels)
             {
-                var violatingOp = ops.Where(op => (op.Responses?.ContainsKey("200") == true) && op.Responses["200"].Schema.Reference.StripDefinitionPath() == model).First();
-                var violatingPath = paths.Where(pathObj => pathObj.Value.Values.Where(op => op.OperationId == violatingOp.OperationId).Any()).First();
-                var violatingOpVerb = violatingPath.Value.Keys.Where(key => key.EqualsIgnoreCase("put")).First();
+                var violatingOp = ops.Where(op => (op.Responses?.ContainsKey("200") == true) && op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() == model).First();
+                var violatingPath = ValidationUtilities.GetOperationIdPath(violatingOp.OperationId, paths);
+                var violatingOpVerb = ValidationUtilities.GetOperationIdVerb(violatingOp.OperationId, violatingPath);
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath.Key).AppendProperty(violatingOpVerb).AppendProperty("operationId")), this, violatingOp.OperationId, model);
             }
         }
