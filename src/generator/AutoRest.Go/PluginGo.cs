@@ -10,11 +10,11 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Go
 {
-  public sealed class PluginGo : Plugin<GeneratorSettingsGo, TransformerGo, CodeGeneratorGo, CodeNamerGo, CodeModelGo>
-  {
-    public PluginGo()
+    public sealed class PluginGo : Plugin<GeneratorSettingsGo, TransformerGo, CodeGeneratorGo, CodeNamerGo, CodeModelGo>
     {
-      Context = new Context {
+        public PluginGo()
+        {
+            Context = new Context {
                   // inherit base settings
                   Context,
 
@@ -30,6 +30,6 @@ namespace AutoRest.Go
                   new Factory<EnumType, EnumTypeGo>(),
                   new Factory<PrimaryType, PrimaryTypeGo>()
                 };
+        }
     }
-  }
 }
