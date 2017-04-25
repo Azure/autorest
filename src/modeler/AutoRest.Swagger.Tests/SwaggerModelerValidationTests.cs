@@ -56,7 +56,7 @@ namespace AutoRest.Swagger.Tests
                     MergeState = mergeState
                 };
                 
-                return validator.GetValidationExceptions(new Uri(input), serviceDefinition, metaData).OfType<ValidationMessage>();
+                return validator.GetValidationExceptions(new Uri(input, UriKind.RelativeOrAbsolute), serviceDefinition, metaData).OfType<ValidationMessage>();
             }
         }
 
