@@ -182,15 +182,19 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // to be replaced with scheduler
   let scopeCtr = 0;
-  const RunPlugin: (pluginName: string, inputScope: DataStoreViewReadonly) => Promise<DataStoreViewReadonly> =
-    async (pluginName, inputScope) => {
+  const RunPlugin: (config: ConfigurationView, pluginName: string, inputScope: DataStoreViewReadonly) => Promise<DataStoreViewReadonly> =
+    async (config, pluginName, inputScope) => {
+      const plugin = plugins[pluginName];
+      if (!plugin) {
+        throw `Plugin '${pluginName}' not found.`;
+      }
       try {
         config.Message({ Channel: Channel.Debug, Text: `${pluginName} - START` });
 
         const scope = config.DataStore.CreateScope(`${++scopeCtr}_${pluginName}`);
         const scopeWorking = scope.CreateScope("working");
         const scopeOutput = scope.CreateScope("output");
-        await plugins[pluginName](config,
+        await plugin(config,
           inputScope,
           scopeWorking,
           scopeOutput);
@@ -203,10 +207,10 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       }
     };
 
-  const scopeLoadedSwaggers = await RunPlugin("loader", config.DataStore.GetReadThroughScopeFileSystem(fileSystem));
-  const scopeLoadedSwaggersTransformed = await RunPlugin("transform", scopeLoadedSwaggers);
-  const scopeComposedSwagger = await RunPlugin("compose", scopeLoadedSwaggersTransformed);
-  const scopeComposedSwaggerTransformed = await RunPlugin("transform", scopeComposedSwagger);
+  const scopeLoadedSwaggers = await RunPlugin(config, "loader", config.DataStore.GetReadThroughScopeFileSystem(fileSystem));
+  const scopeLoadedSwaggersTransformed = await RunPlugin(config, "transform", scopeLoadedSwaggers);
+  const scopeComposedSwagger = await RunPlugin(config, "compose", scopeLoadedSwaggersTransformed);
+  const scopeComposedSwaggerTransformed = await RunPlugin(config, "transform", scopeComposedSwagger);
 
   const swagger = await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]);
 
@@ -217,39 +221,20 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     await emitArtifact(config, "swagger-document", ResolveUri(config.OutputFolderUri, relPath), swagger, true);
   }
 
-  // AMAR WORLD
-  if (!config.DisableValidation && (config.GetEntry("model-validator") || config.GetEntry("semantic-validator"))) {
-    const validationPlugin = await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`);
-    const pluginNames = await validationPlugin.GetPluginNames(cancellationToken);
-    if (pluginNames.length != 2) {
-      throw new Error("Amar's plugin betrayed us!");
+  if (!config.DisableValidation) {
+    if (config.GetEntry("model-validator")) {
+      barrier.Await(RunPlugin(config, "model-validator", scopeComposedSwaggerTransformed));
     }
-
-    for (let pluginName of pluginNames.filter(name => config.GetEntry(name as any))) {
-      barrier.Await((async () => {
-        const scopeWork = config.DataStore.CreateScope(`amar_${pluginName}`);
-        const result = await validationPlugin.Process(
-          pluginName, _ => null,
-          scopeComposedSwaggerTransformed,
-          scopeWork.CreateScope("output"),
-          processMessage,
-          cancellationToken);
-        if (!result) {
-          throw new Error("Amar's plugin failed us!");
-        }
-      })());
+    if (config.GetEntry("semantic-validator")) {
+      barrier.Await(RunPlugin(config, "semantic-validator", scopeComposedSwaggerTransformed));
+    }
+    if (config.GetEntry("azure-validator")) {
+      barrier.Await(RunPlugin(config, "azure-validator", scopeComposedSwaggerTransformed));
     }
   }
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
   const usedCodeGenerators = allCodeGenerators.filter(cg => config.GetEntry(cg as any) !== undefined);
-
-  config.Message({ Channel: Channel.Debug, Text: `Just before autorest.dll realm.` });
-
-  // validator
-  if (config.GetEntry("azure-validator") && !config.DisableValidation) {
-    barrier.Await(AutoRestDotNetPlugin.Get().Validate(swagger, config.DataStore.CreateScope("validate"), processMessage));
-  }
 
   // code generators
   if (usedCodeGenerators.length > 0) {
