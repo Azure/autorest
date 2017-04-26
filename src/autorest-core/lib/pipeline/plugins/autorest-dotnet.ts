@@ -18,7 +18,7 @@ export class AutoRestDotNetPlugin extends EventEmitter {
   public static Get(): AutoRestDotNetPlugin { return AutoRestDotNetPlugin.instance ? AutoRestDotNetPlugin.instance : (AutoRestDotNetPlugin.instance = new AutoRestDotNetPlugin()); }
 
   private childProc: ChildProcess;
-  private pluginEndpoint: Promise<AutoRestPlugin>;
+  public pluginEndpoint: Promise<AutoRestPlugin>;
 
   private constructor() {
     super();

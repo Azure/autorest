@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Lazy } from "../lazy";
+import { Lazy, LazyPromise } from "../lazy";
 import { Stringify, YAMLNode } from '../ref/yaml';
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { AutoRestPlugin } from "./plugin-endpoint";
@@ -23,7 +23,7 @@ import { Exception } from "../exception";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
-async function emitArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): Promise<void> {
+async function emitArtifactInternal(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): Promise<void> {
   config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
   if (config.IsOutputArtifactRequested(artifactType)) {
     config.GeneratedFile.Dispatch({
@@ -41,26 +41,34 @@ async function emitArtifact(config: ConfigurationView, artifactType: string, uri
   }
 }
 let emitCtr = 0;
-async function emitObjectArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): Promise<void> {
-  await emitArtifact(config, artifactType, uri, handle);
+async function emitArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead, isObject: boolean): Promise<void> {
+  await emitArtifactInternal(config, artifactType, uri, handle);
 
-  const scope = config.DataStore.CreateScope("emitObjectArtifact");
-  const object = new Lazy<any>(() => handle.ReadObject<any>());
-  const ast = new Lazy<YAMLNode>(() => handle.ReadYamlAst());
+  if (isObject) {
+    const scope = config.DataStore.CreateScope("emitObjectArtifact");
+    const object = new Lazy<any>(() => handle.ReadObject<any>());
+    const ast = new Lazy<YAMLNode>(() => handle.ReadYamlAst());
 
-  if (config.IsOutputArtifactRequested(artifactType + ".yaml")
-    || config.IsOutputArtifactRequested(artifactType + ".yaml.map")) {
+    if (config.IsOutputArtifactRequested(artifactType + ".yaml")
+      || config.IsOutputArtifactRequested(artifactType + ".yaml.map")) {
 
-    const hw = await scope.Write(`${++emitCtr}.yaml`);
-    const h = await hw.WriteData(Stringify(object.Value), IdentitySourceMapping(handle.key, ast.Value), [handle]);
-    await emitArtifact(config, artifactType + ".yaml", uri + ".yaml", h);
+      const hw = await scope.Write(`${++emitCtr}.yaml`);
+      const h = await hw.WriteData(Stringify(object.Value), IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      await emitArtifactInternal(config, artifactType + ".yaml", uri + ".yaml", h);
+    }
+    if (config.IsOutputArtifactRequested(artifactType + ".json")
+      || config.IsOutputArtifactRequested(artifactType + ".json.map")) {
+
+      const hw = await scope.Write(`${++emitCtr}.json`);
+      const h = await hw.WriteData(JSON.stringify(object.Value, null, 2), IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      await emitArtifactInternal(config, artifactType + ".json", uri + ".json", h);
+    }
   }
-  if (config.IsOutputArtifactRequested(artifactType + ".json")
-    || config.IsOutputArtifactRequested(artifactType + ".json.map")) {
-
-    const hw = await scope.Write(`${++emitCtr}.json`);
-    const h = await hw.WriteData(JSON.stringify(object.Value, null, 2), IdentitySourceMapping(handle.key, ast.Value), [handle]);
-    await emitArtifact(config, artifactType + ".json", uri + ".json", h);
+}
+async function emitArtifacts(config: ConfigurationView, artifactType: string, uriResolver: (key: string) => string, scope: DataStoreViewReadonly, isObject: boolean): Promise<void> {
+  for (const key of await scope.Enum()) {
+    const file = await scope.ReadStrict(key);
+    await emitArtifact(config, artifactType, uriResolver(file.key), file, isObject);
   }
 }
 
@@ -106,8 +114,37 @@ function CreatePluginComposer(): PipelinePlugin {
     await (await output.Write("swagger-document")).Forward(swagger);
   };
 }
-function CreatePluginExternal(modulePath: string, ) {
+function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string): PipelinePlugin {
+  return async (config, input, working, output) => {
+    const plugin = await host;
+    const pluginNames = await plugin.GetPluginNames(config.CancellationToken);
+    if (pluginNames.indexOf(pluginName) === -1) {
+      throw new Error(`Plugin ${pluginName} not found.`);
+    }
+    // forward input scope (relative/absolute key mess...)
+    const inputx = new QuickScope(await Promise.all((await input.Enum()).map(x => input.ReadStrict(x))));
 
+    const result = await plugin.Process(
+      pluginName,
+      key => config.GetEntry(key as any),
+      inputx,
+      output,
+      config.Message.bind(config),
+      config.CancellationToken);
+    if (!result) {
+      throw new Error(`Plugin ${pluginName} reported failure.`);
+    }
+  };
+}
+function CreateCommonmarkProcessor(): PipelinePlugin {
+  return async (config, input, working, output) => {
+    const files = await input.Enum();
+    for (const file of files) {
+      const fileIn = await input.ReadStrict(file);
+      const fileOut = await ProcessCodeModel(fileIn, working);
+      await (await output.Write("./" + file + "/_/code-model-v1.yaml")).Forward(fileOut);
+    }
+  };
 }
 
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
@@ -115,13 +152,33 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const processMessage = config.Message.bind(config);
   const barrier = new OutstandingTaskAwaiter();
 
+  // externals:
+  const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
+  const autoRestDotNet = new LazyPromise(async () => await AutoRestDotNetPlugin.Get().pluginEndpoint);
+
   // TODO: enhance with custom declared plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     "loader": CreatePluginLoader(),
     "transform": CreatePluginTransformer(),
     "compose": CreatePluginComposer(),
+    "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
+    "semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),
+    "azure-validator": CreatePluginExternal(autoRestDotNet, "azure-validator"),
+    "modeler": CreatePluginExternal(autoRestDotNet, "modeler"),
+
+    "csharp": CreatePluginExternal(autoRestDotNet, "csharp"),
+    "ruby": CreatePluginExternal(autoRestDotNet, "ruby"),
+    "nodejs": CreatePluginExternal(autoRestDotNet, "nodejs"),
+    "python": CreatePluginExternal(autoRestDotNet, "python"),
+    "go": CreatePluginExternal(autoRestDotNet, "go"),
+    "java": CreatePluginExternal(autoRestDotNet, "java"),
+    "azureresourceschema": CreatePluginExternal(autoRestDotNet, "azureresourceschema"),
+    "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier"),
+
+    "commonmarker": CreateCommonmarkProcessor()
   };
 
+  // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
   // to be replaced with scheduler
   let scopeCtr = 0;
@@ -157,7 +214,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const relPath =
       config.GetEntry("output-file") || // TODO: overthink
       (config.GetEntry("namespace") ? config.GetEntry("namespace") : GetFilename([...config.InputFileUris][0]).replace(/\.json$/, ""));
-    await emitObjectArtifact(config, "swagger-document", ResolveUri(config.OutputFolderUri, relPath), swagger);
+    await emitArtifact(config, "swagger-document", ResolveUri(config.OutputFolderUri, relPath), swagger, true);
   }
 
   // AMAR WORLD
@@ -217,7 +274,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           // TRANSFORM
           const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/code-model-v1.yaml");
 
-          await emitArtifact(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
+          await emitArtifactInternal(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
 
           let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(genConfig, usedCodeGenerator, swagger, codeModelTransformed, scope.CreateScope("generate"), processMessage);
 
@@ -230,7 +287,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
             const handle = await generatedFileScope.ReadStrict(fileName);
             const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
             const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
-            await emitArtifact(genConfig, `source-file-${usedCodeGenerator}`, outputFileUri, handle);
+            await emitArtifactInternal(genConfig, `source-file-${usedCodeGenerator}`, outputFileUri, handle);
           }
         })());
       }
