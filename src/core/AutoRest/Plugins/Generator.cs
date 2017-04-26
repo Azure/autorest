@@ -8,6 +8,9 @@ using AutoRest.Core.Extensibility;
 using AutoRest.Core;
 using AutoRest.Core.Parsing;
 using System.Linq;
+using AutoRest.Swagger.Model;
+using AutoRest.Swagger;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 public class Generator : NewPlugin
 {
@@ -20,15 +23,23 @@ public class Generator : NewPlugin
 
     protected override async Task<bool> ProcessInternal()
     {
+        var files = await ListInputs();
+        if (files.Length != 2)
+        {
+            return false;
+        }
+
+        Singleton<ServiceDefinition>.Instance = SwaggerParser.Parse("", await ReadFile(files[0]));
+
         // get internal name
         var language = new[] {
-        "CSharp",
-        "Ruby",
-        "NodeJS",
-        "Python",
-        "Go",
-        "Java",
-        "AzureResourceSchema" }
+            "CSharp",
+            "Ruby",
+            "NodeJS",
+            "Python",
+            "Go",
+            "Java",
+            "AzureResourceSchema" }
           .Where(x => x.ToLowerInvariant() == codeGenerator)
           .FirstOrDefault();
 
@@ -65,12 +76,6 @@ public class Generator : NewPlugin
         }
 
         // process
-        var files = await ListInputs();
-        if (files.Length != 2)
-        {
-            return false;
-        }
-
         var plugin = ExtensionsLoader.GetPlugin(
             (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") +
             language +
