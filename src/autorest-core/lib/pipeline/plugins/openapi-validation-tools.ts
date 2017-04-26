@@ -32,7 +32,7 @@ function UnAmarifyPath(path: string[]): JsonPath {
 }
 
 class OpenApiValidationSemantic {
-  public static readonly Name = "semantic-validatior";
+  public static readonly Name = "semantic-validator";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
     const swaggerFileNames = await initiator.ListInputs(sessionId);
@@ -69,7 +69,7 @@ class OpenApiValidationSemantic {
 }
 
 class OpenApiValidationExample {
-  public static readonly Name = "model-validatior";
+  public static readonly Name = "model-validator";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
     const swaggerFileNames = await initiator.ListInputs(sessionId);

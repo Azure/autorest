@@ -65,7 +65,7 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
   throw new Error(`'${stringify(path)}' has incomaptible values (${yaml.Stringify(a)}, ${yaml.Stringify(b)}).`);
 }
 
-export function MergeOverwrite(a: any, b: any, concatListPathFilter: (path: JsonPath) => boolean = _ => false, path: JsonPath = []): any {
+export function MergeOverwriteOrAppend(a: any, b: any, concatListPathFilter: (path: JsonPath) => boolean = _ => false, path: JsonPath = []): any {
   if (a === null || b == null) {
     return null; // TODO: overthink, we could use this to force mute something even if it's "concat" mode...
   }
@@ -102,7 +102,7 @@ export function MergeOverwrite(a: any, b: any, concatListPathFilter: (path: Json
     // try merge objects otherwise
     const aMember = a[key];
     const bMember = b[key];
-    result[key] = MergeOverwrite(aMember, bMember, concatListPathFilter, subpath);
+    result[key] = MergeOverwriteOrAppend(aMember, bMember, concatListPathFilter, subpath);
   }
   return result;
 }

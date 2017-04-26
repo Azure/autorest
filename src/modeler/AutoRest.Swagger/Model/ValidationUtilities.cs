@@ -269,7 +269,8 @@ namespace AutoRest.Swagger.Model.Utilities
 
                 // if the object has more than 2 properties, we can assume its a composite object
                 // that does not represent a collection of some type
-                if ((def?.Properties?.Values?.Count ?? 2) >= 2)
+                var propertyCount = def?.Properties?.Values?.Count;
+                if (propertyCount == null || propertyCount > 2)
                 {
                     return false;
                 }
@@ -280,7 +281,7 @@ namespace AutoRest.Swagger.Model.Utilities
                     return false;
                 }
 
-                if (def.Properties?.Values?.Any(type => type.Type == DataType.Array) ?? false)
+                if (def.Properties.Values.Any(type => type.Type == DataType.Array))
                 {
                     return true;
                 }
