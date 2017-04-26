@@ -42,7 +42,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// What kind of open api document type this rule should be applied to
         /// </summary>
-        public override ServiceDefinitionDocumentType OpenApiDocumentValidationType => ServiceDefinitionDocumentType.ARM;
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
 
         /// <summary>
         /// This rule passes if the parameters section contains both subscriptionId and api-version parameters

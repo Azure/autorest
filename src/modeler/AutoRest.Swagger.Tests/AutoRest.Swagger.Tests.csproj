@@ -71,5 +71,9 @@
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
   </ItemGroup>
  
+  <ItemGroup>
+    <Folder Include="Resource\Swagger\Validation\non-https-service-def-scheme\" />
+  </ItemGroup>
+ 
   <ProjectExtensions><VisualStudio><UserProperties Resource_4Swagger_4swagger-x-ms-discriminator-value_1json__JSONSchema="..\..\..\..\..\schema\swagger-extensions.json" /></VisualStudio></ProjectExtensions>
 </Project>

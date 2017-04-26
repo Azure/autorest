@@ -1,0 +1,49 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Service definitions schemes has non-http/https type",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "Wss"
+  ],
+  "basePath": "/",
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "Noun_Verb",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  }
+}
