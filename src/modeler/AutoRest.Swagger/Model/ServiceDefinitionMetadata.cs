@@ -34,9 +34,9 @@ namespace AutoRest.Swagger.Model
     [Flags]
     public enum ServiceDefinitionDocumentType
     {
-        Default = 0 >> 1,   // A plain regular swagger like pet store
-        ARM = 1 >> 2,       // An Azure Resource Management type document
-        DataPlane = 2 >> 3  // Data Plane specifications
+        Default = 0 << 1,   // A plain regular swagger like pet store
+        ARM = 1 << 2,       // An Azure Resource Management type document
+        DataPlane = 2 << 3  // Data Plane specifications
     }
 
     /// <summary>
