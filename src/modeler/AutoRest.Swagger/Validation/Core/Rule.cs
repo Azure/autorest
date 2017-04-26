@@ -22,11 +22,10 @@ namespace AutoRest.Swagger.Validation.Core
         /// </summary>
         public virtual string Id => "!!! implement me and make me abstract !!!";
 
-
         /// <summary>
         /// What kind of open api document type this rule should be applied to
         /// </summary>
-        public virtual ServiceDefinitionDocumentType OpenApiDocumentValidationType => ServiceDefinitionDocumentType.ARM;
+        public virtual ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
 
         /// <summary>
         /// When to apply the validation rule, before or after it has been merged as a part of 

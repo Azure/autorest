@@ -47,6 +47,6 @@ namespace AutoRest.Swagger.Model
     {
         public ServiceDefinitionMergeState MergeState { get; set; }
 
-        public ServiceDefinitionDocumentType OpenApiDocumentType { get; set; }
+        public ServiceDefinitionDocumentType ServiceDefinitionDocumentType { get; set; }
     }
 }

@@ -42,7 +42,7 @@ namespace AutoRest.Swagger.Tests
     [Collection("Validation Tests")]
     public partial class SwaggerModelerValidationTests
     {
-        private IEnumerable<ValidationMessage> ValidateSwagger(string input, ServiceDefinitionDocumentType openapiDocType = ServiceDefinitionDocumentType.ARM, 
+        private IEnumerable<ValidationMessage> ValidateSwagger(string input, ServiceDefinitionDocumentType serviceDefDocType = ServiceDefinitionDocumentType.ARM, 
             ServiceDefinitionMergeState mergeState = ServiceDefinitionMergeState.After)
         {
             using (NewContext)
@@ -52,7 +52,7 @@ namespace AutoRest.Swagger.Tests
 
                 var metaData = new ServiceDefinitionMetadata
                 {
-                    OpenApiDocumentType = openapiDocType,
+                    ServiceDefinitionDocumentType = serviceDefDocType,
                     MergeState = mergeState
                 };
                 

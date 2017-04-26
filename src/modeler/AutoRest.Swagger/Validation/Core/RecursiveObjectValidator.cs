@@ -34,9 +34,9 @@ namespace AutoRest.Swagger.Validation.Core
         /// <summary>
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
-        /// 
+        /// <param name="filePath">uri path to the servicedefinition document <paramref name="entity"/></param>
         /// <param name="entity">The object to validate</param><param name="entity">The object to validate</param>
-        /// <param name="metaData">The metadata associated with serviceDefinition to which <paramref name="entity"/> belongs to</param>
+        /// <param name="metaData">The metadata associated with serviceDefinition to which <paramref name="metaData"/> belongs to</param>
         public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, ServiceDefinition entity, ServiceDefinitionMetadata metadata)
         {
             // TODO: By default, set validation rule merge state to After
@@ -52,17 +52,16 @@ namespace AutoRest.Swagger.Validation.Core
         {
             // Filter by document type
             // By default select all rules, then add the doc type specific rules
-            var openapiTypeRules = rules.Where(rule => rule.OpenApiDocumentValidationType == ServiceDefinitionDocumentType.Default);
-            if (metaData.OpenApiDocumentType != ServiceDefinitionDocumentType.Default)
+            var serviceDefTypeRules = rules.Where(rule => rule.ServiceDefinitionDocumentType == ServiceDefinitionDocumentType.Default);
+            if (metaData.ServiceDefinitionDocumentType != ServiceDefinitionDocumentType.Default)
             {
-                openapiTypeRules = openapiTypeRules.Concat(rules.Where(rule => (rule.OpenApiDocumentValidationType & metaData.OpenApiDocumentType)!=0));
+                serviceDefTypeRules = serviceDefTypeRules.Concat(rules.Where(rule => (rule.ServiceDefinitionDocumentType & metaData.ServiceDefinitionDocumentType)!=0));
             }
 
             // Filter by the current merge state, and return
-            return openapiTypeRules.Where(rule => rule.ValidationRuleMergeState == metaData.MergeState);
+            return serviceDefTypeRules.Where(rule => rule.ValidationRuleMergeState == metaData.MergeState);
         }
-
-
+        
         /// <summary>
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
@@ -141,8 +140,6 @@ namespace AutoRest.Swagger.Validation.Core
             // Apply each rule for the entity
             return classRules.SelectMany(rule => rule.GetValidationMessages(entity, parentContext));
         }
-
-
 
         /// <summary>
         /// Validates an object property
