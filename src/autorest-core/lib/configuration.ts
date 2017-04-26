@@ -190,9 +190,10 @@ export class ConfigurationView {
       .Select(each => new DirectiveView(each));
   }
 
-  public get InputFileUris(): Iterable<string> {
+  public get InputFileUris(): string[] {
     return From<string>(ValuesOf<string>(this.config["input-file"]))
-      .Select(each => this.ResolveAsPath(each));
+      .Select(each => this.ResolveAsPath(each))
+      .ToArray();
   }
 
   public get OutputFolderUri(): string {
