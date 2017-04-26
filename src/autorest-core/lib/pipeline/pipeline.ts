@@ -215,8 +215,6 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const scopeComposedSwagger = await RunPlugin(config, "compose", scopeLoadedSwaggersTransformed);
   const scopeComposedSwaggerTransformed = await RunPlugin(config, "transform", scopeComposedSwagger);
 
-  const swagger = await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]);
-
   {
     const relPath =
       config.GetEntry("output-file") || // TODO: overthink
@@ -247,16 +245,17 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     let pluginCtr = 0;
     for (const usedCodeGenerator of usedCodeGenerators) {
       for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
-        const processMessage = genConfig.Message.bind(genConfig);
-        const scope = genConfig.DataStore.CreateScope("plugin_" + ++pluginCtr);
-
         barrier.Await((async () => {
           const scopeCodeModelTransformed = await RunPlugin(genConfig, "transform", scopeCodeModelCommonmark);
 
           await emitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), scopeCodeModelTransformed, false);
 
-          const codeModelTransformed = await scopeCodeModelTransformed.ReadStrict((await scopeCodeModelTransformed.Enum())[0]);
-          let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(genConfig, usedCodeGenerator, swagger, codeModelTransformed, scope.CreateScope("generate"), processMessage);
+          let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(
+            genConfig, usedCodeGenerator,
+            await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]),
+            await scopeCodeModelTransformed.ReadStrict((await scopeCodeModelTransformed.Enum())[0]),
+            genConfig.DataStore.CreateScope("generate" + ++pluginCtr),
+            genConfig.Message.bind(genConfig));
 
           // C# simplifier
           if (usedCodeGenerator === "csharp") {

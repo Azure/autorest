@@ -30,22 +30,8 @@ export class AutoRestDotNetPlugin {
     codeModel: DataHandleRead,
     workingScope: DataStoreView,
     onMessage: (message: Message) => void): Promise<DataStoreViewReadonly> {
-
-    const rawSwagger = await swaggerDocument.ReadObject<any>();
-    const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-    const settings: AutoRestConfigurationImpl =
-      Object.assign(
-        { // stuff that comes in via `x-ms-code-generation-settings`
-          "override-client-name": getXmsCodeGenSetting("name"),
-          "use-internal-constructors": getXmsCodeGenSetting("internalConstructors"),
-          "use-datetimeoffset": getXmsCodeGenSetting("useDateTimeOffset"),
-          "payload-flattening-threshold": getXmsCodeGenSetting("ft"),
-          "sync-methods": getXmsCodeGenSetting("syncMethods")
-        },
-        config.Raw);
-
     const outputScope = workingScope.CreateScope("output");
-    const success = await (await this.pluginEndpoint).Process(language, key => (settings as any)[key], new QuickScope([swaggerDocument, codeModel]), outputScope, onMessage, CancellationToken.None);
+    const success = await (await this.pluginEndpoint).Process(language, key => config.GetEntry(key as any), new QuickScope([swaggerDocument, codeModel]), outputScope, onMessage, CancellationToken.None);
     if (!success) {
       throw new Error(`Language generation for ${language} failed.`);
     }

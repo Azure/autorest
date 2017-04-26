@@ -21,6 +21,18 @@ public class Generator : NewPlugin
         this.codeGenerator = codeGenerator;
     }
 
+    private T GetXmsCodeGenSetting<T>(ServiceDefinition sd, string name)
+    {
+        try
+        {
+            return (T)sd.Info.CodeGenerationSettings.Extensions[name];
+        }
+        catch
+        {
+            return default(T);
+        }
+    }
+
     protected override async Task<bool> ProcessInternal()
     {
         var files = await ListInputs();
@@ -29,7 +41,7 @@ public class Generator : NewPlugin
             return false;
         }
 
-        Singleton<ServiceDefinition>.Instance = SwaggerParser.Parse("", await ReadFile(files[0]));
+        var sd = Singleton<ServiceDefinition>.Instance = SwaggerParser.Parse("", await ReadFile(files[0]));
 
         // get internal name
         var language = new[] {
@@ -54,8 +66,8 @@ public class Generator : NewPlugin
         new Settings
         {
             Namespace = await GetValue("namespace"),
-            ClientName = await GetValue("override-client-name"),
-            PayloadFlatteningThreshold = await GetValue<int?>("payload-flattening-threshold") ?? 0,
+            ClientName = GetXmsCodeGenSetting<string>(sd, "name") ?? await GetValue("override-client-name"),
+            PayloadFlatteningThreshold = GetXmsCodeGenSetting<int?>(sd, "ft") ?? await GetValue<int?>("payload-flattening-threshold") ?? 0,
             AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
         };
         var header = await GetValue("license-header");
@@ -63,9 +75,9 @@ public class Generator : NewPlugin
         {
             Settings.Instance.Header = header;
         }
-        Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool?>("use-internal-constructors") ?? false);
-        Settings.Instance.CustomSettings.Add("SyncMethods", await GetValue("sync-methods") ?? "essential");
-        Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool?>("use-datetimeoffset") ?? false);
+        Settings.Instance.CustomSettings.Add("InternalConstructors", GetXmsCodeGenSetting<bool?>(sd, "internalConstructors") ?? await GetValue<bool?>("use-internal-constructors") ?? false);
+        Settings.Instance.CustomSettings.Add("SyncMethods", GetXmsCodeGenSetting<string>(sd, "syncMethods") ?? await GetValue("sync-methods") ?? "essential");
+        Settings.Instance.CustomSettings.Add("UseDateTimeOffset", GetXmsCodeGenSetting<bool?>(sd, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false);
         if (codeGenerator == "ruby" || codeGenerator == "python")
         {
             // TODO: sort out matters here entirely instead of relying on Input being read somewhere...
