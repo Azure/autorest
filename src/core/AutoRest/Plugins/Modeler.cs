@@ -19,7 +19,7 @@ public class Modeler : NewPlugin
     {
         new Settings
         {
-            Namespace = await GetValue("namespace")
+            Namespace = await GetValue("namespace") ?? ""
         };
 
         var files = await ListInputs();

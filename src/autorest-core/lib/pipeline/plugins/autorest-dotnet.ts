@@ -29,7 +29,7 @@ export class AutoRestDotNetPlugin extends EventEmitter {
   /**
    * Probes whether the extension even supports the requested plugin.
    */
-  private async CautiousProcess(
+  public async CautiousProcess(
     pluginName: string,
     configuration: (key: string) => any,
     inputScope: DataStoreViewReadonly,

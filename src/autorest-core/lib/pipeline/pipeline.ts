@@ -65,6 +65,7 @@ async function emitArtifact(config: ConfigurationView, artifactType: string, uri
     }
   }
 }
+
 async function emitArtifacts(config: ConfigurationView, artifactType: string, uriResolver: (key: string) => string, scope: DataStoreViewReadonly, isObject: boolean): Promise<void> {
   for (const key of await scope.Enum()) {
     const file = await scope.ReadStrict(key);
@@ -121,6 +122,7 @@ function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: str
     if (pluginNames.indexOf(pluginName) === -1) {
       throw new Error(`Plugin ${pluginName} not found.`);
     }
+
     // forward input scope (relative/absolute key mess...)
     const inputx = new QuickScope(await Promise.all((await input.Enum()).map(x => input.ReadStrict(x))));
 
@@ -218,7 +220,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const relPath =
       config.GetEntry("output-file") || // TODO: overthink
       (config.GetEntry("namespace") ? config.GetEntry("namespace") : GetFilename([...config.InputFileUris][0]).replace(/\.json$/, ""));
-    await emitArtifact(config, "swagger-document", ResolveUri(config.OutputFolderUri, relPath), swagger, true);
+    barrier.Await(emitArtifacts(config, "swagger-document", _ => ResolveUri(config.OutputFolderUri, relPath), scopeComposedSwaggerTransformed, true));
   }
 
   if (!config.DisableValidation) {
@@ -241,7 +243,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     // modeler
     let codeModel = await AutoRestDotNetPlugin.Get().Model(swagger, config.DataStore.CreateScope("model"),
       {
-        namespace: config.GetEntry("namespace") || ""
+        namespace: config.GetEntry("namespace")
       },
       processMessage);
 

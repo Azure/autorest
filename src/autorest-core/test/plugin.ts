@@ -16,7 +16,7 @@ import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message, Channel } from "../lib/message";
 import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
-import { DataStore } from "../lib/data-store/data-store";
+import { DataStore, QuickScope } from '../lib/data-store/data-store';
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
 @suite class Plugins {
@@ -80,7 +80,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const messages: Message[] = [];
-    const resultScope = await autorestPlugin.Validate(swagger, pluginScope, m => messages.push(m));
+    const resultScope = await autorestPlugin.CautiousProcess("azure-validator", _ => { }, new QuickScope([swagger]), pluginScope, m => messages.push(m));
 
     // check results
     assert.notEqual(messages.length, 0);
@@ -108,10 +108,14 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     // call modeler
     const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
-    const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope, { namespace: "SomeNamespace" }, m => null);
+    await autorestPlugin.CautiousProcess("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickScope([swagger]), pluginScope, m => null);
+    const results = await pluginScope.Enum();
+    if (results.length !== 1) {
+      throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
+    }
 
     // check results
-    const codeModel = codeModelHandle.ReadData();
+    const codeModel = (await pluginScope.ReadStrict(results[0])).ReadData();
     assert.notEqual(codeModel.indexOf("isPolymorphicDiscriminator"), -1);
   }
 
