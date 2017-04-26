@@ -12,7 +12,7 @@ namespace AutoRest.Swagger.Validation
 {
     public class AvoidNestedProperties : TypedRule<Schema>
     {
-        private const string ClientFlattenExtensionName = "x-ms-client-flatten";
+        private static readonly string ClientFlattenExtensionName = "x-ms-client-flatten";
 
 
         /// <summary>
@@ -35,8 +35,7 @@ namespace AutoRest.Swagger.Validation
 
         private static bool IsClientFlattenUsed(Dictionary<string, object> extensions)
             => extensions.ContainsKey(ClientFlattenExtensionName)
-            && extensions[ClientFlattenExtensionName] is bool
-            && (bool)extensions[ClientFlattenExtensionName] == true;
+            && extensions[ClientFlattenExtensionName] is bool;
 
         /// <summary>
         ///     The template message for this Rule.
