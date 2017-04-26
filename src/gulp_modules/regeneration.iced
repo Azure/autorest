@@ -641,6 +641,7 @@ task 'regenerate-samples', '', (done) ->
               sed "-i", /\bfile:\/\/[^\s]*\/autorest/g, "", file  # blame locations
               sed "-i", /(at .* in )([^\s]*(\/|\\))/g, "$1", file # exception stack traces (.cs)
               sed "-i", /at .* \(.*\)/g, "at ...", file           # exception stack traces (.ts)
+              sed "-i", /at [^ ]*/g, "at ...", file               # exception stack traces (.ts)
             )
           next null
         , true # don't fail on failures (since we wanna record them)
