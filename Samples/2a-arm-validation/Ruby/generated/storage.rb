@@ -19,7 +19,7 @@ require 'ms_rest'
 require 'generated/storage/module_definition'
 require 'ms_rest_azure'
 
-module storage
+module Storage
   autoload :StorageAccounts,                                    'generated/storage/storage_accounts.rb'
   autoload :UsageOperations,                                    'generated/storage/usage_operations.rb'
   autoload :StorageManagementClient,                            'generated/storage/storage_management_client.rb'

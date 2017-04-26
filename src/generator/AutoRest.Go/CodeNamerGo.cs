@@ -16,27 +16,27 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Go
 {
-  public class CodeNamerGo : CodeNamer
-  {
-    public new static CodeNamerGo Instance
+    public class CodeNamerGo : CodeNamer
     {
-      get
-      {
-        return (CodeNamerGo)CodeNamer.Instance;
-      }
-    }
+        public new static CodeNamerGo Instance
+        {
+            get
+            {
+                return (CodeNamerGo)CodeNamer.Instance;
+            }
+        }
 
-    public virtual IEnumerable<string> AutorestImports => new string[] { "github.com/Azure/go-autorest/autorest" };
+        public virtual IEnumerable<string> AutorestImports => new string[] { "github.com/Azure/go-autorest/autorest" };
 
-    public virtual IEnumerable<string> StandardImports => new string[] { "github.com/Azure/go-autorest/autorest/azure", "net/http" };
+        public virtual IEnumerable<string> StandardImports => new string[] { "github.com/Azure/go-autorest/autorest/azure", "net/http" };
 
-    public virtual IEnumerable<string> PageableImports => new string[] { "net/http", "github.com/Azure/go-autorest/autorest/to" };
+        public virtual IEnumerable<string> PageableImports => new string[] { "net/http", "github.com/Azure/go-autorest/autorest/to" };
 
-    public virtual IEnumerable<string> ValidationImport => new string[] { "github.com/Azure/go-autorest/autorest/validation" };
+        public virtual IEnumerable<string> ValidationImport => new string[] { "github.com/Azure/go-autorest/autorest/validation" };
 
-    // CommonInitialisms are those "words" within a name that Golint expects to be uppercase.
-    // See https://github.com/golang/lint/blob/master/lint.go for detail.
-    private string[] CommonInitialisms => new string[] {
+        // CommonInitialisms are those "words" within a name that Golint expects to be uppercase.
+        // See https://github.com/golang/lint/blob/master/lint.go for detail.
+        private string[] CommonInitialisms => new string[] {
                                                             "Acl",
                                                             "Api",
                                                             "Ascii",
@@ -76,7 +76,7 @@ namespace AutoRest.Go
                                                             "Xss",
                                                         };
 
-    public string[] UserDefinedNames => new string[] {
+        public string[] UserDefinedNames => new string[] {
                                                             "UserAgent",
                                                             "Version",
                                                             "APIVersion",
@@ -87,19 +87,19 @@ namespace AutoRest.Go
                                                             "NewWithoutDefaults",
                                                         };
 
-    public IReadOnlyDictionary<HttpStatusCode, string> StatusCodeToGoString;
+        public IReadOnlyDictionary<HttpStatusCode, string> StatusCodeToGoString;
 
 
 
-    /// <summary>
-    /// Initializes a new instance of CodeNamerGo.
-    /// </summary>
-    public CodeNamerGo()
-    {
-      // Create a map from HttpStatusCode to the appropriate Go http.StatusXxxxx string.
-      // -- Go does not have constants for the full HttpStatusCode enumeration; this set taken from http://golang.org/pkg/net/http/
-      var statusCodeMap = new Dictionary<HttpStatusCode, string>();
-      foreach (var sc in new HttpStatusCode[]{
+        /// <summary>
+        /// Initializes a new instance of CodeNamerGo.
+        /// </summary>
+        public CodeNamerGo()
+        {
+            // Create a map from HttpStatusCode to the appropriate Go http.StatusXxxxx string.
+            // -- Go does not have constants for the full HttpStatusCode enumeration; this set taken from http://golang.org/pkg/net/http/
+            var statusCodeMap = new Dictionary<HttpStatusCode, string>();
+            foreach (var sc in new HttpStatusCode[]{
                 HttpStatusCode.Continue,
                 HttpStatusCode.SwitchingProtocols,
 
@@ -145,22 +145,22 @@ namespace AutoRest.Go
                 HttpStatusCode.GatewayTimeout,
                 HttpStatusCode.HttpVersionNotSupported
             })
-      {
-        statusCodeMap.Add(sc, string.Format("http.Status{0}", sc));
-      }
+            {
+                statusCodeMap.Add(sc, string.Format("http.Status{0}", sc));
+            }
 
-      // Go names some constants slightly differently than the HttpStatusCode enumeration -- correct those
-      statusCodeMap[HttpStatusCode.Redirect] = "http.StatusFound";
-      statusCodeMap[HttpStatusCode.NonAuthoritativeInformation] = "http.StatusNonAuthoritativeInfo";
-      statusCodeMap[HttpStatusCode.ProxyAuthenticationRequired] = "http.StatusProxyAuthRequired";
-      statusCodeMap[HttpStatusCode.RequestUriTooLong] = "http.StatusRequestURITooLong";
-      statusCodeMap[HttpStatusCode.HttpVersionNotSupported] = "http.StatusHTTPVersionNotSupported";
+            // Go names some constants slightly differently than the HttpStatusCode enumeration -- correct those
+            statusCodeMap[HttpStatusCode.Redirect] = "http.StatusFound";
+            statusCodeMap[HttpStatusCode.NonAuthoritativeInformation] = "http.StatusNonAuthoritativeInfo";
+            statusCodeMap[HttpStatusCode.ProxyAuthenticationRequired] = "http.StatusProxyAuthRequired";
+            statusCodeMap[HttpStatusCode.RequestUriTooLong] = "http.StatusRequestURITooLong";
+            statusCodeMap[HttpStatusCode.HttpVersionNotSupported] = "http.StatusHTTPVersionNotSupported";
 
-      StatusCodeToGoString = statusCodeMap;
+            StatusCodeToGoString = statusCodeMap;
 
-      ReservedWords.AddRange(
-          new[]
-          {
+            ReservedWords.AddRange(
+                new[]
+                {
                     // Reserved keywords -- list retrieved from http://golang.org/ref/spec#Keywords
                     "break",        "default",      "func",         "interface",    "select",
                     "case",         "defer",        "go",           "map",          "struct",
@@ -230,237 +230,237 @@ namespace AutoRest.Go
                     // Other reserved names and packages (defined by the base libraries this code uses)
                     "autorest", "client", "date", "err", "req", "resp", "result", "sender", "to", "validation"
 
-          });
-    }
-
-    /// <summary>
-    /// Formats a string to work around golint name stuttering
-    /// Refactor -> CodeModelTransformer
-    /// </summary>
-    /// <param name="name"></param>
-    /// <param name="packageName"></param>
-    /// <param name="nameInUse"></param>
-    /// <param name="attachment"></param>
-    /// <returns>The formatted string</returns>
-    public static string AttachTypeName(string name, string packageName, bool nameInUse, string attachment)
-    {
-      return nameInUse
-          ? name.Equals(packageName, StringComparison.OrdinalIgnoreCase)
-              ? name
-              : name + attachment
-          : name;
-    }
-
-    /// <summary>
-    /// Formats a string to pascal case using a specific character as splitter
-    /// Refactor -> Namer ... Even better if this already exists in the core :D
-    /// </summary>
-    /// <param name="name"></param>
-    /// <param name="splitter"></param>
-    /// <returns>The formatted string</returns>
-    public static string PascalCaseWithoutChar(string name, char splitter)
-    {
-      if (string.IsNullOrWhiteSpace(name))
-      {
-        return name;
-      }
-
-      return
-          name.Split(splitter)
-              .Where(s => !string.IsNullOrEmpty(s))
-              .Select(s => char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1))
-              .DefaultIfEmpty("")
-              .Aggregate(string.Concat);
-    }
-
-    public override string GetEnumMemberName(string name)
-    {
-      return EnsureNameCase(base.GetEnumMemberName(name));
-    }
-
-    public override string GetFieldName(string name)
-    {
-      if (string.IsNullOrWhiteSpace(name))
-      {
-        return name;
-      }
-      return EnsureNameCase(PascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Field"))));
-    }
-
-    public override string GetInterfaceName(string name)
-    {
-      if (string.IsNullOrWhiteSpace(name))
-      {
-        return name;
-      }
-      return EnsureNameCase(PascalCase(RemoveInvalidCharacters(name)));
-    }
-
-    /// <summary>
-    /// Formats a string for naming a method using Pascal case by default.
-    /// </summary>
-    /// <param name="name"></param>
-    /// <returns>The formatted string.</returns>
-    public override string GetMethodName(string name)
-    {
-      if (string.IsNullOrWhiteSpace(name))
-      {
-        return name;
-      }
-      return EnsureNameCase(GetEscapedReservedName(PascalCase(RemoveInvalidCharacters(name)), "Method"));
-    }
-
-    public override string GetMethodGroupName(string name)
-    {
-      if (string.IsNullOrWhiteSpace(name))
-      {
-        return name;
-      }
-
-      // we use the base implementation here as it uses a case-insensitive comparison.
-      // this is a bit of a hacky work-around for some naming changes introduced in core...
-      return EnsureNameCase(PascalCase(RemoveInvalidCharacters(base.GetEscapedReservedName(name, "Group"))));
-    }
-
-    /// <summary>
-    /// Formats a string for naming method parameters using GetVariableName Camel case by default.
-    /// </summary>
-    /// <param name="name"></param>
-    /// <returns>The formatted string.</returns>
-    public override string GetParameterName(string name)
-    {
-      if (string.IsNullOrWhiteSpace(name))
-      {
-        return name;
-      }
-      return EnsureNameCase(GetEscapedReservedName(CamelCase(RemoveInvalidCharacters(name)), "Parameter"));
-    }
-
-    /// <summary>
-    /// Formats a string for naming properties using Pascal case by default.
-    /// </summary>
-    /// <param name="name"></param>
-    /// <returns>The formatted string.</returns>
-    public override string GetPropertyName(string name)
-    {
-      if (string.IsNullOrWhiteSpace(name))
-      {
-        return name;
-      }
-      return EnsureNameCase(GetEscapedReservedName(PascalCase(RemoveInvalidCharacters(name)), "Property"));
-    }
-
-    /// <summary>
-    /// Formats a string for naming a Type or Object using Pascal case by default.
-    /// </summary>
-    /// <param name="name"></param>
-    /// <returns>The formatted string.</returns>
-    public override string GetTypeName(string name)
-    {
-      if (string.IsNullOrWhiteSpace(name))
-      {
-        return name;
-      }
-      return EnsureNameCase(GetEscapedReservedName(PascalCase(RemoveInvalidCharacters(name)), "Type"));
-    }
-
-    /// <summary>
-    /// Formats a string for naming a local variable using Camel case by default.
-    /// </summary>
-    /// <param name="name"></param>
-    /// <returns>The formatted string.</returns>
-    public override string GetVariableName(string name)
-    {
-      if (string.IsNullOrWhiteSpace(name))
-      {
-        return name;
-      }
-      return EnsureNameCase(GetEscapedReservedName(CamelCase(RemoveInvalidCharacters(name)), "Var"));
-    }
-
-    /// <summary>
-    /// Converts names the conflict with Go reserved terms by appending the passed appendValue.
-    /// </summary>
-    /// <param name="name">Name.</param>
-    /// <param name="appendValue">String to append.</param>
-    /// <returns>The transformed reserved name</returns>
-    protected override string GetEscapedReservedName(string name, string appendValue)
-    {
-      if (name == null)
-      {
-        throw new ArgumentNullException("name");
-      }
-
-      if (appendValue == null)
-      {
-        throw new ArgumentNullException("appendValue");
-      }
-
-      // Use case-sensitive comparisons to reduce generated names
-      if (ReservedWords.Contains(name, StringComparer.Ordinal))
-      {
-        name += appendValue;
-      }
-
-      return name;
-    }
-
-    // Refactor -> Namer
-    public void ReserveNamespace(string ns)
-    {
-      ReservedWords.Add(ns);
-    }
-
-    // EnsureNameCase ensures that all "words" in the passed name adhere to Golint casing expectations.
-    // A "word" is a sequence of characters separated by a change in case or underscores. Since this
-    // method alters name casing, it should be used after any other method that expects normal
-    // camelCase or PascalCase.
-    private string EnsureNameCase(string name)
-    {
-      var builder = new StringBuilder();
-      foreach (var s in name.ToWords())
-      {
-        builder.Append(CommonInitialisms.Contains(s) ? s.ToUpper() : s);
-      }
-      return builder.ToString();
-    }
-
-    public override string EscapeDefaultValue(string defaultValue, IModelType type)
-    {
-      if (type == null)
-      {
-        throw new ArgumentNullException("type");
-      }
-      PrimaryType primaryType = type as PrimaryType;
-      if (defaultValue != null)
-      {
-        if (type is CompositeType)
-        {
-          return type.Name + "{}";
+                });
         }
-        else if (primaryType != null)
+
+        /// <summary>
+        /// Formats a string to work around golint name stuttering
+        /// Refactor -> CodeModelTransformer
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="packageName"></param>
+        /// <param name="nameInUse"></param>
+        /// <param name="attachment"></param>
+        /// <returns>The formatted string</returns>
+        public static string AttachTypeName(string name, string packageName, bool nameInUse, string attachment)
         {
-          if (primaryType.KnownPrimaryType == KnownPrimaryType.String
-              || primaryType.KnownPrimaryType == KnownPrimaryType.Uuid
-              || primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-          {
-            return CodeNamer.Instance.QuoteValue(defaultValue);
-          }
-          else if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
-          {
-            return defaultValue.ToLowerInvariant();
-          }
-          else if (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray)
-          {
-            return "[]bytearray(\"" + defaultValue + "\")";
-          }
-          else
-          {
-            //TODO: handle imports for package types.
-          }
+            return nameInUse
+                ? name.Equals(packageName, StringComparison.OrdinalIgnoreCase)
+                    ? name
+                    : name + attachment
+                : name;
         }
-      }
-      return defaultValue;
+
+        /// <summary>
+        /// Formats a string to pascal case using a specific character as splitter
+        /// Refactor -> Namer ... Even better if this already exists in the core :D
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="splitter"></param>
+        /// <returns>The formatted string</returns>
+        public static string PascalCaseWithoutChar(string name, char splitter)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+
+            return
+                name.Split(splitter)
+                    .Where(s => !string.IsNullOrEmpty(s))
+                    .Select(s => char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1))
+                    .DefaultIfEmpty("")
+                    .Aggregate(string.Concat);
+        }
+
+        public override string GetEnumMemberName(string name)
+        {
+            return EnsureNameCase(base.GetEnumMemberName(name));
+        }
+
+        public override string GetFieldName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return EnsureNameCase(PascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Field"))));
+        }
+
+        public override string GetInterfaceName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return EnsureNameCase(PascalCase(RemoveInvalidCharacters(name)));
+        }
+
+        /// <summary>
+        /// Formats a string for naming a method using Pascal case by default.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>The formatted string.</returns>
+        public override string GetMethodName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return EnsureNameCase(GetEscapedReservedName(PascalCase(RemoveInvalidCharacters(name)), "Method"));
+        }
+
+        public override string GetMethodGroupName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+
+            // we use the base implementation here as it uses a case-insensitive comparison.
+            // this is a bit of a hacky work-around for some naming changes introduced in core...
+            return EnsureNameCase(PascalCase(RemoveInvalidCharacters(base.GetEscapedReservedName(name, "Group"))));
+        }
+
+        /// <summary>
+        /// Formats a string for naming method parameters using GetVariableName Camel case by default.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>The formatted string.</returns>
+        public override string GetParameterName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return EnsureNameCase(GetEscapedReservedName(CamelCase(RemoveInvalidCharacters(name)), "Parameter"));
+        }
+
+        /// <summary>
+        /// Formats a string for naming properties using Pascal case by default.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>The formatted string.</returns>
+        public override string GetPropertyName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return EnsureNameCase(GetEscapedReservedName(PascalCase(RemoveInvalidCharacters(name)), "Property"));
+        }
+
+        /// <summary>
+        /// Formats a string for naming a Type or Object using Pascal case by default.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>The formatted string.</returns>
+        public override string GetTypeName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return EnsureNameCase(GetEscapedReservedName(PascalCase(RemoveInvalidCharacters(name)), "Type"));
+        }
+
+        /// <summary>
+        /// Formats a string for naming a local variable using Camel case by default.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>The formatted string.</returns>
+        public override string GetVariableName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return EnsureNameCase(GetEscapedReservedName(CamelCase(RemoveInvalidCharacters(name)), "Var"));
+        }
+
+        /// <summary>
+        /// Converts names the conflict with Go reserved terms by appending the passed appendValue.
+        /// </summary>
+        /// <param name="name">Name.</param>
+        /// <param name="appendValue">String to append.</param>
+        /// <returns>The transformed reserved name</returns>
+        protected override string GetEscapedReservedName(string name, string appendValue)
+        {
+            if (name == null)
+            {
+                throw new ArgumentNullException("name");
+            }
+
+            if (appendValue == null)
+            {
+                throw new ArgumentNullException("appendValue");
+            }
+
+            // Use case-sensitive comparisons to reduce generated names
+            if (ReservedWords.Contains(name, StringComparer.Ordinal))
+            {
+                name += appendValue;
+            }
+
+            return name;
+        }
+
+        // Refactor -> Namer
+        public void ReserveNamespace(string ns)
+        {
+            ReservedWords.Add(ns);
+        }
+
+        // EnsureNameCase ensures that all "words" in the passed name adhere to Golint casing expectations.
+        // A "word" is a sequence of characters separated by a change in case or underscores. Since this
+        // method alters name casing, it should be used after any other method that expects normal
+        // camelCase or PascalCase.
+        private string EnsureNameCase(string name)
+        {
+            var builder = new StringBuilder();
+            foreach (var s in name.ToWords())
+            {
+                builder.Append(CommonInitialisms.Contains(s) ? s.ToUpper() : s);
+            }
+            return builder.ToString();
+        }
+
+        public override string EscapeDefaultValue(string defaultValue, IModelType type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+            PrimaryType primaryType = type as PrimaryType;
+            if (defaultValue != null)
+            {
+                if (type is CompositeType)
+                {
+                    return type.Name + "{}";
+                }
+                else if (primaryType != null)
+                {
+                    if (primaryType.KnownPrimaryType == KnownPrimaryType.String
+                        || primaryType.KnownPrimaryType == KnownPrimaryType.Uuid
+                        || primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan)
+                    {
+                        return CodeNamer.Instance.QuoteValue(defaultValue);
+                    }
+                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
+                    {
+                        return defaultValue.ToLowerInvariant();
+                    }
+                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray)
+                    {
+                        return "[]bytearray(\"" + defaultValue + "\")";
+                    }
+                    else
+                    {
+                        //TODO: handle imports for package types.
+                    }
+                }
+            }
+            return defaultValue;
+        }
     }
-  }
 }

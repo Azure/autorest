@@ -7,6 +7,7 @@ require("../lib/polyfill.min.js");
 
 import { suite, test, timeout, skip } from "mocha-typescript";
 import * as assert from "assert";
+import { PumpMessagesToConsole } from './test-utility';
 
 import { RealFileSystem } from "../lib/file-system";
 import { AutoRest } from "../lib/autorest-core";
@@ -15,7 +16,7 @@ import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message, Channel } from "../lib/message";
 import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
-import { DataStore } from "../lib/data-store/data-store";
+import { DataStore, QuickScope } from '../lib/data-store/data-store';
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
 @suite class Plugins {
@@ -46,7 +47,8 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
   @test @timeout(0) async "openapi-validation-tools"() {
     const autoRest = new AutoRest(new RealFileSystem());
     autoRest.AddConfiguration({ "input-file": "https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json" });
-    autoRest.AddConfiguration({ amar: true });
+    autoRest.AddConfiguration({ "model-validator": true });
+    autoRest.AddConfiguration({ "semantic-validator": true });
 
     const errorMessages: Message[] = [];
     autoRest.Message.Subscribe((_, m) => {
@@ -78,7 +80,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const messages: Message[] = [];
-    const resultScope = await autorestPlugin.ValidateComposite(swagger, pluginScope, config.GetEntry("openapi-type"), m => messages.push(m));
+    const resultScope = await autorestPlugin.CautiousProcess("azure-validator", key => config.GetEntry(key as any), new QuickScope([swagger]), pluginScope, m => messages.push(m));
 
     // check results
     assert.notEqual(messages.length, 0);
@@ -86,8 +88,6 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       assert.ok(message);
       assert.ok(message.Details.code);
       assert.ok(message.Text);
-      assert.ok(message.Details.jsonref);
-      assert.ok(message.Details["json-path"]);
       assert.ok(message.Details.validationCategory);
       assert.strictEqual(message.Plugin, "azure-validator");
     }
@@ -108,15 +108,35 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     // call modeler
     const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
-    const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope, { namespace: "SomeNamespace" }, m => null);
+    await autorestPlugin.CautiousProcess("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickScope([swagger]), pluginScope, m => null);
+    const results = await pluginScope.Enum();
+    if (results.length !== 1) {
+      throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
+    }
 
     // check results
-    const codeModel = codeModelHandle.ReadData();
+    const codeModel = (await pluginScope.ReadStrict(results[0])).ReadData();
     assert.notEqual(codeModel.indexOf("isPolymorphicDiscriminator"), -1);
   }
 
   @test @timeout(10000) async "AutoRest.dll Generator"() {
+    const autoRest = new AutoRest(new RealFileSystem());
+    autoRest.AddConfiguration({
+      namespace: "SomeNamespace",
+      "license-header": null,
+      "payload-flattening-threshold": 0,
+      "add-credentials": false,
+      "package-name": "rubyrubyrubyruby"
+    });
+    const config = await autoRest.view;
     const dataStore = new DataStore(CancellationToken.None);
+
+    // load swagger
+    const swagger = await LoadLiterateSwagger(
+      config,
+      dataStore.GetReadThroughScope(),
+      "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
+      dataStore.CreateScope("loader"));
 
     // load code model
     const codeModelUri = ResolveUri(CreateFolderUri(__dirname), "resources/code-model.yaml");
@@ -127,16 +147,11 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const resultScope = await autorestPlugin.GenerateCode(
+      config,
       "csharp",
+      swagger,
       codeModelHandle,
       pluginScope,
-      <any>{
-        namespace: "SomeNamespace",
-        "license-header": null,
-        "payload-flattening-threshold": 0,
-        "add-credentials": false,
-        "package-name": "rubyrubyrubyruby"
-      },
       m => null);
 
     // check results

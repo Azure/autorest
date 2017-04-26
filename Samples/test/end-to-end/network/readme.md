@@ -22,8 +22,8 @@ input-file:
  - https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/vmssNetworkInterface.json
 
 output-artifact:
-- swagger-document
-- swagger-document.map
+- swagger-document.json
+- swagger-document.json.map
 
 override-info:
   title: Network
