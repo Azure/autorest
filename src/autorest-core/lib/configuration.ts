@@ -1,9 +1,9 @@
-import { OperationAbortedException } from './exception';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { OperationAbortedException } from './exception';
 import { TryDecodeEnhancedPositionFromName } from './source-map/source-map';
 import { Supressor } from './pipeline/supression';
 import { matches, stringify } from "./ref/jsonpath";

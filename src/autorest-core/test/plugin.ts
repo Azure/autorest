@@ -2,10 +2,10 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-// polyfills for language support 
+// polyfills for language support
 require("../lib/polyfill.min.js");
 
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
+import { suite, test, timeout, skip } from "mocha-typescript";
 import * as assert from "assert";
 
 import { RealFileSystem } from "../lib/file-system";
@@ -78,7 +78,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const messages: Message[] = [];
-    const resultScope = await autorestPlugin.Validate(swagger, pluginScope, m => messages.push(m));
+    const resultScope = await autorestPlugin.ValidateComposite(swagger, pluginScope, m => messages.push(m));
 
     // check results
     assert.notEqual(messages.length, 0);
