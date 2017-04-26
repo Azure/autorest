@@ -177,6 +177,16 @@ namespace AutoRest.Go
               mtm.NextLink = CodeNamerGo.PascalCaseWithoutChar(cmg.PagedTypes[mtm], '.');
               mtm.PreparerNeeded = cmg.NextMethodUndefined.Contains(mtm);
               mtm.PackageName = cmg.Namespace;
+              var methods = cmg.Methods.Cast<MethodGo>().Where(m => m.HasReturnValue() && m.ReturnValue().Body.Equals(mtm));
+              List<string> codes = new List<string>();
+              foreach(MethodGo m in methods)
+              {
+                foreach (string code in m.ResponseCodes)
+                {
+                  codes.Add(code);                  
+                }
+              }
+              mtm.ResponseCodes = string.Join(",", codes.ToArray());
             }
           });
     }

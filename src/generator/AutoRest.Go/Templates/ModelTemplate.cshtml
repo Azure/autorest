@@ -28,9 +28,6 @@ type @Model.Name struct {
     @:if err != nil {
         @:return result, @(Model.AutorestError("Failure preparing next results request"))
     @:}
-    @:if req == nil {
-        @:return
-    @:}
 
     @:@EmptyLine
     @:resp, err := lastResults.NextSender(req)
@@ -70,24 +67,26 @@ type @Model.Name struct {
 @:}
 
 @EmptyLine
-// @(Model.ResponderMethodName) handles the response to the @(Model.Name) request. The method always
-// closes the http.Response Body.
-func (lastResults @(Model.Name)) NextResponder(resp *http.Response) (result @(Model.Name), err error) { 
-    err = autorest.Respond(
-            @:client.ByInspecting(),
-            @:azure.WithErrorUnlessStatusCode(1),
-            if (IsWrapperType)
+@:// NextResponder handles the response to the @(Model.Name)
+@:// request. The method always closes the http.Response Body.
+@:func (lastResults @(Model.Name)) NextResponder(resp *http.Response) (result @(Model.Name), err error) { 
+    @:err = autorest.Respond(
+            @:resp,
+            @:lastResults.client.ByInspecting(),
+            @:azure.WithErrorUnlessStatusCode(@(Model.ResponseCodes)),
+            if (Model.IsWrapperType)
             {
-                @:autorest.ByUnmarshallingJSON(&result.Value),
+            @:autorest.ByUnmarshallingJSON(&result.Value),
             }
             else
             {
-                @:autorest.ByUnmarshallingJSON(&result)
+            @:autorest.ByUnmarshallingJSON(&result),
             }
             @:autorest.ByClosing(),
     @:)
 
-    @result.Response = autorest.Response{Response: resp}
-    return
-}
+    @:result.Response = autorest.Response{Response: resp}
+    @:result.client = lastResults.client
+    @:return
+@:}
 }

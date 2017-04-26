@@ -107,6 +107,10 @@ namespace AutoRest.Go.Model
     /// <param name="imports"></param>
     public void AddImports(HashSet<string> imports)
     {
+      if (!string.IsNullOrEmpty(NextLink) && PreparerNeeded)
+      {
+        imports.Add("github.com/Azure/go-autorest/autorest/azure");
+      }
       Properties.ForEach(p => p.ModelType.AddImports(imports));
     }
 
@@ -218,6 +222,8 @@ namespace AutoRest.Go.Model
         return type;
       }
     }
+
+    public string ResponseCodes;
 
     public void SetName(string name)
     {

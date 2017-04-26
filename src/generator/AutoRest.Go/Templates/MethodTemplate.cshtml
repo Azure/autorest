@@ -160,37 +160,54 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
             @(rd.EmitAsArguments()))
 
     @(Model.Response)
+    @if (Model.IsPageable)
+    {
+    @if (Model.Owner == "ManagementClient")
+    {
+    @:result.client = client
+    }
+    else
+    {
+    @:result.client = client.ManagementClient
+    }
+    }
     return
 }
 
-@if (Model.IsPageable)
+@if (Model.IsPageable && !Model.IsNextMethod)
 {
 @:@EmptyLine
 @:// @(Model.ListCompleteMethodName) gets all elements from the list without paging.
 @:func (client @(Model.Owner)) @(Model.ListCompleteMethodName) @(Model.MethodParametersSignatureComplete) @(Model.MethodReturnSignatureComplete) {
     @:respSlice := @((Model.ListElement.ModelType as SequenceTypeGo).Name){}
     @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters))
-    @:for err == nil {
+    @:if err != nil {
+        @:return respSlice, err
+    @:}
+    @:if list.@(Model.ListElement.Name) != nil {
+        @:for _, item := range *list.@(Model.ListElement.Name) {
+            @:respSlice = append(respSlice, item)
+        @:}
+    @:}
+    @:for list.@(Model.NextLink()) != nil {
         @:select {
         @:case <- cancel:
             @:return respSlice, nil
         @:default:
-            @:if list.@(Model.ListElement.Name) != nil {
-                @:for _, item := range *list.@(Model.ListElement.Name) {
-                    @:respSlice = append(respSlice, item)
-                @:}
-            @:}
-            @:if list.@(Model.NextLink()) != nil {
             if (!Model.NextAlreadyDefined)
             {
-                @:list, err = list.Next()
+            @:list, err = list.Next()
             }
             else
             {
-                @:list, err = client.@(Model.NextOperationName)(@(Model.NextOperationParameters))
+            @:list, err = client.@(Model.NextOperationName)(@(Model.NextOperationParameters))
             }
-                @:if err != nil {
-                    @:return respSlice, err
+            @:if err != nil {
+                @:return respSlice, err
+            @:}            
+            @:if list.@(Model.ListElement.Name) != nil {
+                @:for _, item := range *list.@(Model.ListElement.Name) {
+                    @:respSlice = append(respSlice, item)
                 @:}
             @:}
         @:}

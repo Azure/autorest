@@ -404,6 +404,8 @@ namespace AutoRest.Go.Model
 
     public bool IsPageable => !string.IsNullOrEmpty(NextLink());
 
+    public bool IsNextMethod => Name.Value.EqualsIgnoreCase(NextOperationName);
+
     /// <summary>
     /// Checks if method for next page of results on paged methods is already present in the method list.
     /// </summary>
