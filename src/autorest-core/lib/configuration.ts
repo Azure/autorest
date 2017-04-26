@@ -224,7 +224,6 @@ export class ConfigurationView {
   // message pipeline (source map resolution, filter, ...)
   public Message(m: Message): void {
     this.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - starting processing` });
-
     try {
       // update source locations to point to loaded Swagger
       if (m.Source) {
