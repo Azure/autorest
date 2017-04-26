@@ -244,21 +244,18 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const scopeCodeModel = await RunPlugin(config, "modeler", scopeComposedSwaggerTransformed);
     const scopeCodeModelCommonmark = await RunPlugin(config, "commonmarker", scopeCodeModel);
 
-    const codeModelGFM = await scopeCodeModelCommonmark.ReadStrict((await scopeCodeModelCommonmark.Enum())[0]);
-
     let pluginCtr = 0;
     for (const usedCodeGenerator of usedCodeGenerators) {
       for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
-        const manipulator = new Manipulator(genConfig);
         const processMessage = genConfig.Message.bind(genConfig);
         const scope = genConfig.DataStore.CreateScope("plugin_" + ++pluginCtr);
 
         barrier.Await((async () => {
-          // TRANSFORM
-          const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/code-model-v1.yaml");
+          const scopeCodeModelTransformed = await RunPlugin(genConfig, "transform", scopeCodeModelCommonmark);
 
-          await emitArtifactInternal(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
+          await emitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), scopeCodeModelTransformed, false);
 
+          const codeModelTransformed = await scopeCodeModelTransformed.ReadStrict((await scopeCodeModelTransformed.Enum())[0]);
           let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(genConfig, usedCodeGenerator, swagger, codeModelTransformed, scope.CreateScope("generate"), processMessage);
 
           // C# simplifier
