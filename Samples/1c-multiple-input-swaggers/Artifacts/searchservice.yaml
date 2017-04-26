@@ -1,0 +1,2273 @@
+---
+swagger: '2.0'
+info:
+  title: Search and Storage
+paths:
+  '/datasources(''{dataSourceName}'')':
+    put:
+      tags:
+        - DataSources
+      operationId: DataSources_CreateOrUpdate
+      description: >-
+        Creates a new Azure Search datasource or updates a datasource if it
+        already exists.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946900.aspx'
+      parameters:
+        - name: dataSourceName
+          in: path
+          required: true
+          type: string
+          description: The name of the datasource to create or update.
+        - name: dataSource
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DataSource'
+          description: The definition of the datasource to create or update.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/DataSource'
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/DataSource'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+    delete:
+      tags:
+        - DataSources
+      operationId: DataSources_Delete
+      description: Deletes an Azure Search datasource.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946881.aspx'
+      parameters:
+        - name: dataSourceName
+          in: path
+          required: true
+          type: string
+          description: The name of the datasource to delete.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '204':
+          description: ''
+        '404':
+          description: ''
+      produces:
+        - application/json
+      consumes:
+        - application/json
+    get:
+      tags:
+        - DataSources
+      operationId: DataSources_Get
+      description: Retrieves a datasource definition from Azure Search.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946893.aspx'
+      parameters:
+        - name: dataSourceName
+          in: path
+          required: true
+          type: string
+          description: The name of the datasource to retrieve.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/DataSource'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+  /datasources:
+    get:
+      tags:
+        - DataSources
+      operationId: DataSources_List
+      description: Lists all datasources available for an Azure Search service.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946878.aspx'
+      parameters:
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/DataSourceListResult'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+    post:
+      tags:
+        - DataSources
+      operationId: DataSources_Create
+      description: Creates a new Azure Search datasource.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946876.aspx'
+      parameters:
+        - name: dataSource
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DataSource'
+          description: The definition of the datasource to create.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/DataSource'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+  '/indexers(''{indexerName}'')/search.reset':
+    post:
+      tags:
+        - Indexers
+      operationId: Indexers_Reset
+      description: >-
+        Resets the change tracking state associated with an Azure Search
+        indexer.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946897.aspx'
+      parameters:
+        - name: indexerName
+          in: path
+          required: true
+          type: string
+          description: The name of the indexer to reset.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '204':
+          description: ''
+      produces:
+        - application/json
+      consumes:
+        - application/json
+  '/indexers(''{indexerName}'')/search.run':
+    post:
+      tags:
+        - Indexers
+      operationId: Indexers_Run
+      description: Runs an Azure Search indexer on-demand.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946885.aspx'
+      parameters:
+        - name: indexerName
+          in: path
+          required: true
+          type: string
+          description: The name of the indexer to run.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '202':
+          description: ''
+      produces:
+        - application/json
+      consumes:
+        - application/json
+  '/indexers(''{indexerName}'')':
+    put:
+      tags:
+        - Indexers
+      operationId: Indexers_CreateOrUpdate
+      description: >-
+        Creates a new Azure Search indexer or updates an indexer if it already
+        exists.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946899.aspx'
+      parameters:
+        - name: indexerName
+          in: path
+          required: true
+          type: string
+          description: The name of the indexer to create or update.
+        - name: indexer
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Indexer'
+          description: The definition of the indexer to create or update.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Indexer'
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Indexer'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+    delete:
+      tags:
+        - Indexers
+      operationId: Indexers_Delete
+      description: Deletes an Azure Search indexer.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946898.aspx'
+      parameters:
+        - name: indexerName
+          in: path
+          required: true
+          type: string
+          description: The name of the indexer to delete.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '404':
+          description: ''
+        '204':
+          description: ''
+      produces:
+        - application/json
+      consumes:
+        - application/json
+    get:
+      tags:
+        - Indexers
+      operationId: Indexers_Get
+      description: Retrieves an indexer definition from Azure Search.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946874.aspx'
+      parameters:
+        - name: indexerName
+          in: path
+          required: true
+          type: string
+          description: The name of the indexer to retrieve.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Indexer'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+  /indexers:
+    get:
+      tags:
+        - Indexers
+      operationId: Indexers_List
+      description: Lists all indexers available for an Azure Search service.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946883.aspx'
+      parameters:
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/IndexerListResult'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+    post:
+      tags:
+        - Indexers
+      operationId: Indexers_Create
+      description: Creates a new Azure Search indexer.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946899.aspx'
+      parameters:
+        - name: indexer
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Indexer'
+          description: The definition of the indexer to create.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Indexer'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+  '/indexers(''{indexerName}'')/search.status':
+    get:
+      tags:
+        - Indexers
+      operationId: Indexers_GetStatus
+      description: Returns the current status and execution history of an indexer.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn946884.aspx'
+      parameters:
+        - name: indexerName
+          in: path
+          required: true
+          type: string
+          description: The name of the indexer for which to retrieve status.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/IndexerExecutionInfo'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+  /indexes:
+    post:
+      tags:
+        - Indexes
+      operationId: Indexes_Create
+      description: Creates a new Azure Search index.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn798941.aspx'
+      parameters:
+        - name: index
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Index'
+          description: The definition of the index to create.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Index'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+    get:
+      tags:
+        - Indexes
+      operationId: Indexes_List
+      description: Lists all indexes available for an Azure Search service.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn798923.aspx'
+      parameters:
+        - name: $select
+          in: query
+          required: false
+          type: string
+          description: >-
+            Selects which properties of the index definitions to retrieve.
+            Specified as a comma-separated list of JSON property names, or '*'
+            for all properties. The default is all properties.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/IndexListResult'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+  '/indexes(''{indexName}'')':
+    put:
+      tags:
+        - Indexes
+      operationId: Indexes_CreateOrUpdate
+      description: >-
+        Creates a new Azure Search index or updates an index if it already
+        exists.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn800964.aspx'
+      parameters:
+        - name: indexName
+          in: path
+          required: true
+          type: string
+          description: The definition of the index to create or update.
+        - name: index
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Index'
+          description: The definition of the index to create or update.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Index'
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Index'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+    delete:
+      tags:
+        - Indexes
+      operationId: Indexes_Delete
+      description: Deletes an Azure Search index and all the documents it contains.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn798926.aspx'
+      parameters:
+        - name: indexName
+          in: path
+          required: true
+          type: string
+          description: The name of the index to delete.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '204':
+          description: ''
+        '404':
+          description: ''
+      produces:
+        - application/json
+      consumes:
+        - application/json
+    get:
+      tags:
+        - Indexes
+      operationId: Indexes_Get
+      description: Retrieves an index definition from Azure Search.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn798939.aspx'
+      parameters:
+        - name: indexName
+          in: path
+          required: true
+          type: string
+          description: The name of the index to retrieve.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Index'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+  '/indexes(''{indexName}'')/search.stats':
+    get:
+      tags:
+        - Indexes
+      operationId: Indexes_GetStatistics
+      description: >-
+        Returns statistics for the given index, including a document count and
+        storage usage.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/dn798942.aspx'
+      parameters:
+        - name: indexName
+          in: path
+          required: true
+          type: string
+          description: The name of the index for which to retrieve statistics.
+        - name: client-request-id
+          in: header
+          required: false
+          type: string
+          format: uuid
+          description: Tracking ID sent with the request to help with debugging.
+          x-ms-client-request-id: true
+          x-ms-parameter-grouping:
+            name: search-request-options
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-02-28'
+      x-ms-request-id: request-id
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/IndexGetStatisticsResult'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability':
+    post:
+      tags:
+        - StorageAccounts
+      operationId: StorageAccounts_CheckNameAvailability
+      description: Checks that account name is valid and is not in use.
+      parameters:
+        - name: accountName
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StorageAccountCheckNameAvailabilityParameters'
+          description: >-
+            The name of the storage account within the specified resource group.
+            Storage account names must be between 3 and 24 characters in length
+            and use numbers and lower-case letters only.
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-06-15'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityResult'
+      produces:
+        - application/json
+        - text/json
+      consumes:
+        - application/json
+        - text/json
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}':
+    put:
+      tags:
+        - StorageAccounts
+      operationId: StorageAccounts_Create
+      description: >-
+        Asynchronously creates a new storage account with the specified
+        parameters. Existing accounts cannot be updated with this API and should
+        instead use the Update Storage Account API. If an account is already
+        created and subsequent PUT request is issued with exact same set of
+        properties, then HTTP 200 would be returned. 
+      parameters:
+        - name: resourceGroupName
+          in: path
+          required: true
+          type: string
+          description: The name of the resource group within the user's subscription.
+        - name: accountName
+          in: path
+          required: true
+          type: string
+          description: >-
+            The name of the storage account within the specified resource group.
+            Storage account names must be between 3 and 24 characters in length
+            and use numbers and lower-case letters only.  
+          maxLength: 24
+          minLength: 3
+        - name: parameters
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StorageAccountCreateParameters'
+          description: The parameters to provide for the created account.
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-06-15'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StorageAccount'
+        '202':
+          description: ''
+      x-ms-long-running-operation: true
+      produces:
+        - application/json
+        - text/json
+      consumes:
+        - application/json
+        - text/json
+    delete:
+      tags:
+        - StorageAccounts
+      operationId: StorageAccounts_Delete
+      description: Deletes a storage account in Microsoft Azure.
+      parameters:
+        - name: resourceGroupName
+          in: path
+          required: true
+          type: string
+          description: The name of the resource group within the user's subscription.
+        - name: accountName
+          in: path
+          required: true
+          type: string
+          description: >-
+            The name of the storage account within the specified resource group.
+            Storage account names must be between 3 and 24 characters in length
+            and use numbers and lower-case letters only.  
+          maxLength: 24
+          minLength: 3
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-06-15'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+        '204':
+          description: ''
+      produces:
+        - application/json
+        - text/json
+      consumes:
+        - application/json
+        - text/json
+    get:
+      tags:
+        - StorageAccounts
+      operationId: StorageAccounts_GetProperties
+      description: >-
+        Returns the properties for the specified storage account including but
+        not limited to name, account type, location, and account status. The
+        ListKeys operation should be used to retrieve storage keys.
+      parameters:
+        - name: resourceGroupName
+          in: path
+          required: true
+          type: string
+          description: The name of the resource group within the user's subscription.
+        - name: accountName
+          in: path
+          required: true
+          type: string
+          description: >-
+            The name of the storage account within the specified resource group.
+            Storage account names must be between 3 and 24 characters in length
+            and use numbers and lower-case letters only.  
+          maxLength: 24
+          minLength: 3
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-06-15'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StorageAccount'
+      produces:
+        - application/json
+        - text/json
+      consumes:
+        - application/json
+        - text/json
+    patch:
+      tags:
+        - StorageAccounts
+      operationId: StorageAccounts_Update
+      description: >-
+        Updates the account type or tags for a storage account. It can also be
+        used to add a custom domain (note that custom domains cannot be added
+        via the Create operation). Only one custom domain is supported per
+        storage account. In order to replace a custom domain, the old value must
+        be cleared before a new value may be set. To clear a custom domain,
+        simply update the custom domain with empty string. Then call update
+        again with the new cutsom domain name. The update API can only be used
+        to update one of tags, accountType, or customDomain per call. To update
+        multiple of these properties, call the API multiple times with one
+        change per call. This call does not change the storage keys for the
+        account. If you want to change storage account keys, use the
+        RegenerateKey operation. The location and name of the storage account
+        cannot be changed after creation.
+      parameters:
+        - name: resourceGroupName
+          in: path
+          required: true
+          type: string
+          description: The name of the resource group within the user's subscription.
+        - name: accountName
+          in: path
+          required: true
+          type: string
+          description: >-
+            The name of the storage account within the specified resource group.
+            Storage account names must be between 3 and 24 characters in length
+            and use numbers and lower-case letters only.  
+          maxLength: 24
+          minLength: 3
+        - name: parameters
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StorageAccountUpdateParameters'
+          description: >-
+            The parameters to update on the account. Note that only one property
+            can be changed at a time using this API. 
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-06-15'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StorageAccount'
+      produces:
+        - application/json
+        - text/json
+      consumes:
+        - application/json
+        - text/json
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys':
+    post:
+      tags:
+        - StorageAccounts
+      operationId: StorageAccounts_ListKeys
+      description: Lists the access keys for the specified storage account.
+      parameters:
+        - name: resourceGroupName
+          in: path
+          required: true
+          type: string
+          description: The name of the resource group.
+        - name: accountName
+          in: path
+          required: true
+          type: string
+          description: The name of the storage account.
+          maxLength: 24
+          minLength: 3
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-06-15'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StorageAccountKeys'
+      produces:
+        - application/json
+        - text/json
+      consumes:
+        - application/json
+        - text/json
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts':
+    get:
+      tags:
+        - StorageAccounts
+      operationId: StorageAccounts_List
+      description: >-
+        Lists all the storage accounts available under the subscription. Note
+        that storage keys are not returned; use the ListKeys operation for this.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-06-15'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StorageAccountListResult'
+      x-ms-pageable:
+        nextLinkName: null
+      produces:
+        - application/json
+        - text/json
+      consumes:
+        - application/json
+        - text/json
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts':
+    get:
+      tags:
+        - StorageAccounts
+      operationId: StorageAccounts_ListByResourceGroup
+      description: >-
+        Lists all the storage accounts available under the given resource group.
+        Note that storage keys are not returned; use the ListKeys operation for
+        this.
+      parameters:
+        - name: resourceGroupName
+          in: path
+          required: true
+          type: string
+          description: The name of the resource group within the user's subscription.
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-06-15'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StorageAccountListResult'
+      x-ms-pageable:
+        nextLinkName: null
+      produces:
+        - application/json
+        - text/json
+      consumes:
+        - application/json
+        - text/json
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey':
+    post:
+      tags:
+        - StorageAccounts
+      operationId: StorageAccounts_RegenerateKey
+      description: Regenerates the access keys for the specified storage account.
+      parameters:
+        - name: resourceGroupName
+          in: path
+          required: true
+          type: string
+          description: The name of the resource group within the user's subscription.
+        - name: accountName
+          in: path
+          required: true
+          type: string
+          description: >-
+            The name of the storage account within the specified resource group.
+            Storage account names must be between 3 and 24 characters in length
+            and use numbers and lower-case letters only.  
+          maxLength: 24
+          minLength: 3
+        - name: regenerateKey
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StorageAccountRegenerateKeyParameters'
+          description: >-
+            Specifies name of the key which should be regenerated. key1 or key2
+            for the default keys
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-06-15'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StorageAccountKeys'
+      produces:
+        - application/json
+        - text/json
+      consumes:
+        - application/json
+        - text/json
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages':
+    get:
+      tags:
+        - Usage
+      operationId: Usage_List
+      description: >-
+        Gets the current usage count and the limit for the resources under the
+        subscription.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          type: string
+          description: Client Api Version.
+          enum:
+            - '2015-06-15'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/UsageListResult'
+      x-ms-pageable:
+        nextLinkName: null
+      produces:
+        - application/json
+        - text/json
+      consumes:
+        - application/json
+        - text/json
+definitions:
+  DataSourceCredentials:
+    properties:
+      connectionString:
+        externalDocs:
+          url: 'https://msdn.microsoft.com/library/azure/dn946876.aspx'
+        type: string
+        description: Gets or sets the connection string for the datasource.
+    required:
+      - connectionString
+    description: Represents credentials that can be used to connect to a datasource.
+  DataContainer:
+    properties:
+      name:
+        type: string
+        description: >-
+          Gets or sets the name of the table or view (for Azure SQL data source)
+          or collection (for DocumentDB data source) that will be indexed.
+      query:
+        type: string
+        description: >-
+          Gets or sets a query that is applied to this data container. Only
+          supported by DocumentDb datasources.
+    required:
+      - name
+    description: >-
+      Represents information about the entity (such as Azure SQL table or
+      DocumentDb collection) that will be indexed.
+  DataChangeDetectionPolicy:
+    discriminator: '@odata.type'
+    properties:
+      '@odata.type':
+        type: string
+    required:
+      - '@odata.type'
+    description: Abstract base class for data change detection policies.
+  HighWaterMarkChangeDetectionPolicy:
+    description: >-
+      Defines a data change detection policy that captures changes based on the
+      value of a high water mark column.
+    x-ms-discriminator-value: '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
+    allOf:
+      - $ref: '#/definitions/DataChangeDetectionPolicy'
+    properties:
+      highWaterMarkColumnName:
+        type: string
+        description: Gets or sets the name of the high water mark column.
+    required:
+      - highWaterMarkColumnName
+  SqlIntegratedChangeTrackingPolicy:
+    description: >-
+      Defines a data change detection policy that captures changes using the
+      Integrated Change Tracking feature of Azure SQL Database.
+    x-ms-discriminator-value: '#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy'
+    allOf:
+      - $ref: '#/definitions/DataChangeDetectionPolicy'
+  DataDeletionDetectionPolicy:
+    discriminator: '@odata.type'
+    properties:
+      '@odata.type':
+        type: string
+    required:
+      - '@odata.type'
+    description: Abstract base class for data deletion detection policies.
+  SoftDeleteColumnDeletionDetectionPolicy:
+    description: >-
+      Defines a data deletion detection policy that implements a soft-deletion
+      strategy. It determines whether an item should be deleted based on the
+      value of a designated 'soft delete' column.
+    x-ms-discriminator-value: '#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy'
+    allOf:
+      - $ref: '#/definitions/DataDeletionDetectionPolicy'
+    properties:
+      softDeleteColumnName:
+        type: string
+        description: >-
+          Gets or sets the name of the column to use for soft-deletion
+          detection.
+      softDeleteMarkerValue:
+        type: string
+        description: Gets or sets the marker value that indentifies an item as deleted.
+  DataSource:
+    properties:
+      name:
+        externalDocs:
+          url: 'https://msdn.microsoft.com/library/azure/dn857353.aspx'
+        type: string
+        description: Gets or sets the name of the datasource.
+      description:
+        type: string
+        description: Gets or sets the description of the datasource.
+      type:
+        type: string
+        description: Gets or sets the type of the datasource.
+      credentials:
+        $ref: '#/definitions/DataSourceCredentials'
+        description: Gets or sets credentials for the datasource.
+      container:
+        $ref: '#/definitions/DataContainer'
+        description: Gets or sets the data container for the datasource.
+      dataChangeDetectionPolicy:
+        $ref: '#/definitions/DataChangeDetectionPolicy'
+        description: Gets or sets the data change detection policy for the datasource.
+      dataDeletionDetectionPolicy:
+        $ref: '#/definitions/DataDeletionDetectionPolicy'
+        description: Gets or sets the data deletion detection policy for the datasource.
+    required:
+      - name
+      - type
+      - credentials
+      - container
+    description: >-
+      Represents a datasource definition in Azure Search, which can be used to
+      configure an indexer.
+  DataSourceListResult:
+    properties:
+      value:
+        type: array
+        readOnly: true
+        items:
+          $ref: '#/definitions/DataSource'
+        description: Gets the datasources in the Search service.
+    description: >-
+      Response from a List Datasources request. If successful, it includes the
+      full definitions of all datasources.
+    x-ms-external: true
+  IndexingSchedule:
+    properties:
+      interval:
+        type: string
+        format: duration
+        description: Gets or sets the interval of time between indexer executions.
+      startTime:
+        type: string
+        format: date-time
+        description: Gets or sets the time when an indexer should start running.
+    required:
+      - interval
+    description: Represents a schedule for indexer execution.
+    x-ms-external: true
+  IndexingParameters:
+    properties:
+      maxFailedItems:
+        type: integer
+        format: int32
+        description: >-
+          Gets or sets the maximum number of items that can fail indexing for
+          indexer execution to still be considered successful. -1 means no
+          limit. Default is 0.
+      maxFailedItemsPerBatch:
+        type: integer
+        format: int32
+        description: >-
+          Gets or sets the maximum number of items in a single batch that can
+          fail indexing for the batch to still be considered successful. -1
+          means no limit. Default is 0.
+      base64EncodeKeys:
+        type: boolean
+        description: >-
+          Gets or sets whether indexer will base64-encode all values that are
+          inserted into key field of the target index. This is needed if keys
+          can contain characters that are invalid in keys (such as dot '.').
+          Default is false.
+    description: Represents parameters for indexer execution.
+  Indexer:
+    properties:
+      name:
+        externalDocs:
+          url: 'https://msdn.microsoft.com/library/azure/dn857353.aspx'
+        type: string
+        description: Gets or sets the name of the indexer.
+      description:
+        type: string
+        description: Gets or sets the description of the indexer.
+      dataSourceName:
+        type: string
+        description: >-
+          Gets or sets the name of the datasource from which this indexer reads
+          data.
+      targetIndexName:
+        type: string
+        description: Gets or sets the name of the index to which this indexer writes data.
+      schedule:
+        $ref: '#/definitions/IndexingSchedule'
+        description: Gets or sets the schedule for this indexer.
+      parameters:
+        $ref: '#/definitions/IndexingParameters'
+        description: Gets or sets parameters for indexer execution.
+    required:
+      - name
+      - dataSourceName
+      - targetIndexName
+    externalDocs:
+      url: 'https://msdn.microsoft.com/library/azure/dn946891.aspx'
+    description: Represents an Azure Search indexer.
+  IndexerListResult:
+    properties:
+      value:
+        type: array
+        readOnly: true
+        items:
+          $ref: '#/definitions/Indexer'
+        description: Gets the indexers in the Search service.
+    description: >-
+      Response from a List Indexers request. If successful, it includes the full
+      definitions of all indexers.
+    x-ms-external: true
+  ItemError:
+    properties:
+      key:
+        type: string
+        readOnly: true
+        description: Gets the key of the item for which indexing failed.
+      errorMessage:
+        type: string
+        readOnly: true
+        description: >-
+          Gets the message describing the error that occurred while attempting
+          to index the item.
+    description: Represents an item- or document-level indexing error.
+  IndexerExecutionResult:
+    properties:
+      status:
+        $ref: '#/definitions/IndexerExecutionStatus'
+        readOnly: true
+        description: Gets the outcome of this indexer execution.
+      errorMessage:
+        type: string
+        readOnly: true
+        description: 'Gets the error message indicating the top-level error, if any.'
+      startTime:
+        type: string
+        format: date-time
+        readOnly: true
+        description: Gets the start time of this indexer execution.
+      endTime:
+        type: string
+        format: date-time
+        readOnly: true
+        description: >-
+          Gets the end time of this indexer execution, if the execution has
+          already completed.
+      errors:
+        type: array
+        readOnly: true
+        items:
+          $ref: '#/definitions/ItemError'
+        description: Gets the item-level indexing errors
+      itemsProcessed:
+        type: integer
+        format: int32
+        readOnly: true
+        description: >-
+          Gets the number of items that were processed during this indexer
+          execution. This includes both successfully processed items and items
+          where indexing was attempted but failed.
+      itemsFailed:
+        type: integer
+        format: int32
+        readOnly: true
+        description: >-
+          Gets the number of items that failed to be indexed during this indexer
+          execution.
+      initialTrackingState:
+        type: string
+        readOnly: true
+        description: Change tracking state with which an indexer execution started.
+      finalTrackingState:
+        type: string
+        readOnly: true
+        description: Change tracking state with which an indexer execution finished.
+    description: Represents result of an individual indexer execution.
+    x-ms-external: true
+  IndexerExecutionStatus:
+    type: string
+    enum:
+      - transientFailure
+      - success
+      - inProgress
+      - reset
+    x-ms-enum:
+      name: IndexerExecutionStatus
+    description: Represents the status of an individual indexer execution.
+  IndexerExecutionInfo:
+    properties:
+      status:
+        $ref: '#/definitions/IndexerStatus'
+        readOnly: true
+        description: Overall indexer status.
+      lastResult:
+        $ref: '#/definitions/IndexerExecutionResult'
+        readOnly: true
+        description: The result of the most recent or an in-progress indexer execution.
+      executionHistory:
+        type: array
+        readOnly: true
+        items:
+          $ref: '#/definitions/IndexerExecutionResult'
+        description: >-
+          History of the recent indexer executions, sorted in reverse
+          chronological order.
+    description: Represents the current status and execution history of an indexer.
+    x-ms-external: true
+  IndexerStatus:
+    type: string
+    enum:
+      - unknown
+      - error
+      - running
+    x-ms-enum:
+      name: IndexerStatus
+    description: Represents the overall indexer status.
+  Field:
+    properties:
+      name:
+        externalDocs:
+          url: 'https://msdn.microsoft.com/library/azure/dn857353.aspx'
+        type: string
+        description: Gets or sets the name of the field.
+      type:
+        type: string
+        description: Gets or sets the data type of the field.
+      analyzer:
+        externalDocs:
+          url: 'https://msdn.microsoft.com/library/azure/dn879793.aspx'
+        type: string
+        description: Name of the text analyzer to use.
+      key:
+        type: boolean
+        description: >-
+          Gets or sets a value indicating whether the field is the key of the
+          index. Valid only for string fields. Every index must have exactly one
+          key field.
+      searchable:
+        type: boolean
+        description: >-
+          Gets or sets a value indicating whether the field is included in
+          full-text searches. Valid only forstring or string collection fields.
+          Default is false.
+      filterable:
+        type: boolean
+        description: >-
+          Gets or sets a value indicating whether the field can be used in
+          filter expressions. Default is false.
+      sortable:
+        type: boolean
+        description: >-
+          Gets or sets a value indicating whether the field can be used in
+          orderby expressions. Not valid for string collection fields. Default
+          is false.
+      facetable:
+        type: boolean
+        description: >-
+          Gets or sets a value indicating whether it is possible to facet on
+          this field. Not valid for geo-point fields. Default is false.
+      retrievable:
+        type: boolean
+        description: >-
+          Gets or sets a value indicating whether the field can be returned in a
+          search result. Default is true.
+    required:
+      - name
+      - type
+    externalDocs:
+      url: 'https://msdn.microsoft.com/library/azure/dn798941.aspx'
+    description: >-
+      Represents a field in an index definition in Azure Search, which describes
+      the name, data type, and search behavior of a field.
+    x-ms-external: true
+  TextWeights:
+    properties:
+      weights:
+        type: object
+        additionalProperties:
+          type: number
+          format: double
+        description: >-
+          Gets the dictionary of per-field weights to boost document scoring.
+          The keys are field names and the values are the weights for each
+          field.
+    required:
+      - weights
+    description: >-
+      Defines weights on index fields for which matches should boost scoring in
+      search queries.
+    x-ms-external: true
+  ScoringFunction:
+    discriminator: type
+    properties:
+      type:
+        type: string
+      fieldName:
+        type: string
+        description: >-
+          Gets or sets the name of the field used as input to the scoring
+          function.
+      boost:
+        type: number
+        format: double
+        description: >-
+          Gets or sets a multiplier for the raw score. Must be a positive number
+          not equal to 1.0.
+      interpolation:
+        $ref: '#/definitions/ScoringFunctionInterpolation'
+        description: >-
+          Gets or sets a value indicating how boosting will be interpolated
+          across document scores; defaults to "Linear".
+    required:
+      - type
+      - fieldName
+      - boost
+    externalDocs:
+      url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
+    description: >-
+      Abstract base class for functions that can modify document scores during
+      ranking.
+    x-ms-external: true
+  DistanceScoringFunction:
+    x-ms-discriminator-value: distance
+    allOf:
+      - $ref: '#/definitions/ScoringFunction'
+    properties:
+      distance:
+        $ref: '#/definitions/DistanceScoringParameters'
+        description: Gets parameter values for the distance scoring function.
+    required:
+      - distance
+    externalDocs:
+      url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
+    description: >-
+      Defines a function that boosts scores based on distance from a geographic
+      location.
+    x-ms-external: true
+  DistanceScoringParameters:
+    properties:
+      referencePointParameter:
+        type: string
+        description: >-
+          Gets or sets the name of the parameter passed in search queries to
+          specify the reference location.
+      boostingDistance:
+        type: number
+        format: double
+        description: >-
+          Gets or sets the distance in kilometers from the reference location
+          where the boosting range ends.
+    required:
+      - referencePointParameter
+      - boostingDistance
+    description: Provides parameter values to a distance scoring function.
+    x-ms-external: true
+  FreshnessScoringFunction:
+    x-ms-discriminator-value: freshness
+    allOf:
+      - $ref: '#/definitions/ScoringFunction'
+    properties:
+      freshness:
+        $ref: '#/definitions/FreshnessScoringParameters'
+        description: Gets parameter values for the freshness scoring function.
+    required:
+      - freshness
+    externalDocs:
+      url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
+    description: >-
+      Defines a function that boosts scores based on the value of a date-time
+      field.
+    x-ms-external: true
+  FreshnessScoringParameters:
+    properties:
+      boostingDuration:
+        type: string
+        format: duration
+        description: >-
+          Gets or sets the expiration period after which boosting will stop for
+          a particular document.
+    required:
+      - boostingDuration
+    description: Provides parameter values to a freshness scoring function.
+    x-ms-external: true
+  MagnitudeScoringFunction:
+    x-ms-discriminator-value: magnitude
+    allOf:
+      - $ref: '#/definitions/ScoringFunction'
+    properties:
+      magnitude:
+        $ref: '#/definitions/MagnitudeScoringParameters'
+        description: Gets parameter values for the magnitude scoring function.
+    required:
+      - magnitude
+    externalDocs:
+      url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
+    description: >-
+      Defines a function that boosts scores based on the magnitude of a numeric
+      field.
+    x-ms-external: true
+  MagnitudeScoringParameters:
+    properties:
+      boostingRangeStart:
+        type: number
+        format: double
+        description: Gets or sets the field value at which boosting starts.
+      boostingRangeEnd:
+        type: number
+        format: double
+        description: Gets or sets the field value at which boosting ends.
+      constantBoostBeyondRange:
+        type: boolean
+        description: >-
+          Gets or sets a value indicating whether to apply a constant boost for
+          field values beyond the range end value; default is false.
+    required:
+      - boostingRangeStart
+      - boostingRangeEnd
+    description: Provides parameter values to a magnitude scoring function.
+    x-ms-external: true
+  TagScoringFunction:
+    x-ms-discriminator-value: tag
+    allOf:
+      - $ref: '#/definitions/ScoringFunction'
+    properties:
+      tag:
+        $ref: '#/definitions/TagScoringParameters'
+        description: Gets parameter values for the tag scoring function.
+    required:
+      - tag
+    externalDocs:
+      url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
+    description: >-
+      Defines a function that boosts scores of documents with string values
+      matching a given list of tags.
+    x-ms-external: true
+  TagScoringParameters:
+    properties:
+      tagsParameter:
+        type: string
+        description: >-
+          Gets or sets the name of the parameter passed in search queries to
+          specify the list of tags to compare against the target field.
+    required:
+      - tagsParameter
+    description: Provides parameter values to a tag scoring function.
+  ScoringFunctionInterpolation:
+    type: string
+    enum:
+      - linear
+      - constant
+      - quadratic
+      - logarithmic
+    x-ms-enum:
+      name: ScoringFunctionInterpolation
+    description: >-
+      Defines the function used to interpolate score boosting across a range of
+      documents.
+  ScoringProfile:
+    properties:
+      name:
+        externalDocs:
+          url: 'https://msdn.microsoft.com/library/azure/dn857353.aspx'
+        type: string
+        description: Gets or sets the name of the scoring profile.
+      text:
+        $ref: '#/definitions/TextWeights'
+        description: >-
+          Gets or sets parameters that boost scoring based on text matches in
+          certain index fields.
+      functions:
+        type: array
+        items:
+          $ref: '#/definitions/ScoringFunction'
+        description: >-
+          Gets the collection of functions that influence the scoring of
+          documents.
+      functionAggregation:
+        $ref: '#/definitions/ScoringFunctionAggregation'
+        description: >-
+          Gets or sets a value indicating how the results of individual scoring
+          functions should be combined. Defaults to "Sum". Ignored if there are
+          no scoring functions.
+    required:
+      - name
+    externalDocs:
+      url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
+    description: >-
+      Defines parameters for an Azure Search index that influence scoring in
+      search queries.
+    x-ms-external: true
+  ScoringFunctionAggregation:
+    type: string
+    enum:
+      - sum
+      - average
+      - minimum
+      - maximum
+      - firstMatching
+    x-ms-enum:
+      name: ScoringFunctionAggregation
+    description: >-
+      Defines the aggregation function used to combine the results of all the
+      scoring functions in a scoring profile.
+  CorsOptions:
+    properties:
+      allowedOrigins:
+        type: array
+        items:
+          type: string
+        description: >-
+          Gets the list of origins from which JavaScript code will be granted
+          access to your index. Can contain a list of hosts of the form
+          {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*'
+          to allow all origins (not recommended).
+      maxAgeInSeconds:
+        type: integer
+        format: int64
+        description: >-
+          Gets or sets the duration for which browsers should cache CORS
+          preflight responses. Defaults to 5 mintues.
+    required:
+      - allowedOrigins
+    externalDocs:
+      url: 'https://msdn.microsoft.com/library/azure/dn798941.aspx'
+    description: >-
+      Defines options to control Cross-Origin Resource Sharing (CORS) for an
+      index.
+  Suggester:
+    properties:
+      name:
+        type: string
+        description: Gets or sets the name of the suggester.
+      searchMode:
+        $ref: '#/definitions/SuggesterSearchMode'
+        description: Gets or sets a value indicating the capabilities of the suggester.
+      sourceFields:
+        type: array
+        items:
+          type: string
+        description: >-
+          Gets the list of field names to which the suggester applies. Each
+          field must be searchable.
+    required:
+      - name
+      - searchMode
+      - sourceFields
+    description: >-
+      Defines how the Suggest API should apply to a group of fields in the
+      index.
+    x-ms-external: true
+  SuggesterSearchMode:
+    type: string
+    enum:
+      - analyzingInfixMatching
+    x-ms-enum:
+      name: SuggesterSearchMode
+    description: Describes the type of suggester to use.
+  Index:
+    properties:
+      name:
+        externalDocs:
+          url: 'https://msdn.microsoft.com/library/azure/dn857353.aspx'
+        type: string
+        description: Gets or sets the name of the index.
+      fields:
+        type: array
+        items:
+          $ref: '#/definitions/Field'
+        description: Gets or sets the fields of the index.
+      scoringProfiles:
+        type: array
+        items:
+          $ref: '#/definitions/ScoringProfile'
+        description: Gets or sets the scoring profiles for the index.
+      defaultScoringProfile:
+        type: string
+        description: >-
+          Gets or sets the name of the scoring profile to use if none is
+          specified in the query. If this property is not set and no scoring
+          profile is specified in the query, then default scoring (tf-idf) will
+          be used.
+      corsOptions:
+        $ref: '#/definitions/CorsOptions'
+        description: >-
+          Gets or sets options to control Cross-Origin Resource Sharing (CORS)
+          for the index.
+      suggesters:
+        type: array
+        items:
+          $ref: '#/definitions/Suggester'
+        description: Gets or sets the suggesters for the index.
+    required:
+      - name
+      - fields
+    description: >-
+      Represents an index definition in Azure Search, which describes the fields
+      and search behavior of an index.
+  IndexGetStatisticsResult:
+    properties:
+      documentCount:
+        type: integer
+        format: int64
+        readOnly: true
+        description: Gets the number of documents in the index.
+      storageSize:
+        type: integer
+        format: int64
+        readOnly: true
+        description: Gets the amount of storage in bytes consumed by the index.
+    description: >-
+      Statistics for a given index. Statistics are collected periodically and
+      are not guaranteed to always be up-to-date.
+    x-ms-external: true
+  IndexListResult:
+    properties:
+      value:
+        type: array
+        readOnly: true
+        items:
+          $ref: '#/definitions/Index'
+        description: Gets the indexes in the Search service.
+    description: >-
+      Response from a List Indexes request. If successful, it includes the full
+      definitions of all indexes.
+    x-ms-external: true
+  StorageAccountCheckNameAvailabilityParameters:
+    properties:
+      name:
+        type: string
+      type:
+        type: string
+        default: Microsoft.Storage/storageAccounts
+    required:
+      - name
+  CheckNameAvailabilityResult:
+    properties:
+      nameAvailable:
+        type: boolean
+        description: >-
+          Gets a boolean value that indicates whether the name is available for
+          you to use. If true, the name is available. If false, the name has
+          already been taken or invalid and cannot be used.
+      reason:
+        type: string
+        description: >-
+          Gets the reason that a storage account name could not be used. The
+          Reason element is only returned if NameAvailable is false.
+        enum:
+          - AccountNameInvalid
+          - AlreadyExists
+        x-ms-enum:
+          name: Reason
+          modelAsString: false
+      message:
+        type: string
+        description: Gets an error message explaining the Reason value in more detail.
+    description: The CheckNameAvailability operation response.
+  StorageAccountPropertiesCreateParameters:
+    properties:
+      accountType:
+        type: string
+        description: Gets or sets the account type.
+        enum:
+          - Standard_LRS
+          - Standard_ZRS
+          - Standard_GRS
+          - Standard_RAGRS
+          - Premium_LRS
+        x-ms-enum:
+          name: AccountType
+          modelAsString: false
+    required:
+      - accountType
+  StorageAccountCreateParameters:
+    properties:
+      location:
+        type: string
+        description: Resource location
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Resource tags
+      properties:
+        x-ms-client-flatten: true
+        $ref: '#/definitions/StorageAccountPropertiesCreateParameters'
+    required:
+      - location
+    x-ms-azure-resource: true
+    description: The parameters to provide for the account.
+  Endpoints:
+    properties:
+      blob:
+        type: string
+        description: Gets the blob endpoint.
+      queue:
+        type: string
+        description: Gets the queue endpoint.
+      table:
+        type: string
+        description: Gets the table endpoint.
+      file:
+        type: string
+        description: Gets the file endpoint.
+    description: >-
+      The URIs that are used to perform a retrieval of a public blob, queue or
+      table object.
+  CustomDomain:
+    properties:
+      name:
+        type: string
+        description: Gets or sets the custom domain name. Name is the CNAME source.
+      useSubDomain:
+        type: boolean
+        description: >-
+          Indicates whether indirect CName validation is enabled. Default value
+          is false. This should only be set on updates
+    required:
+      - name
+    description: >-
+      The custom domain assigned to this storage account. This can be set via
+      Update.
+  StorageAccountProperties:
+    properties:
+      provisioningState:
+        type: string
+        description: >-
+          Gets the status of the storage account at the time the operation was
+          called.
+        enum:
+          - Creating
+          - ResolvingDNS
+          - Succeeded
+        x-ms-enum:
+          name: ProvisioningState
+          modelAsString: false
+      accountType:
+        type: string
+        description: Gets the type of the storage account.
+        enum:
+          - Standard_LRS
+          - Standard_ZRS
+          - Standard_GRS
+          - Standard_RAGRS
+          - Premium_LRS
+        x-ms-enum:
+          name: AccountType
+          modelAsString: false
+      primaryEndpoints:
+        $ref: '#/definitions/Endpoints'
+        description: >-
+          Gets the URLs that are used to perform a retrieval of a public blob,
+          queue or table object.Note that StandardZRS and PremiumLRS accounts
+          only return the blob endpoint.
+      primaryLocation:
+        type: string
+        description: Gets the location of the primary for the storage account.
+      statusOfPrimary:
+        type: string
+        description: >-
+          Gets the status indicating whether the primary location of the storage
+          account is available or unavailable.
+        enum:
+          - Available
+          - Unavailable
+        x-ms-enum:
+          name: AccountStatus
+          modelAsString: false
+      lastGeoFailoverTime:
+        type: string
+        format: date-time
+        description: >-
+          Gets the timestamp of the most recent instance of a failover to the
+          secondary location. Only the most recent timestamp is retained. This
+          element is not returned if there has never been a failover instance.
+          Only available if the accountType is StandardGRS or StandardRAGRS.
+      secondaryLocation:
+        type: string
+        description: >-
+          Gets the location of the geo replicated secondary for the storage
+          account. Only available if the accountType is StandardGRS or
+          StandardRAGRS.
+      statusOfSecondary:
+        type: string
+        description: >-
+          Gets the status indicating whether the secondary location of the
+          storage account is available or unavailable. Only available if the
+          accountType is StandardGRS or StandardRAGRS.
+        enum:
+          - Available
+          - Unavailable
+        x-ms-enum:
+          name: AccountStatus
+          modelAsString: false
+      creationTime:
+        type: string
+        format: date-time
+        description: Gets the creation date and time of the storage account in UTC.
+      customDomain:
+        $ref: '#/definitions/CustomDomain'
+        description: Gets the user assigned custom domain assigned to this storage account.
+      secondaryEndpoints:
+        $ref: '#/definitions/Endpoints'
+        description: >-
+          Gets the URLs that are used to perform a retrieval of a public blob,
+          queue or table object from the secondary location of the storage
+          account. Only available if the accountType is StandardRAGRS.
+  StorageAccount:
+    properties:
+      properties:
+        x-ms-client-flatten: true
+        $ref: '#/definitions/StorageAccountProperties'
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The storage account.
+  StorageAccountKeys:
+    properties:
+      key1:
+        type: string
+        description: Gets the value of key 1.
+      key2:
+        type: string
+        description: Gets the value of key 2.
+    description: The access keys for the storage account.
+  StorageAccountListResult:
+    properties:
+      value:
+        type: array
+        items:
+          $ref: '#/definitions/StorageAccount'
+        description: Gets the list of storage accounts and their properties.
+    description: The list storage accounts operation response.
+  StorageAccountPropertiesUpdateParameters:
+    properties:
+      accountType:
+        type: string
+        description: >-
+          Gets or sets the account type. Note that StandardZRS and PremiumLRS
+          accounts cannot be changed to other account types, and other account
+          types cannot be changed to StandardZRS or PremiumLRS.
+        enum:
+          - Standard_LRS
+          - Standard_ZRS
+          - Standard_GRS
+          - Standard_RAGRS
+          - Premium_LRS
+        x-ms-enum:
+          name: AccountType
+          modelAsString: false
+      customDomain:
+        $ref: '#/definitions/CustomDomain'
+        description: >-
+          User domain assigned to the storage account. Name is the CNAME source.
+          Only one custom domain is supported per storage account at this time.
+          To clear the existing custom domain, use an empty string for the
+          custom domain name property.
+  StorageAccountUpdateParameters:
+    properties:
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Resource tags
+      properties:
+        x-ms-client-flatten: true
+        $ref: '#/definitions/StorageAccountPropertiesUpdateParameters'
+    x-ms-azure-resource: true
+    description: The parameters to update on the account.
+  StorageAccountRegenerateKeyParameters:
+    properties:
+      keyName:
+        type: string
+    required:
+      - keyName
+  UsageName:
+    properties:
+      value:
+        type: string
+        description: Gets a string describing the resource name.
+      localizedValue:
+        type: string
+        description: Gets a localized string describing the resource name.
+    description: The Usage Names.
+  Usage:
+    properties:
+      unit:
+        type: string
+        description: Gets the unit of measurement.
+        enum:
+          - Count
+          - Bytes
+          - Seconds
+          - Percent
+          - CountsPerSecond
+          - BytesPerSecond
+        x-ms-enum:
+          name: UsageUnit
+          modelAsString: false
+      currentValue:
+        type: integer
+        format: int32
+        description: Gets the current count of the allocated resources in the subscription.
+      limit:
+        type: integer
+        format: int32
+        description: >-
+          Gets the maximum count of the resources that can be allocated in the
+          subscription.
+      name:
+        $ref: '#/definitions/UsageName'
+        description: Gets the name of the type of usage.
+    required:
+      - unit
+      - currentValue
+      - limit
+      - name
+    description: Describes Storage Resource Usage.
+  UsageListResult:
+    properties:
+      value:
+        type: array
+        items:
+          $ref: '#/definitions/Usage'
+        description: Gets or sets the list Storage Resource Usages.
+    description: The List Usages operation response.
+  Resource:
+    properties:
+      id:
+        readOnly: true
+        type: string
+        description: Resource Id
+      name:
+        readOnly: true
+        type: string
+        description: Resource name
+      type:
+        readOnly: true
+        type: string
+        description: Resource type
+      location:
+        type: string
+        description: Resource location
+      tags:
+        type: object
+        additionalProperties:
+          type: string
+        description: Resource tags
+    x-ms-azure-resource: true
+parameters:
+  SubscriptionIdParameter:
+    name: subscriptionId
+    in: path
+    required: true
+    type: string
+    description: >-
+      Gets subscription credentials which uniquely identify Microsoft Azure
+      subscription. The subscription ID forms part of the URI for every service
+      call.
+host: management.azure.com
+schemes:
+  - https
+security:
+  - azure_auth:
+      - user_impersonation
+securityDefinitions:
+  azure_auth:
+    type: oauth2
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    flow: implicit
+    description: Azure Active Directory OAuth2 Flow
+    scopes:
+      user_impersonation: impersonate your user account

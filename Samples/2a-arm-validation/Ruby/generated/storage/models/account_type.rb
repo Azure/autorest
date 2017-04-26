@@ -3,7 +3,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is
 # regenerated.
 
-module storage
+module Storage
   module Models
     #
     # Defines values for AccountType

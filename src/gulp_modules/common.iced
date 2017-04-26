@@ -204,7 +204,7 @@ module.exports =
           echo marked  ">> #{error stderr}"
         if( stdout.length ) 
           echo warning "(stdout)" 
-          echo marked ">> #{ warning stdout}" 
+          echo warning stdout
 
         Fail "Execute Task failed, fast exit"
       callback(code,stdout,stderr)

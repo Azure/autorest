@@ -7,5 +7,5 @@
 input-file:
 - swagger.json 
 
-azure-arm: true
+azure-validator: true
 ```

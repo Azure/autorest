@@ -3,7 +3,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is
 # regenerated.
 
-module storage
+module Storage
   #
   # The Storage Management Client.
   #
@@ -81,7 +81,7 @@ module storage
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = storage::Models::StorageAccountCheckNameAvailabilityParameters.mapper()
+      request_mapper = Storage::Models::StorageAccountCheckNameAvailabilityParameters.mapper()
       request_content = @client.serialize(request_mapper,  account_name, 'account_name')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -113,7 +113,7 @@ module storage
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = storage::Models::CheckNameAvailabilityResult.mapper()
+            result_mapper = Storage::Models::CheckNameAvailabilityResult.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -171,7 +171,7 @@ module storage
       promise = promise.then do |response|
         # Defining deserialization method.
         deserialize_method = lambda do |parsed_response|
-          result_mapper = storage::Models::StorageAccount.mapper()
+          result_mapper = Storage::Models::StorageAccount.mapper()
           parsed_response = @client.deserialize(result_mapper, parsed_response, 'parsed_response')
         end
 
@@ -364,7 +364,7 @@ module storage
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = storage::Models::StorageAccount.mapper()
+            result_mapper = Storage::Models::StorageAccount.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -484,7 +484,7 @@ module storage
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = storage::Models::StorageAccountUpdateParameters.mapper()
+      request_mapper = Storage::Models::StorageAccountUpdateParameters.mapper()
       request_content = @client.serialize(request_mapper,  parameters, 'parameters')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -516,7 +516,7 @@ module storage
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = storage::Models::StorageAccount.mapper()
+            result_mapper = Storage::Models::StorageAccount.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -607,7 +607,7 @@ module storage
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = storage::Models::StorageAccountKeys.mapper()
+            result_mapper = Storage::Models::StorageAccountKeys.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -693,7 +693,7 @@ module storage
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = storage::Models::StorageAccountListResult.mapper()
+            result_mapper = Storage::Models::StorageAccountListResult.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -786,7 +786,7 @@ module storage
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = storage::Models::StorageAccountListResult.mapper()
+            result_mapper = Storage::Models::StorageAccountListResult.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -870,7 +870,7 @@ module storage
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = storage::Models::StorageAccountRegenerateKeyParameters.mapper()
+      request_mapper = Storage::Models::StorageAccountRegenerateKeyParameters.mapper()
       request_content = @client.serialize(request_mapper,  regenerate_key, 'regenerate_key')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -902,7 +902,7 @@ module storage
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = storage::Models::StorageAccountKeys.mapper()
+            result_mapper = Storage::Models::StorageAccountKeys.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -998,7 +998,7 @@ module storage
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = storage::Models::StorageAccountCreateParameters.mapper()
+      request_mapper = Storage::Models::StorageAccountCreateParameters.mapper()
       request_content = @client.serialize(request_mapper,  parameters, 'parameters')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -1030,7 +1030,7 @@ module storage
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = storage::Models::StorageAccount.mapper()
+            result_mapper = Storage::Models::StorageAccount.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
