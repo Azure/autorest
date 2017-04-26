@@ -15,7 +15,7 @@ import { MultiPromise } from "../multi-promise";
 import { GetFilename, ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
-import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
+import { GetAutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { From } from "../ref/linq";
 import { IFileSystem } from "../file-system";
@@ -157,7 +157,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // externals:
   const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
-  const autoRestDotNet = new LazyPromise(async () => await AutoRestDotNetPlugin.Get().pluginEndpoint);
+  const autoRestDotNet = new LazyPromise(async () => await GetAutoRestDotNetPlugin());
 
   // TODO: enhance with custom declared plugins
   const plugins: { [name: string]: PipelinePlugin } = {
@@ -250,12 +250,11 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
           await emitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), scopeCodeModelTransformed, false);
 
-          let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(
-            genConfig, usedCodeGenerator,
+          const inputScope = new QuickScope([
             await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]),
-            await scopeCodeModelTransformed.ReadStrict((await scopeCodeModelTransformed.Enum())[0]),
-            genConfig.DataStore.CreateScope("generate" + ++pluginCtr),
-            genConfig.Message.bind(genConfig));
+            await scopeCodeModelTransformed.ReadStrict((await scopeCodeModelTransformed.Enum())[0])
+          ]);
+          let generatedFileScope = await RunPlugin(genConfig, usedCodeGenerator, inputScope);
 
           // C# simplifier
           if (usedCodeGenerator === "csharp") {
