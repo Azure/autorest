@@ -102,14 +102,30 @@ namespace AutoRest.Go.Model
             }
         }
 
-        public string MethodReturnSignature
+        public string MethodReturnType
         {
             get
             {
-                return HasReturnValue()
-                    ? string.Format("result {0}, err error", ReturnValue().Body.Name)
-                    : "result autorest.Response, err error";
+                return HasReturnValue() ? ReturnValue().Body.Name.ToString() : "autorest.Response";
             }
+        }
+
+        public string MethodReturnSignature(bool helper)
+        {
+            var retValType = MethodReturnType;
+            var retVal = $"result {retValType}";
+            var errVal = "err error";
+
+            // for LROs return the response types via a channel.
+            // only do this for the "real" API; for "helper" methods
+            // i.e. preparer/sender/responder don't use a channel.
+            if (!helper && IsLongRunningOperation())
+            {
+                retVal = $"<-chan {retValType}";
+                errVal = "<-chan error";
+            }
+
+            return $"{retVal}, {errVal}";
         }
 
         public string NextMethodName => $"{Name}NextResults";
