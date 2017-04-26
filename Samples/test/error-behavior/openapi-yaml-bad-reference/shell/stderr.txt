@@ -11,7 +11,7 @@ FATAL: System.ArgumentException: Reference path 'Cowball' does not exist in the 
    at AutoRest.Swagger.SwaggerModeler.Build(ServiceDefinition serviceDefinition) in SwaggerModeler.cs:line 134
    at Modeler.<ProcessInternal>d__1.MoveNext() in Modeler.cs:line 37
 --- End of stack trace from previous location where exception was thrown ---
-   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
    at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
    at NewPlugin.<Process>d__11.MoveNext() in NewPlugin.cs:line 67
