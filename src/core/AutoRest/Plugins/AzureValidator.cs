@@ -11,6 +11,7 @@ using AutoRest.Swagger;
 using AutoRest.Swagger.Validation.Core;
 using System.Threading.Tasks;
 using System;
+using AutoRest.Swagger.Model;
 
 public class AzureValidator : NewPlugin
 {
@@ -84,7 +85,12 @@ public class AzureValidator : NewPlugin
 
     var serviceDefinition = SwaggerParser.Load(files[0], fs);
     var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-    foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition))
+    var metadata = new ServiceDefinitionMetadata
+        {
+            Categories = (ServiceDefinitionCategory)Enum.Parse(typeof(ServiceDefinitionCategory), await GetValue("validation-category") ?? ServiceDefinitionCategory.Regular.ToString()),
+            MergeState = await GetValue<bool?>("validation-is-individual") == true ? ServiceDefinitionMergeState.Before : ServiceDefinitionMergeState.After
+        };
+    foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition, metadata))
     {
       LogValidationMessage(validationEx);
     }
