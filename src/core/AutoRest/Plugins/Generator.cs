@@ -25,7 +25,10 @@ public class Generator : NewPlugin
     {
         try
         {
-            return (T)sd.Info.CodeGenerationSettings.Extensions[name];
+            return (T)Convert.ChangeType(
+                sd.Info.CodeGenerationSettings.Extensions[name], 
+                typeof(T).GenericTypeArguments.Length == 0 ? typeof(T) : typeof(T).GenericTypeArguments[0] // un-nullable
+            );
         }
         catch
         {

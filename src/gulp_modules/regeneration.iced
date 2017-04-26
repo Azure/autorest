@@ -639,9 +639,7 @@ task 'regenerate-samples', '', (done) ->
             .filter((file) -> file.match(/.(map|txt)$/))
             .forEach((file) -> 
               sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
-              sed "-i", /(at .* in )([^\s]*(\/|\\))/g, "$1", file # exception stack traces (.cs)
-              sed "-i", /at .* \(.*\)/g, "at ...", file           # exception stack traces (.ts)
-              sed "-i", /at [^ ]*\.ts/g, "at ...", file           # exception stack traces (.ts)
+              sed "-i", /\sat .*/g, "at ...", file                         # exception stack traces
             )
           next null
         , true # don't fail on failures (since we wanna record them)
