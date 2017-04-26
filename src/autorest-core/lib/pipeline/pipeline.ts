@@ -115,7 +115,7 @@ function CreatePluginComposer(): PipelinePlugin {
     await (await output.Write("swagger-document")).Forward(swagger);
   };
 }
-function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string): PipelinePlugin {
+function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string, fullKeys: boolean = true): PipelinePlugin {
   return async (config, input, working, output) => {
     const plugin = await host;
     const pluginNames = await plugin.GetPluginNames(config.CancellationToken);
@@ -124,12 +124,14 @@ function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: str
     }
 
     // forward input scope (relative/absolute key mess...)
-    const inputx = new QuickScope(await Promise.all((await input.Enum()).map(x => input.ReadStrict(x))));
+    if (fullKeys) {
+      input = new QuickScope(await Promise.all((await input.Enum()).map(x => input.ReadStrict(x))));
+    }
 
     const result = await plugin.Process(
       pluginName,
       key => config.GetEntry(key as any),
-      inputx,
+      input,
       output,
       config.Message.bind(config),
       config.CancellationToken);
@@ -150,7 +152,6 @@ function CreateCommonmarkProcessor(): PipelinePlugin {
 }
 
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
-  const cancellationToken = config.CancellationToken;
   const processMessage = config.Message.bind(config);
   const barrier = new OutstandingTaskAwaiter();
 
@@ -175,7 +176,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     "go": CreatePluginExternal(autoRestDotNet, "go"),
     "java": CreatePluginExternal(autoRestDotNet, "java"),
     "azureresourceschema": CreatePluginExternal(autoRestDotNet, "azureresourceschema"),
-    "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier"),
+    "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier", false),
 
     "commonmarker": CreateCommonmarkProcessor()
   };
@@ -240,15 +241,10 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // code generators
   if (usedCodeGenerators.length > 0) {
-    // modeler
-    let codeModel = await AutoRestDotNetPlugin.Get().Model(swagger, config.DataStore.CreateScope("model"),
-      {
-        namespace: config.GetEntry("namespace")
-      },
-      processMessage);
+    const scopeCodeModel = await RunPlugin(config, "modeler", scopeComposedSwaggerTransformed);
+    const scopeCodeModelCommonmark = await RunPlugin(config, "commonmarker", scopeCodeModel);
 
-    // GFMer
-    const codeModelGFM = await ProcessCodeModel(codeModel, config.DataStore.CreateScope("modelgfm"));
+    const codeModelGFM = await scopeCodeModelCommonmark.ReadStrict((await scopeCodeModelCommonmark.Enum())[0]);
 
     let pluginCtr = 0;
     for (const usedCodeGenerator of usedCodeGenerators) {
@@ -267,15 +263,10 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
           // C# simplifier
           if (usedCodeGenerator === "csharp") {
-            generatedFileScope = await AutoRestDotNetPlugin.Get().SimplifyCSharpCode(generatedFileScope, scope.CreateScope("simplify"), processMessage);
+            generatedFileScope = await RunPlugin(genConfig, "csharp-simplifier", generatedFileScope);
           }
 
-          for (const fileName of await generatedFileScope.Enum()) {
-            const handle = await generatedFileScope.ReadStrict(fileName);
-            const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
-            const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
-            await emitArtifactInternal(genConfig, `source-file-${usedCodeGenerator}`, outputFileUri, handle);
-          }
+          await emitArtifacts(genConfig, `source-file-${usedCodeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, decodeURIComponent(key.split("/output/")[1])), generatedFileScope, false);
         })());
       }
     }

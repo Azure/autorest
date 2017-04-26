@@ -50,11 +50,6 @@ export class AutoRestDotNetPlugin extends EventEmitter {
     }
   }
 
-  public async Validate(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void): Promise<void> {
-    const outputScope = workingScope.CreateScope("output");
-    await this.CautiousProcess("azure-validator", _ => { }, new QuickScope([swagger]), outputScope, onMessage);
-  }
-
   public async GenerateCode(
     config: ConfigurationView,
     language: string,
@@ -79,30 +74,5 @@ export class AutoRestDotNetPlugin extends EventEmitter {
     const outputScope = workingScope.CreateScope("output");
     await this.CautiousProcess(language, key => (settings as any)[key], new QuickScope([swaggerDocument, codeModel]), outputScope, onMessage);
     return outputScope;
-  }
-
-  public async SimplifyCSharpCode(
-    inputScope: DataStoreViewReadonly,
-    workingScope: DataStoreView,
-    onMessage: (message: Message) => void): Promise<DataStoreViewReadonly> {
-
-    const outputScope = workingScope.CreateScope("output");
-    await this.CautiousProcess(`csharp-simplifier`, _ => null, inputScope, outputScope, onMessage);
-    return outputScope;
-  }
-
-  public async Model(
-    swagger: DataHandleRead,
-    workingScope: DataStoreView,
-    settings: { namespace: string },
-    onMessage: (message: Message) => void): Promise<DataHandleRead> {
-
-    const outputScope = workingScope.CreateScope("output");
-    await this.CautiousProcess("modeler", key => (settings as any)[key], new QuickScope([swagger]), outputScope, onMessage);
-    const results = await outputScope.Enum();
-    if (results.length !== 1) {
-      throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
-    }
-    return await outputScope.ReadStrict(results[0]);
   }
 }
