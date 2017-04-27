@@ -168,6 +168,14 @@ namespace AutoRest.Swagger
                 Uri filePath = null;
                 Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out filePath);
                 swaggerService.FilePath = filePath;
+                if (swaggerService.Schemes == null || swaggerService.Schemes.Count != 1)
+                {
+                    swaggerService.Schemes = new List<TransferProtocolScheme> { TransferProtocolScheme.Http };
+                }
+                if (string.IsNullOrEmpty(swaggerService.Host))
+                {
+                    swaggerService.Host = "localhost";
+                }
                 return swaggerService;
             }
             catch (JsonException ex)

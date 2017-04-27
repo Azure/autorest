@@ -60,7 +60,7 @@ import { PumpMessagesToConsole } from './test-utility';
 
     const config = await autoRest.view;
     assert.strictEqual(config.GetEntry("azure-arm"), true);
-    assert.strictEqual([...config.InputFileUris].length, 1);
+    assert.strictEqual(config.InputFileUris.length, 1);
 
     const messages: Message[] = [];
 

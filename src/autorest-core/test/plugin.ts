@@ -14,7 +14,7 @@ import { AutoRest } from "../lib/autorest-core";
 import { CancellationToken } from "../lib/ref/cancallation";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message, Channel } from "../lib/message";
-import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
+import { GetAutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
 import { DataStore, QuickScope } from '../lib/data-store/data-store';
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
@@ -77,10 +77,11 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       dataStore.CreateScope("loader"));
 
     // call validator
-    const autorestPlugin = AutoRestDotNetPlugin.Get();
+    const autorestPlugin = await GetAutoRestDotNetPlugin();
     const pluginScope = dataStore.CreateScope("plugin");
     const messages: Message[] = [];
-    const resultScope = await autorestPlugin.CautiousProcess("azure-validator", _ => { }, new QuickScope([swagger]), pluginScope, m => messages.push(m));
+    const result = await autorestPlugin.Process("azure-validator", _ => { }, new QuickScope([swagger]), pluginScope, m => messages.push(m), CancellationToken.None);
+    assert.strictEqual(result, true);
 
     // check results
     assert.notEqual(messages.length, 0);
@@ -106,9 +107,10 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       dataStore.CreateScope("loader"));
 
     // call modeler
-    const autorestPlugin = AutoRestDotNetPlugin.Get();
+    const autorestPlugin = await GetAutoRestDotNetPlugin();
     const pluginScope = dataStore.CreateScope("plugin");
-    await autorestPlugin.CautiousProcess("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickScope([swagger]), pluginScope, m => null);
+    const result = await autorestPlugin.Process("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickScope([swagger]), pluginScope, m => null, CancellationToken.None);
+    assert.strictEqual(result, true);
     const results = await pluginScope.Enum();
     if (results.length !== 1) {
       throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
@@ -144,15 +146,16 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 
     // call generator
-    const autorestPlugin = AutoRestDotNetPlugin.Get();
-    const pluginScope = dataStore.CreateScope("plugin");
-    const resultScope = await autorestPlugin.GenerateCode(
-      config,
+    const autorestPlugin = await GetAutoRestDotNetPlugin();
+    const resultScope = dataStore.CreateScope("output");
+    const result = await autorestPlugin.Process(
       "csharp",
-      swagger,
-      codeModelHandle,
-      pluginScope,
-      m => null);
+      key => config.GetEntry(key as any),
+      new QuickScope([swagger, codeModelHandle]),
+      resultScope,
+      m => null,
+      CancellationToken.None);
+    assert.strictEqual(result, true);
 
     // check results
     const results = await resultScope.Enum();

@@ -168,6 +168,9 @@ export class AutoRest extends EventEmitter {
 
         this.Message.Dispatch({ Channel: Channel.Debug, Text: `Starting Process() Run Pipeline.` });
 
+        if (view.InputFileUris.length === 0) {
+          throw new Exception("No input files provided.\n\nUse --help to get help information.", 0);
+        }
         const result = await Promise.race([
           RunPipeline(view, <IFileSystem>this.fileSystem),
           new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej("Cancellation requested.")))]);
