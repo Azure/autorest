@@ -135,11 +135,9 @@ else
 }
     @(Model.BuildUrl("_url"))
     // Create HTTP transport objects
-    var _httpRequest = new System.Net.Http.HttpRequestMessage();
+    var _httpRequest = new System.Net.Http.HttpRequestMessage(new System.Net.Http.HttpMethod("@(Model.HttpMethod.ToString().ToUpper())"), _url);
     System.Net.Http.HttpResponseMessage _httpResponse = null;
 
-    _httpRequest.Method = new System.Net.Http.HttpMethod("@(Model.HttpMethod.ToString().ToUpper())");
-    _httpRequest.RequestUri = new System.Uri(_url);
     // Set Headers
     @(Model.SetDefaultHeaders)
     @foreach (var parameter in Model.LogicalParameters.OfType<ParameterCs>().Where(p => p.Location == ParameterLocation.Header && !p.IsHeaderCollection))
