@@ -25,8 +25,8 @@
     "@types/jsonpath": "^0.1.29",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
-    "mocha": "^3.2.0",
-    "mocha-typescript": "^1.0.22",
+    "mocha": "3.2.0",
+    "mocha-typescript": "1.0.22",
     "source-map-support": "^0.4.14",
     "typescript": "^2.3.0-dev.20170314"
   },

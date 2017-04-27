@@ -1,22 +1,5 @@
 FATAL: System.ArgumentException: Reference path 'Cowball' does not exist in the definition section of the Swagger document.
-   at AutoRest.Swagger.SchemaResolver.DereferenceInner(String referencePath, List`1 visitedReferences) in SchemaResolver.cs:line 354
-   at AutoRest.Swagger.SchemaResolver.Dereference(String referencePath) in SchemaResolver.cs:line 323
-   at AutoRest.Swagger.SchemaResolver.Unwrap(Schema schema) in SchemaResolver.cs:line 71
-   at AutoRest.Swagger.SwaggerModeler.Unwrap(SwaggerParameter swaggerParameter) in SwaggerModeler.cs:line 409
-   at AutoRest.Swagger.ParameterBuilder.BuildServiceType(String serviceTypeName) in ParameterBuilder.cs:line 69
-   at AutoRest.Swagger.ParameterBuilder.Build() in ParameterBuilder.cs:line 47
-   at AutoRest.Swagger.OperationBuilder.BuildMethodParameters(Method method) in OperationBuilder.cs:line 212
-   at AutoRest.Swagger.OperationBuilder.BuildMethod(HttpMethod httpMethod, String url, String methodName, String methodGroup) in OperationBuilder.cs:line 94
-   at AutoRest.Swagger.SwaggerModeler.BuildMethod(HttpMethod httpMethod, String url, String name, Operation operation) in SwaggerModeler.cs:line 334
-   at AutoRest.Swagger.SwaggerModeler.Build(ServiceDefinition serviceDefinition) in SwaggerModeler.cs:line 138
-   at Modeler.<ProcessInternal>d__1.MoveNext() in Modeler.cs:line 37
---- End of stack trace from previous location where exception was thrown ---
-   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
-   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
-   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
-   at NewPlugin.<Process>d__11.MoveNext() in NewPlugin.cs:line 67
-Error: Plugin modeler failed.
-    at ...
-    at ...
-    at ...
-    at ...
+   at ...
+   at ...
+   at ...
+   at ...

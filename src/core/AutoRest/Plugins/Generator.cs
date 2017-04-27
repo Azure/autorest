@@ -8,6 +8,9 @@ using AutoRest.Core.Extensibility;
 using AutoRest.Core;
 using AutoRest.Core.Parsing;
 using System.Linq;
+using AutoRest.Swagger.Model;
+using AutoRest.Swagger;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 public class Generator : NewPlugin
 {
@@ -18,17 +21,40 @@ public class Generator : NewPlugin
         this.codeGenerator = codeGenerator;
     }
 
+    private T GetXmsCodeGenSetting<T>(ServiceDefinition sd, string name)
+    {
+        try
+        {
+            return (T)Convert.ChangeType(
+                sd.Info.CodeGenerationSettings.Extensions[name], 
+                typeof(T).GenericTypeArguments.Length == 0 ? typeof(T) : typeof(T).GenericTypeArguments[0] // un-nullable
+            );
+        }
+        catch
+        {
+            return default(T);
+        }
+    }
+
     protected override async Task<bool> ProcessInternal()
     {
+        var files = await ListInputs();
+        if (files.Length != 2)
+        {
+            return false;
+        }
+
+        var sd = Singleton<ServiceDefinition>.Instance = SwaggerParser.Parse("", await ReadFile(files[0]));
+
         // get internal name
         var language = new[] {
-        "CSharp",
-        "Ruby",
-        "NodeJS",
-        "Python",
-        "Go",
-        "Java",
-        "AzureResourceSchema" }
+            "CSharp",
+            "Ruby",
+            "NodeJS",
+            "Python",
+            "Go",
+            "Java",
+            "AzureResourceSchema" }
           .Where(x => x.ToLowerInvariant() == codeGenerator)
           .FirstOrDefault();
 
@@ -43,8 +69,8 @@ public class Generator : NewPlugin
         new Settings
         {
             Namespace = await GetValue("namespace"),
-            ClientName = await GetValue("override-client-name"),
-            PayloadFlatteningThreshold = await GetValue<int?>("payload-flattening-threshold") ?? 0,
+            ClientName = GetXmsCodeGenSetting<string>(sd, "name") ?? await GetValue("override-client-name"),
+            PayloadFlatteningThreshold = GetXmsCodeGenSetting<int?>(sd, "ft") ?? await GetValue<int?>("payload-flattening-threshold") ?? 0,
             AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
         };
         var header = await GetValue("license-header");
@@ -52,9 +78,9 @@ public class Generator : NewPlugin
         {
             Settings.Instance.Header = header;
         }
-        Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool?>("use-internal-constructors") ?? false);
-        Settings.Instance.CustomSettings.Add("SyncMethods", await GetValue("sync-methods") ?? "essential");
-        Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool?>("use-datetimeoffset") ?? false);
+        Settings.Instance.CustomSettings.Add("InternalConstructors", GetXmsCodeGenSetting<bool?>(sd, "internalConstructors") ?? await GetValue<bool?>("use-internal-constructors") ?? false);
+        Settings.Instance.CustomSettings.Add("SyncMethods", GetXmsCodeGenSetting<string>(sd, "syncMethods") ?? await GetValue("sync-methods") ?? "essential");
+        Settings.Instance.CustomSettings.Add("UseDateTimeOffset", GetXmsCodeGenSetting<bool?>(sd, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false);
         if (codeGenerator == "ruby" || codeGenerator == "python")
         {
             // TODO: sort out matters here entirely instead of relying on Input being read somewhere...
@@ -65,12 +91,6 @@ public class Generator : NewPlugin
         }
 
         // process
-        var files = await ListInputs();
-        if (files.Length != 2)
-        {
-            return false;
-        }
-
         var plugin = ExtensionsLoader.GetPlugin(
             (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") +
             language +

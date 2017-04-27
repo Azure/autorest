@@ -3,85 +3,29 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Lazy, LazyPromise } from "../lazy";
-import { Stringify, YAMLNode } from '../ref/yaml';
+import { LazyPromise } from "../lazy";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { AutoRestPlugin } from "./plugin-endpoint";
 import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
-import { IdentitySourceMapping } from "../source-map/merging";
-import { Channel, Message, SourceLocation, Range } from "../message";
+import { Channel } from "../message";
 import { MultiPromise } from "../multi-promise";
 import { GetFilename, ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
-import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
+import { GetAutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
-import { From } from "../ref/linq";
 import { IFileSystem } from "../file-system";
-import { Exception } from "../exception";
+import { EmitArtifacts } from "./artifact-emitter";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
-
-async function emitArtifactInternal(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): Promise<void> {
-  config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
-  if (config.IsOutputArtifactRequested(artifactType)) {
-    config.GeneratedFile.Dispatch({
-      type: artifactType,
-      uri: uri,
-      content: handle.ReadData()
-    });
-  }
-  if (config.IsOutputArtifactRequested(artifactType + ".map")) {
-    config.GeneratedFile.Dispatch({
-      type: artifactType + ".map",
-      uri: uri + ".map",
-      content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2)
-    });
-  }
-}
-let emitCtr = 0;
-async function emitArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead, isObject: boolean): Promise<void> {
-  await emitArtifactInternal(config, artifactType, uri, handle);
-
-  if (isObject) {
-    const scope = config.DataStore.CreateScope("emitObjectArtifact");
-    const object = new Lazy<any>(() => handle.ReadObject<any>());
-    const ast = new Lazy<YAMLNode>(() => handle.ReadYamlAst());
-
-    if (config.IsOutputArtifactRequested(artifactType + ".yaml")
-      || config.IsOutputArtifactRequested(artifactType + ".yaml.map")) {
-
-      const hw = await scope.Write(`${++emitCtr}.yaml`);
-      const h = await hw.WriteData(Stringify(object.Value), IdentitySourceMapping(handle.key, ast.Value), [handle]);
-      await emitArtifactInternal(config, artifactType + ".yaml", uri + ".yaml", h);
-    }
-    if (config.IsOutputArtifactRequested(artifactType + ".json")
-      || config.IsOutputArtifactRequested(artifactType + ".json.map")) {
-
-      const hw = await scope.Write(`${++emitCtr}.json`);
-      const h = await hw.WriteData(JSON.stringify(object.Value, null, 2), IdentitySourceMapping(handle.key, ast.Value), [handle]);
-      await emitArtifactInternal(config, artifactType + ".json", uri + ".json", h);
-    }
-  }
-}
-
-async function emitArtifacts(config: ConfigurationView, artifactType: string, uriResolver: (key: string) => string, scope: DataStoreViewReadonly, isObject: boolean): Promise<void> {
-  for (const key of await scope.Enum()) {
-    const file = await scope.ReadStrict(key);
-    await emitArtifact(config, artifactType, uriResolver(file.key), file, isObject);
-  }
-}
 
 type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
 type PipelineNode = { id: string, outputArtifact: string, plugin: PipelinePlugin, inputs: PipelineNode[] };
 
 function CreatePluginLoader(): PipelinePlugin {
   return async (config, input, working, output) => {
-    let inputs = From(config.InputFileUris).ToArray();
-    if (inputs.length === 0) {
-      throw new Exception("No input files provided.\n\nUse --help to get help information.", 0);
-    }
+    let inputs = config.InputFileUris;
     const swaggers = await LoadLiterateSwaggers(
       config,
       input,
@@ -115,7 +59,7 @@ function CreatePluginComposer(): PipelinePlugin {
     await (await output.Write("swagger-document")).Forward(swagger);
   };
 }
-function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string): PipelinePlugin {
+function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string, fullKeys: boolean = true): PipelinePlugin {
   return async (config, input, working, output) => {
     const plugin = await host;
     const pluginNames = await plugin.GetPluginNames(config.CancellationToken);
@@ -124,12 +68,14 @@ function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: str
     }
 
     // forward input scope (relative/absolute key mess...)
-    const inputx = new QuickScope(await Promise.all((await input.Enum()).map(x => input.ReadStrict(x))));
+    if (fullKeys) {
+      input = new QuickScope(await Promise.all((await input.Enum()).map(x => input.ReadStrict(x))));
+    }
 
     const result = await plugin.Process(
       pluginName,
       key => config.GetEntry(key as any),
-      inputx,
+      input,
       output,
       config.Message.bind(config),
       config.CancellationToken);
@@ -156,7 +102,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // externals:
   const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
-  const autoRestDotNet = new LazyPromise(async () => await AutoRestDotNetPlugin.Get().pluginEndpoint);
+  const autoRestDotNet = new LazyPromise(async () => await GetAutoRestDotNetPlugin());
 
   // TODO: enhance with custom declared plugins
   const plugins: { [name: string]: PipelinePlugin } = {
@@ -175,7 +121,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     "go": CreatePluginExternal(autoRestDotNet, "go"),
     "java": CreatePluginExternal(autoRestDotNet, "java"),
     "azureresourceschema": CreatePluginExternal(autoRestDotNet, "azureresourceschema"),
-    "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier"),
+    "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier", false),
 
     "commonmarker": CreateCommonmarkProcessor()
   };
@@ -221,13 +167,11 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const scopeComposedSwagger = await RunPlugin(config, "compose", scopeLoadedSwaggersTransformed);
   const scopeComposedSwaggerTransformed = await RunPlugin(config, "transform", scopeComposedSwagger);
 
-  const swagger = await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]);
-
   {
     const relPath =
       config.GetEntry("output-file") || // TODO: overthink
-      (config.GetEntry("namespace") ? config.GetEntry("namespace") : GetFilename([...config.InputFileUris][0]).replace(/\.json$/, ""));
-    barrier.Await(emitArtifacts(config, "swagger-document", _ => ResolveUri(config.OutputFolderUri, relPath), scopeComposedSwaggerTransformed, true));
+      (config.GetEntry("namespace") ? config.GetEntry("namespace") : GetFilename(config.InputFileUris[0]).replace(/\.json$/, ""));
+    barrier.Await(EmitArtifacts(config, "swagger-document", _ => ResolveUri(config.OutputFolderUri, relPath), new LazyPromise(async () => scopeComposedSwaggerTransformed), true));
   }
 
   if (!config.DisableValidation) {
@@ -247,42 +191,28 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // code generators
   if (usedCodeGenerators.length > 0) {
-    // modeler
-    let codeModel = await AutoRestDotNetPlugin.Get().Model(swagger, config.DataStore.CreateScope("model"),
-      {
-        namespace: config.GetEntry("namespace")
-      },
-      processMessage);
+    const scopeCodeModel = await RunPlugin(config, "modeler", scopeComposedSwaggerTransformed);
+    const scopeCodeModelCommonmark = await RunPlugin(config, "commonmarker", scopeCodeModel);
 
-    // GFMer
-    const codeModelGFM = await ProcessCodeModel(codeModel, config.DataStore.CreateScope("modelgfm"));
-
-    let pluginCtr = 0;
     for (const usedCodeGenerator of usedCodeGenerators) {
       for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
-        const manipulator = new Manipulator(genConfig);
-        const processMessage = genConfig.Message.bind(genConfig);
-        const scope = genConfig.DataStore.CreateScope("plugin_" + ++pluginCtr);
-
         barrier.Await((async () => {
-          // TRANSFORM
-          const codeModelTransformed = await manipulator.Process(codeModelGFM, scope.CreateScope("transform"), "/code-model-v1.yaml");
+          const scopeCodeModelTransformed = await RunPlugin(genConfig, "transform", scopeCodeModelCommonmark);
 
-          await emitArtifactInternal(genConfig, "code-model-v1", ResolveUri(config.OutputFolderUri, "code-model.yaml"), codeModelTransformed);
+          await EmitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), new LazyPromise(async () => scopeCodeModelTransformed), false);
 
-          let generatedFileScope = await AutoRestDotNetPlugin.Get().GenerateCode(genConfig, usedCodeGenerator, swagger, codeModelTransformed, scope.CreateScope("generate"), processMessage);
+          const inputScope = new QuickScope([
+            await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]),
+            await scopeCodeModelTransformed.ReadStrict((await scopeCodeModelTransformed.Enum())[0])
+          ]);
+          let generatedFileScope = await RunPlugin(genConfig, usedCodeGenerator, inputScope);
 
           // C# simplifier
           if (usedCodeGenerator === "csharp") {
-            generatedFileScope = await AutoRestDotNetPlugin.Get().SimplifyCSharpCode(generatedFileScope, scope.CreateScope("simplify"), processMessage);
+            generatedFileScope = await RunPlugin(genConfig, "csharp-simplifier", generatedFileScope);
           }
 
-          for (const fileName of await generatedFileScope.Enum()) {
-            const handle = await generatedFileScope.ReadStrict(fileName);
-            const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
-            const outputFileUri = ResolveUri(genConfig.OutputFolderUri, relPath);
-            await emitArtifactInternal(genConfig, `source-file-${usedCodeGenerator}`, outputFileUri, handle);
-          }
+          await EmitArtifacts(genConfig, `source-file-${usedCodeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, decodeURIComponent(key.split("/output/")[1])), new LazyPromise(async () => generatedFileScope), false);
         })());
       }
     }

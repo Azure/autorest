@@ -31,7 +31,7 @@ if( -not $lastAutorest  ) {
   # $null = &"$PSScriptRoot\NuGet.exe" install autorest -source https://www.myget.org/F/autorest/api/v3/index.json -prerelease -Version 0.17.3-Nightly20161101 -outputdirectory $baseFolder
 
   # get autorest nightly exe
-  $lastAutoRest = (dir "$PSScriptRoot\..\src\core\AutoRest\bin\Debug\netcoreapp1.0\node_modules\autorest-core\app.js").FullName
+  $lastAutoRest = (Get-ChildItem "$PSScriptRoot\..\src\core\AutoRest\bin\Debug\netcoreapp1.0\node_modules\autorest-core\app.js").FullName
 }
 
 if( -not (resolve-path $lastAutoRest -ea 0 )) {
@@ -39,7 +39,7 @@ if( -not (resolve-path $lastAutoRest -ea 0 )) {
 }
 
 if( -not $newAutoRest  ) {
-  $newAutorest = (dir "$PSScriptRoot\..\src\core\AutoRest\bin\Debug\netcoreapp1.0\node_modules\autorest-core\app.js").FullName
+  $newAutorest = (Get-ChildItem "$PSScriptRoot\..\src\core\AutoRest\bin\Debug\netcoreapp1.0\node_modules\autorest-core\app.js").FullName
 }
 
 if( -not (resolve-path $newAutorest -ea 0 )) {

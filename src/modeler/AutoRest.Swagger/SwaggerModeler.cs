@@ -33,8 +33,6 @@ namespace AutoRest.Swagger
             {
                 throw new ArgumentNullException("settings");
             }
-
-            DefaultProtocol = TransferProtocolScheme.Http;
         }
 
         public override string Name
@@ -51,11 +49,6 @@ namespace AutoRest.Swagger
         /// Client model.
         /// </summary>
         public CodeModel CodeModel { get; set; }
-
-        /// <summary>
-        /// Default protocol when no protocol is specified in the schema
-        /// </summary>
-        public TransferProtocolScheme DefaultProtocol { get; set; }
 
         /// <summary>
         /// Builds service model from swagger file.
@@ -250,14 +243,6 @@ namespace AutoRest.Swagger
             CodeModel.ModelsName = Settings.ModelsName;
             CodeModel.ApiVersion = ServiceDefinition.Info.Version;
             CodeModel.Documentation = ServiceDefinition.Info.Description;
-            if (ServiceDefinition.Schemes == null || ServiceDefinition.Schemes.Count != 1)
-            {
-                ServiceDefinition.Schemes = new List<TransferProtocolScheme> { DefaultProtocol };
-            }
-            if (string.IsNullOrEmpty(ServiceDefinition.Host))
-            {
-                ServiceDefinition.Host = "localhost";
-            }
             CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
                 ServiceDefinition.Schemes[0].ToString().ToLower(),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);

@@ -107,15 +107,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A body parameter must be named &apos;parameters&apos;..
-        /// </summary>
-        public static string BodyParametersNotValid {
-            get {
-                return ResourceManager.GetString("BodyParametersNotValid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, must follow camelCase style. Example: &quot;{1}&quot;..
         /// </summary>
         public static string BodyPropertyNameCamelCase {
