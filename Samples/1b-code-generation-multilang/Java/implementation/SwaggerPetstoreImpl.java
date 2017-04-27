@@ -4,16 +4,13 @@
  * regenerated.
  */
 
-package petstore.implementation;
+package javanamespace.implementation;
 
-import .SwaggerPetstore;
+import javanamespace.SwaggerPetstore;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import .models.ErrorException;
-import .models.ListPetsHeaders;
-import .models.Pet;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
@@ -21,6 +18,9 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import java.io.IOException;
 import java.util.List;
+import javanamespace.models.ErrorException;
+import javanamespace.models.ListPetsHeaders;
+import javanamespace.models.Pet;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -103,15 +103,15 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * used by Retrofit to perform actually REST calls.
      */
     interface SwaggerPetstoreService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: .SwaggerPetstore listPets" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: javanamespace.SwaggerPetstore listPets" })
         @GET("pets")
         Observable<Response<ResponseBody>> listPets(@Query("limit") Integer limit);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: .SwaggerPetstore createPets" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: javanamespace.SwaggerPetstore createPets" })
         @POST("pets")
         Observable<Response<ResponseBody>> createPets();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: .SwaggerPetstore showPetById" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: javanamespace.SwaggerPetstore showPetById" })
         @GET("pets/{petId}")
         Observable<Response<ResponseBody>> showPetById(@Path("petId") String petId);
 
