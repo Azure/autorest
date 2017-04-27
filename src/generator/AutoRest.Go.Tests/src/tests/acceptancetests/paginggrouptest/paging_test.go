@@ -32,7 +32,7 @@ func (s *PagingGroupSuite) TestGetMultiplePages(c *chk.C) {
 	count := 1
 	for res.NextLink != nil {
 		count++
-		resNext, err := pagingClient.GetMultiplePagesNextResults(res)
+		resNext, err := res.Next()
 		c.Assert(err, chk.IsNil)
 		res = resNext
 	}
@@ -52,7 +52,7 @@ func (s *PagingGroupSuite) TestGetOdataMultiplePages(c *chk.C) {
 	count := 1
 	for res.OdataNextLink != nil {
 		count++
-		resNext, err := pagingClient.GetOdataMultiplePagesNextResults(res)
+		resNext, err := res.Next()
 		c.Assert(err, chk.IsNil)
 		res = resNext
 	}
@@ -66,7 +66,7 @@ func (s *PagingGroupSuite) TestGetMultiplePagesWithOffset(c *chk.C) {
 	count := 1
 	for res.NextLink != nil {
 		count++
-		resNext, err := pagingClient.GetMultiplePagesWithOffsetNextResults(res)
+		resNext, err := res.Next()
 		c.Assert(err, chk.IsNil)
 		res = resNext
 	}
@@ -80,7 +80,7 @@ func (s *PagingGroupSuite) TestGetMultiplePagesRetryFirst(c *chk.C) {
 	count := 1
 	for res.NextLink != nil {
 		count++
-		resNext, err := pagingClient.GetMultiplePagesRetryFirstNextResults(res)
+		resNext, err := res.Next()
 		c.Assert(err, chk.IsNil)
 		res = resNext
 	}
@@ -93,7 +93,7 @@ func (s *PagingGroupSuite) TestGetMultiplePagesRetrySecond(c *chk.C) {
 	count := 1
 	for res.NextLink != nil {
 		count++
-		resNext, err := pagingClient.GetMultiplePagesRetrySecondNextResults(res)
+		resNext, err := res.Next()
 		c.Assert(err, chk.IsNil)
 		res = resNext
 	}
@@ -110,7 +110,7 @@ func (s *PagingGroupSuite) TestGetMultiplePagesFailure(c *chk.C) {
 	res, err := pagingClient.GetMultiplePagesFailure()
 	c.Assert(err, chk.IsNil)
 	c.Assert(res.NextLink, chk.NotNil)
-	res, err = pagingClient.GetMultiplePagesFailureNextResults(res)
+	res, err = res.Next()
 	c.Assert(err, chk.NotNil)
 	c.Assert(res.StatusCode, chk.Equals, http.StatusBadRequest)
 }
@@ -119,7 +119,7 @@ func (s *PagingGroupSuite) TestGetMultiplePagesFailureURI(c *chk.C) {
 	res, err := pagingClient.GetMultiplePagesFailureURI()
 	c.Assert(err, chk.IsNil)
 	c.Assert(*res.NextLink, chk.Equals, "*&*#&$")
-	_, err = pagingClient.GetMultiplePagesFailureURINextResults(res)
+	_, err = res.Next()
 	c.Assert(err, chk.NotNil)
 	c.Assert(err, chk.ErrorMatches, ".*No scheme detected in URL.*")
 }
