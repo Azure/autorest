@@ -182,12 +182,11 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // code generators
   if (usedCodeGenerators.length > 0) {
-    const scopeCodeModel = await RunPlugin(config, "modeler", scopeComposedSwaggerTransformed);
-    const scopeCodeModelCommonmark = await RunPlugin(config, "commonmarker", scopeCodeModel);
-
     for (const usedCodeGenerator of usedCodeGenerators) {
       for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
         barrier.Await((async () => {
+          const scopeCodeModel = await RunPlugin(genConfig, "modeler", scopeComposedSwaggerTransformed);
+          const scopeCodeModelCommonmark = await RunPlugin(genConfig, "commonmarker", scopeCodeModel);
           const scopeCodeModelTransformed = await RunPlugin(genConfig, "transform", scopeCodeModelCommonmark);
 
           await EmitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), new LazyPromise(async () => scopeCodeModelTransformed), false);
