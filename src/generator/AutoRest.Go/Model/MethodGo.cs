@@ -139,7 +139,7 @@ namespace AutoRest.Go.Model
             // for LROs return the response types via a channel.
             // only do this for the "real" API; for "helper" methods
             // i.e. preparer/sender/responder don't use a channel.
-            if (!helper && IsLongRunningOperation())
+            if (!helper && ReturnViaChannel)
             {
                 retVal = $"<-chan {retValType}";
                 errVal = "<-chan error";
