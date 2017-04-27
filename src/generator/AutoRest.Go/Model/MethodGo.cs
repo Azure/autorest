@@ -102,14 +102,50 @@ namespace AutoRest.Go.Model
             }
         }
 
-        public string MethodReturnSignature
+        /// <summary>
+        /// Returns true if this method should return its results via channels.
+        /// </summary>
+        public bool ReturnViaChannel
         {
             get
             {
-                return HasReturnValue()
-                    ? string.Format("result {0}, err error", ReturnValue().Body.Name)
-                    : "result autorest.Response, err error";
+                // pageable operations will be handled separately
+                return IsLongRunningOperation() && !IsPageable;
             }
+        }
+
+        /// <summary>
+        /// Gets the return type name for this method.
+        /// </summary>
+        public string MethodReturnType
+        {
+            get
+            {
+                return HasReturnValue() ? ReturnValue().Body.Name.ToString() : "autorest.Response";
+            }
+        }
+
+        /// <summary>
+        /// Returns the method return signature for this method (e.g. "foo, bar").
+        /// </summary>
+        /// <param name="helper">Indicates if this method is a helper method (i.e. preparer/sender/responder).</param>
+        /// <returns>The method signature for this method.</returns>
+        public string MethodReturnSignature(bool helper)
+        {
+            var retValType = MethodReturnType;
+            var retVal = $"result {retValType}";
+            var errVal = "err error";
+
+            // for LROs return the response types via a channel.
+            // only do this for the "real" API; for "helper" methods
+            // i.e. preparer/sender/responder don't use a channel.
+            if (!helper && IsLongRunningOperation())
+            {
+                retVal = $"<-chan {retValType}";
+                errVal = "<-chan error";
+            }
+
+            return $"{retVal}, {errVal}";
         }
 
         public string NextMethodName => $"{Name}NextResults";
