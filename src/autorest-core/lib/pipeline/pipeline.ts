@@ -96,8 +96,6 @@ function CreateCommonmarkProcessor(): PipelinePlugin {
 }
 
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
-  const cancellationToken = config.CancellationToken;
-  const processMessage: (m: Message) => void = config.Message.bind(config);
   const barrier = new OutstandingTaskAwaiter();
 
   // externals:

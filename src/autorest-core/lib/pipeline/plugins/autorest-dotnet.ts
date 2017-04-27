@@ -11,6 +11,9 @@ import { CancellationToken } from "../../ref/cancallation";
 import { LazyPromise } from '../../lazy';
 import { SpawnJsonRpcAutoRest } from "../../../interop/autorest-dotnet";
 import { AutoRestPlugin } from "../plugin-endpoint";
+import { DataHandleRead, DataStoreViewReadonly, QuickScope, DataStoreView } from "../../data-store/data-store";
+import { Message } from "../../message";
+import { ConfigurationView } from "../../autorest-core";
 
 export class AutoRestDotNetPlugin extends EventEmitter {
   private static instance = new Lazy<AutoRestDotNetPlugin>(() => new AutoRestDotNetPlugin());
@@ -118,9 +121,8 @@ export class AutoRestDotNetPlugin extends EventEmitter {
     }
     return await outputScope.ReadStrict(results[0]);
   }
-=======
+}
 const instance = new LazyPromise<AutoRestPlugin>(() => AutoRestPlugin.FromChildProcess(SpawnJsonRpcAutoRest()));
 export function GetAutoRestDotNetPlugin(): PromiseLike<AutoRestPlugin> {
   return instance;
->>>>>>> e3dfdf5745d47cfc6b693cc5c7cf0b68a9de35f2
 }
