@@ -40,19 +40,21 @@
 }
 
 func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature(false)) {
-@if (Model.IsLongRunningOperation())
+@if (Model.ReturnViaChannel)
 {
+    @:resultChan := make(chan @(Model.MethodReturnType), 1)
     @:errChan:= make(chan error, 1)
 }
 @if (Model.ParameterValidations.Length > 0)
 {
     @:if err := validation.Validate([]validation.Validation{
     @:@(Model.ParameterValidations)}); err != nil {
-    @if (Model.IsLongRunningOperation())
+    @if (Model.ReturnViaChannel)
     {
-    @:errChan <- validation.NewErrorWithValidationError(err, "redis.GroupClient", "Create")
+    @:errChan <- @(Model.ValidationError)
     @:close(errChan)
-    @:return nil, errChan
+    @:close(resultChan)
+    @:return resultChan, errChan
     }
     else
     {
@@ -61,9 +63,8 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
 @:}
 @:@EmptyLine
 }
-@if (Model.IsLongRunningOperation())
+@if (Model.ReturnViaChannel)
 {
-    @:resultChan := make(chan @(Model.MethodReturnType), 1)
     @:go func() {
         @:var err error
         @:var result @(Model.MethodReturnType)
@@ -92,7 +93,7 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
     if err != nil {
         err = @(Model.AutorestError("Failure responding to request", "resp"))
     }
-@if (Model.IsLongRunningOperation())
+@if (Model.ReturnViaChannel)
 {
     @:}()
     @:return resultChan, errChan

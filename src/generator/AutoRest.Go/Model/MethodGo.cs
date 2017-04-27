@@ -102,6 +102,21 @@ namespace AutoRest.Go.Model
             }
         }
 
+        /// <summary>
+        /// Returns true if this method should return its results via channels.
+        /// </summary>
+        public bool ReturnViaChannel
+        {
+            get
+            {
+                // pageable operations will be handled separately
+                return IsLongRunningOperation() && !IsPageable;
+            }
+        }
+
+        /// <summary>
+        /// Gets the return type name for this method.
+        /// </summary>
         public string MethodReturnType
         {
             get
@@ -110,6 +125,11 @@ namespace AutoRest.Go.Model
             }
         }
 
+        /// <summary>
+        /// Returns the method return signature for this method (e.g. "foo, bar").
+        /// </summary>
+        /// <param name="helper">Indicates if this method is a helper method (i.e. preparer/sender/responder).</param>
+        /// <returns>The method signature for this method.</returns>
         public string MethodReturnSignature(bool helper)
         {
             var retValType = MethodReturnType;
