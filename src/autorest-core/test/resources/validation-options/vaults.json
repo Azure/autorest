@@ -1,0 +1,551 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-06-01",
+    "title": "RecoveryServicesClient",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": false
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Get the Vault details.",
+        "operationId": "Vaults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Creates or updates a Recovery Services vault.",
+        "operationId": "Vaults_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "vault",
+            "in": "body",
+            "description": "Recovery Services Vault to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Deletes a vault.",
+        "operationId": "Vaults_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Updates the vault.",
+        "operationId": "Vaults_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "vault",
+            "in": "body",
+            "description": "Recovery Services Vault to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "ClientDiscoveryDisplay": {
+      "description": "Localized display information of an operation.",
+      "type": "object",
+      "properties": {
+        "Provider": {
+          "description": "Name of the resource provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Resource": {
+          "description": "Type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Operation": {
+          "description": "Name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Description": {
+          "description": "Operation description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryForLogSpecification": {
+      "description": "Log specification for the operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Localized display name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "description": "Blob duration.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryForServiceSpecification": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "List of log specifications of this operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryForLogSpecification"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ClientDiscoveryForServiceSpecification",
+          "description": "Operation properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryResponse": {
+      "description": "List of available operations.",
+      "type": "object",
+      "properties": {
+        "Value": {
+          "description": "List of available operationss.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientDiscoveryValueForSingleApi"
+          },
+          "readOnly": true
+        },
+        "NextLink": {
+          "description": "NextLink",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClientDiscoveryValueForSingleApi": {
+      "description": "Available operation details.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "Name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Display": {
+          "$ref": "#/definitions/ClientDiscoveryDisplay",
+          "description": "Contains the localized display information for this particular operation.",
+          "readOnly": true
+        },
+        "Origin": {
+          "description": "The intended executor of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Properties": {
+          "$ref": "#/definitions/ClientDiscoveryProperties",
+          "description": "Properties of the operation.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "ARM Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id represents the complete path to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name associated with the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "Optional ETag.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Sku": {
+      "description": "Identifies the unique system identifier for each Azure resource.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The Sku name.",
+          "enum": [
+            "Standard",
+            "RS0"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "Tracked resource with location.",
+      "type": "object",
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties":{
+        "location": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpgradeDetails": {
+      "description": "Details for upgrading vault.",
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "description": "ID of the vault upgrade operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "description": "UTC time at which the upgrade operation has started.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "lastUpdatedTimeUtc": {
+          "description": "UTC time at which the upgrade operation status was last updated.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endTimeUtc": {
+          "description": "UTC time at which the upgrade operation has ended.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "status": {
+          "description": "Status of the vault upgrade operation.",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Upgraded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VaultUpgradeState",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "Message to the user containing information about the upgrade operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "triggerType": {
+          "description": "The way the vault upgradation was triggered.",
+          "enum": [
+            "UserTriggered",
+            "ForcedUpgrade"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "TriggerType",
+            "modelAsString": true
+          }
+        },
+        "upgradedResourceId": {
+          "description": "Resource ID of the upgraded vault.",
+          "type": "string",
+          "readOnly": true
+        },
+        "previousResourceId": {
+          "description": "Resource ID of the vault before the upgrade.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Vault": {
+      "description": "Resource information, as returned by the resource provider.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        }
+      }
+    },
+    "VaultList": {
+      "description": "The response model for a list of Vaults.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Vault"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VaultProperties": {
+      "description": "Properties of the vault.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning State.",
+          "type": "string",
+          "readOnly": true
+        },
+        "upgradeDetails": {
+          "$ref": "#/definitions/UpgradeDetails"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "VaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
