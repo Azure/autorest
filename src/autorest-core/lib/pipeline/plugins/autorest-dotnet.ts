@@ -52,6 +52,10 @@ export class AutoRestDotNetPlugin extends EventEmitter {
     }
   }
 
+
+  // The entry point where we call the validator module in AutoRest dll
+  // isIndividual - whether we wish to run the validation rules for After/Before merge states
+  // openapiType - the type of open api document to validate (ARM/Default/DataPlane), validation rules for appropriate type will be run
   async Validate(swagger: DataHandleRead, workingScope: DataStoreView, onMessage: (message: Message) => void, isIndividual: boolean, openapiType: string): Promise<void> {
     const outputScope = workingScope.CreateScope("output");
     await this.CautiousProcess("azure-validator", key => {
