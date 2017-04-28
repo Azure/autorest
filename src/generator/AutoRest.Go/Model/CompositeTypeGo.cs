@@ -36,6 +36,8 @@ namespace AutoRest.Go.Model
 
     }
 
+    public MethodGo NextMethod;
+
     public CompositeTypeGo(IModelType wrappedType)
     {
       if (!wrappedType.ShouldBeSyntheticType())

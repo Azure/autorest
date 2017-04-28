@@ -143,6 +143,30 @@ namespace AutoRest.Go.Model
       }
     }
 
+    public string ParametersDocumentation
+    {
+      get
+      {
+        StringBuilder sb = new StringBuilder();
+        foreach (var parameter in LocalParameters)
+        {
+          if (!string.IsNullOrEmpty(parameter.Documentation))
+          {
+            sb.Append(parameter.Name);
+            sb.Append(" is ");
+            sb.Append(parameter.Documentation.FixedValue.ToSentence());
+            sb.Append(" ");
+          }
+          if (parameter.ModelType.PrimaryType(KnownPrimaryType.Stream))
+          {
+            sb.Append(parameter.Name);
+            sb.Append(" will be closed upon successful return. Callers should ensure closure when receiving an error.");
+          }
+        }
+        return sb.ToString();
+      }
+    }
+
     public PropertyGo ListElement
     {
       get

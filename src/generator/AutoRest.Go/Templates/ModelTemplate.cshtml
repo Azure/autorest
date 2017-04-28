@@ -19,10 +19,11 @@ type @Model.Name struct {
     @(Model.Fields())
 }
 
-@if (!string.IsNullOrEmpty(Model.NextLink) && Model.PreparerNeeded)
+@if (!string.IsNullOrEmpty(Model.NextLink))
 {
-
-@:// Next retrieves the next set of results, if any.
+if (Model.PreparerNeeded)
+{
+@:// Next retrieves the next set of results of @(Model.Name), if any.
 @:func (lastResults @(Model.Name)) Next() (result @(Model.Name), err error) {
     @:req, err := lastResults.NextPreparer()
     @:if err != nil {
@@ -47,7 +48,7 @@ type @Model.Name struct {
 @:}
 
 @:@EmptyLine
-@:// NextPreparer prepares a request to retrieve the next set of results. It returns
+@:// NextPreparer prepares a request to retrieve the next set of @(Model.Name). It returns
 @:// nil if no more results exist.
 @:func (lastResults @(Model.Name)) NextPreparer() (*http.Request, error) {
     @:if lastResults.@(Model.NextLink) == nil || len(to.String(lastResults.@(Model.NextLink))) <= 0 {
@@ -60,15 +61,16 @@ type @Model.Name struct {
 @:}
 
 @:@EmptyLine
-@:// NextSender sends the next results request to retrieve the next set of results. The
-@:// method will close the http.Response Body if it receives an error.
+@:// NextSender sends the next results request to retrieve the next set of results
+@:// of @(Model.Name). The method will close the http.Response Body if it
+@:// receives an error.
 @:func (lastResults @(Model.Name)) NextSender(req *http.Request) (*http.Response, error) {
     @:return autorest.SendWithSender(lastResults.client, req)
 @:}
 
 @EmptyLine
-@:// NextResponder handles the response to the @(Model.Name)
-@:// request. The method always closes the http.Response Body.
+@:// NextResponder handles the response to the next results of @(Model.Name) request. The
+@:// method always closes the http.Response Body.
 @:func (lastResults @(Model.Name)) NextResponder(resp *http.Response) (result @(Model.Name), err error) { 
     @:err = autorest.Respond(
             @:resp,
@@ -89,4 +91,11 @@ type @Model.Name struct {
     @:result.client = lastResults.client
     @:return
 @:}
+}
+else
+{
+@EmptyLine
+@:@(Include(new MethodTemplate(), Model.NextMethod))
+@EmptyLine
+}
 }

@@ -10,36 +10,34 @@
 @inherits AutoRest.Core.Template<AutoRest.Go.Model.MethodGo>
 
 @{
-    StringBuilder sb = new StringBuilder();
-    foreach (var parameter in Model.LocalParameters)
-    {
-        if (!string.IsNullOrEmpty(parameter.Documentation))
-        {
-            sb.Append(parameter.Name);
-            sb.Append(" is ");
-            sb.Append(parameter.Documentation.FixedValue.ToSentence());
-            sb.Append(" ");
-        }
-        if (parameter.ModelType.PrimaryType(KnownPrimaryType.Stream))
-        {
-            sb.Append(parameter.Name);
-            sb.Append(" will be closed upon successful return. Callers should ensure closure when receiving an error.");
-        }
-    }
-
     List<string> pd = Model.PrepareDecorators;
     List<string> rd = Model.RespondDecorators;
     rd.Insert(0, "resp");
 }
 
+@if (Model.IsNextMethod)
+{
+@WrapComment("// ", "Next " + Model.Description.ToSentence())
+@://
+}
+else
+{
 @WrapComment("// ", Model.Name + " " + Model.Description.ToSentence())
+@://
+}
 @if (Model.LocalParameters.Count() > 0)
 {
+@WrapComment("// ", Model.ParametersDocumentation)
 @://
-@WrapComment("// ", sb.ToString())
 }
-
-func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature) {
+@if (Model.IsNextMethod)
+{
+@:func (lastResults @(Model.ReturnValue().Body.Name)) Next(@Model.MethodParametersSignature) (@Model.MethodReturnSignature) {
+}
+else
+{
+@:func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature) {
+}
     @if (Model.ParameterValidations.Length > 0)
     {
     @:if err := validation.Validate([]validation.Validation{
@@ -48,20 +46,41 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
     @:}
     @:@EmptyLine
     }
-    req, err := client.@(Model.PreparerMethodName)(@(Model.HelperInvocationParameters))
+    @if (Model.IsNextMethod)
+    {
+    @:req, err := lastResults.NextPreparer(@(Model.HelperInvocationParameters))
+    }
+    else
+    {
+    @:req, err := client.@(Model.PreparerMethodName)(@(Model.HelperInvocationParameters))
+    }
     if err != nil {
         return result, @(Model.AutorestError("Failure preparing request"))
     }
 
     @EmptyLine
-    resp, err := client.@(Model.SenderMethodName)(req)
+    @if (Model.IsNextMethod)
+    {
+    @:resp, err := lastResults.NextSender(req)
+    }
+    else
+    {
+    @:resp, err := client.@(Model.SenderMethodName)(req)
+    }
     if err != nil {
         @(Model.Response)
         return result, @(Model.AutorestError("Failure sending request", "resp"))
     }
 
     @EmptyLine
-    result, err = client.@(Model.ResponderMethodName)(resp)
+    @if (Model.IsNextMethod)
+    {
+    @:result, err = lastResults.NextResponder(resp)
+    }
+    else
+    {
+    @:result, err = client.@(Model.ResponderMethodName)(resp)
+    }
     if err != nil {
         err = @(Model.AutorestError("Failure responding to request", "resp"))
     }
@@ -71,8 +90,16 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
 }
 
 @EmptyLine
-// @(Model.PreparerMethodName) prepares the @(Model.Name) request.
-func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParametersSignature)) (*http.Request, error) {
+@if (Model.IsNextMethod)
+{
+@:// NextPreparer prepares a request to retrieve the next set of @(Model.Name).
+@:func (lastResults @(Model.ReturnValue().Body.Name)) NextPreparer(@(Model.MethodParametersSignature)) (*http.Request, error) {
+}
+else
+{
+@:// @(Model.PreparerMethodName) prepares the @(Model.Name) request.
+@:func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParametersSignature)) (*http.Request, error) {
+}
 @if (Model.IsCustomBaseUri && Model.URLParameters.Any())
 {
     @:@(Model.URLMap)
@@ -133,9 +160,19 @@ func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParameter
 
 
 @EmptyLine
-// @(Model.SenderMethodName) sends the @(Model.Name) request. The method will close the
-// http.Response Body if it receives an error.
-func (client @(Model.Owner)) @(Model.SenderMethodName)(req *http.Request) (*http.Response, error) {
+@if (Model.IsNextMethod)
+{
+@:// NextSender sends the next results request to get the next set of results
+@:// of @(Model.Name). The method will close the http.Response Body if it
+@://receives an error.
+@:func (lastResults @(Model.ReturnValue().Body.Name)) NextSender(req *http.Request) (*http.Response, error) {
+}
+else
+{
+@:// @(Model.SenderMethodName) sends the @(Model.Name) request. The method will close the
+@:// http.Response Body if it receives an error.
+@:func (client @(Model.Owner)) @(Model.SenderMethodName)(req *http.Request) (*http.Response, error) {
+}
     @if (Model.IsLongRunningOperation())
     {
         @:return autorest.SendWithSender(client,
@@ -149,9 +186,18 @@ func (client @(Model.Owner)) @(Model.SenderMethodName)(req *http.Request) (*http
 }
 
 @EmptyLine
-// @(Model.ResponderMethodName) handles the response to the @(Model.Name) request. The method always
-// closes the http.Response Body.
-func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (@(Model.MethodReturnSignature)) { 
+@if (Model.IsNextMethod)
+{
+@:// NextResponder handles the response to the next results of @(Model.Name) request. The
+@:// method always closes the http.Response Body.
+@:func (lastResults @(Model.ReturnValue().Body.Name)) NextResponder(resp *http.Response) (@(Model.MethodReturnSignature)) { 
+}
+else
+{
+@:// @(Model.ResponderMethodName) handles the response to the @(Model.Name) request. The method always
+@:// closes the http.Response Body.
+@:func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (@(Model.MethodReturnSignature)) { 
+}
     @if (Model.ReturnValue().Body.IsStreamType())
     {
     @:result.Value = &resp.Body
@@ -200,7 +246,7 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
             }
             else
             {
-            @:list, err = client.@(Model.NextOperationName)(@(Model.NextOperationParameters))
+            @:list, err = list.Next(@(Model.NextOperationParameters))
             }
             @:if err != nil {
                 @:return respSlice, err

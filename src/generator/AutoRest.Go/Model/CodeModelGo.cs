@@ -93,6 +93,11 @@ namespace AutoRest.Go.Model
         {
           imports.Add("github.com/Azure/go-autorest/autorest");
         }
+        if (Methods.Cast<MethodGo>().Any(m => m.IsNextMethod))
+        {
+          imports.Add("net/http");
+          imports.Add("github.com/Azure/go-autorest/autorest/azure");
+        }
         ModelTypes.Cast<CompositeTypeGo>()
             .ForEach(mt =>
             {
