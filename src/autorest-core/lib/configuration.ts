@@ -79,6 +79,7 @@ export interface Directive {
   suppress?: string[] | string;
   set?: string[] | string;
   transform?: string[] | string;
+  test?: string[] | string;
 }
 
 export class DirectiveView {
@@ -107,6 +108,10 @@ export class DirectiveView {
 
   public get transform(): Iterable<string> {
     return ValuesOf<string>(this.directive["transform"]);
+  }
+
+  public get test(): Iterable<string> {
+    return ValuesOf<string>(this.directive["test"]);
   }
 }
 
