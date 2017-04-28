@@ -31,7 +31,7 @@ export class Manipulator {
     return matchesFrom;
   }
 
-  public async Process(data: DataHandleRead, scope: DataStoreView, documentId?: string): Promise<DataHandleRead> {
+  private async ProcessInternal(data: DataHandleRead, scope: DataStoreView, documentId?: string): Promise<DataHandleRead> {
     let nextId = (() => { let i = 0; return () => ++i; })();
     for (const trans of this.transformations) {
       // matches filter?
@@ -75,6 +75,16 @@ export class Manipulator {
     }
 
     return data;
+  }
+
+  public async Process(data: DataHandleRead, scope: DataStoreView, documentId?: string): Promise<DataHandleRead> {
+    // if the input data is not an object (e.g. raw source code) transform to string object and back
+    const needsTransform = !data.IsObject();
+
+    const trans1 = needsTransform ? await (await scope.Write("trans_input")).WriteObject(data.ReadData()) : data;
+    const result = await this.ProcessInternal(trans1, scope, documentId);
+    const trans2 = needsTransform ? await (await scope.Write("trans_output")).WriteData(result.ReadObject<string>()) : result;
+    return trans2;
   }
 
   // TODO: make method that'll warn about transforms that weren't used!
