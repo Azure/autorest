@@ -234,19 +234,19 @@ namespace AutoRest.Go.Model
 
     public IEnumerable<ParameterGo> URLParameters => ParametersGo.URLParameters();
 
-    public string URLMap => URLParameters.BuildParameterMap("urlParameters");
+    public string URLMap => URLParameters.BuildParameterMap("urlParameters", IsNextMethod);
 
     public IEnumerable<ParameterGo> PathParameters => ParametersGo.PathParameters();
 
-    public string PathMap => PathParameters.BuildParameterMap("pathParameters");
+    public string PathMap => PathParameters.BuildParameterMap("pathParameters", IsNextMethod);
 
     public IEnumerable<ParameterGo> QueryParameters => ParametersGo.QueryParameters();
 
     public IEnumerable<ParameterGo> OptionalQueryParameters => ParametersGo.QueryParameters(false);
 
-    public string QueryMap => QueryParameters.BuildParameterMap("queryParameters");
+    public string QueryMap => QueryParameters.BuildParameterMap("queryParameters", IsNextMethod);
 
-    public string FormDataMap => FormDataParameters.BuildParameterMap("formDataParameters");
+    public string FormDataMap => FormDataParameters.BuildParameterMap("formDataParameters",IsNextMethod);
 
     public List<string> ResponseCodes
     {
@@ -282,7 +282,14 @@ namespace AutoRest.Go.Model
         decorators.Add(HTTPMethodDecorator);
         if (!this.IsCustomBaseUri)
         {
+          if (IsNextMethod)
+          {
+          decorators.Add(string.Format("autorest.WithBaseURL(lastResults.client.BaseURI)"));
+          }
+          else
+          {
           decorators.Add(string.Format("autorest.WithBaseURL(client.BaseURI)"));
+          }
         }
         else
         {
@@ -358,7 +365,14 @@ namespace AutoRest.Go.Model
       get
       {
         var decorators = new List<string>();
-        decorators.Add("client.ByInspecting()");
+        if (IsNextMethod)
+        {
+          decorators.Add("lastResults.client.ByInspecting()");
+        }
+        else
+        {
+          decorators.Add("client.ByInspecting()");
+        }
         decorators.Add(string.Format("azure.WithErrorUnlessStatusCode({0})", string.Join(",", ResponseCodes.ToArray())));
 
         if (HasReturnValue() && !ReturnValue().Body.IsStreamType())

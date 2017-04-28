@@ -35,9 +35,9 @@ namespace AutoRest.Go.Model
     /// </summary>
     /// <param name="mapVariable"></param>
     /// <returns></returns>
-    public string AddToMap(string mapVariable)
+    public string AddToMap(string mapVariable, bool isNext)
     {
-      return string.Format("{0}[\"{1}\"] = {2}", mapVariable, NameForMap(), ValueForMap());
+      return string.Format("{0}[\"{1}\"] = {2}", mapVariable, NameForMap(), ValueForMap(isNext));
     }
 
     public string GetParameterName()
@@ -85,7 +85,7 @@ namespace AutoRest.Go.Model
     /// Return formatted value string for the parameter.
     /// </summary>
     /// <returns></returns>
-    public string ValueForMap()
+    public string ValueForMap(bool isNext)
     {
       if (IsAPIVersion)
       {
@@ -93,7 +93,9 @@ namespace AutoRest.Go.Model
       }
 
       var value = IsClientProperty
-          ? "client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
+          ? isNext
+            ? "lastResults.client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
+            : "client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
           : Name.Value;
 
       var format = IsRequired || ModelType.CanBeEmpty()
@@ -121,7 +123,7 @@ namespace AutoRest.Go.Model
     /// <param name="parameters"></param>
     /// <param name="mapVariable"></param>
     /// <returns></returns>
-    public static string BuildParameterMap(this IEnumerable<ParameterGo> parameters, string mapVariable)
+    public static string BuildParameterMap(this IEnumerable<ParameterGo> parameters, string mapVariable, bool isNext)
     {
       var builder = new StringBuilder();
 
@@ -135,7 +137,7 @@ namespace AutoRest.Go.Model
         parameters
             .Where(p => p.IsRequired)
             .OrderBy(p => p.SerializedName.ToString())
-            .ForEach(p => indented.AppendLine("\"{0}\": {1},", p.NameForMap(), p.ValueForMap()));
+            .ForEach(p => indented.AppendLine("\"{0}\": {1},", p.NameForMap(), p.ValueForMap(isNext)));
         builder.Append(indented);
       }
       builder.AppendLine("}");

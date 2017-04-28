@@ -120,7 +120,7 @@ else
     foreach (var p in Model.OptionalQueryParameters)
     {
     @:if @(p.ModelType.GetEmptyCheck(p.GetParameterName(),false)) {
-        @:@(p.AddToMap("queryParameters"))
+        @:@(p.AddToMap("queryParameters", Model.IsNextMethod))
     @:}
     }
     @:@EmptyLine
@@ -175,13 +175,27 @@ else
 }
     @if (Model.IsLongRunningOperation())
     {
+        @if (Model.IsNextMethod)
+        {
+        @:return autorest.SendWithSender(lastResults.client,
+        }
+        else
+        {
         @:return autorest.SendWithSender(client,
+        }
                                                     @:req,
                                                     @:azure.DoPollForAsynchronous(client.PollingDelay))
     }
     else
     {
+    @if (Model.IsNextMethod)
+    {
+    @:return autorest.SendWithSender(lastResults.client, req)
+    }
+    else
+    {
     @:return autorest.SendWithSender(client, req)
+    }
     }
 }
 
@@ -208,6 +222,13 @@ else
     @(Model.Response)
     @if (Model.IsPageable)
     {
+        
+    @if (Model.IsNextMethod)
+    {
+    @:result.client = lastResults.client
+    }
+    else
+    {
     @if (Model.Owner == "ManagementClient")
     {
     @:result.client = client
@@ -215,6 +236,7 @@ else
     else
     {
     @:result.client = client.ManagementClient
+    }
     }
     }
     return
