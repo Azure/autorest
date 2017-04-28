@@ -26,7 +26,7 @@ namespace AutoRest.TypeScript.SuperAgent.Tests
                 }
                 catch (NullReferenceException)
                 {
-                    path = "C:\\projects\\autorest\\src\\generator\\AutoRest.TypeScript.SuperAgent.Tests\\Resource";
+                    path = "C:\\projects\\autorest\\src\\generator\\AutoRest.TypeScript.SuperAgent.Tests";
                 }
 
                 var settings = new Settings
