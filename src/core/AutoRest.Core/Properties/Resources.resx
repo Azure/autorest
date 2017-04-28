@@ -203,7 +203,7 @@ Modelers:
     <value>Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.</value>
   </data>
   <data name="SecurityDefinitionsStructureValidation" xml:space="preserve">
-    <value>A swagger must have security definitions and must adhere to the specific structure.</value>
+    <value>Every swagger/configuration must have a security definitions section and it must adhere to the structure described in: https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md</value>
   </data>
   <data name="MsdnReferencesDiscouraged" xml:space="preserve">
     <value>For better generated code quality, remove all references to "msdn.microsoft.com".</value>

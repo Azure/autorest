@@ -5,4 +5,4 @@
 /**
  * This package contains the classes for SwaggerPetstore.
  */
-package petstore;
+package javanamespace;

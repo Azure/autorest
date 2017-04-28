@@ -185,34 +185,30 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   }
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
-  const usedCodeGenerators = allCodeGenerators.filter(cg => config.GetEntry(cg as any) !== undefined);
 
   // code generators
-  if (usedCodeGenerators.length > 0) {
-    const scopeCodeModel = await RunPlugin(config, "modeler", scopeComposedSwaggerTransformed);
-    const scopeCodeModelCommonmark = await RunPlugin(config, "commonmarker", scopeCodeModel);
+  for (const codeGenerator of allCodeGenerators) {
+    for (const genConfig of config.GetPluginViews(codeGenerator)) {
+      barrier.Await((async () => {
+        const scopeCodeModel = await RunPlugin(genConfig, "modeler", scopeComposedSwaggerTransformed);
+        const scopeCodeModelCommonmark = await RunPlugin(genConfig, "commonmarker", scopeCodeModel);
+        const scopeCodeModelTransformed = await RunPlugin(genConfig, "transform", scopeCodeModelCommonmark);
 
-    for (const usedCodeGenerator of usedCodeGenerators) {
-      for (const genConfig of config.GetPluginViews(usedCodeGenerator)) {
-        barrier.Await((async () => {
-          const scopeCodeModelTransformed = await RunPlugin(genConfig, "transform", scopeCodeModelCommonmark);
+        await EmitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), new LazyPromise(async () => scopeCodeModelTransformed), false);
 
-          await EmitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), new LazyPromise(async () => scopeCodeModelTransformed), false);
+        const inputScope = new QuickScope([
+          await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]),
+          await scopeCodeModelTransformed.ReadStrict((await scopeCodeModelTransformed.Enum())[0])
+        ]);
+        let generatedFileScope = await RunPlugin(genConfig, codeGenerator, inputScope);
 
-          const inputScope = new QuickScope([
-            await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]),
-            await scopeCodeModelTransformed.ReadStrict((await scopeCodeModelTransformed.Enum())[0])
-          ]);
-          let generatedFileScope = await RunPlugin(genConfig, usedCodeGenerator, inputScope);
+        // C# simplifier
+        if (codeGenerator === "csharp") {
+          generatedFileScope = await RunPlugin(genConfig, "csharp-simplifier", generatedFileScope);
+        }
 
-          // C# simplifier
-          if (usedCodeGenerator === "csharp") {
-            generatedFileScope = await RunPlugin(genConfig, "csharp-simplifier", generatedFileScope);
-          }
-
-          await EmitArtifacts(genConfig, `source-file-${usedCodeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, decodeURIComponent(key.split("/output/")[1])), new LazyPromise(async () => generatedFileScope), false);
-        })());
-      }
+        await EmitArtifacts(genConfig, `source-file-${codeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, decodeURIComponent(key.split("/output/")[1])), new LazyPromise(async () => generatedFileScope), false);
+      })());
     }
   }
 

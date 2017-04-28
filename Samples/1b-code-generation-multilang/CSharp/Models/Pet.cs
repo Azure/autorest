@@ -2,7 +2,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace Petstore.Models
+namespace CSharpNamespace.Models
 {
     using Microsoft.Rest;
     using Newtonsoft.Json;

@@ -4,17 +4,17 @@
  * regenerated.
  */
 
-package petstore;
+package javanamespace;
 
-import .models.ErrorException;
-import .models.ListPetsHeaders;
-import .models.Pet;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import java.io.IOException;
 import java.util.List;
+import javanamespace.models.ErrorException;
+import javanamespace.models.ListPetsHeaders;
+import javanamespace.models.Pet;
 import rx.Observable;
 import com.microsoft.rest.RestClient;
 
