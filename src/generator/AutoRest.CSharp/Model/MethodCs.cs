@@ -406,7 +406,7 @@ namespace AutoRest.CSharp.Model
                            .AppendLine("{").Indent()
                            .AppendLine("foreach (var _item in {0})", queryParameter.Name)
                            .AppendLine("{").Indent()
-                           .AppendLine(replaceString, queryParameter.SerializedName, "_item ?? string.Empty").Outdent()
+                           .AppendLine(replaceString, queryParameter.SerializedName, "_item?.ToString() ?? string.Empty").Outdent()
                            .AppendLine("}").Outdent()
                            .AppendLine("}").Outdent();
                     }

@@ -21,6 +21,7 @@ C# supports multiple different flavors:
 ``` yaml 
 csharp:
   - output-folder: CSharp
+    namespace: CSharpNamespace
   - output-folder: Azure.CSharp
     azure-arm: true
   - output-folder: Azure.CSharp.Fluent
@@ -45,7 +46,8 @@ Do you love curlies? Let's use JSON for a change.
 {
   "java": [
     {
-      "output-folder": "Java"
+      "output-folder": "Java",
+      "namespace": "JavaNamespace"
     },
     {
       "output-folder": "Azure.Java",
