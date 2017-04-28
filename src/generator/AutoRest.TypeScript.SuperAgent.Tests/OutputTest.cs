@@ -18,7 +18,16 @@ namespace AutoRest.TypeScript.SuperAgent.Tests
 
             using (var context = new DependencyInjection.Context().Activate())
             {
-                var path = parent(parent(parent(currentPath)));
+                var path = "";
+
+                try
+                {
+                    parent(parent(parent(currentPath)));
+                }
+                catch (NullReferenceException)
+                {
+                    path = "C:\\projects\\autorest\\src\\generator\\AutoRest.TypeScript.SuperAgent.Tests\\Resource";
+                }
 
                 var settings = new Settings
                                {
