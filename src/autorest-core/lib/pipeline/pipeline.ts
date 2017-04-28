@@ -165,16 +165,14 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     barrier.Await(EmitArtifacts(config, "swagger-document", _ => ResolveUri(config.OutputFolderUri, relPath), new LazyPromise(async () => scopeComposedSwaggerTransformed), true));
   }
 
-  if (!config.DisableValidation) {
-    if (config.GetEntry("model-validator")) {
-      barrier.Await(RunPlugin(config, "model-validator", scopeComposedSwaggerTransformed));
-    }
-    if (config.GetEntry("semantic-validator")) {
-      barrier.Await(RunPlugin(config, "semantic-validator", scopeComposedSwaggerTransformed));
-    }
-    if (config.GetEntry("azure-validator")) {
-      barrier.Await(RunPlugin(config, "azure-validator", scopeComposedSwaggerTransformed));
-    }
+  if (config.GetEntry("model-validator")) {
+    barrier.Await(RunPlugin(config, "model-validator", scopeComposedSwaggerTransformed));
+  }
+  if (config.GetEntry("semantic-validator")) {
+    barrier.Await(RunPlugin(config, "semantic-validator", scopeComposedSwaggerTransformed));
+  }
+  if (config.GetEntry("azure-validator")) {
+    barrier.Await(RunPlugin(config, "azure-validator", scopeComposedSwaggerTransformed));
   }
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];

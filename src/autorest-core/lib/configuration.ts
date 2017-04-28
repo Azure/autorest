@@ -31,7 +31,6 @@ export interface AutoRestConfigurationImpl {
   // plugin specific
   "output-file"?: string;
   "output-folder"?: string;
-  "disable-validation"?: boolean;
 
   // from here on: CONVENTION, not cared about by the core
   "fluent"?: boolean;
@@ -210,10 +209,6 @@ export class ConfigurationView {
 
   public get Raw(): AutoRestConfigurationImpl {
     return this.config;
-  }
-
-  public get DisableValidation(): boolean {
-    return this.config["disable-validation"] || false;
   }
 
   public * GetPluginViews(pluginName: string): Iterable<ConfigurationView> {

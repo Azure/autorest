@@ -6,7 +6,6 @@
 azure-arm: false    # no special ARM consideratons 
 output-folder: $(base-folder)/generated 
 
-disable-validation: false
 ```
 
 ## Implicit plugins
@@ -89,14 +88,14 @@ swagger-parser:
 ### Azure Validator (aka 'the linter')
 The Azure Validator is enabled as a plugin when `azure-arm` is set to `true` and can be disabled when `disable-validation` is set to `false`.
 
-``` yaml $(azure-arm) && !$(disable-validation)
+``` yaml $(azure-arm)
 azure-validator: # enable the azure validator 
 #consumes: swaggerdocument
 #produces: (nothing)
 ```
 ### Model Validator (Amar's Enhnanced Swagger-Tools validation)
 The Model Validator is enabled by default, and can be disabled when `disable-validation` is set to `true`.
-``` yaml !$(disable-validation)
+``` yaml
 model-validator: # enable the model validator
 #consumes: swaggerdocument
 #produces: (nothing)
