@@ -7,7 +7,6 @@ This configuration applies to every run of AutoRest, but with less priority than
 ``` yaml
 azure-arm: false
 output-folder: generated
-disable-validation: false
 ```
 
 ## Pipeline
