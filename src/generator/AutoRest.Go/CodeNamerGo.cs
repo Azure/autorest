@@ -37,43 +37,43 @@ namespace AutoRest.Go
         // CommonInitialisms are those "words" within a name that Golint expects to be uppercase.
         // See https://github.com/golang/lint/blob/master/lint.go for detail.
         private string[] CommonInitialisms => new string[] {
-                                                            "Acl",
-                                                            "Api",
-                                                            "Ascii",
-                                                            "Cpu",
-                                                            "Css",
-                                                            "Dns",
-                                                            "Eof",
-                                                            "Guid",
-                                                            "Html",
-                                                            "Http",
-                                                            "Https",
-                                                            "Id",
-                                                            "Ip",
-                                                            "Json",
-                                                            "Lhs",
-                                                            "Qps",
-                                                            "Ram",
-                                                            "Rhs",
-                                                            "Rpc",
-                                                            "Sla",
-                                                            "Smtp",
-                                                            "Sql",
-                                                            "Ssh",
-                                                            "Tcp",
-                                                            "Tls",
-                                                            "Ttl",
-                                                            "Udp",
-                                                            "Ui",
-                                                            "Uid",
-                                                            "Uuid",
-                                                            "Uri",
-                                                            "Url",
-                                                            "Utf8",
-                                                            "Vm",
-                                                            "Xml",
-                                                            "Xsrf",
-                                                            "Xss",
+                                                            "acl",
+                                                            "api",
+                                                            "ascii",
+                                                            "cpu",
+                                                            "css",
+                                                            "dns",
+                                                            "eof",
+                                                            "guid",
+                                                            "html",
+                                                            "http",
+                                                            "https",
+                                                            "id",
+                                                            "ip",
+                                                            "json",
+                                                            "lhs",
+                                                            "qps",
+                                                            "ram",
+                                                            "rhs",
+                                                            "rpc",
+                                                            "sla",
+                                                            "smtp",
+                                                            "sql",
+                                                            "ssh",
+                                                            "tcp",
+                                                            "tls",
+                                                            "ttl",
+                                                            "udp",
+                                                            "ui",
+                                                            "uid",
+                                                            "uuid",
+                                                            "uri",
+                                                            "url",
+                                                            "utf8",
+                                                            "vm",
+                                                            "xml",
+                                                            "xsrf",
+                                                            "xss",
                                                         };
 
         public string[] UserDefinedNames => new string[] {
@@ -418,9 +418,27 @@ namespace AutoRest.Go
         private string EnsureNameCase(string name)
         {
             var builder = new StringBuilder();
-            foreach (var s in name.ToWords())
+            var words = name.ToWords();
+            for (int i = 0; i < words.Length; i++)
             {
-                builder.Append(CommonInitialisms.Contains(s) ? s.ToUpper() : s);
+                string word = words[i];
+                if (CommonInitialisms.Contains(word.ToLower()))
+                {
+                    word = word.ToUpper();
+                }
+                else
+                {
+                    if (i < words.Length-1)
+                    {
+                        var concat = words[i] + words[i+1];
+                        if (CommonInitialisms.Contains(concat.ToLower()))
+                        {
+                            word = concat.ToUpper();
+                            i++;
+                        }
+                    }
+                }
+                builder.Append(word);
             }
             return builder.ToString();
         }
