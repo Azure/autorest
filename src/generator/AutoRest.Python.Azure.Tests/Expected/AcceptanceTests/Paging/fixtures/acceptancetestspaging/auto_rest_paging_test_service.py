@@ -51,7 +51,7 @@ class AutoRestPagingTestService(object):
     :vartype config: AutoRestPagingTestServiceConfiguration
 
     :ivar paging: Paging operations
-    :vartype paging: .operations.PagingOperations
+    :vartype paging: fixtures.acceptancetestspaging.operations.PagingOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials

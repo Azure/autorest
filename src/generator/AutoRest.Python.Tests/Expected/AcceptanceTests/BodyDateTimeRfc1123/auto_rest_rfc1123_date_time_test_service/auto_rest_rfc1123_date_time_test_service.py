@@ -42,7 +42,7 @@ class AutoRestRFC1123DateTimeTestService(object):
     :vartype config: AutoRestRFC1123DateTimeTestServiceConfiguration
 
     :ivar datetimerfc1123: Datetimerfc1123 operations
-    :vartype datetimerfc1123: .operations.Datetimerfc1123Operations
+    :vartype datetimerfc1123: fixtures.acceptancetestsbodydatetimerfc1123.operations.Datetimerfc1123Operations
 
     :param str base_url: Service URL
     """

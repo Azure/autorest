@@ -42,7 +42,7 @@ class AutoRestBoolTestService(object):
     :vartype config: AutoRestBoolTestServiceConfiguration
 
     :ivar bool_model: BoolModel operations
-    :vartype bool_model: .operations.BoolModelOperations
+    :vartype bool_model: fixtures.acceptancetestsbodyboolean.operations.BoolModelOperations
 
     :param str base_url: Service URL
     """

@@ -42,7 +42,7 @@ class AutoRestNumberTestService(object):
     :vartype config: AutoRestNumberTestServiceConfiguration
 
     :ivar number: Number operations
-    :vartype number: .operations.NumberOperations
+    :vartype number: fixtures.acceptancetestsbodynumber.operations.NumberOperations
 
     :param str base_url: Service URL
     """

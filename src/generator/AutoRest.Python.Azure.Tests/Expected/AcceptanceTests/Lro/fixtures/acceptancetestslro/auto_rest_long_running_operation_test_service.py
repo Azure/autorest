@@ -54,13 +54,13 @@ class AutoRestLongRunningOperationTestService(object):
     :vartype config: AutoRestLongRunningOperationTestServiceConfiguration
 
     :ivar lr_os: LROs operations
-    :vartype lr_os: .operations.LROsOperations
+    :vartype lr_os: fixtures.acceptancetestslro.operations.LROsOperations
     :ivar lro_retrys: LRORetrys operations
-    :vartype lro_retrys: .operations.LRORetrysOperations
+    :vartype lro_retrys: fixtures.acceptancetestslro.operations.LRORetrysOperations
     :ivar lrosa_ds: LROSADs operations
-    :vartype lrosa_ds: .operations.LROSADsOperations
+    :vartype lrosa_ds: fixtures.acceptancetestslro.operations.LROSADsOperations
     :ivar lr_os_custom_header: LROsCustomHeader operations
-    :vartype lr_os_custom_header: .operations.LROsCustomHeaderOperations
+    :vartype lr_os_custom_header: fixtures.acceptancetestslro.operations.LROsCustomHeaderOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials

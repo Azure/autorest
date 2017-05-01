@@ -49,19 +49,19 @@ class AutoRestHttpInfrastructureTestService(object):
     :vartype config: AutoRestHttpInfrastructureTestServiceConfiguration
 
     :ivar http_failure: HttpFailure operations
-    :vartype http_failure: .operations.HttpFailureOperations
+    :vartype http_failure: fixtures.acceptancetestshttp.operations.HttpFailureOperations
     :ivar http_success: HttpSuccess operations
-    :vartype http_success: .operations.HttpSuccessOperations
+    :vartype http_success: fixtures.acceptancetestshttp.operations.HttpSuccessOperations
     :ivar http_redirects: HttpRedirects operations
-    :vartype http_redirects: .operations.HttpRedirectsOperations
+    :vartype http_redirects: fixtures.acceptancetestshttp.operations.HttpRedirectsOperations
     :ivar http_client_failure: HttpClientFailure operations
-    :vartype http_client_failure: .operations.HttpClientFailureOperations
+    :vartype http_client_failure: fixtures.acceptancetestshttp.operations.HttpClientFailureOperations
     :ivar http_server_failure: HttpServerFailure operations
-    :vartype http_server_failure: .operations.HttpServerFailureOperations
+    :vartype http_server_failure: fixtures.acceptancetestshttp.operations.HttpServerFailureOperations
     :ivar http_retry: HttpRetry operations
-    :vartype http_retry: .operations.HttpRetryOperations
+    :vartype http_retry: fixtures.acceptancetestshttp.operations.HttpRetryOperations
     :ivar multiple_responses: MultipleResponses operations
-    :vartype multiple_responses: .operations.MultipleResponsesOperations
+    :vartype multiple_responses: fixtures.acceptancetestshttp.operations.MultipleResponsesOperations
 
     :param str base_url: Service URL
     """
