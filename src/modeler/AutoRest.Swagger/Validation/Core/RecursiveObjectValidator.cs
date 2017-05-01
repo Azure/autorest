@@ -52,8 +52,8 @@ namespace AutoRest.Swagger.Validation.Core
         {
             // Filter by document type
             // By default select all rules, then add the doc type specific rules
-            var serviceDefTypeRules = rules.Where(rule => rule.ServiceDefinitionDocumentType == ServiceDefinitionDocumentType.Default);
-            if (metaData.ServiceDefinitionDocumentType != ServiceDefinitionDocumentType.Default)
+            var serviceDefTypeRules = rules.Where(rule => rule.ServiceDefinitionDocumentType == ServiceDefinitionDocumentType.DEFAULT);
+            if (metaData.ServiceDefinitionDocumentType != ServiceDefinitionDocumentType.DEFAULT)
             {
                 serviceDefTypeRules = serviceDefTypeRules.Concat(rules.Where(rule => (rule.ServiceDefinitionDocumentType & metaData.ServiceDefinitionDocumentType)!=0));
             }
