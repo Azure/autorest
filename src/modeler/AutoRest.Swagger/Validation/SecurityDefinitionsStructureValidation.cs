@@ -24,6 +24,11 @@ namespace AutoRest.Swagger.Validation
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         /// <summary>
+        /// What kind of breaking change implementing this rule can cause.
+        /// </summary>
+        public virtual ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceBreakingChanges;
+
+        /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override Category Severity => Category.Error;

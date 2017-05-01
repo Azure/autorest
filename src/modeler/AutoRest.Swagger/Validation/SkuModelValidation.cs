@@ -35,6 +35,11 @@ namespace AutoRest.Swagger.Validation
         public override string Id => "M2057";
 
         /// <summary>
+        /// What kind of breaking change implementing this rule can cause.
+        /// </summary>
+        public virtual ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceBreakingChanges;
+
+        /// <summary>
         /// Violation category of the Rule.
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
