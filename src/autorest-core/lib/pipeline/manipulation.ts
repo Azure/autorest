@@ -14,50 +14,50 @@ import { Channel, Message, SourceLocation } from '../message';
 
 export class Manipulator {
   private transformations: DirectiveView[];
+  private ctr = 0;
 
   public constructor(private config: ConfigurationView) {
-    this.transformations = From(config.Directives).Where(x => [...x.transform].length > 0 || [...x.set].length > 0).ToArray();
+    this.transformations = From(config.Directives).ToArray();
   }
 
   private MatchesSourceFilter(document: string, transform: DirectiveView): boolean {
+    document = "/" + document;
+
+    // console.log(document, [...transform.from]);
+
     // from
     const from = From(transform.from);
     const matchesFrom = !from.Any() || from
-      .Select(d => d.toLowerCase())
       .Any(d =>
-        document.toLowerCase().endsWith(d) ||
-        document.toLowerCase().indexOf("/" + d) !== -1);
+        document.endsWith("/" + d) ||
+        document.indexOf("/" + d + "/") !== -1);
 
     return matchesFrom;
   }
 
   private async ProcessInternal(data: DataHandleRead, scope: DataStoreView, documentId?: string): Promise<DataHandleRead> {
-    let nextId = (() => { let i = 0; return () => ++i; })();
     for (const trans of this.transformations) {
       // matches filter?
       if (this.MatchesSourceFilter(documentId || data.key, trans)) {
         for (const w of trans.where) {
           // transform
           for (const t of trans.transform) {
-            const target = await scope.Write(`transform_${nextId()}.yaml`);
+            const target = await scope.Write(`transform_${++this.ctr}.yaml`);
             data = (await ManipulateObject(data, target, w, (doc, obj, path) => safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path }))).result;
           }
           // set
           for (const s of trans.set) {
-            const target = await scope.Write(`set_${nextId()}.yaml`);
+            const target = await scope.Write(`set_${++this.ctr}.yaml`);
             data = (await ManipulateObject(data, target, w, obj => s)).result;
           }
           // test
           for (const t of trans.test) {
             const doc = data.ReadObject<any>();
-            const allHits = nodes(doc, w).sort((a, b) => a.path.length - b.path.length);
+            const allHits = nodes(doc, w);
             for (const hit of allHits) {
-              let testResults = safeEval<any>(`(() => { { ${t} }; return (${t}); })()`, { $: hit.value, $doc: doc, $path: hit.path });
-              if (!testResults) {
-                if (!Array.isArray(testResults)) {
-                  testResults = [testResults];
-                }
-                for (const testResult of testResults) {
+              let testResults = [...safeEval<any>(`(function* () { ${t.indexOf('yield') === -1 ? `yield (${t}\n)` : `${t}\n`} })()`, { $: hit.value, $doc: doc, $path: hit.path })];
+              for (const testResult of testResults) {
+                if (testResult === false || typeof testResult !== "boolean") {
                   const messageText = typeof testResult === "string" ? testResult : "Custom test failed";
                   const message = (testResult as Message).Text
                     ? testResult as Message
@@ -66,6 +66,7 @@ export class Manipulator {
                   for (const src of message.Source) {
                     src.document = src.document || data.key;
                   }
+                  this.config.Message(message);
                 }
               }
             }

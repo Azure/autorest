@@ -90,7 +90,7 @@ function CreateCommonmarkProcessor(): PipelinePlugin {
     for (const file of files) {
       const fileIn = await input.ReadStrict(file);
       const fileOut = await ProcessCodeModel(fileIn, working);
-      await (await output.Write("./" + file + "/_/code-model-v1.yaml")).Forward(fileOut);
+      await (await output.Write("./" + file + "/_code-model-v1")).Forward(fileOut);
     }
   };
 }
@@ -198,7 +198,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           generatedFileScope = await RunPlugin(genConfig, "csharp-simplifier", generatedFileScope);
         }
 
-        generatedFileScope = await RunPlugin(genConfig, "transform", generatedFileScope);
+        // generatedFileScope = await RunPlugin(genConfig, "transform", generatedFileScope);
         await EmitArtifacts(genConfig, `source-file-${codeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, decodeURIComponent(key.split("/output/")[1])), new LazyPromise(async () => generatedFileScope), false);
       })());
     }

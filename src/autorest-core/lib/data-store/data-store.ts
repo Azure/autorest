@@ -412,7 +412,7 @@ export class DataHandleRead {
 
   public IsObject(): boolean {
     try {
-      this.ReadYamlAst();
+      this.ReadObject();
       return true;
     } catch (e) {
       return false;
