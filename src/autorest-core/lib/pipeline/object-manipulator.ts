@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IdentitySourceMapping } from "../source-map/merging";
-import { Descendants, StringifyAst, ToAst, YAMLNode } from "../ref/yaml";
+import { CloneAst, Descendants, StringifyAst, ToAst, YAMLNode } from '../ref/yaml';
 import { ReplaceNode, ResolveRelativeNode } from "../parsing/yaml";
 import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
 import { IsPrefix, JsonPath, nodes, stringify } from "../ref/jsonpath";
@@ -38,7 +38,7 @@ export async function ManipulateObject(
   }
 
   // process
-  let ast: YAMLNode = src.ReadYamlAst();
+  let ast: YAMLNode = CloneAst(src.ReadYamlAst());
   const mapping = IdentitySourceMapping(src.key, ast).filter(m => !hits.some(hit => IsPrefix(hit.path, (m.generated as any).path)));
   for (const hit of hits) {
     if (ast === undefined) {
