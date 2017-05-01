@@ -28,8 +28,6 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
-    :ivar api_version: API ID.
-    :type api_version: str
     :param str base_url: Service URL
     """
 
@@ -42,8 +40,6 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
         super(AutoRestComplexTestServiceConfiguration, self).__init__(base_url)
 
         self.add_user_agent('autorestcomplextestservice/{}'.format(VERSION))
-
-        self.api_version = "2014-04-01-preview"
 
 
 class AutoRestComplexTestService(object):
