@@ -1,0 +1,8 @@
+WARNING: Custom test failed
+    - mem:///10_transform/working/trans_input?mem:///9_csharp-simplifier/output/StorageAccounts.cs:undefined:undefined ($)
+WARNING: Custom test failed
+    - mem:///10_transform/working/trans_input?mem:///9_csharp-simplifier/output/StorageAccounts.cs:undefined:undefined ($)
+WARNING: we want some cowbell - found none
+    - mem:///10_transform/working/trans_input?mem:///9_csharp-simplifier/output/StorageAccounts.cs:undefined:undefined ($)
+ERROR: we want some cowbell - found none
+    - mem:///10_transform/working/trans_input?mem:///9_csharp-simplifier/output/StorageAccounts.cs:undefined:undefined ($)
