@@ -38,6 +38,8 @@ namespace AutoRest.Swagger.Validation.Core
             this.File = parent?.File;
             this.ResourceModels = parent?.ResourceModels;
             this.TrackedResourceModels = parent?.TrackedResourceModels;
+            this.ChildTrackedResourceModels = parent?.ChildTrackedResourceModels;
+            this.ParentTrackedResourceModels = parent?.ParentTrackedResourceModels;
             this.ProxyResourceModels = parent?.ProxyResourceModels;
         }
 
@@ -101,6 +103,16 @@ namespace AutoRest.Swagger.Validation.Core
         public IEnumerable<string> TrackedResourceModels { get; private set; }
 
         /// <summary>
+        /// List of child tracked resources in serviceDefinition
+        /// </summary>
+        public IEnumerable<KeyValuePair<string, string>> ChildTrackedResourceModels { get; private set; }
+
+        /// <summary>
+        /// List of parent tracked resources in serviceDefinition
+        /// </summary>
+        public IEnumerable<string> ParentTrackedResourceModels { get; private set; }
+
+        /// <summary>
         /// List of proxy resources in serviceDefinition
         /// </summary>
         public IEnumerable<string> ProxyResourceModels { get; private set; }
@@ -121,6 +133,8 @@ namespace AutoRest.Swagger.Validation.Core
         {
             this.ResourceModels = ValidationUtilities.GetResourceModels(serviceDefinition).ToList();
             this.TrackedResourceModels = ValidationUtilities.GetTrackedResources(this.ResourceModels, serviceDefinition.Definitions).ToList();
+            this.ChildTrackedResourceModels = ValidationUtilities.GetChildTrackedResourcesWithImmediateParent(serviceDefinition).ToList();
+            this.ParentTrackedResourceModels = ValidationUtilities.GetParentTrackedResources(this.TrackedResourceModels, this.ChildTrackedResourceModels).ToList();
             this.ProxyResourceModels = this.ResourceModels.Except(this.TrackedResourceModels).ToList();
         }
 
