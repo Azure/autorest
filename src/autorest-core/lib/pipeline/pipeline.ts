@@ -198,8 +198,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           generatedFileScope = await RunPlugin(genConfig, "csharp-simplifier", generatedFileScope);
         }
 
-        // generatedFileScope = await RunPlugin(genConfig, "transform", generatedFileScope);
-        await EmitArtifacts(genConfig, `source-file-${codeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, decodeURIComponent(key.split("/output/")[1])), new LazyPromise(async () => generatedFileScope), false);
+        generatedFileScope = await RunPlugin(genConfig, "transform", generatedFileScope);
+        await EmitArtifacts(genConfig, `source-file-${codeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, key.split("/output/")[1]), new LazyPromise(async () => generatedFileScope), false);
       })());
     }
   }

@@ -82,9 +82,9 @@ export class Manipulator {
     // if the input data is not an object (e.g. raw source code) transform to string object and back
     const needsTransform = !data.IsObject();
 
-    const trans1 = needsTransform ? await (await scope.Write("trans_input")).WriteObject(data.ReadData()) : data;
+    const trans1 = needsTransform ? await (await scope.Write(`trans_input?${data.key}`)).WriteObject(data.ReadData()) : data;
     const result = await this.ProcessInternal(trans1, scope, documentId);
-    const trans2 = needsTransform ? await (await scope.Write("trans_output")).WriteData(result.ReadObject<string>()) : result;
+    const trans2 = needsTransform ? await (await scope.Write(`trans_output?${data.key}`)).WriteData(result.ReadObject<string>()) : result;
     return trans2;
   }
 
