@@ -56,7 +56,7 @@ class AutoRestParameterizedCustomHostTestClient(object):
     :vartype config: AutoRestParameterizedCustomHostTestClientConfiguration
 
     :ivar paths: Paths operations
-    :vartype paths: .operations.PathsOperations
+    :vartype paths: fixtures.acceptancetestscustombaseurimoreoptions.operations.PathsOperations
 
     :param subscription_id: The subscription id with value 'test12'.
     :type subscription_id: str

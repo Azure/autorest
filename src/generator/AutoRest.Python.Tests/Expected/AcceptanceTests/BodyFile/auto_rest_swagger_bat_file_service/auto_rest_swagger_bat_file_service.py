@@ -42,7 +42,7 @@ class AutoRestSwaggerBATFileService(object):
     :vartype config: AutoRestSwaggerBATFileServiceConfiguration
 
     :ivar files: Files operations
-    :vartype files: .operations.FilesOperations
+    :vartype files: fixtures.acceptancetestsbodyfile.operations.FilesOperations
 
     :param str base_url: Service URL
     """

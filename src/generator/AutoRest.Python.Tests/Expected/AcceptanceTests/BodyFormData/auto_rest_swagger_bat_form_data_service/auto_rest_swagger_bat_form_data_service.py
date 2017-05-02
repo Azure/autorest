@@ -42,7 +42,7 @@ class AutoRestSwaggerBATFormDataService(object):
     :vartype config: AutoRestSwaggerBATFormDataServiceConfiguration
 
     :ivar formdata: Formdata operations
-    :vartype formdata: .operations.FormdataOperations
+    :vartype formdata: fixtures.acceptancetestsbodyformdata.operations.FormdataOperations
 
     :param str base_url: Service URL
     """

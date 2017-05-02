@@ -57,7 +57,7 @@ class AutoRestParameterizedHostTestClient(object):
     :vartype config: AutoRestParameterizedHostTestClientConfiguration
 
     :ivar paths: Paths operations
-    :vartype paths: .operations.PathsOperations
+    :vartype paths: fixtures.acceptancetestscustombaseuri.operations.PathsOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
