@@ -10,6 +10,6 @@ namespace AutoRest.Swagger.Validation.Core
     {
         None = 1 << 0,
         PotentialServiceBreakingChanges = 1 << 1,
-        AdditionalServiceEndPointRequired = 1 << 2
+        NonBreakingServiceChanges = 1 << 2
     }
 }

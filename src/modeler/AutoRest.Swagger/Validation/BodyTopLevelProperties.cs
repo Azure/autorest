@@ -30,7 +30,7 @@ namespace AutoRest.Swagger.Validation
 
 
         /// <summary>
-        /// This rule passes if the body parameter contains top level properties only from the allowed set: name, type,
+        /// This rule passes if the model definition contains top level properties only from the allowed set: name, type,
         /// id, location, properties, tags, plan, sku, etag, managedBy, identity
         /// </summary>
         /// <param name="definitions">The model definitions</param>

@@ -42,7 +42,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// What kind of change implementing this rule can cause.
         /// </summary>
-        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.AdditionalServiceEndPointRequired;
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.NonBreakingServiceChanges;
         
         /// <summary>
         /// Validates if the Operations API has been implemented
