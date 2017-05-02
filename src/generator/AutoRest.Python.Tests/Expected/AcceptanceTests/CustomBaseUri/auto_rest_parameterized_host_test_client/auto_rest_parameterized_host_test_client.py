@@ -49,7 +49,7 @@ class AutoRestParameterizedHostTestClient(object):
     :vartype config: AutoRestParameterizedHostTestClientConfiguration
 
     :ivar paths: Paths operations
-    :vartype paths: .operations.PathsOperations
+    :vartype paths: fixtures.acceptancetestscustombaseuri.operations.PathsOperations
 
     :param host: A string value that is used as a global part of the
      parameterized host

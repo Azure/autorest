@@ -51,7 +51,7 @@ class AutoRestDurationTestService(object):
     :vartype config: AutoRestDurationTestServiceConfiguration
 
     :ivar duration: Duration operations
-    :vartype duration: .operations.DurationOperations
+    :vartype duration: fixtures.acceptancetestsazurebodyduration.operations.DurationOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials

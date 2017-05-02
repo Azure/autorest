@@ -57,9 +57,9 @@ class StorageManagementClient(object):
     :vartype config: StorageManagementClientConfiguration
 
     :ivar storage_accounts: StorageAccounts operations
-    :vartype storage_accounts: .operations.StorageAccountsOperations
+    :vartype storage_accounts: storage.operations.StorageAccountsOperations
     :ivar usage: Usage operations
-    :vartype usage: .operations.UsageOperations
+    :vartype usage: storage.operations.UsageOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials

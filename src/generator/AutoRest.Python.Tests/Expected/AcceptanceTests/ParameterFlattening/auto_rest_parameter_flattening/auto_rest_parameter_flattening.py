@@ -43,7 +43,7 @@ class AutoRestParameterFlattening(object):
     :vartype config: AutoRestParameterFlatteningConfiguration
 
     :ivar availability_sets: AvailabilitySets operations
-    :vartype availability_sets: .operations.AvailabilitySetsOperations
+    :vartype availability_sets: fixtures.acceptancetestsparameterflattening.operations.AvailabilitySetsOperations
 
     :param str base_url: Service URL
     """

@@ -58,11 +58,11 @@ class AutoRestUrlTestService(object):
     :vartype config: AutoRestUrlTestServiceConfiguration
 
     :ivar paths: Paths operations
-    :vartype paths: .operations.PathsOperations
+    :vartype paths: fixtures.acceptancetestsurl.operations.PathsOperations
     :ivar queries: Queries operations
-    :vartype queries: .operations.QueriesOperations
+    :vartype queries: fixtures.acceptancetestsurl.operations.QueriesOperations
     :ivar path_items: PathItems operations
-    :vartype path_items: .operations.PathItemsOperations
+    :vartype path_items: fixtures.acceptancetestsurl.operations.PathItemsOperations
 
     :param global_string_path: A string value 'globalItemStringPath' that
      appears in the path

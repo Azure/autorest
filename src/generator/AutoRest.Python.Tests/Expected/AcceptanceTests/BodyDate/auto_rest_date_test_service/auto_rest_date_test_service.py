@@ -42,7 +42,7 @@ class AutoRestDateTestService(object):
     :vartype config: AutoRestDateTestServiceConfiguration
 
     :ivar date_model: DateModel operations
-    :vartype date_model: .operations.DateModelOperations
+    :vartype date_model: fixtures.acceptancetestsbodydate.operations.DateModelOperations
 
     :param str base_url: Service URL
     """

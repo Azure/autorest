@@ -66,21 +66,21 @@ class AutoRestAzureSpecialParametersTestClient(object):
     :vartype config: AutoRestAzureSpecialParametersTestClientConfiguration
 
     :ivar xms_client_request_id: XMsClientRequestId operations
-    :vartype xms_client_request_id: .operations.XMsClientRequestIdOperations
+    :vartype xms_client_request_id: fixtures.acceptancetestsazurespecials.operations.XMsClientRequestIdOperations
     :ivar subscription_in_credentials: SubscriptionInCredentials operations
-    :vartype subscription_in_credentials: .operations.SubscriptionInCredentialsOperations
+    :vartype subscription_in_credentials: fixtures.acceptancetestsazurespecials.operations.SubscriptionInCredentialsOperations
     :ivar subscription_in_method: SubscriptionInMethod operations
-    :vartype subscription_in_method: .operations.SubscriptionInMethodOperations
+    :vartype subscription_in_method: fixtures.acceptancetestsazurespecials.operations.SubscriptionInMethodOperations
     :ivar api_version_default: ApiVersionDefault operations
-    :vartype api_version_default: .operations.ApiVersionDefaultOperations
+    :vartype api_version_default: fixtures.acceptancetestsazurespecials.operations.ApiVersionDefaultOperations
     :ivar api_version_local: ApiVersionLocal operations
-    :vartype api_version_local: .operations.ApiVersionLocalOperations
+    :vartype api_version_local: fixtures.acceptancetestsazurespecials.operations.ApiVersionLocalOperations
     :ivar skip_url_encoding: SkipUrlEncoding operations
-    :vartype skip_url_encoding: .operations.SkipUrlEncodingOperations
+    :vartype skip_url_encoding: fixtures.acceptancetestsazurespecials.operations.SkipUrlEncodingOperations
     :ivar odata: Odata operations
-    :vartype odata: .operations.OdataOperations
+    :vartype odata: fixtures.acceptancetestsazurespecials.operations.OdataOperations
     :ivar header: Header operations
-    :vartype header: .operations.HeaderOperations
+    :vartype header: fixtures.acceptancetestsazurespecials.operations.HeaderOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials

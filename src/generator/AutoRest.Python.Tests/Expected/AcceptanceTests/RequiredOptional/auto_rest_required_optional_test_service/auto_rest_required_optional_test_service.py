@@ -61,9 +61,9 @@ class AutoRestRequiredOptionalTestService(object):
     :vartype config: AutoRestRequiredOptionalTestServiceConfiguration
 
     :ivar implicit: Implicit operations
-    :vartype implicit: .operations.ImplicitOperations
+    :vartype implicit: fixtures.acceptancetestsrequiredoptional.operations.ImplicitOperations
     :ivar explicit: Explicit operations
-    :vartype explicit: .operations.ExplicitOperations
+    :vartype explicit: fixtures.acceptancetestsrequiredoptional.operations.ExplicitOperations
 
     :param required_global_path: number of items to skip
     :type required_global_path: str
