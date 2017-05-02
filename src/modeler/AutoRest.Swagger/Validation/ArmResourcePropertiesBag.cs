@@ -49,7 +49,7 @@ namespace AutoRest.Swagger.Validation
             foreach (var violatingModel in violatingModels)
             {
                 var violatingProperties = definitions[violatingModel].Properties.Keys.Union(definitions[violatingModel].Properties["properties"].Properties.Keys).Intersect(ArmPropertiesBag);
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, violatingModel, 
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingModel).AppendProperty("properties")), this, violatingModel, 
                                                    string.Join(", ", violatingProperties));
             }
         }

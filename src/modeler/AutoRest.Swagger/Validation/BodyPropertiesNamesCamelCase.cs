@@ -60,7 +60,10 @@ namespace AutoRest.Swagger.Validation
                             {
                                 if (!ValidationUtilities.IsODataProperty(prop.Key) && !ValidationUtilities.IsNameCamelCase(prop.Key))
                                 {
-                                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, prop.Key, ValidationUtilities.GetCamelCasedSuggestion(prop.Key));
+                                    Console.Error.WriteLine("Found param {0} at index {1}", param.Name, path[operation].Parameters.IndexOf(param));
+                                    yield return new ValidationMessage(new FileObjectPath(context.File, 
+                                        context.Path.AppendProperty(operation).AppendProperty("parameters").AppendIndex(path[operation].Parameters.IndexOf(param)).AppendProperty("schema").AppendProperty("properties").AppendProperty(prop.Key)), 
+                                        this, prop.Key, ValidationUtilities.GetCamelCasedSuggestion(prop.Key));
                                 }
                             }
                         }

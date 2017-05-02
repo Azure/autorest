@@ -41,7 +41,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, SecurityDefinition> securityDefinitions)        
+        public override bool IsValid(Dictionary<string, SecurityDefinition> securityDefinitions, RuleContext context)        
         {
             if (securityDefinitions.Count != 1)
             {
