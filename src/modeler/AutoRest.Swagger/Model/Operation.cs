@@ -12,7 +12,7 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Describes a single API operation on a path.
     /// </summary>
-    [Rule(typeof(OperationDescriptionRequired))]
+    
     public class Operation : SwaggerBase
     {
         private string _description;
@@ -50,6 +50,7 @@ namespace AutoRest.Swagger.Model
         }
 
         [Rule(typeof(AvoidMsdnReferences))]
+        [Rule(typeof(OperationDescriptionRequired))]
         public string Description
         {
             get { return _description; }

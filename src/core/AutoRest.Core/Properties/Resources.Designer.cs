@@ -107,7 +107,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, must follow camelCase style. Example: &quot;{1}&quot;..
+        ///   Looks up a localized string similar to Property named: &apos;{0}&apos;, must follow camelCase style. Example: &apos;{1}&apos;..
         /// </summary>
         public static string BodyPropertyNameCamelCase {
             get {
@@ -125,7 +125,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Collection object {0} returned by list operation {1} with &apos;x-ms-pageable&apos; extension, has no property named &apos;value&apos;..
+        ///   Looks up a localized string similar to Collection object &apos;{0}&apos; returned by list operation &apos;{1}&apos; with &apos;x-ms-pageable&apos; extension, has no property named &apos;value&apos;..
         /// </summary>
         public static string CollectionObjectPropertiesNamingMessage {
             get {
@@ -161,7 +161,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, for definition: &quot;{1}&quot; must follow camelCase style. Example: &quot;{2}&quot;..
+        ///   Looks up a localized string similar to Property named: &apos;{0}&apos;, for definition: &apos;{1}&apos; must follow camelCase style. Example: &apos;{2}&apos;..
         /// </summary>
         public static string DefinitionsPropertiesNameCamelCase {
             get {
@@ -170,7 +170,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;Delete&apos; operation must not have a request body..
+        ///   Looks up a localized string similar to &apos;Delete&apos; operation &apos;{0}&apos; must not have a request body..
         /// </summary>
         public static string DeleteMustNotHaveRequestBody {
             get {

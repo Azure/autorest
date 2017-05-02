@@ -227,7 +227,7 @@ Modelers:
     <value>Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model.</value>
   </data>
   <data name="DeleteMustNotHaveRequestBody" xml:space="preserve">
-    <value>'Delete' operation must not have a request body.</value>
+    <value>'Delete' operation '{0}' must not have a request body.</value>
   </data>
   <data name="SkuModelIsNotValid" xml:space="preserve">
     <value>Sku Model is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties.</value>
@@ -320,16 +320,16 @@ Modelers:
     <value>'PUT' operation '{0}' must use method name 'Create'.</value>
   </data>
   <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
-    <value>Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'.</value>
+    <value>Collection object '{0}' returned by list operation '{1}' with 'x-ms-pageable' extension, has no property named 'value'.</value>
   </data>
   <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
     <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>
   </data>
   <data name="BodyPropertyNameCamelCase" xml:space="preserve">
-    <value>Property named: "{0}", must follow camelCase style. Example: "{1}".</value>
+    <value>Property named: '{0}', must follow camelCase style. Example: '{1}'.</value>
   </data>
   <data name="DefinitionsPropertiesNameCamelCase" xml:space="preserve">
-    <value>Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".</value>
+    <value>Property named: '{0}', for definition: '{1}' must follow camelCase style. Example: '{2}'.</value>
   </data>
   <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
     <value>Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these.</value>

@@ -42,60 +42,27 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="operationDefinition">Operation Definition to validate</param>
         /// <returns>true if delete operation does not have a request body. false otherwise.</returns>
-        public override bool IsValid(Dictionary<string, Operation> operationDefinition, RuleContext context)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Operation> operationDefinition, RuleContext context)
         {
             foreach (string httpVerb in operationDefinition.Keys)
             {
                 if (httpVerb.ToLower().Equals("delete"))
                 {
                     Operation operation = operationDefinition.GetValueOrNull(httpVerb);
-                    if (operation == null)
-                        return false;
-
-                    if (operation.Parameters == null)
+                    
+                    if (operation?.Parameters == null)
                         continue;
 
                     foreach(SwaggerParameter parameter in operation.Parameters)
                     {
-                        if(parameter.Reference == null)
+                        if (parameter.In == ParameterLocation.Body)
                         {
-                            if(parameter.In == ParameterLocation.Body)
-                            {
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            if (context == null || context.Root == null)
-                            {
-                                return false;
-                            }
-
-                            if(this.GetParameterLocation(parameter, (ServiceDefinition)context.Root) == ParameterLocation.Body)
-                            {
-                                return false;
-                            }
+                            yield return new ValidationMessage(new FileObjectPath(context.File,
+                                    context.Path.AppendProperty(httpVerb).AppendProperty("parameters").AppendIndex(operation.Parameters.IndexOf(parameter))), this, operation.OperationId);
                         }
                     }
                 }
             }
-
-            return true;
-        }
-
-        private ParameterLocation GetParameterLocation(SwaggerParameter parameter, ServiceDefinition serviceDefinition)
-        {
-            string parameterReference = parameter.Reference;
-            if(parameterReference.StartsWith("#/parameters/"))
-            {
-                string[] splitArray = parameterReference.Split('/');
-                SwaggerParameter parameterValue = serviceDefinition.Parameters.GetValueOrNull(splitArray[splitArray.Length - 1].Trim());
-                if (parameterValue != null)
-                {
-                    return parameterValue.In;
-                }
-            }
-            return ParameterLocation.None;
         }
     }
 }

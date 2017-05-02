@@ -6,7 +6,7 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class OperationDescriptionRequired : DescriptionRequired<Operation>
+    public class OperationDescriptionRequired : DescriptionRequired<string>
     {
         /// <summary>
         /// This rule fails if the description is null and the reference is null (since the reference could have a description)
@@ -15,10 +15,10 @@ namespace AutoRest.Swagger.Validation
         /// <param name="context">Rule context</param>
         /// <param name="formatParameters">formatted parameters</param>
         /// <returns><c>true</c> if entity contains description, <c>false</c> otherwise</returns>
-        public override bool IsValid(Operation entity, RuleContext context, out object[] formatParameters)
+        public override bool IsValid(string entity, RuleContext context, out object[] formatParameters)
         {
-            formatParameters = new string[] { string.Format("Operation '{0}'", entity.OperationId) };
-            return !string.IsNullOrWhiteSpace(entity.Description);
+            formatParameters = new string[] { string.Format("Operation '{0}'", ((Operation)context.Parent.Value).OperationId) };
+            return !string.IsNullOrWhiteSpace(entity);
         }
     }
 }
