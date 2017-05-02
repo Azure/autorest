@@ -42,7 +42,7 @@ class AutoRestSwaggerBATArrayService(object):
     :vartype config: AutoRestSwaggerBATArrayServiceConfiguration
 
     :ivar array: Array operations
-    :vartype array: .operations.ArrayOperations
+    :vartype array: fixtures.acceptancetestsbodyarray.operations.ArrayOperations
 
     :param str base_url: Service URL
     """

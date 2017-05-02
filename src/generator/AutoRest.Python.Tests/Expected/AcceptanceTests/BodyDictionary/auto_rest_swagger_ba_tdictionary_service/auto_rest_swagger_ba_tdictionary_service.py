@@ -42,7 +42,7 @@ class AutoRestSwaggerBATdictionaryService(object):
     :vartype config: AutoRestSwaggerBATdictionaryServiceConfiguration
 
     :ivar dictionary: Dictionary operations
-    :vartype dictionary: .operations.DictionaryOperations
+    :vartype dictionary: fixtures.acceptancetestsbodydictionary.operations.DictionaryOperations
 
     :param str base_url: Service URL
     """

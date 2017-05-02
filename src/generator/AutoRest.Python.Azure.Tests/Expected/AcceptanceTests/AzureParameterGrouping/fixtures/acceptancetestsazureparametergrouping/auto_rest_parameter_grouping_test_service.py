@@ -51,7 +51,7 @@ class AutoRestParameterGroupingTestService(object):
     :vartype config: AutoRestParameterGroupingTestServiceConfiguration
 
     :ivar parameter_grouping: ParameterGrouping operations
-    :vartype parameter_grouping: .operations.ParameterGroupingOperations
+    :vartype parameter_grouping: fixtures.acceptancetestsazureparametergrouping.operations.ParameterGroupingOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
