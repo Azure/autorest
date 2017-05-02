@@ -42,6 +42,16 @@ output-artifact:
 - source-file-azureresourceschema
 ```
 
+# Validation
+
+## Client Side Validation
+
+On by default for backwards compatibility, but see https://github.com/Azure/autorest/issues/2100
+
+``` yaml $(azure-arm)
+client-side-validation: true
+```
+
 ## Azure Validation
 
 Activate `azure-validator` when setting `azure-arm`!?

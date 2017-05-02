@@ -33,6 +33,7 @@ export interface AutoRestConfigurationImpl {
   "output-folder"?: string;
 
   // from here on: CONVENTION, not cared about by the core
+  "client-side-validation"?: boolean; // C#
   "fluent"?: boolean;
   "azure-arm"?: boolean;
   "azure-validator"?: boolean;
