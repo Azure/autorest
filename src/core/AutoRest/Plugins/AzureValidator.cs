@@ -85,8 +85,8 @@ public class AzureValidator : NewPlugin
         var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
         var metadata = new ServiceDefinitionMetadata
             {
-                ServiceDefinitionDocumentType = (ServiceDefinitionDocumentType)Enum.Parse(typeof(ServiceDefinitionDocumentType), (await GetValue("openapi-type"))?.ToString().ToUpper() ?? ServiceDefinitionDocumentType.ARM.ToString(), true),
-                MergeState = await GetValue<bool?>("is-individual-swagger") == true ? ServiceDefinitionMergeState.BEFORE : ServiceDefinitionMergeState.AFTER
+                ServiceDefinitionDocumentType = (ServiceDefinitionDocumentType)Enum.Parse(typeof(ServiceDefinitionDocumentType), (await GetValue("openapi-type"))?.ToString() ?? ServiceDefinitionDocumentType.ARM.ToString(), true),
+                MergeState = await GetValue<bool?>("is-individual-swagger") == true ? ServiceDefinitionMergeState.Before : ServiceDefinitionMergeState.After
             };
         foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition, metadata))
         {

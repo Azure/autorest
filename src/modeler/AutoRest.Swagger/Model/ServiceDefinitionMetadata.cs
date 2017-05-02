@@ -22,8 +22,8 @@ namespace AutoRest.Swagger.Model
     /// </summary>
     public enum ServiceDefinitionMergeState
     {
-        BEFORE,
-        AFTER
+        Before,
+        After
     }
 
     /// <summary>
@@ -34,9 +34,9 @@ namespace AutoRest.Swagger.Model
     [Flags]
     public enum ServiceDefinitionDocumentType
     {
-        DEFAULT = 0 << 1,   // A plain regular swagger like pet store
+        Default = 0,   // A plain regular swagger like pet store
         ARM = 1 << 2,       // An Azure Resource Management type document
-        DATAPLANE = 2 << 3  // Data Plane specifications
+        DataPlane = 2 << 3  // Data Plane specifications
     }
 
     /// <summary>

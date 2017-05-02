@@ -43,7 +43,7 @@ namespace AutoRest.Swagger.Tests
     public partial class SwaggerModelerValidationTests
     {
         private IEnumerable<ValidationMessage> ValidateSwagger(string input, ServiceDefinitionDocumentType serviceDefDocType = ServiceDefinitionDocumentType.ARM, 
-            ServiceDefinitionMergeState mergeState = ServiceDefinitionMergeState.AFTER)
+            ServiceDefinitionMergeState mergeState = ServiceDefinitionMergeState.After)
         {
 
             // Most rules are to be applied for ARM documents
@@ -187,7 +187,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-service-def-scheme.json"),
                                            ServiceDefinitionDocumentType.ARM,
-                                           ServiceDefinitionMergeState.BEFORE);
+                                           ServiceDefinitionMergeState.Before);
             messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
         }
 
@@ -196,7 +196,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-operations-scheme.json"),
                                            ServiceDefinitionDocumentType.ARM,
-                                           ServiceDefinitionMergeState.BEFORE);
+                                           ServiceDefinitionMergeState.Before);
             messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
         }
 

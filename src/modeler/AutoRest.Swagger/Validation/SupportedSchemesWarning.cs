@@ -34,7 +34,7 @@ namespace AutoRest.Swagger.Validation
         /// When to apply the validation rule, before or after it has been merged as a part of its composite document
         /// By default consider all rules to be applied for After only
         /// </summary>
-        public override ServiceDefinitionMergeState ValidationRuleMergeState => ServiceDefinitionMergeState.BEFORE;
+        public override ServiceDefinitionMergeState ValidationRuleMergeState => ServiceDefinitionMergeState.Before;
 
     }
 }
