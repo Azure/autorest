@@ -324,17 +324,6 @@ namespace AwesomeNamespace
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "accountName");
             }
-            if (accountName != null)
-            {
-                if (accountName.Length > 24)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "accountName", 24);
-                }
-                if (accountName.Length < 3)
-                {
-                    throw new ValidationException(ValidationRules.MinLength, "accountName", 3);
-                }
-            }
             if (Client.ApiVersion == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
@@ -516,17 +505,6 @@ namespace AwesomeNamespace
             if (accountName == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "accountName");
-            }
-            if (accountName != null)
-            {
-                if (accountName.Length > 24)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "accountName", 24);
-                }
-                if (accountName.Length < 3)
-                {
-                    throw new ValidationException(ValidationRules.MinLength, "accountName", 3);
-                }
             }
             if (Client.ApiVersion == null)
             {
@@ -753,17 +731,6 @@ namespace AwesomeNamespace
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "accountName");
             }
-            if (accountName != null)
-            {
-                if (accountName.Length > 24)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "accountName", 24);
-                }
-                if (accountName.Length < 3)
-                {
-                    throw new ValidationException(ValidationRules.MinLength, "accountName", 3);
-                }
-            }
             if (Client.ApiVersion == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
@@ -771,10 +738,6 @@ namespace AwesomeNamespace
             if (Client.SubscriptionId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.SubscriptionId");
-            }
-            if (customDomain != null)
-            {
-                customDomain.Validate();
             }
             StorageAccountUpdateParameters parameters = new StorageAccountUpdateParameters();
             if (tags != null || accountType != null || customDomain != null)
@@ -977,17 +940,6 @@ namespace AwesomeNamespace
             if (accountName == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "accountName");
-            }
-            if (accountName != null)
-            {
-                if (accountName.Length > 24)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "accountName", 24);
-                }
-                if (accountName.Length < 3)
-                {
-                    throw new ValidationException(ValidationRules.MinLength, "accountName", 3);
-                }
             }
             if (Client.ApiVersion == null)
             {
@@ -1557,17 +1509,6 @@ namespace AwesomeNamespace
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "accountName");
             }
-            if (accountName != null)
-            {
-                if (accountName.Length > 24)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "accountName", 24);
-                }
-                if (accountName.Length < 3)
-                {
-                    throw new ValidationException(ValidationRules.MinLength, "accountName", 3);
-                }
-            }
             if (Client.ApiVersion == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
@@ -1795,17 +1736,6 @@ namespace AwesomeNamespace
             if (accountName == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "accountName");
-            }
-            if (accountName != null)
-            {
-                if (accountName.Length > 24)
-                {
-                    throw new ValidationException(ValidationRules.MaxLength, "accountName", 24);
-                }
-                if (accountName.Length < 3)
-                {
-                    throw new ValidationException(ValidationRules.MinLength, "accountName", 3);
-                }
             }
             if (Client.ApiVersion == null)
             {

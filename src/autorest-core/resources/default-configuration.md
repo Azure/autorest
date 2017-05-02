@@ -48,7 +48,7 @@ output-artifact:
 
 On by default for backwards compatibility, but see https://github.com/Azure/autorest/issues/2100
 
-``` yaml $(azure-arm)
+``` yaml
 client-side-validation: true
 ```
 

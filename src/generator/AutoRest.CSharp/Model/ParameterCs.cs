@@ -5,6 +5,7 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Model
 {
@@ -17,7 +18,7 @@ namespace AutoRest.CSharp.Model
         /// <summary>
         /// Gets True if parameter can call .Validate method
         /// </summary>
-        public virtual bool CanBeValidated => true;
+        public virtual bool CanBeValidated => Singleton<GeneratorSettingsCs>.Instance.ClientSideValidation;
 
         public override string ModelTypeName => ModelType.AsNullableType(this.IsNullable());
 
