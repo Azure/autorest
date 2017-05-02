@@ -242,7 +242,7 @@ export class ConfigurationView {
           }
 
           // try forward resolving (towards emitted files) if no real path
-          if (s.document.startsWith(DataStore.BaseUri)) {
+          if (s.document.startsWith(DataStore.BaseUri) && s.document.split("/output/")[1]) {
             s = {
               document: ResolveUri(this.OutputFolderUri, s.document.split("/output/")[1]),
               Position: s.Position
