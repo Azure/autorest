@@ -90,7 +90,7 @@ function CreateCommonmarkProcessor(): PipelinePlugin {
     for (const file of files) {
       const fileIn = await input.ReadStrict(file);
       const fileOut = await ProcessCodeModel(fileIn, working);
-      await (await output.Write("./" + file + "/_/code-model-v1.yaml")).Forward(fileOut);
+      await (await output.Write("./" + file + "/_code-model-v1")).Forward(fileOut);
     }
   };
 }
@@ -165,16 +165,14 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     barrier.Await(EmitArtifacts(config, "swagger-document", _ => ResolveUri(config.OutputFolderUri, relPath), new LazyPromise(async () => scopeComposedSwaggerTransformed), true));
   }
 
-  if (!config.DisableValidation) {
-    if (config.GetEntry("model-validator")) {
-      barrier.Await(RunPlugin(config, "model-validator", scopeComposedSwaggerTransformed));
-    }
-    if (config.GetEntry("semantic-validator")) {
-      barrier.Await(RunPlugin(config, "semantic-validator", scopeComposedSwaggerTransformed));
-    }
-    if (config.GetEntry("azure-validator")) {
-      barrier.Await(RunPlugin(config, "azure-validator", scopeComposedSwaggerTransformed));
-    }
+  if (config.GetEntry("model-validator")) {
+    barrier.Await(RunPlugin(config, "model-validator", scopeComposedSwaggerTransformed));
+  }
+  if (config.GetEntry("semantic-validator")) {
+    barrier.Await(RunPlugin(config, "semantic-validator", scopeComposedSwaggerTransformed));
+  }
+  if (config.GetEntry("azure-validator")) {
+    barrier.Await(RunPlugin(config, "azure-validator", scopeComposedSwaggerTransformed));
   }
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
@@ -200,7 +198,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           generatedFileScope = await RunPlugin(genConfig, "csharp-simplifier", generatedFileScope);
         }
 
-        await EmitArtifacts(genConfig, `source-file-${codeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, decodeURIComponent(key.split("/output/")[1])), new LazyPromise(async () => generatedFileScope), false);
+        generatedFileScope = await RunPlugin(genConfig, "transform", generatedFileScope);
+        await EmitArtifacts(genConfig, `source-file-${codeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, key.split("/output/")[1]), new LazyPromise(async () => generatedFileScope), false);
       })());
     }
   }
