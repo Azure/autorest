@@ -240,6 +240,15 @@ export class ConfigurationView {
             //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
             //console.log(e);
           }
+
+          // try forward resolving (towards emitted files) if no real path
+          if (s.document.startsWith(DataStore.BaseUri)) {
+            s = {
+              document: ResolveUri(this.OutputFolderUri, s.document.split("/output/")[1]),
+              Position: s.Position
+            };
+          }
+
           return [s];
         });
 
@@ -292,7 +301,13 @@ export class ConfigurationView {
             let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join("/")})` : ""}: ${mx.Text}`;
             for (const source of mx.Source || []) {
               if (source.Position) {
-                text += `\n    - ${source.document}:${source.Position.line}:${source.Position.column}`;
+                text += `\n    - ${source.document}`;
+                if (source.Position.line !== undefined) {
+                  text += `:${source.Position.line}`;
+                  if (source.Position.column !== undefined) {
+                    text += `:${source.Position.column}`;
+                  }
+                }
                 if (source.Position.path) {
                   text += ` (${stringify(source.Position.path)})`;
                 }

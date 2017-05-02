@@ -1,8 +1,8 @@
 WARNING: Custom test failed
-    - mem:///10_transform/working/trans_input?mem:///9_csharp-simplifier/output/StorageAccounts.cs:undefined:undefined ($)
+    - /Samples/3d-custom-validation/Client/StorageAccounts.cs ($)
 WARNING: Custom test failed
-    - mem:///10_transform/working/trans_input?mem:///9_csharp-simplifier/output/StorageAccounts.cs:undefined:undefined ($)
+    - /Samples/3d-custom-validation/Client/StorageAccounts.cs ($)
 WARNING: we want some cowbell - found none
-    - mem:///10_transform/working/trans_input?mem:///9_csharp-simplifier/output/StorageAccounts.cs:undefined:undefined ($)
+    - /Samples/3d-custom-validation/Client/StorageAccounts.cs ($)
 ERROR: we want some cowbell - found none
-    - mem:///10_transform/working/trans_input?mem:///9_csharp-simplifier/output/StorageAccounts.cs:undefined:undefined ($)
+    - /Samples/3d-custom-validation/Client/StorageAccounts.cs ($)
