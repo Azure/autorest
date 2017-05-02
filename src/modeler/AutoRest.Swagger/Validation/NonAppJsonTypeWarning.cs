@@ -30,6 +30,11 @@ namespace AutoRest.Swagger.Validation
             => (entity.ToLowerInvariant().StartsWith(AppJsonType));
         
         /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.PotentialServiceBreakingChanges;
+
+        /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>

@@ -9,6 +9,7 @@ namespace AutoRest.Swagger.Validation.Core
     public enum ValidationChangesImpact
     {
         None = 1 << 0,
-        ServiceBreakingChanges = 1 << 1
+        PotentialServiceBreakingChanges = 1 << 1,
+        AdditionalServiceEndPointRequired = 1 << 2
     }
 }

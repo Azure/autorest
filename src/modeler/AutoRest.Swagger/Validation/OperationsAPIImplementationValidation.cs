@@ -40,6 +40,11 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.AdditionalServiceEndPointRequired;
+        
+        /// <summary>
         /// Validates if the Operations API has been implemented
         /// </summary>
         /// <param name="paths">API paths</param>

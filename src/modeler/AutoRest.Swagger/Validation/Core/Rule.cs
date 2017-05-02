@@ -27,7 +27,7 @@ namespace AutoRest.Swagger.Validation.Core
         public virtual ValidationCategory ValidationCategory => ValidationCategory.None; // !!! implement me and make me abstract !!!
 
         /// <summary>
-        /// What kind of breaking change implementing this rule can cause.
+        /// What kind of change implementing this rule can cause.
         /// </summary>
         public virtual ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.None;
 

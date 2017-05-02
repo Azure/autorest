@@ -25,9 +25,9 @@ namespace AutoRest.Swagger.Validation
         public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
 
         /// <summary>
-        /// What kind of breaking change implementing this rule can cause.
+        /// What kind of change implementing this rule can cause.
         /// </summary>
-        public virtual ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceBreakingChanges;
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.PotentialServiceBreakingChanges;
 
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
