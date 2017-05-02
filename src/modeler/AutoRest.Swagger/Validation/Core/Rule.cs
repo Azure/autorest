@@ -32,7 +32,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// its merged document as specified in the corresponding '.md' file
         /// By default consider all rules to be applied for After only
         /// </summary>
-        public virtual ServiceDefinitionMergeState ValidationRuleMergeState => ServiceDefinitionMergeState.AFTER;
+        public virtual ServiceDefinitionMergeState ValidationRuleMergeState => ServiceDefinitionMergeState.After;
 
         /// <summary>
         /// Violation category of the Rule.
