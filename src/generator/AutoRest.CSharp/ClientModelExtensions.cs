@@ -51,7 +51,7 @@ namespace AutoRest.CSharp
 
         public static bool ShouldValidateChain(this IModelType model)
         {
-            if (model == null)
+            if (model == null || !Singleton<GeneratorSettingsCs>.Instance.ClientSideValidation)
             {
                 return false;
             }
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp
 
         private static bool ShouldValidate(this IModelType model)
         {
-            if (model == null)
+            if (model == null || !Singleton<GeneratorSettingsCs>.Instance.ClientSideValidation)
             {
                 return false;
             }

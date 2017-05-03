@@ -50,7 +50,7 @@ class AutoRestHeadExceptionTestService(object):
     :vartype config: AutoRestHeadExceptionTestServiceConfiguration
 
     :ivar head_exception: HeadException operations
-    :vartype head_exception: .operations.HeadExceptionOperations
+    :vartype head_exception: fixtures.acceptancetestsheadexceptions.operations.HeadExceptionOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials

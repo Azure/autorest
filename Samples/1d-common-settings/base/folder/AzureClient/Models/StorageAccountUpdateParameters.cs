@@ -85,18 +85,5 @@ namespace AwesomeNamespace.Models
         [JsonProperty(PropertyName = "properties.customDomain")]
         public CustomDomain CustomDomain { get; set; }
 
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public virtual void Validate()
-        {
-            if (CustomDomain != null)
-            {
-                CustomDomain.Validate();
-            }
-        }
     }
 }

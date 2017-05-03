@@ -42,7 +42,7 @@ class AutoRestSwaggerBATByteService(object):
     :vartype config: AutoRestSwaggerBATByteServiceConfiguration
 
     :ivar byte: Byte operations
-    :vartype byte: .operations.ByteOperations
+    :vartype byte: fixtures.acceptancetestsbodybyte.operations.ByteOperations
 
     :param str base_url: Service URL
     """

@@ -42,7 +42,7 @@ class AutoRestDurationTestService(object):
     :vartype config: AutoRestDurationTestServiceConfiguration
 
     :ivar duration: Duration operations
-    :vartype duration: .operations.DurationOperations
+    :vartype duration: fixtures.acceptancetestsbodyduration.operations.DurationOperations
 
     :param str base_url: Service URL
     """

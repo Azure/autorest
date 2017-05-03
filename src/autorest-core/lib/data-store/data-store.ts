@@ -7,7 +7,7 @@ import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
 import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from '../ref/uri';
-import { FastStringify, Parse, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
+import { FastStringify, Parse, ParseNode, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
@@ -403,11 +403,20 @@ export class DataHandleRead {
   }
 
   public ReadObject<T>(): T {
-    return Parse<T>(this.ReadData());
+    return ParseNode<T>(this.ReadYamlAst());
   }
 
   public ReadYamlAst(): YAMLNode {
     return this.ReadMetadata().yamlAst.Value;
+  }
+
+  public IsObject(): boolean {
+    try {
+      this.ReadObject();
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   public Blame(position: sourceMap.Position): sourceMap.MappedPosition[] {

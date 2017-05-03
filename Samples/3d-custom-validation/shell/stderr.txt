@@ -1,0 +1,8 @@
+WARNING: Custom test failed
+    - /Samples/3d-custom-validation/Client/StorageAccounts.cs ($)
+WARNING: Custom test failed
+    - /Samples/3d-custom-validation/Client/StorageAccounts.cs ($)
+WARNING: we want some cowbell - found none
+    - /Samples/3d-custom-validation/Client/StorageAccounts.cs ($)
+ERROR: we want some cowbell - found none
+    - /Samples/3d-custom-validation/Client/StorageAccounts.cs ($)

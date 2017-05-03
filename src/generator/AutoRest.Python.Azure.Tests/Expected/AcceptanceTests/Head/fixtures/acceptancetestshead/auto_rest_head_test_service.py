@@ -50,7 +50,7 @@ class AutoRestHeadTestService(object):
     :vartype config: AutoRestHeadTestServiceConfiguration
 
     :ivar http_success: HttpSuccess operations
-    :vartype http_success: .operations.HttpSuccessOperations
+    :vartype http_success: fixtures.acceptancetestshead.operations.HttpSuccessOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials

@@ -24,22 +24,16 @@ class AutoRestValidationTestConfiguration(Configuration):
 
     :param subscription_id: Subscription ID.
     :type subscription_id: str
-    :param api_version: Required string following pattern \\d{2}-\\d{2}-\\d{4}
-    :type api_version: str
     :param str base_url: Service URL
     """
 
     def __init__(
-            self, subscription_id, api_version, base_url=None):
+            self, subscription_id, base_url=None):
 
         if subscription_id is None:
             raise ValueError("Parameter 'subscription_id' must not be None.")
         if not isinstance(subscription_id, str):
             raise TypeError("Parameter 'subscription_id' must be str.")
-        if api_version is None:
-            raise ValueError("Parameter 'api_version' must not be None.")
-        if not isinstance(api_version, str):
-            raise TypeError("Parameter 'api_version' must be str.")
         if not base_url:
             base_url = 'http://localhost'
 
@@ -48,7 +42,6 @@ class AutoRestValidationTestConfiguration(Configuration):
         self.add_user_agent('autorestvalidationtest/{}'.format(VERSION))
 
         self.subscription_id = subscription_id
-        self.api_version = api_version
 
 
 class AutoRestValidationTest(object):
@@ -59,15 +52,13 @@ class AutoRestValidationTest(object):
 
     :param subscription_id: Subscription ID.
     :type subscription_id: str
-    :param api_version: Required string following pattern \\d{2}-\\d{2}-\\d{4}
-    :type api_version: str
     :param str base_url: Service URL
     """
 
     def __init__(
-            self, subscription_id, api_version, base_url=None):
+            self, subscription_id, base_url=None):
 
-        self.config = AutoRestValidationTestConfiguration(subscription_id, api_version, base_url)
+        self.config = AutoRestValidationTestConfiguration(subscription_id, base_url)
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
@@ -108,7 +99,7 @@ class AutoRestValidationTest(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str', pattern='\d{2}-\d{2}-\d{4}')
+        query_parameters['apiVersion'] = self._serialize.query("self.api_version", self.api_version, 'str', pattern='\d{2}-\d{2}-\d{4}')
 
         # Construct headers
         header_parameters = {}
@@ -169,7 +160,7 @@ class AutoRestValidationTest(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str', pattern='\d{2}-\d{2}-\d{4}')
+        query_parameters['apiVersion'] = self._serialize.query("self.api_version", self.api_version, 'str', pattern='\d{2}-\d{2}-\d{4}')
 
         # Construct headers
         header_parameters = {}

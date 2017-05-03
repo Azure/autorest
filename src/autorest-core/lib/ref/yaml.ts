@@ -88,26 +88,32 @@ export function ResolveAnchorRef(yamlAstRoot: YAMLNode, anchorRef: string): YAML
   throw new Error(`Anchor '${anchorRef}' not found`);
 }
 
-function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: (message: string, index: number) => void): any {
+/**
+ * Populates yamlNode.valueFunc with a function that creates a *mutable* object (i.e. no caching of the reference or such)
+ */
+function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: (message: string, index: number) => void): () => any {
   if (yamlNode.errors.length > 0) {
     for (const error of yamlNode.errors) {
       onError(`Syntax error: ${error.reason}`, error.mark.position);
     }
-    return null;
+    return (yamlNode as any).valueFunc = () => null;
+  }
+  if ((yamlNode as any).valueFunc) {
+    return (yamlNode as any).valueFunc;
   }
 
   switch (yamlNode.kind) {
     case Kind.SCALAR: {
       const yamlNodeScalar = yamlNode as YAMLScalar;
-      return yamlNode.valueObject = yamlNodeScalar.valueObject !== undefined
-        ? yamlNodeScalar.valueObject
-        : yamlNodeScalar.value;
+      return (yamlNode as any).valueFunc = yamlNodeScalar.valueObject !== undefined
+        ? () => yamlNodeScalar.valueObject
+        : () => yamlNodeScalar.value;
     }
     case Kind.MAPPING:
-      onError("Syntax error: Encountered single mapping.", yamlNode.startPosition);
-      return null;
+      onError("Syntax error: Encountered bare mapping.", yamlNode.startPosition);
+      return (yamlNode as any).valueFunc = () => null;
     case Kind.MAP: {
-      yamlNode.valueObject = NewEmptyObject();
+      const factories: ([string, () => any])[] = [];
       const yamlNodeMapping = yamlNode as YAMLMap;
       for (const mapping of yamlNodeMapping.mappings) {
         if (mapping.key.kind !== Kind.SCALAR) {
@@ -115,35 +121,47 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
         } else if (mapping.value === null) {
           onError("Syntax error: No mapping value found.", mapping.key.endPosition);
         } else {
-          yamlNode.valueObject[mapping.key.value] = ParseNodeInternal(yamlRootNode, mapping.value, onError);
+          factories.push([mapping.key.value, ParseNodeInternal(yamlRootNode, mapping.value, onError)]);
         }
       }
-      return yamlNode.valueObject;
+      return (yamlNode as any).valueFunc = () => {
+        const result = NewEmptyObject();
+        for (const member of factories) {
+          result[member[0]] = member[1]();
+        }
+        return result;
+      };
     }
     case Kind.SEQ: {
-      yamlNode.valueObject = [];
+      const factories: (() => any)[] = [];
       const yamlNodeSequence = yamlNode as YAMLSequence;
       for (const item of yamlNodeSequence.items) {
-        yamlNode.valueObject.push(ParseNodeInternal(yamlRootNode, item, onError));
+        factories.push(ParseNodeInternal(yamlRootNode, item, onError));
       }
-      return yamlNode.valueObject;
+      return (yamlNode as any).valueFunc = () => factories.map(f => f());
     }
     case Kind.ANCHOR_REF: {
       const yamlNodeRef = yamlNode as YAMLAnchorReference;
-      return ResolveAnchorRef(yamlRootNode, yamlNodeRef.referencesAnchor).node.valueObject;
+      return (ResolveAnchorRef(yamlRootNode, yamlNodeRef.referencesAnchor).node as any).valueFunc;
     }
     case Kind.INCLUDE_REF:
       onError("Syntax error: INCLUDE_REF not implemented.", yamlNode.startPosition);
-      return null;
+      return (yamlNode as any).valueFunc = () => null;
+    default:
+      throw new Error("Unknown YAML node kind.");
   }
 }
 
 export function ParseNode<T>(yamlNode: YAMLNode, onError: (message: string, index: number) => void = message => { throw new Error(message); }): T {
   ParseNodeInternal(yamlNode, yamlNode, onError);
-  return yamlNode.valueObject;
+  return (yamlNode as any).valueFunc();
 }
 
 export function CloneAst<T extends YAMLNode>(ast: T): T {
+  if (ast.kind === Kind.MAPPING) {
+    const astMapping = ast as YAMLMapping;
+    return <T>CreateYAMLMapping(CloneAst(astMapping.key), CloneAst(astMapping.value));
+  }
   return ParseToAst(StringifyAst(ast)) as T;
 }
 export function StringifyAst(ast: YAMLNode): string {

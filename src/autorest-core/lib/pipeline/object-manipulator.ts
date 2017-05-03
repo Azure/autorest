@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IdentitySourceMapping } from "../source-map/merging";
-import { Descendants, StringifyAst, ToAst, YAMLNode } from "../ref/yaml";
+import { CloneAst, Descendants, StringifyAst, ToAst, YAMLNode } from '../ref/yaml';
 import { ReplaceNode, ResolveRelativeNode } from "../parsing/yaml";
 import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
 import { IsPrefix, JsonPath, nodes, stringify } from "../ref/jsonpath";
@@ -15,7 +15,7 @@ export async function ManipulateObject(
   src: DataHandleRead,
   target: DataHandleWrite,
   whereJsonQuery: string,
-  transformer: (obj: any) => any, // transforming to `undefined` results in removal
+  transformer: (doc: any, obj: any, path: JsonPath) => any, // transforming to `undefined` results in removal
   mappingInfo?: {
     transformerSourceHandle: DataHandleRead,
     transformerSourcePosition: SmartPosition,
@@ -23,7 +23,8 @@ export async function ManipulateObject(
   }): Promise<{ anyHit: boolean, result: DataHandleRead }> {
 
   // find paths matched by `whereJsonQuery`
-  const allHits = nodes(src.ReadObject<any>(), whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
+  const doc = src.ReadObject<any>();
+  const allHits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
   if (allHits.length === 0) {
     return { anyHit: false, result: src };
   }
@@ -37,13 +38,13 @@ export async function ManipulateObject(
   }
 
   // process
-  let ast: YAMLNode = src.ReadYamlAst();
+  let ast: YAMLNode = CloneAst(src.ReadYamlAst());
   const mapping = IdentitySourceMapping(src.key, ast).filter(m => !hits.some(hit => IsPrefix(hit.path, (m.generated as any).path)));
   for (const hit of hits) {
     if (ast === undefined) {
       throw new Error("Cannot remove root node.");
     }
-    const newObject = transformer(hit.value);
+    const newObject = transformer(doc, hit.value, hit.path);
     const newAst = newObject === undefined
       ? undefined
       : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
