@@ -242,7 +242,7 @@ else
     return
 }
 
-@if (Model.IsPageable && !Model.IsNextMethod)
+@if (Model.IsPageable && !Model.IsNextMethod && Model.ListElement != null)
 {
 @:@EmptyLine
 @:// @(Model.ListCompleteMethodName) gets all elements from the list without paging.
