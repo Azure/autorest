@@ -44,34 +44,23 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
-        /// <summary>
-        /// Validates Sku Model
-        /// </summary>
-        /// <param name="definitions">to be validated</param>
-        /// <returns>true if valid.false otherwise</returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            foreach(KeyValuePair<string, Schema> definition in definitions)
+            var modelsNamedSku = definitions.Where(defPair => defPair.Key.EqualsIgnoreCase("sku"));
+
+            foreach (KeyValuePair<string, Schema> definition in modelsNamedSku)
             {
-                if(definition.Key.EqualsIgnoreCase("sku"))
+                Schema schema = definition.Value;
+                if (schema.Properties?.All(property => propertiesRegEx.IsMatch(property.Key))!=true ||
+                    (schema.Properties?.Any(property => property.Key.EqualsIgnoreCase("name") &&
+                                                        (property.Value.Type == Model.DataType.String || 
+                                                            (property.Value.Type == null && 
+                                                            ValidationUtilities.IsReferenceOfType(property.Value.Reference, definitions, Model.DataType.String)))) != true))
                 {
-                    Schema schema = definition.Value;
-                    if (schema.Properties == null)
-                        return false;
-
-                    bool hasName = schema.Properties.Any(property =>
-                        property.Key.EqualsIgnoreCase("name") &&
-                        (property.Value.Type == Model.DataType.String || (property.Value.Type == null && ValidationUtilities.IsReferenceOfType(property.Value.Reference, definitions, Model.DataType.String))));
-
-                    if (!hasName)
-                        return false;
-
-                    if (!schema.Properties.All(property => propertiesRegEx.IsMatch(property.Key)))
-                        return false;
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(definition.Key)), this, definition.Key);
                 }
             }
-
-            return true;
+            
         }
     }
 }

@@ -36,21 +36,18 @@ namespace AutoRest.Swagger.Validation
         /// </remarks>
         public override string MessageTemplate => Resources.SecurityDefinitionsStructureValidation;
 
-        /// <summary>
-        /// Checks for the presence and existence of the security definiton
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public override bool IsValid(Dictionary<string, SecurityDefinition> securityDefinitions, RuleContext context)        
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, SecurityDefinition> securityDefinitions, RuleContext context)
         {
             if (securityDefinitions.Count != 1)
             {
-                return false;
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Parent.Path), this);
             }
-
-            return securityDefinitions.Where(sdPair =>
-                sdPair.Key.Equals("azure_auth", StringComparison.CurrentCultureIgnoreCase)
-            &&  IsSecurityDefinitionModelValid(sdPair.Value)).Any();
+            if (!securityDefinitions.Any(sdPair =>
+                 sdPair.Key.Equals("azure_auth", StringComparison.CurrentCultureIgnoreCase)
+                 && IsSecurityDefinitionModelValid(sdPair.Value)))
+            {
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this);
+            }
         }
 
         private bool IsSecurityDefinitionModelValid(SecurityDefinition securityDefinition)
