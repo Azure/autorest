@@ -110,7 +110,7 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
         : () => yamlNodeScalar.value;
     }
     case Kind.MAPPING:
-      onError("Syntax error: Encountered single mapping.", yamlNode.startPosition);
+      onError("Syntax error: Encountered bare mapping.", yamlNode.startPosition);
       return (yamlNode as any).valueFunc = () => null;
     case Kind.MAP: {
       const factories: ([string, () => any])[] = [];
@@ -158,6 +158,10 @@ export function ParseNode<T>(yamlNode: YAMLNode, onError: (message: string, inde
 }
 
 export function CloneAst<T extends YAMLNode>(ast: T): T {
+  if (ast.kind === Kind.MAPPING) {
+    const astMapping = ast as YAMLMapping;
+    return <T>CreateYAMLMapping(CloneAst(astMapping.key), CloneAst(astMapping.value));
+  }
   return ParseToAst(StringifyAst(ast)) as T;
 }
 export function StringifyAst(ast: YAMLNode): string {
