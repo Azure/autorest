@@ -41,17 +41,14 @@ namespace AutoRest.Swagger.Validation
 
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            if (definitions != null)
+            foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                foreach (KeyValuePair<string, Schema> definition in definitions)
+                object[] formatParameters;
+                if (!this.HandleSchema((Schema)definition.Value, definitions, out formatParameters, definition.Key))
                 {
-                    object[] formatParameters;
-                    if (!this.HandleSchema((Schema)definition.Value, definitions, out formatParameters, definition.Key))
-                    {
-                        formatParameters[1] = definition.Key;
-                        yield return new ValidationMessage(new FileObjectPath(context.File,
-                                    context.Path.AppendProperty(definition.Key).AppendProperty("properties").AppendProperty((string)formatParameters[0])), this, formatParameters);
-                    }
+                    formatParameters[1] = definition.Key;
+                    yield return new ValidationMessage(new FileObjectPath(context.File,
+                                context.Path.AppendProperty(definition.Key).AppendProperty("properties").AppendProperty((string)formatParameters[0])), this, formatParameters);
                 }
             }
         }
