@@ -44,6 +44,7 @@ namespace AutoRest.Swagger.Validation
         /// <returns>true if delete operation does not have a request body. false otherwise.</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Operation> operationDefinition, RuleContext context)
         {
+            var serviceDefinition = (ServiceDefinition)context.Root;
             foreach (string httpVerb in operationDefinition.Keys)
             {
                 if (httpVerb.ToLower().Equals("delete"))
@@ -59,6 +60,14 @@ namespace AutoRest.Swagger.Validation
                         {
                             yield return new ValidationMessage(new FileObjectPath(context.File,
                                     context.Path.AppendProperty(httpVerb).AppendProperty("parameters").AppendIndex(operation.Parameters.IndexOf(parameter))), this, operation.OperationId);
+                        }
+                        else if (serviceDefinition.Parameters.ContainsKey(parameter.Reference?.StripParameterPath()??string.Empty))
+                        {
+                            if (serviceDefinition.Parameters[parameter.Reference.StripParameterPath()].In == ParameterLocation.Body)
+                            {
+                                yield return new ValidationMessage(new FileObjectPath(context.File,
+                                    context.Path.AppendProperty(httpVerb).AppendProperty("parameters").AppendIndex(operation.Parameters.IndexOf(parameter))), this, operation.OperationId);
+                            }
                         }
                     }
                 }
