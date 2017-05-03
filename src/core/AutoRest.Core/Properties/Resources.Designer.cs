@@ -260,7 +260,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board..
+        ///   Looks up a localized string similar to Guid used in model definition &apos;{1}&apos; for property &apos;{0}&apos;. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board..
         /// </summary>
         public static string GuidUsageNotRecommended {
             get {
