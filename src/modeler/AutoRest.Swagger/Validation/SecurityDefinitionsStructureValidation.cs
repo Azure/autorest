@@ -42,7 +42,7 @@ namespace AutoRest.Swagger.Validation
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Parent.Path), this);
             }
-            if (!securityDefinitions.Any(sdPair =>
+            else if (!securityDefinitions.Any(sdPair =>
                  sdPair.Key.Equals("azure_auth", StringComparison.CurrentCultureIgnoreCase)
                  && IsSecurityDefinitionModelValid(sdPair.Value)))
             {
