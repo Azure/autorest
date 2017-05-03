@@ -505,6 +505,13 @@ namespace AutoRest.Swagger.Model.Utilities
             return pathToEvaluate.Substring(pathToEvaluate.LastIndexOf("/") + 1);
         }
 
+        /// <summary>
+        /// Gets the actual parent resource name. For example, the name in Path could be 'servers'. The actual parent name is 'server'.
+        /// </summary>
+        /// <param name="nameInPath"></param>
+        /// <param name="paths"></param>
+        /// <param name="definitions"></param>
+        /// <returns></returns>
         private static string GetActualParentResourceName(string nameInPath, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
         {
             Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/.*/" + nameInPath + "/{[^/]+}$", RegexOptions.IgnoreCase);
