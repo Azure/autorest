@@ -385,12 +385,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 }
             }
 
-            // opt into client side validation by default
-            if (!autoRestSettings.CustomSettings.ContainsKey("ClientSideValidation"))
-            {
-                autoRestSettings.CustomSettings.Add("ClientSideValidation", true);
-            }
-
             return autoRestSettings;
         }
 
