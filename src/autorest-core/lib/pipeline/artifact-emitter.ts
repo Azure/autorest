@@ -13,11 +13,6 @@ import { DataHandleRead, DataStoreViewReadonly } from "../data-store/data-store"
 function IsOutputArtifactOrMapRequested(config: ConfigurationView, artifactType: string) {
   return config.IsOutputArtifactRequested(artifactType) || config.IsOutputArtifactRequested(artifactType + ".map");
 }
-function IsOutputArtifactVariantRequested(config: ConfigurationView, artifactType: string) {
-  return IsOutputArtifactOrMapRequested(config, artifactType)
-    || IsOutputArtifactOrMapRequested(config, artifactType + ".yaml")
-    || IsOutputArtifactOrMapRequested(config, artifactType + ".json");
-}
 
 async function EmitArtifactInternal(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): Promise<void> {
   config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
@@ -58,12 +53,9 @@ async function EmitArtifact(config: ConfigurationView, artifactType: string, uri
   }
 }
 
-export async function EmitArtifacts(config: ConfigurationView, artifactType: string, uriResolver: (key: string) => string, lazyScope: LazyPromise<DataStoreViewReadonly>, isObject: boolean): Promise<void> {
-  if (IsOutputArtifactVariantRequested(config, artifactType)) {
-    const scope = await lazyScope;
-    for (const key of await scope.Enum()) {
-      const file = await scope.ReadStrict(key);
-      await EmitArtifact(config, artifactType, uriResolver(file.key), file, isObject);
-    }
+export async function EmitArtifacts(config: ConfigurationView, artifactType: string, uriResolver: (key: string) => string, scope: DataStoreViewReadonly, isObject: boolean): Promise<void> {
+  for (const key of await scope.Enum()) {
+    const file = await scope.ReadStrict(key);
+    await EmitArtifact(config, artifactType, uriResolver(file.key), file, isObject);
   }
 }

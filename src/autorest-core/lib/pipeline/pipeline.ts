@@ -162,7 +162,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     const relPath =
       config.GetEntry("output-file") || // TODO: overthink
       (config.GetEntry("namespace") ? config.GetEntry("namespace") : GetFilename(config.InputFileUris[0]).replace(/\.json$/, ""));
-    barrier.Await(EmitArtifacts(config, "swagger-document", _ => ResolveUri(config.OutputFolderUri, relPath), new LazyPromise(async () => scopeComposedSwaggerTransformed), true));
+    barrier.Await(EmitArtifacts(config, "swagger-document", _ => ResolveUri(config.OutputFolderUri, relPath), scopeComposedSwaggerTransformed, true));
   }
 
   if (config.GetEntry("model-validator")) {
@@ -185,7 +185,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         const scopeCodeModelCommonmark = await RunPlugin(genConfig, "commonmarker", scopeCodeModel);
         const scopeCodeModelTransformed = await RunPlugin(genConfig, "transform", scopeCodeModelCommonmark);
 
-        await EmitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), new LazyPromise(async () => scopeCodeModelTransformed), false);
+        await EmitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), scopeCodeModelTransformed, false);
 
         const inputScope = new QuickScope([
           await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]),
@@ -199,7 +199,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         }
 
         generatedFileScope = await RunPlugin(genConfig, "transform", generatedFileScope);
-        await EmitArtifacts(genConfig, `source-file-${codeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, key.split("/output/")[1]), new LazyPromise(async () => generatedFileScope), false);
+        await EmitArtifacts(genConfig, `source-file-${codeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, key.split("/output/")[1]), generatedFileScope, false);
       })());
     }
   }
