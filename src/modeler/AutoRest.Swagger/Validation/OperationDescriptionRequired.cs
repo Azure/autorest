@@ -19,7 +19,7 @@ namespace AutoRest.Swagger.Validation
         {
             if (string.IsNullOrWhiteSpace(entity.Description))
             {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("operationId")), this, entity.OperationId);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, entity.OperationId);
             }
             
         }

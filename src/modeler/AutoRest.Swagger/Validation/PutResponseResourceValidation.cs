@@ -52,7 +52,7 @@ namespace AutoRest.Swagger.Validation
                 var violatingOp = ops.Where(op => (op.Responses?.ContainsKey("200") == true) && op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() == model).First();
                 var violatingPath = ValidationUtilities.GetOperationIdPath(violatingOp.OperationId, paths);
                 var violatingOpVerb = ValidationUtilities.GetOperationIdVerb(violatingOp.OperationId, violatingPath);
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath.Key).AppendProperty(violatingOpVerb).AppendProperty("operationId")), this, violatingOp.OperationId, model);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath.Key).AppendProperty(violatingOpVerb)), this, violatingOp.OperationId, model);
             }
         }
     }
