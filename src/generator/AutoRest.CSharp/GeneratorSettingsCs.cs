@@ -29,5 +29,10 @@ namespace AutoRest.CSharp
 
         [SettingsInfo("Indicates whether to use DateTimeOffset instead of DateTime to model date-time types")]
         public bool UseDateTimeOffset { get; set; }
+
+        /// <summary>
+        /// Indicates whether to generate client side validation.
+        /// </summary>
+        public bool ClientSideValidation { get; set; }
     }
 }

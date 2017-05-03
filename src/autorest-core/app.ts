@@ -143,7 +143,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 
     // switch
     const key = match[1];
-    const value = match[3] || {};
+    const value = Parse(match[3] || "{}");
     result.switches.push(CreateObject(key.split("."), value));
   }
 

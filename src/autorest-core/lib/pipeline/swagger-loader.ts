@@ -83,7 +83,7 @@ async function EnsureCompleteDefinitionIsPresent(
     const refPath = node.value as string;
     if (refPath.indexOf("#") === -1) {
       // inject entire file right here
-      const fileUri = ResolveUri(sourceFileUri, refPath);
+      const fileUri = ResolveUri(currentFileUri, refPath);
       await ensureExtFilePresent(fileUri, config, complaintLocation);
       // console.error("Resolving ", fileUri);
       const targetPath = path.slice(0, path.length - 1);
@@ -106,7 +106,7 @@ async function EnsureCompleteDefinitionIsPresent(
     if (refPathParts.length === 2) {
       fileUri = refPathParts[0];
       entityPath = "#" + refPathParts[1];
-      fileUri = ResolveUri(sourceFileUri, fileUri);
+      fileUri = ResolveUri(currentFileUri, fileUri);
       await ensureExtFilePresent(fileUri, config, complaintLocation);
     }
 

@@ -81,6 +81,7 @@ public class Generator : NewPlugin
         Settings.Instance.CustomSettings.Add("InternalConstructors", GetXmsCodeGenSetting<bool?>(sd, "internalConstructors") ?? await GetValue<bool?>("use-internal-constructors") ?? false);
         Settings.Instance.CustomSettings.Add("SyncMethods", GetXmsCodeGenSetting<string>(sd, "syncMethods") ?? await GetValue("sync-methods") ?? "essential");
         Settings.Instance.CustomSettings.Add("UseDateTimeOffset", GetXmsCodeGenSetting<bool?>(sd, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false);
+        Settings.Instance.CustomSettings["ClientSideValidation"] = await GetValue<bool?>("client-side-validation") ?? false;
         if (codeGenerator == "ruby" || codeGenerator == "python")
         {
             // TODO: sort out matters here entirely instead of relying on Input being read somewhere...
