@@ -23,13 +23,13 @@ regenExpected = (opts,done) ->
       args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
 
     if (opts.addCredentials)
-      args.push('--#{opts.language}.add-credentials=true')
+      args.push("--#{opts.language}.add-credentials=true")
 
     if (opts.azureArm)
-      args.push('--#{opts.language}.azure-arm=true')
+      args.push("--#{opts.language}.azure-arm=true")
 
     if (opts.fluent)
-      args.push('--#{opts.language}.fluent=true')
+      args.push("--#{opts.language}.fluent=true")
     
     if (opts.syncMethods)
       args.push("--#{opts.language}.sync-methods=#{opts.syncMethods}")
