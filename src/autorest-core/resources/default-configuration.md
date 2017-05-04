@@ -40,9 +40,9 @@ emit-swagger-document:
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
 emit-code-model-v1:
   artifact: code-model-v1
-  is-object: false
+  is-object: true
   output-uri-expr: |
-    "code-model-v1.yaml"
+    "code-model-v1"
 emit-source-file-csharp:
   artifact: source-file-csharp
   output-uri-expr: $key.split("/output/")[1]
