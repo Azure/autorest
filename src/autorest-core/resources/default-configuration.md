@@ -7,7 +7,6 @@ This configuration applies to every run of AutoRest, but with less priority than
 ``` yaml
 azure-arm: false
 output-folder: generated
-disable-validation: false
 ```
 
 ## Pipeline
@@ -41,6 +40,16 @@ output-artifact:
 - source-file-go
 - source-file-java
 - source-file-azureresourceschema
+```
+
+# Validation
+
+## Client Side Validation
+
+On by default for backwards compatibility, but see https://github.com/Azure/autorest/issues/2100
+
+``` yaml
+client-side-validation: true
 ```
 
 ## Azure Validation

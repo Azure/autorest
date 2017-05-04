@@ -16,12 +16,57 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}": {      
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}": {
       "get": {
         "tags": [
           "Zones"
         ],
         "operationId": "Zones_Get",
+        "description": "Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/crs/{cr1}": {
+      "get": {
+        "tags": [
+          "Zones"
+        ],
+        "operationId": "Crs_Get",
         "description": "Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.",
         "parameters": [
           {

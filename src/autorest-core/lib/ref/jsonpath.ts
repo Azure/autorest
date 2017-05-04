@@ -17,11 +17,16 @@ export function stringify(jsonPath: JsonPath): string {
 }
 
 export function paths<T>(obj: T, jsonQuery: string): JsonPath[] {
-  return jsonpath.paths(obj, jsonQuery).map(x => x.slice(1));
+  return nodes(obj, jsonQuery).map(x => x.path);
 }
 
 export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: any }[] {
-  return jsonpath.nodes(obj, jsonQuery).map(x => { return { path: x.path.slice(1), value: x.value }; });
+  // jsonpath only accepts objects
+  if (obj instanceof Object) {
+    return jsonpath.nodes(obj, jsonQuery).map(x => { return { path: x.path.slice(1), value: x.value }; });
+  } else {
+    return matches(jsonQuery, []) ? [{ path: [], value: obj }] : [];
+  }
 }
 
 export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean {

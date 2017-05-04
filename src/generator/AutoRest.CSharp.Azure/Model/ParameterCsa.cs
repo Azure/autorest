@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Azure.Model
         /// <summary>
         /// Gets True if parameter can call .Validate method
         /// </summary>
-        public override bool CanBeValidated => !IsODataFilterExpression;
+        public override bool CanBeValidated => base.CanBeValidated && !IsODataFilterExpression;
 
         /// <summary>
         /// Gets True if parameter is OData $filter, $top, $orderby, $expand, $skip expression

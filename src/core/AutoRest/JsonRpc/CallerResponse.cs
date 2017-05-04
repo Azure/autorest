@@ -38,14 +38,17 @@ namespace Microsoft.Perks.JsonRPC
 
         public bool SetCompleted(JToken result)
         {
-#if false          
-            Log.WriteLine($"The jtoken for the result is {result}");
-            var value = result.ToObject<T>();
-            Log.WriteLine($"Deserialized {value}");
-            Log.WriteLine($" try setting response {TrySetResult(value)}");
-            return true;
-#endif            
-            return TrySetResult(result.ToObject<T>());
+            T value;
+            if (typeof(T) == typeof(bool?))
+            {
+                var obj = result.ToObject<object>();
+                value = (T)(object)(obj != null && !0.Equals(obj) && !false.Equals(obj) && !"".Equals(obj));
+            }
+            else
+            {
+                value = result.ToObject<T>();
+            }
+            return TrySetResult(value);
         }
 
         public bool SetException(JToken error)

@@ -72,27 +72,24 @@ public class AzureValidator : NewPlugin
     protected override async Task<bool> ProcessInternal()
     {
         var files = await ListInputs();
-        if (files.Length != 1)
+        foreach (var file in files)
         {
-            return false;
-        }
+            var content = await ReadFile(file);
+            var fs = new MemoryFileSystem();
+            fs.WriteAllText(file, content);
 
-        var content = await ReadFile(files[0]);
-        var fs = new MemoryFileSystem();
-        fs.WriteAllText(files[0], content);
-
-        var serviceDefinition = SwaggerParser.Load(files[0], fs);
-        var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-        var metadata = new ServiceDefinitionMetadata
+            var serviceDefinition = SwaggerParser.Load(file, fs);
+            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+            var metadata = new ServiceDefinitionMetadata
             {
                 ServiceDefinitionDocumentType = (ServiceDefinitionDocumentType)Enum.Parse(typeof(ServiceDefinitionDocumentType), (await GetValue("openapi-type"))?.ToString() ?? ServiceDefinitionDocumentType.ARM.ToString(), true),
                 MergeState = await GetValue<bool?>("is-individual-swagger") == true ? ServiceDefinitionMergeState.Before : ServiceDefinitionMergeState.After
             };
-        foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition, metadata))
-        {
-            LogValidationMessage(validationEx);
+            foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(file, UriKind.RelativeOrAbsolute), serviceDefinition, metadata))
+            {
+                LogValidationMessage(validationEx);
+            }
         }
-
         return true;
     }
 }

@@ -73,18 +73,5 @@ namespace AwesomeNamespace.Models
         [JsonProperty(PropertyName = "properties.accountType")]
         public AccountType AccountType { get; set; }
 
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public virtual void Validate()
-        {
-            if (Location == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Location");
-            }
-        }
     }
 }

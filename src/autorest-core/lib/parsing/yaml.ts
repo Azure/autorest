@@ -64,7 +64,6 @@ function ResolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPa
 }
 
 export function ResolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPath: JsonPath): YAMLNode {
-  const yamlAstFirst = yamlAstCurrent;
   try {
     for (const jsonPathPart of jsonPath) {
       yamlAstCurrent = ResolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathPart, true);

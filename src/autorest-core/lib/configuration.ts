@@ -31,9 +31,9 @@ export interface AutoRestConfigurationImpl {
   // plugin specific
   "output-file"?: string;
   "output-folder"?: string;
-  "disable-validation"?: boolean;
 
   // from here on: CONVENTION, not cared about by the core
+  "client-side-validation"?: boolean; // C#
   "fluent"?: boolean;
   "azure-arm"?: boolean;
   "azure-validator"?: boolean;
@@ -83,6 +83,7 @@ export interface Directive {
   suppress?: string[] | string;
   set?: string[] | string;
   transform?: string[] | string;
+  test?: string[] | string;
 }
 
 export class DirectiveView {
@@ -111,6 +112,10 @@ export class DirectiveView {
 
   public get transform(): Iterable<string> {
     return ValuesOf<string>(this.directive["transform"]);
+  }
+
+  public get test(): Iterable<string> {
+    return ValuesOf<string>(this.directive["test"]);
   }
 }
 
@@ -215,10 +220,6 @@ export class ConfigurationView {
     return this.config;
   }
 
-  public get DisableValidation(): boolean {
-    return this.config["disable-validation"] || false;
-  }
-
   public * GetPluginViews(pluginName: string): Iterable<ConfigurationView> {
     for (const section of ValuesOf<any>((this.config as any)[pluginName])) {
       yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section, this.config);
@@ -243,6 +244,15 @@ export class ConfigurationView {
             //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
             //console.log(e);
           }
+
+          // try forward resolving (towards emitted files) if no real path
+          if (s.document.startsWith(DataStore.BaseUri) && s.document.split("/output/")[1]) {
+            s = {
+              document: ResolveUri(this.OutputFolderUri, s.document.split("/output/")[1]),
+              Position: s.Position
+            };
+          }
+
           return [s];
         });
 
@@ -295,7 +305,13 @@ export class ConfigurationView {
             let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join("/")})` : ""}: ${mx.Text}`;
             for (const source of mx.Source || []) {
               if (source.Position) {
-                text += `\n    - ${source.document}:${source.Position.line}:${source.Position.column}`;
+                text += `\n    - ${source.document}`;
+                if (source.Position.line !== undefined) {
+                  text += `:${source.Position.line}`;
+                  if (source.Position.column !== undefined) {
+                    text += `:${source.Position.column}`;
+                  }
+                }
                 if (source.Position.path) {
                   text += ` (${stringify(source.Position.path)})`;
                 }

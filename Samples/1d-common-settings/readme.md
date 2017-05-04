@@ -69,4 +69,5 @@ csharp:
     license-header: MICROSOFT_MIT # override the `license-header` defined at the top level. (see above)
     sync-methods: none # other possible values: essential, all
     payload-flattening-threshold: 3 # body parameter types with 3 or less properties cause method to expect those properties instead of an object 
+    client-side-validation: false
 ```
