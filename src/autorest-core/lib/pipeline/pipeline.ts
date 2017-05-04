@@ -99,7 +99,7 @@ function CreateArtifactEmitter(): PipelinePlugin {
   return async (config, input, working, output) => {
     return EmitArtifacts(
       config,
-      config.GetEntry("artifact" as any),
+      config.GetEntry("input-artifact" as any),
       key => ResolveUri(
         config.OutputFolderUri,
         safeEval<string>(config.GetEntry("output-uri-expr" as any), { $key: key, $config: config.Raw })),
@@ -175,7 +175,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const scopeComposedSwagger = await RunPlugin(config, "compose", scopeLoadedSwaggersTransformed);
   const scopeComposedSwaggerTransformed = await RunPlugin(config, "transform", scopeComposedSwagger);
 
-  await RunPlugin([...config.GetPluginViews("emit-swagger-document")][0], "emitter", scopeComposedSwaggerTransformed);
+  barrier.Await(RunPlugin([...config.GetPluginViews("emit-swagger-document")][0], "emitter", scopeComposedSwaggerTransformed));
 
   if (config.GetEntry("model-validator")) {
     barrier.Await(RunPlugin(config, "model-validator", scopeComposedSwaggerTransformed));

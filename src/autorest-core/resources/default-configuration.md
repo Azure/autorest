@@ -31,7 +31,7 @@ plugins:
 
 ``` yaml
 emit-swagger-document:
-  artifact: swagger-document
+  input-artifact: swagger-document
   is-object: true
   # rethink that output-file part
   output-uri-expr: |
@@ -39,30 +39,30 @@ emit-swagger-document:
     $config.namespace || 
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
 emit-code-model-v1:
-  artifact: code-model-v1
+  input-artifact: code-model-v1
   is-object: true
   output-uri-expr: |
     "code-model-v1"
 emit-source-file-csharp:
-  artifact: source-file-csharp
+  input-artifact: source-file-csharp
   output-uri-expr: $key.split("/output/")[1]
 emit-source-file-ruby:
-  artifact: source-file-ruby
+  input-artifact: source-file-ruby
   output-uri-expr: $key.split("/output/")[1]
 emit-source-file-nodejs:
-  artifact: source-file-nodejs
+  input-artifact: source-file-nodejs
   output-uri-expr: $key.split("/output/")[1]
 emit-source-file-python:
-  artifact: source-file-python
+  input-artifact: source-file-python
   output-uri-expr: $key.split("/output/")[1]
 emit-source-file-go:
-  artifact: source-file-go
+  input-artifact: source-file-go
   output-uri-expr: $key.split("/output/")[1]
 emit-source-file-java:
-  artifact: source-file-java
+  input-artifact: source-file-java
   output-uri-expr: $key.split("/output/")[1]
 emit-source-file-azureresourceschema:
-  artifact: source-file-azureresourceschema
+  input-artifact: source-file-azureresourceschema
   output-uri-expr: $key.split("/output/")[1]
 ```
 
