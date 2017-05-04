@@ -39,7 +39,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
-        private readonly IEnumerable<string> OpList = new List<string>() { "put", "get", "patch" };
+        private static readonly IEnumerable<string> OpList = new List<string>() { "put", "get", "patch" };
 
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
@@ -47,6 +47,8 @@ namespace AutoRest.Swagger.Validation
             foreach (var pathPair in entity)
             {
                 var respModels = pathPair.Value.Where(opPair => OpList.Contains(opPair.Key.ToLower()))
+                                                // exclude list operations here?
+                                               .Where(opPair=>!opPair.Value.OperationId.ToLower().Contains("_list"))
                                                .Select(opPair => opPair.Value.Responses?.GetValueOrNull<OperationResponse>("200")?.Schema?.Reference)
                                                .Where(respModel => !string.IsNullOrWhiteSpace(respModel) && serviceDefinition.Definitions.ContainsKey(respModel.StripDefinitionPath()))
                                                .Distinct();
