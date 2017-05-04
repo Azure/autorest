@@ -181,126 +181,70 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       }
     };
 
-  const artSD = "swagger-document";
-  const artCM = "code-model-v1";
-
   //Build pipeline
+  const cfgPipeline = config.GetEntry("pipeline" as any);
   const pipeline: { [name: string]: PipelineNode } = {};
-  pipeline["loader"] = {
-    pluginName: "loader",
-    outputArtifact: artSD,
-    config: config,
-    inputs: []
-  };
-  pipeline["transform-swagger-document-individual"] = {
-    pluginName: "transform",
-    outputArtifact: artSD,
-    config: config,
-    inputs: ["loader"]
-  };
-  pipeline["compose"] = {
-    pluginName: "compose",
-    outputArtifact: artSD,
-    config: config,
-    inputs: ["transform-swagger-document-individual"]
-  };
-  pipeline["transform-swagger-document-composed"] = {
-    pluginName: "transform",
-    outputArtifact: artSD,
-    config: config,
-    inputs: ["compose"]
-  };
 
-  for (const [cfg, idx] of WithIndex(config.GetPluginViews("emit-swagger-document"))) {
-    pipeline[`emit-swagger-document-${idx}`] = {
-      pluginName: "emitter",
-      config: cfg,
-      inputs: ["transform-swagger-document-composed"]
-    };
-  }
-  for (const [cfg, idx] of WithIndex(config.GetPluginViews("model-validator"))) {
-    pipeline[`model-validator-${idx}`] = {
-      pluginName: "model-validator",
-      config: cfg,
-      inputs: ["transform-swagger-document-composed"]
-    };
-  }
-  for (const [cfg, idx] of WithIndex(config.GetPluginViews("semantic-validator"))) {
-    pipeline[`semantic-validator-${idx}`] = {
-      pluginName: "semantic-validator",
-      config: cfg,
-      inputs: ["transform-swagger-document-composed"]
-    };
-  }
-  for (const [cfg, idx] of WithIndex(config.GetPluginViews("azure-validator"))) {
-    pipeline[`azure-validator-${idx}`] = {
-      pluginName: "azure-validator",
-      config: cfg,
-      inputs: ["transform-swagger-document-composed"]
-    };
-  }
-
-  const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
-
-  for (const codeGenerator of allCodeGenerators) {
-    for (const [genConfig, idx] of WithIndex(config.GetPluginViews(codeGenerator))) {
-
-      pipeline[`modeler-${codeGenerator}-${idx}`] = {
-        pluginName: "modeler",
-        outputArtifact: artCM,
-        config: genConfig,
-        inputs: ["transform-swagger-document-composed"]
-      };
-      pipeline[`commonmarker-${codeGenerator}-${idx}`] = {
-        pluginName: "commonmarker",
-        outputArtifact: artCM,
-        config: genConfig,
-        inputs: [`modeler-${codeGenerator}-${idx}`]
-      };
-      pipeline[`transform-${codeGenerator}-${idx}`] = {
-        pluginName: "transform",
-        outputArtifact: artCM,
-        config: genConfig,
-        inputs: [`commonmarker-${codeGenerator}-${idx}`]
-      };
-      for (const [cfg, idxx] of WithIndex(genConfig.GetPluginViews("emit-code-model-v1"))) {
-        pipeline[`emit-code-model-v1-${codeGenerator}-${idx}-${idxx}`] = {
-          pluginName: "emitter",
-          config: cfg,
-          inputs: [`transform-${codeGenerator}-${idx}`]
-        };
-      }
-      pipeline[`${codeGenerator}-${idx}`] = {
-        pluginName: codeGenerator,
-        outputArtifact: `source-file-${codeGenerator}`,
-        config: genConfig,
-        inputs: ["transform-swagger-document-composed", `transform-${codeGenerator}-${idx}`]
-      };
-
-      if (codeGenerator === "csharp") {
-        pipeline[`simplify-${codeGenerator}-${idx}`] = {
-          pluginName: "csharp-simplifier",
-          outputArtifact: `source-file-${codeGenerator}`,
-          config: genConfig,
-          inputs: [`${codeGenerator}-${idx}`]
-        };
-      }
-
-      pipeline[`transform-sources-${codeGenerator}-${idx}`] = {
-        pluginName: "transform",
-        outputArtifact: `source-file-${codeGenerator}`,
-        config: genConfig,
-        inputs: [codeGenerator === "csharp" ? `simplify-${codeGenerator}-${idx}` : `${codeGenerator}-${idx}`]
-      };
-
-      for (const [cfg, idxx] of WithIndex(genConfig.GetPluginViews(`emit-source-file-${codeGenerator}`))) {
-        pipeline[`emit-source-file-${codeGenerator}-${idx}-${idxx}`] = {
-          pluginName: "emitter",
-          config: cfg,
-          inputs: [`transform-sources-${codeGenerator}-${idx}`]
-        };
-      }
+  const resolvePipelineName: (base: string, relative: string) => string = (base, relative) => {
+    if (base === "") {
+      throw new Error(`Cannot resolve pipeline step '${relative}'.`);
     }
+    base = base.substring(0, base.length - 1);
+    base = base.substring(0, base.lastIndexOf("/") + 1);
+
+    if (cfgPipeline[base + relative]) {
+      return base + relative;
+    }
+    return resolvePipelineName(base, relative);
+  };
+  const getNode: (name: string) => [string, string[]] = name => {
+    const cfg = cfgPipeline[name];
+    if (!cfg) {
+      throw new Error(`Cannot find pipeline step '${name}'.`);
+    }
+    if (cfg.suffixes) {
+      return [name, cfg.suffixes];
+    }
+
+    const plugin = cfg.plugin || name.split("/").reverse()[0];
+    const outputArtifact = cfg.outputArtifact;
+    const scope = cfg.scope;
+    const inputs: string[] = (!cfg.input ? [] : (Array.isArray(cfg.input) ? cfg.input : [cfg.input])).map((x: string) => resolvePipelineName(name, x));
+
+    const suffixes: string[] = [];
+    const addForSuffixes = (suffix: string, inputs: string[], config: ConfigurationView, inputSuffixes: [string, string[]][]) => {
+      if (inputSuffixes.length === 0) {
+        const configs = scope ? [...config.GetPluginViews(scope)] : [config];
+        for (let i = 0; i < configs.length; ++i) {
+          const newSuffix = configs.length === 1 ? "" : "/" + i;
+          suffixes.push(suffix + newSuffix);
+          pipeline[name + suffix + newSuffix] = {
+            pluginName: plugin,
+            outputArtifact: outputArtifact,
+            config: configs[i],
+            inputs: inputs
+          };
+        }
+      } else {
+        const inputSuffixesHead = inputSuffixes[0];
+        const inputSuffixesTail = inputSuffixes.slice(1);
+        for (const inputSuffix of inputSuffixesHead[1]) {
+          const additionalInput = inputSuffixesHead[0] + inputSuffix;
+          addForSuffixes(
+            suffix + inputSuffix,
+            inputs.concat([additionalInput]),
+            pipeline[additionalInput].config,
+            inputSuffixesTail);
+        }
+      }
+    };
+
+    addForSuffixes("", [], config, inputs.map(getNode));
+
+    return [name, cfg.suffixes = suffixes];
+  };
+  for (const pipelineStepName of Object.keys(cfgPipeline)) {
+    getNode(pipelineStepName);
   }
 
   // schedule pipeline
@@ -332,7 +276,6 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
     return tasks[name] = (async () => RunPlugin(node.config, node.pluginName, await inputScopes[0]))();
   };
-
 
   // execute pipeline
   const barrier = new OutstandingTaskAwaiter();
