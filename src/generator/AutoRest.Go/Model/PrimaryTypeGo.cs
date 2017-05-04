@@ -52,6 +52,8 @@ namespace AutoRest.Go.Model
                         return "github.com/shopspring/decimal";
                     case KnownPrimaryType.Stream:
                         return "io";
+                    case KnownPrimaryType.UnixTime:
+                        return "github.com/Azure/go-autorest/autorest/date";
                     case KnownPrimaryType.Uuid:
                         return "github.com/satori/uuid";
                     default:
@@ -111,8 +113,7 @@ namespace AutoRest.Go.Model
                         return "map[string]interface{}";
 
                     case KnownPrimaryType.UnixTime:
-                        // TODO: add support
-                        return "string";
+                        return "date.UnixTime";
 
                     case KnownPrimaryType.Uuid:
                         return "uuid.UUID";
