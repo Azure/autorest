@@ -1,3 +1,4 @@
+import { safeEval } from '../ref/safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -94,6 +95,18 @@ function CreateCommonmarkProcessor(): PipelinePlugin {
     }
   };
 }
+function CreateArtifactEmitter(): PipelinePlugin {
+  return async (config, input, working, output) => {
+    return EmitArtifacts(
+      config,
+      config.GetEntry("artifact" as any),
+      key => ResolveUri(
+        config.OutputFolderUri,
+        safeEval<string>(config.GetEntry("output-uri-expr" as any), { $key: key, $config: config.Raw })),
+      input,
+      config.GetEntry("is-object" as any));
+  };
+}
 
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   const barrier = new OutstandingTaskAwaiter();
@@ -121,7 +134,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     "azureresourceschema": CreatePluginExternal(autoRestDotNet, "azureresourceschema"),
     "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier", false),
 
-    "commonmarker": CreateCommonmarkProcessor()
+    "commonmarker": CreateCommonmarkProcessor(),
+    "emitter": CreateArtifactEmitter()
   };
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
@@ -130,9 +144,12 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   let scopeCtr = 0;
   const RunPlugin: (config: ConfigurationView, pluginName: string, inputScope: DataStoreViewReadonly) => Promise<DataStoreViewReadonly> =
     async (config, pluginName, inputScope) => {
+      if (!config) {
+        throw new Error(`Invalid configuration.`);
+      }
       const plugin = plugins[pluginName];
       if (!plugin) {
-        throw `Plugin '${pluginName}' not found.`;
+        throw new Error(`Plugin '${pluginName}' not found.`);
       }
       try {
         config.Message({ Channel: Channel.Debug, Text: `${pluginName} - START` });
@@ -158,12 +175,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const scopeComposedSwagger = await RunPlugin(config, "compose", scopeLoadedSwaggersTransformed);
   const scopeComposedSwaggerTransformed = await RunPlugin(config, "transform", scopeComposedSwagger);
 
-  {
-    const relPath =
-      config.GetEntry("output-file") || // TODO: overthink
-      (config.GetEntry("namespace") ? config.GetEntry("namespace") : GetFilename(config.InputFileUris[0]).replace(/\.json$/, ""));
-    barrier.Await(EmitArtifacts(config, "swagger-document", _ => ResolveUri(config.OutputFolderUri, relPath), scopeComposedSwaggerTransformed, true));
-  }
+  await RunPlugin([...config.GetPluginViews("emit-swagger-document")][0], "emitter", scopeComposedSwaggerTransformed);
 
   if (config.GetEntry("model-validator")) {
     barrier.Await(RunPlugin(config, "model-validator", scopeComposedSwaggerTransformed));
@@ -185,7 +197,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         const scopeCodeModelCommonmark = await RunPlugin(genConfig, "commonmarker", scopeCodeModel);
         const scopeCodeModelTransformed = await RunPlugin(genConfig, "transform", scopeCodeModelCommonmark);
 
-        await EmitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), scopeCodeModelTransformed, false);
+        await RunPlugin([...genConfig.GetPluginViews("emit-code-model-v1")][0], "emitter", scopeCodeModelTransformed);
 
         const inputScope = new QuickScope([
           await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]),
@@ -199,7 +211,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         }
 
         generatedFileScope = await RunPlugin(genConfig, "transform", generatedFileScope);
-        await EmitArtifacts(genConfig, `source-file-${codeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, key.split("/output/")[1]), generatedFileScope, false);
+        await RunPlugin([...genConfig.GetPluginViews(`emit-source-file-${codeGenerator}`)][0], "emitter", generatedFileScope);
       })());
     }
   }

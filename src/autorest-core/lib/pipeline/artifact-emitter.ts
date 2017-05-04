@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Lazy, LazyPromise } from '../lazy';
+import { Lazy } from "../lazy";
 import { Stringify, YAMLNode } from "../ref/yaml";
 import { IdentitySourceMapping } from "../source-map/merging";
 import { Channel } from "../message";
