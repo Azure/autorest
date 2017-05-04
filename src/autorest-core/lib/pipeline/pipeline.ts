@@ -121,7 +121,101 @@ function* WithIndex<T>(collection: Iterable<T>): Iterable<[T, number]> {
   }
 }
 
-export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
+function BuildPipeline(config: ConfigurationView): { [name: string]: PipelineNode } {
+  const cfgPipeline = config.GetEntry("pipeline" as any);
+  const pipeline: { [name: string]: PipelineNode } = {};
+
+  // Resolves a pipeline stage name using the current stage's name and the relative name.
+  // It considers the actually existing pipeline stages.
+  // Example:
+  // (csharp/cm/transform, commonmarker)
+  //    --> csharp/cm/commonmarker       if such a stage exists
+  //    --> csharp/commonmarker          if such a stage exists
+  //    --> commonmarker                 if such a stage exists
+  //    --> THROWS                       otherwise
+  const resolvePipelineStageName = (currentStageName: string, relativeName: string) => {
+    while (currentStageName !== "") {
+      currentStageName = currentStageName.substring(0, currentStageName.length - 1);
+      currentStageName = currentStageName.substring(0, currentStageName.lastIndexOf("/") + 1);
+
+      if (cfgPipeline[currentStageName + relativeName]) {
+        return currentStageName + relativeName;
+      }
+    }
+    throw new Error(`Cannot resolve pipeline stage '${relativeName}'.`);
+  };
+
+  // One pipeline stage can generate multiple nodes in the pipeline graph
+  // if the stage is associated with a configuration scope that has multiple entries.
+  // Example: multiple generator calls
+  const createNodesAndSuffixes: (stageName: string) => { name: string, suffixes: string[] } = stageName => {
+    const cfg = cfgPipeline[stageName];
+    if (!cfg) {
+      throw new Error(`Cannot find pipeline stage '${stageName}'.`);
+    }
+    if (cfg.suffixes) {
+      return { name: stageName, suffixes: cfg.suffixes };
+    }
+
+    // derive information about given pipeline stage
+    const plugin = cfg.plugin || stageName.split("/").reverse()[0];
+    const outputArtifact = cfg.outputArtifact;
+    const scope = cfg.scope;
+    const inputs: string[] = (!cfg.input ? [] : (Array.isArray(cfg.input) ? cfg.input : [cfg.input])).map((x: string) => resolvePipelineStageName(stageName, x));
+
+    const suffixes: string[] = [];
+    // adds nodes using at least suffix `suffix`, the input nodes called `inputs` using the context `config`
+    // AFTER considering all the input nodes `inputNodes`
+    // Example:
+    // ("", [], cfg, [{ name: "a", suffixes: ["/0", "/1"] }])
+    // --> ("/0", ["a/0"], cfg of "a/0", [])
+    //     --> adds node `${stageName}/0`
+    // --> ("/1", ["a/1"], cfg of "a/1", [])
+    //     --> adds node `${stageName}/1`
+    // Note: inherits the config of the LAST input node (affects for example `.../generate`)
+    const addNodesAndSuffixes = (suffix: string, inputs: string[], config: ConfigurationView, inputNodes: { name: string, suffixes: string[] }[]) => {
+      if (inputNodes.length === 0) {
+        const configs = scope ? [...config.GetPluginViews(scope)] : [config];
+        for (let i = 0; i < configs.length; ++i) {
+          const newSuffix = configs.length === 1 ? "" : "/" + i;
+          suffixes.push(suffix + newSuffix);
+          pipeline[stageName + suffix + newSuffix] = {
+            pluginName: plugin,
+            outputArtifact: outputArtifact,
+            config: configs[i],
+            inputs: inputs
+          };
+        }
+      } else {
+        const inputSuffixesHead = inputNodes[0];
+        const inputSuffixesTail = inputNodes.slice(1);
+        for (const inputSuffix of inputSuffixesHead.suffixes) {
+          const additionalInput = inputSuffixesHead.name + inputSuffix;
+          addNodesAndSuffixes(
+            suffix + inputSuffix,
+            inputs.concat([additionalInput]),
+            pipeline[additionalInput].config,
+            inputSuffixesTail);
+        }
+      }
+    };
+
+    addNodesAndSuffixes("", [], config, inputs.map(createNodesAndSuffixes));
+
+    return { name: stageName, suffixes: cfg.suffixes = suffixes };
+  };
+
+  for (const pipelineStepName of Object.keys(cfgPipeline)) {
+    createNodesAndSuffixes(pipelineStepName);
+  }
+
+  return pipeline;
+}
+
+export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
+
+  const pipeline = BuildPipeline(configView);
+
   // externals:
   const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
   const autoRestDotNet = new LazyPromise(async () => await GetAutoRestDotNetPlugin());
@@ -151,13 +245,30 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
-  // to be replaced with scheduler
-  let scopeCtr = 0;
-  const RunPlugin: (config: ConfigurationView, pluginName: string, inputScope: DataStoreViewReadonly) => Promise<DataStoreViewReadonly> =
-    async (config, pluginName, inputScope) => {
-      if (!config) {
-        throw new Error(`Invalid configuration.`);
+  const RunPlugin: (nodeName: string) => Promise<DataStoreViewReadonly> =
+    async (nodeName) => {
+      const node = pipeline[nodeName];
+
+      // get input
+      let inputScopes: DataStoreViewReadonly[] = await Promise.all(node.inputs.map(x => getTask(x)));
+      if (inputScopes.length === 0) {
+        inputScopes = [configView.DataStore.GetReadThroughScopeFileSystem(fileSystem)];
       }
+      if (inputScopes.length > 1) {
+        const handles: DataHandleRead[] = [];
+        for (const pscope of inputScopes) {
+          const scope = await pscope;
+          for (const handle of await scope.Enum()) {
+            handles.push(await scope.ReadStrict(handle));
+          }
+        }
+        // note the fact that QuickScope returns absolute keys...
+        inputScopes = [new QuickScope(handles)];
+      }
+      const inputScope = inputScopes[0];
+
+      const config = node.config;
+      const pluginName = node.pluginName;
       const plugin = plugins[pluginName];
       if (!plugin) {
         throw new Error(`Plugin '${pluginName}' not found.`);
@@ -165,7 +276,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       try {
         config.Message({ Channel: Channel.Debug, Text: `${pluginName} - START` });
 
-        const scope = config.DataStore.CreateScope(`${++scopeCtr}_${pluginName}`);
+        const scope = config.DataStore.CreateScope(nodeName);
         const scopeWorking = scope.CreateScope("working");
         const scopeOutput = scope.CreateScope("output");
         await plugin(config,
@@ -181,101 +292,11 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       }
     };
 
-  //Build pipeline
-  const cfgPipeline = config.GetEntry("pipeline" as any);
-  const pipeline: { [name: string]: PipelineNode } = {};
-
-  const resolvePipelineName: (base: string, relative: string) => string = (base, relative) => {
-    if (base === "") {
-      throw new Error(`Cannot resolve pipeline step '${relative}'.`);
-    }
-    base = base.substring(0, base.length - 1);
-    base = base.substring(0, base.lastIndexOf("/") + 1);
-
-    if (cfgPipeline[base + relative]) {
-      return base + relative;
-    }
-    return resolvePipelineName(base, relative);
-  };
-  const getNode: (name: string) => [string, string[]] = name => {
-    const cfg = cfgPipeline[name];
-    if (!cfg) {
-      throw new Error(`Cannot find pipeline step '${name}'.`);
-    }
-    if (cfg.suffixes) {
-      return [name, cfg.suffixes];
-    }
-
-    const plugin = cfg.plugin || name.split("/").reverse()[0];
-    const outputArtifact = cfg.outputArtifact;
-    const scope = cfg.scope;
-    const inputs: string[] = (!cfg.input ? [] : (Array.isArray(cfg.input) ? cfg.input : [cfg.input])).map((x: string) => resolvePipelineName(name, x));
-
-    const suffixes: string[] = [];
-    const addForSuffixes = (suffix: string, inputs: string[], config: ConfigurationView, inputSuffixes: [string, string[]][]) => {
-      if (inputSuffixes.length === 0) {
-        const configs = scope ? [...config.GetPluginViews(scope)] : [config];
-        for (let i = 0; i < configs.length; ++i) {
-          const newSuffix = configs.length === 1 ? "" : "/" + i;
-          suffixes.push(suffix + newSuffix);
-          pipeline[name + suffix + newSuffix] = {
-            pluginName: plugin,
-            outputArtifact: outputArtifact,
-            config: configs[i],
-            inputs: inputs
-          };
-        }
-      } else {
-        const inputSuffixesHead = inputSuffixes[0];
-        const inputSuffixesTail = inputSuffixes.slice(1);
-        for (const inputSuffix of inputSuffixesHead[1]) {
-          const additionalInput = inputSuffixesHead[0] + inputSuffix;
-          addForSuffixes(
-            suffix + inputSuffix,
-            inputs.concat([additionalInput]),
-            pipeline[additionalInput].config,
-            inputSuffixesTail);
-        }
-      }
-    };
-
-    addForSuffixes("", [], config, inputs.map(getNode));
-
-    return [name, cfg.suffixes = suffixes];
-  };
-  for (const pipelineStepName of Object.keys(cfgPipeline)) {
-    getNode(pipelineStepName);
-  }
-
   // schedule pipeline
   const tasks: { [name: string]: Promise<DataStoreViewReadonly> } = {};
-  const getTask = (name: string) => {
-    if (name in tasks) {
-      return tasks[name];
-    }
-    const node = pipeline[name];
-
-    // get input
-    let inputScopes: Promise<DataStoreViewReadonly>[] = node.inputs.map(x => getTask(x));
-    if (inputScopes.length === 0) {
-      inputScopes = [Promise.resolve(config.DataStore.GetReadThroughScopeFileSystem(fileSystem))];
-    }
-    if (inputScopes.length > 1) {
-      const inputScopesPrev = inputScopes;
-      inputScopes = [(async () => {
-        const handles: DataHandleRead[] = [];
-        for (const pscope of inputScopesPrev) {
-          const scope = await pscope;
-          for (const handle of await scope.Enum()) {
-            handles.push(await scope.ReadStrict(handle));
-          }
-        }
-        return new QuickScope(handles);
-      })()];
-    }
-
-    return tasks[name] = (async () => RunPlugin(node.config, node.pluginName, await inputScopes[0]))();
-  };
+  const getTask = (name: string) => name in tasks ?
+    tasks[name] :
+    tasks[name] = (async () => RunPlugin(name))();
 
   // execute pipeline
   const barrier = new OutstandingTaskAwaiter();

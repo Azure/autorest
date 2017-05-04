@@ -47,9 +47,9 @@ pipeline:
     output-artifact: swagger-document
   swagger-document/emitter:
     input: transform
-    scope: emit-swagger-document
+    scope: scope-swagger-document/emitter
 
-emit-swagger-document:
+scope-swagger-document/emitter:
   input-artifact: swagger-document
   is-object: true
   # rethink that output-file part
@@ -57,7 +57,7 @@ emit-swagger-document:
     $config["output-file"] || 
     $config.namespace || 
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
-emit-code-model-v1:
+scope-cm/emitter:
   input-artifact: code-model-v1
   is-object: true
   output-uri-expr: |
@@ -97,7 +97,7 @@ pipeline:
     output-artifact: code-model-v1
   csharp/cm/emitter:
     input: transform
-    scope: emit-code-model-v1
+    scope: scope-cm/emitter
   csharp/generate:
     plugin: csharp
     input: 
@@ -113,9 +113,9 @@ pipeline:
     output-artifact: source-file-csharp
   csharp/emitter:
     input: transform
-    scope: emit-source-file-csharp
+    scope: scope-csharp/emitter
 
-emit-source-file-csharp:
+scope-csharp/emitter:
   input-artifact: source-file-csharp
   output-uri-expr: $key.split("/output/")[1]
 
@@ -139,7 +139,7 @@ pipeline:
     output-artifact: code-model-v1
   go/cm/emitter:
     input: transform
-    scope: emit-code-model-v1
+    scope: scope-cm/emitter
   go/generate:
     plugin: go
     input: 
@@ -151,9 +151,9 @@ pipeline:
     output-artifact: source-file-go
   go/emitter:
     input: transform
-    scope: emit-source-file-go
+    scope: scope-go/emitter
 
-emit-source-file-go:
+scope-go/emitter:
   input-artifact: source-file-go
   output-uri-expr: $key.split("/output/")[1]
 
@@ -177,7 +177,7 @@ pipeline:
     output-artifact: code-model-v1
   java/cm/emitter:
     input: transform
-    scope: emit-code-model-v1
+    scope: scope-cm/emitter
   java/generate:
     plugin: java
     input: 
@@ -189,9 +189,9 @@ pipeline:
     output-artifact: source-file-java
   java/emitter:
     input: transform
-    scope: emit-source-file-java
+    scope: scope-java/emitter
 
-emit-source-file-java:
+scope-java/emitter:
   input-artifact: source-file-java
   output-uri-expr: $key.split("/output/")[1]
 
@@ -215,7 +215,7 @@ pipeline:
     output-artifact: code-model-v1
   python/cm/emitter:
     input: transform
-    scope: emit-code-model-v1
+    scope: scope-cm/emitter
   python/generate:
     plugin: python
     input: 
@@ -227,9 +227,9 @@ pipeline:
     output-artifact: source-file-python
   python/emitter:
     input: transform
-    scope: emit-source-file-python
+    scope: scope-python/emitter
 
-emit-source-file-python:
+scope-python/emitter:
   input-artifact: source-file-python
   output-uri-expr: $key.split("/output/")[1]
 
@@ -253,7 +253,7 @@ pipeline:
     output-artifact: code-model-v1
   nodejs/cm/emitter:
     input: transform
-    scope: emit-code-model-v1
+    scope: scope-cm/emitter
   nodejs/generate:
     plugin: nodejs
     input: 
@@ -265,9 +265,9 @@ pipeline:
     output-artifact: source-file-nodejs
   nodejs/emitter:
     input: transform
-    scope: emit-source-file-nodejs
+    scope: scope-nodejs/emitter
 
-emit-source-file-nodejs:
+scope-nodejs/emitter:
   input-artifact: source-file-nodejs
   output-uri-expr: $key.split("/output/")[1]
 
@@ -291,7 +291,7 @@ pipeline:
     output-artifact: code-model-v1
   ruby/cm/emitter:
     input: transform
-    scope: emit-code-model-v1
+    scope: scope-cm/emitter
   ruby/generate:
     plugin: ruby
     input: 
@@ -303,9 +303,9 @@ pipeline:
     output-artifact: source-file-ruby
   ruby/emitter:
     input: transform
-    scope: emit-source-file-ruby
+    scope: scope-ruby/emitter
 
-emit-source-file-ruby:
+scope-ruby/emitter:
   input-artifact: source-file-ruby
   output-uri-expr: $key.split("/output/")[1]
 
@@ -329,7 +329,7 @@ pipeline:
     output-artifact: code-model-v1
   azureresourceschema/cm/emitter:
     input: transform
-    scope: emit-code-model-v1
+    scope: scope-cm/emitter
   azureresourceschema/generate:
     plugin: azureresourceschema
     input: 
@@ -341,9 +341,9 @@ pipeline:
     output-artifact: source-file-azureresourceschema
   azureresourceschema/emitter:
     input: transform
-    scope: emit-source-file-azureresourceschema
+    scope: scope-azureresourceschema/emitter
 
-emit-source-file-azureresourceschema:
+scope-azureresourceschema/emitter:
   input-artifact: source-file-azureresourceschema
   output-uri-expr: $key.split("/output/")[1]
 output-artifact:
