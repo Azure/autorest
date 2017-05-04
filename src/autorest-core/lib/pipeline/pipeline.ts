@@ -22,7 +22,13 @@ import { EmitArtifacts } from "./artifact-emitter";
 export type DataPromise = MultiPromise<DataHandleRead>;
 
 type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
-type PipelineNode = { id: string, outputArtifact: string, plugin: PipelinePlugin, inputs: PipelineNode[] };
+interface PipelineNode {
+  // id: string;
+  outputArtifact?: string;
+  pluginName: string;
+  config: ConfigurationView;
+  inputs: string[];
+};
 
 function CreatePluginLoader(): PipelinePlugin {
   return async (config, input, working, output) => {
@@ -108,9 +114,14 @@ function CreateArtifactEmitter(): PipelinePlugin {
   };
 }
 
-export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
-  const barrier = new OutstandingTaskAwaiter();
+function* WithIndex<T>(collection: Iterable<T>): Iterable<[T, number]> {
+  let idx = 0;
+  for (const x of collection) {
+    yield [x, idx++];
+  }
+}
 
+export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   // externals:
   const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
   const autoRestDotNet = new LazyPromise(async () => await GetAutoRestDotNetPlugin());
@@ -170,51 +181,163 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       }
     };
 
-  const scopeLoadedSwaggers = await RunPlugin(config, "loader", config.DataStore.GetReadThroughScopeFileSystem(fileSystem));
-  const scopeLoadedSwaggersTransformed = await RunPlugin(config, "transform", scopeLoadedSwaggers);
-  const scopeComposedSwagger = await RunPlugin(config, "compose", scopeLoadedSwaggersTransformed);
-  const scopeComposedSwaggerTransformed = await RunPlugin(config, "transform", scopeComposedSwagger);
+  const artSD = "swagger-document";
+  const artCM = "code-model-v1";
 
-  barrier.Await(RunPlugin([...config.GetPluginViews("emit-swagger-document")][0], "emitter", scopeComposedSwaggerTransformed));
+  //Build pipeline
+  const pipeline: { [name: string]: PipelineNode } = {};
+  pipeline["loader"] = {
+    pluginName: "loader",
+    outputArtifact: artSD,
+    config: config,
+    inputs: []
+  };
+  pipeline["transform-swagger-document-individual"] = {
+    pluginName: "transform",
+    outputArtifact: artSD,
+    config: config,
+    inputs: ["loader"]
+  };
+  pipeline["compose"] = {
+    pluginName: "compose",
+    outputArtifact: artSD,
+    config: config,
+    inputs: ["transform-swagger-document-individual"]
+  };
+  pipeline["transform-swagger-document-composed"] = {
+    pluginName: "transform",
+    outputArtifact: artSD,
+    config: config,
+    inputs: ["compose"]
+  };
 
-  if (config.GetEntry("model-validator")) {
-    barrier.Await(RunPlugin(config, "model-validator", scopeComposedSwaggerTransformed));
+  for (const [cfg, idx] of WithIndex(config.GetPluginViews("emit-swagger-document"))) {
+    pipeline[`emit-swagger-document-${idx}`] = {
+      pluginName: "emitter",
+      config: cfg,
+      inputs: ["transform-swagger-document-composed"]
+    };
   }
-  if (config.GetEntry("semantic-validator")) {
-    barrier.Await(RunPlugin(config, "semantic-validator", scopeComposedSwaggerTransformed));
+  for (const [cfg, idx] of WithIndex(config.GetPluginViews("model-validator"))) {
+    pipeline[`model-validator-${idx}`] = {
+      pluginName: "model-validator",
+      config: cfg,
+      inputs: ["transform-swagger-document-composed"]
+    };
   }
-  if (config.GetEntry("azure-validator")) {
-    barrier.Await(RunPlugin(config, "azure-validator", scopeComposedSwaggerTransformed));
+  for (const [cfg, idx] of WithIndex(config.GetPluginViews("semantic-validator"))) {
+    pipeline[`semantic-validator-${idx}`] = {
+      pluginName: "semantic-validator",
+      config: cfg,
+      inputs: ["transform-swagger-document-composed"]
+    };
+  }
+  for (const [cfg, idx] of WithIndex(config.GetPluginViews("azure-validator"))) {
+    pipeline[`azure-validator-${idx}`] = {
+      pluginName: "azure-validator",
+      config: cfg,
+      inputs: ["transform-swagger-document-composed"]
+    };
   }
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
 
-  // code generators
   for (const codeGenerator of allCodeGenerators) {
-    for (const genConfig of config.GetPluginViews(codeGenerator)) {
-      barrier.Await((async () => {
-        const scopeCodeModel = await RunPlugin(genConfig, "modeler", scopeComposedSwaggerTransformed);
-        const scopeCodeModelCommonmark = await RunPlugin(genConfig, "commonmarker", scopeCodeModel);
-        const scopeCodeModelTransformed = await RunPlugin(genConfig, "transform", scopeCodeModelCommonmark);
+    for (const [genConfig, idx] of WithIndex(config.GetPluginViews(codeGenerator))) {
 
-        await RunPlugin([...genConfig.GetPluginViews("emit-code-model-v1")][0], "emitter", scopeCodeModelTransformed);
+      pipeline[`modeler-${codeGenerator}-${idx}`] = {
+        pluginName: "modeler",
+        outputArtifact: artCM,
+        config: genConfig,
+        inputs: ["transform-swagger-document-composed"]
+      };
+      pipeline[`commonmarker-${codeGenerator}-${idx}`] = {
+        pluginName: "commonmarker",
+        outputArtifact: artCM,
+        config: genConfig,
+        inputs: [`modeler-${codeGenerator}-${idx}`]
+      };
+      pipeline[`transform-${codeGenerator}-${idx}`] = {
+        pluginName: "transform",
+        outputArtifact: artCM,
+        config: genConfig,
+        inputs: [`commonmarker-${codeGenerator}-${idx}`]
+      };
+      for (const [cfg, idxx] of WithIndex(genConfig.GetPluginViews("emit-code-model-v1"))) {
+        pipeline[`emit-code-model-v1-${codeGenerator}-${idx}-${idxx}`] = {
+          pluginName: "emitter",
+          config: cfg,
+          inputs: [`transform-${codeGenerator}-${idx}`]
+        };
+      }
+      pipeline[`${codeGenerator}-${idx}`] = {
+        pluginName: codeGenerator,
+        outputArtifact: `source-file-${codeGenerator}`,
+        config: genConfig,
+        inputs: ["transform-swagger-document-composed", `transform-${codeGenerator}-${idx}`]
+      };
 
-        const inputScope = new QuickScope([
-          await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]),
-          await scopeCodeModelTransformed.ReadStrict((await scopeCodeModelTransformed.Enum())[0])
-        ]);
-        let generatedFileScope = await RunPlugin(genConfig, codeGenerator, inputScope);
+      if (codeGenerator === "csharp") {
+        pipeline[`simplify-${codeGenerator}-${idx}`] = {
+          pluginName: "csharp-simplifier",
+          outputArtifact: `source-file-${codeGenerator}`,
+          config: genConfig,
+          inputs: [`${codeGenerator}-${idx}`]
+        };
+      }
 
-        // C# simplifier
-        if (codeGenerator === "csharp") {
-          generatedFileScope = await RunPlugin(genConfig, "csharp-simplifier", generatedFileScope);
-        }
+      pipeline[`transform-sources-${codeGenerator}-${idx}`] = {
+        pluginName: "transform",
+        outputArtifact: `source-file-${codeGenerator}`,
+        config: genConfig,
+        inputs: [codeGenerator === "csharp" ? `simplify-${codeGenerator}-${idx}` : `${codeGenerator}-${idx}`]
+      };
 
-        generatedFileScope = await RunPlugin(genConfig, "transform", generatedFileScope);
-        await RunPlugin([...genConfig.GetPluginViews(`emit-source-file-${codeGenerator}`)][0], "emitter", generatedFileScope);
-      })());
+      for (const [cfg, idxx] of WithIndex(genConfig.GetPluginViews(`emit-source-file-${codeGenerator}`))) {
+        pipeline[`emit-source-file-${codeGenerator}-${idx}-${idxx}`] = {
+          pluginName: "emitter",
+          config: cfg,
+          inputs: [`transform-sources-${codeGenerator}-${idx}`]
+        };
+      }
     }
   }
 
+  // schedule pipeline
+  const tasks: { [name: string]: Promise<DataStoreViewReadonly> } = {};
+  const getTask = (name: string) => {
+    if (name in tasks) {
+      return tasks[name];
+    }
+    const node = pipeline[name];
+
+    // get input
+    let inputScopes: Promise<DataStoreViewReadonly>[] = node.inputs.map(x => getTask(x));
+    if (inputScopes.length === 0) {
+      inputScopes = [Promise.resolve(config.DataStore.GetReadThroughScopeFileSystem(fileSystem))];
+    }
+    if (inputScopes.length > 1) {
+      const inputScopesPrev = inputScopes;
+      inputScopes = [(async () => {
+        const handles: DataHandleRead[] = [];
+        for (const pscope of inputScopesPrev) {
+          const scope = await pscope;
+          for (const handle of await scope.Enum()) {
+            handles.push(await scope.ReadStrict(handle));
+          }
+        }
+        return new QuickScope(handles);
+      })()];
+    }
+
+    return tasks[name] = (async () => RunPlugin(node.config, node.pluginName, await inputScopes[0]))();
+  };
+
+
+  // execute pipeline
+  const barrier = new OutstandingTaskAwaiter();
+  for (const name of Object.keys(pipeline)) {
+    barrier.Await(getTask(name));
+  }
   await barrier.Wait();
 }
