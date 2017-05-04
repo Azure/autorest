@@ -14,7 +14,6 @@ regenExpected = (opts,done) ->
     
     swaggerFiles = (if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue).split(";")
     args = [
-      '--skip-validation=true',
       "--#{opts.language}",
       "--output-folder=#{outputDir}/#{key}",
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}"
@@ -24,25 +23,25 @@ regenExpected = (opts,done) ->
       args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
 
     if (opts.addCredentials)
-      args.push('--add-credentials=true')
+      args.push('--#{opts.language}.add-credentials=true')
 
     if (opts.azureArm)
-      args.push('--azure-arm=true')
+      args.push('--#{opts.language}.azure-arm=true')
 
     if (opts.fluent)
-      args.push('--fluent=true')
+      args.push('--#{opts.language}.fluent=true')
     
     if (opts.syncMethods)
-      args.push("--sync-methods=#{opts.syncMethods}")
+      args.push("--#{opts.language}.sync-methods=#{opts.syncMethods}")
     
     if (opts.flatteningThreshold)
-      args.push("--payload-flattening-threshold=#{opts.flatteningThreshold}")
+      args.push("--#{opts.language}.payload-flattening-threshold=#{opts.flatteningThreshold}")
 
     if (!!opts.nsPrefix)
       if (optsMappingsValue instanceof Array && optsMappingsValue[1] != undefined)
-        args.push("--namespace=#{optsMappingsValue[1]}")
+        args.push("--#{opts.language}.namespace=#{optsMappingsValue[1]}")
       else
-        args.push("--namespace=#{[opts.nsPrefix, key.replace(/\/|\./, '')].join('.')}")
+        args.push("--#{opts.language}.namespace=#{[opts.nsPrefix, key.replace(/\/|\./, '')].join('.')}")
 
     if (opts['override-info.version'])
       args.push("--override-info.version=#{opts['override-info.version']}")
