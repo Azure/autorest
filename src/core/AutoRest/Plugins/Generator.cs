@@ -54,7 +54,8 @@ public class Generator : NewPlugin
             "Python",
             "Go",
             "Java",
-            "AzureResourceSchema" }
+            "AzureResourceSchema",
+            "JsonRpcClient" }
           .Where(x => x.ToLowerInvariant() == codeGenerator)
           .FirstOrDefault();
 
@@ -81,6 +82,7 @@ public class Generator : NewPlugin
         Settings.Instance.CustomSettings.Add("InternalConstructors", GetXmsCodeGenSetting<bool?>(sd, "internalConstructors") ?? await GetValue<bool?>("use-internal-constructors") ?? false);
         Settings.Instance.CustomSettings.Add("SyncMethods", GetXmsCodeGenSetting<string>(sd, "syncMethods") ?? await GetValue("sync-methods") ?? "essential");
         Settings.Instance.CustomSettings.Add("UseDateTimeOffset", GetXmsCodeGenSetting<bool?>(sd, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false);
+        Settings.Instance.CustomSettings["ClientSideValidation"] = await GetValue<bool?>("client-side-validation") ?? false;
         if (codeGenerator == "ruby" || codeGenerator == "python")
         {
             // TODO: sort out matters here entirely instead of relying on Input being read somewhere...
@@ -94,7 +96,8 @@ public class Generator : NewPlugin
         var plugin = ExtensionsLoader.GetPlugin(
             (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") +
             language +
-            (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : ""));
+            (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : "") +
+            (await GetValue<bool?>("testgen") ?? false ? ".TestGen" : ""));
         var modelAsJson = (await ReadFile(files[1])).EnsureYamlIsJson();
 
         using (plugin.Activate())

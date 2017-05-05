@@ -268,7 +268,7 @@ namespace AutoRest.Python
                             { KnownPrimaryType.TimeSpan, "duration" },
                             { KnownPrimaryType.UnixTime, "unix-time" },
                             { KnownPrimaryType.Base64Url, "base64" },
-                            { KnownPrimaryType.Decimal, "Decimal" }
+                            { KnownPrimaryType.Decimal, "decimal" }
                         };
             PrimaryType primaryType = type as PrimaryType;
             if (primaryType != null)

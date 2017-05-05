@@ -60,6 +60,7 @@ Some settings are specific to plugins, such as:
 - `add-credentials` which adds a `Credentials` property to C# Azure clients
 - `sync-methods` which allows specifying whether synchronous wrappers for asynchronous methods should be generated (discouraged!)
 - `payload-flattening-threshold` which controls whether a body parameter should be passed directly (as an argument to the generated method) or whether its properties should be passed as arguments. As the latter option makes sense for body parameter types with few properties (less overhead for `new`ing), this setting is a threshold specifying when to use which option.
+- `client-side-validation` which controls whether or not client side validation of constrains such as `minLength`, `maximum` or `pattern` is desired
 
 ``` yaml
 csharp:
@@ -69,4 +70,5 @@ csharp:
     license-header: MICROSOFT_MIT # override the `license-header` defined at the top level. (see above)
     sync-methods: none # other possible values: essential, all
     payload-flattening-threshold: 3 # body parameter types with 3 or less properties cause method to expect those properties instead of an object 
+    client-side-validation: false # disable client side validation
 ```

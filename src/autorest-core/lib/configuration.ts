@@ -33,6 +33,7 @@ export interface AutoRestConfigurationImpl {
   "output-folder"?: string;
 
   // from here on: CONVENTION, not cared about by the core
+  "client-side-validation"?: boolean; // C#
   "fluent"?: boolean;
   "azure-arm"?: boolean;
   "azure-validator"?: boolean;
@@ -218,7 +219,9 @@ export class ConfigurationView {
 
   public * GetPluginViews(pluginName: string): Iterable<ConfigurationView> {
     for (const section of ValuesOf<any>((this.config as any)[pluginName])) {
-      yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section, this.config);
+      if (section) {
+        yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section === true ? {} : section, this.config);
+      }
     }
   }
 

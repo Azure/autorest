@@ -384,6 +384,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                     autoRestSettings.CustomSettings[pair.Key] = pair.Value;
                 }
             }
+
             return autoRestSettings;
         }
 

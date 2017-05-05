@@ -47,12 +47,12 @@ namespace AutoRest.Swagger.Validation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             // Retrieve the list of TrackedResources
-            IEnumerable<string> trackedResources = context.TrackedResourceModels;
+            IEnumerable<string> parentTrackedResources = context.ParentTrackedResourceModels;
 
             // Retrieve the list of getOperations
             IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", context.Root);
 
-            foreach (string trackedResource in trackedResources)
+            foreach (string trackedResource in parentTrackedResources)
             {
                 bool listByResourceGroupCheck = ValidationUtilities.ListByXCheck(getOperations, listByRgRegEx, trackedResource, definitions);
 

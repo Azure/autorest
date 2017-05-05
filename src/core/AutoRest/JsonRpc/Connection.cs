@@ -311,6 +311,7 @@ namespace Microsoft.Perks.JsonRPC
                 }
                 catch (Exception e)
                 {
+                    Console.Error.WriteLine(e);
                     //Log($"[PROCESS ERROR]: {e.GetType().FullName}/{e.Message}/{e.StackTrace}");
                     //Log($"[LISTEN CONTENT]: {jobject.ToString()}");
                 }
