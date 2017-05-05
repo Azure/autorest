@@ -43,9 +43,9 @@ class AutoRestSwaggerBATService(object):
     :vartype config: AutoRestSwaggerBATServiceConfiguration
 
     :ivar string: String operations
-    :vartype string: .operations.StringOperations
+    :vartype string: fixtures.acceptancetestsbodystring.operations.StringOperations
     :ivar enum: Enum operations
-    :vartype enum: .operations.EnumOperations
+    :vartype enum: fixtures.acceptancetestsbodystring.operations.EnumOperations
 
     :param str base_url: Service URL
     """

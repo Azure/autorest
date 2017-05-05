@@ -107,15 +107,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A body parameter must be named &apos;parameters&apos;..
-        /// </summary>
-        public static string BodyParametersNotValid {
-            get {
-                return ResourceManager.GetString("BodyParametersNotValid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, must follow camelCase style. Example: &quot;{1}&quot;..
         /// </summary>
         public static string BodyPropertyNameCamelCase {
@@ -566,7 +557,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A swagger must have security definitions and must adhere to the specific structure..
+        ///   Looks up a localized string similar to Every swagger/configuration must have a security definitions section and it must adhere to the structure described in: https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md.
         /// </summary>
         public static string SecurityDefinitionsStructureValidation {
             get {

@@ -42,7 +42,7 @@ class AutoRestUrlMutliCollectionFormatTestService(object):
     :vartype config: AutoRestUrlMutliCollectionFormatTestServiceConfiguration
 
     :ivar queries: Queries operations
-    :vartype queries: .operations.QueriesOperations
+    :vartype queries: fixtures.acceptancetestsurlmulticollectionformat.operations.QueriesOperations
 
     :param str base_url: Service URL
     """

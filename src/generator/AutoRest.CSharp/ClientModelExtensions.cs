@@ -207,14 +207,6 @@ namespace AutoRest.CSharp
                 primaryType = New<PrimaryType>(KnownPrimaryType.String);
             }
 
-            if (primaryType == null || primaryType.KnownPrimaryType != KnownPrimaryType.String)
-            {
-                throw new InvalidOperationException(
-                    string.Format(CultureInfo.InvariantCulture, 
-                    "Cannot generate a formatted sequence from a " +
-                                  "non-string List parameter {0}", parameter));
-            }
-
             return string.Format(CultureInfo.InvariantCulture,
                 "string.Join(\"{0}\", {1})", parameter.CollectionFormat.GetSeparator(), parameter.Name);
         }

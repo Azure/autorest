@@ -124,8 +124,8 @@ export class Installer {
     });
   }
 
-  public static async InstallAutoRest(version: string) {
-    const asset = (await Github.GetAssets(`v${version}`)).FirstOrDefault();
+  public static async InstallAutoRest(version: string, feed: string = "azure") {
+    const asset = (await Github.GetAssets(`v${version}`, feed)).FirstOrDefault();
 
     if (asset == null) {
       throw `Unable to find asset for version '${version}'`

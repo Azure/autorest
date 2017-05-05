@@ -36,7 +36,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Error;
+        public override Category Severity => Category.Warning;
 
         /// <summary>
         /// Verifies if a tracked resource has a corresponding ListByResourceGroup operation

@@ -13,8 +13,8 @@ This example combines multiple AutoRest features:
 input-file: swagger.md
 azure-arm: true
 output-artifact:
-  - swagger-document
-  - swagger-document.map
+  - swagger-document.json
+  - swagger-document.json.map
 csharp:
   output-folder: Client
 ```

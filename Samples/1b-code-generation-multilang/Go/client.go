@@ -41,13 +41,15 @@ func New()ManagementClient {
     func (client ManagementClient) CreatePets() (result autorest.Response, err error) {
         req, err := client.CreatePetsPreparer()
         if err != nil {
-            return result, autorest.NewErrorWithError(err, ".ManagementClient", "CreatePets", nil , "Failure preparing request")
+            err = autorest.NewErrorWithError(err, ".ManagementClient", "CreatePets", nil , "Failure preparing request")
+            return
         }
 
         resp, err := client.CreatePetsSender(req)
         if err != nil {
             result.Response = resp
-            return result, autorest.NewErrorWithError(err, ".ManagementClient", "CreatePets", resp, "Failure sending request")
+            err = autorest.NewErrorWithError(err, ".ManagementClient", "CreatePets", resp, "Failure sending request")
+            return
         }
 
         result, err = client.CreatePetsResponder(resp)
@@ -91,13 +93,15 @@ func New()ManagementClient {
     func (client ManagementClient) ListPets(limit *int32) (result ListPetType, err error) {
         req, err := client.ListPetsPreparer(limit)
         if err != nil {
-            return result, autorest.NewErrorWithError(err, ".ManagementClient", "ListPets", nil , "Failure preparing request")
+            err = autorest.NewErrorWithError(err, ".ManagementClient", "ListPets", nil , "Failure preparing request")
+            return
         }
 
         resp, err := client.ListPetsSender(req)
         if err != nil {
             result.Response = autorest.Response{Response: resp}
-            return result, autorest.NewErrorWithError(err, ".ManagementClient", "ListPets", resp, "Failure sending request")
+            err = autorest.NewErrorWithError(err, ".ManagementClient", "ListPets", resp, "Failure sending request")
+            return
         }
 
         result, err = client.ListPetsResponder(resp)
@@ -149,13 +153,15 @@ func New()ManagementClient {
     func (client ManagementClient) ShowPetByID(petID string) (result ListPetType, err error) {
         req, err := client.ShowPetByIDPreparer(petID)
         if err != nil {
-            return result, autorest.NewErrorWithError(err, ".ManagementClient", "ShowPetByID", nil , "Failure preparing request")
+            err = autorest.NewErrorWithError(err, ".ManagementClient", "ShowPetByID", nil , "Failure preparing request")
+            return
         }
 
         resp, err := client.ShowPetByIDSender(req)
         if err != nil {
             result.Response = autorest.Response{Response: resp}
-            return result, autorest.NewErrorWithError(err, ".ManagementClient", "ShowPetByID", resp, "Failure sending request")
+            err = autorest.NewErrorWithError(err, ".ManagementClient", "ShowPetByID", resp, "Failure sending request")
+            return
         }
 
         result, err = client.ShowPetByIDResponder(resp)

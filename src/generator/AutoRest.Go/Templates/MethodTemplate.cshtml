@@ -36,16 +36,44 @@ else
 }
 else
 {
-@:func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature) {
+func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature(false)) {
+@if (Model.ReturnViaChannel)
+{
+    @:resultChan := make(chan @(Model.MethodReturnType), 1)
+    @:errChan:= make(chan error, 1)
 }
-    @if (Model.ParameterValidations.Length > 0)
-    {
+}
+@if (Model.ParameterValidations.Length > 0)
+{
     @:if err := validation.Validate([]validation.Validation{
-         @:@(Model.ParameterValidations)}); err != nil {
-             @:return result, @(Model.ValidationError)
-    @:}
-    @:@EmptyLine
+    @:@(Model.ParameterValidations)}); err != nil {
+    @if (Model.ReturnViaChannel)
+    {
+    @:errChan <- @(Model.ValidationError)
+    @:close(errChan)
+    @:close(resultChan)
+    @:return resultChan, errChan
     }
+    else
+    {
+    @:return result, @(Model.ValidationError)
+    }
+@:}
+@:@EmptyLine
+}
+@if (Model.ReturnViaChannel)
+{
+    @:go func() {
+        @:var err error
+        @:var result @(Model.MethodReturnType)
+
+        @:defer func() {
+            @:resultChan <- result
+            @:errChan <- err
+            @:close(resultChan)
+            @:close(errChan)
+        @:}()
+}
     @if (Model.IsNextMethod)
     {
     @:req, err := lastResults.NextPreparer(@(Model.HelperInvocationParameters))
@@ -55,7 +83,8 @@ else
     @:req, err := client.@(Model.PreparerMethodName)(@(Model.HelperInvocationParameters))
     }
     if err != nil {
-        return result, @(Model.AutorestError("Failure preparing request"))
+        err = @(Model.AutorestError("Failure preparing request"))
+        return
     }
 
     @EmptyLine
@@ -69,7 +98,8 @@ else
     }
     if err != nil {
         @(Model.Response)
-        return result, @(Model.AutorestError("Failure sending request", "resp"))
+        err = @(Model.AutorestError("Failure sending request", "resp"))
+        return
     }
 
     @EmptyLine
@@ -84,9 +114,16 @@ else
     if err != nil {
         err = @(Model.AutorestError("Failure responding to request", "resp"))
     }
-
+@if (Model.ReturnViaChannel)
+{
+    @:}()
+    @:return resultChan, errChan
+}
+else
+{
     @EmptyLine
-    return
+    @:return
+}
 }
 
 @EmptyLine
@@ -112,7 +149,8 @@ else
 }
 @if (Model.QueryParameters.Any())
 {
-    @if (Model.QueryParameters.Any(p => p.GetParameterName().IsApiVersion())) 
+    @if (Model.QueryParameters.Any(p => p.GetParameterName().IsApiVersion())
+        && !Model.LocalParameters.Any(p => p.GetParameterName().IsApiVersion())) 
     {
         @:@(string.Format("const APIVersion = \"{0}\"", Model.APIVersion))
     }
@@ -210,7 +248,7 @@ else
 {
 @:// @(Model.ResponderMethodName) handles the response to the @(Model.Name) request. The method always
 @:// closes the http.Response Body.
-@:func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (@(Model.MethodReturnSignature)) { 
+@:func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (@(Model.MethodReturnSignature(true))) { 
 }
     @if (Model.ReturnValue().Body.IsStreamType())
     {

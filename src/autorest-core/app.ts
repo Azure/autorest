@@ -10,14 +10,14 @@
 // this file should get 'required' by the boostrapper
 require("./lib/polyfill.min.js");
 
-import { Stringify } from "./lib/ref/yaml";
+import { Parse, Stringify } from './lib/ref/yaml';
 import { CreateObject, nodes } from './lib/ref/jsonpath';
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
 import { AutoRest } from "./lib/autorest-core";
 import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
-import { CreateFolderUri, ResolveUri, WriteString } from "./lib/ref/uri";
+import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from './lib/ref/uri';
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
@@ -44,6 +44,12 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
 
     // autorest init
     if (autorestArgs[0] === "init") {
+      const clientNameGuess = (config["override-info"] || {}).title || Parse<any>(await ReadUri(config["input-file"][0])).info.title;
+      await autorestInit(clientNameGuess, Array.isArray(config["input-file"]) ? config["input-file"] as any : []);
+      return;
+    }
+    // autorest init-min
+    if (autorestArgs[0] === "init-min") {
       console.log(`# AutoRest Configuration (auto-generated, please adjust title)
 
 > see https://aka.ms/autorest
@@ -144,7 +150,62 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
   return result;
 }
 
+async function autorestInit(title: string = "API-NAME", inputs: string[] = ["LIST INPUT FILES HERE"]) {
+  const cwdUri = CreateFolderUri(currentDirectory());
+  for (let i = 0; i < inputs.length; ++i) {
+    try {
+      inputs[i] = MakeRelativeUri(cwdUri, inputs[i]);
+    } catch (e) { }
+  }
+  console.log(`# ${title}
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file for the ${title}.
+
+---
+## Getting Started 
+To build the SDK for ${title}, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+
+> ~autorest~
+
+To see additional help and options, run:
+
+> ~autorest --help~
+---
+
+## Configuration for generating APIs
+
+...insert-some-meanigful-notes-here...
+
+---
+#### Basic Information 
+These are the global settings for the API.
+
+~~~ yaml
+# list all the input OpenAPI files (may be YAML, JSON, or Literate- OpenAPI markdown)
+input-file:
+${inputs.map(x => "  - " + x).join("\n")}
+~~~
+
+---
+#### Language-specific settings: CSharp
+
+These settings apply only when ~--csharp~ is specified on the command line.
+
+~~~ yaml $(csharp) 
+csharp:
+  # override the default output folder
+  output-folder: generated/csharp
+~~~
+`.replace(/~/g, "`"));
+}
+
 async function currentMain(autorestArgs: string[]): Promise<void> {
+  if (autorestArgs[0] === "init") {
+    await autorestInit();
+    return;
+  }
+
   const args = parseArgs(autorestArgs);
   const currentDirUri = CreateFolderUri(currentDirectory());
   const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFileOrFolder || "."));

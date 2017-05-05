@@ -42,7 +42,7 @@ class AutoRestSwaggerBATHeaderService(object):
     :vartype config: AutoRestSwaggerBATHeaderServiceConfiguration
 
     :ivar header: Header operations
-    :vartype header: .operations.HeaderOperations
+    :vartype header: fixtures.acceptancetestsheader.operations.HeaderOperations
 
     :param str base_url: Service URL
     """

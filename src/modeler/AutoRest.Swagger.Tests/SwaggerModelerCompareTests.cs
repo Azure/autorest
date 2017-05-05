@@ -57,23 +57,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
-        /// Verifies that raising the version number does not result in a strict comparison.
-        /// </summary>
-        [Fact]
-        public void UpdatedMajorVersionNumberNotStrict()
-        {
-            var messages = CompareSwagger("version_check_01.json").ToArray();
-            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity == Category.Warning));
-        }
-
-        [Fact]
-        public void UpdatedMinorVersionNumberNotStrict()
-        {
-            var messages = CompareSwagger("version_check_03.json").ToArray();
-            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity == Category.Warning));
-        }
-
-        /// <summary>
         /// Verifies that not raising the version number results in a strict comparison.
         /// </summary>
         [Fact]
@@ -94,18 +77,6 @@ namespace AutoRest.Swagger.Tests
             var reversed = messages.Where(m => m.Id == ComparisonMessages.VersionsReversed.Id);
             Assert.NotEmpty(reversed);
             Assert.Equal(Category.Error, reversed.First().Severity);
-        }
-
-        /// <summary>
-        /// Verifies that if you remove a supported protocol when updating the specification, it's caught.
-        /// </summary>
-        [Fact]
-        public void ProtocolMissing()
-        {
-            var messages = CompareSwagger("version_check_01.json").ToArray();
-            var missing = messages.Where(m => m.Id == ComparisonMessages.ProtocolNoLongerSupported.Id);
-            Assert.NotEmpty(missing);
-            Assert.Equal(Category.Warning, missing.First().Severity);
         }
 
         /// <summary>

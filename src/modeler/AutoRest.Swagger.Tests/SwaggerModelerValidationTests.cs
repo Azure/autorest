@@ -238,7 +238,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "property-names-casing.json"));
             messages.AssertOnlyValidationMessage(typeof(BodyPropertiesNamesCamelCase), 1);
-            messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 1);
+            messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 2);
         }
 
         [Fact]
@@ -559,20 +559,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void BodyParametersInlineValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-parameters-validation-1.json"));
-            messages.AssertOnlyValidationMessage(typeof(BodyParametersValidation), 1);
-        }
-
-        [Fact]
-        public void BodyParametersReferencedValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-parameters-validation-2.json"));
-            messages.AssertOnlyValidationMessage(typeof(BodyParametersValidation), 1);
-        }
-
-        [Fact]
         public void XmsEnumExtensionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "x-ms-enum-absent.json"));
@@ -591,6 +577,13 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-response-resource-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(PutResponseResourceValidation), 1);
+        }
+
+        [Fact]
+        public void LROStatusCodesValidationTest()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "lro-status-codes-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(LROStatusCodesValidation), 2);
         }
 
         [Fact]

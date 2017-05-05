@@ -7,7 +7,7 @@ import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
 import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from '../ref/uri';
-import { FastStringify, Parse, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
+import { FastStringify, Parse, ParseNode, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
@@ -242,16 +242,19 @@ export class DataStore extends DataStoreView {
   public async Write(uri: string): Promise<DataHandleWrite> {
     uri = ResolveUri(this.BaseUri, uri);
     this.ThrowIfCancelled();
-    return new DataHandleWrite(uri, async (data, sourceMapFactory) => {
+    const setData = (data: Data) => {
       this.ThrowIfCancelled();
       if (this.store[uri]) {
         throw new Error(`can only write '${uri}' once`);
       }
+      this.store[uri] = data;
+    };
+    return new DataHandleWrite(uri, async (data, sourceMapFactory) => {
       const storeEntry: Data = {
         data: data,
         metadata: <Metadata><Metadata | null>{}
       };
-      this.store[uri] = storeEntry;
+      setData(storeEntry);
 
       // metadata
       const result = await this.ReadStrict(uri);
@@ -291,6 +294,8 @@ export class DataStore extends DataStoreView {
       storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(() => parseAst(data));
       storeEntry.metadata.lineIndices = new Lazy<number[]>(() => LineIndices(data));
       return result;
+    }, async data => {
+      setData(this.store[data.key]);
     });
   }
 
@@ -363,7 +368,9 @@ export class DataStore extends DataStoreView {
  ********************************************/
 
 export class DataHandleWrite {
-  constructor(public readonly key: string, private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => RawSourceMap) => Promise<DataHandleRead>) {
+  constructor(public readonly key: string,
+    private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => RawSourceMap) => Promise<DataHandleRead>,
+    public Forward: (data: DataHandleRead) => Promise<void>) {
   }
 
   public async WriteDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => RawSourceMap): Promise<DataHandleRead> {
@@ -396,11 +403,20 @@ export class DataHandleRead {
   }
 
   public ReadObject<T>(): T {
-    return Parse<T>(this.ReadData());
+    return ParseNode<T>(this.ReadYamlAst());
   }
 
   public ReadYamlAst(): YAMLNode {
     return this.ReadMetadata().yamlAst.Value;
+  }
+
+  public IsObject(): boolean {
+    try {
+      this.ReadObject();
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   public Blame(position: sourceMap.Position): sourceMap.MappedPosition[] {

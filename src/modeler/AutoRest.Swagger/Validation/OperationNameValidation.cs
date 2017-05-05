@@ -29,7 +29,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This rule corresponds to M1005, M1006, M1007 & M1009.
         /// </remarks>
-        public override Category Severity => Category.Error;
+        public override Category Severity => Category.Warning;
 
         /// <summary>
         /// This rule passes if the operation id of HTTP Method confirms to M1005.

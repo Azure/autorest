@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package petstore.models;
+package javanamespace.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

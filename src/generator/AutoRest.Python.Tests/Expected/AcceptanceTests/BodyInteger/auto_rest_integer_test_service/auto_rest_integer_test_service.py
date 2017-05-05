@@ -42,7 +42,7 @@ class AutoRestIntegerTestService(object):
     :vartype config: AutoRestIntegerTestServiceConfiguration
 
     :ivar int_model: IntModel operations
-    :vartype int_model: .operations.IntModelOperations
+    :vartype int_model: fixtures.acceptancetestsbodyinteger.operations.IntModelOperations
 
     :param str base_url: Service URL
     """

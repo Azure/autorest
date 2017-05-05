@@ -28,8 +28,6 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
-    :ivar api_version: API ID.
-    :type api_version: str
     :param str base_url: Service URL
     """
 
@@ -43,8 +41,6 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
 
         self.add_user_agent('autorestcomplextestservice/{}'.format(VERSION))
 
-        self.api_version = "2014-04-01-preview"
-
 
 class AutoRestComplexTestService(object):
     """Test Infrastructure for AutoRest
@@ -53,21 +49,21 @@ class AutoRestComplexTestService(object):
     :vartype config: AutoRestComplexTestServiceConfiguration
 
     :ivar basic: Basic operations
-    :vartype basic: .operations.BasicOperations
+    :vartype basic: fixtures.acceptancetestsbodycomplex.operations.BasicOperations
     :ivar primitive: Primitive operations
-    :vartype primitive: .operations.PrimitiveOperations
+    :vartype primitive: fixtures.acceptancetestsbodycomplex.operations.PrimitiveOperations
     :ivar array: Array operations
-    :vartype array: .operations.ArrayOperations
+    :vartype array: fixtures.acceptancetestsbodycomplex.operations.ArrayOperations
     :ivar dictionary: Dictionary operations
-    :vartype dictionary: .operations.DictionaryOperations
+    :vartype dictionary: fixtures.acceptancetestsbodycomplex.operations.DictionaryOperations
     :ivar inheritance: Inheritance operations
-    :vartype inheritance: .operations.InheritanceOperations
+    :vartype inheritance: fixtures.acceptancetestsbodycomplex.operations.InheritanceOperations
     :ivar polymorphism: Polymorphism operations
-    :vartype polymorphism: .operations.PolymorphismOperations
+    :vartype polymorphism: fixtures.acceptancetestsbodycomplex.operations.PolymorphismOperations
     :ivar polymorphicrecursive: Polymorphicrecursive operations
-    :vartype polymorphicrecursive: .operations.PolymorphicrecursiveOperations
+    :vartype polymorphicrecursive: fixtures.acceptancetestsbodycomplex.operations.PolymorphicrecursiveOperations
     :ivar readonlyproperty: Readonlyproperty operations
-    :vartype readonlyproperty: .operations.ReadonlypropertyOperations
+    :vartype readonlyproperty: fixtures.acceptancetestsbodycomplex.operations.ReadonlypropertyOperations
 
     :param str base_url: Service URL
     """

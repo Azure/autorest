@@ -12,35 +12,35 @@ using AutoRest.Core.Model;
 
 public class Modeler : NewPlugin
 {
-  public Modeler(Connection connection, string sessionId) : base(connection, sessionId)
-  { }
+    public Modeler(Connection connection, string sessionId) : base(connection, sessionId)
+    { }
 
-  protected override async Task<bool> ProcessInternal()
-  {
-    new Settings
+    protected override async Task<bool> ProcessInternal()
     {
-      Namespace = await GetValue("namespace")
-    };
+        new Settings
+        {
+            Namespace = await GetValue("namespace") ?? ""
+        };
 
-    var files = await ListInputs();
-    if (files.Length != 1)
-    {
-      return false;
+        var files = await ListInputs();
+        if (files.Length != 1)
+        {
+            return false;
+        }
+
+        var content = await ReadFile(files[0]);
+        var fs = new MemoryFileSystem();
+        fs.WriteAllText(files[0], content);
+
+        var serviceDefinition = SwaggerParser.Load(files[0], fs);
+        var modeler = new SwaggerModeler();
+        var codeModel = modeler.Build(serviceDefinition);
+
+        var genericSerializer = new ModelSerializer<CodeModel>();
+        var modelAsJson = genericSerializer.ToJson(codeModel);
+
+        WriteFile("codeMode.yaml", modelAsJson, null);
+
+        return true;
     }
-
-    var content = await ReadFile(files[0]);
-    var fs = new MemoryFileSystem();
-    fs.WriteAllText(files[0], content);
-
-    var serviceDefinition = SwaggerParser.Load(files[0], fs);
-    var modeler = new SwaggerModeler();
-    var codeModel = modeler.Build(serviceDefinition);
-        
-    var genericSerializer = new ModelSerializer<CodeModel>();
-    var modelAsJson = genericSerializer.ToJson(codeModel);
-
-    WriteFile("codeMode.yaml", modelAsJson, null);
-
-    return true;
-  }
 }

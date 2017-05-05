@@ -112,7 +112,7 @@ class @(Model.Name)(object):
     foreach (var methodGroup in Model.MethodGroupModels)
     {
 @:    :ivar @(((string) methodGroup.Name).ToPythonCase()): @((string) methodGroup.Name) operations
-@:    :vartype @(((string) methodGroup.Name).ToPythonCase()): .operations.@((string) methodGroup.TypeName)
+@:    :vartype @(((string) methodGroup.Name).ToPythonCase()): @(Model.Namespace).operations.@((string) methodGroup.TypeName)
     }
 }
 @EmptyLine

@@ -58,7 +58,7 @@ class MicrosoftAzureTestUrl(object):
     :vartype config: MicrosoftAzureTestUrlConfiguration
 
     :ivar group: Group operations
-    :vartype group: .operations.GroupOperations
+    :vartype group: fixtures.acceptancetestssubscriptionidapiversion.operations.GroupOperations
 
     :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials

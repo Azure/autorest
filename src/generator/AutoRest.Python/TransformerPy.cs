@@ -25,6 +25,9 @@ namespace AutoRest.Python
             // provides a default value now for Namespace, so Namespace is never empty.
             codeModel.Namespace = Settings.Instance.Namespace.Else(codeModel.Name.ToPythonCase().ToLower());
 
+            // api_version is no longer a parameter of the constructor
+            codeModel.Remove(codeModel.Properties.FirstOrDefault(p => p.Name == "api_version"));
+
             TransformGroupApiVersionToLocal(codeModel);
             SwaggerExtensions.NormalizeClientModel(codeModel);
             PopulateAdditionalProperties(codeModel);

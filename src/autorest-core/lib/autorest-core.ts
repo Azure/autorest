@@ -159,7 +159,7 @@ export class AutoRest extends EventEmitter {
             view.CancellationTokenSource.cancel();
             view.messageEmitter.removeAllListeners();
           }
-        }
+        };
 
         if (earlyCancel) {
           this.Finished.Dispatch(false);
@@ -168,6 +168,9 @@ export class AutoRest extends EventEmitter {
 
         this.Message.Dispatch({ Channel: Channel.Debug, Text: `Starting Process() Run Pipeline.` });
 
+        if (view.InputFileUris.length === 0) {
+          throw new Exception("No input files provided.\n\nUse --help to get help information.", 0);
+        }
         const result = await Promise.race([
           RunPipeline(view, <IFileSystem>this.fileSystem),
           new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej("Cancellation requested.")))]);
@@ -183,7 +186,6 @@ export class AutoRest extends EventEmitter {
           /* if (!(e instanceof OperationCanceledException)) {
             console.error(e.message);
           } */
-
           this.Message.Dispatch({ Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` });
           this.Finished.Dispatch(e);
 

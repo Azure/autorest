@@ -27,6 +27,7 @@ class App {
   private static reset: boolean = cli.reset || false;
 
   private static help: string = cli.help || false;
+  private static feed: string = cli.feed || "azure";
 
   private static networkEnabled: boolean = true;
   private static pkgVersion: string = require(`${__dirname}/package.json`).version;
@@ -44,7 +45,7 @@ class App {
   }
 
   private static async GetReleases(): Promise<IEnumerable<Release>> {
-    return (await Github.List()).Where(each => semver.valid(each.name, false) != null);
+    return (await Github.List(App.feed)).Where(each => semver.valid(each.name, false) != null);
   }
 
   private static async CheckBootstrapperVersion() {
@@ -238,7 +239,7 @@ class App {
           Console.Verbose(`Attempting to install it.`);
           // install that version
           try {
-            return Installer.InstallAutoRest(this.version);
+            return Installer.InstallAutoRest(this.version, App.feed);
           } catch (exception) {
             Console.Exit(`Unable to install AutoRest version '${this.version}'`);
           }
