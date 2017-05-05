@@ -15,6 +15,7 @@ import { BlameTree } from "../source-map/blaming";
 import { Lazy, LazyPromise } from '../lazy';
 import { IFileSystem } from "../file-system";
 import { OperationCanceledException } from "../exception";
+import { Message, Channel } from "../message";
 
 /********************************************
  * Data model section (not exposed)
@@ -320,7 +321,7 @@ export class DataStore extends DataStoreView {
     return Object.getOwnPropertyNames(this.store);
   }
 
-  public Blame(absoluteUri: string, position: SmartPosition): BlameTree {
+  public Blame(absoluteUri: string, position: SmartPosition, message?: (m: Message) => void): BlameTree {
     const data = this.ReadStrictSync(absoluteUri);
     if ('path' in position) {
       let x = (<any>JSON.parse(data.ReadData()));
@@ -329,7 +330,9 @@ export class DataStore extends DataStoreView {
       let currObj = x;
       for (let i = 0; i < keys.length; ++i) {
         if (!(keys[i] in currObj)) {
-          console.warn('Could not find exact path \'' + keys + '\'');
+          if (message !== undefined) {
+            message({ Channel: Channel.Warning, Text: 'Could not find exact path: \'' + keys + '\'', Details: position });
+          }
           break;
         }
         validKeys.push(keys[i]);

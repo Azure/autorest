@@ -231,7 +231,7 @@ export class ConfigurationView {
       if (m.Source) {
         const blameSources = m.Source.map(s => {
           try {
-            const blameTree = this.DataStore.Blame(s.document, s.Position);
+            const blameTree = this.DataStore.Blame(s.document, s.Position, this.Message.bind(this));
             const result = [...blameTree.BlameInputs()];
             if (result.length > 0) {
               return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
