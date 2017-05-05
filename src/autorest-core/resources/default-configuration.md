@@ -29,6 +29,14 @@ plugins:
 
 ### Graph
 
+#### Reflection
+
+``` yaml
+pipeline:
+  pipeline-emitter: # emits the pipeline graph
+    scope: scope-pipeline-emitter
+```
+
 #### Loading
 
 ``` yaml
@@ -49,6 +57,11 @@ pipeline:
     input: transform
     scope: scope-swagger-document/emitter
 
+scope-pipeline-emitter:
+  input-artifact: pipeline
+  is-object: true
+  output-uri-expr: |
+    "pipeline"
 scope-swagger-document/emitter:
   input-artifact: swagger-document
   is-object: true

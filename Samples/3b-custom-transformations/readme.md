@@ -10,6 +10,7 @@ azure-arm: true
 output-artifact:
  - swagger-document.json
  - code-model-v1.yaml
+ - pipeline.yaml
 csharp:
   output-folder: Client
 ```

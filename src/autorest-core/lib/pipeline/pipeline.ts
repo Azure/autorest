@@ -1,3 +1,4 @@
+import { JsonPath, stringify } from '../ref/jsonpath';
 import { safeEval } from '../ref/safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -26,7 +27,7 @@ interface PipelineNode {
   // id: string;
   outputArtifact?: string;
   pluginName: string;
-  config: ConfigurationView;
+  configScope: JsonPath;
   inputs: string[];
 };
 
@@ -101,7 +102,7 @@ function CreateCommonmarkProcessor(): PipelinePlugin {
     }
   };
 }
-function CreateArtifactEmitter(): PipelinePlugin {
+function CreateArtifactEmitter(inputOverride?: () => Promise<DataStoreViewReadonly>): PipelinePlugin {
   return async (config, input, working, output) => {
     return EmitArtifacts(
       config,
@@ -109,7 +110,7 @@ function CreateArtifactEmitter(): PipelinePlugin {
       key => ResolveUri(
         config.OutputFolderUri,
         safeEval<string>(config.GetEntry("output-uri-expr" as any), { $key: key, $config: config.Raw })),
-      input,
+      inputOverride ? await inputOverride() : input,
       config.GetEntry("is-object" as any));
   };
 }
@@ -121,9 +122,10 @@ function* WithIndex<T>(collection: Iterable<T>): Iterable<[T, number]> {
   }
 }
 
-function BuildPipeline(config: ConfigurationView): { [name: string]: PipelineNode } {
+function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }, configs: { [jsonPath: string]: ConfigurationView } } {
   const cfgPipeline = config.GetEntry("pipeline" as any);
   const pipeline: { [name: string]: PipelineNode } = {};
+  const configCache: { [jsonPath: string]: ConfigurationView } = {};
 
   // Resolves a pipeline stage name using the current stage's name and the relative name.
   // It considers the actually existing pipeline stages.
@@ -173,16 +175,21 @@ function BuildPipeline(config: ConfigurationView): { [name: string]: PipelineNod
     // --> ("/1", ["a/1"], cfg of "a/1", [])
     //     --> adds node `${stageName}/1`
     // Note: inherits the config of the LAST input node (affects for example `.../generate`)
-    const addNodesAndSuffixes = (suffix: string, inputs: string[], config: ConfigurationView, inputNodes: { name: string, suffixes: string[] }[]) => {
+    const addNodesAndSuffixes = (suffix: string, inputs: string[], configScope: JsonPath, inputNodes: { name: string, suffixes: string[] }[]) => {
       if (inputNodes.length === 0) {
+        const config = configCache[stringify(configScope)];
         const configs = scope ? [...config.GetPluginViews(scope)] : [config];
         for (let i = 0; i < configs.length; ++i) {
           const newSuffix = configs.length === 1 ? "" : "/" + i;
           suffixes.push(suffix + newSuffix);
+          const path: JsonPath = configScope.slice();
+          if (scope) path.push(scope);
+          if (configs.length !== 1) path.push(i);
+          configCache[stringify(path)] = configs[i];
           pipeline[stageName + suffix + newSuffix] = {
             pluginName: plugin,
             outputArtifact: outputArtifact,
-            config: configs[i],
+            configScope: path,
             inputs: inputs
           };
         }
@@ -194,13 +201,14 @@ function BuildPipeline(config: ConfigurationView): { [name: string]: PipelineNod
           addNodesAndSuffixes(
             suffix + inputSuffix,
             inputs.concat([additionalInput]),
-            pipeline[additionalInput].config,
+            pipeline[additionalInput].configScope,
             inputSuffixesTail);
         }
       }
     };
 
-    addNodesAndSuffixes("", [], config, inputs.map(createNodesAndSuffixes));
+    configCache[stringify([])] = config;
+    addNodesAndSuffixes("", [], [], inputs.map(createNodesAndSuffixes));
 
     return { name: stageName, suffixes: cfg.suffixes = suffixes };
   };
@@ -209,7 +217,10 @@ function BuildPipeline(config: ConfigurationView): { [name: string]: PipelineNod
     createNodesAndSuffixes(pipelineStepName);
   }
 
-  return pipeline;
+  return {
+    pipeline: pipeline,
+    configs: configCache
+  };
 }
 
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
@@ -240,17 +251,22 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier", false),
 
     "commonmarker": CreateCommonmarkProcessor(),
-    "emitter": CreateArtifactEmitter()
+    "emitter": CreateArtifactEmitter(),
+    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)]))
   };
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
   const RunPlugin: (nodeName: string) => Promise<DataStoreViewReadonly> =
     async (nodeName) => {
-      const node = pipeline[nodeName];
+      const node = pipeline.pipeline[nodeName];
+
+      if (!node) {
+        throw new Error(`Cannot find pipeline node ${nodeName}.`);
+      }
 
       // get input
-      let inputScopes: DataStoreViewReadonly[] = await Promise.all(node.inputs.map(x => getTask(x)));
+      let inputScopes: DataStoreViewReadonly[] = await Promise.all(node.inputs.map(getTask));
       if (inputScopes.length === 0) {
         inputScopes = [configView.DataStore.GetReadThroughScopeFileSystem(fileSystem)];
       }
@@ -267,7 +283,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       }
       const inputScope = inputScopes[0];
 
-      const config = node.config;
+      const config = pipeline.configs[stringify(node.configScope)];
       const pluginName = node.pluginName;
       const plugin = plugins[pluginName];
       if (!plugin) {
@@ -300,7 +316,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // execute pipeline
   const barrier = new OutstandingTaskAwaiter();
-  for (const name of Object.keys(pipeline)) {
+  for (const name of Object.keys(pipeline.pipeline)) {
     barrier.Await(getTask(name));
   }
   await barrier.Wait();
