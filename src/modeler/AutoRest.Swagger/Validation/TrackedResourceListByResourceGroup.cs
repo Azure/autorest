@@ -6,15 +6,12 @@ using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
-using System.Text.RegularExpressions;
 using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
     public class TrackedResourceListByResourceGroup : TypedRule<Dictionary<string, Schema>>
     {
-        private static readonly Regex listByRgRegEx = new Regex(@".+_ListByResourceGroup$", RegexOptions.IgnoreCase);
-
         /// <summary>
         /// Id of the Rule.
         /// </summary>
@@ -49,14 +46,11 @@ namespace AutoRest.Swagger.Validation
             // Retrieve the list of TrackedResources
             IEnumerable<string> parentTrackedResources = context.ParentTrackedResourceModels;
 
-            // Retrieve the list of getOperations
-            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", context.Root);
-
             foreach (string trackedResource in parentTrackedResources)
             {
-                bool listByResourceGroupCheck = ValidationUtilities.ListByXCheck(getOperations, listByRgRegEx, trackedResource, definitions);
+                Operation operation = ValidationUtilities.GetListByResourceGroupOperation(trackedResource, definitions, context.Root);
 
-                if (!listByResourceGroupCheck)
+                if (operation == null)
                 {
                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(trackedResource)), this, trackedResource);
                 }

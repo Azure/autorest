@@ -241,6 +241,9 @@ Modelers:
   <data name="TrackedResourceListByImmediateParentOperationMissing" xml:space="preserve">
     <value>The child tracked resource, '{0}' with immediate parent '{1}', must have a list by immediate parent operation.</value>
   </data>
+  <data name="XMSPagableListByRGAndSubscriptionsMismatch" xml:space="preserve">
+    <value>For the tracked resource '{0}', the x-ms-pageable must be same for list by resource group and subscriptions operations.</value>
+  </data>
   <data name="TrackedResourceListByResourceGroupOperationMissing" xml:space="preserve">
     <value>The tracked resource, '{0}', must have a list by resource group operation.</value>
   </data>
