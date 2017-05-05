@@ -54,7 +54,8 @@ public class Generator : NewPlugin
             "Python",
             "Go",
             "Java",
-            "AzureResourceSchema" }
+            "AzureResourceSchema",
+            "JsonRpcClient" }
           .Where(x => x.ToLowerInvariant() == codeGenerator)
           .FirstOrDefault();
 
@@ -95,7 +96,8 @@ public class Generator : NewPlugin
         var plugin = ExtensionsLoader.GetPlugin(
             (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") +
             language +
-            (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : ""));
+            (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : "") +
+            (await GetValue<bool?>("testgen") ?? false ? ".TestGen" : ""));
         var modelAsJson = (await ReadFile(files[1])).EnsureYamlIsJson();
 
         using (plugin.Activate())

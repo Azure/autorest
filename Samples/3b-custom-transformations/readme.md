@@ -7,7 +7,10 @@
 ``` yaml 
 input-file: https://github.com/Azure/azure-rest-api-specs/blob/master/arm-storage/2015-06-15/swagger/storage.json
 azure-arm: true
-output-artifact: swagger-document.json
+output-artifact:
+ - swagger-document.json
+ - code-model-v1.yaml
+ - pipeline.yaml
 csharp:
   output-folder: Client
 ```

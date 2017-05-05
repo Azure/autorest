@@ -40,6 +40,12 @@ namespace AutoRest
                     {
                         settings = Settings.Create(args);
 
+                        // opt into client side validation by default
+                        if (!settings.CustomSettings.ContainsKey("ClientSideValidation"))
+                        {
+                            settings.CustomSettings.Add("ClientSideValidation", true);
+                        }
+
                         // set up logging
                         if (settings.JsonValidationMessages)
                         {

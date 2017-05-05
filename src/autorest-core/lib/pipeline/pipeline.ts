@@ -1,3 +1,5 @@
+import { JsonPath, stringify } from '../ref/jsonpath';
+import { safeEval } from '../ref/safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -21,7 +23,12 @@ import { EmitArtifacts } from "./artifact-emitter";
 export type DataPromise = MultiPromise<DataHandleRead>;
 
 type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
-type PipelineNode = { id: string, outputArtifact: string, plugin: PipelinePlugin, inputs: PipelineNode[] };
+interface PipelineNode {
+  outputArtifact?: string;
+  pluginName: string;
+  configScope: JsonPath;
+  inputs: string[];
+};
 
 function CreatePluginLoader(): PipelinePlugin {
   return async (config, input, working, output) => {
@@ -94,9 +101,130 @@ function CreateCommonmarkProcessor(): PipelinePlugin {
     }
   };
 }
+function CreateArtifactEmitter(inputOverride?: () => Promise<DataStoreViewReadonly>): PipelinePlugin {
+  return async (config, input, working, output) => {
+    return EmitArtifacts(
+      config,
+      config.GetEntry("input-artifact" as any),
+      key => ResolveUri(
+        config.OutputFolderUri,
+        safeEval<string>(config.GetEntry("output-uri-expr" as any), { $key: key, $config: config.Raw })),
+      inputOverride ? await inputOverride() : input,
+      config.GetEntry("is-object" as any));
+  };
+}
 
-export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
-  const barrier = new OutstandingTaskAwaiter();
+function* WithIndex<T>(collection: Iterable<T>): Iterable<[T, number]> {
+  let idx = 0;
+  for (const x of collection) {
+    yield [x, idx++];
+  }
+}
+
+function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }, configs: { [jsonPath: string]: ConfigurationView } } {
+  const cfgPipeline = config.GetEntry("pipeline" as any);
+  const pipeline: { [name: string]: PipelineNode } = {};
+  const configCache: { [jsonPath: string]: ConfigurationView } = {};
+
+  // Resolves a pipeline stage name using the current stage's name and the relative name.
+  // It considers the actually existing pipeline stages.
+  // Example:
+  // (csharp/cm/transform, commonmarker)
+  //    --> csharp/cm/commonmarker       if such a stage exists
+  //    --> csharp/commonmarker          if such a stage exists
+  //    --> commonmarker                 if such a stage exists
+  //    --> THROWS                       otherwise
+  const resolvePipelineStageName = (currentStageName: string, relativeName: string) => {
+    while (currentStageName !== "") {
+      currentStageName = currentStageName.substring(0, currentStageName.length - 1);
+      currentStageName = currentStageName.substring(0, currentStageName.lastIndexOf("/") + 1);
+
+      if (cfgPipeline[currentStageName + relativeName]) {
+        return currentStageName + relativeName;
+      }
+    }
+    throw new Error(`Cannot resolve pipeline stage '${relativeName}'.`);
+  };
+
+  // One pipeline stage can generate multiple nodes in the pipeline graph
+  // if the stage is associated with a configuration scope that has multiple entries.
+  // Example: multiple generator calls
+  const createNodesAndSuffixes: (stageName: string) => { name: string, suffixes: string[] } = stageName => {
+    const cfg = cfgPipeline[stageName];
+    if (!cfg) {
+      throw new Error(`Cannot find pipeline stage '${stageName}'.`);
+    }
+    if (cfg.suffixes) {
+      return { name: stageName, suffixes: cfg.suffixes };
+    }
+
+    // derive information about given pipeline stage
+    const plugin = cfg.plugin || stageName.split("/").reverse()[0];
+    const outputArtifact = cfg.outputArtifact;
+    const scope = cfg.scope;
+    const inputs: string[] = (!cfg.input ? [] : (Array.isArray(cfg.input) ? cfg.input : [cfg.input])).map((x: string) => resolvePipelineStageName(stageName, x));
+
+    const suffixes: string[] = [];
+    // adds nodes using at least suffix `suffix`, the input nodes called `inputs` using the context `config`
+    // AFTER considering all the input nodes `inputNodes`
+    // Example:
+    // ("", [], cfg, [{ name: "a", suffixes: ["/0", "/1"] }])
+    // --> ("/0", ["a/0"], cfg of "a/0", [])
+    //     --> adds node `${stageName}/0`
+    // --> ("/1", ["a/1"], cfg of "a/1", [])
+    //     --> adds node `${stageName}/1`
+    // Note: inherits the config of the LAST input node (affects for example `.../generate`)
+    const addNodesAndSuffixes = (suffix: string, inputs: string[], configScope: JsonPath, inputNodes: { name: string, suffixes: string[] }[]) => {
+      if (inputNodes.length === 0) {
+        const config = configCache[stringify(configScope)];
+        const configs = scope ? [...config.GetPluginViews(scope)] : [config];
+        for (let i = 0; i < configs.length; ++i) {
+          const newSuffix = configs.length === 1 ? "" : "/" + i;
+          suffixes.push(suffix + newSuffix);
+          const path: JsonPath = configScope.slice();
+          if (scope) path.push(scope);
+          if (configs.length !== 1) path.push(i);
+          configCache[stringify(path)] = configs[i];
+          pipeline[stageName + suffix + newSuffix] = {
+            pluginName: plugin,
+            outputArtifact: outputArtifact,
+            configScope: path,
+            inputs: inputs
+          };
+        }
+      } else {
+        const inputSuffixesHead = inputNodes[0];
+        const inputSuffixesTail = inputNodes.slice(1);
+        for (const inputSuffix of inputSuffixesHead.suffixes) {
+          const additionalInput = inputSuffixesHead.name + inputSuffix;
+          addNodesAndSuffixes(
+            suffix + inputSuffix,
+            inputs.concat([additionalInput]),
+            pipeline[additionalInput].configScope,
+            inputSuffixesTail);
+        }
+      }
+    };
+
+    configCache[stringify([])] = config;
+    addNodesAndSuffixes("", [], [], inputs.map(createNodesAndSuffixes));
+
+    return { name: stageName, suffixes: cfg.suffixes = suffixes };
+  };
+
+  for (const pipelineStepName of Object.keys(cfgPipeline)) {
+    createNodesAndSuffixes(pipelineStepName);
+  }
+
+  return {
+    pipeline: pipeline,
+    configs: configCache
+  };
+}
+
+export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
+
+  const pipeline = BuildPipeline(configView);
 
   // externals:
   const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
@@ -119,25 +247,52 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     "go": CreatePluginExternal(autoRestDotNet, "go"),
     "java": CreatePluginExternal(autoRestDotNet, "java"),
     "azureresourceschema": CreatePluginExternal(autoRestDotNet, "azureresourceschema"),
+    "jsonrpcclient": CreatePluginExternal(autoRestDotNet, "jsonrpcclient"),
     "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier", false),
 
-    "commonmarker": CreateCommonmarkProcessor()
+    "commonmarker": CreateCommonmarkProcessor(),
+    "emitter": CreateArtifactEmitter(),
+    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)]))
   };
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
-  // to be replaced with scheduler
-  let scopeCtr = 0;
-  const RunPlugin: (config: ConfigurationView, pluginName: string, inputScope: DataStoreViewReadonly) => Promise<DataStoreViewReadonly> =
-    async (config, pluginName, inputScope) => {
+  const ScheduleNode: (nodeName: string) => Promise<DataStoreViewReadonly> =
+    async (nodeName) => {
+      const node = pipeline.pipeline[nodeName];
+
+      if (!node) {
+        throw new Error(`Cannot find pipeline node ${nodeName}.`);
+      }
+
+      // get input
+      let inputScopes: DataStoreViewReadonly[] = await Promise.all(node.inputs.map(getTask));
+      if (inputScopes.length === 0) {
+        inputScopes = [configView.DataStore.GetReadThroughScopeFileSystem(fileSystem)];
+      }
+      if (inputScopes.length > 1) {
+        const handles: DataHandleRead[] = [];
+        for (const pscope of inputScopes) {
+          const scope = await pscope;
+          for (const handle of await scope.Enum()) {
+            handles.push(await scope.ReadStrict(handle));
+          }
+        }
+        // note the fact that QuickScope returns absolute keys...
+        inputScopes = [new QuickScope(handles)];
+      }
+      const inputScope = inputScopes[0];
+
+      const config = pipeline.configs[stringify(node.configScope)];
+      const pluginName = node.pluginName;
       const plugin = plugins[pluginName];
       if (!plugin) {
-        throw `Plugin '${pluginName}' not found.`;
+        throw new Error(`Plugin '${pluginName}' not found.`);
       }
       try {
         config.Message({ Channel: Channel.Debug, Text: `${pluginName} - START` });
 
-        const scope = config.DataStore.CreateScope(`${++scopeCtr}_${pluginName}`);
+        const scope = config.DataStore.CreateScope(nodeName);
         const scopeWorking = scope.CreateScope("working");
         const scopeOutput = scope.CreateScope("output");
         await plugin(config,
@@ -153,56 +308,16 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       }
     };
 
-  const scopeLoadedSwaggers = await RunPlugin(config, "loader", config.DataStore.GetReadThroughScopeFileSystem(fileSystem));
-  const scopeLoadedSwaggersTransformed = await RunPlugin(config, "transform", scopeLoadedSwaggers);
-  const scopeComposedSwagger = await RunPlugin(config, "compose", scopeLoadedSwaggersTransformed);
-  const scopeComposedSwaggerTransformed = await RunPlugin(config, "transform", scopeComposedSwagger);
+  // schedule pipeline
+  const tasks: { [name: string]: Promise<DataStoreViewReadonly> } = {};
+  const getTask = (name: string) => name in tasks ?
+    tasks[name] :
+    tasks[name] = (async () => ScheduleNode(name))();
 
-  {
-    const relPath =
-      config.GetEntry("output-file") || // TODO: overthink
-      (config.GetEntry("namespace") ? config.GetEntry("namespace") : GetFilename(config.InputFileUris[0]).replace(/\.json$/, ""));
-    barrier.Await(EmitArtifacts(config, "swagger-document", _ => ResolveUri(config.OutputFolderUri, relPath), new LazyPromise(async () => scopeComposedSwaggerTransformed), true));
+  // execute pipeline
+  const barrier = new OutstandingTaskAwaiter();
+  for (const name of Object.keys(pipeline.pipeline)) {
+    barrier.Await(getTask(name));
   }
-
-  if (config.GetEntry("model-validator")) {
-    barrier.Await(RunPlugin(config, "model-validator", scopeComposedSwaggerTransformed));
-  }
-  if (config.GetEntry("semantic-validator")) {
-    barrier.Await(RunPlugin(config, "semantic-validator", scopeComposedSwaggerTransformed));
-  }
-  if (config.GetEntry("azure-validator")) {
-    barrier.Await(RunPlugin(config, "azure-validator", scopeComposedSwaggerTransformed));
-  }
-
-  const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
-
-  // code generators
-  for (const codeGenerator of allCodeGenerators) {
-    for (const genConfig of config.GetPluginViews(codeGenerator)) {
-      barrier.Await((async () => {
-        const scopeCodeModel = await RunPlugin(genConfig, "modeler", scopeComposedSwaggerTransformed);
-        const scopeCodeModelCommonmark = await RunPlugin(genConfig, "commonmarker", scopeCodeModel);
-        const scopeCodeModelTransformed = await RunPlugin(genConfig, "transform", scopeCodeModelCommonmark);
-
-        await EmitArtifacts(genConfig, "code-model-v1", _ => ResolveUri(genConfig.OutputFolderUri, "code-model.yaml"), new LazyPromise(async () => scopeCodeModelTransformed), false);
-
-        const inputScope = new QuickScope([
-          await scopeComposedSwaggerTransformed.ReadStrict((await scopeComposedSwaggerTransformed.Enum())[0]),
-          await scopeCodeModelTransformed.ReadStrict((await scopeCodeModelTransformed.Enum())[0])
-        ]);
-        let generatedFileScope = await RunPlugin(genConfig, codeGenerator, inputScope);
-
-        // C# simplifier
-        if (codeGenerator === "csharp") {
-          generatedFileScope = await RunPlugin(genConfig, "csharp-simplifier", generatedFileScope);
-        }
-
-        generatedFileScope = await RunPlugin(genConfig, "transform", generatedFileScope);
-        await EmitArtifacts(genConfig, `source-file-${codeGenerator}`, key => ResolveUri(genConfig.OutputFolderUri, key.split("/output/")[1]), new LazyPromise(async () => generatedFileScope), false);
-      })());
-    }
-  }
-
   await barrier.Wait();
 }
