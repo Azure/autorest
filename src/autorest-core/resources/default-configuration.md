@@ -361,6 +361,7 @@ scope-azureresourceschema/emitter:
   output-uri-expr: $key.split("/output/")[1]
 output-artifact:
 - source-file-azureresourceschema
+- source-file-jsonrpcclient
 ```
 
 # Validation

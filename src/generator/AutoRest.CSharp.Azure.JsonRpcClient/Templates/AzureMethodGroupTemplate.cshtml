@@ -1,0 +1,48 @@
+﻿@using AutoRest.CSharp.Azure.Model
+@using AutoRest.CSharp.Azure.Templates
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodGroupCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+    using System.Linq;
+    using Microsoft.Rest;
+@foreach (var usingString in Model.Usings) {
+@:    using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    /// @(Model.TypeName) operations.
+    /// </summary>
+    internal partial class @(Model.TypeName) : Microsoft.Rest.IServiceOperations<@Model.CodeModel.Name>, I@(Model.TypeName)
+    {
+        /// <summary>
+        /// Initializes a new instance of the @(Model.TypeName) class.
+        /// </summary>
+        /// <param name='client'>
+        /// Reference to the service client.
+        /// </param>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        internal @(Model.TypeName)(@Model.CodeModel.Name client)
+        {
+            if (client == null) 
+            {
+                throw new System.ArgumentNullException("client");
+            }
+            this.Client = client;
+        }
+        @EmptyLine
+        /// <summary>
+        /// Gets a reference to the @Model.CodeModel.Name
+        /// </summary>
+        public @Model.CodeModel.Name Client { get; private set; }
+        @EmptyLine
+        @foreach (var method in Model.Methods)
+        {
+        @:@(Include(new AutoRest.CSharp.Azure.JsonRpcClient.Templates.AzureMethodTemplate(), (MethodCsa)method))
+        @EmptyLine
+        }
+    }
+}

@@ -247,6 +247,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "go": CreatePluginExternal(autoRestDotNet, "go"),
     "java": CreatePluginExternal(autoRestDotNet, "java"),
     "azureresourceschema": CreatePluginExternal(autoRestDotNet, "azureresourceschema"),
+    "jsonrpcclient": CreatePluginExternal(autoRestDotNet, "jsonrpcclient"),
     "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier", false),
 
     "commonmarker": CreateCommonmarkProcessor(),

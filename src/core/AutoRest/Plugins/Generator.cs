@@ -54,7 +54,8 @@ public class Generator : NewPlugin
             "Python",
             "Go",
             "Java",
-            "AzureResourceSchema" }
+            "AzureResourceSchema",
+            "JsonRpcClient" }
           .Where(x => x.ToLowerInvariant() == codeGenerator)
           .FirstOrDefault();
 
