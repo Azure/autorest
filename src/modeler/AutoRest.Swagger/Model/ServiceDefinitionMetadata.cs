@@ -36,7 +36,7 @@ namespace AutoRest.Swagger.Model
     {
         Default = 0,   // A plain regular swagger like pet store
         ARM = 1 << 2,       // An Azure Resource Management type document
-        DataPlane = 2 << 3  // Data Plane specifications
+        DataPlane = 1 << 3  // Data Plane specifications
     }
 
     /// <summary>
