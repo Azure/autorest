@@ -322,6 +322,22 @@ export class DataStore extends DataStoreView {
 
   public Blame(absoluteUri: string, position: SmartPosition): BlameTree {
     const data = this.ReadStrictSync(absoluteUri);
+    if ('path' in position) {
+      let x = (<any>JSON.parse(data.ReadData()));
+      let keys = <string[]>(<any>position)['path'];
+      let validKeys = [];
+      let currObj = x;
+      for (let i = 0; i < keys.length; ++i) {
+        if (!(keys[i] in currObj)) {
+          console.warn('Could not find exact path \'' + keys + '\'');
+          break;
+        }
+        validKeys.push(keys[i]);
+        currObj = currObj[keys[i]];
+      }
+      (<any>position)['path'] = validKeys;
+    }
+
     const resolvedPosition = CompilePosition(position, data);
     return BlameTree.Create(this, {
       source: absoluteUri,
