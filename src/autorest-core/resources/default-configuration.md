@@ -27,7 +27,46 @@ plugins:
   swagger-loader: 42
 ```
 
-## Output Artifacts
+### Emitters
+
+``` yaml
+emit-swagger-document:
+  input-artifact: swagger-document
+  is-object: true
+  # rethink that output-file part
+  output-uri-expr: |
+    $config["output-file"] || 
+    $config.namespace || 
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
+emit-code-model-v1:
+  input-artifact: code-model-v1
+  is-object: true
+  output-uri-expr: |
+    "code-model-v1"
+emit-source-file-csharp:
+  input-artifact: source-file-csharp
+  output-uri-expr: $key.split("/output/")[1]
+emit-source-file-ruby:
+  input-artifact: source-file-ruby
+  output-uri-expr: $key.split("/output/")[1]
+emit-source-file-nodejs:
+  input-artifact: source-file-nodejs
+  output-uri-expr: $key.split("/output/")[1]
+emit-source-file-python:
+  input-artifact: source-file-python
+  output-uri-expr: $key.split("/output/")[1]
+emit-source-file-go:
+  input-artifact: source-file-go
+  output-uri-expr: $key.split("/output/")[1]
+emit-source-file-java:
+  input-artifact: source-file-java
+  output-uri-expr: $key.split("/output/")[1]
+emit-source-file-azureresourceschema:
+  input-artifact: source-file-azureresourceschema
+  output-uri-expr: $key.split("/output/")[1]
+```
+
+### Output Artifacts
 
 What to write out.
 

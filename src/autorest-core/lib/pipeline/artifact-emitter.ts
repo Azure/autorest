@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Lazy, LazyPromise } from '../lazy';
+import { Lazy } from "../lazy";
 import { Stringify, YAMLNode } from "../ref/yaml";
 import { IdentitySourceMapping } from "../source-map/merging";
 import { Channel } from "../message";
@@ -12,11 +12,6 @@ import { DataHandleRead, DataStoreViewReadonly } from "../data-store/data-store"
 
 function IsOutputArtifactOrMapRequested(config: ConfigurationView, artifactType: string) {
   return config.IsOutputArtifactRequested(artifactType) || config.IsOutputArtifactRequested(artifactType + ".map");
-}
-function IsOutputArtifactVariantRequested(config: ConfigurationView, artifactType: string) {
-  return IsOutputArtifactOrMapRequested(config, artifactType)
-    || IsOutputArtifactOrMapRequested(config, artifactType + ".yaml")
-    || IsOutputArtifactOrMapRequested(config, artifactType + ".json");
 }
 
 async function EmitArtifactInternal(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): Promise<void> {
@@ -58,12 +53,9 @@ async function EmitArtifact(config: ConfigurationView, artifactType: string, uri
   }
 }
 
-export async function EmitArtifacts(config: ConfigurationView, artifactType: string, uriResolver: (key: string) => string, lazyScope: LazyPromise<DataStoreViewReadonly>, isObject: boolean): Promise<void> {
-  if (IsOutputArtifactVariantRequested(config, artifactType)) {
-    const scope = await lazyScope;
-    for (const key of await scope.Enum()) {
-      const file = await scope.ReadStrict(key);
-      await EmitArtifact(config, artifactType, uriResolver(file.key), file, isObject);
-    }
+export async function EmitArtifacts(config: ConfigurationView, artifactType: string, uriResolver: (key: string) => string, scope: DataStoreViewReadonly, isObject: boolean): Promise<void> {
+  for (const key of await scope.Enum()) {
+    const file = await scope.ReadStrict(key);
+    await EmitArtifact(config, artifactType, uriResolver(file.key), file, isObject);
   }
 }
