@@ -11,20 +11,11 @@ output-folder: generated
 
 ## Pipeline
 
-### Standard Plugins
-
-Schema:
-
-```
-plugins:
-  swagger-loader:
-    input-artifact?: string  # no input artifact means no dependencies, i.e. runnable immediately
-    output-artifact?: string # no output artifact could make perfect sense for CLIs, inspection, etc.
-```
+### External Plugins
 
 ``` yaml
 plugins:
-  swagger-loader: 42
+  fantasy-plugin: 42
 ```
 
 ### Graph
@@ -38,6 +29,19 @@ pipeline:
 ```
 
 #### Loading
+
+Markdown documentation overrides:
+
+``` yaml
+pipeline:
+  swagger-document-override/md-override-loader:
+    output-artifact: config-directive
+  swagger-document-override/compose:
+    input: md-override-loader
+    output-artifact: config-directive
+```
+
+OpenAPI definitions:
 
 ``` yaml
 pipeline:
@@ -53,6 +57,8 @@ pipeline:
   swagger-document/transform:
     input: compose
     output-artifact: swagger-document
+    # use output of pipeline as scope for this one
+    scope: !swagger-document-override/compose
   swagger-document/emitter:
     input: transform
     scope: scope-swagger-document/emitter

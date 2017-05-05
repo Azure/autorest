@@ -46,9 +46,12 @@ function GetSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.
   return result;
 }
 
+export function ParseCommonmark(markdown: string): commonmark.Node {
+  return new commonmark.Parser().parse(markdown);
+}
+
 function* ParseCodeblocks(markdown: string): Iterable<commonmark.Node> {
-  const parser = new commonmark.Parser();
-  const parsed = parser.parse(markdown);
+  const parsed = ParseCommonmark(markdown);
   const walker = parsed.walker();
   let event;
   while ((event = walker.next())) {
@@ -57,4 +60,61 @@ function* ParseCodeblocks(markdown: string): Iterable<commonmark.Node> {
       yield node;
     }
   }
+}
+
+
+
+
+const commonmarkHeadingNodeType = "heading";
+const commonmarkHeadingMaxLevel = 1000;
+
+function CommonmarkParentHeading(startNode: commonmark.Node): commonmark.Node | null {
+  const currentLevel = startNode.type === commonmarkHeadingNodeType
+    ? startNode.level
+    : commonmarkHeadingMaxLevel;
+
+  while (startNode != null && (startNode.type !== commonmarkHeadingNodeType || startNode.level >= currentLevel)) {
+    startNode = startNode.prev || startNode.parent;
+  }
+
+  return startNode;
+}
+
+export function* CommonmarkSubHeadings(startNode: commonmark.Node): Iterable<commonmark.Node> {
+  if (startNode.type === commonmarkHeadingNodeType || !startNode.parent) {
+    const currentLevel = startNode.level;
+    let maxLevel = commonmarkHeadingMaxLevel;
+
+    startNode = startNode.next;
+    while (startNode != null) {
+      if (startNode.type === commonmarkHeadingNodeType) {
+        if (currentLevel < startNode.level) {
+          if (startNode.level <= maxLevel) {
+            maxLevel = startNode.level;
+            yield startNode;
+          }
+        } else {
+          break;
+        }
+      }
+      startNode = startNode.next;
+    }
+  }
+}
+
+function CommonmarkHeadingText(headingNode: commonmark.Node): string {
+  return headingNode.firstChild.literal;
+}
+
+function CommonmarkHeadingFollowingText(rawMarkdown: string, headingNode: commonmark.Node): [number, number] {
+  let subNode = headingNode.next;
+  const startPos = subNode.sourcepos[0];
+  while (subNode.next
+    && subNode.next.type !== "code_block"
+    && (subNode.next.type !== commonmarkHeadingNodeType /* || subNode.next.level > headingNode.level*/)) {
+    subNode = subNode.next;
+  }
+  const endPos = subNode.sourcepos[1];
+
+  return [startPos[0], endPos[0]];
 }

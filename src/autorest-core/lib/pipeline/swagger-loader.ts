@@ -1,3 +1,4 @@
+import { CommonmarkSubHeadings, ParseCommonmark } from '../parsing/literate';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -194,6 +195,18 @@ async function StripExternalReferences(swagger: DataHandleRead, workingScope: Da
   return await result.WriteData(StringifyAst(ast), mapping, [swagger]);
 }
 
+export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
+  const commonmark = await inputScope.ReadStrict(inputFileUri);
+  const commonmarkNode = await ParseCommonmark(commonmark.ReadData());
+
+  const directives: any[] = [];
+  const mappings: Mappings = [];
+  const state = CommonmarkSubHeadings(commonmarkNode).map(x => ...); // make this inline DFS with current JSON query and such
+
+  const resultHandle = await workingScope.Write("override-directives");
+  return resultHandle.WriteObject({ directive: directives }, mappings, [commonmark]);
+}
+
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
   const data = await ParseLiterateYaml(config, await inputScope.ReadStrict(inputFileUri), workingScope.CreateScope("yaml"));
   const externalFiles: { [uri: string]: DataHandleRead } = {};
@@ -218,6 +231,17 @@ export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
     const pluginInput = await LoadLiterateSwagger(config, inputScope, inputFileUri, workingScope.CreateScope("swagger_" + i));
+    rawSwaggers.push(pluginInput);
+    i++;
+  }
+  return rawSwaggers;
+}
+export async function LoadLiterateSwaggerOverrides(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUris: string[], workingScope: DataStoreView): Promise<DataHandleRead[]> {
+  const rawSwaggers: DataHandleRead[] = [];
+  let i = 0;
+  for (const inputFileUri of inputFileUris) {
+    // read literate Swagger
+    const pluginInput = await LoadLiterateSwaggerOverride(config, inputScope, inputFileUri, workingScope.CreateScope("swagger_" + i));
     rawSwaggers.push(pluginInput);
     i++;
   }

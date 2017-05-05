@@ -16,7 +16,7 @@ import { GetFilename, ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
 import { GetAutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
-import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
+import { ComposeSwaggers, LoadLiterateSwaggers, LoadLiterateSwaggerOverrides } from "./swagger-loader";
 import { IFileSystem } from "../file-system";
 import { EmitArtifacts } from "./artifact-emitter";
 
@@ -42,6 +42,19 @@ function CreatePluginLoader(): PipelinePlugin {
     }
   };
 }
+function CreatePluginMdOverrideLoader(): PipelinePlugin {
+  return async (config, input, working, output) => {
+    let inputs = config.InputFileUris;
+    const swaggers = await LoadLiterateSwaggerOverrides(
+      config,
+      input,
+      inputs, working);
+    for (let i = 0; i < inputs.length; ++i) {
+      await (await output.Write(`./${i}/_` + encodeURIComponent(inputs[i]))).Forward(swaggers[i]);
+    }
+  };
+}
+
 function CreatePluginTransformer(): PipelinePlugin {
   return async (config, input, working, output) => {
     const documentIdResolver: (key: string) => string = key => {
@@ -233,6 +246,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   // TODO: enhance with custom declared plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     "loader": CreatePluginLoader(),
+    "md-override-loader": CreatePluginMdOverrideLoader(),
     "transform": CreatePluginTransformer(),
     "compose": CreatePluginComposer(),
     "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
