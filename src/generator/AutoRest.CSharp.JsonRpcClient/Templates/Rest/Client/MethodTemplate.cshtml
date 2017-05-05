@@ -1,0 +1,371 @@
+﻿@using System.Globalization
+@using System.Linq;
+@using System
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Model
+@using AutoRest.Extensions
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodCs>
+
+@if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
+{
+@:/// <summary>
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+    if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
+    {
+@:/// <see href="@Model.ExternalDocsUrl" />
+    }
+@:/// </summary>
+}
+@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:/// <remarks>
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
+}
+@foreach (var parameter in Model.LocalParameters)
+{
+@:/// <param name='@parameter.Name'>
+@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
+@:/// </param>
+}
+/// <param name='customHeaders'>
+/// Headers that will be added to request.
+/// </param>
+/// <param name='cancellationToken'>
+/// The cancellation token.
+/// </param>
+/// <exception cref="@(Model.OperationExceptionTypeString)">
+/// Thrown when the operation returned an invalid status code
+/// </exception>
+@if (Model.Responses.Where(r => r.Value.Body != null).Any())
+{
+@:/// <exception cref="Microsoft.Rest.SerializationException">
+@:/// Thrown when unable to deserialize the response
+@:/// </exception>
+}
+@if (Model.Parameters.Cast<ParameterCs>().Any(p => !p.IsConstant && p.IsRequired &&p.IsNullable()))
+{
+@:/// <exception cref="Microsoft.Rest.ValidationException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
+@:/// <exception cref="System.ArgumentNullException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
+    }
+/// <return>
+/// A response object containing the response body and response headers.
+/// </return>
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
+public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+{
+    @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
+    {
+        if (parameter.IsRequired && parameter.IsNullable())
+        {
+    @:if (@(parameter.Name) == null)
+    @:{
+        @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@(parameter.Name)");
+    @:}
+@:
+        }
+        if(parameter.CanBeValidated  && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+        {
+    @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
+        }
+    }
+
+    @foreach (ParameterCs parameter in Model.Parameters)
+    {
+        if (parameter.IsConstant && !parameter.IsClientProperty)
+        {
+    @:@(parameter.ModelTypeName) @(parameter.Name) = @(parameter.DefaultValue);
+        }
+
+        if (parameter.ModelType is CompositeType
+            && !parameter.IsConstant
+            && parameter.IsRequired
+            && !parameter.IsClientProperty
+            && ((CompositeType)parameter.ModelType).ContainsConstantProperties)
+        {
+    @:if (@(parameter.Name) == null)
+    @:{
+    @:    @(parameter.Name) = new @(parameter.ModelTypeName)();
+    @:}
+        }
+
+    }
+    @Model.BuildInputMappings()
+
+    // Create HTTP transport objects
+    var _httpRequest = new System.Net.Http.HttpRequestMessage();
+    System.Net.Http.HttpResponseMessage _httpResponse = null;
+    _httpRequest.Headers.TryAddWithoutValidation("redirect", "true");
+    _httpRequest.Method = new System.Net.Http.HttpMethod("@(Model.SerializedName)");
+    _httpRequest.RequestUri = new System.Uri("https://bogus");
+    // Set Headers
+    @(Model.SetDefaultHeaders)
+    @foreach (var parameter in Model.LogicalParameters.OfType<ParameterCs>().Where(p => p.Location == ParameterLocation.Header && !p.IsHeaderCollection))
+    {
+        if (!parameter.IsNullable())
+        {
+    @:if (_httpRequest.Headers.Contains("@(parameter.SerializedName)"))
+    @:{
+    @:    _httpRequest.Headers.Remove("@(parameter.SerializedName)");
+    @:}
+    @:_httpRequest.Headers.TryAddWithoutValidation("@(parameter.SerializedName)", @parameter.ModelType.ToString(Model.ClientReference, parameter.Name));
+        }
+        else
+        {
+    @:if (@(parameter.Name) != null)
+    @:{
+    @:    if (_httpRequest.Headers.Contains("@(parameter.SerializedName)"))
+    @:    {
+    @:        _httpRequest.Headers.Remove("@(parameter.SerializedName)");
+    @:    }
+    @:    _httpRequest.Headers.TryAddWithoutValidation("@(parameter.SerializedName)", @parameter.ModelType.ToString(Model.ClientReference, parameter.Name));
+    @:}
+        }
+    }
+    @EmptyLine
+    @foreach (var parameter in Model.LogicalParameters.OfType<ParameterCs>().Where(p => p.Location == ParameterLocation.Header && p.IsHeaderCollection))
+    {
+    @:if (@(parameter.Name) != null)
+    @:{
+    @:    foreach (var _header in @(parameter.Name))
+    @:    {
+    @:        var key = "@(parameter.HeaderCollectionPrefix)" + _header.Key;
+    @:        if (_httpRequest.Headers.Contains(key))
+    @:        {
+    @:            _httpRequest.Headers.Remove(key);
+    @:        }
+    @:        _httpRequest.Headers.TryAddWithoutValidation(key, _header.Value);
+    @:    }
+    @:}
+    }
+    @EmptyLine
+    if (customHeaders != null)
+    {
+        foreach(var _header in customHeaders)
+        {
+            if (_httpRequest.Headers.Contains(_header.Key))
+            {
+                _httpRequest.Headers.Remove(_header.Key);
+            }
+            _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+        }
+    }
+    @EmptyLine
+
+    // Serialize Request
+    var @@params = new System.Collections.Generic.Dictionary<string, object>
+    {
+        { "subscriptionId", Client.SubscriptionId },
+        @foreach (var parameter in Model.LocalParameters)
+        {
+            if (parameter.IsRequired)
+            {
+      @:{ "@parameter.Name", @parameter.Name },
+            }
+        }
+    };
+
+    string _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@@params, Client.SerializationSettings);
+    _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+    _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+
+    // Send Request
+    cancellationToken.ThrowIfCancellationRequested();
+    @if (Model.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream) || Model.HttpMethod == HttpMethod.Head)
+    {
+    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+    }
+    else
+    {
+    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+    }
+
+    System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
+    cancellationToken.ThrowIfCancellationRequested();
+    string _responseContent = null;
+
+    if (@(Model.FailureStatusCodePredicate))
+    {
+        var ex = new @(Model.OperationExceptionTypeString)(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+    @if (Model.DefaultResponse.Body != null)
+    {
+        @:try
+        @:{
+            if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
+            {
+            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            }
+            else
+            {
+            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+            }
+            @:if (_errorBody != null)
+            @:{
+                @:@(Model.InitializeExceptionWithMessage)
+                @:ex.Body = _errorBody;
+            @:}
+        @:}
+        @:catch (Newtonsoft.Json.JsonException)
+        @:{
+        @:    // Ignore the exception
+        @:}
+    }
+    else
+    {
+        //If not defined by default model, read content as string
+        @:if (_httpResponse.Content != null) {
+            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+        @:}
+        @:else {
+            @:_responseContent = string.Empty;
+        @:}
+    }
+
+        ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
+        ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
+        @(Model.InitializeException)
+
+        _httpRequest.Dispose();
+        if (_httpResponse != null)
+        {
+            _httpResponse.Dispose();
+        }
+        throw ex;
+    }
+
+    // Create Result
+    var _result = new @(Model.OperationResponseReturnTypeString)();
+    _result.Request = _httpRequest;
+    _result.Response = _httpResponse;
+    @(Model.InitializeResponseBody)
+
+    @foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
+    {
+    <text>
+    // Deserialize Response
+    if ((int)_statusCode == @MethodCs.GetStatusCodeReference(responsePair.Key))
+    {
+        @if (responsePair.Value.Body.IsPrimaryType(KnownPrimaryType.Stream))
+        {
+        @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        }
+        else
+        {<text>
+        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+        try
+        {
+            @if (Model.CodeModel.ShouldGenerateXmlSerialization)
+            {<text>
+            @responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType) _tmp_ = null;
+            if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.GenerateDeserializer(Model.CodeModel, responsePair.Value.Body)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+            {
+                _result.Body = _tmp_;
+            }
+            else
+            {
+                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+            }
+</text>
+            }
+            else
+            {<text>
+            _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+</text>
+            }
+        }
+        catch (Newtonsoft.Json.JsonException ex)
+        {
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+        }
+</text>
+        }
+    }
+    </text>
+    }
+
+    @if (Model.ReturnType.Body != null && Model.DefaultResponse.Body != null && !Model.Responses.Any())
+    {
+        if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
+        {
+    @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+        }
+        else
+        {
+    @:string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+    @:try
+    @:{
+        if (Model.CodeModel.ShouldGenerateXmlSerialization)
+        {
+        @: @Model.DefaultResponse.Body.AsNullableType() _tmp_ = null;
+        @: if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+        @:     @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.GenerateDeserializer(Model.CodeModel, Model.DefaultResponse.Body)))(System.Xml.Linq.XElement.Parse(_defaultResponseContent), out _tmp_))
+        @:{
+        @:   _result.Body = _tmp_;
+        @:} else 
+        @:{
+        @:    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        @:}
+        }
+        else
+        {
+        @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        }
+    @:}
+    @:catch (Newtonsoft.Json.JsonException ex)
+    @:{
+    @:    _httpRequest.Dispose();
+    @:    if (_httpResponse != null)
+    @:    {
+    @:        _httpResponse.Dispose();
+    @:    }
+    @:    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
+    @:}
+        }
+    }
+
+    @if (Model.ReturnType.Headers != null)
+    {
+
+    @:try
+    @:{
+        @:_result.Headers = _httpResponse.GetHeadersAsJson().ToObject<@(Model.ReturnType.Headers.Name)>(Newtonsoft.Json.JsonSerializer.Create(@(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body))));
+        foreach (var property in (Model.ReturnType.Headers as CompositeType).Properties.OfType<PropertyCs>().Where(p => p.IsHeaderCollection))
+        {
+        @:_result.Headers.@(property.Name) = new @(property.ModelTypeName.Replace("IDictionary", "Dictionary"))();
+        @:foreach (var header in _httpResponse.Headers)
+        @:{
+        @:    if (header.Key.StartsWith("@(property.HeaderCollectionPrefix)"))
+        @:    {
+        @:        _result.Headers.@(property.Name)[header.Key.Replace("@(property.HeaderCollectionPrefix)", "")] = header.Value.FirstOrDefault() as @((property.ModelType as DictionaryType).ValueType.Name);
+        @:    }
+        @:}
+        }
+    @:}
+    @:catch (Newtonsoft.Json.JsonException ex)
+    @:{
+    @:    _httpRequest.Dispose();
+    @:    if (_httpResponse != null)
+    @:    {
+    @:        _httpResponse.Dispose();
+    @:    }
+    @:    throw new Microsoft.Rest.SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
+    @:}
+    }
+
+    return _result;
+}
