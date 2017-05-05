@@ -326,7 +326,7 @@ export class DataStore extends DataStoreView {
 
     // verify if the path exists in the document
     if ('path' in position) {
-      let x = (<any>JSON.parse(data.ReadData()));
+      let x = (<any>data.ReadObject());
       let keys = <string[]>(<any>position)['path'];
       let validKeys = [];
       let currObj = x;
