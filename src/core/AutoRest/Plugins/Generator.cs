@@ -95,7 +95,8 @@ public class Generator : NewPlugin
         var plugin = ExtensionsLoader.GetPlugin(
             (await GetValue<bool?>("azure-arm") ?? false ? "Azure." : "") +
             language +
-            (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : ""));
+            (await GetValue<bool?>("fluent") ?? false ? ".Fluent" : "") +
+            (await GetValue<bool?>("testgen") ?? false ? ".TestGen" : ""));
         var modelAsJson = (await ReadFile(files[1])).EnsureYamlIsJson();
 
         using (plugin.Activate())

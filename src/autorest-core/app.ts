@@ -130,7 +130,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
   };
 
   for (const arg of autorestArgs) {
-    const match = /^--([^=]+)(=([^=]+))?$/g.exec(arg);
+    const match = /^--([^=]+)(=(.+))?$/g.exec(arg);
 
     // configuration file?
     if (match === null) {

@@ -32,6 +32,7 @@
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Azure/AutoRest.CSharp.Azure.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Azure.Fluent/AutoRest.CSharp.Azure.Fluent.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Go/AutoRest.Go.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Go.TestGen/AutoRest.Go.TestGen.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Java/AutoRest.Java.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Java.Azure/AutoRest.Java.Azure.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Java.Azure.Fluent/AutoRest.Java.Azure.Fluent.csproj" />

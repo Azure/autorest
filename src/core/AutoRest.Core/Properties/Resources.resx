@@ -142,6 +142,8 @@
     TypeName: PluginPya, AutoRest.Python.Azure
   Go:
     TypeName: PluginGo, AutoRest.Go
+  Go.TestGen:
+    TypeName: PluginGotg, AutoRest.Go.TestGen
   Java:
     TypeName: PluginJv, AutoRest.Java
   Azure.Java:

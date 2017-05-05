@@ -222,7 +222,9 @@ export class ConfigurationView {
 
   public * GetPluginViews(pluginName: string): Iterable<ConfigurationView> {
     for (const section of ValuesOf<any>((this.config as any)[pluginName])) {
-      yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section, this.config);
+      if (section) {
+        yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section === true ? {} : section, this.config);
+      }
     }
   }
 
