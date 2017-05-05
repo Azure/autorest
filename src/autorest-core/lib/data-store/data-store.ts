@@ -323,6 +323,8 @@ export class DataStore extends DataStoreView {
 
   public Blame(absoluteUri: string, position: SmartPosition, message?: (m: Message) => void): BlameTree {
     const data = this.ReadStrictSync(absoluteUri);
+
+    // verify if the path exists in the document
     if ('path' in position) {
       let x = (<any>JSON.parse(data.ReadData()));
       let keys = <string[]>(<any>position)['path'];

@@ -6,12 +6,9 @@
       "type": "node2",
       "request": "launch",
       "name": "run bootstrapper",
-      "program": "${workspaceRoot}/src/autorest-core/app.js",
+      "program": "${workspaceRoot}/src/autorest/app.js",
       "cwd": "${workspaceRoot}",
-      "args":[
-        "--input-file=F:\\artemp\\rcm\\autorest\\src\\modeler\\AutoRest.Swagger.Tests\\Resource\\Swagger\\Validation\\security-definitions-validations-1.json",
-        "--azure-validator=true"
-      ]
+      "preLaunchTask": "build/typescript"
     }
   ]
 }
