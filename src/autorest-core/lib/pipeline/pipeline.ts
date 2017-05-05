@@ -24,7 +24,6 @@ export type DataPromise = MultiPromise<DataHandleRead>;
 
 type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
 interface PipelineNode {
-  // id: string;
   outputArtifact?: string;
   pluginName: string;
   configScope: JsonPath;
@@ -257,7 +256,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
-  const RunPlugin: (nodeName: string) => Promise<DataStoreViewReadonly> =
+  const ScheduleNode: (nodeName: string) => Promise<DataStoreViewReadonly> =
     async (nodeName) => {
       const node = pipeline.pipeline[nodeName];
 
@@ -312,7 +311,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   const tasks: { [name: string]: Promise<DataStoreViewReadonly> } = {};
   const getTask = (name: string) => name in tasks ?
     tasks[name] :
-    tasks[name] = (async () => RunPlugin(name))();
+    tasks[name] = (async () => ScheduleNode(name))();
 
   // execute pipeline
   const barrier = new OutstandingTaskAwaiter();
