@@ -253,13 +253,15 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
       const targetField = allowedTargetFields.filter(f => (clue || "").endsWith("." + f))[0] || "description";
       const targetPath = clue.endsWith("." + targetField) ? clue.slice(0, clue.length - targetField.length - 1) : clue;
 
-      // add directive
-      const headingTextRange = CommonmarkHeadingFollowingText(x.node);
-      const documentation = Lines(rawCommonmark).slice(headingTextRange[0] - 1, headingTextRange[1]);
-      directives.push({
-        where: targetPath,
-        transform: `if (typeof $.${targetField} === "string" || typeof $.${targetField} === "undefined") $.${targetField} = ${JSON.stringify(documentation)};`
-      });
+      if (targetPath !== "$.parameters" && targetPath !== "$.definitions") {
+        // add directive
+        const headingTextRange = CommonmarkHeadingFollowingText(x.node);
+        const documentation = Lines(rawCommonmark).slice(headingTextRange[0] - 1, headingTextRange[1]).join("\n");
+        directives.push({
+          where: targetPath,
+          transform: `if (typeof $.${targetField} === "string" || typeof $.${targetField} === "undefined") $.${targetField} = ${JSON.stringify(documentation)};`
+        });
+      }
     }
 
     state.push(...[...CommonmarkSubHeadings(x.node)].map(y => { return { node: y, query: clue || x.query }; }));
