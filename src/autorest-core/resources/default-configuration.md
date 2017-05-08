@@ -36,9 +36,6 @@ Markdown documentation overrides:
 pipeline:
   swagger-document-override/md-override-loader:
     output-artifact: immediate-directive
-  swagger-document-override/compose:
-    input: md-override-loader
-    output-artifact: immediate-directive
 ```
 
 OpenAPI definitions:
@@ -56,7 +53,7 @@ pipeline:
     output-artifact: swagger-document
   swagger-document/transform-immediate:
     input:
-    - swagger-document-override/compose
+    - swagger-document-override/md-override-loader
     - compose
     output-artifact: swagger-document
   swagger-document/transform:

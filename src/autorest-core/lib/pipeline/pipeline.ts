@@ -76,12 +76,10 @@ function CreatePluginTransformerImmediate(): PipelinePlugin {
       const parts = key.split("/_");
       return parts.length === 1 ? parts[0] : decodeURIComponent(parts[parts.length - 1]);
     };
-    const files = await input.Enum();
-    if (files.length !== 2) {
-      throw new Error("Unexpected number of input documents. Expected: immediate-directive, swagger-document");
-    }
-    const manipulator = new Manipulator(config.GetPluginViewImmediate({ directive: (await input.ReadStrict(files[0])).ReadObject<any>() }));
-    const file = files[1];
+    const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
+    const scopes = await Promise.all(files.slice(0, files.length - 1).map(f => input.ReadStrict(f)));
+    const manipulator = new Manipulator(config.GetPluginViewImmediate(...scopes.map(s => s.ReadObject<any>())));
+    const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);
     const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
     await (await output.Write("swagger-document")).Forward(fileOut);

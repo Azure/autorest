@@ -297,8 +297,8 @@ export class ConfigurationView {
     }
   }
 
-  public GetPluginViewImmediate(scope: any): ConfigurationView {
-    return new ConfigurationView(this.messageEmitter, this.configFileFolderUri, scope, this.config).Indexer;
+  public GetPluginViewImmediate(...scope: any[]): ConfigurationView {
+    return new ConfigurationView(this.messageEmitter, this.configFileFolderUri, ...scope, this.config).Indexer;
   }
 
   // message pipeline (source map resolution, filter, ...)
