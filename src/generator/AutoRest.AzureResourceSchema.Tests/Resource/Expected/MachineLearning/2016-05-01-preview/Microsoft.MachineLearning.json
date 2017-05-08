@@ -334,6 +334,23 @@
       },
       "description": "Sample input data for the service's input(s)."
     },
+    "Graph": {
+      "type": "object",
+      "properties": {
+        "package": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/GraphPackage"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The definition of the graph package making up this web service."
+        }
+      },
+      "description": "Properties specific to a Graph based web service."
+    },
     "GraphEdge": {
       "type": "object",
       "properties": {
@@ -899,29 +916,12 @@
         {
           "anyOf": [
             {
-              "$ref": "#/definitions/WebServicePropertiesForGraph"
+              "$ref": "#/definitions/Graph"
             }
           ]
         }
       ],
       "description": "The set of properties specific to the Azure ML web service resource."
-    },
-    "WebServicePropertiesForGraph": {
-      "type": "object",
-      "properties": {
-        "package": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/GraphPackage"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
-          "description": "The definition of the graph package making up this web service."
-        }
-      },
-      "description": "Properties specific to a Graph based web service."
     }
   }
 }
