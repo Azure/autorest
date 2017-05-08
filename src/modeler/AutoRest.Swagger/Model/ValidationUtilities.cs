@@ -633,12 +633,7 @@ namespace AutoRest.Swagger.Model.Utilities
         {
             Operation operation = GetListByOperation(regEx, definitionKey, definitions, serviceDefinition);
 
-            if (operation != null)
-            {
-                return true;
-            }
-
-            return false;
+            return (operation != null);
         }
 
         /// <summary>
