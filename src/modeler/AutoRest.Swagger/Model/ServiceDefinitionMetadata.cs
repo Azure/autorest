@@ -20,10 +20,10 @@ namespace AutoRest.Swagger.Model
     /// This will be equivalent to running AutoRest in CompositeSwagger mode per 
     /// legacy cli. 
     /// </summary>
-    public enum ServiceDefinitionMergeState
+    public enum ServiceDefinitionDocumentState
     {
-        Before,
-        After
+        Individual,
+        Composite
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ namespace AutoRest.Swagger.Model
     /// </summary>
     public class ServiceDefinitionMetadata
     {
-        public ServiceDefinitionMergeState MergeState { get; set; }
+        public ServiceDefinitionDocumentState MergeState { get; set; }
 
         public ServiceDefinitionDocumentType ServiceDefinitionDocumentType { get; set; }
     }
