@@ -27,9 +27,8 @@ namespace AwesomeNamespace.Models
         /// <summary>
         /// Initializes a new instance of the UsageName class.
         /// </summary>
-        /// <param name="value">Gets a string describing the resource
-        /// name.</param>
-        /// <param name="localizedValue">Gets a localized string describing the
+        /// <param name="value">A string describing the resource name.</param>
+        /// <param name="localizedValue">A localized string describing the
         /// resource name.</param>
         public UsageName(string value = default(string), string localizedValue = default(string))
         {
@@ -44,13 +43,13 @@ namespace AwesomeNamespace.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets a string describing the resource name.
+        /// Gets or sets a string describing the resource name.
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
 
         /// <summary>
-        /// Gets a localized string describing the resource name.
+        /// Gets or sets a localized string describing the resource name.
         /// </summary>
         [JsonProperty(PropertyName = "localizedValue")]
         public string LocalizedValue { get; set; }

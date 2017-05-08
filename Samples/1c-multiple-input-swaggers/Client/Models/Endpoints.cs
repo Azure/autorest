@@ -24,10 +24,10 @@ namespace Searchservice.Models
         /// <summary>
         /// Initializes a new instance of the Endpoints class.
         /// </summary>
-        /// <param name="blob">Gets the blob endpoint.</param>
-        /// <param name="queue">Gets the queue endpoint.</param>
-        /// <param name="table">Gets the table endpoint.</param>
-        /// <param name="file">Gets the file endpoint.</param>
+        /// <param name="blob">The blob endpoint.</param>
+        /// <param name="queue">The queue endpoint.</param>
+        /// <param name="table">The table endpoint.</param>
+        /// <param name="file">The file endpoint.</param>
         public Endpoints(string blob = default(string), string queue = default(string), string table = default(string), string file = default(string))
         {
             Blob = blob;
@@ -43,25 +43,25 @@ namespace Searchservice.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets the blob endpoint.
+        /// Gets or sets the blob endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "blob")]
         public string Blob { get; set; }
 
         /// <summary>
-        /// Gets the queue endpoint.
+        /// Gets or sets the queue endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "queue")]
         public string Queue { get; set; }
 
         /// <summary>
-        /// Gets the table endpoint.
+        /// Gets or sets the table endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "table")]
         public string Table { get; set; }
 
         /// <summary>
-        /// Gets the file endpoint.
+        /// Gets or sets the file endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "file")]
         public string File { get; set; }

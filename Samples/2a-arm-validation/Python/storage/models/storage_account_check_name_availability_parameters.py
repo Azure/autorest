@@ -9,7 +9,7 @@ from msrest.serialization import Model
 
 
 class StorageAccountCheckNameAvailabilityParameters(Model):
-    """StorageAccountCheckNameAvailabilityParameters.
+    """The parameters used to check the availabity of the storage account name.
 
     :param name:
     :type name: str

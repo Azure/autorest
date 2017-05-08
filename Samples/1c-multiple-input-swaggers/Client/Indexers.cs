@@ -18,7 +18,7 @@ namespace Searchservice
     /// <summary>
     /// Indexers operations.
     /// </summary>
-    public partial class Indexers : IServiceOperations<SearchandStorage>, IIndexers
+    public partial class Indexers : IServiceOperations<StorageManagementClient>, IIndexers
     {
         /// <summary>
         /// Initializes a new instance of the Indexers class.
@@ -29,7 +29,7 @@ namespace Searchservice
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Indexers(SearchandStorage client)
+        public Indexers(StorageManagementClient client)
         {
             if (client == null)
             {
@@ -39,9 +39,9 @@ namespace Searchservice
         }
 
         /// <summary>
-        /// Gets a reference to the SearchandStorage
+        /// Gets a reference to the StorageManagementClient
         /// </summary>
-        public SearchandStorage Client { get; private set; }
+        public StorageManagementClient Client { get; private set; }
 
         /// <summary>
         /// Resets the change tracking state associated with an Azure Search indexer.

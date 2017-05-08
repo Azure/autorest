@@ -11,7 +11,7 @@ const msRestAzure = require('ms-rest-azure');
 const WebResource = msRest.WebResource;
 
 /**
- * Gets the current usage count and the limit for the resources under the
+ * Lists the current usage count and the limit for the resources under the
  * subscription.
  *
  * @param {object} [options] Optional Parameters.
@@ -161,7 +161,7 @@ class UsageOperations {
   }
 
   /**
-   * Gets the current usage count and the limit for the resources under the
+   * Lists the current usage count and the limit for the resources under the
    * subscription.
    *
    * @param {object} [options] Optional Parameters.
@@ -190,7 +190,7 @@ class UsageOperations {
   }
 
   /**
-   * Gets the current usage count and the limit for the resources under the
+   * Lists the current usage count and the limit for the resources under the
    * subscription.
    *
    * @param {object} [options] Optional Parameters.

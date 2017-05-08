@@ -13,27 +13,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Usage {
     /**
-     * Gets the unit of measurement. Possible values include: 'Count', 'Bytes',
+     * The unit of measurement. Possible values include: 'Count', 'Bytes',
      * 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond'.
      */
     @JsonProperty(value = "unit", required = true)
     private UsageUnit unit;
 
     /**
-     * Gets the current count of the allocated resources in the subscription.
+     * The current count of the allocated resources in the subscription.
      */
     @JsonProperty(value = "currentValue", required = true)
     private int currentValue;
 
     /**
-     * Gets the maximum count of the resources that can be allocated in the
+     * The maximum count of the resources that can be allocated in the
      * subscription.
      */
     @JsonProperty(value = "limit", required = true)
     private int limit;
 
     /**
-     * Gets the name of the type of usage.
+     * The name of the type of usage.
      */
     @JsonProperty(value = "name", required = true)
     private UsageName name;

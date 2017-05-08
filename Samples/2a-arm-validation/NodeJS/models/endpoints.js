@@ -13,13 +13,13 @@
  * The URIs that are used to perform a retrieval of a public blob, queue or
  * table object.
  *
- * @member {string} [blob] Gets the blob endpoint.
+ * @member {string} [blob] The blob endpoint.
  *
- * @member {string} [queue] Gets the queue endpoint.
+ * @member {string} [queue] The queue endpoint.
  *
- * @member {string} [table] Gets the table endpoint.
+ * @member {string} [table] The table endpoint.
  *
- * @member {string} [file] Gets the file endpoint.
+ * @member {string} [file] The file endpoint.
  *
  */
 class Endpoints {

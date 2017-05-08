@@ -17,7 +17,7 @@ namespace Searchservice
     public partial interface IUsageOperations
     {
         /// <summary>
-        /// Gets the current usage count and the limit for the resources under
+        /// Lists the current usage count and the limit for the resources under
         /// the subscription.
         /// </summary>
         /// <param name='customHeaders'>

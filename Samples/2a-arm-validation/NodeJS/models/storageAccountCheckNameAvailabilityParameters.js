@@ -10,6 +10,8 @@
  * @class
  * Initializes a new instance of the StorageAccountCheckNameAvailabilityParameters class.
  * @constructor
+ * The parameters used to check the availabity of the storage account name.
+ *
  * @member {string} name
  *
  * @member {string} [type] Default value: 'Microsoft.Storage/storageAccounts' .

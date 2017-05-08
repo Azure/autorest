@@ -18,7 +18,7 @@ namespace Searchservice
     /// <summary>
     /// DataSources operations.
     /// </summary>
-    public partial class DataSources : IServiceOperations<SearchandStorage>, IDataSources
+    public partial class DataSources : IServiceOperations<StorageManagementClient>, IDataSources
     {
         /// <summary>
         /// Initializes a new instance of the DataSources class.
@@ -29,7 +29,7 @@ namespace Searchservice
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public DataSources(SearchandStorage client)
+        public DataSources(StorageManagementClient client)
         {
             if (client == null)
             {
@@ -39,9 +39,9 @@ namespace Searchservice
         }
 
         /// <summary>
-        /// Gets a reference to the SearchandStorage
+        /// Gets a reference to the StorageManagementClient
         /// </summary>
-        public SearchandStorage Client { get; private set; }
+        public StorageManagementClient Client { get; private set; }
 
         /// <summary>
         /// Creates a new Azure Search datasource or updates a datasource if it already

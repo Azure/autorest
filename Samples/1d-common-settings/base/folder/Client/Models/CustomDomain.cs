@@ -26,8 +26,8 @@ namespace AwesomeNamespace.Models
         /// <summary>
         /// Initializes a new instance of the CustomDomain class.
         /// </summary>
-        /// <param name="name">Gets or sets the custom domain name. Name is the
-        /// CNAME source.</param>
+        /// <param name="name">The custom domain name. Name is the CNAME
+        /// source.</param>
         /// <param name="useSubDomain">Indicates whether indirect CName
         /// validation is enabled. Default value is false. This should only be
         /// set on updates</param>

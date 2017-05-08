@@ -2,7 +2,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace Storage
+namespace Searchservice
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
@@ -13,9 +13,6 @@ namespace Storage
     using System.Net;
     using System.Net.Http;
 
-    /// <summary>
-    /// The Azure Storage Management API.
-    /// </summary>
     public partial class StorageManagementClient : ServiceClient<StorageManagementClient>, IStorageManagementClient
     {
         /// <summary>
@@ -41,9 +38,19 @@ namespace Storage
         public string SubscriptionId { get; set; }
 
         /// <summary>
-        /// Client Api Version.
+        /// Gets the IDataSources.
         /// </summary>
-        public string ApiVersion { get; set; }
+        public virtual IDataSources DataSources { get; private set; }
+
+        /// <summary>
+        /// Gets the IIndexers.
+        /// </summary>
+        public virtual IIndexers Indexers { get; private set; }
+
+        /// <summary>
+        /// Gets the IIndexes.
+        /// </summary>
+        public virtual IIndexes Indexes { get; private set; }
 
         /// <summary>
         /// Gets the IStorageAccounts.
@@ -134,6 +141,9 @@ namespace Storage
         /// </summary>
         private void Initialize()
         {
+            DataSources = new DataSources(this);
+            Indexers = new Indexers(this);
+            Indexes = new Indexes(this);
             StorageAccounts = new StorageAccounts(this);
             Usage = new UsageOperations(this);
             BaseUri = new System.Uri("https://management.azure.com");
@@ -163,6 +173,12 @@ namespace Storage
                         new Iso8601TimeSpanConverter()
                     }
             };
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<DataChangeDetectionPolicy>("@odata.type"));
+            DeserializationSettings.Converters.Add(new  PolymorphicDeserializeJsonConverter<DataChangeDetectionPolicy>("@odata.type"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<DataDeletionDetectionPolicy>("@odata.type"));
+            DeserializationSettings.Converters.Add(new  PolymorphicDeserializeJsonConverter<DataDeletionDetectionPolicy>("@odata.type"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<ScoringFunction>("type"));
+            DeserializationSettings.Converters.Add(new  PolymorphicDeserializeJsonConverter<ScoringFunction>("type"));
             CustomInitialize();
             DeserializationSettings.Converters.Add(new TransformationJsonConverter());
         }

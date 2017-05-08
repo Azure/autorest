@@ -26,8 +26,7 @@ namespace AwesomeNamespace.Models
         /// <summary>
         /// Initializes a new instance of the UsageListResult class.
         /// </summary>
-        /// <param name="value">Gets or sets the list Storage Resource
-        /// Usages.</param>
+        /// <param name="value">The list Storage Resource Usages.</param>
         public UsageListResult(IList<Usage> value = default(IList<Usage>))
         {
             Value = value;

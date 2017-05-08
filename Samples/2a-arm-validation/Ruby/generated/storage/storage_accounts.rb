@@ -5,7 +5,7 @@
 
 module Storage
   #
-  # The Storage Management Client.
+  # The Azure Storage Management API.
   #
   class StorageAccounts
     include MsRestAzure
@@ -22,7 +22,7 @@ module Storage
     attr_reader :client
 
     #
-    # Checks that account name is valid and is not in use.
+    # Checks that the storage account name is valid and is not already in use.
     #
     # @param account_name [StorageAccountCheckNameAvailabilityParameters] The name
     # of the storage account within the specified resource group. Storage account
@@ -39,7 +39,7 @@ module Storage
     end
 
     #
-    # Checks that account name is valid and is not in use.
+    # Checks that the storage account name is valid and is not already in use.
     #
     # @param account_name [StorageAccountCheckNameAvailabilityParameters] The name
     # of the storage account within the specified resource group. Storage account
@@ -55,7 +55,7 @@ module Storage
     end
 
     #
-    # Checks that account name is valid and is not in use.
+    # Checks that the storage account name is valid and is not already in use.
     #
     # @param account_name [StorageAccountCheckNameAvailabilityParameters] The name
     # of the storage account within the specified resource group. Storage account
@@ -128,13 +128,13 @@ module Storage
 
     #
     # Asynchronously creates a new storage account with the specified parameters.
-    # Existing accounts cannot be updated with this API and should instead use the
-    # Update Storage Account API. If an account is already created and subsequent
-    # PUT request is issued with exact same set of properties, then HTTP 200 would
-    # be returned.
+    # If an account is already created and a subsequent create request is issued
+    # with different properties, the account properties will be updated. If an
+    # account is already created and a subsequent create or update request is
+    # issued with the exact same set of properties, the request will succeed.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -152,7 +152,7 @@ module Storage
 
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -186,7 +186,7 @@ module Storage
     # Deletes a storage account in Microsoft Azure.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -203,7 +203,7 @@ module Storage
     # Deletes a storage account in Microsoft Azure.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -220,7 +220,7 @@ module Storage
     # Deletes a storage account in Microsoft Azure.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -273,11 +273,11 @@ module Storage
 
     #
     # Returns the properties for the specified storage account including but not
-    # limited to name, account type, location, and account status. The ListKeys
+    # limited to name, SKU name, location, and account status. The ListKeys
     # operation should be used to retrieve storage keys.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -293,11 +293,11 @@ module Storage
 
     #
     # Returns the properties for the specified storage account including but not
-    # limited to name, account type, location, and account status. The ListKeys
+    # limited to name, SKU name, location, and account status. The ListKeys
     # operation should be used to retrieve storage keys.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -312,11 +312,11 @@ module Storage
 
     #
     # Returns the properties for the specified storage account including but not
-    # limited to name, account type, location, and account status. The ListKeys
+    # limited to name, SKU name, location, and account status. The ListKeys
     # operation should be used to retrieve storage keys.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -378,27 +378,23 @@ module Storage
     end
 
     #
-    # Updates the account type or tags for a storage account. It can also be used
-    # to add a custom domain (note that custom domains cannot be added via the
-    # Create operation). Only one custom domain is supported per storage account.
-    # In order to replace a custom domain, the old value must be cleared before a
-    # new value may be set. To clear a custom domain, simply update the custom
-    # domain with empty string. Then call update again with the new cutsom domain
-    # name. The update API can only be used to update one of tags, accountType, or
-    # customDomain per call. To update multiple of these properties, call the API
-    # multiple times with one change per call. This call does not change the
-    # storage keys for the account. If you want to change storage account keys, use
-    # the RegenerateKey operation. The location and name of the storage account
-    # cannot be changed after creation.
+    # The update operation can be used to update the SKU, encryption, access tier,
+    # or tags for a storage account. It can also be used to map the account to a
+    # custom domain. Only one custom domain is supported per storage account; the
+    # replacement/change of custom domain is not supported. In order to replace an
+    # old custom domain, the old value must be cleared/unregistered before a new
+    # value can be set. The update of multiple properties is supported. This call
+    # does not change the storage keys for the account. If you want to change the
+    # storage account keys, use the regenerate keys operation. The location and
+    # name of the storage account cannot be changed after creation.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
-    # @param parameters [StorageAccountUpdateParameters] The parameters to update
-    # on the account. Note that only one property can be changed at a time using
-    # this API.
+    # @param parameters [StorageAccountUpdateParameters] The parameters to provide
+    # for the updated account.
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
     # will be added to the HTTP request.
     #
@@ -410,27 +406,23 @@ module Storage
     end
 
     #
-    # Updates the account type or tags for a storage account. It can also be used
-    # to add a custom domain (note that custom domains cannot be added via the
-    # Create operation). Only one custom domain is supported per storage account.
-    # In order to replace a custom domain, the old value must be cleared before a
-    # new value may be set. To clear a custom domain, simply update the custom
-    # domain with empty string. Then call update again with the new cutsom domain
-    # name. The update API can only be used to update one of tags, accountType, or
-    # customDomain per call. To update multiple of these properties, call the API
-    # multiple times with one change per call. This call does not change the
-    # storage keys for the account. If you want to change storage account keys, use
-    # the RegenerateKey operation. The location and name of the storage account
-    # cannot be changed after creation.
+    # The update operation can be used to update the SKU, encryption, access tier,
+    # or tags for a storage account. It can also be used to map the account to a
+    # custom domain. Only one custom domain is supported per storage account; the
+    # replacement/change of custom domain is not supported. In order to replace an
+    # old custom domain, the old value must be cleared/unregistered before a new
+    # value can be set. The update of multiple properties is supported. This call
+    # does not change the storage keys for the account. If you want to change the
+    # storage account keys, use the regenerate keys operation. The location and
+    # name of the storage account cannot be changed after creation.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
-    # @param parameters [StorageAccountUpdateParameters] The parameters to update
-    # on the account. Note that only one property can be changed at a time using
-    # this API.
+    # @param parameters [StorageAccountUpdateParameters] The parameters to provide
+    # for the updated account.
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
     # will be added to the HTTP request.
     #
@@ -441,27 +433,23 @@ module Storage
     end
 
     #
-    # Updates the account type or tags for a storage account. It can also be used
-    # to add a custom domain (note that custom domains cannot be added via the
-    # Create operation). Only one custom domain is supported per storage account.
-    # In order to replace a custom domain, the old value must be cleared before a
-    # new value may be set. To clear a custom domain, simply update the custom
-    # domain with empty string. Then call update again with the new cutsom domain
-    # name. The update API can only be used to update one of tags, accountType, or
-    # customDomain per call. To update multiple of these properties, call the API
-    # multiple times with one change per call. This call does not change the
-    # storage keys for the account. If you want to change storage account keys, use
-    # the RegenerateKey operation. The location and name of the storage account
-    # cannot be changed after creation.
+    # The update operation can be used to update the SKU, encryption, access tier,
+    # or tags for a storage account. It can also be used to map the account to a
+    # custom domain. Only one custom domain is supported per storage account; the
+    # replacement/change of custom domain is not supported. In order to replace an
+    # old custom domain, the old value must be cleared/unregistered before a new
+    # value can be set. The update of multiple properties is supported. This call
+    # does not change the storage keys for the account. If you want to change the
+    # storage account keys, use the regenerate keys operation. The location and
+    # name of the storage account cannot be changed after creation.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
-    # @param parameters [StorageAccountUpdateParameters] The parameters to update
-    # on the account. Note that only one property can be changed at a time using
-    # this API.
+    # @param parameters [StorageAccountUpdateParameters] The parameters to provide
+    # for the updated account.
     # @param [Hash{String => String}] A hash of custom headers that will be added
     # to the HTTP request.
     #
@@ -517,97 +505,6 @@ module Storage
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
             result_mapper = Storage::Models::StorageAccount.mapper()
-            result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
-          rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
-          end
-        end
-
-        result
-      end
-
-      promise.execute
-    end
-
-    #
-    # Lists the access keys for the specified storage account.
-    #
-    # @param resource_group_name [String] The name of the resource group.
-    # @param account_name [String] The name of the storage account.
-    # @param custom_headers [Hash{String => String}] A hash of custom headers that
-    # will be added to the HTTP request.
-    #
-    # @return [StorageAccountKeys] operation results.
-    #
-    def list_keys(resource_group_name, account_name, custom_headers = nil)
-      response = list_keys_async(resource_group_name, account_name, custom_headers).value!
-      response.body unless response.nil?
-    end
-
-    #
-    # Lists the access keys for the specified storage account.
-    #
-    # @param resource_group_name [String] The name of the resource group.
-    # @param account_name [String] The name of the storage account.
-    # @param custom_headers [Hash{String => String}] A hash of custom headers that
-    # will be added to the HTTP request.
-    #
-    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
-    #
-    def list_keys_with_http_info(resource_group_name, account_name, custom_headers = nil)
-      list_keys_async(resource_group_name, account_name, custom_headers).value!
-    end
-
-    #
-    # Lists the access keys for the specified storage account.
-    #
-    # @param resource_group_name [String] The name of the resource group.
-    # @param account_name [String] The name of the storage account.
-    # @param [Hash{String => String}] A hash of custom headers that will be added
-    # to the HTTP request.
-    #
-    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
-    #
-    def list_keys_async(resource_group_name, account_name, custom_headers = nil)
-      fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
-      fail ArgumentError, 'account_name is nil' if account_name.nil?
-      fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
-      fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
-
-
-      request_headers = {}
-
-      # Set Headers
-      request_headers['x-ms-client-request-id'] = SecureRandom.uuid
-      request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-      path_template = 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
-
-      request_url = @base_url || @client.base_url
-
-      options = {
-          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          path_params: {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id},
-          query_params: {'api-version' => @client.api_version},
-          headers: request_headers.merge(custom_headers || {}),
-          base_url: request_url
-      }
-      promise = @client.make_request_async(:post, path_template, options)
-
-      promise = promise.then do |result|
-        http_response = result.response
-        status_code = http_response.status
-        response_content = http_response.body
-        unless status_code == 200
-          error_model = JSON.load(response_content)
-          fail MsRestAzure::AzureOperationError.new(result.request, http_response, error_model)
-        end
-
-        result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
-        # Deserialize Response
-        if status_code == 200
-          begin
-            parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = Storage::Models::StorageAccountKeys.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -711,7 +608,7 @@ module Storage
     # that storage keys are not returned; use the ListKeys operation for this.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
     # will be added to the HTTP request.
     #
@@ -727,7 +624,7 @@ module Storage
     # that storage keys are not returned; use the ListKeys operation for this.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
     # will be added to the HTTP request.
     #
@@ -742,7 +639,7 @@ module Storage
     # that storage keys are not returned; use the ListKeys operation for this.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param [Hash{String => String}] A hash of custom headers that will be added
     # to the HTTP request.
     #
@@ -800,15 +697,115 @@ module Storage
     end
 
     #
-    # Regenerates the access keys for the specified storage account.
+    # Lists the access keys for the specified storage account.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [StorageAccountKeys] operation results.
+    #
+    def list_keys(resource_group_name, account_name, custom_headers = nil)
+      response = list_keys_async(resource_group_name, account_name, custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # Lists the access keys for the specified storage account.
+    #
+    # @param resource_group_name [String] The name of the resource group within the
+    # user's subscription. The name is case insensitive.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def list_keys_with_http_info(resource_group_name, account_name, custom_headers = nil)
+      list_keys_async(resource_group_name, account_name, custom_headers).value!
+    end
+
+    #
+    # Lists the access keys for the specified storage account.
+    #
+    # @param resource_group_name [String] The name of the resource group within the
+    # user's subscription. The name is case insensitive.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def list_keys_async(resource_group_name, account_name, custom_headers = nil)
+      fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
+      fail ArgumentError, 'account_name is nil' if account_name.nil?
+      fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
+      fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
+      request_headers = {}
+
+      # Set Headers
+      request_headers['x-ms-client-request-id'] = SecureRandom.uuid
+      request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
+      path_template = 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
+
+      request_url = @base_url || @client.base_url
+
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id},
+          query_params: {'api-version' => @client.api_version},
+          headers: request_headers.merge(custom_headers || {}),
+          base_url: request_url
+      }
+      promise = @client.make_request_async(:post, path_template, options)
+
+      promise = promise.then do |result|
+        http_response = result.response
+        status_code = http_response.status
+        response_content = http_response.body
+        unless status_code == 200
+          error_model = JSON.load(response_content)
+          fail MsRestAzure::AzureOperationError.new(result.request, http_response, error_model)
+        end
+
+        result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
+        # Deserialize Response
+        if status_code == 200
+          begin
+            parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
+            result_mapper = Storage::Models::StorageAccountKeys.mapper()
+            result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
+          rescue Exception => e
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
+          end
+        end
+
+        result
+      end
+
+      promise.execute
+    end
+
+    #
+    # Regenerates one of the access keys for the specified storage account.
+    #
+    # @param resource_group_name [String] The name of the resource group within the
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
     # @param regenerate_key [StorageAccountRegenerateKeyParameters] Specifies name
-    # of the key which should be regenerated. key1 or key2 for the default keys
+    # of the key which should be regenerated -- key1 or key2.
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
     # will be added to the HTTP request.
     #
@@ -820,15 +817,15 @@ module Storage
     end
 
     #
-    # Regenerates the access keys for the specified storage account.
+    # Regenerates one of the access keys for the specified storage account.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
     # @param regenerate_key [StorageAccountRegenerateKeyParameters] Specifies name
-    # of the key which should be regenerated. key1 or key2 for the default keys
+    # of the key which should be regenerated -- key1 or key2.
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
     # will be added to the HTTP request.
     #
@@ -839,15 +836,15 @@ module Storage
     end
 
     #
-    # Regenerates the access keys for the specified storage account.
+    # Regenerates one of the access keys for the specified storage account.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
     # @param regenerate_key [StorageAccountRegenerateKeyParameters] Specifies name
-    # of the key which should be regenerated. key1 or key2 for the default keys
+    # of the key which should be regenerated -- key1 or key2.
     # @param [Hash{String => String}] A hash of custom headers that will be added
     # to the HTTP request.
     #
@@ -917,13 +914,13 @@ module Storage
 
     #
     # Asynchronously creates a new storage account with the specified parameters.
-    # Existing accounts cannot be updated with this API and should instead use the
-    # Update Storage Account API. If an account is already created and subsequent
-    # PUT request is issued with exact same set of properties, then HTTP 200 would
-    # be returned.
+    # If an account is already created and a subsequent create request is issued
+    # with different properties, the account properties will be updated. If an
+    # account is already created and a subsequent create or update request is
+    # issued with the exact same set of properties, the request will succeed.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -941,13 +938,13 @@ module Storage
 
     #
     # Asynchronously creates a new storage account with the specified parameters.
-    # Existing accounts cannot be updated with this API and should instead use the
-    # Update Storage Account API. If an account is already created and subsequent
-    # PUT request is issued with exact same set of properties, then HTTP 200 would
-    # be returned.
+    # If an account is already created and a subsequent create request is issued
+    # with different properties, the account properties will be updated. If an
+    # account is already created and a subsequent create or update request is
+    # issued with the exact same set of properties, the request will succeed.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
@@ -964,13 +961,13 @@ module Storage
 
     #
     # Asynchronously creates a new storage account with the specified parameters.
-    # Existing accounts cannot be updated with this API and should instead use the
-    # Update Storage Account API. If an account is already created and subsequent
-    # PUT request is issued with exact same set of properties, then HTTP 200 would
-    # be returned.
+    # If an account is already created and a subsequent create request is issued
+    # with different properties, the account properties will be updated. If an
+    # account is already created and a subsequent create or update request is
+    # issued with the exact same set of properties, the request will succeed.
     #
     # @param resource_group_name [String] The name of the resource group within the
-    # user's subscription.
+    # user's subscription. The name is case insensitive.
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.

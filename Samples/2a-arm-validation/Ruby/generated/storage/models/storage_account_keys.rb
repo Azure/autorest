@@ -12,10 +12,10 @@ module Storage
 
       include MsRestAzure
 
-      # @return [String] Gets the value of key 1.
+      # @return [String] The value of key 1.
       attr_accessor :key1
 
-      # @return [String] Gets the value of key 2.
+      # @return [String] The value of key 2.
       attr_accessor :key2
 
 

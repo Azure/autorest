@@ -17,16 +17,18 @@ namespace Storage
     {
             /// <summary>
             /// Asynchronously creates a new storage account with the specified parameters.
-            /// Existing accounts cannot be updated with this API and should instead use
-            /// the Update Storage Account API. If an account is already created and
-            /// subsequent PUT request is issued with exact same set of properties, then
-            /// HTTP 200 would be returned.  Make sure you add that extra cowbell.
+            /// If an account is already created and a subsequent create request is issued
+            /// with different properties, the account properties will be updated. If an
+            /// account is already created and a subsequent create or update request is
+            /// issued with the exact same set of properties, the request will succeed.
+            /// Make sure you add that extra cowbell.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='resourceGroupName'>
-            /// The name of the resource group within the user's subscription.
+            /// The name of the resource group within the user's subscription. The name is
+            /// case insensitive.
             /// </param>
             /// <param name='accountName'>
             /// The name of the storage account within the specified resource group.
@@ -43,16 +45,18 @@ namespace Storage
 
             /// <summary>
             /// Asynchronously creates a new storage account with the specified parameters.
-            /// Existing accounts cannot be updated with this API and should instead use
-            /// the Update Storage Account API. If an account is already created and
-            /// subsequent PUT request is issued with exact same set of properties, then
-            /// HTTP 200 would be returned.  Make sure you add that extra cowbell.
+            /// If an account is already created and a subsequent create request is issued
+            /// with different properties, the account properties will be updated. If an
+            /// account is already created and a subsequent create or update request is
+            /// issued with the exact same set of properties, the request will succeed.
+            /// Make sure you add that extra cowbell.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='resourceGroupName'>
-            /// The name of the resource group within the user's subscription.
+            /// The name of the resource group within the user's subscription. The name is
+            /// case insensitive.
             /// </param>
             /// <param name='accountName'>
             /// The name of the storage account within the specified resource group.

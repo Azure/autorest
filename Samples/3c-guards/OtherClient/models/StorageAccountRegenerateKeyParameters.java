@@ -9,7 +9,7 @@ package storage.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The StorageAccountRegenerateKeyParameters model.
+ * The parameters used to regenerate the storage account key.
  */
 public class StorageAccountRegenerateKeyParameters {
     /**

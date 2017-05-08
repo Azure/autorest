@@ -12,20 +12,20 @@ module Storage
 
       include MsRestAzure
 
-      # @return [UsageUnit] Gets the unit of measurement. Possible values
-      # include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
+      # @return [UsageUnit] The unit of measurement. Possible values include:
+      # 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
       # 'BytesPerSecond'
       attr_accessor :unit
 
-      # @return [Integer] Gets the current count of the allocated resources in
-      # the subscription.
+      # @return [Integer] The current count of the allocated resources in the
+      # subscription.
       attr_accessor :current_value
 
-      # @return [Integer] Gets the maximum count of the resources that can be
+      # @return [Integer] The maximum count of the resources that can be
       # allocated in the subscription.
       attr_accessor :limit
 
-      # @return [UsageName] Gets the name of the type of usage.
+      # @return [UsageName] The name of the type of usage.
       attr_accessor :name
 
 

@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CustomDomain {
     /**
-     * Gets or sets the custom domain name. Name is the CNAME source.
+     * The custom domain name. Name is the CNAME source.
      */
     @JsonProperty(value = "name", required = true)
     private String name;

@@ -12,9 +12,9 @@
  * @constructor
  * The access keys for the storage account.
  *
- * @member {string} [key1] Gets the value of key 1.
+ * @member {string} [key1] The value of key 1.
  *
- * @member {string} [key2] Gets the value of key 2.
+ * @member {string} [key2] The value of key 2.
  *
  */
 class StorageAccountKeys {

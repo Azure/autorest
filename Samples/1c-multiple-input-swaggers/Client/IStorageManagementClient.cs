@@ -2,13 +2,12 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace Storage
+namespace Searchservice
 {
     using Models;
     using Newtonsoft.Json;
 
     /// <summary>
-    /// The Azure Storage Management API.
     /// </summary>
     public partial interface IStorageManagementClient : System.IDisposable
     {
@@ -34,11 +33,21 @@ namespace Storage
         /// </summary>
         string SubscriptionId { get; set; }
 
-        /// <summary>
-        /// Client Api Version.
-        /// </summary>
-        string ApiVersion { get; set; }
 
+        /// <summary>
+        /// Gets the IDataSources.
+        /// </summary>
+        IDataSources DataSources { get; }
+
+        /// <summary>
+        /// Gets the IIndexers.
+        /// </summary>
+        IIndexers Indexers { get; }
+
+        /// <summary>
+        /// Gets the IIndexes.
+        /// </summary>
+        IIndexes Indexes { get; }
 
         /// <summary>
         /// Gets the IStorageAccounts.

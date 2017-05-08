@@ -8,6 +8,10 @@ namespace Storage.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// The parameters used to check the availabity of the storage account
+    /// name.
+    /// </summary>
     public partial class StorageAccountCheckNameAvailabilityParameters
     {
         /// <summary>

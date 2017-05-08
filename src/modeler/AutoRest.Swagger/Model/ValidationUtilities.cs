@@ -622,21 +622,6 @@ namespace AutoRest.Swagger.Model.Utilities
         }
 
         /// <summary>
-        /// Checks if there is an operation that matches the given regex
-        /// </summary>
-        /// <param name="getOperations"></param>
-        /// <param name="regEx"></param>
-        /// <param name="definitionKey"></param>
-        /// <param name="definitions"></param>
-        /// <returns></returns>
-        public static bool ListByXCheck(Regex regEx, string definitionKey, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition)
-        {
-            Operation operation = GetListByOperation(regEx, definitionKey, definitions, serviceDefinition);
-
-            return (operation != null);
-        }
-
-        /// <summary>
         /// For the provided resource model, it gets the operation which matches with specified regex and returns the resource model.
         /// </summary>
         /// <param name="regEx"></param>

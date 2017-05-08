@@ -15,7 +15,7 @@ namespace AwesomeNamespace
     public static partial class UsageOperationsExtensions
     {
             /// <summary>
-            /// Gets the current usage count and the limit for the resources under the
+            /// Lists the current usage count and the limit for the resources under the
             /// subscription.
             /// </summary>
             /// <param name='operations'>
@@ -27,7 +27,7 @@ namespace AwesomeNamespace
             }
 
             /// <summary>
-            /// Gets the current usage count and the limit for the resources under the
+            /// Lists the current usage count and the limit for the resources under the
             /// subscription.
             /// </summary>
             /// <param name='operations'>

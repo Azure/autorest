@@ -18,7 +18,7 @@ namespace Searchservice
     /// <summary>
     /// UsageOperations operations.
     /// </summary>
-    public partial class UsageOperations : IServiceOperations<SearchandStorage>, IUsageOperations
+    public partial class UsageOperations : IServiceOperations<StorageManagementClient>, IUsageOperations
     {
         /// <summary>
         /// Initializes a new instance of the UsageOperations class.
@@ -29,7 +29,7 @@ namespace Searchservice
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public UsageOperations(SearchandStorage client)
+        public UsageOperations(StorageManagementClient client)
         {
             if (client == null)
             {
@@ -39,12 +39,12 @@ namespace Searchservice
         }
 
         /// <summary>
-        /// Gets a reference to the SearchandStorage
+        /// Gets a reference to the StorageManagementClient
         /// </summary>
-        public SearchandStorage Client { get; private set; }
+        public StorageManagementClient Client { get; private set; }
 
         /// <summary>
-        /// Gets the current usage count and the limit for the resources under the
+        /// Lists the current usage count and the limit for the resources under the
         /// subscription.
         /// </summary>
         /// <param name='customHeaders'>

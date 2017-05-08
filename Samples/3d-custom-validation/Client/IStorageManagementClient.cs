@@ -8,7 +8,7 @@ namespace Storage
     using Newtonsoft.Json;
 
     /// <summary>
-    /// The Storage Management Client.
+    /// The Azure Storage Management API.
     /// </summary>
     public partial interface IStorageManagementClient : System.IDisposable
     {
@@ -28,7 +28,7 @@ namespace Storage
         JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
-        /// Gets subscription credentials which uniquely identify Microsoft
+        /// Subscription credentials which uniquely identify the Microsoft
         /// Azure subscription. The subscription ID forms part of the URI for
         /// every service call.
         /// </summary>

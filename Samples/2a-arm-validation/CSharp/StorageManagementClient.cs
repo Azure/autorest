@@ -16,7 +16,7 @@ namespace Storage
     using System.Net.Http;
 
     /// <summary>
-    /// The Storage Management Client.
+    /// The Azure Storage Management API.
     /// </summary>
     public partial class StorageManagementClient : ServiceClient<StorageManagementClient>, IStorageManagementClient, IAzureClient
     {
@@ -41,7 +41,7 @@ namespace Storage
         public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
-        /// Gets subscription credentials which uniquely identify Microsoft Azure
+        /// Subscription credentials which uniquely identify the Microsoft Azure
         /// subscription. The subscription ID forms part of the URI for every service
         /// call.
         /// </summary>

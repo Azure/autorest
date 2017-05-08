@@ -12,7 +12,7 @@ module Storage
 
       include MsRestAzure
 
-      # @return [Array<Usage>] Gets or sets the list Storage Resource Usages.
+      # @return [Array<Usage>] The list Storage Resource Usages.
       attr_accessor :value
 
 

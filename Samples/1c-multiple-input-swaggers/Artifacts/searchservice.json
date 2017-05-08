@@ -1,6 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
+    "x-ms-code-generation-settings": {
+      "name": "StorageManagementClient"
+    },
     "title": "Search and Storage"
   },
   "paths": {
@@ -1125,7 +1128,7 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_CheckNameAvailability",
-        "description": "Checks that account name is valid and is not in use.",
+        "description": "Checks that the storage account name is valid and is not already in use.",
         "parameters": [
           {
             "name": "accountName",
@@ -1152,7 +1155,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK -- Operation to check the storage account name availability was successful.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
@@ -1174,21 +1177,17 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_Create",
-        "description": "Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned. ",
+        "description": "Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
             "maxLength": 24,
             "minLength": 3
           },
@@ -1217,13 +1216,13 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK -- returned when the storage account was already created from a previous request with the same properties specified in the request body.",
             "schema": {
               "$ref": "#/definitions/StorageAccount"
             }
           },
           "202": {
-            "description": ""
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously."
           }
         },
         "x-ms-long-running-operation": true,
@@ -1244,18 +1243,14 @@
         "description": "Deletes a storage account in Microsoft Azure.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
             "maxLength": 24,
             "minLength": 3
           },
@@ -1275,10 +1270,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK -- storage account deleted successfully."
           },
           "204": {
-            "description": ""
+            "description": "NoContent -- account does not exist in the subscription."
           }
         },
         "produces": [
@@ -1295,14 +1290,10 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_GetProperties",
-        "description": "Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.",
+        "description": "Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -1329,7 +1320,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK -- properties retrieved successfully for the storage account.",
             "schema": {
               "$ref": "#/definitions/StorageAccount"
             }
@@ -1349,21 +1340,17 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_Update",
-        "description": "Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.",
+        "description": "The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
             "maxLength": 24,
             "minLength": 3
           },
@@ -1374,7 +1361,7 @@
             "schema": {
               "$ref": "#/definitions/StorageAccountUpdateParameters"
             },
-            "description": "The parameters to update on the account. Note that only one property can be changed at a time using this API. "
+            "description": "The parameters to provide for the updated account."
           },
           {
             "name": "api-version",
@@ -1392,65 +1379,9 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK -- storage account properties updated successfully.",
             "schema": {
               "$ref": "#/definitions/StorageAccount"
-            }
-          }
-        },
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys": {
-      "post": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_ListKeys",
-        "description": "Lists the access keys for the specified storage account.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account.",
-            "maxLength": 24,
-            "minLength": 3
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/StorageAccountKeys"
             }
           }
         },
@@ -1488,7 +1419,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK -- List of storage accounts was retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/StorageAccountListResult"
             }
@@ -1516,11 +1447,7 @@
         "description": "Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "api-version",
@@ -1538,7 +1465,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK -- List of storage accounts in the given resource group retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/StorageAccountListResult"
             }
@@ -1557,38 +1484,25 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys": {
       "post": {
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_RegenerateKey",
-        "description": "Regenerates the access keys for the specified storage account.",
+        "operationId": "StorageAccounts_ListKeys",
+        "description": "Lists the access keys for the specified storage account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
             "maxLength": 24,
             "minLength": 3
-          },
-          {
-            "name": "regenerateKey",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageAccountRegenerateKeyParameters"
-            },
-            "description": "Specifies name of the key which should be regenerated. key1 or key2 for the default keys"
           },
           {
             "name": "api-version",
@@ -1606,7 +1520,68 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK -- list of keys retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountKeys"
+            }
+          }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
+      "post": {
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_RegenerateKey",
+        "description": "Regenerates one of the access keys for the specified storage account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "maxLength": 24,
+            "minLength": 3
+          },
+          {
+            "name": "regenerateKey",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountRegenerateKeyParameters"
+            },
+            "description": "Specifies name of the key which should be regenerated -- key1 or key2."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ]
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- specified key regenerated successfully.",
             "schema": {
               "$ref": "#/definitions/StorageAccountKeys"
             }
@@ -1628,7 +1603,7 @@
           "Usage"
         ],
         "operationId": "Usage_List",
-        "description": "Gets the current usage count and the limit for the resources under the subscription.",
+        "description": "Lists the current usage count and the limit for the resources under the subscription.",
         "parameters": [
           {
             "name": "api-version",
@@ -1646,7 +1621,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK -- current usage count and limit retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/UsageListResult"
             }
@@ -2507,17 +2482,18 @@
       },
       "required": [
         "name"
-      ]
+      ],
+      "description": "The parameters used to check the availabity of the storage account name."
     },
     "CheckNameAvailabilityResult": {
       "properties": {
         "nameAvailable": {
           "type": "boolean",
-          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used."
+          "description": "Boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used."
         },
         "reason": {
           "type": "string",
-          "description": "Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.",
+          "description": "The reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.",
           "enum": [
             "AccountNameInvalid",
             "AlreadyExists"
@@ -2529,7 +2505,7 @@
         },
         "message": {
           "type": "string",
-          "description": "Gets an error message explaining the Reason value in more detail."
+          "description": "The error message explaining the Reason value in more detail."
         }
       },
       "description": "The CheckNameAvailability operation response."
@@ -2538,7 +2514,7 @@
       "properties": {
         "accountType": {
           "type": "string",
-          "description": "Gets or sets the account type.",
+          "description": "The sku name. Required for account creation; optional for update. Note that in older versions, sku name was called accountType.",
           "enum": [
             "Standard_LRS",
             "Standard_ZRS",
@@ -2554,20 +2530,21 @@
       },
       "required": [
         "accountType"
-      ]
+      ],
+      "description": "The parameters used to create the storage account."
     },
     "StorageAccountCreateParameters": {
       "properties": {
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "The location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "description": "A list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2584,19 +2561,19 @@
       "properties": {
         "blob": {
           "type": "string",
-          "description": "Gets the blob endpoint."
+          "description": "The blob endpoint."
         },
         "queue": {
           "type": "string",
-          "description": "Gets the queue endpoint."
+          "description": "The queue endpoint."
         },
         "table": {
           "type": "string",
-          "description": "Gets the table endpoint."
+          "description": "The table endpoint."
         },
         "file": {
           "type": "string",
-          "description": "Gets the file endpoint."
+          "description": "The file endpoint."
         }
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
@@ -2605,7 +2582,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets the custom domain name. Name is the CNAME source."
+          "description": "The custom domain name. Name is the CNAME source."
         },
         "useSubDomain": {
           "type": "boolean",
@@ -2621,7 +2598,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "Gets the status of the storage account at the time the operation was called.",
+          "description": "The status of the storage account at the time the operation was called.",
           "enum": [
             "Creating",
             "ResolvingDNS",
@@ -2634,7 +2611,7 @@
         },
         "accountType": {
           "type": "string",
-          "description": "Gets the type of the storage account.",
+          "description": "The type of the storage account.",
           "enum": [
             "Standard_LRS",
             "Standard_ZRS",
@@ -2649,15 +2626,15 @@
         },
         "primaryEndpoints": {
           "$ref": "#/definitions/Endpoints",
-          "description": "Gets the URLs that are used to perform a retrieval of a public blob, queue or table object.Note that StandardZRS and PremiumLRS accounts only return the blob endpoint."
+          "description": "The URLs that are used to perform a retrieval of a public blob, queue, or table object. Note that Standard_ZRS and Premium_LRS accounts only return the blob endpoint."
         },
         "primaryLocation": {
           "type": "string",
-          "description": "Gets the location of the primary for the storage account."
+          "description": "The location of the primary data center for the storage account."
         },
         "statusOfPrimary": {
           "type": "string",
-          "description": "Gets the status indicating whether the primary location of the storage account is available or unavailable.",
+          "description": "The status indicating whether the primary location of the storage account is available or unavailable.",
           "enum": [
             "Available",
             "Unavailable"
@@ -2670,15 +2647,15 @@
         "lastGeoFailoverTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is StandardGRS or StandardRAGRS."
+          "description": "The timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is Standard_GRS or Standard_RAGRS."
         },
         "secondaryLocation": {
           "type": "string",
-          "description": "Gets the location of the geo replicated secondary for the storage account. Only available if the accountType is StandardGRS or StandardRAGRS."
+          "description": "The location of the geo-replicated secondary for the storage account. Only available if the accountType is Standard_GRS or Standard_RAGRS."
         },
         "statusOfSecondary": {
           "type": "string",
-          "description": "Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the accountType is StandardGRS or StandardRAGRS.",
+          "description": "The status indicating whether the secondary location of the storage account is available or unavailable. Only available if the SKU name is Standard_GRS or Standard_RAGRS.",
           "enum": [
             "Available",
             "Unavailable"
@@ -2691,17 +2668,18 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets the creation date and time of the storage account in UTC."
+          "description": "The creation date and time of the storage account in UTC."
         },
         "customDomain": {
           "$ref": "#/definitions/CustomDomain",
-          "description": "Gets the user assigned custom domain assigned to this storage account."
+          "description": "The custom domain the user assigned to this storage account."
         },
         "secondaryEndpoints": {
           "$ref": "#/definitions/Endpoints",
-          "description": "Gets the URLs that are used to perform a retrieval of a public blob, queue or table object from the secondary location of the storage account. Only available if the accountType is StandardRAGRS."
+          "description": "The URLs that are used to perform a retrieval of a public blob, queue, or table object from the secondary location of the storage account. Only available if the SKU name is Standard_RAGRS."
         }
-      }
+      },
+      "description": "Properties of the storage account."
     },
     "StorageAccount": {
       "properties": {
@@ -2721,11 +2699,11 @@
       "properties": {
         "key1": {
           "type": "string",
-          "description": "Gets the value of key 1."
+          "description": "The value of key 1."
         },
         "key2": {
           "type": "string",
-          "description": "Gets the value of key 2."
+          "description": "The value of key 2."
         }
       },
       "description": "The access keys for the storage account."
@@ -2737,7 +2715,7 @@
           "items": {
             "$ref": "#/definitions/StorageAccount"
           },
-          "description": "Gets the list of storage accounts and their properties."
+          "description": "The list of storage accounts and their properties."
         }
       },
       "description": "The list storage accounts operation response."
@@ -2746,7 +2724,7 @@
       "properties": {
         "accountType": {
           "type": "string",
-          "description": "Gets or sets the account type. Note that StandardZRS and PremiumLRS accounts cannot be changed to other account types, and other account types cannot be changed to StandardZRS or PremiumLRS.",
+          "description": "The account type. Note that StandardZRS and PremiumLRS accounts cannot be changed to other account types, and other account types cannot be changed to StandardZRS or PremiumLRS.",
           "enum": [
             "Standard_LRS",
             "Standard_ZRS",
@@ -2763,7 +2741,8 @@
           "$ref": "#/definitions/CustomDomain",
           "description": "User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property."
         }
-      }
+      },
+      "description": "The parameters used when updating a storage account."
     },
     "StorageAccountUpdateParameters": {
       "properties": {
@@ -2790,17 +2769,18 @@
       },
       "required": [
         "keyName"
-      ]
+      ],
+      "description": "The parameters used to regenerate the storage account key."
     },
     "UsageName": {
       "properties": {
         "value": {
           "type": "string",
-          "description": "Gets a string describing the resource name."
+          "description": "A string describing the resource name."
         },
         "localizedValue": {
           "type": "string",
-          "description": "Gets a localized string describing the resource name."
+          "description": "A localized string describing the resource name."
         }
       },
       "description": "The Usage Names."
@@ -2809,7 +2789,7 @@
       "properties": {
         "unit": {
           "type": "string",
-          "description": "Gets the unit of measurement.",
+          "description": "The unit of measurement.",
           "enum": [
             "Count",
             "Bytes",
@@ -2826,16 +2806,16 @@
         "currentValue": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the current count of the allocated resources in the subscription."
+          "description": "The current count of the allocated resources in the subscription."
         },
         "limit": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the maximum count of the resources that can be allocated in the subscription."
+          "description": "The maximum count of the resources that can be allocated in the subscription."
         },
         "name": {
           "$ref": "#/definitions/UsageName",
-          "description": "Gets the name of the type of usage."
+          "description": "The name of the type of usage."
         }
       },
       "required": [
@@ -2853,7 +2833,7 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
-          "description": "Gets or sets the list Storage Resource Usages."
+          "description": "The list Storage Resource Usages."
         }
       },
       "description": "The List Usages operation response."
@@ -2887,7 +2867,8 @@
           "description": "Resource tags"
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": true,
+      "description": "Describes a storage resource."
     }
   },
   "parameters": {
@@ -2896,7 +2877,18 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
     }
   },
   "host": "management.azure.com",

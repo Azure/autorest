@@ -10,7 +10,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The Resource model.
+ * Describes a storage resource.
  */
 public class Resource {
     /**

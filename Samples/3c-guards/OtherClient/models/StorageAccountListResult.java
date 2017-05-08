@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class StorageAccountListResult {
     /**
-     * Gets the list of storage accounts and their properties.
+     * The list of storage accounts and their properties.
      */
     @JsonProperty(value = "value")
     private List<StorageAccount> value;

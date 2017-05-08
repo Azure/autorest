@@ -25,14 +25,14 @@ namespace AwesomeNamespace.Models
         /// <summary>
         /// Initializes a new instance of the Usage class.
         /// </summary>
-        /// <param name="unit">Gets the unit of measurement. Possible values
+        /// <param name="unit">The unit of measurement. Possible values
         /// include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
         /// 'BytesPerSecond'</param>
-        /// <param name="currentValue">Gets the current count of the allocated
+        /// <param name="currentValue">The current count of the allocated
         /// resources in the subscription.</param>
-        /// <param name="limit">Gets the maximum count of the resources that
-        /// can be allocated in the subscription.</param>
-        /// <param name="name">Gets the name of the type of usage.</param>
+        /// <param name="limit">The maximum count of the resources that can be
+        /// allocated in the subscription.</param>
+        /// <param name="name">The name of the type of usage.</param>
         public Usage(UsageUnit unit, int currentValue, int limit, UsageName name)
         {
             Unit = unit;
@@ -48,28 +48,29 @@ namespace AwesomeNamespace.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets the unit of measurement. Possible values include: 'Count',
-        /// 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond'
+        /// Gets or sets the unit of measurement. Possible values include:
+        /// 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
+        /// 'BytesPerSecond'
         /// </summary>
         [JsonProperty(PropertyName = "unit")]
         public UsageUnit Unit { get; set; }
 
         /// <summary>
-        /// Gets the current count of the allocated resources in the
+        /// Gets or sets the current count of the allocated resources in the
         /// subscription.
         /// </summary>
         [JsonProperty(PropertyName = "currentValue")]
         public int CurrentValue { get; set; }
 
         /// <summary>
-        /// Gets the maximum count of the resources that can be allocated in
-        /// the subscription.
+        /// Gets or sets the maximum count of the resources that can be
+        /// allocated in the subscription.
         /// </summary>
         [JsonProperty(PropertyName = "limit")]
         public int Limit { get; set; }
 
         /// <summary>
-        /// Gets the name of the type of usage.
+        /// Gets or sets the name of the type of usage.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public UsageName Name { get; set; }

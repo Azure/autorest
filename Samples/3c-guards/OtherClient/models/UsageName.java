@@ -13,13 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class UsageName {
     /**
-     * Gets a string describing the resource name.
+     * A string describing the resource name.
      */
     @JsonProperty(value = "value")
     private String value;
 
     /**
-     * Gets a localized string describing the resource name.
+     * A localized string describing the resource name.
      */
     @JsonProperty(value = "localizedValue")
     private String localizedValue;

@@ -4,6 +4,6 @@
 
 /**
  * This package contains the models classes for StorageManagementClient.
- * The Storage Management Client.
+ * The Azure Storage Management API.
  */
 package storage.models;

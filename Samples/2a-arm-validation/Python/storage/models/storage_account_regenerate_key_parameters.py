@@ -9,7 +9,7 @@ from msrest.serialization import Model
 
 
 class StorageAccountRegenerateKeyParameters(Model):
-    """StorageAccountRegenerateKeyParameters.
+    """The parameters used to regenerate the storage account key.
 
     :param key_name:
     :type key_name: str

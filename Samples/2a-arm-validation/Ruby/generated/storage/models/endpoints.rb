@@ -13,16 +13,16 @@ module Storage
 
       include MsRestAzure
 
-      # @return [String] Gets the blob endpoint.
+      # @return [String] The blob endpoint.
       attr_accessor :blob
 
-      # @return [String] Gets the queue endpoint.
+      # @return [String] The queue endpoint.
       attr_accessor :queue
 
-      # @return [String] Gets the table endpoint.
+      # @return [String] The table endpoint.
       attr_accessor :table
 
-      # @return [String] Gets the file endpoint.
+      # @return [String] The file endpoint.
       attr_accessor :file
 
 

@@ -22,7 +22,8 @@ namespace AwesomeNamespace
     public partial interface IStorageAccountsOperations
     {
         /// <summary>
-        /// Checks that account name is valid and is not in use.
+        /// Checks that the storage account name is valid and is not already in
+        /// use.
         /// </summary>
         /// <param name='name'>
         /// </param>
@@ -46,13 +47,15 @@ namespace AwesomeNamespace
         Task<AzureOperationResponse<CheckNameAvailabilityResult>> CheckNameAvailabilityWithHttpMessagesAsync(string name, string type = "Microsoft.Storage/storageAccounts", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Asynchronously creates a new storage account with the specified
-        /// parameters. Existing accounts cannot be updated with this API and
-        /// should instead use the Update Storage Account API. If an account is
-        /// already created and subsequent PUT request is issued with exact
-        /// same set of properties, then HTTP 200 would be returned.
+        /// parameters. If an account is already created and a subsequent
+        /// create request is issued with different properties, the account
+        /// properties will be updated. If an account is already created and a
+        /// subsequent create or update request is issued with the exact same
+        /// set of properties, the request will succeed.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// The name of the resource group within the user's subscription.
+        /// The name of the resource group within the user's subscription. The
+        /// name is case insensitive.
         /// </param>
         /// <param name='accountName'>
         /// The name of the storage account within the specified resource
@@ -60,15 +63,24 @@ namespace AwesomeNamespace
         /// length and use numbers and lower-case letters only.
         /// </param>
         /// <param name='location'>
-        /// Resource location
+        /// The location of the resource. This will be one of the supported and
+        /// registered Azure Geo Regions (e.g. West US, East US, Southeast
+        /// Asia, etc.). The geo region of a resource cannot be changed once it
+        /// is created, but if an identical geo region is specified on update,
+        /// the request will succeed.
         /// </param>
         /// <param name='accountType'>
-        /// Gets or sets the account type. Possible values include:
-        /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
-        /// 'Premium_LRS'
+        /// The sku name. Required for account creation; optional for update.
+        /// Note that in older versions, sku name was called accountType.
+        /// Possible values include: 'Standard_LRS', 'Standard_ZRS',
+        /// 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
         /// </param>
         /// <param name='tags'>
-        /// Resource tags
+        /// A list of key value pairs that describe the resource. These tags
+        /// can be used for viewing and grouping this resource (across resource
+        /// groups). A maximum of 15 tags can be provided for a resource. Each
+        /// tag must have a key with a length no greater than 128 characters
+        /// and a value with a length no greater than 256 characters.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -90,7 +102,8 @@ namespace AwesomeNamespace
         /// Deletes a storage account in Microsoft Azure.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// The name of the resource group within the user's subscription.
+        /// The name of the resource group within the user's subscription. The
+        /// name is case insensitive.
         /// </param>
         /// <param name='accountName'>
         /// The name of the storage account within the specified resource
@@ -112,12 +125,12 @@ namespace AwesomeNamespace
         Task<AzureOperationResponse> DeleteWithHttpMessagesAsync(string resourceGroupName, string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Returns the properties for the specified storage account including
-        /// but not limited to name, account type, location, and account
-        /// status. The ListKeys operation should be used to retrieve storage
-        /// keys.
+        /// but not limited to name, SKU name, location, and account status.
+        /// The ListKeys operation should be used to retrieve storage keys.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// The name of the resource group within the user's subscription.
+        /// The name of the resource group within the user's subscription. The
+        /// name is case insensitive.
         /// </param>
         /// <param name='accountName'>
         /// The name of the storage account within the specified resource
@@ -141,22 +154,21 @@ namespace AwesomeNamespace
         /// </exception>
         Task<AzureOperationResponse<StorageAccount>> GetPropertiesWithHttpMessagesAsync(string resourceGroupName, string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Updates the account type or tags for a storage account. It can also
-        /// be used to add a custom domain (note that custom domains cannot be
-        /// added via the Create operation). Only one custom domain is
-        /// supported per storage account. In order to replace a custom domain,
-        /// the old value must be cleared before a new value may be set. To
-        /// clear a custom domain, simply update the custom domain with empty
-        /// string. Then call update again with the new cutsom domain name. The
-        /// update API can only be used to update one of tags, accountType, or
-        /// customDomain per call. To update multiple of these properties, call
-        /// the API multiple times with one change per call. This call does not
-        /// change the storage keys for the account. If you want to change
-        /// storage account keys, use the RegenerateKey operation. The location
-        /// and name of the storage account cannot be changed after creation.
+        /// The update operation can be used to update the SKU, encryption,
+        /// access tier, or tags for a storage account. It can also be used to
+        /// map the account to a custom domain. Only one custom domain is
+        /// supported per storage account; the replacement/change of custom
+        /// domain is not supported. In order to replace an old custom domain,
+        /// the old value must be cleared/unregistered before a new value can
+        /// be set. The update of multiple properties is supported. This call
+        /// does not change the storage keys for the account. If you want to
+        /// change the storage account keys, use the regenerate keys operation.
+        /// The location and name of the storage account cannot be changed
+        /// after creation.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// The name of the resource group within the user's subscription.
+        /// The name of the resource group within the user's subscription. The
+        /// name is case insensitive.
         /// </param>
         /// <param name='accountName'>
         /// The name of the storage account within the specified resource
@@ -167,11 +179,11 @@ namespace AwesomeNamespace
         /// Resource tags
         /// </param>
         /// <param name='accountType'>
-        /// Gets or sets the account type. Note that StandardZRS and PremiumLRS
-        /// accounts cannot be changed to other account types, and other
-        /// account types cannot be changed to StandardZRS or PremiumLRS.
-        /// Possible values include: 'Standard_LRS', 'Standard_ZRS',
-        /// 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
+        /// The account type. Note that StandardZRS and PremiumLRS accounts
+        /// cannot be changed to other account types, and other account types
+        /// cannot be changed to StandardZRS or PremiumLRS. Possible values
+        /// include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+        /// 'Standard_RAGRS', 'Premium_LRS'
         /// </param>
         /// <param name='customDomain'>
         /// User domain assigned to the storage account. Name is the CNAME
@@ -195,31 +207,6 @@ namespace AwesomeNamespace
         /// Thrown when a required parameter is null
         /// </exception>
         Task<AzureOperationResponse<StorageAccount>> UpdateWithHttpMessagesAsync(string resourceGroupName, string accountName, IDictionary<string, string> tags = default(IDictionary<string, string>), AccountType? accountType = default(AccountType?), CustomDomain customDomain = default(CustomDomain), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Lists the access keys for the specified storage account.
-        /// </summary>
-        /// <param name='resourceGroupName'>
-        /// The name of the resource group.
-        /// </param>
-        /// <param name='accountName'>
-        /// The name of the storage account.
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="Microsoft.Rest.Azure.CloudException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<AzureOperationResponse<StorageAccountKeys>> ListKeysWithHttpMessagesAsync(string resourceGroupName, string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Lists all the storage accounts available under the subscription.
         /// Note that storage keys are not returned; use the ListKeys operation
@@ -247,7 +234,8 @@ namespace AwesomeNamespace
         /// operation for this.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// The name of the resource group within the user's subscription.
+        /// The name of the resource group within the user's subscription. The
+        /// name is case insensitive.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -266,10 +254,40 @@ namespace AwesomeNamespace
         /// </exception>
         Task<AzureOperationResponse<IEnumerable<StorageAccount>>> ListByResourceGroupWithHttpMessagesAsync(string resourceGroupName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Regenerates the access keys for the specified storage account.
+        /// Lists the access keys for the specified storage account.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// The name of the resource group within the user's subscription.
+        /// The name of the resource group within the user's subscription. The
+        /// name is case insensitive.
+        /// </param>
+        /// <param name='accountName'>
+        /// The name of the storage account within the specified resource
+        /// group. Storage account names must be between 3 and 24 characters in
+        /// length and use numbers and lower-case letters only.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.Azure.CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<StorageAccountKeys>> ListKeysWithHttpMessagesAsync(string resourceGroupName, string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Regenerates one of the access keys for the specified storage
+        /// account.
+        /// </summary>
+        /// <param name='resourceGroupName'>
+        /// The name of the resource group within the user's subscription. The
+        /// name is case insensitive.
         /// </param>
         /// <param name='accountName'>
         /// The name of the storage account within the specified resource
@@ -296,13 +314,15 @@ namespace AwesomeNamespace
         Task<AzureOperationResponse<StorageAccountKeys>> RegenerateKeyWithHttpMessagesAsync(string resourceGroupName, string accountName, string keyName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Asynchronously creates a new storage account with the specified
-        /// parameters. Existing accounts cannot be updated with this API and
-        /// should instead use the Update Storage Account API. If an account is
-        /// already created and subsequent PUT request is issued with exact
-        /// same set of properties, then HTTP 200 would be returned.
+        /// parameters. If an account is already created and a subsequent
+        /// create request is issued with different properties, the account
+        /// properties will be updated. If an account is already created and a
+        /// subsequent create or update request is issued with the exact same
+        /// set of properties, the request will succeed.
         /// </summary>
         /// <param name='resourceGroupName'>
-        /// The name of the resource group within the user's subscription.
+        /// The name of the resource group within the user's subscription. The
+        /// name is case insensitive.
         /// </param>
         /// <param name='accountName'>
         /// The name of the storage account within the specified resource
@@ -310,15 +330,24 @@ namespace AwesomeNamespace
         /// length and use numbers and lower-case letters only.
         /// </param>
         /// <param name='location'>
-        /// Resource location
+        /// The location of the resource. This will be one of the supported and
+        /// registered Azure Geo Regions (e.g. West US, East US, Southeast
+        /// Asia, etc.). The geo region of a resource cannot be changed once it
+        /// is created, but if an identical geo region is specified on update,
+        /// the request will succeed.
         /// </param>
         /// <param name='accountType'>
-        /// Gets or sets the account type. Possible values include:
-        /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
-        /// 'Premium_LRS'
+        /// The sku name. Required for account creation; optional for update.
+        /// Note that in older versions, sku name was called accountType.
+        /// Possible values include: 'Standard_LRS', 'Standard_ZRS',
+        /// 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
         /// </param>
         /// <param name='tags'>
-        /// Resource tags
+        /// A list of key value pairs that describe the resource. These tags
+        /// can be used for viewing and grouping this resource (across resource
+        /// groups). A maximum of 15 tags can be provided for a resource. Each
+        /// tag must have a key with a length no greater than 128 characters
+        /// and a value with a length no greater than 256 characters.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.

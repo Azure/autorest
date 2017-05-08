@@ -53,6 +53,7 @@ modelTypes:
         '#defaultValue': Microsoft.Storage/storageAccounts
         '#name': type
         '#serializedName': type
+    documentation: The parameters used to check the availabity of the storage account name.
     containsConstantProperties: false
     className: StorageAccountCheckNameAvailabilityParameters
     declarationName: StorageAccountCheckNameAvailabilityParameters
@@ -85,9 +86,9 @@ modelTypes:
           isConstant: false
           '#name': Boolean
         '#documentation': >-
-          Gets a boolean value that indicates whether the name is available for
-          you to use. If true, the name is available. If false, the name has
-          already been taken or invalid and cannot be used.
+          Boolean value that indicates whether the name is available for you to
+          use. If true, the name is available. If false, the name has already
+          been taken or is invalid and cannot be used.
         '#name': nameAvailable
         '#serializedName': nameAvailable
       - $id: '9'
@@ -125,8 +126,8 @@ modelTypes:
           '#serializedName': Reason
           '#name': Reason
         '#documentation': >-
-          Gets the reason that a storage account name could not be used. The
-          Reason element is only returned if NameAvailable is false.
+          The reason that a storage account name could not be used. The Reason
+          element is only returned if NameAvailable is false.
         '#name': reason
         '#serializedName': reason
       - $id: '11'
@@ -151,7 +152,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets an error message explaining the Reason value in more detail.
+        '#documentation': The error message explaining the Reason value in more detail.
         '#name': message
         '#serializedName': message
     documentation: The CheckNameAvailability operation response.
@@ -209,9 +210,12 @@ modelTypes:
           isConstant: false
           '#serializedName': AccountType
           '#name': AccountType
-        '#documentation': Gets or sets the account type.
+        '#documentation': >-
+          The sku name. Required for account creation; optional for update. Note
+          that in older versions, sku name was called accountType.
         '#name': accountType
         '#serializedName': accountType
+    documentation: The parameters used to create the storage account.
     containsConstantProperties: false
     className: StorageAccountPropertiesCreateParameters
     declarationName: StorageAccountPropertiesCreateParameters
@@ -243,7 +247,12 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Resource location
+        '#documentation': >-
+          The location of the resource. This will be one of the supported and
+          registered Azure Geo Regions (e.g. West US, East US, Southeast Asia,
+          etc.). The geo region of a resource cannot be changed once it is
+          created, but if an identical geo region is specified on update, the
+          request will succeed.
         '#name': location
         '#serializedName': location
       - $id: '19'
@@ -276,7 +285,12 @@ modelTypes:
           className: 'Dictionary<string,String>'
           declarationName: 'Dictionary<string,String>'
           isConstant: false
-        '#documentation': Resource tags
+        '#documentation': >-
+          A list of key value pairs that describe the resource. These tags can
+          be used for viewing and grouping this resource (across resource
+          groups). A maximum of 15 tags can be provided for a resource. Each tag
+          must have a key with a length no greater than 128 characters and a
+          value with a length no greater than 256 characters.
         '#name': tags
         '#serializedName': tags
       - $id: '22'
@@ -331,7 +345,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets the blob endpoint.
+        '#documentation': The blob endpoint.
         '#name': blob
         '#serializedName': blob
       - $id: '26'
@@ -356,7 +370,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets the queue endpoint.
+        '#documentation': The queue endpoint.
         '#name': queue
         '#serializedName': queue
       - $id: '28'
@@ -381,7 +395,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets the table endpoint.
+        '#documentation': The table endpoint.
         '#name': table
         '#serializedName': table
       - $id: '30'
@@ -406,7 +420,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets the file endpoint.
+        '#documentation': The file endpoint.
         '#name': file
         '#serializedName': file
     documentation: >-
@@ -443,7 +457,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets or sets the custom domain name. Name is the CNAME source.
+        '#documentation': The custom domain name. Name is the CNAME source.
         '#name': name
         '#serializedName': name
       - $id: '35'
@@ -523,7 +537,7 @@ modelTypes:
           '#serializedName': ProvisioningState
           '#name': ProvisioningState
         '#documentation': >-
-          Gets the status of the storage account at the time the operation was
+          The status of the storage account at the time the operation was
           called.
         '#name': provisioningState
         '#serializedName': provisioningState
@@ -545,7 +559,7 @@ modelTypes:
         modelTypeName: AccountType
         modelType:
           $ref: '15'
-        '#documentation': Gets the type of the storage account.
+        '#documentation': The type of the storage account.
         '#name': accountType
         '#serializedName': accountType
       - $id: '41'
@@ -563,9 +577,9 @@ modelTypes:
         modelType:
           $ref: '23'
         '#documentation': >-
-          Gets the URLs that are used to perform a retrieval of a public blob,
-          queue or table object.Note that StandardZRS and PremiumLRS accounts
-          only return the blob endpoint.
+          The URLs that are used to perform a retrieval of a public blob, queue,
+          or table object. Note that Standard_ZRS and Premium_LRS accounts only
+          return the blob endpoint.
         '#name': primaryEndpoints
         '#serializedName': primaryEndpoints
       - $id: '42'
@@ -590,7 +604,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets the location of the primary for the storage account.
+        '#documentation': The location of the primary data center for the storage account.
         '#name': primaryLocation
         '#serializedName': primaryLocation
       - $id: '44'
@@ -628,7 +642,7 @@ modelTypes:
           '#serializedName': AccountStatus
           '#name': AccountStatus
         '#documentation': >-
-          Gets the status indicating whether the primary location of the storage
+          The status indicating whether the primary location of the storage
           account is available or unavailable.
         '#name': statusOfPrimary
         '#serializedName': statusOfPrimary
@@ -656,10 +670,10 @@ modelTypes:
           isConstant: false
           '#name': DateTime
         '#documentation': >-
-          Gets the timestamp of the most recent instance of a failover to the
+          The timestamp of the most recent instance of a failover to the
           secondary location. Only the most recent timestamp is retained. This
           element is not returned if there has never been a failover instance.
-          Only available if the accountType is StandardGRS or StandardRAGRS.
+          Only available if the accountType is Standard_GRS or Standard_RAGRS.
         '#name': lastGeoFailoverTime
         '#serializedName': lastGeoFailoverTime
       - $id: '48'
@@ -685,9 +699,8 @@ modelTypes:
           isConstant: false
           '#name': String
         '#documentation': >-
-          Gets the location of the geo replicated secondary for the storage
-          account. Only available if the accountType is StandardGRS or
-          StandardRAGRS.
+          The location of the geo-replicated secondary for the storage account.
+          Only available if the accountType is Standard_GRS or Standard_RAGRS.
         '#name': secondaryLocation
         '#serializedName': secondaryLocation
       - $id: '50'
@@ -709,9 +722,9 @@ modelTypes:
         modelType:
           $ref: '45'
         '#documentation': >-
-          Gets the status indicating whether the secondary location of the
-          storage account is available or unavailable. Only available if the
-          accountType is StandardGRS or StandardRAGRS.
+          The status indicating whether the secondary location of the storage
+          account is available or unavailable. Only available if the SKU name is
+          Standard_GRS or Standard_RAGRS.
         '#name': statusOfSecondary
         '#serializedName': statusOfSecondary
       - $id: '51'
@@ -737,7 +750,7 @@ modelTypes:
           declarationName: DateTime
           isConstant: false
           '#name': DateTime
-        '#documentation': Gets the creation date and time of the storage account in UTC.
+        '#documentation': The creation date and time of the storage account in UTC.
         '#name': creationTime
         '#serializedName': creationTime
       - $id: '53'
@@ -754,7 +767,7 @@ modelTypes:
         modelTypeName: CustomDomain
         modelType:
           $ref: '32'
-        '#documentation': Gets the user assigned custom domain assigned to this storage account.
+        '#documentation': The custom domain the user assigned to this storage account.
         '#name': customDomain
         '#serializedName': customDomain
       - $id: '54'
@@ -772,11 +785,12 @@ modelTypes:
         modelType:
           $ref: '23'
         '#documentation': >-
-          Gets the URLs that are used to perform a retrieval of a public blob,
-          queue or table object from the secondary location of the storage
-          account. Only available if the accountType is StandardRAGRS.
+          The URLs that are used to perform a retrieval of a public blob, queue,
+          or table object from the secondary location of the storage account.
+          Only available if the SKU name is Standard_RAGRS.
         '#name': secondaryEndpoints
         '#serializedName': secondaryEndpoints
+    documentation: Properties of the storage account.
     containsConstantProperties: false
     className: StorageAccountProperties
     declarationName: StorageAccountProperties
@@ -942,6 +956,7 @@ modelTypes:
           '#documentation': Resource tags
           '#name': tags
           '#serializedName': tags
+      documentation: Describes a storage resource.
       containsConstantProperties: false
       className: Resource
       declarationName: Resource
@@ -981,7 +996,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets the value of key 1.
+        '#documentation': The value of key 1.
         '#name': key1
         '#serializedName': key1
       - $id: '72'
@@ -1006,7 +1021,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets the value of key 2.
+        '#documentation': The value of key 2.
         '#name': key2
         '#serializedName': key2
     documentation: The access keys for the storage account.
@@ -1038,7 +1053,7 @@ modelTypes:
           className: IList<StorageAccount>
           declarationName: IList<StorageAccount>
           isConstant: false
-        '#documentation': Gets the list of storage accounts and their properties.
+        '#documentation': The list of storage accounts and their properties.
         '#name': value
         '#serializedName': value
     documentation: The list storage accounts operation response.
@@ -1070,9 +1085,9 @@ modelTypes:
         modelType:
           $ref: '15'
         '#documentation': >-
-          Gets or sets the account type. Note that StandardZRS and PremiumLRS
-          accounts cannot be changed to other account types, and other account
-          types cannot be changed to StandardZRS or PremiumLRS.
+          The account type. Note that StandardZRS and PremiumLRS accounts cannot
+          be changed to other account types, and other account types cannot be
+          changed to StandardZRS or PremiumLRS.
         '#name': accountType
         '#serializedName': accountType
       - $id: '79'
@@ -1096,6 +1111,7 @@ modelTypes:
           custom domain name property.
         '#name': customDomain
         '#serializedName': customDomain
+    documentation: The parameters used when updating a storage account.
     containsConstantProperties: false
     className: StorageAccountPropertiesUpdateParameters
     declarationName: StorageAccountPropertiesUpdateParameters
@@ -1192,6 +1208,7 @@ modelTypes:
           '#name': String
         '#name': keyName
         '#serializedName': keyName
+    documentation: The parameters used to regenerate the storage account key.
     containsConstantProperties: false
     className: StorageAccountRegenerateKeyParameters
     declarationName: StorageAccountRegenerateKeyParameters
@@ -1223,7 +1240,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets a string describing the resource name.
+        '#documentation': A string describing the resource name.
         '#name': value
         '#serializedName': value
       - $id: '91'
@@ -1248,7 +1265,7 @@ modelTypes:
           declarationName: String
           isConstant: false
           '#name': String
-        '#documentation': Gets a localized string describing the resource name.
+        '#documentation': A localized string describing the resource name.
         '#name': localizedValue
         '#serializedName': localizedValue
     documentation: The Usage Names.
@@ -1309,7 +1326,7 @@ modelTypes:
           isConstant: false
           '#serializedName': UsageUnit
           '#name': UsageUnit
-        '#documentation': Gets the unit of measurement.
+        '#documentation': The unit of measurement.
         '#name': unit
         '#serializedName': unit
       - $id: '96'
@@ -1335,7 +1352,7 @@ modelTypes:
           declarationName: Int
           isConstant: false
           '#name': Int
-        '#documentation': Gets the current count of the allocated resources in the subscription.
+        '#documentation': The current count of the allocated resources in the subscription.
         '#name': currentValue
         '#serializedName': currentValue
       - $id: '98'
@@ -1362,7 +1379,7 @@ modelTypes:
           isConstant: false
           '#name': Int
         '#documentation': >-
-          Gets the maximum count of the resources that can be allocated in the
+          The maximum count of the resources that can be allocated in the
           subscription.
         '#name': limit
         '#serializedName': limit
@@ -1380,7 +1397,7 @@ modelTypes:
         modelTypeName: UsageName
         modelType:
           $ref: '88'
-        '#documentation': Gets the name of the type of usage.
+        '#documentation': The name of the type of usage.
         '#name': name
         '#serializedName': name
     documentation: DESCRIBES STORAGE RESOURCE USAGE.
@@ -1412,7 +1429,7 @@ modelTypes:
           className: IList<Usage>
           declarationName: IList<Usage>
           isConstant: false
-        '#documentation': Gets or sets the list Storage Resource Usages.
+        '#documentation': The list Storage Resource Usages.
         '#name': value
         '#serializedName': value
     documentation: The List Usages operation response.
@@ -1435,7 +1452,7 @@ baseUrl: 'https://management.azure.com'
 methodGroupNames:
   - StorageAccounts
   - Usage
-documentation: The Storage Management Client.
+documentation: The Azure Storage Management API.
 shouldGenerateXmlSerialization: false
 properties:
   - $id: '104'
@@ -1461,7 +1478,7 @@ properties:
       isConstant: false
       '#name': String
     '#documentation': >-
-      Gets subscription credentials which uniquely identify Microsoft Azure
+      Subscription credentials which uniquely identify the Microsoft Azure
       subscription. The subscription ID forms part of the URI for every service
       call.
     '#name': subscriptionId
@@ -1491,10 +1508,43 @@ properties:
     '#documentation': Client Api Version.
     '#name': api-version
     '#serializedName': api-version
+  - $id: '108'
+    $actualType: AutoRest.Core.Model.Property
+    isReadOnly: false
+    isPolymorphicDiscriminator: false
+    realPath:
+      - resourceGroupName
+    realXmlPath:
+      - resourceGroupName
+    collectionFormat: none
+    constraints:
+      MaxLength: '90'
+      MinLength: '1'
+      Pattern: '^[-\w\._\(\)]+$'
+    extensions:
+      x-ms-parameter-location: method
+    isRequired: true
+    isConstant: false
+    modelTypeName: String
+    modelType:
+      $id: '109'
+      $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+      $actualType: AutoRest.Core.Model.PrimaryType
+      knownFormat: none
+      knownPrimaryType: string
+      className: String
+      declarationName: String
+      isConstant: false
+      '#name': String
+    '#documentation': >-
+      The name of the resource group within the user's subscription. The name is
+      case insensitive.
+    '#name': resourceGroupName
+    '#serializedName': resourceGroupName
 operations:
   - methods:
       - parameters:
-          - $id: '108'
+          - $id: '110'
             isClientProperty: false
             location: body
             collectionFormat: none
@@ -1509,33 +1559,11 @@ operations:
               in length and use numbers and lower-case letters only.
             '#name': accountName
             '#serializedName': accountName
-          - $id: '109'
+          - $id: '111'
             isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '110'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
-          - $id: '111'
-            isClientProperty: true
-            clientProperty:
-              $ref: '104'
-            location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
@@ -1550,8 +1578,30 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
+            '#documentation': Client Api Version.
+            '#name': api-version
+            '#serializedName': api-version
+          - $id: '113'
+            isClientProperty: true
+            clientProperty:
+              $ref: '104'
+            location: path
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '114'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
             '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
+              Subscription credentials which uniquely identify the Microsoft
               Azure subscription. The subscription ID forms part of the URI for
               every service call.
             '#name': subscriptionId
@@ -1585,33 +1635,18 @@ operations:
         '#url': >-
           /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
       - parameters:
-          - $id: '113'
-            isClientProperty: false
-            location: path
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '114'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
           - $id: '115'
             isClientProperty: false
+            clientProperty:
+              $ref: '108'
             location: path
             collectionFormat: none
             constraints:
-              MaxLength: '24'
-              MinLength: '3'
+              MaxLength: '90'
+              MinLength: '1'
+              Pattern: '^[-\w\._\(\)]+$'
+            extensions:
+              x-ms-parameter-location: method
             isRequired: true
             isConstant: false
             modelTypeName: String
@@ -1626,12 +1661,37 @@ operations:
               isConstant: false
               '#name': String
             '#documentation': >-
+              The name of the resource group within the user's subscription. The
+              name is case insensitive.
+            '#name': resourceGroupName
+            '#serializedName': resourceGroupName
+          - $id: '117'
+            isClientProperty: false
+            location: path
+            collectionFormat: none
+            constraints:
+              MaxLength: '24'
+              MinLength: '3'
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '118'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
+            '#documentation': >-
               The name of the storage account within the specified resource
               group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.  
+              in length and use numbers and lower-case letters only.
             '#name': accountName
             '#serializedName': accountName
-          - $id: '117'
+          - $id: '119'
             isClientProperty: false
             location: body
             collectionFormat: none
@@ -1643,33 +1703,11 @@ operations:
             '#documentation': The parameters to provide for the created account.
             '#name': parameters
             '#serializedName': parameters
-          - $id: '118'
+          - $id: '120'
             isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '119'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
-          - $id: '120'
-            isClientProperty: true
-            clientProperty:
-              $ref: '104'
-            location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
@@ -1684,8 +1722,30 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
+            '#documentation': Client Api Version.
+            '#name': api-version
+            '#serializedName': api-version
+          - $id: '122'
+            isClientProperty: true
+            clientProperty:
+              $ref: '104'
+            location: path
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '123'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
             '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
+              Subscription credentials which uniquely identify the Microsoft
               Azure subscription. The subscription ID forms part of the URI for
               every service call.
             '#name': subscriptionId
@@ -1709,11 +1769,12 @@ operations:
           isNullable: true
         description: >-
           Asynchronously creates a new storage account with the specified
-          parameters. Existing accounts cannot be updated with this API and
-          should instead use the Update Storage Account API. If an account is
-          already created and subsequent PUT request is issued with exact same
-          set of properties, then HTTP 200 would be returned.  Make sure you add
-          that extra cowbell.
+          parameters. If an account is already created and a subsequent create
+          request is issued with different properties, the account properties
+          will be updated. If an account is already created and a subsequent
+          create or update request is issued with the exact same set of
+          properties, the request will succeed. Make sure you add that extra
+          cowbell.
         requestContentType: application/json; charset=utf-8
         responseContentTypes:
           - application/json
@@ -1727,33 +1788,18 @@ operations:
         '#url': >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
-          - $id: '122'
-            isClientProperty: false
-            location: path
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '123'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
           - $id: '124'
             isClientProperty: false
+            clientProperty:
+              $ref: '108'
             location: path
             collectionFormat: none
             constraints:
-              MaxLength: '24'
-              MinLength: '3'
+              MaxLength: '90'
+              MinLength: '1'
+              Pattern: '^[-\w\._\(\)]+$'
+            extensions:
+              x-ms-parameter-location: method
             isRequired: true
             isConstant: false
             modelTypeName: String
@@ -1768,17 +1814,17 @@ operations:
               isConstant: false
               '#name': String
             '#documentation': >-
-              The name of the storage account within the specified resource
-              group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.  
-            '#name': accountName
-            '#serializedName': accountName
+              The name of the resource group within the user's subscription. The
+              name is case insensitive.
+            '#name': resourceGroupName
+            '#serializedName': resourceGroupName
           - $id: '126'
-            isClientProperty: true
-            clientProperty:
-              $ref: '106'
-            location: query
+            isClientProperty: false
+            location: path
             collectionFormat: none
+            constraints:
+              MaxLength: '24'
+              MinLength: '3'
             isRequired: true
             isConstant: false
             modelTypeName: String
@@ -1792,14 +1838,17 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+            '#documentation': >-
+              The name of the storage account within the specified resource
+              group. Storage account names must be between 3 and 24 characters
+              in length and use numbers and lower-case letters only.
+            '#name': accountName
+            '#serializedName': accountName
           - $id: '128'
             isClientProperty: true
             clientProperty:
-              $ref: '104'
-            location: path
+              $ref: '106'
+            location: query
             collectionFormat: none
             isRequired: true
             isConstant: false
@@ -1814,8 +1863,30 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
+            '#documentation': Client Api Version.
+            '#name': api-version
+            '#serializedName': api-version
+          - $id: '130'
+            isClientProperty: true
+            clientProperty:
+              $ref: '104'
+            location: path
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '131'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
             '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
+              Subscription credentials which uniquely identify the Microsoft
               Azure subscription. The subscription ID forms part of the URI for
               every service call.
             '#name': subscriptionId
@@ -1845,33 +1916,18 @@ operations:
         '#url': >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
-          - $id: '130'
-            isClientProperty: false
-            location: path
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '131'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
           - $id: '132'
             isClientProperty: false
+            clientProperty:
+              $ref: '108'
             location: path
             collectionFormat: none
             constraints:
-              MaxLength: '24'
-              MinLength: '3'
+              MaxLength: '90'
+              MinLength: '1'
+              Pattern: '^[-\w\._\(\)]+$'
+            extensions:
+              x-ms-parameter-location: method
             isRequired: true
             isConstant: false
             modelTypeName: String
@@ -1886,17 +1942,17 @@ operations:
               isConstant: false
               '#name': String
             '#documentation': >-
-              The name of the storage account within the specified resource
-              group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.  
-            '#name': accountName
-            '#serializedName': accountName
+              The name of the resource group within the user's subscription. The
+              name is case insensitive.
+            '#name': resourceGroupName
+            '#serializedName': resourceGroupName
           - $id: '134'
-            isClientProperty: true
-            clientProperty:
-              $ref: '106'
-            location: query
+            isClientProperty: false
+            location: path
             collectionFormat: none
+            constraints:
+              MaxLength: '24'
+              MinLength: '3'
             isRequired: true
             isConstant: false
             modelTypeName: String
@@ -1910,14 +1966,17 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+            '#documentation': >-
+              The name of the storage account within the specified resource
+              group. Storage account names must be between 3 and 24 characters
+              in length and use numbers and lower-case letters only.  
+            '#name': accountName
+            '#serializedName': accountName
           - $id: '136'
             isClientProperty: true
             clientProperty:
-              $ref: '104'
-            location: path
+              $ref: '106'
+            location: query
             collectionFormat: none
             isRequired: true
             isConstant: false
@@ -1932,8 +1991,30 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
+            '#documentation': Client Api Version.
+            '#name': api-version
+            '#serializedName': api-version
+          - $id: '138'
+            isClientProperty: true
+            clientProperty:
+              $ref: '104'
+            location: path
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '139'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
             '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
+              Subscription credentials which uniquely identify the Microsoft
               Azure subscription. The subscription ID forms part of the URI for
               every service call.
             '#name': subscriptionId
@@ -1955,7 +2036,7 @@ operations:
           isNullable: true
         description: >-
           Returns the properties for the specified storage account including but
-          not limited to name, account type, location, and account status. The
+          not limited to name, SKU name, location, and account status. The
           ListKeys operation should be used to retrieve storage keys.
         requestContentType: application/json; charset=utf-8
         responseContentTypes:
@@ -1968,33 +2049,18 @@ operations:
         '#url': >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
-          - $id: '138'
-            isClientProperty: false
-            location: path
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '139'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
           - $id: '140'
             isClientProperty: false
+            clientProperty:
+              $ref: '108'
             location: path
             collectionFormat: none
             constraints:
-              MaxLength: '24'
-              MinLength: '3'
+              MaxLength: '90'
+              MinLength: '1'
+              Pattern: '^[-\w\._\(\)]+$'
+            extensions:
+              x-ms-parameter-location: method
             isRequired: true
             isConstant: false
             modelTypeName: String
@@ -2009,36 +2075,22 @@ operations:
               isConstant: false
               '#name': String
             '#documentation': >-
-              The name of the storage account within the specified resource
-              group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.  
-            '#name': accountName
-            '#serializedName': accountName
+              The name of the resource group within the user's subscription. The
+              name is case insensitive.
+            '#name': resourceGroupName
+            '#serializedName': resourceGroupName
           - $id: '142'
             isClientProperty: false
-            location: body
+            location: path
             collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: StorageAccountUpdateParameters
-            modelType:
-              $ref: '80'
-            '#documentation': >-
-              The parameters to update on the account. Note that only one
-              property can be changed at a time using this API. 
-            '#name': parameters
-            '#serializedName': parameters
-          - $id: '143'
-            isClientProperty: true
-            clientProperty:
-              $ref: '106'
-            location: query
-            collectionFormat: none
+            constraints:
+              MaxLength: '24'
+              MinLength: '3'
             isRequired: true
             isConstant: false
             modelTypeName: String
             modelType:
-              $id: '144'
+              $id: '143'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
@@ -2047,14 +2099,29 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+            '#documentation': >-
+              The name of the storage account within the specified resource
+              group. Storage account names must be between 3 and 24 characters
+              in length and use numbers and lower-case letters only.
+            '#name': accountName
+            '#serializedName': accountName
+          - $id: '144'
+            isClientProperty: false
+            location: body
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: StorageAccountUpdateParameters
+            modelType:
+              $ref: '80'
+            '#documentation': The parameters to provide for the updated account.
+            '#name': parameters
+            '#serializedName': parameters
           - $id: '145'
             isClientProperty: true
             clientProperty:
-              $ref: '104'
-            location: path
+              $ref: '106'
+            location: query
             collectionFormat: none
             isRequired: true
             isConstant: false
@@ -2069,8 +2136,30 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
+            '#documentation': Client Api Version.
+            '#name': api-version
+            '#serializedName': api-version
+          - $id: '147'
+            isClientProperty: true
+            clientProperty:
+              $ref: '104'
+            location: path
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '148'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
             '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
+              Subscription credentials which uniquely identify the Microsoft
               Azure subscription. The subscription ID forms part of the URI for
               every service call.
             '#name': subscriptionId
@@ -2091,19 +2180,16 @@ operations:
             $ref: '55'
           isNullable: true
         description: >-
-          Updates the account type or tags for a storage account. It can also be
-          used to add a custom domain (note that custom domains cannot be added
-          via the Create operation). Only one custom domain is supported per
-          storage account. In order to replace a custom domain, the old value
-          must be cleared before a new value may be set. To clear a custom
-          domain, simply update the custom domain with empty string. Then call
-          update again with the new cutsom domain name. The update API can only
-          be used to update one of tags, accountType, or customDomain per call.
-          To update multiple of these properties, call the API multiple times
-          with one change per call. This call does not change the storage keys
-          for the account. If you want to change storage account keys, use the
-          RegenerateKey operation. The location and name of the storage account
-          cannot be changed after creation.
+          The update operation can be used to update the SKU, encryption, access
+          tier, or tags for a storage account. It can also be used to map the
+          account to a custom domain. Only one custom domain is supported per
+          storage account; the replacement/change of custom domain is not
+          supported. In order to replace an old custom domain, the old value
+          must be cleared/unregistered before a new value can be set. The update
+          of multiple properties is supported. This call does not change the
+          storage keys for the account. If you want to change the storage
+          account keys, use the regenerate keys operation. The location and name
+          of the storage account cannot be changed after creation.
         requestContentType: application/json; charset=utf-8
         responseContentTypes:
           - application/json
@@ -2115,33 +2201,12 @@ operations:
         '#url': >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
-          - $id: '147'
-            isClientProperty: false
-            location: path
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '148'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': The name of the resource group.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
           - $id: '149'
-            isClientProperty: false
-            location: path
+            isClientProperty: true
+            clientProperty:
+              $ref: '106'
+            location: query
             collectionFormat: none
-            constraints:
-              MaxLength: '24'
-              MinLength: '3'
             isRequired: true
             isConstant: false
             modelTypeName: String
@@ -2155,14 +2220,14 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
-            '#documentation': The name of the storage account.
-            '#name': accountName
-            '#serializedName': accountName
+            '#documentation': Client Api Version.
+            '#name': api-version
+            '#serializedName': api-version
           - $id: '151'
             isClientProperty: true
             clientProperty:
-              $ref: '106'
-            location: query
+              $ref: '104'
+            location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
@@ -2177,15 +2242,57 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+            '#documentation': >-
+              Subscription credentials which uniquely identify the Microsoft
+              Azure subscription. The subscription ID forms part of the URI for
+              every service call.
+            '#name': subscriptionId
+            '#serializedName': subscriptionId
+        isAbsoluteUrl: false
+        httpMethod: get
+        requestSerializationFormat: none
+        responseSerializationFormat: none
+        responses:
+          OK:
+            body:
+              $ref: '74'
+            isNullable: true
+        defaultResponse:
+          isNullable: true
+        returnType:
+          body:
+            $ref: '74'
+          isNullable: true
+        description: >-
+          Lists all the storage accounts available under the subscription. Note
+          that storage keys are not returned; use the ListKeys operation for
+          this.
+        requestContentType: application/json; charset=utf-8
+        responseContentTypes:
+          - application/json
+          - text/json
+        extensions:
+          x-ms-pageable:
+            nextLinkName: null
+        deprecated: false
+        '#name': List
+        '#group': StorageAccounts
+        '#serializedName': StorageAccounts_List
+        '#url': >-
+          /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
+      - parameters:
           - $id: '153'
-            isClientProperty: true
+            isClientProperty: false
             clientProperty:
-              $ref: '104'
+              $ref: '108'
             location: path
             collectionFormat: none
+            constraints:
+              MaxLength: '90'
+              MinLength: '1'
+              Pattern: '^[-\w\._\(\)]+$'
+            extensions:
+              x-ms-parameter-location: method
             isRequired: true
             isConstant: false
             modelTypeName: String
@@ -2200,38 +2307,10 @@ operations:
               isConstant: false
               '#name': String
             '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
-        isAbsoluteUrl: false
-        httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
-        responses:
-          OK:
-            body:
-              $ref: '69'
-            isNullable: true
-        defaultResponse:
-          isNullable: true
-        returnType:
-          body:
-            $ref: '69'
-          isNullable: true
-        description: Lists the access keys for the specified storage account.
-        requestContentType: application/json; charset=utf-8
-        responseContentTypes:
-          - application/json
-          - text/json
-        deprecated: false
-        '#name': ListKeys
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_ListKeys
-        '#url': >-
-          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
-      - parameters:
+              The name of the resource group within the user's subscription. The
+              name is case insensitive.
+            '#name': resourceGroupName
+            '#serializedName': resourceGroupName
           - $id: '155'
             isClientProperty: true
             clientProperty:
@@ -2274,107 +2353,7 @@ operations:
               isConstant: false
               '#name': String
             '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
-        isAbsoluteUrl: false
-        httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
-        responses:
-          OK:
-            body:
-              $ref: '74'
-            isNullable: true
-        defaultResponse:
-          isNullable: true
-        returnType:
-          body:
-            $ref: '74'
-          isNullable: true
-        description: >-
-          Lists all the storage accounts available under the subscription. Note
-          that storage keys are not returned; use the ListKeys operation for
-          this.
-        requestContentType: application/json; charset=utf-8
-        responseContentTypes:
-          - application/json
-          - text/json
-        extensions:
-          x-ms-pageable:
-            nextLinkName: null
-        deprecated: false
-        '#name': List
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_List
-        '#url': >-
-          /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
-      - parameters:
-          - $id: '159'
-            isClientProperty: false
-            location: path
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '160'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
-          - $id: '161'
-            isClientProperty: true
-            clientProperty:
-              $ref: '106'
-            location: query
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '162'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
-          - $id: '163'
-            isClientProperty: true
-            clientProperty:
-              $ref: '104'
-            location: path
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '164'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
+              Subscription credentials which uniquely identify the Microsoft
               Azure subscription. The subscription ID forms part of the URI for
               every service call.
             '#name': subscriptionId
@@ -2412,8 +2391,88 @@ operations:
         '#url': >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts
       - parameters:
-          - $id: '165'
+          - $id: '159'
             isClientProperty: false
+            clientProperty:
+              $ref: '108'
+            location: path
+            collectionFormat: none
+            constraints:
+              MaxLength: '90'
+              MinLength: '1'
+              Pattern: '^[-\w\._\(\)]+$'
+            extensions:
+              x-ms-parameter-location: method
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '160'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
+            '#documentation': >-
+              The name of the resource group within the user's subscription. The
+              name is case insensitive.
+            '#name': resourceGroupName
+            '#serializedName': resourceGroupName
+          - $id: '161'
+            isClientProperty: false
+            location: path
+            collectionFormat: none
+            constraints:
+              MaxLength: '24'
+              MinLength: '3'
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '162'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
+            '#documentation': >-
+              The name of the storage account within the specified resource
+              group. Storage account names must be between 3 and 24 characters
+              in length and use numbers and lower-case letters only.
+            '#name': accountName
+            '#serializedName': accountName
+          - $id: '163'
+            isClientProperty: true
+            clientProperty:
+              $ref: '106'
+            location: query
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '164'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
+            '#documentation': Client Api Version.
+            '#name': api-version
+            '#serializedName': api-version
+          - $id: '165'
+            isClientProperty: true
+            clientProperty:
+              $ref: '104'
             location: path
             collectionFormat: none
             isRequired: true
@@ -2429,92 +2488,8 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
-          - $id: '167'
-            isClientProperty: false
-            location: path
-            collectionFormat: none
-            constraints:
-              MaxLength: '24'
-              MinLength: '3'
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '168'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
             '#documentation': >-
-              The name of the storage account within the specified resource
-              group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.  
-            '#name': accountName
-            '#serializedName': accountName
-          - $id: '169'
-            isClientProperty: false
-            location: body
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: StorageAccountRegenerateKeyParameters
-            modelType:
-              $ref: '85'
-            '#documentation': >-
-              Specifies name of the key which should be regenerated. key1 or
-              key2 for the default keys
-            '#name': regenerateKey
-            '#serializedName': regenerateKey
-          - $id: '170'
-            isClientProperty: true
-            clientProperty:
-              $ref: '106'
-            location: query
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '171'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
-          - $id: '172'
-            isClientProperty: true
-            clientProperty:
-              $ref: '104'
-            location: path
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '173'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
+              Subscription credentials which uniquely identify the Microsoft
               Azure subscription. The subscription ID forms part of the URI for
               every service call.
             '#name': subscriptionId
@@ -2534,7 +2509,151 @@ operations:
           body:
             $ref: '69'
           isNullable: true
-        description: Regenerates the access keys for the specified storage account.
+        description: Lists the access keys for the specified storage account.
+        requestContentType: application/json; charset=utf-8
+        responseContentTypes:
+          - application/json
+          - text/json
+        deprecated: false
+        '#name': ListKeys
+        '#group': StorageAccounts
+        '#serializedName': StorageAccounts_ListKeys
+        '#url': >-
+          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
+      - parameters:
+          - $id: '167'
+            isClientProperty: false
+            clientProperty:
+              $ref: '108'
+            location: path
+            collectionFormat: none
+            constraints:
+              MaxLength: '90'
+              MinLength: '1'
+              Pattern: '^[-\w\._\(\)]+$'
+            extensions:
+              x-ms-parameter-location: method
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '168'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
+            '#documentation': >-
+              The name of the resource group within the user's subscription. The
+              name is case insensitive.
+            '#name': resourceGroupName
+            '#serializedName': resourceGroupName
+          - $id: '169'
+            isClientProperty: false
+            location: path
+            collectionFormat: none
+            constraints:
+              MaxLength: '24'
+              MinLength: '3'
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '170'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
+            '#documentation': >-
+              The name of the storage account within the specified resource
+              group. Storage account names must be between 3 and 24 characters
+              in length and use numbers and lower-case letters only.
+            '#name': accountName
+            '#serializedName': accountName
+          - $id: '171'
+            isClientProperty: false
+            location: body
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: StorageAccountRegenerateKeyParameters
+            modelType:
+              $ref: '85'
+            '#documentation': >-
+              Specifies name of the key which should be regenerated -- key1 or
+              key2.
+            '#name': regenerateKey
+            '#serializedName': regenerateKey
+          - $id: '172'
+            isClientProperty: true
+            clientProperty:
+              $ref: '106'
+            location: query
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '173'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
+            '#documentation': Client Api Version.
+            '#name': api-version
+            '#serializedName': api-version
+          - $id: '174'
+            isClientProperty: true
+            clientProperty:
+              $ref: '104'
+            location: path
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '175'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
+            '#documentation': >-
+              Subscription credentials which uniquely identify the Microsoft
+              Azure subscription. The subscription ID forms part of the URI for
+              every service call.
+            '#name': subscriptionId
+            '#serializedName': subscriptionId
+        isAbsoluteUrl: false
+        httpMethod: post
+        requestSerializationFormat: none
+        responseSerializationFormat: none
+        responses:
+          OK:
+            body:
+              $ref: '69'
+            isNullable: true
+        defaultResponse:
+          isNullable: true
+        returnType:
+          body:
+            $ref: '69'
+          isNullable: true
+        description: Regenerates one of the access keys for the specified storage account.
         requestContentType: application/json; charset=utf-8
         responseContentTypes:
           - application/json
@@ -2555,7 +2674,7 @@ operations:
           {
             "parameters": [
               {
-                "$id": "108",
+                "$id": "110",
                 "isClientProperty": false,
                 "location": "body",
                 "collectionFormat": "none",
@@ -2570,38 +2689,12 @@ operations:
                 "#serializedName": "accountName"
               },
               {
-                "$id": "109",
+                "$id": "111",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
                 "location": "query",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "110",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
-              },
-              {
-                "$id": "111",
-                "isClientProperty": true,
-                "clientProperty": {
-                  "$ref": "104"
-                },
-                "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
@@ -2617,7 +2710,33 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+                "#documentation": "Client Api Version.",
+                "#name": "api-version",
+                "#serializedName": "api-version"
+              },
+              {
+                "$id": "113",
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "104"
+                },
+                "location": "path",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "114",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
                 "#name": "subscriptionId",
                 "#serializedName": "subscriptionId"
               }
@@ -2658,36 +2777,20 @@ operations:
           {
             "parameters": [
               {
-                "$id": "113",
-                "isClientProperty": false,
-                "location": "path",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "114",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
-              },
-              {
                 "$id": "115",
                 "isClientProperty": false,
+                "clientProperty": {
+                  "$ref": "108"
+                },
                 "location": "path",
                 "collectionFormat": "none",
                 "constraints": {
-                  "MaxLength": "24",
-                  "MinLength": "3"
+                  "MaxLength": "90",
+                  "MinLength": "1",
+                  "Pattern": "^[-\\w\\._\\(\\)]+$"
+                },
+                "extensions": {
+                  "x-ms-parameter-location": "method"
                 },
                 "isRequired": true,
                 "isConstant": false,
@@ -2703,12 +2806,39 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+                "#documentation": "The name of the resource group within the user's subscription. The name is case insensitive.",
+                "#name": "resourceGroupName",
+                "#serializedName": "resourceGroupName"
+              },
+              {
+                "$id": "117",
+                "isClientProperty": false,
+                "location": "path",
+                "collectionFormat": "none",
+                "constraints": {
+                  "MaxLength": "24",
+                  "MinLength": "3"
+                },
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "118",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
                 "#name": "accountName",
                 "#serializedName": "accountName"
               },
               {
-                "$id": "117",
+                "$id": "119",
                 "isClientProperty": false,
                 "location": "body",
                 "collectionFormat": "none",
@@ -2723,38 +2853,12 @@ operations:
                 "#serializedName": "parameters"
               },
               {
-                "$id": "118",
+                "$id": "120",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
                 "location": "query",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "119",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
-              },
-              {
-                "$id": "120",
-                "isClientProperty": true,
-                "clientProperty": {
-                  "$ref": "104"
-                },
-                "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
@@ -2770,7 +2874,33 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+                "#documentation": "Client Api Version.",
+                "#name": "api-version",
+                "#serializedName": "api-version"
+              },
+              {
+                "$id": "122",
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "104"
+                },
+                "location": "path",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "123",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
                 "#name": "subscriptionId",
                 "#serializedName": "subscriptionId"
               }
@@ -2799,7 +2929,7 @@ operations:
               },
               "isNullable": true
             },
-            "description": "Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.  Make sure you add that extra cowbell.",
+            "description": "Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed. Make sure you add that extra cowbell.",
             "requestContentType": "application/json; charset=utf-8",
             "responseContentTypes": [
               "application/json",
@@ -2817,36 +2947,20 @@ operations:
           {
             "parameters": [
               {
-                "$id": "122",
-                "isClientProperty": false,
-                "location": "path",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "123",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
-              },
-              {
                 "$id": "124",
                 "isClientProperty": false,
+                "clientProperty": {
+                  "$ref": "108"
+                },
                 "location": "path",
                 "collectionFormat": "none",
                 "constraints": {
-                  "MaxLength": "24",
-                  "MinLength": "3"
+                  "MaxLength": "90",
+                  "MinLength": "1",
+                  "Pattern": "^[-\\w\\._\\(\\)]+$"
+                },
+                "extensions": {
+                  "x-ms-parameter-location": "method"
                 },
                 "isRequired": true,
                 "isConstant": false,
@@ -2862,18 +2976,19 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                "#documentation": "The name of the resource group within the user's subscription. The name is case insensitive.",
+                "#name": "resourceGroupName",
+                "#serializedName": "resourceGroupName"
               },
               {
                 "$id": "126",
-                "isClientProperty": true,
-                "clientProperty": {
-                  "$ref": "106"
-                },
-                "location": "query",
+                "isClientProperty": false,
+                "location": "path",
                 "collectionFormat": "none",
+                "constraints": {
+                  "MaxLength": "24",
+                  "MinLength": "3"
+                },
                 "isRequired": true,
                 "isConstant": false,
                 "modelTypeName": "String",
@@ -2888,17 +3003,17 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+                "#name": "accountName",
+                "#serializedName": "accountName"
               },
               {
                 "$id": "128",
                 "isClientProperty": true,
                 "clientProperty": {
-                  "$ref": "104"
+                  "$ref": "106"
                 },
-                "location": "path",
+                "location": "query",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
@@ -2914,7 +3029,33 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+                "#documentation": "Client Api Version.",
+                "#name": "api-version",
+                "#serializedName": "api-version"
+              },
+              {
+                "$id": "130",
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "104"
+                },
+                "location": "path",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "131",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
                 "#name": "subscriptionId",
                 "#serializedName": "subscriptionId"
               }
@@ -2952,36 +3093,20 @@ operations:
           {
             "parameters": [
               {
-                "$id": "130",
-                "isClientProperty": false,
-                "location": "path",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "131",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
-              },
-              {
                 "$id": "132",
                 "isClientProperty": false,
+                "clientProperty": {
+                  "$ref": "108"
+                },
                 "location": "path",
                 "collectionFormat": "none",
                 "constraints": {
-                  "MaxLength": "24",
-                  "MinLength": "3"
+                  "MaxLength": "90",
+                  "MinLength": "1",
+                  "Pattern": "^[-\\w\\._\\(\\)]+$"
+                },
+                "extensions": {
+                  "x-ms-parameter-location": "method"
                 },
                 "isRequired": true,
                 "isConstant": false,
@@ -2997,18 +3122,19 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                "#documentation": "The name of the resource group within the user's subscription. The name is case insensitive.",
+                "#name": "resourceGroupName",
+                "#serializedName": "resourceGroupName"
               },
               {
                 "$id": "134",
-                "isClientProperty": true,
-                "clientProperty": {
-                  "$ref": "106"
-                },
-                "location": "query",
+                "isClientProperty": false,
+                "location": "path",
                 "collectionFormat": "none",
+                "constraints": {
+                  "MaxLength": "24",
+                  "MinLength": "3"
+                },
                 "isRequired": true,
                 "isConstant": false,
                 "modelTypeName": "String",
@@ -3023,17 +3149,17 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+                "#name": "accountName",
+                "#serializedName": "accountName"
               },
               {
                 "$id": "136",
                 "isClientProperty": true,
                 "clientProperty": {
-                  "$ref": "104"
+                  "$ref": "106"
                 },
-                "location": "path",
+                "location": "query",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
@@ -3049,7 +3175,33 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+                "#documentation": "Client Api Version.",
+                "#name": "api-version",
+                "#serializedName": "api-version"
+              },
+              {
+                "$id": "138",
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "104"
+                },
+                "location": "path",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "139",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
                 "#name": "subscriptionId",
                 "#serializedName": "subscriptionId"
               }
@@ -3075,7 +3227,7 @@ operations:
               },
               "isNullable": true
             },
-            "description": "Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.",
+            "description": "Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.",
             "requestContentType": "application/json; charset=utf-8",
             "responseContentTypes": [
               "application/json",
@@ -3090,36 +3242,20 @@ operations:
           {
             "parameters": [
               {
-                "$id": "138",
-                "isClientProperty": false,
-                "location": "path",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "139",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
-              },
-              {
                 "$id": "140",
                 "isClientProperty": false,
+                "clientProperty": {
+                  "$ref": "108"
+                },
                 "location": "path",
                 "collectionFormat": "none",
                 "constraints": {
-                  "MaxLength": "24",
-                  "MinLength": "3"
+                  "MaxLength": "90",
+                  "MinLength": "1",
+                  "Pattern": "^[-\\w\\._\\(\\)]+$"
+                },
+                "extensions": {
+                  "x-ms-parameter-location": "method"
                 },
                 "isRequired": true,
                 "isConstant": false,
@@ -3135,38 +3271,24 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                "#documentation": "The name of the resource group within the user's subscription. The name is case insensitive.",
+                "#name": "resourceGroupName",
+                "#serializedName": "resourceGroupName"
               },
               {
                 "$id": "142",
                 "isClientProperty": false,
-                "location": "body",
+                "location": "path",
                 "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "StorageAccountUpdateParameters",
-                "modelType": {
-                  "$ref": "80"
+                "constraints": {
+                  "MaxLength": "24",
+                  "MinLength": "3"
                 },
-                "#documentation": "The parameters to update on the account. Note that only one property can be changed at a time using this API. ",
-                "#name": "parameters",
-                "#serializedName": "parameters"
-              },
-              {
-                "$id": "143",
-                "isClientProperty": true,
-                "clientProperty": {
-                  "$ref": "106"
-                },
-                "location": "query",
-                "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
                 "modelTypeName": "String",
                 "modelType": {
-                  "$id": "144",
+                  "$id": "143",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
@@ -3176,17 +3298,32 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+                "#name": "accountName",
+                "#serializedName": "accountName"
+              },
+              {
+                "$id": "144",
+                "isClientProperty": false,
+                "location": "body",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "StorageAccountUpdateParameters",
+                "modelType": {
+                  "$ref": "80"
+                },
+                "#documentation": "The parameters to provide for the updated account.",
+                "#name": "parameters",
+                "#serializedName": "parameters"
               },
               {
                 "$id": "145",
                 "isClientProperty": true,
                 "clientProperty": {
-                  "$ref": "104"
+                  "$ref": "106"
                 },
-                "location": "path",
+                "location": "query",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
@@ -3202,7 +3339,33 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+                "#documentation": "Client Api Version.",
+                "#name": "api-version",
+                "#serializedName": "api-version"
+              },
+              {
+                "$id": "147",
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "104"
+                },
+                "location": "path",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "148",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
                 "#name": "subscriptionId",
                 "#serializedName": "subscriptionId"
               }
@@ -3228,7 +3391,7 @@ operations:
               },
               "isNullable": true
             },
-            "description": "Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.",
+            "description": "The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.",
             "requestContentType": "application/json; charset=utf-8",
             "responseContentTypes": [
               "application/json",
@@ -3243,37 +3406,13 @@ operations:
           {
             "parameters": [
               {
-                "$id": "147",
-                "isClientProperty": false,
-                "location": "path",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "148",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
-              },
-              {
                 "$id": "149",
-                "isClientProperty": false,
-                "location": "path",
-                "collectionFormat": "none",
-                "constraints": {
-                  "MaxLength": "24",
-                  "MinLength": "3"
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "106"
                 },
+                "location": "query",
+                "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
                 "modelTypeName": "String",
@@ -3288,17 +3427,17 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "The name of the storage account.",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                "#documentation": "Client Api Version.",
+                "#name": "api-version",
+                "#serializedName": "api-version"
               },
               {
                 "$id": "151",
                 "isClientProperty": true,
                 "clientProperty": {
-                  "$ref": "106"
+                  "$ref": "104"
                 },
-                "location": "query",
+                "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
@@ -3314,18 +3453,67 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                "#documentation": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+                "#name": "subscriptionId",
+                "#serializedName": "subscriptionId"
+              }
+            ],
+            "isAbsoluteUrl": false,
+            "httpMethod": "get",
+            "requestSerializationFormat": "none",
+            "responseSerializationFormat": "none",
+            "responses": {
+              "OK": {
+                "body": {
+                  "$ref": "74"
+                },
+                "isNullable": true
+              }
+            },
+            "defaultResponse": {
+              "isNullable": true
+            },
+            "returnType": {
+              "body": {
+                "$ref": "74"
               },
+              "isNullable": true
+            },
+            "description": "Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.",
+            "requestContentType": "application/json; charset=utf-8",
+            "responseContentTypes": [
+              "application/json",
+              "text/json"
+            ],
+            "extensions": {
+              "x-ms-pageable": {
+                "nextLinkName": null
+              }
+            },
+            "deprecated": false,
+            "#name": "List",
+            "#group": "StorageAccounts",
+            "#serializedName": "StorageAccounts_List",
+            "#url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts"
+          },
+          {
+            "parameters": [
               {
                 "$id": "153",
-                "isClientProperty": true,
+                "isClientProperty": false,
                 "clientProperty": {
-                  "$ref": "104"
+                  "$ref": "108"
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "constraints": {
+                  "MaxLength": "90",
+                  "MinLength": "1",
+                  "Pattern": "^[-\\w\\._\\(\\)]+$"
+                },
+                "extensions": {
+                  "x-ms-parameter-location": "method"
+                },
                 "isRequired": true,
                 "isConstant": false,
                 "modelTypeName": "String",
@@ -3340,46 +3528,10 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
-              }
-            ],
-            "isAbsoluteUrl": false,
-            "httpMethod": "post",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
-            "responses": {
-              "OK": {
-                "body": {
-                  "$ref": "69"
-                },
-                "isNullable": true
-              }
-            },
-            "defaultResponse": {
-              "isNullable": true
-            },
-            "returnType": {
-              "body": {
-                "$ref": "69"
+                "#documentation": "The name of the resource group within the user's subscription. The name is case insensitive.",
+                "#name": "resourceGroupName",
+                "#serializedName": "resourceGroupName"
               },
-              "isNullable": true
-            },
-            "description": "Lists the access keys for the specified storage account.",
-            "requestContentType": "application/json; charset=utf-8",
-            "responseContentTypes": [
-              "application/json",
-              "text/json"
-            ],
-            "deprecated": false,
-            "#name": "ListKeys",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_ListKeys",
-            "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys"
-          },
-          {
-            "parameters": [
               {
                 "$id": "155",
                 "isClientProperty": true,
@@ -3428,123 +3580,7 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
-              }
-            ],
-            "isAbsoluteUrl": false,
-            "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
-            "responses": {
-              "OK": {
-                "body": {
-                  "$ref": "74"
-                },
-                "isNullable": true
-              }
-            },
-            "defaultResponse": {
-              "isNullable": true
-            },
-            "returnType": {
-              "body": {
-                "$ref": "74"
-              },
-              "isNullable": true
-            },
-            "description": "Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.",
-            "requestContentType": "application/json; charset=utf-8",
-            "responseContentTypes": [
-              "application/json",
-              "text/json"
-            ],
-            "extensions": {
-              "x-ms-pageable": {
-                "nextLinkName": null
-              }
-            },
-            "deprecated": false,
-            "#name": "List",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_List",
-            "#url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts"
-          },
-          {
-            "parameters": [
-              {
-                "$id": "159",
-                "isClientProperty": false,
-                "location": "path",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "160",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
-              },
-              {
-                "$id": "161",
-                "isClientProperty": true,
-                "clientProperty": {
-                  "$ref": "106"
-                },
-                "location": "query",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "162",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
-              },
-              {
-                "$id": "163",
-                "isClientProperty": true,
-                "clientProperty": {
-                  "$ref": "104"
-                },
-                "location": "path",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "164",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+                "#documentation": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
                 "#name": "subscriptionId",
                 "#serializedName": "subscriptionId"
               }
@@ -3590,8 +3626,98 @@ operations:
           {
             "parameters": [
               {
-                "$id": "165",
+                "$id": "159",
                 "isClientProperty": false,
+                "clientProperty": {
+                  "$ref": "108"
+                },
+                "location": "path",
+                "collectionFormat": "none",
+                "constraints": {
+                  "MaxLength": "90",
+                  "MinLength": "1",
+                  "Pattern": "^[-\\w\\._\\(\\)]+$"
+                },
+                "extensions": {
+                  "x-ms-parameter-location": "method"
+                },
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "160",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "The name of the resource group within the user's subscription. The name is case insensitive.",
+                "#name": "resourceGroupName",
+                "#serializedName": "resourceGroupName"
+              },
+              {
+                "$id": "161",
+                "isClientProperty": false,
+                "location": "path",
+                "collectionFormat": "none",
+                "constraints": {
+                  "MaxLength": "24",
+                  "MinLength": "3"
+                },
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "162",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+                "#name": "accountName",
+                "#serializedName": "accountName"
+              },
+              {
+                "$id": "163",
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "106"
+                },
+                "location": "query",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "164",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "Client Api Version.",
+                "#name": "api-version",
+                "#serializedName": "api-version"
+              },
+              {
+                "$id": "165",
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "104"
+                },
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
@@ -3608,101 +3734,7 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
-              },
-              {
-                "$id": "167",
-                "isClientProperty": false,
-                "location": "path",
-                "collectionFormat": "none",
-                "constraints": {
-                  "MaxLength": "24",
-                  "MinLength": "3"
-                },
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "168",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-                "#name": "accountName",
-                "#serializedName": "accountName"
-              },
-              {
-                "$id": "169",
-                "isClientProperty": false,
-                "location": "body",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "StorageAccountRegenerateKeyParameters",
-                "modelType": {
-                  "$ref": "85"
-                },
-                "#documentation": "Specifies name of the key which should be regenerated. key1 or key2 for the default keys",
-                "#name": "regenerateKey",
-                "#serializedName": "regenerateKey"
-              },
-              {
-                "$id": "170",
-                "isClientProperty": true,
-                "clientProperty": {
-                  "$ref": "106"
-                },
-                "location": "query",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "171",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
-              },
-              {
-                "$id": "172",
-                "isClientProperty": true,
-                "clientProperty": {
-                  "$ref": "104"
-                },
-                "location": "path",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "173",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+                "#documentation": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
                 "#name": "subscriptionId",
                 "#serializedName": "subscriptionId"
               }
@@ -3728,7 +3760,171 @@ operations:
               },
               "isNullable": true
             },
-            "description": "Regenerates the access keys for the specified storage account.",
+            "description": "Lists the access keys for the specified storage account.",
+            "requestContentType": "application/json; charset=utf-8",
+            "responseContentTypes": [
+              "application/json",
+              "text/json"
+            ],
+            "deprecated": false,
+            "#name": "ListKeys",
+            "#group": "StorageAccounts",
+            "#serializedName": "StorageAccounts_ListKeys",
+            "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys"
+          },
+          {
+            "parameters": [
+              {
+                "$id": "167",
+                "isClientProperty": false,
+                "clientProperty": {
+                  "$ref": "108"
+                },
+                "location": "path",
+                "collectionFormat": "none",
+                "constraints": {
+                  "MaxLength": "90",
+                  "MinLength": "1",
+                  "Pattern": "^[-\\w\\._\\(\\)]+$"
+                },
+                "extensions": {
+                  "x-ms-parameter-location": "method"
+                },
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "168",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "The name of the resource group within the user's subscription. The name is case insensitive.",
+                "#name": "resourceGroupName",
+                "#serializedName": "resourceGroupName"
+              },
+              {
+                "$id": "169",
+                "isClientProperty": false,
+                "location": "path",
+                "collectionFormat": "none",
+                "constraints": {
+                  "MaxLength": "24",
+                  "MinLength": "3"
+                },
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "170",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+                "#name": "accountName",
+                "#serializedName": "accountName"
+              },
+              {
+                "$id": "171",
+                "isClientProperty": false,
+                "location": "body",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "StorageAccountRegenerateKeyParameters",
+                "modelType": {
+                  "$ref": "85"
+                },
+                "#documentation": "Specifies name of the key which should be regenerated -- key1 or key2.",
+                "#name": "regenerateKey",
+                "#serializedName": "regenerateKey"
+              },
+              {
+                "$id": "172",
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "106"
+                },
+                "location": "query",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "173",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "Client Api Version.",
+                "#name": "api-version",
+                "#serializedName": "api-version"
+              },
+              {
+                "$id": "174",
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "104"
+                },
+                "location": "path",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "175",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+                "#name": "subscriptionId",
+                "#serializedName": "subscriptionId"
+              }
+            ],
+            "isAbsoluteUrl": false,
+            "httpMethod": "post",
+            "requestSerializationFormat": "none",
+            "responseSerializationFormat": "none",
+            "responses": {
+              "OK": {
+                "body": {
+                  "$ref": "69"
+                },
+                "isNullable": true
+              }
+            },
+            "defaultResponse": {
+              "isNullable": true
+            },
+            "returnType": {
+              "body": {
+                "$ref": "69"
+              },
+              "isNullable": true
+            },
+            "description": "Regenerates one of the access keys for the specified storage account.",
             "requestContentType": "application/json; charset=utf-8",
             "responseContentTypes": [
               "application/json",
@@ -3749,33 +3945,11 @@ operations:
       }
   - methods:
       - parameters:
-          - $id: '174'
+          - $id: '176'
             isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
-            collectionFormat: none
-            isRequired: true
-            isConstant: false
-            modelTypeName: String
-            modelType:
-              $id: '175'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
-              knownPrimaryType: string
-              className: String
-              declarationName: String
-              isConstant: false
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
-          - $id: '176'
-            isClientProperty: true
-            clientProperty:
-              $ref: '104'
-            location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
@@ -3790,8 +3964,30 @@ operations:
               declarationName: String
               isConstant: false
               '#name': String
+            '#documentation': Client Api Version.
+            '#name': api-version
+            '#serializedName': api-version
+          - $id: '178'
+            isClientProperty: true
+            clientProperty:
+              $ref: '104'
+            location: path
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: String
+            modelType:
+              $id: '179'
+              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+              $actualType: AutoRest.Core.Model.PrimaryType
+              knownFormat: none
+              knownPrimaryType: string
+              className: String
+              declarationName: String
+              isConstant: false
+              '#name': String
             '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
+              Subscription credentials which uniquely identify the Microsoft
               Azure subscription. The subscription ID forms part of the URI for
               every service call.
             '#name': subscriptionId
@@ -3812,8 +4008,8 @@ operations:
             $ref: '101'
           isNullable: true
         description: >-
-          Gets the current usage count and the limit for the resources under the
-          subscription.
+          Lists the current usage count and the limit for the resources under
+          the subscription.
         requestContentType: application/json; charset=utf-8
         responseContentTypes:
           - application/json
@@ -3836,38 +4032,12 @@ operations:
           {
             "parameters": [
               {
-                "$id": "174",
+                "$id": "176",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
                 "location": "query",
-                "collectionFormat": "none",
-                "isRequired": true,
-                "isConstant": false,
-                "modelTypeName": "String",
-                "modelType": {
-                  "$id": "175",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
-                  "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
-                  "isConstant": false,
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
-              },
-              {
-                "$id": "176",
-                "isClientProperty": true,
-                "clientProperty": {
-                  "$ref": "104"
-                },
-                "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
@@ -3883,7 +4053,33 @@ operations:
                   "isConstant": false,
                   "#name": "String"
                 },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+                "#documentation": "Client Api Version.",
+                "#name": "api-version",
+                "#serializedName": "api-version"
+              },
+              {
+                "$id": "178",
+                "isClientProperty": true,
+                "clientProperty": {
+                  "$ref": "104"
+                },
+                "location": "path",
+                "collectionFormat": "none",
+                "isRequired": true,
+                "isConstant": false,
+                "modelTypeName": "String",
+                "modelType": {
+                  "$id": "179",
+                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+                  "$actualType": "AutoRest.Core.Model.PrimaryType",
+                  "knownFormat": "none",
+                  "knownPrimaryType": "string",
+                  "className": "String",
+                  "declarationName": "String",
+                  "isConstant": false,
+                  "#name": "String"
+                },
+                "#documentation": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
                 "#name": "subscriptionId",
                 "#serializedName": "subscriptionId"
               }
@@ -3909,7 +4105,7 @@ operations:
               },
               "isNullable": true
             },
-            "description": "Gets the current usage count and the limit for the resources under the subscription.",
+            "description": "Lists the current usage count and the limit for the resources under the subscription.",
             "requestContentType": "application/json; charset=utf-8",
             "responseContentTypes": [
               "application/json",
@@ -3933,4 +4129,4 @@ operations:
         ],
         "#name": "usages"
       }
-'#name': StorageManagementClient
+'#name': StorageManagement

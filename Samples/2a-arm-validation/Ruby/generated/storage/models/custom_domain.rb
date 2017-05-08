@@ -13,8 +13,7 @@ module Storage
 
       include MsRestAzure
 
-      # @return [String] Gets or sets the custom domain name. Name is the CNAME
-      # source.
+      # @return [String] The custom domain name. Name is the CNAME source.
       attr_accessor :name
 
       # @return [Boolean] Indicates whether indirect CName validation is

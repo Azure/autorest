@@ -12,6 +12,8 @@ const models = require('./index');
  * @class
  * Initializes a new instance of the Resource class.
  * @constructor
+ * Describes a storage resource.
+ *
  * @member {string} [id] Resource Id
  *
  * @member {string} [name] Resource name
