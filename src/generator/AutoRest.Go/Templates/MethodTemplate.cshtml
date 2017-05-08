@@ -70,8 +70,10 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
         @:var result @(Model.MethodReturnType)
 
         @:defer func() {
+            @:if err != nil {
+                @:errChan <- err
+            @:}
             @:resultChan <- result
-            @:errChan <- err
             @:close(resultChan)
             @:close(errChan)
         @:}()

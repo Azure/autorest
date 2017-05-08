@@ -104,7 +104,7 @@ public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeStri
     var _httpRequest = new System.Net.Http.HttpRequestMessage();
     System.Net.Http.HttpResponseMessage _httpResponse = null;
     _httpRequest.Headers.TryAddWithoutValidation("redirect", "true");
-    _httpRequest.Method = new System.Net.Http.HttpMethod("@(Model.SerializedName)");
+    _httpRequest.Method = new System.Net.Http.HttpMethod("@(Model.CodeModel.Name).@(Model.SerializedName)");
     _httpRequest.RequestUri = new System.Uri("https://bogus");
     // Set Headers
     @(Model.SetDefaultHeaders)
