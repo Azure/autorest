@@ -10,8 +10,6 @@
  * @class
  * Initializes a new instance of the StorageAccountRegenerateKeyParameters class.
  * @constructor
- * The parameters used to regenerate the storage account key.
- *
  * @member {string} keyName
  *
  */

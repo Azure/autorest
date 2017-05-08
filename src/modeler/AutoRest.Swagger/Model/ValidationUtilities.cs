@@ -590,7 +590,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="resourceModel"></param>
         /// <param name="definitions"></param>
         /// <param name="serviceDefinition"></param>
-        /// <returns></returns>
+        /// <returns>Gets the operation which ends with ListByResourceGroup and returns the resource model.</returns>
         public static Operation GetListByResourceGroupOperation(string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition)
         {
             return GetListByXOperation(resourceModel, definitions, serviceDefinition, listByRgRegEx);
@@ -602,7 +602,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="resourceModel"></param>
         /// <param name="definitions"></param>
         /// <param name="serviceDefinition"></param>
-        /// <returns></returns>
+        /// <returns>Gets the operation which matches with ListBySubscription and returns the resource model.</returns>
         public static Operation GetListBySubscriptionOperation(string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition)
         {
             return GetListByXOperation(resourceModel, definitions, serviceDefinition, listBySidRegEx);
@@ -615,7 +615,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="definitions"></param>
         /// <param name="serviceDefinition"></param>
         /// <param name="regEx"></param>
-        /// <returns></returns>
+        /// <returns>Gets the operation which matches with specified regex and returns the resource model.</returns>
         private static Operation GetListByXOperation(string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition, Regex regEx)
         {
             return GetListByOperation(regEx, resourceModel, definitions, serviceDefinition);
@@ -628,7 +628,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="resourceModel"></param>
         /// <param name="definitions"></param>
         /// <param name="serviceDefinition"></param>
-        /// <returns></returns>
+        /// <returns>Gets the operation which matches with specified regex and returns the resource model.</returns>
         private static Operation GetListByOperation(Regex regEx, string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition)
         {
             IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", serviceDefinition);

@@ -5,7 +5,7 @@
 
 module Storage
   #
-  # The Azure Storage Management API.
+  # The Storage Management Client.
   #
   class UsageOperations
     include MsRestAzure
@@ -22,7 +22,7 @@ module Storage
     attr_reader :client
 
     #
-    # Lists the current usage count and the limit for the resources under the
+    # Gets the current usage count and the limit for the resources under the
     # subscription.
     #
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
@@ -36,7 +36,7 @@ module Storage
     end
 
     #
-    # Lists the current usage count and the limit for the resources under the
+    # Gets the current usage count and the limit for the resources under the
     # subscription.
     #
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
@@ -49,7 +49,7 @@ module Storage
     end
 
     #
-    # Lists the current usage count and the limit for the resources under the
+    # Gets the current usage count and the limit for the resources under the
     # subscription.
     #
     # @param [Hash{String => String}] A hash of custom headers that will be added

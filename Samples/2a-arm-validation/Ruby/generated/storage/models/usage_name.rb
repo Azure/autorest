@@ -12,10 +12,10 @@ module Storage
 
       include MsRestAzure
 
-      # @return [String] A string describing the resource name.
+      # @return [String] Gets a string describing the resource name.
       attr_accessor :value
 
-      # @return [String] A localized string describing the resource name.
+      # @return [String] Gets a localized string describing the resource name.
       attr_accessor :localized_value
 
 

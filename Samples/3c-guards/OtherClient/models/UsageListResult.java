@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class UsageListResult {
     /**
-     * The list Storage Resource Usages.
+     * Gets or sets the list Storage Resource Usages.
      */
     @JsonProperty(value = "value")
     private List<Usage> value;

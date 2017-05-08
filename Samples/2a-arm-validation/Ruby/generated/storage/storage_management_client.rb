@@ -17,7 +17,7 @@ module Storage
     # @return Credentials needed for the client to connect to Azure.
     attr_reader :credentials
 
-    # @return [String] Subscription credentials which uniquely identify the
+    # @return [String] Gets subscription credentials which uniquely identify
     # Microsoft Azure subscription. The subscription ID forms part of the URI
     # for every service call.
     attr_accessor :subscription_id

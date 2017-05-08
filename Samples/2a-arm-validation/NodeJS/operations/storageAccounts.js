@@ -11,7 +11,7 @@ const msRestAzure = require('ms-rest-azure');
 const WebResource = msRest.WebResource;
 
 /**
- * Checks that the storage account name is valid and is not already in use.
+ * Checks that account name is valid and is not in use.
  *
  * @param {object} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -172,13 +172,13 @@ function _checkNameAvailability(accountName, options, callback) {
 
 /**
  * Asynchronously creates a new storage account with the specified parameters.
- * If an account is already created and a subsequent create request is issued
- * with different properties, the account properties will be updated. If an
- * account is already created and a subsequent create or update request is
- * issued with the exact same set of properties, the request will succeed.
+ * Existing accounts cannot be updated with this API and should instead use the
+ * Update Storage Account API. If an account is already created and subsequent
+ * PUT request is issued with exact same set of properties, then HTTP 200 would
+ * be returned.
  *
  * @param {string} resourceGroupName The name of the resource group within the
- * user's subscription. The name is case insensitive.
+ * user's subscription.
  *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -187,22 +187,13 @@ function _checkNameAvailability(accountName, options, callback) {
  * @param {object} parameters The parameters to provide for the created
  * account.
  *
- * @param {string} parameters.location The location of the resource. This will
- * be one of the supported and registered Azure Geo Regions (e.g. West US, East
- * US, Southeast Asia, etc.). The geo region of a resource cannot be changed
- * once it is created, but if an identical geo region is specified on update,
- * the request will succeed.
+ * @param {string} parameters.location Resource location
  *
- * @param {object} [parameters.tags] A list of key value pairs that describe
- * the resource. These tags can be used for viewing and grouping this resource
- * (across resource groups). A maximum of 15 tags can be provided for a
- * resource. Each tag must have a key with a length no greater than 128
- * characters and a value with a length no greater than 256 characters.
+ * @param {object} [parameters.tags] Resource tags
  *
- * @param {string} parameters.accountType The sku name. Required for account
- * creation; optional for update. Note that in older versions, sku name was
- * called accountType. Possible values include: 'Standard_LRS', 'Standard_ZRS',
- * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
+ * @param {string} parameters.accountType Gets or sets the account type.
+ * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+ * 'Standard_RAGRS', 'Premium_LRS'
  *
  * @param {object} [options] Optional Parameters.
  *
@@ -278,7 +269,7 @@ function _create(resourceGroupName, accountName, parameters, options, callback) 
  * Deletes a storage account in Microsoft Azure.
  *
  * @param {string} resourceGroupName The name of the resource group within the
- * user's subscription. The name is case insensitive.
+ * user's subscription.
  *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -315,20 +306,6 @@ function _deleteMethod(resourceGroupName, accountName, options, callback) {
   try {
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
-    }
-    if (resourceGroupName !== null && resourceGroupName !== undefined) {
-      if (resourceGroupName.length > 90)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MaxLength": 90');
-      }
-      if (resourceGroupName.length < 1)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MinLength": 1');
-      }
-      if (resourceGroupName.match(/^[-\w\._\(\)]+$/) === null)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "Pattern": /^[-\w\._\(\)]+$/');
-      }
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -430,11 +407,11 @@ function _deleteMethod(resourceGroupName, accountName, options, callback) {
 
 /**
  * Returns the properties for the specified storage account including but not
- * limited to name, SKU name, location, and account status. The ListKeys
+ * limited to name, account type, location, and account status. The ListKeys
  * operation should be used to retrieve storage keys.
  *
  * @param {string} resourceGroupName The name of the resource group within the
- * user's subscription. The name is case insensitive.
+ * user's subscription.
  *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -472,20 +449,6 @@ function _getProperties(resourceGroupName, accountName, options, callback) {
   try {
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
-    }
-    if (resourceGroupName !== null && resourceGroupName !== undefined) {
-      if (resourceGroupName.length > 90)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MaxLength": 90');
-      }
-      if (resourceGroupName.length < 1)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MinLength": 1');
-      }
-      if (resourceGroupName.match(/^[-\w\._\(\)]+$/) === null)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "Pattern": /^[-\w\._\(\)]+$/');
-      }
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -603,30 +566,33 @@ function _getProperties(resourceGroupName, accountName, options, callback) {
 }
 
 /**
- * The update operation can be used to update the SKU, encryption, access tier,
- * or tags for a storage account. It can also be used to map the account to a
- * custom domain. Only one custom domain is supported per storage account; the
- * replacement/change of custom domain is not supported. In order to replace an
- * old custom domain, the old value must be cleared/unregistered before a new
- * value can be set. The update of multiple properties is supported. This call
- * does not change the storage keys for the account. If you want to change the
- * storage account keys, use the regenerate keys operation. The location and
- * name of the storage account cannot be changed after creation.
+ * Updates the account type or tags for a storage account. It can also be used
+ * to add a custom domain (note that custom domains cannot be added via the
+ * Create operation). Only one custom domain is supported per storage account.
+ * In order to replace a custom domain, the old value must be cleared before a
+ * new value may be set. To clear a custom domain, simply update the custom
+ * domain with empty string. Then call update again with the new cutsom domain
+ * name. The update API can only be used to update one of tags, accountType, or
+ * customDomain per call. To update multiple of these properties, call the API
+ * multiple times with one change per call. This call does not change the
+ * storage keys for the account. If you want to change storage account keys,
+ * use the RegenerateKey operation. The location and name of the storage
+ * account cannot be changed after creation.
  *
  * @param {string} resourceGroupName The name of the resource group within the
- * user's subscription. The name is case insensitive.
+ * user's subscription.
  *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
  *
- * @param {object} parameters The parameters to provide for the updated
- * account.
+ * @param {object} parameters The parameters to update on the account. Note
+ * that only one property can be changed at a time using this API.
  *
  * @param {object} [parameters.tags] Resource tags
  *
- * @param {string} [parameters.accountType] The account type. Note that
- * StandardZRS and PremiumLRS accounts cannot be changed to other account
+ * @param {string} [parameters.accountType] Gets or sets the account type. Note
+ * that StandardZRS and PremiumLRS accounts cannot be changed to other account
  * types, and other account types cannot be changed to StandardZRS or
  * PremiumLRS. Possible values include: 'Standard_LRS', 'Standard_ZRS',
  * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
@@ -636,8 +602,8 @@ function _getProperties(resourceGroupName, accountName, options, callback) {
  * supported per storage account at this time. To clear the existing custom
  * domain, use an empty string for the custom domain name property.
  *
- * @param {string} parameters.customDomain.name The custom domain name. Name is
- * the CNAME source.
+ * @param {string} parameters.customDomain.name Gets or sets the custom domain
+ * name. Name is the CNAME source.
  *
  * @param {boolean} [parameters.customDomain.useSubDomain] Indicates whether
  * indirect CName validation is enabled. Default value is false. This should
@@ -675,20 +641,6 @@ function _update(resourceGroupName, accountName, parameters, options, callback) 
   try {
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
-    }
-    if (resourceGroupName !== null && resourceGroupName !== undefined) {
-      if (resourceGroupName.length > 90)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MaxLength": 90');
-      }
-      if (resourceGroupName.length < 1)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MinLength": 1');
-      }
-      if (resourceGroupName.match(/^[-\w\._\(\)]+$/) === null)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "Pattern": /^[-\w\._\(\)]+$/');
-      }
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -808,6 +760,161 @@ function _update(resourceGroupName, accountName, parameters, options, callback) 
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           let resultMapper = new client.models['StorageAccount']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+}
+
+/**
+ * Lists the access keys for the specified storage account.
+ *
+ * @param {string} resourceGroupName The name of the resource group.
+ *
+ * @param {string} accountName The name of the storage account.
+ *
+ * @param {object} [options] Optional Parameters.
+ *
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ *
+ * @param {function} callback - The callback.
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
+ *                      See {@link StorageAccountKeys} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+function _listKeys(resourceGroupName, accountName, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
+      throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
+    }
+    if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
+      throw new Error('accountName cannot be null or undefined and it must be of type string.');
+    }
+    if (accountName !== null && accountName !== undefined) {
+      if (accountName.length > 24)
+      {
+        throw new Error('"accountName" should satisfy the constraint - "MaxLength": 24');
+      }
+      if (accountName.length < 3)
+      {
+        throw new Error('"accountName" should satisfy the constraint - "MinLength": 3');
+      }
+    }
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined || typeof this.client.apiVersion.valueOf() !== 'string') {
+      throw new Error('this.client.apiVersion cannot be null or undefined and it must be of type string.');
+    }
+    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined || typeof this.client.subscriptionId.valueOf() !== 'string') {
+      throw new Error('this.client.subscriptionId cannot be null or undefined and it must be of type string.');
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys';
+  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
+  requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
+  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  let queryParameters = [];
+  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+
+  // Create HTTP transport objects
+  let httpRequest = new WebResource();
+  httpRequest.method = 'POST';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(let headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  // Send Request
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
+    if (err) {
+      return callback(err);
+    }
+    let statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      let error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      let parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          let resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    let result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      let parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          let resultMapper = new client.models['StorageAccountKeys']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
@@ -963,7 +1070,7 @@ function _list(options, callback) {
  * this.
  *
  * @param {string} resourceGroupName The name of the resource group within the
- * user's subscription. The name is case insensitive.
+ * user's subscription.
  *
  * @param {object} [options] Optional Parameters.
  *
@@ -998,20 +1105,6 @@ function _listByResourceGroup(resourceGroupName, options, callback) {
   try {
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
-    }
-    if (resourceGroupName !== null && resourceGroupName !== undefined) {
-      if (resourceGroupName.length > 90)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MaxLength": 90');
-      }
-      if (resourceGroupName.length < 1)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MinLength": 1');
-      }
-      if (resourceGroupName.match(/^[-\w\._\(\)]+$/) === null)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "Pattern": /^[-\w\._\(\)]+$/');
-      }
     }
     if (this.client.apiVersion === null || this.client.apiVersion === undefined || typeof this.client.apiVersion.valueOf() !== 'string') {
       throw new Error('this.client.apiVersion cannot be null or undefined and it must be of type string.');
@@ -1115,189 +1208,17 @@ function _listByResourceGroup(resourceGroupName, options, callback) {
 }
 
 /**
- * Lists the access keys for the specified storage account.
+ * Regenerates the access keys for the specified storage account.
  *
  * @param {string} resourceGroupName The name of the resource group within the
- * user's subscription. The name is case insensitive.
- *
- * @param {string} accountName The name of the storage account within the
- * specified resource group. Storage account names must be between 3 and 24
- * characters in length and use numbers and lower-case letters only.
- *
- * @param {object} [options] Optional Parameters.
- *
- * @param {object} [options.customHeaders] Headers that will be added to the
- * request
- *
- * @param {function} callback - The callback.
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {object} [result]   - The deserialized result object if an error did not occur.
- *                      See {@link StorageAccountKeys} for more information.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-function _listKeys(resourceGroupName, accountName, options, callback) {
-   /* jshint validthis: true */
-  let client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
-      throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
-    }
-    if (resourceGroupName !== null && resourceGroupName !== undefined) {
-      if (resourceGroupName.length > 90)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MaxLength": 90');
-      }
-      if (resourceGroupName.length < 1)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MinLength": 1');
-      }
-      if (resourceGroupName.match(/^[-\w\._\(\)]+$/) === null)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "Pattern": /^[-\w\._\(\)]+$/');
-      }
-    }
-    if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
-      throw new Error('accountName cannot be null or undefined and it must be of type string.');
-    }
-    if (accountName !== null && accountName !== undefined) {
-      if (accountName.length > 24)
-      {
-        throw new Error('"accountName" should satisfy the constraint - "MaxLength": 24');
-      }
-      if (accountName.length < 3)
-      {
-        throw new Error('"accountName" should satisfy the constraint - "MinLength": 3');
-      }
-    }
-    if (this.client.apiVersion === null || this.client.apiVersion === undefined || typeof this.client.apiVersion.valueOf() !== 'string') {
-      throw new Error('this.client.apiVersion cannot be null or undefined and it must be of type string.');
-    }
-    if (this.client.subscriptionId === null || this.client.subscriptionId === undefined || typeof this.client.subscriptionId.valueOf() !== 'string') {
-      throw new Error('this.client.subscriptionId cannot be null or undefined and it must be of type string.');
-    }
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  let baseUrl = this.client.baseUri;
-  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys';
-  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
-  requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
-  requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
-  let queryParameters = [];
-  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-
-  // Create HTTP transport objects
-  let httpRequest = new WebResource();
-  httpRequest.method = 'POST';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if (this.client.generateClientRequestId) {
-      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  }
-  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(let headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  // Send Request
-  return client.pipeline(httpRequest, (err, response, responseBody) => {
-    if (err) {
-      return callback(err);
-    }
-    let statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      let error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = msRest.stripRequest(httpRequest);
-      error.response = msRest.stripResponse(response);
-      if (responseBody === '') responseBody = null;
-      let parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        if (parsedErrorResponse) {
-          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
-          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
-        }
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          let resultMapper = new client.models['CloudError']().mapper();
-          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
-        }
-      } catch (defaultError) {
-        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
-                         `- "${responseBody}" for the default response.`;
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    let result = null;
-    if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      let parsedResponse = null;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          let resultMapper = new client.models['StorageAccountKeys']().mapper();
-          result = client.deserialize(resultMapper, parsedResponse, 'result');
-        }
-      } catch (error) {
-        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
-        deserializationError.request = msRest.stripRequest(httpRequest);
-        deserializationError.response = msRest.stripResponse(response);
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result, httpRequest, response);
-  });
-}
-
-/**
- * Regenerates one of the access keys for the specified storage account.
- *
- * @param {string} resourceGroupName The name of the resource group within the
- * user's subscription. The name is case insensitive.
+ * user's subscription.
  *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
  *
  * @param {object} regenerateKeyParameter Specifies name of the key which
- * should be regenerated -- key1 or key2.
+ * should be regenerated. key1 or key2 for the default keys
  *
  * @param {string} regenerateKeyParameter.keyName
  *
@@ -1333,20 +1254,6 @@ function _regenerateKey(resourceGroupName, accountName, regenerateKeyParameter, 
   try {
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
-    }
-    if (resourceGroupName !== null && resourceGroupName !== undefined) {
-      if (resourceGroupName.length > 90)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MaxLength": 90');
-      }
-      if (resourceGroupName.length < 1)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MinLength": 1');
-      }
-      if (resourceGroupName.match(/^[-\w\._\(\)]+$/) === null)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "Pattern": /^[-\w\._\(\)]+$/');
-      }
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -1482,13 +1389,13 @@ function _regenerateKey(resourceGroupName, accountName, regenerateKeyParameter, 
 
 /**
  * Asynchronously creates a new storage account with the specified parameters.
- * If an account is already created and a subsequent create request is issued
- * with different properties, the account properties will be updated. If an
- * account is already created and a subsequent create or update request is
- * issued with the exact same set of properties, the request will succeed.
+ * Existing accounts cannot be updated with this API and should instead use the
+ * Update Storage Account API. If an account is already created and subsequent
+ * PUT request is issued with exact same set of properties, then HTTP 200 would
+ * be returned.
  *
  * @param {string} resourceGroupName The name of the resource group within the
- * user's subscription. The name is case insensitive.
+ * user's subscription.
  *
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
@@ -1497,22 +1404,13 @@ function _regenerateKey(resourceGroupName, accountName, regenerateKeyParameter, 
  * @param {object} parameters The parameters to provide for the created
  * account.
  *
- * @param {string} parameters.location The location of the resource. This will
- * be one of the supported and registered Azure Geo Regions (e.g. West US, East
- * US, Southeast Asia, etc.). The geo region of a resource cannot be changed
- * once it is created, but if an identical geo region is specified on update,
- * the request will succeed.
+ * @param {string} parameters.location Resource location
  *
- * @param {object} [parameters.tags] A list of key value pairs that describe
- * the resource. These tags can be used for viewing and grouping this resource
- * (across resource groups). A maximum of 15 tags can be provided for a
- * resource. Each tag must have a key with a length no greater than 128
- * characters and a value with a length no greater than 256 characters.
+ * @param {object} [parameters.tags] Resource tags
  *
- * @param {string} parameters.accountType The sku name. Required for account
- * creation; optional for update. Note that in older versions, sku name was
- * called accountType. Possible values include: 'Standard_LRS', 'Standard_ZRS',
- * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
+ * @param {string} parameters.accountType Gets or sets the account type.
+ * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+ * 'Standard_RAGRS', 'Premium_LRS'
  *
  * @param {object} [options] Optional Parameters.
  *
@@ -1546,20 +1444,6 @@ function _beginCreate(resourceGroupName, accountName, parameters, options, callb
   try {
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
-    }
-    if (resourceGroupName !== null && resourceGroupName !== undefined) {
-      if (resourceGroupName.length > 90)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MaxLength": 90');
-      }
-      if (resourceGroupName.length < 1)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "MinLength": 1');
-      }
-      if (resourceGroupName.match(/^[-\w\._\(\)]+$/) === null)
-      {
-        throw new Error('"resourceGroupName" should satisfy the constraint - "Pattern": /^[-\w\._\(\)]+$/');
-      }
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -1711,15 +1595,15 @@ class StorageAccounts {
     this._deleteMethod = _deleteMethod;
     this._getProperties = _getProperties;
     this._update = _update;
+    this._listKeys = _listKeys;
     this._list = _list;
     this._listByResourceGroup = _listByResourceGroup;
-    this._listKeys = _listKeys;
     this._regenerateKey = _regenerateKey;
     this._beginCreate = _beginCreate;
   }
 
   /**
-   * Checks that the storage account name is valid and is not already in use.
+   * Checks that account name is valid and is not in use.
    *
    * @param {object} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
@@ -1755,7 +1639,7 @@ class StorageAccounts {
   }
 
   /**
-   * Checks that the storage account name is valid and is not already in use.
+   * Checks that account name is valid and is not in use.
    *
    * @param {object} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
@@ -1815,13 +1699,13 @@ class StorageAccounts {
 
   /**
    * Asynchronously creates a new storage account with the specified parameters.
-   * If an account is already created and a subsequent create request is issued
-   * with different properties, the account properties will be updated. If an
-   * account is already created and a subsequent create or update request is
-   * issued with the exact same set of properties, the request will succeed.
+   * Existing accounts cannot be updated with this API and should instead use the
+   * Update Storage Account API. If an account is already created and subsequent
+   * PUT request is issued with exact same set of properties, then HTTP 200 would
+   * be returned.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
@@ -1830,22 +1714,13 @@ class StorageAccounts {
    * @param {object} parameters The parameters to provide for the created
    * account.
    *
-   * @param {string} parameters.location The location of the resource. This will
-   * be one of the supported and registered Azure Geo Regions (e.g. West US, East
-   * US, Southeast Asia, etc.). The geo region of a resource cannot be changed
-   * once it is created, but if an identical geo region is specified on update,
-   * the request will succeed.
+   * @param {string} parameters.location Resource location
    *
-   * @param {object} [parameters.tags] A list of key value pairs that describe
-   * the resource. These tags can be used for viewing and grouping this resource
-   * (across resource groups). A maximum of 15 tags can be provided for a
-   * resource. Each tag must have a key with a length no greater than 128
-   * characters and a value with a length no greater than 256 characters.
+   * @param {object} [parameters.tags] Resource tags
    *
-   * @param {string} parameters.accountType The sku name. Required for account
-   * creation; optional for update. Note that in older versions, sku name was
-   * called accountType. Possible values include: 'Standard_LRS', 'Standard_ZRS',
-   * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
+   * @param {string} parameters.accountType Gets or sets the account type.
+   * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+   * 'Standard_RAGRS', 'Premium_LRS'
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -1874,13 +1749,13 @@ class StorageAccounts {
 
   /**
    * Asynchronously creates a new storage account with the specified parameters.
-   * If an account is already created and a subsequent create request is issued
-   * with different properties, the account properties will be updated. If an
-   * account is already created and a subsequent create or update request is
-   * issued with the exact same set of properties, the request will succeed.
+   * Existing accounts cannot be updated with this API and should instead use the
+   * Update Storage Account API. If an account is already created and subsequent
+   * PUT request is issued with exact same set of properties, then HTTP 200 would
+   * be returned.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
@@ -1889,22 +1764,13 @@ class StorageAccounts {
    * @param {object} parameters The parameters to provide for the created
    * account.
    *
-   * @param {string} parameters.location The location of the resource. This will
-   * be one of the supported and registered Azure Geo Regions (e.g. West US, East
-   * US, Southeast Asia, etc.). The geo region of a resource cannot be changed
-   * once it is created, but if an identical geo region is specified on update,
-   * the request will succeed.
+   * @param {string} parameters.location Resource location
    *
-   * @param {object} [parameters.tags] A list of key value pairs that describe
-   * the resource. These tags can be used for viewing and grouping this resource
-   * (across resource groups). A maximum of 15 tags can be provided for a
-   * resource. Each tag must have a key with a length no greater than 128
-   * characters and a value with a length no greater than 256 characters.
+   * @param {object} [parameters.tags] Resource tags
    *
-   * @param {string} parameters.accountType The sku name. Required for account
-   * creation; optional for update. Note that in older versions, sku name was
-   * called accountType. Possible values include: 'Standard_LRS', 'Standard_ZRS',
-   * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
+   * @param {string} parameters.accountType Gets or sets the account type.
+   * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+   * 'Standard_RAGRS', 'Premium_LRS'
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -1957,7 +1823,7 @@ class StorageAccounts {
    * Deletes a storage account in Microsoft Azure.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
@@ -1992,7 +1858,7 @@ class StorageAccounts {
    * Deletes a storage account in Microsoft Azure.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
@@ -2046,11 +1912,11 @@ class StorageAccounts {
 
   /**
    * Returns the properties for the specified storage account including but not
-   * limited to name, SKU name, location, and account status. The ListKeys
+   * limited to name, account type, location, and account status. The ListKeys
    * operation should be used to retrieve storage keys.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
@@ -2083,11 +1949,11 @@ class StorageAccounts {
 
   /**
    * Returns the properties for the specified storage account including but not
-   * limited to name, SKU name, location, and account status. The ListKeys
+   * limited to name, account type, location, and account status. The ListKeys
    * operation should be used to retrieve storage keys.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
@@ -2141,30 +2007,33 @@ class StorageAccounts {
   }
 
   /**
-   * The update operation can be used to update the SKU, encryption, access tier,
-   * or tags for a storage account. It can also be used to map the account to a
-   * custom domain. Only one custom domain is supported per storage account; the
-   * replacement/change of custom domain is not supported. In order to replace an
-   * old custom domain, the old value must be cleared/unregistered before a new
-   * value can be set. The update of multiple properties is supported. This call
-   * does not change the storage keys for the account. If you want to change the
-   * storage account keys, use the regenerate keys operation. The location and
-   * name of the storage account cannot be changed after creation.
+   * Updates the account type or tags for a storage account. It can also be used
+   * to add a custom domain (note that custom domains cannot be added via the
+   * Create operation). Only one custom domain is supported per storage account.
+   * In order to replace a custom domain, the old value must be cleared before a
+   * new value may be set. To clear a custom domain, simply update the custom
+   * domain with empty string. Then call update again with the new cutsom domain
+   * name. The update API can only be used to update one of tags, accountType, or
+   * customDomain per call. To update multiple of these properties, call the API
+   * multiple times with one change per call. This call does not change the
+   * storage keys for the account. If you want to change storage account keys,
+   * use the RegenerateKey operation. The location and name of the storage
+   * account cannot be changed after creation.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
    * characters in length and use numbers and lower-case letters only.
    *
-   * @param {object} parameters The parameters to provide for the updated
-   * account.
+   * @param {object} parameters The parameters to update on the account. Note
+   * that only one property can be changed at a time using this API.
    *
    * @param {object} [parameters.tags] Resource tags
    *
-   * @param {string} [parameters.accountType] The account type. Note that
-   * StandardZRS and PremiumLRS accounts cannot be changed to other account
+   * @param {string} [parameters.accountType] Gets or sets the account type. Note
+   * that StandardZRS and PremiumLRS accounts cannot be changed to other account
    * types, and other account types cannot be changed to StandardZRS or
    * PremiumLRS. Possible values include: 'Standard_LRS', 'Standard_ZRS',
    * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
@@ -2174,8 +2043,8 @@ class StorageAccounts {
    * supported per storage account at this time. To clear the existing custom
    * domain, use an empty string for the custom domain name property.
    *
-   * @param {string} parameters.customDomain.name The custom domain name. Name is
-   * the CNAME source.
+   * @param {string} parameters.customDomain.name Gets or sets the custom domain
+   * name. Name is the CNAME source.
    *
    * @param {boolean} [parameters.customDomain.useSubDomain] Indicates whether
    * indirect CName validation is enabled. Default value is false. This should
@@ -2207,30 +2076,33 @@ class StorageAccounts {
   }
 
   /**
-   * The update operation can be used to update the SKU, encryption, access tier,
-   * or tags for a storage account. It can also be used to map the account to a
-   * custom domain. Only one custom domain is supported per storage account; the
-   * replacement/change of custom domain is not supported. In order to replace an
-   * old custom domain, the old value must be cleared/unregistered before a new
-   * value can be set. The update of multiple properties is supported. This call
-   * does not change the storage keys for the account. If you want to change the
-   * storage account keys, use the regenerate keys operation. The location and
-   * name of the storage account cannot be changed after creation.
+   * Updates the account type or tags for a storage account. It can also be used
+   * to add a custom domain (note that custom domains cannot be added via the
+   * Create operation). Only one custom domain is supported per storage account.
+   * In order to replace a custom domain, the old value must be cleared before a
+   * new value may be set. To clear a custom domain, simply update the custom
+   * domain with empty string. Then call update again with the new cutsom domain
+   * name. The update API can only be used to update one of tags, accountType, or
+   * customDomain per call. To update multiple of these properties, call the API
+   * multiple times with one change per call. This call does not change the
+   * storage keys for the account. If you want to change storage account keys,
+   * use the RegenerateKey operation. The location and name of the storage
+   * account cannot be changed after creation.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
    * characters in length and use numbers and lower-case letters only.
    *
-   * @param {object} parameters The parameters to provide for the updated
-   * account.
+   * @param {object} parameters The parameters to update on the account. Note
+   * that only one property can be changed at a time using this API.
    *
    * @param {object} [parameters.tags] Resource tags
    *
-   * @param {string} [parameters.accountType] The account type. Note that
-   * StandardZRS and PremiumLRS accounts cannot be changed to other account
+   * @param {string} [parameters.accountType] Gets or sets the account type. Note
+   * that StandardZRS and PremiumLRS accounts cannot be changed to other account
    * types, and other account types cannot be changed to StandardZRS or
    * PremiumLRS. Possible values include: 'Standard_LRS', 'Standard_ZRS',
    * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
@@ -2240,8 +2112,8 @@ class StorageAccounts {
    * supported per storage account at this time. To clear the existing custom
    * domain, use an empty string for the custom domain name property.
    *
-   * @param {string} parameters.customDomain.name The custom domain name. Name is
-   * the CNAME source.
+   * @param {string} parameters.customDomain.name Gets or sets the custom domain
+   * name. Name is the CNAME source.
    *
    * @param {boolean} [parameters.customDomain.useSubDomain] Indicates whether
    * indirect CName validation is enabled. Default value is false. This should
@@ -2291,6 +2163,92 @@ class StorageAccounts {
       });
     } else {
       return self._update(resourceGroupName, accountName, parameters, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Lists the access keys for the specified storage account.
+   *
+   * @param {string} resourceGroupName The name of the resource group.
+   *
+   * @param {string} accountName The name of the storage account.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<StorageAccountKeys>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  listKeysWithHttpOperationResponse(resourceGroupName, accountName, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._listKeys(resourceGroupName, accountName, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Lists the access keys for the specified storage account.
+   *
+   * @param {string} resourceGroupName The name of the resource group.
+   *
+   * @param {string} accountName The name of the storage account.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {StorageAccountKeys} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link StorageAccountKeys} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  listKeys(resourceGroupName, accountName, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._listKeys(resourceGroupName, accountName, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._listKeys(resourceGroupName, accountName, options, optionalCallback);
     }
   }
 
@@ -2381,7 +2339,7 @@ class StorageAccounts {
    * this.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -2414,7 +2372,7 @@ class StorageAccounts {
    * this.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -2465,109 +2423,17 @@ class StorageAccounts {
   }
 
   /**
-   * Lists the access keys for the specified storage account.
+   * Regenerates the access keys for the specified storage account.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
-   *
-   * @param {string} accountName The name of the storage account within the
-   * specified resource group. Storage account names must be between 3 and 24
-   * characters in length and use numbers and lower-case letters only.
-   *
-   * @param {object} [options] Optional Parameters.
-   *
-   * @param {object} [options.customHeaders] Headers that will be added to the
-   * request
-   *
-   * @returns {Promise} A promise is returned
-   *
-   * @resolve {HttpOperationResponse<StorageAccountKeys>} - The deserialized result object.
-   *
-   * @reject {Error} - The error object.
-   */
-  listKeysWithHttpOperationResponse(resourceGroupName, accountName, options) {
-    let client = this.client;
-    let self = this;
-    return new Promise((resolve, reject) => {
-      self._listKeys(resourceGroupName, accountName, options, (err, result, request, response) => {
-        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
-        httpOperationResponse.body = result;
-        if (err) { reject(err); }
-        else { resolve(httpOperationResponse); }
-        return;
-      });
-    });
-  }
-
-  /**
-   * Lists the access keys for the specified storage account.
-   *
-   * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
-   *
-   * @param {string} accountName The name of the storage account within the
-   * specified resource group. Storage account names must be between 3 and 24
-   * characters in length and use numbers and lower-case letters only.
-   *
-   * @param {object} [options] Optional Parameters.
-   *
-   * @param {object} [options.customHeaders] Headers that will be added to the
-   * request
-   *
-   * @param {function} [optionalCallback] - The optional callback.
-   *
-   * @returns {function|Promise} If a callback was passed as the last parameter
-   * then it returns the callback else returns a Promise.
-   *
-   * {Promise} A promise is returned
-   *
-   *                      @resolve {StorageAccountKeys} - The deserialized result object.
-   *
-   *                      @reject {Error} - The error object.
-   *
-   * {function} optionalCallback(err, result, request, response)
-   *
-   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
-   *
-   *                      {object} [result]   - The deserialized result object if an error did not occur.
-   *                      See {@link StorageAccountKeys} for more information.
-   *
-   *                      {object} [request]  - The HTTP Request object if an error did not occur.
-   *
-   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
-   */
-  listKeys(resourceGroupName, accountName, options, optionalCallback) {
-    let client = this.client;
-    let self = this;
-    if (!optionalCallback && typeof options === 'function') {
-      optionalCallback = options;
-      options = null;
-    }
-    if (!optionalCallback) {
-      return new Promise((resolve, reject) => {
-        self._listKeys(resourceGroupName, accountName, options, (err, result, request, response) => {
-          if (err) { reject(err); }
-          else { resolve(result); }
-          return;
-        });
-      });
-    } else {
-      return self._listKeys(resourceGroupName, accountName, options, optionalCallback);
-    }
-  }
-
-  /**
-   * Regenerates one of the access keys for the specified storage account.
-   *
-   * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
    * characters in length and use numbers and lower-case letters only.
    *
    * @param {object} regenerateKeyParameter Specifies name of the key which
-   * should be regenerated -- key1 or key2.
+   * should be regenerated. key1 or key2 for the default keys
    *
    * @param {string} regenerateKeyParameter.keyName
    *
@@ -2597,17 +2463,17 @@ class StorageAccounts {
   }
 
   /**
-   * Regenerates one of the access keys for the specified storage account.
+   * Regenerates the access keys for the specified storage account.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
    * characters in length and use numbers and lower-case letters only.
    *
    * @param {object} regenerateKeyParameter Specifies name of the key which
-   * should be regenerated -- key1 or key2.
+   * should be regenerated. key1 or key2 for the default keys
    *
    * @param {string} regenerateKeyParameter.keyName
    *
@@ -2660,13 +2526,13 @@ class StorageAccounts {
 
   /**
    * Asynchronously creates a new storage account with the specified parameters.
-   * If an account is already created and a subsequent create request is issued
-   * with different properties, the account properties will be updated. If an
-   * account is already created and a subsequent create or update request is
-   * issued with the exact same set of properties, the request will succeed.
+   * Existing accounts cannot be updated with this API and should instead use the
+   * Update Storage Account API. If an account is already created and subsequent
+   * PUT request is issued with exact same set of properties, then HTTP 200 would
+   * be returned.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
@@ -2675,22 +2541,13 @@ class StorageAccounts {
    * @param {object} parameters The parameters to provide for the created
    * account.
    *
-   * @param {string} parameters.location The location of the resource. This will
-   * be one of the supported and registered Azure Geo Regions (e.g. West US, East
-   * US, Southeast Asia, etc.). The geo region of a resource cannot be changed
-   * once it is created, but if an identical geo region is specified on update,
-   * the request will succeed.
+   * @param {string} parameters.location Resource location
    *
-   * @param {object} [parameters.tags] A list of key value pairs that describe
-   * the resource. These tags can be used for viewing and grouping this resource
-   * (across resource groups). A maximum of 15 tags can be provided for a
-   * resource. Each tag must have a key with a length no greater than 128
-   * characters and a value with a length no greater than 256 characters.
+   * @param {object} [parameters.tags] Resource tags
    *
-   * @param {string} parameters.accountType The sku name. Required for account
-   * creation; optional for update. Note that in older versions, sku name was
-   * called accountType. Possible values include: 'Standard_LRS', 'Standard_ZRS',
-   * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
+   * @param {string} parameters.accountType Gets or sets the account type.
+   * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+   * 'Standard_RAGRS', 'Premium_LRS'
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -2719,13 +2576,13 @@ class StorageAccounts {
 
   /**
    * Asynchronously creates a new storage account with the specified parameters.
-   * If an account is already created and a subsequent create request is issued
-   * with different properties, the account properties will be updated. If an
-   * account is already created and a subsequent create or update request is
-   * issued with the exact same set of properties, the request will succeed.
+   * Existing accounts cannot be updated with this API and should instead use the
+   * Update Storage Account API. If an account is already created and subsequent
+   * PUT request is issued with exact same set of properties, then HTTP 200 would
+   * be returned.
    *
    * @param {string} resourceGroupName The name of the resource group within the
-   * user's subscription. The name is case insensitive.
+   * user's subscription.
    *
    * @param {string} accountName The name of the storage account within the
    * specified resource group. Storage account names must be between 3 and 24
@@ -2734,22 +2591,13 @@ class StorageAccounts {
    * @param {object} parameters The parameters to provide for the created
    * account.
    *
-   * @param {string} parameters.location The location of the resource. This will
-   * be one of the supported and registered Azure Geo Regions (e.g. West US, East
-   * US, Southeast Asia, etc.). The geo region of a resource cannot be changed
-   * once it is created, but if an identical geo region is specified on update,
-   * the request will succeed.
+   * @param {string} parameters.location Resource location
    *
-   * @param {object} [parameters.tags] A list of key value pairs that describe
-   * the resource. These tags can be used for viewing and grouping this resource
-   * (across resource groups). A maximum of 15 tags can be provided for a
-   * resource. Each tag must have a key with a length no greater than 128
-   * characters and a value with a length no greater than 256 characters.
+   * @param {object} [parameters.tags] Resource tags
    *
-   * @param {string} parameters.accountType The sku name. Required for account
-   * creation; optional for update. Note that in older versions, sku name was
-   * called accountType. Possible values include: 'Standard_LRS', 'Standard_ZRS',
-   * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
+   * @param {string} parameters.accountType Gets or sets the account type.
+   * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+   * 'Standard_RAGRS', 'Premium_LRS'
    *
    * @param {object} [options] Optional Parameters.
    *

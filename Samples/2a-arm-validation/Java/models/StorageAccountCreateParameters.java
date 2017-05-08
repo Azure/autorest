@@ -16,30 +16,20 @@ import com.microsoft.rest.serializer.JsonFlatten;
 @JsonFlatten
 public class StorageAccountCreateParameters {
     /**
-     * The location of the resource. This will be one of the supported and
-     * registered Azure Geo Regions (e.g. West US, East US, Southeast Asia,
-     * etc.). The geo region of a resource cannot be changed once it is
-     * created, but if an identical geo region is specified on update, the
-     * request will succeed.
+     * Resource location.
      */
     @JsonProperty(value = "location", required = true)
     private String location;
 
     /**
-     * A list of key value pairs that describe the resource. These tags can be
-     * used for viewing and grouping this resource (across resource groups). A
-     * maximum of 15 tags can be provided for a resource. Each tag must have a
-     * key with a length no greater than 128 characters and a value with a
-     * length no greater than 256 characters.
+     * Resource tags.
      */
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
     /**
-     * The sku name. Required for account creation; optional for update. Note
-     * that in older versions, sku name was called accountType. Possible values
-     * include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
-     * 'Standard_RAGRS', 'Premium_LRS'.
+     * Gets or sets the account type. Possible values include: 'Standard_LRS',
+     * 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
      */
     @JsonProperty(value = "properties.accountType", required = true)
     private AccountType accountType;

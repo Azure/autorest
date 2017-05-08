@@ -6,7 +6,8 @@
 module Storage
   module Models
     #
-    # The parameters used to regenerate the storage account key.
+    # Model object.
+    #
     #
     class StorageAccountRegenerateKeyParameters
 

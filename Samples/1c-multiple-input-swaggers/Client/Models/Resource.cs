@@ -9,9 +9,6 @@ namespace Searchservice.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    /// <summary>
-    /// Describes a storage resource.
-    /// </summary>
     public partial class Resource
     {
         /// <summary>

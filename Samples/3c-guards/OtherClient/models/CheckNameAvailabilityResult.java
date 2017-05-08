@@ -13,23 +13,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CheckNameAvailabilityResult {
     /**
-     * Boolean value that indicates whether the name is available for you to
-     * use. If true, the name is available. If false, the name has already been
-     * taken or is invalid and cannot be used.
+     * Gets a boolean value that indicates whether the name is available for
+     * you to use. If true, the name is available. If false, the name has
+     * already been taken or invalid and cannot be used.
      */
     @JsonProperty(value = "nameAvailable")
     private Boolean nameAvailable;
 
     /**
-     * The reason that a storage account name could not be used. The Reason
-     * element is only returned if NameAvailable is false. Possible values
-     * include: 'AccountNameInvalid', 'AlreadyExists'.
+     * Gets the reason that a storage account name could not be used. The
+     * Reason element is only returned if NameAvailable is false. Possible
+     * values include: 'AccountNameInvalid', 'AlreadyExists'.
      */
     @JsonProperty(value = "reason")
     private Reason reason;
 
     /**
-     * The error message explaining the Reason value in more detail.
+     * Gets an error message explaining the Reason value in more detail.
      */
     @JsonProperty(value = "message")
     private String message;

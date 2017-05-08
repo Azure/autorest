@@ -16,14 +16,15 @@ import com.microsoft.rest.serializer.JsonFlatten;
 @JsonFlatten
 public class StorageAccount extends Resource {
     /**
-     * The status of the storage account at the time the operation was called.
-     * Possible values include: 'Creating', 'ResolvingDNS', 'Succeeded'.
+     * Gets the status of the storage account at the time the operation was
+     * called. Possible values include: 'Creating', 'ResolvingDNS',
+     * 'Succeeded'.
      */
     @JsonProperty(value = "properties.provisioningState")
     private ProvisioningState provisioningState;
 
     /**
-     * The type of the storage account. Possible values include:
+     * Gets the type of the storage account. Possible values include:
      * 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
      * 'Premium_LRS'.
      */
@@ -31,21 +32,21 @@ public class StorageAccount extends Resource {
     private AccountType accountType;
 
     /**
-     * The URLs that are used to perform a retrieval of a public blob, queue,
-     * or table object. Note that Standard_ZRS and Premium_LRS accounts only
+     * Gets the URLs that are used to perform a retrieval of a public blob,
+     * queue or table object.Note that StandardZRS and PremiumLRS accounts only
      * return the blob endpoint.
      */
     @JsonProperty(value = "properties.primaryEndpoints")
     private Endpoints primaryEndpoints;
 
     /**
-     * The location of the primary data center for the storage account.
+     * Gets the location of the primary for the storage account.
      */
     @JsonProperty(value = "properties.primaryLocation")
     private String primaryLocation;
 
     /**
-     * The status indicating whether the primary location of the storage
+     * Gets the status indicating whether the primary location of the storage
      * account is available or unavailable. Possible values include:
      * 'Available', 'Unavailable'.
      */
@@ -53,46 +54,47 @@ public class StorageAccount extends Resource {
     private AccountStatus statusOfPrimary;
 
     /**
-     * The timestamp of the most recent instance of a failover to the secondary
-     * location. Only the most recent timestamp is retained. This element is
-     * not returned if there has never been a failover instance. Only available
-     * if the accountType is Standard_GRS or Standard_RAGRS.
+     * Gets the timestamp of the most recent instance of a failover to the
+     * secondary location. Only the most recent timestamp is retained. This
+     * element is not returned if there has never been a failover instance.
+     * Only available if the accountType is StandardGRS or StandardRAGRS.
      */
     @JsonProperty(value = "properties.lastGeoFailoverTime")
     private DateTime lastGeoFailoverTime;
 
     /**
-     * The location of the geo-replicated secondary for the storage account.
-     * Only available if the accountType is Standard_GRS or Standard_RAGRS.
+     * Gets the location of the geo replicated secondary for the storage
+     * account. Only available if the accountType is StandardGRS or
+     * StandardRAGRS.
      */
     @JsonProperty(value = "properties.secondaryLocation")
     private String secondaryLocation;
 
     /**
-     * The status indicating whether the secondary location of the storage
-     * account is available or unavailable. Only available if the SKU name is
-     * Standard_GRS or Standard_RAGRS. Possible values include: 'Available',
+     * Gets the status indicating whether the secondary location of the storage
+     * account is available or unavailable. Only available if the accountType
+     * is StandardGRS or StandardRAGRS. Possible values include: 'Available',
      * 'Unavailable'.
      */
     @JsonProperty(value = "properties.statusOfSecondary")
     private AccountStatus statusOfSecondary;
 
     /**
-     * The creation date and time of the storage account in UTC.
+     * Gets the creation date and time of the storage account in UTC.
      */
     @JsonProperty(value = "properties.creationTime")
     private DateTime creationTime;
 
     /**
-     * The custom domain the user assigned to this storage account.
+     * Gets the user assigned custom domain assigned to this storage account.
      */
     @JsonProperty(value = "properties.customDomain")
     private CustomDomain customDomain;
 
     /**
-     * The URLs that are used to perform a retrieval of a public blob, queue,
-     * or table object from the secondary location of the storage account. Only
-     * available if the SKU name is Standard_RAGRS.
+     * Gets the URLs that are used to perform a retrieval of a public blob,
+     * queue or table object from the secondary location of the storage
+     * account. Only available if the accountType is StandardRAGRS.
      */
     @JsonProperty(value = "properties.secondaryEndpoints")
     private Endpoints secondaryEndpoints;

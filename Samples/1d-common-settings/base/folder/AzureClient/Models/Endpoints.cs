@@ -28,10 +28,10 @@ namespace AwesomeNamespace.Models
         /// <summary>
         /// Initializes a new instance of the Endpoints class.
         /// </summary>
-        /// <param name="blob">The blob endpoint.</param>
-        /// <param name="queue">The queue endpoint.</param>
-        /// <param name="table">The table endpoint.</param>
-        /// <param name="file">The file endpoint.</param>
+        /// <param name="blob">Gets the blob endpoint.</param>
+        /// <param name="queue">Gets the queue endpoint.</param>
+        /// <param name="table">Gets the table endpoint.</param>
+        /// <param name="file">Gets the file endpoint.</param>
         public Endpoints(string blob = default(string), string queue = default(string), string table = default(string), string file = default(string))
         {
             Blob = blob;
@@ -47,25 +47,25 @@ namespace AwesomeNamespace.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the blob endpoint.
+        /// Gets the blob endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "blob")]
         public string Blob { get; set; }
 
         /// <summary>
-        /// Gets or sets the queue endpoint.
+        /// Gets the queue endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "queue")]
         public string Queue { get; set; }
 
         /// <summary>
-        /// Gets or sets the table endpoint.
+        /// Gets the table endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "table")]
         public string Table { get; set; }
 
         /// <summary>
-        /// Gets or sets the file endpoint.
+        /// Gets the file endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "file")]
         public string File { get; set; }

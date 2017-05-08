@@ -17,7 +17,7 @@ namespace Storage
     public partial interface IUsageOperations
     {
         /// <summary>
-        /// Lists the current usage count and the limit for the resources under
+        /// Gets the current usage count and the limit for the resources under
         /// the subscription.
         /// </summary>
         /// <param name='customHeaders'>

@@ -9,7 +9,7 @@ package storage.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The parameters used to check the availabity of the storage account name.
+ * The StorageAccountCheckNameAvailabilityParameters model.
  */
 public class StorageAccountCheckNameAvailabilityParameters {
     /**

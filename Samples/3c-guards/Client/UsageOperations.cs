@@ -44,7 +44,7 @@ namespace Storage
         public StorageManagementClient Client { get; private set; }
 
         /// <summary>
-        /// Lists the current usage count and the limit for the resources under the
+        /// Gets the current usage count and the limit for the resources under the
         /// subscription.
         /// </summary>
         /// <param name='customHeaders'>

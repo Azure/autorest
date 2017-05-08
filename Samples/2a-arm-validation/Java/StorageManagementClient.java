@@ -34,14 +34,14 @@ public interface StorageManagementClient {
     String userAgent();
 
     /**
-     * Gets Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call..
+     * Gets Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call..
      *
      * @return the subscriptionId value.
      */
     String subscriptionId();
 
     /**
-     * Sets Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call..
+     * Sets Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call..
      *
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself

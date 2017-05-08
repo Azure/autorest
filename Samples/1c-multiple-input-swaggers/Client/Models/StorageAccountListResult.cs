@@ -25,7 +25,7 @@ namespace Searchservice.Models
         /// <summary>
         /// Initializes a new instance of the StorageAccountListResult class.
         /// </summary>
-        /// <param name="value">The list of storage accounts and their
+        /// <param name="value">Gets the list of storage accounts and their
         /// properties.</param>
         public StorageAccountListResult(IList<StorageAccount> value = default(IList<StorageAccount>))
         {
@@ -39,7 +39,7 @@ namespace Searchservice.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the list of storage accounts and their properties.
+        /// Gets the list of storage accounts and their properties.
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public IList<StorageAccount> Value { get; set; }

@@ -6,7 +6,8 @@
 module Storage
   module Models
     #
-    # The parameters used to check the availabity of the storage account name.
+    # Model object.
+    #
     #
     class StorageAccountCheckNameAvailabilityParameters
 

@@ -13,13 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class StorageAccountKeys {
     /**
-     * The value of key 1.
+     * Gets the value of key 1.
      */
     @JsonProperty(value = "key1")
     private String key1;
 
     /**
-     * The value of key 2.
+     * Gets the value of key 2.
      */
     @JsonProperty(value = "key2")
     private String key2;

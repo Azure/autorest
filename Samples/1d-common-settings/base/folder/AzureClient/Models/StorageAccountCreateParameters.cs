@@ -35,22 +35,11 @@ namespace AwesomeNamespace.Models
         /// Initializes a new instance of the StorageAccountCreateParameters
         /// class.
         /// </summary>
-        /// <param name="location">The location of the resource. This will be
-        /// one of the supported and registered Azure Geo Regions (e.g. West
-        /// US, East US, Southeast Asia, etc.). The geo region of a resource
-        /// cannot be changed once it is created, but if an identical geo
-        /// region is specified on update, the request will succeed.</param>
-        /// <param name="accountType">The sku name. Required for account
-        /// creation; optional for update. Note that in older versions, sku
-        /// name was called accountType. Possible values include:
-        /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
-        /// 'Premium_LRS'</param>
-        /// <param name="tags">A list of key value pairs that describe the
-        /// resource. These tags can be used for viewing and grouping this
-        /// resource (across resource groups). A maximum of 15 tags can be
-        /// provided for a resource. Each tag must have a key with a length no
-        /// greater than 128 characters and a value with a length no greater
-        /// than 256 characters.</param>
+        /// <param name="location">Resource location</param>
+        /// <param name="accountType">Gets or sets the account type. Possible
+        /// values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+        /// 'Standard_RAGRS', 'Premium_LRS'</param>
+        /// <param name="tags">Resource tags</param>
         public StorageAccountCreateParameters(string location, AccountType accountType, IDictionary<string, string> tags = default(IDictionary<string, string>))
         {
             Location = location;
@@ -65,31 +54,21 @@ namespace AwesomeNamespace.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets the location of the resource. This will be one of the
-        /// supported and registered Azure Geo Regions (e.g. West US, East US,
-        /// Southeast Asia, etc.). The geo region of a resource cannot be
-        /// changed once it is created, but if an identical geo region is
-        /// specified on update, the request will succeed.
+        /// Gets or sets resource location
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of key value pairs that describe the resource.
-        /// These tags can be used for viewing and grouping this resource
-        /// (across resource groups). A maximum of 15 tags can be provided for
-        /// a resource. Each tag must have a key with a length no greater than
-        /// 128 characters and a value with a length no greater than 256
-        /// characters.
+        /// Gets or sets resource tags
         /// </summary>
         [JsonProperty(PropertyName = "tags")]
         public IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
-        /// Gets or sets the sku name. Required for account creation; optional
-        /// for update. Note that in older versions, sku name was called
-        /// accountType. Possible values include: 'Standard_LRS',
-        /// 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
+        /// Gets or sets the account type. Possible values include:
+        /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
+        /// 'Premium_LRS'
         /// </summary>
         [JsonProperty(PropertyName = "properties.accountType")]
         public AccountType AccountType { get; set; }

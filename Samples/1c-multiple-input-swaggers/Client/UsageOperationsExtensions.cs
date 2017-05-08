@@ -14,7 +14,7 @@ namespace Searchservice
     public static partial class UsageOperationsExtensions
     {
             /// <summary>
-            /// Lists the current usage count and the limit for the resources under the
+            /// Gets the current usage count and the limit for the resources under the
             /// subscription.
             /// </summary>
             /// <param name='operations'>
@@ -26,7 +26,7 @@ namespace Searchservice
             }
 
             /// <summary>
-            /// Lists the current usage count and the limit for the resources under the
+            /// Gets the current usage count and the limit for the resources under the
             /// subscription.
             /// </summary>
             /// <param name='operations'>

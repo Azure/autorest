@@ -89,6 +89,10 @@ public class StorageAccountsImpl implements StorageAccounts {
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}")
         Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountUpdateParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: .StorageAccounts listKeys" })
+        @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys")
+        Observable<Response<ResponseBody>> listKeys(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: .StorageAccounts list" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts")
         Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -97,10 +101,6 @@ public class StorageAccountsImpl implements StorageAccounts {
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts")
         Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: .StorageAccounts listKeys" })
-        @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys")
-        Observable<Response<ResponseBody>> listKeys(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
-
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: .StorageAccounts regenerateKey" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey")
         Observable<Response<ResponseBody>> regenerateKey(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountRegenerateKeyParameters regenerateKey, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
@@ -108,7 +108,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Checks that the storage account name is valid and is not already in use.
+     * Checks that account name is valid and is not in use.
      *
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -121,7 +121,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Checks that the storage account name is valid and is not already in use.
+     * Checks that account name is valid and is not in use.
      *
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -133,7 +133,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Checks that the storage account name is valid and is not already in use.
+     * Checks that account name is valid and is not in use.
      *
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -149,7 +149,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Checks that the storage account name is valid and is not already in use.
+     * Checks that account name is valid and is not in use.
      *
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -188,9 +188,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
+     * Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -203,9 +203,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
+     * Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -217,9 +217,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
+     * Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -235,9 +235,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
+     * Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -265,9 +265,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
+     * Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -280,9 +280,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
+     * Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -294,9 +294,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
+     * Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -312,9 +312,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
+     * Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -362,7 +362,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     /**
      * Deletes a storage account in Microsoft Azure.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -375,7 +375,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     /**
      * Deletes a storage account in Microsoft Azure.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -388,7 +388,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     /**
      * Deletes a storage account in Microsoft Azure.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -405,7 +405,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     /**
      * Deletes a storage account in Microsoft Azure.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -446,9 +446,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
+     * Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -460,9 +460,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
+     * Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -473,9 +473,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
+     * Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
@@ -490,9 +490,9 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
+     * Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
@@ -532,11 +532,11 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.
+     * Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param parameters The parameters to provide for the updated account.
+     * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -547,11 +547,11 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.
+     * Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param parameters The parameters to provide for the updated account.
+     * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -561,11 +561,11 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.
+     * Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param parameters The parameters to provide for the updated account.
+     * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
      */
@@ -579,11 +579,11 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.
+     * Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param parameters The parameters to provide for the updated account.
+     * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
      */
@@ -621,6 +621,92 @@ public class StorageAccountsImpl implements StorageAccounts {
     private ServiceResponse<StorageAccount> updateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<StorageAccount, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<StorageAccount>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Lists the access keys for the specified storage account.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param accountName The name of the storage account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the StorageAccountKeys object if successful.
+     */
+    public StorageAccountKeys listKeys(String resourceGroupName, String accountName) {
+        return listKeysWithServiceResponseAsync(resourceGroupName, accountName).toBlocking().single().body();
+    }
+
+    /**
+     * Lists the access keys for the specified storage account.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param accountName The name of the storage account.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<StorageAccountKeys> listKeysAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccountKeys> serviceCallback) {
+        return ServiceFuture.fromResponse(listKeysWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
+    }
+
+    /**
+     * Lists the access keys for the specified storage account.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param accountName The name of the storage account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the StorageAccountKeys object
+     */
+    public Observable<StorageAccountKeys> listKeysAsync(String resourceGroupName, String accountName) {
+        return listKeysWithServiceResponseAsync(resourceGroupName, accountName).map(new Func1<ServiceResponse<StorageAccountKeys>, StorageAccountKeys>() {
+            @Override
+            public StorageAccountKeys call(ServiceResponse<StorageAccountKeys> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Lists the access keys for the specified storage account.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param accountName The name of the storage account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the StorageAccountKeys object
+     */
+    public Observable<ServiceResponse<StorageAccountKeys>> listKeysWithServiceResponseAsync(String resourceGroupName, String accountName) {
+        if (resourceGroupName == null) {
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
+        }
+        if (accountName == null) {
+            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
+        }
+        if (this.client.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
+        }
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
+        }
+        return service.listKeys(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageAccountKeys>>>() {
+                @Override
+                public Observable<ServiceResponse<StorageAccountKeys>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<StorageAccountKeys> clientResponse = listKeysDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<StorageAccountKeys> listKeysDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<StorageAccountKeys, CloudException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<StorageAccountKeys>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -701,7 +787,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     /**
      * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -714,7 +800,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     /**
      * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -726,7 +812,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     /**
      * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;StorageAccount&gt; object
      */
@@ -742,7 +828,7 @@ public class StorageAccountsImpl implements StorageAccounts {
     /**
      * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;StorageAccount&gt; object
      */
@@ -779,97 +865,11 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Lists the access keys for the specified storage account.
+     * Regenerates the access keys for the specified storage account.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws CloudException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the StorageAccountKeys object if successful.
-     */
-    public StorageAccountKeys listKeys(String resourceGroupName, String accountName) {
-        return listKeysWithServiceResponseAsync(resourceGroupName, accountName).toBlocking().single().body();
-    }
-
-    /**
-     * Lists the access keys for the specified storage account.
-     *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
-     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<StorageAccountKeys> listKeysAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccountKeys> serviceCallback) {
-        return ServiceFuture.fromResponse(listKeysWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
-    }
-
-    /**
-     * Lists the access keys for the specified storage account.
-     *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
-     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the StorageAccountKeys object
-     */
-    public Observable<StorageAccountKeys> listKeysAsync(String resourceGroupName, String accountName) {
-        return listKeysWithServiceResponseAsync(resourceGroupName, accountName).map(new Func1<ServiceResponse<StorageAccountKeys>, StorageAccountKeys>() {
-            @Override
-            public StorageAccountKeys call(ServiceResponse<StorageAccountKeys> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Lists the access keys for the specified storage account.
-     *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
-     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the StorageAccountKeys object
-     */
-    public Observable<ServiceResponse<StorageAccountKeys>> listKeysWithServiceResponseAsync(String resourceGroupName, String accountName) {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (accountName == null) {
-            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        return service.listKeys(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageAccountKeys>>>() {
-                @Override
-                public Observable<ServiceResponse<StorageAccountKeys>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<StorageAccountKeys> clientResponse = listKeysDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<StorageAccountKeys> listKeysDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<StorageAccountKeys, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<StorageAccountKeys>() { }.getType())
-                .registerError(CloudException.class)
-                .build(response);
-    }
-
-    /**
-     * Regenerates one of the access keys for the specified storage account.
-     *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
-     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param regenerateKey Specifies name of the key which should be regenerated -- key1 or key2.
+     * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -880,11 +880,11 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Regenerates one of the access keys for the specified storage account.
+     * Regenerates the access keys for the specified storage account.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param regenerateKey Specifies name of the key which should be regenerated -- key1 or key2.
+     * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -894,11 +894,11 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Regenerates one of the access keys for the specified storage account.
+     * Regenerates the access keys for the specified storage account.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param regenerateKey Specifies name of the key which should be regenerated -- key1 or key2.
+     * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccountKeys object
      */
@@ -912,11 +912,11 @@ public class StorageAccountsImpl implements StorageAccounts {
     }
 
     /**
-     * Regenerates one of the access keys for the specified storage account.
+     * Regenerates the access keys for the specified storage account.
      *
-     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case insensitive.
+     * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param regenerateKey Specifies name of the key which should be regenerated -- key1 or key2.
+     * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccountKeys object
      */

@@ -14,25 +14,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Endpoints {
     /**
-     * The blob endpoint.
+     * Gets the blob endpoint.
      */
     @JsonProperty(value = "blob")
     private String blob;
 
     /**
-     * The queue endpoint.
+     * Gets the queue endpoint.
      */
     @JsonProperty(value = "queue")
     private String queue;
 
     /**
-     * The table endpoint.
+     * Gets the table endpoint.
      */
     @JsonProperty(value = "table")
     private String table;
 
     /**
-     * The file endpoint.
+     * Gets the file endpoint.
      */
     @JsonProperty(value = "file")
     private String file;

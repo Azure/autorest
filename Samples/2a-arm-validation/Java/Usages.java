@@ -21,7 +21,7 @@ import rx.Observable;
  */
 public interface Usages {
     /**
-     * Lists the current usage count and the limit for the resources under the subscription.
+     * Gets the current usage count and the limit for the resources under the subscription.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -31,7 +31,7 @@ public interface Usages {
     List<Usage> list();
 
     /**
-     * Lists the current usage count and the limit for the resources under the subscription.
+     * Gets the current usage count and the limit for the resources under the subscription.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -40,7 +40,7 @@ public interface Usages {
     ServiceFuture<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback);
 
     /**
-     * Lists the current usage count and the limit for the resources under the subscription.
+     * Gets the current usage count and the limit for the resources under the subscription.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Usage&gt; object
@@ -48,7 +48,7 @@ public interface Usages {
     Observable<List<Usage>> listAsync();
 
     /**
-     * Lists the current usage count and the limit for the resources under the subscription.
+     * Gets the current usage count and the limit for the resources under the subscription.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Usage&gt; object

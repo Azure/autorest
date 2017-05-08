@@ -12,18 +12,18 @@ module Storage
 
       include MsRestAzure
 
-      # @return [Boolean] Boolean value that indicates whether the name is
-      # available for you to use. If true, the name is available. If false, the
-      # name has already been taken or is invalid and cannot be used.
+      # @return [Boolean] Gets a boolean value that indicates whether the name
+      # is available for you to use. If true, the name is available. If false,
+      # the name has already been taken or invalid and cannot be used.
       attr_accessor :name_available
 
-      # @return [Reason] The reason that a storage account name could not be
-      # used. The Reason element is only returned if NameAvailable is false.
+      # @return [Reason] Gets the reason that a storage account name could not
+      # be used. The Reason element is only returned if NameAvailable is false.
       # Possible values include: 'AccountNameInvalid', 'AlreadyExists'
       attr_accessor :reason
 
-      # @return [String] The error message explaining the Reason value in more
-      # detail.
+      # @return [String] Gets an error message explaining the Reason value in
+      # more detail.
       attr_accessor :message
 
 

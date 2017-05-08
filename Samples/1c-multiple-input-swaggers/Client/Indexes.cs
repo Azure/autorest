@@ -18,7 +18,7 @@ namespace Searchservice
     /// <summary>
     /// Indexes operations.
     /// </summary>
-    public partial class Indexes : IServiceOperations<StorageManagementClient>, IIndexes
+    public partial class Indexes : IServiceOperations<SearchandStorage>, IIndexes
     {
         /// <summary>
         /// Initializes a new instance of the Indexes class.
@@ -29,7 +29,7 @@ namespace Searchservice
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Indexes(StorageManagementClient client)
+        public Indexes(SearchandStorage client)
         {
             if (client == null)
             {
@@ -39,9 +39,9 @@ namespace Searchservice
         }
 
         /// <summary>
-        /// Gets a reference to the StorageManagementClient
+        /// Gets a reference to the SearchandStorage
         /// </summary>
-        public StorageManagementClient Client { get; private set; }
+        public SearchandStorage Client { get; private set; }
 
         /// <summary>
         /// Creates a new Azure Search index.

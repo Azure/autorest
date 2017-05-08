@@ -8,9 +8,6 @@ namespace Storage.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    /// <summary>
-    /// The parameters used to regenerate the storage account key.
-    /// </summary>
     public partial class StorageAccountRegenerateKeyParameters
     {
         /// <summary>

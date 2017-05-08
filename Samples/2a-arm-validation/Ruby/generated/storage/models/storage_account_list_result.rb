@@ -12,8 +12,8 @@ module Storage
 
       include MsRestAzure
 
-      # @return [Array<StorageAccount>] The list of storage accounts and their
-      # properties.
+      # @return [Array<StorageAccount>] Gets the list of storage accounts and
+      # their properties.
       attr_accessor :value
 
 

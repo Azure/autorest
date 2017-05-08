@@ -18,7 +18,7 @@ namespace Storage
     public static partial class UsagesOperationsExtensions
     {
             /// <summary>
-            /// Lists the current usage count and the limit for the resources under the
+            /// Gets the current usage count and the limit for the resources under the
             /// subscription.
             /// </summary>
             /// <param name='operations'>
@@ -30,7 +30,7 @@ namespace Storage
             }
 
             /// <summary>
-            /// Lists the current usage count and the limit for the resources under the
+            /// Gets the current usage count and the limit for the resources under the
             /// subscription.
             /// </summary>
             /// <param name='operations'>
