@@ -81,7 +81,7 @@ function CommonmarkParentHeading(startNode: commonmark.Node): commonmark.Node | 
 }
 
 export function* CommonmarkSubHeadings(startNode: commonmark.Node): Iterable<commonmark.Node> {
-  if (startNode.type === commonmarkHeadingNodeType || !startNode.parent) {
+  if (startNode.type === commonmarkHeadingNodeType || !startNode.prev) {
     const currentLevel = startNode.level;
     let maxLevel = commonmarkHeadingMaxLevel;
 
@@ -102,11 +102,17 @@ export function* CommonmarkSubHeadings(startNode: commonmark.Node): Iterable<com
   }
 }
 
-function CommonmarkHeadingText(headingNode: commonmark.Node): string {
-  return headingNode.firstChild.literal;
+export function CommonmarkHeadingText(headingNode: commonmark.Node): string {
+  let text = "";
+  let node = headingNode.firstChild;
+  while (node) {
+    text += node.literal;
+    node = node.next;
+  }
+  return text;
 }
 
-function CommonmarkHeadingFollowingText(rawMarkdown: string, headingNode: commonmark.Node): [number, number] {
+export function CommonmarkHeadingFollowingText(headingNode: commonmark.Node): [number, number] {
   let subNode = headingNode.next;
   const startPos = subNode.sourcepos[0];
   while (subNode.next

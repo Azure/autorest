@@ -1,4 +1,10 @@
-import { CommonmarkSubHeadings, ParseCommonmark } from '../parsing/literate';
+import { Lines } from '../parsing/text-utility';
+import {
+  CommonmarkHeadingFollowingText,
+  CommonmarkHeadingText,
+  CommonmarkSubHeadings,
+  ParseCommonmark
+} from '../parsing/literate';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -197,15 +203,65 @@ async function StripExternalReferences(swagger: DataHandleRead, workingScope: Da
 
 export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
   const commonmark = await inputScope.ReadStrict(inputFileUri);
-  const commonmarkNode = await ParseCommonmark(commonmark.ReadData());
+  const rawCommonmark = commonmark.ReadData();
+  const commonmarkNode = await ParseCommonmark(rawCommonmark);
 
   const directives: any[] = [];
   const mappings: Mappings = [];
-  const state = [...CommonmarkSubHeadings(commonmarkNode)].map(x => { return { node: x, jsonQuery: "$" }; });
+  let transformer: string[] = [];
+  const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => { return { node: x, query: "$" }; });
 
+  while (state.length > 0) {
+    const x = state.pop(); if (x === undefined) throw "unreachable";
+    // extract heading clue
+    // Syntax: <regular heading> (`<query>`)
+    // query syntax:
+    // - implicit prefix: "@." (omitted if starts with "$." or "@.")
+    // - "#<asd>" to obtain the object containing a string property containing "<asd>"
+    let clue: string | null = null;
+    let node = x.node.firstChild;
+    while (node) {
+      if (node.literal.endsWith("(")
+        && (((node.next || {}).next || {}).literal || "").startsWith(")")
+        && node.next.type === "code") {
+        clue = node.next.literal;
+        break;
+      }
+      node = node.next;
+    }
+
+    // process clue
+    if (clue) {
+      // be explicit about relativity
+      if (!clue.startsWith("@.") && !clue.startsWith("$.")) {
+        clue = "@." + clue;
+      }
+
+      // make absolute
+      if (clue.startsWith("@.")) {
+        clue = x.query + clue.slice(1);
+      }
+
+      // replace queries
+      const candidProperties = ["name", "operationId", "$ref"];
+      clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `@.${p}.indexOf('${match}') !== -1`).join(' || ')})]`);
+
+      // console.log(clue);
+
+      // add directive
+      const headingTextRange = CommonmarkHeadingFollowingText(x.node);
+      const documentation = Lines(rawCommonmark).slice(headingTextRange[0] - 1, headingTextRange[1]);
+      directives.push({
+        where: clue.endsWith(".description") ? clue : clue + ".description",
+        set: documentation
+      });
+    }
+
+    state.push(...[...CommonmarkSubHeadings(x.node)].map(y => { return { node: y, query: clue || x.query }; }));
+  }
 
   const resultHandle = await workingScope.Write("override-directives");
-  return resultHandle.WriteObject(directives, mappings, [commonmark]);
+  return resultHandle.WriteObject({ directive: directives }, mappings, [commonmark]);
 }
 
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
