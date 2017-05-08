@@ -35,7 +35,7 @@ Markdown documentation overrides:
 ``` yaml
 pipeline:
   swagger-document-override/md-override-loader:
-    output-artifact: immediate-directive
+    output-artifact: immediate-config
 ```
 
 OpenAPI definitions:

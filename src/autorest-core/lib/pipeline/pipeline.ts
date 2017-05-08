@@ -78,7 +78,6 @@ function CreatePluginTransformerImmediate(): PipelinePlugin {
     };
     const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
     const scopes = await Promise.all(files.slice(0, files.length - 1).map(f => input.ReadStrict(f)));
-    console.log(JSON.stringify(scopes.map(s => s.ReadObject<any>()), null, 2));
     const manipulator = new Manipulator(config.GetPluginViewImmediate(...scopes.map(s => s.ReadObject<any>())));
     const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);
