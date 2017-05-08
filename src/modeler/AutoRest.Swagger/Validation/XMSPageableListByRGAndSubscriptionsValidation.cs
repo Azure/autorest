@@ -10,6 +10,8 @@ namespace AutoRest.Swagger.Validation
 {
     public class XMSPageableListByRGAndSubscriptionsValidation : TypedRule<Dictionary<string, Schema>>
     {
+        private static readonly string NextLinkName = "nextLinkName";
+
         /// <summary>
         /// Id of the Rule.
         /// </summary>
@@ -33,19 +35,22 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
-        private string RemoveAndTrim(string str)
-        {
-            str = str.Replace('\r', ' ');
-            str = str.Replace('\n', ' ');
-            str = str.Replace(" ", "");
-            return str.Trim();
-        }
-
         private bool IsEqual(JObject obj1, JObject obj2)
         {
-            string obj1String = RemoveAndTrim(obj1.ToString());
-            string obj2String = RemoveAndTrim(obj2.ToString());
-            return obj1String.Equals(obj2String);
+            if(obj1.Count != obj2.Count && obj1.Count != 1)
+            {
+                return false;
+            }
+
+            JToken value1 = obj1.GetValue(NextLinkName);
+            JToken value2 = obj2.GetValue(NextLinkName);
+
+            if(!JToken.DeepEquals(value1, value2))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
