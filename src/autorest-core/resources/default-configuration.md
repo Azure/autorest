@@ -385,6 +385,34 @@ output-artifact:
 - source-file-azureresourceschema
 ```
 
+##### JSON-RPC client
+
+``` yaml
+pipeline:
+  jsonrpcclient/modeler:
+    input: swagger-document/transform
+    output-artifact: code-model-v1
+    scope: jsonrpcclient
+  jsonrpcclient/generate:
+    plugin: jsonrpcclient
+    input: 
+      - swagger-document/transform
+      - modeler
+    output-artifact: source-file-jsonrpcclient
+  jsonrpcclient/transform:
+    input: generate
+    output-artifact: source-file-jsonrpcclient
+  jsonrpcclient/emitter:
+    input: transform
+    scope: scope-jsonrpcclient/emitter
+
+scope-jsonrpcclient/emitter:
+  input-artifact: source-file-jsonrpcclient
+  output-uri-expr: $key.split("/output/")[1]
+output-artifact:
+- source-file-jsonrpcclient
+```
+
 # Validation
 
 ## Client Side Validation
