@@ -6,7 +6,7 @@ blocks for machine readable sections. This encourages easy-to-author documentati
 desired when authoring and processing instructions.
 
 ### Notable Features
-- All the relavent settings for generating code for any langugage can be unified into a single location
+- All the relavent settings for generating code for any language can be unified into a single location
 - Choose a specific version (or a valid range?) of AutoRest to run (discovery/acquring when necessary.)
 - Specify the OpenAPI files that it applies to.
 - Apply code generation tweaks without having to mark up the OpenAPI 

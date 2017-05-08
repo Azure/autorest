@@ -124,10 +124,14 @@
     <value>Plugins:
   CSharp:
     TypeName: PluginCs, AutoRest.CSharp
+  JsonRpcClient:
+    TypeName: PluginCs, AutoRest.CSharp.JsonRpcClient
   Azure.CSharp:
     TypeName: PluginCsa, AutoRest.CSharp.Azure
   Azure.CSharp.Fluent:
     TypeName: PluginCsaf, AutoRest.CSharp.Azure.Fluent
+  Azure.JsonRpcClient:
+    TypeName: PluginCsa, AutoRest.CSharp.Azure.JsonRpcClient
   Ruby:
     TypeName: PluginRb, AutoRest.Ruby
   Azure.Ruby:
@@ -142,6 +146,8 @@
     TypeName: PluginPya, AutoRest.Python.Azure
   Go:
     TypeName: PluginGo, AutoRest.Go
+  Go.TestGen:
+    TypeName: PluginGotg, AutoRest.Go.TestGen
   Java:
     TypeName: PluginJv, AutoRest.Java
   Azure.Java:
