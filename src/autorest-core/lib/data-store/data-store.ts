@@ -7,7 +7,7 @@ import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
 import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from '../ref/uri';
-import { FastStringify, Parse, ParseNode, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
+import { Clone, FastStringify, Parse, ParseNode, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
@@ -323,7 +323,7 @@ export class DataStore extends DataStoreView {
 
   public Blame(absoluteUri: string, position: SmartPosition, message?: (m: Message) => void): BlameTree {
     const data = this.ReadStrictSync(absoluteUri);
-
+    /*
     // verify if the path exists in the document
     if ('path' in position) {
       let x = (<any>data.ReadObject());
@@ -342,6 +342,7 @@ export class DataStore extends DataStoreView {
       }
       (<any>position)['path'] = validKeys;
     }
+    */
 
     const resolvedPosition = CompilePosition(position, data);
     return BlameTree.Create(this, {

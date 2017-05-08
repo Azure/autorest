@@ -1,3 +1,4 @@
+import { Clone } from './ref/yaml';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -223,6 +224,36 @@ export class ConfigurationView {
     }
   }
 
+  private BuildBlameTree(s: SourceLocation): any {
+    let result: any;
+    let posClone = Clone(s.Position);
+    if ('path' in s.Position) {
+      while (true) {
+        try {
+          result = this.TryCreateBlameTree(s);
+        }
+        catch (e) {
+          (<string[]>posClone.path).pop();
+          if ((<string[]>posClone.path).length === 0) {
+            throw e;
+          }
+        }
+      }
+    } else {
+      result = this.TryCreateBlameTree(s);
+    }
+    s.Position = posClone;
+    return result;
+  }
+
+  private TryCreateBlameTree(s: SourceLocation): any {
+    const blameTree = this.DataStore.Blame(s.document, s.Position, this.Message.bind(this));
+    const result = [...blameTree.BlameInputs()];
+    if (result.length > 0) {
+      return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
+    }
+  }
+
   // message pipeline (source map resolution, filter, ...)
   public Message(m: Message): void {
     this.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - starting processing` });
@@ -231,11 +262,7 @@ export class ConfigurationView {
       if (m.Source) {
         const blameSources = m.Source.map(s => {
           try {
-            const blameTree = this.DataStore.Blame(s.document, s.Position, this.Message.bind(this));
-            const result = [...blameTree.BlameInputs()];
-            if (result.length > 0) {
-              return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
-            }
+            return this.BuildBlameTree(s);
           } catch (e) {
             // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
             //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
