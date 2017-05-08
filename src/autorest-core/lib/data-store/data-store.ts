@@ -173,6 +173,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 
 class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
   private uris: string[] = [];
+  private cache: { [uri: string]: Promise<DataHandleRead> } = {};
 
   constructor(private slave: DataStore, private fs: IFileSystem) {
     super();
@@ -185,26 +186,34 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
       uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
     }
 
-    // prope cache
-    const existingData = await this.slave.Read(uri);
-    if (existingData !== null) {
-      this.uris.push(uri);
-      return existingData;
+    // sync cache (inner stuff is racey!)
+    if (!this.cache[uri]) {
+      this.cache[uri] = (async () => {
+        // probe data store
+        const existingData = await this.slave.Read(uri);
+        if (existingData !== null) {
+          this.uris.push(uri);
+          return existingData;
+        }
+
+        // populate cache
+        let data: string | null = null;
+        try {
+          data = await this.fs.ReadFile(uri) || await ReadUri(uri);
+        } finally {
+          if (!data) {
+            return null;
+          }
+        }
+        const writeHandle = await this.slave.Write(uri);
+        const readHandle = await writeHandle.WriteData(data);
+
+        this.uris.push(uri);
+        return readHandle;
+      })();
     }
 
-    // populate cache
-    let data: string | null = null;
-    try {
-      data = await this.fs.ReadFile(uri) || await ReadUri(uri);
-    } finally {
-      if (!data) {
-        return null;
-      }
-    }
-    const writeHandle = await this.slave.Write(uri);
-    const readHandle = await writeHandle.WriteData(data);
-    this.uris.push(uri);
-    return readHandle;
+    return await this.cache[uri];
   }
 
   public async Enum(): Promise<string[]> {

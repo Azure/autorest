@@ -84,7 +84,7 @@ function CreatePluginTransformerImmediate(): PipelinePlugin {
     const file = files[1];
     const fileIn = await input.ReadStrict(file);
     const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
-    await (await output.Write("./" + file)).Forward(fileOut);
+    await (await output.Write("swagger-document")).Forward(fileOut);
   };
 }
 function CreatePluginComposer(): PipelinePlugin {
@@ -93,7 +93,7 @@ function CreatePluginComposer(): PipelinePlugin {
     const swagger = config.GetEntry("override-info") || swaggers.length !== 1
       ? await ComposeSwaggers(config, config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
       : swaggers[0];
-    await (await output.Write("swagger-document")).Forward(swagger);
+    await (await output.Write("composed")).Forward(swagger);
   };
 }
 function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string, fullKeys: boolean = true): PipelinePlugin {
@@ -255,6 +255,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
 
   const pipeline = BuildPipeline(configView);
+  const fsInput = configView.DataStore.GetReadThroughScopeFileSystem(fileSystem);
 
   // externals:
   const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
@@ -300,7 +301,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       // get input
       let inputScopes: DataStoreViewReadonly[] = await Promise.all(node.inputs.map(getTask));
       if (inputScopes.length === 0) {
-        inputScopes = [configView.DataStore.GetReadThroughScopeFileSystem(fileSystem)];
+        inputScopes = [fsInput];
       }
       if (inputScopes.length > 1) {
         const handles: DataHandleRead[] = [];
@@ -322,7 +323,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
         throw new Error(`Plugin '${pluginName}' not found.`);
       }
       try {
-        config.Message({ Channel: Channel.Debug, Text: `${pluginName} - START` });
+        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START` });
 
         const scope = config.DataStore.CreateScope(nodeName);
         const scopeWorking = scope.CreateScope("working");
@@ -332,10 +333,10 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
           scopeWorking,
           scopeOutput);
 
-        config.Message({ Channel: Channel.Debug, Text: `${pluginName} - END` });
+        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END` });
         return scopeOutput;
       } catch (e) {
-        config.Message({ Channel: Channel.Fatal, Text: `${pluginName} - FAILED` });
+        config.Message({ Channel: Channel.Fatal, Text: `${nodeName} - FAILED` });
         throw e;
       }
     };
