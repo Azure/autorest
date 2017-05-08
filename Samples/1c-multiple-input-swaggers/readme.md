@@ -8,8 +8,8 @@ We want a single client to be created from the following OpenAPI definition file
 
 ``` yaml 
 input-file:
-  - https://github.com/Azure/azure-rest-api-specs/blob/master/search/2015-02-28/swagger/searchservice.json
-  - https://github.com/Azure/azure-rest-api-specs/blob/master/arm-storage/2015-06-15/swagger/storage.json
+  - https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/search/2015-02-28/swagger/searchservice.json
+  - https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json
 ```
 
 Since the info sections of the OpenAPI definition files differ, we choose a new title for the overall client:
