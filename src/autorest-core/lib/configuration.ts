@@ -292,9 +292,13 @@ export class ConfigurationView {
   public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
     for (const section of ValuesOf<any>((this.config as any)[pluginName])) {
       if (section) {
-        yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section === true ? {} : section, this.config).Indexer;
+        yield this.GetPluginViewImmediate(section === true ? {} : section);
       }
     }
+  }
+
+  public GetPluginViewImmediate(scope: any): ConfigurationView {
+    return new ConfigurationView(this.messageEmitter, this.configFileFolderUri, scope, this.config).Indexer;
   }
 
   // message pipeline (source map resolution, filter, ...)

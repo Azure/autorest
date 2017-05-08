@@ -70,6 +70,23 @@ function CreatePluginTransformer(): PipelinePlugin {
     }
   };
 }
+function CreatePluginTransformerImmediate(): PipelinePlugin {
+  return async (config, input, working, output) => {
+    const documentIdResolver: (key: string) => string = key => {
+      const parts = key.split("/_");
+      return parts.length === 1 ? parts[0] : decodeURIComponent(parts[parts.length - 1]);
+    };
+    const files = await input.Enum();
+    if (files.length !== 2) {
+      throw new Error("Unexpected number of input documents. Expected: immediate-directive, swagger-document");
+    }
+    const manipulator = new Manipulator(config.GetPluginViewImmediate({ directive: (await input.ReadStrict(files[0])).ReadObject<any>() }));
+    const file = files[1];
+    const fileIn = await input.ReadStrict(file);
+    const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
+    await (await output.Write("./" + file)).Forward(fileOut);
+  };
+}
 function CreatePluginComposer(): PipelinePlugin {
   return async (config, input, working, output) => {
     const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
@@ -248,6 +265,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "loader": CreatePluginLoader(),
     "md-override-loader": CreatePluginMdOverrideLoader(),
     "transform": CreatePluginTransformer(),
+    "transform-immediate": CreatePluginTransformerImmediate(),
     "compose": CreatePluginComposer(),
     "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
     "semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),

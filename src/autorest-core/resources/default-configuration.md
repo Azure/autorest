@@ -35,10 +35,10 @@ Markdown documentation overrides:
 ``` yaml
 pipeline:
   swagger-document-override/md-override-loader:
-    output-artifact: config-directive
+    output-artifact: immediate-directive
   swagger-document-override/compose:
     input: md-override-loader
-    output-artifact: config-directive
+    output-artifact: immediate-directive
 ```
 
 OpenAPI definitions:
@@ -54,11 +54,14 @@ pipeline:
   swagger-document/compose:
     input: individual/transform
     output-artifact: swagger-document
-  swagger-document/transform:
-    input: compose
+  swagger-document/transform-immediate:
+    input:
+    - swagger-document-override/compose
+    - compose
     output-artifact: swagger-document
-    # use output of pipeline as scope for this one
-    scope: !swagger-document-override/compose
+  swagger-document/transform:
+    input: transform-immediate
+    output-artifact: swagger-document
   swagger-document/emitter:
     input: transform
     scope: scope-swagger-document/emitter

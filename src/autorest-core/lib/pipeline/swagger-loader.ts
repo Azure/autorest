@@ -201,10 +201,11 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
 
   const directives: any[] = [];
   const mappings: Mappings = [];
-  const state = CommonmarkSubHeadings(commonmarkNode).map(x => ...); // make this inline DFS with current JSON query and such
+  const state = [...CommonmarkSubHeadings(commonmarkNode)].map(x => { return { node: x, jsonQuery: "$" }; });
+
 
   const resultHandle = await workingScope.Write("override-directives");
-  return resultHandle.WriteObject({ directive: directives }, mappings, [commonmark]);
+  return resultHandle.WriteObject(directives, mappings, [commonmark]);
 }
 
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
