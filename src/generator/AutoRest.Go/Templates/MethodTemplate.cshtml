@@ -32,11 +32,11 @@ else
 }
 @if (Model.IsNextMethod)
 {
-@:func (lastResults @(Model.ReturnValue().Body.Name)) Next(@Model.MethodParametersSignature) (@Model.MethodReturnSignature) {
+@:func (lastResults @(Model.ReturnValue().Body.Name)) Next(@Model.MethodParametersSignature) (@Model.MethodReturnSignature(false)) {
 }
 else
 {
-func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature(false)) {
+@:func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature(false)) {
 @if (Model.ReturnViaChannel)
 {
     @:resultChan := make(chan @(Model.MethodReturnType), 1)
@@ -158,7 +158,7 @@ else
     foreach (var p in Model.OptionalQueryParameters)
     {
     @:if @(p.ModelType.GetEmptyCheck(p.GetParameterName(),false)) {
-        @:@(p.AddToMap("queryParameters", Model.IsNextMethod))
+        @:@(p.AddToMap("queryParameters", Model.IsNextMethod, Model.NextLink))
     @:}
     }
     @:@EmptyLine
@@ -242,7 +242,7 @@ else
 {
 @:// NextResponder handles the response to the next results of @(Model.Name) request. The
 @:// method always closes the http.Response Body.
-@:func (lastResults @(Model.ReturnValue().Body.Name)) NextResponder(resp *http.Response) (@(Model.MethodReturnSignature)) { 
+@:func (lastResults @(Model.ReturnValue().Body.Name)) NextResponder(resp *http.Response) (@(Model.MethodReturnSignature(true))) { 
 }
 else
 {
@@ -295,7 +295,7 @@ else
             @:respSlice = append(respSlice, item)
         @:}
     @:}
-    @:for list.@(Model.NextLink()) != nil {
+    @:for list.@(Model.NextLink) != nil {
         @:select {
         @:case <- cancel:
             @:return respSlice, nil

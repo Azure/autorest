@@ -35,9 +35,9 @@ namespace AutoRest.Go.Model
         /// </summary>
         /// <param name="mapVariable"></param>
         /// <returns></returns>
-        public string AddToMap(string mapVariable, bool isNext)
+        public string AddToMap(string mapVariable, bool isNext, string nextLink)
         {
-            return string.Format("{0}[\"{1}\"] = {2}", mapVariable, NameForMap(), ValueForMap(isNext));
+            return string.Format("{0}[\"{1}\"] = {2}", mapVariable, NameForMap(), ValueForMap(isNext, nextLink));
         }
 
         public string GetParameterName()
@@ -85,7 +85,7 @@ namespace AutoRest.Go.Model
         /// Return formatted value string for the parameter.
         /// </summary>
         /// <returns></returns>
-        public string ValueForMap(bool isNext)
+        public string ValueForMap(bool isNext, string nextLink)
         {
             if (IsAPIVersion)
             {
@@ -96,7 +96,9 @@ namespace AutoRest.Go.Model
                 ? isNext
                     ? "lastResults.client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
                     : "client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
-                        : Name.Value;
+                : isNext
+                    ? "lastResults." + nextLink
+                    : Name.Value;
 
             var format = IsRequired || ModelType.CanBeEmpty()
                                     ? "{0}"
@@ -123,7 +125,7 @@ namespace AutoRest.Go.Model
         /// <param name="parameters"></param>
         /// <param name="mapVariable"></param>
         /// <returns></returns>
-        public static string BuildParameterMap(this IEnumerable<ParameterGo> parameters, string mapVariable, bool isNext)
+        public static string BuildParameterMap(this IEnumerable<ParameterGo> parameters, string mapVariable, bool isNext, string nextLink)
         {
             var builder = new StringBuilder();
 
@@ -137,7 +139,7 @@ namespace AutoRest.Go.Model
                 parameters
                     .Where(p => p.IsRequired)
                     .OrderBy(p => p.SerializedName.ToString())
-                    .ForEach(p => indented.AppendLine("\"{0}\": {1},", p.NameForMap(), p.ValueForMap(isNext)));
+                    .ForEach(p => indented.AppendLine("\"{0}\": {1},", p.NameForMap(), p.ValueForMap(isNext, nextLink)));
                     builder.Append(indented);
             }
             builder.AppendLine("}");

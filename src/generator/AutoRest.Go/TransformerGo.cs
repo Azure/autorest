@@ -154,7 +154,7 @@ namespace AutoRest.Go
                 {
                     if (!cmg.PagedTypes.ContainsKey(m.ReturnValue().Body))
                     {
-                        cmg.PagedTypes.Add(m.ReturnValue().Body, m.NextLink());
+                        cmg.PagedTypes.Add(m.ReturnValue().Body, m.NextLink);
                     }
 
                     if (!m.NextMethodExists(cmg.Methods.Cast<MethodGo>()))

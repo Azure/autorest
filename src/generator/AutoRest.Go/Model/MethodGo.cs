@@ -160,11 +160,15 @@ namespace AutoRest.Go.Model
             get
             {
                 List<string> declarations = new List<string>();
-                LocalParameters
-                    .ForEach(p => declarations.Add(string.Format(
-                                                        p.IsRequired || p.ModelType.CanBeEmpty()
+                foreach (ParameterGo p in LocalParameters)
+                {
+                    if (!p.Name.EqualsIgnoreCase("NextLink"))
+                    {
+                        declarations.Add(string.Format(p.IsRequired || p.ModelType.CanBeEmpty()
                                                             ? "{0} {1}"
-                                                            : "{0} *{1}", p.Name, p.ModelType.Name)));
+                                                            : "{0} *{1}", p.Name, p.ModelType.Name));
+                    }
+                }
                 //for Cancelation channel option for long-running operations
                 if (IsLongRunningOperation())
                 {
@@ -233,8 +237,13 @@ namespace AutoRest.Go.Model
             get
             {
                 List<string> invocationParams = new List<string>();
-                LocalParameters
-                    .ForEach(p => invocationParams.Add(p.Name));
+                foreach (ParameterGo p in LocalParameters)
+                {
+                    if(!p.Name.EqualsIgnoreCase("NextLink"))
+                    {
+                        invocationParams.Add(p.Name);
+                    }
+                }
                 if (IsLongRunningOperation())
                 {
                     invocationParams.Add("cancel");
@@ -271,19 +280,19 @@ namespace AutoRest.Go.Model
 
         public IEnumerable<ParameterGo> URLParameters => ParametersGo.URLParameters();
 
-        public string URLMap => URLParameters.BuildParameterMap("urlParameters", IsNextMethod);
+        public string URLMap => URLParameters.BuildParameterMap("urlParameters", IsNextMethod, NextLink);
 
         public IEnumerable<ParameterGo> PathParameters => ParametersGo.PathParameters();
 
-        public string PathMap => PathParameters.BuildParameterMap("pathParameters", IsNextMethod);
+        public string PathMap => PathParameters.BuildParameterMap("pathParameters", IsNextMethod, NextLink);
 
         public IEnumerable<ParameterGo> QueryParameters => ParametersGo.QueryParameters();
 
         public IEnumerable<ParameterGo> OptionalQueryParameters => ParametersGo.QueryParameters(false);
 
-        public string QueryMap => QueryParameters.BuildParameterMap("queryParameters", IsNextMethod);
+        public string QueryMap => QueryParameters.BuildParameterMap("queryParameters", IsNextMethod, NextLink);
 
-        public string FormDataMap => FormDataParameters.BuildParameterMap("formDataParameters",IsNextMethod);
+        public string FormDataMap => FormDataParameters.BuildParameterMap("formDataParameters", IsNextMethod, NextLink);
 
         public List<string> ResponseCodes
         {
@@ -477,7 +486,7 @@ namespace AutoRest.Go.Model
         /// </summary>
         /// <returns></returns>
 
-        public bool IsPageable => !string.IsNullOrEmpty(NextLink());
+        public bool IsPageable => !string.IsNullOrEmpty(NextLink);
 
         public bool IsNextMethod => Name.Value.EqualsIgnoreCase(NextOperationName);
 
@@ -536,11 +545,7 @@ namespace AutoRest.Go.Model
                 List<string> invocationParams = new List<string>();
                 foreach (ParameterGo p in (NextOperation as MethodGo).LocalParameters)
                 {
-                    if (p.Name.EqualsIgnoreCase("nextlink"))
-                    {
-                        invocationParams.Add(string.Format("*list.{0}", NextLink()));
-                    }
-                    else
+                    if (!p.Name.EqualsIgnoreCase("nextlink"))
                     {
                         invocationParams.Add(p.Name);
                     }
@@ -585,29 +590,32 @@ namespace AutoRest.Go.Model
         /// Add NextLink attribute for pageable extension for the method.
         /// </summary>
         /// <returns></returns>
-        public string NextLink()
+        public string NextLink
         {
-            var nextLink = "";
-
-            // Note:
-            // -- The CSharp generator applies a default link name if the extension is present but the link name is not.
-            //    Yet, the MSDN for methods whose nextLink is missing are not paged methods. It appears the CSharp code is
-            //    outdated vis a vis the specification.
-            // TODO (gosdk): Ensure obtaining the nextLink is correct.
-            if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
+            get
             {
-                var pageableExtension = Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
-                if (pageableExtension != null)
+                var nextLink = "";
+
+                // Note:
+                // -- The CSharp generator applies a default link name if the extension is present but the link name is not.
+                //    Yet, the MSDN for methods whose nextLink is missing are not paged methods. It appears the CSharp code is
+                //    outdated vis a vis the specification.
+                // TODO (gosdk): Ensure obtaining the nextLink is correct.
+                if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
                 {
-                    var nextLinkName = (string)pageableExtension["nextLinkName"];
-                    if (!string.IsNullOrEmpty(nextLinkName))
+                    var pageableExtension = Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                    if (pageableExtension != null)
                     {
-                        nextLink = CodeNamerGo.PascalCaseWithoutChar(nextLinkName, '.');
+                        var nextLinkName = (string)pageableExtension["nextLinkName"];
+                        if (!string.IsNullOrEmpty(nextLinkName))
+                        {
+                            nextLink = CodeNamerGo.PascalCaseWithoutChar(nextLinkName, '.');
+                        }
                     }
                 }
-            }
 
-            return nextLink;
+                return nextLink;
+            }
         }
     }
 }
