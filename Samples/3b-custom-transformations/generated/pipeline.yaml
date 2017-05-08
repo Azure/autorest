@@ -32,9 +32,15 @@ swagger-document/emitter:
 swagger-document/azure-validator:
   pluginName: azure-validator
   configScope:
-    - azure-validator
+    - azure-validator-composed
   inputs:
     - swagger-document/transform
+swagger-document/individual/azure-validator:
+  pluginName: azure-validator
+  configScope:
+    - azure-validator-individual
+  inputs:
+    - swagger-document/individual/transform
 csharp/modeler:
   pluginName: modeler
   configScope:
