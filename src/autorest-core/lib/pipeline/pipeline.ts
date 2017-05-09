@@ -177,7 +177,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     const addNodesAndSuffixes = (suffix: string, inputs: string[], configScope: JsonPath, inputNodes: { name: string, suffixes: string[] }[]) => {
       if (inputNodes.length === 0) {
         const config = configCache[stringify(configScope)];
-        const configs = scope ? [...config.GetPluginViews(scope)] : [config];
+        const configs = scope ? [...config.GetNestedConfiguration(scope)] : [config];
         for (let i = 0; i < configs.length; ++i) {
           const newSuffix = configs.length === 1 ? "" : "/" + i;
           suffixes.push(suffix + newSuffix);
