@@ -14,6 +14,7 @@ import { Parse, Stringify } from './lib/ref/yaml';
 import { CreateObject, nodes } from './lib/ref/jsonpath';
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
 import { AutoRest } from "./lib/autorest-core";
+import { ShallowCopy } from "./lib/source-map/merging"
 import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
@@ -23,19 +24,21 @@ import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
 import { Exception, OperationCanceledException } from './lib/exception';
+import { Console } from "./lib/console"
+import { exists } from "./lib/ref/async"
 
 /**
  * Legacy AutoRest
  */
 
 function awaitable(child: ChildProcess): Promise<number> {
-  return new Promise((resolve, reject) => {
+  return new Promise<number>((resolve, reject) => {
     child.addListener("error", reject);
     child.addListener("exit", resolve);
   });
 }
 
-async function legacyMain(autorestArgs: string[]): Promise<void> {
+async function legacyMain(autorestArgs: string[]): Promise<number> {
   if (autorestArgs.indexOf("-FANCY") !== -1) {
     // generate virtual config file
     const currentDirUri = CreateFolderUri(currentDirectory());
@@ -46,7 +49,7 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     if (autorestArgs[0] === "init") {
       const clientNameGuess = (config["override-info"] || {}).title || Parse<any>(await ReadUri(config["input-file"][0])).info.title;
       await autorestInit(clientNameGuess, Array.isArray(config["input-file"]) ? config["input-file"] as any : []);
-      return;
+      return 0;
     }
     // autorest init-min
     if (autorestArgs[0] === "init-min") {
@@ -61,7 +64,7 @@ ${Stringify(config).replace(/^---\n/, "")}
 ~~~
 
 `.replace(/~/g, "`"));
-      return;
+      return 0;
     }
     // autorest init-cli
     if (autorestArgs[0] === "init-cli") {
@@ -74,7 +77,7 @@ ${Stringify(config).replace(/^---\n/, "")}
         }
       }
       console.log(args.join(" "));
-      return;
+      return 0;
     }
 
     config["base-folder"] = currentDirUri;
@@ -82,24 +85,7 @@ ${Stringify(config).replace(/^---\n/, "")}
     await api.AddConfiguration(config);
     const outstanding = new OutstandingTaskAwaiter();
     api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
-    //api.Debug.Subscribe((_, m) => console.log(m.Text));
-    //api.Verbose.Subscribe((_, m) => console.log(m.Text));
-    api.Message.Subscribe((_, m) => {
-      switch (m.Channel) {
-        case Channel.Information:
-          console.log(m.Text);
-          break;
-        case Channel.Warning:
-          console.warn(m.Text);
-          break;
-        case Channel.Error:
-          console.error(m.Text);
-          break;
-        case Channel.Fatal:
-          console.error(m.Text);
-          break;
-      }
-    });
+    subscribeMessages(api, () => { });
 
     const result = await api.Process().finish;
     if (result != true) {
@@ -115,6 +101,8 @@ ${Stringify(config).replace(/^---\n/, "")}
     const exitCode = await awaitable(autorestExe);
     process.exit(exitCode);
   }
+
+  return 0;
 }
 
 
@@ -130,7 +118,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
   };
 
   for (const arg of autorestArgs) {
-    const match = /^--([^=]+)(=([^=]+))?$/g.exec(arg);
+    const match = /^--([^=]+)(=(.+))?$/g.exec(arg);
 
     // configuration file?
     if (match === null) {
@@ -148,6 +136,33 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
   }
 
   return result;
+}
+
+function subscribeMessages(api: AutoRest, errorCounter: () => void) {
+  api.Message.Subscribe((_, m) => {
+    switch (m.Channel) {
+      case Channel.Information:
+        console.log(m.Text);
+        break;
+      case Channel.Warning:
+        console.warn(m.Text);
+        break;
+      case Channel.Error:
+        errorCounter();
+        console.error(m.Text);
+        break;
+      case Channel.Debug:
+        console.log(m.Text);
+        break;
+      case Channel.Verbose:
+        console.log(m.Text);
+        break;
+      case Channel.Fatal:
+        errorCounter();
+        console.error(m.Text);
+        break;
+    }
+  });
 }
 
 async function autorestInit(title: string = "API-NAME", inputs: string[] = ["LIST INPUT FILES HERE"]) {
@@ -200,43 +215,219 @@ csharp:
 `.replace(/~/g, "`"));
 }
 
-async function currentMain(autorestArgs: string[]): Promise<void> {
+let exitcode = 0;
+const outstanding = new OutstandingTaskAwaiter();
+let args: CommandLineArgs;
+
+async function currentMain(autorestArgs: string[]): Promise<number> {
   if (autorestArgs[0] === "init") {
     await autorestInit();
-    return;
+    return 0;
   }
 
-  const args = parseArgs(autorestArgs);
+  // parse the args from the command line
+  args = parseArgs(autorestArgs);
+
+  // identify where we are starting from.
   const currentDirUri = CreateFolderUri(currentDirectory());
+
+  // get an instance of AutoRest and add the command line switches to the configuration.
   const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
-  for (const s of args.switches) {
-    await api.AddConfiguration(s);
-  }
-  const outstanding = new OutstandingTaskAwaiter();
+  api.AddConfiguration(args.switches);
+
+  // listen for output messages and file writes
+  subscribeMessages(api, () => exitcode++);
   api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
-  //api.Debug.Subscribe((_, m) => console.log(m.Text));
-  //api.Verbose.Subscribe((_, m) => console.log(m.Text));
-  api.Message.Subscribe((_, m) => {
-    switch (m.Channel) {
-      case Channel.Information:
-        console.log(m.Text);
-        break;
-      case Channel.Warning:
-        console.warn(m.Text);
-        break;
-      case Channel.Error:
-        console.error(m.Text);
-        break;
-      case Channel.Fatal:
-        console.error(m.Text);
-        break;
+  const config = (await api.view);
+
+  try {
+    // is this a batch process?
+    if (config["batch"]) {
+      return await batch(api);
     }
-  });
-  const result = await api.Process().finish;
-  if (result != true) {
-    throw result;
+
+    // maybe a merge process
+    if (config["merge"]) {
+      return await merge(api);
+    }
+
+    // Just regular ol' AutoRest!
+    const result = await api.Process().finish;
+    if (result != true) {
+      throw result;
+    }
   }
-  await outstanding.Wait();
+  finally {
+    // wait for any outstanding file writes to complete before we bail.
+    await outstanding.Wait();
+  }
+
+  // return the exit code to the caller.
+  return exitcode;
+}
+
+async function merge(api: AutoRest): Promise<number> {
+  // get the configuration
+  const config = await api.view;
+
+  for (const configFile of config.InputFileUris) {
+    // let's get out of here if things are not going well.
+    if (exitcode > 0) {
+      break;
+    }
+  }
+  return 0;
+}
+
+function shallowMerge(existing: any, more: any) {
+  if (existing && more) {
+    for (const key of Object.getOwnPropertyNames(more)) {
+      const value = more[key];
+      if (value !== undefined) {
+        /* if (existing[key]) {
+          Console.Log(`> Warning: ${key} is overwritten.`);
+        } */
+        existing[key] = value;
+      }
+    }
+    return existing;
+  }
+
+  if (existing) {
+    return existing;
+  }
+  return more;
+}
+
+function getRds(schema: any, path: string): Array<string> {
+  const rx = /.*\/(.*)\/(.*).json/;
+
+  const m = rx.exec(path) || [];
+  const apiversion = m[1];
+  const namespace = m[2];
+  const result = [];
+  if (schema.resourceDefinitions) {
+    for (const name of Object.getOwnPropertyNames(schema.resourceDefinitions)) {
+      result.push(`{ "$ref": "http://schema.management.azure.com/schemas/${apiversion}/${namespace}.json#/resourceDefinitions/${name}" }, `);
+    }
+  }
+  return result;
+}
+
+async function batch(api: AutoRest): Promise<number> {
+  // get the configuration
+  const outputs = new Map<string, string>();
+  const schemas = new Array<string>();
+
+  const config = await api.view;
+  for (const batchConfig of config.GetNestedConfiguration("batch")) { // really, there should be only one
+    for (const eachFile of batchConfig["input-file"]) {
+      const path = ResolveUri(config.configFileFolderUri, eachFile);
+      const content = await ReadUri(path);
+      if (!AutoRest.IsSwaggerFile(content)) {
+        exitcode++;
+        Console.Error(`File ${path} is not a OpenAPI file.`);
+        continue;
+      }
+
+      // Create the autorest instance for that item
+      const instance = new AutoRest(new RealFileSystem(), config.configFileFolderUri);
+      instance.GeneratedFile.Subscribe((_, file) => {
+        if (file.uri.endsWith(".json")) {
+          const more = JSON.parse(file.content);
+          if (!outputs.has(file.uri)) {
+            // Console.Log(`  Writing  *${file.uri}*`);
+            outputs.set(file.uri, file.content);
+            outstanding.Await(WriteString(file.uri, file.content))
+            schemas.push(...getRds(more, file.uri));
+            return;
+          } else {
+            const existing = JSON.parse(<string>outputs.get(file.uri));
+            // Console.Log(`  Updating *${file.uri}*`);
+
+            schemas.push(...getRds(more, file.uri));
+            existing.resourceDefinitions = shallowMerge(existing.resourceDefinitions, more.resourceDefinitions);
+            existing.definitions = shallowMerge(existing.definitions, more.definitions);
+            const content = JSON.stringify(existing, null, 2);
+            outputs.set(file.uri, content);
+            outstanding.Await(WriteString(file.uri, content));
+          }
+        }
+      });
+      subscribeMessages(instance, () => exitcode++);
+
+      // set configuration for that item
+      instance.AddConfiguration(ShallowCopy(batchConfig, "input-file"));
+      instance.AddConfiguration({ "input-file": eachFile });
+
+      const newView = await instance.view;
+      // console.log(`Inputs: ${newView["input-file"]}`);
+
+      Console.Log(`Running autorest for *${path}* `);
+
+      // ok, kick off the process for that one.
+      await instance.Process().finish.then((result) => {
+        // console.log(`done: ${path}`);
+        exitcode++;
+        if (result != true) {
+          throw result;
+        }
+      });
+    }
+  }
+
+  await outstanding;
+
+  return exitcode;
+}
+
+
+async function deprecatedBatch(api: AutoRest): Promise<number> {
+  // get the configuration
+  const config = await api.view;
+  for (const batchConfig of config.GetNestedConfiguration("batch")) { // really, there should be only one
+    for (const eachGeneration of batchConfig.GetNestedConfiguration("for-each")) {
+      for (const configFile of eachGeneration["input-file"]) { // really, there should be only one here too.
+        const path = ResolveUri(config.configFileFolderUri, configFile);
+        const content = await ReadUri(path);
+        if (!AutoRest.IsConfigurationFile(content)) {
+          exitcode++;
+          console.error(`File ${path} is not a AutoRest configuration file.`);
+          continue;
+        }
+
+        // Create the autorest instance for that item
+        const instance = new AutoRest(new RealFileSystem(), path);
+        instance.GeneratedFile.Subscribe((_, file) => {
+          console.log(`writing ${file.uri}`);
+          return outstanding.Await(WriteString(file.uri, file.content))
+        });
+        subscribeMessages(instance, () => exitcode++);
+
+        // set configuration for that item
+        instance.AddConfiguration(ShallowCopy(eachGeneration, "input-file"));
+        instance.AddConfiguration(ShallowCopy(batchConfig, "for-each"));
+
+        const newView = await instance.view;
+        // console.log(`Inputs: ${newView["input-file"]}`);
+
+        console.log(`Running autorest for ${path} `);
+
+        // ok, kick off the process for that one.
+
+        await instance.Process().finish.then((result) => {
+          console.log(`done: ${path}`);
+          exitcode++;
+          if (result != true) {
+            throw result;
+          }
+        });
+        break;
+
+      }
+    }
+  }
+  return exitcode;
 }
 
 /**
@@ -244,8 +435,12 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
  */
 
 async function main() {
+  let autorestArgs: Array<string> = [];
+
   try {
-    const autorestArgs = process.argv.slice(2);
+    let exitcode: number = 0;
+
+    autorestArgs = process.argv.slice(2);
 
     // temporary: --help displays legacy AutoRest's -Help message
     if (autorestArgs.indexOf("--help") !== -1) {
@@ -254,9 +449,9 @@ async function main() {
     }
 
     if (isLegacy(autorestArgs)) {
-      await legacyMain(autorestArgs);
+      exitcode = await legacyMain(autorestArgs);
     } else {
-      await currentMain(autorestArgs);
+      exitcode = await currentMain(autorestArgs);
     }
 
     // for relaxed profiling (assuming that no one calls `main` from electron... use AAAL!)
@@ -265,7 +460,11 @@ async function main() {
     process.exit(0);
   } catch (e) {
     if (e instanceof Exception) {
-      console.error(e.message);
+      console.log(e.message);
+
+      if (autorestArgs.indexOf("--debug")) {
+        console.log(e);
+      }
       process.exit(e.exitCode);
     }
 

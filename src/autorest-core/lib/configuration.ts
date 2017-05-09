@@ -7,7 +7,7 @@ import { OperationAbortedException } from "./exception";
 import { TryDecodeEnhancedPositionFromName } from "./source-map/source-map";
 import { Supressor } from "./pipeline/supression";
 import { matches, stringify } from "./ref/jsonpath";
-import { MergeOverwriteOrAppend } from "./source-map/merging";
+import { MergeOverwriteOrAppend, resolveRValue, ShallowCopy } from "./source-map/merging";
 import { DataHandleRead, DataStore } from './data-store/data-store';
 import { EventEmitter, IEvent } from "./events";
 import { CodeBlock, EvaluateGuard, ParseCodeBlocks } from "./parsing/literate-yaml";
@@ -19,6 +19,8 @@ import { Channel, Message, SourceLocation, Range } from "./message";
 import { Artifact } from "./artifact";
 import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
 
+const RESOLVE_MACROS_AT_RUNTIME = true;
+
 export interface AutoRestConfigurationImpl {
   __info?: string | null;
   "input-file": string[] | string;
@@ -27,6 +29,9 @@ export interface AutoRestConfigurationImpl {
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
+
+  "debug"?: boolean;
+  "verbose"?: boolean;
 
   // plugin specific
   "output-file"?: string;
@@ -50,25 +55,25 @@ export interface AutoRestConfigurationImpl {
 }
 
 // TODO: operate on DataHandleRead and create source map!
-function MergeConfigurations(a: AutoRestConfigurationImpl, b: AutoRestConfigurationImpl): AutoRestConfigurationImpl {
+function MergeConfigurations(higherPriority: AutoRestConfigurationImpl, lowerPriority: AutoRestConfigurationImpl): AutoRestConfigurationImpl {
   // check guard
-  if (b.__info && !EvaluateGuard(b.__info, a)) {
+  if (lowerPriority.__info && !EvaluateGuard(lowerPriority.__info, higherPriority)) {
     // guard false? => skip
-    return a;
+    return higherPriority;
   }
 
   // merge
-  return MergeOverwriteOrAppend(a, b);
+  return MergeOverwriteOrAppend(higherPriority, lowerPriority);
 }
 
-function ValuesOf<T>(obj: any): Iterable<T> {
-  if (obj === undefined) {
+function ValuesOf<T>(value: any): Iterable<T> {
+  if (value === undefined) {
     return [];
   }
-  if (obj instanceof Array) {
-    return obj;
+  if (value instanceof Array) {
+    return value;
   }
-  return [obj];
+  return [value];
 }
 
 export interface Directive {
@@ -118,7 +123,7 @@ export class DirectiveView {
 
 export class MessageEmitter extends EventEmitter {
   /**
-  * Event: Signals when a File is generated 
+  * Event: Signals when a File is generated
   */
   @EventEmitter.Event public GeneratedFile: IEvent<MessageEmitter, Artifact>;
   /**
@@ -137,7 +142,25 @@ export class MessageEmitter extends EventEmitter {
   /* @internal */ public get CancellationToken(): CancellationToken { return this.cancellationTokenSource.token; }
 }
 
+function ProxifyConfigurationView(cfgView: any) {
+  return new Proxy(cfgView, {
+    get: (target, property) => {
+      const value = (<any>target)[property];
+      if (value && value instanceof Array) {
+        const result = [];
+        for (const each of value) {
+          result.push(resolveRValue(each, "", target, null));
+        }
+        return result;
+      }
+      return resolveRValue(value, <string>property, null, cfgView);
+    }
+  });
+}
+
+
 export class ConfigurationView {
+  [name: string]: any;
 
   private suppressor: Supressor;
 
@@ -147,34 +170,73 @@ export class ConfigurationView {
     ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
   ) {
 
-    // TODO: fix configuration loading, note that there was no point in passing that DataStore used 
+    // TODO: fix configuration loading, note that there was no point in passing that DataStore used
     // for loading in here as all connection to the sources is lost when passing `Array<AutoRestConfigurationImpl>` instead of `DataHandleRead`s...
     // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
     // long term, we simply gotta write a `Merge` method that adheres to the rules we need in here.
-    this.config = <any>{
+    this.rawConfig = <any>{
       "directive": [],
       "input-file": [],
-      "output-artifact": []
+      "output-artifact": [],
     };
+
     for (const config of configs) {
-      this.config = MergeConfigurations(this.config, config);
+      this.rawConfig = MergeConfigurations(this.rawConfig, config);
+    }
+
+    // default values that are the least priority.
+    this.rawConfig = MergeConfigurations(this.rawConfig, <any>{
+      "base-folder": ".",
+      "output-folder": "generated",
+      "debug": false,
+      "verbose": false,
+      "disable-validation": false
+    });
+
+    if (RESOLVE_MACROS_AT_RUNTIME) {
+      // if RESOLVE_MACROS_AT_RUNTIME is set
+      // this will insert a Proxy object in most of the uses of
+      // the configuration, and will do a macro resolution when the
+      // value is retrieved.
+
+      // I have turned on this behavior by default. I'm not sure that
+      // I need it at this point, but I'm leaving this code here since
+      // It's possible that I do.
+      this.config = ProxifyConfigurationView(this.rawConfig);
+    } else {
+      this.config = this.rawConfig;
     }
 
     this.suppressor = new Supressor(this);
     this.Message({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
   }
 
-  /* @internal */ public get DataStore(): DataStore { return this.messageEmitter.DataStore; }
-
-  /* @internal */ public get CancellationToken(): CancellationToken { return this.messageEmitter.CancellationToken; }
-
-  /* @internal */ public get CancellationTokenSource(): CancellationTokenSource { return this.messageEmitter.CancellationTokenSource; }
-
-  /* @internal */ public get GeneratedFile(): IEvent<MessageEmitter, Artifact> {
-    return this.messageEmitter.GeneratedFile;
+  public get Keys(): Array<string> {
+    return Object.getOwnPropertyNames(this.config);
   }
 
+  public Dump(title: string = "") {
+    console.log(`\n${title}\n===================================`)
+    for (const each of Object.getOwnPropertyNames(this.config)) {
+      console.log(`${each} : ${(<any>this.config)[each]}`);
+    };
+  }
+
+  /* @internal */ public get Indexer(): ConfigurationView {
+    return new Proxy<ConfigurationView>(this, {
+      get: (target, property) => {
+        return property in target.config ? (<any>target.config)[property] : this[property];
+      }
+    });
+  }
+
+  /* @internal */ public get DataStore(): DataStore { return this.messageEmitter.DataStore; }
+  /* @internal */ public get CancellationToken(): CancellationToken { return this.messageEmitter.CancellationToken; }
+  /* @internal */ public get CancellationTokenSource(): CancellationTokenSource { return this.messageEmitter.CancellationTokenSource; }
+  /* @internal */ public get GeneratedFile(): IEvent<MessageEmitter, Artifact> { return this.messageEmitter.GeneratedFile; }
+
   private config: AutoRestConfigurationImpl;
+  private rawConfig: AutoRestConfigurationImpl;
 
   private ResolveAsFolder(path: string): string {
     return EnsureIsFolderUri(ResolveUri(this.BaseFolderUri, path));
@@ -185,7 +247,7 @@ export class ConfigurationView {
   }
 
   private get BaseFolderUri(): string {
-    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, this.config["base-folder"] || "."));
+    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, this.config["base-folder"] as string));
   }
 
   // public methods
@@ -202,7 +264,7 @@ export class ConfigurationView {
   }
 
   public get OutputFolderUri(): string {
-    return this.ResolveAsFolder(this.config["output-folder"] || "generated");
+    return this.ResolveAsFolder(this.config["output-folder"] as string);
   }
 
   public IsOutputArtifactRequested(artifact: string): boolean {
@@ -217,15 +279,32 @@ export class ConfigurationView {
     return this.config;
   }
 
-  public * GetPluginViews(pluginName: string): Iterable<ConfigurationView> {
+  public get DebugMode(): boolean {
+    return this.config["debug"] as boolean;
+  }
+
+  public get VerboseMode(): boolean {
+    return this.config["verbose"] as boolean;
+  }
+
+  public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
     for (const section of ValuesOf<any>((this.config as any)[pluginName])) {
-      yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section, this.config);
+      if (section) {
+        yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section === true ? {} : section, this.config).Indexer;
+      }
     }
   }
 
   // message pipeline (source map resolution, filter, ...)
   public Message(m: Message): void {
-    this.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - starting processing` });
+    if (m.Channel === Channel.Debug && !this.DebugMode) {
+      return;
+    }
+
+    if (m.Channel === Channel.Verbose && !this.VerboseMode) {
+      return;
+    }
+
     try {
       // update source locations to point to loaded Swagger
       if (m.Source) {
@@ -321,10 +400,8 @@ export class ConfigurationView {
         this.messageEmitter.Message.Dispatch(mx);
       }
     } catch (e) {
-      console.error(e);
+      this.messageEmitter.Message.Dispatch({ Channel: Channel.Error, Text: `${e}` });
     }
-
-    this.messageEmitter.Message.Dispatch({ Channel: Channel.Debug, Text: `Incoming validation message (${m.Text}) - finished processing` });
   }
 }
 
@@ -381,7 +458,7 @@ export class Configuration {
       configSegments.push(...blocks);
     }
 
-    return new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments);
+    return new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments).Indexer;
   }
 
   public constructor(

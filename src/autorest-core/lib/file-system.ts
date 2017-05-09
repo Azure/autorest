@@ -62,12 +62,3 @@ export class RealFileSystem implements IFileSystem {
     return WriteString(uri, content);
   }
 }
-
-/// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
-async function* yieldFromMap(): AsyncIterable<string> {
-  yield* ["hello", "world"];
-};
-async function foo() {
-  for await (const each of yieldFromMap()) {
-  }
-}

@@ -73,8 +73,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
             ValidationLevel = Category.Error;
             ModelsName = "Models";
             CodeGenerationMode = "rest-client";
-
-            CustomSettings.Add("ClientSideValidation", true);
         }
 
         /// <summary>
@@ -386,6 +384,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                     autoRestSettings.CustomSettings[pair.Key] = pair.Value;
                 }
             }
+
             return autoRestSettings;
         }
 

@@ -35,6 +35,7 @@ namespace AutoRest.Extensions
                 //Constraints = parameter.Constraints, Omit these since we don't want to perform parameter validation
                 Documentation = parameter.Documentation,
                 ModelType = parameter.ModelType,
+                RealPath = new string[] { },
                 SerializedName = default(string) //Parameter is never serialized directly
             });
 

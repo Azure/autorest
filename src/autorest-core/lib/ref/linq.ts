@@ -12,3 +12,18 @@ export async function ToArray<T>(iterable: AsyncIterable<T>): Promise<Array<T>> 
   }
   return result;
 }
+
+export function Push<T>(destination: Array<T>, source: any) {
+  if (source) {
+    if (IsIterable(source)) {
+      destination.push(...source);
+    }
+    else {
+      destination.push(source)
+    }
+  }
+}
+
+export function IsIterable(target: any) {
+  return target && target[Symbol.iterator] && typeof target !== 'string'
+}
