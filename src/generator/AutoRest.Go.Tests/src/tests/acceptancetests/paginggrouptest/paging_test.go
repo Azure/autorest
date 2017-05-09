@@ -130,9 +130,8 @@ func (s *PagingGroupSuite) TestGetMultiplePagesFragmentNextLink(c *chk.C) {
 	count := 1
 	for res.OdataNextLink != nil {
 		count++
-		resNext, err := pagingClient.NextFragment("1.6", "test_user", *res.OdataNextLink)
+		res, err = res.Next()
 		c.Assert(err, chk.IsNil)
-		res = resNext
 	}
 	c.Assert(count, chk.Equals, 10)
 }

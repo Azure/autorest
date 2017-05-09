@@ -32,7 +32,7 @@ else
 }
 @if (Model.IsNextMethod)
 {
-@:func (lastResults @(Model.ReturnValue().Body.Name)) Next(@Model.MethodParametersSignature) (@Model.MethodReturnSignature(false)) {
+@:func (lastResults @(Model.ReturnValue().Body.Name)) Next(@Model.MethodParametersSignature(Model.IsNextMethod)) (@Model.MethodReturnSignature(false)) {
 }
 else
 {
@@ -76,11 +76,11 @@ else
 }
     @if (Model.IsNextMethod)
     {
-    @:req, err := lastResults.NextPreparer(@(Model.HelperInvocationParameters))
+    @:req, err := lastResults.NextPreparer(@(Model.HelperInvocationParameters(Model.IsNextMethod)))
     }
     else
     {
-    @:req, err := client.@(Model.PreparerMethodName)(@(Model.HelperInvocationParameters))
+    @:req, err := client.@(Model.PreparerMethodName)(@(Model.HelperInvocationParameters(Model.IsNextMethod)))
     }
     if err != nil {
         err = @(Model.AutorestError("Failure preparing request"))
@@ -130,12 +130,12 @@ else
 @if (Model.IsNextMethod)
 {
 @:// NextPreparer prepares a request to retrieve the next set of @(Model.Name).
-@:func (lastResults @(Model.ReturnValue().Body.Name)) NextPreparer(@(Model.MethodParametersSignature)) (*http.Request, error) {
+@:func (lastResults @(Model.ReturnValue().Body.Name)) NextPreparer(@(Model.MethodParametersSignature(Model.IsNextMethod))) (*http.Request, error) {
 }
 else
 {
 @:// @(Model.PreparerMethodName) prepares the @(Model.Name) request.
-@:func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParametersSignature)) (*http.Request, error) {
+@:func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParametersSignature(Model.IsNextMethod))) (*http.Request, error) {
 }
 @if (Model.IsCustomBaseUri && Model.URLParameters.Any())
 {
@@ -286,7 +286,7 @@ else
 @:// @(Model.ListCompleteMethodName) gets all elements from the list without paging.
 @:func (client @(Model.Owner)) @(Model.ListCompleteMethodName) @(Model.MethodParametersSignatureComplete) @(Model.MethodReturnSignatureComplete) {
     @:respSlice := @((Model.ListElement.ModelType as SequenceTypeGo).Name){}
-    @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters))
+    @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters(Model.IsNextMethod)))
     @:if err != nil {
         @:return respSlice, err
     @:}
@@ -300,14 +300,7 @@ else
         @:case <- cancel:
             @:return respSlice, nil
         @:default:
-            if (!Model.NextAlreadyDefined)
-            {
             @:list, err = list.Next()
-            }
-            else
-            {
-            @:list, err = list.Next(@(Model.NextOperationParameters))
-            }
             @:if err != nil {
                 @:return respSlice, err
             @:}            

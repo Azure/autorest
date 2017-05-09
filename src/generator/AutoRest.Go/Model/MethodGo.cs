@@ -83,10 +83,10 @@ namespace AutoRest.Go.Model
             get
             {     
                 var signature = new StringBuilder("(");
-                signature.Append(MethodParametersSignature);
+                signature.Append(MethodParametersSignature(false));
                 if (!IsLongRunningOperation())
                 {
-                    if (MethodParametersSignature.Length > 0)
+                    if (MethodParametersSignature(false).Length > 0)
                     {
                         signature.Append( ", ");
                     }
@@ -150,32 +150,38 @@ namespace AutoRest.Go.Model
 
         public string ListCompleteMethodName => $"{Name}Complete";
 
-        public string MethodSignature => $"{Name}({MethodParametersSignature})";
+        public string MethodSignature => $"{Name}({MethodParametersSignature(false)})";
 
         /// <summary>
         /// Generate the method parameter declaration.
         /// </summary>
-        public string MethodParametersSignature
+        public string MethodParametersSignature(bool next)
         {
-            get
+            IEnumerable<ParameterGo> lp;
+            if (next)
             {
-                List<string> declarations = new List<string>();
-                foreach (ParameterGo p in LocalParameters)
-                {
-                    if (!p.Name.EqualsIgnoreCase("NextLink"))
-                    {
-                        declarations.Add(string.Format(p.IsRequired || p.ModelType.CanBeEmpty()
-                                                            ? "{0} {1}"
-                                                            : "{0} *{1}", p.Name, p.ModelType.Name));
-                    }
-                }
-                //for Cancelation channel option for long-running operations
-                if (IsLongRunningOperation())
-                {
-                    declarations.Add("cancel <-chan struct{}");
-                }
-                return string.Join(", ", declarations);
+                lp = (NextOperation as MethodGo).LocalParameters;
             }
+            else
+            {
+                lp = LocalParameters;
+            }
+            List<string> declarations = new List<string>();
+            foreach (ParameterGo p in lp)
+            {
+                if (!p.Name.EqualsIgnoreCase("NextLink"))
+                {
+                    declarations.Add(string.Format(p.IsRequired || p.ModelType.CanBeEmpty()
+                                                        ? "{0} {1}"
+                                                        : "{0} *{1}", p.Name, p.ModelType.Name));
+                }
+            }
+            //for Cancelation channel option for long-running operations
+            if (IsLongRunningOperation())
+            {
+                declarations.Add("cancel <-chan struct{}");
+            }
+            return string.Join(", ", declarations);
         }
 
         /// <summary>
@@ -232,24 +238,31 @@ namespace AutoRest.Go.Model
 
         public string ResponderMethodName => $"{Name}Responder";
 
-        public string HelperInvocationParameters
+        public string HelperInvocationParameters(bool next)
         {
-            get
+            
+            IEnumerable<ParameterGo> lp;
+            if (next)
             {
-                List<string> invocationParams = new List<string>();
-                foreach (ParameterGo p in LocalParameters)
-                {
-                    if(!p.Name.EqualsIgnoreCase("NextLink"))
-                    {
-                        invocationParams.Add(p.Name);
-                    }
-                }
-                if (IsLongRunningOperation())
-                {
-                    invocationParams.Add("cancel");
-                }
-                return string.Join(", ", invocationParams);
+                lp = (NextOperation as MethodGo).LocalParameters;
             }
+            else
+            {
+                lp = LocalParameters;
+            }
+            List<string> invocationParams = new List<string>();
+            foreach (ParameterGo p in lp)
+            {
+                if(!p.Name.EqualsIgnoreCase("NextLink"))
+                {
+                    invocationParams.Add(p.Name);
+                }
+            }
+            if (IsLongRunningOperation())
+            {
+                invocationParams.Add("cancel");
+            }
+            return string.Join(", ", invocationParams);
         }
 
         /// <summary>
@@ -535,26 +548,6 @@ namespace AutoRest.Go.Model
                     }
                 }
                 return null;
-            }
-        }
-
-        public string NextOperationParameters
-        {
-            get
-            {
-                List<string> invocationParams = new List<string>();
-                foreach (ParameterGo p in (NextOperation as MethodGo).LocalParameters)
-                {
-                    if (!p.Name.EqualsIgnoreCase("nextlink"))
-                    {
-                        invocationParams.Add(p.Name);
-                    }
-                }
-                if (IsLongRunningOperation())
-                {
-                    invocationParams.Add("cancel");
-                }
-                return string.Join(", ", invocationParams);
             }
         }
 
