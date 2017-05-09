@@ -7,7 +7,7 @@ import { BlameTree } from './source-map/blaming';
 import { Clone } from './ref/yaml';
 import { OperationAbortedException } from "./exception";
 import { TryDecodeEnhancedPositionFromName } from "./source-map/source-map";
-import { Supressor } from "./pipeline/supression";
+import { Suppressor } from "./pipeline/suppression";
 import { matches, stringify } from "./ref/jsonpath";
 import { MergeOverwriteOrAppend, resolveRValue, ShallowCopy } from "./source-map/merging";
 import { DataHandleRead, DataStore } from './data-store/data-store';
@@ -164,7 +164,7 @@ function ProxifyConfigurationView(cfgView: any) {
 export class ConfigurationView {
   [name: string]: any;
 
-  private suppressor: Supressor;
+  private suppressor: Suppressor;
 
   /* @internal */ constructor(
     /* @internal */public messageEmitter: MessageEmitter,
@@ -209,7 +209,7 @@ export class ConfigurationView {
       this.config = this.rawConfig;
     }
 
-    this.suppressor = new Supressor(this);
+    this.suppressor = new Suppressor(this);
     this.Message({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
   }
 
