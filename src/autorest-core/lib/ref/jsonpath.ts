@@ -54,11 +54,11 @@ export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: an
             } else if (queryPart.scope === "descendant") {
               step(`$..${value}`);
             } else {
-              console.log(queryPart); throw queryPart;
+              console.log(jsonQuery, queryPart); throw queryPart;
             }
             break;
           default:
-            console.log(queryPart); throw queryPart;
+            console.log(jsonQuery, queryPart); throw queryPart;
         }
         break;
       case "subscript":
@@ -69,7 +69,7 @@ export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: an
             } else if (queryPart.scope === "descendant") {
               step(`$..*`);
             } else {
-              console.log(queryPart); throw queryPart;
+              console.log(jsonQuery, queryPart); throw queryPart;
             }
             if (!value.startsWith("?")) {
               throw queryPart;
@@ -83,12 +83,32 @@ export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: an
               }
             });
             break;
+          case "wildcard":
+            if (queryPart.scope === "child") {
+              step(`$[*]`);
+            } else if (queryPart.scope === "descendant") {
+              console.log(jsonQuery, queryPart); throw queryPart;
+              // step(`$..[*]`);
+            } else {
+              console.log(jsonQuery, queryPart); throw queryPart;
+            }
+            break;
+          case "string_literal":
+            if (queryPart.scope === "child") {
+              step(`$[${JSON.stringify(value)}]`);
+            } else if (queryPart.scope === "descendant") {
+              console.log(jsonQuery, queryPart); throw queryPart;
+              //step(`$..[${JSON.stringify(value)}]`);
+            } else {
+              console.log(jsonQuery, queryPart); throw queryPart;
+            }
+            break;
           default:
-            console.log(queryPart); throw queryPart;
+            console.log(jsonQuery, queryPart); throw queryPart;
         }
         break;
       default:
-        console.log(queryPart); throw queryPart;
+        console.log(jsonQuery, queryPart); throw queryPart;
     }
   }
 
