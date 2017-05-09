@@ -52,6 +52,8 @@ import * as jp from "../lib/ref/jsonpath";
     assert.strictEqual(jp.nodes(obj, "$..['d']").length, 1);
     assert.strictEqual(jp.nodes(obj, "$..d").length, 1);
     assert.strictEqual(jp.nodes(obj, "$..[2]").length, 1);
+    assert.strictEqual(jp.nodes(obj, "$..[?(@.a[2] === 3)]").length, 1);
+    assert.strictEqual(jp.nodes(obj, "$..[?(@.a.reduce((x,y) => x+y, 0) === 6)]").length, 1);
     //assert.strictEqual(jp.nodes(obj, "$..[(@.length - 1)]").length, 1);
     //assert.strictEqual(jp.nodes(obj, "$..[(1 + 1)]").length, 1);
   }

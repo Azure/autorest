@@ -6,6 +6,23 @@ import { safeEval } from './safe-eval';
 
 import * as jsonpath from "jsonpath";
 
+// patch in smart filter expressions
+const handlers = (jsonpath as any).handlers;
+handlers.register("subscript-descendant-filter_expression", function (component: any, partial: any, count: any) {
+  var src = component.expression.value.slice(1);
+
+  var passable = function (key: any, value: any) {
+    try {
+      return safeEval(src.replace(/\@/g, "$$$$"), { "$$": value });
+    } catch (e) {
+      return false;
+    }
+  }
+
+  return eval("this").traverse(partial, null, passable, count);
+});
+// patch end
+
 export type JsonPathComponent = jsonpath.PathComponent;
 export type JsonPath = JsonPathComponent[];
 
@@ -22,105 +39,12 @@ export function paths<T>(obj: T, jsonQuery: string): JsonPath[] {
 }
 
 export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: any }[] {
-  const parsedQuery = jsonpath.parse(jsonQuery);
-  if (parsedQuery.shift().expression.type !== "root") {
-    throw new Error(`Unexpected format: '${jsonQuery}' has no root.`);
+  // jsonpath only accepts objects
+  if (obj instanceof Object) {
+    return jsonpath.nodes(obj, jsonQuery).map(x => { return { path: x.path.slice(1), value: x.value }; });
+  } else {
+    return matches(jsonQuery, []) ? [{ path: [], value: obj }] : [];
   }
-
-
-  let matches = [{ path: <JsonPath>[], value: <any>obj }];
-  const step = (expr: string) => {
-    const newMatches: any[] = [];
-    for (const m of matches) {
-      try {
-        const result = jsonpath.nodes(m.value, expr);
-        newMatches.push(...result.map(x => <any>{ path: m.path.concat(x.path.slice(1)), value: x.value }));
-      } catch (e) {
-        // query failed => no results
-      }
-    }
-    matches = newMatches;
-  }
-
-  for (const queryPart of parsedQuery) {
-    const value = queryPart.expression.value;
-    switch (queryPart.operation) {
-      case "member":
-        switch (queryPart.expression.type) {
-          case "identifier":
-          case "wildcard":
-            if (queryPart.scope === "child") {
-              step(`$.${value}`);
-            } else if (queryPart.scope === "descendant") {
-              step(`$..${value}`);
-            } else {
-              console.log(jsonQuery, queryPart); throw queryPart;
-            }
-            break;
-          default:
-            console.log(jsonQuery, queryPart); throw queryPart;
-        }
-        break;
-      case "subscript":
-        switch (queryPart.expression.type) {
-          case "filter_expression":
-            if (queryPart.scope === "child") {
-              step(`$[*]`);
-            } else if (queryPart.scope === "descendant") {
-              step(`$..*`);
-            } else {
-              console.log(jsonQuery, queryPart); throw queryPart;
-            }
-            if (!value.startsWith("?")) {
-              throw queryPart;
-            }
-            matches = matches.filter(x => {
-              try {
-                return safeEval(value.slice(1).replace(/\@/g, "$$$$"), { "$$": x.value, "$": obj });
-              } catch (e) {
-                // bad filter expression => treat as false
-                return false;
-              }
-            });
-            break;
-          case "script_expression":
-            if (queryPart.scope === "child") {
-              step(`$[${value}]`);
-            } else if (queryPart.scope === "descendant") {
-              step(`$..[${value}]`);
-            } else {
-              console.log(jsonQuery, queryPart); throw queryPart;
-            }
-            break;
-          case "wildcard":
-            if (queryPart.scope === "child") {
-              step(`$[*]`);
-            } else if (queryPart.scope === "descendant") {
-              step(`$..[*]`);
-            } else {
-              console.log(jsonQuery, queryPart); throw queryPart;
-            }
-            break;
-          case "string_literal":
-          case "numeric_literal":
-            if (queryPart.scope === "child") {
-              step(`$[${JSON.stringify(value)}]`);
-            } else if (queryPart.scope === "descendant") {
-              step(`$..[${JSON.stringify(value)}]`);
-            } else {
-              console.log(jsonQuery, queryPart); throw queryPart;
-            }
-            break;
-          default:
-            console.log(jsonQuery, queryPart); throw queryPart;
-        }
-        break;
-      default:
-        console.log(jsonQuery, queryPart); throw queryPart;
-    }
-  }
-
-  return matches;
 }
 
 export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean {
