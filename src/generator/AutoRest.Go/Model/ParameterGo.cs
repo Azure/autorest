@@ -35,15 +35,15 @@ namespace AutoRest.Go.Model
         /// </summary>
         /// <param name="mapVariable"></param>
         /// <returns></returns>
-        public string AddToMap(string mapVariable, bool isNext, string nextLink)
+        public string AddToMap(string mapVariable)
         {
-            return string.Format("{0}[\"{1}\"] = {2}", mapVariable, NameForMap(), ValueForMap(isNext, nextLink));
+            return string.Format("{0}[\"{1}\"] = {2}", mapVariable, NameForMap(), ValueForMap());
         }
 
         public string GetParameterName()
         {
             string retval;
-            if (IsAPIVersion) 
+            if (IsAPIVersion)
             {
                 retval = APIVersionName;
             }
@@ -51,7 +51,7 @@ namespace AutoRest.Go.Model
             {
                 retval = "client." + Name.Value.Capitalize();
             }
-            else 
+            else
             {
                 retval = Name.Value;
             }
@@ -85,7 +85,7 @@ namespace AutoRest.Go.Model
         /// Return formatted value string for the parameter.
         /// </summary>
         /// <returns></returns>
-        public string ValueForMap(bool isNext, string nextLink)
+        public string ValueForMap()
         {
             if (IsAPIVersion)
             {
@@ -93,12 +93,8 @@ namespace AutoRest.Go.Model
             }
 
             var value = IsClientProperty
-                ? isNext
-                    ? "lastResults.client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
-                    : "client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
-                : isNext
-                    ? "lastResults." + nextLink
-                    : Name.Value;
+                ? "client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
+                : Name.Value;
 
             var format = IsRequired || ModelType.CanBeEmpty()
                                     ? "{0}"
@@ -125,7 +121,7 @@ namespace AutoRest.Go.Model
         /// <param name="parameters"></param>
         /// <param name="mapVariable"></param>
         /// <returns></returns>
-        public static string BuildParameterMap(this IEnumerable<ParameterGo> parameters, string mapVariable, bool isNext, string nextLink)
+        public static string BuildParameterMap(this IEnumerable<ParameterGo> parameters, string mapVariable)
         {
             var builder = new StringBuilder();
 
@@ -139,13 +135,12 @@ namespace AutoRest.Go.Model
                 parameters
                     .Where(p => p.IsRequired)
                     .OrderBy(p => p.SerializedName.ToString())
-                    .ForEach(p => indented.AppendLine("\"{0}\": {1},", p.NameForMap(), p.ValueForMap(isNext, nextLink)));
+                    .ForEach(p => indented.AppendLine("\"{0}\": {1},", p.NameForMap(), p.ValueForMap()));
                     builder.Append(indented);
             }
             builder.AppendLine("}");
             return builder.ToString();
         }
-
 
         /// <summary>
         /// Return list of parameters for specified location passed in an argument.

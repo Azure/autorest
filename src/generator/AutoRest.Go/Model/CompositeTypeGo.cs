@@ -17,6 +17,7 @@ namespace AutoRest.Go.Model
     {
         private bool _wrapper;
         // True if the type is returned by a method
+
         public bool IsResponseType;
 
         // Name of the field containing the URL used to retrieve the next result set
@@ -34,8 +35,6 @@ namespace AutoRest.Go.Model
         {
 
         }
-
-        public MethodGo NextMethod;
 
         public CompositeTypeGo(IModelType wrappedType)
         {
@@ -108,10 +107,6 @@ namespace AutoRest.Go.Model
         /// <param name="imports"></param>
         public void AddImports(HashSet<string> imports)
         {
-            if (!string.IsNullOrEmpty(NextLink) && PreparerNeeded)
-            {
-                imports.Add("github.com/Azure/go-autorest/autorest/azure");
-            }
             Properties.ForEach(p => p.ModelType.AddImports(imports));
         }
 
@@ -195,17 +190,6 @@ namespace AutoRest.Go.Model
 
         public IModelType BaseType { get; private set; }
 
-        public string PackageName;
-
-        public string AutorestError(string phase, string response = null, string parameter = null)
-        {
-        return !string.IsNullOrEmpty(parameter)
-                  ? string.Format("autorest.NewErrorWithError(err, \"{0}\", \"{1}\", nil , \"{2}\'{3}\'\")", PackageName, Name, phase, parameter)
-                  : string.IsNullOrEmpty(response)
-                           ? string.Format("autorest.NewErrorWithError(err, \"{0}\", \"{1}\", nil , \"{2}\")", PackageName, Name, phase)
-                           : string.Format("autorest.NewErrorWithError(err, \"{0}\", \"{1}\", {2}, \"{3}\")", PackageName, Name, response, phase);
-        }
-
         public IModelType GetElementType(IModelType type)
         {
             if (type is SequenceTypeGo)
@@ -224,9 +208,8 @@ namespace AutoRest.Go.Model
             }
         }
 
-        public string ResponseCodes;
-
         public string PreparerMethodName => $"{Name}Preparer";
+
         public void SetName(string name)
         {
             Name = name;

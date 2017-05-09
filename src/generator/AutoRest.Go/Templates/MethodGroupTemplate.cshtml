@@ -62,9 +62,6 @@ func New@(Model.ClientName)(@(Model.GlobalParameters)) @(Model.ClientName) {
 
 @foreach (var method in methods)
 {
-    @if (!method.IsNextMethod)
-    {
-    @:@(Include(new MethodTemplate(), method))
-    @:@EmptyLine
-    }
+@:@(Include(new MethodTemplate(), method))
+@:@EmptyLine
 }

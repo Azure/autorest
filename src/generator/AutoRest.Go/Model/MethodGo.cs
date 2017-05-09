@@ -78,15 +78,17 @@ namespace AutoRest.Go.Model
             }
         }
 
+        public string MethodSignature => $"{Name}({MethodParametersSignature})";
+        
         public string MethodParametersSignatureComplete
         {
             get
             {     
                 var signature = new StringBuilder("(");
-                signature.Append(MethodParametersSignature(false));
+                signature.Append(MethodParametersSignature);
                 if (!IsLongRunningOperation())
                 {
-                    if (MethodParametersSignature(false).Length > 0)
+                    if (MethodParametersSignature.Length > 0)
                     {
                         signature.Append( ", ");
                     }
@@ -150,38 +152,26 @@ namespace AutoRest.Go.Model
 
         public string ListCompleteMethodName => $"{Name}Complete";
 
-        public string MethodSignature => $"{Name}({MethodParametersSignature(false)})";
-
         /// <summary>
         /// Generate the method parameter declaration.
         /// </summary>
-        public string MethodParametersSignature(bool next)
+        public string MethodParametersSignature
         {
-            IEnumerable<ParameterGo> lp;
-            if (next)
+            get
             {
-                lp = (NextOperation as MethodGo).LocalParameters;
-            }
-            else
-            {
-                lp = LocalParameters;
-            }
-            List<string> declarations = new List<string>();
-            foreach (ParameterGo p in lp)
-            {
-                if (!p.Name.EqualsIgnoreCase("NextLink"))
+                List<string> declarations = new List<string>();
+                LocalParameters
+                    .ForEach(p => declarations.Add(string.Format(
+                                                        p.IsRequired || p.ModelType.CanBeEmpty()
+                                                            ? "{0} {1}"
+                                                            : "{0} *{1}", p.Name, p.ModelType.Name)));
+                //for Cancelation channel option for long-running operations
+                if (IsLongRunningOperation())
                 {
-                    declarations.Add(string.Format(p.IsRequired || p.ModelType.CanBeEmpty()
-                                                        ? "{0} {1}"
-                                                        : "{0} *{1}", p.Name, p.ModelType.Name));
+                    declarations.Add("cancel <-chan struct{}");
                 }
+                return string.Join(", ", declarations);
             }
-            //for Cancelation channel option for long-running operations
-            if (IsLongRunningOperation())
-            {
-                declarations.Add("cancel <-chan struct{}");
-            }
-            return string.Join(", ", declarations);
         }
 
         /// <summary>
@@ -238,31 +228,19 @@ namespace AutoRest.Go.Model
 
         public string ResponderMethodName => $"{Name}Responder";
 
-        public string HelperInvocationParameters(bool next)
+        public string HelperInvocationParameters
         {
-            
-            IEnumerable<ParameterGo> lp;
-            if (next)
+            get
             {
-                lp = (NextOperation as MethodGo).LocalParameters;
-            }
-            else
-            {
-                lp = LocalParameters;
-            }
-            List<string> invocationParams = new List<string>();
-            foreach (ParameterGo p in lp)
-            {
-                if(!p.Name.EqualsIgnoreCase("NextLink"))
+                List<string> invocationParams = new List<string>();
+                LocalParameters
+                    .ForEach(p => invocationParams.Add(p.Name));
+                if (IsLongRunningOperation())
                 {
-                    invocationParams.Add(p.Name);
+                    invocationParams.Add("cancel");
                 }
+                return string.Join(", ", invocationParams);
             }
-            if (IsLongRunningOperation())
-            {
-                invocationParams.Add("cancel");
-            }
-            return string.Join(", ", invocationParams);
         }
 
         /// <summary>
@@ -293,19 +271,19 @@ namespace AutoRest.Go.Model
 
         public IEnumerable<ParameterGo> URLParameters => ParametersGo.URLParameters();
 
-        public string URLMap => URLParameters.BuildParameterMap("urlParameters", IsNextMethod, NextLink);
+        public string URLMap => URLParameters.BuildParameterMap("urlParameters");
 
         public IEnumerable<ParameterGo> PathParameters => ParametersGo.PathParameters();
 
-        public string PathMap => PathParameters.BuildParameterMap("pathParameters", IsNextMethod, NextLink);
+        public string PathMap => PathParameters.BuildParameterMap("pathParameters");
 
         public IEnumerable<ParameterGo> QueryParameters => ParametersGo.QueryParameters();
 
         public IEnumerable<ParameterGo> OptionalQueryParameters => ParametersGo.QueryParameters(false);
 
-        public string QueryMap => QueryParameters.BuildParameterMap("queryParameters", IsNextMethod, NextLink);
+        public string QueryMap => QueryParameters.BuildParameterMap("queryParameters");
 
-        public string FormDataMap => FormDataParameters.BuildParameterMap("formDataParameters", IsNextMethod, NextLink);
+        public string FormDataMap => FormDataParameters.BuildParameterMap("formDataParameters");
 
         public List<string> ResponseCodes
         {
@@ -341,14 +319,7 @@ namespace AutoRest.Go.Model
                 decorators.Add(HTTPMethodDecorator);
                 if (!this.IsCustomBaseUri)
                 {
-                    if (IsNextMethod)
-                    {
-                        decorators.Add(string.Format("autorest.WithBaseURL(lastResults.client.BaseURI)"));
-                    }
-                    else
-                    {
-                        decorators.Add(string.Format("autorest.WithBaseURL(client.BaseURI)"));
-                    }
+                    decorators.Add(string.Format("autorest.WithBaseURL(client.BaseURI)"));
                 }
                 else
                 {
@@ -425,14 +396,7 @@ namespace AutoRest.Go.Model
             get
             {
                 var decorators = new List<string>();
-                if (IsNextMethod)
-                {
-                    decorators.Add("lastResults.client.ByInspecting()");
-                }
-                else
-                {
-                    decorators.Add("client.ByInspecting()");
-                }
+                decorators.Add("client.ByInspecting()");
                 decorators.Add(string.Format("azure.WithErrorUnlessStatusCode({0})", string.Join(",", ResponseCodes.ToArray())));
 
                 if (HasReturnValue() && !ReturnValue().Body.IsStreamType())
@@ -500,7 +464,7 @@ namespace AutoRest.Go.Model
         /// <returns></returns>
 
         public bool IsPageable => !string.IsNullOrEmpty(NextLink);
-
+        
         public bool IsNextMethod => Name.Value.EqualsIgnoreCase(NextOperationName);
 
         /// <summary>
@@ -587,7 +551,7 @@ namespace AutoRest.Go.Model
         {
             get
             {
-                var nextLink = "";
+                string nextLink = "";
 
                 // Note:
                 // -- The CSharp generator applies a default link name if the extension is present but the link name is not.
