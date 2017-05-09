@@ -45,11 +45,11 @@ export class Manipulator {
             const target = await scope.Write(`transform_${++this.ctr}.yaml`);
             const result = await ManipulateObject(data, target, w, (doc, obj, path) => safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path }));
             if (!result.anyHit) {
-              this.config.Message({
-                Channel: Channel.Warning,
-                Details: trans,
-                Text: `Transformation directive with 'where' clause '${w}' was not used.`
-              });
+              // this.config.Message({
+              //   Channel: Channel.Warning,
+              //   Details: trans,
+              //   Text: `Transformation directive with 'where' clause '${w}' was not used.`
+              // });
             }
             data = result.result;
           }
@@ -58,11 +58,11 @@ export class Manipulator {
             const target = await scope.Write(`set_${++this.ctr}.yaml`);
             const result = await ManipulateObject(data, target, w, obj => s);
             if (!result.anyHit) {
-              this.config.Message({
-                Channel: Channel.Warning,
-                Details: trans,
-                Text: `Set directive with 'where' clause '${w}' was not used.`
-              });
+              // this.config.Message({
+              //   Channel: Channel.Warning,
+              //   Details: trans,
+              //   Text: `Set directive with 'where' clause '${w}' was not used.`
+              // });
             }
             data = result.result;
           }
@@ -87,11 +87,11 @@ export class Manipulator {
               }
             }
             if (allHits.length === 0) {
-              this.config.Message({
-                Channel: Channel.Warning,
-                Details: trans,
-                Text: `Test directive with 'where' clause '${w}' was not used.`
-              });
+              // this.config.Message({
+              //   Channel: Channel.Warning,
+              //   Details: trans,
+              //   Text: `Test directive with 'where' clause '${w}' was not used.`
+              // });
             }
           }
         }
