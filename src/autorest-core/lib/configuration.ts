@@ -1,3 +1,4 @@
+import { BlameTree } from './source-map/blaming';
 import { Clone } from './ref/yaml';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
@@ -311,30 +312,33 @@ export class ConfigurationView {
       if (m.Source) {
         const blameSources = m.Source.map(s => {
           let posClone = Clone(s.Position);
-          while (true) {
-            try {
-              const blameTree = this.DataStore.Blame(s.document, posClone);
-              const result = [...blameTree.BlameInputs()];
-              if (result.length > 0) {
-                return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
-              } else {
-                break;
-              }
-            } catch (e) {
-              if ('path' in posClone) {
-                this.Message({ Channel: Channel.Debug, Text: `Could not find the exact path ` + JSON.stringify(s.Position) });
-                (<string[]>posClone.path).pop();
-                if ((<string[]>posClone.path).length === 0) {
-                  break;
+          let blameTree: BlameTree | null = null;
+          try {
+            while (blameTree === null) {
+              try {
+                blameTree = this.DataStore.Blame(s.document, posClone);
+              } catch (e) {
+                if ('path' in posClone) {
+                  this.Message({ Channel: Channel.Debug, Text: `Could not find the exact path ` + JSON.stringify(s.Position) });
+                  (<string[]>posClone.path).pop();
+                  if ((<string[]>posClone.path).length === 0) {
+                    throw e;
+                  }
+                } else {
+                  throw e;
                 }
-              } else {
-                break;
               }
-              // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
-              //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
-              //console.log(e);
             }
+            const result = [...blameTree.BlameInputs()];
+            if (result.length > 0) {
+              return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
+            }
+          } catch (e) {
+            // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
+            //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
+            //console.log(e);
           }
+
           s.Position = posClone;
           // try forward resolving (towards emitted files) if no real path
           if (s.document.startsWith(DataStore.BaseUri) && s.document.split("/output/")[1]) {
