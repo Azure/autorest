@@ -15,6 +15,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity">Entity being validated</param>
         /// <param name="context">Rule context</param>
+        /// <returns>list of ValidationMessages</returns> 
         public override IEnumerable<ValidationMessage> GetValidationMessages(Operation entity, RuleContext context)
         {
             if (string.IsNullOrWhiteSpace(entity.Description))

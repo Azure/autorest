@@ -41,6 +41,13 @@ namespace AutoRest.Swagger.Validation
 
         private static readonly IEnumerable<string> OpList = new List<string>() { "put", "get", "patch" };
 
+
+        /// <summary>
+        /// Validates if the response of Put/Get/Patch are same.
+        /// </summary>
+        /// <param name="entity">paths to validate</param>
+        /// <param name="context">The rule context</param>
+        /// <returns>list of ValidationMessages.</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
             var serviceDefinition = (ServiceDefinition)context.Root;

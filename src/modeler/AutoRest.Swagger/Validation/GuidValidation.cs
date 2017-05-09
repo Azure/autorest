@@ -39,6 +39,13 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
+        /// <summary>
+        /// An <paramref name="definitions"/> fails this rule if one of the property has GUID,
+        /// i.e. if the type of the definition is string and the format is uuid.
+        /// </summary>
+        /// <param name="definitions">Operation Definitions to validate</param>
+        /// <param name="context">The rule context</param>
+        /// <returns>list of validation messages</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             foreach (KeyValuePair<string, Schema> definition in definitions)

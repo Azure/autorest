@@ -40,7 +40,7 @@ namespace AutoRest.Swagger.Validation
         private static readonly IEnumerable<string> ArmPropertiesBag = new List<string>()
                                                                         { "name", "id", "type", "location", "tag" };
         
-        // Verifies if a tracked resource has a corresponding get operation
+        // Verifies whether ARM resource has the set of properties repeated in its property bag
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             var resModels = context.ResourceModels;

@@ -36,6 +36,12 @@ namespace AutoRest.Swagger.Validation
         /// </remarks>
         public override string MessageTemplate => Resources.SecurityDefinitionsStructureValidation;
 
+        /// <summary>
+        /// Checks for the presence and existence of the security definiton
+        /// </summary>
+        /// <param name="securityDefinitions"></param>
+        /// <param name="context">The rule context</param>
+        /// <returns>List of ValidationMessages</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, SecurityDefinition> securityDefinitions, RuleContext context)
         {
             if (securityDefinitions.Count != 1)

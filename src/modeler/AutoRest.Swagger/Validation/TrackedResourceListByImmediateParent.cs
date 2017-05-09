@@ -55,7 +55,7 @@ namespace AutoRest.Swagger.Validation
                     formatParameters[0] = childResourceMapping.Key;
                     formatParameters[1] = childResourceMapping.Value;
 
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Parent.Path.AppendProperty("definitions").AppendProperty(childResourceMapping.Value)), this, formatParameters);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Parent.Path.AppendProperty("definitions").AppendProperty(childResourceMapping.Key)), this, formatParameters);
                 }
             }
         }

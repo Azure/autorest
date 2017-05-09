@@ -44,6 +44,12 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
+        /// <summary>
+        /// Validates Sku Model
+        /// </summary>
+        /// <param name="definitions">to be validated</param>
+        /// <param name="context">the rule context</param>
+        /// <returns>list of ValidationMessages</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             var modelsNamedSku = definitions.Where(defPair => defPair.Key.EqualsIgnoreCase("sku"));
