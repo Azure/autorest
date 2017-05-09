@@ -83,22 +83,30 @@ export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: an
               }
             });
             break;
+          case "script_expression":
+            if (queryPart.scope === "child") {
+              step(`$[${value}]`);
+            } else if (queryPart.scope === "descendant") {
+              step(`$..[${value}]`);
+            } else {
+              console.log(jsonQuery, queryPart); throw queryPart;
+            }
+            break;
           case "wildcard":
             if (queryPart.scope === "child") {
               step(`$[*]`);
             } else if (queryPart.scope === "descendant") {
-              console.log(jsonQuery, queryPart); throw queryPart;
-              // step(`$..[*]`);
+              step(`$..[*]`);
             } else {
               console.log(jsonQuery, queryPart); throw queryPart;
             }
             break;
           case "string_literal":
+          case "numeric_literal":
             if (queryPart.scope === "child") {
               step(`$[${JSON.stringify(value)}]`);
             } else if (queryPart.scope === "descendant") {
-              console.log(jsonQuery, queryPart); throw queryPart;
-              //step(`$..[${JSON.stringify(value)}]`);
+              step(`$..[${JSON.stringify(value)}]`);
             } else {
               console.log(jsonQuery, queryPart); throw queryPart;
             }
