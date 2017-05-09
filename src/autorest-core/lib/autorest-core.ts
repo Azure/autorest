@@ -2,7 +2,7 @@ import { Stringify } from './ref/yaml';
 import { RunPipeline } from './pipeline/pipeline';
 import { SmartPosition, Position } from './ref/source-map';
 import { DataStore, Metadata } from './data-store/data-store';
-import { IEnumerable, From } from './ref/linq';
+import { IEnumerable, From, Push } from './ref/linq';
 import { IEvent, EventDispatcher, EventEmitter } from "./events";
 import { IFileSystem } from "./file-system";
 import { Configuration, ConfigurationView, MessageEmitter } from './configuration';
@@ -31,7 +31,7 @@ export class AutoRest extends EventEmitter {
     })();
   }
   /**
-   * 
+   *
    * @param rootUri The rootUri of the workspace. Is null if no workspace is open.
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    */
@@ -46,7 +46,7 @@ export class AutoRest extends EventEmitter {
    * @param content - the file content to evaluate
    */
   public static async IsSwaggerFile(content: string): Promise<boolean> {
-    // this checks to see if the document is a swagger document 
+    // this checks to see if the document is a swagger document
     try {
       // quick check to see if it's json already
       let doc = JSON.parse(content);
@@ -120,8 +120,8 @@ export class AutoRest extends EventEmitter {
     }
   }
 
-  public AddConfiguration(configuratuion: any): void {
-    this._configurations.push(configuratuion);
+  public AddConfiguration(configuration: any): void {
+    Push(this._configurations, configuration);
     this.Invalidate();
   }
 
@@ -132,7 +132,7 @@ export class AutoRest extends EventEmitter {
   }
 
   public get HasConfiguration(): Promise<boolean> {
-    return new Promise(async (r, f) => {
+    return new Promise<boolean>(async (r, f) => {
       (await this.view);
       r(false);
     });
@@ -165,8 +165,6 @@ export class AutoRest extends EventEmitter {
           this.Finished.Dispatch(false);
           return false;
         }
-
-        this.Message.Dispatch({ Channel: Channel.Debug, Text: `Starting Process() Run Pipeline.` });
 
         if (view.InputFileUris.length === 0) {
           throw new Exception("No input files provided.\n\nUse --help to get help information.", 0);
@@ -215,7 +213,7 @@ export class AutoRest extends EventEmitter {
   @EventEmitter.Event public Finished: IEvent<AutoRest, boolean | Error>;
 
   /**
-  * Event: Signals when a File is generated 
+  * Event: Signals when a File is generated
   */
   @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
   /**

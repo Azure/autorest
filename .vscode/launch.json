@@ -2,13 +2,37 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "diagnosticLogging": true,
-      "type": "node2",
+      "type": "node",
+      "protocol": "inspector",
+      "request": "launch",
+      "name": "run tests",
+      "program": "${workspaceRoot}/src/autorest-core/node_modules/mocha/bin/_mocha",
+      "args": [
+        "test",
+        "-g",
+        "TestConfiguration"
+      ],
+      "cwd": "${workspaceRoot}/src/autorest-core"
+    },
+    {
+      "type": "node",
+      "protocol": "inspector",
       "request": "launch",
       "name": "run bootstrapper",
       "program": "${workspaceRoot}/src/autorest/app.js",
       "cwd": "${workspaceRoot}",
       "preLaunchTask": "build/typescript"
+    },
+    {
+      "type": "node",
+      "protocol": "inspector",
+      "request": "launch",
+      "name": "run autorest",
+      "program": "${workspaceRoot}/src/autorest-core/app.js",
+      "args" : [
+        "C:/work/github/azure-rest-api-specs/profile/all.md"
+      ],
+      "cwd": "${workspaceRoot}"
     }
   ]
 }
