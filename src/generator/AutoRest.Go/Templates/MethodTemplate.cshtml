@@ -212,7 +212,7 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
 @:}
 }
 
-@if (Model.IsPageable && !Model.IsNextMethod)
+@if (Model.IsPageable && !Model.IsNextMethod && Model.ListElement != null)
 {
 @:@EmptyLine
 @:// @(Model.ListCompleteMethodName) gets all elements from the list without paging.
@@ -232,7 +232,14 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
         @:case <- cancel:
             @:return respSlice, nil
         @:default:
-            @:list, err = list.Next()
+            if (!Model.NextAlreadyDefined)
+            {
+                @:list, err = client.@(Model.NextMethodName)(list)
+            }
+            else
+            {
+                @:list, err = client.@(Model.NextOperationName)(*list.@(Model.NextLink))
+            }
             @:if err != nil {
                 @:return respSlice, err
             @:}            
