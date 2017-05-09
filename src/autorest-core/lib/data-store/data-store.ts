@@ -7,7 +7,7 @@ import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
 import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from '../ref/uri';
-import { Clone, FastStringify, Parse, ParseNode, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
+import { FastStringify, Parse, ParseNode, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
@@ -15,7 +15,6 @@ import { BlameTree } from "../source-map/blaming";
 import { Lazy, LazyPromise } from '../lazy';
 import { IFileSystem } from "../file-system";
 import { OperationCanceledException } from "../exception";
-import { Message, Channel } from "../message";
 
 /********************************************
  * Data model section (not exposed)
@@ -321,29 +320,8 @@ export class DataStore extends DataStoreView {
     return Object.getOwnPropertyNames(this.store);
   }
 
-  public Blame(absoluteUri: string, position: SmartPosition, message?: (m: Message) => void): BlameTree {
+  public Blame(absoluteUri: string, position: SmartPosition): BlameTree {
     const data = this.ReadStrictSync(absoluteUri);
-    /*
-    // verify if the path exists in the document
-    if ('path' in position) {
-      let x = (<any>data.ReadObject());
-      let keys = <string[]>(<any>position)['path'];
-      let validKeys = [];
-      let currObj = x;
-      for (let i = 0; i < keys.length; ++i) {
-        if (!(keys[i] in currObj)) {
-          if (message !== undefined) {
-            message({ Channel: Channel.Warning, Text: 'Could not find exact path: \'' + keys + '\'', Details: position });
-          }
-          break;
-        }
-        validKeys.push(keys[i]);
-        currObj = currObj[keys[i]];
-      }
-      (<any>position)['path'] = validKeys;
-    }
-    */
-
     const resolvedPosition = CompilePosition(position, data);
     return BlameTree.Create(this, {
       source: absoluteUri,
