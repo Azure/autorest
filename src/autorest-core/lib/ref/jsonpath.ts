@@ -1,3 +1,4 @@
+import { safeEval } from './safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -21,12 +22,77 @@ export function paths<T>(obj: T, jsonQuery: string): JsonPath[] {
 }
 
 export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: any }[] {
-  // jsonpath only accepts objects
-  if (obj instanceof Object) {
-    return jsonpath.nodes(obj, jsonQuery).map(x => { return { path: x.path.slice(1), value: x.value }; });
-  } else {
-    return matches(jsonQuery, []) ? [{ path: [], value: obj }] : [];
+  const parsedQuery = jsonpath.parse(jsonQuery);
+  if (parsedQuery.shift().expression.type !== "root") {
+    throw new Error(`Unexpected format: '${jsonQuery}' has no root.`);
   }
+
+
+  let matches = [{ path: <JsonPath>[], value: <any>obj }];
+  const step = (expr: string) => {
+    const newMatches: any[] = [];
+    for (const m of matches) {
+      try {
+        const result = jsonpath.nodes(m.value, expr);
+        newMatches.push(...result.map(x => <any>{ path: m.path.concat(x.path.slice(1)), value: x.value }));
+      } catch (e) {
+        // query failed => no results
+      }
+    }
+    matches = newMatches;
+  }
+
+  for (const queryPart of parsedQuery) {
+    const value = queryPart.expression.value;
+    switch (queryPart.operation) {
+      case "member":
+        switch (queryPart.expression.type) {
+          case "identifier":
+          case "wildcard":
+            if (queryPart.scope === "child") {
+              step(`$.${value}`);
+            } else if (queryPart.scope === "descendant") {
+              step(`$..${value}`);
+            } else {
+              console.log(queryPart); throw queryPart;
+            }
+            break;
+          default:
+            console.log(queryPart); throw queryPart;
+        }
+        break;
+      case "subscript":
+        switch (queryPart.expression.type) {
+          case "filter_expression":
+            if (queryPart.scope === "child") {
+              step(`$[*]`);
+            } else if (queryPart.scope === "descendant") {
+              step(`$..*`);
+            } else {
+              console.log(queryPart); throw queryPart;
+            }
+            if (!value.startsWith("?")) {
+              throw queryPart;
+            }
+            matches = matches.filter(x => {
+              try {
+                return safeEval(value.slice(1).replace(/\@/g, "$$$$"), { "$$": x.value, "$": obj });
+              } catch (e) {
+                // bad filter expression => treat as false
+                return false;
+              }
+            });
+            break;
+          default:
+            console.log(queryPart); throw queryPart;
+        }
+        break;
+      default:
+        console.log(queryPart); throw queryPart;
+    }
+  }
+
+  return matches;
 }
 
 export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean {

@@ -244,7 +244,7 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
 
       // replace queries
       const candidProperties = ["name", "operationId", "$ref"];
-      clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `@.${p}.indexOf('${match}') !== -1`).join(' || ')})]`);
+      clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(' || ')})]`);
 
       // console.log(clue);
 
@@ -259,7 +259,9 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
         const documentation = Lines(rawCommonmark).slice(headingTextRange[0] - 1, headingTextRange[1]).join("\n");
         directives.push({
           where: targetPath,
-          transform: `if (typeof $.${targetField} === "string" || typeof $.${targetField} === "undefined") $.${targetField} = ${JSON.stringify(documentation)};`
+          transform: `
+            if (typeof $.${targetField} === "string" || typeof $.${targetField} === "undefined")
+              $.${targetField} = ${JSON.stringify(documentation)};`
         });
       }
     }
