@@ -53,7 +53,7 @@ namespace AutoRest.Swagger.Validation
                 if ((property.Value?.Extensions?.Count ?? 0) != 0)
                 {
                     string valueOfXmsExtensionProperty = (string)property.Value.Extensions.GetValueOrNull(extensionToCheck);
-                    if (valueOfXmsExtensionProperty != null && valueOfXmsExtensionProperty.EqualsIgnoreCase(property.Key))
+                    if (valueOfXmsExtensionProperty != null && valueOfXmsExtensionProperty.Equals(property.Key))
                     {
                         yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, property.Key);
                     }
