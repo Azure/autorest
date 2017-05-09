@@ -26,13 +26,14 @@ func getPagingClient() PagingClient {
 }
 
 func (s *PagingGroupSuite) TestGetMultiplePages(c *chk.C) {
+	// Get pages one by one...
 	res, err := pagingClient.GetMultiplePages(clientID, nil, nil)
 	c.Assert(err, chk.IsNil)
 	c.Assert(res.NextLink, chk.NotNil)
 	count := 1
 	for res.NextLink != nil {
 		count++
-		resNext, err := res.Next()
+		resNext, err := pagingClient.GetMultiplePagesNextResults(res)
 		c.Assert(err, chk.IsNil)
 		res = resNext
 	}
@@ -52,7 +53,7 @@ func (s *PagingGroupSuite) TestGetOdataMultiplePages(c *chk.C) {
 	count := 1
 	for res.OdataNextLink != nil {
 		count++
-		resNext, err := res.Next()
+		resNext, err := pagingClient.GetOdataMultiplePagesNextResults(res)
 		c.Assert(err, chk.IsNil)
 		res = resNext
 	}
@@ -66,7 +67,7 @@ func (s *PagingGroupSuite) TestGetMultiplePagesWithOffset(c *chk.C) {
 	count := 1
 	for res.NextLink != nil {
 		count++
-		resNext, err := res.Next()
+		resNext, err := pagingClient.GetMultiplePagesWithOffsetNextResults(res)
 		c.Assert(err, chk.IsNil)
 		res = resNext
 	}
@@ -80,7 +81,7 @@ func (s *PagingGroupSuite) TestGetMultiplePagesRetryFirst(c *chk.C) {
 	count := 1
 	for res.NextLink != nil {
 		count++
-		resNext, err := res.Next()
+		resNext, err := pagingClient.GetMultiplePagesRetryFirstNextResults(res)
 		c.Assert(err, chk.IsNil)
 		res = resNext
 	}
@@ -93,7 +94,7 @@ func (s *PagingGroupSuite) TestGetMultiplePagesRetrySecond(c *chk.C) {
 	count := 1
 	for res.NextLink != nil {
 		count++
-		resNext, err := res.Next()
+		resNext, err := pagingClient.GetMultiplePagesRetrySecondNextResults(res)
 		c.Assert(err, chk.IsNil)
 		res = resNext
 	}
@@ -110,7 +111,7 @@ func (s *PagingGroupSuite) TestGetMultiplePagesFailure(c *chk.C) {
 	res, err := pagingClient.GetMultiplePagesFailure()
 	c.Assert(err, chk.IsNil)
 	c.Assert(res.NextLink, chk.NotNil)
-	res, err = res.Next()
+	res, err = pagingClient.GetMultiplePagesFailureNextResults(res)
 	c.Assert(err, chk.NotNil)
 	c.Assert(res.StatusCode, chk.Equals, http.StatusBadRequest)
 }
@@ -119,7 +120,7 @@ func (s *PagingGroupSuite) TestGetMultiplePagesFailureURI(c *chk.C) {
 	res, err := pagingClient.GetMultiplePagesFailureURI()
 	c.Assert(err, chk.IsNil)
 	c.Assert(*res.NextLink, chk.Equals, "*&*#&$")
-	_, err = res.Next()
+	_, err = pagingClient.GetMultiplePagesFailureURINextResults(res)
 	c.Assert(err, chk.NotNil)
 	c.Assert(err, chk.ErrorMatches, ".*No scheme detected in URL.*")
 }
@@ -130,8 +131,9 @@ func (s *PagingGroupSuite) TestGetMultiplePagesFragmentNextLink(c *chk.C) {
 	count := 1
 	for res.OdataNextLink != nil {
 		count++
-		res, err = res.Next()
+		resNext, err := pagingClient.NextFragment("1.6", "test_user", *res.OdataNextLink)
 		c.Assert(err, chk.IsNil)
+		res = resNext
 	}
 	c.Assert(count, chk.Equals, 10)
 }

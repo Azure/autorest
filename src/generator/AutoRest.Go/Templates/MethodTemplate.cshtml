@@ -58,7 +58,7 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
             @:close(errChan)
         @:}()
 }
-    req, err := client.@(Model.PreparerMethodName)(@(Model.HelperInvocationParameters))
+    req, err := client.@(Model.PreparerMethodName)(@(Model.HelperInvocationParameters(false)))
     if err != nil {
         err = @(Model.AutorestError("Failure preparing request"))
         return
@@ -217,39 +217,48 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
 @:@EmptyLine
 @:// @(Model.ListCompleteMethodName) gets all elements from the list without paging.
 @:func (client @(Model.Owner)) @(Model.ListCompleteMethodName) @(Model.MethodParametersSignatureComplete) @(Model.MethodReturnSignatureComplete) {
-    @:respSlice := @((Model.ListElement.ModelType as SequenceTypeGo).Name){}
-    @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters))
-    @:if err != nil {
-        @:return respSlice, err
-    @:}
-    @:if list.@(Model.ListElement.Name) != nil {
-        @:for _, item := range *list.@(Model.ListElement.Name) {
-            @:respSlice = append(respSlice, item)
-        @:}
-    @:}
-    @:for list.@(Model.NextLink) != nil {
+    @:resultChan := make(chan @((Model.ListElement.ModelType as SequenceTypeGo).GetElement), 1)
+    @:errChan := make(chan error, 1)
+    @:go func() {
+        @:defer func() {
+			@:close(resultChan)
+			@:close(errChan)
+		@:}()
         @:select {
-        @:case <- cancel:
-            @:return respSlice, nil
-        @:default:
-            if (!Model.NextAlreadyDefined)
-            {
-                @:list, err = client.@(Model.NextMethodName)(list)
-            }
-            else
-            {
-                @:list, err = client.@(Model.NextOperationName)(*list.@(Model.NextLink))
-            }
-            @:if err != nil {
-                @:return respSlice, err
-            @:}            
-            @:if list.@(Model.ListElement.Name) != nil {
-                @:for _, item := range *list.@(Model.ListElement.Name) {
-                    @:respSlice = append(respSlice, item)
+            @:case <- cancel:
+                @:return
+            @:default:
+                @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters(false)))
+                @:if err != nil {
+                    @:errChan <- err
+                    @:return
                 @:}
-            @:}
+                @:if list.@(Model.ListElement.Name) != nil {
+                    @:for _, item := range *list.@(Model.ListElement.Name) {
+                        @:resultChan <- item
+                    @:}
+                @:}
+                @:for list.@(Model.NextLink) != nil {
+                if (Model.NextAlreadyDefined)
+                {
+                    @:list, err = client.@(Model.NextOperationName)(@(Model.NextMethod.HelperInvocationParameters(true)))
+                }
+                else
+                {
+                    @:list, err = client.@(Model.NextMethodName)(list)
+                }
+                    @:if err != nil {
+                        @:errChan <- err
+                        @:return
+                    @:}            
+                    @:if list.@(Model.ListElement.Name) != nil {
+                        @:for _, item := range *list.@(Model.ListElement.Name) {
+                            @:resultChan <- item
+                        @:}
+                    @:}
+                @:}
         @:}
-    @:}
-    @:return respSlice, err
+    @:}()
+    @:return resultChan, errChan
 @:}
 }

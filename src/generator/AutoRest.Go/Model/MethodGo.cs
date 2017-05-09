@@ -103,9 +103,9 @@ namespace AutoRest.Go.Model
         {
             get
             {
-                var signature = new StringBuilder("(");
-                signature.Append((ListElement.ModelType as SequenceTypeGo).Name);
-                signature.Append(", error)");
+                var signature = new StringBuilder("(<-chan ");
+                signature.Append((ListElement.ModelType as SequenceTypeGo).GetElement);
+                signature.Append(", <-chan error)");
                 return signature.ToString();
             }
         }
@@ -228,19 +228,25 @@ namespace AutoRest.Go.Model
 
         public string ResponderMethodName => $"{Name}Responder";
 
-        public string HelperInvocationParameters
+        public string HelperInvocationParameters(bool complete)
         {
-            get
+            List<string> invocationParams = new List<string>();
+            foreach (ParameterGo p in LocalParameters)
             {
-                List<string> invocationParams = new List<string>();
-                LocalParameters
-                    .ForEach(p => invocationParams.Add(p.Name));
-                if (IsLongRunningOperation())
+                if (p.Name.EqualsIgnoreCase("nextlink") && complete)
                 {
-                    invocationParams.Add("cancel");
+                    invocationParams.Add(string.Format("*list.{0}", NextLink));
                 }
-                return string.Join(", ", invocationParams);
+                else
+                {
+                    invocationParams.Add(p.Name);
+                }
             }
+            if (IsLongRunningOperation())
+            {
+                invocationParams.Add("cancel");
+            }
+            return string.Join(", ", invocationParams);
         }
 
         /// <summary>
@@ -464,7 +470,7 @@ namespace AutoRest.Go.Model
         /// <returns></returns>
 
         public bool IsPageable => !string.IsNullOrEmpty(NextLink);
-        
+
         public bool IsNextMethod => Name.Value.EqualsIgnoreCase(NextOperationName);
 
         /// <summary>
@@ -482,7 +488,7 @@ namespace AutoRest.Go.Model
             return methods.Any(m => m.Name.Value.EqualsIgnoreCase(next));
         }
 
-        public string NextOperationName
+        public MethodGo NextMethod
         {
             get
             {
@@ -491,9 +497,20 @@ namespace AutoRest.Go.Model
                     var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
                     if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
                     {
-                        var method = CodeModel.Methods.First(m => m.SerializedName.EqualsIgnoreCase(pageableExtension.OperationName));
-                        return method.Name.Value;
+                        return (CodeModel.Methods.First(m => m.SerializedName.EqualsIgnoreCase(pageableExtension.OperationName)) as MethodGo);
                     }
+                }
+                return null;
+            }
+        }
+
+        public string NextOperationName
+        {
+            get
+            {
+                if (NextMethod != null)
+                {
+                    return NextMethod.Name.Value;
                 }
                 return null;
             }
