@@ -5,7 +5,7 @@ import { OperationAbortedException } from '../exception';
  *--------------------------------------------------------------------------------------------*/
 
 import { Descendants, Kind, CloneAst, YAMLMapping, newScalar, ParseNode } from "../ref/yaml";
-import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
+import { MergeYamls, IdentitySourceMapping, resolveRValue } from "../source-map/merging";
 import { Mapping } from "../ref/source-map";
 import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
 import { Parse as ParseLiterate } from "./literate";
@@ -264,7 +264,26 @@ async function ParseCodeBlocksInternal(config: ConfigurationView, hLiterate: Dat
 }
 
 export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolean {
-  const match = /\$\((.*)\)/.exec(rawFenceGuard);
+  // trim the language from the front first
+  let match = /^\S*\s*(.*)/.exec(rawFenceGuard);
+  let fence = match && match[1];
+  if (!fence) {
+    // no fence at all.
+    return true;
+  }
+
+  try {
+    const expressionFence = `${resolveRValue(fence, "", contextObject, null, 2)}`;
+    // is there unresolved values?  May be old-style, or not valid value yet.
+    if (expressionFence.indexOf("$(") == -1) {
+      return safeEval<boolean>(expressionFence);
+    }
+  } catch (E) {
+    // not a legal expression?
+  }
+
+  // fall back to original behavior, where the whole expression is in the $( ... )
+  match = /\$\((.*)\)/.exec(fence);
   const guardExpression = match && match[1];
   if (!guardExpression) {
     return true;
