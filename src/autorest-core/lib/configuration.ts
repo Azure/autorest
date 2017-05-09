@@ -240,6 +240,8 @@ export class ConfigurationView {
               const result = [...blameTree.BlameInputs()];
               if (result.length > 0) {
                 return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
+              } else {
+                break;
               }
             } catch (e) {
               if ('path' in posClone) {
