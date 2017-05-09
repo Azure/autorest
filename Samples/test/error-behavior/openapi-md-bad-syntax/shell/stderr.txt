@@ -7,4 +7,3 @@ ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entr
 ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
     - /Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md:65:18
 FATAL: swagger-document/loader - FAILED
-Error occurred. Exiting.
