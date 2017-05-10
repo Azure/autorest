@@ -10,6 +10,10 @@ namespace Swagger.Models
     using System.Linq;
 
     /// <summary>
+    /// &gt; Shorthand for `@.definitions.SearchServiceListResult` which equals
+    /// `$.definitions.SearchServiceListResult` since no super headings change
+    /// the current scope.
+    ///
     /// Response containing a list of Azure Search services for a given
     /// resource group.
     /// </summary>

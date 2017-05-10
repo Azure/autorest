@@ -10,22 +10,21 @@
 // this file should get 'required' by the boostrapper
 require("./lib/polyfill.min.js");
 
-import { Parse, Stringify } from './lib/ref/yaml';
-import { CreateObject, nodes } from './lib/ref/jsonpath';
+import { Parse, Stringify } from "./lib/ref/yaml";
+import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
 import { AutoRest } from "./lib/autorest-core";
-import { ShallowCopy } from "./lib/source-map/merging"
+import { ShallowCopy } from "./lib/source-map/merging";
 import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
-import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from './lib/ref/uri';
+import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
-import { Exception, OperationCanceledException } from './lib/exception';
-import { Console } from "./lib/console"
-import { exists } from "./lib/ref/async"
+import { Exception, OperationCanceledException } from "./lib/exception";
+import { Console } from "./lib/console";
 
 /**
  * Legacy AutoRest

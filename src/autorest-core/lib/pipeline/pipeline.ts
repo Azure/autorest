@@ -12,11 +12,11 @@ import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
 import { Channel } from "../message";
 import { MultiPromise } from "../multi-promise";
-import { GetFilename, ResolveUri } from "../ref/uri";
+import { ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
 import { GetAutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
-import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
+import { ComposeSwaggers, LoadLiterateSwaggers, LoadLiterateSwaggerOverrides } from "./swagger-loader";
 import { IFileSystem } from "../file-system";
 import { EmitArtifacts } from "./artifact-emitter";
 
@@ -42,6 +42,19 @@ function CreatePluginLoader(): PipelinePlugin {
     }
   };
 }
+function CreatePluginMdOverrideLoader(): PipelinePlugin {
+  return async (config, input, working, output) => {
+    let inputs = config.InputFileUris;
+    const swaggers = await LoadLiterateSwaggerOverrides(
+      config,
+      input,
+      inputs, working);
+    for (let i = 0; i < inputs.length; ++i) {
+      await (await output.Write(`./${i}/_` + encodeURIComponent(inputs[i]))).Forward(swaggers[i]);
+    }
+  };
+}
+
 function CreatePluginTransformer(): PipelinePlugin {
   return async (config, input, working, output) => {
     const documentIdResolver: (key: string) => string = key => {
@@ -57,13 +70,28 @@ function CreatePluginTransformer(): PipelinePlugin {
     }
   };
 }
+function CreatePluginTransformerImmediate(): PipelinePlugin {
+  return async (config, input, working, output) => {
+    const documentIdResolver: (key: string) => string = key => {
+      const parts = key.split("/_");
+      return parts.length === 1 ? parts[0] : decodeURIComponent(parts[parts.length - 1]);
+    };
+    const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
+    const scopes = await Promise.all(files.slice(0, files.length - 1).map(f => input.ReadStrict(f)));
+    const manipulator = new Manipulator(config.GetPluginViewImmediate(...scopes.map(s => s.ReadObject<any>())));
+    const file = files[files.length - 1];
+    const fileIn = await input.ReadStrict(file);
+    const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
+    await (await output.Write("swagger-document")).Forward(fileOut);
+  };
+}
 function CreatePluginComposer(): PipelinePlugin {
   return async (config, input, working, output) => {
     const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
     const swagger = config.GetEntry("override-info") || swaggers.length !== 1
       ? await ComposeSwaggers(config, config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
       : swaggers[0];
-    await (await output.Write("swagger-document")).Forward(swagger);
+    await (await output.Write("composed")).Forward(swagger);
   };
 }
 function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string, fullKeys: boolean = true): PipelinePlugin {
@@ -112,13 +140,6 @@ function CreateArtifactEmitter(inputOverride?: () => Promise<DataStoreViewReadon
       inputOverride ? await inputOverride() : input,
       config.GetEntry("is-object" as any));
   };
-}
-
-function* WithIndex<T>(collection: Iterable<T>): Iterable<[T, number]> {
-  let idx = 0;
-  for (const x of collection) {
-    yield [x, idx++];
-  }
 }
 
 function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }, configs: { [jsonPath: string]: ConfigurationView } } {
@@ -225,6 +246,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
 
   const pipeline = BuildPipeline(configView);
+  const fsInput = configView.DataStore.GetReadThroughScopeFileSystem(fileSystem);
 
   // externals:
   const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
@@ -233,7 +255,9 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   // TODO: enhance with custom declared plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     "loader": CreatePluginLoader(),
+    "md-override-loader": CreatePluginMdOverrideLoader(),
     "transform": CreatePluginTransformer(),
+    "transform-immediate": CreatePluginTransformerImmediate(),
     "compose": CreatePluginComposer(),
     "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
     "semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),
@@ -268,7 +292,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       // get input
       let inputScopes: DataStoreViewReadonly[] = await Promise.all(node.inputs.map(getTask));
       if (inputScopes.length === 0) {
-        inputScopes = [configView.DataStore.GetReadThroughScopeFileSystem(fileSystem)];
+        inputScopes = [fsInput];
       }
       if (inputScopes.length > 1) {
         const handles: DataHandleRead[] = [];
@@ -290,7 +314,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
         throw new Error(`Plugin '${pluginName}' not found.`);
       }
       try {
-        config.Message({ Channel: Channel.Debug, Text: `${pluginName} - START` });
+        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START` });
 
         const scope = config.DataStore.CreateScope(nodeName);
         const scopeWorking = scope.CreateScope("working");
@@ -300,10 +324,10 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
           scopeWorking,
           scopeOutput);
 
-        config.Message({ Channel: Channel.Debug, Text: `${pluginName} - END` });
+        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END` });
         return scopeOutput;
       } catch (e) {
-        config.Message({ Channel: Channel.Fatal, Text: `${pluginName} - FAILED` });
+        config.Message({ Channel: Channel.Fatal, Text: `${nodeName} - FAILED` });
         throw e;
       }
     };

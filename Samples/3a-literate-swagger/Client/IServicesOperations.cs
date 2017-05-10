@@ -30,7 +30,7 @@ namespace Swagger
         /// The name of the Search service to operate on.
         /// </param>
         /// <param name='parameters'>
-        /// #parameter-parameters
+        /// The properties to set or update on the Search service.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.

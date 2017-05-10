@@ -11,7 +11,7 @@ import { Message, Channel } from "../lib/message";
 
 @suite class Directive {
 
-  @test @timeout(60000) async "suppression"() {
+  @test @timeout(0) async "suppression"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
     autoRest.Message.Subscribe((_, m) => m.Channel === Channel.Fatal ? console.error(m.Text) : "");
 
@@ -33,7 +33,7 @@ import { Message, Channel } from "../lib/message";
     // muted run
     await autoRest.ResetConfiguration();
     await autoRest.AddConfiguration({ "azure-validator": true });
-    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing", "PutRequestResponseValidation"] } });
+    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "M4000", "PutRequestResponseValidation"] } });
     {
       const messages: Message[] = [];
       const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
@@ -73,7 +73,7 @@ import { Message, Channel } from "../lib/message";
     // not all types
     await pickyRun({ suppress: ["AvoidNestedProperties"] });
     // certain paths
-    await pickyRun({ suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"], where: "$..properties" });
+    await pickyRun({ suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "M4000"], where: "$..properties" });
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties" });
     // multiple directives
     await pickyRun([{ suppress: ["AvoidNestedProperties"], where: "$..properties.properties" }]);
@@ -82,7 +82,7 @@ import { Message, Channel } from "../lib/message";
       { suppress: ["ModelTypeIncomplete"] }
     ]);
     await pickyRun([
-      { suppress: ["DescriptionMissing"] },
+      { suppress: ["M4000"] },
       { suppress: ["ModelTypeIncomplete"] }
     ]);
     // document
