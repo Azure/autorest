@@ -12,7 +12,7 @@ import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
 import { Channel } from "../message";
 import { MultiPromise } from "../multi-promise";
-import { GetFilename, ResolveUri } from "../ref/uri";
+import { ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
 import { GetAutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
@@ -140,13 +140,6 @@ function CreateArtifactEmitter(inputOverride?: () => Promise<DataStoreViewReadon
       inputOverride ? await inputOverride() : input,
       config.GetEntry("is-object" as any));
   };
-}
-
-function* WithIndex<T>(collection: Iterable<T>): Iterable<[T, number]> {
-  let idx = 0;
-  for (const x of collection) {
-    yield [x, idx++];
-  }
 }
 
 function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }, configs: { [jsonPath: string]: ConfigurationView } } {
