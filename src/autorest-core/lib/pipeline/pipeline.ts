@@ -314,7 +314,9 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
         throw new Error(`Plugin '${pluginName}' not found.`);
       }
       try {
-        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START` });
+        if (nodeName.indexOf('validator') >= 0) {
+          config.Message({ Channel: Channel.Error, Text: `${nodeName} - START` });
+        }
 
         const scope = config.DataStore.CreateScope(nodeName);
         const scopeWorking = scope.CreateScope("working");
@@ -324,7 +326,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
           scopeWorking,
           scopeOutput);
 
-        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END` });
+        config.Message({ Channel: Channel.Error, Text: `${nodeName} - END` });
         return scopeOutput;
       } catch (e) {
         config.Message({ Channel: Channel.Fatal, Text: `${nodeName} - FAILED` });
