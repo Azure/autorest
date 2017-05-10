@@ -26,7 +26,7 @@ import { parse } from "../lib/ref/jsonpath";
       const blameTree = await view.DataStore.Blame(
         "mem:///compose/swagger.yaml",
         { path: parse("$.securityDefinitions.azure_auth.description") });
-      const blameInputs = [...blameTree.BlameInputs()];
+      const blameInputs = [...blameTree.BlameLeafs()];
       assert.equal(blameInputs.length, 1);
     }
 
@@ -35,7 +35,7 @@ import { parse } from "../lib/ref/jsonpath";
       const blameTree = await view.DataStore.Blame(
         "mem:///compose/swagger.yaml",
         { path: parse("$.definitions.SearchServiceListResult.description") });
-      const blameInputs = [...blameTree.BlameInputs()];
+      const blameInputs = [...blameTree.BlameLeafs()];
       assert.equal(blameInputs.length, 2);
     }
 

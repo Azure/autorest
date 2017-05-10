@@ -353,7 +353,7 @@ export class DataStore extends DataStoreView {
     const mappings: Mapping[] = [];
     for (const targetPosition of targetPositions) {
       const blameTree = this.Blame(absoluteUri, targetPosition);
-      const inputPositions = blameTree.BlameInputs();
+      const inputPositions = blameTree.BlameLeafs();
       for (const inputPosition of inputPositions) {
         mappings.push({
           name: inputPosition.name,

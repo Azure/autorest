@@ -1,3 +1,4 @@
+import { BlameTree } from './source-map/blaming';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -315,40 +316,36 @@ export class ConfigurationView {
       // update source locations to point to loaded Swagger
       if (m.Source) {
         const blameSources = m.Source.map(s => {
-          let posClone = Clone(s.Position);
           let blameTree: BlameTree | null = null;
+
           try {
             while (blameTree === null) {
               try {
-                blameTree = this.DataStore.Blame(s.document, posClone);
+                blameTree = this.DataStore.Blame(s.document, s.Position);
               } catch (e) {
-                if ("path" in posClone) {
-                  this.Message({ Channel: Channel.Warning, Text: `Could not find the exact path ${JSON.stringify(posClone.path)}` });
-                  if ((<string[]>posClone.path).length === 0) {
+                const path = s.Position.path as string[];
+                if (path) {
+                  this.Message({
+                    Channel: Channel.Warning,
+                    Text: `Could not find the exact path ${JSON.stringify(path)}`
+                  });
+                  if (path.length === 0) {
                     throw e;
                   }
-                  (<string[]>posClone.path).pop();
+                  path.pop();
                 } else {
                   throw e;
                 }
               }
             }
-            const result = [...blameTree.BlameInputs()];
-            if (result.length > 0) {
-              return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
-            }
           } catch (e) {
             // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
             //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
             //console.log(e);
+            return [s];
           }
 
-          // if position path is non empty set that as the position information
-          if ("path" in posClone && (<string[]>posClone.path).length > 0) {
-            s.Position = posClone;
-          }
-
-          return [s];
+          return blameTree.BlameLeafs().map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
         });
 
         //console.log("---");
