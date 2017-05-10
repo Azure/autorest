@@ -3,17 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BlameTree } from './source-map/blaming';
-import { Clone } from './ref/yaml';
+import { BlameTree } from "./source-map/blaming";
+import { Clone } from "./ref/yaml";
 import { OperationAbortedException } from "./exception";
 import { TryDecodeEnhancedPositionFromName } from "./source-map/source-map";
 import { Suppressor } from "./pipeline/suppression";
 import { matches, stringify } from "./ref/jsonpath";
 import { MergeOverwriteOrAppend, resolveRValue, ShallowCopy } from "./source-map/merging";
-import { DataHandleRead, DataStore } from './data-store/data-store';
+import { DataHandleRead, DataStore } from "./data-store/data-store";
 import { EventEmitter, IEvent } from "./events";
 import { CodeBlock, EvaluateGuard, ParseCodeBlocks } from "./parsing/literate-yaml";
-import { CreateFolderUri, EnsureIsFolderUri, ReadUri, ResolveUri } from './ref/uri';
+import { CreateFolderUri, EnsureIsFolderUri, ReadUri, ResolveUri } from "./ref/uri";
 import { From } from "./ref/linq";
 import { IFileSystem } from "./file-system";
 import * as Constants from "./constants";
@@ -322,12 +322,12 @@ export class ConfigurationView {
               try {
                 blameTree = this.DataStore.Blame(s.document, posClone);
               } catch (e) {
-                if ('path' in posClone) {
-                  this.Message({ Channel: Channel.Debug, Text: `Could not find the exact path ` + JSON.stringify(s.Position) });
-                  (<string[]>posClone.path).pop();
+                if ("path" in posClone) {
+                  this.Message({ Channel: Channel.Warning, Text: `Could not find the exact path ${JSON.stringify(posClone.path)}` });
                   if ((<string[]>posClone.path).length === 0) {
                     throw e;
                   }
+                  (<string[]>posClone.path).pop();
                 } else {
                   throw e;
                 }
@@ -344,16 +344,8 @@ export class ConfigurationView {
           }
 
           // if position path is non empty set that as the position information
-          if ('path' in posClone && (<string[]>posClone.path).length > 0) {
+          if ("path" in posClone && (<string[]>posClone.path).length > 0) {
             s.Position = posClone;
-          }
-
-          // try forward resolving (towards emitted files) if no real path
-          if (s.document.startsWith(DataStore.BaseUri) && s.document.split("/output/")[1]) {
-            s = {
-              document: ResolveUri(this.OutputFolderUri, s.document.split("/output/")[1]),
-              Position: s.Position
-            };
           }
 
           return [s];
