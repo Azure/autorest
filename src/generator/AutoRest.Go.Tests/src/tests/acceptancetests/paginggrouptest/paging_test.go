@@ -39,6 +39,7 @@ func (s *PagingGroupSuite) TestGetMultiplePages(c *chk.C) {
 	}
 	c.Assert(count, chk.Equals, 10)
 
+	// Get all!
 	resChan, errChan := pagingClient.GetMultiplePagesComplete(clientID, nil, nil, nil)
 	count = 0
 	for item := range resChan {
@@ -47,6 +48,18 @@ func (s *PagingGroupSuite) TestGetMultiplePages(c *chk.C) {
 	}
 	c.Assert(count, chk.Equals, 10)
 	c.Assert(<-errChan, chk.IsNil)
+
+	// Get some and then cancel...
+	cancel := make(chan struct{})
+	resChan, errChan = pagingClient.GetMultiplePagesComplete(clientID, nil, nil, cancel)
+	for i := 0; i < 3; i++ {
+		_, ok := <-resChan
+		c.Assert(ok, chk.Equals, true)
+	}
+	close(cancel)
+	c.Assert(<-errChan, chk.IsNil)
+	_, ok := <-resChan
+	c.Assert(ok, chk.Equals, false)
 }
 
 func (s *PagingGroupSuite) TestGetSinglePages(c *chk.C) {

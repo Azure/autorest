@@ -232,7 +232,12 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
         @:}
         @:if list.@(Model.ListElement.Name) != nil {
             @:for _, item := range *list.@(Model.ListElement.Name) {
-                @:resultChan <- item
+                @:select {
+                @:case <- cancel:
+                    @:return
+                @:default:
+                    @:resultChan <- item
+                @:}
             @:}
         @:}
          @:for list.@(Model.NextLink) != nil {
@@ -249,7 +254,12 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
                     @:}            
                     @:if list.@(Model.ListElement.Name) != nil {
                         @:for _, item := range *list.@(Model.ListElement.Name) {
-                            @:resultChan <- item
+                            @:select {
+                            @:case <- cancel:
+                                @:return
+                            @:default:
+                                @:resultChan <- item
+                            @:}
                         @:}
                     @:}
                 @:}
