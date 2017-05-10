@@ -47,7 +47,7 @@ export interface AutoRestConfigurationImpl {
   "model-validator"?: boolean;
   "semantic-validator"?: boolean;
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
-  "namespace"?: string; // TODO: the modeler cares :( because it is badly designed
+  "namespace"?: string;
   "license-header"?: string;
   "add-credentials"?: boolean;
   "package-name"?: string; // Ruby, Python, ...

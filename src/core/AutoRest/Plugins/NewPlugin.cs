@@ -46,7 +46,7 @@ public abstract class NewPlugin
     public Task<string> GetValue(string key) => GetValue<string>(key);
     public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId);
 
-    public void Message(Message message, object sourcemap) => _connection.Notify("Message", _sessionId, message, sourcemap);
+    public void Message(Message message) => _connection.Notify("Message", _sessionId, message);
     public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
 
     protected string _sessionId;
@@ -73,7 +73,7 @@ public abstract class NewPlugin
             {
                 Channel = "fatal",
                 Text = e.ToString()
-            }, null);
+            });
             return false;
         }
     }

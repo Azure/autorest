@@ -100,12 +100,20 @@ pipeline:
 
 ``` yaml
 pipeline:
+  # validator written in C#
   swagger-document/azure-validator:
     input: transform
     scope: azure-validator-composed
   swagger-document/individual/azure-validator:
     input: individual/transform
     scope: azure-validator-individual
+  # validator written in TypeScript
+  swagger-document/azure-openapi-validator:
+    input: transform
+    scope: azure-validator-composed # same scope as above as it plays side by side with "swagger-document/azure-validator"
+  swagger-document/individual/azure-openapi-validator:
+    input: transform
+    scope: azure-validator-individual # same scope as above as it plays side by side with "swagger-document/individual/azure-validator"
 ```
 
 Activate `azure-validator` when setting `azure-arm`!?
