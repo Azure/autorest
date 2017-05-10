@@ -1,10 +1,10 @@
-import { BlameTree } from './source-map/blaming';
-import { Clone } from './ref/yaml';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { BlameTree } from './source-map/blaming';
+import { Clone } from './ref/yaml';
 import { OperationAbortedException } from "./exception";
 import { TryDecodeEnhancedPositionFromName } from "./source-map/source-map";
 import { Supressor } from "./pipeline/supression";
