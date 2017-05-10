@@ -11,20 +11,11 @@ output-folder: generated
 
 ## Pipeline
 
-### Standard Plugins
-
-Schema:
-
-```
-plugins:
-  swagger-loader:
-    input-artifact?: string  # no input artifact means no dependencies, i.e. runnable immediately
-    output-artifact?: string # no output artifact could make perfect sense for CLIs, inspection, etc.
-```
+### External Plugins
 
 ``` yaml
 plugins:
-  swagger-loader: 42
+  fantasy-plugin: 42
 ```
 
 ### Graph
@@ -39,6 +30,16 @@ pipeline:
 
 #### Loading
 
+Markdown documentation overrides:
+
+``` yaml
+pipeline:
+  swagger-document-override/md-override-loader:
+    output-artifact: immediate-config
+```
+
+OpenAPI definitions:
+
 ``` yaml
 pipeline:
   swagger-document/loader:
@@ -50,8 +51,13 @@ pipeline:
   swagger-document/compose:
     input: individual/transform
     output-artifact: swagger-document
+  swagger-document/transform-immediate:
+    input:
+    - swagger-document-override/md-override-loader
+    - compose
+    output-artifact: swagger-document
   swagger-document/transform:
-    input: compose
+    input: transform-immediate
     output-artifact: swagger-document
   swagger-document/emitter:
     input: transform

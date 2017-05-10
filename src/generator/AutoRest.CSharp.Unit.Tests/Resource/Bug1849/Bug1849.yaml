@@ -29,6 +29,21 @@ paths:
         items:
           type: string
           format: guid
+      - name: param2req
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: integer
+          x-nullable: false
+      - name: param3req
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+          format: guid
+          x-nullable: false
       - name: param1x
         in: query
         required: true

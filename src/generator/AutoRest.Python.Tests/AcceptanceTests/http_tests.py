@@ -34,7 +34,8 @@ from requests.packages.urllib3 import HTTPConnectionPool, Retry
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.poolmanager import (
     PoolManager,
-    HTTPPoolKey,
+    PoolKey,
+    _default_key_normalizer
 )
 from datetime import date, datetime, timedelta
 import os
@@ -113,10 +114,17 @@ class TestAdapter(HTTPAdapter):
 
     def init_poolmanager(self, connections, maxsize, block=False):
         self.poolmanager = PoolManager(
-            num_pools=connections, maxsize=maxsize,
+            num_pools=connections,
+            maxsize=maxsize,
             block=block)
-        test_hosts = [HTTPPoolKey('http', 'localhost', 3000, None, None, None, block, None),
-                      HTTPPoolKey('http', 'localhost.', 3000, None, None, None, block, None)]
+        context = {
+            "scheme": "http",
+            "host": "localhost",
+            "port": 3000,
+            "block": block,
+            "maxsize": maxsize
+        }
+        test_hosts = [_default_key_normalizer(PoolKey, context)]
         for host in test_hosts:
             self.poolmanager.pools[host] = \
                 TestHTTPConnectionPool(host[1], port=host[2])

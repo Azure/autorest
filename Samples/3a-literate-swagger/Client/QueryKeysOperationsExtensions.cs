@@ -16,6 +16,9 @@ namespace Swagger
     public static partial class QueryKeysOperationsExtensions
     {
             /// <summary>
+            /// &gt; `#QueryKeys_List` searches for an object that has a string property
+            /// containing "QueryKeys_List".
+            ///
             /// Returns the list of query API keys for the given Azure Search service.
             /// <see href="https://msdn.microsoft.com/library/azure/dn832701.aspx" />
             /// </summary>
@@ -34,6 +37,9 @@ namespace Swagger
             }
 
             /// <summary>
+            /// &gt; `#QueryKeys_List` searches for an object that has a string property
+            /// containing "QueryKeys_List".
+            ///
             /// Returns the list of query API keys for the given Azure Search service.
             /// <see href="https://msdn.microsoft.com/library/azure/dn832701.aspx" />
             /// </summary>

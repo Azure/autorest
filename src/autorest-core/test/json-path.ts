@@ -42,6 +42,22 @@ import * as jp from "../lib/ref/jsonpath";
     assert.strictEqual(jp.paths({ a: { x: { $ref: "x" } }, b: { x: { $re: "x" } } }, "$..*[?(@.$ref)]").length, 1);
   }
 
+  @test async "querying features"() {
+    const obj = { a: 1, b: 2, c: 3, d: { a: [1, 2, 3], b: 2, c: 3 } };
+    assert.strictEqual(jp.nodes(obj, "$.*").length, 4);
+    assert.strictEqual(jp.nodes(obj, "$.*.*").length, 3);
+    assert.strictEqual(jp.nodes(obj, "$..*.*").length, 6);
+    assert.strictEqual(jp.nodes(obj, "$..*").length, 10);
+    assert.strictEqual(jp.nodes(obj, "$..[*]").length, 10);
+    assert.strictEqual(jp.nodes(obj, "$..['d']").length, 1);
+    assert.strictEqual(jp.nodes(obj, "$..d").length, 1);
+    assert.strictEqual(jp.nodes(obj, "$..[2]").length, 1);
+    assert.strictEqual(jp.nodes(obj, "$..[?(@.a[2] === 3)]").length, 1);
+    assert.strictEqual(jp.nodes(obj, "$..[?(@.a.reduce((x,y) => x+y, 0) === 6)]").length, 1);
+    //assert.strictEqual(jp.nodes(obj, "$..[(@.length - 1)]").length, 1);
+    //assert.strictEqual(jp.nodes(obj, "$..[(1 + 1)]").length, 1);
+  }
+
   private roundTrip(s: string): string { return jp.stringify(jp.parse(s)); }
 
   @test "round trip identity"() {

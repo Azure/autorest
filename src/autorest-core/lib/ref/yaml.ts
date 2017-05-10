@@ -113,32 +113,25 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
       onError("Syntax error: Encountered bare mapping.", yamlNode.startPosition);
       return (yamlNode as any).valueFunc = () => null;
     case Kind.MAP: {
-      const factories: ([string, () => any])[] = [];
       const yamlNodeMapping = yamlNode as YAMLMap;
-      for (const mapping of yamlNodeMapping.mappings) {
-        if (mapping.key.kind !== Kind.SCALAR) {
-          onError("Syntax error: Only scalar keys are allowed as mapping keys.", mapping.key.startPosition);
-        } else if (mapping.value === null) {
-          onError("Syntax error: No mapping value found.", mapping.key.endPosition);
-        } else {
-          factories.push([mapping.key.value, ParseNodeInternal(yamlRootNode, mapping.value, onError)]);
-        }
-      }
       return (yamlNode as any).valueFunc = () => {
         const result = NewEmptyObject();
-        for (const member of factories) {
-          result[member[0]] = member[1]();
+        for (const mapping of yamlNodeMapping.mappings) {
+          if (mapping.key.kind !== Kind.SCALAR) {
+            onError("Syntax error: Only scalar keys are allowed as mapping keys.", mapping.key.startPosition);
+          } else if (mapping.value === null) {
+            onError("Syntax error: No mapping value found.", mapping.key.endPosition);
+          } else {
+            result[mapping.key.value] = ParseNodeInternal(yamlRootNode, mapping.value, onError)();
+          }
         }
         return result;
       };
     }
     case Kind.SEQ: {
-      const factories: (() => any)[] = [];
       const yamlNodeSequence = yamlNode as YAMLSequence;
-      for (const item of yamlNodeSequence.items) {
-        factories.push(ParseNodeInternal(yamlRootNode, item, onError));
-      }
-      return (yamlNode as any).valueFunc = () => factories.map(f => f());
+      return (yamlNode as any).valueFunc = () =>
+        yamlNodeSequence.items.map(item => ParseNodeInternal(yamlRootNode, item, onError)());
     }
     case Kind.ANCHOR_REF: {
       const yamlNodeRef = yamlNode as YAMLAnchorReference;

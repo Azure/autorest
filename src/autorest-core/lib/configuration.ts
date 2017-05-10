@@ -3,15 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { BlameTree } from "./source-map/blaming";
+import { Clone } from "./ref/yaml";
 import { OperationAbortedException } from "./exception";
 import { TryDecodeEnhancedPositionFromName } from "./source-map/source-map";
-import { Supressor } from "./pipeline/supression";
+import { Suppressor } from "./pipeline/suppression";
 import { matches, stringify } from "./ref/jsonpath";
 import { MergeOverwriteOrAppend, resolveRValue, ShallowCopy } from "./source-map/merging";
-import { DataHandleRead, DataStore } from './data-store/data-store';
+import { DataHandleRead, DataStore } from "./data-store/data-store";
 import { EventEmitter, IEvent } from "./events";
 import { CodeBlock, EvaluateGuard, ParseCodeBlocks } from "./parsing/literate-yaml";
-import { CreateFolderUri, EnsureIsFolderUri, ReadUri, ResolveUri } from './ref/uri';
+import { CreateFolderUri, EnsureIsFolderUri, ReadUri, ResolveUri } from "./ref/uri";
 import { From } from "./ref/linq";
 import { IFileSystem } from "./file-system";
 import * as Constants from "./constants";
@@ -165,7 +167,7 @@ function ProxifyConfigurationView(cfgView: any) {
 export class ConfigurationView {
   [name: string]: any;
 
-  private suppressor: Supressor;
+  private suppressor: Suppressor;
 
   /* @internal */ constructor(
     /* @internal */public messageEmitter: MessageEmitter,
@@ -210,7 +212,7 @@ export class ConfigurationView {
       this.config = this.rawConfig;
     }
 
-    this.suppressor = new Supressor(this);
+    this.suppressor = new Suppressor(this);
     this.Message({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
   }
 
@@ -293,9 +295,13 @@ export class ConfigurationView {
   public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
     for (const section of ValuesOf<any>((this.config as any)[pluginName])) {
       if (section) {
-        yield new ConfigurationView(this.messageEmitter, this.configFileFolderUri, section === true ? {} : section, this.config).Indexer;
+        yield this.GetPluginViewImmediate(section === true ? {} : section);
       }
     }
+  }
+
+  public GetPluginViewImmediate(...scope: any[]): ConfigurationView {
+    return new ConfigurationView(this.messageEmitter, this.configFileFolderUri, ...scope, this.config).Indexer;
   }
 
   // message pipeline (source map resolution, filter, ...)
@@ -312,27 +318,36 @@ export class ConfigurationView {
       // update source locations to point to loaded Swagger
       if (m.Source) {
         const blameSources = m.Source.map(s => {
+          let blameTree: BlameTree | null = null;
+
           try {
-            const blameTree = this.DataStore.Blame(s.document, s.Position);
-            const result = [...blameTree.BlameInputs()];
-            if (result.length > 0) {
-              return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
+            while (blameTree === null) {
+              try {
+                blameTree = this.DataStore.Blame(s.document, s.Position);
+              } catch (e) {
+                const path = s.Position.path as string[];
+                if (path) {
+                  this.Message({
+                    Channel: Channel.Warning,
+                    Text: `Could not find the exact path ${JSON.stringify(path)}`
+                  });
+                  if (path.length === 0) {
+                    throw e;
+                  }
+                  path.pop();
+                } else {
+                  throw e;
+                }
+              }
             }
           } catch (e) {
             // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
             //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
             //console.log(e);
+            return [s];
           }
 
-          // try forward resolving (towards emitted files) if no real path
-          if (s.document.startsWith(DataStore.BaseUri) && s.document.split("/output/")[1]) {
-            s = {
-              document: ResolveUri(this.OutputFolderUri, s.document.split("/output/")[1]),
-              Position: s.Position
-            };
-          }
-
-          return [s];
+          return blameTree.BlameLeafs().map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
         });
 
         //console.log("---");

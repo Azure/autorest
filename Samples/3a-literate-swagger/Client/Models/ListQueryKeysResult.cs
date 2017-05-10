@@ -12,9 +12,6 @@ namespace Swagger.Models
     /// <summary>
     /// Response containing the query API keys for a given Azure Search
     /// service.
-    ///
-    /// ##### Examples
-    /// I am content under a subheading
     /// </summary>
     public partial class ListQueryKeysResult
     {
@@ -29,8 +26,9 @@ namespace Swagger.Models
         /// <summary>
         /// Initializes a new instance of the ListQueryKeysResult class.
         /// </summary>
-        /// <param name="value">The query keys for the Azure Search
-        /// service.</param>
+        /// <param name="value">&gt; Again, shorthand for `@.properties.value`
+        ///
+        /// The query keys for the Azure Search service.</param>
         public ListQueryKeysResult(IList<QueryKey> value = default(IList<QueryKey>))
         {
             Value = value;
@@ -43,7 +41,9 @@ namespace Swagger.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets the query keys for the Azure Search service.
+        /// Gets &amp;gt; Again, shorthand for `@.properties.value`
+        ///
+        /// The query keys for the Azure Search service.
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public IList<QueryKey> Value { get; private set; }
