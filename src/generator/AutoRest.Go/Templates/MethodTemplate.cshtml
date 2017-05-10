@@ -217,28 +217,25 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
 @:@EmptyLine
 @:// @(Model.ListCompleteMethodName) gets all elements from the list without paging.
 @:func (client @(Model.Owner)) @(Model.ListCompleteMethodName) @(Model.MethodParametersSignatureComplete) @(Model.MethodReturnSignatureComplete) {
-    @:resultChan := make(chan @((Model.ListElement.ModelType as SequenceTypeGo).GetElement), 1)
+    @:resultChan := make(chan @((Model.ListElement.ModelType as SequenceTypeGo).GetElement))
     @:errChan := make(chan error, 1)
     @:go func() {
+        @:var err error
         @:defer func() {
+            @:errChan <- err
 			@:close(resultChan)
 			@:close(errChan)
 		@:}()
-        @:select {
-            @:case <- cancel:
-                @:return
-            @:default:
-                @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters(false)))
-                @:if err != nil {
-                    @:errChan <- err
-                    @:return
-                @:}
-                @:if list.@(Model.ListElement.Name) != nil {
-                    @:for _, item := range *list.@(Model.ListElement.Name) {
-                        @:resultChan <- item
-                    @:}
-                @:}
-                @:for list.@(Model.NextLink) != nil {
+        @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters(false)))
+        @:if err != nil {
+            @:return
+        @:}
+        @:if list.@(Model.ListElement.Name) != nil {
+            @:for _, item := range *list.@(Model.ListElement.Name) {
+                @:resultChan <- item
+            @:}
+        @:}
+         @:for list.@(Model.NextLink) != nil {
                 if (Model.NextAlreadyDefined)
                 {
                     @:list, err = client.@(Model.NextOperationName)(@(Model.NextMethod.HelperInvocationParameters(true)))
@@ -248,7 +245,6 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
                     @:list, err = client.@(Model.NextMethodName)(list)
                 }
                     @:if err != nil {
-                        @:errChan <- err
                         @:return
                     @:}            
                     @:if list.@(Model.ListElement.Name) != nil {
@@ -257,7 +253,6 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
                         @:}
                     @:}
                 @:}
-        @:}
     @:}()
     @:return resultChan, errChan
 @:}
