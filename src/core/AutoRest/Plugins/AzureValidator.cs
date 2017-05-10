@@ -84,7 +84,7 @@ public class AzureValidator : NewPlugin
             var metadata = new ServiceDefinitionMetadata
             {
                 ServiceDefinitionDocumentType = (ServiceDefinitionDocumentType)Enum.Parse(typeof(ServiceDefinitionDocumentType), (await GetValue("openapi-type"))?.ToString() ?? ServiceDefinitionDocumentType.ARM.ToString(), true),
-                MergeState = await GetValue<string>("merge-state") == "composed" ? ServiceDefinitionDocumentState.Individual : ServiceDefinitionDocumentState.Composite
+                MergeState = await GetValue<string>("merge-state") == "individual" ? ServiceDefinitionDocumentState.Individual : ServiceDefinitionDocumentState.Composite
             };
 
             foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(file, UriKind.RelativeOrAbsolute), serviceDefinition, metadata))

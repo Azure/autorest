@@ -15,62 +15,14 @@ ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-ex
     - /Samples/3a-literate-swagger/swagger.md:181:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete.operationId)
 ERROR (XmsExamplesProvidedValidation/M2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_List'
     - /Samples/3a-literate-swagger/swagger.md:210:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get.operationId)
-WARNING (OperationDescriptionRequired/M4000/SDKViolation): Operation 'QueryKeys_List' lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:52:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys"].get)
-WARNING (ParameterDescriptionRequired/M4000/SDKViolation): 'parameters' parameter lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:148:8 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put.parameters[2])
-WARNING (OperationDescriptionRequired/M4000/SDKViolation): Operation 'Services_CreateOrUpdate' lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
-WARNING (OperationDescriptionRequired/M4000/SDKViolation): Operation 'Services_Delete' lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:178:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete)
-WARNING (OperationDescriptionRequired/M4000/SDKViolation): Operation 'Services_List' lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:207:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get)
 ERROR (ResourceModelValidation/M2020/RPCViolation): Model definition 'SearchServiceResource' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
     - /Samples/3a-literate-swagger/swagger.md:283:2 ($.definitions.SearchServiceResource)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'ListQueryKeysResult' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:89:2 ($.definitions.ListQueryKeysResult)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'QueryKey' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:113:2 ($.definitions.QueryKey)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'SearchServiceProperties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:232:2 ($.definitions.SearchServiceProperties)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'SearchServiceCreateOrUpdateParameters' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:256:2 ($.definitions.SearchServiceCreateOrUpdateParameters)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'SearchServiceResource' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:283:2 ($.definitions.SearchServiceResource)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'SearchServiceListResult' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:320:2 ($.definitions.SearchServiceListResult)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'Error' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
     - /Samples/3a-literate-swagger/swagger.md:391:2 ($.definitions.Error)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'ErrorDetails' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:41:4 ($.definitions.ErrorDetails)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'value' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:91:6 ($.definitions.ListQueryKeysResult.properties.value)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'name' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:115:6 ($.definitions.QueryKey.properties.name)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'key' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:118:6 ($.definitions.QueryKey.properties.key)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'replicaCount' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:234:6 ($.definitions.SearchServiceProperties.properties.replicaCount)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'partitionCount' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:239:6 ($.definitions.SearchServiceProperties.properties.partitionCount)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'location' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:258:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.location)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'tags' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:260:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.tags)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'properties' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:264:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.properties)
 WARNING (AvoidNestedProperties/S2001/SDKViolation): Consider using x-ms-client-flatten to provide a better end user experience
     - /Samples/3a-literate-swagger/swagger.md:264:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.properties)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'id' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:285:6 ($.definitions.SearchServiceResource.properties.id)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'name' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:288:6 ($.definitions.SearchServiceResource.properties.name)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'location' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:292:6 ($.definitions.SearchServiceResource.properties.location)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'tags' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:294:6 ($.definitions.SearchServiceResource.properties.tags)
-WARNING (DescriptionMissing/M4000/SDKViolation): 'value' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:322:6 ($.definitions.SearchServiceListResult.properties.value)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'code' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
     - /Samples/3a-literate-swagger/swagger.md:394:6 ($.definitions.Error.properties.code)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'message' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
@@ -83,11 +35,3 @@ WARNING (DescriptionMissing/M4000/SDKViolation): 'target' model/property lacks '
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)
 WARNING (DescriptionMissing/M4000/SDKViolation): 'message' model/property lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)
-WARNING (ParameterDescriptionRequired/M4000/SDKViolation): 'subscriptionId' parameter lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:340:2 ($.parameters.SubscriptionId)
-WARNING (ParameterDescriptionRequired/M4000/SDKViolation): 'api-version' parameter lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:352:2 ($.parameters.ApiVersion)
-WARNING (ParameterDescriptionRequired/M4000/SDKViolation): 'resourceGroupName' parameter lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:364:2 ($.parameters.ResourceGroupName)
-WARNING (ParameterDescriptionRequired/M4000/SDKViolation): 'serviceName' parameter lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:377:2 ($.parameters.SearchServiceName)
