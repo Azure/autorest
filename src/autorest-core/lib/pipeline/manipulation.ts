@@ -43,7 +43,12 @@ export class Manipulator {
           // transform
           for (const t of trans.transform) {
             const target = await scope.Write(`transform_${++this.ctr}.yaml`);
-            const result = await ManipulateObject(data, target, w, (doc, obj, path) => safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path }));
+            const result = await ManipulateObject(data, target, w,
+              (doc, obj, path) => safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path })/*,
+              {
+                reason: trans.reason,
+                transformerSourceHandle: // TODO
+              }*/);
             if (!result.anyHit) {
               // this.config.Message({
               //   Channel: Channel.Warning,
@@ -56,7 +61,11 @@ export class Manipulator {
           // set
           for (const s of trans.set) {
             const target = await scope.Write(`set_${++this.ctr}.yaml`);
-            const result = await ManipulateObject(data, target, w, obj => s);
+            const result = await ManipulateObject(data, target, w, obj => s/*,
+              {
+                reason: trans.reason,
+                transformerSourceHandle: // TODO
+              }*/);
             if (!result.anyHit) {
               // this.config.Message({
               //   Channel: Channel.Warning,
