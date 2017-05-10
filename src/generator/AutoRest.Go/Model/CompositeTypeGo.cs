@@ -16,8 +16,8 @@ namespace AutoRest.Go.Model
     public class CompositeTypeGo : CompositeType
     {
         private bool _wrapper;
+        
         // True if the type is returned by a method
-
         public bool IsResponseType;
 
         // Name of the field containing the URL used to retrieve the next result set

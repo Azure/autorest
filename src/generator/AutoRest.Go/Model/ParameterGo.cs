@@ -97,18 +97,18 @@ namespace AutoRest.Go.Model
                 : Name.Value;
 
             var format = IsRequired || ModelType.CanBeEmpty()
-                                    ? "{0}"
-                                    : "*{0}";
+                                          ? "{0}"
+                                          : "*{0}";
 
             var s = CollectionFormat != CollectionFormat.None
-                            ? $"{format},\"{CollectionFormat.GetSeparator()}\""
-                            : $"{format}";
+                                  ? $"{format},\"{CollectionFormat.GetSeparator()}\""
+                                  : $"{format}";
 
             return string.Format(
                 RequiresUrlEncoding()
                     ? $"autorest.Encode(\"{Location.ToString().ToLower()}\",{s})"
                     : $"{s}",
-                        value);
+                value);
         }
     }
 
@@ -136,7 +136,7 @@ namespace AutoRest.Go.Model
                     .Where(p => p.IsRequired)
                     .OrderBy(p => p.SerializedName.ToString())
                     .ForEach(p => indented.AppendLine("\"{0}\": {1},", p.NameForMap(), p.ValueForMap()));
-                    builder.Append(indented);
+                builder.Append(indented);
             }
             builder.AppendLine("}");
             return builder.ToString();
