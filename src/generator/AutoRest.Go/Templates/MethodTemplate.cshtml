@@ -220,14 +220,13 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
     @:resultChan := make(chan @((Model.ListElement.ModelType as SequenceTypeGo).GetElement))
     @:errChan := make(chan error, 1)
     @:go func() {
-        @:var err error
         @:defer func() {
-            @:errChan <- err
 			@:close(resultChan)
 			@:close(errChan)
 		@:}()
         @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters(false)))
         @:if err != nil {
+            @:errChan <- err
             @:return
         @:}
         @:if list.@(Model.ListElement.Name) != nil {
@@ -250,6 +249,7 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
                     @:list, err = client.@(Model.NextMethodName)(list)
                 }
                     @:if err != nil {
+                        @:errChan <- err
                         @:return
                     @:}            
                     @:if list.@(Model.ListElement.Name) != nil {
