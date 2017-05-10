@@ -22,6 +22,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
+
         /// <summary>
         /// This rule passes if the parameters are not subscriptionId or api-version
         /// </summary>

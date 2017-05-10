@@ -115,9 +115,11 @@ azure-validator: true
 
 ``` yaml $(azure-validator)
 azure-validator-composed:
-  merge-stage: composed
+  merge-state: composed
+  openapi-type: arm
 azure-validator-individual:
-  merge-stage: individual
+  merge-state: individual
+  openapi-type: arm
 ```
 
 #### Generation
