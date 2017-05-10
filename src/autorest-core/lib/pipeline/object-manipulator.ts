@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IdentitySourceMapping } from "../source-map/merging";
-import { CloneAst, Descendants, StringifyAst, ToAst, YAMLNode } from '../ref/yaml';
+import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNode } from "../ref/yaml";
 import { ReplaceNode, ResolveRelativeNode } from "../parsing/yaml";
 import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
-import { IsPrefix, JsonPath, nodes, stringify } from "../ref/jsonpath";
+import { IsPrefix, JsonPath, nodes, paths, stringify } from "../ref/jsonpath";
 import { Mapping, SmartPosition } from "../ref/source-map";
 import { From } from "../ref/linq";
 
@@ -44,7 +44,7 @@ export async function ManipulateObject(
     if (ast === undefined) {
       throw new Error("Cannot remove root node.");
     }
-    const newObject = transformer(doc, hit.value, hit.path);
+    const newObject = transformer(doc, Clone(hit.value), hit.path);
     const newAst = newObject === undefined
       ? undefined
       : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
@@ -65,12 +65,19 @@ export async function ManipulateObject(
             };
           }));
       }
-      mapping.push({
-        name: `Original object at '${stringify(hit.path)}'${reasonSuffix}`,
-        source: src.key,
-        original: { path: hit.path },
-        generated: { path: hit.path }
-      });
+
+      // try to be smart and assume that nodes existing in both old and new AST have a relationship
+      mapping.push(
+        ...From(Descendants(newAst))
+          .Where(descendant => paths(doc, stringify(hit.path.concat(descendant.path))).length === 1)
+          .Select(descendant => {
+            return <Mapping>{
+              name: `Original object at '${stringify(hit.path)}'${reasonSuffix}`,
+              source: src.key,
+              original: { path: hit.path.concat(descendant.path) },
+              generated: { path: hit.path.concat(descendant.path) }
+            };
+          }));
     }
   }
 
