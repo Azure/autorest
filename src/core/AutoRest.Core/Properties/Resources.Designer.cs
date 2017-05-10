@@ -674,6 +674,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For the tracked resource &apos;{0}&apos;, the x-ms-pageable must be same for list by resource group and subscriptions operations..
+        /// </summary>
+        public static string XMSPagableListByRGAndSubscriptionsMismatch {
+            get {
+                return ResourceManager.GetString("XMSPagableListByRGAndSubscriptionsMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters..
         /// </summary>
         public static string XMSPathBaseNotInPaths {

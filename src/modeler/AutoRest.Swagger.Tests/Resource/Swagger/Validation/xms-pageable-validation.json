@@ -1,0 +1,207 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Azure Redis Cache Management API",
+    "description": "Some cool documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ListByResourceGroup",
+        "description": "Lists all Redis caches in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName"  :   "nextLink"  
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/Redis/": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_List",
+        "description": "Gets all Redis caches in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RedisListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisResource"
+          },
+          "description": "List of Redis cache instances."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link for next set of locations."
+        }
+      },
+      "description": "The response of list Redis operation."
+    },
+    "RedisResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisResourceProperties",
+          "description": "Redis cache properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "A single Redis item in List or Get Operation."
+    },
+    "RedisResourceProperties": {
+      "properties": {
+        "redisVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Redis version."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Redis instance provisioning status."
+        },
+        "hostName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Redis host name."
+        },
+        "port": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis non-SSL port."
+        },
+        "sslPort": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis SSL port."
+        }
+      },
+      "description": "Parameters describing a Redis instance."
+    },
+    "Resource": {
+      "description": "The Resource definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

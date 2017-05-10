@@ -6,19 +6,16 @@ using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
-using System.Text.RegularExpressions;
 using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
     public class TrackedResourceListBySubscription : TypedRule<Dictionary<string, Schema>>
     {
-        private static readonly Regex listBySidRegEx = new Regex(@".+_(List|ListBySubscriptionId|ListBySubscription|ListBySubscriptions)$", RegexOptions.IgnoreCase);
-
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M3027";
+        public override string Id => "M3028";
 
         /// <summary>
         /// Violation category of the Rule.
@@ -49,14 +46,11 @@ namespace AutoRest.Swagger.Validation
             // Retrieve the list of TrackedResources
             IEnumerable<string> parentTrackedResources = context.ParentTrackedResourceModels;
 
-            // Retrieve the list of getOperations
-            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", context.Root);
-
             foreach (string trackedResource in parentTrackedResources)
             {
-                bool listBySubscriptionsCheck = ValidationUtilities.ListByXCheck(getOperations, listBySidRegEx, trackedResource, definitions);
+                Operation operation = ValidationUtilities.GetListBySubscriptionOperation(trackedResource, definitions, context.Root);
 
-                if (!listBySubscriptionsCheck)
+                if (operation == null)
                 {
                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(trackedResource)), this, trackedResource);
                 }
