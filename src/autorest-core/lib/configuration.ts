@@ -3,6 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { BlameTree } from './source-map/blaming';
+import { Clone } from './ref/yaml';
 import { OperationAbortedException } from "./exception";
 import { TryDecodeEnhancedPositionFromName } from "./source-map/source-map";
 import { Supressor } from "./pipeline/supression";
@@ -309,8 +311,24 @@ export class ConfigurationView {
       // update source locations to point to loaded Swagger
       if (m.Source) {
         const blameSources = m.Source.map(s => {
+          let posClone = Clone(s.Position);
+          let blameTree: BlameTree | null = null;
           try {
-            const blameTree = this.DataStore.Blame(s.document, s.Position);
+            while (blameTree === null) {
+              try {
+                blameTree = this.DataStore.Blame(s.document, posClone);
+              } catch (e) {
+                if ('path' in posClone) {
+                  this.Message({ Channel: Channel.Debug, Text: `Could not find the exact path ` + JSON.stringify(s.Position) });
+                  (<string[]>posClone.path).pop();
+                  if ((<string[]>posClone.path).length === 0) {
+                    throw e;
+                  }
+                } else {
+                  throw e;
+                }
+              }
+            }
             const result = [...blameTree.BlameInputs()];
             if (result.length > 0) {
               return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
@@ -319,6 +337,11 @@ export class ConfigurationView {
             // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
             //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
             //console.log(e);
+          }
+
+          // if position path is non empty set that as the position information
+          if ('path' in posClone && (<string[]>posClone.path).length > 0) {
+            s.Position = posClone;
           }
 
           // try forward resolving (towards emitted files) if no real path

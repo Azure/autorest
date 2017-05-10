@@ -1,9 +1,10 @@
 // polyfills for language support
 require("../lib/polyfill.min.js");
 
+import { EnhancedPosition } from '../lib/ref/source-map';
 import { PumpMessagesToConsole } from "./test-utility";
 import { Artifact } from "../lib/artifact";
-import { Message } from "../lib/message";
+import { Channel, Message, SourceLocation } from '../lib/message';
 import { AutoRest } from "../lib/autorest-core";
 import { RealFileSystem } from "../lib/file-system";
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
@@ -36,6 +37,32 @@ import { parse } from "../lib/ref/jsonpath";
         { path: parse("$.definitions.SearchServiceListResult.description") });
       const blameInputs = [...blameTree.BlameInputs()];
       assert.equal(blameInputs.length, 2);
+    }
+
+    // path with existant node in path
+    {
+      let msg = {
+        Text: 'Phoney message to test', Channel: Channel.Warning, Source: [<SourceLocation>
+          {
+            document: "mem:///compose/swagger.yaml",
+            Position: <EnhancedPosition>{ path: parse('$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"]') }
+          }]
+      };
+      view.Message(msg);
+      assert.equal((<string[]>msg.Source[0].Position.path).length, 2);
+    }
+
+    // path node non existent
+    {
+      let msg = {
+        Text: 'Phoney message to test', Channel: Channel.Warning, Source: [<SourceLocation>
+          {
+            document: "mem:///compose/swagger.yaml",
+            Position: <EnhancedPosition>{ path: parse('$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].get') }
+          }]
+      };
+      view.Message(msg);
+      assert.equal((<string[]>msg.Source[0].Position.path).length, 2);
     }
   }
 
