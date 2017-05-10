@@ -43,12 +43,37 @@ export class Manipulator {
           // transform
           for (const t of trans.transform) {
             const target = await scope.Write(`transform_${++this.ctr}.yaml`);
-            data = (await ManipulateObject(data, target, w, (doc, obj, path) => safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path }))).result;
+            const result = await ManipulateObject(data, target, w,
+              (doc, obj, path) => safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path })/*,
+              {
+                reason: trans.reason,
+                transformerSourceHandle: // TODO
+              }*/);
+            if (!result.anyHit) {
+              // this.config.Message({
+              //   Channel: Channel.Warning,
+              //   Details: trans,
+              //   Text: `Transformation directive with 'where' clause '${w}' was not used.`
+              // });
+            }
+            data = result.result;
           }
           // set
           for (const s of trans.set) {
             const target = await scope.Write(`set_${++this.ctr}.yaml`);
-            data = (await ManipulateObject(data, target, w, obj => s)).result;
+            const result = await ManipulateObject(data, target, w, obj => s/*,
+              {
+                reason: trans.reason,
+                transformerSourceHandle: // TODO
+              }*/);
+            if (!result.anyHit) {
+              // this.config.Message({
+              //   Channel: Channel.Warning,
+              //   Details: trans,
+              //   Text: `Set directive with 'where' clause '${w}' was not used.`
+              // });
+            }
+            data = result.result;
           }
           // test
           for (const t of trans.test) {
@@ -70,6 +95,13 @@ export class Manipulator {
                 }
               }
             }
+            if (allHits.length === 0) {
+              // this.config.Message({
+              //   Channel: Channel.Warning,
+              //   Details: trans,
+              //   Text: `Test directive with 'where' clause '${w}' was not used.`
+              // });
+            }
           }
         }
       }
@@ -87,6 +119,4 @@ export class Manipulator {
     const trans2 = needsTransform ? await (await scope.Write(`trans_output?${data.key}`)).WriteData(result.ReadObject<string>()) : result;
     return trans2;
   }
-
-  // TODO: make method that'll warn about transforms that weren't used!
 }

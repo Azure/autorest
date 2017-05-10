@@ -3,14 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Artifact } from "../artifact";
 import { DirectiveView } from "../configuration";
-import { Message, SourceLocation } from "../message";
+import { Message } from "../message";
 import { ConfigurationView } from "../autorest-core";
-import { IsPrefix, JsonPath, paths, stringify, matches } from "../ref/jsonpath";
+import { JsonPath, matches } from "../ref/jsonpath";
 import { From } from "../ref/linq";
 
-export class Supressor {
+export class Suppressor {
   private suppressions: DirectiveView[];
 
   public constructor(private config: ConfigurationView) {

@@ -10,14 +10,11 @@ namespace Swagger
     using Newtonsoft.Json;
 
     /// <summary>
+    /// &gt; the above JSON query pushes this markdown section into node
+    /// `$.info.description` of the OpenAPI definition.
+    ///
     /// This client that can be used to manage Azure Search services and API
     /// keys.
-    ///
-    /// ASd
-    ///
-    /// - ASd
-    /// - qawe
-    ///
     /// </summary>
     public partial interface ISearchManagementClient : System.IDisposable
     {

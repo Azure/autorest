@@ -1,10 +1,10 @@
-import { EnhancedPosition, PositionEnhancements } from '../ref/source-map';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, ResolveAnchorRef, StringifyAst } from "../ref/yaml";
+import { EnhancedPosition } from "../ref/source-map";
+import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, ResolveAnchorRef } from "../ref/yaml";
 import { JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { IndexToPosition } from "./text-utility";
 import { DataHandleRead } from "../data-store/data-store";

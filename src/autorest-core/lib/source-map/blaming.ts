@@ -32,21 +32,20 @@ export class BlameTree {
     public readonly node: sourceMap.MappedPosition & { path?: JsonPath },
     public readonly blaming: BlameTree[]) { }
 
-  public BlameInputs(): sourceMap.MappedPosition[] {
+  public BlameLeafs(): sourceMap.MappedPosition[] {
     const result: sourceMap.MappedPosition[] = [];
 
     const todos: BlameTree[] = [this];
     let todo: BlameTree | undefined;
     while (todo = todos.pop()) {
       // report self
-      if (IsUri(todo.node.source) && !todo.node.source.startsWith(DataStore.BaseUri)) {
+      if (todo.blaming.length === 0) {
         result.push({
           column: todo.node.column,
           line: todo.node.line,
           name: todo.node.name,
           source: todo.node.source
         });
-        continue;
       }
       // recurse
       todos.push(...todo.blaming);

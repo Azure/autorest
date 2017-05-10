@@ -1,9 +1,27 @@
+import { safeEval } from './safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
 import * as jsonpath from "jsonpath";
+
+// patch in smart filter expressions
+const handlers = (jsonpath as any).handlers;
+handlers.register("subscript-descendant-filter_expression", function (component: any, partial: any, count: any) {
+  var src = component.expression.value.slice(1);
+
+  var passable = function (key: any, value: any) {
+    try {
+      return safeEval(src.replace(/\@/g, "$$$$"), { "$$": value });
+    } catch (e) {
+      return false;
+    }
+  }
+
+  return eval("this").traverse(partial, null, passable, count);
+});
+// patch end
 
 export type JsonPathComponent = jsonpath.PathComponent;
 export type JsonPath = JsonPathComponent[];

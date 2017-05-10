@@ -92,7 +92,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
                 {
                     foreach (var _item in arrayQuery)
                     {
-                        _queryParameters.Add(string.Format("arrayQuery={0}", System.Uri.EscapeDataString(_item?.ToString() ?? string.Empty)));
+                        _queryParameters.Add(string.Format("arrayQuery={0}", System.Uri.EscapeDataString("" + _item)));
                     }
                 }
             }
@@ -221,7 +221,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
                 {
                     foreach (var _item in arrayQuery)
                     {
-                        _queryParameters.Add(string.Format("arrayQuery={0}", System.Uri.EscapeDataString(_item?.ToString() ?? string.Empty)));
+                        _queryParameters.Add(string.Format("arrayQuery={0}", System.Uri.EscapeDataString("" + _item)));
                     }
                 }
             }
@@ -352,7 +352,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
                 {
                     foreach (var _item in arrayQuery)
                     {
-                        _queryParameters.Add(string.Format("arrayQuery={0}", System.Uri.EscapeDataString(_item?.ToString() ?? string.Empty)));
+                        _queryParameters.Add(string.Format("arrayQuery={0}", System.Uri.EscapeDataString("" + _item)));
                     }
                 }
             }

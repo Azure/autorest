@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "Search Management",
-    "description": "This client that can be used to manage Azure Search services and API keys.\n\nASd\n\n- ASd\n- qawe\n",
-    "version": "2015-02-28"
+    "version": "2015-02-28",
+    "description": "> the above JSON query pushes this markdown section into node `$.info.description` of the OpenAPI definition.\n\nThis client that can be used to manage Azure Search services and API keys."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -40,7 +40,6 @@
           "QueryKeys"
         ],
         "operationId": "QueryKeys_List",
-        "description": "Returns the list of query API keys for the given Azure Search service.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832701.aspx"
         },
@@ -49,7 +48,8 @@
             "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SearchServiceName"
+            "$ref": "#/parameters/SearchServiceName",
+            "description": "> Search is also performed relative to nodes discovered by parent headings.\n>\n> In this case, we're in the scope of the node identified by `#QueryKeys_List` which is the operation.\n>\n> Furthermore, `#SearchServiceName` is really shorthand for `@.#SearchServiceName` where `@` represents the current scope's node.\n> One could force searching the global scope with `$.#SearchServiceName`\n\nSome description."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -68,7 +68,8 @@
           "default": {
             "$ref": "#/responses/error"
           }
-        }
+        },
+        "description": "> `#QueryKeys_List` searches for an object that has a string property containing \"QueryKeys_List\".\n\nReturns the list of query API keys for the given Azure Search service."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}": {
@@ -77,7 +78,6 @@
           "Services"
         ],
         "operationId": "Services_CreateOrUpdate",
-        "description": "Creates or updates a Search service in the given resource group.\nIf the Search service already exists, all properties will be updated with the given values.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832687.aspx"
         },
@@ -95,7 +95,7 @@
             "schema": {
               "$ref": "#/definitions/SearchServiceCreateOrUpdateParameters"
             },
-            "description": "#parameter-parameters"
+            "description": "The properties to set or update on the Search service."
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -120,14 +120,14 @@
           "default": {
             "$ref": "#/responses/error"
           }
-        }
+        },
+        "description": "Creates or updates a Search service in the given resource group.\nIf the Search service already exists, all properties will be updated with the given values."
       },
       "delete": {
         "tags": [
           "Services"
         ],
         "operationId": "Services_Delete",
-        "description": "Deletes a Search service in the given resource group, along with its associated resources.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832692.aspx"
         },
@@ -158,7 +158,8 @@
           "default": {
             "$ref": "#/responses/error"
           }
-        }
+        },
+        "description": "Deletes a Search service in the given resource group, along with its associated resources."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices": {
@@ -167,7 +168,6 @@
           "Services"
         ],
         "operationId": "Services_List",
-        "description": "Returns a list of all Search services in the given resource group.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832688.aspx"
         },
@@ -192,7 +192,8 @@
           "default": {
             "$ref": "#/responses/error"
           }
-        }
+        },
+        "description": "Returns a list of all Search services in the given resource group."
       }
     }
   },
@@ -205,10 +206,10 @@
           "items": {
             "$ref": "#/definitions/QueryKey"
           },
-          "description": "The query keys for the Azure Search service."
+          "description": "> Again, shorthand for `@.properties.value`\n\nThe query keys for the Azure Search service."
         }
       },
-      "description": "Response containing the query API keys for a given Azure Search service.\n\n##### Examples\nI am content under a subheading "
+      "description": "Response containing the query API keys for a given Azure Search service."
     },
     "QueryKey": {
       "properties": {
@@ -301,7 +302,7 @@
           "description": "The Search services in the resource group."
         }
       },
-      "description": "Response containing a list of Azure Search services for a given resource group."
+      "description": "> Shorthand for `@.definitions.SearchServiceListResult` which equals `$.definitions.SearchServiceListResult` since no super headings change the current scope.\n\nResponse containing a list of Azure Search services for a given resource group."
     },
     "Error": {
       "type": "object",
