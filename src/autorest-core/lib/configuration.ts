@@ -339,7 +339,11 @@ export class ConfigurationView {
             //console.log(e);
           }
 
-          s.Position = posClone;
+          // if position path is non empty set that as the position information
+          if ('path' in posClone && (<string[]>posClone.path).length > 0) {
+            s.Position = posClone;
+          }
+
           // try forward resolving (towards emitted files) if no real path
           if (s.document.startsWith(DataStore.BaseUri) && s.document.split("/output/")[1]) {
             s = {
