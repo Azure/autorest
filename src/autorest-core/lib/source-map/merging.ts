@@ -148,43 +148,43 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
   return value;
 }
 
-export function MergeOverwriteOrAppend(a: any, b: any, concatListPathFilter: (path: JsonPath) => boolean = _ => false, path: JsonPath = []): any {
-  if (a === null || b === null) {
+export function MergeOverwriteOrAppend(higherPriority: any, lowerPriority: any, concatListPathFilter: (path: JsonPath) => boolean = _ => false, path: JsonPath = []): any {
+  if (higherPriority === null || lowerPriority === null) {
     return null; // TODO: overthink, we could use this to force mute something even if it's "concat" mode...
   }
 
   // scalars/arrays involved
-  if (typeof a !== "object" || a instanceof Array ||
-    typeof b !== "object" || b instanceof Array) {
-    if (!(a instanceof Array) && !(b instanceof Array) && !concatListPathFilter(path)) {
-      return a;
+  if (typeof higherPriority !== "object" || higherPriority instanceof Array ||
+    typeof lowerPriority !== "object" || lowerPriority instanceof Array) {
+    if (!(higherPriority instanceof Array) && !(lowerPriority instanceof Array) && !concatListPathFilter(path)) {
+      return higherPriority;
     }
-    return a instanceof Array
-      ? a.concat(b)
-      : [a].concat(b);
+    return higherPriority instanceof Array
+      ? higherPriority.concat(lowerPriority)
+      : [higherPriority].concat(lowerPriority);
   }
 
   // object nodes - iterate all members
   const result: any = {};
-  let keys = Object.getOwnPropertyNames(a).concat(Object.getOwnPropertyNames(b));
+  let keys = Object.getOwnPropertyNames(higherPriority).concat(Object.getOwnPropertyNames(lowerPriority));
   keys = keys.filter((v, i) => { const idx = keys.indexOf(v); return idx === -1 || idx >= i; }); // distinct
 
   for (const key of keys) {
     const subpath = path.concat(key);
 
     // forward if only present in one of the nodes
-    if (a[key] === undefined) {
-      result[key] = resolveRValue(b[key], key, a, b);
+    if (higherPriority[key] === undefined) {
+      result[key] = resolveRValue(lowerPriority[key], key, higherPriority, lowerPriority);
       continue;
     }
-    if (b[key] === undefined) {
-      result[key] = resolveRValue(a[key], key, null, a);
+    if (lowerPriority[key] === undefined) {
+      result[key] = resolveRValue(higherPriority[key], key, null, higherPriority);
       continue;
     }
 
     // try merge objects otherwise
-    const aMember = resolveRValue(a[key], key, b, a);
-    const bMember = resolveRValue(b[key], key, a, b);
+    const aMember = resolveRValue(higherPriority[key], key, lowerPriority, higherPriority);
+    const bMember = resolveRValue(lowerPriority[key], key, higherPriority, lowerPriority);
     result[key] = MergeOverwriteOrAppend(aMember, bMember, concatListPathFilter, subpath);
   }
   return result;

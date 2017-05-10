@@ -17,19 +17,20 @@ export class AutoRest extends EventEmitter {
   private _configurations = new Array<any>();
   private _view: ConfigurationView | undefined;
   public get view(): Promise<ConfigurationView> {
-    return (async () => {
-      if (!this._view) {
-        const messageEmitter = new MessageEmitter();
-
-        // subscribe to the events for the current configuration view
-        messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
-        messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
-
-        this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, ...this._configurations);
-      }
-      return this._view;
-    })();
+    return (this._view) ? Promise.resolve(this._view) : this.RegenerateView(true);
   }
+
+  public async RegenerateView(includeDefault: boolean = false): Promise<ConfigurationView> {
+    this.Invalidate();
+    const messageEmitter = new MessageEmitter();
+
+    // subscribe to the events for the current configuration view
+    messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
+    messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
+
+    return this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, includeDefault, ...this._configurations);
+  }
+
   /**
    *
    * @param rootUri The rootUri of the workspace. Is null if no workspace is open.

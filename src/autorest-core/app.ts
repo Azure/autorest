@@ -319,7 +319,8 @@ async function batch(api: AutoRest): Promise<number> {
   const outputs = new Map<string, string>();
   const schemas = new Array<string>();
 
-  const config = await api.view;
+  // ask for the view without 
+  const config = await api.RegenerateView();
   for (const batchConfig of config.GetNestedConfiguration("batch")) { // really, there should be only one
     for (const eachFile of batchConfig["input-file"]) {
       const path = ResolveUri(config.configFileFolderUri, eachFile);
@@ -360,16 +361,16 @@ async function batch(api: AutoRest): Promise<number> {
       instance.AddConfiguration(ShallowCopy(batchConfig, "input-file"));
       instance.AddConfiguration({ "input-file": eachFile });
 
-      const newView = await instance.view;
+      // const newView = await instance.view;
       // console.log(`Inputs: ${newView["input-file"]}`);
+      // newView.Dump()
 
       Console.Log(`Running autorest for *${path}* `);
 
       // ok, kick off the process for that one.
       await instance.Process().finish.then((result) => {
-        // console.log(`done: ${path}`);
-        exitcode++;
         if (result != true) {
+          exitcode++;
           throw result;
         }
       });

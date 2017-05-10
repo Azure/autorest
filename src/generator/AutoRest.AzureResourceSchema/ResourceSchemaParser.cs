@@ -468,6 +468,7 @@ namespace AutoRest.AzureResourceSchema
                     break;
 
                 case KnownPrimaryType.Double:
+                case KnownPrimaryType.Decimal:
                     result.JsonType = "number";
                     break;
 
@@ -475,6 +476,16 @@ namespace AutoRest.AzureResourceSchema
                     result.JsonType = "object";
                     break;
 
+                case KnownPrimaryType.ByteArray:
+                    result.JsonType = "array";
+                    result.Items =  new JsonSchema()
+                    {
+                        JsonType = "integer"
+                    };
+                    break;
+
+                case KnownPrimaryType.Base64Url:
+                case KnownPrimaryType.Date:
                 case KnownPrimaryType.DateTime:
                 case KnownPrimaryType.String:
                 case KnownPrimaryType.TimeSpan:
