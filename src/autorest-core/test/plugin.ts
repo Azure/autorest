@@ -57,7 +57,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       }
     });
     assert.strictEqual(await autoRest.Process().finish, true);
-    const expectedNumErrors = 7;
+    const expectedNumErrors = 2;
     if (errorMessages.length !== expectedNumErrors) {
       console.log(JSON.stringify(errorMessages, null, 2));
     }
