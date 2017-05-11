@@ -1,10 +1,10 @@
-import { JsonPath, stringify } from '../ref/jsonpath';
-import { safeEval } from '../ref/safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { JsonPath, stringify } from "../ref/jsonpath";
+import { safeEval } from "../ref/safe-eval";
 import { LazyPromise } from "../lazy";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { AutoRestPlugin } from "./plugin-endpoint";
@@ -22,7 +22,7 @@ import { EmitArtifacts } from "./artifact-emitter";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
-type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
+export type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
 interface PipelineNode {
   outputArtifact?: string;
   pluginName: string;
@@ -94,7 +94,7 @@ function CreatePluginComposer(): PipelinePlugin {
     await (await output.Write("composed")).Forward(swagger);
   };
 }
-function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string, fullKeys: boolean = true): PipelinePlugin {
+function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string): PipelinePlugin {
   return async (config, input, working, output) => {
     const plugin = await host;
     const pluginNames = await plugin.GetPluginNames(config.CancellationToken);
@@ -102,10 +102,7 @@ function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: str
       throw new Error(`Plugin ${pluginName} not found.`);
     }
 
-    // forward input scope (relative/absolute key mess...)
-    if (fullKeys) {
-      input = new QuickScope(await Promise.all((await input.Enum()).map(x => input.ReadStrict(x))));
-    }
+    input = new QuickScope(await Promise.all((await input.Enum()).map(x => input.ReadStrict(x))));
 
     const result = await plugin.Process(
       pluginName,
@@ -274,7 +271,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "java": CreatePluginExternal(autoRestDotNet, "java"),
     "azureresourceschema": CreatePluginExternal(autoRestDotNet, "azureresourceschema"),
     "jsonrpcclient": CreatePluginExternal(autoRestDotNet, "jsonrpcclient"),
-    "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier", false),
+    "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier"),
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),

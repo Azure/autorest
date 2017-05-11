@@ -1,18 +1,17 @@
-import { LazyPromise } from '../lazy';
-import { EventEmitter, IEvent } from '../events';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { MultiPromise, MultiPromiseUtility } from '../multi-promise';
+import { LazyPromise } from "../lazy";
+import { EventEmitter } from "../events";
 import { fork, ChildProcess } from "child_process";
-import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../ref/source-map";
+import { Mappings, RawSourceMap, SmartPosition } from "../ref/source-map";
 import { CancellationToken } from "../ref/cancallation";
 import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
-import { DataStoreViewReadonly, DataStoreView, DataHandleRead } from "../data-store/data-store";
+import { DataStoreViewReadonly, DataStoreView } from "../data-store/data-store";
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
-import { Channel, Message } from "../message";
+import { Message } from "../message";
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;

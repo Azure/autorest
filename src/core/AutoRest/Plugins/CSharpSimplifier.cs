@@ -1,16 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Threading.Tasks;
 using Microsoft.Perks.JsonRPC;
-using AutoRest.Core.Extensibility;
-using AutoRest.Core;
 using AutoRest.Core.Utilities;
+using System;
+using System.Text.RegularExpressions;
 
 public class CSharpSimplifier : NewPlugin
 {
-    private string codeGenerator;
+    static readonly Regex ExpectedUriPrefix = new Regex("^mem:///csharp/generate/([0-9]+/)?output/");
 
     public CSharpSimplifier(Connection connection, string sessionId) : base(connection, sessionId)
     { }
@@ -23,7 +22,11 @@ public class CSharpSimplifier : NewPlugin
         var files = await ListInputs();
         foreach (var file in files)
         {
-            fs.WriteAllText(file, await ReadFile(file));
+            if (!ExpectedUriPrefix.IsMatch(file))
+            {
+                throw new FormatException($"Unexpected file URI format: '{file}'");
+            }
+            fs.WriteAllText(ExpectedUriPrefix.Replace(file, ""), await ReadFile(file));
         }
 
         // simplify
