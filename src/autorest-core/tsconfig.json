@@ -8,7 +8,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "sourceMap": true,
-    "strictNullChecks": true,
+    "strict": true,
     "declaration": true,
     "stripInternal": true,
     "noEmitHelpers": true,

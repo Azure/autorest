@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { LazyPromise } from '../../lazy';
+import { LazyPromise } from "../../lazy";
 import { SpawnJsonRpcAutoRest } from "../../../interop/autorest-dotnet";
 import { AutoRestPlugin } from "../plugin-endpoint";
 
