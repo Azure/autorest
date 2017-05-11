@@ -14,7 +14,7 @@ import { parse } from "../lib/ref/jsonpath";
 
 @suite class Blaming {
 
-  @test @timeout(30000) async "end to end blaming with literate swagger"() {
+  @test @timeout(0) async "end to end blaming with literate swagger"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-composite.md"));
     // PumpMessagesToConsole(autoRest);
     const view = await autoRest.view;
@@ -39,7 +39,7 @@ import { parse } from "../lib/ref/jsonpath";
     }
   }
 
-  @test @timeout(60000) async "generate resolved swagger with source map"() {
+  @test @timeout(0) async "generate resolved swagger with source map"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/small-input/"));
     await autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const files: Artifact[] = [];
@@ -54,7 +54,7 @@ import { parse } from "../lib/ref/jsonpath";
     assert.ok(sourceMapObj.mappings.split(";").length > 1000);
   }
 
-  @test @timeout(60000) async "large swagger performance"() {
+  @test @timeout(0) async "large swagger performance"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/large-input/"));
     await autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const messages: Message[] = [];
