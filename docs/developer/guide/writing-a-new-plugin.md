@@ -5,7 +5,20 @@ Add an entry to the (configuration file)[https://github.com/Azure/autorest/blob/
 add the entry in the corresponding subsection (eg. validators should go in the ```Validators``` section)
 Please note that the ```transform``` step is pre-cursor to most plugins since it transforms the raw json into a usable model. 
 The order of execution of the plugins can also be dictated with this configuration file. The ```input``` node indicates the pre-task for the execution of current plugin. 
-The ```scope``` section indicates the input settings for the execution of given plugin.
+The ```scope``` section can be used to pass input settings. We can simply create a section named as the scope and pass all necessary arguments to the scope.
+Eg.:
+
+```
+swagger-document/individual/azure-validator:
+    input: individual/transform
+    scope: azure-validator-individual
+
+azure-validator-individual:
+  merge-state: individual
+  openapi-type: arm
+```
+
+In the example above, ```swagger-document/individual/azure-validator``` is the plugin to run, ```individual/transform``` is the step before this plugin is executed or the input which this plugin would process and ```azure-validator-individual``` is its scope. The inputs to this scope are ```merge-state``` and ```openapi-type``` which are defined in a different section.
 
 ## Add a plugin entry to the Configuration object
 Add an entry to the (Configuration object)[https://github.com/Azure/autorest/blob/master/src/autorest-core/lib/configuration.ts]. This entry determines the input flag that will enable/disable the plugin 
