@@ -7,6 +7,7 @@ This configuration applies to every run of AutoRest, but with less priority than
 ``` yaml
 azure-arm: false
 output-folder: generated
+openapi-type: arm
 ```
 
 ## Pipeline
@@ -116,10 +117,8 @@ azure-validator: true
 ``` yaml $(azure-validator)
 azure-validator-composed:
   merge-state: composed
-  openapi-type: arm
 azure-validator-individual:
   merge-state: individual
-  openapi-type: arm
 ```
 
 #### Generation

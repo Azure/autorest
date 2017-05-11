@@ -1,9 +1,9 @@
 # How to write a new plugin
 
 ## Register the plugin in default-configuration.md
-Add an entry to the (configuration file)[https://github.com/Azure/autorest/blob/master/src/autorest-core/resources/default-configuration.md] that will load the plugin. Depending on the type of the plugin,
+Add an entry to the [configuration file](https://github.com/Azure/autorest/blob/master/src/autorest-core/resources/default-configuration.md) that will load the plugin. Depending on the type of the plugin,
 add the entry in the corresponding subsection (eg. validators should go in the ```Validators``` section)
-Please note that the ```transform``` step is pre-cursor to most plugins since it transforms the raw json into a usable model. 
+
 The order of execution of the plugins can also be dictated with this configuration file. The ```input``` node indicates the pre-task for the execution of current plugin. 
 The ```scope``` section can be used to pass input settings. We can simply create a section named as the scope and pass all necessary arguments to the scope.
 Eg.:
@@ -15,12 +15,11 @@ swagger-document/individual/azure-validator:
 
 azure-validator-individual:
   merge-state: individual
-  openapi-type: arm
 ```
 
-In the example above, ```swagger-document/individual/azure-validator``` is the plugin to run, ```individual/transform``` is the step before this plugin is executed or the input which this plugin would process and ```azure-validator-individual``` is its scope. The inputs to this scope are ```merge-state``` and ```openapi-type``` which are defined in a different section.
+In the example above, ```swagger-document/individual/azure-validator``` is the plugin to run, ```individual/transform``` is the step before this plugin is executed or the input which this plugin would process and ```azure-validator-individual``` is its scope. The setting for this scope is ```merge-state``` which is defined in a different section.
 
 ## Add a plugin entry to the Configuration object
-Add an entry to the (Configuration object)[https://github.com/Azure/autorest/blob/master/src/autorest-core/lib/configuration.ts]. This entry determines the input flag that will enable/disable the plugin 
+Add an entry to the [configuration file](https://github.com/Azure/autorest/blob/master/src/autorest-core/lib/configuration.ts). This entry denotes name of the plugin. This name is then mapped to the actual process in ```configuration.ts```
 and the prcoess to be loaded when the plugin is requested. This process need to be a node or C# process and is completely independent of the AutoRest process, the inputs to be provided to this process 
 can also be specified in here.
