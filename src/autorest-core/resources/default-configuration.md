@@ -109,11 +109,13 @@ pipeline:
     scope: azure-validator-individual
   # validator written in TypeScript
   swagger-document/azure-openapi-validator:
-    input: transform
-    scope: azure-validator-composed # same scope as above as it plays side by side with "swagger-document/azure-validator"
+    input:
+      - transform
+      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes! replace section with the one below after migration complete
   swagger-document/individual/azure-openapi-validator:
-    input: transform
-    scope: azure-validator-individual # same scope as above as it plays side by side with "swagger-document/individual/azure-validator"
+    input: 
+      - transform
+      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes! replace section with the one below after migration complete
 ```
 
 Activate `azure-validator` when setting `azure-arm`!?

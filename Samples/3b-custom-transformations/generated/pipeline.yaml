@@ -59,7 +59,11 @@ swagger-document/azure-openapi-validator:
     - azure-validator
   inputs:
     - swagger-document/transform
+<<<<<<< HEAD
 >>>>>>> add azure-openapi-validator
+=======
+    - swagger-document/azure-validator
+>>>>>>> artificial order
 csharp/modeler:
   pluginName: modeler
   configScope:
