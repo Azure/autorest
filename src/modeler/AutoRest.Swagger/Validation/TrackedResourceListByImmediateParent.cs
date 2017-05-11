@@ -5,8 +5,6 @@ using System.Linq;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model;
-using AutoRest.Swagger.Model.Utilities;
-using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {

@@ -1,3 +1,10 @@
+import { Lines } from '../parsing/text-utility';
+import {
+  CommonmarkHeadingFollowingText,
+  CommonmarkHeadingText,
+  CommonmarkSubHeadings,
+  ParseCommonmark
+} from '../parsing/literate';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -194,6 +201,78 @@ async function StripExternalReferences(swagger: DataHandleRead, workingScope: Da
   return await result.WriteData(StringifyAst(ast), mapping, [swagger]);
 }
 
+export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
+  const commonmark = await inputScope.ReadStrict(inputFileUri);
+  const rawCommonmark = commonmark.ReadData();
+  const commonmarkNode = await ParseCommonmark(rawCommonmark);
+
+  const directives: any[] = [];
+  const mappings: Mappings = [];
+  let transformer: string[] = [];
+  const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => { return { node: x, query: "$" }; });
+
+  while (state.length > 0) {
+    const x = state.pop(); if (x === undefined) throw "unreachable";
+    // extract heading clue
+    // Syntax: <regular heading> (`<query>`)
+    // query syntax:
+    // - implicit prefix: "@." (omitted if starts with "$." or "@.")
+    // - "#<asd>" to obtain the object containing a string property containing "<asd>"
+    let clue: string | null = null;
+    let node = x.node.firstChild;
+    while (node) {
+      if (node.literal.endsWith("(")
+        && (((node.next || {}).next || {}).literal || "").startsWith(")")
+        && node.next.type === "code") {
+        clue = node.next.literal;
+        break;
+      }
+      node = node.next;
+    }
+
+    // process clue
+    if (clue) {
+      // be explicit about relativity
+      if (!clue.startsWith("@.") && !clue.startsWith("$.")) {
+        clue = "@." + clue;
+      }
+
+      // make absolute
+      if (clue.startsWith("@.")) {
+        clue = x.query + clue.slice(1);
+      }
+
+      // replace queries
+      const candidProperties = ["name", "operationId", "$ref"];
+      clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(' || ')})]`);
+
+      // console.log(clue);
+
+      // target field
+      const allowedTargetFields = ["description", "summary"];
+      const targetField = allowedTargetFields.filter(f => (clue || "").endsWith("." + f))[0] || "description";
+      const targetPath = clue.endsWith("." + targetField) ? clue.slice(0, clue.length - targetField.length - 1) : clue;
+
+      if (targetPath !== "$.parameters" && targetPath !== "$.definitions") {
+        // add directive
+        const headingTextRange = CommonmarkHeadingFollowingText(x.node);
+        const documentation = Lines(rawCommonmark).slice(headingTextRange[0] - 1, headingTextRange[1]).join("\n");
+        directives.push({
+          where: targetPath,
+          transform: `
+            if (typeof $.${targetField} === "string" || typeof $.${targetField} === "undefined")
+              $.${targetField} = ${JSON.stringify(documentation)};`
+        });
+      }
+    }
+
+    state.push(...[...CommonmarkSubHeadings(x.node)].map(y => { return { node: y, query: clue || x.query }; }));
+  }
+
+  const resultHandle = await workingScope.Write("override-directives");
+  return resultHandle.WriteObject({ directive: directives }, mappings, [commonmark]);
+}
+
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
   const data = await ParseLiterateYaml(config, await inputScope.ReadStrict(inputFileUri), workingScope.CreateScope("yaml"));
   const externalFiles: { [uri: string]: DataHandleRead } = {};
@@ -218,6 +297,17 @@ export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
     const pluginInput = await LoadLiterateSwagger(config, inputScope, inputFileUri, workingScope.CreateScope("swagger_" + i));
+    rawSwaggers.push(pluginInput);
+    i++;
+  }
+  return rawSwaggers;
+}
+export async function LoadLiterateSwaggerOverrides(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUris: string[], workingScope: DataStoreView): Promise<DataHandleRead[]> {
+  const rawSwaggers: DataHandleRead[] = [];
+  let i = 0;
+  for (const inputFileUri of inputFileUris) {
+    // read literate Swagger
+    const pluginInput = await LoadLiterateSwaggerOverride(config, inputScope, inputFileUri, workingScope.CreateScope("swagger_" + i));
     rawSwaggers.push(pluginInput);
     i++;
   }

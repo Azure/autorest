@@ -4,6 +4,10 @@ pipeline-emitter:
   configScope:
     - scope-pipeline-emitter
   inputs: []
+swagger-document-override/md-override-loader:
+  pluginName: md-override-loader
+  configScope: []
+  inputs: []
 swagger-document/loader:
   pluginName: loader
   configScope: []
@@ -18,11 +22,17 @@ swagger-document/compose:
   configScope: []
   inputs:
     - swagger-document/individual/transform
+swagger-document/transform-immediate:
+  pluginName: transform-immediate
+  configScope: []
+  inputs:
+    - swagger-document-override/md-override-loader
+    - swagger-document/compose
 swagger-document/transform:
   pluginName: transform
   configScope: []
   inputs:
-    - swagger-document/compose
+    - swagger-document/transform-immediate
 swagger-document/emitter:
   pluginName: emitter
   configScope:

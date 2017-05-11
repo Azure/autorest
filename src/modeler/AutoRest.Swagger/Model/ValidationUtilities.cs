@@ -14,12 +14,15 @@ namespace AutoRest.Swagger.Model.Utilities
 {
     public static class ValidationUtilities
     {
-        private static readonly string XmsPageable = "x-ms-pageable";
+        public static readonly string XmsPageable = "x-ms-pageable";
         private static readonly IEnumerable<string> BaseResourceModelNames = 
             new List<string>() { "trackedresource", "proxyresource", "resource" };
 
         private static readonly Regex ResourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
         private static readonly Regex PropNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,3}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,3}[a-z0-9\$-]+)*[A-Z]{1,3}$");
+
+        public static readonly Regex listBySidRegEx = new Regex(@".+_(List|ListBySubscriptionId|ListBySubscription|ListBySubscriptions)$", RegexOptions.IgnoreCase);
+        public static readonly Regex listByRgRegEx = new Regex(@".+_ListByResourceGroup$", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Populates a list of 'Resource' models found in the service definition
@@ -389,25 +392,6 @@ namespace AutoRest.Swagger.Model.Utilities
         }
 
         /// <summary>
-        /// Checks if there is an operation that matches the given regex
-        /// </summary>
-        /// <param name="getOperations"></param>
-        /// <param name="regEx"></param>
-        /// <param name="definitionKey"></param>
-        /// <param name="definitions"></param>
-        /// <returns></returns>
-        public static bool ListByXCheck(IEnumerable<Operation> getOperations, Regex regEx, string definitionKey, Dictionary<string, Schema> definitions)
-        {
-            return getOperations.Any(operation =>
-                       regEx.IsMatch(operation.OperationId) &&
-                       IsXmsPageableResponseOperation(operation) &&
-                       operation.Responses.Any(
-                           response => response.Key.Equals("200") &&
-                           IsArrayOf(response.Value.Schema?.Reference, definitionKey, definitions))
-                    );
-        }
-
-        /// <summary>
         /// Checks if the reference to match is an array response of the reference
         /// </summary>
         /// <param name="reference"></param>
@@ -599,5 +583,68 @@ namespace AutoRest.Swagger.Model.Utilities
 
         public static IEnumerable<string> GetParentTrackedResources(IEnumerable<string> trackedResourceModels, IEnumerable<KeyValuePair<string, string>> childTrackedResourceModels)
             => trackedResourceModels.Where(resourceModel => !childTrackedResourceModels.Any(childModel => childModel.Key.Equals(resourceModel)));
+
+        /// <summary>
+        /// For the provided resource model, it gets the operation which ends with ListByResourceGroup and returns the resource model.
+        /// </summary>
+        /// <param name="resourceModel"></param>
+        /// <param name="definitions"></param>
+        /// <param name="serviceDefinition"></param>
+        /// <returns>Gets the operation which ends with ListByResourceGroup and returns the resource model.</returns>
+        public static Operation GetListByResourceGroupOperation(string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition)
+        {
+            return GetListByXOperation(resourceModel, definitions, serviceDefinition, listByRgRegEx);
+        }
+
+        /// <summary>
+        /// For the provided resource model, it gets the operation which matches with ListBySubscription and returns the resource model.
+        /// </summary>
+        /// <param name="resourceModel"></param>
+        /// <param name="definitions"></param>
+        /// <param name="serviceDefinition"></param>
+        /// <returns>Gets the operation which matches with ListBySubscription and returns the resource model.</returns>
+        public static Operation GetListBySubscriptionOperation(string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition)
+        {
+            return GetListByXOperation(resourceModel, definitions, serviceDefinition, listBySidRegEx);
+        }
+
+        /// <summary>
+        /// For the provided resource model, it gets the operation which matches with specified regex and returns the resource model.
+        /// </summary>
+        /// <param name="resourceModel"></param>
+        /// <param name="definitions"></param>
+        /// <param name="serviceDefinition"></param>
+        /// <param name="regEx"></param>
+        /// <returns>Gets the operation which matches with specified regex and returns the resource model.</returns>
+        private static Operation GetListByXOperation(string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition, Regex regEx)
+        {
+            return GetListByOperation(regEx, resourceModel, definitions, serviceDefinition);
+        }
+
+        /// <summary>
+        /// For the provided resource model, it gets the operation which matches with specified regex and returns the resource model.
+        /// </summary>
+        /// <param name="regEx"></param>
+        /// <param name="resourceModel"></param>
+        /// <param name="definitions"></param>
+        /// <param name="serviceDefinition"></param>
+        /// <returns>Gets the operation which matches with specified regex and returns the resource model.</returns>
+        private static Operation GetListByOperation(Regex regEx, string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition)
+        {
+            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", serviceDefinition);
+
+            IEnumerable<Operation> operations = getOperations.Where(operation => regEx.IsMatch(operation.OperationId) &&
+                    IsXmsPageableResponseOperation(operation) &&
+                    operation.Responses.Any(
+                           response => response.Key.Equals("200") &&
+                           IsArrayOf(response.Value.Schema?.Reference, resourceModel, definitions)));
+
+            if (operations != null && operations.Count() != 0)
+            {
+                return operations.First();
+            }
+
+            return null;
+        }
     }
 }

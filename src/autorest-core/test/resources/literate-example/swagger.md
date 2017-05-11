@@ -1,18 +1,22 @@
 ﻿# Search Management
 
-## General
+## General (`$.info`, `description`)
+
+> the above JSON query pushes this markdown section into node `$.info.description` of the OpenAPI definition.
+> Furthermore, it "enters" scope `$.info`, meaning that all annotations on subheadings will have `@` point to that node (see below for examples).
+> 
+> The second part (`description`) can be omitted, but is useful for specifying other fields like `summary`.
+>
+> To set a description without entering a scope, one could have used (`$`, `info.description`)
+
 This client that can be used to manage Azure Search services and API keys.
-
-ASd
-
-- ASd
-- qawe
 
 ```yaml
 swagger: '2.0'
 info:
   title: Search Management
-  description: ['Search Management', 'General']
+  # `description` will be injected.
+  # If it was specified here, it would be overridden.
   version: '2015-02-28'
 host: management.azure.com
 schemes:
@@ -41,7 +45,11 @@ securityDefinitions:
 
 ## Operations on Query Keys
 
-### List
+### List (`#QueryKeys_List`)
+
+> `#QueryKeys_List` is shorthand for `$..[?(@.operationId == "QueryKeys_List")]`
+
+Returns the list of query API keys for the given Azure Search service.
 
 ```yaml
 paths:
@@ -50,7 +58,6 @@ paths:
       tags:
       - QueryKeys
       operationId: QueryKeys_List
-      description: ['Description']
       externalDocs:
         url: https://msdn.microsoft.com/library/azure/dn832701.aspx
       parameters:
@@ -67,10 +74,13 @@ paths:
           '$ref': '#/responses/error'
 ```
 
-#### Description
-Returns the list of query API keys for the given Azure Search service.
+#### Parameter: Search Service Name (`@.parameters[1]`)
 
-### Model Definition: ListQueryKeysResult
+Some description.
+
+### Model Definition: ListQueryKeysResult (`$.definitions.ListQueryKeysResult`)
+
+Response containing the query API keys for a given Azure Search service.
 
 ```yaml
 definitions:
@@ -81,20 +91,17 @@ definitions:
         type: array
         items:
           '$ref': '#/definitions/QueryKey'
-        description: ['Property: value']
-    description: ['Description']
 ```
 
-#### Description
-Response containing the query API keys for a given Azure Search service.
-
-##### Examples
+#### Examples
 I am content under a subheading 
 
-#### Property: value
+#### Property: value (`@.properties.value`)
 The query keys for the Azure Search service.
 
-### Model Definition: QueryKey
+### Model Definition: QueryKey (`$.definitions.QueryKey`)
+
+Describes an API key for a given Azure Search service that has permissions for query operations only.
 
 ```yaml
 definitions:
@@ -103,26 +110,23 @@ definitions:
       name:
         readOnly: true
         type: string
-        description: ['Property: name']
       key:
         readOnly: true
         type: string
-        description: ['Property: key']
-    description: ['Description']
 ```
 
-#### Description
-Describes an API key for a given Azure Search service that has permissions for query operations only.
-
-#### Property: name
+#### Property: name (`@.properties.name`)
 The name of the query API key; may be empty.
 
-#### Property: key
+#### Property: key (`@.properties.key`)
 The value of the query API key.
 
 ## Operations on Services
 
-### CreateOrUpdate
+### CreateOrUpdate (`#Services_CreateOrUpdate`)
+
+Creates or updates a Search service in the given resource group.
+If the Search service already exists, all properties will be updated with the given values.
 
 ```yaml
 paths:
@@ -131,7 +135,6 @@ paths:
       tags:
       - Services
       operationId: Services_CreateOrUpdate
-      description: ['Description']
       externalDocs:
         url: https://msdn.microsoft.com/library/azure/dn832687.aspx
       parameters:
@@ -158,14 +161,12 @@ paths:
           '$ref': '#/responses/error'
 ```
 
-#### Description
-Creates or updates a Search service in the given resource group.
-If the Search service already exists, all properties will be updated with the given values.
-
-#### Parameter: parameters
+#### Parameter: parameters (`@.parameters[?(@.name == "parameters")]`)
 The properties to set or update on the Search service.
 
-### Delete
+### Delete (`#Services_Delete`)
+
+Deletes a Search service in the given resource group, along with its associated resources.
 
 ```yaml
 paths:
@@ -174,7 +175,6 @@ paths:
       tags:
       - Services
       operationId: Services_Delete
-      description: ['Description']
       externalDocs:
         url: https://msdn.microsoft.com/library/azure/dn832692.aspx
       parameters:
@@ -193,10 +193,9 @@ paths:
           '$ref': '#/responses/error'
 ```
 
-#### Description
-Deletes a Search service in the given resource group, along with its associated resources.
+### List (`#Services_List`)
 
-### List
+Returns a list of all Search services in the given resource group.
 
 ```yaml
 paths:
@@ -205,7 +204,6 @@ paths:
       tags:
       - Services
       operationId: Services_List
-      description: ['Description']
       externalDocs:
         url: https://msdn.microsoft.com/library/azure/dn832688.aspx
       parameters:
@@ -221,10 +219,9 @@ paths:
           '$ref': '#/responses/error'
 ```
 
-#### Description
-Returns a list of all Search services in the given resource group.
+### Model Definition: SearchServiceProperties (`$.definitions.SearchServiceProperties`)
 
-### Model Definition: SearchServiceProperties
+Defines properties of an Azure Search service that can be modified.
 
 ```yaml
 definitions:
@@ -235,24 +232,20 @@ definitions:
         format: int32
         minimum: 1
         maximum: 6
-        description: ['Property: replicaCount']
       partitionCount:
         type: integer
         format: int32
-        description: ['Property: partitionCount']
-    description: ['Description']
 ```
 
-#### Description
-Defines properties of an Azure Search service that can be modified.
-
-#### Property: replicaCount
+#### Property: replicaCount (`@.properties.replicaCount`)
 The number of replicas in the Search service.
 
-#### Property: partitionCount
+#### Property: partitionCount (`@.properties.partitionCount`)
 The number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12.
 
-### Model Definition: SearchServiceCreateOrUpdateParameters
+### Model Definition: SearchServiceCreateOrUpdateParameters (`$.definitions.SearchServiceCreateOrUpdateParameters`)
+
+Properties that describe an Azure Search service.
 
 ```yaml
 definitions:
@@ -260,31 +253,26 @@ definitions:
     properties:
       location:
         type: string
-        description: ['Model Definition: SearchServiceCreateOrUpdateParameters', 'Property: location']
       tags:
         type: object
         additionalProperties:
           type: string
-        description: ['Property: tags']
       properties:
         '$ref': '#/definitions/SearchServiceProperties'
-        description: ['Property: properties']
-    description: ['Description']
 ```
 
-#### Description
-Properties that describe an Azure Search service.
-
-#### Property: location
+#### Property: location (`@.properties.location`)
 The geographic location of the Search service.
 
-#### Property: tags
+#### Property: tags (`@.properties.tags`)
 Tags to help categorize the Search service in the Azure Portal.
 
-#### Property: properties
+#### Property: properties (`@.properties.properties`)
 Properties of the Search service.
 
-### Model Definition: SearchServiceResource
+### Model Definition: SearchServiceResource (`$.definitions.SearchServiceResource`)
+
+Describes an Azure Search service and its current state.
 
 ```yaml
 definitions:
@@ -293,39 +281,33 @@ definitions:
       id:
         readOnly: true
         type: string
-        description: ['Property: id']
       name:
         externalDocs:
           url: https://msdn.microsoft.com/library/azure/dn857353.aspx
         type: string
-        description: ['Property: name']
       location:
         type: string
-        description: ['Property: location']
       tags:
         type: object
         additionalProperties:
           type: string
-        description: ['Property: tags']
-    description: ['Description']
 ```
 
-#### Description
-Describes an Azure Search service and its current state.
-
-#### Property: id
+#### Property: id (`@.properties.id`)
 The resource Id of the Azure Search service.
 
-#### Property: name
+#### Property: name (`@.properties.name`)
 The name of the Search service.
 
-#### Property: location
+#### Property: location (`@.properties.location`)
 The geographic location of the Search service.
 
-#### Property: tags
+#### Property: tags (`@.properties.tags`)
 Tags to help categorize the Search service in the Azure Portal.
 
-### Model Definition: SearchServiceListResult
+### Model Definition: SearchServiceListResult (`$.definitions.SearchServiceListResult`)
+
+Response containing a list of Azure Search services for a given resource group.
 
 ```yaml
 definitions:
@@ -336,19 +318,16 @@ definitions:
         type: array
         items:
           '$ref': '#/definitions/SearchServiceResource'
-        description: ['Property: value']
-    description: ['Description']
 ```
 
-#### Description
-Response containing a list of Azure Search services for a given resource group.
-
-#### Property: value
+#### Property: value (`@.properties.value`)
 The Search services in the resource group.
 
-## Common Definitions
+## Common Parameters (`$.parameters`, -)
 
-### Client Parameter: SubscriptionId
+> The "-" makes sure we inject nothing here, we just wanna enter the scope.
+
+### Client: SubscriptionId (`@.SubscriptionId`)
 Gets subscription credentials which uniquely identify Microsoft Azure subscription.
 The subscription ID forms part of the URI for every service call.
 
@@ -359,10 +338,9 @@ parameters:
     in: path
     required: true
     type: string
-    description: []
 ```
 
-### Client Parameter: ApiVersion
+### Client: ApiVersion (`@.ApiVersion`)
 The client API version.
 
 ```yaml
@@ -372,10 +350,9 @@ parameters:
     in: query
     required: true
     type: string
-    description: []
 ```
 
-### Method Parameter: ResourceGroupName
+### ResourceGroupName (`@.ResourceGroupName`)
 The name of the resource group within the current subscription.
 
 ```yaml
@@ -386,10 +363,9 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-    description: []
 ```
 
-### Method Parameter: SearchServiceName
+### SearchServiceName (`@.SearchServiceName`)
 The name of the Search service to operate on.
 
 ``` yaml
@@ -400,10 +376,9 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-    description: ['Method Parameter: SearchServiceName']
 ```
 
-### Error Response
+## Error Response
 
 The default response will be deserialized as per the Error defintion and will be part of the exception.
 
@@ -416,6 +391,9 @@ definitions:
         type: integer
       message:
         type: string
+      details:
+        schema:
+          "$ref": "https://github.com/Azure/azure-rest-api-specs/blob/813c8e8b8b12f3d541daeb45bb2298d223845d37/arm-network/2016-09-01/swagger/network.json#/definitions/ErrorDetails"
 responses:
   error:
     description: OK

@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.Azure.Model
                            .AppendLine("{").Indent()
                            .AppendLine("foreach (var _item in {0})", queryParameter.Name)
                            .AppendLine("{").Indent()
-                           .AppendLine(queryParametersAddString, queryParameter.SerializedName, "_item?.ToString() ?? string.Empty").Outdent()
+                           .AppendLine(queryParametersAddString, queryParameter.SerializedName, "\"\" + _item").Outdent()
                            .AppendLine("}").Outdent()
                            .AppendLine("}").Outdent();
                     }

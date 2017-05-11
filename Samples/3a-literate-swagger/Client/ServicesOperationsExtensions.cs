@@ -31,7 +31,7 @@ namespace Swagger
             /// The name of the Search service to operate on.
             /// </param>
             /// <param name='parameters'>
-            /// #parameter-parameters
+            /// The properties to set or update on the Search service.
             /// </param>
             public static SearchServiceResource CreateOrUpdate(this IServicesOperations operations, string resourceGroupName, string serviceName, SearchServiceCreateOrUpdateParameters parameters)
             {
@@ -54,7 +54,7 @@ namespace Swagger
             /// The name of the Search service to operate on.
             /// </param>
             /// <param name='parameters'>
-            /// #parameter-parameters
+            /// The properties to set or update on the Search service.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.

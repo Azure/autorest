@@ -1,9 +1,10 @@
 // polyfills for language support
 require("../lib/polyfill.min.js");
 
+import { EnhancedPosition } from '../lib/ref/source-map';
 import { PumpMessagesToConsole } from "./test-utility";
 import { Artifact } from "../lib/artifact";
-import { Message } from "../lib/message";
+import { Channel, Message, SourceLocation } from '../lib/message';
 import { AutoRest } from "../lib/autorest-core";
 import { RealFileSystem } from "../lib/file-system";
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
@@ -23,19 +24,46 @@ import { parse } from "../lib/ref/jsonpath";
     // regular description
     {
       const blameTree = await view.DataStore.Blame(
-        "mem:///compose/swagger.yaml",
+        "mem:///swagger-document/transform-immediate/output/swagger-document",
         { path: parse("$.securityDefinitions.azure_auth.description") });
-      const blameInputs = [...blameTree.BlameInputs()];
+      const blameInputs = [...blameTree.BlameLeafs()];
       assert.equal(blameInputs.length, 1);
     }
 
     // markdown description (blames both the swagger's json path and the markdown source of the description)
     {
       const blameTree = await view.DataStore.Blame(
-        "mem:///compose/swagger.yaml",
+        "mem:///swagger-document/transform-immediate/output/swagger-document",
         { path: parse("$.definitions.SearchServiceListResult.description") });
-      const blameInputs = [...blameTree.BlameInputs()];
-      assert.equal(blameInputs.length, 2);
+      const blameInputs = [...blameTree.BlameLeafs()];
+      assert.equal(blameInputs.length, 1);
+      // assert.equal(blameInputs.length, 2); // TODO: blame configuration file segments!
+    }
+
+    // path with existant node in path
+    {
+      let msg = {
+        Text: 'Phoney message to test', Channel: Channel.Warning, Source: [<SourceLocation>
+          {
+            document: "mem:///compose/swagger.yaml",
+            Position: <EnhancedPosition>{ path: parse('$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"]') }
+          }]
+      };
+      view.Message(msg);
+      assert.equal((<string[]>msg.Source[0].Position.path).length, 2);
+    }
+
+    // path node non existent
+    {
+      let msg = {
+        Text: 'Phoney message to test', Channel: Channel.Warning, Source: [<SourceLocation>
+          {
+            document: "mem:///compose/swagger.yaml",
+            Position: <EnhancedPosition>{ path: parse('$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].get') }
+          }]
+      };
+      view.Message(msg);
+      assert.equal((<string[]>msg.Source[0].Position.path).length, 2);
     }
   }
 

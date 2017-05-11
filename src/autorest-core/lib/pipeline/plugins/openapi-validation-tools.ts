@@ -35,6 +35,7 @@ class OpenApiValidationSemantic {
   public static readonly Name = "semantic-validator";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
+    // console.log('I am in OpenApiValidationSemantic');
     const swaggerFileNames = await initiator.ListInputs(sessionId);
     for (const swaggerFileName of swaggerFileNames) {
       const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
@@ -45,7 +46,7 @@ class OpenApiValidationSemantic {
         get: () => <any>{ "cache.json": swagger },
         set: () => { }
       });
-      const specValidationResult = await validation.validateSpec("cache.json", "off");
+      const specValidationResult = await validation.validateSpec("cache.json", { "consoleLogLevel": "off" });
       const messages = specValidationResult.validateSpec;
       for (const message of messages.errors) {
         initiator.Message(sessionId, {
@@ -82,7 +83,7 @@ class OpenApiValidationExample {
         get: () => <any>{ "cache.json": swagger },
         set: () => { }
       });
-      const specValidationResult = await validation.validateExamples("cache.json", null, "off");
+      const specValidationResult = await validation.validateExamples("cache.json", null, { "consoleLogLevel": "off" });
 
       for (const op of Object.getOwnPropertyNames(specValidationResult.operations)) {
         const opObj = specValidationResult.operations[op]["x-ms-examples"];
