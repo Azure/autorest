@@ -18,8 +18,8 @@
 @WrapComment("// ", Model.Name + " " + Model.Description.ToSentence())
 @if (Model.LocalParameters.Count() > 0)
 {
-@WrapComment("// ", Model.ParametersDocumentation)
 @://
+@WrapComment("// ", Model.ParametersDocumentation)
 }
 func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature(false)) {
 @if (Model.ReturnViaChannel)
