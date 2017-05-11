@@ -63,8 +63,9 @@ function CreatePluginTransformer(): PipelinePlugin {
     };
     const manipulator = new Manipulator(config);
     const files = await input.Enum();
-    for (const file of files) {
+    for (let file of files) {
       const fileIn = await input.ReadStrict(file);
+      file = file.substr(file.indexOf("/output/") + "/output/".length);
       const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
       await (await output.Write("./" + file)).Forward(fileOut);
     }
@@ -102,8 +103,6 @@ function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: str
       throw new Error(`Plugin ${pluginName} not found.`);
     }
 
-    input = new QuickScope(await Promise.all((await input.Enum()).map(x => input.ReadStrict(x))));
-
     const result = await plugin.Process(
       pluginName,
       key => config.GetEntry(key as any),
@@ -119,9 +118,10 @@ function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: str
 function CreateCommonmarkProcessor(): PipelinePlugin {
   return async (config, input, working, output) => {
     const files = await input.Enum();
-    for (const file of files) {
+    for (let file of files) {
       const fileIn = await input.ReadStrict(file);
       const fileOut = await ProcessCodeModel(fileIn, working);
+      file = file.substr(file.indexOf("/output/") + "/output/".length);
       await (await output.Write("./" + file + "/_code-model-v1")).Forward(fileOut);
     }
   };
@@ -292,8 +292,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       let inputScopes: DataStoreViewReadonly[] = await Promise.all(node.inputs.map(getTask));
       if (inputScopes.length === 0) {
         inputScopes = [fsInput];
-      }
-      if (inputScopes.length > 1) {
+      } else {
         const handles: DataHandleRead[] = [];
         for (const pscope of inputScopes) {
           const scope = await pscope;
