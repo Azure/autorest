@@ -74,7 +74,7 @@ namespace AutoRest.Swagger
                 // Look for semantic errors and warnings in the document.
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
                 foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition, new ServiceDefinitionMetadata
-                {   // LEGACY MODE! set defaults for the metadata, marked to be depracted
+                {   // LEGACY MODE! set defaults for the metadata, marked to be deprecated
                     ServiceDefinitionDocumentType = ServiceDefinitionDocumentType.ARM, 
                     MergeState = ServiceDefinitionDocumentState.Composite
                 }))

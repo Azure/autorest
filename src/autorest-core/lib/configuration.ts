@@ -44,8 +44,6 @@ export interface AutoRestConfigurationImpl {
   "fluent"?: boolean;
   "azure-arm"?: boolean;
   "azure-validator"?: boolean;
-  "azure-validator-individual"?: boolean;
-  "azure-validator-composed"?: boolean;
   "model-validator"?: boolean;
   "semantic-validator"?: boolean;
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)

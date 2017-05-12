@@ -39,7 +39,6 @@ namespace AutoRest.Swagger.Validation.Core
         /// <param name="metaData">The metadata associated with serviceDefinition to which <paramref name="metaData"/> belongs to</param>
         public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, ServiceDefinition entity, ServiceDefinitionMetadata metadata)
         {
-            // TODO: By default, set validation rule merge state to After
             return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity, filePath), Enumerable.Empty<Rule>(), metadata);
         }
 

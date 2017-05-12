@@ -12,10 +12,10 @@ namespace AutoRest.Swagger.Model
     /// This can influence ARM validation (e.g. one would not expect an operations API 
     /// on individual OpenAPI definitions).
     /// Explanation:
-    /// 'Before Merge' state: This is the state where the json provided is considered 
+    /// 'Individual' state: This is the state where the json provided is considered 
     /// in isolation and the corresponding rules are applied. This is equivalent to 
     /// running validator in the  non-CompositeSwagger mode per legacy API
-    /// 'After Merge' state: For a given json, the AutoRest core will find 
+    /// 'Composite' state: For a given json, the AutoRest core will find 
     /// its corresponding '.md' file and construct a ServiceDefinition object. 
     /// This will be equivalent to running AutoRest in CompositeSwagger mode per 
     /// legacy cli. 
