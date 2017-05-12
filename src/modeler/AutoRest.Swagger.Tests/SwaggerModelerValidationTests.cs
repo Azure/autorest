@@ -43,7 +43,7 @@ namespace AutoRest.Swagger.Tests
     public partial class SwaggerModelerValidationTests
     {
         private IEnumerable<ValidationMessage> ValidateSwagger(string input, ServiceDefinitionDocumentType serviceDefDocType = ServiceDefinitionDocumentType.ARM, 
-            ServiceDefinitionDocumentState mergeState = ServiceDefinitionDocumentState.Composite)
+            ServiceDefinitionDocumentState mergeState = ServiceDefinitionDocumentState.Composed)
         {
 
             // Most rules are to be applied for ARM documents

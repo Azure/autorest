@@ -23,7 +23,7 @@ namespace AutoRest.Swagger.Model
     public enum ServiceDefinitionDocumentState
     {
         Individual,
-        Composite
+        Composed
     }
 
     /// <summary>

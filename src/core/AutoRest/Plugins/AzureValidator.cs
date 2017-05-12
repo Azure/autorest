@@ -80,11 +80,25 @@ public class AzureValidator : NewPlugin
 
             var serviceDefinition = SwaggerParser.Load(file, fs);
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            
+            var docTypeInput = (await GetValue<string>("openapi-type"));
+            var docStateInput = (await GetValue<string>("merge-state"));
+
+            ServiceDefinitionDocumentType docType;
+            if (!Enum.TryParse<ServiceDefinitionDocumentType>(docTypeInput, true, out docType))
+            {
+                throw new Exception("Invalid Input for openapi-type: " + docTypeInput + ". Valid values are 'arm', 'data-plane' or 'default'.");
+            }
+
+            ServiceDefinitionDocumentState docState;
+            if (!Enum.TryParse<ServiceDefinitionDocumentState>(docStateInput, true, out docState))
+            {
+                throw new Exception("Invalid Input for merge-state: " + docStateInput + ". Valid values are 'individual' and 'composed'.");
+            }
+
             var metadata = new ServiceDefinitionMetadata
             {
-                ServiceDefinitionDocumentType = (ServiceDefinitionDocumentType)Enum.Parse(typeof(ServiceDefinitionDocumentType), (await GetValue("openapi-type"))?.ToString() ?? ServiceDefinitionDocumentType.ARM.ToString(), true),
-                MergeState = await GetValue<string>("merge-state") == "individual" ? ServiceDefinitionDocumentState.Individual : ServiceDefinitionDocumentState.Composite
+                ServiceDefinitionDocumentType = docType,
+                MergeState = docState
             };
 
             foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(file, UriKind.RelativeOrAbsolute), serviceDefinition, metadata))
