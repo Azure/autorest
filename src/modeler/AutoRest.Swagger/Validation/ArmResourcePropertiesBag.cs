@@ -40,7 +40,7 @@ namespace AutoRest.Swagger.Validation
         private static readonly IEnumerable<string> ArmPropertiesBag = new List<string>()
                                                                         { "name", "id", "type", "location", "tag" };
         
-        // Verifies if a tracked resource has a corresponding get operation
+        // Verifies whether ARM resource has the set of properties repeated in its property bag
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             var resModels = context.ResourceModels;
@@ -49,7 +49,7 @@ namespace AutoRest.Swagger.Validation
             foreach (var violatingModel in violatingModels)
             {
                 var violatingProperties = definitions[violatingModel].Properties.Keys.Union(definitions[violatingModel].Properties["properties"].Properties.Keys).Intersect(ArmPropertiesBag);
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, violatingModel, 
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingModel).AppendProperty("properties")), this, violatingModel, 
                                                    string.Join(", ", violatingProperties));
             }
         }

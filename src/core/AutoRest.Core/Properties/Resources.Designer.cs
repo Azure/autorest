@@ -107,7 +107,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, must follow camelCase style. Example: &quot;{1}&quot;..
+        ///   Looks up a localized string similar to Property named: &apos;{0}&apos;, must follow camelCase style. Example: &apos;{1}&apos;..
         /// </summary>
         public static string BodyPropertyNameCamelCase {
             get {
@@ -125,7 +125,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Collection object {0} returned by list operation {1} with &apos;x-ms-pageable&apos; extension, has no property named &apos;value&apos;..
+        ///   Looks up a localized string similar to Collection object &apos;{0}&apos; returned by list operation &apos;{1}&apos; with &apos;x-ms-pageable&apos; extension, has no property named &apos;value&apos;..
         /// </summary>
         public static string CollectionObjectPropertiesNamingMessage {
             get {
@@ -161,7 +161,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, for definition: &quot;{1}&quot; must follow camelCase style. Example: &quot;{2}&quot;..
+        ///   Looks up a localized string similar to Property named: &apos;{0}&apos;, for definition: &apos;{1}&apos; must follow camelCase style. Example: &apos;{2}&apos;..
         /// </summary>
         public static string DefinitionsPropertiesNameCamelCase {
             get {
@@ -170,7 +170,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;Delete&apos; operation must not have a request body..
+        ///   Looks up a localized string similar to &apos;Delete&apos; operation &apos;{0}&apos; must not have a request body..
         /// </summary>
         public static string DeleteMustNotHaveRequestBody {
             get {
@@ -260,7 +260,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board..
+        ///   Looks up a localized string similar to Guid used in model definition &apos;{1}&apos; for property &apos;{0}&apos;. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board..
         /// </summary>
         public static string GuidUsageNotRecommended {
             get {
@@ -575,7 +575,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sku Model is not valid. A Sku model must have &apos;name&apos; property. It can also have &apos;tier&apos;, &apos;size&apos;, &apos;family&apos;, &apos;capacity&apos; as optional properties..
+        ///   Looks up a localized string similar to Sku Model definition &apos;{0}&apos; is not valid. A Sku model must have &apos;name&apos; property. It can also have &apos;tier&apos;, &apos;size&apos;, &apos;family&apos;, &apos;capacity&apos; as optional properties..
         /// </summary>
         public static string SkuModelIsNotValid {
             get {
