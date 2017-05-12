@@ -28,7 +28,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// What kind of change implementing this rule can cause.
         /// </summary>
-        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.PotentialServiceBreakingChanges;
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceImpactingChanges;
 
         /// <summary>
         /// Violation category of the Rule.

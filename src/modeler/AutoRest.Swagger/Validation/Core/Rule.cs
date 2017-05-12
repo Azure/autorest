@@ -29,7 +29,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// <summary>
         /// What kind of change implementing this rule can cause.
         /// </summary>
-        public virtual ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.None;
+        public virtual ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.SDKImpactingChanges;
 
         /// <summary>
         /// The template message for this Rule. 
