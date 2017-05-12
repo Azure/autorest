@@ -90,7 +90,7 @@ namespace AutoRest.Swagger.Validation
                 foreach (var violatingOp in violatingOps)
                 {
                     var violatingPath = paths.First(pathObj => pathObj.Value.Values.Select(op => op.OperationId).Contains(violatingOp.Value.OperationId)).Key;
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath).AppendProperty(violatingOp.Key).AppendProperty("operationId")), this, string.Format(OperationIdMessageSuffix, violatingOp.Value.OperationId));
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath).AppendProperty(violatingOp.Key)), this, string.Format(OperationIdMessageSuffix, violatingOp.Value.OperationId));
                 }
             }
         }

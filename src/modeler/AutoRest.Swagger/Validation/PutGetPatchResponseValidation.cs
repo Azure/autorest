@@ -39,51 +39,34 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
+        private static readonly IEnumerable<string> OpList = new List<string>() { "put", "get", "patch" };
+
+
         /// <summary>
         /// Validates if the response of Put/Get/Patch are same.
         /// </summary>
-        /// <param name="paths">paths to validate</param>
-        /// <param name="formatParameters">The noun to be put in the failure message</param>
-        /// <returns>true if the response is same for Put/Get/Patch responses.false otherwise.</returns>
-        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context, out object[] formatParameters)
+        /// <param name="entity">paths to validate</param>
+        /// <param name="context">The rule context</param>
+        /// <returns>list of ValidationMessages.</returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
-            foreach(KeyValuePair<string, Dictionary<string, Operation>> pathCombination in paths)
+            var serviceDefinition = (ServiceDefinition)context.Root;
+            foreach (var pathPair in entity)
             {
-                Dictionary<string, Operation> operations = pathCombination.Value;
-                if (operations.Count < 2)
+                var respModels = pathPair.Value.Where(opPair => OpList.Contains(opPair.Key.ToLower()))
+                                                // exclude list operations here?
+                                               .Where(opPair=>!opPair.Value.OperationId.ToLower().Contains("_list"))
+                                               .Select(opPair => opPair.Value.Responses?.GetValueOrNull<OperationResponse>("200")?.Schema?.Reference)
+                                               .Where(respModel => !string.IsNullOrWhiteSpace(respModel) && serviceDefinition.Definitions.ContainsKey(respModel.StripDefinitionPath()))
+                                               .Distinct();
+                if (respModels.Count() > 1)
                 {
-                    continue;
-                }
+                    // more than one model referenced by get/put/patch operations under a path, must be flagged
+                    yield return new ValidationMessage(
+                        new FileObjectPath(context.File, context.Path.AppendProperty(pathPair.Key)), this, pathPair.Key);
 
-                List<string> responseSchemaReference = new List<string>();
-
-                foreach (KeyValuePair<string, Operation> operation in operations)
-                {
-                    if (operation.Key.ToLower().Equals("put") || operation.Key.ToLower().Equals("get") || operation.Key.ToLower().Equals("patch"))
-                    {
-                        Dictionary<string, OperationResponse> responses = operation.Value.Responses;
-                        if(responses != null && responses.Count > 0)
-                        {
-                            foreach(KeyValuePair<string, OperationResponse> response in responses)
-                            {
-                                if(response.Value != null && response.Value.Schema != null && response.Value.Schema.Reference != null && response.Key.Equals("200"))
-                                {
-                                    responseSchemaReference.Add(response.Value.Schema.Reference);
-                                    break;
-                                }
-                            }                            
-                        }
-                    }
-                }
-
-                if (responseSchemaReference.Distinct().Count() > 1)
-                {
-                    formatParameters = new object[] { pathCombination.Key };
-                    return false;
                 }
             }
-            formatParameters = new object[0];
-            return true;
         }
     }
 }

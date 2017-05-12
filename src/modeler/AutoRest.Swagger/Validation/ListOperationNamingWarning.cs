@@ -40,13 +40,14 @@ namespace AutoRest.Swagger.Validation
                     continue;
                 }
 
+                var violatingPath = ValidationUtilities.GetOperationIdPath(opPair.Value.OperationId, entity).Key;
                 if (ValidationUtilities.IsXmsPageableResponseOperation(opPair.Value))
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, opPair.Value.OperationId, XmsPageableViolation);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath).AppendProperty(opPair.Key).AppendProperty("operationId")), this, opPair.Value.OperationId, XmsPageableViolation);
                 }
                 else if (ValidationUtilities.IsArrayTypeResponseOperation(opPair.Value, serviceDefinition))
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, opPair.Value.OperationId, ArrayTypeViolation);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath).AppendProperty(opPair.Key).AppendProperty("operationId")), this, opPair.Value.OperationId, ArrayTypeViolation);
                 }
             }
         }

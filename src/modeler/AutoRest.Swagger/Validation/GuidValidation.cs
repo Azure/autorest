@@ -44,32 +44,29 @@ namespace AutoRest.Swagger.Validation
         /// i.e. if the type of the definition is string and the format is uuid.
         /// </summary>
         /// <param name="definitions">Operation Definitions to validate</param>
-        /// <param name="formatParameters">The noun to be put in the failure message</param>
-        /// <returns>true if there is no GUID. false otherwise.</returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
+        /// <param name="context">The rule context</param>
+        /// <returns>list of validation messages</returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            if(definitions != null)
+            foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                foreach (KeyValuePair<string, Schema> definition in definitions)
+                object[] formatParameters;
+                if (!this.HandleSchema((Schema)definition.Value, definitions, out formatParameters, definition.Key))
                 {
-                    if (!this.HandleSchema((Schema)definition.Value, definitions, out formatParameters, definition.Key))
-                    {
-                        formatParameters[1] = definition.Key;
-                        return false;
-                    }
+                    formatParameters[1] = definition.Key;
+                    yield return new ValidationMessage(new FileObjectPath(context.File,
+                                context.Path.AppendProperty(definition.Key).AppendProperty("properties").AppendProperty((string)formatParameters[0])), this, formatParameters);
                 }
             }
-            formatParameters = new object[0];
-            return true;
         }
 
         private bool HandleSchema(Schema definition, Dictionary<string, Schema> definitions, out object[] formatParameters, string name)
         {
             // This could be a reference to another definition. But, that definition could be handled seperately.
-            if(definition.Type == DataType.String && definition.Format != null && definition.Format.EqualsIgnoreCase("uuid"))
+            if(definition.Type == DataType.String && definition.Format?.EqualsIgnoreCase("uuid") == true)
             {
                 formatParameters = new object[2];
-                formatParameters[0] = name ;
+                formatParameters[0] = name;
                 return false;
             }            
 
