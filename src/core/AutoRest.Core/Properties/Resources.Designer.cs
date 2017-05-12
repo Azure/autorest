@@ -137,22 +137,20 @@ namespace AutoRest.Core.Properties {
         ///   Looks up a localized string similar to Plugins:
         ///  CSharp:
         ///    TypeName: PluginCs, AutoRest.CSharp
+        ///  JsonRpcClient:
+        ///    TypeName: PluginCs, AutoRest.CSharp.JsonRpcClient
         ///  Azure.CSharp:
         ///    TypeName: PluginCsa, AutoRest.CSharp.Azure
         ///  Azure.CSharp.Fluent:
         ///    TypeName: PluginCsaf, AutoRest.CSharp.Azure.Fluent
+        ///  Azure.JsonRpcClient:
+        ///    TypeName: PluginCsa, AutoRest.CSharp.Azure.JsonRpcClient
         ///  Ruby:
         ///    TypeName: PluginRb, AutoRest.Ruby
         ///  Azure.Ruby:
         ///    TypeName: PluginRba, AutoRest.Ruby.Azure
         ///  NodeJS:
-        ///    TypeName: PluginJs, AutoRest.NodeJS
-        ///  Azure.NodeJS:
-        ///    TypeName: PluginJsa, AutoRest.NodeJS.Azure
-        ///  Python:
-        ///    TypeName: PluginPy, AutoRest.Python
-        ///  Azure.Python:
-        ///    TypeNa [rest of string was truncated]&quot;;.
+        ///    TypeName: PluginJs, Au [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ConfigurationKnownPlugins {
             get {
@@ -584,6 +582,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The summary and description values should not be same..
+        /// </summary>
+        public static string SummaryDescriptionVaidationError {
+            get {
+                return ResourceManager.GetString("SummaryDescriptionVaidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Azure Resource Management only supports HTTPS scheme..
         /// </summary>
         public static string SupportedSchemesWarningMessage {
@@ -674,7 +681,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For the tracked resource &apos;{0}&apos;, the x-ms-pageable must be same for list by resource group and subscriptions operations..
+        ///   Looks up a localized string similar to For the tracked resource &apos;{0}&apos;, the x-ms-pageable extension values must be same for list by resource group and subscriptions operations..
         /// </summary>
         public static string XMSPagableListByRGAndSubscriptionsMismatch {
             get {
