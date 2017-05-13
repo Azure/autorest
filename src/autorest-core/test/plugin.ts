@@ -80,7 +80,11 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const autorestPlugin = await GetAutoRestDotNetPlugin();
     const pluginScope = dataStore.CreateScope("plugin");
     const messages: Message[] = [];
-    const result = await autorestPlugin.Process("azure-validator", _ => { }, new QuickScope([swagger]), pluginScope, m => messages.push(m), CancellationToken.None);
+    let currConfig: any = {
+      'openapi-type': 'arm',
+      'merge-state': 'composed'
+    };
+    const result = await autorestPlugin.Process("azure-validator", key => currConfig[key], new QuickScope([swagger]), pluginScope, m => messages.push(m), CancellationToken.None);
     assert.strictEqual(result, true);
 
     // check results
