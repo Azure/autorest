@@ -277,7 +277,6 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
   const data = await ParseLiterateYaml(config, await inputScope.ReadStrict(inputFileUri), workingScope.CreateScope("yaml"));
   const externalFiles: { [uri: string]: DataHandleRead } = {};
   externalFiles[inputFileUri] = data;
-  //WriteString(`file:///C:/output/${(<any>workingScope).name}_before.yaml`, await externalFiles[inputFileUri].ReadData());
   await EnsureCompleteDefinitionIsPresent(config,
     inputScope,
     workingScope.CreateScope("ref-resolving"),
@@ -287,7 +286,6 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
     data.ReadObject<any>(),
     IdentitySourceMapping(data.key, data.ReadYamlAst()));
   const result = await StripExternalReferences(externalFiles[inputFileUri], workingScope.CreateScope("strip-ext-references"));
-  //WriteString(`file:///C:/output/${(<any>workingScope).name}_after.yaml`, await result.ReadData());
   return result;
 }
 

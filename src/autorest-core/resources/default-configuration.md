@@ -27,6 +27,14 @@ plugins:
 pipeline:
   pipeline-emitter: # emits the pipeline graph
     scope: scope-pipeline-emitter
+  autorest-interactive:
+    scope: autorest-interactive
+
+scope-pipeline-emitter:
+  input-artifact: pipeline
+  is-object: true
+  output-uri-expr: |
+    "pipeline"
 ```
 
 #### Loading
@@ -64,11 +72,6 @@ pipeline:
     input: transform
     scope: scope-swagger-document/emitter
 
-scope-pipeline-emitter:
-  input-artifact: pipeline
-  is-object: true
-  output-uri-expr: |
-    "pipeline"
 scope-swagger-document/emitter:
   input-artifact: swagger-document
   is-object: true
@@ -111,11 +114,11 @@ pipeline:
   swagger-document/azure-openapi-validator:
     input:
       - transform
-      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes! replace section with the one below after migration complete
+      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
   swagger-document/individual/azure-openapi-validator:
     input: 
       - transform
-      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes! replace section with the one below after migration complete
+      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
 ```
 
 Activate `azure-validator` when setting `azure-arm`!?

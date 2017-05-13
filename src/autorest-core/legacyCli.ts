@@ -60,7 +60,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
   const codegenerator = switches["g"] || switches["codegenerator"] || "CSharp";
   const usedCodeGenerator = codegenerator.toLowerCase().replace("azure.", "").replace(".fluent", "");
   if (codegenerator.toLowerCase() === "none") {
-    result["azure-validator"] = true;
+    (<any>result)["azure-validator"] = true;
   } else {
     (<any>result)[usedCodeGenerator] = {};
     if (codegenerator.toLowerCase().startsWith("azure.")) {

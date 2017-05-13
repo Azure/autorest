@@ -79,7 +79,7 @@ function CreatePluginTransformerImmediate(): PipelinePlugin {
     };
     const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
     const scopes = await Promise.all(files.slice(0, files.length - 1).map(f => input.ReadStrict(f)));
-    const manipulator = new Manipulator(config.GetPluginViewImmediate(...scopes.map(s => s.ReadObject<any>())));
+    const manipulator = new Manipulator(config.GetNestedConfigurationImmediate(...scopes.map(s => s.ReadObject<any>())));
     const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);
     const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
@@ -247,6 +247,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // externals:
   const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
+  const aiPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/autorest-interactive`));
   const aoavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/azure-openapi-validator`));
   const autoRestDotNet = new LazyPromise(async () => await GetAutoRestDotNetPlugin());
 
@@ -275,7 +276,32 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
-    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)]))
+    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)])),
+    "autorest-interactive": async (
+      config: ConfigurationView,
+      input: DataStoreViewReadonly,
+      working: DataStoreView,
+      output: DataStoreView) => {
+      await CreatePluginExternal(aiPluginHost, "autorest-interactive")(
+        config.GetNestedConfigurationImmediate({
+          __status: new Proxy<any>({}, {
+            get(_, key) {
+              const expr = new Buffer(key.toString(), "base64").toString("ascii");
+              try {
+                return safeEval(expr, {
+                  pipeline: pipeline.pipeline,
+                  tasks: tasks
+                });
+              } catch (e) {
+                return "" + e;
+              }
+            }
+          })
+        }),
+        config.DataStore,
+        working,
+        output);
+    }
   };
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
@@ -339,7 +365,12 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   // execute pipeline
   const barrier = new OutstandingTaskAwaiter();
   for (const name of Object.keys(pipeline.pipeline)) {
-    barrier.Await(getTask(name));
+    const task = getTask(name);
+    const taskx: { _state: "running" | "failed" | "complete" } = task as any;
+    taskx._state = "running";
+    task.catch(() => taskx._state = "failed");
+    task.then(() => taskx._state = "complete");
+    barrier.Await(task);
   }
   await barrier.Wait();
 }
