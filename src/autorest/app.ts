@@ -126,8 +126,8 @@ class App {
       // use this to make the core aware that this run may be legal even without any inputs
       // this is a valid scenario for "preparation calls" to autorest like `autorest --reset` or `autorest --latest`
       const allowNoInput = () => {
-        // if there is *anything* else left on the command line, that's an indicator that the core is supposed to do something
-        if (process.argv.length === 0) {
+        // if there is *any* other argument left, that's an indicator that the core is supposed to do something
+        if (process.argv.length <= 2 /*expecting node and this script*/) {
           process.argv.push("--allow-no-input");
         }
       };
