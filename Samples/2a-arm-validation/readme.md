@@ -14,7 +14,9 @@ input-file:
 This time, we not only want to generate code, we also want to validate.
 
 ``` yaml
-azure-arm: true # enables validation messages
+azure-validator: true # Azure specific validation
+model-validator: true # validation of examples against the API definition
+semantic-validator: true # general semantic checks such as: Does the specified `default` value actually have the type specified for the corresponding field?
 ```
 
 ## Generation
@@ -22,6 +24,7 @@ azure-arm: true # enables validation messages
 Also generate for some languages.
 
 ``` yaml 
+azure-arm: true # generate code using Azure ARM flavor
 csharp:
   output-folder: CSharp
 java:
