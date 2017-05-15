@@ -1,17 +1,16 @@
-import { OperationAbortedException } from '../exception';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Descendants, Kind, CloneAst, YAMLMapping, newScalar, ParseNode } from "../ref/yaml";
-import { MergeYamls, IdentitySourceMapping, resolveRValue } from "../source-map/merging";
-import { Mapping } from "../ref/source-map";
+import { OperationAbortedException } from "../exception";
+import { ParseNode } from "../ref/yaml";
+import { MergeYamls, resolveRValue } from "../source-map/merging";
 import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
 import { Parse as ParseLiterate } from "./literate";
-import { IndexToPosition, Lines } from "./text-utility";
+import { IndexToPosition } from "./text-utility";
 import { ConfigurationView } from "../autorest-core";
-import { Channel, Message, SourceLocation, Range } from "../message";
+import { Channel, SourceLocation } from "../message";
 import { safeEval } from "../ref/safe-eval";
 
 export class CodeBlock {
