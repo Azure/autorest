@@ -64,6 +64,6 @@ namespace AutoRest.Swagger.Validation.Core
         /// <summary>
         /// The collection of rules that apply to all properties regardless of other rules.
         /// </summary>
-        public static IEnumerable<Rule> UniversalRules = new[] { new NoControlCharacters() };
+        public static IEnumerable<Rule> UniversalRules = new List<Rule>();
     }
 }
