@@ -1,9 +1,9 @@
-import { safeEval } from './safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { safeEval } from "./safe-eval";
 import * as jsonpath from "jsonpath";
 
 // patch in smart filter expressions

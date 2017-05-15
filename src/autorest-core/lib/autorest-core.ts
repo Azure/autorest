@@ -1,17 +1,17 @@
-import { Stringify } from './ref/yaml';
-import { RunPipeline } from './pipeline/pipeline';
-import { SmartPosition, Position } from './ref/source-map';
-import { DataStore, Metadata } from './data-store/data-store';
-import { IEnumerable, From, Push } from './ref/linq';
-import { IEvent, EventDispatcher, EventEmitter } from "./events";
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+import { RunPipeline } from "./pipeline/pipeline";
+import { Push } from "./ref/linq";
+import { IEvent, EventEmitter } from "./events";
 import { IFileSystem } from "./file-system";
-import { Configuration, ConfigurationView, MessageEmitter } from './configuration';
-import { DocumentType } from "./document-type";
-export { ConfigurationView } from './configuration';
-import { Message, Channel } from './message';
-import * as Constants from './constants';
-import { Artifact } from './artifact';
-import { Exception, OperationCanceledException } from './exception';
+import { Configuration, ConfigurationView, MessageEmitter } from "./configuration";
+export { ConfigurationView } from "./configuration";
+import { Message, Channel } from "./message";
+import * as Constants from "./constants";
+import { Artifact } from "./artifact";
 
 export class AutoRest extends EventEmitter {
   private _configurations = new Array<any>();

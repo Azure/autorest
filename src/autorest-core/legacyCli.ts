@@ -3,9 +3,8 @@
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import * as path from "path";
 import { ResolveUri, GetFilenameWithoutExtension } from "./lib/ref/uri";
-import { DataHandleRead, DataStoreViewReadonly } from "./lib/data-store/data-store";
+import { DataStoreViewReadonly } from "./lib/data-store/data-store";
 import { AutoRestConfigurationImpl } from "./lib/configuration";
 
 const regexLegacyArg = /^-[^-]/;

@@ -2,14 +2,13 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
+
 import { IndexToPosition } from "../parsing/text-utility";
-import { ConfigurationView, MessageEmitter } from "../configuration";
-import { Message, Channel } from "../message";
-import { From } from "../ref/linq";
+import { ConfigurationView } from "../configuration";
+import { Channel } from "../message";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import * as yaml from "../ref/yaml";
-import { Mapping, Mappings } from "../ref/source-map";
+import { Mappings } from "../ref/source-map";
 import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
 
 // // TODO: may want ASTy merge! (supporting circular structure and such?)
