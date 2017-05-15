@@ -1,8 +1,12 @@
-﻿using AutoRest.Swagger.Validation.Core;
-using System.Collections.Generic;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model;
-using AutoRest.Core.Logging;
+using AutoRest.Swagger.Validation.Core;
+using System;
+using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -33,7 +37,7 @@ namespace AutoRest.Swagger.Validation
 
         public override IEnumerable<ValidationMessage> GetValidationMessages(Operation operation, RuleContext context)
         {
-            if(operation.Description != null && operation.Summary != null && operation.Description.Trim().Equals(operation.Summary.Trim()))
+            if(operation.Description != null && operation.Summary != null && operation.Description.Trim().Equals(operation.Summary.Trim(), StringComparison.CurrentCultureIgnoreCase))
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, new object[0]);
             }
