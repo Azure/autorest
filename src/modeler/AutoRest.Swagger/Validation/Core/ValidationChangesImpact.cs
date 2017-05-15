@@ -8,7 +8,8 @@ namespace AutoRest.Swagger.Validation.Core
     [Flags]
     public enum ValidationChangesImpact
     {
-        ServiceImpactingChanges = 0,
-        SDKImpactingChanges = 1 << 0
+        None = 0,
+        ServiceImpactingChanges = 1 << 0,
+        SDKImpactingChanges = 1 << 1
     }
 }

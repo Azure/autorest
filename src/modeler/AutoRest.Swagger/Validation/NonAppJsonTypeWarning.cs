@@ -32,7 +32,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// What kind of change implementing this rule can cause.
         /// </summary>
-        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceImpactingChanges;
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.None;
 
         /// <summary>
         /// The template message for this Rule. 
