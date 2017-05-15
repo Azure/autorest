@@ -7,6 +7,7 @@ This configuration applies to every run of AutoRest, but with less priority than
 ``` yaml
 azure-arm: false
 output-folder: generated
+openapi-type: arm
 ```
 
 ## Pipeline
@@ -93,9 +94,31 @@ pipeline:
   swagger-document/semantic-validator:
     input: transform
     scope: semantic-validator
+```
+
+##### Azure Validator
+
+``` yaml
+pipeline:
   swagger-document/azure-validator:
     input: transform
-    scope: azure-validator
+    scope: azure-validator-composed
+  swagger-document/individual/azure-validator:
+    input: individual/transform
+    scope: azure-validator-individual
+```
+
+Activate `azure-validator` when setting `azure-arm`!?
+
+``` yaml $(azure-arm)
+azure-validator: true
+```
+
+``` yaml $(azure-validator)
+azure-validator-composed:
+  merge-state: composed
+azure-validator-individual:
+  merge-state: individual
 ```
 
 #### Generation
@@ -405,12 +428,4 @@ On by default for backwards compatibility, but see https://github.com/Azure/auto
 
 ``` yaml
 client-side-validation: true
-```
-
-## Azure Validation
-
-Activate `azure-validator` when setting `azure-arm`!?
-
-``` yaml $(azure-arm)
-azure-validator: true
 ```
