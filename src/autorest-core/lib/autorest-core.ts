@@ -167,9 +167,14 @@ export class AutoRest extends EventEmitter {
         }
 
         if (view.InputFileUris.length === 0) {
-          throw new Exception("No input files provided.\n\nUse --help to get help information.", 0);
+          if (view.GetEntry("allow-no-input")) {
+            return true;
+          } else {
+            return new Error("No input files provided.\n\nUse --help to get help information.");
+          }
         }
-        const result = await Promise.race([
+
+        await Promise.race([
           RunPipeline(view, <IFileSystem>this.fileSystem),
           new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej("Cancellation requested.")))]);
 
@@ -178,8 +183,7 @@ export class AutoRest extends EventEmitter {
 
         view.messageEmitter.removeAllListeners();
         return true;
-      }
-      catch (e) {
+      } catch (e) {
         if (e instanceof Error) {
           /* if (!(e instanceof OperationCanceledException)) {
             console.error(e.message);

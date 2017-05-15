@@ -123,8 +123,18 @@ class App {
       // Remove bootstrapper args from cmdline
       process.argv = From<string>(process.argv).Where(each => !RemoveArgs.Any(i => each === i || each.startsWith(`${i}=`) || each.startsWith(`${i}:`))).ToArray();
 
+      // use this to make the core aware that this run may be legal even without any inputs
+      // this is a valid scenario for "preparation calls" to autorest like `autorest --reset` or `autorest --latest`
+      const allowNoInput = () => {
+        // if there is *anything* else left on the command line, that's an indicator that the core is supposed to do something
+        if (process.argv.length === 0) {
+          process.argv.push("--allow-no-input");
+        }
+      };
+
       if (this.reset) {
         rm('-rf', Installer.RootFolder);
+        allowNoInput();
       }
 
       // check if we're up to date with the bootstrapper
@@ -176,6 +186,9 @@ class App {
           // or, grab the latest version
           this.version = 'latest';
         }
+      } else {
+        // a version was explicitly asked for => may just be a preparation call
+        allowNoInput();
       }
 
       // if necessary, go get the package we need.
@@ -184,7 +197,7 @@ class App {
           // find out the latest version
           let releases = await this.GetReleases();
 
-          if (this.version == 'latest-release') {
+          if (this.version === 'latest-release') {
             Console.Verbose('Requested "latest-release" version');
             releases = releases.Where(each => each.prerelease == false);
           } else {

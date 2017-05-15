@@ -24,6 +24,7 @@ const RESOLVE_MACROS_AT_RUNTIME = true;
 
 export interface AutoRestConfigurationImpl {
   __info?: string | null;
+  "allow-no-input"?: boolean;
   "input-file": string[] | string;
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
