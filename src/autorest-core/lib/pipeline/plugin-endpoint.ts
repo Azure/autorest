@@ -1,18 +1,17 @@
-import { LazyPromise } from '../lazy';
-import { EventEmitter, IEvent } from '../events';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { MultiPromise, MultiPromiseUtility } from '../multi-promise';
+import { LazyPromise } from "../lazy";
+import { EventEmitter } from "../events";
 import { fork, ChildProcess } from "child_process";
-import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../ref/source-map";
+import { Mappings, RawSourceMap, SmartPosition } from "../ref/source-map";
 import { CancellationToken } from "../ref/cancallation";
 import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
-import { DataStoreViewReadonly, DataStoreView, DataHandleRead } from "../data-store/data-store";
+import { DataStoreViewReadonly, DataStoreView } from "../data-store/data-store";
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
-import { Channel, Message } from "../message";
+import { Message } from "../message";
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
@@ -48,7 +47,6 @@ export class AutoRestPlugin extends EventEmitter {
     );
     childProc.stderr.pipe(process.stderr);
     const plugin = new AutoRestPlugin(channel);
-    channel.onClose(() => { throw "AutoRest plugin terminated."; });
     channel.listen();
     return plugin;
   }
@@ -83,13 +81,15 @@ export class AutoRestPlugin extends EventEmitter {
     channel.onNotification(IAutoRestPluginInitiator_Types.WriteFile, this.apiInitiator.WriteFile);
     channel.onNotification(IAutoRestPluginInitiator_Types.Message, this.apiInitiator.Message);
 
+    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Error("AutoRest plugin terminated.")); }));
+
     // target
     this.apiTarget = {
       async GetPluginNames(cancellationToken: CancellationToken): Promise<string[]> {
-        return await channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken);
+        return await Promise.race([terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken)]);
       },
       async Process(pluginName: string, sessionId: string, cancellationToken: CancellationToken): Promise<boolean> {
-        return await channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken);
+        return await Promise.race([terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken)]);
       }
     };
   }
@@ -121,8 +121,6 @@ export class AutoRestPlugin extends EventEmitter {
   }
 
   private static CreateEndpointFor(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, onMessage: (message: Message) => void, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
-    let messageId: number = 0;
-
     const inputFileNames = new LazyPromise(async () => inputScope.Enum());
     const inputFileHandles = new LazyPromise(async () => {
       const names = await inputFileNames;
@@ -162,7 +160,7 @@ export class AutoRestPlugin extends EventEmitter {
         await finishPrev;
         notify();
       },
-      async Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void> {
+      async Message(message: Message): Promise<void> {
         const finishPrev = finishNotifications;
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);

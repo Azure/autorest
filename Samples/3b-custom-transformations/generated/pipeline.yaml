@@ -51,6 +51,20 @@ swagger-document/individual/azure-validator:
     - azure-validator-individual
   inputs:
     - swagger-document/individual/transform
+swagger-document/azure-openapi-validator:
+  pluginName: azure-openapi-validator
+  configScope:
+    - azure-validator-composed
+  inputs:
+    - swagger-document/transform
+    - swagger-document/azure-validator
+swagger-document/individual/azure-openapi-validator:
+  pluginName: azure-openapi-validator
+  configScope:
+    - azure-validator-individual
+  inputs:
+    - swagger-document/individual/transform
+    - swagger-document/individual/azure-validator
 csharp/modeler:
   pluginName: modeler
   configScope:

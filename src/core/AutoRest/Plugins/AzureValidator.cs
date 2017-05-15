@@ -66,7 +66,7 @@ public class AzureValidator : NewPlugin
                 }
             }
         }
-        }, new object[0]);
+        });
     }
 
     protected override async Task<bool> ProcessInternal()

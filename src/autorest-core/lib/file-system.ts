@@ -1,6 +1,10 @@
-import { EnumerateFiles, ExistsUri } from './ref/uri';
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+import { EnumerateFiles } from "./ref/uri";
 import { From } from "./ref/linq";
-import * as a from "./ref/async";
 import { ResolveUri, ReadUri, WriteString } from "./ref/uri";
 import * as Constants from "./constants";
 

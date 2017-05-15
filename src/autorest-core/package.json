@@ -43,6 +43,7 @@
     "jsonpath": "^0.2.11",
     "linq-es2015": "^2.4.13",
     "oav": "0.4.1",
+    "azure-openapi-validator": "git+https://github.com/olydis/azure-openapi-validator.git#b45423f4560585e64f574bbffbb5cdf894cfbd53",
     "pify": "^2.3.0",
     "safe-eval": "^0.3.0",
     "source-map": "^0.5.6",

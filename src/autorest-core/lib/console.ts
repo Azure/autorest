@@ -1,9 +1,14 @@
-import * as marked from 'marked'
-import * as chalk from 'chalk'
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
-import * as moment from 'moment';
+import * as marked from "marked";
+import * as chalk from "chalk";
 
-const markedTerminal = require('marked-terminal')
+import * as moment from "moment";
+
+const markedTerminal = require("marked-terminal");
 
 marked.setOptions({
   renderer: new markedTerminal({
@@ -15,7 +20,7 @@ marked.setOptions({
     blockquote: chalk.yellow,
     tab: 2
   })
-})
+});
 
 export class Console {
   public static quiet: boolean = false;

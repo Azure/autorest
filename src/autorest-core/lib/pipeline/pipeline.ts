@@ -1,17 +1,16 @@
-import { JsonPath, stringify } from '../ref/jsonpath';
-import { safeEval } from '../ref/safe-eval';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { JsonPath, stringify } from "../ref/jsonpath";
+import { safeEval } from "../ref/safe-eval";
 import { LazyPromise } from "../lazy";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { AutoRestPlugin } from "./plugin-endpoint";
 import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
 import { Channel } from "../message";
-import { MultiPromise } from "../multi-promise";
 import { ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
@@ -20,9 +19,7 @@ import { ComposeSwaggers, LoadLiterateSwaggers, LoadLiterateSwaggerOverrides } f
 import { IFileSystem } from "../file-system";
 import { EmitArtifacts } from "./artifact-emitter";
 
-export type DataPromise = MultiPromise<DataHandleRead>;
-
-type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
+export type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
 interface PipelineNode {
   outputArtifact?: string;
   pluginName: string;
@@ -63,8 +60,9 @@ function CreatePluginTransformer(): PipelinePlugin {
     };
     const manipulator = new Manipulator(config);
     const files = await input.Enum();
-    for (const file of files) {
+    for (let file of files) {
       const fileIn = await input.ReadStrict(file);
+      file = file.substr(file.indexOf("/output/") + "/output/".length);
       const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
       await (await output.Write("./" + file)).Forward(fileOut);
     }
@@ -78,7 +76,7 @@ function CreatePluginTransformerImmediate(): PipelinePlugin {
     };
     const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
     const scopes = await Promise.all(files.slice(0, files.length - 1).map(f => input.ReadStrict(f)));
-    const manipulator = new Manipulator(config.GetPluginViewImmediate(...scopes.map(s => s.ReadObject<any>())));
+    const manipulator = new Manipulator(config.GetNestedConfigurationImmediate(...scopes.map(s => s.ReadObject<any>())));
     const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);
     const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
@@ -94,17 +92,12 @@ function CreatePluginComposer(): PipelinePlugin {
     await (await output.Write("composed")).Forward(swagger);
   };
 }
-function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string, fullKeys: boolean = true): PipelinePlugin {
+function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string): PipelinePlugin {
   return async (config, input, working, output) => {
     const plugin = await host;
     const pluginNames = await plugin.GetPluginNames(config.CancellationToken);
     if (pluginNames.indexOf(pluginName) === -1) {
       throw new Error(`Plugin ${pluginName} not found.`);
-    }
-
-    // forward input scope (relative/absolute key mess...)
-    if (fullKeys) {
-      input = new QuickScope(await Promise.all((await input.Enum()).map(x => input.ReadStrict(x))));
     }
 
     const result = await plugin.Process(
@@ -122,9 +115,10 @@ function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: str
 function CreateCommonmarkProcessor(): PipelinePlugin {
   return async (config, input, working, output) => {
     const files = await input.Enum();
-    for (const file of files) {
+    for (let file of files) {
       const fileIn = await input.ReadStrict(file);
       const fileOut = await ProcessCodeModel(fileIn, working);
+      file = file.substr(file.indexOf("/output/") + "/output/".length);
       await (await output.Write("./" + file + "/_code-model-v1")).Forward(fileOut);
     }
   };
@@ -250,6 +244,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // externals:
   const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
+  const aiPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/autorest-interactive`));
+  const aoavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/azure-openapi-validator`));
   const autoRestDotNet = new LazyPromise(async () => await GetAutoRestDotNetPlugin());
 
   // TODO: enhance with custom declared plugins
@@ -262,6 +258,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
     "semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),
     "azure-validator": CreatePluginExternal(autoRestDotNet, "azure-validator"),
+    "azure-openapi-validator": CreatePluginExternal(aoavPluginHost, "azure-openapi-validator"),
     "modeler": CreatePluginExternal(autoRestDotNet, "modeler"),
 
     "csharp": CreatePluginExternal(autoRestDotNet, "csharp"),
@@ -272,11 +269,36 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "java": CreatePluginExternal(autoRestDotNet, "java"),
     "azureresourceschema": CreatePluginExternal(autoRestDotNet, "azureresourceschema"),
     "jsonrpcclient": CreatePluginExternal(autoRestDotNet, "jsonrpcclient"),
-    "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier", false),
+    "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier"),
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
-    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)]))
+    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)])),
+    "autorest-interactive": async (
+      config: ConfigurationView,
+      input: DataStoreViewReadonly,
+      working: DataStoreView,
+      output: DataStoreView) => {
+      await CreatePluginExternal(aiPluginHost, "autorest-interactive")(
+        config.GetNestedConfigurationImmediate({
+          __status: new Proxy<any>({}, {
+            get(_, key) {
+              const expr = new Buffer(key.toString(), "base64").toString("ascii");
+              try {
+                return safeEval(expr, {
+                  pipeline: pipeline.pipeline,
+                  tasks: tasks
+                });
+              } catch (e) {
+                return "" + e;
+              }
+            }
+          })
+        }),
+        config.DataStore,
+        working,
+        output);
+    }
   };
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
@@ -293,8 +315,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       let inputScopes: DataStoreViewReadonly[] = await Promise.all(node.inputs.map(getTask));
       if (inputScopes.length === 0) {
         inputScopes = [fsInput];
-      }
-      if (inputScopes.length > 1) {
+      } else {
         const handles: DataHandleRead[] = [];
         for (const pscope of inputScopes) {
           const scope = await pscope;
@@ -341,7 +362,12 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   // execute pipeline
   const barrier = new OutstandingTaskAwaiter();
   for (const name of Object.keys(pipeline.pipeline)) {
-    barrier.Await(getTask(name));
+    const task = getTask(name);
+    const taskx: { _state: "running" | "failed" | "complete" } = task as any;
+    taskx._state = "running";
+    task.catch(() => taskx._state = "failed");
+    task.then(() => taskx._state = "complete");
+    barrier.Await(task);
   }
   await barrier.Wait();
 }

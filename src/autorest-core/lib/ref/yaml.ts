@@ -1,4 +1,3 @@
-import { IndexToPosition } from '../parsing/text-utility';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -6,7 +5,6 @@ import { IndexToPosition } from '../parsing/text-utility';
 
 import * as yamlAst from "yaml-ast-parser";
 import { JsonPath } from "./jsonpath";
-import { Message, SourceLocation, Channel } from '../message';
 import { NewEmptyObject } from "../parsing/stable-object";
 
 /**

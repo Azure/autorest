@@ -456,7 +456,7 @@ async function main() {
     // for relaxed profiling (assuming that no one calls `main` from electron... use AAAL!)
     if (require("process").versions.electron) await new Promise(_ => { });
 
-    process.exit(0);
+    process.exit(exitcode);
   } catch (e) {
     if (e instanceof Exception) {
       console.log(e.message);

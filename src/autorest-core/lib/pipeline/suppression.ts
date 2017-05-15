@@ -51,5 +51,5 @@ export class Suppressor {
     return m;
   }
 
-  // TODO: make method that'll complain about supressions that weren't used!
+  // TODO: make method that'll complain about suppressions that weren't used!
 }
