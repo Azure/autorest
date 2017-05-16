@@ -44,7 +44,7 @@ namespace AutoRest.AzureResourceSchema.Tests
             Assert.Equal(1, schemas.Count);
 
             ResourceSchema schema = schemas["Mock.Provider"];
-            Assert.Equal("http://schema.management.azure.com/schemas/2016-01-01/Mock.Provider.json#", schema.Id);
+            Assert.Equal("https://schema.management.azure.com/schemas/2016-01-01/Mock.Provider.json#", schema.Id);
             Assert.Equal("http://json-schema.org/draft-04/schema#", schema.Schema);
             Assert.Equal("Mock.Provider", schema.Title);
             Assert.Equal("Mock Provider Resource Types", schema.Description);

@@ -1,5 +1,5 @@
 {
-  "id": "http://schema.management.azure.com/schemas/2015-12-01/Microsoft.Batch.json#",
+  "id": "https://schema.management.azure.com/schemas/2015-12-01/Microsoft.Batch.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Batch",
   "description": "Microsoft Batch Resource Types",
@@ -17,9 +17,16 @@
           ]
         },
         "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2015-12-01"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "2015-12-01"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ]
         },
         "location": {
@@ -35,7 +42,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The user specified tags associated with the account."
@@ -46,7 +53,7 @@
               "$ref": "#/definitions/AccountBaseProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The properties of the account."
@@ -83,9 +90,16 @@
           ]
         },
         "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2015-12-01"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "2015-12-01"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ]
         },
         "allowUpdates": {
@@ -94,7 +108,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "A value indicating whether packages within the application may be overwritten using the same version string."
@@ -134,9 +148,16 @@
           ]
         },
         "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2015-12-01"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "2015-12-01"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ]
         }
       },
@@ -158,7 +179,7 @@
               "$ref": "#/definitions/AutoStorageBaseProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The properties related to auto storage account."
@@ -192,9 +213,16 @@
           ]
         },
         "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2015-12-01"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "2015-12-01"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ]
         },
         "allowUpdates": {
@@ -203,7 +231,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "A value indicating whether packages within the application may be overwritten using the same version string."
@@ -243,9 +271,16 @@
           ]
         },
         "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2015-12-01"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "2015-12-01"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ]
         }
       },
