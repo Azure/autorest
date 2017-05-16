@@ -30,6 +30,11 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
 
+        /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceImpactingChanges;
+
         /// <summary>;
         /// The template message for this Rule. 
         /// </summary>
@@ -52,15 +57,17 @@ namespace AutoRest.Swagger.Validation
             {
                 if (path[operation]?.Parameters != null)
                 {
-                    foreach (SwaggerParameter param in path[operation].Parameters)
+                    for (var i=0; i<path[operation].Parameters.Count; ++i)
                     {
-                        if (param.In == ParameterLocation.Body && param.Schema?.Properties != null)
+                        if (path[operation].Parameters[i].In == ParameterLocation.Body && path[operation].Parameters[i].Schema?.Properties != null)
                         {
-                            foreach (KeyValuePair<string, Schema> prop in param.Schema?.Properties)
+                            foreach (KeyValuePair<string, Schema> prop in path[operation].Parameters[i].Schema?.Properties)
                             {
                                 if (!ValidationUtilities.IsODataProperty(prop.Key) && !ValidationUtilities.IsNameCamelCase(prop.Key))
                                 {
-                                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, prop.Key, ValidationUtilities.GetCamelCasedSuggestion(prop.Key));
+                                    yield return new ValidationMessage(new FileObjectPath(context.File, 
+                                        context.Path.AppendProperty(operation).AppendProperty("parameters").AppendIndex(i).AppendProperty("schema").AppendProperty("properties").AppendProperty(prop.Key)), 
+                                        this, prop.Key, ValidationUtilities.GetCamelCasedSuggestion(prop.Key));
                                 }
                             }
                         }

@@ -1,23 +1,23 @@
-import { Lines } from '../parsing/text-utility';
-import {
-  CommonmarkHeadingFollowingText,
-  CommonmarkHeadingText,
-  CommonmarkSubHeadings,
-  ParseCommonmark
-} from '../parsing/literate';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Channel, SourceLocation } from '../message';
+import { Lines } from "../parsing/text-utility";
+import {
+  CommonmarkHeadingFollowingText,
+  CommonmarkHeadingText,
+  CommonmarkSubHeadings,
+  ParseCommonmark
+} from "../parsing/literate";
+import { Channel, SourceLocation } from "../message";
 import { OperationAbortedException } from "../exception";
 import { safeEval } from "../ref/safe-eval";
 import { ConfigurationView } from "../autorest-core";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/data-store";
 import { IsPrefix, JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { ResolvePath, ResolveRelativeNode } from "../parsing/yaml";
-import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNodeWithPath } from '../ref/yaml';
+import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNodeWithPath } from "../ref/yaml";
 import { ResolveUri } from "../ref/uri";
 import { From } from "../ref/linq";
 import { Mappings, Mapping } from "../ref/source-map";
@@ -244,7 +244,7 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
 
       // replace queries
       const candidProperties = ["name", "operationId", "$ref"];
-      clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(' || ')})]`);
+      clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(" || ")})]`);
 
       // console.log(clue);
 
@@ -277,7 +277,6 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
   const data = await ParseLiterateYaml(config, await inputScope.ReadStrict(inputFileUri), workingScope.CreateScope("yaml"));
   const externalFiles: { [uri: string]: DataHandleRead } = {};
   externalFiles[inputFileUri] = data;
-  //WriteString(`file:///C:/output/${(<any>workingScope).name}_before.yaml`, await externalFiles[inputFileUri].ReadData());
   await EnsureCompleteDefinitionIsPresent(config,
     inputScope,
     workingScope.CreateScope("ref-resolving"),
@@ -287,7 +286,6 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
     data.ReadObject<any>(),
     IdentitySourceMapping(data.key, data.ReadYamlAst()));
   const result = await StripExternalReferences(externalFiles[inputFileUri], workingScope.CreateScope("strip-ext-references"));
-  //WriteString(`file:///C:/output/${(<any>workingScope).name}_after.yaml`, await result.ReadData());
   return result;
 }
 

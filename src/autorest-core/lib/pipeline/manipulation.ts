@@ -1,16 +1,16 @@
-import { nodes } from '../ref/jsonpath';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { nodes } from "../ref/jsonpath";
 import { safeEval } from "../ref/safe-eval";
 import { ManipulateObject } from "./object-manipulator";
 import { DataHandleRead, DataStoreView } from "../data-store/data-store";
 import { DirectiveView } from "../configuration";
 import { ConfigurationView } from "../autorest-core";
 import { From } from "../ref/linq";
-import { Channel, Message, SourceLocation } from '../message';
+import { Channel, Message, SourceLocation } from "../message";
 
 export class Manipulator {
   private transformations: DirectiveView[];
@@ -80,7 +80,7 @@ export class Manipulator {
             const doc = data.ReadObject<any>();
             const allHits = nodes(doc, w);
             for (const hit of allHits) {
-              let testResults = [...safeEval<any>(`(function* () { ${t.indexOf('yield') === -1 ? `yield (${t}\n)` : `${t}\n`} })()`, { $: hit.value, $doc: doc, $path: hit.path })];
+              let testResults = [...safeEval<any>(`(function* () { ${t.indexOf("yield") === -1 ? `yield (${t}\n)` : `${t}\n`} })()`, { $: hit.value, $doc: doc, $path: hit.path })];
               for (const testResult of testResults) {
                 if (testResult === false || typeof testResult !== "boolean") {
                   const messageText = typeof testResult === "string" ? testResult : "Custom test failed";

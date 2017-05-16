@@ -11,6 +11,7 @@ using AutoRest.Swagger;
 using AutoRest.Swagger.Validation.Core;
 using System.Threading.Tasks;
 using System;
+using AutoRest.Swagger.Model;
 
 public class AzureValidator : NewPlugin
 {
@@ -65,28 +66,46 @@ public class AzureValidator : NewPlugin
                 }
             }
         }
-        }, new object[0]);
+        });
     }
 
     protected override async Task<bool> ProcessInternal()
     {
         var files = await ListInputs();
-        if (files.Length != 1)
+        foreach (var file in files)
         {
-            return false;
+            var content = await ReadFile(file);
+            var fs = new MemoryFileSystem();
+            fs.WriteAllText(file, content);
+
+            var serviceDefinition = SwaggerParser.Load(file, fs);
+            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+            var docTypeInput = (await GetValue<string>("openapi-type"));
+            var docStateInput = (await GetValue<string>("merge-state"));
+
+            ServiceDefinitionDocumentType docType;
+            if (!Enum.TryParse<ServiceDefinitionDocumentType>(docTypeInput, true, out docType))
+            {
+                throw new Exception("Invalid Input for openapi-type: " + docTypeInput + ". Valid values are 'arm', 'data-plane' or 'default'.");
+            }
+
+            ServiceDefinitionDocumentState docState;
+            if (!Enum.TryParse<ServiceDefinitionDocumentState>(docStateInput, true, out docState))
+            {
+                throw new Exception("Invalid Input for merge-state: " + docStateInput + ". Valid values are 'individual' and 'composed'.");
+            }
+
+            var metadata = new ServiceDefinitionMetadata
+            {
+                ServiceDefinitionDocumentType = docType,
+                MergeState = docState
+            };
+
+            foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(file, UriKind.RelativeOrAbsolute), serviceDefinition, metadata))
+            {
+                LogValidationMessage(validationEx);
+            }
         }
-
-        var content = await ReadFile(files[0]);
-        var fs = new MemoryFileSystem();
-        fs.WriteAllText(files[0], content);
-
-        var serviceDefinition = SwaggerParser.Load(files[0], fs);
-        var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-        foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition))
-        {
-            LogValidationMessage(validationEx);
-        }
-
         return true;
     }
 }

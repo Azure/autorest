@@ -26,6 +26,11 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
 
+        /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceImpactingChanges;
+
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
             // get all operation objects that are either of get or post type
@@ -51,7 +56,10 @@ namespace AutoRest.Swagger.Validation
                 // and the object does not have a property named "value", show the warning
                 if ((collTypeDef.Properties?.Count <= 2) && collTypeDef.Properties.All(prop => !(prop.Key.ToLower().Equals("value") && prop.Value.Type == DataType.Array)))
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, collType, opPair.Value.OperationId);
+                    var violatingPath = ValidationUtilities.GetOperationIdPath(opPair.Value.OperationId, entity);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, 
+                        context.Path.AppendProperty(violatingPath.Key).AppendProperty(opPair.Key).AppendProperty("responses").AppendProperty("200").AppendProperty("schema")), 
+                        this, collType, opPair.Value.OperationId);
                 }
             }
         }

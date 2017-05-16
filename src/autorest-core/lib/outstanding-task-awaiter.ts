@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OutstandingTaskAlreadyCompletedException } from './exception';
+import { OutstandingTaskAlreadyCompletedException } from "./exception";
 
 export class OutstandingTaskAwaiter {
   private locked: boolean = false;

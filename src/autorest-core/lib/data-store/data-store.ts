@@ -6,13 +6,13 @@
 import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
-import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from '../ref/uri';
-import { FastStringify, Parse, ParseNode, ParseToAst as parseAst, Stringify, YAMLNode } from '../ref/yaml';
+import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from "../ref/uri";
+import { FastStringify, ParseNode, ParseToAst as parseAst, YAMLNode } from "../ref/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
 import { BlameTree } from "../source-map/blaming";
-import { Lazy, LazyPromise } from '../lazy';
+import { Lazy } from "../lazy";
 import { IFileSystem } from "../file-system";
 import { OperationCanceledException } from "../exception";
 

@@ -48,7 +48,7 @@ namespace AutoRest.Swagger.Validation
                 {
                     if (property.Value.ReadOnly && definition.Required?.Contains(property.Key) == true)
                     {
-                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, property.Key);
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty(property.Key)), this, property.Key);
                     }
                 }
             }            

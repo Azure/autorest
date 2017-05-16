@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { EnhancedPosition, Mappings, Position, SmartPosition } from '../ref/source-map';
+import { EnhancedPosition, Mappings, SmartPosition } from "../ref/source-map";
 import { Descendants, ToAst } from "../ref/yaml";
-import { JsonPath, parse, stringify } from '../ref/jsonpath';
+import { JsonPath, stringify } from "../ref/jsonpath";
 import * as yaml from "../parsing/yaml";
 import { DataHandleRead } from "../data-store/data-store";
 

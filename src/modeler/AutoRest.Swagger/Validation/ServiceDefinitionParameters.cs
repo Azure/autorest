@@ -39,6 +39,17 @@ namespace AutoRest.Swagger.Validation
         /// </remarks>
         public override string MessageTemplate => Resources.ServiceDefinitionParametersMissingMessage;
 
+
+        /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.SDKImpactingChanges;
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
         /// <summary>
         /// This rule passes if the parameters section contains both subscriptionId and api-version parameters
         /// </summary>

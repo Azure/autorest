@@ -34,21 +34,43 @@ namespace AutoRest.Swagger.Validation.Core
         /// <summary>
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
-        /// <param name="entity">The object to validate</param>
-        public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, ServiceDefinition entity)
+        /// <param name="filePath">uri path to the servicedefinition document <paramref name="entity"/></param>
+        /// <param name="entity">The object to validate</param><param name="entity">The object to validate</param>
+        /// <param name="metaData">The metadata associated with serviceDefinition to which <paramref name="metaData"/> belongs to</param>
+        public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, ServiceDefinition entity, ServiceDefinitionMetadata metadata)
         {
-            return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity, filePath), Enumerable.Empty<Rule>());
+            return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity, filePath), Enumerable.Empty<Rule>(), metadata);
         }
 
         /// <summary>
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
         /// <param name="entity">The object to validate</param>
+        /// <param name="metaData">metaData associated with the serviceDefinition</param>
+        public IEnumerable<Rule> GetFilteredRules(IEnumerable<Rule> rules, ServiceDefinitionMetadata metaData)
+        {
+            // Filter by document type
+            // By default select all rules, then add the doc type specific rules
+            var serviceDefTypeRules = rules.Where(rule => rule.ServiceDefinitionDocumentType == ServiceDefinitionDocumentType.Default);
+            if (metaData.ServiceDefinitionDocumentType != ServiceDefinitionDocumentType.Default)
+            {
+                serviceDefTypeRules = serviceDefTypeRules.Concat(rules.Where(rule => (rule.ServiceDefinitionDocumentType & metaData.ServiceDefinitionDocumentType)!=0));
+            }
+
+            // Filter by the current merge state, and return
+            return serviceDefTypeRules.Where(rule => rule.ValidationRuleMergeState == metaData.MergeState);
+        }
+        
+        /// <summary>
+        /// Recursively validates <paramref name="entity"/> by traversing all of its properties
+        /// </summary>
+        /// <param name="entity">The object to validate</param>
         /// <param name="parentContext">The rule context of the object that <paramref name="entity"/> belongs to</param>
         /// <param name="rules">The set of rules from the parent object to apply to <paramref name="entity"/></param>
+        /// <param name="metaData">The metadata associated with serviceDefinition to which <paramref name="entity"/> belongs to</param>
         /// <param name="traverseProperties">Whether or not to traverse this <paramref name="entity"/>'s properties</param>
         /// <returns></returns>
-        private IEnumerable<LogMessage> RecursiveValidate(object entity, ObjectPath entityPath, RuleContext parentContext, IEnumerable<Rule> rules, bool traverseProperties = true)
+        private IEnumerable<LogMessage> RecursiveValidate(object entity, ObjectPath entityPath, RuleContext parentContext, IEnumerable<Rule> rules, ServiceDefinitionMetadata metaData, bool traverseProperties = true)
         {
             var messages = Enumerable.Empty<LogMessage>();
             if (entity == null)
@@ -66,7 +88,7 @@ namespace AutoRest.Swagger.Validation.Core
                 // Recursively validate each list item and add the 
                 // item index to the location of each validation message
                 var listMessages = list.SelectMany((item, index)
-                    => RecursiveValidate(item, entityPath.AppendIndex(index), parentContext.CreateChild(item, index), collectionRules));
+                    => RecursiveValidate(item, entityPath.AppendIndex(index), parentContext.CreateChild(item, index), collectionRules, metaData));
                 messages = messages.Concat(listMessages);
             }
 
@@ -78,7 +100,7 @@ namespace AutoRest.Swagger.Validation.Core
                 // Recursively validate each dictionary entry and add the entry 
                 // key to the location of each validation message
                 var dictMessages = dictionary.SelectMany((key, value)
-                    => RecursiveValidate(value, entityPath.AppendProperty((string)key), parentContext.CreateChild(value, (string)key), collectionRules, shouldTraverseEntries));
+                    => RecursiveValidate(value, entityPath.AppendProperty((string)key), parentContext.CreateChild(value, (string)key), collectionRules, metaData, shouldTraverseEntries));
                 messages = messages.Concat(dictMessages);
             }
 
@@ -87,12 +109,12 @@ namespace AutoRest.Swagger.Validation.Core
             {
                 // Validate each property of the object
                 var propertyMessages = entity.GetValidatableProperties()
-                    .SelectMany(p => ValidateProperty(p, p.GetValue(entity), entityPath.AppendProperty(p.Name), parentContext));
+                    .SelectMany(p => ValidateProperty(p, p.GetValue(entity), entityPath.AppendProperty(p.Name), parentContext, metaData));
                 messages = messages.Concat(propertyMessages);
             }
 
             // Validate the value of the object itself
-            var valueMessages = ValidateObjectValue(entity, collectionRules, parentContext);
+            var valueMessages = ValidateObjectValue(entity, collectionRules, parentContext, metaData);
             return messages.Concat(valueMessages);
         }
 
@@ -102,12 +124,14 @@ namespace AutoRest.Swagger.Validation.Core
         /// <param name="entity"></param>
         /// <param name="collectionRules"></param>
         /// <param name="parentContext"></param>
+        /// <param name="metaData">The metadata associated with corresponding serviceDefinition</param>
         /// <returns></returns>
         private IEnumerable<LogMessage> ValidateObjectValue(object entity,
-            IEnumerable<Rule> collectionRules, RuleContext parentContext)
+            IEnumerable<Rule> collectionRules, RuleContext parentContext,
+            ServiceDefinitionMetadata metaData)
         {
             // Get any rules defined for the class of the entity
-            var classRules = entity.GetType().GetValidationRules();
+            var classRules = GetFilteredRules(entity.GetType().GetValidationRules(), metaData);
 
             // Combine the class rules with any rules that apply to the collection that the entity is part of
             classRules = collectionRules.Concat(classRules);
@@ -116,7 +140,15 @@ namespace AutoRest.Swagger.Validation.Core
             return classRules.SelectMany(rule => rule.GetValidationMessages(entity, parentContext));
         }
 
-        private IEnumerable<LogMessage> ValidateProperty(PropertyInfo prop, object value, ObjectPath entityPath, RuleContext parentContext)
+        /// <summary>
+        /// Validates an object property
+        /// </summary>
+        /// <param name="prop">The property metadata</param>
+        /// <param name="value">The property object to validate</param>
+        /// <param name="entityPath">Path to the property object in the serviceDefinition</param>
+        /// <param name="metaData">The metadata associated with corresponding serviceDefinition</param>
+        /// <returns></returns>
+        private IEnumerable<LogMessage> ValidateProperty(PropertyInfo prop, object value, ObjectPath entityPath, RuleContext parentContext, ServiceDefinitionMetadata metaData)
         {
             // Uses the property name resolver to get the name to use in the path of messages
             var propName = resolver(prop);
@@ -128,15 +160,15 @@ namespace AutoRest.Swagger.Validation.Core
                 : parentContext.CreateChild(value, -1);
 
             // Get any rules defined on this property and any defined as applying to the collection
-            var propertyRules = prop.GetValidationRules();
-            var collectionRules = prop.GetValidationCollectionRules();
+            var propertyRules = GetFilteredRules(prop.GetValidationRules(), metaData);
+            var collectionRules = GetFilteredRules(prop.GetValidationCollectionRules(), metaData);
 
             // Validate the value of this property against any rules for it
             var propertyMessages = propertyRules.SelectMany(r => r.GetValidationMessages(value, ruleContext));
 
             // Recursively validate the property (e.g. its properties or any list/dictionary entries),
             // passing any rules that apply to this collection)
-            var childrenMessages = RecursiveValidate(value, entityPath, ruleContext, collectionRules, shouldTraverseObject);
+            var childrenMessages = RecursiveValidate(value, entityPath, ruleContext, collectionRules, metaData, shouldTraverseObject);
 
             return propertyMessages.Concat(childrenMessages);
         }

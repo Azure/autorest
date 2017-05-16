@@ -8,9 +8,9 @@ namespace AutoRest.Swagger.Validation.Core
     [Flags]
     public enum ValidationCategory
     {
-        None            = 1 << 0,
-        RPCViolation    = 1 << 1,
-        OneAPIViolation = 1 << 2,
-        SDKViolation    = 1 << 3
+        None            = 0,
+        RPCViolation    = 1 << 0,
+        OneAPIViolation = 1 << 1,
+        SDKViolation    = 1 << 2
     }
 }

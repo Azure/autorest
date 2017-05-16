@@ -89,7 +89,7 @@ import { Message, Channel } from "../lib/message";
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties", from: "swagger.md" });
   }
 
-  @test @timeout(60000) async "set descriptions on different levels"() {
+  @test @timeout(0) async "set descriptions on different levels"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
 
     const GenerateCodeModel = async (config: any) => {

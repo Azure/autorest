@@ -638,7 +638,8 @@ task 'regenerate-samples', '', (done) ->
             .filter((file) -> file.match(/.(map|txt)$/))
             .forEach((file) -> 
               sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
-              sed "-i", /\sat .*/g, "at ...", file                         # exception stack traces
+              sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
+              (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file)   # minify exception stack traces
             )
           next null
         , true # don't fail on failures (since we wanna record them)

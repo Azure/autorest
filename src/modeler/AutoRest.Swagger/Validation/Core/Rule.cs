@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using AutoRest.Core.Logging;
+using AutoRest.Swagger.Model;
 using System;
 
 namespace AutoRest.Swagger.Validation.Core
@@ -22,9 +23,26 @@ namespace AutoRest.Swagger.Validation.Core
         public virtual string Id => "!!! implement me and make me abstract !!!";
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public virtual ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// When to apply the validation rule, before or after it has been merged as a part of 
+        /// its merged document as specified in the corresponding '.md' file
+        /// By default consider all rules to be applied for After only
+        /// </summary>
+        public virtual ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
+        /// <summary>
         /// Violation category of the Rule.
         /// </summary>
         public virtual ValidationCategory ValidationCategory => ValidationCategory.None; // !!! implement me and make me abstract !!!
+
+        /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public virtual ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.None;
 
         /// <summary>
         /// The template message for this Rule. 

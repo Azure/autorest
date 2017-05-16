@@ -4,16 +4,15 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { BlameTree } from "./source-map/blaming";
-import { Clone } from "./ref/yaml";
 import { OperationAbortedException } from "./exception";
 import { TryDecodeEnhancedPositionFromName } from "./source-map/source-map";
 import { Suppressor } from "./pipeline/suppression";
-import { matches, stringify } from "./ref/jsonpath";
-import { MergeOverwriteOrAppend, resolveRValue, ShallowCopy } from "./source-map/merging";
+import { stringify } from "./ref/jsonpath";
+import { MergeOverwriteOrAppend, resolveRValue } from "./source-map/merging";
 import { DataHandleRead, DataStore } from "./data-store/data-store";
 import { EventEmitter, IEvent } from "./events";
-import { CodeBlock, EvaluateGuard, ParseCodeBlocks } from "./parsing/literate-yaml";
-import { CreateFolderUri, EnsureIsFolderUri, ReadUri, ResolveUri } from "./ref/uri";
+import { EvaluateGuard, ParseCodeBlocks } from "./parsing/literate-yaml";
+import { CreateFolderUri, EnsureIsFolderUri, ResolveUri } from "./ref/uri";
 import { From } from "./ref/linq";
 import { IFileSystem } from "./file-system";
 import * as Constants from "./constants";
@@ -25,6 +24,7 @@ const RESOLVE_MACROS_AT_RUNTIME = true;
 
 export interface AutoRestConfigurationImpl {
   __info?: string | null;
+  "allow-no-input"?: boolean;
   "input-file": string[] | string;
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
@@ -43,17 +43,15 @@ export interface AutoRestConfigurationImpl {
   "client-side-validation"?: boolean; // C#
   "fluent"?: boolean;
   "azure-arm"?: boolean;
-  "azure-validator"?: boolean;
-  "model-validator"?: boolean;
-  "semantic-validator"?: boolean;
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
-  "namespace"?: string; // TODO: the modeler cares :( because it is badly designed
+  "namespace"?: string;
   "license-header"?: string;
   "add-credentials"?: boolean;
   "package-name"?: string; // Ruby, Python, ...
   "package-version"?: string;
   "sync-methods"?: "all" | "essential" | "none";
   "payload-flattening-threshold"?: number;
+  "openapi-type"?: string // the specification type (ARM/Data-Plane/Default)
 }
 
 // TODO: operate on DataHandleRead and create source map!
@@ -187,6 +185,7 @@ export class ConfigurationView {
     }
 
     // default values that are the least priority.
+    // TODO: why is this here and not in default-configuration?
     this.rawConfig = MergeConfigurations(this.rawConfig, <any>{
       "base-folder": ".",
       "output-folder": "generated",
@@ -274,7 +273,11 @@ export class ConfigurationView {
   }
 
   public GetEntry(key: keyof AutoRestConfigurationImpl): any {
-    return (this.config as any)[key];
+    let result = this.config as any;
+    for (const keyPart of key.split(".")) {
+      result = result[keyPart];
+    }
+    return result;
   }
 
   public get Raw(): AutoRestConfigurationImpl {
@@ -292,12 +295,12 @@ export class ConfigurationView {
   public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
     for (const section of ValuesOf<any>((this.config as any)[pluginName])) {
       if (section) {
-        yield this.GetPluginViewImmediate(section === true ? {} : section);
+        yield this.GetNestedConfigurationImmediate(section === true ? {} : section);
       }
     }
   }
 
-  public GetPluginViewImmediate(...scope: any[]): ConfigurationView {
+  public GetNestedConfigurationImmediate(...scope: any[]): ConfigurationView {
     return new ConfigurationView(this.messageEmitter, this.configFileFolderUri, ...scope, this.config).Indexer;
   }
 

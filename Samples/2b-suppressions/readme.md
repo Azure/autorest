@@ -12,7 +12,7 @@ input-file:
 ## Validation
 
 ``` yaml
-azure-arm: true
+azure-validator: true
 ```
 
 ## Suppression

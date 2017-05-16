@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using AutoRest.Swagger.Validation.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
+using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -41,21 +42,25 @@ namespace AutoRest.Swagger.Tests
     [Collection("Validation Tests")]
     public partial class SwaggerModelerValidationTests
     {
-        private IEnumerable<ValidationMessage> ValidateSwagger(string input)
+        private IEnumerable<ValidationMessage> ValidateSwagger(string input, ServiceDefinitionDocumentType serviceDefDocType = ServiceDefinitionDocumentType.ARM, 
+            ServiceDefinitionDocumentState mergeState = ServiceDefinitionDocumentState.Composed)
         {
+
+            // Most rules are to be applied for ARM documents
+            // Also, most rules need to be run over the composite document (i.e. AFTER merge state)
+            // hence the defaults
             using (NewContext)
             {
-                new Settings
+                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                var serviceDefinition = SwaggerParser.Parse(input, File.ReadAllText(input));
+
+                var metaData = new ServiceDefinitionMetadata
                 {
-                    CodeGenerator = "None",
-                    Namespace = "Test",
-                    Input = input
+                    ServiceDefinitionDocumentType = serviceDefDocType,
+                    MergeState = mergeState
                 };
-                var modeler = new SwaggerModeler();
-                var messages = new List<LogMessage>();
-                Logger.Instance.AddListener(new SignalingLogListener(Category.Info, messages.Add));
-                modeler.Build();
-                return messages.OfType<ValidationMessage>();
+                
+                return validator.GetValidationExceptions(new Uri(input, UriKind.RelativeOrAbsolute), serviceDefinition, metaData).OfType<ValidationMessage>();
             }
         }
 
@@ -180,14 +185,18 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void NonHttpsServiceDefinitionForScheme()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-service-def-scheme.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-service-def-scheme.json"),
+                                           ServiceDefinitionDocumentType.ARM,
+                                           ServiceDefinitionDocumentState.Individual);
             messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
         }
 
         [Fact]
         public void NonHttpsOperationsForScheme()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-operations-scheme.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-https-operations-scheme.json"),
+                                           ServiceDefinitionDocumentType.ARM,
+                                           ServiceDefinitionDocumentState.Individual);
             messages.AssertOnlyValidationWarning(typeof(SupportedSchemesWarning));
         }
 

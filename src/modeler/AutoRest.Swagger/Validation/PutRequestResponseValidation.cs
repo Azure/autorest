@@ -24,6 +24,11 @@ namespace AutoRest.Swagger.Validation
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceImpactingChanges;
+
+        /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
@@ -78,7 +83,7 @@ namespace AutoRest.Swagger.Validation
                 {
                     var violatingPath = ValidationUtilities.GetOperationIdPath(op.OperationId, paths);
                     var violatingOpVerb = ValidationUtilities.GetOperationIdVerb(op.OperationId, violatingPath);
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath.Key).AppendProperty(violatingOpVerb).AppendProperty("operationId")), this, op.OperationId, reqBodySchema, respModel);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingPath.Key).AppendProperty(violatingOpVerb)), this, op.OperationId, reqBodySchema, respModel);
                 }
             }
         }

@@ -3,9 +3,8 @@
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import * as path from "path";
 import { ResolveUri, GetFilenameWithoutExtension } from "./lib/ref/uri";
-import { DataHandleRead, DataStoreViewReadonly } from "./lib/data-store/data-store";
+import { DataStoreViewReadonly } from "./lib/data-store/data-store";
 import { AutoRestConfigurationImpl } from "./lib/configuration";
 
 const regexLegacyArg = /^-[^-]/;
@@ -60,7 +59,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
   const codegenerator = switches["g"] || switches["codegenerator"] || "CSharp";
   const usedCodeGenerator = codegenerator.toLowerCase().replace("azure.", "").replace(".fluent", "");
   if (codegenerator.toLowerCase() === "none") {
-    result["azure-validator"] = true;
+    (<any>result)["azure-validator"] = true;
   } else {
     (<any>result)[usedCodeGenerator] = {};
     if (codegenerator.toLowerCase().startsWith("azure.")) {

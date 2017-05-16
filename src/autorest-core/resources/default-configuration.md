@@ -7,6 +7,7 @@ This configuration applies to every run of AutoRest, but with less priority than
 ``` yaml
 azure-arm: false
 output-folder: generated
+openapi-type: arm
 ```
 
 ## Pipeline
@@ -26,6 +27,14 @@ plugins:
 pipeline:
   pipeline-emitter: # emits the pipeline graph
     scope: scope-pipeline-emitter
+  autorest-interactive:
+    scope: autorest-interactive
+
+scope-pipeline-emitter:
+  input-artifact: pipeline
+  is-object: true
+  output-uri-expr: |
+    "pipeline"
 ```
 
 #### Loading
@@ -63,11 +72,6 @@ pipeline:
     input: transform
     scope: scope-swagger-document/emitter
 
-scope-pipeline-emitter:
-  input-artifact: pipeline
-  is-object: true
-  output-uri-expr: |
-    "pipeline"
 scope-swagger-document/emitter:
   input-artifact: swagger-document
   is-object: true
@@ -93,9 +97,41 @@ pipeline:
   swagger-document/semantic-validator:
     input: transform
     scope: semantic-validator
+```
+
+##### Azure Validator
+
+``` yaml
+pipeline:
+  # validator written in C#
   swagger-document/azure-validator:
     input: transform
-    scope: azure-validator
+    scope: azure-validator-composed
+  swagger-document/individual/azure-validator:
+    input: individual/transform
+    scope: azure-validator-individual
+  # validator written in TypeScript
+  swagger-document/azure-openapi-validator:
+    input:
+      - transform
+      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
+  swagger-document/individual/azure-openapi-validator:
+    input: 
+      - transform
+      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
+```
+
+Activate `azure-validator` when setting `azure-arm`!?
+
+``` yaml $(azure-arm)
+azure-validator: true
+```
+
+``` yaml $(azure-validator)
+azure-validator-composed:
+  merge-state: composed
+azure-validator-individual:
+  merge-state: individual
 ```
 
 #### Generation
@@ -405,12 +441,4 @@ On by default for backwards compatibility, but see https://github.com/Azure/auto
 
 ``` yaml
 client-side-validation: true
-```
-
-## Azure Validation
-
-Activate `azure-validator` when setting `azure-arm`!?
-
-``` yaml $(azure-arm)
-azure-validator: true
 ```
