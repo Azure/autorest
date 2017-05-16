@@ -65,9 +65,14 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 |`--use-datetimeoffset`|Indicates whether to use DateTimeOffset instead of DateTime to model date-time types|
 |`--models-name=NAME`|Name to use for the generated client models namespace and folder name. By default, uses the value of 'Models'. This is not currently supported by all code generators.|
 |`--output-file-name=FILENAME`|If set, will cause generated code to be output to a single file. Not supported by all code generators.|
-|`--azure-validator=true`|If set, uses the new autorest core pipeline to execute the validator plugin.
-|`--openapi-type=arm|default|data-plane`|Indicates the type of configuration file being passed to the validator so that it can run the appropriate class of validation rules accordingly.
 
+#### Validation
+|Option                                                                &nbsp;| Description |
+|------------------|-------------|
+|`--azure-validator`|If set, runs the Azure specific validator plugin.|
+|`--openapi-type=arm│default│data-plane`|Indicates the type of configuration file being passed to the `azure-validator` so that it can run the appropriate class of validation rules accordingly.|
+|`--model-validator`|If set, validates the provided OpenAPI definition(s) against provided `examples`.|
+|`--semantic-validator`|If set, semantically verifies the provided OpenAPI definition(s), e.g. checks that a parameter's specified `default` value matches the parameter's declared type.|
 
 #### Selecting the Language with which to generate code
 
