@@ -363,10 +363,15 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   const barrier = new OutstandingTaskAwaiter();
   for (const name of Object.keys(pipeline.pipeline)) {
     const task = getTask(name);
-    const taskx: { _state: "running" | "failed" | "complete" } = task as any;
+    const taskx: { _state: "running" | "failed" | "complete", _result: () => DataHandleRead[], _finishedAt: number } = task as any;
     taskx._state = "running";
     task.catch(() => taskx._state = "failed");
-    task.then(() => taskx._state = "complete");
+    task.then(async x => {
+      const res = await Promise.all((await x.Enum()).map(key => x.ReadStrict(key)));
+      taskx._result = () => res;
+      taskx._state = "complete";
+      taskx._finishedAt = Date.now();
+    });
     barrier.Await(task);
   }
   await barrier.Wait();
