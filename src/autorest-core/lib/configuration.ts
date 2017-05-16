@@ -326,7 +326,7 @@ export class ConfigurationView {
                 const path = s.Position.path as string[];
                 if (path) {
                   this.Message({
-                    Channel: Channel.Debug,
+                    Channel: Channel.Warning,
                     Text: `Could not find the exact path ${JSON.stringify(path)} for ${JSON.stringify(m.Details)}`
                   });
                   if (path.length === 0) {
