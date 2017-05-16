@@ -87,8 +87,9 @@ namespace AutoRest.AzureResourceSchema
                             case "string":
                                 shouldAddExpressionReference = (definition.Enum != null &&
                                                                 definition.Enum.Any() &&
-                                                                definitionName != "type" &&
-                                                                definitionName != "apiVersion") ||
+                                                                definitionName != "type" 
+                                                                // && definitionName != "apiVersion"  // api versions are templated in some templates. No idea why. 
+                                                                ) ||
                                                                definition.Pattern != null;
                                 break;
 
@@ -126,7 +127,7 @@ namespace AutoRest.AzureResourceSchema
 
                         WriteDefinition(writer, new JsonSchema()
                         {
-                            Ref = "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                            Ref = "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                         });
 
                         writer.WriteEndArray();

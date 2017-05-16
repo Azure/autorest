@@ -65,7 +65,7 @@ namespace AutoRest.AzureResourceSchema
                 if (!resourceSchemas.ContainsKey(resourceProvider))
                 {
                     resourceSchema = new ResourceSchema();
-                    resourceSchema.Id = string.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
+                    resourceSchema.Id = string.Format(CultureInfo.InvariantCulture, "https://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
                     resourceSchema.Title = resourceProvider;
                     resourceSchema.Description = resourceProvider.Replace('.', ' ') + " Resource Types";
                     resourceSchema.Schema = "http://json-schema.org/draft-04/schema#";

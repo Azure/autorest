@@ -307,7 +307,7 @@ function getRds(schema: any, path: string): Array<string> {
   const result = [];
   if (schema.resourceDefinitions) {
     for (const name of Object.getOwnPropertyNames(schema.resourceDefinitions)) {
-      result.push(`{ "$ref": "http://schema.management.azure.com/schemas/${apiversion}/${namespace}.json#/resourceDefinitions/${name}" }, `);
+      result.push(`{ "$ref": "https://schema.management.azure.com/schemas/${apiversion}/${namespace}.json#/resourceDefinitions/${name}" }, `);
     }
   }
   return result;
