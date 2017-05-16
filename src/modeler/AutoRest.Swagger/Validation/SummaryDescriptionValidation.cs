@@ -37,7 +37,7 @@ namespace AutoRest.Swagger.Validation
 
         public override IEnumerable<ValidationMessage> GetValidationMessages(Operation operation, RuleContext context)
         {
-            if(operation.Description != null && operation.Summary != null && operation.Description.Trim().Equals(operation.Summary.Trim(), StringComparison.CurrentCultureIgnoreCase))
+            if(operation.Description != null && operation.Summary != null && operation.Description.Trim().Equals(operation.Summary.Trim(), StringComparison.OrdinalIgnoreCase))
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, new object[0]);
             }
