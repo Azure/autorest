@@ -43,7 +43,17 @@ namespace AutoRest.Swagger.Validation
         /// What kind of change implementing this rule can cause.
         /// </summary>
         public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.SDKImpactingChanges;
-        
+
+        /// <summary>
+        /// Represents Service Definition Document Type 
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
+        /// <summary>
+        /// Represents Service Definition Document Merge state
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
         /// <summary>
         /// Validates if the Operations API has been implemented
         /// </summary>
