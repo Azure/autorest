@@ -39,6 +39,12 @@ namespace AutoRest.Swagger.Validation
         /// </remarks>
         public override string MessageTemplate => Resources.ServiceDefinitionParametersMissingMessage;
 
+
+        /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.SDKImpactingChanges;
+
         /// <summary>
         /// What kind of open api document type this rule should be applied to
         /// </summary>

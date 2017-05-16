@@ -83,5 +83,10 @@ namespace AutoRest.Swagger.Validation
             formatParameters = new object[0];
             return true;
         }
+
+        /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceImpactingChanges;
     }
 }
