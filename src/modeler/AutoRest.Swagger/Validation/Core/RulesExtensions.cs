@@ -46,24 +46,12 @@ namespace AutoRest.Swagger.Validation.Core
                    dictType.GenericTypeArguments[1] != typeof(object);
         }
 
-        public static IEnumerable<Rule> GetValidationRules(this PropertyInfo property)
-        {
-            var propertyRules = property.GetCustomAttributes<RuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
-            return propertyRules.Concat(UniversalRules).ReEnumerable();
-        }
+        public static IEnumerable<Rule> GetValidationRules(this PropertyInfo property) =>  property.GetCustomAttributes<RuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
 
-        public static IEnumerable<Rule> GetValidationCollectionRules(this PropertyInfo property)
-        {
-            var collectionRules = property.GetCustomAttributes<CollectionRuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
-            return collectionRules.Concat(UniversalRules).ReEnumerable();
-        }
+        public static IEnumerable<Rule> GetValidationCollectionRules(this PropertyInfo property) => property.GetCustomAttributes<CollectionRuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
 
         public static IEnumerable<Rule> GetValidationRules(this Type type)
             => type.GetCustomAttributes<RuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
 
-        /// <summary>
-        /// The collection of rules that apply to all properties regardless of other rules.
-        /// </summary>
-        public static IEnumerable<Rule> UniversalRules = new List<Rule>();
     }
 }
