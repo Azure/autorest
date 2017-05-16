@@ -68,4 +68,33 @@ import { PumpMessagesToConsole } from './test-utility';
     assert.equal(await autoRest.Process().finish, true);
     assert.notEqual(messages.length, 0);
   }
+  // testing end-to-end for non-arm type validation rules. Since all validation rules are currently defaulted to 
+  // ARM, non-ARM documents should show 0 validation messages
+  // TODO: fix this test when validation rules are properly categorized
+  @test @timeout(60000) async "non-arm type spec testing"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
+    autoRest.AddConfiguration({
+      "openapi-type": "default"
+    });
+
+    const config = await autoRest.view;
+    const messages: Message[] = [];
+
+    autoRest.Message.Subscribe((_, m) => { if (m.Channel === Channel.Warning || Channel.Error) { messages.push(m); } });
+    assert.equal(await autoRest.Process().finish, true);
+    assert.equal(messages.length, 0);
+  }
+  @test @timeout(60000) async "arm type spec testing"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
+    autoRest.AddConfiguration({
+      "openapi-type": "arm"
+    });
+
+    const config = await autoRest.view;
+    const messages: Message[] = [];
+
+    autoRest.Message.Subscribe((_, m) => { if (m.Channel === Channel.Warning || Channel.Error) { messages.push(m); } });
+    assert.equal(await autoRest.Process().finish, true);
+    assert.notEqual(messages.length, 0);
+  }
 }
