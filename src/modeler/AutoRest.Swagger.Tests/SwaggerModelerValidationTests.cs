@@ -623,6 +623,13 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(XMSPageableListByRGAndSubscriptionsValidation), 1);
         }
 
+        [Fact]
+        public void SummaryDescriptionValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-summary-description.json"));
+            messages.AssertOnlyValidationMessage(typeof(SummaryDescriptionValidation), 1);
+        }
+
     }
 
     #region Positive tests

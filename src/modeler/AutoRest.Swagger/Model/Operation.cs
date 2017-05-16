@@ -13,6 +13,7 @@ namespace AutoRest.Swagger.Model
     /// Describes a single API operation on a path.
     /// </summary>
     [Rule(typeof(OperationDescriptionRequired))]
+    [Rule(typeof(SummaryDescriptionValidation))]
     public class Operation : SwaggerBase
     {
         private string _description;
