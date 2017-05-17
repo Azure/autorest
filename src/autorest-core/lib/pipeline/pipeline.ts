@@ -284,13 +284,14 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       await CreatePluginExternal(aiPluginHost, "autorest-interactive")(
         config.GetNestedConfigurationImmediate({
           __status: new Proxy<any>({}, {
-            get(_, key) {
+            async get(_, key) {
               const expr = new Buffer(key.toString(), "base64").toString("ascii");
               try {
                 return FastStringify(safeEval(expr, {
                   pipeline: pipeline.pipeline,
                   tasks: tasks,
-                  startTime: startTime
+                  startTime: startTime,
+                  blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => config.DataStore.Blame(uri, position)
                 }));
               } catch (e) {
                 return "" + e;
