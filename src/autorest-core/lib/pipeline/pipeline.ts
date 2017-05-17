@@ -279,6 +279,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       input: DataStoreViewReadonly,
       working: DataStoreView,
       output: DataStoreView) => {
+      const startTime = Date.now();
       await CreatePluginExternal(aiPluginHost, "autorest-interactive")(
         config.GetNestedConfigurationImmediate({
           __status: new Proxy<any>({}, {
@@ -287,7 +288,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
               try {
                 return safeEval(expr, {
                   pipeline: pipeline.pipeline,
-                  tasks: tasks
+                  tasks: tasks,
+                  startTime: startTime
                 });
               } catch (e) {
                 return "" + e;
