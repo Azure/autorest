@@ -121,10 +121,8 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             _url = _url.Replace("{resourceGroupName}", System.Uri.EscapeDataString(resourceGroupName));
             _url = _url.Replace("{availabilitySetName}", System.Uri.EscapeDataString(avset));
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PATCH"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PATCH");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 

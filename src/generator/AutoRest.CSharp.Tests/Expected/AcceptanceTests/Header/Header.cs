@@ -93,10 +93,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/existingkey").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (userAgent != null)
             {
@@ -207,10 +205,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/existingkey").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -340,10 +336,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/protectedkey").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (contentType != null)
             {
@@ -454,10 +448,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/protectedkey").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -592,10 +584,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/integer").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -725,10 +715,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/integer").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -871,10 +859,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/long").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -1004,10 +990,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/long").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -1150,10 +1134,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/float").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -1283,10 +1265,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/float").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -1429,10 +1409,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/double").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -1562,10 +1540,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/double").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -1708,10 +1684,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/bool").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -1841,10 +1815,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/bool").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -1990,10 +1962,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/string").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -2128,10 +2098,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/string").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -2274,10 +2242,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/date").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -2407,10 +2373,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/date").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -2555,10 +2519,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/datetime").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -2689,10 +2651,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/datetime").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -2837,10 +2797,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/datetimerfc1123").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -2974,10 +2932,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/datetimerfc1123").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -3120,10 +3076,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/duration").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -3253,10 +3207,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/duration").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -3403,10 +3355,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/byte").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -3539,10 +3489,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/byte").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -3687,10 +3635,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/enum").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -3824,10 +3770,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/enum").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
             {
@@ -3952,10 +3896,8 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 

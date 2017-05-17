@@ -81,10 +81,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/readonlyproperty/valid").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -213,10 +211,8 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/readonlyproperty/valid").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PUT"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 

@@ -78,10 +78,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/400").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("HEAD"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("HEAD");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -198,10 +196,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/400").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -322,10 +318,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/400").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PUT"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -452,10 +446,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/400").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PATCH"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PATCH");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -582,10 +574,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/400").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -712,10 +702,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/400").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("DELETE"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -838,10 +826,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/401").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("HEAD"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("HEAD");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -958,10 +944,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/402").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1078,10 +1062,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/403").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1202,10 +1184,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/404").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PUT"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1332,10 +1312,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/405").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PATCH"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PATCH");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1462,10 +1440,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/406").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1592,10 +1568,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/407").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("DELETE"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1722,10 +1696,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/409").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PUT"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1848,10 +1820,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/410").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("HEAD"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("HEAD");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1968,10 +1938,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/411").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2088,10 +2056,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/412").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2212,10 +2178,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/413").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PUT"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2342,10 +2306,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/414").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PATCH"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PATCH");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2472,10 +2434,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/415").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2598,10 +2558,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/416").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2722,10 +2680,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/417").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("DELETE"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2848,10 +2804,8 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/client/429").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("HEAD"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("HEAD");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 

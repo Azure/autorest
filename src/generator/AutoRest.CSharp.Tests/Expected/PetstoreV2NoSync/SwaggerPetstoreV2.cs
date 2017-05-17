@@ -204,10 +204,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -354,10 +352,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PUT"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -488,10 +484,8 @@ namespace Fixtures.PetstoreV2NoSync
                 _url += "?" + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -644,10 +638,8 @@ namespace Fixtures.PetstoreV2NoSync
                 _url += "?" + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -781,10 +773,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
             _url = _url.Replace("{petId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -934,10 +924,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
             _url = _url.Replace("{petId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1067,10 +1055,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet/{petId}").ToString();
             _url = _url.Replace("{petId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("DELETE"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (apiKey != null)
             {
@@ -1180,10 +1166,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "store/inventory").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1323,10 +1307,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "store/order").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1488,10 +1470,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "store/order/{orderId}").ToString();
             _url = _url.Replace("{orderId}", System.Uri.EscapeDataString(orderId));
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1640,10 +1620,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "store/order/{orderId}").ToString();
             _url = _url.Replace("{orderId}", System.Uri.EscapeDataString(orderId));
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("DELETE"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1756,10 +1734,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1875,10 +1851,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/createWithArray").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -1994,10 +1968,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/createWithList").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("POST"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2137,10 +2109,8 @@ namespace Fixtures.PetstoreV2NoSync
                 _url += "?" + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2276,10 +2246,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/logout").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2393,10 +2361,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/{username}").ToString();
             _url = _url.Replace("{username}", System.Uri.EscapeDataString(username));
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("GET"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2545,10 +2511,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/{username}").ToString();
             _url = _url.Replace("{username}", System.Uri.EscapeDataString(username));
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("PUT"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
@@ -2668,10 +2632,8 @@ namespace Fixtures.PetstoreV2NoSync
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/{username}").ToString();
             _url = _url.Replace("{username}", System.Uri.EscapeDataString(username));
             // Create HTTP transport objects
-            var _httpRequest = new HttpRequestMessage();
+            var _httpRequest = new HttpRequestMessage(new HttpMethod("DELETE"), _url);
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
 
