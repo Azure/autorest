@@ -84,6 +84,8 @@ You can test out the PREVIEW AutoRest installer from : https://github.com/Azure/
 Start by reading the documentation for using AutoRest:
 - [Managing Autorest](./docs/managing-autorest.md) - shows how to get new updates to AutoRest and choose which version to use for code generation
 - [Generating a Client using AutoRest](./docs/generating-a-client.md) - shows simple command line usage for generating a client library.
+- [Command Line Interface Documentation](./docs/user/cli.md) - explains common command line arguments
+- [Examples](./Samples) - full, walkthrough-style scenarios for using AutoRest
 
 # Developers ![image](./docs/images/glasses.png)
 
