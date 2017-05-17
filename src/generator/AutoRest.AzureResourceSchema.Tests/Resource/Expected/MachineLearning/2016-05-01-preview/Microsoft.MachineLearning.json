@@ -1,5 +1,5 @@
 {
-  "id": "http://schema.management.azure.com/schemas/2016-05-01-preview/Microsoft.MachineLearning.json#",
+  "id": "https://schema.management.azure.com/schemas/2016-05-01-preview/Microsoft.MachineLearning.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.MachineLearning",
   "description": "Microsoft MachineLearning Resource Types",
@@ -17,9 +17,16 @@
           ]
         },
         "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-05-01-preview"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "2016-05-01-preview"
+              ]
+            },
+            {
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ]
         },
         "location": {
@@ -35,7 +42,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Resource tags"
@@ -46,7 +53,7 @@
               "$ref": "#/definitions/WebServiceProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Web service resource properties."
@@ -88,7 +95,7 @@
               "$ref": "#/definitions/AssetLocation"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Access information for the asset."
@@ -102,7 +109,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Information about the asset's input ports."
@@ -116,7 +123,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Information about the asset's output ports."
@@ -130,7 +137,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "If the asset is a custom module, this holds the module's metadata."
@@ -144,7 +151,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "If the asset is a custom module, this holds the module's parameters."
@@ -210,7 +217,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Additional format information for the data type."
@@ -222,7 +229,7 @@
               "items": {}
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "If the data type is categorical, this provides the list of accepted categories."
@@ -233,7 +240,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Flag indicating if the type supports null values or not."
@@ -244,7 +251,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Flag indicating whether the categories are treated as an ordered set or not, if this is a categorical column."
@@ -282,7 +289,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Level of tracing to be used: None - disables tracing; Error - collects only error (stderr) traces; All - collects all traces (stdout and stderr)."
@@ -314,7 +321,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Sample input data for the web service's input(s) given as an input name to sample input values matrix map."
@@ -326,7 +333,7 @@
               "additionalProperties": {}
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Sample input data for the web service's global parameters"
@@ -343,7 +350,7 @@
               "$ref": "#/definitions/GraphPackage"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The definition of the graph package making up this web service."
@@ -397,7 +404,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "If applicable, parameters of the node. Global graph parameters map into these, with values set at runtime."
@@ -417,7 +424,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The set of nodes making up the graph, provided as a nodeId to GraphNode map"
@@ -431,7 +438,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The list of edges making up the graph."
@@ -445,7 +452,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The collection of global parameters for the graph, given as a global parameter name to GraphParameter map. Each parameter here has a 1:1 match with the global parameters values map declared at the WebServiceProperties level."
@@ -487,7 +494,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Association links for this parameter to nodes in the graph."
@@ -559,7 +566,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The definition of the parameter."
@@ -587,7 +594,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Definitions for nested interface parameters if this is a complex module parameter."
@@ -619,7 +626,7 @@
               "maximum": 200
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Maximum number of concurrent calls allowed on the realtime endpoint."
@@ -654,7 +661,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Map of name to swagger schema for each input or output of the web service."
@@ -711,7 +718,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The set of columns within the data table."
@@ -750,7 +757,7 @@
                   ]
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ]
             },
@@ -768,7 +775,7 @@
                   "$ref": "#/definitions/WebServiceKeys"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "The set of access keys for the web service. If not specified at creation time (PUT), they will be generated automatically by the resource provider."
@@ -779,7 +786,7 @@
                   "type": "boolean"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "If true, the web service can no longer be updated / patched, only removed. Otherwise, the service resource supports changes."
@@ -790,7 +797,7 @@
                   "type": "boolean"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "Flag that controls whether to expose sample data or not in the web service's swagger definition."
@@ -801,7 +808,7 @@
                   "$ref": "#/definitions/RealtimeConfiguration"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "Configuration for the service's realtime endpoint."
@@ -812,7 +819,7 @@
                   "$ref": "#/definitions/DiagnosticsConfiguration"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "Settings controlling the diagnostics traces collection for the web service."
@@ -823,7 +830,7 @@
                   "$ref": "#/definitions/StorageAccount"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "The storage account associated with the service. This is used to store both datasets and diagnostic traces. This information is required at creation time (PUT) and only the key is updateable after that. The account credentials are hidden on a GET web service call."
@@ -834,7 +841,7 @@
                   "$ref": "#/definitions/MachineLearningWorkspace"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "This is only populated at creation time (PUT) for web services originating from an AzureML Studio experiment."
@@ -845,7 +852,7 @@
                   "$ref": "#/definitions/CommitmentPlan"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "The commitment plan associated with this web service. This is required to be specified at creation time (PUT) and is not updateable afterwards."
@@ -856,7 +863,7 @@
                   "$ref": "#/definitions/ServiceInputOutputSpecification"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "Swagger schema for the service's input(s), as applicable."
@@ -867,7 +874,7 @@
                   "$ref": "#/definitions/ServiceInputOutputSpecification"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "Swagger schema for the service's output(s), as applicable."
@@ -878,7 +885,7 @@
                   "$ref": "#/definitions/ExampleRequest"
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "Sample request data for each of the service's inputs, as applicable."
@@ -892,7 +899,7 @@
                   }
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "Set of assets associated with the web service."
@@ -906,7 +913,7 @@
                   }
                 },
                 {
-                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                  "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
                 }
               ],
               "description": "The set of global parameters values defined for the web service, given as a global parameter name to default value map. If no default value is specified, the parameter is considered to be required."
