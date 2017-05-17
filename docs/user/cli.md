@@ -74,6 +74,8 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 |`--model-validator`|If set, validates the provided OpenAPI definition(s) against provided `examples`.|
 |`--semantic-validator`|If set, semantically verifies the provided OpenAPI definition(s), e.g. checks that a parameter's specified `default` value matches the parameter's declared type.|
 
+Also, see [Samples/2a-validation](../../Samples/2a-validation) for an example of validation using a configuration file.
+
 #### Selecting the Language with which to generate code
 
 |Option                              &nbsp;| Description |
