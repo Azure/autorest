@@ -83,7 +83,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(UniqueResourcePaths))]
         [Rule(typeof(ListInOperationName))]
         [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
-        [Rule(typeof(PutGetPatchResponseValidation))]
+        [Rule(typeof(PutGetPatchResponseSchema))]
         [Rule(typeof(OperationsAPIImplementationValidation))]
         [Rule(typeof(ParameterizeProperties))]
         [Rule(typeof(XmsResourceInPutResponse))]

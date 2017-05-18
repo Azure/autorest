@@ -432,7 +432,7 @@ namespace AutoRest.Swagger.Tests
         public void PutGetPatchResponseValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-putgetpatch-response-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(PutGetPatchResponseValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(PutGetPatchResponseSchema), 1);
         }
 
         [Fact]

@@ -14,7 +14,7 @@ namespace AutoRest.Swagger.Validation
     /// <summary>
     /// Validates if the response of Put/Get/Patch are same.
     /// </summary>
-    public class PutGetPatchResponseValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class PutGetPatchResponseSchema : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         /// <summary>
         /// Id of the Rule.
