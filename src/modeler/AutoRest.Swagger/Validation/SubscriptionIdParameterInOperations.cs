@@ -8,7 +8,7 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class OperationParametersValidation : TypedRule<SwaggerParameter>
+    public class SubscriptionIdParameterInOperations : TypedRule<SwaggerParameter>
     {
         private const string SubscriptionId = "subscriptionid";
 

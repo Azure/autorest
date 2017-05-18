@@ -128,7 +128,7 @@ namespace AutoRest.Swagger.Tests
             // ignore ParameterNotDefinedInGlobalParamters validation rule since it overlaps with this
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operations-invalid-parameters.json"))
                             .Where(msg => msg.Rule.GetType().Name != "ParameterNotDefinedInGlobalParamters");
-            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(SubscriptionIdParameterInOperations), 1);
         }
 
         [Fact]
@@ -741,7 +741,7 @@ namespace AutoRest.Swagger.Tests
         public void ValidOperationParameters()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "operations-valid-parameters.json"));
-            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 0);
+            messages.AssertOnlyValidationMessage(typeof(SubscriptionIdParameterInOperations), 0);
         }
 
         [Fact]
