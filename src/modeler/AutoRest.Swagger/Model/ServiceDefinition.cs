@@ -119,7 +119,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(GuidUsage))]
         [Rule(typeof(InvalidSkuModel))]
         [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
-        [Rule(typeof(TrackedResourceGetOperationValidation))]
+        [Rule(typeof(TrackedResourceGetOperation))]
         [Rule(typeof(TrackedResourceListByResourceGroup))]
         [Rule(typeof(TrackedResourceListBySubscription))]
         [Rule(typeof(TrackedResourcePatchOperation))]

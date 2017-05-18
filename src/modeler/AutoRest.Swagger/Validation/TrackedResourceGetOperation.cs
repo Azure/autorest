@@ -11,7 +11,7 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class TrackedResourceGetOperationValidation : TypedRule<Dictionary<string, Schema>>
+    public class TrackedResourceGetOperation : TypedRule<Dictionary<string, Schema>>
     {
         /// <summary>
         /// Id of the Rule.
