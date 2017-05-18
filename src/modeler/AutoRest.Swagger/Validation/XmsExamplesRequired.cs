@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class XmsExamplesProvidedValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class XmsExamplesRequired : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         // the maximum number of non-xms-examples operations to allow.
         private const int magicNumber = 10;
