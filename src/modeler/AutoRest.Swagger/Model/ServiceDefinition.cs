@@ -147,7 +147,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger security definition.
         /// </summary>
-        [Rule(typeof(SecurityDefinitionsStructureValidation))]
+        [Rule(typeof(SecurityDefinitionsStructure))]
         public Dictionary<string, SecurityDefinition> SecurityDefinitions { get; set; }
 
         /// <summary>

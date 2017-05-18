@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class SecurityDefinitionsStructureValidation : TypedRule<Dictionary<string, SecurityDefinition>>
+    public class SecurityDefinitionsStructure : TypedRule<Dictionary<string, SecurityDefinition>>
     {
         /// <summary>
         /// Id of the Rule.
