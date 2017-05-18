@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class PutOperationNameValidation : OperationNameValidation
+    public class PutInOperationName : OperationNameValidation
     {
         /// <summary>
         /// Id of the Rule.

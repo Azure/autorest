@@ -290,7 +290,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operation-name-not-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(GetOperationNameValidation), 1);
-            messages.AssertOnlyValidationMessage(typeof(PutOperationNameValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(PutInOperationName), 1);
             messages.AssertOnlyValidationMessage(typeof(DeleteOperationNameValidation), 1);
         }
 
