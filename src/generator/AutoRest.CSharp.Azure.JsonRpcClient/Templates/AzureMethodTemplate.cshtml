@@ -9,5 +9,6 @@
 
 public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
+    dynamic dynamicClient = this.Client.HttpClient;
     return null;
 }
