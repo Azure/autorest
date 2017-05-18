@@ -9,7 +9,7 @@ using System;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class ParameterNameValidation : TypedRule<SwaggerParameter>
+    public class NamePropertyDefinitionInParameter : TypedRule<SwaggerParameter>
     {
         /// <summary>
         /// Id of the Rule.
