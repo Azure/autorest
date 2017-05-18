@@ -35,7 +35,7 @@ namespace AutoRest.Swagger.Model
         /// operation id to uniquely identify an operation.
         /// </summary>
         [Rule(typeof(OneUnderscoreInOperationId))]
-        [Rule(typeof(OperationIdNounInVerb))]
+        [Rule(typeof(OperationIdNounVerb))]
         [Rule(typeof(GetOperationNameValidation))]
         [Rule(typeof(PutInOperationName))]
         [Rule(typeof(PatchInOperationName))]

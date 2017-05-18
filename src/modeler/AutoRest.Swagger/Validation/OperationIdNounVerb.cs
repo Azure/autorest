@@ -10,7 +10,7 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class OperationIdNounInVerb : TypedRule<string>
+    public class OperationIdNounVerb : TypedRule<string>
     {
         private const string NOUN_VERB_PATTERN = "^(\\w+)?_(\\w+)$";
 
