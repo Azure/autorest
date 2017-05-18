@@ -25,7 +25,7 @@ namespace AutoRest.Swagger.Model
 
         [Rule(typeof(AvoidAnonymousTypes))]
         [Rule(typeof(BooleanPropertyNotRecommended))]
-        [Rule(typeof(RequiredReadOnlyPropertiesValidation))]
+        [Rule(typeof(RequiredReadOnlyProperties))]
         public Schema Schema { get; set; }
 
         public Dictionary<string, Header> Headers { get; set; }

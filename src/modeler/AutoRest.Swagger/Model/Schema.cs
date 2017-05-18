@@ -37,7 +37,7 @@ namespace AutoRest.Swagger.Model
         [CollectionRule(typeof(AvoidNestedProperties))]
         [Rule(typeof(XmsClientNamePropertyValidation))]
         [Rule(typeof(DescriptionMissing))]
-        [CollectionRule(typeof(RequiredReadOnlyPropertiesValidation))]
+        [CollectionRule(typeof(RequiredReadOnlyProperties))]
         public Dictionary<string, Schema> Properties { get; set; }
 
         public bool ReadOnly { get; set; }

@@ -40,7 +40,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The schema defining the type used for the body parameter.
         /// </summary>
-        [Rule(typeof(RequiredReadOnlyPropertiesValidation))]
+        [Rule(typeof(RequiredReadOnlyProperties))]
         public Schema Schema { get; set; }
 
         /// <summary>

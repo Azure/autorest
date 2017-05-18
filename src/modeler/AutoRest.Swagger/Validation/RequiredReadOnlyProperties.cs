@@ -9,7 +9,7 @@ using AutoRest.Core.Logging;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class RequiredReadOnlyPropertiesValidation : TypedRule<Schema>
+    public class RequiredReadOnlyProperties : TypedRule<Schema>
     {
         /// <summary>
         /// Id of the Rule.
