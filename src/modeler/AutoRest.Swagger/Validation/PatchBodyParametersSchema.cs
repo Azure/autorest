@@ -13,7 +13,7 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class PatchBodyParametersSchemaValidation : TypedRule<Dictionary<string, Schema>>
+    public class PatchBodyParametersSchema : TypedRule<Dictionary<string, Schema>>
     {
         /// <summary>
         /// Id of the Rule.

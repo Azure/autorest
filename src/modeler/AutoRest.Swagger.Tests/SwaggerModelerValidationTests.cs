@@ -556,7 +556,7 @@ namespace AutoRest.Swagger.Tests
         {
             // This test validates if a definition has required properties which are marked as readonly true
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "default-valued-properties-in-patch-request.json"));
-            messages.AssertOnlyValidationMessage(typeof(PatchBodyParametersSchemaValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(PatchBodyParametersSchema), 1);
         }
 
         [Fact]
@@ -564,7 +564,7 @@ namespace AutoRest.Swagger.Tests
         {
             // This test validates if a definition has required properties which are marked as readonly true
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "req-properties-in-patch-request.json"));
-            messages.AssertOnlyValidationMessage(typeof(PatchBodyParametersSchemaValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(PatchBodyParametersSchema), 1);
         }
 
         [Fact]
