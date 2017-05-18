@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class PutResponseResourceValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class XmsResourceInPutResponse : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         /// <summary>
         /// Id of the Rule.
