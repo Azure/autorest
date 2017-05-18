@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class TrackedResourcePatchOperationValidation : TypedRule<Dictionary<string, Schema>>
+    public class TrackedResourcePatchOperation : TypedRule<Dictionary<string, Schema>>
     {
         /// <summary>
         /// Id of the Rule.

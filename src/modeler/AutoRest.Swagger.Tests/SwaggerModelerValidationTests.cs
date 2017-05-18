@@ -397,7 +397,7 @@ namespace AutoRest.Swagger.Tests
         public void TrackedResourcePatchOperationValidationValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "tracked-resource-patch-operation.json"));
-            messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperation), 1);
         }
 
         [Fact]
@@ -686,7 +686,7 @@ namespace AutoRest.Swagger.Tests
         public void ValidTrackedResourcePatchOperation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "tracked-resource-patch-valid-operation.json"));
-            messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 0);
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperation), 0);
         }
 
         /// <summary>
