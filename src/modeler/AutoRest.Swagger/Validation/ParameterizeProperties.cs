@@ -10,7 +10,7 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class ProvidersPathValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class ParameterizeProperties : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         private readonly Regex ProviderRegex = new Regex(@"Subscriptions\/\{.+\}\/ResourceGroups\/\{.+\}\/providers\/([^\/]+)(?<typenamesandvalues>[^?]+)([\?]?.+)?$", RegexOptions.IgnoreCase);
         
