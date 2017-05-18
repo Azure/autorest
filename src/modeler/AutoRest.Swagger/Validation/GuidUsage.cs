@@ -14,7 +14,7 @@ namespace AutoRest.Swagger.Validation
     /// Validates if GUID is used in any of the properties.
     /// GUID usage is not recommended in general.
     /// </summary>
-    public class GuidValidation : TypedRule<Dictionary<string, Schema>>
+    public class GuidUsage : TypedRule<Dictionary<string, Schema>>
     {
         /// <summary>
         /// Id of the Rule.

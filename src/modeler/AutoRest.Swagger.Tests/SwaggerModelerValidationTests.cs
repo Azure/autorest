@@ -333,7 +333,7 @@ namespace AutoRest.Swagger.Tests
         public void GuidUsageValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-guid-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(GuidValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(GuidUsage), 1);
         }
 
         [Fact]
