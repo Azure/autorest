@@ -347,7 +347,7 @@ namespace AutoRest.Swagger.Tests
         public void ResourceExtensionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-ext-msresource-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(ResourceIsMsResourceValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(ResourceHasXMsResourceEnabled), 1);
         }
 
         [Fact]

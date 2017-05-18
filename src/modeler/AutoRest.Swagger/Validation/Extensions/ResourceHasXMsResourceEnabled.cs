@@ -12,7 +12,7 @@ namespace AutoRest.Swagger.Validation
     /// <summary>
     /// Validates if the resource definition has x-ms-azure-resource extension set to true.
     /// </summary>
-    public class ResourceIsMsResourceValidation : TypedRule<Dictionary<string, Schema>>
+    public class ResourceHasXMsResourceEnabled : TypedRule<Dictionary<string, Schema>>
     {
         private static readonly string requiredExtension = "x-ms-azure-resource";
 

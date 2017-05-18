@@ -115,7 +115,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(BooleanPropertyNotRecommended))]
         [CollectionRule(typeof(BooleanPropertyNotRecommended))]
         [Rule(typeof(ResourceModelValidation))]
-        [Rule(typeof(ResourceIsMsResourceValidation))]
+        [Rule(typeof(ResourceHasXMsResourceEnabled))]
         [Rule(typeof(GuidValidation))]
         [Rule(typeof(SkuModelValidation))]
         [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
