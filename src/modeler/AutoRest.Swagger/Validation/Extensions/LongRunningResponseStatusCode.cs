@@ -11,7 +11,7 @@ using AutoRest.Core.Properties;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class LongRunningResponseValidationRule : ExtensionRule
+    public class LongRunningResponseStatusCode : ExtensionRule
     {
         private static readonly IEnumerable<string> DeleteAllowedCodes = new List<string>() { "200", "204" };
         private static readonly IEnumerable<string> PostAllowedCodes = new List<string>() { "200", "201", "204" };
