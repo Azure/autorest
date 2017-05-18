@@ -8,7 +8,7 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class SupportedSchemesWarning : TypedRule<TransferProtocolScheme>
+    public class HttpsSupportedScheme : TypedRule<TransferProtocolScheme>
     {
         /// <summary>
         /// This rule passes if the scheme is of type https
