@@ -114,7 +114,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(ArmResourcePropertiesBag))]
         [Rule(typeof(EnumInsteadOfBoolean))]
         [CollectionRule(typeof(EnumInsteadOfBoolean))]
-        [Rule(typeof(ResourceModelValidation))]
+        [Rule(typeof(RequiredPropertiesMissingInResourceModel ))]
         [Rule(typeof(ResourceHasXMsResourceEnabled))]
         [Rule(typeof(GuidUsage))]
         [Rule(typeof(InvalidSkuModel))]

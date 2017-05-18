@@ -16,7 +16,7 @@ namespace AutoRest.Swagger.Validation
     /// name, type, location, tags with everything as readonly except location 
     /// and tags.
     /// </summary>
-    public class ResourceModelValidation: TypedRule<Dictionary<string, Schema>>
+    public class RequiredPropertiesMissingInResourceModel : TypedRule<Dictionary<string, Schema>>
     {
 
         private static readonly IEnumerable<string> ReadonlyProps = new List<string>() { "name", "id", "type" };

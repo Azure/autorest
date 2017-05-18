@@ -369,7 +369,7 @@ namespace AutoRest.Swagger.Tests
         public void ResourceModelValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-ext-resource-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(ResourceModelValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(RequiredPropertiesMissingInResourceModel ), 1);
         }
 
         [Fact]
@@ -785,7 +785,7 @@ namespace AutoRest.Swagger.Tests
         public void ValidResourceModelReadOnlyProperties()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-readonly-props.json"));
-            messages.AssertOnlyValidationMessage(typeof(ResourceModelValidation), 0);
+            messages.AssertOnlyValidationMessage(typeof(RequiredPropertiesMissingInResourceModel ), 0);
         }
         
     }
