@@ -319,7 +319,7 @@ namespace AutoRest.Swagger.Tests
         public void MutabilityNotModeledWithReadOnlyValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "mutability-invalid-values-for-readonly.json"));
-            messages.AssertOnlyValidationMessage(typeof(MutabilityWithReadOnlyRule), 2);
+            messages.AssertOnlyValidationMessage(typeof(MutabilityWithReadOnly), 2);
         }
 
         [Fact]

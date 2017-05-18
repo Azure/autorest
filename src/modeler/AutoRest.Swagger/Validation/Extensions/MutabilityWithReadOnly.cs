@@ -10,7 +10,7 @@ using AutoRest.Core.Logging;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class MutabilityWithReadOnlyRule : MutabilityExtensionRule
+    public class MutabilityWithReadOnly : MutabilityExtensionRule
     {
         /// <summary>
         /// Array of valid values for x-ms-mutability extension when property is marked as "readonly": true.
