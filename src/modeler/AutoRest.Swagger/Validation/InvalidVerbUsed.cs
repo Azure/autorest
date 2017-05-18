@@ -14,7 +14,7 @@ namespace AutoRest.Swagger.Validation
     /// Validates the HTTP verb. Allowed values for the HTTP Verb are
     /// delete, get, put, patch, head, options, post.
     /// </summary>
-    public class HttpVerbValidation : TypedRule<Dictionary<string, Operation>>
+    public class InvalidVerbUsed : TypedRule<Dictionary<string, Operation>>
     {
         private readonly Regex opRegExp = new Regex(@"^(DELETE|GET|PUT|PATCH|HEAD|OPTIONS|POST|TRACE)$", RegexOptions.IgnoreCase);
 

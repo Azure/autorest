@@ -87,7 +87,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(OperationsAPIImplementation))]
         [Rule(typeof(ParameterizeProperties))]
         [Rule(typeof(XmsResourceInPutResponse))]
-        [CollectionRule(typeof(HttpVerbValidation))]
+        [CollectionRule(typeof(InvalidVerbUsed))]
         [CollectionRule(typeof(DeleteMustNotHaveRequestBody))]
         [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
         [Rule(typeof(PutRequestResponseScheme))]
