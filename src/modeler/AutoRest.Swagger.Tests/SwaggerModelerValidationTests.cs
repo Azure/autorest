@@ -376,7 +376,7 @@ namespace AutoRest.Swagger.Tests
         public void SkuModelValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-skumodel-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(InvalidSkuModel), 1);
         }
 
         [Fact]
@@ -775,7 +775,7 @@ namespace AutoRest.Swagger.Tests
         public void ValidSkuObjectStructure()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
-            messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
+            messages.AssertOnlyValidationMessage(typeof(InvalidSkuModel), 0);
         }
 
         /// <summary>

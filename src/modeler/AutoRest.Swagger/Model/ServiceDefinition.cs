@@ -117,7 +117,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(ResourceModelValidation))]
         [Rule(typeof(ResourceHasXMsResourceEnabled))]
         [Rule(typeof(GuidValidation))]
-        [Rule(typeof(SkuModelValidation))]
+        [Rule(typeof(InvalidSkuModel))]
         [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
         [Rule(typeof(TrackedResourceGetOperationValidation))]
         [Rule(typeof(TrackedResourceListByResourceGroup))]

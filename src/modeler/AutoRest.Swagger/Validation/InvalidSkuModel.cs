@@ -17,7 +17,7 @@ namespace AutoRest.Swagger.Validation
     /// Validates the SKU Model. A Sku model must have name property. 
     /// It can also have tier, size, family, capacity as optional properties.
     /// </summary>
-    public class SkuModelValidation : TypedRule<Dictionary<string, Schema>>
+    public class InvalidSkuModel : TypedRule<Dictionary<string, Schema>>
     {
         private readonly Regex propertiesRegEx = new Regex(@"^(NAME|TIER|SIZE|FAMILY|CAPACITY)$", RegexOptions.IgnoreCase);
 
