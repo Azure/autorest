@@ -14,7 +14,7 @@ namespace AutoRest.Swagger.Validation
     /// <summary>
     /// Validates if the Operations API has been implemented
     /// </summary>
-    public class OperationsAPIImplementationValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class OperationsAPIImplementation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         /// <summary>
         /// Id of the Rule.

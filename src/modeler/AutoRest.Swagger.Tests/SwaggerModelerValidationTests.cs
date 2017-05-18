@@ -362,7 +362,7 @@ namespace AutoRest.Swagger.Tests
         public void OperationsApiValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-operations-api-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(OperationsAPIImplementationValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(OperationsAPIImplementation), 1);
         }
 
         [Fact]
