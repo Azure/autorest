@@ -355,7 +355,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-ext-msclientname-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(XmsClientNamePropertyValidation), 1);
-            messages.AssertOnlyValidationMessage(typeof(XmsClientNameParameterValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(XmsClientNameParameter), 1);
         }
 
         [Fact]

@@ -13,7 +13,7 @@ namespace AutoRest.Swagger.Validation
     /// <summary>
     /// Validates if the name of parameter and x-ms-client-name(if exists) does not match.
     /// </summary>
-    public class XmsClientNameParameterValidation : TypedRule<SwaggerParameter>
+    public class XmsClientNameParameter : TypedRule<SwaggerParameter>
     {
         private static readonly string extensionToCheck = "x-ms-client-name";
 
