@@ -150,7 +150,7 @@ namespace AutoRest.Swagger.Tests
         public void NonAppJsonTypeOperationForConsumes()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-app-json-operation-consumes.json"));
-            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonType));
         }
 
         [Fact]
@@ -165,21 +165,21 @@ namespace AutoRest.Swagger.Tests
         public void NonAppJsonTypeOperationForProduces()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-app-json-operation-produces.json"));
-            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonType));
         }
 
         [Fact]
         public void NonAppJsonTypeServiceDefinitionForProduces()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-app-json-service-def-produces.json"));
-            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonType));
         }
 
         [Fact]
         public void NonAppJsonTypeServiceDefinitionForConsumes()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "non-app-json-service-def-consumes.json"));
-            messages.AssertOnlyValidationWarning(typeof(NonAppJsonTypeWarning));
+            messages.AssertOnlyValidationWarning(typeof(NonAppJsonType));
         }
 
         [Fact]
