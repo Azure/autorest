@@ -10,6 +10,7 @@
 public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     dynamic dynamicClient = this.Client.HttpClient;
-    Task< object> x = dynamicClient.GenericSendAsync();
+    var params_ = new System.Collections.Generic.Dictionary< string, object>();
+    System.Threading.Tasks.Task< object> x = dynamicClient.GenericSendAsync("@(Model.SerializedName)", params_);
     return (@(Model.OperationResponseReturnTypeString)) await x;
 }
