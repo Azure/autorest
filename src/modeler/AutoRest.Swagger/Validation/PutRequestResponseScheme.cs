@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class PutRequestResponseValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class PutRequestResponseScheme : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         /// <summary>
         /// Id of the Rule.

@@ -613,7 +613,7 @@ namespace AutoRest.Swagger.Tests
         public void PutRequestResponseBodySchemaValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "put-request-response-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(PutRequestResponseValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(PutRequestResponseScheme), 1);
         }
 
         [Fact]

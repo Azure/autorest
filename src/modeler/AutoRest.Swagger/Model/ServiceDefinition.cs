@@ -90,7 +90,7 @@ namespace AutoRest.Swagger.Model
         [CollectionRule(typeof(HttpVerbValidation))]
         [CollectionRule(typeof(DeleteMustNotHaveRequestBody))]
         [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
-        [Rule(typeof(PutRequestResponseValidation))]
+        [Rule(typeof(PutRequestResponseScheme))]
         [Rule(typeof(TrackedResourceListByImmediateParent))]
         [Rule(typeof(XmsExamplesProvidedValidation))]
         [Rule(typeof(LROStatusCodesValidation))]
