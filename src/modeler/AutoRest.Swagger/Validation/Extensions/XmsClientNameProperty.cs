@@ -13,7 +13,7 @@ namespace AutoRest.Swagger.Validation
     /// <summary>
     /// Validates if the name of property and x-ms-client-name(if exists) does not match.
     /// </summary>
-    public class XmsClientNamePropertyValidation : TypedRule<Dictionary<string, Schema>>
+    public class XmsClientNameProperty : TypedRule<Dictionary<string, Schema>>
     {
         private static readonly string extensionToCheck = "x-ms-client-name";
 
