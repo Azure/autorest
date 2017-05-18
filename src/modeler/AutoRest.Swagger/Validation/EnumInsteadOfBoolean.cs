@@ -12,7 +12,7 @@ namespace AutoRest.Swagger.Validation
     /// <summary>
     /// Flags properties of boolean type as they are not recommended, unless it's the only option.
     /// </summary>
-    public class BooleanPropertyNotRecommended : TypedRule<SwaggerObject>
+    public class EnumInsteadOfBoolean : TypedRule<SwaggerObject>
     {
         /// <summary>
         /// Id of the Rule.
