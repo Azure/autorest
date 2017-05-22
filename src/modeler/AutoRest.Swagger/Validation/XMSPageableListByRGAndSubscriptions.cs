@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class XMSPageableListByRGAndSubscriptionsValidation : TypedRule<Dictionary<string, Schema>>
+    public class XMSPageableListByRGAndSubscriptions : TypedRule<Dictionary<string, Schema>>
     {
         private static readonly string NextLinkName = "nextLinkName";
 

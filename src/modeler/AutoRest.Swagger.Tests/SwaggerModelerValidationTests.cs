@@ -620,7 +620,7 @@ namespace AutoRest.Swagger.Tests
         public void XMSPageableListByRGAndSubscriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "xms-pageable-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(XMSPageableListByRGAndSubscriptionsValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(XMSPageableListByRGAndSubscriptions), 1);
         }
 
         [Fact]
