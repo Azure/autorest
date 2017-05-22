@@ -82,7 +82,7 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [Rule(typeof(UniqueResourcePaths))]
         [Rule(typeof(ListInOperationName))]
-        [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
+        [Rule(typeof(CollectionObjectPropertiesNaming))]
         [Rule(typeof(PutGetPatchResponseSchema))]
         [Rule(typeof(OperationsAPIImplementation))]
         [Rule(typeof(ParameterizeProperties))]
@@ -101,7 +101,7 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [JsonProperty("x-ms-paths")]
         [Rule(typeof(ListInOperationName))]
-        [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
+        [Rule(typeof(CollectionObjectPropertiesNaming))]
         [Rule(typeof(ParameterizeProperties))]
         [CollectionRule(typeof(XmsPathsMustOverloadPaths))]
         [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]

@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class CollectionObjectPropertiesNamingValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class CollectionObjectPropertiesNaming : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         private readonly Regex ListRegex = new Regex(@".+_List([^_]*)$", RegexOptions.IgnoreCase);
 

@@ -232,7 +232,7 @@ namespace AutoRest.Swagger.Tests
         public void CollectionObjectsPropertiesNamingValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "collection-objects-naming.json"));
-            messages.AssertOnlyValidationMessage(typeof(CollectionObjectPropertiesNamingValidation), 2);
+            messages.AssertOnlyValidationMessage(typeof(CollectionObjectPropertiesNaming), 2);
         }
 
         [Fact]
