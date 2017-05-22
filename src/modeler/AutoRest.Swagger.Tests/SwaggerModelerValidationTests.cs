@@ -627,7 +627,7 @@ namespace AutoRest.Swagger.Tests
         public void SummaryDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-summary-description.json"));
-            messages.AssertOnlyValidationMessage(typeof(SummaryDescriptionValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(SummaryAndDescriptionMustNotBeSame), 1);
         }
 
     }

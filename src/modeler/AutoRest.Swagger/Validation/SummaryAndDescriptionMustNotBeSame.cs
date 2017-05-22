@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class SummaryDescriptionValidation: TypedRule<Operation>
+    public class SummaryAndDescriptionMustNotBeSame: TypedRule<Operation>
     {
         /// <summary>
         /// Id of the Rule.
