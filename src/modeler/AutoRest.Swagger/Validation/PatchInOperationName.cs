@@ -15,7 +15,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M1007";
+        public override string Id => "R1007";
 
         /// <summary>
         /// The template message for this Rule.

@@ -32,7 +32,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M2057";
+        public override string Id => "R2057";
 
         /// <summary>
         /// What kind of change implementing this rule can cause.

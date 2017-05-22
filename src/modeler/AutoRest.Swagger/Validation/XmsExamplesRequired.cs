@@ -22,7 +22,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M2022";
+        public override string Id => "R2022";
 
         private string OperationIdMessageSuffix => " Operation: '{0}'";
 
