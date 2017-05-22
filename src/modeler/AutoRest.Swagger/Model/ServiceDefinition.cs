@@ -93,7 +93,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(PutRequestResponseScheme))]
         [Rule(typeof(TrackedResourceListByImmediateParent))]
         [Rule(typeof(XmsExamplesRequired))]
-        [Rule(typeof(LROStatusCodesValidation))]
+        [Rule(typeof(LROStatusCodesReturnTypeSchema))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
         /// <summary>

@@ -592,7 +592,7 @@ namespace AutoRest.Swagger.Tests
         public void LROStatusCodesValidationTest()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "lro-status-codes-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(LROStatusCodesValidation), 2);
+            messages.AssertOnlyValidationMessage(typeof(LROStatusCodesReturnTypeSchema), 2);
         }
 
         [Fact]

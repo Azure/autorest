@@ -12,7 +12,7 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class LROStatusCodesValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class LROStatusCodesReturnTypeSchema : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         
         /// <summary>
