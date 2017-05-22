@@ -46,7 +46,7 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 |`--list-available=nn`|lists the last nn releases available from github (defaults to 10)|
 |`--version=version`|uses version of AutoRest (installing if necessary.)<br>For version you can use a version label (see --list-available) or<br>&nbsp;&nbsp;`latest` - get latest nightly build<br>&nbsp;&nbsp;`latest-release` - get latest release version|
 |`--reset`|remove all installed versions of AutoRest tools and install the latest (override with --version)|
-|`--runtime-id=id`|overrides the platform detection for the dotnet runtime. (special case)|
+|`--runtime-id=id`|overrides the platform detection for the dotnet runtime (special case). Refer to the <a href="https://docs.microsoft.com/en-us/dotnet/articles/core/rid-catalog">Runtime Identifier (RID) catalog</a> for more details.|
 
 #### Commonly used Settings
 |Option                                                                &nbsp;| Description |
@@ -58,7 +58,7 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 |`--add-credentials`|If specified, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type.|
 |`--package-name=PACKAGENAME`|Name of the package (Ruby, Python)|
 |`--package-version=VERSION`|Version of the package (Ruby, Python)|
-|`--sync-methods=all|essential|none`|Specifies mode for generating sync wrappers. Supported value are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods|
+|`--sync-methods=all\|essential\|none`|Specifies mode for generating sync wrappers. Supported value are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods|
 |`--payload-flattening-threshold=NUMBER`|The maximum number of properties in the request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as method arguments|
 |`--override-client-name=NAME`|Name to use for the generated client type. By default, uses the value of the 'Title' field from the input files|
 |`--use-internal-constructors`|Indicates whether ctor needs to be generated with `internal` protection level.|
