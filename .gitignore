@@ -216,3 +216,5 @@ src/extension/old/**/*
 src/bootstrapper
 src/extension/out
 src/next-gen
+
+src/nuget-package/tools
