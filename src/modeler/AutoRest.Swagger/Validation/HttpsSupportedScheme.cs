@@ -11,6 +11,11 @@ namespace AutoRest.Swagger.Validation
     public class HttpsSupportedScheme : TypedRule<TransferProtocolScheme>
     {
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "R1011";
+
+        /// <summary>
         /// This rule passes if the scheme is of type https
         /// </summary>
         /// <param name="scheme"></param>
