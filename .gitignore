@@ -217,4 +217,5 @@ src/bootstrapper
 src/extension/out
 src/next-gen
 
-src/nuget-package/tools
+package/nuget/tools
+package/chocolatey/*.nupkg
