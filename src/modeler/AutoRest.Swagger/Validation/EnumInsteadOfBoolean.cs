@@ -52,7 +52,7 @@ namespace AutoRest.Swagger.Validation
         {
             if (entity.Type?.Equals(DataType.Boolean) == true)
             {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, context.Parent.Key);
             }
             if (entity.GetType() == typeof(Schema) && ((Schema)entity).Properties != null)
             {
@@ -60,13 +60,13 @@ namespace AutoRest.Swagger.Validation
                 {
                     if (property.Value?.Type?.Equals(DataType.Boolean) == true)
                     {
-                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty(property.Key)), this);
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty(property.Key)), this, property.Key);
                     }
                 }
             }
             if (entity.GetType() == typeof(SwaggerParameter) && ((SwaggerParameter)entity).Schema?.Type?.Equals(DataType.Boolean) == true)
             {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, ((SwaggerParameter)entity).Name);
             }
         }
     }

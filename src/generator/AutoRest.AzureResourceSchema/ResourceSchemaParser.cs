@@ -65,7 +65,7 @@ namespace AutoRest.AzureResourceSchema
                 if (!resourceSchemas.ContainsKey(resourceProvider))
                 {
                     resourceSchema = new ResourceSchema();
-                    resourceSchema.Id = string.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
+                    resourceSchema.Id = string.Format(CultureInfo.InvariantCulture, "https://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
                     resourceSchema.Title = resourceProvider;
                     resourceSchema.Description = resourceProvider.Replace('.', ' ') + " Resource Types";
                     resourceSchema.Schema = "http://json-schema.org/draft-04/schema#";
@@ -468,6 +468,7 @@ namespace AutoRest.AzureResourceSchema
                     break;
 
                 case KnownPrimaryType.Double:
+                case KnownPrimaryType.Decimal:
                     result.JsonType = "number";
                     break;
 
@@ -475,6 +476,16 @@ namespace AutoRest.AzureResourceSchema
                     result.JsonType = "object";
                     break;
 
+                case KnownPrimaryType.ByteArray:
+                    result.JsonType = "array";
+                    result.Items =  new JsonSchema()
+                    {
+                        JsonType = "integer"
+                    };
+                    break;
+
+                case KnownPrimaryType.Base64Url:
+                case KnownPrimaryType.Date:
                 case KnownPrimaryType.DateTime:
                 case KnownPrimaryType.String:
                 case KnownPrimaryType.TimeSpan:

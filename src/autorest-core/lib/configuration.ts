@@ -329,7 +329,7 @@ export class ConfigurationView {
                 if (path) {
                   this.Message({
                     Channel: Channel.Warning,
-                    Text: `Could not find the exact path ${JSON.stringify(path)}`
+                    Text: `Could not find the exact path ${JSON.stringify(path)} for ${JSON.stringify(m.Details)}`
                   });
                   if (path.length === 0) {
                     throw e;
@@ -448,7 +448,7 @@ export class Configuration {
     return blocks;
   }
 
-  public async CreateView(messageEmitter: MessageEmitter, ...configs: Array<any>): Promise<ConfigurationView> {
+  public async CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView> {
     const configFileUri = this.fileSystem && this.configFileOrFolderUri
       ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri)
       : null;
@@ -467,7 +467,7 @@ export class Configuration {
       configSegments.push(...blocks);
     }
     // 3. default configuration
-    {
+    if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../resources/default-configuration.md")),

@@ -11,7 +11,7 @@ Next, generate the client:
  
 ``` powershell
 # generate the client
-> autorest -Input petstore.json -CodeGenerator CSharp -OutputDirectory CSharp_PetStore -Namespace PetStore
+> autorest --input-file=petstore.json --csharp --output-folder=CSharp_PetStore --namespace=PetStore
 The Microsoft.Rest.ClientRuntime.2.2.0 nuget package is required to compile the generated code.
 
 # show what got generated:
