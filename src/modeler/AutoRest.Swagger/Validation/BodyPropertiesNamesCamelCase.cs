@@ -23,7 +23,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "R3016";
+        public override string Id => "R3014";
 
         /// <summary>
         /// Violation category of the Rule.
