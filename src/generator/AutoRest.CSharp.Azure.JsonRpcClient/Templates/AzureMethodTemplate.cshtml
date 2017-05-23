@@ -6,17 +6,21 @@
 @using AutoRest.CSharp.Model
 @using AutoRest.CSharp.JsonRpcClient.Templates.Rest.Client
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.MethodCsa>
+using Microsoft.Rest.ClientRuntime.Test.Azure.ServiceClientEx;
 
 public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
-    dynamic dynamicClient = this.Client.HttpClient;
-    var params_ = new System.Collections.Generic.Dictionary< string, object>()
+    var params_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam[]
     {
         @foreach(var p in Model.LocalParameters)
         {
-        @:{ "@(p.SerializedName)", @(p.Name) },
+        @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam("@(p.SerializedName)", @(p.Name)),
         }
     };
-    System.Threading.Tasks.Task< object> x = dynamicClient.GenericSendAsync("@(Model.SerializedName)", params_);
-    return (@(Model.OperationResponseReturnTypeString)) await x;
+    var operation_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureOperation(
+        "@(Model.MethodGroup.CodeModel.Name)",
+        "@(Model.SerializedName)",
+        this.Client.SubscriptionId,
+        params_);
+    return this.Client.Call(operation_);
 }
