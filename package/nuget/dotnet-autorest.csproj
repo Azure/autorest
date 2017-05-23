@@ -5,7 +5,7 @@
     <PackageType>DotnetCliTool</PackageType>
     <IsTool>false</IsTool>
     <ContentTargetFolders>.</ContentTargetFolders>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.3</PackageVersion>
     <PackageId>AutoRest</PackageId>
     <Title>AutoRest Code Generation Tool</Title>
     <Authors>Microsoft, Azure-SDK</Authors>
