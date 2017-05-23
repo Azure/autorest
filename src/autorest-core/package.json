@@ -31,7 +31,7 @@
     "mocha": "3.2.0",
     "mocha-typescript": "1.0.22",
     "source-map-support": "^0.4.14",
-    "typescript": "^2.3.0-dev.20170314"
+    "typescript": "2.3.3"
   },
   "dependencies": {
     "chalk": "^1.1.2",

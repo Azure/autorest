@@ -39,7 +39,7 @@
     "mocha": "3.2.0",
     "mocha-typescript": "1.0.22",
     "pify": "^2.3.0",
-    "typescript": "^2.3.0-dev.20170314",
+    "typescript": "2.3.3",
     "@types/commonmark": "^0.22.29",
     "@types/jsonpath": "^0.1.29",
     "@types/source-map": "^0.5.0",
