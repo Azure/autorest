@@ -6,9 +6,8 @@
 @using AutoRest.CSharp.Model
 @using AutoRest.CSharp.JsonRpcClient.Templates.Rest.Client
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.MethodCsa>
-using Microsoft.Rest.ClientRuntime.Test.Azure.ServiceClientEx;
 
-public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     var params_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam[]
     {
@@ -17,7 +16,7 @@ public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeStri
         @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam("@(p.SerializedName)", @(p.Name)),
         }
     };
-    var operation_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureOperation(
+    var operation_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureOperation<@(Model.ReturnTypeString)>(
         "@(Model.MethodGroup.CodeModel.Name)",
         "@(Model.SerializedName)",
         this.Client.SubscriptionId,
