@@ -49,7 +49,7 @@
     "run-sequence": "*",
     "shelljs": "^0.7.6",
     "through2-parallel": "^0.1.3",
-    "typescript": "^2.3.0-dev.20170314",
+    "typescript": "2.3.3",
     "vinyl-paths": "^2.1.0",
     "vinyl-fs": "^2.4.4",
     "yargs": "^6.6.0"
