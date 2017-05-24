@@ -152,7 +152,7 @@ function isAccessibleFile(localPath: string) {
 }
 
 function FileUriToLocalPath(fileUri: string): string {
-  const uri = parse(fileUri);
+  const uri = parse(decodeURI(fileUri));
   if (uri.protocol !== "file:") {
     throw new Error(`Protocol '${uri.protocol}' not supported for writing.`);
   }
@@ -165,6 +165,7 @@ function FileUriToLocalPath(fileUri: string): string {
     p = p.substr(p.startsWith("/") ? 1 : 0);
     p = p.replace(/\//g, "\\");
   }
+
   return p;
 }
 

@@ -16,7 +16,8 @@ regenExpected = (opts,done) ->
     args = [
       "--#{opts.language}",
       "--output-folder=#{outputDir}/#{key}",
-      "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}"
+      "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
+      "--enable-xml"
     ]
 
     for swaggerFile in swaggerFiles

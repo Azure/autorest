@@ -37,7 +37,7 @@ public class Message
   public SourceLocation[] Source { get; set; }
 }
 
-public abstract class NewPlugin
+public abstract class NewPlugin :  AutoRest.Core.IHost
 {
     private IDisposable Start => NewContext;
 
