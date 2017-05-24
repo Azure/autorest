@@ -1,6 +1,6 @@
 {
   "name": "autorest",
-  "version": "0.13.3",
+  "version": "0.14.0",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is a spec that describes the REST API using the Open API Initiative format.",
   "repository": {
     "type": "git",
@@ -39,7 +39,7 @@
     "mocha": "3.2.0",
     "mocha-typescript": "1.0.22",
     "pify": "^2.3.0",
-    "typescript": "^2.3.0-dev.20170314",
+    "typescript": "2.3.3",
     "@types/commonmark": "^0.22.29",
     "@types/jsonpath": "^0.1.29",
     "@types/source-map": "^0.5.0",

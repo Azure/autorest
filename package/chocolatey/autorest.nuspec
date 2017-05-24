@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>autorest</id>
+    <version>1.0.0</version>
+    <title>AutoRest</title>
+    <authors>Microsoft</authors>
+    <owners>azure-sdk, Microsoft</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Azure/AutoRest</projectUrl>
+    <iconUrl>https://github.com/Azure/autorest/raw/master/docs/images/logo.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>The AutoRest tool generates client libraries for accessing REST APIs that are described using the Swagger format.</description>
+    <summary>AutoRest code generation of REST API client libraries.</summary>
+    <copyright>Copyright (c) Microsoft Corporation</copyright>
+    <tags>Microsoft AutoRest</tags>
+    <dependencies>
+         <dependency id="nodejs.install" version="[7.10,)" />
+    </dependencies>
+  </metadata>
+</package>
