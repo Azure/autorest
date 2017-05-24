@@ -17,10 +17,12 @@ public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @
         }
     };
     var operation_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequest(
-        "@(Model.MethodGroup.CodeModel.Name)",
-        "@(Model.SerializedName)",
-        this.Client.SubscriptionId,
-        params_);
+        title: "@(Model.MethodGroup.CodeModel.Name)",
+        baseUri: this.Client.BaseUri,
+        id: "@(Model.SerializedName)",
+        method: "@(Model.HttpMethod.ToString().ToUpper())",
+        subscriptionId: this.Client.SubscriptionId,
+        paramList: params_);
     return Microsoft.Rest.ClientRuntime.Test.Azure.ServiceClientEx.Call(
         this.Client,
         operation_,
