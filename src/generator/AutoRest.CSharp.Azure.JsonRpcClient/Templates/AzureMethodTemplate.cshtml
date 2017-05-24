@@ -16,10 +16,13 @@ public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @
         @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam("@(p.SerializedName)", @(p.Name)),
         }
     };
-    var operation_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureOperation<@(Model.ReturnTypeString)>(
+    var operation_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequest(
         "@(Model.MethodGroup.CodeModel.Name)",
         "@(Model.SerializedName)",
         this.Client.SubscriptionId,
         params_);
-    return this.Client.Call(operation_);
-}
+    return Microsoft.Rest.ClientRuntime.Test.Azure.ServiceClientEx.Call(
+        this.Client,
+        operation_,
+        new Microsoft.Rest.ClientRuntime.Test.Azure.Tag<@(Model.OperationResponseReturnTypeString)>());
+    }
