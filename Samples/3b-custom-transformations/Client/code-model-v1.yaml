@@ -1436,7 +1436,6 @@ methodGroupNames:
   - StorageAccounts
   - Usage
 documentation: The Storage Management Client.
-shouldGenerateXmlSerialization: false
 properties:
   - $id: '104'
     $actualType: AutoRest.Core.Model.Property
