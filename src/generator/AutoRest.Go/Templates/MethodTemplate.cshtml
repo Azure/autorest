@@ -235,8 +235,8 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
                 @:select {
                 @:case <- cancel:
                     @:return
-                @:default:
-                    @:resultChan <- item
+                @:case resultChan <- item:
+                    @: // Intentionally left blank
                 @:}
             @:}
         @:}
