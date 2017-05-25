@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model;
@@ -14,6 +15,11 @@ namespace AutoRest.Swagger.Validation
         /// Id of the Rule.
         /// </summary>
         public override string Id => "R1011";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         /// <summary>
         /// This rule passes if the scheme is of type https
