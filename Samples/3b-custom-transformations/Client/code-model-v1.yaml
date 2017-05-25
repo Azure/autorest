@@ -22,9 +22,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#name': name
         '#serializedName': name
@@ -46,9 +46,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#defaultValue': Microsoft.Storage/storageAccounts
         '#name': type
@@ -80,9 +80,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: boolean
+          isConstant: false
           className: Boolean
           declarationName: Boolean
-          isConstant: false
           '#name': Boolean
         '#documentation': >-
           Gets a boolean value that indicates whether the name is available for
@@ -120,8 +120,8 @@ modelTypes:
           modelAsString: false
           declarationName: Reason
           extendedDocumentation: 'Possible values include: ''AccountNameInvalid'', ''AlreadyExists'''
-          className: Reason
           isConstant: false
+          className: Reason
           '#serializedName': Reason
           '#name': Reason
         '#documentation': >-
@@ -147,9 +147,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets an error message explaining the Reason value in more detail.
         '#name': message
@@ -205,8 +205,8 @@ modelTypes:
           extendedDocumentation: >-
             Possible values include: 'Standard_LRS', 'Standard_ZRS',
             'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
-          className: AccountType
           isConstant: false
+          className: AccountType
           '#serializedName': AccountType
           '#name': AccountType
         '#documentation': Gets or sets the account type.
@@ -239,9 +239,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Resource location
         '#name': location
@@ -268,14 +268,14 @@ modelTypes:
             $actualType: AutoRest.Core.Model.PrimaryType
             knownFormat: none
             knownPrimaryType: string
+            isConstant: false
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           supportsAdditionalProperties: false
+          isConstant: false
           className: 'Dictionary<string,String>'
           declarationName: 'Dictionary<string,String>'
-          isConstant: false
         '#documentation': Resource tags
         '#name': tags
         '#serializedName': tags
@@ -327,9 +327,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the blob endpoint.
         '#name': blob
@@ -352,9 +352,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the queue endpoint.
         '#name': queue
@@ -377,9 +377,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the table endpoint.
         '#name': table
@@ -402,9 +402,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the file endpoint.
         '#name': file
@@ -439,9 +439,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets or sets the custom domain name. Name is the CNAME source.
         '#name': name
@@ -464,9 +464,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: boolean
+          isConstant: false
           className: Boolean
           declarationName: Boolean
-          isConstant: false
           '#name': Boolean
         '#documentation': >-
           Indicates whether indirect CName validation is enabled. Default value
@@ -518,8 +518,8 @@ modelTypes:
           modelAsString: false
           declarationName: ProvisioningState
           extendedDocumentation: 'Possible values include: ''Creating'', ''ResolvingDNS'', ''Succeeded'''
-          className: ProvisioningState
           isConstant: false
+          className: ProvisioningState
           '#serializedName': ProvisioningState
           '#name': ProvisioningState
         '#documentation': >-
@@ -586,9 +586,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the location of the primary for the storage account.
         '#name': primaryLocation
@@ -623,8 +623,8 @@ modelTypes:
           modelAsString: false
           declarationName: AccountStatus
           extendedDocumentation: 'Possible values include: ''Available'', ''Unavailable'''
-          className: AccountStatus
           isConstant: false
+          className: AccountStatus
           '#serializedName': AccountStatus
           '#name': AccountStatus
         '#documentation': >-
@@ -651,9 +651,9 @@ modelTypes:
           format: date-time
           knownFormat: date_time
           knownPrimaryType: dateTime
+          isConstant: false
           className: DateTime
           declarationName: DateTime
-          isConstant: false
           '#name': DateTime
         '#documentation': >-
           Gets the timestamp of the most recent instance of a failover to the
@@ -680,9 +680,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': >-
           Gets the location of the geo replicated secondary for the storage
@@ -733,9 +733,9 @@ modelTypes:
           format: date-time
           knownFormat: date_time
           knownPrimaryType: dateTime
+          isConstant: false
           className: DateTime
           declarationName: DateTime
-          isConstant: false
           '#name': DateTime
         '#documentation': Gets the creation date and time of the storage account in UTC.
         '#name': creationTime
@@ -827,9 +827,9 @@ modelTypes:
             $actualType: AutoRest.Core.Model.PrimaryType
             knownFormat: none
             knownPrimaryType: string
+            isConstant: false
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           '#documentation': Resource Id
           '#name': id
@@ -852,9 +852,9 @@ modelTypes:
             $actualType: AutoRest.Core.Model.PrimaryType
             knownFormat: none
             knownPrimaryType: string
+            isConstant: false
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           '#documentation': Resource name
           '#name': name
@@ -877,9 +877,9 @@ modelTypes:
             $actualType: AutoRest.Core.Model.PrimaryType
             knownFormat: none
             knownPrimaryType: string
+            isConstant: false
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           '#documentation': Resource type
           '#name': type
@@ -902,9 +902,9 @@ modelTypes:
             $actualType: AutoRest.Core.Model.PrimaryType
             knownFormat: none
             knownPrimaryType: string
+            isConstant: false
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           '#documentation': Resource location
           '#name': location
@@ -931,14 +931,14 @@ modelTypes:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             supportsAdditionalProperties: false
+            isConstant: false
             className: 'Dictionary<string,String>'
             declarationName: 'Dictionary<string,String>'
-            isConstant: false
           '#documentation': Resource tags
           '#name': tags
           '#serializedName': tags
@@ -977,9 +977,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the value of key 1.
         '#name': key1
@@ -1002,9 +1002,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the value of key 2.
         '#name': key2
@@ -1035,9 +1035,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.SequenceType
           elementType:
             $ref: '55'
+          isConstant: false
           className: IList<StorageAccount>
           declarationName: IList<StorageAccount>
-          isConstant: false
         '#documentation': Gets the list of storage accounts and their properties.
         '#name': value
         '#serializedName': value
@@ -1127,14 +1127,14 @@ modelTypes:
             $actualType: AutoRest.Core.Model.PrimaryType
             knownFormat: none
             knownPrimaryType: string
+            isConstant: false
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           supportsAdditionalProperties: false
+          isConstant: false
           className: 'Dictionary<string,String>'
           declarationName: 'Dictionary<string,String>'
-          isConstant: false
         '#documentation': Resource tags
         '#name': tags
         '#serializedName': tags
@@ -1186,9 +1186,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#name': keyName
         '#serializedName': keyName
@@ -1219,9 +1219,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets a string describing the resource name.
         '#name': value
@@ -1244,9 +1244,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
+          isConstant: false
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets a localized string describing the resource name.
         '#name': localizedValue
@@ -1305,8 +1305,8 @@ modelTypes:
           extendedDocumentation: >-
             Possible values include: 'Count', 'Bytes', 'Seconds', 'Percent',
             'CountsPerSecond', 'BytesPerSecond'
-          className: UsageUnit
           isConstant: false
+          className: UsageUnit
           '#serializedName': UsageUnit
           '#name': UsageUnit
         '#documentation': Gets the unit of measurement.
@@ -1331,9 +1331,9 @@ modelTypes:
           format: int32
           knownFormat: int32
           knownPrimaryType: int
+          isConstant: false
           className: Int
           declarationName: Int
-          isConstant: false
           '#name': Int
         '#documentation': Gets the current count of the allocated resources in the subscription.
         '#name': currentValue
@@ -1357,9 +1357,9 @@ modelTypes:
           format: int32
           knownFormat: int32
           knownPrimaryType: int
+          isConstant: false
           className: Int
           declarationName: Int
-          isConstant: false
           '#name': Int
         '#documentation': >-
           Gets the maximum count of the resources that can be allocated in the
@@ -1409,9 +1409,9 @@ modelTypes:
           $actualType: AutoRest.Core.Model.SequenceType
           elementType:
             $ref: '93'
+          isConstant: false
           className: IList<Usage>
           declarationName: IList<Usage>
-          isConstant: false
         '#documentation': Gets or sets the list Storage Resource Usages.
         '#name': value
         '#serializedName': value
@@ -1455,9 +1455,9 @@ properties:
       $actualType: AutoRest.Core.Model.PrimaryType
       knownFormat: none
       knownPrimaryType: string
+      isConstant: false
       className: String
       declarationName: String
-      isConstant: false
       '#name': String
     '#documentation': >-
       Gets subscription credentials which uniquely identify Microsoft Azure
@@ -1483,9 +1483,9 @@ properties:
       $actualType: AutoRest.Core.Model.PrimaryType
       knownFormat: none
       knownPrimaryType: string
+      isConstant: false
       className: String
       declarationName: String
-      isConstant: false
       '#name': String
     '#documentation': Client Api Version.
     '#name': api-version
@@ -1523,9 +1523,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -1545,9 +1545,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1597,9 +1597,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -1620,9 +1620,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -1657,9 +1657,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -1679,9 +1679,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1739,9 +1739,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -1762,9 +1762,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -1787,9 +1787,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -1809,9 +1809,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1857,9 +1857,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -1880,9 +1880,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -1905,9 +1905,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -1927,9 +1927,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1980,9 +1980,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -2003,9 +2003,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -2042,9 +2042,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -2064,9 +2064,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2127,9 +2127,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group.
             '#name': resourceGroupName
@@ -2150,9 +2150,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the storage account.
             '#name': accountName
@@ -2172,9 +2172,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -2194,9 +2194,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2246,9 +2246,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -2268,9 +2268,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2324,9 +2324,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -2346,9 +2346,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -2368,9 +2368,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2424,9 +2424,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -2447,9 +2447,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -2486,9 +2486,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -2508,9 +2508,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2585,9 +2585,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2611,9 +2611,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -2670,9 +2670,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -2697,9 +2697,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -2738,9 +2738,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2764,9 +2764,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -2829,9 +2829,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -2856,9 +2856,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -2882,9 +2882,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2908,9 +2908,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -2964,9 +2964,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -2991,9 +2991,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -3017,9 +3017,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3043,9 +3043,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3102,9 +3102,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -3129,9 +3129,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -3170,9 +3170,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3196,9 +3196,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3255,9 +3255,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group.",
@@ -3282,9 +3282,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account.",
@@ -3308,9 +3308,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3334,9 +3334,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3396,9 +3396,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3422,9 +3422,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3486,9 +3486,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -3512,9 +3512,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3538,9 +3538,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3602,9 +3602,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -3629,9 +3629,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -3670,9 +3670,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3696,9 +3696,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3763,9 +3763,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -3785,9 +3785,9 @@ operations:
               $actualType: AutoRest.Core.Model.PrimaryType
               knownFormat: none
               knownPrimaryType: string
+              isConstant: false
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -3851,9 +3851,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3877,9 +3877,9 @@ operations:
                   "$actualType": "AutoRest.Core.Model.PrimaryType",
                   "knownFormat": "none",
                   "knownPrimaryType": "string",
+                  "isConstant": false,
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
