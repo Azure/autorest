@@ -357,6 +357,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} lacks &apos;description&apos; and &apos;title&apos; property. Consider adding a &apos;description&apos;/&apos;title&apos; element. Accurate description/title is essential for maintaining reference documentation..
+        /// </summary>
+        public static string MissingTitleDescription {
+            get {
+                return ResourceManager.GetString("MissingTitleDescription", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Successfully initialized modeler {0} v {1}..
         /// </summary>
         public static string ModelerInitialized {

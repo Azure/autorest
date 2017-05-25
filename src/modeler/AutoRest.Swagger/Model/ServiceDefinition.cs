@@ -123,7 +123,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(TrackedResourceListByResourceGroup))]
         [Rule(typeof(TrackedResourceListBySubscription))]
         [Rule(typeof(TrackedResourcePatchOperationValidation))]
-        [Rule(typeof(DescriptionMissing))]
+        [Rule(typeof(DescriptionAndTitleMissing))]
         [Rule(typeof(PatchBodyParametersSchemaValidation))]
         [Rule(typeof(BodyTopLevelProperties))]
         [Rule(typeof(XmsEnumValidation))]
