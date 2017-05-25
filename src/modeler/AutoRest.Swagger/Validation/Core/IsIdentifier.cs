@@ -14,6 +14,11 @@ namespace AutoRest.Swagger.Validation.Core
     public class IsIdentifier : TypedRule<string>
     {
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "R1012";
+
+        /// <summary>
         /// Start characters are letters or underscores.
         /// </summary>
         /// <param name="ch"></param>

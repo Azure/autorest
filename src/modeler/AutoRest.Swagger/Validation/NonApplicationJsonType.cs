@@ -7,7 +7,7 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class NonAppJsonType : TypedRule<string>
+    public class NonApplicationJsonType : TypedRule<string>
     {
         private const string AppJsonType = "application/json";
 

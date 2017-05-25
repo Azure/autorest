@@ -68,13 +68,13 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// A list of MIME types the service can consume.
         /// </summary>
-        [CollectionRule(typeof(NonAppJsonType))]
+        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the APIs can produce.
         /// </summary>
-        [CollectionRule(typeof(NonAppJsonType))]
+        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Produces { get; set; }
 
         /// <summary>
