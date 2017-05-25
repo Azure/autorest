@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class ParameterNotDefinedInGlobalParamters : TypedRule<Dictionary<string, SwaggerParameter>>
+    public class ParameterNotDefinedInGlobalParameters : TypedRule<Dictionary<string, SwaggerParameter>>
     {
         private const string SubscriptionId = "subscriptionid";
         private const string ApiVersion = "api-version";

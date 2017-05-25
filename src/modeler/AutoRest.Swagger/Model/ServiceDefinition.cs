@@ -135,7 +135,7 @@ namespace AutoRest.Swagger.Model
         /// Dictionary of parameters that can be used across operations.
         /// This property does not define global parameters for all operations.
         /// </summary>
-        [Rule(typeof(ParameterNotDefinedInGlobalParamters))]
+        [Rule(typeof(ParameterNotDefinedInGlobalParameters))]
         [CollectionRule(typeof(AnonymousBodyParameter))]
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
 
