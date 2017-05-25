@@ -7,8 +7,8 @@
 @using AutoRest.CSharp.JsonRpcClient.Templates.Rest.Client
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.MethodCsa>
 
-static Microsoft.Rest.ClientRuntime.Test.AzureRequestInfo @(Model.Name)RequestInfo { get; } =
-    new Microsoft.Rest.ClientRuntime.Test.AzureRequestInfo(
+static Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequestInfo @(Model.Name)RequestInfo { get; } =
+    new Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequestInfo(
         title: "@(Model.MethodGroup.CodeModel.Name)",
         id: "@(Model.SerializedName)",
         method: "@(Model.HttpMethod.ToString().ToUpper())");
