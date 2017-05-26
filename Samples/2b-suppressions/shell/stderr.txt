@@ -1,6 +1,6 @@
-WARNING (NonAppJsonType/R2004/SDKViolation): Please make sure that media types other than 'application/json' are supported by your service.
+WARNING (NonApplicationJsonType/R2004/SDKViolation): Please make sure that media types other than 'application/json' are supported by your service.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:14:4 ($.consumes[1])
-WARNING (NonAppJsonType/R2004/SDKViolation): Please make sure that media types other than 'application/json' are supported by your service.
+WARNING (NonApplicationJsonType/R2004/SDKViolation): Please make sure that media types other than 'application/json' are supported by your service.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:18:4 ($.produces[1])
 ERROR (OperationsAPIImplementation/R3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Storage/operations'.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:38:2 ($.paths)
