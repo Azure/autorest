@@ -2,15 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Logging;
-using AutoRest.Core.Properties;
-using AutoRest.Swagger.Model.Utilities;
-using System.Collections.Generic;
 using AutoRest.Swagger.Model;
-using System.Text.RegularExpressions;
-using System.Linq;
-using Newtonsoft.Json;
+using AutoRest.Swagger.Model.Utilities;
 using AutoRest.Swagger.Validation.Core;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -48,8 +45,7 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
 
         /// <summary>
-        /// Verifies whether an LRO PUT operation returns response models for 
-        /// 200/201 status codes
+        /// Verifies whether the location property for a tracked resource has the x-ms-mutability extension set correctly
         /// </summary>
         /// <param name="definitions"></param>
         /// <param name="context"></param>
@@ -73,6 +69,7 @@ namespace AutoRest.Swagger.Validation
                     else
                     {
                         var jObject = JsonConvert.DeserializeObject<object[]>(definitions[modelWithLocationProp].Properties["location"].Extensions["x-ms-mutability"].ToString());
+                        // make sure jObject and the expected mutability properties have exact same elements
                         if (jObject.Except(LocationPropertyMutability).Any() || LocationPropertyMutability.Except(jObject).Any())
                         {
                             yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty("location").AppendProperty("x-ms-mutability")), this);
