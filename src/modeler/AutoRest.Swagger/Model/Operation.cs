@@ -14,6 +14,7 @@ namespace AutoRest.Swagger.Model
     /// </summary>
     [Rule(typeof(OperationDescriptionRequired))]
     [Rule(typeof(SummaryAndDescriptionMustNotBeSame))]
+    [Rule(typeof(LongRunningOperationsWithLongRunningExtension))]
     public class Operation : SwaggerBase
     {
         private string _description;
