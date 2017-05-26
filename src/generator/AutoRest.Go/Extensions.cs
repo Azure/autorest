@@ -40,7 +40,7 @@ namespace AutoRest.Go
 
         /// <summary>
         /// This method changes string to sentence where is make the first word 
-        /// of sentence to lowercase. The sentence is coming directly from swagger.
+        /// of sentence to lowercase (unless it is an acronym). The sentence is coming directly from swagger.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -53,6 +53,18 @@ namespace AutoRest.Go
             else
             {
                 value = value.Trim();
+                string[] words = value.Split(' ');
+                if (words.First().Length > 1)
+                {
+                    for (int i = 0; i < words.First().Length; i++)
+                    {
+                        if (char.IsLower(words.First()[i]))
+                        {
+                            return value.First().ToString().ToLowerInvariant() + value.Substring(1);
+                        }
+                    }
+                    return value;
+                }
                 return value.First().ToString().ToLowerInvariant() + (value.Length > 1 ? value.Substring(1) : "");
             }
         }
