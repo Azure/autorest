@@ -5,30 +5,49 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.Model
 @using AutoRest.CSharp.JsonRpcClient.Templates.Rest.Client
+@using AutoRest.CSharp.Azure.JsonRpcClient
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.MethodCsa>
 
-static Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequestInfo @(Model.Name)RequestInfo { get; } =
+static Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequestInfo @(Model.Name)_RequestInfo { get; } =
     new Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequestInfo(
         title: "@(Model.MethodGroup.CodeModel.Name)",
         id: "@(Model.SerializedName)",
-        method: "@(Model.HttpMethod.ToString().ToUpper())");
+        method: "@(Model.HttpMethod.ToString().ToUpper())",
+        // path = "@(Model.Url)"
+        path: new Microsoft.Rest.ClientRuntime.Test.Azure.AzurePathPart[]
+        {
+            @foreach (var p in Model.GetPathParts())
+            {
+            @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzurePathPart(value: "@(p.Item1)", isParam: @(p.Item2 ? "true" : "false")),
+            }            
+        });
 
-public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+@foreach (var p in Model.LogicalParameters)
+{
+@EmptyLine
+@:static Microsoft.Rest.ClientRuntime.Test.Azure.AzureParamInfo @(p.GetInfoName()) = 
+    @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParamInfo(
+        @:name: "@(p.SerializedName)",
+        @:location: Microsoft.Rest.ClientRuntime.Test.Azure.AzureParamLocation.@(p.Location));
+}
+
+@EmptyLine
+public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(
+    @(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     var params_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam[]
     {
-        @foreach(var p in Model.LocalParameters)
+        @foreach(var p in Model.LogicalParameters)
         {
-        @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam("@(p.SerializedName)", @(p.Name)),
+        @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam(@(p.GetInfoName()), @(p.Name)),
         }
     };
     var operation_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequest(
-        @(Model.Name)RequestInfo,
+        info: @(Model.Name)_RequestInfo,
         baseUri: this.Client.BaseUri,
-        subscriptionId: this.Client.SubscriptionId,
         paramList: params_);
     return Microsoft.Rest.ClientRuntime.Test.Azure.ServiceClientEx.Call(
         this.Client,
         operation_,
         new Microsoft.Rest.ClientRuntime.Test.Azure.Tag<@(Model.OperationResponseReturnTypeString)>());
-    }
+}
