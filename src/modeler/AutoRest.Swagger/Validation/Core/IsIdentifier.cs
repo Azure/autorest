@@ -14,6 +14,11 @@ namespace AutoRest.Swagger.Validation.Core
     public class IsIdentifier : TypedRule<string>
     {
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "R1012";
+
+        /// <summary>
         /// Start characters are letters or underscores.
         /// </summary>
         /// <param name="ch"></param>
@@ -51,5 +56,10 @@ namespace AutoRest.Swagger.Validation.Core
         ///     The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override Category Severity => Category.Error;
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
     }
 }

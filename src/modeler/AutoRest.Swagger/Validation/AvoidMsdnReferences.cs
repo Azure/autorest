@@ -11,6 +11,16 @@ namespace AutoRest.Swagger.Validation
 {
     public class AvoidMsdnReferences : TypedRule<string>
     {
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "R1010";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
         private static readonly Regex MsdnRegex = new Regex(@"https?:\/\/msdn(?:.microsoft)?.com\/", RegexOptions.IgnoreCase);
 
         /// <summary>

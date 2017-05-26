@@ -47,7 +47,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Describes the type of items in the array.
         /// </summary>
-        [Rule(typeof(RequiredReadOnlyPropertiesValidation))]
+        [Rule(typeof(RequiredReadOnlyProperties))]
         public virtual Schema Items { get; set; }
 
         [JsonProperty(PropertyName = "$ref")]

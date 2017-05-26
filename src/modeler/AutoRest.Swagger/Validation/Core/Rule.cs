@@ -20,7 +20,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public virtual string Id => "!!! implement me and make me abstract !!!";
+        public abstract string Id { get; }
 
         /// <summary>
         /// What kind of open api document type this rule should be applied to
@@ -37,7 +37,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// <summary>
         /// Violation category of the Rule.
         /// </summary>
-        public virtual ValidationCategory ValidationCategory => ValidationCategory.None; // !!! implement me and make me abstract !!!
+        public abstract ValidationCategory ValidationCategory { get; }
 
         /// <summary>
         /// What kind of change implementing this rule can cause.

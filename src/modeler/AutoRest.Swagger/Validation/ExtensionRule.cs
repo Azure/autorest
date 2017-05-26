@@ -17,7 +17,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Overridable method that lets a child rule return multiple validation messages for the <paramref name="entity"/>
         /// Override this method when trying to apply a rule for a composite/array type object or when manipulating the path
-        /// where violation occurs. Eg.: LROStatusCodesValidation.
+        /// where violation occurs. Eg.: LROStatusCodesReturnTypeSchema.
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
