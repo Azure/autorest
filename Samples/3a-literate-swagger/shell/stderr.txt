@@ -17,21 +17,21 @@ ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples des
     - /Samples/3a-literate-swagger/swagger.md:207:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get)
 ERROR (RequiredPropertiesMissingInResourceModel/R2020/RPCViolation): Model definition 'SearchServiceResource' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
     - /Samples/3a-literate-swagger/swagger.md:283:2 ($.definitions.SearchServiceResource)
-WARNING (DescriptionAndTitleMissing/M4000/SDKViolation): 'Error' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'Error' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - /Samples/3a-literate-swagger/swagger.md:391:2 ($.definitions.Error)
-WARNING (DescriptionAndTitleMissing/M4000/SDKViolation): 'ErrorDetails' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'ErrorDetails' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:41:4 ($.definitions.ErrorDetails)
 WARNING (AvoidNestedProperties/R2001/SDKViolation): Consider using x-ms-client-flatten to provide a better end user experience
     - /Samples/3a-literate-swagger/swagger.md:264:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.properties)
-WARNING (DescriptionAndTitleMissing/M4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - /Samples/3a-literate-swagger/swagger.md:394:6 ($.definitions.Error.properties.code)
-WARNING (DescriptionAndTitleMissing/M4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - /Samples/3a-literate-swagger/swagger.md:396:6 ($.definitions.Error.properties.message)
-WARNING (DescriptionAndTitleMissing/M4000/SDKViolation): 'details' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'details' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - /Samples/3a-literate-swagger/swagger.md:398:6 ($.definitions.Error.properties.details)
-WARNING (DescriptionAndTitleMissing/M4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:43:8 ($.definitions.ErrorDetails.properties.code)
-WARNING (DescriptionAndTitleMissing/M4000/SDKViolation): 'target' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'target' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)
-WARNING (DescriptionAndTitleMissing/M4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)
