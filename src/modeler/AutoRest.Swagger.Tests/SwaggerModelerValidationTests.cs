@@ -261,7 +261,7 @@ namespace AutoRest.Swagger.Tests
         public void OperationDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operation-missing-description.json"));
-            messages.AssertOnlyValidationMessage(typeof(OperationDescriptionRequired));
+            messages.AssertOnlyValidationMessage(typeof(OperationDescriptionOrSummaryRequired));
         }
 
         [Fact]
