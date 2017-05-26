@@ -35,9 +35,9 @@ namespace AutoRest.Swagger.Model
         /// Key is a type serviceTypeName.
         /// </summary>
         [CollectionRule(typeof(AvoidNestedProperties))]
-        [Rule(typeof(XmsClientNamePropertyValidation))]
+        [Rule(typeof(XmsClientNameProperty))]
         [Rule(typeof(DescriptionAndTitleMissing))]
-        [CollectionRule(typeof(RequiredReadOnlyPropertiesValidation))]
+        [CollectionRule(typeof(RequiredReadOnlyProperties))]
         public Dictionary<string, Schema> Properties { get; set; }
 
         public bool ReadOnly { get; set; }

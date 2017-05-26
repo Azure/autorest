@@ -62,80 +62,80 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The transfer protocol of the API.
         /// </summary>
-        [CollectionRule(typeof(SupportedSchemesWarning))]
+        [CollectionRule(typeof(HttpsSupportedScheme))]
         public IList<TransferProtocolScheme> Schemes { get; set; }
 
         /// <summary>
         /// A list of MIME types the service can consume.
         /// </summary>
-        [CollectionRule(typeof(NonAppJsonTypeWarning))]
+        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the APIs can produce.
         /// </summary>
-        [CollectionRule(typeof(NonAppJsonTypeWarning))]
+        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Produces { get; set; }
 
         /// <summary>
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
         [Rule(typeof(UniqueResourcePaths))]
-        [Rule(typeof(ListOperationNamingWarning))]
-        [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
-        [Rule(typeof(PutGetPatchResponseValidation))]
-        [Rule(typeof(OperationsAPIImplementationValidation))]
-        [Rule(typeof(ProvidersPathValidation))]
-        [Rule(typeof(PutResponseResourceValidation))]
-        [CollectionRule(typeof(HttpVerbValidation))]
+        [Rule(typeof(ListInOperationName))]
+        [Rule(typeof(CollectionObjectPropertiesNaming))]
+        [Rule(typeof(PutGetPatchResponseSchema))]
+        [Rule(typeof(OperationsAPIImplementation))]
+        [Rule(typeof(ParameterizeProperties))]
+        [Rule(typeof(XmsResourceInPutResponse))]
+        [CollectionRule(typeof(InvalidVerbUsed))]
         [CollectionRule(typeof(DeleteMustNotHaveRequestBody))]
         [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
-        [Rule(typeof(PutRequestResponseValidation))]
+        [Rule(typeof(PutRequestResponseScheme))]
         [Rule(typeof(TrackedResourceListByImmediateParent))]
-        [Rule(typeof(XmsExamplesProvidedValidation))]
-        [Rule(typeof(LROStatusCodesValidation))]
+        [Rule(typeof(XmsExamplesRequired))]
+        [Rule(typeof(LROStatusCodesReturnTypeSchema))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
         /// <summary>
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
         [JsonProperty("x-ms-paths")]
-        [Rule(typeof(ListOperationNamingWarning))]
-        [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
-        [Rule(typeof(ProvidersPathValidation))]
+        [Rule(typeof(ListInOperationName))]
+        [Rule(typeof(CollectionObjectPropertiesNaming))]
+        [Rule(typeof(ParameterizeProperties))]
         [CollectionRule(typeof(XmsPathsMustOverloadPaths))]
         [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
-        [Rule(typeof(XmsExamplesProvidedValidation))]
+        [Rule(typeof(XmsExamplesRequired))]
         public Dictionary<string, Dictionary<string, Operation>> CustomPaths { get; set; }
 
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger definition.
         /// </summary>
         [Rule(typeof(ArmResourcePropertiesBag))]
-        [Rule(typeof(BooleanPropertyNotRecommended))]
-        [CollectionRule(typeof(BooleanPropertyNotRecommended))]
-        [Rule(typeof(ResourceModelValidation))]
-        [Rule(typeof(ResourceIsMsResourceValidation))]
-        [Rule(typeof(GuidValidation))]
-        [Rule(typeof(SkuModelValidation))]
+        [Rule(typeof(EnumInsteadOfBoolean))]
+        [CollectionRule(typeof(EnumInsteadOfBoolean))]
+        [Rule(typeof(RequiredPropertiesMissingInResourceModel ))]
+        [Rule(typeof(ResourceHasXMsResourceEnabled))]
+        [Rule(typeof(GuidUsage))]
+        [Rule(typeof(InvalidSkuModel))]
         [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
-        [Rule(typeof(TrackedResourceGetOperationValidation))]
+        [Rule(typeof(TrackedResourceGetOperation))]
         [Rule(typeof(TrackedResourceListByResourceGroup))]
         [Rule(typeof(TrackedResourceListBySubscription))]
-        [Rule(typeof(TrackedResourcePatchOperationValidation))]
+        [Rule(typeof(TrackedResourcePatchOperation))]
         [Rule(typeof(DescriptionAndTitleMissing))]
-        [Rule(typeof(PatchBodyParametersSchemaValidation))]
+        [Rule(typeof(PatchBodyParametersSchema))]
         [Rule(typeof(BodyTopLevelProperties))]
         [Rule(typeof(XmsEnumValidation))]
-        [CollectionRule(typeof(RequiredReadOnlyPropertiesValidation))]
-        [Rule(typeof(XMSPageableListByRGAndSubscriptionsValidation))]
+        [CollectionRule(typeof(RequiredReadOnlyProperties))]
+        [Rule(typeof(XmsPageableListByRGAndSubscriptions))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>
         /// Dictionary of parameters that can be used across operations.
         /// This property does not define global parameters for all operations.
         /// </summary>
-        [Rule(typeof(ServiceDefinitionParameters))]
+        [Rule(typeof(ParameterNotDefinedInGlobalParameters))]
         [CollectionRule(typeof(AnonymousBodyParameter))]
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
 
@@ -147,7 +147,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger security definition.
         /// </summary>
-        [Rule(typeof(SecurityDefinitionsStructureValidation))]
+        [Rule(typeof(SecurityDefinitionsStructure))]
         public Dictionary<string, SecurityDefinition> SecurityDefinitions { get; set; }
 
         /// <summary>
