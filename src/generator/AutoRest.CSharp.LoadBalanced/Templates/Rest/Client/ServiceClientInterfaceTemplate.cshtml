@@ -1,0 +1,93 @@
+@using System
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.LoadBalanced.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.CodeModelCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+@foreach (var usingString in Model.Usings) {
+    @:using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    /// </summary>
+    public partial interface I@(Model.Name) : System.IDisposable
+    {
+        /// <summary>
+        /// The base URI of the service.
+        /// </summary>
+        @if (!Model.IsCustomBaseUri)
+        {
+        @:System.Uri BaseUri { get; set; }
+        }
+        
+        @EmptyLine
+
+        /// <summary>
+        /// Gets or sets json serialization settings.
+        /// </summary>
+        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
+        @EmptyLine
+
+        /// <summary>
+        /// Gets or sets json deserialization settings.
+        /// </summary>
+        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
+        @EmptyLine
+
+        @foreach (var property in Model.Properties)
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+        @:/// </summary>
+        @:@property.ModelTypeName @property.Name { get;@(property.IsReadOnly || property.IsConstant ? "" : " set;") }
+        @EmptyLine
+        }
+
+        @EmptyLine
+    @foreach(var operation in Model.AllOperations)
+    {
+        @:/// <summary>
+        @:/// Gets the I@(operation.TypeName).
+        @:/// </summary>
+        @:I@(operation.TypeName) @(operation.NameForProperty) { get; }
+        @EmptyLine
+        @:
+    }
+     
+    @foreach(MethodCs method in Model.Methods.Where( each => each.Group.IsNullOrEmpty()) )
+    {
+        if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", String.IsNullOrEmpty(method.Summary) ? method.Description.EscapeXmlComment() : method.Summary.EscapeXmlComment())
+        @:/// </summary>
+        }
+        if (!String.IsNullOrEmpty(method.Description) && !String.IsNullOrEmpty(method.Summary))
+        {
+        @:/// <remarks>
+        @:@WrapComment("/// ", method.Description.EscapeXmlComment())
+        @:/// </remarks>
+        }
+        foreach (var parameter in method.LocalParameters)
+        {
+        @:/// <param name='@parameter.Name'>
+        @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+        @:/// </param>
+        }
+        @:/// <param name='customHeaders'>
+        @:/// The headers that will be added to request.
+        @:/// </param>
+        @:/// <param name='cancellationToken'>
+        @:/// The cancellation token.
+        @:/// </param>
+        @:System.Threading.Tasks.Task<@(method.OperationResponseReturnTypeString)> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
+        @EmptyLine
+        @:
+    }
+
+    }
+}
