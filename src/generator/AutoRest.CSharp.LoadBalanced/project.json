@@ -1,5 +1,5 @@
 {
-  "name": "AutoRest.CSharp.AutoRest.CSharp.LoadBalanced",
+  "name": "AutoRest.CSharp.LoadBalanced",
   "version": "1.0.0-*",
   "authors": [ "Agoda, Microsoft" ],
 

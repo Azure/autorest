@@ -1,6 +1,5 @@
-﻿using System;
-using System.Reflection;
-using System.Resources;
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
@@ -8,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AutoRest.CSharp.LoadBalanced")]
+[assembly: AssemblyProduct("AutoRest.CSharp.LoadBalanced.Tests")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -17,8 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c024f83f-73e6-40f4-8150-128c70226301")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: CLSCompliant(false)]
-[assembly: NeutralResourcesLanguage("en")]
-[assembly: DefaultDllImportSearchPathsAttribute(DllImportSearchPath.SafeDirectories)]
+[assembly: Guid("dca3bb6a-1581-4de6-961b-4b7b1848adc9")]

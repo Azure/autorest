@@ -11,7 +11,6 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.LoadBalanced.Model;
-using AutoRest.CSharp.LoadBalanced.Templates;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Client;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Common;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Server;
@@ -28,72 +27,62 @@ namespace AutoRest.CSharp.LoadBalanced
 
 
         public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
-            Properties.Resources.UsageInformation, ClientRuntimePackage);
+            "The {0} nuget package is required to compile the generated code.", ClientRuntimePackage);
 
         public override string ImplementationFileExtension => ".cs";
 
-        private async Task GenerateServerSideCode(CodeModelCs codeModel)
-        {
-            var project = new ProjectModel
-                          {
-                              RootNameSpace = codeModel.Namespace
-                          };
-
-            foreach (string methodGrp in codeModel.MethodGroupNames)
-            {
-                using (NewContext)
-                {
-                    codeModel.Name = methodGrp;
-                    // Service server
-                    var serviceControllerTemplate = new ServiceControllerTemplate { Model = codeModel };
-                    var filePath = $"{codeModel.Name}{ImplementationFileExtension}";
-                    project.FilePaths.Add(filePath);
-                    await Write(serviceControllerTemplate, filePath);
-                }
-            }
-            // Models
-            foreach (var compositeType in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
-            {
-                var model = (CompositeTypeCs) compositeType;
-                var modelTemplate = new ModelTemplate { Model = model };
-                var fileName = $"{model.Name}{ImplementationFileExtension}";
-                var filePath = Path.Combine(Settings.Instance.ModelsName, fileName);
-                project.FilePaths.Add(filePath);
-                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, filePath));
-            }
-
-            var projectTemplate = new CsProjTemplate() { Model = project };
-            var projFilePath = $"{project.RootNameSpace}.csproj";
-
-            await Write(projectTemplate, projFilePath);
-        }
-
         private async Task GenerateClientSideCode(CodeModelCs codeModel)
         {
+            var project = new ProjectModel
+            {
+                RootNameSpace = codeModel.Namespace
+            };
+
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+
+            var clientPath = $"{codeModel.Name}{ImplementationFileExtension}";
+            project.FilePaths.Add(clientPath);
+
+            await Write(serviceClientTemplate, clientPath);
 
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
-            await Write(serviceClientInterfaceTemplate, $"I{codeModel.Name}{ImplementationFileExtension}");
+
+            var interfacePath = $"I{codeModel.Name}{ImplementationFileExtension}";
+            project.FilePaths.Add(interfacePath);
+
+            await Write(serviceClientInterfaceTemplate, interfacePath);
 
             // operations
-            foreach (MethodGroupCs methodGroup in codeModel.Operations)
+            foreach (var methodGroup1 in codeModel.Operations)
             {
+                var methodGroup = (MethodGroupCs) methodGroup1;
+
                 if (!methodGroup.Name.IsNullOrEmpty())
                 {
                     // Operation
                     var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                    await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}");
+                    var operationsFilePath = $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}";
+                    project.FilePaths.Add(operationsFilePath);
+
+                    await Write(operationsTemplate, operationsFilePath);
 
                     // Operation interface
                     var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                    await Write(operationsInterfaceTemplate, $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}");
+                    var operationsInterfacePath =
+                        $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}";
+                    project.FilePaths.Add(operationsInterfacePath);
+
+                    await Write(operationsInterfaceTemplate, operationsInterfacePath);
                 }
 
                 var operationExtensionsTemplate = new ExtensionsTemplate { Model = methodGroup };
-                await Write(operationExtensionsTemplate, $"{methodGroup.ExtensionTypeName}Extensions{ImplementationFileExtension}");
+                var extensionPath = $"{methodGroup.ExtensionTypeName}Extensions{ImplementationFileExtension}";
+
+                project.FilePaths.Add(extensionPath);
+
+                await Write(operationExtensionsTemplate, extensionPath);
             }
 
             // Models
@@ -106,51 +95,59 @@ namespace AutoRest.CSharp.LoadBalanced
                 }
 
                 var modelTemplate = new ModelTemplate{ Model = model };
-                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
+                var modelPath = Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}");
+                project.FilePaths.Add(modelPath);
+
+                await Write(modelTemplate, modelPath);
             }
 
             // Enums
             foreach (EnumTypeCs enumType in codeModel.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine(Settings.Instance.ModelsName, $"{enumTemplate.Model.Name}{ImplementationFileExtension}"));
+                var enumFilePath = Path.Combine(Settings.Instance.ModelsName, $"{enumTemplate.Model.Name}{ImplementationFileExtension}");
+                project.FilePaths.Add(enumFilePath);
+
+                await Write(enumTemplate, enumFilePath);
             }
 
             // Exceptions
             foreach (CompositeTypeCs exceptionType in codeModel.ErrorTypes)
             {
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
-                await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
+                var exceptionFilePath =
+                    Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
+                project.FilePaths.Add(exceptionFilePath);
+
+                await Write(exceptionTemplate, exceptionFilePath);
             }
             
             // Xml Serialization
             if (codeModel.ShouldGenerateXmlSerialization)
             {
                 var xmlSerializationTemplate = new XmlSerializationTemplate();
-                await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
+                var xmlSerializationPath = Path.Combine(Settings.Instance.ModelsName,
+                    $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}");
+                project.FilePaths.Add(xmlSerializationPath);
+
+                await Write(xmlSerializationTemplate, xmlSerializationPath);
             }
+
+            var projectTemplate = new CsProjTemplate { Model = project };
+            var projFilePath = $"{project.RootNameSpace}.csproj";
+
+            var solutionTemplate = new SlnTemplate { Model = project };
+            var slnFilePath = $"{project.RootNameSpace}.sln";
+
+            await Write(projectTemplate, projFilePath);
+            await Write(solutionTemplate, slnFilePath);
+            await Write(new PackagesTemplate(), "packages.config");
         }
 
         private async Task GenerateRestCode(CodeModelCs codeModel)
         {
-            if (Settings.Instance.CodeGenerationMode.IsNullOrEmpty() || Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest-client"))
-            {
-                Logger.Instance.Log(Category.Info, "Defaulting to generate client side Code");
-                await GenerateClientSideCode(codeModel);
-            } 
-            else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest"))
-            {
-                Logger.Instance.Log(Category.Info, "Generating client side Code");
-                await GenerateClientSideCode(codeModel);
-                Logger.Instance.Log(Category.Info, "Generating server side Code");
-                await GenerateServerSideCode(codeModel);
-            }
-            else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest-server"))
-            {
-                Logger.Instance.Log(Category.Info, "Generating server side Code");
-                await GenerateServerSideCode(codeModel);
-            }
-
+            Logger.Instance.Log(Category.Info, "Defaulting to generate client side Code");
+            await GenerateClientSideCode(codeModel);
         }
 
         /// <summary>

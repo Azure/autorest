@@ -1,0 +1,1929 @@
+{{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Test API"
+  },
+  "host": "tempuri.org",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/PrimitiveArrayTypes/EchoBoolean": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoBoolean",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "boolean",
+                "x-type-dotnet": "System.Boolean",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "boolean",
+                "x-type-dotnet": "System.Boolean",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoByte": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoByte",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "format": "byte",
+              "type": "string",
+              "x-type-dotnet": "System.Byte[]",
+              "x-nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "byte",
+              "type": "string",
+              "x-type-dotnet": "System.Byte[]",
+              "x-nullable": true
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoSByte": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoSByte",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.SByte",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.SByte",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoInt16": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoInt16",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.Int16",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.Int16",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoUInt16": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoUInt16",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt16",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt16",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoInt32": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoInt32",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.Int32",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.Int32",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoUInt32": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoUInt32",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt32",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt32",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoInt64": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoInt64",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int64",
+                "type": "integer",
+                "x-type-dotnet": "System.Int64",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int64",
+                "type": "integer",
+                "x-type-dotnet": "System.Int64",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoUInt64": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoUInt64",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int64",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt64",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int64",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt64",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoSingle": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoSingle",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "float",
+                "type": "number",
+                "x-type-dotnet": "System.Single",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "float",
+                "type": "number",
+                "x-type-dotnet": "System.Single",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoDouble": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoDouble",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "double",
+                "type": "number",
+                "x-type-dotnet": "System.Double",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "double",
+                "type": "number",
+                "x-type-dotnet": "System.Double",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoDecimal": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoDecimal",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "double",
+                "type": "number",
+                "x-type-dotnet": "System.Decimal",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "double",
+                "type": "number",
+                "x-type-dotnet": "System.Decimal",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoDateTime": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoDateTime",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "date-time",
+                "type": "string",
+                "x-type-dotnet": "System.DateTime",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "date-time",
+                "type": "string",
+                "x-type-dotnet": "System.DateTime",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoDateTimeOffset": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoDateTimeOffset",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "date-time",
+                "type": "string",
+                "x-type-dotnet": "System.DateTimeOffset",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "date-time",
+                "type": "string",
+                "x-type-dotnet": "System.DateTimeOffset",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoTimeSpan": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoTimeSpan",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-type-dotnet": "System.TimeSpan",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-type-dotnet": "System.TimeSpan",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoGuid": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoGuid",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "uuid",
+                "type": "string",
+                "x-type-dotnet": "System.Guid",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "uuid",
+                "type": "string",
+                "x-type-dotnet": "System.Guid",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoEnum": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoEnum",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "type": "integer",
+                "x-names": [
+                  "OneFish",
+                  "TwoFish",
+                  "RedFish",
+                  "BlueFish"
+                ],
+                "x-type-dotnet": "Swashbuckle.Dummy.Types.PrimitiveEnum",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "type": "integer",
+                "x-names": [
+                  "OneFish",
+                  "TwoFish",
+                  "RedFish",
+                  "BlueFish"
+                ],
+                "x-type-dotnet": "Swashbuckle.Dummy.Types.PrimitiveEnum",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoChar": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoChar",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-type-dotnet": "System.Char",
+                "x-nullable": false
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-type-dotnet": "System.Char",
+                "x-nullable": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableBoolean": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableBoolean",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "boolean",
+                "x-type-dotnet": "System.Boolean",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "boolean",
+                "x-type-dotnet": "System.Boolean",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableByte": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableByte",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.Byte",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.Byte",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableSByte": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableSByte",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.SByte",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.SByte",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableInt16": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableInt16",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.Int16",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.Int16",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableUInt16": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableUInt16",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt16",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt16",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableInt32": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableInt32",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.Int32",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.Int32",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableUInt32": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableUInt32",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt32",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt32",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableInt64": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableInt64",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int64",
+                "type": "integer",
+                "x-type-dotnet": "System.Int64",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int64",
+                "type": "integer",
+                "x-type-dotnet": "System.Int64",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableUInt64": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableUInt64",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int64",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt64",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int64",
+                "type": "integer",
+                "x-type-dotnet": "System.UInt64",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableSingle": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableSingle",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "float",
+                "type": "number",
+                "x-type-dotnet": "System.Single",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "float",
+                "type": "number",
+                "x-type-dotnet": "System.Single",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableDouble": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableDouble",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "double",
+                "type": "number",
+                "x-type-dotnet": "System.Double",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "double",
+                "type": "number",
+                "x-type-dotnet": "System.Double",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableDecimal": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableDecimal",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "double",
+                "type": "number",
+                "x-type-dotnet": "System.Decimal",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "double",
+                "type": "number",
+                "x-type-dotnet": "System.Decimal",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableDateTime": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableDateTime",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "date-time",
+                "type": "string",
+                "x-type-dotnet": "System.DateTime",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "date-time",
+                "type": "string",
+                "x-type-dotnet": "System.DateTime",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableDateTimeOffset": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableDateTimeOffset",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "date-time",
+                "type": "string",
+                "x-type-dotnet": "System.DateTimeOffset",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "date-time",
+                "type": "string",
+                "x-type-dotnet": "System.DateTimeOffset",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableTimeSpan": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableTimeSpan",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-type-dotnet": "System.TimeSpan",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-type-dotnet": "System.TimeSpan",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableGuid": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableGuid",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "uuid",
+                "type": "string",
+                "x-type-dotnet": "System.Guid",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "uuid",
+                "type": "string",
+                "x-type-dotnet": "System.Guid",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableEnum": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableEnum",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "type": "integer",
+                "x-names": [
+                  "OneFish",
+                  "TwoFish",
+                  "RedFish",
+                  "BlueFish"
+                ],
+                "x-type-dotnet": "Swashbuckle.Dummy.Types.PrimitiveEnum",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "type": "integer",
+                "x-names": [
+                  "OneFish",
+                  "TwoFish",
+                  "RedFish",
+                  "BlueFish"
+                ],
+                "x-type-dotnet": "Swashbuckle.Dummy.Types.PrimitiveEnum",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoNullableChar": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoNullableChar",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-type-dotnet": "System.Char",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-type-dotnet": "System.Char",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/PrimitiveArrayTypes/EchoString": {
+      "post": {
+        "tags": [
+          "PrimitiveArrayTypes"
+        ],
+        "operationId": "PrimitiveArrayTypes_EchoString",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-type-dotnet": "System.String",
+                "x-nullable": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "x-type-dotnet": "System.String",
+                "x-nullable": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}}

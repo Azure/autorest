@@ -1,0 +1,15 @@
+﻿{
+  "plugins": {
+    "Test": {
+      "type": "LoadBalancedPluginCs, AutoRest.CSharp.LoadBalanced"
+    }
+  },
+  "modelers": {
+    "Swagger": {
+      "type": "SwaggerModeler, AutoRest.Swagger"
+    },
+    "CompositeSwagger": {
+      "type": "CompositeSwaggerModeler, AutoRest.CompositeSwagger"
+    }
+  }
+}
