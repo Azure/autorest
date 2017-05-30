@@ -14,11 +14,5 @@ namespace AutoRest.Core
         public Settings Settings => Settings.Instance;
 
         public abstract CodeModel Build();
-
-        /// <summary>
-        /// Copares two versions of the same service specification.
-        /// </summary>
-        /// <returns></returns>
-        public abstract IEnumerable<LogMessage> Compare();
     }
 }
