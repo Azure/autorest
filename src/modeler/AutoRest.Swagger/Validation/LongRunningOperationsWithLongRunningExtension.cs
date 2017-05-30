@@ -44,8 +44,8 @@ namespace AutoRest.Swagger.Validation
         /// <returns>true if the long running operation has long running extension enabled. false otherwise.</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Operation operation, RuleContext context)
         {
-            if((bool)operation.Responses?.Any(response => response.Key.Equals("201", StringComparison.OrdinalIgnoreCase)) && 
-               !(bool)operation.Extensions?.Any(extension => extension.Key.Equals("x-ms-long-running-operation", StringComparison.OrdinalIgnoreCase) && (bool)extension.Value))
+            if(operation.Responses?.Any(response => response.Key.Equals("201", StringComparison.OrdinalIgnoreCase)) == true && 
+              operation.Extensions?.Any(extension => extension.Key.Equals("x-ms-long-running-operation", StringComparison.OrdinalIgnoreCase) && (bool)extension.Value) == false)
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, new object[0]);
             }
