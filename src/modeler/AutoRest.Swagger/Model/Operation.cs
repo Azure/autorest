@@ -13,7 +13,7 @@ namespace AutoRest.Swagger.Model
     /// Describes a single API operation on a path.
     /// </summary>
     [Rule(typeof(OperationDescriptionRequired))]
-    [Rule(typeof(SummaryDescriptionValidation))]
+    [Rule(typeof(SummaryAndDescriptionMustNotBeSame))]
     public class Operation : SwaggerBase
     {
         private string _description;
@@ -36,11 +36,11 @@ namespace AutoRest.Swagger.Model
         /// operation id to uniquely identify an operation.
         /// </summary>
         [Rule(typeof(OneUnderscoreInOperationId))]
-        [Rule(typeof(OperationIdNounInVerb))]
-        [Rule(typeof(GetOperationNameValidation))]
-        [Rule(typeof(PutOperationNameValidation))]
-        [Rule(typeof(PatchOperationNameValidation))]
-        [Rule(typeof(DeleteOperationNameValidation))]
+        [Rule(typeof(OperationIdNounVerb))]
+        [Rule(typeof(GetInOperationName))]
+        [Rule(typeof(PutInOperationName))]
+        [Rule(typeof(PatchInOperationName))]
+        [Rule(typeof(DeleteInOperationName))]
         [Rule(typeof(OperationIdNounConflictingModelNames))]
         public string OperationId { get; set; }
 
@@ -65,13 +65,13 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// A list of MIME types the operation can consume.
         /// </summary>
-        [CollectionRule(typeof(NonAppJsonTypeWarning))]
+        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the operation can produce. 
         /// </summary>
-        [CollectionRule(typeof(NonAppJsonTypeWarning))]
+        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Produces { get; set; }
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace AutoRest.Swagger.Model
         /// If a parameter is already defined at the Path Item, the 
         /// new definition will override it, but can never remove it.
         /// </summary>
-        [CollectionRule(typeof(OperationParametersValidation))]
-        [CollectionRule(typeof(BooleanPropertyNotRecommended))]
+        [CollectionRule(typeof(SubscriptionIdParameterInOperations))]
+        [CollectionRule(typeof(EnumInsteadOfBoolean))]
         [CollectionRule(typeof(AnonymousBodyParameter))]
         public IList<SwaggerParameter> Parameters { get; set; }
 
@@ -92,7 +92,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The transfer protocol for the operation. 
         /// </summary>
-        [CollectionRule(typeof(SupportedSchemesWarning))]
+        [CollectionRule(typeof(HttpsSupportedScheme))]
         public IList<TransferProtocolScheme> Schemes { get; set; }
 
         public bool Deprecated { get; set; }

@@ -14,9 +14,9 @@ namespace AutoRest.Swagger.Model
     /// Describes a single operation parameter.
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject 
     /// </summary>
-    [Rule(typeof(ParameterNameValidation))]
+    [Rule(typeof(NamePropertyDefinitionInParameter))]
     [Rule(typeof(ParameterDescriptionRequired))]
-    [Rule(typeof(XmsClientNameParameterValidation))]
+    [Rule(typeof(XmsClientNameParameter))]
     public class SwaggerParameter : SwaggerObject
     {
         private bool _isRequired;
@@ -40,7 +40,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The schema defining the type used for the body parameter.
         /// </summary>
-        [Rule(typeof(RequiredReadOnlyPropertiesValidation))]
+        [Rule(typeof(RequiredReadOnlyProperties))]
         public Schema Schema { get; set; }
 
         /// <summary>
