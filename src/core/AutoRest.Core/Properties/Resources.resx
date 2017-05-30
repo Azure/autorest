@@ -271,6 +271,9 @@ Modelers:
   <data name="MissingSummaryDescription" xml:space="preserve">
     <value>{0} lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.</value>
   </data>
+  <data name="MissingTitleDescription" xml:space="preserve">
+    <value>{0} lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.</value>
+  </data>
   <data name="OnlyOneUnderscoreAllowedInOperationId" xml:space="preserve">
     <value>Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.</value>
   </data>
