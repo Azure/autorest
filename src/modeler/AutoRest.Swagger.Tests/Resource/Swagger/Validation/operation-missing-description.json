@@ -20,7 +20,6 @@
     "/foo": {
       "post": {
         "operationId": "PostFoo",
-        "summary": "Foo path",
         "responses": {
           "default": {
             "description": "Response"
