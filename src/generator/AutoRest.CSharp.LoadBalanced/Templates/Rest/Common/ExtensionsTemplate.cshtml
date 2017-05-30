@@ -4,6 +4,9 @@
 @inherits AutoRest.Core.Template<MethodGroupCs>
 @Header("// ")
 @EmptyLine
+using System.Threading;
+using System.Threading.Tasks;
+@EmptyLine
 namespace @Settings.Namespace
 {
 @foreach (var usingString in Model.Usings) {

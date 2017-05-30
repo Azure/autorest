@@ -15,6 +15,8 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 {
     public class CodeModelCs : CodeModel
     {
+        private IEnumerable<string> _usings;
+
         [JsonIgnore]
         public IEnumerable<MethodGroupCs> AllOperations => Operations.Where( operation => !operation.Name.IsNullOrEmpty()).Cast<MethodGroupCs>();
 
@@ -26,11 +28,23 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             get
             {
+                if (_usings != null)
+                {
+                    return _usings;
+                }
+
+                var usingsList = new List<string>();
+
                 if (HaveModelNamespace)
                 {
-                    yield return ModelsName;
+                    usingsList.Add(ModelsName);
                 }
+
+                _usings = usingsList;
+
+                return _usings;
             }
+            set { _usings = value; }
         }
 
         [JsonIgnore]

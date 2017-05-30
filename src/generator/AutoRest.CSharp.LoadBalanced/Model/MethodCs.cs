@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
             if (addCustomHeaderParameters)
             {
-                declarations.Add("System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null");
+                declarations.Add("Dictionary<string, List<string>> customHeaders = null");
             }
 
             return string.Join(", ", declarations);
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
             {
                 declarations += ", ";
             }
-            declarations += "System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)";
+            declarations += "CancellationToken cancellationToken = default(CancellationToken)";
 
             return declarations;
         }
@@ -140,18 +140,18 @@ namespace AutoRest.CSharp.LoadBalanced.Model
             {
                 if (ReturnType.Body != null && ReturnType.Headers != null)
                 {
-                    return $"Microsoft.Rest.HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head)},{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
+                    return $"HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head)},{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
                 }
                 if (ReturnType.Body != null)
                 {
-                    return $"Microsoft.Rest.HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head)}>";
+                    return $"HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head)}>";
                 }
                 if (ReturnType.Headers != null)
                 {
-                    return $"Microsoft.Rest.HttpOperationHeaderResponse<{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
+                    return $"HttpOperationHeaderResponse<{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
                 }
 
-                return "Microsoft.Rest.HttpOperationResponse";
+                return "HttpOperationResponse";
 
             }
         }
@@ -166,17 +166,16 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                 if (ReturnType.Body != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "System.Threading.Tasks.Task<{0}>", ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head));
+                        "Task<{0}>", ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head));
                 }
-                else if (ReturnType.Headers != null)
+
+                if (ReturnType.Headers != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "System.Threading.Tasks.Task<{0}>", ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head));
+                        "Task<{0}>", ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head));
                 }
-                else
-                {
-                    return "System.Threading.Tasks.Task";
-                }
+
+                return "Task";
             }
         }
 
@@ -187,69 +186,45 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             get
             {
-                if (this.DefaultResponse.Body is CompositeType)
+                if (!(this.DefaultResponse.Body is CompositeType))
                 {
-                    CompositeType type = this.DefaultResponse.Body as CompositeType;
-                    if (type.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
-                    {
-                        var ext = type.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
-                        if (ext != null && ext["name"] != null)
-                        {
-                            return ext["name"].ToString();
-                        }
-                    }
+                    return "HttpOperationException";
+                }
+
+                CompositeType type = this.DefaultResponse.Body as CompositeType;
+                if (!type.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                {
                     return type.Name + "Exception";
                 }
-                else
+
+                var ext = type.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                if (ext != null && ext["name"] != null)
                 {
-                    return "Microsoft.Rest.HttpOperationException";
+                    return ext["name"].ToString();
                 }
+                return type.Name + "Exception";
             }
         }
 
         /// <summary>
         /// Get the expression for exception initialization with message.
         /// </summary>
-        public virtual string InitializeExceptionWithMessage
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public virtual string InitializeExceptionWithMessage => string.Empty;
 
         /// <summary>
         /// Get the expression for exception initialization with message.
         /// </summary>
-        public virtual string InitializeException
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public virtual string InitializeException => string.Empty;
 
         /// <summary>
         /// Gets the expression for response body initialization.
         /// </summary>
-        public virtual string InitializeResponseBody
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public virtual string InitializeResponseBody => string.Empty;
 
         /// <summary>
         /// Gets the expression for default header setting.
         /// </summary>
-        public virtual string SetDefaultHeaders
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public virtual string SetDefaultHeaders => string.Empty;
 
         /// <summary>
         /// Get the type name for the method's return type
@@ -262,14 +237,8 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                 {
                     return ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head);
                 }
-                if (ReturnType.Headers != null)
-                {
-                    return ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head);
-                }
-                else
-                {
-                    return "void";
-                }
+
+                return ReturnType.Headers != null ? ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head) : "void";
             }
         }
 
@@ -294,19 +263,22 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.Date))
             {
-                return "new Microsoft.Rest.Serialization.DateJsonConverter()";
+                return "new DateJsonConverter()";
             }
-            else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+
+            if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
-                return "new Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter()";
+                return "new DateTimeRfc1123JsonConverter()";
             }
-            else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.Base64Url))
+
+            if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.Base64Url))
             {
-                return "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
+                return "new Base64UrlJsonConverter()";
             }
-            else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.UnixTime))
+
+            if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.UnixTime))
             {
-                return "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
+                return "new UnixTimeJsonConverter()";
             }
             return ClientReference + ".SerializationSettings";
         }
@@ -320,16 +292,19 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.Date))
             {
-                return "new Microsoft.Rest.Serialization.DateJsonConverter()";
+                return "new DateJsonConverter()";
             }
-            else if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.Base64Url))
+
+            if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.Base64Url))
             {
-                return "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
+                return "new Base64UrlJsonConverter()";
             }
-            else if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.UnixTime))
+
+            if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.UnixTime))
             {
-                return "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
+                return "new UnixTimeJsonConverter()";
             }
+
             return ClientReference + ".DeserializationSettings";
         }
 
@@ -357,7 +332,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
             foreach (var pathParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
             {
-                string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", System.Uri.EscapeDataString({2}));";
+                string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));";
                 if (pathParameter.SkipUrlEncoding())
                 {
                     replaceString = "{0} = {0}.Replace(\"{{{1}}}\", {2});";
@@ -380,10 +355,10 @@ namespace AutoRest.CSharp.LoadBalanced.Model
             }
             if (this.LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
             {
-                builder.AppendLine("System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();");
+                builder.AppendLine("List<string> _queryParameters = new SList<string>();");
                 foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
                 {
-                    var replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", System.Uri.EscapeDataString({1})));";
+                    var replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
                     if ((queryParameter as ParameterCs).IsNullable())
                     {
                         builder.AppendLine("if ({0} != null)", queryParameter.Name)
@@ -495,7 +470,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             if (transformation == null)
             {
-                throw new ArgumentNullException("transformation");
+                throw new ArgumentNullException(nameof(transformation));
             }
 
             return string.Join(" || ",

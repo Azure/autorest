@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,9 +14,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.CSharp.LoadBalanced.Model;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Client;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Common;
-using AutoRest.CSharp.LoadBalanced.Templates.Rest.Server;
 using AutoRest.Extensions;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.LoadBalanced
 {
@@ -33,10 +32,30 @@ namespace AutoRest.CSharp.LoadBalanced
 
         private async Task GenerateClientSideCode(CodeModelCs codeModel)
         {
+            var usings = new List<string>(codeModel.Usings);
+            var methods = codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()).Cast<MethodCs>().ToList();
+
             var project = new ProjectModel
             {
                 RootNameSpace = codeModel.Namespace
             };
+
+            var metricsTemplate = new MetricsTemplate {Model = methods};
+            var metricsFilePath = "Metrics.cs";
+            project.FilePaths.Add(metricsFilePath);
+            await Write(metricsTemplate, metricsFilePath);
+
+            usings.Add("System");
+            usings.Add("System.Collections.Generic");
+            usings.Add("System.Linq");
+            usings.Add("System.Net.Http");
+            usings.Add("System.Threading");
+            usings.Add("System.Threading.Tasks");
+            usings.Add("Microsoft.Rest");
+            usings.Add("System.IO");
+            usings.Add("Microsoft.Rest.Serialization");
+
+            codeModel.Usings = usings.Where(u => !string.IsNullOrWhiteSpace(u)).Distinct();
 
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
@@ -53,6 +72,11 @@ namespace AutoRest.CSharp.LoadBalanced
             project.FilePaths.Add(interfacePath);
 
             await Write(serviceClientInterfaceTemplate, interfacePath);
+
+            var apiBaseTemplate = new ApiBaseTemplate {Model = codeModel};
+            var apiBaseCsPath = "ApiBase.cs";
+            project.FilePaths.Add(apiBaseCsPath);
+            await Write(apiBaseTemplate, apiBaseCsPath);
 
             // operations
             foreach (var methodGroup1 in codeModel.Operations)

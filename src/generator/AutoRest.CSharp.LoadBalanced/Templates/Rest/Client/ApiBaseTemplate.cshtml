@@ -1,0 +1,331 @@
+﻿@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.CodeModelCs>
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using Microsoft.Rest;
+using Microsoft.Rest.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
+@EmptyLine
+namespace @Settings.Namespace
+{
+@EmptyLine
+    public abstract class ApiBase<T> : ServiceClient<T>, ApiBase<T>.ITracer where T : ServiceClient<T>
+    {
+    /// <summary>The base URI of the service.</summary>
+    public System.Uri BaseUri { get; set; }
+
+    /// <summary>Gets or sets json serialization settings.</summary>
+    public JsonSerializerSettings SerializationSettings { get; protected set; }
+
+    /// <summary>Gets or sets json deserialization settings.</summary>
+    public JsonSerializerSettings DeserializationSettings { get; protected set; }
+
+    /// <summary>Initializes a new instance of the @(Model.Name) class.</summary>
+    /// <param name='handlers'>Optional. The delegating handlers to add to the http client pipeline.</param>
+    public ApiBase(params DelegatingHandler[] handlers) : base(handlers)
+    {
+    this.Initialize();
+    }
+    /// <summary>Initializes a new instance of the @(Model.Name) class.</summary>
+    /// <param name='rootHandler'>Optional. The http client handler used to handle http transport.</param>
+    /// <param name='handlers'>Optional. The delegating handlers to add to the http client pipeline.</param>
+    public ApiBase(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+    {
+    this.Initialize();
+    }
+    /// <summary>Initializes a new instance of the @(Model.Name) class.</summary>
+    /// <param name='baseUri'>Optional. The base URI of the service.</param>
+    /// <param name='handlers'>Optional. The delegating handlers to add to the http client pipeline.</param>
+    /// <exception cref="System.ArgumentNullException">Thrown when a required parameter is null</exception>
+    public ApiBase(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+    {
+    if (baseUri == null)
+    {
+    throw new ArgumentNullException("baseUri");
+    }
+    this.BaseUri = baseUri;
+    }
+    /// <summary>Initializes a new instance of the @(Model.Name) class.</summary>
+    /// <param name='baseUri'>Optional. The base URI of the service.</param>
+    /// <param name='rootHandler'>Optional. The http client handler used to handle http transport.</param>
+    /// <param name='handlers'>Optional. The delegating handlers to add to the http client pipeline.</param>
+    /// <exception cref="System.ArgumentNullException">Thrown when a required parameter is null</exception>
+    public ApiBase(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+    {
+    if (baseUri == null)
+    {
+    throw new ArgumentNullException("baseUri");
+    }
+    this.BaseUri = baseUri;
+    }
+    /// <summary>Initializes client properties.</summary>
+@EmptyLine
+    protected abstract void Initialize();
+@EmptyLine
+    protected ITracer GetTracer(string method, Lazy<Dictionary<string, object>> tracingParameters)
+        {
+            var shouldTrace = ServiceClientTracing.IsEnabled;
+            string invocationId = null;
+            if (shouldTrace)
+            {
+                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                ServiceClientTracing.Enter(invocationId, this, method, tracingParameters.Value);
+            }
+            return new CompositeTracer(new Tracer(invocationId), this);
+        }
+@EmptyLine
+        protected HttpRequestMessage CreateRequest(string httpVerb, string restUrl,
+            Dictionary<string, object> queryParameters, Dictionary<string, List<string>> customHeaders = null, object body = null)
+        {
+            // Construct URL
+            var url = GetUrl(restUrl, queryParameters);
+            // Create HTTP transport objects
+            var httpRequest = new HttpRequestMessage
+                              {
+                                  Method = new HttpMethod(httpVerb),
+                                  RequestUri = new Uri(url)
+                              };
+            // Set Headers
+            if (customHeaders != null)
+            {
+                foreach (var header in customHeaders)
+                {
+                    if (httpRequest.Headers.Contains(header.Key))
+                    {
+                        httpRequest.Headers.Remove(header.Key);
+                    }
+                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                }
+            }
+            if (body == null)
+            {
+                return httpRequest;
+            }
+            var requestContent = SafeJsonConvert.SerializeObject(body, SerializationSettings);
+            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
+            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            return httpRequest;
+        }
+@EmptyLine
+        protected string GetUrl(string restUrl, Dictionary<string, object> queryParameters)
+        {
+            var baseUrl = BaseUri.AbsoluteUri;
+            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), restUrl).ToString();
+            foreach (var parameterName in queryParameters.Keys)
+            {
+                var rawValue = queryParameters[parameterName];
+                var jsonValue = SafeJsonConvert
+                    .SerializeObject(rawValue, SerializationSettings)
+                    .Trim('"');
+                var urlValue = Uri.EscapeDataString(jsonValue);
+                url = url.Replace($"{{{parameterName}}}", urlValue);
+            }
+            return url;
+        }
+@EmptyLine
+        protected async Task<HttpOperationResponse> InvokeNewRequest(
+           string metricName,
+           ITracer tracer,
+           Func<HttpRequestMessage> createRequest,
+           CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var watch = Stopwatch.StartNew();
+            try
+            {
+                // Create HTTP transport objects
+                using (var httpRequest = createRequest())
+                {
+                    // Send Request
+                    tracer.SendRequest(httpRequest);
+                    cancellationToken.ThrowIfCancellationRequested();
+                    using (var httpResponse = await HttpClient.SendAsync(httpRequest, cancellationToken))
+                    {
+                        tracer.ReceiveResponse(httpResponse);
+                        var statusCode = httpResponse.StatusCode;
+                        cancellationToken.ThrowIfCancellationRequested();
+                        if ((int) statusCode != 200)
+                        {
+                            var ex = new HttpOperationException(
+                                $"Operation returned an invalid status code '{statusCode}'");
+                            string responseContent = null;
+                            if (httpResponse.Content != null)
+                            {
+                                responseContent =
+                                    await httpResponse.Content.ReadAsStringAsync()
+                                        .ConfigureAwait(false);
+
+                                cancellationToken.ThrowIfCancellationRequested();
+                            }
+                            else responseContent = string.Empty;
+                            ex.Request = new HttpRequestMessageWrapper(httpRequest, httpRequest.Content.AsString() ?? "");
+                            ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
+                            throw ex;
+                        }
+                        // Create Result
+                        var result = new HttpOperationResponse
+                                     {
+                                         Request = httpRequest,
+                                         Response = httpResponse
+                                     };
+                        tracer.Exit(result);
+                        return result;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                tracer.Error(ex);
+                throw;
+            }
+            finally
+            {
+                MetricSendEvent?.Invoke(this, new MetricSendEventArgs
+                                              {
+                                                  Name = metricName,
+                                                  ElapsedMilliseconds = watch.ElapsedMilliseconds,
+                                                  Tags = new Dictionary<string, object>()
+                                              });
+            }
+        }
+@EmptyLine
+        #region Tracer
+@EmptyLine
+        protected class CompositeTracer : ITracer
+        {
+            private readonly List<ITracer> _tracers;
+            public CompositeTracer(params ITracer[] tracers)
+            {
+                _tracers = new List<ITracer>(tracers ?? new ITracer[0]);
+            }
+
+            public void SendRequest(HttpRequestMessage request)
+            {
+                _tracers.ForEach(t => SendRequest(request));
+            }
+
+            public void ReceiveResponse(HttpResponseMessage response)
+            {
+                _tracers.ForEach(t => ReceiveResponse(response));
+            }
+
+            public void Error(Exception ex)
+            {
+                _tracers.ForEach(t => Error(ex));
+            }
+
+            public void Exit(object result)
+            {
+                _tracers.ForEach(t => Exit(result));
+            }
+        }
+@EmptyLine
+        protected class Tracer : ITracer
+        {
+            private readonly string _name;
+            public Tracer(string name)
+            {
+                _name = name;
+            }
+            public void SendRequest(HttpRequestMessage request)
+            {
+                if (!ServiceClientTracing.IsEnabled)
+                {
+                    return;
+                }
+                ServiceClientTracing.SendRequest(_name, request);
+            }
+            public void ReceiveResponse(HttpResponseMessage response)
+            {
+                if (!ServiceClientTracing.IsEnabled)
+                {
+                    return;
+                }
+                ServiceClientTracing.ReceiveResponse(_name, response);
+            }
+            public void Error(Exception ex)
+            {
+                if (!ServiceClientTracing.IsEnabled)
+                {
+                    return;
+                }
+                ServiceClientTracing.Error(_name, ex);
+            }
+            public void Exit(object result)
+            {
+                if (!ServiceClientTracing.IsEnabled)
+                {
+                    return;
+                }
+                ServiceClientTracing.Exit(_name, result);
+            }
+        }
+@EmptyLine
+        public interface ITracer
+        {
+            void SendRequest(HttpRequestMessage request);
+            void ReceiveResponse(HttpResponseMessage response);
+            void Error(Exception ex);
+            void Exit(object result);
+        }
+@EmptyLine
+        void ITracer.SendRequest(HttpRequestMessage request)
+        {
+            RequestSendEvent?.Invoke(this, new SendEventArgs { RequestMessage = request});
+        }
+@EmptyLine
+        void ITracer.ReceiveResponse(HttpResponseMessage response)
+        {
+            ReceiveResponseEvent?.Invoke(this, new ReceiveResponseArgs { ResponseMessage = response});
+        }
+@EmptyLine
+        void ITracer.Error(Exception ex)
+        {
+            ErrorEvent?.Invoke(this, new ErrorEventArgs { Exception = ex });
+        }
+@EmptyLine
+        void ITracer.Exit(object result)
+        {
+            ExitEvent?.Invoke(this, new ExitEventArgs { Result = result });
+        }
+@EmptyLine
+        #endregion
+@EmptyLine
+        public event EventHandler<MetricSendEventArgs> MetricSendEvent;
+        public event EventHandler<SendEventArgs> RequestSendEvent;
+        public event EventHandler<ReceiveResponseArgs> ReceiveResponseEvent;
+        public event EventHandler<ExitEventArgs> ExitEvent;
+        public event EventHandler<ErrorEventArgs> ErrorEvent;
+@EmptyLine
+        public class MetricSendEventArgs : EventArgs
+        {
+            public long ElapsedMilliseconds { get; set; }
+            public string Name { get; set; }
+            public Dictionary<string, object> Tags { get; set; }
+        }
+@EmptyLine
+        public class SendEventArgs : EventArgs
+        {
+            public HttpRequestMessage RequestMessage { get; set; }
+        }
+@EmptyLine
+        public class ReceiveResponseArgs : EventArgs
+        {
+            public HttpResponseMessage ResponseMessage { get; set; }
+        }
+@EmptyLine
+        public class ExitEventArgs : EventArgs
+        {
+            public object Result { get; set; }
+        }
+@EmptyLine
+        public class ErrorEventArgs : EventArgs
+        {
+            public Exception Exception { get; set; }
+        }
+    }
+}

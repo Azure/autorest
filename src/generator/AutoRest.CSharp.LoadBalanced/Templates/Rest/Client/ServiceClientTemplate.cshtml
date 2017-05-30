@@ -7,10 +7,11 @@
 @EmptyLine
 namespace @Settings.Namespace
 {
-    using Microsoft.Rest;
-@foreach (var usingString in Model.Usings) {
+@foreach (var usingString in Model.Usings)
+{
     @:using @usingString;
 }
+
 @EmptyLine
     @if (!string.IsNullOrWhiteSpace(Model.Documentation))
     {
@@ -19,19 +20,12 @@ namespace @Settings.Namespace
     @:/// </summary>
     }
 
-    public partial class @Model.Name : Microsoft.Rest.ServiceClient<@Model.Name>, I@(Model.Name)
+    public partial class @Model.Name : ApiBase<@Model.Name>, I@(Model.Name)
     {
-        @(Include(new ServiceClientBodyTemplate(), Model))
-
-        /// <summary>
-        /// An optional partial-method to perform custom initialization.
-        ///</summary> 
-        partial void CustomInitialize();
-
         /// <summary>
         /// Initializes client properties.
         /// </summary>
-        private void Initialize()
+        protected override void Initialize()
         {
         @foreach (var operation in Model.AllOperations) 
         {
@@ -86,8 +80,6 @@ namespace @Settings.Namespace
             @:SerializationSettings.Converters.Add(new Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
             @:DeserializationSettings.Converters.Add(new  Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
             }
-
-            CustomInitialize();
             
             @if (Model.NeedsTransformationConverter)
             {
