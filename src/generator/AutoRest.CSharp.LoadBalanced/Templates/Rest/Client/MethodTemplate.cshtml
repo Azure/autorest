@@ -46,7 +46,7 @@
 {
 @:[System.Obsolete()]
 }
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
     {

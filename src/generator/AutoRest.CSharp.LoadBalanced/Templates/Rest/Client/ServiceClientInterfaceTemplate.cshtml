@@ -62,7 +62,7 @@ namespace @Settings.Namespace
         }
         @:/// <param name='customHeaders'>The headers that will be added to request.</param>
         @:/// <param name='cancellationToken'>The cancellation token.</param>
-        @:Task<@(method.OperationResponseReturnTypeString)> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
+        @:Task<@(method.OperationResponseReturnTypeString)> @(method.Name)Async(@(method.GetAsyncMethodParameterDeclaration(true)));
         @EmptyLine
         @:
     }
