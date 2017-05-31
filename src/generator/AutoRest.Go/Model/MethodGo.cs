@@ -138,15 +138,8 @@ namespace AutoRest.Go.Model
         {
             get
             {
-                var properties = (ReturnType.Body as CompositeTypeGo).Properties.Cast<PropertyGo>().ToList();
-                foreach (PropertyGo p in properties)
-                {
-                    if (p.ModelType is SequenceTypeGo)
-                    {
-                        return p;
-                    }
-                }
-                return null;
+                var body = ReturnType.Body as CompositeTypeGo;
+                return body.Properties.Where(p => p.ModelType is SequenceTypeGo).FirstOrDefault() as PropertyGo;
             }
         }
 
@@ -508,11 +501,7 @@ namespace AutoRest.Go.Model
         {
             get
             {
-                if (NextMethod != null)
-                {
-                    return NextMethod.Name.Value;
-                }
-                return null;
+                return NextMethod?.Name.Value;
             }
         }
 
