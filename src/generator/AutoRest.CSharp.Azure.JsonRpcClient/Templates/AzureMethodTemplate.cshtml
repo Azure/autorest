@@ -70,11 +70,11 @@ public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @
         }
         else
         {
-        @:baseUri: new Microsoft.Rest.ClientRuntime.Test.Azure.AzureConstBaseUri(this.Client.BaseUri),
+        @:baseUri: new Microsoft.Rest.ClientRuntime.Test.Azure.AzureConstBaseUri(@(Model.ClientReference).BaseUri),
         }
         paramList: params_);
     return Microsoft.Rest.ClientRuntime.Test.Azure.ServiceClientEx.Call(
-        this.Client,
+        @(Model.ClientReference),
         operation_,
         new Microsoft.Rest.ClientRuntime.Test.Azure.Tag<@(Model.OperationResponseReturnTypeString)>());
 }
