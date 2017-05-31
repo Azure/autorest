@@ -61,6 +61,12 @@ namespace AutoRest.Go
             }
         }
 
+        /// <summary>
+        /// Determines if the first word in a string is an acronym
+        /// (acronym defined as all caps and more than 1 char)
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static bool StartsWithAcronym(this string value)
         {
             value = value.Trim();
