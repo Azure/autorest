@@ -6,37 +6,42 @@ namespace AutoRest.CSharp.Azure.JsonRpcClient
 {
     public static class MethodPathEx
     {
-        public static IEnumerable<Tuple<string, bool>> GetPathParts(this Method method)
+        public static IEnumerable<Tuple<string, bool>> GetParts(this string value)
         {
-            var url = method.Url.Value;
-            while (url != string.Empty)
+            while (value != string.Empty)
             {
-                var index = url.IndexOf('{');
+                var index = value.IndexOf('{');
 
                 if (index < 0)
                 {
-                    yield return Tuple.Create(url, false);
+                    yield return Tuple.Create(value, false);
                     break;
                 }
 
                 if (index > 0)
                 {
-                    yield return Tuple.Create(url.Substring(0, index), false);
+                    yield return Tuple.Create(value.Substring(0, index), false);
                 }
 
-                url = url.Substring(index + 1);
+                value = value.Substring(index + 1);
 
-                index = url.IndexOf('}');
+                index = value.IndexOf('}');
 
                 if (index <= 0)
                 {
-                    throw new Exception("invalid url: " + method.Url.Value);
+                    throw new Exception("invalid url: " + value);
                 }
 
-                yield return Tuple.Create(url.Substring(0, index), true);
+                yield return Tuple.Create(value.Substring(0, index), true);
 
-                url = url.Substring(index + 1);
+                value = value.Substring(index + 1);
             }
         }
+
+        public static IEnumerable<Tuple<string, bool>> GetUriParts(this Method method)
+            => method.MethodGroup.CodeModel.BaseUrl.GetParts();
+
+        public static IEnumerable<Tuple<string, bool>> GetPathParts(this Method method)
+            => method.Url.Value.GetParts();
     }
 }

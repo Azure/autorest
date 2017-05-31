@@ -8,7 +8,7 @@
 @using AutoRest.CSharp.Azure.JsonRpcClient
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.MethodCsa>
 
-static Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequestInfo @(Model.Name)_RequestInfo { get; } =
+static readonly Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequestInfo @(Model.Name)_RequestInfo =
     new Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequestInfo(
         title: "@(Model.MethodGroup.CodeModel.Name)",
         id: "@(Model.SerializedName)",
@@ -20,12 +20,23 @@ static Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequestInfo @(Model.Name)_Re
             {
             @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzurePathPart(value: "@(p.Item1)", isParam: @(p.Item2 ? "true" : "false")),
             }            
+        },
+        constList: new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam[]
+        {
+            @foreach (var p in Model.LogicalParameters.Where(x => x.IsConstant))
+            {
+            @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam(
+                @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParamInfo(
+                    @:name: "@(p.SerializedName)",
+                    @:location: Microsoft.Rest.ClientRuntime.Test.Azure.AzureParamLocation.@(p.Location)),
+                @:@(p.GetExp())),
+            }
         });
 
-@foreach (var p in Model.LogicalParameters)
+@foreach (var p in Model.LogicalParameters.Where(x => !x.IsConstant))
 {
 @EmptyLine
-@:static Microsoft.Rest.ClientRuntime.Test.Azure.AzureParamInfo @(p.GetInfoName()) = 
+@:static readonly Microsoft.Rest.ClientRuntime.Test.Azure.AzureParamInfo @(Model.GetParameterInfoName(p)) = 
     @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParamInfo(
         @:name: "@(p.SerializedName)",
         @:location: Microsoft.Rest.ClientRuntime.Test.Azure.AzureParamLocation.@(p.Location));
@@ -37,14 +48,30 @@ public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @
 {
     var params_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam[]
     {
-        @foreach(var p in Model.LogicalParameters)
+        @foreach(var p in Model.LogicalParameters.Where(x => !x.IsConstant))
         {
-        @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam(@(p.GetInfoName()), @(p.Name)),
+        @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParam(
+            @:@(Model.GetParameterInfoName(p)),
+            @:@(p.GetExp())),
         }
     };
     var operation_ = new Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequest(
         info: @(Model.Name)_RequestInfo,
-        baseUri: this.Client.BaseUri,
+        @if (Model.IsCustomBaseUri)
+        {
+        @:baseUri: new Microsoft.Rest.ClientRuntime.Test.Azure.AzureParamBaseUri(
+            @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzurePathPart[]
+            @:{
+                foreach (var p in Model.GetUriParts())
+                {
+                @:new Microsoft.Rest.ClientRuntime.Test.Azure.AzurePathPart(value: "@(p.Item1)", isParam: @(p.Item2 ? "true" : "false")),
+                }            
+            @:}),        
+        }
+        else
+        {
+        @:baseUri: new Microsoft.Rest.ClientRuntime.Test.Azure.AzureConstBaseUri(this.Client.BaseUri),
+        }
         paramList: params_);
     return Microsoft.Rest.ClientRuntime.Test.Azure.ServiceClientEx.Call(
         this.Client,
