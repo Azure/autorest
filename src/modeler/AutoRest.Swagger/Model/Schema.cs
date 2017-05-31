@@ -73,9 +73,6 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         public XmlProperties Xml { get; set; }
 
-        [JsonIgnore]
-        internal bool IsReferenced { get; set; }
-
         public static Schema FindReferencedSchema(string reference, IDictionary<string, Schema> definitions)
         {
             if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
