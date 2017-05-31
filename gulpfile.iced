@@ -134,33 +134,42 @@ task 'autorest', 'Runs AutoRest', (done)->
 task 'init', "" ,(done)->
   Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 6.9.5" if semver.lt( process.versions.node , "6.9.5" )
 
-  if (! test "-d","#{basefolder}/src/autorest-core") 
-    echo warning "\n#{ error 'NOTE:' } #{ info 'src/autorest-core'} appears to be missing \n      fixing with #{ info 'git checkout src/autorest-core'}"
-    echo warning "      in the future do a #{ info 'gulp clean'} before using #{ info 'git clean'} .\n"
-    exec "git checkout #{basefolder}/src/autorest-core"
+  execute "npm -v", (code,stdout,stderr) -> 
+    isV5 = stdout.startsWith( "5" ) 
 
-  return done() if initialized
-  global.initialized = true
-  # if the node_modules isn't created, do it.
-  doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
+    if (! test "-d","#{basefolder}/src/autorest-core") 
+      echo warning "\n#{ error 'NOTE:' } #{ info 'src/autorest-core'} appears to be missing \n      fixing with #{ info 'git checkout src/autorest-core'}"
+      echo warning "      in the future do a #{ info 'gulp clean'} before using #{ info 'git clean'} .\n"
+      exec "git checkout #{basefolder}/src/autorest-core"
 
-  typescriptProjectFolders()
-    .on 'end', -> 
-      if doit
-        echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
-        exec "npm install",{silent:false},(c,o,e)->
-          # after npm, hookup symlinks/junctions for dependent packages in projects
-          echo warning "\n#{ info 'NOTE:' } it also seems prudent to do a 'gulp clean' at this point.\n"
-          exec "gulp clean", (c,o,e) -> 
-            done null
-      else 
-        done null
+    return done() if initialized
+    global.initialized = true
+    # if the node_modules isn't created, do it.
+    if isV5 
+      doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/package-lock.json") 
+    else 
+      doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
+      
+    typescriptProjectFolders()
+      .on 'end', -> 
+        if doit
+          echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
+          exec "npm install",{silent:false},(c,o,e)->
+            # after npm, hookup symlinks/junctions for dependent packages in projects
+            echo warning "\n#{ info 'NOTE:' } it also seems prudent to do a 'gulp clean' at this point.\n"
+            exec "gulp clean", (c,o,e) -> 
+              done null
+        else 
+          done null
 
-    .pipe foreach (each,next) -> 
-      # is any of the TS projects node_modules out of date?
-      doit = true if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/node_modules")
-      next null
-
+      .pipe foreach (each,next) -> 
+        # is any of the TS projects node_modules out of date?
+        if isV5
+          doit = true if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/package-lock.json")
+        else 
+          doit = true if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/node_modules")
+        next null
+    return null
   return null
 
 task 'find-rogue-node-modules','Shows the unrecognized node_modules folders in the source tree', ->
