@@ -573,6 +573,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In the &apos;Resource&apos; model, the &apos;name&apos; property must not be marked as readonly..
+        /// </summary>
+        public static string ResourceRequiredMustNotHaveNameValidationError {
+            get {
+                return ResourceManager.GetString("ResourceRequiredMustNotHaveNameValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Every swagger/configuration must have a security definitions section and it must adhere to the structure described in: https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md.
         /// </summary>
         public static string SecurityDefinitionsStructureValidation {

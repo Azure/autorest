@@ -630,6 +630,13 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(SummaryAndDescriptionMustNotBeSame), 1);
         }
 
+        [Fact]
+        public void ResourceRequiredMustNotHaveNameValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-resource-required.json"));
+            messages.AssertOnlyValidationMessage(typeof(ResourceRequiredMustNotHaveName), 1);
+        }
+
     }
 
     #region Positive tests

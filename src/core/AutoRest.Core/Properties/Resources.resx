@@ -370,4 +370,7 @@ Modelers:
   <data name="SummaryDescriptionVaidationError" xml:space="preserve">
     <value>The summary and description values should not be same.</value>
   </data>
+  <data name="ResourceRequiredMustNotHaveNameValidationError" xml:space="preserve">
+    <value>In the 'Resource' model, the 'name' property must not be marked as readonly.</value>
+  </data>
 </root>
