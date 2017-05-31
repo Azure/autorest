@@ -38,7 +38,7 @@ function awaitable(child: ChildProcess): Promise<number> {
 }
 
 async function legacyMain(autorestArgs: string[]): Promise<number> {
-  if (autorestArgs.indexOf("-FANCY") !== -1) {
+  if (autorestArgs.indexOf("-LEGACY") === -1) {
     // generate virtual config file
     const currentDirUri = CreateFolderUri(currentDirectory());
     const dataStore = new DataStore();
