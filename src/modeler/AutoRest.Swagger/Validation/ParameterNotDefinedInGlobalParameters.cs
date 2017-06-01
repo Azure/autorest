@@ -50,6 +50,13 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
 
+
+        /// <summary>
+        /// When to apply the validation rule, before or after it has been merged as a part of its composite document
+        /// By default consider all rules to be applied for After only
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
         /// <summary>
         /// This rule passes if the parameters section contains both subscriptionId and api-version parameters
         /// </summary>
