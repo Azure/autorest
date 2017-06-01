@@ -891,7 +891,7 @@
           }
         }
       }
-    },
+    }
   },
   "parameters": {
     "globalSubscriptionId": {

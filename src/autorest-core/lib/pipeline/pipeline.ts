@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { FastStringify } from "../ref/yaml";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import { safeEval } from "../ref/safe-eval";
 import { LazyPromise } from "../lazy";
@@ -279,16 +280,19 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       input: DataStoreViewReadonly,
       working: DataStoreView,
       output: DataStoreView) => {
+      const startTime = Date.now();
       await CreatePluginExternal(aiPluginHost, "autorest-interactive")(
         config.GetNestedConfigurationImmediate({
           __status: new Proxy<any>({}, {
-            get(_, key) {
+            async get(_, key) {
               const expr = new Buffer(key.toString(), "base64").toString("ascii");
               try {
-                return safeEval(expr, {
+                return FastStringify(safeEval(expr, {
                   pipeline: pipeline.pipeline,
-                  tasks: tasks
-                });
+                  tasks: tasks,
+                  startTime: startTime,
+                  blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => config.DataStore.Blame(uri, position)
+                }));
               } catch (e) {
                 return "" + e;
               }
@@ -323,7 +327,6 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
             handles.push(await scope.ReadStrict(handle));
           }
         }
-        // note the fact that QuickScope returns absolute keys...
         inputScopes = [new QuickScope(handles)];
       }
       const inputScope = inputScopes[0];
@@ -357,17 +360,30 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   const tasks: { [name: string]: Promise<DataStoreViewReadonly> } = {};
   const getTask = (name: string) => name in tasks ?
     tasks[name] :
-    tasks[name] = (async () => ScheduleNode(name))();
+    tasks[name] = ScheduleNode(name);
 
   // execute pipeline
   const barrier = new OutstandingTaskAwaiter();
+  const barrierRobust = new OutstandingTaskAwaiter();
   for (const name of Object.keys(pipeline.pipeline)) {
     const task = getTask(name);
-    const taskx: { _state: "running" | "failed" | "complete" } = task as any;
+    const taskx: { _state: "running" | "failed" | "complete", _result: () => DataHandleRead[], _finishedAt: number } = task as any;
     taskx._state = "running";
-    task.catch(() => taskx._state = "failed");
-    task.then(() => taskx._state = "complete");
+    task.then(async x => {
+      const res = await Promise.all((await x.Enum()).map(key => x.ReadStrict(key)));
+      taskx._result = () => res;
+      taskx._state = "complete";
+      taskx._finishedAt = Date.now();
+    }).catch(() => taskx._state = "failed");
     barrier.Await(task);
+    barrierRobust.Await(task.catch(() => null));
   }
-  await barrier.Wait();
+
+  try {
+    await barrier.Wait();
+  } catch (e) {
+    // wait for outstanding nodes
+    await barrierRobust.Wait();
+    throw e;
+  }
 }

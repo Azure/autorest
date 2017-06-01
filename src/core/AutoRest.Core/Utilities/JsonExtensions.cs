@@ -75,13 +75,6 @@ namespace AutoRest.Core.Utilities
             return null;
         }
 
-        public static string SortJson(this string jsonText)
-        {
-            var dom = (JObject) JsonConvert.DeserializeObject(jsonText);
-            dom.Sort();
-            return dom.ToString(Formatting.Indented);
-        }
-
         public static T ResolveReference<T>(this JsonSerializer serializer, string id) where T : class
         {
             return
@@ -93,35 +86,6 @@ namespace AutoRest.Core.Utilities
             var result = New<T>();
             serializer.Populate(reader, result);
             return result;
-        }
-
-        public static void Sort(this JObject jObj)
-        {
-            var props = jObj.Properties().ToList();
-            foreach (var prop in props)
-            {
-                prop.Remove();
-            }
-
-            foreach (var prop in props.OrderBy(p => p.Name))
-            {
-                jObj.Add(prop);
-                if (prop.Value is JObject)
-                {
-                    Sort((JObject) prop.Value);
-                }
-                if (prop.Value is JArray)
-                {
-                    var a = prop.Value as JArray;
-                    foreach (var i in a)
-                    {
-                        if (i is JObject)
-                        {
-                            Sort((JObject) i);
-                        }
-                    }
-                }
-            }
         }
     }
 }

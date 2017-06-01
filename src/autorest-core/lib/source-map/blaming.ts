@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { IsUri } from "../ref/uri";
 import { JsonPath } from "../ref/jsonpath";
 import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from "./source-map";
 import { DataStore } from "../data-store/data-store";

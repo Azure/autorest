@@ -35,7 +35,12 @@ export async function ReadUri(uri: string): Promise<string> {
       readable.on("error", err => reject(err));
     });
 
-    return stripBom(await readAll);
+    let result = await readAll;
+    // fix up UTF16le files
+    if (result.charCodeAt(0) === 65533 && result.charCodeAt(1) === 65533) {
+      result = Buffer.from(result.slice(2)).toString("utf16le");
+    }
+    return stripBom(result);
   } catch (e) {
     throw new Error(`Failed to load '${uri}' (${e})`);
   }
