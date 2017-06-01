@@ -37,7 +37,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "Property 'location' must have '\"x-ms-mutability\":[\"read\", \"create\"]' extension defined.";
+        public override string MessageTemplate => "Property 'location' must have '\"x-ms-mutability\":[\"read\", \"create\"]' extension defined. Resource Model: '{0}'";
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -72,7 +72,7 @@ namespace AutoRest.Swagger.Validation
                         // make sure jObject and the expected mutability properties have exact same elements
                         if (jObject.Except(LocationPropertyMutability).Any() || LocationPropertyMutability.Except(jObject).Any())
                         {
-                            yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty("location").AppendProperty("x-ms-mutability")), this);
+                            yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty("location").AppendProperty("x-ms-mutability")), this, resource);
                         }
                     }
                 }
