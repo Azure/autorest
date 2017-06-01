@@ -91,13 +91,6 @@ namespace AutoRest
                             return 0;
                         }
 
-                        // comparison?
-                        if (!string.IsNullOrEmpty(settings.Previous))
-                        {
-                            AutoRestController.Compare();
-                            return 0;
-                        }
-
                         // main pipeline
                         AutoRestController.Generate();
                         if (!Settings.Instance.JsonValidationMessages && !Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)

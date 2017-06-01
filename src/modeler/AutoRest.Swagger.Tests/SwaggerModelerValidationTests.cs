@@ -68,7 +68,7 @@ namespace AutoRest.Swagger.Tests
         public void MissingDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "definition-missing-description.json"));
-            messages.AssertOnlyValidationMessage(typeof(DescriptionMissing), 2);
+            messages.AssertOnlyValidationMessage(typeof(DescriptionAndTitleMissing), 2);
         }
 
         [Fact]
@@ -134,7 +134,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void ServiceDefinitionParametersValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "service-def-invalid-parameters.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "service-def-invalid-parameters.json"), ServiceDefinitionDocumentType.ARM, ServiceDefinitionDocumentState.Individual);
             messages.AssertOnlyValidationMessage(typeof(ParameterNotDefinedInGlobalParameters), 2);
         }
 
@@ -261,7 +261,7 @@ namespace AutoRest.Swagger.Tests
         public void OperationDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operation-missing-description.json"));
-            messages.AssertOnlyValidationMessage(typeof(OperationDescriptionRequired));
+            messages.AssertOnlyValidationMessage(typeof(OperationDescriptionOrSummaryRequired));
         }
 
         [Fact]

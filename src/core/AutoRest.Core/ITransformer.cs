@@ -6,8 +6,6 @@ namespace AutoRest.Core {
     using Model;
 
     public interface ITransformer<out TResultCodeModel> where TResultCodeModel : CodeModel {
-        int Priority {get; set;}
-        Trigger Trigger {get; set;}
         TResultCodeModel TransformCodeModel(CodeModel codeModel);
     }
 }

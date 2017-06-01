@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text;
 
 namespace AutoRest.Go.Model
 {
@@ -66,7 +67,6 @@ namespace AutoRest.Go.Model
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture,
                     Resources.IllegalStreamingParameter, parameter.Name));
             }
-
             if (string.IsNullOrEmpty(Description))
             {
                 Description = string.Format("sends the {0} request.", Name.ToString().ToPhrase());
@@ -79,6 +79,71 @@ namespace AutoRest.Go.Model
         }
 
         public string MethodSignature => $"{Name}({MethodParametersSignature})";
+        
+        public string MethodParametersSignatureComplete
+        {
+            get
+            {     
+                var signature = new StringBuilder("(");
+                signature.Append(MethodParametersSignature);
+                if (!IsLongRunningOperation())
+                {
+                    if (MethodParametersSignature.Length > 0)
+                    {
+                        signature.Append( ", ");
+                    }
+                    signature.Append("cancel <-chan struct{}");
+                }
+                signature.Append(")");
+                return signature.ToString();
+            }
+        }
+
+        public string MethodReturnSignatureComplete
+        {
+            get
+            {
+                var signature = new StringBuilder("(<-chan ");
+                signature.Append((ListElement.ModelType as SequenceTypeGo).GetElement);
+                signature.Append(", <-chan error)");
+                return signature.ToString();
+            }
+        }
+
+        public string ParametersDocumentation
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var parameter in LocalParameters)
+                {
+                    if (!string.IsNullOrEmpty(parameter.Documentation))
+                    {
+                        sb.Append(parameter.Name);
+                        sb.Append(" is ");
+                        sb.Append(parameter.Documentation.FixedValue.ToSentence());
+                        sb.Append(" ");
+                    }
+                    if (parameter.ModelType.PrimaryType(KnownPrimaryType.Stream))
+                    {
+                        sb.Append(parameter.Name);
+                        sb.Append(" will be closed upon successful return. Callers should ensure closure when receiving an error.");
+                    }
+                }
+                return sb.ToString();
+            }
+        }
+
+        public PropertyGo ListElement
+        {
+            get
+            {
+                var body = ReturnType.Body as CompositeTypeGo;
+                return body.Properties.Where(p => p.ModelType is SequenceTypeGo).FirstOrDefault() as PropertyGo;
+            }
+        }
+
+        public string ListCompleteMethodName => $"{Name}Complete";
 
         /// <summary>
         /// Generate the method parameter declaration.
@@ -156,19 +221,25 @@ namespace AutoRest.Go.Model
 
         public string ResponderMethodName => $"{Name}Responder";
 
-        public string HelperInvocationParameters
+        public string HelperInvocationParameters(bool complete)
         {
-            get
+            List<string> invocationParams = new List<string>();
+            foreach (ParameterGo p in LocalParameters)
             {
-                List<string> invocationParams = new List<string>();
-                LocalParameters
-                    .ForEach(p => invocationParams.Add(p.Name));
-                if (IsLongRunningOperation())
+                if (p.Name.EqualsIgnoreCase("nextlink") && complete)
                 {
-                    invocationParams.Add("cancel");
+                    invocationParams.Add(string.Format("*list.{0}", NextLink));
                 }
-                return string.Join(", ", invocationParams);
+                else
+                {
+                    invocationParams.Add(p.Name);
+                }
             }
+            if (IsLongRunningOperation())
+            {
+                invocationParams.Add("cancel");
+            }
+            return string.Join(", ", invocationParams);
         }
 
         /// <summary>
@@ -347,7 +418,6 @@ namespace AutoRest.Go.Model
             }
         }
 
-
         public string Response
         {
             get
@@ -365,7 +435,6 @@ namespace AutoRest.Go.Model
                         : string.IsNullOrEmpty(response)
                                  ? string.Format("autorest.NewErrorWithError(err, \"{0}.{1}\", \"{2}\", nil , \"{3}\")", PackageName, Owner, Name, phase)
                                  : string.Format("autorest.NewErrorWithError(err, \"{0}.{1}\", \"{2}\", {3}, \"{4}\")", PackageName, Owner, Name, response, phase);
-
         }
 
         public string ValidationError => $"validation.NewErrorWithValidationError(err, \"{PackageName}.{Owner}\",\"{Name}\")";
@@ -393,7 +462,9 @@ namespace AutoRest.Go.Model
         /// </summary>
         /// <returns></returns>
 
-        public bool IsPageable => !string.IsNullOrEmpty(NextLink());
+        public bool IsPageable => !string.IsNullOrEmpty(NextLink);
+
+        public bool IsNextMethod => Name.Value.EqualsIgnoreCase(NextOperationName);
 
         /// <summary>
         /// Checks if method for next page of results on paged methods is already present in the method list.
@@ -402,15 +473,52 @@ namespace AutoRest.Go.Model
         /// <returns></returns>
         public bool NextMethodExists(IEnumerable<MethodGo> methods)
         {
-            if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
+            string next = NextOperationName;
+            if (string.IsNullOrEmpty(next))
             {
-                var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
-                if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
-                {
-                    return methods.Any(m => m.SerializedName.EqualsIgnoreCase(pageableExtension.OperationName));
-                }
+                return false; 
             }
-            return false;
+            return methods.Any(m => m.Name.Value.EqualsIgnoreCase(next));
+        }
+
+        public MethodGo NextMethod
+        {
+            get
+            {
+                if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                {
+                    var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
+                    if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
+                    {
+                        return (CodeModel.Methods.First(m => m.SerializedName.EqualsIgnoreCase(pageableExtension.OperationName)) as MethodGo);
+                    }
+                }
+                return null;
+            }
+        }
+
+        public string NextOperationName
+        {
+            get
+            {
+                return NextMethod?.Name.Value;
+            }
+        }
+
+        public Method NextOperation
+        {
+            get
+            {
+                if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                {
+                    var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
+                    if (pageableExtension != null && !string.IsNullOrWhiteSpace(pageableExtension.OperationName))
+                    {
+                        return CodeModel.Methods.First(m => m.SerializedName.EqualsIgnoreCase(pageableExtension.OperationName));
+                    }
+                }
+                return null;
+            }
         }
 
         /// <summary>
@@ -445,29 +553,32 @@ namespace AutoRest.Go.Model
         /// Add NextLink attribute for pageable extension for the method.
         /// </summary>
         /// <returns></returns>
-        public string NextLink()
+        public string NextLink
         {
-            var nextLink = "";
-
-            // Note:
-            // -- The CSharp generator applies a default link name if the extension is present but the link name is not.
-            //    Yet, the MSDN for methods whose nextLink is missing are not paged methods. It appears the CSharp code is
-            //    outdated vis a vis the specification.
-            // TODO (gosdk): Ensure obtaining the nextLink is correct.
-            if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
+            get
             {
-                var pageableExtension = Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
-                if (pageableExtension != null)
+                string nextLink = "";
+
+                // Note:
+                // -- The CSharp generator applies a default link name if the extension is present but the link name is not.
+                //    Yet, the MSDN for methods whose nextLink is missing are not paged methods. It appears the CSharp code is
+                //    outdated vis a vis the specification.
+                // TODO (gosdk): Ensure obtaining the nextLink is correct.
+                if (Extensions.ContainsKey(AzureExtensions.PageableExtension))
                 {
-                    var nextLinkName = (string)pageableExtension["nextLinkName"];
-                    if (!string.IsNullOrEmpty(nextLinkName))
+                    var pageableExtension = Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                    if (pageableExtension != null)
                     {
-                        nextLink = CodeNamerGo.PascalCaseWithoutChar(nextLinkName, '.');
+                        var nextLinkName = (string)pageableExtension["nextLinkName"];
+                        if (!string.IsNullOrEmpty(nextLinkName))
+                        {
+                            nextLink = CodeNamerGo.PascalCaseWithoutChar(nextLinkName, '.');
+                        }
                     }
                 }
-            }
 
-            return nextLink;
+                return nextLink;
+            }
         }
     }
 }
