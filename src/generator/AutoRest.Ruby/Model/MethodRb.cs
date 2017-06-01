@@ -496,14 +496,7 @@ namespace AutoRest.Ruby.Model
         {
             IndentedStringBuilder builder = new IndentedStringBuilder("");
             builder.AppendLine("response = {0}_async({1}).value!", Name, MethodParameterInvocation);
-            if (ReturnType.Body != null)
-            {
-                builder.AppendLine("response.body unless response.nil?");
-            }
-            else
-            {
-                builder.AppendLine("nil");
-            }
+            builder.AppendLine("response.body unless response.nil?");
             return builder.ToString();
         }
 

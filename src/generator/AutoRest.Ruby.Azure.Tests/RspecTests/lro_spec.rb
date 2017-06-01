@@ -49,8 +49,7 @@ describe 'Long Running Operation' do
   end
 
   it 'should retry on 202 server response in POST request' do
-    result = @lros_client.post202retry200_async(@product).value!
-    expect(result.body).to be_nil
+    result = @lros_client.post202retry200_async(@product).value!    
     expect(result.response.status).to eq(200)
   end
 
@@ -149,7 +148,6 @@ describe 'Long Running Operation' do
 
   it 'should succeed for delete no header in retry' do
     result = @lros_client.delete_no_header_in_retry_async().value!
-    expect(result.body).to be_nil
     expect(result.response.status).to eq(204)
   end
 
@@ -284,13 +282,11 @@ describe 'Long Running Operation with retry' do
 
   it 'should retry DELETE request on 500 response' do
     result = @lroretrys_client.delete202retry200_async().value!
-    expect(result.body).to be_nil
     expect(result.response.status).to eq(200)
   end
 
   it 'should retry POST request on 500 response' do
     result = @lroretrys_client.post202retry200_async(@product).value!
-    expect(result.body).to be_nil
     expect(result.response.status).to eq(200)
   end
 
@@ -473,7 +469,6 @@ describe 'Long Running Operation with custom header' do
 
   it 'should succeed for custom header post' do
     result = @lros_custom_header_client.post202retry200_async(@product, @custom_header).value!
-    expect(result.body).to be_nil
     expect(result.response.status).to eq(200)
   end
 end
