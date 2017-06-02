@@ -157,7 +157,7 @@ function isAccessibleFile(localPath: string) {
 }
 
 function FileUriToLocalPath(fileUri: string): string {
-  const uri = parse(decodeURI(fileUri));
+  const uri = parse(fileUri);
   if (uri.protocol !== "file:") {
     throw new Error(`Protocol '${uri.protocol}' not supported for writing.`);
   }
@@ -171,7 +171,7 @@ function FileUriToLocalPath(fileUri: string): string {
     p = p.replace(/\//g, "\\");
   }
 
-  return p;
+  return decodeURI(p);
 }
 
 export async function* EnumerateFiles(folderUri: string, probeFiles: string[] = []): AsyncIterable<string> {
