@@ -74,7 +74,8 @@ import { PumpMessagesToConsole } from './test-utility';
   @test @timeout(60000) async "non-arm type spec testing"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
     autoRest.AddConfiguration({
-      "openapi-type": "default"
+      "openapi-type": "default",
+      "merge-state": "composed"
     });
 
     const config = await autoRest.view;
@@ -87,7 +88,8 @@ import { PumpMessagesToConsole } from './test-utility';
   @test @timeout(60000) async "arm type spec testing"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
     autoRest.AddConfiguration({
-      "openapi-type": "arm"
+      "openapi-type": "arm",
+      "merge-state": "composed"
     });
 
     const config = await autoRest.view;
