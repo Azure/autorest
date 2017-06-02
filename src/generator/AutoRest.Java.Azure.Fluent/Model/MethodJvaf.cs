@@ -231,7 +231,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
             if (method.HttpMethod == HttpMethod.Get)
             {
                 var urlSplits = methodUrl.Split('/');
-                if ((urlSplits.Count() == 5 || urlSplits.Count() == 7) && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[0], "subscriptions"))
+                if ((urlSplits.Count() == 5 || urlSplits.Count() == 7)
+                    && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[0], "subscriptions")
+                    && method.ReturnType.Body is SequenceType)
                 {
                     if (urlSplits.Count() == 5)
                     {
