@@ -323,8 +323,7 @@ namespace AutoRest.Go
         }
 
         /// <summary>
-        /// Formats a string for naming method parameters using Camel case by default,
-        /// unless the parameter name starts with an acroynm.
+        /// Formats a string for naming method parameters using Camel case by default.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>The formatted string.</returns>
@@ -336,7 +335,7 @@ namespace AutoRest.Go
             }
             if (Extensions.StartsWithAcronym(name))
             {
-                return EnsureNameCase(GetEscapedReservedName(PascalCase(RemoveInvalidCharacters(name)), "Parameter"));
+                return EnsureNameCase(GetEscapedReservedName((RemoveInvalidCharacters(name).ToLower()), "Parameter"));
             }
             return EnsureNameCase(GetEscapedReservedName(CamelCase(RemoveInvalidCharacters(name)), "Parameter"));
         }
