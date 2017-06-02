@@ -31,7 +31,7 @@ namespace AutoRest.Core
         /// </summary>
         public string EmptyLine
         {
-            get { return TemplateConstants.EmptyLine + "\r\n"; }
+            get { return "\r\n" + TemplateConstants.EmptyLine + "\r\n"; }
         }
 
         public virtual void BeginWriteAttribute(string name, string prefix, int prefixOffset, string suffix, int suffixOffset, int attributeValuesCount) {
@@ -236,8 +236,7 @@ namespace AutoRest.Core
                 Indentation.Length - // - Space used for indent
                 prefix.Length - // - Prefix //'s length
                 1; // - Extra space between prefix and text
-            return string.Join(Environment.NewLine, comment.WordWrap(available)
-                .Select(s => string.Format(CultureInfo.InvariantCulture, "{0}{1}", prefix, s)));
+            return string.Join(Environment.NewLine, comment.WordWrap(available).Select(s => $"{prefix}{s}"));
         }
 
         protected string Indentation
