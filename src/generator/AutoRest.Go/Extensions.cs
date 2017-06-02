@@ -69,20 +69,8 @@ namespace AutoRest.Go
         /// <returns></returns>
         public static bool StartsWithAcronym(this string value)
         {
-            value = value.Trim();
-            string[] words = value.Split(' ', '-', '_');
-            if (words.First().Length > 1)
-            {
-                for (int i = 0; i < words.First().Length; i++)
-                {
-                    if (char.IsLower(words.First()[i]))
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return false;
+            string firstWord = value.Trim().Split(' ', '-', '_').First();
+            return firstWord.Length > 1 && firstWord.All(c => char.IsUpper(c));
         }
 
         /// <summary>
