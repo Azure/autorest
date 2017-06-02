@@ -40,7 +40,7 @@ namespace AutoRest.Go
 
         /// <summary>
         /// This method changes string to sentence where is make the first word 
-        /// of sentence to lowercase. The sentence is coming directly from swagger.
+        /// of sentence to lowercase (unless it is an acronym). The sentence is coming directly from swagger.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -53,8 +53,24 @@ namespace AutoRest.Go
             else
             {
                 value = value.Trim();
+                if (value.StartsWithAcronym())
+                {
+                    return value;
+                }                
                 return value.First().ToString().ToLowerInvariant() + (value.Length > 1 ? value.Substring(1) : "");
             }
+        }
+
+        /// <summary>
+        /// Determines if the first word in a string is an acronym
+        /// (acronym defined as all caps and more than 1 char)
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool StartsWithAcronym(this string value)
+        {
+            string firstWord = value.Trim().Split(' ', '-', '_').First();
+            return firstWord.Length > 1 && firstWord.All(c => char.IsUpper(c));
         }
 
         /// <summary>

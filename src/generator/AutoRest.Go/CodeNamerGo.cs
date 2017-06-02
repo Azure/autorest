@@ -323,7 +323,7 @@ namespace AutoRest.Go
         }
 
         /// <summary>
-        /// Formats a string for naming method parameters using GetVariableName Camel case by default.
+        /// Formats a string for naming method parameters using Camel case by default.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>The formatted string.</returns>
@@ -332,6 +332,10 @@ namespace AutoRest.Go
             if (string.IsNullOrWhiteSpace(name))
             {
                 return name;
+            }
+            if (Extensions.StartsWithAcronym(name))
+            {
+                return EnsureNameCase(GetEscapedReservedName((RemoveInvalidCharacters(name).ToLower()), "Parameter"));
             }
             return EnsureNameCase(GetEscapedReservedName(CamelCase(RemoveInvalidCharacters(name)), "Parameter"));
         }
