@@ -121,9 +121,9 @@ pipeline:
       - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
 ```
 
-Activate `azure-validator` when setting `azure-arm`!?
+Activate `azure-validator`
 
-``` yaml $(azure-arm)
+``` yaml
 azure-validator: true
 ```
 
