@@ -64,7 +64,7 @@ namespace AutoRest.Swagger.Validation
                     var modelWithLocationProp = modelsWithLocationProp.First();
                     if (definitions[modelWithLocationProp].Properties["location"].Extensions?.ContainsKey("x-ms-mutability") != true)
                     {
-                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty("location")), this);
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty("location")), this, modelWithLocationProp);
                     }
                     else
                     {
