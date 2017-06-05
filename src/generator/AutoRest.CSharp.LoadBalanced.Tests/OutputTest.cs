@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.LoadBalanced.Tests
 
                 var settings = new Settings
                                {
-                                   Input = "D:\\projects\\autorest\\src\\core\\AutoRest\\bin\\Debug\\net451\\win7-x64\\swagger.json",
+                                   Input = "http://petstore.swagger.io/v2/swagger.json",
                                    OutputDirectory = "D:\\projects\\gen2",
                                    CodeGenerator = "Test",
                                    Namespace = "Agoda.SAPI.Client"

@@ -100,13 +100,6 @@ namespace AutoRest.CSharp.LoadBalanced
 
                     await Write(operationsInterfaceTemplate, operationsInterfacePath);
                 }
-
-                var operationExtensionsTemplate = new ExtensionsTemplate { Model = methodGroup };
-                var extensionPath = $"{methodGroup.ExtensionTypeName}Extensions{ImplementationFileExtension}";
-
-                project.FilePaths.Add(extensionPath);
-
-                await Write(operationExtensionsTemplate, extensionPath);
             }
 
             // Models

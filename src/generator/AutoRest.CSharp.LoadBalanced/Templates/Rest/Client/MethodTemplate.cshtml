@@ -30,7 +30,6 @@
 @:/// <param name='@parameter.Name'>@(parameter.Documentation.EscapeXmlComment())</param>
 }
 /// <param name='customHeaders'>Headers that will be added to request.</param>
-/// <param name='cancellationToken'>The cancellation token.</param>
 /// <exception cref="@(Model.OperationExceptionTypeString)">Thrown when the operation returned an invalid status code</exception>
 @if (Model.Responses.Where(r => r.Value.Body != null).Any())
 {
@@ -46,7 +45,7 @@
 {
 @:[System.Obsolete()]
 }
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
+public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
     {
@@ -86,7 +85,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)Async
     }
     @Model.BuildInputMappings()
 @EmptyLine
-    var verb = "@(Model.HttpMethod.ToString().ToUpper())";
+    var verb = Verbs.@(Model.HttpMethod.ToString().ToUpper());
 @EmptyLine
     var queryParameters = new Dictionary<string, object>
         {
@@ -96,22 +95,17 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)Async
     }
         };
 @EmptyLine
-    var tracer = GetTracer(
-        verb,
-        new Lazy<Dictionary<string, object>>(
-            () =>
-            {
-                var traceParameters = queryParameters.ToDictionary(entry => entry.Key, entry => entry.Value);
-                traceParameters.Add("cancellationToken", cancellationToken);
-                return traceParameters;
-            }));
+    var requestParameters = new RequestParameters
+                            {
+                                HttpVerb = verb,
+                                RestUrl = "@(Model.Url.TrimStart('/'))",
+                                CustomHeaders = customHeaders,
+                                QueryParameters = queryParameters
+                                @(@Model.Body == null ? "" : ", Body = body")
+                            };
 @EmptyLine
-    Func<HttpRequestMessage> createRequest = 
-        () => CreateRequest(
-            verb,
-            "@(Model.Url.TrimStart('/'))",
-            queryParameters, 
-            customHeaders@(@Model.Body == null ? "" : ", body"));
-@EmptyLine
-    return await InvokeNewRequest(Metrics.@(Model.Name), tracer, createRequest, cancellationToken);
+    @if (Model.ReturnType.Body != null) {
+@:    return 
+    }
+    await @(Model.GetOperationResponseReturnTypeString("InvokeNewRequest"))(Metrics.@(Model.Name), requestParameters);
 }

@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
             if (addCustomHeaderParameters)
             {
-                declarations.Add("Dictionary<string, List<string>> customHeaders = null");
+                declarations.Add("Dictionary<string, string> customHeaders = null");
             }
 
             return string.Join(", ", declarations);
@@ -92,14 +92,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         public virtual string GetAsyncMethodParameterDeclaration(bool addCustomHeaderParameters)
         {
             var declarations = this.GetSyncMethodParameterDeclaration(addCustomHeaderParameters);
-
-            if (!string.IsNullOrEmpty(declarations))
-            {
-                declarations += ", ";
-            }
-            declarations += "CancellationToken cancellationToken = default(CancellationToken)";
-
-            return declarations;
+            return string.Join(", ", declarations);
         }
 
         /// <summary>
@@ -134,27 +127,33 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         /// <summary>
         /// Get the return type name for the underlying interface method
         /// </summary>
-        public virtual string OperationResponseReturnTypeString
+        public virtual string OperationResponseReturnTypeString => GetOperationResponseReturnTypeString();
+
+        public virtual string GetOperationResponseReturnTypeString(string typeName = "Task")
+        {
+            if (ReturnType.Body != null)
+            {
+                return $"{typeName}<{OperationResponseType}>";
+            }
+
+            return typeName;
+        }
+
+
+        public string OperationResponseType
         {
             get
             {
-                if (ReturnType.Body != null && ReturnType.Headers != null)
+                var typeName = ReturnType.Body?.AsNullableType(HttpMethod != HttpMethod.Head);
+
+                if (string.IsNullOrWhiteSpace(typeName))
                 {
-                    return $"HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head)},{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
-                }
-                if (ReturnType.Body != null)
-                {
-                    return $"HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head)}>";
-                }
-                if (ReturnType.Headers != null)
-                {
-                    return $"HttpOperationHeaderResponse<{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
+                    return "dynamic";
                 }
 
-                return "HttpOperationResponse";
-
+                return typeName.Replace("System.Collections.Generic.", ""); // TODO: all using namespace
             }
-        }
+        } 
 
         /// <summary>
         /// Get the return type for the async extension method
