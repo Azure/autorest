@@ -74,7 +74,8 @@ import { PumpMessagesToConsole } from './test-utility';
   @test @timeout(60000) async "non-arm type spec testing"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
     autoRest.AddConfiguration({
-      "openapi-type": "default"
+      "openapi-type": "default",
+      "azure-validator": true
     });
 
     const config = await autoRest.view;
@@ -84,15 +85,14 @@ import { PumpMessagesToConsole } from './test-utility';
     assert.equal(await autoRest.Process().finish, true);
 
     // flag any fatal errors
-    assert.equal(messages.filter(m => {
-      m.Channel === Channel.Fatal
-    }).length, 0);
+    assert.equal(messages.filter(m => m.Channel === Channel.Fatal).length, 0);
     assert.equal(messages.length, 0);
   }
   @test @timeout(60000) async "arm type spec testing"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
     autoRest.AddConfiguration({
-      "openapi-type": "arm"
+      "openapi-type": "arm",
+      "azure-validator": true
     });
 
     const config = await autoRest.view;
@@ -100,12 +100,10 @@ import { PumpMessagesToConsole } from './test-utility';
     const messages: Message[] = [];
 
     autoRest.Message.Subscribe((_, m) => { messages.push(m); });
-
+    // PumpMessagesToConsole(autoRest);
     assert.equal(await autoRest.Process().finish, true);
     // flag any fatal errors
-    assert.equal(messages.filter(m => {
-      m.Channel === Channel.Fatal
-    }).length, 0);
+    assert.equal(messages.filter(m => m.Channel === Channel.Fatal).length, 0);
     assert.notEqual(messages.length, 0);
   }
 }

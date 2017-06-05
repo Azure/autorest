@@ -44,7 +44,7 @@
     "jsonpath": "^0.2.11",
     "linq-es2015": "^2.4.13",
     "oav": "0.4.1",
-    "azure-openapi-linter": "F:\\artemp\\rcm\\azure-openapi-linter\\azure-openapi-linter-0.1.3.tgz",
+    "azure-openapi-linter": "0.1.4",
     "pify": "^2.3.0",
     "safe-eval": "^0.3.0",
     "source-map": "^0.5.6",
