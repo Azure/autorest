@@ -80,8 +80,13 @@ import { PumpMessagesToConsole } from './test-utility';
     const config = await autoRest.view;
     const messages: Message[] = [];
 
-    autoRest.Message.Subscribe((_, m) => { if (m.Channel === Channel.Warning || Channel.Error) { messages.push(m); } });
+    autoRest.Message.Subscribe((_, m) => { messages.push(m); });
     assert.equal(await autoRest.Process().finish, true);
+
+    // flag any fatal errors
+    assert.equal(messages.filter(m => {
+      m.Channel === Channel.Fatal
+    }).length, 0);
     assert.equal(messages.length, 0);
   }
   @test @timeout(60000) async "arm type spec testing"() {
@@ -91,10 +96,16 @@ import { PumpMessagesToConsole } from './test-utility';
     });
 
     const config = await autoRest.view;
+
     const messages: Message[] = [];
 
-    autoRest.Message.Subscribe((_, m) => { if (m.Channel === Channel.Warning || Channel.Error) { messages.push(m); } });
+    autoRest.Message.Subscribe((_, m) => { messages.push(m); });
+
     assert.equal(await autoRest.Process().finish, true);
+    // flag any fatal errors
+    assert.equal(messages.filter(m => {
+      m.Channel === Channel.Fatal
+    }).length, 0);
     assert.notEqual(messages.length, 0);
   }
 }
