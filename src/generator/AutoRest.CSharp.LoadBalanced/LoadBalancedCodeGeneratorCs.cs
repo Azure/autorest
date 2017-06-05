@@ -48,12 +48,14 @@ namespace AutoRest.CSharp.LoadBalanced
             usings.Add("System");
             usings.Add("System.Collections.Generic");
             usings.Add("System.Linq");
-            usings.Add("System.Net.Http");
             usings.Add("System.Threading");
             usings.Add("System.Threading.Tasks");
             usings.Add("Microsoft.Rest");
             usings.Add("System.IO");
             usings.Add("Microsoft.Rest.Serialization");
+            usings.Add("Agoda.RoundRobin");
+            usings.Add("Newtonsoft.Json");
+            usings.Add("Agoda.SAPI.Client.Models");
 
             codeModel.Usings = usings.Where(u => !string.IsNullOrWhiteSpace(u)).Distinct();
 
