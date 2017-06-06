@@ -32,7 +32,7 @@
             },
             "description": "Foo body parameter"
           },
-		  {
+          {
             "name": "boolparam",
             "in": "path",
             "required": true,
