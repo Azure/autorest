@@ -50,21 +50,24 @@ namespace AutoRest.Swagger.Validation
         /// <returns>true if there are no propeties of type boolean, false otherwise.</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(SwaggerObject entity, RuleContext context)
         {
-            if (entity.Type?.Equals(DataType.Boolean) == true)
+            if (entity.GetType() == typeof(Schema))
             {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("name")), this, ((SwaggerParameter)entity).Name);
-            }
-            if (entity.GetType() == typeof(Schema) && ((Schema)entity).Properties != null)
-            {
-                foreach (KeyValuePair<string, Schema> property in ((Schema)entity).Properties)
+                if (((Schema)entity).Properties != null)
                 {
-                    if (property.Value?.Type?.Equals(DataType.Boolean) == true)
+                    foreach (KeyValuePair<string, Schema> property in ((Schema)entity).Properties)
                     {
-                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty(property.Key)), this, property.Key);
+                        if (property.Value?.Type?.Equals(DataType.Boolean) == true)
+                        {
+                            yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty(property.Key)), this, property.Key);
+                        }
                     }
+                } 
+                else if (entity.Type?.Equals(DataType.Boolean) == true)
+                { 
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, context.Key);
                 }
             }
-            if (entity.GetType() == typeof(SwaggerParameter) && ((SwaggerParameter)entity).Schema?.Type?.Equals(DataType.Boolean) == true)
+            if (entity.GetType() == typeof(SwaggerParameter) && (entity.Type?.Equals(DataType.Boolean) == true || ((SwaggerParameter)entity).Schema?.Type?.Equals(DataType.Boolean) == true))
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("name")), this, ((SwaggerParameter)entity).Name);
             }

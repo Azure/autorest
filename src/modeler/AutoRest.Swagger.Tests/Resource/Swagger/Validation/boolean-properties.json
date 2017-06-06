@@ -17,7 +17,7 @@
     "application/json"
   ],
   "paths": {
-    "/foo": {
+    "/foo/{boolparam}": {
       "post": {
         "operationId": "PostFoo",
         "summary": "Foo path",
@@ -31,6 +31,13 @@
               "description": "A foo boolean"
             },
             "description": "Foo body parameter"
+          },
+		  {
+            "name": "boolparam",
+            "in": "path",
+            "required": true,
+            "type": "boolean",
+            "description": "A boolean param defined without schema"
           }
         ],
         "responses": {
