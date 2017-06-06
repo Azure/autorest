@@ -140,25 +140,18 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 function subscribeMessages(api: AutoRest, errorCounter: () => void) {
   api.Message.Subscribe((_, m) => {
     switch (m.Channel) {
+      case Channel.Debug:
+      case Channel.Verbose:
       case Channel.Information:
-        console.log(m.Text);
+        console.log(m.FormattedMessage);
         break;
       case Channel.Warning:
-        console.warn(m.Text);
+        console.warn(m.FormattedMessage);
         break;
       case Channel.Error:
-        errorCounter();
-        console.error(m.Text);
-        break;
-      case Channel.Debug:
-        console.log(m.Text);
-        break;
-      case Channel.Verbose:
-        console.log(m.Text);
-        break;
       case Channel.Fatal:
         errorCounter();
-        console.error(m.Text);
+        console.error(m.FormattedMessage);
         break;
     }
   });
