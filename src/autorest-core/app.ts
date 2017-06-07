@@ -82,9 +82,23 @@ ${Stringify(config).replace(/^---\n/, "")}
     config["base-folder"] = currentDirUri;
     const api = new AutoRest(new RealFileSystem());
     await api.AddConfiguration(config);
+    const view = await api.view;
     const outstanding = new OutstandingTaskAwaiter();
     api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
     subscribeMessages(api, () => { });
+
+    // warn about `--` arguments
+    for (var arg of autorestArgs) {
+      if (arg.startsWith("--")) {
+        view.Message({
+          Channel: Channel.Warning,
+          Text:
+          `The parameter ${arg} looks like it was meant for the new CLI! ` +
+          "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
+          "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."
+        });
+      }
+    }
 
     const result = await api.Process().finish;
     if (result != true) {
