@@ -290,16 +290,25 @@ namespace AutoRest.Swagger
         {
             if (operation == null)
             {
-                throw new ArgumentNullException("operation");
+                throw new ArgumentNullException(nameof(operation));
             }
 
-            if (operation.OperationId == null || operation.OperationId.IndexOf('_') == -1)
+            switch (Settings.Instance.GroupingMethod)
             {
-                return null;
+                case "underscore":
+                    if (operation.OperationId == null || operation.OperationId.IndexOf('_') == -1)
+                    {
+                        return null;
+                    }
+
+                    string[] parts = operation.OperationId.Split('_');
+                    return parts[0];
+                case "tag":
+                    return !operation.Tags.Any() ? null : operation.Tags[0];
+                default:
+                    throw new NotImplementedException();
             }
 
-            var parts = operation.OperationId.Split('_');
-            return parts[0];
         }
 
         /// <summary>
@@ -311,7 +320,7 @@ namespace AutoRest.Swagger
         {
             if (operation == null)
             {
-                throw new ArgumentNullException("operation");
+                throw new ArgumentNullException(nameof(operation));
             }
 
             if (operation.OperationId == null)
@@ -324,7 +333,7 @@ namespace AutoRest.Swagger
                 return operation.OperationId;
             }
 
-            var parts = operation.OperationId.Split('_');
+            string[] parts = operation.OperationId.Split('_');
             return parts[1];
         }
 
@@ -332,7 +341,7 @@ namespace AutoRest.Swagger
         {
             if (swaggerParameter == null)
             {
-                throw new ArgumentNullException("swaggerParameter");
+                throw new ArgumentNullException(nameof(swaggerParameter));
             }
 
             // If referencing global parameters serializationProperty
