@@ -1,5 +1,5 @@
 ## Issues Management
-
+ 
 
 #### Links to Issues queries:
  - [Waiting for more information](https://github.com/Azure/autorest/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+label%3A%22More+Information+Required%22++)
