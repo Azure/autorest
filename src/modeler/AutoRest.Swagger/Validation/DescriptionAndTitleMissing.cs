@@ -22,6 +22,18 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.MissingTitleDescription;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// When to apply the validation rule, before or after it has been merged as a part of 
+        /// its merged document as specified in the corresponding '.md' file
+        /// By default consider all rules to be applied for After only
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
+        /// <summary>
         /// Validates model for description and title property
         /// </summary>
         /// <param name="schema">Schema being validated</param>

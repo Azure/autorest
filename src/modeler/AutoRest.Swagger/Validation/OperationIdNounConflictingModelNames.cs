@@ -26,6 +26,18 @@ namespace AutoRest.Swagger.Validation
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// When to apply the validation rule, before or after it has been merged as a part of 
+        /// its merged document as specified in the corresponding '.md' file
+        /// By default consider all rules to be applied for After only
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
+        /// <summary>
         /// Check if the noun part of an operationId (Noun_Verb) conflicts with any model names provided in the spec
         /// </summary>
         /// <param name="entity">The operation id to test</param>

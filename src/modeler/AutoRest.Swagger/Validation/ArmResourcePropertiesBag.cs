@@ -37,6 +37,18 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// When to apply the validation rule, before or after it has been merged as a part of 
+        /// its merged document as specified in the corresponding '.md' file
+        /// By default consider all rules to be applied for After only
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
         private static readonly IEnumerable<string> ArmPropertiesBag = new List<string>()
                                                                         { "name", "id", "type", "location", "tag" };
         

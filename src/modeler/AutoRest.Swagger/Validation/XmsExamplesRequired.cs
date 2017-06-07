@@ -38,7 +38,19 @@ namespace AutoRest.Swagger.Validation
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override Category Severity => Category.Error;
-        
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// When to apply the validation rule, before or after it has been merged as a part of 
+        /// its merged document as specified in the corresponding '.md' file
+        /// By default consider all rules to be applied for After only
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
         /// <summary>
         /// Violation category of the Rule.
         /// </summary>

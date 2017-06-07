@@ -49,14 +49,26 @@ namespace AutoRest.Swagger.Validation
         /// <returns>http verb as string</returns>
         protected static string GetHttpVerb(RuleContext context) => context?.Parent?.Parent?.Key;
 
-        ///// <summary>
-        ///// An x-ms-long-running-operation extension passes this rule if the operation that this extension has a valid response defined.
-        ///// </summary>
-        ///// <param name="longRunning">long running extension object.</param>
-        ///// <param name="context">Rule context.</param>
-        ///// <param name="formatParameters">list of parameters for message formatter.</param>
-        ///// <returns><c>true</c> if operation has valid response code modeled, otherwise <c>false</c>.</returns>
-        ///// <remarks>This rule corresponds to M2005.</remarks>
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// When to apply the validation rule, before or after it has been merged as a part of 
+        /// its merged document as specified in the corresponding '.md' file
+        /// By default consider all rules to be applied for After only
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
+        /// <summary>
+        /// An x-ms-long-running-operation extension passes this rule if the operation that this extension has a valid response defined.
+        /// </summary>
+        /// <param name="longRunning">long running extension object.</param>
+        /// <param name="context">Rule context.</param>
+        /// <param name="formatParameters">list of parameters for message formatter.</param>
+        /// <returns><c>true</c> if operation has valid response code modeled, otherwise <c>false</c>.</returns>
+        /// <remarks>This rule corresponds to M2005.</remarks>
         public override bool IsValid(object longRunning, RuleContext context, out object[] formatParameters)
         {
             bool isValid = true;
