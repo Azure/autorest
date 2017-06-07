@@ -177,7 +177,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;DELETE&apos; operation &apos;{0}&apos; must use method name &apos;Delete&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
+        ///   Looks up a localized string similar to &apos;DELETE&apos; operation &apos;{0}&apos; should use method name &apos;Delete&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string DeleteOperationNameNotValid {
             get {
@@ -249,7 +249,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;GET&apos; operation &apos;{0}&apos; must use method name &apos;Get&apos; or Method name start with &apos;List&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
+        ///   Looks up a localized string similar to &apos;GET&apos; operation &apos;{0}&apos; should use method name &apos;Get&apos; or Method name start with &apos;List&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string GetOperationNameNotValid {
             get {
@@ -492,7 +492,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;PATCH&apos; operation &apos;{0}&apos; must use method name &apos;Update&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
+        ///   Looks up a localized string similar to &apos;PATCH&apos; operation &apos;{0}&apos; should use method name &apos;Update&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string PatchOperationNameNotValid {
             get {
@@ -519,7 +519,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;PUT&apos; operation &apos;{0}&apos; must use method name &apos;Create&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
+        ///   Looks up a localized string similar to &apos;PUT&apos; operation &apos;{0}&apos; should use method name &apos;Create&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string PutOperationNameNotValid {
             get {
