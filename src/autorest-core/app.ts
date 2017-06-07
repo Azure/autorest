@@ -82,9 +82,23 @@ ${Stringify(config).replace(/^---\n/, "")}
     config["base-folder"] = currentDirUri;
     const api = new AutoRest(new RealFileSystem());
     await api.AddConfiguration(config);
+    const view = await api.view;
     const outstanding = new OutstandingTaskAwaiter();
     api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
     subscribeMessages(api, () => { });
+
+    // warn about `--` arguments
+    for (var arg of autorestArgs) {
+      if (arg.startsWith("--")) {
+        view.Message({
+          Channel: Channel.Warning,
+          Text:
+          `The parameter ${arg} looks like it was meant for the new CLI! ` +
+          "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
+          "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."
+        });
+      }
+    }
 
     const result = await api.Process().finish;
     if (result != true) {
@@ -140,25 +154,18 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 function subscribeMessages(api: AutoRest, errorCounter: () => void) {
   api.Message.Subscribe((_, m) => {
     switch (m.Channel) {
+      case Channel.Debug:
+      case Channel.Verbose:
       case Channel.Information:
-        console.log(m.Text);
+        console.log(m.FormattedMessage || m.Text);
         break;
       case Channel.Warning:
-        console.warn(m.Text);
+        console.warn(m.FormattedMessage || m.Text);
         break;
       case Channel.Error:
-        errorCounter();
-        console.error(m.Text);
-        break;
-      case Channel.Debug:
-        console.log(m.Text);
-        break;
-      case Channel.Verbose:
-        console.log(m.Text);
-        break;
       case Channel.Fatal:
         errorCounter();
-        console.error(m.Text);
+        console.error(m.FormattedMessage || m.Text);
         break;
     }
   });

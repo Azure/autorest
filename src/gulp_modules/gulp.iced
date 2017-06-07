@@ -86,7 +86,7 @@ Import
   today: moment().format('YYYYMMDD')
   now: moment().format('YYYYMMDD-HHmm')
   force: argv.force or false
-  threshold: argv.threshold or ((os.cpus().length)-1 )
+  threshold: argv.threshold or ((os.cpus().length)-1) or 1
   verbose: argv.verbose or null
   workdir: "#{process.env.tmp}/gulp/#{guid()}"
   watch: argv.watch or false

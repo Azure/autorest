@@ -63,11 +63,23 @@ import { dirname } from "path";
 const URI = require("urijs");
 const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
 
-// remake of path.isAbsolute... because it's platform dependent:
-// Windows: C:\\... -> true    /... -> true
-// Linux:   C:\\... -> false   /... -> true
+
+/**
+ *  remake of path.isAbsolute... because it's platform dependent:
+ * Windows: C:\\... -> true    /... -> true
+ * Linux:   C:\\... -> false   /... -> true
+ */
 function isAbsolute(path: string): boolean {
   return !!path.match(/^([a-zA-Z]:)?(\/|\\)/);
+}
+
+/**
+ * determines what an absolute URI is for our purposes, consider:
+ * - we had Ruby try to use "Azure::ARM::SQL" as a file name, so that should not be considered absolute
+ * - we want simple, easily predictable semantics
+ */
+function isUriAbsolute(url: string): boolean {
+  return /^[a-z]+:\/\//.test(url);
 }
 
 /**
@@ -117,11 +129,21 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
   if (isAbsolute(pathOrUri)) {
     return CreateFileOrFolderUri(pathOrUri);
   }
+  // known here: `pathOrUri` is eiher URI (relative or absolute) or relative path - which we can normalize to a relative URI
   pathOrUri = pathOrUri.replace(/\\/g, "/");
+  // known here: `pathOrUri` is a URI (relative or absolute)
+  if (isUriAbsolute(pathOrUri)) {
+    return pathOrUri;
+  }
+  // known here: `pathOrUri` is a relative URI
   if (!baseUri) {
     throw new Error("'pathOrUri' was detected to be relative so 'baseUri' is required");
   }
-  return new URI(pathOrUri).absoluteTo(baseUri).toString();
+  try {
+    return new URI(pathOrUri).absoluteTo(baseUri).toString();
+  } catch (e) {
+    throw new Error(`Failed resolving '${pathOrUri}' against '${baseUri}'.`);
+  }
 }
 
 export function ParentFolderUri(uri: string): string | null {
