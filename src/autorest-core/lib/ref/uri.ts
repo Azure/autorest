@@ -139,10 +139,11 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
   if (!baseUri) {
     throw new Error("'pathOrUri' was detected to be relative so 'baseUri' is required");
   }
-  if (pathOrUri.indexOf(":") !== -1) {
-    throw new Error(`Invalid character ':' in relative URI ${pathOrUri}`);
+  try {
+    return new URI(pathOrUri).absoluteTo(baseUri).toString();
+  } catch (e) {
+    throw new Error(`Failed resolving '${pathOrUri}' against '${baseUri}'.`);
   }
-  return new URI(pathOrUri).absoluteTo(baseUri).toString();
 }
 
 export function ParentFolderUri(uri: string): string | null {

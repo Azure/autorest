@@ -78,7 +78,7 @@ scope-swagger-document/emitter:
   # rethink that output-file part
   output-uri-expr: |
     $config["output-file"] || 
-    $config.namespace || 
+    $config.namespace.replace(/:/g,'_') || 
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
 scope-cm/emitter:
   input-artifact: code-model-v1
