@@ -15,11 +15,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger.Tests
 {
-    internal static class MessagesExtensions
-    {
-        internal static IEnumerable<ValidationMessage> GetValidationMessagesForCategory(this IEnumerable<ValidationMessage> messages, Category category) => messages.Where(m => m.Severity == category);
-    }
-
+    
     [Collection("Validation Tests")]
     public partial class SwaggerModelerValidationTests
     {
@@ -37,11 +33,13 @@ namespace AutoRest.Swagger.Tests
             }
         }
 
+        private static IEnumerable<ValidationMessage> GetValidationMessagesForCategory(IEnumerable<ValidationMessage> messages, Category category) => messages.Where(m => m.Severity == category);
+
         private IEnumerable<ValidationMessage> GetValidationMessagesForRule<TRule>(string swaggerFileName) where TRule : Rule
         {
             var ruleInstance = (Rule)Activator.CreateInstance<TRule>();
             var messages = ValidateSwagger(Path.Combine(PathToValidationResources, swaggerFileName), GetMetadataForRuleTest(ruleInstance));
-            return messages.GetValidationMessagesForCategory(ruleInstance.Severity).Where(message => message.Rule is TRule);
+            return GetValidationMessagesForCategory(messages, ruleInstance.Severity).Where(message => message.Rule is TRule);
         }
 
         private ServiceDefinitionMetadata GetMetadataForRuleTest(Rule rule) =>
