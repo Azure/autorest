@@ -143,15 +143,15 @@ function subscribeMessages(api: AutoRest, errorCounter: () => void) {
       case Channel.Debug:
       case Channel.Verbose:
       case Channel.Information:
-        console.log(m.FormattedMessage);
+        console.log(m.FormattedMessage || m.Text);
         break;
       case Channel.Warning:
-        console.warn(m.FormattedMessage);
+        console.warn(m.FormattedMessage || m.Text);
         break;
       case Channel.Error:
       case Channel.Fatal:
         errorCounter();
-        console.error(m.FormattedMessage);
+        console.error(m.FormattedMessage || m.Text);
         break;
     }
   });
