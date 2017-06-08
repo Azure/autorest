@@ -23,7 +23,6 @@ modelTypes:
           format: int64
           knownFormat: int64
           knownPrimaryType: long
-          isConstant: false
           className: Long
           declarationName: Long
           '#name': Long
@@ -48,7 +47,6 @@ modelTypes:
           $actualType: AutoRest.Core.Model.PrimaryType
           knownFormat: none
           knownPrimaryType: string
-          isConstant: false
           className: String
           declarationName: String
           '#name': String
