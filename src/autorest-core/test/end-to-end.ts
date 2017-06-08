@@ -82,7 +82,7 @@ import { PumpMessagesToConsole } from './test-utility';
 
     autoRest.Message.Subscribe((_, m) => { if (m.Channel === Channel.Warning || Channel.Error) { messages.push(m); } });
     assert.equal(await autoRest.Process().finish, true);
-    assert.equal(messages.length, 0);
+    assert.notEqual(messages.length, 0);
   }
   @test @timeout(60000) async "arm type spec testing"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
