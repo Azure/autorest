@@ -51,7 +51,7 @@ namespace AutoRest.Swagger.Validation
         /// its merged document as specified in the corresponding '.md' file
         /// By default consider all rules to be applied for After only
         /// </summary>
-        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 
         /// <summary>
         /// Verifies if a tracked resource has a corresponding get operation

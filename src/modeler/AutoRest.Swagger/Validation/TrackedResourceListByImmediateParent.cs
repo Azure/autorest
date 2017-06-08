@@ -43,7 +43,7 @@ namespace AutoRest.Swagger.Validation
         /// its merged document as specified in the corresponding '.md' file
         /// By default consider all rules to be applied for After only
         /// </summary>
-        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 
         /// <summary>
         /// Validates if the child tracked resources have List by immediate parent operation.

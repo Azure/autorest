@@ -35,7 +35,7 @@ namespace AutoRest.Swagger.Validation
         /// its merged document as specified in the corresponding '.md' file
         /// By default consider all rules to be applied for After only
         /// </summary>
-        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 
         /// <summary>
         /// Check if the noun part of an operationId (Noun_Verb) conflicts with any model names provided in the spec
