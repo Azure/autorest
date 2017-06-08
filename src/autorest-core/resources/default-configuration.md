@@ -111,10 +111,10 @@ pipeline:
     input: individual/transform
     scope: azure-validator-individual
   # validator written in TypeScript
-  swagger-document/azure-openapi-linter:
+  swagger-document/azure-openapi-validator:
     input: transform
     scope: azure-validator-composed # artificial predecessor in order to ensure order of messages for CI purposes
-  swagger-document/individual/azure-openapi-linter:
+  swagger-document/individual/azure-openapi-validator:
     input: individual/transform
     scope: azure-validator-individual # artificial predecessor in order to ensure order of messages for CI purposes
 ```

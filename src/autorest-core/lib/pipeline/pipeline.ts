@@ -246,7 +246,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   // externals:
   const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
   const aiPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/autorest-interactive`));
-  const aoavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/azure-openapi-linter`));
+  const aoavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/@microsoft.azure/openapi-validator`));
   const autoRestDotNet = new LazyPromise(async () => await GetAutoRestDotNetPlugin());
 
   // TODO: enhance with custom declared plugins
@@ -259,7 +259,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
     "semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),
     "azure-validator": CreatePluginExternal(autoRestDotNet, "azure-validator"),
-    "azure-openapi-linter": CreatePluginExternal(aoavPluginHost, "azure-openapi-linter"),
+    "azure-openapi-validator": CreatePluginExternal(aoavPluginHost, "azure-openapi-validator"),
     "modeler": CreatePluginExternal(autoRestDotNet, "modeler"),
 
     "csharp": CreatePluginExternal(autoRestDotNet, "csharp"),

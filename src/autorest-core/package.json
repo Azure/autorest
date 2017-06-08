@@ -44,7 +44,7 @@
     "jsonpath": "^0.2.11",
     "linq-es2015": "^2.4.13",
     "oav": "0.4.1",
-    "azure-openapi-linter": "^0.1.4",
+    "@microsoft.azure/openapi-validator": "^0.1.0",
     "pify": "^2.3.0",
     "safe-eval": "^0.3.0",
     "source-map": "^0.5.6",

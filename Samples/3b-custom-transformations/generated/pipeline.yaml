@@ -51,14 +51,14 @@ swagger-document/individual/azure-validator:
     - azure-validator-individual
   inputs:
     - swagger-document/individual/transform
-swagger-document/azure-openapi-linter:
-  pluginName: azure-openapi-linter
+swagger-document/azure-openapi-validator:
+  pluginName: azure-openapi-validator
   configScope:
     - azure-validator-composed
   inputs:
     - swagger-document/transform
-swagger-document/individual/azure-openapi-linter:
-  pluginName: azure-openapi-linter
+swagger-document/individual/azure-openapi-validator:
+  pluginName: azure-openapi-validator
   configScope:
     - azure-validator-individual
   inputs:
