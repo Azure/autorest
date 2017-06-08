@@ -1,0 +1,1517 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BatchManagement",
+    "version": "2017-05-01",
+    "x-ms-code-generation-settings": {
+      "name": "BatchManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}": {
+      "put": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Create",
+        "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
+            "description": "A name for the Batch account which must be unique within the region. Batch account names must be between 3 and 24 characters in length and must use only numbers and lowercase letters. This name is used as part of the DNS name that is used to access the Batch service in the region in which the account is created. For example: http://accountname.region.batch.azure.com/."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchAccountCreateParameters"
+            },
+            "description": "Additional parameters for account creation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account entity.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "x-ms-headers": {
+              "$ref": "#/definitions/RetryHeader"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Update",
+        "description": "Updates the properties of an existing Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchAccountUpdateParameters"
+            },
+            "description": "Additional parameters for account update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account entity.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Delete",
+        "description": "Deletes the specified Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "x-ms-headers": {
+              "$ref": "#/definitions/RetryHeader"
+            },
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent -- account does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Get",
+        "description": "Gets information about the specified Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account entity.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/batchAccounts": {
+      "get": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_List",
+        "description": "Gets information about the Batch accounts associated with the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of Batch account entities associated with the subscription.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts": {
+      "get": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_ListByResourceGroup",
+        "description": "Gets information about the Batch accounts associated with the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of Batch account entities associated with the resource group.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/syncAutoStorageKeys": {
+      "post": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_SynchronizeAutoStorageKeys",
+        "description": "Synchronizes access keys for the auto-storage account configured for the specified Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_RegenerateKey",
+        "description": "Regenerates the specified account key for the Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchAccountRegenerateKeyParameters"
+            },
+            "description": "The type of key to regenerate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account keys.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/listKeys": {
+      "post": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_GetKeys",
+        "summary": "Gets the account keys for the specified Batch account.",
+        "description": "This operation applies only to Batch accounts created with a poolAllocationMode of 'BatchService'. If the Batch account was created with a poolAllocationMode of 'UserSubscription', clients cannot use access to keys to authenticate, and must use Azure Active Directory instead. In this case, getting the keys will fail.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the keys of the Batch account.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}/activate": {
+      "post": {
+        "tags": [
+          "ApplicationPackage"
+        ],
+        "operationId": "ApplicationPackage_Activate",
+        "description": "Activates the specified application package.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the application."
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The version of the application to activate."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActivateApplicationPackageParameters"
+            },
+            "description": "The parameters for the request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}": {
+      "put": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Create",
+        "description": "Adds an application to the specified Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the application."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ApplicationCreateParameters"
+            },
+            "description": "The parameters for the request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The operation was successful. The response contains the application entity.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Delete",
+        "description": "Deletes an application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Get",
+        "description": "Gets information about the specified application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the application entity.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Update",
+        "description": "Updates settings for the specified application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the application."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationUpdateParameters"
+            },
+            "description": "The parameters for the request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationId}/versions/{version}": {
+      "put": {
+        "tags": [
+          "ApplicationPackage"
+        ],
+        "operationId": "ApplicationPackage_Create",
+        "description": "Creates an application package record.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the application."
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The version of the application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The operation was successful. The response contains the application package entity.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationPackage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApplicationPackage"
+        ],
+        "operationId": "ApplicationPackage_Delete",
+        "description": "Deletes an application package record and its associated binary file.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the application."
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The version of the application to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApplicationPackage"
+        ],
+        "operationId": "ApplicationPackage_Get",
+        "description": "Gets information about the specified application package.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the application."
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The version of the application."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the application package entity.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationPackage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_List",
+        "description": "Lists all of the applications in the specified account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of items to return in the response."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of the application entities associated with the specified account.",
+            "schema": {
+              "$ref": "#/definitions/ListApplicationsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationName}/quotas": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_GetQuotas",
+        "description": "Gets the Batch service quotas for the specified subscription at the given location.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region for which to retrieve Batch service quotas."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch service quotas for the subscription in the specified location.",
+            "schema": {
+              "$ref": "#/definitions/BatchLocationQuota"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Batch/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists available operations for the Microsoft.Batch provider",
+        "parameters": [
+          {
+              "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RetryHeader": {
+      "properties": {
+        "Location": {
+          "description": "The URL of the resource used to check the status of the asynchronous operation.",
+          "type": "string"
+        },
+        "Retry-After": {
+          "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AutoStorageBaseProperties": {
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The resource ID of the storage account to be used for auto-storage account."
+        }
+      },
+      "required": [
+        "storageAccountId"
+      ],
+      "description": "The properties related to the auto-storage account."
+    },
+    "BatchAccountUpdateProperties": {
+      "properties": {
+        "autoStorage": {
+          "$ref": "#/definitions/AutoStorageBaseProperties",
+          "description": "The properties related to the auto-storage account."
+        }
+      },
+      "description": "The properties of a Batch account."
+    },
+    "BatchAccountCreateProperties": {
+      "properties": {
+        "autoStorage": {
+          "$ref": "#/definitions/AutoStorageBaseProperties",
+          "description": "The properties related to the auto-storage account."
+        },
+        "poolAllocationMode": {
+          "title": "The allocation mode to use for creating pools in the Batch account.",
+          "description": "The pool allocation mode also affects how clients may authenticate to the Batch Service API. If the mode is BatchService, clients may authenticate using access keys or Azure Active Directory. If the mode is UserSubscription, clients must use Azure Active Directory. The default is BatchService.",
+          "$ref": "#/definitions/PoolAllocationMode"
+        },
+        "keyVaultReference": {
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "A reference to the Azure key vault associated with the Batch account."
+        }
+      },
+      "description": "The properties of a Batch account."
+    },
+    "BatchAccountCreateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The region in which to create the account."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the account."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BatchAccountCreateProperties",
+          "description": "The properties of the Batch account."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the Create operation."
+    },
+    "KeyVaultReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the Azure key vault associated with the Batch account."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the Azure key vault associated with the Batch account."
+        }
+      },
+      "required": [
+        "id",
+        "url"
+      ],
+      "description": "Identifies the Azure key vault associated with a Batch account."
+    },
+    "AutoStorageProperties": {
+      "properties": {
+        "lastKeySync": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time at which storage keys were last synchronized with the Batch account."
+        }
+      },
+      "required": [
+        "lastKeySync"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutoStorageBaseProperties"
+        }
+      ],
+      "description": "Contains information about the auto-storage account associated with a Batch account."
+    },
+    "BatchAccountProperties": {
+      "properties": {
+        "accountEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The account endpoint used to interact with the Batch service."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "description": "The provisioned state of the resource",
+          "enum": [
+            "Invalid",
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "poolAllocationMode": {
+          "readOnly": true,
+          "x-nullable": false,
+          "title": "The allocation mode to use for creating pools in the Batch account.",
+          "$ref": "#/definitions/PoolAllocationMode"
+        },
+        "keyVaultReference": {
+          "title": "A reference to the Azure key vault associated with the Batch account.",
+          "readOnly": true,
+          "$ref": "#/definitions/KeyVaultReference"
+        },
+        "autoStorage": {
+          "title": "The properties and status of any auto-storage account associated with the Batch account.",
+          "readOnly": true,
+          "$ref": "#/definitions/AutoStorageProperties"
+        },
+        "dedicatedCoreQuota": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int32",
+          "title": "The dedicated core quota for this Batch account."
+        },
+        "lowPriorityCoreQuota": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int32",
+          "title": "The low-priority core quota for this Batch account."
+        },
+        "poolQuota": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int32",
+          "title": "The pool quota for this Batch account."
+        },
+        "activeJobAndJobScheduleQuota": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int32",
+          "title": "The active job and job schedule quota for this Batch account."
+        }
+      },
+      "description": "Account specific properties."
+    },
+    "BatchAccount": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BatchAccountProperties",
+          "description": "The properties associated with the account."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Contains information about an Azure Batch account."
+    },
+    "BatchAccountUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the account."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BatchAccountUpdateProperties",
+          "description": "The properties of the account."
+        }
+      },
+      "description": "Parameters for updating an Azure Batch account."
+    },
+    "BatchAccountListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchAccount"
+          },
+          "description": "The collection of Batch accounts returned by the listing operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "BatchAccountRegenerateKeyParameters": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The type of account key to regenerate.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "AccountKeyType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "keyName"
+      ],
+      "description": "Parameters supplied to the RegenerateKey operation."
+    },
+    "BatchAccountKeys": {
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Batch account name."
+        },
+        "primary": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The primary key associated with the account."
+        },
+        "secondary": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The secondary key associated with the account."
+        }
+      },
+      "description": "A set of Azure Batch account keys."
+    },
+    "ActivateApplicationPackageParameters": {
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "The format of the application package binary file."
+        }
+      },
+      "required": [
+        "format"
+      ],
+      "description": "Parameters for an activating an application package."
+    },
+    "ApplicationCreateParameters": {
+      "properties": {
+        "allowUpdates": {
+          "type": "boolean",
+          "description": "A value indicating whether packages within the application may be overwritten using the same version string."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the application."
+        }
+      },
+      "description": "Parameters for adding an Application."
+    },
+    "Application": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A string that uniquely identifies the application within the account."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the application."
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationPackage"
+          },
+          "description": "The list of packages under this application."
+        },
+        "allowUpdates": {
+          "type": "boolean",
+          "description": "A value indicating whether packages within the application may be overwritten using the same version string."
+        },
+        "defaultVersion": {
+          "type": "string",
+          "description": "The package to use if a client requests the application but does not specify a version."
+        }
+      },
+      "description": "Contains information about an application in a Batch account."
+    },
+    "ApplicationPackage": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ID of the application."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version of the application package. "
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current state of the application package.",
+          "enum": [
+            "pending",
+            "active",
+            "unmapped"
+          ],
+          "x-ms-enum": {
+            "name": "PackageState",
+            "modelAsString": false
+          }
+        },
+        "format": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The format of the application package, if the package is active."
+        },
+        "storageUrl": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL for the application package in Azure Storage."
+        },
+        "storageUrlExpiry": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The UTC time at which the Azure Storage URL will expire."
+        },
+        "lastActivationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time at which the package was last activated, if the package is active."
+        }
+      },
+      "description": "An application package which represents a particular version of an application."
+    },
+    "ListApplicationsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          },
+          "description": "The list of applications."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The result of performing list applications."
+    },
+    "ApplicationUpdateParameters": {
+      "properties": {
+        "allowUpdates": {
+          "type": "boolean",
+          "description": "A value indicating whether packages within the application may be overwritten using the same version string."
+        },
+        "defaultVersion": {
+          "type": "string",
+          "description": "The package to use if a client requests the application but does not specify a version."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the application."
+        }
+      },
+      "description": "Parameters for an update application request."
+    },
+    "BatchLocationQuota": {
+      "properties": {
+        "accountQuota": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The number of Batch accounts that may be created under the subscription in the specified region."
+        }
+      },
+      "description": "Quotas associated with a Batch region for a particular subscription."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The tags of the resource."
+        }
+      },
+      "description": "A definition of an Azure resource.",
+      "x-ms-azure-resource": true
+    },
+    "PoolAllocationMode": {
+      "type": "string",
+      "description": "The allocation mode for creating pools in the Batch account.",
+      "enum": [
+        "BatchService",
+        "UserSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "PoolAllocationMode",
+        "modelAsString": false
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "Operation": {
+      "title": "A REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "title": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "title": "Friendly name of the resource provider.",
+              "type": "string"
+            },
+            "operation": {
+              "title": "The operation type.",
+              "description": "For example: read, write, delete, or listKeys/action",
+              "type": "string"
+            },
+            "resource": {
+              "title": "The resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "title": "The friendly name of the operation",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "title": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Properties of the operation.",
+          "type": "object"
+        }
+      }
+    },
+    "OperationListResult": {
+     "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "title": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "title": "The URL to get the next set of operation list results if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    }, 
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._]+$",
+      "description": "The name of the resource group that contains the Batch account.",
+      "x-ms-parameter-location": "method"
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._]+$",
+      "minLength": 3,
+      "maxLength": 24,
+      "description": "The name of the Batch account.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
