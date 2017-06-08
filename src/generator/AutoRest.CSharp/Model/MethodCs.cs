@@ -280,6 +280,9 @@ namespace AutoRest.CSharp.Model
         [JsonIgnore]
         public ParameterCs RequestBody => Body as ParameterCs;
 
+        [JsonIgnore]
+        public string AccessModifier => Hidden ? "internal" : "public";
+
         /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
