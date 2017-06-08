@@ -13,6 +13,8 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 
 using static AutoRest.Core.Utilities.DependencyInjection;
@@ -94,54 +96,86 @@ namespace AutoRest.Swagger
                 BuildMethodParameters(method);
             }
 
+            // Directly requested header types (x-ms-$ref to definitions secion)
+            var headerTypeReferences = new List<IModelType>();
+
+            var headerTypeName = $"{methodGroup}-{methodName}-Headers".Trim('-');
+
             // Build header object
             var responseHeaders = new Dictionary<string, Header>();
             foreach (var response in _operation.Responses.Values)
             {
-                if (response.Headers != null)
+                var xMsHeaders = response.Extensions?.GetValue<JObject>("x-ms-headers");
+                if (xMsHeaders != null)
                 {
-                    response.Headers.ForEach(h => responseHeaders[h.Key] = h.Value);
-                }
-            }
-
-            var headerTypeName = string.Format(CultureInfo.InvariantCulture,
-                "{0}-{1}-Headers", methodGroup, methodName).Trim('-');
-            var headerType = New<CompositeType>(headerTypeName, new
-            {
-                SerializedName = headerTypeName,
-                RealPath = new string[] { headerTypeName },
-                Documentation = string.Format(CultureInfo.InvariantCulture, "Defines headers for {0} operation.", methodName)
-            });
-            responseHeaders.ForEach(h =>
-            {
-                if (h.Value.Extensions != null && h.Value.Extensions.ContainsKey("x-ms-header-collection-prefix"))
-                {
-                    var property = New<Property>(new
-                    {
-                        Name = h.Key,
-                        SerializedName = h.Key,
-                        RealPath = new string[] { h.Key },
-                        Extensions = h.Value.Extensions,
-                        ModelType = New<DictionaryType>(new
+                    var schema =
+                        xMsHeaders.ToObject<Schema>(JsonSerializer.Create(new JsonSerializerSettings
                         {
-                            ValueType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key)
-                        })
-                    });
-                    headerType.Add(property);
+                            MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                        }));
+                    headerTypeReferences.Add(schema.GetBuilder(_swaggerModeler).BuildServiceType(headerTypeName));
                 }
                 else
                 {
-                    var property = New<Property>(new
-                    {
-                        Name = h.Key,
-                        SerializedName = h.Key,
-                        RealPath = new string[] { h.Key },
-                        ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
-                        Documentation = h.Value.Description
-                    });
-                    headerType.Add(property);
+                    response.Headers?.ForEach(h => responseHeaders[h.Key] = h.Value);
                 }
-            });
+            }
+            headerTypeReferences = headerTypeReferences.Distinct().ToList();
+
+            CompositeType headerType;
+            if (headerTypeReferences.Count == 0)
+            {
+                headerType = New<CompositeType>(headerTypeName, new
+                {
+                    SerializedName = headerTypeName,
+                    RealPath = new[] {headerTypeName},
+                    Documentation = $"Defines headers for {methodName} operation."
+                });
+                foreach (var h in responseHeaders)
+                {
+                    if (h.Value.Extensions != null && h.Value.Extensions.ContainsKey("x-ms-header-collection-prefix"))
+                    {
+                        var property = New<Property>(new
+                        {
+                            Name = h.Key,
+                            SerializedName = h.Key,
+                            RealPath = new[] {h.Key},
+                            Extensions = h.Value.Extensions,
+                            ModelType = New<DictionaryType>(new
+                            {
+                                ValueType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key)
+                            })
+                        });
+                        headerType.Add(property);
+                    }
+                    else
+                    {
+                        var property = New<Property>(new
+                        {
+                            Name = h.Key,
+                            SerializedName = h.Key,
+                            RealPath = new[] {h.Key},
+                            ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
+                            Documentation = h.Value.Description
+                        });
+                        headerType.Add(property);
+                    }
+                };
+            }
+            else if (headerTypeReferences.Count == 1 
+                && headerTypeReferences[0] is CompositeType singleType
+                && responseHeaders.Count == 0)
+            {
+                headerType = singleType;
+            }
+            else
+            {
+                Logger.Instance.Log(Category.Error, "Detected invalid reference(s) to response header types." +
+                                                    " 1) All references must point to the very same type." +
+                                                    " 2) That type must be an object type (i.e. no array or primitive type)." +
+                                                    " 3) No response may only define classical `headers`.");
+                throw new CodeGenerationException("Invalid response header types.");
+            }
 
             if (!headerType.Properties.Any())
             {
