@@ -1,0 +1,110 @@
+---
+modelTypes:
+  - $id: '1'
+    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
+    $actualType: AutoRest.Core.Model.CompositeType
+    properties:
+      - $id: '2'
+        $actualType: AutoRest.Core.Model.Property
+        isReadOnly: false
+        isPolymorphicDiscriminator: false
+        realPath:
+          - id
+        realXmlPath:
+          - id
+        collectionFormat: none
+        isRequired: false
+        isConstant: false
+        modelTypeName: Long
+        modelType:
+          $id: '3'
+          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+          $actualType: AutoRest.Core.Model.PrimaryType
+          format: int64
+          knownFormat: int64
+          knownPrimaryType: long
+          isConstant: false
+          className: Long
+          declarationName: Long
+          '#name': Long
+        '#defaultValue': '42'
+        '#name': id
+        '#serializedName': id
+      - $id: '4'
+        $actualType: AutoRest.Core.Model.Property
+        isReadOnly: false
+        isPolymorphicDiscriminator: false
+        realPath:
+          - name
+        realXmlPath:
+          - name
+        collectionFormat: none
+        isRequired: true
+        isConstant: false
+        modelTypeName: String
+        modelType:
+          $id: '5'
+          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
+          $actualType: AutoRest.Core.Model.PrimaryType
+          knownFormat: none
+          knownPrimaryType: string
+          isConstant: false
+          className: String
+          declarationName: String
+          '#name': String
+        '#defaultValue': shiny
+        '#name': name
+        '#serializedName': name
+    documentation: A cowbell.
+    containsConstantProperties: false
+    className: Cowbell
+    declarationName: Cowbell
+    '#serializedName': Cowbell
+    '#name': Cowbell
+namespace: ''
+modelsName: Models
+apiVersion: 1.0.0
+baseUrl: 'https://localhost'
+methodGroupNames:
+  - Cowbell
+documentation: This is a sample.
+operations:
+  - methods:
+      - parameters:
+          - $id: '6'
+            isClientProperty: false
+            location: body
+            collectionFormat: none
+            isRequired: true
+            isConstant: false
+            modelTypeName: Cowbell
+            modelType:
+              $ref: '1'
+            '#name': body
+            '#serializedName': body
+        isAbsoluteUrl: false
+        httpMethod: post
+        requestSerializationFormat: none
+        responseSerializationFormat: none
+        responses:
+          OK:
+            isNullable: true
+        defaultResponse:
+          isNullable: true
+        returnType:
+          isNullable: true
+        description: A good description.
+        requestContentType: application/json; charset=utf-8
+        responseContentTypes:
+          - application/json
+        deprecated: false
+        hidden: true
+        '#name': Add
+        '#group': Cowbell
+        '#serializedName': Cowbell_Add
+        '#url': /cowbell
+    isCodeModelMethodGroup: false
+    usings:
+      - Models
+    '#name': Cowbell
+'#name': CowbellFactory
