@@ -111,8 +111,8 @@ export class Installer {
       runtimeId = pi.runtimeId;
     }
 
-    const fwks = await Github.GetAssets('dotnet-runtime-1.0.4');
-    const runtime = fwks.FirstOrDefault(each => each.name.startsWith(`dotnet-${runtimeId}.1.0.4`));
+    const fwks = await Github.GetAssets('dotnet-runtime-1.0.5');
+    const runtime = fwks.FirstOrDefault(each => each.name.startsWith(`dotnet-${runtimeId}.1.0.5`));
 
     if (runtime == null) {
       throw `Unable to find framework for ${runtimeId}`

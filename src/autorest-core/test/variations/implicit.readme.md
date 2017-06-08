@@ -88,7 +88,7 @@ swagger-parser:
 ### Azure Validator (aka 'the linter')
 The Azure Validator is enabled as a plugin when `azure-arm` is set to `true` and can be disabled when `disable-validation` is set to `false`.
 
-``` yaml $(azure-arm)
+``` yaml
 azure-validator: # enable the azure validator 
 #consumes: swaggerdocument
 #produces: (nothing)

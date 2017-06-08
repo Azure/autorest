@@ -84,6 +84,7 @@ task 'test', 'typescript',['build/typescript'], (done)->
         next null
 
 task 'npm-install', 'typescript', (done)-> 
+  global.threshold =1
   count = 5
   npminstalls()
     .pipe foreach (each,next)-> 
