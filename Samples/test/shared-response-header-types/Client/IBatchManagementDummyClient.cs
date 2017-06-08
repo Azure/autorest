@@ -11,7 +11,7 @@ namespace SharedHeaders
 
     /// <summary>
     /// </summary>
-    public partial interface IBatchManagementClient : System.IDisposable
+    public partial interface IBatchManagementDummyClient : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.
@@ -66,26 +66,6 @@ namespace SharedHeaders
         /// Gets the IBatchAccountOperations.
         /// </summary>
         IBatchAccountOperations BatchAccount { get; }
-
-        /// <summary>
-        /// Gets the IApplicationPackageOperations.
-        /// </summary>
-        IApplicationPackageOperations ApplicationPackage { get; }
-
-        /// <summary>
-        /// Gets the IApplicationOperations.
-        /// </summary>
-        IApplicationOperations Application { get; }
-
-        /// <summary>
-        /// Gets the ILocationOperations.
-        /// </summary>
-        ILocationOperations Location { get; }
-
-        /// <summary>
-        /// Gets the IOperations.
-        /// </summary>
-        IOperations Operations { get; }
 
     }
 }

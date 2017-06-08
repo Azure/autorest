@@ -154,14 +154,8 @@ namespace AutoRest.Core.Model
         CodeModel IParent.CodeModel => this;
 
         [JsonIgnore]
-        public virtual IEnumerable<IIdentifier> IdentifiersInScope
-        {
-            get
-            {
-                return ((IEnumerable<IIdentifier>)Operations).Concat(ModelTypes).ConcatSingleItem(this);
-                //yield return this;
-            }
-        }
+        public virtual IEnumerable<IIdentifier> IdentifiersInScope => 
+            ((IEnumerable<IIdentifier>)Operations).Concat(ModelTypes).ConcatSingleItem(this);
 
         [JsonIgnore]
         public virtual IEnumerable<IChild> Children

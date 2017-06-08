@@ -4,8 +4,6 @@
 
 namespace SharedHeaders.Models
 {
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -14,7 +12,6 @@ namespace SharedHeaders.Models
     /// <summary>
     /// Parameters for updating an Azure Batch account.
     /// </summary>
-    [JsonTransformation]
     public partial class BatchAccountUpdateParameters
     {
         /// <summary>
@@ -32,12 +29,9 @@ namespace SharedHeaders.Models
         /// </summary>
         /// <param name="tags">The user-specified tags associated with the
         /// account.</param>
-        /// <param name="autoStorage">The properties related to the
-        /// auto-storage account.</param>
-        public BatchAccountUpdateParameters(IDictionary<string, string> tags = default(IDictionary<string, string>), AutoStorageBaseProperties autoStorage = default(AutoStorageBaseProperties))
+        public BatchAccountUpdateParameters(IDictionary<string, string> tags = default(IDictionary<string, string>))
         {
             Tags = tags;
-            AutoStorage = autoStorage;
             CustomInit();
         }
 
@@ -52,24 +46,5 @@ namespace SharedHeaders.Models
         [JsonProperty(PropertyName = "tags")]
         public IDictionary<string, string> Tags { get; set; }
 
-        /// <summary>
-        /// Gets or sets the properties related to the auto-storage account.
-        /// </summary>
-        [JsonProperty(PropertyName = "properties.autoStorage")]
-        public AutoStorageBaseProperties AutoStorage { get; set; }
-
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public virtual void Validate()
-        {
-            if (AutoStorage != null)
-            {
-                AutoStorage.Validate();
-            }
-        }
     }
 }

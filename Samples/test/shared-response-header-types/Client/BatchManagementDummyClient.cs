@@ -15,7 +15,7 @@ namespace SharedHeaders
     using System.Net;
     using System.Net.Http;
 
-    public partial class BatchManagementClient : ServiceClient<BatchManagementClient>, IBatchManagementClient, IAzureClient
+    public partial class BatchManagementDummyClient : ServiceClient<BatchManagementDummyClient>, IBatchManagementDummyClient, IAzureClient
     {
         /// <summary>
         /// The base URI of the service.
@@ -71,38 +71,18 @@ namespace SharedHeaders
         public virtual IBatchAccountOperations BatchAccount { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicationPackageOperations.
-        /// </summary>
-        public virtual IApplicationPackageOperations ApplicationPackage { get; private set; }
-
-        /// <summary>
-        /// Gets the IApplicationOperations.
-        /// </summary>
-        public virtual IApplicationOperations Application { get; private set; }
-
-        /// <summary>
-        /// Gets the ILocationOperations.
-        /// </summary>
-        public virtual ILocationOperations Location { get; private set; }
-
-        /// <summary>
-        /// Gets the IOperations.
-        /// </summary>
-        public virtual IOperations Operations { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the BatchManagementClient class.
+        /// Initializes a new instance of the BatchManagementDummyClient class.
         /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected BatchManagementClient(params DelegatingHandler[] handlers) : base(handlers)
+        protected BatchManagementDummyClient(params DelegatingHandler[] handlers) : base(handlers)
         {
             Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the BatchManagementClient class.
+        /// Initializes a new instance of the BatchManagementDummyClient class.
         /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -110,13 +90,13 @@ namespace SharedHeaders
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected BatchManagementClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        protected BatchManagementDummyClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the BatchManagementClient class.
+        /// Initializes a new instance of the BatchManagementDummyClient class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -127,7 +107,7 @@ namespace SharedHeaders
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        protected BatchManagementClient(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        protected BatchManagementDummyClient(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -137,7 +117,7 @@ namespace SharedHeaders
         }
 
         /// <summary>
-        /// Initializes a new instance of the BatchManagementClient class.
+        /// Initializes a new instance of the BatchManagementDummyClient class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -151,7 +131,7 @@ namespace SharedHeaders
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        protected BatchManagementClient(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        protected BatchManagementDummyClient(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -161,7 +141,7 @@ namespace SharedHeaders
         }
 
         /// <summary>
-        /// Initializes a new instance of the BatchManagementClient class.
+        /// Initializes a new instance of the BatchManagementDummyClient class.
         /// </summary>
         /// <param name='credentials'>
         /// Required. Credentials needed for the client to connect to Azure.
@@ -172,7 +152,7 @@ namespace SharedHeaders
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public BatchManagementClient(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public BatchManagementDummyClient(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
@@ -186,7 +166,7 @@ namespace SharedHeaders
         }
 
         /// <summary>
-        /// Initializes a new instance of the BatchManagementClient class.
+        /// Initializes a new instance of the BatchManagementDummyClient class.
         /// </summary>
         /// <param name='credentials'>
         /// Required. Credentials needed for the client to connect to Azure.
@@ -200,7 +180,7 @@ namespace SharedHeaders
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public BatchManagementClient(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public BatchManagementDummyClient(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (credentials == null)
             {
@@ -214,7 +194,7 @@ namespace SharedHeaders
         }
 
         /// <summary>
-        /// Initializes a new instance of the BatchManagementClient class.
+        /// Initializes a new instance of the BatchManagementDummyClient class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -228,7 +208,7 @@ namespace SharedHeaders
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public BatchManagementClient(System.Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public BatchManagementDummyClient(System.Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -247,7 +227,7 @@ namespace SharedHeaders
         }
 
         /// <summary>
-        /// Initializes a new instance of the BatchManagementClient class.
+        /// Initializes a new instance of the BatchManagementDummyClient class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -264,7 +244,7 @@ namespace SharedHeaders
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public BatchManagementClient(System.Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public BatchManagementDummyClient(System.Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -292,10 +272,6 @@ namespace SharedHeaders
         private void Initialize()
         {
             BatchAccount = new BatchAccountOperations(this);
-            ApplicationPackage = new ApplicationPackageOperations(this);
-            Application = new ApplicationOperations(this);
-            Location = new LocationOperations(this);
-            Operations = new Operations(this);
             BaseUri = new System.Uri("https://management.azure.com");
             ApiVersion = "2017-05-01";
             AcceptLanguage = "en-US";

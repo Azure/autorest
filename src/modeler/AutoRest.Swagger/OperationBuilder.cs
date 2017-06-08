@@ -96,9 +96,8 @@ namespace AutoRest.Swagger
                 BuildMethodParameters(method);
             }
 
-            // Directly requested header types (x-ms-$ref to definitions secion)
+            // Directly requested header types (x-ms-headers)
             var headerTypeReferences = new List<IModelType>();
-
             var headerTypeName = $"{methodGroup}-{methodName}-Headers".Trim('-');
 
             // Build header object
