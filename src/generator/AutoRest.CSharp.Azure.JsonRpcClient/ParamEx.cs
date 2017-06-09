@@ -12,6 +12,24 @@ namespace AutoRest.CSharp.Azure.JsonRpcClient
         public static string GetInfoName(this Parameter p)
             => p.Method.GetParameterInfoName(p);
 
+        public static string GetConstraint(this KeyValuePair<Constraint, string> p)
+        {
+            switch(p.Key)
+            {
+                case Constraint.MinLength:
+                    return $"new Microsoft.Rest.ClientRuntime.Test.Azure.Constraints.AzureMinLength({p.Value}),";
+                case Constraint.MaxLength:
+                    return $"new Microsoft.Rest.ClientRuntime.Test.Azure.Constraints.AzureMaxLength({p.Value}),";
+                case Constraint.Pattern:
+                    return $"new Microsoft.Rest.ClientRuntime.Test.Azure.Constraints.AzurePattern(@\"{p.Value}\"),";
+                default:
+                    return string.Empty;
+            }
+        }
+
+        public static string AsNullableTypeOrDefault(this IModelType v)
+            => v == null ? "object" : v.AsNullableType();
+
         public static string GetExp(this Parameter p)
         {
             if (p.IsConstant)
