@@ -344,27 +344,6 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Throws<CloudException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product { Location = "West US" }));
 
-#if LEGACY
-                Assert.Throws<SerializationException>(
-                    () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product { Location = "West US" }));
-
-                // UriFormatException invalidHeader = null;
-                var invalidHeader = Assert.Throws<SerializationException>(() => client.LROSADs.Delete202RetryInvalidHeader());
-                Assert.NotNull(invalidHeader.Message);
-
-
-                var invalidAsyncHeader =
-                    Assert.Throws<SerializationException>(() => client.LROSADs.DeleteAsyncRelativeRetryInvalidHeader());
-                Assert.NotNull(invalidAsyncHeader.Message);
-
-
-                invalidHeader = Assert.Throws<SerializationException>(() => client.LROSADs.Post202RetryInvalidHeader());
-                Assert.NotNull(invalidHeader.Message);
-
-                invalidAsyncHeader =
-                    Assert.Throws<SerializationException>(() => client.LROSADs.PostAsyncRelativeRetryInvalidHeader());
-                Assert.NotNull(invalidAsyncHeader.Message);
-#endif
                 var invalidPollingBody =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.DeleteAsyncRelativeRetryInvalidJsonPolling());
@@ -492,12 +471,7 @@ namespace AutoRest.CSharp.Azure.Tests
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 var report = client.GetReport();
-#if !LEGACY
                 float totalTests = report.Count - 11;
-#else
-                // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
-                float totalTests = report.Count;
-#endif
                 float executedTests = report.Values.Count(v => v > 0);
                 if (executedTests < totalTests)
                 {

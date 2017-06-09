@@ -23,9 +23,8 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(object entity, RuleContext context)
         {
-            object[] formatParams;
             // Only try to validate an object with this extension rule if the extension name matches the key
-            if (context.Key == ExtensionName && !IsValid(entity, context, out formatParams))
+            if (context.Key == ExtensionName && !IsValid(entity, context, out object[] formatParams))
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, formatParams);
             }

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Python;
 using AutoRest.Python.Model;
 using AutoRest.Python.Properties;
 using AutoRest.Python.Templates;

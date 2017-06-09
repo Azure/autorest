@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
@@ -184,8 +182,6 @@ namespace AutoRest.Core.Model
         [JsonIgnore]
         public abstract string Qualifier { get; }
 
-        [JsonIgnore]
-        public virtual string QualifierType => Qualifier;
         [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames { get { if (!string.IsNullOrEmpty(Name)) { yield return Name; } }}
         [JsonIgnore]

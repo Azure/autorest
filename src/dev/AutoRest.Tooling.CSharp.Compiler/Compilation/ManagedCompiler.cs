@@ -39,10 +39,12 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
             var ms = new MemoryStream();
             var emitResult = compilation.Emit(ms, cancellationToken: cancellationToken);
 
-            var compileResult = new CompilationResult {OutputKind = outputKind};
-
-            compileResult.Messages = emitResult.Diagnostics;
-            compileResult.Succeeded = emitResult.Success;
+            var compileResult = new CompilationResult
+            {
+                OutputKind = outputKind,
+                Messages = emitResult.Diagnostics,
+                Succeeded = emitResult.Success
+            };
 
             if (emitResult.Success)
             {

@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 using TableQueueEntry = System.Tuple<string, AutoRest.AzureResourceSchema.JsonSchema>;
@@ -54,7 +53,7 @@ namespace AutoRest.AzureResourceSchema
         {
             if (resourceSchema == null)
             {
-                throw new ArgumentNullException("resourceSchema");
+                throw new ArgumentNullException(nameof(resourceSchema));
             }
 
             var mds = new Markdown[resourceSchema.ResourceDefinitions.Keys.Count];
@@ -326,7 +325,7 @@ namespace AutoRest.AzureResourceSchema
             {
                 values.Add(GetDefNameFromPointer(jsonSchema.Items.Ref));
             }
-            else if (jsonSchema.Items != null && jsonSchema.Items.OneOf != null)
+            else if (jsonSchema.Items?.OneOf != null)
             {
                 foreach (var o in jsonSchema.Items.OneOf)
                 {

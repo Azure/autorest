@@ -1,19 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core;
-using AutoRest.Core.Model;
-using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Templates.Rest.Client;
 using AutoRest.CSharp.Templates.Rest.Common;
 using AutoRest.CSharp.Model;
-using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Extensions;
 
 namespace AutoRest.CSharp.JsonRpcClient

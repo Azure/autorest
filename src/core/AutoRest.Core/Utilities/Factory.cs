@@ -92,7 +92,7 @@ namespace AutoRest.Core.Utilities
         /// <returns>A strongly typed delegate for creating new objects of a given type</returns>
         public static Delegate CreateDelegateForConstructor(ConstructorInfo ctorInfo)
         {
-            if (ctorInfo == null || ctorInfo.DeclaringType == null)
+            if (ctorInfo?.DeclaringType == null)
             {
                 throw new ArgumentNullException(nameof(ctorInfo));
             }

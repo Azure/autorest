@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
 
@@ -73,25 +72,18 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
+                switch (KnownPrimaryType)
                 {
-                    return new PrimaryTypeJv(KnownPrimaryType.DateTime);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.UnixTime)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.DateTime);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.Base64Url)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.Stream)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
-                }
-                else
-                {
-                    return this;
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+                    case KnownPrimaryType.UnixTime:
+                        return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+                    case KnownPrimaryType.Base64Url:
+                        return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
+                    case KnownPrimaryType.Stream:
+                        return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
+                    default:
+                        return this;
                 }
             }
         }
@@ -101,21 +93,16 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
+                switch (KnownPrimaryType)
                 {
-                    return new PrimaryTypeJv(KnownPrimaryType.DateTime);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.UnixTime)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.DateTime);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.Base64Url)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.None)
-                {
-                    return NonNullableVariant;
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+                    case KnownPrimaryType.UnixTime:
+                        return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+                    case KnownPrimaryType.Base64Url:
+                        return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
+                    case KnownPrimaryType.None:
+                        return NonNullableVariant;
                 }
                 return this;
             }

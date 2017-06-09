@@ -37,11 +37,11 @@ namespace AutoRest.Swagger
         {
             if (operation == null)
             {
-                throw new ArgumentNullException("operation");
+                throw new ArgumentNullException(nameof(operation));
             }
             if (swaggerModeler == null)
             {
-                throw new ArgumentNullException("swaggerModeler");
+                throw new ArgumentNullException(nameof(swaggerModeler));
             }
             this._operation = operation;
             this._swaggerModeler = swaggerModeler;
@@ -382,11 +382,10 @@ namespace AutoRest.Swagger
             OperationResponse response, Method method, List<Stack<IModelType>> types, IModelType headerType)
         {
             bool handled = false;
-            IModelType serviceType;
             if (SwaggerOperationProducesSomethingDeserializable())
             {
                 if (TryBuildResponseBody(methodName, response,
-                    s => GenerateResponseObjectName(s, responseStatusCode), out serviceType))
+                    s => GenerateResponseObjectName(s, responseStatusCode), out IModelType serviceType))
                 {
                     method.Responses[responseStatusCode] = new Response(serviceType, headerType);
                     BuildMethodReturnTypeStack(serviceType, types);

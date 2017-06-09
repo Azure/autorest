@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -416,11 +415,11 @@ namespace AutoRest.Python.Model
         {
             if (builder == null)
             {
-                throw new ArgumentNullException("builder");
+                throw new ArgumentNullException(nameof(builder));
             }
             if (headersType == null)
             {
-                throw new ArgumentNullException("headersType");
+                throw new ArgumentNullException(nameof(headersType));
             }
 
             foreach (var prop in headersType.Properties)
@@ -536,7 +535,7 @@ namespace AutoRest.Python.Model
         {
             if (parameter == null)
             {
-                throw new ArgumentNullException("parameter");
+                throw new ArgumentNullException(nameof(parameter));
             }
 
             string docString = ":param ";
@@ -590,7 +589,7 @@ namespace AutoRest.Python.Model
         {
             if (transformation == null)
             {
-                throw new ArgumentNullException("transformation");
+                throw new ArgumentNullException(nameof(transformation));
             }
 
             return string.Join(" or ",

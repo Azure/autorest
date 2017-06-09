@@ -1,13 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core.Utilities;
 using AutoRest.Go.Model;
 using AutoRest.Go.TestGen.Builders;
 using AutoRest.Go.TestGen.Model;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace AutoRest.Go.TestGen
@@ -40,9 +37,8 @@ namespace AutoRest.Go.TestGen
 
             TestFunctionRpc.TypeAddedEvent = (Core.Model.IModelType modelType) =>
             {
-                if (modelType is PrimaryTypeGo)
+                if (modelType is PrimaryTypeGo ptg)
                 {
-                    var ptg = modelType as PrimaryTypeGo;
                     if (!string.IsNullOrWhiteSpace(ptg.Import))
                     {
                         var imp = new ImportEntry(ptg.Import);

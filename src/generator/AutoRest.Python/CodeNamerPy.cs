@@ -92,7 +92,7 @@ namespace AutoRest.Python
         private string GetValidPythonName(string name, string padString)
             => PythonCase(GetEscapedReservedName(RemoveInvalidPythonCharacters(name), padString));
 
-        public override string GetFieldName(string name) => "_" + GetValidPythonName(name, "Variable");
+        public virtual string GetFieldName(string name) => "_" + GetValidPythonName(name, "Variable");
 
         public override string GetPropertyName(string name) => GetValidPythonName(name, "Property");
 
@@ -113,7 +113,7 @@ namespace AutoRest.Python
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             var parsedDefault = PythonConstants.None;
@@ -127,47 +127,40 @@ namespace AutoRest.Python
             PrimaryType primaryType = type as PrimaryType;
             if (defaultValue != null && primaryType != null)
             {
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
+                switch (primaryType.KnownPrimaryType)
                 {
-                    return double.Parse(defaultValue).ToString();
-                }
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.String || primaryType.KnownPrimaryType== KnownPrimaryType.Uuid)
-                {
-                    parsedDefault = QuoteValue(defaultValue);
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
-                {
-                    if (defaultValue == "true")
-                    {
-                        parsedDefault = "True";
-                    }
-                    else
-                    {
-                        parsedDefault = "False";
-                    }
-                }
-                else
-                {
-                    //TODO: Add support for default KnownPrimaryType.DateTimeRfc1123
-
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.Date ||
-                        primaryType.KnownPrimaryType == KnownPrimaryType.DateTime ||
-                        primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-                    {
+                    case KnownPrimaryType.Double:
+                        return double.Parse(defaultValue).ToString(CultureInfo.InvariantCulture);
+                    case KnownPrimaryType.String:
+                    case KnownPrimaryType.Uuid:
                         parsedDefault = QuoteValue(defaultValue);
-                    }
-
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray)
-                    {
+                        break;
+                    case KnownPrimaryType.Boolean:
+                        if (defaultValue == "true")
+                        {
+                            parsedDefault = "True";
+                        }
+                        else
+                        {
+                            parsedDefault = "False";
+                        }
+                        break;
+                    case KnownPrimaryType.Date:
+                    case KnownPrimaryType.DateTime:
+                    case KnownPrimaryType.TimeSpan:
+                        parsedDefault = QuoteValue(defaultValue);
+                        break;
+                    case KnownPrimaryType.ByteArray:
                         parsedDefault = "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
-                    }
-
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.Int ||
-                        primaryType.KnownPrimaryType == KnownPrimaryType.Long ||
-                        primaryType.KnownPrimaryType == KnownPrimaryType.Double)
-                    {
-                        parsedDefault = defaultValue;
-                    }
+                        break;
+                    default:
+                        if (primaryType.KnownPrimaryType == KnownPrimaryType.Int ||
+                            primaryType.KnownPrimaryType == KnownPrimaryType.Long ||
+                            primaryType.KnownPrimaryType == KnownPrimaryType.Double)
+                        {
+                            parsedDefault = defaultValue;
+                        }
+                        break;
                 }
             }
             return parsedDefault;

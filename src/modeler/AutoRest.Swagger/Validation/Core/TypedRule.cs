@@ -3,7 +3,6 @@
 
 using AutoRest.Core.Logging;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace AutoRest.Swagger.Validation.Core
@@ -27,8 +26,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// <returns></returns>
         public virtual IEnumerable<ValidationMessage> GetValidationMessages(T entity, RuleContext context)
         {
-            object[] formatParams;
-            if (!IsValid(entity, context, out formatParams))
+            if (!IsValid(entity, context, out object[] formatParams))
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, formatParams);
             }

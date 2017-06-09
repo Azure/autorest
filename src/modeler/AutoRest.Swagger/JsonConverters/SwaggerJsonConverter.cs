@@ -20,7 +20,7 @@ namespace AutoRest.Swagger.JsonConverters
         {
             if (serializer == null)
             {
-                throw new ArgumentNullException("serializer");
+                throw new ArgumentNullException(nameof(serializer));
             }
 
             var settings = new JsonSerializerSettings

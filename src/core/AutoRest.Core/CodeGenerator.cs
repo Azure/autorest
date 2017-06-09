@@ -11,20 +11,12 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace AutoRest.Core
 {
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class CodeGenerator
     {
-        protected CodeGenerator()
-        {
-        }
-
-        // TODO: header files aren't part of most target languages. Remove?
-        public virtual string HeaderFileExtension => null;
-
         public abstract string ImplementationFileExtension { get; }
 
         /// <summary>

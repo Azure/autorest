@@ -11,7 +11,6 @@ using AutoRest.Go.Model;
 using AutoRest.Go.Properties;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Extensions.Azure;

@@ -45,7 +45,7 @@ namespace AutoRest.Swagger.Validation
         // TODO: apply on single spec level and ARM specs only
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
         {
-            var serviceDefinition = (ServiceDefinition)context.Root;
+            var serviceDefinition = context.Root;
             var ops = ValidationUtilities.GetOperationsByRequestMethod("put", serviceDefinition);
             foreach (var op in ops)
             {

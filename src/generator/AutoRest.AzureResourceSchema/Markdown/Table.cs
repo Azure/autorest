@@ -18,7 +18,7 @@ namespace AutoRest.AzureResourceSchema.Markdown
             if (headers == null)
                 throw new ArgumentNullException(nameof(headers));
             if (!headers.Any())
-                throw new ArgumentException("Collection contained no elements.", "headers");
+                throw new ArgumentException("Collection contained no elements.", nameof(headers));
 
             _headers = headers;
             _rows = new List<IEnumerable<string>>();
@@ -29,7 +29,7 @@ namespace AutoRest.AzureResourceSchema.Markdown
             if (row == null)
                 throw new ArgumentNullException(nameof(row));
             if (!row.Any())
-                throw new ArgumentException("Collection contained no elements.", "row");
+                throw new ArgumentException("Collection contained no elements.", nameof(row));
 
             _rows.Add(row);
         }

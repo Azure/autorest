@@ -2,12 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoRest.Core.Utilities;
 using System.Text.RegularExpressions;
-using YamlDotNet.RepresentationModel;
 
 namespace AutoRest.Core.Logging
 {
@@ -30,13 +25,5 @@ namespace AutoRest.Core.Logging
         public override string ReadablePath => Property.StartsWith("/") ? Property : $"/{Property}";
 
         public override object RawPath => Property;
-
-        public override YamlNode SelectNode(ref YamlNode node)
-        {
-            var child = (node as YamlMappingNode)?.
-                Children?.FirstOrDefault(pair => pair.Key.ToString().EqualsIgnoreCase(Property));
-            node = child?.Value;
-            return child?.Key;
-        }
     }
 }

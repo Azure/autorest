@@ -1,8 +1,6 @@
-@using System;
 @using System.Linq;
 @using AutoRest.Python
 @using AutoRest.Python.Model
-@using AutoRest.Python.Templates
 @inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Azure.Model.MethodPya>
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(true))):

@@ -5,6 +5,7 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Model
@@ -20,6 +21,7 @@ namespace AutoRest.CSharp.Model
         /// </summary>
         public virtual bool CanBeValidated => Singleton<GeneratorSettingsCs>.Instance.ClientSideValidation;
 
+        [JsonProperty(Order = -10)]
         public override string ModelTypeName => ModelType.AsNullableType(this.IsNullable());
 
         public string HeaderCollectionPrefix => Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);

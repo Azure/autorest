@@ -34,12 +34,12 @@ namespace AutoRest.Core.Utilities
         {
             if (sequence == null)
             {
-                throw new ArgumentNullException("sequence");
+                throw new ArgumentNullException(nameof(sequence));
             }
 
             if (action == null)
             {
-                throw new ArgumentNullException("action");
+                throw new ArgumentNullException(nameof(action));
             }
 
             foreach (T element in sequence)
@@ -126,7 +126,6 @@ namespace AutoRest.Core.Utilities
 
         public static bool IsGenericOf(this Type type, Type genericType)
             => type.IsGenericType() && type.GetGenericTypeDefinition() == genericType;
-#if !LEGACY
         public static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;
         public static bool IsEnum(this Type type) => type.GetTypeInfo().IsEnum;
         public static IEnumerable<T> GetCustomAttributes<T>(this Type type, bool inherit) where T : Attribute => type.GetTypeInfo().GetCustomAttributes<T>(inherit);
@@ -144,7 +143,6 @@ namespace AutoRest.Core.Utilities
                 return Directory.GetParent(a.Location.ToString()).ToString();
             }
         }
-#endif 
 
         public static string ToTypesString(this Type[] types) => types?.Aggregate("", (current, type) => $"{current}, {type?.FullName ?? "�null�" }").Trim(',') ?? "";
 
@@ -207,11 +205,9 @@ namespace AutoRest.Core.Utilities
                 // if the property is an IDictionary, clear the destination, and copy the key/values across
                 if (typeof(IDictionary).IsAssignableFrom(destinationType))
                 {
-                    var destinationDictionary = destinationProperty.GetValue(destination) as IDictionary;
-                    if (destinationDictionary != null)
+                    if (destinationProperty.GetValue(destination) is IDictionary destinationDictionary)
                     {
-                        var sourceDictionary = sourceProperty.GetValue(source, null) as IDictionary;
-                        if (sourceDictionary != null )
+                        if (sourceProperty.GetValue(source, null) is IDictionary sourceDictionary)
                         {
                             foreach (DictionaryEntry kv in sourceDictionary)
                             {
@@ -220,17 +216,15 @@ namespace AutoRest.Core.Utilities
                             continue;
                         }
                     }
-                   
+
                 }
 
                 // if the property is an IList, 
                 if (typeof(IList).IsAssignableFrom(destinationType))
                 {
-                    var destinationList = destinationProperty.GetValue(destination) as IList;
-                    if (destinationList != null)
+                    if (destinationProperty.GetValue(destination) is IList destinationList)
                     {
-                        var sourceValue = sourceProperty.GetValue(source, null) as IEnumerable;
-                        if (sourceValue != null)
+                        if (sourceProperty.GetValue(source, null) is IEnumerable sourceValue)
                         {
                             foreach (var i in sourceValue)
                             {
@@ -501,7 +495,7 @@ namespace AutoRest.Core.Utilities
 
             
             // tell the child that they own that name now.
-            scope?.LocallyUsedNames?.Add(result);
+            scope.LocallyUsedNames?.Add(result);
             return result;
         }
 

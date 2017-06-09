@@ -7,12 +7,9 @@ using System.Linq;
 using System.Net;
 
 using AutoRest.Core;
-using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Core.Model;
-using AutoRest.Go.Model;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace AutoRest.Go
 {
@@ -278,7 +275,7 @@ namespace AutoRest.Go
             return EnsureNameCase(base.GetEnumMemberName(name));
         }
 
-        public override string GetFieldName(string name)
+        public virtual string GetFieldName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -287,7 +284,7 @@ namespace AutoRest.Go
             return EnsureNameCase(PascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Field"))));
         }
 
-        public override string GetInterfaceName(string name)
+        public virtual string GetInterfaceName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -392,12 +389,12 @@ namespace AutoRest.Go
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             if (appendValue == null)
             {
-                throw new ArgumentNullException("appendValue");
+                throw new ArgumentNullException(nameof(appendValue));
             }
 
             // Use case-sensitive comparisons to reduce generated names
@@ -450,7 +447,7 @@ namespace AutoRest.Go
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
             PrimaryType primaryType = type as PrimaryType;
             if (defaultValue != null)
@@ -461,23 +458,16 @@ namespace AutoRest.Go
                 }
                 else if (primaryType != null)
                 {
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.String
-                        || primaryType.KnownPrimaryType == KnownPrimaryType.Uuid
-                        || primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan)
+                    switch (primaryType.KnownPrimaryType)
                     {
-                        return CodeNamer.Instance.QuoteValue(defaultValue);
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
-                    {
-                        return defaultValue.ToLowerInvariant();
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray)
-                    {
-                        return "[]bytearray(\"" + defaultValue + "\")";
-                    }
-                    else
-                    {
-                        //TODO: handle imports for package types.
+                        case KnownPrimaryType.String:
+                        case KnownPrimaryType.Uuid:
+                        case KnownPrimaryType.TimeSpan:
+                            return CodeNamer.Instance.QuoteValue(defaultValue);
+                        case KnownPrimaryType.Boolean:
+                            return defaultValue.ToLowerInvariant();
+                        case KnownPrimaryType.ByteArray:
+                            return "[]bytearray(\"" + defaultValue + "\")";
                     }
                 }
             }

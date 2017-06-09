@@ -148,7 +148,7 @@ namespace AutoRest.Ruby.Model
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
 
             string summary = property.Summary;

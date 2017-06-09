@@ -18,10 +18,6 @@ namespace AutoRest.CSharp.Azure.Model
 {
     public class MethodCsa : MethodCs
     {
-        public MethodCsa()
-        {
-        }
-        
         [JsonIgnore]
         public string ClientRequestIdString => AzureExtensions.GetClientRequestIdString(this);
 
@@ -227,7 +223,7 @@ namespace AutoRest.CSharp.Azure.Model
         {
             if (getMethod == null)
             {
-                throw new ArgumentNullException("getMethod");
+                throw new ArgumentNullException(nameof(getMethod));
             }
 
             var invocationParams = new List<string>();

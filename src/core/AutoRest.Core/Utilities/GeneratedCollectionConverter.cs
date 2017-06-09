@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Utilities.Collections;
@@ -62,8 +61,7 @@ namespace AutoRest.Core.Utilities
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            var o = existingValue as ICopyFrom<IEnumerable<T>>;
-            if (o != null)
+            if (existingValue is ICopyFrom<IEnumerable<T>> o)
             {
                 o.CopyFrom(JArray.Load(reader)
                         .Select(

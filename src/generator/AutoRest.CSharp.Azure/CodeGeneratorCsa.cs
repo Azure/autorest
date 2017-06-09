@@ -15,7 +15,6 @@ using AutoRest.CSharp.Model;
 using AutoRest.CSharp.Templates.Rest.Client;
 using AutoRest.CSharp.Templates.Rest.Common;
 using AutoRest.Extensions.Azure;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Azure
 {

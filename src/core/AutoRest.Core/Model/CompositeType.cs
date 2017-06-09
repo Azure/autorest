@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.Core.Utilities;
-using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
 
 namespace AutoRest.Core.Model
@@ -22,9 +21,8 @@ namespace AutoRest.Core.Model
     {
         private string _summary;
         private string _documentation;
-        private CompositeType _baseModelType;
 
-        public override string RefName => $"AutoRest.Core.Model.CompositeType, AutoRest.Core";
+        public override string RefName => "AutoRest.Core.Model.CompositeType, AutoRest.Core";
 
 
         partial void InitializeCollections();
@@ -82,11 +80,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the base model type.
         /// </summary>
-        public virtual CompositeType BaseModelType
-        {
-            get { return _baseModelType; }
-            set { _baseModelType = value; }
-        }
+        public virtual CompositeType BaseModelType { get; set; }
 
         /// <summary>
         /// Gets or sets the discriminator property for polymorphic types.
@@ -98,7 +92,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         [JsonIgnore]
         public virtual string BasePolymorphicDiscriminator
-            => PolymorphicDiscriminator.Else(BaseModelType?.BasePolymorphicDiscriminator ?? null);
+            => PolymorphicDiscriminator.Else(BaseModelType?.BasePolymorphicDiscriminator);
 
         /// <summary>
         /// Returns true if this type or its parent is polymorphic.
@@ -189,9 +183,6 @@ namespace AutoRest.Core.Model
 
         [JsonIgnore]
         public override string Qualifier => "Model";
-
-        [JsonIgnore]
-        public override string QualifierType => "Model Type";
 
         public class CompositeTypeComparer : IComparer<CompositeType>
         {

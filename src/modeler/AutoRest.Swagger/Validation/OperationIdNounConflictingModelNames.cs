@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
@@ -45,7 +44,7 @@ namespace AutoRest.Swagger.Validation
             // Get the noun and verb parts of the operation id
             var noun = match.Groups["noun"].Value;
 
-            var serviceDefinition = (ServiceDefinition)context.Root;
+            var serviceDefinition = context.Root;
             if (serviceDefinition.Definitions.Keys.Any(key => key.ToLower().Equals(noun.ToLower())))
             {
                 formatParameters = new object[] { noun, noun };

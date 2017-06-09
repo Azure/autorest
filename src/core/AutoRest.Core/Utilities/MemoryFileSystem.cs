@@ -17,13 +17,7 @@ namespace AutoRest.Core.Utilities
     {
         private const string FolderKey = "Folder";
 
-        private Dictionary<string, StringBuilder> _virtualStore =
-            new Dictionary<string, StringBuilder>();
-
-        public Dictionary<string, StringBuilder> VirtualStore
-        {
-            get { return _virtualStore; }
-        }
+        public Dictionary<string, StringBuilder> VirtualStore { get; } = new Dictionary<string, StringBuilder>();
 
         public bool IsCompletePath(string path)
            => Uri.IsWellFormedUriString(path, UriKind.Relative);
@@ -74,7 +68,7 @@ namespace AutoRest.Core.Utilities
         {
             if (path.IsNullOrEmpty())
             {
-                throw new ArgumentException("path cannot be null.", "path");
+                throw new ArgumentException("path cannot be null.", nameof(path));
             }
             var directory = Path.GetDirectoryName(path);
             if (!VirtualStore.ContainsKey(directory))
@@ -156,17 +150,17 @@ namespace AutoRest.Core.Utilities
 
             var sb = new StringBuilder();
 
-            char[] chars = wildcard.ToCharArray();
-            for (int i = 0; i < chars.Length; ++i)
+            var chars = wildcard.ToCharArray();
+            foreach (var ch in chars)
             {
-                if (chars[i] == '*')
+                if (ch == '*')
                     sb.Append(".*");
-                else if (chars[i] == '?')
+                else if (ch == '?')
                     sb.Append(".");
-                else if ("+()^$.{}|\\".IndexOf(chars[i]) != -1)
-                    sb.Append('\\').Append(chars[i]); // prefix all metacharacters with backslash
+                else if ("+()^$.{}|\\".IndexOf(ch) != -1)
+                    sb.Append('\\').Append(ch); // prefix all metacharacters with backslash
                 else
-                    sb.Append(chars[i]);
+                    sb.Append(ch);
             }
             return sb.ToString().ToLowerInvariant();
         }
@@ -181,7 +175,7 @@ namespace AutoRest.Core.Utilities
         {
             if (disposing)
             {
-                _virtualStore?.Clear();
+                VirtualStore?.Clear();
             }
         }
 

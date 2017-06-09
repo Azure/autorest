@@ -3,13 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Extensions;
 
 namespace AutoRest.Ruby
 {
@@ -94,7 +91,7 @@ namespace AutoRest.Ruby
         /// </summary>
         /// <param name="name">The intended name of field.</param>
         /// <returns>The corrected name of field.</returns>
-        public override string GetFieldName(string name)
+        public virtual string GetFieldName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -138,34 +135,25 @@ namespace AutoRest.Ruby
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             PrimaryType primaryType = type as PrimaryType;
             if (defaultValue != null && primaryType != null)
             {
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
+                switch (primaryType.KnownPrimaryType)
                 {
-                    return QuoteValue(defaultValue, quoteChar: "'");
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
-                {
-                    return defaultValue.ToLowerInvariant();
-                }
-                else
-                {
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.Date ||
-                        primaryType.KnownPrimaryType == KnownPrimaryType.DateTime ||
-                        primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 ||
-                        primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-                    {
+                    case KnownPrimaryType.String:
+                        return QuoteValue(defaultValue, quoteChar: "'");
+                    case KnownPrimaryType.Boolean:
+                        return defaultValue.ToLowerInvariant();
+                    case KnownPrimaryType.Date:
+                    case KnownPrimaryType.DateTime:
+                    case KnownPrimaryType.DateTimeRfc1123:
+                    case KnownPrimaryType.TimeSpan:
                         return "Date.parse('" + defaultValue + "')";
-                    }
-
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray)
-                    {
+                    case KnownPrimaryType.ByteArray:
                         return "'" + defaultValue + "'.bytes.pack('C*')";
-                    }
                 }
             }
 

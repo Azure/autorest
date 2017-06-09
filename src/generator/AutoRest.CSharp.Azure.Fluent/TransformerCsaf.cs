@@ -5,6 +5,7 @@
 using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Azure.Fluent.Model;
 using AutoRest.CSharp.Azure.Model;
 using AutoRest.CSharp.Model;
@@ -54,9 +55,8 @@ namespace AutoRest.CSharp.Azure.Fluent
             {
                 foreach (var model in codeModel.ModelTypes)
                 {
-                    if ((model.BaseModelType != null) && (model.BaseModelType.Extensions != null) &&
-                        model.BaseModelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
-                        (bool) model.BaseModelType.Extensions[AzureExtensions.AzureResourceExtension])
+                    if (model.BaseModelType?.Extensions != null && 
+                        model.BaseModelType.Extensions.Get<bool>(AzureExtensions.AzureResourceExtension) == true)
                     {
                         if (model.BaseModelType.Name == "Resource")
                         {

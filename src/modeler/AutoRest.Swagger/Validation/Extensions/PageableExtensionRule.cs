@@ -13,10 +13,7 @@ namespace AutoRest.Swagger.Validation
         public static T GetValueOrNull<T>(this Dictionary<string, T> dictionary, string key)
         {
             T value = default(T);
-            if (dictionary != null)
-            {
-                dictionary.TryGetValue(key, out value);
-            }
+            dictionary?.TryGetValue(key, out value);
             return value;
         }
     }

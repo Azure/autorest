@@ -3,12 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Extensions;
 
 namespace AutoRest.NodeJS.Model
 {

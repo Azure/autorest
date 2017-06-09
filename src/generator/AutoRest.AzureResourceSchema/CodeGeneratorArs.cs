@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities.Collections;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.AzureResourceSchema
 {

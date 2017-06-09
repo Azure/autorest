@@ -50,8 +50,7 @@ namespace AutoRest.Swagger.Validation
         {
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                object[] formatParameters;
-                if (!this.HandleSchema((Schema)definition.Value, definitions, out formatParameters, definition.Key))
+                if (!this.HandleSchema(definition.Value, definitions, out object[] formatParameters, definition.Key))
                 {
                     formatParameters[1] = definition.Key;
                     yield return new ValidationMessage(new FileObjectPath(context.File,
@@ -74,7 +73,7 @@ namespace AutoRest.Swagger.Validation
             {
                 foreach (KeyValuePair<string, Schema> property in definition.Properties)
                 {
-                    if (!this.HandleSchema((Schema)property.Value, definitions, out formatParameters, property.Key))
+                    if (!this.HandleSchema(property.Value, definitions, out formatParameters, property.Key))
                     {
                         return false;
                     }

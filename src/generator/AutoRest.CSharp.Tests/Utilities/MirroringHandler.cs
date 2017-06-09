@@ -17,8 +17,7 @@ namespace AutoRest.CSharp.Tests.Utilities
             CancellationToken cancellationToken)
         {
             var responseCode = HttpStatusCode.OK;
-            IEnumerable<string> headerValues = null;
-            if (request.Headers.TryGetValues("response-code", out headerValues))
+            if (request.Headers.TryGetValues("response-code", out IEnumerable<string> headerValues))
             {
                 responseCode = headerValues.First().ToStatusCode();
             }

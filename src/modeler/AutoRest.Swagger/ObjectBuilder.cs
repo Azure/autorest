@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
@@ -61,16 +60,14 @@ namespace AutoRest.Swagger
                 SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
                 if (xMsEnum != null)
                 {
-                    var enumObject = xMsEnum as JContainer;
-                    if (enumObject != null)
+                    if (xMsEnum is JContainer enumObject)
                     {
-                        enumType.SetName(enumObject["name"].ToString() );
+                        enumType.SetName(enumObject["name"].ToString());
                         if (enumObject["modelAsString"] != null)
                         {
                             enumType.ModelAsString = bool.Parse(enumObject["modelAsString"].ToString());
                         }
-                        var valueOverrides = enumObject["values"] as JArray;
-                        if (valueOverrides != null)
+                        if (enumObject["values"] is JArray valueOverrides)
                         {
                             enumType.Values.Clear();
                             foreach (var valueOverride in valueOverrides)
@@ -175,11 +172,11 @@ namespace AutoRest.Swagger
         {
             if (swaggerObject == null)
             {
-                throw new ArgumentNullException("swaggerObject");
+                throw new ArgumentNullException(nameof(swaggerObject));
             }
             if (parameter == null)
             {
-                throw new ArgumentNullException("parameter");
+                throw new ArgumentNullException(nameof(parameter));
             }
             parameter.IsRequired = swaggerObject.IsRequired;
             parameter.DefaultValue = swaggerObject.Default;
@@ -208,11 +205,11 @@ namespace AutoRest.Swagger
         {
             if (constraints == null)
             {
-                throw new ArgumentNullException("constraints");
+                throw new ArgumentNullException(nameof(constraints));
             }
             if (swaggerObject == null)
             {
-                throw new ArgumentNullException("swaggerObject");
+                throw new ArgumentNullException(nameof(swaggerObject));
             }
 
             if (!string.IsNullOrEmpty(swaggerObject.Maximum)

@@ -27,21 +27,19 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
 
             var buffer = new StringBuilder(contents);
             int tokenIndex;
-            string token;
 
             var index = 0;
             var infiniteLoopGuard = 0;
 
-            while ((tokenIndex = buffer.FindNextToken(index, out token)) != -1)
+            while ((tokenIndex = buffer.FindNextToken(index, out string token)) != -1)
             {
-                string replacement;
                 if (token == "$$")
                 {
                     // Unescape '$' and move one character forward
                     buffer.Replace("$$", "$", tokenIndex, 2);
                     index = tokenIndex + 1;
                 }
-                else if (replacements.TryGetValue(token, out replacement))
+                else if (replacements.TryGetValue(token, out string replacement))
                 {
                     // Replace token but do not modify 'startIndex' to allow for nested replacements
                     buffer.Replace(token, replacement, tokenIndex, token.Length);

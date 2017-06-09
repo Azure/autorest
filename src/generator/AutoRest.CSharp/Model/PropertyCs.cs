@@ -10,6 +10,7 @@ namespace AutoRest.CSharp.Model
 {
     public class PropertyCs : Property
     {
+        [JsonProperty(Order = -10)]
         public override string ModelTypeName => ModelType.AsNullableType(this.IsNullable());
 
         public string HeaderCollectionPrefix => Extensions.GetValue<string>(SwaggerExtensions.HeaderCollectionPrefix);

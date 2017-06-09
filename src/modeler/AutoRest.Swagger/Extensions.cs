@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
 using System.Net;
 using AutoRest.Core.Model;
 
@@ -22,7 +21,7 @@ namespace AutoRest.Swagger
         {
             if (verb == null)
             {
-                throw new ArgumentNullException("verb");
+                throw new ArgumentNullException(nameof(verb));
             }
 
             switch (verb.ToLower())

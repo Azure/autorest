@@ -62,8 +62,7 @@ namespace AutoRest.Extensions
         {
             if (parameter.Extensions.ContainsKey(SwaggerExtensions.ParameterGroupExtension))
             {
-                JContainer extensionObject = parameter.Extensions[SwaggerExtensions.ParameterGroupExtension] as JContainer;
-                if (extensionObject != null)
+                if (parameter.Extensions[SwaggerExtensions.ParameterGroupExtension] is JContainer extensionObject)
                 {
                     string specifiedGroupName = extensionObject.Value<string>("name");
                     string parameterGroupName;
@@ -135,7 +134,7 @@ namespace AutoRest.Extensions
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             HashSet<CompositeType> generatedParameterGroups = new HashSet<CompositeType>();

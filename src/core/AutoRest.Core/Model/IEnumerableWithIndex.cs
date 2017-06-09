@@ -7,9 +7,7 @@ using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Core.Model
 {
-    public interface IEnumerableWithIndex<out T> : IEnumerable<T>, ICopyFrom
+    public interface IEnumerableWithIndex<out T> : IReadOnlyList<T>, ICopyFrom
     {
-        T this[int index] { get; }
-        int Count { get; }
     }
 }

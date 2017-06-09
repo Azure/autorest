@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Linq;
 using System.Net;
 using AutoRest.Core.Utilities;
@@ -27,7 +26,6 @@ namespace AutoRest.Core.Model
         private MethodGroup _parent;
 
         public string Qualifier => "Method";
-        public string QualifierType => "Method";
 
         [JsonIgnore]
         public MethodGroup MethodGroup
@@ -168,16 +166,6 @@ namespace AutoRest.Core.Model
         public Dictionary<string, string> RequestHeaders { get; private set; } = new Dictionary<string, string>();
 
         /// <summary>
-        /// Gets or sets the request format.
-        /// </summary>
-        public SerializationFormat RequestSerializationFormat { get; set; }
-
-        /// <summary>
-        /// Gets or sets the response format.
-        /// </summary>
-        public SerializationFormat ResponseSerializationFormat { get; set; }
-
-        /// <summary>
         /// Gets or sets response bodies by HttpStatusCode.
         /// and headers.
         /// </summary>
@@ -245,21 +233,6 @@ namespace AutoRest.Core.Model
         /// rendering the method itself required but confusing or useless to end-users
         /// </summary>
         public bool Hidden { get; set; }
-
-        /// <summary>
-        /// Determines whether the specified method is structurally equal to this object.
-        /// </summary>
-        /// <param name="other">The object to compare with this object.</param>
-        public bool StructurallyEquals(Method other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-            return ReturnType.StructurallyEquals(other.ReturnType)
-                && Name.Equals(other.Name)
-                && Parameters.SequenceEqual(other.Parameters, new Utilities.EqualityComparer<Parameter>((a, b) => a.StructurallyEquals(b)));
-        }
 
         [JsonIgnore]
         public IEnumerable<string> MyReservedNames => Name.Value.SingleItemAsEnumerable();

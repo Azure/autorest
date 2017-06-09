@@ -2,8 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
-using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Go.Model;
 using System;
@@ -340,17 +338,17 @@ namespace AutoRest.Go
         /// <param name="imports"></param>
         public static void AddImports(this IModelType type, HashSet<string> imports)
         {
-            if (type is DictionaryTypeGo)
+            if (type is DictionaryTypeGo typeDict)
             {
-                (type as DictionaryTypeGo).AddImports(imports);
+                typeDict.AddImports(imports);
             }
-            else if (type is PrimaryTypeGo)
+            else if (type is PrimaryTypeGo typePrimary)
             {
-                (type as PrimaryTypeGo).AddImports(imports);
+                typePrimary.AddImports(imports);
             }
-            else if (type is SequenceTypeGo)
+            else if (type is SequenceTypeGo typeSeq)
             {
-                (type as SequenceTypeGo).AddImports(imports);
+                typeSeq.AddImports(imports);
             }
         }
 

@@ -43,7 +43,7 @@ namespace AutoRest.NodeJS.Model
                 List<CompositeTypeJs> orderedList = new List<CompositeTypeJs>();
                 foreach (var model in ModelTemplateModels)
                 {
-                    constructOrderedList(model, orderedList);
+                    ConstructOrderedList(model, orderedList);
                 }
                 return orderedList;
             }
@@ -58,7 +58,7 @@ namespace AutoRest.NodeJS.Model
             return prop != null;
         }
 
-        private void constructOrderedList(CompositeTypeJs model, List<CompositeTypeJs> orderedList)
+        private void ConstructOrderedList(CompositeTypeJs model, List<CompositeTypeJs> orderedList)
         {
             if (model == null)
             {
@@ -83,7 +83,7 @@ namespace AutoRest.NodeJS.Model
             var baseModel = ModelTemplateModels.FirstOrDefault(m => m.Name == model.BaseModelType.Name);
             if (baseModel != null)
             {
-                constructOrderedList(baseModel, orderedList);
+                ConstructOrderedList(baseModel, orderedList);
             }
             // Add the child type after the parent type has been added.
             if (!orderedList.Contains(model))

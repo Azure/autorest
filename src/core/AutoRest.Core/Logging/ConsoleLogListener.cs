@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AutoRest.Core.Logging
 {
@@ -19,8 +17,7 @@ namespace AutoRest.Core.Logging
 
         private static ConsoleColor GetColorForSeverity(Category severity)
         {
-            ConsoleColor color;
-            if (!colors.TryGetValue(severity, out color))
+            if (!colors.TryGetValue(severity, out ConsoleColor color))
             {
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "No color defined for severity {0}", severity));
             }

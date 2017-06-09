@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
 using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Logging;
@@ -14,7 +13,6 @@ using AutoRest.Swagger.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -26,7 +24,7 @@ namespace AutoRest.Swagger
         {
             if (fileSystem == null)
             {
-                throw new ArgumentNullException("fileSystem");
+                throw new ArgumentNullException(nameof(fileSystem));
             }
 
             var swaggerDocument = fileSystem.ReadAllText(path);
@@ -165,8 +163,7 @@ namespace AutoRest.Swagger
 
                 // for parameterized host, will be made available via JsonRpc accessible state in the future
                 ServiceDefinition.Instance = swaggerService;
-                Uri filePath = null;
-                Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out filePath);
+                Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out Uri filePath);
                 swaggerService.FilePath = filePath;
                 if (swaggerService.Schemes == null || swaggerService.Schemes.Count != 1)
                 {

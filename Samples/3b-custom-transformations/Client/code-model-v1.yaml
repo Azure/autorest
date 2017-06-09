@@ -6,6 +6,7 @@ modelTypes:
     properties:
       - $id: '2'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -15,7 +16,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '3'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -29,6 +29,7 @@ modelTypes:
         '#serializedName': name
       - $id: '4'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -38,7 +39,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '5'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -62,6 +62,7 @@ modelTypes:
     properties:
       - $id: '7'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: Boolean
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -71,7 +72,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: Boolean
         modelType:
           $id: '8'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -89,6 +89,7 @@ modelTypes:
         '#serializedName': nameAvailable
       - $id: '9'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: Reason
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -102,7 +103,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: Reason
         modelType:
           $id: '10'
           $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
@@ -127,6 +127,7 @@ modelTypes:
         '#serializedName': reason
       - $id: '11'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -136,7 +137,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '12'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -161,6 +161,7 @@ modelTypes:
     properties:
       - $id: '14'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: AccountType
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -174,7 +175,6 @@ modelTypes:
             modelAsString: false
         isRequired: true
         isConstant: false
-        modelTypeName: AccountType
         modelType:
           $id: '15'
           $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
@@ -217,6 +217,7 @@ modelTypes:
     properties:
       - $id: '17'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -226,7 +227,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '18'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -241,6 +241,7 @@ modelTypes:
         '#serializedName': location
       - $id: '19'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: 'Dictionary<string,String>'
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -250,7 +251,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: 'Dictionary<string,String>'
         modelType:
           $id: '20'
           $type: 'AutoRest.Core.Model.DictionaryType, AutoRest.Core'
@@ -272,6 +272,7 @@ modelTypes:
         '#serializedName': tags
       - $id: '22'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: StorageAccountPropertiesCreateParameters
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -283,7 +284,6 @@ modelTypes:
           x-ms-client-flatten: true
         isRequired: false
         isConstant: false
-        modelTypeName: StorageAccountPropertiesCreateParameters
         modelType:
           $ref: '13'
         '#name': properties
@@ -302,6 +302,7 @@ modelTypes:
     properties:
       - $id: '24'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -311,7 +312,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '25'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -326,6 +326,7 @@ modelTypes:
         '#serializedName': blob
       - $id: '26'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -335,7 +336,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '27'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -350,6 +350,7 @@ modelTypes:
         '#serializedName': queue
       - $id: '28'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -359,7 +360,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '29'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -374,6 +374,7 @@ modelTypes:
         '#serializedName': table
       - $id: '30'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -383,7 +384,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '31'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -410,6 +410,7 @@ modelTypes:
     properties:
       - $id: '33'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -419,7 +420,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '34'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -434,6 +434,7 @@ modelTypes:
         '#serializedName': name
       - $id: '35'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: Boolean
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -443,7 +444,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: Boolean
         modelType:
           $id: '36'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -472,6 +472,7 @@ modelTypes:
     properties:
       - $id: '38'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: ProvisioningState
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -485,7 +486,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: ProvisioningState
         modelType:
           $id: '39'
           $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
@@ -513,6 +513,7 @@ modelTypes:
         '#serializedName': provisioningState
       - $id: '40'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: AccountType
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -526,7 +527,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: AccountType
         modelType:
           $ref: '15'
         '#documentation': Gets the type of the storage account.
@@ -534,6 +534,7 @@ modelTypes:
         '#serializedName': accountType
       - $id: '41'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: Endpoints
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -543,7 +544,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: Endpoints
         modelType:
           $ref: '23'
         '#documentation': >-
@@ -554,6 +554,7 @@ modelTypes:
         '#serializedName': primaryEndpoints
       - $id: '42'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -563,7 +564,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '43'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -578,6 +578,7 @@ modelTypes:
         '#serializedName': primaryLocation
       - $id: '44'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: AccountStatus
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -591,7 +592,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: AccountStatus
         modelType:
           $id: '45'
           $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
@@ -616,6 +616,7 @@ modelTypes:
         '#serializedName': statusOfPrimary
       - $id: '46'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: DateTime
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -625,7 +626,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: DateTime
         modelType:
           $id: '47'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -645,6 +645,7 @@ modelTypes:
         '#serializedName': lastGeoFailoverTime
       - $id: '48'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -654,7 +655,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '49'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -672,6 +672,7 @@ modelTypes:
         '#serializedName': secondaryLocation
       - $id: '50'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: AccountStatus
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -685,7 +686,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: AccountStatus
         modelType:
           $ref: '45'
         '#documentation': >-
@@ -696,6 +696,7 @@ modelTypes:
         '#serializedName': statusOfSecondary
       - $id: '51'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: DateTime
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -705,7 +706,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: DateTime
         modelType:
           $id: '52'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -721,6 +721,7 @@ modelTypes:
         '#serializedName': creationTime
       - $id: '53'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: CustomDomain
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -730,7 +731,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: CustomDomain
         modelType:
           $ref: '32'
         '#documentation': Gets the user assigned custom domain assigned to this storage account.
@@ -738,6 +738,7 @@ modelTypes:
         '#serializedName': customDomain
       - $id: '54'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: Endpoints
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -747,7 +748,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: Endpoints
         modelType:
           $ref: '23'
         '#documentation': >-
@@ -767,6 +767,7 @@ modelTypes:
     properties:
       - $id: '56'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: StorageAccountProperties
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -778,7 +779,6 @@ modelTypes:
           x-ms-client-flatten: true
         isRequired: false
         isConstant: false
-        modelTypeName: StorageAccountProperties
         modelType:
           $ref: '37'
         '#name': properties
@@ -790,6 +790,7 @@ modelTypes:
       properties:
         - $id: '58'
           $actualType: AutoRest.Core.Model.Property
+          modelTypeName: String
           isReadOnly: true
           isPolymorphicDiscriminator: false
           realPath:
@@ -799,7 +800,6 @@ modelTypes:
           collectionFormat: none
           isRequired: false
           isConstant: false
-          modelTypeName: String
           modelType:
             $id: '59'
             $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -814,6 +814,7 @@ modelTypes:
           '#serializedName': id
         - $id: '60'
           $actualType: AutoRest.Core.Model.Property
+          modelTypeName: String
           isReadOnly: true
           isPolymorphicDiscriminator: false
           realPath:
@@ -823,7 +824,6 @@ modelTypes:
           collectionFormat: none
           isRequired: false
           isConstant: false
-          modelTypeName: String
           modelType:
             $id: '61'
             $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -838,6 +838,7 @@ modelTypes:
           '#serializedName': name
         - $id: '62'
           $actualType: AutoRest.Core.Model.Property
+          modelTypeName: String
           isReadOnly: true
           isPolymorphicDiscriminator: false
           realPath:
@@ -847,7 +848,6 @@ modelTypes:
           collectionFormat: none
           isRequired: false
           isConstant: false
-          modelTypeName: String
           modelType:
             $id: '63'
             $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -862,6 +862,7 @@ modelTypes:
           '#serializedName': type
         - $id: '64'
           $actualType: AutoRest.Core.Model.Property
+          modelTypeName: String
           isReadOnly: false
           isPolymorphicDiscriminator: false
           realPath:
@@ -871,7 +872,6 @@ modelTypes:
           collectionFormat: none
           isRequired: false
           isConstant: false
-          modelTypeName: String
           modelType:
             $id: '65'
             $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -886,6 +886,7 @@ modelTypes:
           '#serializedName': location
         - $id: '66'
           $actualType: AutoRest.Core.Model.Property
+          modelTypeName: 'Dictionary<string,String>'
           isReadOnly: false
           isPolymorphicDiscriminator: false
           realPath:
@@ -895,7 +896,6 @@ modelTypes:
           collectionFormat: none
           isRequired: false
           isConstant: false
-          modelTypeName: 'Dictionary<string,String>'
           modelType:
             $id: '67'
             $type: 'AutoRest.Core.Model.DictionaryType, AutoRest.Core'
@@ -934,6 +934,7 @@ modelTypes:
     properties:
       - $id: '70'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -943,7 +944,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '71'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -958,6 +958,7 @@ modelTypes:
         '#serializedName': key1
       - $id: '72'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -967,7 +968,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '73'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -992,6 +992,7 @@ modelTypes:
     properties:
       - $id: '75'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: IList<StorageAccount>
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -999,7 +1000,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: IList<StorageAccount>
         modelType:
           $id: '76'
           $type: 'AutoRest.Core.Model.SequenceType, AutoRest.Core'
@@ -1023,6 +1023,7 @@ modelTypes:
     properties:
       - $id: '78'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: AccountType
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1036,7 +1037,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: AccountType
         modelType:
           $ref: '15'
         '#documentation': >-
@@ -1047,6 +1047,7 @@ modelTypes:
         '#serializedName': accountType
       - $id: '79'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: CustomDomain
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1056,7 +1057,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: CustomDomain
         modelType:
           $ref: '32'
         '#documentation': >-
@@ -1077,6 +1077,7 @@ modelTypes:
     properties:
       - $id: '81'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: 'Dictionary<string,String>'
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1086,7 +1087,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: 'Dictionary<string,String>'
         modelType:
           $id: '82'
           $type: 'AutoRest.Core.Model.DictionaryType, AutoRest.Core'
@@ -1108,6 +1108,7 @@ modelTypes:
         '#serializedName': tags
       - $id: '84'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: StorageAccountPropertiesUpdateParameters
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1119,7 +1120,6 @@ modelTypes:
           x-ms-client-flatten: true
         isRequired: false
         isConstant: false
-        modelTypeName: StorageAccountPropertiesUpdateParameters
         modelType:
           $ref: '77'
         '#name': properties
@@ -1138,6 +1138,7 @@ modelTypes:
     properties:
       - $id: '86'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1147,7 +1148,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '87'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1170,6 +1170,7 @@ modelTypes:
     properties:
       - $id: '89'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1179,7 +1180,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '90'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1194,6 +1194,7 @@ modelTypes:
         '#serializedName': value
       - $id: '91'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: String
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1203,7 +1204,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '92'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1228,6 +1228,7 @@ modelTypes:
     properties:
       - $id: '94'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: UsageUnit
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1241,7 +1242,6 @@ modelTypes:
             modelAsString: false
         isRequired: true
         isConstant: false
-        modelTypeName: UsageUnit
         modelType:
           $id: '95'
           $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
@@ -1278,6 +1278,7 @@ modelTypes:
         '#serializedName': unit
       - $id: '96'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: Int
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1287,7 +1288,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: Int
         modelType:
           $id: '97'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1303,6 +1303,7 @@ modelTypes:
         '#serializedName': currentValue
       - $id: '98'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: Int
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1312,7 +1313,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: Int
         modelType:
           $id: '99'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1330,6 +1330,7 @@ modelTypes:
         '#serializedName': limit
       - $id: '100'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: UsageName
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1339,7 +1340,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: UsageName
         modelType:
           $ref: '88'
         '#documentation': Gets the name of the type of usage.
@@ -1357,6 +1357,7 @@ modelTypes:
     properties:
       - $id: '102'
         $actualType: AutoRest.Core.Model.Property
+        modelTypeName: IList<Usage>
         isReadOnly: false
         isPolymorphicDiscriminator: false
         realPath:
@@ -1364,7 +1365,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: IList<Usage>
         modelType:
           $id: '103'
           $type: 'AutoRest.Core.Model.SequenceType, AutoRest.Core'
@@ -1400,6 +1400,7 @@ documentation: The Storage Management Client.
 properties:
   - $id: '104'
     $actualType: AutoRest.Core.Model.Property
+    modelTypeName: String
     isReadOnly: false
     isPolymorphicDiscriminator: false
     realPath:
@@ -1409,7 +1410,6 @@ properties:
     collectionFormat: none
     isRequired: true
     isConstant: false
-    modelTypeName: String
     modelType:
       $id: '105'
       $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1427,6 +1427,7 @@ properties:
     '#serializedName': subscriptionId
   - $id: '106'
     $actualType: AutoRest.Core.Model.Property
+    modelTypeName: String
     isReadOnly: false
     isPolymorphicDiscriminator: false
     realPath:
@@ -1436,7 +1437,6 @@ properties:
     collectionFormat: none
     isRequired: true
     isConstant: false
-    modelTypeName: String
     modelType:
       $id: '107'
       $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1453,12 +1453,12 @@ operations:
   - methods:
       - parameters:
           - $id: '108'
+            modelTypeName: StorageAccountCheckNameAvailabilityParameters
             isClientProperty: false
             location: body
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: StorageAccountCheckNameAvailabilityParameters
             modelType:
               $ref: '1'
             '#documentation': >-
@@ -1468,6 +1468,7 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '109'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '106'
@@ -1475,7 +1476,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '110'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1489,6 +1489,7 @@ operations:
             '#name': api-version
             '#serializedName': api-version
           - $id: '111'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '104'
@@ -1496,7 +1497,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '112'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1514,8 +1514,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -1543,12 +1541,12 @@ operations:
           /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
       - parameters:
           - $id: '113'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '114'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1562,6 +1560,7 @@ operations:
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '115'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
@@ -1570,7 +1569,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '116'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1587,18 +1585,19 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '117'
+            modelTypeName: StorageAccountCreateParameters
             isClientProperty: false
             location: body
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: StorageAccountCreateParameters
             modelType:
               $ref: '16'
             '#documentation': The parameters to provide for the created account.
             '#name': parameters
             '#serializedName': parameters
           - $id: '118'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '106'
@@ -1606,7 +1605,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '119'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1620,6 +1618,7 @@ operations:
             '#name': api-version
             '#serializedName': api-version
           - $id: '120'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '104'
@@ -1627,7 +1626,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '121'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1645,8 +1643,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: put
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -1682,12 +1678,12 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '122'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '123'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1701,6 +1697,7 @@ operations:
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '124'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
@@ -1709,7 +1706,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '125'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1726,6 +1722,7 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '126'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '106'
@@ -1733,7 +1730,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '127'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1747,6 +1743,7 @@ operations:
             '#name': api-version
             '#serializedName': api-version
           - $id: '128'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '104'
@@ -1754,7 +1751,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '129'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1772,8 +1768,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: delete
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             isNullable: true
@@ -1797,12 +1791,12 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '130'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '131'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1816,6 +1810,7 @@ operations:
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '132'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
@@ -1824,7 +1819,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '133'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1841,6 +1835,7 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '134'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '106'
@@ -1848,7 +1843,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '135'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1862,6 +1856,7 @@ operations:
             '#name': api-version
             '#serializedName': api-version
           - $id: '136'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '104'
@@ -1869,7 +1864,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '137'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1887,8 +1881,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -1917,12 +1909,12 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '138'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '139'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1936,6 +1928,7 @@ operations:
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '140'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
@@ -1944,7 +1937,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '141'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1961,12 +1953,12 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '142'
+            modelTypeName: StorageAccountUpdateParameters
             isClientProperty: false
             location: body
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: StorageAccountUpdateParameters
             modelType:
               $ref: '80'
             '#documentation': >-
@@ -1975,6 +1967,7 @@ operations:
             '#name': parameters
             '#serializedName': parameters
           - $id: '143'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '106'
@@ -1982,7 +1975,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '144'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1996,6 +1988,7 @@ operations:
             '#name': api-version
             '#serializedName': api-version
           - $id: '145'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '104'
@@ -2003,7 +1996,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '146'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2021,8 +2013,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: patch
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2061,12 +2051,12 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '147'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '148'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2080,6 +2070,7 @@ operations:
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '149'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
@@ -2088,7 +2079,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '150'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2102,6 +2092,7 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '151'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '106'
@@ -2109,7 +2100,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '152'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2123,6 +2113,7 @@ operations:
             '#name': api-version
             '#serializedName': api-version
           - $id: '153'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '104'
@@ -2130,7 +2121,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '154'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2148,8 +2138,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2175,6 +2163,7 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
       - parameters:
           - $id: '155'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '106'
@@ -2182,7 +2171,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '156'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2196,6 +2184,7 @@ operations:
             '#name': api-version
             '#serializedName': api-version
           - $id: '157'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '104'
@@ -2203,7 +2192,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '158'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2221,8 +2209,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2254,12 +2240,12 @@ operations:
           /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
       - parameters:
           - $id: '159'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '160'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2273,6 +2259,7 @@ operations:
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '161'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '106'
@@ -2280,7 +2267,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '162'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2294,6 +2280,7 @@ operations:
             '#name': api-version
             '#serializedName': api-version
           - $id: '163'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '104'
@@ -2301,7 +2288,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '164'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2319,8 +2305,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2352,12 +2336,12 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts
       - parameters:
           - $id: '165'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '166'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2371,6 +2355,7 @@ operations:
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '167'
+            modelTypeName: String
             isClientProperty: false
             location: path
             collectionFormat: none
@@ -2379,7 +2364,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '168'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2396,12 +2380,12 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '169'
+            modelTypeName: StorageAccountRegenerateKeyParameters
             isClientProperty: false
             location: body
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: StorageAccountRegenerateKeyParameters
             modelType:
               $ref: '85'
             '#documentation': >-
@@ -2410,6 +2394,7 @@ operations:
             '#name': regenerateKey
             '#serializedName': regenerateKey
           - $id: '170'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '106'
@@ -2417,7 +2402,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '171'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2431,6 +2415,7 @@ operations:
             '#name': api-version
             '#serializedName': api-version
           - $id: '172'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '104'
@@ -2438,7 +2423,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '173'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2456,8 +2440,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2492,12 +2474,12 @@ operations:
             "parameters": [
               {
                 "$id": "108",
+                "modelTypeName": "StorageAccountCheckNameAvailabilityParameters",
                 "isClientProperty": false,
                 "location": "body",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "StorageAccountCheckNameAvailabilityParameters",
                 "modelType": {
                   "$ref": "1"
                 },
@@ -2507,6 +2489,7 @@ operations:
               },
               {
                 "$id": "109",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
@@ -2515,7 +2498,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "110",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2532,6 +2514,7 @@ operations:
               },
               {
                 "$id": "111",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
@@ -2540,7 +2523,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "112",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2558,8 +2540,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "post",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -2594,12 +2574,12 @@ operations:
             "parameters": [
               {
                 "$id": "113",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "114",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2616,6 +2596,7 @@ operations:
               },
               {
                 "$id": "115",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
@@ -2625,7 +2606,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "116",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2642,12 +2622,12 @@ operations:
               },
               {
                 "$id": "117",
+                "modelTypeName": "StorageAccountCreateParameters",
                 "isClientProperty": false,
                 "location": "body",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "StorageAccountCreateParameters",
                 "modelType": {
                   "$ref": "16"
                 },
@@ -2657,6 +2637,7 @@ operations:
               },
               {
                 "$id": "118",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
@@ -2665,7 +2646,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "119",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2682,6 +2662,7 @@ operations:
               },
               {
                 "$id": "120",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
@@ -2690,7 +2671,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "121",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2708,8 +2688,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "put",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -2750,12 +2728,12 @@ operations:
             "parameters": [
               {
                 "$id": "122",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "123",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2772,6 +2750,7 @@ operations:
               },
               {
                 "$id": "124",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
@@ -2781,7 +2760,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "125",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2798,6 +2776,7 @@ operations:
               },
               {
                 "$id": "126",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
@@ -2806,7 +2785,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "127",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2823,6 +2801,7 @@ operations:
               },
               {
                 "$id": "128",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
@@ -2831,7 +2810,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "129",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2849,8 +2827,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "delete",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "isNullable": true
@@ -2882,12 +2858,12 @@ operations:
             "parameters": [
               {
                 "$id": "130",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "131",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2904,6 +2880,7 @@ operations:
               },
               {
                 "$id": "132",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
@@ -2913,7 +2890,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "133",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2930,6 +2906,7 @@ operations:
               },
               {
                 "$id": "134",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
@@ -2938,7 +2915,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "135",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2955,6 +2931,7 @@ operations:
               },
               {
                 "$id": "136",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
@@ -2963,7 +2940,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "137",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2981,8 +2957,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3017,12 +2991,12 @@ operations:
             "parameters": [
               {
                 "$id": "138",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "139",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3039,6 +3013,7 @@ operations:
               },
               {
                 "$id": "140",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
@@ -3048,7 +3023,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "141",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3065,12 +3039,12 @@ operations:
               },
               {
                 "$id": "142",
+                "modelTypeName": "StorageAccountUpdateParameters",
                 "isClientProperty": false,
                 "location": "body",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "StorageAccountUpdateParameters",
                 "modelType": {
                   "$ref": "80"
                 },
@@ -3080,6 +3054,7 @@ operations:
               },
               {
                 "$id": "143",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
@@ -3088,7 +3063,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "144",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3105,6 +3079,7 @@ operations:
               },
               {
                 "$id": "145",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
@@ -3113,7 +3088,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "146",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3131,8 +3105,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "patch",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3167,12 +3139,12 @@ operations:
             "parameters": [
               {
                 "$id": "147",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "148",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3189,6 +3161,7 @@ operations:
               },
               {
                 "$id": "149",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
@@ -3198,7 +3171,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "150",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3215,6 +3187,7 @@ operations:
               },
               {
                 "$id": "151",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
@@ -3223,7 +3196,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "152",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3240,6 +3212,7 @@ operations:
               },
               {
                 "$id": "153",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
@@ -3248,7 +3221,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "154",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3266,8 +3238,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "post",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3302,6 +3272,7 @@ operations:
             "parameters": [
               {
                 "$id": "155",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
@@ -3310,7 +3281,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "156",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3327,6 +3297,7 @@ operations:
               },
               {
                 "$id": "157",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
@@ -3335,7 +3306,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "158",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3353,8 +3323,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3394,12 +3362,12 @@ operations:
             "parameters": [
               {
                 "$id": "159",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "160",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3416,6 +3384,7 @@ operations:
               },
               {
                 "$id": "161",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
@@ -3424,7 +3393,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "162",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3441,6 +3409,7 @@ operations:
               },
               {
                 "$id": "163",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
@@ -3449,7 +3418,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "164",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3467,8 +3435,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3508,12 +3474,12 @@ operations:
             "parameters": [
               {
                 "$id": "165",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "166",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3530,6 +3496,7 @@ operations:
               },
               {
                 "$id": "167",
+                "modelTypeName": "String",
                 "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
@@ -3539,7 +3506,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "168",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3556,12 +3522,12 @@ operations:
               },
               {
                 "$id": "169",
+                "modelTypeName": "StorageAccountRegenerateKeyParameters",
                 "isClientProperty": false,
                 "location": "body",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "StorageAccountRegenerateKeyParameters",
                 "modelType": {
                   "$ref": "85"
                 },
@@ -3571,6 +3537,7 @@ operations:
               },
               {
                 "$id": "170",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
@@ -3579,7 +3546,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "171",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3596,6 +3562,7 @@ operations:
               },
               {
                 "$id": "172",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
@@ -3604,7 +3571,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "173",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3622,8 +3588,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "post",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3664,6 +3628,7 @@ operations:
   - methods:
       - parameters:
           - $id: '174'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '106'
@@ -3671,7 +3636,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '175'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -3685,6 +3649,7 @@ operations:
             '#name': api-version
             '#serializedName': api-version
           - $id: '176'
+            modelTypeName: String
             isClientProperty: true
             clientProperty:
               $ref: '104'
@@ -3692,7 +3657,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '177'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -3710,8 +3674,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -3750,6 +3712,7 @@ operations:
             "parameters": [
               {
                 "$id": "174",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
@@ -3758,7 +3721,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "175",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3775,6 +3737,7 @@ operations:
               },
               {
                 "$id": "176",
+                "modelTypeName": "String",
                 "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
@@ -3783,7 +3746,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "177",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3801,8 +3763,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {

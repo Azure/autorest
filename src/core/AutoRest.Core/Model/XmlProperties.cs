@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace AutoRest.Core.Model
+﻿namespace AutoRest.Core.Model
 {
     public class XmlProperties
     {

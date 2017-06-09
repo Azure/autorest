@@ -4,11 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoRest.Core.Logging;
 using Microsoft.Perks.JsonRPC;
-using Newtonsoft.Json;
-using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Core.Utilities;
 
 namespace AutoRest
 {

@@ -3,13 +3,10 @@
 
 
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
-using AutoRest.Core.Properties;
 using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
 using System.Linq;
 
 namespace AutoRest.Swagger.Validation

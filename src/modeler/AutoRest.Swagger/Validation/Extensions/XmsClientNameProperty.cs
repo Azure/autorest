@@ -6,7 +6,6 @@ using AutoRest.Core.Properties;
 using AutoRest.Swagger.Validation.Core;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
-using AutoRest.Core.Utilities;
 
 namespace AutoRest.Swagger.Validation
 {

@@ -418,15 +418,9 @@ namespace AutoRest.Go.Model
             }
         }
 
-        public string Response
-        {
-            get
-            {
-                return HasReturnValue()
-                    ? "result.Response = autorest.Response{Response: resp}"
-                    : "result.Response = resp";
-            }
-        }
+        public string Response => HasReturnValue()
+            ? "result.Response = autorest.Response{Response: resp}"
+            : "result.Response = resp";
 
         public string AutorestError(string phase, string response = null, string parameter = null)
         {
@@ -443,19 +437,13 @@ namespace AutoRest.Go.Model
         /// Check if method has a return response.
         /// </summary>
         /// <returns></returns>
-        public bool HasReturnValue()
-        {
-            return ReturnValue()?.Body != null;
-        }
+        public bool HasReturnValue() => ReturnValue()?.Body != null;
 
         /// <summary>
         /// Return response object for the method.
         /// </summary>
         /// <returns></returns>
-        public Response ReturnValue()
-        {
-            return ReturnType ?? DefaultResponse;
-        }
+        public Response ReturnValue() => ReturnType ?? DefaultResponse;
 
         /// <summary>
         /// Checks if method has pageable extension (x-ms-pageable) enabled.  

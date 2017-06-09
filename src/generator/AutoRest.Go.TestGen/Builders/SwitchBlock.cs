@@ -4,8 +4,6 @@
 using AutoRest.Go.TestGen.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AutoRest.Go.TestGen.Builders
 {
@@ -56,14 +54,7 @@ namespace AutoRest.Go.TestGen.Builders
             }
 
             Switch switchStmt;
-            if (condition != null)
-            {
-                switchStmt = new Switch(condition);
-            }
-            else
-            {
-                switchStmt = new Switch();
-            }
+            switchStmt = condition != null ? new Switch(condition) : new Switch();
 
             var openBrace = new OpenDelimiter(BinaryDelimiterType.Brace);
 

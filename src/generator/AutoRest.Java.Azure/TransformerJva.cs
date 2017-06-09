@@ -4,13 +4,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure.Model;
@@ -88,7 +86,7 @@ namespace AutoRest.Java.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             foreach (var operation in codeModel.Operations)
@@ -128,15 +126,14 @@ namespace AutoRest.Java.Azure
         {
             if (serviceClient == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException(nameof(serviceClient));
             }
 
             var convertedTypes = new Dictionary<IModelType, IModelType>();
 
             foreach (MethodJva method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension) || (m as MethodJva).SimulateAsPagingOperation))
             {
-                string nextLinkString;
-                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, method.SimulateAsPagingOperation, out nextLinkString);
+                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, method.SimulateAsPagingOperation, out string nextLinkString);
                 if (string.IsNullOrEmpty(pageClassName))
                 {
                     continue;
@@ -205,7 +202,7 @@ namespace AutoRest.Java.Azure
         {
             if (client == null)
             {
-                throw new ArgumentNullException("client");
+                throw new ArgumentNullException(nameof(client));
             }
 
             foreach (var method in client.Methods)
@@ -278,14 +275,7 @@ namespace AutoRest.Java.Azure
             {
                 if (string.IsNullOrWhiteSpace(className))
                 {
-                    if (pageClasses.Count > 0)
-                    {
-                        className = $"PageImpl{pageClasses.Count}";
-                    }
-                    else
-                    {
-                        className = "PageImpl";
-                    }
+                    className = pageClasses.Count > 0 ? $"PageImpl{pageClasses.Count}" : "PageImpl";
                 }
                 pageClasses.Add(keypair, className);
             }

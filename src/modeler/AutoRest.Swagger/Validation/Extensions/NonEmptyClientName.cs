@@ -24,7 +24,7 @@ namespace AutoRest.Swagger.Validation
         public override bool IsValid(object clientName)
         {
             var ext = clientName as Newtonsoft.Json.Linq.JContainer;
-            if (ext != null && (ext["name"] == null || string.IsNullOrEmpty(ext["name"].ToString())))
+            if (ext != null && string.IsNullOrEmpty(ext["name"]?.ToString()))
             {
                 return false;
             }

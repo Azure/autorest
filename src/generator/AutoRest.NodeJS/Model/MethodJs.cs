@@ -9,7 +9,6 @@ using System.Net;
 using System.Text;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.NodeJS.Templates;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 

@@ -186,34 +186,6 @@ namespace AutoRest.Core
         }
 
         /// <summary>
-        ///     Formats a string for naming fields using a prefix '_' and VariableName Camel case by default.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns>The formatted string.</returns>
-        public virtual string GetFieldName(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return name;
-            }
-            return '_' + GetVariableName(name);
-        }
-
-        /// <summary>
-        ///     Formats a string for naming interfaces using a prefix 'I' and Pascal case by default.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns>The formatted string.</returns>
-        public virtual string GetInterfaceName(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return name;
-            }
-            return $"I{PascalCase(RemoveInvalidCharacters(name))}";
-        }
-
-        /// <summary>
         ///     Formats a string for naming a method using Pascal case by default.
         /// </summary>
         /// <param name="name"></param>
@@ -431,12 +403,12 @@ namespace AutoRest.Core
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new ArgumentNullException(nameof(name));
             }
 
             if (appendValue == null)
             {
-                throw new ArgumentNullException("appendValue");
+                throw new ArgumentNullException(nameof(appendValue));
             }
 
             if (ReservedWords.Contains(name, StringComparer.OrdinalIgnoreCase))
@@ -515,26 +487,10 @@ namespace AutoRest.Core
                 return desiredName;
             }
 
-#if refactoring_out
-            // special case: properties can actually have the same name as a composite type 
-            // as long as that type is not the parent class of the property itself.
-            if (whoIsAsking is Property)
-            {
-                reservedNames = reservedNames.Where(each => !(each is CompositeType));
-
-                var parent = (whoIsAsking as IChild)?.Parent as IIdentifier;
-                if (parent != null)
-                {
-                    reservedNames = reservedNames.ConcatSingleItem(parent);
-                }
-            }
-#endif 
-
             var names = new HashSet<IIdentifier>(reservedNames.Where(each => !IsSpecialCase(whoIsAsking, each)));
 
             // is this a legal name? -- add a Qualifier Suffix (ie, Method/Model/Property/etc)
-            string conflict;
-            while ((conflict = IsNameLegal(desiredName, whoIsAsking)) != null)
+            while (IsNameLegal(desiredName, whoIsAsking) != null)
             {
                 desiredName += whoIsAsking.Qualifier;
                 // todo: gws: log the name change because it conflicted with a reserved word.
@@ -543,9 +499,8 @@ namespace AutoRest.Core
             }
 
             // does it conflict with a type name locally? (add a Qualifier Suffix)
-            
-            IIdentifier confl;
-            while (null != (confl = IsNameAvailable(desiredName, names)))
+
+            while (null != (IsNameAvailable(desiredName, names)))
             {
                 desiredName += whoIsAsking.Qualifier;
                 // todo: gws: log the name change because there was something else named that.

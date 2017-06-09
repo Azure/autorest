@@ -10,6 +10,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AutoRest.CSharp.Model
 {
@@ -52,8 +53,7 @@ namespace AutoRest.CSharp.Model
             {
                 if (Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                 {
-                    var ext = Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
-                    if (ext != null && ext["name"] != null)
+                    if (Extensions[SwaggerExtensions.NameOverrideExtension] is JContainer ext && ext["name"] != null)
                     {
                         return ext["name"].ToString();
                     }

@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
-using AutoRest.Extensions;
 using AutoRest.Java.Properties;
 using AutoRest.Java.Templates;
 using AutoRest.Java.Model;

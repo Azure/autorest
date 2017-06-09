@@ -1,5 +1,4 @@
-﻿using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
+﻿using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Model;

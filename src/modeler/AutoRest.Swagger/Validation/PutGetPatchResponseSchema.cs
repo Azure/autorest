@@ -7,7 +7,6 @@ using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Validation.Core;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -55,7 +54,7 @@ namespace AutoRest.Swagger.Validation
         /// <returns>list of ValidationMessages.</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
-            var serviceDefinition = (ServiceDefinition)context.Root;
+            var serviceDefinition = context.Root;
             foreach (var pathPair in entity)
             {
                 var respModels = pathPair.Value.Where(opPair => OpList.Contains(opPair.Key.ToLower()))

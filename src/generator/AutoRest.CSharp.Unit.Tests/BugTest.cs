@@ -23,10 +23,7 @@ namespace AutoRest.CSharp.Unit.Tests {
     using Xunit.Abstractions;
     using OutputKind = Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind;
     using System.Reflection;
-#if !LEGACY
-    using System.Runtime.Loader;
-#else     
-#endif    
+    using System.Runtime.Loader;  
     
 
     public class BugTest {
@@ -39,11 +36,7 @@ namespace AutoRest.CSharp.Unit.Tests {
         };
 
         protected Assembly LoadAssembly(MemoryStream stream) {
-#if !Legacy
             return AssemblyLoadContext.Default.LoadFromStream(stream);
-#else 
-           return Assembly.Load(stream.ToArray());
-#endif            
         }
 
         internal static char Q = '"';
@@ -163,8 +156,7 @@ namespace AutoRest.CSharp.Unit.Tests {
             int n = 0;
             foreach (var i in version.Split('.'))
             {
-                int p;
-                if (!Int32.TryParse(i, out p))
+                if (!Int32.TryParse(i, out int p))
                 {
                     return n;
                 }
@@ -211,22 +203,11 @@ namespace AutoRest.CSharp.Unit.Tests {
 
         };
 
-        protected async Task<Microsoft.Rest.CSharp.Compiler.Compilation.CompilationResult> Compile(IFileSystem fileSystem) {
+        protected async Task<CompilationResult> Compile(IFileSystem fileSystem) {
             var compiler = new CSharpCompiler(fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
                 .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadAllText(each))).ToArray(), _assemblies);
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
 
-#if false
-            // if it failed compiling and we're in an interactive session
-            if (!result.Succeeded && Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.UserInteractive) {
-                var error = result.Messages.FirstOrDefault(each => each.Severity == DiagnosticSeverity.Error);
-                if (error != null) {
-                    // use this to dump the files to disk for examination
-                    // open in Favorite Code Editor
-                    InspectWithFavoriteCodeEditor(fileSystem.SaveFilesToTemp(GetType().Name), error.Location.GetMappedLineSpan());
-                }
-            }
-#endif 
             return result;
         }
     }

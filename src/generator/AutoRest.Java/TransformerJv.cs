@@ -6,7 +6,6 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Java.Model;
 using AutoRest.Extensions;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java
 {

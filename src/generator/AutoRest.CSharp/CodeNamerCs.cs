@@ -3,12 +3,9 @@
 // 
 
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Globalization;
 using AutoRest.Core;
 using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.CSharp
@@ -70,7 +67,7 @@ namespace AutoRest.CSharp
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             var primaryType = type as PrimaryType;
@@ -86,29 +83,24 @@ namespace AutoRest.CSharp
                 }
                 if (primaryType != null)
                 {
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
+                    switch (primaryType.KnownPrimaryType)
                     {
-                        return double.Parse(defaultValue).ToString();
-                    }
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
-                    {
-                        return Instance.QuoteValue(defaultValue);
-                    }
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
-                    {
-                        return defaultValue.ToLowerInvariant();
-                    }
-                    if ((primaryType.KnownPrimaryType == KnownPrimaryType.Date) ||
-                        (primaryType.KnownPrimaryType == KnownPrimaryType.DateTime) ||
-                        (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123) ||
-                        (primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan) ||
-                        (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray) ||
-                        (primaryType.KnownPrimaryType == KnownPrimaryType.Base64Url) ||
-                        (primaryType.KnownPrimaryType == KnownPrimaryType.UnixTime))
-                    {
-                        return
-                            $"Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<{primaryType.Name}>"+
-                            $"({Instance.QuoteValue($"\"{defaultValue}\"")}, this.Client.SerializationSettings)";
+                        case KnownPrimaryType.Double:
+                            return double.Parse(defaultValue).ToString(CultureInfo.InvariantCulture);
+                        case KnownPrimaryType.String:
+                            return Instance.QuoteValue(defaultValue);
+                        case KnownPrimaryType.Boolean:
+                            return defaultValue.ToLowerInvariant();
+                        case KnownPrimaryType.Date:
+                        case KnownPrimaryType.DateTime:
+                        case KnownPrimaryType.DateTimeRfc1123:
+                        case KnownPrimaryType.TimeSpan:
+                        case KnownPrimaryType.ByteArray:
+                        case KnownPrimaryType.Base64Url:
+                        case KnownPrimaryType.UnixTime:
+                            return
+                                $"Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<{primaryType.Name}>"+
+                                $"({Instance.QuoteValue($"\"{defaultValue}\"")}, this.Client.SerializationSettings)";
                     }
                 }
             }

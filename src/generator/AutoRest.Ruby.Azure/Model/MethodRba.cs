@@ -3,11 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Net.NetworkInformation;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -78,7 +76,7 @@ namespace AutoRest.Ruby.Azure.Model
                 builder.Indent();
                 foreach (Parameter param in nextMethod.Parameters)
                 {
-                    if (param.Name.Contains(nextMethod.Name) && (((string)param.Name.RawValue).Length > ((string)nextMethod.Name).Length)) //parameter that contains the method name + postfix, it's a grouped param
+                    if (param.Name.Contains(nextMethod.Name) && (param.Name.RawValue.Length > ((string)nextMethod.Name).Length)) //parameter that contains the method name + postfix, it's a grouped param
                     {
                         //assigning grouped parameter passed to the lazy method, to the parameter used in the invocation to the next method
                         string argumentName = ((string)param.Name).Replace(nextMethodName, origName);

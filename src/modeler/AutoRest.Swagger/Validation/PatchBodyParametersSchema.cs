@@ -1,13 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core.Properties;
 using AutoRest.Core.Logging;
 using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
-using AutoRest.Swagger;
 using AutoRest.Swagger.Model;
-using System.Text.RegularExpressions;
 using System.Linq;
 using AutoRest.Swagger.Validation.Core;
 
@@ -41,7 +38,7 @@ namespace AutoRest.Swagger.Validation
         // Verifies if a tracked resource has a corresponding PATCH operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            ServiceDefinition serviceDefinition = (ServiceDefinition)context.Root;
+            ServiceDefinition serviceDefinition = context.Root;
             // enumerate all the PATCH operations
             IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", serviceDefinition);
             

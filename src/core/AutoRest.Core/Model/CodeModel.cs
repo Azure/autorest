@@ -1,15 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core.Model
@@ -39,9 +35,6 @@ namespace AutoRest.Core.Model
         }
 
         [JsonIgnore]
-        public IEnumerable<CompositeType> AllModelTypes => ModelTypes.Union(HeaderTypes).Union(ErrorTypes).ReEnumerable();
-
-        [JsonIgnore]
         public virtual IEnumerableWithIndex<Method> Methods => new ReEnumerable<Method>(Operations.SelectMany(group => group.Methods));
 
         public virtual Method Add(Method method)
@@ -64,7 +57,7 @@ namespace AutoRest.Core.Model
         public virtual MethodGroup GetOrAddMethodGroup(string groupName)
         {
             groupName = groupName ?? string.Empty;
-            return Operations.FirstOrDefault(group => @group.Name.EqualsIgnoreCase(groupName)) ??
+            return Operations.FirstOrDefault(group => group.Name.EqualsIgnoreCase(groupName)) ??
                    Add(New<MethodGroup>(groupName));
         }
 
@@ -162,7 +155,6 @@ namespace AutoRest.Core.Model
             => ((IEnumerable<IChild>)ModelTypes).Concat(HeaderTypes).Concat(ErrorTypes).Concat(EnumTypes).Concat(Properties);
 
         public string Qualifier => "Client";
-        public string QualifierType => "Service Client";
 
         [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames

@@ -5,15 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Model;
 using AutoRest.Extensions;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using System.IO;
-using System.CodeDom.Compiler;
-using System.CodeDom;
 
 namespace AutoRest.CSharp
 {
@@ -148,7 +144,7 @@ namespace AutoRest.CSharp
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
 
             if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
@@ -191,7 +187,7 @@ namespace AutoRest.CSharp
         {
             if (parameter == null)
             {
-                throw new ArgumentNullException("parameter");
+                throw new ArgumentNullException(nameof(parameter));
             }
 
             SequenceType sequence = parameter.ModelType as SequenceType;
@@ -265,21 +261,20 @@ namespace AutoRest.CSharp
             string serializationSettings = string.Format(CultureInfo.InvariantCulture, "{0}.SerializationSettings", clientReference);
             if (primaryType != null)
             {
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.Date)
+                switch (primaryType.KnownPrimaryType)
                 {
-                    serializationSettings = "new Microsoft.Rest.Serialization.DateJsonConverter()";
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    serializationSettings = "new Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter()";
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Base64Url)
-                {
-                    serializationSettings = "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.UnixTime)
-                {
-                    serializationSettings = "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
+                    case KnownPrimaryType.Date:
+                        serializationSettings = "new Microsoft.Rest.Serialization.DateJsonConverter()";
+                        break;
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        serializationSettings = "new Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter()";
+                        break;
+                    case KnownPrimaryType.Base64Url:
+                        serializationSettings = "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
+                        break;
+                    case KnownPrimaryType.UnixTime:
+                        serializationSettings = "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
+                        break;
                 }
             }
 
@@ -319,7 +314,7 @@ namespace AutoRest.CSharp
         {
             if (scope == null)
             {
-                throw new ArgumentNullException("scope");
+                throw new ArgumentNullException(nameof(scope));
             }
 
             var model = type as CompositeTypeCs;
@@ -383,18 +378,7 @@ namespace AutoRest.CSharp
         /// </summary>
         private static string ToLiteral(string input)
         {
-#if LEGACY            
-            using (var writer = new StringWriter())
-            {
-                using (var provider = CodeDomProvider.CreateProvider("CSharp"))
-                {
-                    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
-                    return writer.ToString();
-                }
-            }
-#else 
             return "\"" + input.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
-#endif             
         }
 
         private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, IModelType type)

@@ -7,7 +7,6 @@ using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Python.Model
 {

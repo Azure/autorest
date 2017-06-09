@@ -4,9 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
-using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Model

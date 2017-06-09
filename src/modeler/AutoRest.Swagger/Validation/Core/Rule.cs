@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using AutoRest.Core.Logging;
 using AutoRest.Swagger.Model;
-using System;
 
 namespace AutoRest.Swagger.Validation.Core
 {

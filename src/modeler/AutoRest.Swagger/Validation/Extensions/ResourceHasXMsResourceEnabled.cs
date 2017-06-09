@@ -52,10 +52,9 @@ namespace AutoRest.Swagger.Validation
                 if (key.ToLower().Equals("resource"))
                 {
                     Schema resourceSchema = definitions.GetValueOrNull(key);
-                    if (resourceSchema == null ||
-                        resourceSchema.Extensions == null ||
-                        resourceSchema.Extensions.Count <= 0 ||
-                        resourceSchema.Extensions.GetValueOrNull(requiredExtension) == null ||
+                    if (resourceSchema?.Extensions == null || 
+                        resourceSchema.Extensions.Count <= 0 || 
+                        resourceSchema.Extensions.GetValueOrNull(requiredExtension) == null || 
                         (bool)resourceSchema.Extensions.GetValueOrNull(requiredExtension) == false)
                     {
                         return false;
