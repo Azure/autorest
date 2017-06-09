@@ -9,9 +9,6 @@ namespace AutoRest.Core
 {
     public class CodeModelTransformer<TCodeModel> : ITransformer<TCodeModel> where TCodeModel : CodeModel
     {
-        public virtual Trigger Trigger { get; set; } = Trigger.AfterModelCreation;
-        public virtual int Priority { get; set; } = 0;
-
         /// <summary>
         /// A type-specific method for code model tranformation.
         /// Note: This is the method you want to override.

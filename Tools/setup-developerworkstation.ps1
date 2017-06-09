@@ -75,9 +75,9 @@ if( !(get-command -ea 0 node.exe) ) {
     set-content -Path "$env:ALLUSERSPROFILE\nvm\settings.txt" -Value "root: $env:ALLUSERSPROFILE\nvm`npath: $env:ProgramFiles\nodejs"
     nvm install 6.9.5
     nvm use 6.9.5 
-
+   
     ReloadPathFromRegistry
-
+   
     if( !(get-command -ea 0 node.exe) ) { return write-error "No NodeJS in PATH." }
     
 <# for build machines, since I don't want this per-user    

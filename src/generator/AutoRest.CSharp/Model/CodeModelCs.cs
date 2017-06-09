@@ -20,7 +20,11 @@ namespace AutoRest.CSharp.Model
 
         public bool IsCustomBaseUri => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
 
-        public virtual bool HaveModelNamespace => ModelTypes.Concat(HeaderTypes).Any(m => !m.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension));
+        public virtual bool HaveModelNamespace => Enumerable.Empty<ModelType>()
+            .Concat(ModelTypes)
+            .Concat(HeaderTypes)
+            .Concat(EnumTypes)
+            .Any(m => !m.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension));
 
         public virtual IEnumerable<string> Usings
         {

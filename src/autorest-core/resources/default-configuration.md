@@ -78,7 +78,7 @@ scope-swagger-document/emitter:
   # rethink that output-file part
   output-uri-expr: |
     $config["output-file"] || 
-    $config.namespace || 
+    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
 scope-cm/emitter:
   input-artifact: code-model-v1
@@ -119,12 +119,6 @@ pipeline:
     input: 
       - transform
       - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
-```
-
-Activate `azure-validator` when setting `azure-arm`!?
-
-``` yaml $(azure-arm)
-azure-validator: true
 ```
 
 ``` yaml $(azure-validator)

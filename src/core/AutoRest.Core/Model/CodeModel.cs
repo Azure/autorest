@@ -182,10 +182,10 @@ namespace AutoRest.Core.Model
         }
 
         public virtual HashSet<string> LocallyUsedNames => null;
-
-        public bool ShouldGenerateXmlSerialization =>
-            Methods.Any(method => 
+        
+        [JsonIgnore]
+        public bool ShouldGenerateXmlSerialization=>  Methods.Any(method => 
                 method.RequestContentType == "application/xml" || 
-                (method.ResponseContentTypes?.Any(rct => rct.StartsWith("application/xml")) ?? false));
+                (method.ResponseContentTypes?.Any(rct => rct.StartsWith("application/xml")) ?? false)) && (Settings.Instance.Host?.GetValue<bool?>("enable-xml").Result == true);
     }
 }

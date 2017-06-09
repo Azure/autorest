@@ -14,6 +14,11 @@ namespace AutoRest.Core.Model
     public class EnumValue : IComparable, IChild
     {
         /// <summary>
+        /// Gets or sets the enum value's description.
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// Gets or sets the literal enum value name.
         /// </summary>
         public string Name { get; set; }

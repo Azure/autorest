@@ -33,7 +33,7 @@ import { Message, Channel } from "../lib/message";
     // muted run
     await autoRest.ResetConfiguration();
     await autoRest.AddConfiguration({ "azure-validator": true });
-    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "M4000", "PutRequestResponseValidation"] } });
+    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "R4000", "PutRequestResponseScheme"] } });
     {
       const messages: Message[] = [];
       const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
@@ -73,7 +73,7 @@ import { Message, Channel } from "../lib/message";
     // not all types
     await pickyRun({ suppress: ["AvoidNestedProperties"] });
     // certain paths
-    await pickyRun({ suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "M4000"], where: "$..properties" });
+    await pickyRun({ suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "R4000"], where: "$..properties" });
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties" });
     // multiple directives
     await pickyRun([{ suppress: ["AvoidNestedProperties"], where: "$..properties.properties" }]);
@@ -82,7 +82,7 @@ import { Message, Channel } from "../lib/message";
       { suppress: ["ModelTypeIncomplete"] }
     ]);
     await pickyRun([
-      { suppress: ["M4000"] },
+      { suppress: ["R4000"] },
       { suppress: ["ModelTypeIncomplete"] }
     ]);
     // document

@@ -219,3 +219,6 @@ src/next-gen
 
 package/nuget/tools
 package/chocolatey/*.nupkg
+
+# npm (we do want to test for most recent versions)
+**/package-lock.json

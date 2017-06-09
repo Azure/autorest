@@ -43,7 +43,7 @@
       }
     },
     "ParamWithProperties": {
-      "description": "Description for the param",
+      "title": "Description for the param",
       "properties": {
         "property1": {
           "type": "string"

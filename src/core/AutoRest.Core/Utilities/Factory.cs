@@ -63,53 +63,8 @@ namespace AutoRest.Core.Utilities
             }
 
             return null;
-
-#if future_garrett_add_dynamic_casting
-            // (for now, just cast the value yourself!)
-            // last ditch effort - if there is a combination that supports casting, try that.
-            foreach (var sig in signatures)
-            {
-                
-            }
-#endif
         }
 
-#if future_garrett_add_dynamic_casting
-        private static BindingFlags StaticPublic = BindingFlags.Static | BindingFlags.Public;
-
-        private static Dictionary<Tuple<Type,Type>, MethodInfo> CastOperators = new Dictionary<Tuple<Type, Type>, MethodInfo>();
-        private static MethodInfo GetCastOperator(Type srcType,Type destType )
-        {
-            return CastOperators.GetOrAdd( new Tuple<Type, Type>(srcType,destType),() => destType.GetMethods(StaticPublic)
-                    .Union(srcType.GetMethods(StaticPublic))
-                    .Where(mi => mi.Name == "op_Explicit" || mi.Name == "op_Implicit")
-                    .Where(mi => {
-                        var pars = mi.GetParameters();
-                        return pars.Length == 1 && pars[0].ParameterType == srcType;
-                    })
-                    .FirstOrDefault(mi => mi.ReturnType == destType));
-        }
-        private static bool DynamicCast(object source, Type destType, out object result)
-        {
-            var srcType = source.GetType();
-            if (srcType == destType)
-            {
-                result = source;
-                return true;
-            }
-            result = null;
-            
-            var castOperator =GetCastOperator(srcType,destType);
-
-            if (castOperator != null)
-            {
-                result = castOperator.Invoke(null, new object[] {source});
-                return true;
-            }
-            
-            return false;
-        }
-#endif 
         private static bool AreAssignableFrom(Type[] signature, Type[] argTypes)
         {
             for (var i = 0; i < signature.Length; i++)

@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { IndexToPosition } from "../parsing/text-utility";
 import { EnhancedPosition, Mappings, SmartPosition } from "../ref/source-map";
 import { Descendants, ToAst } from "../ref/yaml";
 import { JsonPath, stringify } from "../ref/jsonpath";
@@ -37,7 +38,12 @@ export function EncodeEnhancedPositionInName(name: string | undefined, pos: Enha
 
 export function CompilePosition(position: SmartPosition, yamlFile: DataHandleRead): EnhancedPosition {
   if (!(position as EnhancedPosition).line) {
-    return yaml.ResolvePath(yamlFile, (position as any).path);
+    if ((position as any).path) {
+      return yaml.ResolvePath(yamlFile, (position as any).path);
+    }
+    if ((position as any).index) {
+      return IndexToPosition(yamlFile, (position as any).index);
+    }
   }
   return position as EnhancedPosition;
 }

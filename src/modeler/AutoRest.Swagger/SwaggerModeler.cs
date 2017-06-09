@@ -161,45 +161,6 @@ namespace AutoRest.Swagger
             return CodeModel;
         }
 
-        /// <summary>
-        /// Copares two versions of the same service specification.
-        /// </summary>
-        /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override IEnumerable<LogMessage> Compare()
-        {
-            var settings = Settings.Instance;
-
-            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
-            {
-                throw ErrorManager.CreateError(Resources.InputRequired);
-            }
-
-            var oldDefintion = SwaggerParser.Load(settings.Previous, settings.FileSystemInput);
-            var newDefintion = SwaggerParser.Load(settings.Input, settings.FileSystemInput);
-
-            var context = new ComparisonContext(oldDefintion, newDefintion);
-
-            // Look for semantic errors and warnings in the new document.
-            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var LogMessages = validator.GetValidationExceptions(newDefintion.FilePath, newDefintion, new ServiceDefinitionMetadata
-            {
-                ServiceDefinitionDocumentType = ServiceDefinitionDocumentType.ARM,
-                MergeState = ServiceDefinitionDocumentState.Composed
-            }).ToList();
-
-            // Only compare versions if the new version is correct.
-            var comparisonMessages = 
-                !LogMessages.Any(m => m.Severity > Category.Error) ? 
-                newDefintion.Compare(context, oldDefintion) : 
-                Enumerable.Empty<ComparisonMessage>();
-
-            return LogMessages
-                .Select(msg => new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, msg.Path, msg.Severity))
-                .Concat(comparisonMessages);
-        }
-
         private void UpdateSettings()
         {
             if (ServiceDefinition?.Info?.CodeGenerationSettings != null)
