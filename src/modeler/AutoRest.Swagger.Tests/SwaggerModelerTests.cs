@@ -85,6 +85,9 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal(description, codeModel.Methods[0].Description);
                 Assert.NotEmpty(codeModel.Methods[0].Summary);
                 Assert.Equal(summary, codeModel.Methods[0].Summary);
+                Assert.NotNull(codeModel.Methods[0].Tags);
+                Assert.Equal(1, codeModel.Methods[0].Tags.Length);
+                Assert.Equal("Redis", codeModel.Methods[0].Tags[0]);
                 Assert.Equal(HttpMethod.Get, codeModel.Methods[0].HttpMethod);
                 Assert.Equal(3, codeModel.Methods[0].Parameters.Count);
                 Assert.Equal("subscriptionId", codeModel.Methods[0].Parameters[0].Name);
@@ -116,6 +119,25 @@ namespace AutoRest.Swagger.Tests
 
                 Assert.Equal("Capacity", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[3].Name);
                 Assert.Equal("100", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[3].DefaultValue);
+            }
+        }
+
+
+        [Fact]
+        public void TestMissingTags()
+        {
+            using (NewContext)
+            {
+                new Settings
+                {
+                    Namespace = "Test",
+                    Input = Path.Combine("Swagger", "swagger-missing-tags.json")
+                };
+                Modeler modeler = new SwaggerModeler();
+                var codeModel = modeler.Build();
+
+                Assert.NotNull(codeModel.Methods[0].Tags);
+                Assert.Equal(0, codeModel.Methods[0].Tags.Length);
             }
         }
 

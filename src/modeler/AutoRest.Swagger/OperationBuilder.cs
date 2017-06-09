@@ -87,6 +87,7 @@ namespace AutoRest.Swagger
             method.Summary = _operation.Summary;
             method.ExternalDocsUrl = _operation.ExternalDocs?.Url;
             method.Deprecated = _operation.Deprecated;
+            method.Tags = _operation.Tags?.ToArray() ?? new string[] {};
 
             // Service parameters
             if (_operation.Parameters != null)

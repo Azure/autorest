@@ -241,6 +241,11 @@ namespace AutoRest.Core.Model
         public bool Deprecated { get; set; }
 
         /// <summary>
+        /// A list of tags indicating additional metadata.
+        /// </summary>
+        public string[] Tags { get; set; }
+
+        /// <summary>
         /// Determines whether the specified method is structurally equal to this object.
         /// </summary>
         /// <param name="other">The object to compare with this object.</param>
