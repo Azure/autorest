@@ -23,4 +23,8 @@
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp/AutoRest.CSharp.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Tests/AutoRest.CSharp.Tests.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="xunit" Version="2.2.0" />
+    <PackageReference Update="xunit.runner.visualstudio" Version="2.2.0" />
+  </ItemGroup>
 </Project>
