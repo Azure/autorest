@@ -1,0 +1,39 @@
+swagger: '2.0'
+info:
+  description: This is a sample.
+  version: 1.0.0
+  title: Cowbell Factory
+host: localhost
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  "/cowbell":
+    post:
+      description: A good description.
+      operationId: Cowbell_Add
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Cowbell'
+      responses:
+        '200':
+          description: Cowbell was added.
+definitions:
+  Cowbell:
+    required:
+    - name
+    properties:
+      id:
+        type: integer
+        format: int64
+        default: 42
+      name:
+        type: string
+        default: shiny
+    description: A cowbell.

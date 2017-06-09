@@ -238,6 +238,13 @@ namespace AutoRest.Core.Model
         /// Indicates if the method is deprecated.
         /// </summary>
         public bool Deprecated { get; set; }
+        
+        /// <summary>
+        /// Indicates if the method is supposed to be hidden from end-users.
+        /// This is useful if a convenience layer is built around the method,
+        /// rendering the method itself required but confusing or useless to end-users
+        /// </summary>
+        public bool Hidden { get; set; }
 
         /// <summary>
         /// Determines whether the specified method is structurally equal to this object.
