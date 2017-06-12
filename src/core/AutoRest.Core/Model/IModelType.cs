@@ -100,6 +100,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Allows a type to specify that it is a constant value
         /// </summary>
+        [JsonIgnore]
         public virtual bool IsConstant => false;
 
         /// <summary>

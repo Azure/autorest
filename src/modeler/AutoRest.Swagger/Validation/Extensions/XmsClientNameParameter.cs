@@ -50,7 +50,7 @@ namespace AutoRest.Swagger.Validation
         {
             if (parameter?.Extensions?.ContainsKey(extensionToCheck) == true)
             {
-                if (parameter.Extensions[extensionToCheck].ToString().EqualsIgnoreCase(parameter.Name))
+                if (parameter.Extensions[extensionToCheck].ToString().Equals(parameter.Name))
                 {
                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, parameter.Name);
                 }

@@ -24,7 +24,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#name': name
         '#serializedName': name
@@ -48,7 +47,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#defaultValue': Microsoft.Storage/storageAccounts
         '#name': type
@@ -82,7 +80,6 @@ modelTypes:
           knownPrimaryType: boolean
           className: Boolean
           declarationName: Boolean
-          isConstant: false
           '#name': Boolean
         '#documentation': >-
           Gets a boolean value that indicates whether the name is available for
@@ -121,7 +118,6 @@ modelTypes:
           declarationName: Reason
           extendedDocumentation: 'Possible values include: ''AccountNameInvalid'', ''AlreadyExists'''
           className: Reason
-          isConstant: false
           '#serializedName': Reason
           '#name': Reason
         '#documentation': >-
@@ -149,7 +145,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets an error message explaining the Reason value in more detail.
         '#name': message
@@ -206,7 +201,6 @@ modelTypes:
             Possible values include: 'Standard_LRS', 'Standard_ZRS',
             'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
           className: AccountType
-          isConstant: false
           '#serializedName': AccountType
           '#name': AccountType
         '#documentation': Gets or sets the account type.
@@ -241,7 +235,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Resource location
         '#name': location
@@ -270,12 +263,10 @@ modelTypes:
             knownPrimaryType: string
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           supportsAdditionalProperties: false
           className: 'Dictionary<string,String>'
           declarationName: 'Dictionary<string,String>'
-          isConstant: false
         '#documentation': Resource tags
         '#name': tags
         '#serializedName': tags
@@ -329,7 +320,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the blob endpoint.
         '#name': blob
@@ -354,7 +344,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the queue endpoint.
         '#name': queue
@@ -379,7 +368,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the table endpoint.
         '#name': table
@@ -404,7 +392,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the file endpoint.
         '#name': file
@@ -441,7 +428,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets or sets the custom domain name. Name is the CNAME source.
         '#name': name
@@ -466,7 +452,6 @@ modelTypes:
           knownPrimaryType: boolean
           className: Boolean
           declarationName: Boolean
-          isConstant: false
           '#name': Boolean
         '#documentation': >-
           Indicates whether indirect CName validation is enabled. Default value
@@ -519,7 +504,6 @@ modelTypes:
           declarationName: ProvisioningState
           extendedDocumentation: 'Possible values include: ''Creating'', ''ResolvingDNS'', ''Succeeded'''
           className: ProvisioningState
-          isConstant: false
           '#serializedName': ProvisioningState
           '#name': ProvisioningState
         '#documentation': >-
@@ -588,7 +572,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the location of the primary for the storage account.
         '#name': primaryLocation
@@ -624,7 +607,6 @@ modelTypes:
           declarationName: AccountStatus
           extendedDocumentation: 'Possible values include: ''Available'', ''Unavailable'''
           className: AccountStatus
-          isConstant: false
           '#serializedName': AccountStatus
           '#name': AccountStatus
         '#documentation': >-
@@ -653,7 +635,6 @@ modelTypes:
           knownPrimaryType: dateTime
           className: DateTime
           declarationName: DateTime
-          isConstant: false
           '#name': DateTime
         '#documentation': >-
           Gets the timestamp of the most recent instance of a failover to the
@@ -682,7 +663,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': >-
           Gets the location of the geo replicated secondary for the storage
@@ -735,7 +715,6 @@ modelTypes:
           knownPrimaryType: dateTime
           className: DateTime
           declarationName: DateTime
-          isConstant: false
           '#name': DateTime
         '#documentation': Gets the creation date and time of the storage account in UTC.
         '#name': creationTime
@@ -829,7 +808,6 @@ modelTypes:
             knownPrimaryType: string
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           '#documentation': Resource Id
           '#name': id
@@ -854,7 +832,6 @@ modelTypes:
             knownPrimaryType: string
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           '#documentation': Resource name
           '#name': name
@@ -879,7 +856,6 @@ modelTypes:
             knownPrimaryType: string
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           '#documentation': Resource type
           '#name': type
@@ -904,7 +880,6 @@ modelTypes:
             knownPrimaryType: string
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           '#documentation': Resource location
           '#name': location
@@ -933,12 +908,10 @@ modelTypes:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             supportsAdditionalProperties: false
             className: 'Dictionary<string,String>'
             declarationName: 'Dictionary<string,String>'
-            isConstant: false
           '#documentation': Resource tags
           '#name': tags
           '#serializedName': tags
@@ -979,7 +952,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the value of key 1.
         '#name': key1
@@ -1004,7 +976,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets the value of key 2.
         '#name': key2
@@ -1037,7 +1008,6 @@ modelTypes:
             $ref: '55'
           className: IList<StorageAccount>
           declarationName: IList<StorageAccount>
-          isConstant: false
         '#documentation': Gets the list of storage accounts and their properties.
         '#name': value
         '#serializedName': value
@@ -1129,12 +1099,10 @@ modelTypes:
             knownPrimaryType: string
             className: String
             declarationName: String
-            isConstant: false
             '#name': String
           supportsAdditionalProperties: false
           className: 'Dictionary<string,String>'
           declarationName: 'Dictionary<string,String>'
-          isConstant: false
         '#documentation': Resource tags
         '#name': tags
         '#serializedName': tags
@@ -1188,7 +1156,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#name': keyName
         '#serializedName': keyName
@@ -1221,7 +1188,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets a string describing the resource name.
         '#name': value
@@ -1246,7 +1212,6 @@ modelTypes:
           knownPrimaryType: string
           className: String
           declarationName: String
-          isConstant: false
           '#name': String
         '#documentation': Gets a localized string describing the resource name.
         '#name': localizedValue
@@ -1306,7 +1271,6 @@ modelTypes:
             Possible values include: 'Count', 'Bytes', 'Seconds', 'Percent',
             'CountsPerSecond', 'BytesPerSecond'
           className: UsageUnit
-          isConstant: false
           '#serializedName': UsageUnit
           '#name': UsageUnit
         '#documentation': Gets the unit of measurement.
@@ -1333,7 +1297,6 @@ modelTypes:
           knownPrimaryType: int
           className: Int
           declarationName: Int
-          isConstant: false
           '#name': Int
         '#documentation': Gets the current count of the allocated resources in the subscription.
         '#name': currentValue
@@ -1359,7 +1322,6 @@ modelTypes:
           knownPrimaryType: int
           className: Int
           declarationName: Int
-          isConstant: false
           '#name': Int
         '#documentation': >-
           Gets the maximum count of the resources that can be allocated in the
@@ -1411,7 +1373,6 @@ modelTypes:
             $ref: '93'
           className: IList<Usage>
           declarationName: IList<Usage>
-          isConstant: false
         '#documentation': Gets or sets the list Storage Resource Usages.
         '#name': value
         '#serializedName': value
@@ -1457,7 +1418,6 @@ properties:
       knownPrimaryType: string
       className: String
       declarationName: String
-      isConstant: false
       '#name': String
     '#documentation': >-
       Gets subscription credentials which uniquely identify Microsoft Azure
@@ -1485,7 +1445,6 @@ properties:
       knownPrimaryType: string
       className: String
       declarationName: String
-      isConstant: false
       '#name': String
     '#documentation': Client Api Version.
     '#name': api-version
@@ -1525,7 +1484,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -1547,7 +1505,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1578,6 +1535,7 @@ operations:
           - application/json
           - text/json
         deprecated: false
+        hidden: false
         '#name': CheckNameAvailability
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_CheckNameAvailability
@@ -1599,7 +1557,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -1622,7 +1579,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -1659,7 +1615,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -1681,7 +1636,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1720,6 +1674,7 @@ operations:
         extensions:
           x-ms-long-running-operation: true
         deprecated: false
+        hidden: false
         '#name': Create
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_Create
@@ -1741,7 +1696,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -1764,7 +1718,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -1789,7 +1742,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -1811,7 +1763,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1838,6 +1789,7 @@ operations:
           - application/json
           - text/json
         deprecated: false
+        hidden: false
         '#name': Delete
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_Delete
@@ -1859,7 +1811,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -1882,7 +1833,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -1907,7 +1857,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -1929,7 +1878,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1961,6 +1909,7 @@ operations:
           - application/json
           - text/json
         deprecated: false
+        hidden: false
         '#name': GetProperty
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_GetProperty
@@ -1982,7 +1931,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -2005,7 +1953,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -2044,7 +1991,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -2066,7 +2012,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2108,6 +2053,7 @@ operations:
           - application/json
           - text/json
         deprecated: false
+        hidden: false
         '#name': Update
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_Update
@@ -2129,7 +2075,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group.
             '#name': resourceGroupName
@@ -2152,7 +2097,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the storage account.
             '#name': accountName
@@ -2174,7 +2118,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -2196,7 +2139,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2225,6 +2167,7 @@ operations:
           - application/json
           - text/json
         deprecated: false
+        hidden: false
         '#name': ListKeys
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_ListKeys
@@ -2248,7 +2191,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -2270,7 +2212,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2305,6 +2246,7 @@ operations:
           x-ms-pageable:
             nextLinkName: null
         deprecated: false
+        hidden: false
         '#name': List
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_List
@@ -2326,7 +2268,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -2348,7 +2289,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -2370,7 +2310,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2405,6 +2344,7 @@ operations:
           x-ms-pageable:
             nextLinkName: null
         deprecated: false
+        hidden: false
         '#name': ListByResourceGroup
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_ListByResourceGroup
@@ -2426,7 +2366,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
@@ -2449,7 +2388,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -2488,7 +2426,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -2510,7 +2447,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2539,6 +2475,7 @@ operations:
           - application/json
           - text/json
         deprecated: false
+        hidden: false
         '#name': RegenerateKey
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_RegenerateKey
@@ -2587,7 +2524,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2613,7 +2549,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -2649,6 +2584,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
+            "hidden": false,
             "#name": "CheckNameAvailability",
             "#group": "StorageAccounts",
             "#serializedName": "StorageAccounts_CheckNameAvailability",
@@ -2672,7 +2608,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -2699,7 +2634,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -2740,7 +2674,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2766,7 +2699,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -2808,6 +2740,7 @@ operations:
               "x-ms-long-running-operation": true
             },
             "deprecated": false,
+            "hidden": false,
             "#name": "Create",
             "#group": "StorageAccounts",
             "#serializedName": "StorageAccounts_Create",
@@ -2831,7 +2764,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -2858,7 +2790,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -2884,7 +2815,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2910,7 +2840,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -2943,6 +2872,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
+            "hidden": false,
             "#name": "Delete",
             "#group": "StorageAccounts",
             "#serializedName": "StorageAccounts_Delete",
@@ -2966,7 +2896,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -2993,7 +2922,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -3019,7 +2947,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3045,7 +2972,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3081,6 +3007,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
+            "hidden": false,
             "#name": "GetProperty",
             "#group": "StorageAccounts",
             "#serializedName": "StorageAccounts_GetProperty",
@@ -3104,7 +3031,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -3131,7 +3057,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -3172,7 +3097,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3198,7 +3122,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3234,6 +3157,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
+            "hidden": false,
             "#name": "Update",
             "#group": "StorageAccounts",
             "#serializedName": "StorageAccounts_Update",
@@ -3257,7 +3181,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group.",
@@ -3284,7 +3207,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account.",
@@ -3310,7 +3232,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3336,7 +3257,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3372,6 +3292,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
+            "hidden": false,
             "#name": "ListKeys",
             "#group": "StorageAccounts",
             "#serializedName": "StorageAccounts_ListKeys",
@@ -3398,7 +3319,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3424,7 +3344,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3465,6 +3384,7 @@ operations:
               }
             },
             "deprecated": false,
+            "hidden": false,
             "#name": "List",
             "#group": "StorageAccounts",
             "#serializedName": "StorageAccounts_List",
@@ -3488,7 +3408,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -3514,7 +3433,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3540,7 +3458,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3581,6 +3498,7 @@ operations:
               }
             },
             "deprecated": false,
+            "hidden": false,
             "#name": "ListByResourceGroup",
             "#group": "StorageAccounts",
             "#serializedName": "StorageAccounts_ListByResourceGroup",
@@ -3604,7 +3522,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -3631,7 +3548,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -3672,7 +3588,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3698,7 +3613,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3734,6 +3648,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
+            "hidden": false,
             "#name": "RegenerateKey",
             "#group": "StorageAccounts",
             "#serializedName": "StorageAccounts_RegenerateKey",
@@ -3765,7 +3680,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
@@ -3787,7 +3701,6 @@ operations:
               knownPrimaryType: string
               className: String
               declarationName: String
-              isConstant: false
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -3821,6 +3734,7 @@ operations:
           x-ms-pageable:
             nextLinkName: null
         deprecated: false
+        hidden: false
         '#name': List
         '#group': Usage
         '#serializedName': Usage_List
@@ -3853,7 +3767,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3879,7 +3792,6 @@ operations:
                   "knownPrimaryType": "string",
                   "className": "String",
                   "declarationName": "String",
-                  "isConstant": false,
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3920,6 +3832,7 @@ operations:
               }
             },
             "deprecated": false,
+            "hidden": false,
             "#name": "List",
             "#group": "Usage",
             "#serializedName": "Usage_List",
