@@ -112,11 +112,13 @@ pipeline:
     scope: azure-validator-individual
   # validator written in TypeScript
   swagger-document/azure-openapi-validator:
-    input: transform
-    scope: azure-validator-composed # artificial predecessor in order to ensure order of messages for CI purposes
+    input:
+      - transform
+      - azure-validator 
   swagger-document/individual/azure-openapi-validator:
-    input: individual/transform
-    scope: azure-validator-individual # artificial predecessor in order to ensure order of messages for CI purposes
+    input: 
+      - transform
+      - azure-validator
 ```
 
 ``` yaml $(azure-validator)
