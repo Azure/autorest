@@ -1,4 +1,4 @@
-#AutoRest Documentation
+# AutoRest Documentation
 
 1. Installing AutoRest. 
     - You can [install AutoRest](./installing-autorest.md) on Windows, Mac, or Linux.
