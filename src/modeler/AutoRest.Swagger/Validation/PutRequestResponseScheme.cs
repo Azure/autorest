@@ -54,10 +54,9 @@ namespace AutoRest.Swagger.Validation
         /// throwing multiple validation messages for the same violation if related model/property,etc 
         /// was referenced in multiple files
         /// </summary>
-        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
 
         /// Verifies if a PUT operation request and response schemas match
-        /// TODO: apply on single spec level and ARM specs only
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
         {
             var serviceDefinition = (ServiceDefinition)context.Root;

@@ -24,7 +24,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// What kind of open api document type this rule should be applied to
         /// </summary>
-        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
 
         /// <summary>
         /// Whether the rule should be applied to the individual or composed context based on

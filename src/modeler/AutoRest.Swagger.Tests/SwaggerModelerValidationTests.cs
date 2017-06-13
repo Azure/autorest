@@ -626,7 +626,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void CleanFileValidation()
         {
-            // ind state
+            // individual state
             var subtest1md = new ServiceDefinitionMetadata
             {
                 ServiceDefinitionDocumentType = ServiceDefinitionDocumentType.ARM,
