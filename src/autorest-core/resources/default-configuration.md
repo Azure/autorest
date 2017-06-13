@@ -114,11 +114,11 @@ pipeline:
   swagger-document/azure-openapi-validator:
     input:
       - transform
-      - azure-validator 
+      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
   swagger-document/individual/azure-openapi-validator:
     input: 
       - transform
-      - azure-validator
+      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
 ```
 
 ``` yaml $(azure-validator)
