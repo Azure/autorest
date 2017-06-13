@@ -22,6 +22,7 @@ class App {
   private static listAvailable: number = cli['list-available'] ? (Number.isInteger(cli['list-available']) ? cli['list-available'] : 10) : 0;
   private static listInstalled: number = cli['list-installed'] ? (Number.isInteger(cli['list-installed']) ? cli['list-installed'] : 10) : 0;
   private static runtimeId?: string = cli['runtime-id'];
+  private static prerelease: boolean = cli['prerelease'] || false;
 
   private static version: string = cli.version || (cli.latest ? 'latest' : (cli['latest-release'] ? 'latest-release' : null));
   private static reset: boolean = cli.reset || false;
@@ -45,7 +46,7 @@ class App {
   }
 
   private static async GetReleases(): Promise<IEnumerable<Release>> {
-    return (await Github.List(App.feed)).Where(each => semver.valid(each.name, false) != null);
+    return (await Github.List(App.feed)).Where(each => semver.valid(each.name, false) != null && ((!each.prerelease) || this.prerelease));
   }
 
   private static async CheckBootstrapperVersion() {

@@ -6,11 +6,11 @@ import { DocumentPatterns } from './lib/core/lib/document-type';
 // exports the public AutoRest definitions
 export { Installer } from "./installer";
 export { IEvent } from './lib/core/lib/events';
-export { IFileSystem, Message } from './lib/core';
+export { IFileSystem, Message } from './lib/core/main';
 export { Asset, Release, Github } from './github'
 
 // the local class definition of the AutoRest Interface and the EventEmitter signatures
-import { AutoRest as IAutoRest, Channel as IChannel } from './lib/core';
+import { AutoRest as IAutoRest, Channel as IChannel } from './lib/core/main';
 import { EventEmitter as IEventEmitter } from './lib/core/lib/events';
 
 // export the selected implementation of the AutoRest interface.
