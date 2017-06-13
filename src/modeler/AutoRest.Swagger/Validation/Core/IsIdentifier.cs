@@ -73,7 +73,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// its merged document as specified in the corresponding '.md' file
         /// By default consider all rules to be applied for After only
         /// </summary>
-        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 
     }
 }

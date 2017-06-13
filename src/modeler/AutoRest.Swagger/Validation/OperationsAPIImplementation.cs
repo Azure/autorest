@@ -45,7 +45,12 @@ namespace AutoRest.Swagger.Validation
         public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.SDKImpactingChanges;
 
         /// <summary>
-        /// Represents Service Definition Document Type 
+        /// Whether the rule should be applied to the individual or composed context based on
+        /// the corresponding .md file
+        /// In most cases this should be composed
+        /// This is because validation rules that run in individual mode will end up
+        /// throwing multiple validation messages for the same violation if related model/property,etc 
+        /// was referenced in multiple files
         /// </summary>
         public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 
