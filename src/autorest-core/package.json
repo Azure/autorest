@@ -15,11 +15,11 @@
     "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
-  "main": "./index.js",
+  "main": "./main.js",
   "bin": {
     "autorest": "./app.js"
   },
-  "typings": "./index.d.ts",
+  "typings": "./main.d.ts",
   "devDependencies": {
     "@types/chalk": "*",
     "@types/marked": "*",

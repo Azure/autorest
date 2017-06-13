@@ -2,7 +2,7 @@
 global.basefolder = "#{__dirname}"
 
 # use our tweaked version of gulp with iced coffee.
-require './src/gulp_modules/gulp.iced'
+require './.gulp/gulp.iced'
 semver = require 'semver'
 
 # tasks required for this build 
