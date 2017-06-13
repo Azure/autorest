@@ -73,7 +73,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   result["license-header"] = switches["header"] || undefined;
 
-  result["payload-flattening-threshold"] = parseInt(switches["fs"] || switches["payloadflatteningthreshold"] || "0");
+  result["payload-flattening-threshold"] = parseInt(switches["ft"] || switches["payloadflatteningthreshold"] || "0");
 
   result["sync-methods"] = <any>switches["syncmethods"] || undefined;
 
