@@ -1,0 +1,452 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BatchManagementDummy",
+    "version": "2017-05-01",
+    "x-ms-code-generation-settings": {
+      "name": "BatchManagementDummyClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}": {
+      "put": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Create",
+        "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
+            "description": "A name for the Batch account which must be unique within the region. Batch account names must be between 3 and 24 characters in length and must use only numbers and lowercase letters. This name is used as part of the DNS name that is used to access the Batch service in the region in which the account is created. For example: http://accountname.region.batch.azure.com/."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchAccountCreateParameters"
+            },
+            "description": "Additional parameters for account creation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account entity.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "x-ms-headers": {
+              "$ref": "#/definitions/RetryHeader"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Update",
+        "description": "Updates the properties of an existing Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchAccountUpdateParameters"
+            },
+            "description": "Additional parameters for account update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account entity.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Delete",
+        "description": "Deletes the specified Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "x-ms-headers": {
+              "$ref": "#/definitions/RetryHeader"
+            },
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent -- account does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Get",
+        "description": "Gets information about the specified Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account entity.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RetryHeader": {
+      "properties": {
+        "Location": {
+          "description": "The URL of the resource used to check the status of the asynchronous operation.",
+          "type": "string"
+        },
+        "Retry-After": {
+          "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AutoStorageBaseProperties": {
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The resource ID of the storage account to be used for auto-storage account."
+        }
+      },
+      "required": [
+        "storageAccountId"
+      ],
+      "description": "The properties related to the auto-storage account."
+    },
+    "BatchAccountCreateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The region in which to create the account."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the account."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the Create operation."
+    },
+    "KeyVaultReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the Azure key vault associated with the Batch account."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the Azure key vault associated with the Batch account."
+        }
+      },
+      "required": [
+        "id",
+        "url"
+      ],
+      "description": "Identifies the Azure key vault associated with a Batch account."
+    },
+    "BatchAccountProperties": {
+      "properties": {
+        "accountEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The account endpoint used to interact with the Batch service."
+        },
+        "keyVaultReference": {
+          "title": "A reference to the Azure key vault associated with the Batch account.",
+          "readOnly": true,
+          "$ref": "#/definitions/KeyVaultReference"
+        }
+      },
+      "description": "Account specific properties."
+    },
+    "BatchAccount": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BatchAccountProperties",
+          "description": "The properties associated with the account."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Contains information about an Azure Batch account."
+    },
+    "BatchAccountUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the account."
+        }
+      },
+      "description": "Parameters for updating an Azure Batch account."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The tags of the resource."
+        }
+      },
+      "description": "A definition of an Azure resource.",
+      "x-ms-azure-resource": true
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "description": "An error response from the Batch service."
+    },
+    "Operation": {
+      "title": "A REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "title": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "title": "Friendly name of the resource provider.",
+              "type": "string"
+            },
+            "operation": {
+              "title": "The operation type.",
+              "description": "For example: read, write, delete, or listKeys/action",
+              "type": "string"
+            },
+            "resource": {
+              "title": "The resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "title": "The friendly name of the operation",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "title": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Properties of the operation.",
+          "type": "object"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    }, 
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._]+$",
+      "description": "The name of the resource group that contains the Batch account.",
+      "x-ms-parameter-location": "method"
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._]+$",
+      "minLength": 3,
+      "maxLength": 24,
+      "description": "The name of the Batch account.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

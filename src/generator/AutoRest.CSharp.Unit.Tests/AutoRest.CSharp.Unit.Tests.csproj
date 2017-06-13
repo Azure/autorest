@@ -9,6 +9,9 @@
     <!--<RuntimeIdentifier>win7-x64</RuntimeIdentifier>-->
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Resource\SharedResponseHeaders\SharedResponseHeaders.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resource\XMsEnum\XMsEnum.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
