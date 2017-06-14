@@ -6,19 +6,6 @@ task 'copy-dts-files', '', (done)->
   source ["#{basefolder}/src/autorest-core/dist/**/*.d.ts","!#{basefolder}/src/autorest-core/dist/test/**" ]
     .pipe destination "#{basefolder}/src/autorest/lib/core"
 
-
-
-# build task for tsc 
-task 'pre-build', 'typescript', (done)-> 
-  # symlink the build into the target folder for the binaries.
-  if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
-    mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
-
-  if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core"
-    fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core",'junction' 
-  done()
-  
-
 task 'fix-line-endings', 'typescript', ->
   typescriptFiles()
     .pipe eol {eolc: 'LF', encoding:'utf8'}
@@ -114,3 +101,12 @@ task 'npm-install', '', ['init-deps'], (done)->
 
       next null
     return null
+
+task 'pre-build', 'typescript', (done)-> 
+  # symlink the build into the target folder for the binaries.
+  if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
+    mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
+
+  if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core"
+    fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core",'junction' 
+  done()
