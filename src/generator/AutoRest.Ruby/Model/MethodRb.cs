@@ -568,23 +568,24 @@ namespace AutoRest.Ruby.Model
 
             return modelName;
         }
-        
+
         /// <summary>
         /// Constructs mapper for the request body.
         /// </summary>
-        /// <param name="outputVariable">Name of the output variable.</param>
-        /// <returns>Mapper for the request body as string.</returns>
-        public string ConstructRequestBodyMapper(string outputVariable = "request_mapper")
+        /// <param name="requestContent">Name of the output variable.</param>
+        /// <returns>Mapper for the request content as string.</returns>
+        public string ConstructRequestBodyContent(string requestContent = "request_content")
         {
             var builder = new IndentedStringBuilder("  ");
             if (RequestBody.ModelType is CompositeType)
             {
-                builder.AppendLine("{0} = {1}.mapper()", outputVariable, GetModelName(RequestBody.ModelType.Name));
+                builder.AppendLine("{0} = {1}.to_json", requestContent, RequestBody.Name);
             }
             else
             {
-                builder.AppendLine("{0} = {{{1}}}", outputVariable,
+                builder.AppendLine("request_mapper = {{{0}}}",
                     RequestBody.ModelType.ConstructMapper(RequestBody.SerializedName, RequestBody, false));
+                builder.AppendLine("{0} = {1}.to_json(request_mapper)", requestContent, RequestBody.Name);
             }
             return builder.ToString();
         }
@@ -605,21 +606,14 @@ namespace AutoRest.Ruby.Model
             }
 
             var builder = new IndentedStringBuilder("  ");
-            if (type is CompositeType)
-            {
-                builder.AppendLine("result_mapper = {0}.mapper()", GetModelName(type.Name));
-            }
-            else
+            if (!(type is CompositeType) && !(MethodGroup.IsCodeModelMethodGroup))
             {
                 builder.AppendLine("result_mapper = {{{0}}}", type.ConstructMapper(responseVariable, null, false));
-            }
-            if (MethodGroup.IsCodeModelMethodGroup)
-            {
-                builder.AppendLine("{1} = self.deserialize(result_mapper, {0}, '{1}')", responseVariable, valueReference);
+                builder.AppendLine("{1} = Class.new.extend(MsRest::JSONable).from_json({0}, result_mapper)", responseVariable, valueReference);
             }
             else
             {
-                builder.AppendLine("{1} = @client.deserialize(result_mapper, {0}, '{1}')", responseVariable, valueReference);
+                builder.AppendLine("{1} = {2}.new.from_json({0})", responseVariable, valueReference, GetModelName(type.Name));
             }
 
             return builder.ToString();
