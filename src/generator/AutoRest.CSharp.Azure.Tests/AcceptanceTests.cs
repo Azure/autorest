@@ -181,6 +181,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Equal("100", client.LROs.PutNonResource(new Sku()).Id);
                 Assert.Equal("100", client.LROs.PutAsyncNonResource(new Sku()).Id);
                 // client.LROs.Post202Retry200(new Product { Location = "West US" });
+                // ^ non terminating
                 Assert.Equal("Succeeded", client.LROs.Put200Succeeded(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Equal("100", client.LROs.Put200SucceededNoState(new Product { Location = "West US" }).Id);
                 Assert.Equal("100", client.LROs.Put202Retry200(new Product { Location = "West US" }).Id);
@@ -208,7 +209,9 @@ namespace AutoRest.CSharp.Azure.Tests
                 client.LROs.DeleteAsyncRetrySucceeded();
                 client.LROs.DeleteProvisioning202Accepted200Succeeded();
                 // client.LROs.DeleteProvisioning202Deletingcanceled200();
+                // ^ CloudEx
                 // client.LROs.DeleteProvisioning202DeletingFailed200();
+                // ^ CloudEx "... failed with status 'Failed'"
                 client.LROs.Post202NoRetry204(new Product { Location = "West US" });
                 exception = Assert.Throws<CloudException>(() => client.LROs.PostAsyncRetryFailed());
                 Assert.Contains("Long running operation failed with status 'Failed'", exception.Message,
@@ -337,6 +340,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Equal("The response from long running operation does not contain a body.", exception.Message);
 
                 // Assert.Throws<CloudException>(() => client.LROSADs.Put200InvalidJson(new Product { Location = "West US" }));
+                // ^ SerializationEx
 
                 Assert.Throws<CloudException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product { Location = "West US" }));
@@ -344,7 +348,6 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Throws<SerializationException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product { Location = "West US" }));
 
-                // UriFormatException invalidHeader = null;
                 var invalidHeader = Assert.Throws<SerializationException>(() => client.LROSADs.Delete202RetryInvalidHeader());
                 Assert.NotNull(invalidHeader.Message);
 
