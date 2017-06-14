@@ -339,6 +339,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A long running operation must have &apos;x-ms-long-running-operation&apos; extension enabled..
+        /// </summary>
+        public static string LongRunningOperationsWithLongRunningExtensionError {
+            get {
+                return ResourceManager.GetString("LongRunningOperationsWithLongRunningExtensionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A &apos;{0}&apos; operation &apos;{1}&apos; with x-ms-long-running-operation extension must have a valid terminal success status code {2}..
         /// </summary>
         public static string LongRunningResponseNotValid {

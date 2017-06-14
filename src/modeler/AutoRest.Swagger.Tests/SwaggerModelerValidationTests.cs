@@ -630,6 +630,19 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(SummaryAndDescriptionMustNotBeSame), 1);
         }
 
+        [Fact]
+        public void LongRunningHasExtensionValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "long-running-operation-extension.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningOperationsWithLongRunningExtension), 1);
+        }
+
+        [Fact]
+        public void LongRunningHasExtensionTrueValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "long-running-operation-extension-2.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningOperationsWithLongRunningExtension), 1);
+        }
     }
 
     #region Positive tests

@@ -15,6 +15,8 @@ ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples des
     - /Samples/3a-literate-swagger/swagger.md:178:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete)
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_List'
     - /Samples/3a-literate-swagger/swagger.md:207:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get)
+WARNING (LongRunningOperationsWithLongRunningExtension/R2065/SDKViolation): A long running operation must have 'x-ms-long-running-operation' extension enabled.
+    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
 ERROR (RequiredPropertiesMissingInResourceModel/R2020/RPCViolation): Model definition 'SearchServiceResource' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
     - /Samples/3a-literate-swagger/swagger.md:283:2 ($.definitions.SearchServiceResource)
 WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'Error' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.

@@ -132,7 +132,8 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation":  true
       }
     },
     "/pets/{petId}": {
