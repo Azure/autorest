@@ -6,7 +6,7 @@ import * as https from 'https';
 import { parse as parseUrl } from 'url';
 import { Asset, Release, Github } from './github'
 import { Enumerable as IEnumerable, From } from 'linq-es2015';
-import { Utility } from './utility'
+
 import { Installer } from './installer'
 import * as semver from 'semver'
 import { argv as cli } from 'yargs'
