@@ -129,6 +129,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(XmsEnumValidation))]
         [CollectionRule(typeof(RequiredReadOnlyProperties))]
         [Rule(typeof(XmsPageableListByRGAndSubscriptions))]
+        [Rule(typeof(ResourceRequiredMustNotHaveName))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>
