@@ -249,10 +249,6 @@ namespace Microsoft.Perks.JsonRPC
 
         public void Process(JToken content)
         {
-            if (content == null)
-            {
-                return;
-            }
             if (content is JObject)
             {
                 Task.Factory.StartNew(async () => {
@@ -261,7 +257,6 @@ namespace Microsoft.Perks.JsonRPC
                     {
                         if (jobject.Properties().Any(each => each.Name == "method"))
                         {
-                            
                             var method = jobject.Property("method").Value.ToString();
                             var id = jobject.Property("id")?.Value.ToString();
                             // this is a method call.
@@ -273,9 +268,8 @@ namespace Microsoft.Perks.JsonRPC
                                 if (id != null)
                                 {
                                     // if this is a request, send the response.
-                                    await this.Send(ProtocolExtensions.Response(id, result));
+                                    await Respond(id, result);
                                 }
-                                // 
                             }
                             return;
                         }
@@ -287,15 +281,14 @@ namespace Microsoft.Perks.JsonRPC
                             if (!string.IsNullOrEmpty(id))
                             {
                                 ICallerResponse f = null;
-                                lock( _tasks ) {
+                                lock( _tasks )
+                                {
                                     f = _tasks[id];
                                     _tasks.Remove(id);
                                 }
                                 f.SetCompleted(jobject.Property("result").Value);
                             }
-
                         }
-
                     }
                     catch (Exception e)
                     {
@@ -355,9 +348,9 @@ namespace Microsoft.Perks.JsonRPC
         {
             await Send(ProtocolExtensions.Error(id, code, message)).ConfigureAwait(false);
         }
-        public async Task Respond(string request, string value)
+        public async Task Respond(string id, string value)
         {
-            await Send(ProtocolExtensions.Response(request, value)).ConfigureAwait(false);
+            await Send(ProtocolExtensions.Response(id, value)).ConfigureAwait(false);
         }
 
         public async Task Notify(string methodName, params object[] values) =>
@@ -367,7 +360,7 @@ namespace Microsoft.Perks.JsonRPC
 
         public async Task<T> Request<T>(string methodName, params object[] values)
         {
-            var id = Interlocked.Increment(ref _requestId).ToString();
+            var id = Interlocked.Decrement(ref _requestId).ToString();
             var response = new CallerResponse<T>(id);
             lock( _tasks ) { _tasks.Add(id, response); }
             await Send(ProtocolExtensions.Request(id, methodName, values)).ConfigureAwait(false);
@@ -376,7 +369,7 @@ namespace Microsoft.Perks.JsonRPC
 
         public async Task<T> RequestWithObject<T>(string methodName, object parameter)
         {
-            var id = Interlocked.Increment(ref _requestId).ToString();
+            var id = Interlocked.Decrement(ref _requestId).ToString();
             var response = new CallerResponse<T>(id);
             lock( _tasks ) { _tasks.Add(id, response); }
             await Send(ProtocolExtensions.Request(id, methodName, parameter)).ConfigureAwait(false);

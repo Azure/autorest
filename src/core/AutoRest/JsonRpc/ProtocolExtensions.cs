@@ -69,7 +69,7 @@ namespace Microsoft.Perks.JsonRPC
         ///<Summary>
         /// Returns the JSON-RPC protocol pair
         ///</Summary>
-        private static string Protocol = MemberValue("jsonRpc","2.0");
+        private static string Protocol = MemberValue("jsonrpc","2.0");
         
         ///<Summary>
         /// Formats 'id' member

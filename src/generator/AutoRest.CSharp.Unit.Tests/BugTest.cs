@@ -23,10 +23,7 @@ namespace AutoRest.CSharp.Unit.Tests {
     using Xunit.Abstractions;
     using OutputKind = Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind;
     using System.Reflection;
-#if !LEGACY
-    using System.Runtime.Loader;
-#else     
-#endif    
+    using System.Runtime.Loader; 
     
 
     public class BugTest {
@@ -39,11 +36,7 @@ namespace AutoRest.CSharp.Unit.Tests {
         };
 
         protected Assembly LoadAssembly(MemoryStream stream) {
-#if !Legacy
-            return AssemblyLoadContext.Default.LoadFromStream(stream);
-#else 
-           return Assembly.Load(stream.ToArray());
-#endif            
+            return AssemblyLoadContext.Default.LoadFromStream(stream);    
         }
 
         internal static char Q = '"';
@@ -185,7 +178,6 @@ namespace AutoRest.CSharp.Unit.Tests {
         protected static readonly string[] _assemblies = new[] {
             
             Path.Combine(FRAMEWORK, "System.Runtime.dll"),
-            Path.Combine(FRAMEWORK, "System.Net.Http.dll"),
             Path.Combine(FRAMEWORK, "mscorlib.dll"),
             Path.Combine(FRAMEWORK, "System.Threading.Tasks.dll"),
             Path.Combine(FRAMEWORK, "System.Net.Primitives.dll"),
@@ -193,8 +185,9 @@ namespace AutoRest.CSharp.Unit.Tests {
             Path.Combine(FRAMEWORK, "System.Text.Encoding.dll"),
             Path.Combine(FRAMEWORK, "System.Text.RegularExpressions.dll"),
             Path.Combine(FRAMEWORK, "System.IO.dll"),
-            
 
+
+            typeof(HttpClient).GetAssembly().Location,
             typeof(Object).GetAssembly().Location,
             typeof(Attribute).GetAssembly().Location,
             typeof(IAzureClient).GetAssembly().Location,
@@ -211,7 +204,7 @@ namespace AutoRest.CSharp.Unit.Tests {
 
         };
 
-        protected async Task<Microsoft.Rest.CSharp.Compiler.Compilation.CompilationResult> Compile(IFileSystem fileSystem) {
+        protected async Task<CompilationResult> Compile(IFileSystem fileSystem) {
             var compiler = new CSharpCompiler(fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
                 .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadAllText(each))).ToArray(), _assemblies);
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
