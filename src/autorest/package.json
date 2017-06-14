@@ -31,11 +31,20 @@
     "@types/semver": "^5.3.30",
     "mocha": "3.2.0",
     "mocha-typescript": "1.0.22",
+    "@types/commonmark": "^0.22.29",
+    "commonmark": "^0.27.0",
     "typescript": "2.3.3",
-    "source-map-support": "^0.4.14"
+    "source-map-support": "^0.4.14",
+    "source-map": "^0.5.6",
+    "@types/source-map": "^0.5.0",
+    "jsonpath": "^0.2.11",
+  "vscode-jsonrpc": "^3.1.0",
+  "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz"
   },
   "dependencies": {
-    "@microsoft.azure/dotnet-install" : "^1.0.0",
+    "@microsoft.azure/polyfill" : "^1.0.1",
+    "@microsoft.azure/extension" : "^1.0.2",
+    "@microsoft.azure/async-io" : "^1.0.1",
   
     "linq-es2015": "^2.4.13",
     "semver": "^5.3.0"

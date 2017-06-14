@@ -54,7 +54,6 @@ gulp.Gulp::_runTask = (task) ->
 #  echo 'this.currentStartTaskName: ' + this.currentStartTaskName
 #  echo 'this.currentRunTaskName: ' + this.currentRunTaskName
 
-
 # bring some gulp-Plugins along
 Plugin 'filter',
   'zip'

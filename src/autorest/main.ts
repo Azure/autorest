@@ -4,19 +4,22 @@ require("./lib/polyfill.min.js")
 import { DocumentPatterns } from './lib/core/lib/document-type';
 
 // exports the public AutoRest definitions
-export { Installer } from "./installer";
 export { IEvent } from './lib/core/lib/events';
 export { IFileSystem, Message } from './lib/core/main';
-export { Asset, Release, Github } from './github'
 
 // the local class definition of the AutoRest Interface and the EventEmitter signatures
 import { AutoRest as IAutoRest, Channel as IChannel } from './lib/core/main';
 import { EventEmitter as IEventEmitter } from './lib/core/lib/events';
 
 // export the selected implementation of the AutoRest interface.
-import { Installer } from "./installer"
 
-let modulePath = /(\\||\/)src(\\||\/)autorest(\\||\/)/.test(__dirname) ? `${__dirname}/../autorest-core` : Installer.AutorestImplementationPath
+
+function AutorestImplementationPath(): string {
+  // return join(Installer.AutorestFolder, this.LatestAutorestVersion, 'node_modules', 'autorest-core');
+  return "FOOO";
+}
+
+let modulePath = /(\\||\/)src(\\||\/)autorest(\\||\/)/.test(__dirname) ? `${__dirname}/../autorest-core` : AutorestImplementationPath()
 let impl = require(modulePath);
 
 export const AutoRest: typeof IAutoRest = <typeof IAutoRest><any>impl.AutoRest

@@ -16,33 +16,8 @@ task 'pre-build', 'typescript', (done)->
 
   if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core"
     fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core",'junction' 
-
-  # Compile the core
-  execute "#{basefolder}/node_modules/.bin/tsc --project #{basefolder}/src/autorest-core", (c,o,e)-> 
-    # after this is compiled, then we can compile the other one.
-    run "copy-dts-files", ->
-      execute "#{basefolder}/node_modules/.bin/tsc --project #{basefolder}/src/autorest", (cc,oo,ee)-> 
-        # after this is compiled we can go into watch mode if we are told to.
-        if watch 
-          watchFiles ["#{basefolder}/src/autorest-core/**/*.d.ts"], ["copy-dts-files"]
-
-          execute "#{basefolder}/node_modules/.bin/tsc --watch --project #{basefolder}/src/autorest-core", (c,o,e)-> 
-            #nothing
-            echo "hi"
-          , (d) -> echo d.replace(/^src\//mig, "#{basefolder}/src/")
-          execute "#{basefolder}/node_modules/.bin/tsc --watch --project #{basefolder}/src/autorest", (c,o,e)->  
-            #nothing
-            echo "there"
-          , (d) -> echo d.replace(/^src\//mig, "#{basefolder}/src/")
-        
-        done();
-      , (d) ->  # fix filenames for vscode consumption
-        echo d.replace(/^src\//mig, "#{basefolder}/src/")    
-
-  , (data) -> # fix filenames for vscode consumption
-    echo data.replace(/^src\//mig, "#{basefolder}/src/")
-
-  return null
+  done()
+  
 
 task 'fix-line-endings', 'typescript', ->
   typescriptFiles()
@@ -89,14 +64,14 @@ task 'test', 'typescript',['build/typescript'], (done)->
 task "compile/typescript", '' , (done)->  
   done()
 
-task 'build', 'typescript', (done)-> 
- # watch for changes to these files and propogate them to the right spot.
- watcher = watchFiles ["#{basefolder}/src/autorest-core/**/*.d.ts"], ["copy-dts-files"]
-
+task 'build', 'typescript',["pre-build"], (done)-> 
+  # watch for changes to these files and propogate them to the right spot.
+  watcher = watchFiles ["#{basefolder}/src/autorest-core/dist/**/*.d.ts"], ["copy-dts-files"]
+  
   typescriptProjectFolders()
     .on 'end', -> 
       run 'compile/typescript', -> 
-        watcher.close() if !watch
+        watcher._watcher.close() if !watch
         done()
 
     .pipe where (each ) -> 

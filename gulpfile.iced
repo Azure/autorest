@@ -143,7 +143,7 @@ task 'init', "" ,(done)->
   return done() if initialized
   global.initialized = true
   # if the node_modules isn't created, do it.
-   if fileExists "#{basefolder}/package-lock.json" 
+  if fileExists "#{basefolder}/package-lock.json" 
     doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/package-lock.json") 
   else 
     doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
