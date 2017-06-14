@@ -35,3 +35,16 @@ WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'target' model/property
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)
 WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)
+module.js:472
+    throw err;
+    ^
+
+Error: Cannot find module 'C:\work\autorest\src\autorest-core\node_modules\@microsoft.azure\openapi-validator'
+   at ...
+FATAL: swagger-document/individual/azure-openapi-validator - FAILED
+FATAL: swagger-document/azure-openapi-validator - FAILED
+(node:24152) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: AutoRest plugin terminated.
+(node:24152) DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:24152) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 2): Error: AutoRest plugin terminated.
+Error: AutoRest plugin terminated.
+   at ...
