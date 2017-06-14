@@ -56,13 +56,3 @@ WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'properties' model/prop
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:716:8 ($.definitions.StorageAccountUpdateParameters.properties.properties)
 WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'keyName' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:726:8 ($.definitions.StorageAccountRegenerateKeyParameters.properties.keyName)
-module.js:472
-    throw err;
-    ^
-
-Error: Cannot find module 'C:\work\autorest\src\autorest-core\node_modules\@microsoft.azure\openapi-validator'
-   at ...
-FATAL: swagger-document/individual/azure-openapi-validator - FAILED
-FATAL: swagger-document/azure-openapi-validator - FAILED
-Error: AutoRest plugin terminated.
-   at ...
