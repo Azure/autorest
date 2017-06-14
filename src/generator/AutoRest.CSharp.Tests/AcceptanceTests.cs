@@ -1864,11 +1864,8 @@ namespace AutoRest.CSharp.Tests
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get302WithHttpMessagesAsync());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
             // EnsureStatusCode(HttpStatusCode.Found, () => client.HttpRedirects.Patch302WithHttpMessagesAsync(true));
-#if !LEGACY
             //TODO, Fix this test on PORTABLE
-#else
-            EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
-#endif
+            //EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head307WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get307WithHttpMessagesAsync());
             //TODO, 4042586: Support options operations in swagger modeler
@@ -2379,13 +2376,8 @@ namespace AutoRest.CSharp.Tests
                 {
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
                 }
-#if !LEGACY
-                int totalTests = report.Count - 54;
-#else
                 // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
-                int totalTests = report.Count - 3; // there are three tests that fail 
-                logger.LogInformation("TODO: FYI, there are three tests that are not actually running.");
-#endif
+                int totalTests = report.Count - 54;
                 int executedTests = report.Values.Count(v => v > 0);
 
                 var nullValued = report.Where(p => p.Value == null).Select(p => p.Key);

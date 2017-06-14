@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 client.LROs.DeleteAsyncRetrySucceeded();
                 client.LROs.DeleteProvisioning202Accepted200Succeeded();
                 // client.LROs.DeleteProvisioning202Deletingcanceled200();
-                // ^ CloudEx
+                // ^ CloudEx "... canceled"
                 // client.LROs.DeleteProvisioning202DeletingFailed200();
                 // ^ CloudEx "... failed with status 'Failed'"
                 client.LROs.Post202NoRetry204(new Product { Location = "West US" });
@@ -491,12 +491,8 @@ namespace AutoRest.CSharp.Azure.Tests
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 var report = client.GetReport();
-#if !LEGACY
-                float totalTests = report.Count - 11;
-#else
                 // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
-                float totalTests = report.Count;
-#endif
+                float totalTests = report.Count - 11;
                 float executedTests = report.Values.Count(v => v > 0);
                 if (executedTests < totalTests)
                 {

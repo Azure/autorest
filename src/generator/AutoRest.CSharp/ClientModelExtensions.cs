@@ -383,18 +383,7 @@ namespace AutoRest.CSharp
         /// </summary>
         private static string ToLiteral(string input)
         {
-#if LEGACY            
-            using (var writer = new StringWriter())
-            {
-                using (var provider = CodeDomProvider.CreateProvider("CSharp"))
-                {
-                    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
-                    return writer.ToString();
-                }
-            }
-#else 
             return "\"" + input.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
-#endif             
         }
 
         private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, IModelType type)
