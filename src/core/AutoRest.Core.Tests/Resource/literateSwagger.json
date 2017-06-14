@@ -290,7 +290,7 @@
             "description": "The String value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'",
             "schema": {
               "$ref": "#/definitions/RefColors"
-            },
+            }
           },
           "default": {
             "description": "Unexpected error",
@@ -341,7 +341,7 @@
             "description": "The String value 'green-color' from a constant",
             "schema": {
               "$ref": "#/definitions/RefColorConstant"
-            },
+            }
           },
           "default": {
             "description": "Unexpected error",

@@ -36,39 +36,23 @@ namespace AutoRest.Ruby.Azure
 
             if (primary != null)
             {
-                if (primary.KnownPrimaryType == KnownPrimaryType.Int || primary.KnownPrimaryType == KnownPrimaryType.Long)
+                switch (primary.KnownPrimaryType)
                 {
-                    return builder.AppendLine("{0} = Integer({0}) unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.KnownPrimaryType == KnownPrimaryType.Double)
-                {
-                    return builder.AppendLine("{0} = Float({0}) unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.KnownPrimaryType == KnownPrimaryType.ByteArray)
-                {
-                    return builder.AppendLine("{0} = Base64.strict_decode64({0}).unpack('C*') unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.KnownPrimaryType == KnownPrimaryType.Date)
-                {
-                    return builder.AppendLine("{0} = MsRest::Serialization.deserialize_date({0}) unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.KnownPrimaryType == KnownPrimaryType.DateTime)
-                {
-                    return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.KnownPrimaryType == KnownPrimaryType.UnixTime)
-                {
-                    return builder.AppendLine("{0} = DateTime.strptime({0}.to_s, '%s') unless {0}.to_s.empty?", valueReference).ToString();
+                    case KnownPrimaryType.Int:
+                    case KnownPrimaryType.Long:
+                        return builder.AppendLine("{0} = Integer({0}) unless {0}.to_s.empty?", valueReference).ToString();
+                    case KnownPrimaryType.Double:
+                        return builder.AppendLine("{0} = Float({0}) unless {0}.to_s.empty?", valueReference).ToString();
+                    case KnownPrimaryType.ByteArray:
+                        return builder.AppendLine("{0} = Base64.strict_decode64({0}).unpack('C*') unless {0}.to_s.empty?", valueReference).ToString();
+                    case KnownPrimaryType.Date:
+                        return builder.AppendLine("{0} = MsRest::Serialization.deserialize_date({0}) unless {0}.to_s.empty?", valueReference).ToString();
+                    case KnownPrimaryType.DateTime:
+                        return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
+                    case KnownPrimaryType.UnixTime:
+                        return builder.AppendLine("{0} = DateTime.strptime({0}.to_s, '%s') unless {0}.to_s.empty?", valueReference).ToString();
                 }
             }
             else if (enumType != null && !string.IsNullOrEmpty(enumType.Name))
@@ -163,24 +147,16 @@ namespace AutoRest.Ruby.Azure
 
             if (primary != null)
             {
-                if (primary.KnownPrimaryType == KnownPrimaryType.ByteArray)
+                switch (primary.KnownPrimaryType)
                 {
-                    return builder.AppendLine("{0} = Base64.strict_encode64({0}.pack('c*'))", valueReference).ToString();
-                }
-
-                if (primary.KnownPrimaryType == KnownPrimaryType.DateTime)
-                {
-                    return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%FT%TZ')", valueReference).ToString();
-                }
-
-                if (primary.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%a, %d %b %Y %H:%M:%S GMT')", valueReference).ToString();
-                }
-
-                if (primary.KnownPrimaryType == KnownPrimaryType.UnixTime)
-                {
-                    return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%s')", valueReference).ToString();
+                    case KnownPrimaryType.ByteArray:
+                        return builder.AppendLine("{0} = Base64.strict_encode64({0}.pack('c*'))", valueReference).ToString();
+                    case KnownPrimaryType.DateTime:
+                        return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%FT%TZ')", valueReference).ToString();
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%a, %d %b %Y %H:%M:%S GMT')", valueReference).ToString();
+                    case KnownPrimaryType.UnixTime:
+                        return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%s')", valueReference).ToString();
                 }
             }
             else if (sequence != null)

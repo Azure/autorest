@@ -6,7 +6,6 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core {
     using System;
-    using System.IO;
     using Model;
     using Newtonsoft.Json;
     using Utilities;

@@ -2,14 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Globalization;
 using Newtonsoft.Json;
-using AutoRest.Core.Logging;
-using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
-using System.Text.RegularExpressions;
 using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model

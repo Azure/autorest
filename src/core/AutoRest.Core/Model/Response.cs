@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using System.Globalization;
 using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.Model
@@ -47,8 +46,8 @@ namespace AutoRest.Core.Model
             {
                 return false;
             }
-            return (Body == null ? other.Body == null : Body.StructurallyEquals(other.Body))
-                && (Headers == null ? other.Headers == null : Headers.StructurallyEquals(other.Headers));
+            return (Body?.StructurallyEquals(other.Body) ?? other.Body == null)
+                && (Headers?.StructurallyEquals(other.Headers) ?? other.Headers == null);
         }
         public Dictionary<string, object> Extensions { get; set; } = new Dictionary<string, object>();
 

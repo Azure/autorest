@@ -13,9 +13,6 @@ namespace AutoRest.AzureResourceSchema
     /// </summary>
     public class ResourceSchema
     {
-        private IDictionary<string, JsonSchema> resourceDefinitions = new Dictionary<string,JsonSchema>();
-        private IDictionary<string, JsonSchema> definitions = new Dictionary<string, JsonSchema>();
-
         /// <summary>
         /// The id metadata that uniquely identifies this schema. Usually this will be the URL to
         /// the permanent location of this schema in schema.management.azure.com/schemas/.
@@ -41,19 +38,13 @@ namespace AutoRest.AzureResourceSchema
         /// <summary>
         /// The named JSON schemas that define the resources of this resource schema.
         /// </summary>
-        public IDictionary<string, JsonSchema> ResourceDefinitions
-        {
-            get { return resourceDefinitions; }
-        }
+        public IDictionary<string, JsonSchema> ResourceDefinitions { get; } = new Dictionary<string,JsonSchema>();
 
         /// <summary>
         /// The named reusable JSON schemas that the resource definitions reference. These
         /// definitions can also reference each other or themselves.
         /// </summary>
-        public IDictionary<string,JsonSchema> Definitions
-        {
-            get { return definitions; }
-        }
+        public IDictionary<string,JsonSchema> Definitions { get; } = new Dictionary<string, JsonSchema>();
 
         /// <summary>
         /// Search this ResourceSchema for a resource definition that has the provided type.
@@ -64,14 +55,14 @@ namespace AutoRest.AzureResourceSchema
         {
             if (string.IsNullOrWhiteSpace(resourceType))
             {
-                throw new ArgumentException("resourceType cannot be null or whitespace.", "resourceType");
+                throw new ArgumentException("resourceType cannot be null or whitespace.", nameof(resourceType));
             }
 
             JsonSchema result = null;
 
-            if (resourceDefinitions != null && resourceDefinitions.Count > 0)
+            if (ResourceDefinitions != null && ResourceDefinitions.Count > 0)
             {
-                foreach(JsonSchema resourceDefinition in resourceDefinitions.Values)
+                foreach(JsonSchema resourceDefinition in ResourceDefinitions.Values)
                 {
                     if (resourceDefinition.ResourceType == resourceType)
                     {
@@ -93,19 +84,19 @@ namespace AutoRest.AzureResourceSchema
         {
             if (string.IsNullOrWhiteSpace(resourceName))
             {
-                throw new ArgumentException("resourceName cannot be null or whitespace", "resourceName");
+                throw new ArgumentException("resourceName cannot be null or whitespace", nameof(resourceName));
             }
             if (resourceDefinition == null)
             {
-                throw new ArgumentNullException("resourceDefinition");
+                throw new ArgumentNullException(nameof(resourceDefinition));
             }
 
-            if (resourceDefinitions.ContainsKey(resourceName))
+            if (ResourceDefinitions.ContainsKey(resourceName))
             {
-                throw new ArgumentException("A resource definition for \"" + resourceName + "\" already exists in this resource schema.", "resourceName");
+                throw new ArgumentException("A resource definition for \"" + resourceName + "\" already exists in this resource schema.", nameof(resourceName));
             }
 
-            resourceDefinitions.Add(resourceName, resourceDefinition);
+            ResourceDefinitions.Add(resourceName, resourceDefinition);
 
             return this;
         }
@@ -119,19 +110,19 @@ namespace AutoRest.AzureResourceSchema
         {
             if (string.IsNullOrWhiteSpace(definitionName))
             {
-                throw new ArgumentException("definitionName cannot be null or whitespace", "definitionName");
+                throw new ArgumentException("definitionName cannot be null or whitespace", nameof(definitionName));
             }
             if (definition == null)
             {
-                throw new ArgumentNullException("definition");
+                throw new ArgumentNullException(nameof(definition));
             }
 
-            if (definitions.ContainsKey(definitionName))
+            if (Definitions.ContainsKey(definitionName))
             {
-                throw new ArgumentException("A definition for \"" + definitionName + "\" already exists in this resource schema.", "definitionName");
+                throw new ArgumentException("A definition for \"" + definitionName + "\" already exists in this resource schema.", nameof(definitionName));
             }
 
-            definitions.Add(definitionName, definition);
+            Definitions.Add(definitionName, definition);
 
             return this;
         }

@@ -6,10 +6,6 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using Microsoft.Extensions.Logging;
-#if PORTABLE
-
-#endif
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -86,15 +82,6 @@ namespace AutoRest.CSharp.Unit.Tests
             EnsureService();
         }
 
-#if PORTABLE
-        private static readonly ILogger _logger;
-        static ServiceController()
-        {
-            var factory = new LoggerFactory();
-            _logger = factory.CreateLogger<ServiceController>();
-            factory.AddConsole();
-        }
-#endif
         /// <summary>
         /// Directory containing the acceptance test files.
         /// </summary>

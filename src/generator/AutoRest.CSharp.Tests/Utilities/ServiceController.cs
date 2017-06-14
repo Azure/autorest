@@ -28,15 +28,12 @@ namespace AutoRest.CSharp.Tests.Utilities
             EnsureService();
         }
 
-#if !LEGACY
-        private static readonly ILogger _logger;
         static ServiceController()
         {
             var factory = new LoggerFactory();
-            _logger = factory.CreateLogger<ServiceController>();
             factory.AddConsole();
         }
-#endif
+
         /// <summary>
         /// Directory containing the acceptance test files.
         /// </summary>
@@ -88,10 +85,6 @@ namespace AutoRest.CSharp.Tests.Utilities
                 {
                     TearDown();
                 }
-            }
-            catch
-            {
-                throw;
             }
             finally
             {
@@ -207,11 +200,7 @@ namespace AutoRest.CSharp.Tests.Utilities
             startInfo.UseShellExecute = false;
             startInfo.FileName = path;
             startInfo.Arguments = arguments;
-#if !LEGACY
             startInfo.Environment["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
-#else
-            startInfo.EnvironmentVariables["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
-#endif
             process.OutputDataReceived += _listener.ProcessOutput;
             process.ErrorDataReceived += _listener.ProcessError;
             process.Start();

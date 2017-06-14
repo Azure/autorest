@@ -164,7 +164,7 @@ namespace AutoRest.Python.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             var convertedTypes = new Dictionary<IModelType, Response>();
@@ -217,7 +217,7 @@ namespace AutoRest.Python.Azure
         {
             if (serviceClient == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException(nameof(serviceClient));
             }
 
             foreach (

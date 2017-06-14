@@ -17,11 +17,7 @@ namespace AutoRest.Core.Utilities
     {
         internal class Activation : IDisposable
         {
-            private const string Slot = "LODIS-CurrentContext";
-
-#if !LEGACY
             private static AsyncLocal<Guid?> LodisContext = new AsyncLocal<Guid?>();
-#endif
             internal static Dictionary<Guid, Activation> Activations = new Dictionary<Guid, Activation>();
 
             internal readonly Guid Id = Guid.NewGuid();
@@ -100,11 +96,7 @@ namespace AutoRest.Core.Utilities
             {
                 get
                 {
-#if LEGACY
-                    var id = CallContext.LogicalGetData(Slot);
-#else
                     var id = LodisContext.Value;
-#endif
                     lock (typeof(Activation))
                     {
                         return id != null ? Activations[(Guid) id] : null;
@@ -112,11 +104,7 @@ namespace AutoRest.Core.Utilities
                 }
                 set
                 {
-#if LEGACY
-                    CallContext.LogicalSetData( Slot,value?.Id);
-#else
                     LodisContext.Value = value?.Id;
-#endif
                 }
             }
 

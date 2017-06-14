@@ -11,37 +11,26 @@ namespace AutoRest.Core
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class SettingsInfoAttribute : Attribute
     {
-        private string _documentation;
         /// <summary>
         /// Initializes a new instance of SettingsInfoAttribute with documentation and required flag.
         /// </summary>
         /// <param name="documentation">Documentation body.</param>
         /// <param name="isRequired">If set indicates that the property is a required command
         /// line argument.</param>
-        public SettingsInfoAttribute(string documentation, bool isRequired)
+        public SettingsInfoAttribute(string documentation, bool isRequired = false)
         {
-            _documentation = documentation;
+            Documentation = documentation;
             IsRequired = isRequired;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of SettingsInfoAttribute with documentation. 
-        /// IsRequired defaults to false.
-        /// </summary>
-        /// <param name="documentation">Documentation body.</param>
-        public SettingsInfoAttribute(string documentation) :
-            this(documentation, false)
-        {
         }
 
         /// <summary>
         /// Documentation text of the settings property.
         /// </summary>
-        public string Documentation { get { return _documentation; } }
+        public string Documentation { get; }
 
         /// <summary>
         /// True if property is required, false otherwise.
         /// </summary>
-        public bool IsRequired { get; set; }
+        public bool IsRequired { get; }
     }
 }

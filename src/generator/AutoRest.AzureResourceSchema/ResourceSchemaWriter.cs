@@ -15,11 +15,11 @@ namespace AutoRest.AzureResourceSchema
         {
             if (writer == null)
             {
-                throw new ArgumentNullException("writer");
+                throw new ArgumentNullException(nameof(writer));
             }
             if (resourceSchema == null)
             {
-                throw new ArgumentNullException("resourceSchema");
+                throw new ArgumentNullException(nameof(resourceSchema));
             }
 
             using (JsonTextWriter jsonWriter = new JsonTextWriter(writer))
@@ -37,11 +37,11 @@ namespace AutoRest.AzureResourceSchema
         {
             if (writer == null)
             {
-                throw new ArgumentNullException("writer");
+                throw new ArgumentNullException(nameof(writer));
             }
             if (resourceSchema == null)
             {
-                throw new ArgumentNullException("resourceSchema");
+                throw new ArgumentNullException(nameof(resourceSchema));
             }
 
             writer.WriteStartObject();
@@ -144,7 +144,7 @@ namespace AutoRest.AzureResourceSchema
         {
             if (writer == null)
             {
-                throw new ArgumentNullException("writer");
+                throw new ArgumentNullException(nameof(writer));
             }
 
             if (definition != null)
@@ -158,7 +158,7 @@ namespace AutoRest.AzureResourceSchema
         {
             if (definition == null)
             {
-                throw new ArgumentNullException("definition");
+                throw new ArgumentNullException(nameof(definition));
             }
 
             writer.WriteStartObject();
@@ -220,11 +220,11 @@ namespace AutoRest.AzureResourceSchema
         {
             if (writer == null)
             {
-                throw new ArgumentNullException("writer");
+                throw new ArgumentNullException(nameof(writer));
             }
             if (string.IsNullOrWhiteSpace(propertyName))
             {
-                throw new ArgumentException("propertyName cannot be null or whitespace", "propertyName");
+                throw new ArgumentException("propertyName cannot be null or whitespace", nameof(propertyName));
             }
 
             if (!string.IsNullOrWhiteSpace(propertyValue))
@@ -238,11 +238,11 @@ namespace AutoRest.AzureResourceSchema
         {
             if (writer == null)
             {
-                throw new ArgumentNullException("writer");
+                throw new ArgumentNullException(nameof(writer));
             }
             if (string.IsNullOrWhiteSpace(propertyName))
             {
-                throw new ArgumentException("propertyName cannot be null or whitespace", "propertyName");
+                throw new ArgumentException("propertyName cannot be null or whitespace", nameof(propertyName));
             }
 
             if (propertyValue != null)

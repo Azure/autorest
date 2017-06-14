@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
 
 namespace AutoRest.Python.Model
 {

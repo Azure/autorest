@@ -3,12 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Python.Model
@@ -193,7 +191,7 @@ namespace AutoRest.Python.Model
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
             string docString = string.Format(CultureInfo.InvariantCulture, ":param {0}:", property.Name);
             if (property.IsConstant || property.IsReadOnly)
@@ -356,7 +354,7 @@ namespace AutoRest.Python.Model
         {
             if (modelProperty == null || modelProperty.ModelType == null)
             {
-                throw new ArgumentNullException("modelProperty");
+                throw new ArgumentNullException(nameof(modelProperty));
             }
 
             //'id':{'key':'id', 'type':'str'},
@@ -370,7 +368,7 @@ namespace AutoRest.Python.Model
         {
             if (property == null || property.ModelType == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
             if (property.IsReadOnly)
             {

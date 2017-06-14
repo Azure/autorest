@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Azure
         {
             if (client == null)
             {
-                throw new ArgumentNullException("client");
+                throw new ArgumentNullException(nameof(client));
             }
 
             foreach (var method in client.Methods)
@@ -130,8 +130,7 @@ namespace AutoRest.CSharp.Azure
                 var method in
                 codeModel.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
-                string nextLinkString;
-                var pageClassName = GetPagingSetting(method.Extensions, codeModel.pageClasses, out nextLinkString);
+                var pageClassName = GetPagingSetting(method.Extensions, codeModel.pageClasses, out string nextLinkString);
                 if (string.IsNullOrEmpty(pageClassName))
                 {
                     continue;

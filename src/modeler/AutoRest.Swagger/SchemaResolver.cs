@@ -26,7 +26,7 @@ namespace AutoRest.Swagger
         {
             if (modeler == null)
             {
-                throw new ArgumentNullException("modeler");
+                throw new ArgumentNullException(nameof(modeler));
             }
 
             _serviceDefinition = modeler.ServiceDefinition;
@@ -84,7 +84,7 @@ namespace AutoRest.Swagger
         {
             if (schema == null)
             {
-                throw new ArgumentNullException("schema");
+                throw new ArgumentNullException(nameof(schema));
             }
 
             if (schema.AllOf != null)
@@ -120,7 +120,7 @@ namespace AutoRest.Swagger
                     // keep the same resolver state for each of the children
                     var unwrappedComponent = ((SchemaResolver)Clone()).Unwrap(
                         componentSchema);
-                    if (unwrappedComponent != null && unwrappedComponent.Properties != null)
+                    if (unwrappedComponent?.Properties != null)
                     {
                         foreach (var propertyName in unwrappedComponent.Properties.Keys)
                         {
@@ -161,7 +161,7 @@ namespace AutoRest.Swagger
                             }
                         }
                     }
-                    if (unwrappedComponent != null && unwrappedComponent.Required != null)
+                    if (unwrappedComponent?.Required != null)
                     {
                         var requiredProperties = schema.Required ?? new List<string>();
                         foreach (var requiredProperty in unwrappedComponent.Required)
@@ -221,12 +221,12 @@ namespace AutoRest.Swagger
             Debug.Assert(parentProperty != null && unwrappedProperty != null);
             if (parentProperty == null)
             {
-                throw new ArgumentNullException("parentProperty");
+                throw new ArgumentNullException(nameof(parentProperty));
             }
 
             if (unwrappedProperty == null)
             {
-                throw new ArgumentNullException("unwrappedProperty");
+                throw new ArgumentNullException(nameof(unwrappedProperty));
             }
 
             if ((parentProperty.Type == null || parentProperty.Type == DataType.Object) &&

@@ -1,11 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Utilities;
-using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core.Model
@@ -19,7 +17,6 @@ namespace AutoRest.Core.Model
 
         public override string RefName => "AutoRest.Core.Model.EnumType, AutoRest.Core";
         public override string Qualifier => "Enum";
-        public override string QualifierType => "EnumType";
         public override IEnumerable<IChild> Children => Values;
 
         /// <summary>

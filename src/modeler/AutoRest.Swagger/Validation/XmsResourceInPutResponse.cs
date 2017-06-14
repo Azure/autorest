@@ -3,8 +3,6 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Utilities;
-using AutoRest.Swagger;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Model.Utilities;
 using AutoRest.Swagger.Validation.Core;

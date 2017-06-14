@@ -2,15 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
-using System.Globalization;
-
 using AutoRest.Core.Model;
 using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
-
-using Newtonsoft.Json;
 
 namespace AutoRest.Swagger.Model
 {
@@ -80,8 +75,7 @@ namespace AutoRest.Swagger.Model
                 var parts = reference.Split('/');
                 if (parts.Length == 3 && parts[1].Equals("definitions"))
                 {
-                    Schema p = null;
-                    if (definitions.TryGetValue(parts[2], out p))
+                    if (definitions.TryGetValue(parts[2], out Schema p))
                     {
                         return p;
                     }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
 

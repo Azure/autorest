@@ -17,7 +17,7 @@ namespace AutoRest.AzureResourceSchema.Markdown
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
             if (!items.Any())
-                throw new ArgumentException("Collection contains no elements.", "items");
+                throw new ArgumentException("Collection contains no elements.", nameof(items));
 
             _items = items;
         }

@@ -33,7 +33,7 @@ namespace AutoRest.Core.Extensibility
                         Resources.ParameterValueIsMissing, "CodeGenerator"));
             }
 
-            IAnyPlugin plugin = null;
+            IAnyPlugin plugin;
 
             if (pluginName.EqualsIgnoreCase("None"))
             {
@@ -72,10 +72,8 @@ namespace AutoRest.Core.Extensibility
                         Resources.ParameterValueIsMissing, "Modeler"));
             }
 
-            Modeler modeler = null;
-
             var config = AutoRestConfiguration.Get();
-            modeler = LoadTypeFromAssembly<Modeler>(config.Modelers, Settings.Instance.Modeler);
+            Modeler modeler = LoadTypeFromAssembly<Modeler>(config.Modelers, Settings.Instance.Modeler);
             Settings.PopulateSettings(modeler, Settings.Instance.CustomSettings);
 
             Logger.Instance.Log(Category.Info, Resources.ModelerInitialized,

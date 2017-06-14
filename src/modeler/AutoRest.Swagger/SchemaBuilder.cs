@@ -3,13 +3,11 @@
 
 using System;
 using System.Globalization;
-using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using System.Linq;
 
 namespace AutoRest.Swagger
 {
@@ -145,7 +143,7 @@ namespace AutoRest.Swagger
                             Summary = property.Value.Title,
                             XmlProperties = property.Value.Xml
                         });
-                        PopulateParameter(propertyObj, refSchema != null ? refSchema : property.Value);
+                        PopulateParameter(propertyObj, refSchema ?? property.Value);
                         var propertyCompositeType = propertyType as CompositeType;
                         if (propertyObj.IsConstant ||
                             (propertyCompositeType != null
@@ -168,8 +166,7 @@ namespace AutoRest.Swagger
 
             // Optionally override the discriminator value for polymorphic types. We expect this concept to be
             // added to Swagger at some point, but until it is, we use an extension.
-            object discriminatorValueExtension;
-            if (objectType.Extensions.TryGetValue(DiscriminatorValueExtension, out discriminatorValueExtension))
+            if (objectType.Extensions.TryGetValue(DiscriminatorValueExtension, out object discriminatorValueExtension))
             {
                 string discriminatorValue = discriminatorValueExtension as string;
                 if (discriminatorValue != null)

@@ -5,7 +5,6 @@ using AutoRest.Swagger.Validation.Core;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model;
 using AutoRest.Core.Logging;
-using System;
 
 namespace AutoRest.Swagger.Validation
 {

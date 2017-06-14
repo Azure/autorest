@@ -30,7 +30,7 @@ namespace AutoRest.AzureResourceSchema.Markdown
         {
             if (!string.IsNullOrEmpty(_lang))
             {
-                return string.Format("```{0}{1}{2}{3}```", _lang, Environment.NewLine, _code, Environment.NewLine);
+                return $"```{_lang}{Environment.NewLine}{_code}{Environment.NewLine}```";
             }
 
             return string.Format("```{0}{1}{2}```", Environment.NewLine, _code, Environment.NewLine);

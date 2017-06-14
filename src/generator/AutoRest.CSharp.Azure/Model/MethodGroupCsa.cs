@@ -2,10 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Model;
-using AutoRest.Extensions.Azure;
 
 namespace AutoRest.CSharp.Azure.Model
 {

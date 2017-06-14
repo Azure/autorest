@@ -1,6 +1,4 @@
-﻿using AutoRest.Core.Model;
-using AutoRest.Java.Model;
-using static AutoRest.Core.Utilities.DependencyInjection;
+﻿using AutoRest.Java.Model;
 
 namespace AutoRest.Java.Azure.Model
 {

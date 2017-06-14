@@ -7,9 +7,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
-using AutoRest.Extensions;
 using AutoRest.Core.Model;
-using AutoRest.Java.Model;
 
 namespace AutoRest.Java
 {
@@ -80,7 +78,7 @@ namespace AutoRest.Java
 
         #region naming
 
-        public override string GetFieldName(string name)
+        public virtual string GetFieldName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -188,47 +186,31 @@ namespace AutoRest.Java
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             var primaryType = type as PrimaryType;
             if (defaultValue != null && primaryType != null)
             {
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
+                switch (primaryType.KnownPrimaryType)
                 {
-                    return double.Parse(defaultValue).ToString();
-                }
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
-                {
-                    return QuoteValue(defaultValue);
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
-                {
-                    return defaultValue.ToLowerInvariant();
-                }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Long)
-                {
-                    return defaultValue + "L";
-                }
-                else
-                {
-                    if (primaryType.KnownPrimaryType == KnownPrimaryType.Date)
-                    {
+                    case KnownPrimaryType.Double:
+                        return double.Parse(defaultValue).ToString(CultureInfo.InvariantCulture);
+                    case KnownPrimaryType.String:
+                        return QuoteValue(defaultValue);
+                    case KnownPrimaryType.Boolean:
+                        return defaultValue.ToLowerInvariant();
+                    case KnownPrimaryType.Long:
+                        return defaultValue + "L";
+                    case KnownPrimaryType.Date:
                         return "LocalDate.parse(\"" + defaultValue + "\")";
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTime ||
-                        primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                    {
+                    case KnownPrimaryType.DateTime:
+                    case KnownPrimaryType.DateTimeRfc1123:
                         return "DateTime.parse(\"" + defaultValue + "\")";
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-                    {
+                    case KnownPrimaryType.TimeSpan:
                         return "Period.parse(\"" + defaultValue + "\")";
-                    }
-                    else if (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray)
-                    {
+                    case KnownPrimaryType.ByteArray:
                         return "\"" + defaultValue + "\".getBytes()";
-                    }
                 }
             }
             return defaultValue;

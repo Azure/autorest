@@ -1,12 +1,10 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Go;
 using AutoRest.Extensions;
 
 namespace AutoRest.Go.Model

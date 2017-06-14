@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Model;
-using AutoRest.Extensions.Azure;
 
 namespace AutoRest.CSharp.Azure.Model
 {

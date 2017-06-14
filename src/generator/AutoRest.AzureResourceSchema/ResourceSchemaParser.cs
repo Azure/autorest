@@ -110,9 +110,8 @@ namespace AutoRest.AzureResourceSchema
 
                     if (method.Body != null)
                     {
-                        CompositeType body = method.Body.ModelType as CompositeType;
                         // Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
-                        if (body != null)
+                        if (method.Body.ModelType is CompositeType body)
                         {
                             foreach (Property property in body.ComposedProperties)
                             {
@@ -264,8 +263,7 @@ namespace AutoRest.AzureResourceSchema
             {
                 // A schema that matches a JSON object with specific properties, such as
                 // { "name": { "type": "string" }, "age": { "type": "number" } }
-                CompositeType compositeType = type as CompositeType;
-                if (compositeType != null)
+                if (type is CompositeType compositeType)
                 {
                     result = ParseCompositeType(property, compositeType, true, definitions, modelTypes);
                 }
@@ -273,8 +271,7 @@ namespace AutoRest.AzureResourceSchema
                 {
                     // A schema that matches a "dictionary" JSON object, such as
                     // { "additionalProperties": { "type": "string" } }
-                    DictionaryType dictionaryType = type as DictionaryType;
-                    if (dictionaryType != null)
+                    if (type is DictionaryType dictionaryType)
                     {
                         result = ParseDictionaryType(property, dictionaryType, definitions, modelTypes);
                     }
@@ -282,16 +279,14 @@ namespace AutoRest.AzureResourceSchema
                     {
                         // A schema that matches a single value from a given set of values, such as
                         // { "enum": [ "a", "b" ] }
-                        EnumType enumType = type as EnumType;
-                        if (enumType != null)
+                        if (type is EnumType enumType)
                         {
                             result = ParseEnumType(property, enumType);
                         }
                         else
                         {
                             // A schema that matches simple values, such as { "type": "number" }
-                            PrimaryType primaryType = type as PrimaryType;
-                            if (primaryType != null)
+                            if (type is PrimaryType primaryType)
                             {
                                 result = ParsePrimaryType(property, primaryType);
                             }
@@ -299,8 +294,7 @@ namespace AutoRest.AzureResourceSchema
                             {
                                 // A schema that matches an array of values, such as
                                 // { "items": { "type": "number" } }
-                                SequenceType sequenceType = type as SequenceType;
-                                if (sequenceType != null)
+                                if (type is SequenceType sequenceType)
                                 {
                                     result = ParseSequenceType(property, sequenceType, definitions, modelTypes);
                                 }

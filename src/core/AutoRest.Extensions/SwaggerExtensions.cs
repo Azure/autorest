@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -63,16 +62,14 @@ namespace AutoRest.Extensions
             {
                 if (codeModel == null)
                 {
-                    throw new ArgumentNullException("codeModel");
+                    throw new ArgumentNullException(nameof(codeModel));
                 }
 
                 if (codeModel.Extensions.ContainsKey(ParameterizedHostExtension) && !hostChecked)
                 {
-                    var hostExtension = codeModel.Extensions[ParameterizedHostExtension] as JObject;
-
-                    if (hostExtension != null)
+                    if (codeModel.Extensions[ParameterizedHostExtension] is JObject hostExtension)
                     {
-                        var hostTemplate = (string) hostExtension["hostTemplate"];
+                        var hostTemplate = (string)hostExtension["hostTemplate"];
                         var parametersJson = hostExtension["parameters"].ToString();
                         var useSchemePrefix = true;
                         if (hostExtension[UseSchemePrefix] != null)
@@ -168,7 +165,7 @@ namespace AutoRest.Extensions
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             // About "flattenDepth": flattening was not really deterministic and depended on order of specification
@@ -219,7 +216,7 @@ namespace AutoRest.Extensions
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             List<Property> propertiesToProcess = new List<Property>();
@@ -251,7 +248,7 @@ namespace AutoRest.Extensions
         {
             if (compositeType == null)
             {
-                throw new ArgumentNullException("compositeType");
+                throw new ArgumentNullException(nameof(compositeType));
             }
 
             foreach (Property innerProperty in compositeType.Properties)
@@ -289,11 +286,11 @@ namespace AutoRest.Extensions
         {
             if (propertyToFlatten == null)
             {
-                throw new ArgumentNullException("propertyToFlatten");
+                throw new ArgumentNullException(nameof(propertyToFlatten));
             }
             if (typesToDelete == null)
             {
-                throw new ArgumentNullException("typesToDelete");
+                throw new ArgumentNullException(nameof(typesToDelete));
             }
 
             CompositeType typeToFlatten = propertyToFlatten.ModelType as CompositeType;
@@ -334,7 +331,7 @@ namespace AutoRest.Extensions
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
             if (basePath == null)
             {
@@ -359,12 +356,12 @@ namespace AutoRest.Extensions
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             if (typeNames == null)
             {
-                throw new ArgumentNullException("typeNames");
+                throw new ArgumentNullException(nameof(typeNames));
             }
 
             while (typeNames.Count > 0)
@@ -375,11 +372,11 @@ namespace AutoRest.Extensions
                 var typeToDelete = codeModel.ModelTypes.First(t => t.Name == typeName);
 
                 var isUsedInErrorTypes = codeModel.ErrorTypes.Any(e => e.Name == typeName);
-                var isUsedInResponses = codeModel.Methods.Any(m => m.Responses.Any(r => typeReferenced(typeToDelete, r.Value.Body)));
-                var isUsedInParameters = codeModel.Methods.Any(m => m.Parameters.Any(p => typeReferenced(typeToDelete, p.ModelType)));
+                var isUsedInResponses = codeModel.Methods.Any(m => m.Responses.Any(r => TypeReferenced(typeToDelete, r.Value.Body)));
+                var isUsedInParameters = codeModel.Methods.Any(m => m.Parameters.Any(p => TypeReferenced(typeToDelete, p.ModelType)));
                 var isBaseType = codeModel.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
                 var isUsedInProperties = codeModel.ModelTypes.Where(t => !typeNames.Contains(t.Name))
-                                                                 .Any(t => t.Properties.Any(p => typeReferenced(typeToDelete, p.ModelType)));
+                                                                 .Any(t => t.Properties.Any(p => TypeReferenced(typeToDelete, p.ModelType)));
                 if (!isUsedInErrorTypes &&
                     !isUsedInResponses &&
                     !isUsedInParameters &&
@@ -391,22 +388,20 @@ namespace AutoRest.Extensions
             }
         }
 
-        private static bool typeReferenced(CompositeType candidate, IModelType tester)
+        private static bool TypeReferenced(CompositeType candidate, IModelType tester)
         {
             if (candidate == tester)
             {
                 return true;
             }
 
-            SequenceType sequenceTester = tester as SequenceType;
-            if (sequenceTester != null)
+            if (tester is SequenceType sequenceTester)
             {
-                return typeReferenced(candidate, sequenceTester.ElementType);
+                return TypeReferenced(candidate, sequenceTester.ElementType);
             }
-            DictionaryType dictionaryTester = tester as DictionaryType;
-            if (dictionaryTester != null)
+            if (tester is DictionaryType dictionaryTester)
             {
-                return typeReferenced(candidate, dictionaryTester.ValueType);
+                return TypeReferenced(candidate, dictionaryTester.ValueType);
             }
 
             return false;
@@ -422,7 +417,7 @@ namespace AutoRest.Extensions
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");    
+                throw new ArgumentNullException(nameof(codeModel));    
             }
           
 
@@ -433,8 +428,7 @@ namespace AutoRest.Extensions
 
                 if (bodyParameter != null)
                 {
-                    var bodyParameterType = bodyParameter.ModelType as CompositeType;
-                    if (bodyParameterType != null && 
+                    if (bodyParameter.ModelType is CompositeType bodyParameterType &&
                         !bodyParameterType.BaseIsPolymorphic &&
                         (bodyParameterType.ComposedProperties.Count(p => !p.IsConstant && !p.IsReadOnly) <= Settings.Instance.PayloadFlatteningThreshold ||
                          bodyParameter.ShouldBeFlattened()))

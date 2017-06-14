@@ -2,18 +2,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
 using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Properties;
-using AutoRest.Simplify;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using System.IO;
 using AutoRest.Core.Parsing;
 using YamlDotNet.RepresentationModel;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using AutoRest.Swagger.Logging.Core;
 
@@ -153,11 +150,7 @@ namespace AutoRest
         /// <returns>True if markdown formatted help should be shown, otherwise false.</returns>
         private static bool IsShowMarkdownHelpIncluded(string[] args)
         {
-            if (args.Any(a => a == "-md" || "-markdown".EqualsIgnoreCase(a)))
-            {
-                return true;
-            }
-            return false;
+            return args.Any(a => a == "-md" || "-markdown".EqualsIgnoreCase(a));
         }
 
         private static string InternalPreprocessor(string preSwagger)
@@ -166,14 +159,14 @@ namespace AutoRest
 
             Func<string, string> getNameFromRefPath = refPath =>
             {
-                var match = Regex.Match(refPath, $@"\#\/[^/]*/(?<name>.*)");
+                var match = Regex.Match(refPath, @"\#\/[^/]*/(?<name>.*)");
                 return match.Success
                     ? match.Groups["name"].Value
                     : null;
             };
             Func<string, string> getSectionFromRefPath = refPath =>
             {
-                var match = Regex.Match(refPath, $@"\#\/(?<section>[^/]*)/.*");
+                var match = Regex.Match(refPath, @"\#\/(?<section>[^/]*)/.*");
                 return match.Success
                     ? match.Groups["section"].Value
                     : null;
@@ -219,13 +212,11 @@ namespace AutoRest
             string incKey = "$inc";
 
             // resolve sequence-style headers (special case, you don't want to end up with a sequence of resolved stuff here)
-            var headersSection = yaml?.Get("headers") as YamlMappingNode;
-            if (headersSection != null)
+            if (yaml?.Get("headers") is YamlMappingNode headersSection)
             {
                 foreach (var statusCode in statusCodes.ToList())
                 {
-                    var headersNodeSequence = statusCode.Get("headers") as YamlSequenceNode;
-                    if (headersNodeSequence != null)
+                    if (statusCode.Get("headers") is YamlSequenceNode headersNodeSequence)
                     {
                         var headersNodeMapping = new YamlMappingNode();
                         foreach (var refPath in headersNodeSequence.Children.OfType<YamlMappingNode>().Select(x => x.Get(incKey)).OfType<YamlScalarNode>().Select(x => x.Value))

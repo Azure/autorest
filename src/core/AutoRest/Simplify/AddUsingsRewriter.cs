@@ -7,7 +7,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using AutoRest.Core.Utilities;
+
 #pragma warning disable CS3009 // Base type is not CLS-compliant
 #pragma warning disable CS3001
 #pragma warning disable CS3002

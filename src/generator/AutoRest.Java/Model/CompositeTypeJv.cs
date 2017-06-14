@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
@@ -70,7 +69,7 @@ namespace AutoRest.Java.Model
                 if (this.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                 {
                     var ext = this.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
-                    if (ext != null && ext["name"] != null)
+                    if (ext?["name"] != null)
                     {
                         return ext["name"].ToString();
                     }

@@ -5,7 +5,6 @@ using AutoRest.Go.TestGen.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace AutoRest.Go.TestGen.Builders
 {

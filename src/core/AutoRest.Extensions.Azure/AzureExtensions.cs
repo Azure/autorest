@@ -66,7 +66,7 @@ namespace AutoRest.Extensions.Azure
 
                 if (codeModel == null)
                 {
-                    throw new ArgumentNullException("codeModel");
+                    throw new ArgumentNullException(nameof(codeModel));
                 }
                
 
@@ -95,7 +95,7 @@ namespace AutoRest.Extensions.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             foreach (var method in codeModel.Methods.Where(m => m.HttpMethod == HttpMethod.Head)
@@ -124,7 +124,7 @@ namespace AutoRest.Extensions.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             // Create CloudError if not already defined
@@ -158,7 +158,7 @@ namespace AutoRest.Extensions.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             foreach (var method in codeModel.Methods.Where(m => m.Extensions.ContainsKey(ODataExtension)))
@@ -204,7 +204,7 @@ namespace AutoRest.Extensions.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             foreach( var method in codeModel.Methods.Where( each => each.Extensions.ContainsKey(LongRunningExtension)).Distinct( each  => each.Group + each.Name ).ToArray())
@@ -233,7 +233,7 @@ namespace AutoRest.Extensions.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             var apiVersion = codeModel.Properties
@@ -339,7 +339,7 @@ namespace AutoRest.Extensions.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             foreach (var method in codeModel.Methods.Distinct(each => each.Group + each.Name).ToArray())
@@ -501,7 +501,7 @@ namespace AutoRest.Extensions.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             foreach (Method method in codeModel.Methods)
@@ -529,7 +529,7 @@ namespace AutoRest.Extensions.Azure
         {
             if (method == null)
             {
-                throw new ArgumentNullException("method");
+                throw new ArgumentNullException(nameof(method));
             }
 
             if (method.Extensions.ContainsKey(ClientRequestIdExtension))
@@ -546,14 +546,13 @@ namespace AutoRest.Extensions.Azure
         {
             if (method == null)
             {
-                throw new ArgumentNullException("method");
+                throw new ArgumentNullException(nameof(method));
             }
 
             string requestIdName = "x-ms-request-id";
             if (method.Extensions.ContainsKey(RequestIdExtension))
             {
-                string extensionObject = method.Extensions[RequestIdExtension] as string;
-                if (extensionObject != null)
+                if (method.Extensions[RequestIdExtension] is string extensionObject)
                 {
                     requestIdName = extensionObject;
                 }

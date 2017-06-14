@@ -42,6 +42,6 @@ namespace AutoRest.Core.Logging
         /// <summary>
         /// Additional data, set only if `Settings.Instance.Verbose` is set.
         /// </summary>
-        public string VerboseData { get; } = null;
+        public string VerboseData { get; }
     }
 }

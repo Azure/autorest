@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
 using AutoRest.Core;

@@ -34,7 +34,7 @@ namespace AutoRest.Swagger
                 unwrappedParameter = Modeler.Unwrap(_swaggerParameter);
             }
 
-            if (unwrappedParameter.Schema != null && unwrappedParameter.Schema.Reference != null)
+            if (unwrappedParameter.Schema?.Reference != null)
             {
                 parameterName = unwrappedParameter.Schema.Reference.StripDefinitionPath();
             }

@@ -28,8 +28,6 @@ namespace AutoRest.Core.Utilities.Collections
 
         public Func<T, T> AddMethod { get; set; }
 
-        public virtual bool IsReadOnly => false;
-
         public bool CopyFrom(IEnumerable<T> source)
         {
             if (source == null)

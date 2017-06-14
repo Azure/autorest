@@ -22,7 +22,7 @@ namespace AutoRest.Extensions
         {
             if (propertyToCheck == null)
             {
-                throw new ArgumentNullException("propertyToCheck");
+                throw new ArgumentNullException(nameof(propertyToCheck));
             }
 
             return propertyToCheck.Extensions.ContainsKey(SwaggerExtensions.FlattenExtension) &&
@@ -38,7 +38,7 @@ namespace AutoRest.Extensions
         {
             if (propertyToCheck == null)
             {
-                throw new ArgumentNullException("propertyToCheck");
+                throw new ArgumentNullException(nameof(propertyToCheck));
             }
 
             return propertyToCheck.Extensions.ContainsKey(SwaggerExtensions.FlattenOriginalTypeName);
@@ -51,7 +51,7 @@ namespace AutoRest.Extensions
         {
             if (parameter == null)
             {
-                throw new ArgumentNullException("parameter");
+                throw new ArgumentNullException(nameof(parameter));
             }
 
             return parameter.Extensions.GetValue<string>("x-ms-client-name").Else(parameter.Name);

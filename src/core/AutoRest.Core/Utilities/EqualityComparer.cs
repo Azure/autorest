@@ -20,7 +20,7 @@ namespace AutoRest.Core.Utilities
         public EqualityComparer(Func<T, T, bool> compareFn)
         {
             _compareFn = compareFn;
-            _hashFn = (obj) => obj.GetHashCode();
+            _hashFn = obj => obj.GetHashCode();
         }
 
         public bool Equals(T x, T y)

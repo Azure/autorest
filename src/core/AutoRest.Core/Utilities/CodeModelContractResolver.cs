@@ -5,14 +5,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using YamlDotNet.Serialization.TypeInspectors;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core.Utilities

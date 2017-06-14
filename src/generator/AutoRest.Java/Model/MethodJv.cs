@@ -5,14 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Text;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
-using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Java.Model
 {
@@ -66,26 +64,26 @@ namespace AutoRest.Java.Model
                     {
                         parameter.Location = ParameterLocation.Path;
                     }
-                    if (parameter.Location == ParameterLocation.Path ||
-                        parameter.Location == ParameterLocation.Query ||
-                        parameter.Location == ParameterLocation.Header)
+                    switch (parameter.Location)
                     {
-                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "@{0}(\"{1}\") ",
-                            parameter.Location.ToString(),
-                            parameter.SerializedName));
-                    }
-                    else if (parameter.Location == ParameterLocation.Body)
-                    {
-                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "@{0} ",
-                            parameter.Location.ToString()));
-                    }
-                    else if (parameter.Location == ParameterLocation.FormData)
-                    {
-                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "@Part(\"{0}\") ",
-                            parameter.SerializedName));
+                        case ParameterLocation.Path:
+                        case ParameterLocation.Query:
+                        case ParameterLocation.Header:
+                            declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
+                                "@{0}(\"{1}\") ",
+                                parameter.Location.ToString(),
+                                parameter.SerializedName));
+                            break;
+                        case ParameterLocation.Body:
+                            declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
+                                "@{0} ",
+                                parameter.Location.ToString()));
+                            break;
+                        case ParameterLocation.FormData:
+                            declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
+                                "@Part(\"{0}\") ",
+                                parameter.SerializedName));
+                            break;
                     }
                     var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
                     declarationBuilder.Append(parameter.WireType.Name);
@@ -344,7 +342,7 @@ namespace AutoRest.Java.Model
         {
             if (transformation == null)
             {
-                throw new ArgumentNullException("transformation");
+                throw new ArgumentNullException(nameof(transformation));
             }
 
             return string.Join(" || ",

@@ -42,7 +42,7 @@ namespace AutoRest.NodeJS
             });
         }
 
-        public override string GetFieldName(string name) => CamelCase(name);
+        public virtual string GetFieldName(string name) => CamelCase(name);
 
         public override string GetPropertyName(string name) => CamelCase(RemoveInvalidCharacters(name));
 

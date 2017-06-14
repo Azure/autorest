@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 using System;
-using System.Linq;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
 using AutoRest.Core.Utilities;
@@ -128,8 +127,7 @@ namespace AutoRest.Swagger.Model
 
         private OperationResponse FindResponse(string name, IDictionary<string, OperationResponse> responses)
         {
-            OperationResponse response = null;
-            this.Responses.TryGetValue(name, out response);
+            this.Responses.TryGetValue(name, out OperationResponse response);
             return response;
         }
 
@@ -141,8 +139,7 @@ namespace AutoRest.Swagger.Model
                 var parts = reference.Split('/');
                 if (parts.Length == 3 && parts[1].Equals("parameters"))
                 {
-                    SwaggerParameter p = null;
-                    if (parameters.TryGetValue(parts[2], out p))
+                    if (parameters.TryGetValue(parts[2], out SwaggerParameter p))
                     {
                         return p;
                     }

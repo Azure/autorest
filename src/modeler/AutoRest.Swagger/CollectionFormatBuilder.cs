@@ -2,12 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using AutoRest.Core.Model;
 using AutoRest.Swagger.Model;
-using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 
 namespace AutoRest.Swagger
@@ -20,7 +18,7 @@ namespace AutoRest.Swagger
         {
             if (currentSwaggerParam == null)
             {
-                throw new ArgumentNullException("currentSwaggerParam");
+                throw new ArgumentNullException(nameof(currentSwaggerParam));
             }
 
             bool hasCollectionFormat = currentSwaggerParam.CollectionFormat != CollectionFormat.None;
@@ -37,7 +35,7 @@ namespace AutoRest.Swagger
                 {
                     if (method == null || method.Url == null)
                     {
-                       throw new ArgumentNullException("method"); 
+                       throw new ArgumentNullException(nameof(method)); 
                     }
 
                     method.Url = ((string)method.Url).Replace(

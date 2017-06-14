@@ -4,7 +4,6 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Globalization;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
@@ -14,7 +13,6 @@ namespace AutoRest.Core.Model
     [JsonObject(IsReference = true)]
     public abstract class IVariable : IChild
     {
-        private IModelType _modelType;
         private bool? _isConstant;
 
         // Fixable<T> properties should always be readonly, 
@@ -117,8 +115,7 @@ namespace AutoRest.Core.Model
                     else if (!seen.Contains(type))
                     {
                         seen.Add(type);
-                        var typeComp = type as CompositeType;
-                        if (typeComp != null)
+                        if (type is CompositeType typeComp)
                         {
                             var props = typeComp.ComposedProperties;
                             if (!props.Any())
@@ -158,6 +155,7 @@ namespace AutoRest.Core.Model
             set { _name.CopyFrom(value); }
         }
 
+        [JsonProperty(Order = -10)]
         public virtual string ModelTypeName => ModelType.Name;
 
         /// <Summary>
@@ -183,11 +181,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the model type.
         /// </summary>
-        public virtual IModelType ModelType
-        {
-            get { return _modelType; }
-            set { _modelType = value; }
-        }
+        public virtual IModelType ModelType { get; set; }
 
         public virtual HashSet<string> LocallyUsedNames => null;
 
@@ -205,8 +199,6 @@ namespace AutoRest.Core.Model
         public abstract IParent Parent { get; set; }
         [JsonIgnore]
         public abstract string Qualifier { get; }
-        [JsonIgnore]
-        public virtual string QualifierType => Qualifier;
         [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames  { get { if (!string.IsNullOrEmpty(Name)) { yield return Name; } }}
     }

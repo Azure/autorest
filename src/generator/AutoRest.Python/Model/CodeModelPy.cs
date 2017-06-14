@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -215,7 +214,7 @@ namespace AutoRest.Python.Model
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException(nameof(property));
             }
             string docString = string.Format(CultureInfo.InvariantCulture, ":param {0}:", property.Name);
             if (property.IsConstant)
@@ -259,8 +258,7 @@ namespace AutoRest.Python.Model
 
         public virtual string GetExceptionNameIfExist(IModelType type, bool needsQuote)
         {
-            CompositeType compType = type as CompositeType;
-            if (compType != null)
+            if (type is CompositeType compType)
             {
                 if (ErrorTypes.Contains(compType))
                 {

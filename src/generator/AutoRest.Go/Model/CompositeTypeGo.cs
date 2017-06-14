@@ -15,8 +15,6 @@ namespace AutoRest.Go.Model
     /// </summary>
     public class CompositeTypeGo : CompositeType
     {
-        private bool _wrapper;
-
         // True if the type is returned by a method
         public bool IsResponseType;
 
@@ -98,7 +96,7 @@ namespace AutoRest.Go.Model
             p.ModelType = wrappedType;
             Add(p);
 
-            _wrapper = true;
+            IsWrapperType = true;
         }
 
         /// <summary>
@@ -186,7 +184,7 @@ namespace AutoRest.Go.Model
             return indented.ToString();
         }
 
-        public bool IsWrapperType => _wrapper;
+        public bool IsWrapperType { get; }
 
         public IModelType BaseType { get; private set; }
 

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.Model
@@ -50,9 +49,7 @@ namespace AutoRest.Core.Model
 
         public int CompareTo(object obj)
         {
-            var enumType = obj as EnumValue;
-
-            if (enumType != null)
+            if (obj is EnumValue enumType)
             {
                 return String.Compare(enumType.Name, Name, StringComparison.Ordinal);
             }
@@ -61,7 +58,6 @@ namespace AutoRest.Core.Model
         }
 
         public virtual string Qualifier => "EnumValue";
-        public virtual string QualifierType => "Enum Value";
 
         public virtual IEnumerable<string> MyReservedNames
         {

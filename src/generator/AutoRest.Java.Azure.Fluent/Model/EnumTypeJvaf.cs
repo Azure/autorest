@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using AutoRest.Java.Azure.Model;
 using Newtonsoft.Json;
 

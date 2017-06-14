@@ -24,7 +24,7 @@ namespace AutoRest.Python
         {
             if (parameter == null)
             {
-                throw new ArgumentNullException("parameter");
+                throw new ArgumentNullException(nameof(parameter));
             }
 
             SequenceType sequence = parameter.ModelType as SequenceType;
@@ -126,39 +126,22 @@ namespace AutoRest.Python
 
             if (known != null)
             {
-                if (known.KnownPrimaryType == KnownPrimaryType.Date)
+                switch (known.KnownPrimaryType)
                 {
-                    return "date";
-                }
-
-                if (known.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    return "rfc-1123";
-                }
-
-                if (known.KnownPrimaryType == KnownPrimaryType.DateTime)
-                {
-                    return "iso-8601";
-                }
-
-                if (known.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-                {
-                    return "duration";
-                }
-
-                if (known.KnownPrimaryType == KnownPrimaryType.UnixTime)
-                {
-                    return "unix-time";
-                }
-
-                if (known.KnownPrimaryType == KnownPrimaryType.Base64Url)
-                {
-                    return "base64";
-                }
-
-                if (known.KnownPrimaryType == KnownPrimaryType.Decimal)
-                {
-                    return "decimal";
+                    case KnownPrimaryType.Date:
+                        return "date";
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        return "rfc-1123";
+                    case KnownPrimaryType.DateTime:
+                        return "iso-8601";
+                    case KnownPrimaryType.TimeSpan:
+                        return "duration";
+                    case KnownPrimaryType.UnixTime:
+                        return "unix-time";
+                    case KnownPrimaryType.Base64Url:
+                        return "base64";
+                    case KnownPrimaryType.Decimal:
+                        return "decimal";
                 }
             }
 
@@ -203,7 +186,7 @@ namespace AutoRest.Python
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             Property prop = type.Properties.FirstOrDefault(p =>
@@ -236,12 +219,12 @@ namespace AutoRest.Python
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             if (serviceClient == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException(nameof(serviceClient));
             }
 
             if (serviceClient.ErrorTypes.Contains(type))
@@ -258,7 +241,7 @@ namespace AutoRest.Python
         {
             if (type == null)
             {
-                throw new ArgumentNullException("type");
+                throw new ArgumentNullException(nameof(type));
             }
 
             Dictionary<KnownPrimaryType, string> typeNameMapping = new Dictionary<KnownPrimaryType, string>()

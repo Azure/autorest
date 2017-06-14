@@ -1,11 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Globalization;
 using Newtonsoft.Json;
 using AutoRest.Swagger.Validation;
-using System.Collections.Generic;
 using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
@@ -29,12 +26,6 @@ namespace AutoRest.Swagger.Model
         {
             get { return (_isRequired) || In == ParameterLocation.Path; }
             set { _isRequired = value; }
-        }
-
-        [JsonIgnore]
-        public bool IsConstant
-        {
-            get { return IsRequired && Enum != null && Enum.Count == 1; }
         }
 
         /// <summary>

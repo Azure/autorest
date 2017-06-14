@@ -9,9 +9,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
-using AutoRest.Core.Utilities.Collections;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
@@ -307,17 +305,18 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 string method;
-                if (this.HttpMethod == HttpMethod.Put || this.HttpMethod == HttpMethod.Patch)
+                switch (this.HttpMethod)
                 {
-                    method = "getPutOrPatchResult";
-                }
-                else if (this.HttpMethod == HttpMethod.Delete || this.HttpMethod == HttpMethod.Post)
-                {
-                    method = "getPostOrDeleteResult";
-                }
-                else
-                {
-                    throw new InvalidOperationException("Invalid long running operation HTTP method " + this.HttpMethod);
+                    case HttpMethod.Put:
+                    case HttpMethod.Patch:
+                        method = "getPutOrPatchResult";
+                        break;
+                    case HttpMethod.Delete:
+                    case HttpMethod.Post:
+                        method = "getPostOrDeleteResult";
+                        break;
+                    default:
+                        throw new InvalidOperationException("Invalid long running operation HTTP method " + this.HttpMethod);
                 }
                 if (ReturnType.Headers != null)
                 {
@@ -359,8 +358,7 @@ namespace AutoRest.Java.Azure.Model
             var builder = new IndentedStringBuilder();
             if (IsPagingOperation)
             {
-                string invocation;
-                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out string invocation);
                 TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
             }
             return builder.ToString();
@@ -368,8 +366,7 @@ namespace AutoRest.Java.Azure.Model
 
         public string NextMethodParameterInvocation(bool filterRequired = false)
         {
-            string invocation;
-            MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+            MethodJva nextMethod = GetPagingNextMethodWithInvocation(out string invocation);
             if (filterRequired)
             {
                 if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
@@ -407,8 +404,7 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                string invocation;
-                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out string invocation);
                 return nextMethod.Parameters.First(p => p.Name.ToString().StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name;
             }
         }
@@ -420,9 +416,8 @@ namespace AutoRest.Java.Azure.Model
                 var builder = new IndentedStringBuilder();
                 builder.AppendLine("{0} response = {1}Delegate(call.execute());",
                     ReturnTypeJva.WireResponseTypeString, this.Name);
-                    
-                string invocation;
-                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+
+                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out string invocation);
 
                 builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.body()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
                     .Indent().AppendLine("@Override")
@@ -489,8 +484,7 @@ namespace AutoRest.Java.Azure.Model
                 builder.AppendLine("serviceCallback.load(result.body().items());");
                 builder.AppendLine("if (result.body().nextPageLink() != null").Indent().Indent()
                     .AppendLine("&& serviceCallback.progress(result.body().items()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
-                string invocation;
-                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation, true);
+                MethodJva nextMethod = GetPagingNextMethodWithInvocation(out string invocation, true);
                 TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
                 var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}(result.body().nextPageLink(), {1});",
                     invocation,
@@ -579,7 +573,7 @@ namespace AutoRest.Java.Azure.Model
             group = CodeNamerJva.Instance.GetMethodGroupName(group);
             var methodModel =
                 CodeModel.Methods.FirstOrDefault(m =>
-                    (group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase))
+                    (group?.Equals(m.Group, StringComparison.OrdinalIgnoreCase) ?? m.Group == null)
                     && m.Name.ToString().Equals(name, StringComparison.OrdinalIgnoreCase)) as MethodJva;
             group = group.ToPascalCase();
             name = name + methodSuffixString;
@@ -600,8 +594,7 @@ namespace AutoRest.Java.Azure.Model
 
         public string GetPagingNextMethodInvocation(bool async = false, bool singlePage = true)
         {
-            string invocation;
-            GetPagingNextMethodWithInvocation(out invocation, async, singlePage);
+            GetPagingNextMethodWithInvocation(out string invocation, async, singlePage);
             return invocation;
         }
 

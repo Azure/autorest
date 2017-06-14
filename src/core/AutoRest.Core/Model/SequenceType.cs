@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Globalization;
 using Newtonsoft.Json;
 using AutoRest.Core.Utilities;
 
@@ -19,7 +18,7 @@ namespace AutoRest.Core.Model
         }
 
         public override string Qualifier => "Dictionary";
-        public override string RefName => $"AutoRest.Core.Model.SequenceType, AutoRest.Core";
+        public override string RefName => "AutoRest.Core.Model.SequenceType, AutoRest.Core";
         public override void Disambiguate()
         {
             // not needed, right?

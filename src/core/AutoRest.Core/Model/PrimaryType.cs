@@ -29,7 +29,7 @@ namespace AutoRest.Core.Model
         public override IEnumerable<IChild> Children => Enumerable.Empty<IChild>();
         public override string Qualifier => "PrimaryType";
 
-        public override string RefName => $"AutoRest.Core.Model.PrimaryType, AutoRest.Core";
+        public override string RefName => "AutoRest.Core.Model.PrimaryType, AutoRest.Core";
 
         /// <summary>
         ///     Gets or sets the model type format.

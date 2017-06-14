@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Text.RegularExpressions;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
@@ -194,7 +193,7 @@ namespace AutoRest.CSharp.Model
                     if (type.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                     {
                         var ext = type.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
-                        if (ext != null && ext["name"] != null)
+                        if (ext?["name"] != null)
                         {
                             return ext["name"].ToString();
                         }
@@ -499,7 +498,7 @@ namespace AutoRest.CSharp.Model
         {
             if (transformation == null)
             {
-                throw new ArgumentNullException("transformation");
+                throw new ArgumentNullException(nameof(transformation));
             }
 
             return string.Join(" || ",

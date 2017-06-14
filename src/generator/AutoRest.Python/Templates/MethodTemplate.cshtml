@@ -1,10 +1,8 @@
-@using System;
 @using System.Linq;
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.Python
 @using AutoRest.Python.Model
-@using AutoRest.Python.Templates
 @inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Model.MethodPy>
     def @(((string)Model.Name).ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):

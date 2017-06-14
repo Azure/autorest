@@ -33,13 +33,6 @@ namespace AutoRest.Core
         {
             get { return TemplateConstants.EmptyLine + "\r\n"; }
         }
-
-        public virtual void BeginWriteAttribute(string name, string prefix, int prefixOffset, string suffix, int suffixOffset, int attributeValuesCount) {
-        }
-        public virtual void EndWriteAttribute() {
-        }
-        public void WriteAttributeValue(string prefix, int prefixOffset, object value, int valueOffset, int valueLength, bool isLiteral) {
-        }
         
         /// <summary>
         /// Gets or sets settings.
@@ -71,7 +64,7 @@ namespace AutoRest.Core
                                      Tuple<string, int> tuple2,
                                      Tuple<Tuple<string, int>, Tuple<object, int>, bool> tuple3)
         {
-            string value = string.Empty;
+            string value;
 
             if (attribute == "cref")
             {
@@ -94,15 +87,6 @@ namespace AutoRest.Core
             {
                 _lastLiteral = value;
             }
-            WriteLiteralTo(TextWriter, value);
-        }
-
-        /// <summary>
-        /// Write the given value directly to the output
-        /// </summary>
-        /// <param name="value"></param>
-        protected void WriteLiteral(object value)
-        {
             WriteLiteralTo(TextWriter, value);
         }
 
@@ -179,7 +163,7 @@ namespace AutoRest.Core
         {
             if (writer == null)
             {
-                throw new ArgumentNullException("writer");
+                throw new ArgumentNullException(nameof(writer));
             }
 
             if (!string.IsNullOrEmpty(value))

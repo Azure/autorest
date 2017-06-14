@@ -4,7 +4,6 @@
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Validation;
 using AutoRest.Swagger.Validation.Core;
-using System;
 
 namespace AutoRest.Swagger.Model
 {

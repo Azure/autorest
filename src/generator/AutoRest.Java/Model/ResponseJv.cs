@@ -82,26 +82,11 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public IModelTypeJv HeaderWireType
-        {
-            get
-            {
-                if (Headers == null)
-                {
-                    return null;
-                }
-                return (IModelTypeJv)Headers;
-            }
-        }
+        public IModelTypeJv HeaderWireType => Headers as IModelTypeJv;
 
         public string ConvertBodyToClientType(string source, string target)
         {
             return convertToClientType(BodyWireType, source, target);
-        }
-
-        public string ConvertHeaderToClientType(string source, string target)
-        {
-            return convertToClientType(HeaderWireType, source, target);
         }
 
         #endregion

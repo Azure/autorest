@@ -1,5 +1,4 @@
-﻿@using System
-@using AutoRest.CSharp.Azure.Templates
+﻿@using AutoRest.CSharp.Azure.Templates
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.Azure.Model
@@ -102,7 +101,7 @@ namespace @Settings.Namespace
     
         @foreach (MethodCsa method in Model.Methods.Where(each => each.Group.IsNullOrEmpty()))
             {
-        @:@(Include(new AzureMethodTemplate(), (MethodCsa)method))
+        @:@(Include(new AzureMethodTemplate(), method))
         @EmptyLine
         @:
         }

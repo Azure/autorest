@@ -3,8 +3,6 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Utilities;
-using AutoRest.Swagger;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Model.Utilities;
 using AutoRest.Swagger.Validation.Core;
@@ -51,7 +49,7 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            ServiceDefinition serviceDefinition = (ServiceDefinition)context.Root;
+            ServiceDefinition serviceDefinition = context.Root;
             // enumerate all the PATCH operations
             IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", serviceDefinition);
 

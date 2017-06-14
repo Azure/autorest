@@ -15,8 +15,7 @@ namespace AutoRest.Core.Model
                 return KnownFormat.none;
             }
 
-            KnownFormat result;
-            return Enum.TryParse(formatValue.Replace('-', '_'), true, out result) ? result : KnownFormat.unknown;
+            return Enum.TryParse(formatValue.Replace('-', '_'), true, out KnownFormat result) ? result : KnownFormat.unknown;
         }
     }
 }

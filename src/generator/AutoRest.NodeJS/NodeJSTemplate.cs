@@ -1,8 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using AutoRest.Core;
-using AutoRest.Core.Utilities;
+﻿using AutoRest.Core;
 
 namespace AutoRest.NodeJS
 {

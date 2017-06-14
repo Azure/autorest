@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.IO;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CompositeSwagger.Model;
@@ -10,7 +8,6 @@ using AutoRest.CompositeSwagger.Properties;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
-using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;

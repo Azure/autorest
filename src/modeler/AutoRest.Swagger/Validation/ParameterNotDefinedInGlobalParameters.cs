@@ -5,7 +5,6 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
-using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -64,7 +63,7 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, SwaggerParameter> ParametersMap, RuleContext context)
         {
-            var serviceDefinition = (ServiceDefinition)context.Root;
+            var serviceDefinition = context.Root;
             // Check if subscriptionId is used but not defined in global parameters
             bool isSubscriptionIdReferenced = serviceDefinition.Paths.Keys.Any(key => key.ToLower().Contains("{" + SubscriptionId.ToLower() + "}"));
             if (isSubscriptionIdReferenced && (ParametersMap?.Values.Any(parameter => parameter.Name?.ToLower().Equals(SubscriptionId) == true)) == false)

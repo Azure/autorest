@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using AutoRest.Core.Model;
-using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using Newtonsoft.Json;
 

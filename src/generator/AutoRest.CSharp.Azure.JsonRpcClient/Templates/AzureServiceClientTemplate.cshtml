@@ -3,7 +3,6 @@
 @using AutoRest.CSharp.Azure.Templates
 @using AutoRest.CSharp.Model
 @using AutoRest.CSharp.Templates.Rest.Client
-@using System
 @using System.Linq
 @inherits AutoRest.Core.Template<CodeModelCsa>
 @Header("// ")
@@ -101,8 +100,8 @@ namespace @Settings.Namespace
     
         @foreach (MethodCsa method in Model.Methods.Where(each => each.Group.IsNullOrEmpty()))
             {
-        @:@(Include(new AzureMethodTemplate(), (MethodCsa)method))
-        @EmptyLine
+                @Include(new AzureMethodTemplate(), method)
+                @EmptyLine
         @:
         }
     }

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Model;
@@ -174,101 +173,91 @@ namespace AutoRest.NodeJS
             var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
             var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
             var lowercaseTypeName = primary.Name.ToLower();
-            if (primary.KnownPrimaryType == KnownPrimaryType.Boolean ||
-                primary.KnownPrimaryType == KnownPrimaryType.Double ||
-                primary.KnownPrimaryType == KnownPrimaryType.Decimal ||
-                primary.KnownPrimaryType == KnownPrimaryType.Int ||
-                primary.KnownPrimaryType == KnownPrimaryType.Long ||
-                primary.KnownPrimaryType == KnownPrimaryType.Object)
+            switch (primary.KnownPrimaryType)
             {
-                if (isRequired)
-                {
-                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
-                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
-                }
+                case KnownPrimaryType.Boolean:
+                case KnownPrimaryType.Double:
+                case KnownPrimaryType.Decimal:
+                case KnownPrimaryType.Int:
+                case KnownPrimaryType.Long:
+                case KnownPrimaryType.Object:
+                    if (isRequired)
+                    {
+                        builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
+                        return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                    }
 
-                builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
-                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Stream)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if ({0} === null || {0} === undefined) {{", valueReference, lowercaseTypeName);
-                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
-                }
+                    builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+                case KnownPrimaryType.Stream:
+                    if (isRequired)
+                    {
+                        builder.AppendLine("if ({0} === null || {0} === undefined) {{", valueReference, lowercaseTypeName);
+                        return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                    }
 
-                builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
-                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.String)
-            {
-                if (isRequired)
-                {
-                    //empty string can be a valid value hence we cannot implement the simple check if (!{0})
-                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
-                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
-                }
+                    builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+                case KnownPrimaryType.String:
+                    if (isRequired)
+                    {
+                        //empty string can be a valid value hence we cannot implement the simple check if (!{0})
+                        builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
+                        return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                    }
 
-                builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
-                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Uuid)
-            {
-                if (isRequired)
-                {
-                    requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type string and must be a valid {1}.');";
-                    //empty string can be a valid value hence we cannot implement the simple check if (!{0})
-                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== 'string' || !msRest.isValidUuid({0})) {{", valueReference);
-                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
-                }
-                typeErrorMessage = "throw new Error('{0} must be of type string and must be a valid {1}.');";
-                builder.AppendLine("if ({0} !== null && {0} !== undefined && !(typeof {0}.valueOf() === 'string' && msRest.isValidUuid({0}))) {{", valueReference);
-                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.ByteArray || primary.KnownPrimaryType == KnownPrimaryType.Base64Url)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if (!Buffer.isBuffer({0})) {{", valueReference, lowercaseTypeName);
-                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
-                }
+                    builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+                case KnownPrimaryType.Uuid:
+                    if (isRequired)
+                    {
+                        requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type string and must be a valid {1}.');";
+                        //empty string can be a valid value hence we cannot implement the simple check if (!{0})
+                        builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== 'string' || !msRest.isValidUuid({0})) {{", valueReference);
+                        return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                    }
+                    typeErrorMessage = "throw new Error('{0} must be of type string and must be a valid {1}.');";
+                    builder.AppendLine("if ({0} !== null && {0} !== undefined && !(typeof {0}.valueOf() === 'string' && msRest.isValidUuid({0}))) {{", valueReference);
+                    return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+                case KnownPrimaryType.ByteArray:
+                case KnownPrimaryType.Base64Url:
+                    if (isRequired)
+                    {
+                        builder.AppendLine("if (!Buffer.isBuffer({0})) {{", valueReference, lowercaseTypeName);
+                        return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                    }
 
-                builder.AppendLine("if ({0} && !Buffer.isBuffer({0})) {{", valueReference, lowercaseTypeName);
-                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.DateTime || primary.KnownPrimaryType == KnownPrimaryType.Date || 
-                primary.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 || primary.KnownPrimaryType == KnownPrimaryType.UnixTime)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if(!{0} || !({0} instanceof Date || ", valueReference)
-                                                  .Indent()
-                                                  .Indent()
-                                                  .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
-                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
-                }
+                    builder.AppendLine("if ({0} && !Buffer.isBuffer({0})) {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+                case KnownPrimaryType.DateTime:
+                case KnownPrimaryType.Date:
+                case KnownPrimaryType.DateTimeRfc1123:
+                case KnownPrimaryType.UnixTime:
+                    if (isRequired)
+                    {
+                        builder.AppendLine("if(!{0} || !({0} instanceof Date || ", valueReference)
+                            .Indent()
+                            .Indent()
+                            .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
+                        return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                    }
 
-                builder = builder.AppendLine("if ({0} && !({0} instanceof Date || ", valueReference)
-                                              .Indent()
-                                              .Indent()
-                                              .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
-                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if(!{0} || !moment.isDuration({0})) {{", valueReference);
-                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
-                }
+                    builder = builder.AppendLine("if ({0} && !({0} instanceof Date || ", valueReference)
+                        .Indent()
+                        .Indent()
+                        .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
+                    return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+                case KnownPrimaryType.TimeSpan:
+                    if (isRequired)
+                    {
+                        builder.AppendLine("if(!{0} || !moment.isDuration({0})) {{", valueReference);
+                        return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                    }
 
-                builder.AppendLine("if({0} && !moment.isDuration({0})) {{", valueReference);
-                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
-            }
-            else
-            {
-                throw new NotImplementedException($"'{valueReference}' not implemented");
+                    builder.AppendLine("if({0} && !moment.isDuration({0})) {{", valueReference);
+                    return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+                default:
+                    throw new NotImplementedException($"'{valueReference}' not implemented");
             }
         }
 
@@ -277,35 +266,43 @@ namespace AutoRest.NodeJS
         /// </summary>
         /// <param name="primary">primary.KnownPrimaryType to query</param>
         /// <returns>The TypeScript type correspoinding to this model primary.KnownPrimaryType</returns>
-        private static string PrimaryTSType(this PrimaryType primary) 
+        private static string PrimaryTSType(this PrimaryType primary)
         {
             if (primary == null)
             {
                 throw new ArgumentNullException(nameof(primary));
             }
 
-            if (primary.KnownPrimaryType == KnownPrimaryType.Boolean)
-                return "boolean";
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Double || primary.KnownPrimaryType == KnownPrimaryType.Decimal || 
-                primary.KnownPrimaryType == KnownPrimaryType.Int || primary.KnownPrimaryType == KnownPrimaryType.Long)
-                return "number";
-            else if (primary.KnownPrimaryType == KnownPrimaryType.String || primary.KnownPrimaryType == KnownPrimaryType.Uuid)
-                return "string";
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Date || primary.KnownPrimaryType == KnownPrimaryType.DateTime || 
-                primary.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123 || primary.KnownPrimaryType == KnownPrimaryType.UnixTime)
-                return "Date";
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Object)
-                return "any";   // TODO: test this
-            else if (primary.KnownPrimaryType == KnownPrimaryType.ByteArray || primary.KnownPrimaryType == KnownPrimaryType.Base64Url)  
-                return "Buffer";  
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Stream)  
-                return "stream.Readable";
-            else if (primary.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-                return "moment.Duration"; //TODO: test this, add include for it
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Credentials)
-                return "ServiceClientCredentials"; //TODO: test this, add include for it
-            else {
-                throw new NotImplementedException($"Type '{primary}' not implemented");
+            switch (primary.KnownPrimaryType)
+            {
+                case KnownPrimaryType.Boolean:
+                    return "boolean";
+                case KnownPrimaryType.Double:
+                case KnownPrimaryType.Decimal:
+                case KnownPrimaryType.Int:
+                case KnownPrimaryType.Long:
+                    return "number";
+                case KnownPrimaryType.String:
+                case KnownPrimaryType.Uuid:
+                    return "string";
+                case KnownPrimaryType.Date:
+                case KnownPrimaryType.DateTime:
+                case KnownPrimaryType.DateTimeRfc1123:
+                case KnownPrimaryType.UnixTime:
+                    return "Date";
+                case KnownPrimaryType.Object:
+                    return "any";   // TODO: test this
+                case KnownPrimaryType.ByteArray:
+                case KnownPrimaryType.Base64Url:
+                    return "Buffer";
+                case KnownPrimaryType.Stream:
+                    return "stream.Readable";
+                case KnownPrimaryType.TimeSpan:
+                    return "moment.Duration"; //TODO: test this, add include for it
+                case KnownPrimaryType.Credentials:
+                    return "ServiceClientCredentials"; //TODO: test this, add include for it
+                default:
+                    throw new NotImplementedException($"Type '{primary}' not implemented");
             }
         }
 
@@ -890,11 +887,11 @@ namespace AutoRest.NodeJS
         {
             if (composite == null)
             {
-                throw new ArgumentNullException("composite");
+                throw new ArgumentNullException(nameof(composite));
             }
             if (builder == null)
             {
-                throw new ArgumentNullException("builder");
+                throw new ArgumentNullException(nameof(builder));
             }
             // Note: If the polymorphicDiscriminator has a dot in it's name then do not escape that dot for 
             // it's serializedName, the way it is done for other properties. This makes it easy to find the 

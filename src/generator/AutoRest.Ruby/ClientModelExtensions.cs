@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Model;
@@ -13,7 +12,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 namespace AutoRest.Ruby
 {
     using System.Collections.Generic;
-    using System.Reflection;
+
     /// <summary>
     /// Keeps a few aux method used across all templates/models.
     /// </summary>
@@ -41,17 +40,17 @@ namespace AutoRest.Ruby
             string result = $"{reference}.to_s";
             if (known != null)
             {
-                if (known.KnownPrimaryType == KnownPrimaryType.String)
+                switch (known.KnownPrimaryType)
                 {
-                    result = reference;
-                }
-                else if (known.KnownPrimaryType == KnownPrimaryType.DateTime)
-                {
-                    result = $"{reference}.new_offset(0).strftime('%FT%TZ')";
-                }
-                else if (known.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    result = $"{reference}.strftime('%a, %d %b %Y %H:%M:%S GMT')";
+                    case KnownPrimaryType.String:
+                        result = reference;
+                        break;
+                    case KnownPrimaryType.DateTime:
+                        result = $"{reference}.new_offset(0).strftime('%FT%TZ')";
+                        break;
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        result = $"{reference}.strftime('%a, %d %b %Y %H:%M:%S GMT')";
+                        break;
                 }
             }
 
@@ -73,49 +72,27 @@ namespace AutoRest.Ruby
 
             if (primaryType != null)
             {
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
+                switch (primaryType.KnownPrimaryType)
                 {
-                    return "String";
-                }
-
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.Int || primaryType.KnownPrimaryType == KnownPrimaryType.Long)
-                {
-                    return "Integer";
-                }
-
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
-                {
-                    return "Boolean";
-                }
-
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
-                {
-                    return "Float";
-                }
-
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.Date)
-                {
-                    return "Date";
-                }
-
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTime)
-                {
-                    return "DateTime";
-                }
-
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    return "DateTime";
-                }
-
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray)
-                {
-                    return "Array<Integer>";
-                }
-
-                if (primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-                {
-                    return "Duration"; //TODO: Is this a real Ruby type...?
+                    case KnownPrimaryType.String:
+                        return "String";
+                    case KnownPrimaryType.Int:
+                    case KnownPrimaryType.Long:
+                        return "Integer";
+                    case KnownPrimaryType.Boolean:
+                        return "Boolean";
+                    case KnownPrimaryType.Double:
+                        return "Float";
+                    case KnownPrimaryType.Date:
+                        return "Date";
+                    case KnownPrimaryType.DateTime:
+                        return "DateTime";
+                    case KnownPrimaryType.DateTimeRfc1123:
+                        return "DateTime";
+                    case KnownPrimaryType.ByteArray:
+                        return "Array<Integer>";
+                    case KnownPrimaryType.TimeSpan:
+                        return "Duration"; //TODO: Is this a real Ruby type...?
                 }
             }
 
@@ -503,62 +480,52 @@ namespace AutoRest.Ruby
 
             IndentedStringBuilder builder = new IndentedStringBuilder("  ");
 
-            if (primary.KnownPrimaryType == KnownPrimaryType.Boolean)
+            switch (primary.KnownPrimaryType)
             {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Double)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'Double'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Int || primary.KnownPrimaryType == KnownPrimaryType.Long ||
-                primary.KnownPrimaryType == KnownPrimaryType.Decimal)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.String || primary.KnownPrimaryType == KnownPrimaryType.Uuid)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.ByteArray)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Base64Url)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'Base64Url'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Date)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'Date'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.DateTime)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTime'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTimeRfc1123'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.TimeSpan)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.UnixTime)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'UnixTime'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Object)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'Object'").Outdent().AppendLine("}");
-            }
-            else if (primary.KnownPrimaryType == KnownPrimaryType.Stream)
-            {
-                builder.AppendLine("type: {").Indent().AppendLine("name: 'Stream'").Outdent().AppendLine("}");
-            }
-            else
-            {
-                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} is not a supported primary Type for {1}.", primary.KnownPrimaryType, primary.SerializedName));
+                case KnownPrimaryType.Boolean:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.Double:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Double'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.Int:
+                case KnownPrimaryType.Long:
+                case KnownPrimaryType.Decimal:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.String:
+                case KnownPrimaryType.Uuid:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.ByteArray:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.Base64Url:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Base64Url'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.Date:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Date'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.DateTime:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTime'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.DateTimeRfc1123:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTimeRfc1123'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.TimeSpan:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.UnixTime:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'UnixTime'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.Object:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Object'").Outdent().AppendLine("}");
+                    break;
+                case KnownPrimaryType.Stream:
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Stream'").Outdent().AppendLine("}");
+                    break;
+                default:
+                    throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} is not a supported primary Type for {1}.", primary.KnownPrimaryType, primary.SerializedName));
             }
 
             return builder.ToString();

@@ -3,7 +3,6 @@
 // 
 
 using System;
-using System.Diagnostics;
 using AutoRest.Core.Model;
 
 namespace AutoRest.Python.Model

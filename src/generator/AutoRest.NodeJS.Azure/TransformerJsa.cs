@@ -64,7 +64,7 @@ namespace AutoRest.NodeJS.Azure
         {
             if (codeModel == null)
             {
-                throw new ArgumentNullException("codeModel");
+                throw new ArgumentNullException(nameof(codeModel));
             }
 
             foreach (var method in codeModel.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))

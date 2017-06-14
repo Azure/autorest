@@ -26,7 +26,7 @@ namespace AutoRest.Simplify
         public async Task Run(MemoryFileSystem fs)
         {
             var files = fs.GetFiles("", "*.cs", SearchOption.AllDirectories).
-                ToDictionary(each => each, each => fs.ReadAllText(each));
+                ToDictionary(each => each, fs.ReadAllText);
 
             var assemblies = new[] {
                 typeof(IAzureClient).GetAssembly().Location,

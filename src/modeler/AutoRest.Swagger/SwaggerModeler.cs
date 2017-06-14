@@ -21,8 +21,6 @@ namespace AutoRest.Swagger
 {
     public class SwaggerModeler : Modeler
     {
-        private const string BaseUriParameterName = "BaseUri";
-
         internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         internal Dictionary<string, CompositeType> GeneratedTypes = new Dictionary<string, CompositeType>();
         internal Dictionary<Schema, CompositeType> GeneratingTypes = new Dictionary<Schema, CompositeType>();
@@ -35,10 +33,7 @@ namespace AutoRest.Swagger
             }
         }
 
-        public override string Name
-        {
-            get { return "Swagger"; }
-        }
+        public override string Name => "Swagger";
 
         /// <summary>
         /// Swagger service model.
@@ -290,7 +285,7 @@ namespace AutoRest.Swagger
         {
             if (operation == null)
             {
-                throw new ArgumentNullException("operation");
+                throw new ArgumentNullException(nameof(operation));
             }
 
             if (operation.OperationId == null || operation.OperationId.IndexOf('_') == -1)
@@ -311,7 +306,7 @@ namespace AutoRest.Swagger
         {
             if (operation == null)
             {
-                throw new ArgumentNullException("operation");
+                throw new ArgumentNullException(nameof(operation));
             }
 
             if (operation.OperationId == null)
@@ -332,7 +327,7 @@ namespace AutoRest.Swagger
         {
             if (swaggerParameter == null)
             {
-                throw new ArgumentNullException("swaggerParameter");
+                throw new ArgumentNullException(nameof(swaggerParameter));
             }
 
             // If referencing global parameters serializationProperty

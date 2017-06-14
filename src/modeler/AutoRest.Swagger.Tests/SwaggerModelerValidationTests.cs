@@ -26,13 +26,8 @@ namespace AutoRest.Swagger.Tests
         {
             AssertOnlyValidationMessage(messages.Where(m => m.Severity == Category.Warning), validationType, count);
         }
-        internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType)
-        {
-            // checks that the collection has one item, and that it is the correct message type.
-            AssertOnlyValidationMessage(messages, validationType, 1);
-        }
 
-        internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType, int count)
+        internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType, int count = 1)
         {
             // checks that the collection has the right number of items and each is the correct type.
             Assert.Equal(count, messages.Count(message => message.Rule.GetType() == validationType));
@@ -767,8 +762,7 @@ namespace AutoRest.Swagger.Tests
             var filePath = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-definitions.json");
             var fileText = System.IO.File.ReadAllText(filePath);
             var servDef = SwaggerParser.Parse(filePath, fileText);
-            Uri uriPath = null;
-            Uri.TryCreate(filePath, UriKind.RelativeOrAbsolute, out uriPath);
+            Uri.TryCreate(filePath, UriKind.RelativeOrAbsolute, out Uri uriPath);
             var context = new RuleContext(servDef, uriPath);
             Assert.Equal(4, context.ResourceModels.Count());
             Assert.Equal(1, context.TrackedResourceModels.Count());

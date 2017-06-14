@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Text.RegularExpressions;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -526,7 +525,7 @@ namespace AutoRest.Ruby.Model
         {
             if (builder == null)
             {
-                throw new ArgumentNullException("builder");
+                throw new ArgumentNullException(nameof(builder));
             }
 
             IEnumerable<Parameter> pathParameters = LogicalParameters.Where(p => p.Extensions.ContainsKey("hostParameter") && p.Location == ParameterLocation.Path);
@@ -634,7 +633,7 @@ namespace AutoRest.Ruby.Model
         {
             if (transformation == null)
             {
-                throw new ArgumentNullException("transformation");
+                throw new ArgumentNullException(nameof(transformation));
             }
             if (transformation.ParameterMappings.Count == 1)
             {

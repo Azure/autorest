@@ -1,15 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Globalization;
-using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
-using AutoRest.Swagger.JsonConverters;
 using AutoRest.Swagger.Model;
-using AutoRest.Swagger.Properties;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using AutoRest.Core.Model;
 
 namespace AutoRest.Swagger
