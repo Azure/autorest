@@ -367,7 +367,7 @@ namespace Microsoft.Perks.JsonRPC
 
         public async Task<T> Request<T>(string methodName, params object[] values)
         {
-            var id = Interlocked.Increment(ref _requestId).ToString();
+            var id = Interlocked.Decrement(ref _requestId).ToString();
             var response = new CallerResponse<T>(id);
             lock( _tasks ) { _tasks.Add(id, response); }
             await Send(ProtocolExtensions.Request(id, methodName, values)).ConfigureAwait(false);
@@ -376,7 +376,7 @@ namespace Microsoft.Perks.JsonRPC
 
         public async Task<T> RequestWithObject<T>(string methodName, object parameter)
         {
-            var id = Interlocked.Increment(ref _requestId).ToString();
+            var id = Interlocked.Decrement(ref _requestId).ToString();
             var response = new CallerResponse<T>(id);
             lock( _tasks ) { _tasks.Add(id, response); }
             await Send(ProtocolExtensions.Request(id, methodName, parameter)).ConfigureAwait(false);
