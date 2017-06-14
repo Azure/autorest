@@ -4,29 +4,58 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 
 [![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
 
-# What's New (02/24/2017)
+# What's New (06/14/2017)
 
-AutoRest has been thru a lot of changes recently, most notably:
-- we've switched to building the core components with the latest [dotnet-cli](https://github.com/dotnet/cli) tools, and the binaries are build for .NET Core 1.0 (aka 'CoreCLR')
-- we're starting to build some of the components in NodeJS - this allows us to leverage all sorts of other great functionality with less coding effort
-- we have a great cross-platform installation model for Windows, Mac OSX and Linux, which is built on top of NodeJS's `npm` package manager
+AutoRest has shipped a **Stable** build!
 
-> #### Why did you change that?
-> Previously, in order to get AutoRest, you had to either get an older version from Chocolatey, or install a 'nightly' build from the MyGet feed using the NuGet tool.
-> This didn't make it easier to keep up-to-date with AutoRest (as development happens pretty fast these days!), and often bugs were getting fixed and it was a pain for users to get the updated binaries.
->
-> Now, you can "install" AutoRest just once, and AutoRest itself has the ability to download and install any updates, as well as allowing the user to choose any arbitrary build at runtime, and it will use the requested verion.
->
-> This will let you install a 'release' version of AutoRest, and use that, but if you want to test a new nightly or preview version, you can just ask for it on the command line. 
->
-> Additionally, we're making AutoRest work in multiple environments, (including a upcoming [Visual Studio Code](https://code.visualstudio.com/) extension), and using this model, AutoRest will give exactly the same results from the command line as in the IDE, without having to manually fight to switch versions when you want.
+Starting with the current version of AutoRest in `npm` (v 1.1.0), AutoRest will by default only look at `release` builds of the AutoRest core. and will be available in both `stable` and `prerelease` builds.
+
+**AutoRest will release a stable version on the second Wednesday of the month.**
+
+Using `npm` you can upgrade to the latest stable version of AutoRest:
+
+``` powershell
+# Install latest autorest package
+npm install -g autorest
+
+# Update the generator plugins to the latest stable version
+autorest --reset
+```
+
+You can still access the nightly build of the generator plugins by using `--prerelease` on the autorest command line:
+
+``` powershell
+# install the latest nightly autorest generators 
+autorest --latest --prerelease 
+
+# revert back to the latest stable release of autorest generators:
+autorest --reset 
+```
+
+If you're living life on the edge (and know what you're doing!) you can access the `next` version of the main autorest package from npm:
+
+``` powershell
+# install the 'next' version of the autorest package 
+npm install autorest@next 
+
+# revert to the 'stable' version of the autorest package 
+npm install autorest@latest 
+```
+Features-in-progress in AutoRest will be found in the 'next' version, and use at your own risk :D
+
+## What's Next 
+
+The finishing touches on the extension model are being made right now in the `@next` version of autorest, which will
+make it possible to install and manage extensions on a fine-grained level, as well as being able to publish a plugin written in different languages. 
+
+We've already started on the path to OpenAPI 3 support, a new code modeler, which will lead to generators for some languages, and new language support!
 
 
 # Installing Autorest 
 
 Installing AutoRest on Windows, MacOS or Linux involves two steps:
 
-1. __Install [Node.js](https://nodejs.org/en/)__ (6.9.5 or greater)
+1. __Install [Node.js](https://nodejs.org/en/)__ (7.10.0 or greater)
 > for more help, check out [Installing Node.JS on different platforms](./docs/developer/workstation.md#nodejs)
 
 2. __Install AutoRest__ using `npm`
