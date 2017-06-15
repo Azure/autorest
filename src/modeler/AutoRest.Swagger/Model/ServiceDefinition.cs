@@ -112,7 +112,6 @@ namespace AutoRest.Swagger.Model
         /// Key is the object serviceTypeName and the value is swagger definition.
         /// </summary>
         [Rule(typeof(ArmResourcePropertiesBag))]
-        [Rule(typeof(EnumInsteadOfBoolean))]
         [CollectionRule(typeof(EnumInsteadOfBoolean))]
         [Rule(typeof(RequiredPropertiesMissingInResourceModel ))]
         [Rule(typeof(ResourceHasXMsResourceEnabled))]
