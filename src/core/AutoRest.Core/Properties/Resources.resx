@@ -287,7 +287,7 @@ Modelers:
     <value>The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation.</value>
   </data>
   <data name="OperationIdNounInVerb" xml:space="preserve">
-    <value>Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore.</value>
+    <value>Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
   </data>
   <data name="NonAppJsonTypeNotSupported" xml:space="preserve">
     <value>Please make sure that media types other than 'application/json' are supported by your service.</value>
@@ -311,13 +311,13 @@ Modelers:
     <value>Guid used in model definition '{1}' for property '{0}'. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.</value>
   </data>
   <data name="GetOperationNameNotValid" xml:space="preserve">
-    <value>'GET' operation '{0}' must use method name 'Get' or Method name start with 'List'</value>
+    <value>'GET' operation '{0}' should use method name 'Get' or Method name start with 'List'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
   </data>
   <data name="InvalidMutabilityValueForReadOnly" xml:space="preserve">
     <value>When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'.</value>
   </data>
   <data name="BooleanPropertyNotRecommended" xml:space="preserve">
-    <value>Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined. Enum Property: {0}</value>
+    <value>Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: {0}</value>
   </data>
   <data name="AllowedTopLevelProperties" xml:space="preserve">
     <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Model definition '{0}' has extra properties ['{1}'].</value>
@@ -326,13 +326,13 @@ Modelers:
     <value>Tracked resource '{0}' must have a get operation.</value>
   </data>
   <data name="DeleteOperationNameNotValid" xml:space="preserve">
-    <value>'DELETE' operation '{0}' must use method name 'Delete'.</value>
+    <value>'DELETE' operation '{0}' should use method name 'Delete'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
   </data>
   <data name="PatchOperationNameNotValid" xml:space="preserve">
-    <value>'PATCH' operation '{0}' must use method name 'Update'.</value>
+    <value>'PATCH' operation '{0}' should use method name 'Update'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
   </data>
   <data name="PutOperationNameNotValid" xml:space="preserve">
-    <value>'PUT' operation '{0}' must use method name 'Create'.</value>
+    <value>'PUT' operation '{0}' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
   </data>
   <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
     <value>Collection object '{0}' returned by list operation '{1}' with 'x-ms-pageable' extension, has no property named 'value'.</value>
@@ -350,7 +350,7 @@ Modelers:
     <value>Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
   </data>
   <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
-    <value>Since operation '{0}' response has model definition '{1}', it should be of the form "*_list*"</value>
+    <value>Since operation '{0}' response has model definition '{1}', it should be of the form "*_list*". Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
   </data>
   <data name="LongRunningResponseNotValid" xml:space="preserve">
     <value>A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.</value>
@@ -362,7 +362,7 @@ Modelers:
     <value>Parameter Must have the "name" property defined with non-empty string as its value</value>
   </data>
   <data name="OperationIdNounConflictingModelNamesMessage" xml:space="preserve">
-    <value>OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to '{0}Model'. Consider using the plural form of '{1}' to avoid this.</value>
+    <value>OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to '{0}Model'. Consider using the plural form of '{1}' to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
   </data>
   <data name="PutOperationRequestResponseSchemaMessage" xml:space="preserve">
     <value>A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}'</value>

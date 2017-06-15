@@ -83,7 +83,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "boolean-properties.json"));
 
-            messages.AssertOnlyValidationMessage(typeof(EnumInsteadOfBoolean), 4);
+            messages.AssertOnlyValidationMessage(typeof(EnumInsteadOfBoolean), 5);
         }
 
         [Fact]
@@ -630,6 +630,20 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(SummaryAndDescriptionMustNotBeSame), 1);
         }
 
+
+        [Fact]
+        public void LocationPropertyWithoutXmsMutability()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "location-without-xms-mutability.json"));
+            messages.AssertOnlyValidationMessage(typeof(LocationMustHaveXmsMutability), 1);
+        }
+        
+        [Fact]
+        public void LocationPropertyWithIncorrectXmsMutability()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "location-with-incorrect-xms-mutability.json"));
+            messages.AssertOnlyValidationMessage(typeof(LocationMustHaveXmsMutability), 1);
+        }
     }
 
     #region Positive tests
