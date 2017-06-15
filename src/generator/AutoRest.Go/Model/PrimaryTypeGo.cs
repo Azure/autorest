@@ -5,6 +5,7 @@ using AutoRest.Core.Model;
 using AutoRest.Go;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace AutoRest.Go.Model
 {
@@ -43,19 +44,19 @@ namespace AutoRest.Go.Model
                 switch (KnownPrimaryType)
                 {
                     case KnownPrimaryType.Date:
-                        return "github.com/Azure/go-autorest/autorest/date";
+                        return GetImportLine(package: "github.com/Azure/go-autorest/autorest/date");
                     case KnownPrimaryType.DateTimeRfc1123:
-                        return "github.com/Azure/go-autorest/autorest/date";
+                        return GetImportLine(package: "github.com/Azure/go-autorest/autorest/date");
                     case KnownPrimaryType.DateTime:
-                        return "github.com/Azure/go-autorest/autorest/date";
+                        return GetImportLine(package: "github.com/Azure/go-autorest/autorest/date");
                     case KnownPrimaryType.Decimal:
-                        return "github.com/shopspring/decimal";
+                        return GetImportLine(package: "github.com/shopspring/decimal");
                     case KnownPrimaryType.Stream:
-                        return "io";
+                        return GetImportLine(package: "io");
                     case KnownPrimaryType.UnixTime:
-                        return "github.com/Azure/go-autorest/autorest/date";
+                        return GetImportLine(package: "github.com/Azure/go-autorest/autorest/date");
                     case KnownPrimaryType.Uuid:
-                        return "github.com/satori/uuid";
+                        return GetImportLine(package: "github.com/satori/go.uuid", alias: "uuid");
                     default:
                         return string.Empty;
                 }
@@ -143,6 +144,19 @@ namespace AutoRest.Go.Model
                                         ? "{0} == nil"
                                         : "{0} != nil", valueReference);
             }
+        }
+
+        public static string GetImportLine(string package, string alias = default(string)) {
+            var builder = new StringBuilder();
+            if(!string.IsNullOrEmpty(alias)){
+                builder.Append(alias);
+                builder.Append(' ');
+            }
+
+            builder.Append('"');
+            builder.Append(package);
+            builder.Append('"');
+            return builder.ToString();
         }
     }
 }
