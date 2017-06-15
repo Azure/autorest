@@ -2,7 +2,7 @@
 ############################################### 
 task 'test', "runs all tests", (done) ->
     run 'test-dotnet',
-#      'test-python'
+      'test-python'
       'test-ruby'
       'test-go'
       'test-java'
