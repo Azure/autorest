@@ -45,12 +45,8 @@ namespace AutoRest.Swagger.Validation
         public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
 
         /// <summary>
-        /// Whether the rule should be applied to the individual or composed context based on
-        /// the corresponding .md file
-        /// In most cases this should be composed
-        /// This is because validation rules that run in individual mode will end up
-        /// throwing multiple validation messages for the same violation if related model/property,etc 
-        /// was referenced in multiple files
+        /// x-ms-paths could theoretically overload a path in another json 
+        /// (however this is unlikely since we usually have one resource path per json)
         /// </summary>
         public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 

@@ -8,6 +8,7 @@ using AutoRest.Swagger.Validation.Core;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -15,6 +16,19 @@ namespace AutoRest.Swagger.Validation
     {
 
         private static readonly IEnumerable<string> LocationPropertyMutability = new List<string>() { "read", "create" };
+
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+
+        /// <summary>
+        /// The rule could be violated by a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 
         /// <summary>
         /// Id of the Rule.

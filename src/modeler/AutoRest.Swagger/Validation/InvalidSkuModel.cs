@@ -55,9 +55,8 @@ namespace AutoRest.Swagger.Validation
         public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
 
         /// <summary>
-        /// When to apply the validation rule, before or after it has been merged as a part of 
-        /// its merged document as specified in the corresponding '.md' file
-        /// By default consider all rules to be applied for After only
+        /// The rule could be violated by a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
         /// </summary>
         public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 

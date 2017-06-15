@@ -54,12 +54,7 @@ namespace AutoRest.Swagger.Validation
         public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
 
         /// <summary>
-        /// Whether the rule should be applied to the individual or composed context based on
-        /// the corresponding .md file
-        /// In most cases this should be composed
-        /// This is because validation rules that run in individual mode will end up
-        /// throwing multiple validation messages for the same violation if related model/property,etc 
-        /// was referenced in multiple files
+        /// Rule needs to be run for every single json in individual state
         /// </summary>
         public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
 
