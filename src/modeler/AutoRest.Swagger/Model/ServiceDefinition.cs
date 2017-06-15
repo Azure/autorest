@@ -127,6 +127,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(PatchBodyParametersSchema))]
         [Rule(typeof(BodyTopLevelProperties))]
         [Rule(typeof(XmsEnumValidation))]
+        [Rule(typeof(LocationMustHaveXmsMutability))]
         [CollectionRule(typeof(RequiredReadOnlyProperties))]
         [Rule(typeof(XmsPageableListByRGAndSubscriptions))]
         public Dictionary<string, Schema> Definitions { get; set; }

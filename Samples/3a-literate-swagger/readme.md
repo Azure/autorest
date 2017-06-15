@@ -12,6 +12,7 @@ This example combines multiple AutoRest features:
 ``` yaml 
 input-file: swagger.md
 azure-arm: true
+azure-validator: true
 output-artifact:
   - swagger-document.json
   - swagger-document.json.map

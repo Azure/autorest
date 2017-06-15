@@ -82,7 +82,7 @@ namespace AutoRest.Core.Utilities
                 throw new IOException(string.Format(CultureInfo.InvariantCulture, "Directory {0} does not exist.", directory));
             }
 
-            var stringBuilder = new StringBuilder();
+            var stringBuilder = VirtualStore.ContainsKey(path) ? VirtualStore[path] : new StringBuilder();
             var stringWriter = new StringWriter(stringBuilder, CultureInfo.InvariantCulture);
             VirtualStore[path] = stringBuilder;
 

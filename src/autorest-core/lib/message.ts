@@ -30,7 +30,10 @@ export interface Message {
   Key?: Iterable<string>;
   Details?: any;
   Text: string;
+
+  // injected or modified by core
   Source?: Array<SourceLocation>;
   Range?: Iterable<Range>;
   Plugin?: string;
+  FormattedMessage?: string;
 };

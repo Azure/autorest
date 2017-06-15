@@ -1,3 +1,4 @@
+import { isAbsolute } from 'path';
 /*---------------------------------------------------------------------------------------------
 *  Copyright (c) Microsoft Corporation. All rights reserved.
 *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -72,7 +73,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   result["license-header"] = switches["header"] || undefined;
 
-  result["payload-flattening-threshold"] = parseInt(switches["fs"] || switches["payloadflatteningthreshold"] || "0");
+  result["payload-flattening-threshold"] = parseInt(switches["ft"] || switches["payloadflatteningthreshold"] || "0");
 
   result["sync-methods"] = <any>switches["syncmethods"] || undefined;
 
@@ -83,7 +84,12 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
     result["package-name"] = switches["pn"] || switches["packagename"] || undefined;
   }
 
-  result["output-file"] = switches["outputfilename"] || undefined;
+  const outputFile = result["output-file"] = switches["outputfilename"] || undefined;
+  if (outputFile && isAbsolute(outputFile)) {
+    const splitAt = Math.max(outputFile.lastIndexOf("/"), outputFile.lastIndexOf("\\"));
+    result["output-file"] = outputFile.slice(splitAt + 1);
+    result["output-folder"] = outputFile.slice(0, splitAt);
+  }
 
   result["message-format"] = switches["jsonvalidationmessages"] !== undefined ? "json" : undefined;
 

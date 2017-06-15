@@ -7,6 +7,7 @@
 ``` yaml 
 input-file: https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json
 azure-arm: true
+azure-validator: true
 output-artifact:
  - swagger-document.json
  - code-model-v1.yaml

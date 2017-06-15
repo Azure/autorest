@@ -83,9 +83,10 @@ class App {
                           __latest-release__ - get latest release version
   *--reset*              remove all installed versions of AutoRest tools
                         and install the latest (override with *--version*)
-  *--runtime-id*=__id__        overrides the platform detection for the dotnet runtime.
+  *--runtime-id*=__id__      overrides the platform detection for the dotnet runtime.
 
-## __Using AutoRest__`);
+  SEE ALSO : https://aka.ms/autorest/cli for additional documentation
+`);
   }
 
   private static async ListAvailable() {
@@ -154,8 +155,7 @@ class App {
       if (this.help) {
         this.ShowHelp();
         // remove other arguments and send -help o 
-        process.argv.length = 2;
-        process.argv.push('--help');
+        process.exit(0);
       }
 
       if (this.listAvailable || this.listInstalled) {

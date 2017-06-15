@@ -26,5 +26,6 @@
   },
   "files.associations": {
     "*.iced": "coffeescript"
-  }
+  },
+  "eslint.enable": false
 }
