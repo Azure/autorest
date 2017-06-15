@@ -610,7 +610,7 @@ var lros = function (coverage) {
     if (scenario) {
       coverage[scenario]++;
       if (finalCode === 200) {
-        res.status(200).end('{ "properties": { "provisioningState": "Running"}, "id": "100", "name": "foo" }');
+        res.status(200).end('{ "properties": { "provisioningState": "Succeeded"}, "id": "100", "name": "foo" }');
       } else {
         res.status(finalCode).end();
       }
