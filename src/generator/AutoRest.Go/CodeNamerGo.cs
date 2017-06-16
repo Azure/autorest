@@ -26,13 +26,21 @@ namespace AutoRest.Go
             }
         }
 
-        public virtual IEnumerable<string> AutorestImports => new string[] { "github.com/Azure/go-autorest/autorest" };
+        public virtual IEnumerable<string> AutorestImports => new string[] { PrimaryTypeGo.GetImportLine(package: "github.com/Azure/go-autorest/autorest") };
 
-        public virtual IEnumerable<string> StandardImports => new string[] { "github.com/Azure/go-autorest/autorest/azure", "net/http" };
+        public virtual IEnumerable<string> StandardImports => new string[] 
+        { 
+            PrimaryTypeGo.GetImportLine(package: "github.com/Azure/go-autorest/autorest/azure"), 
+            PrimaryTypeGo.GetImportLine(package: "net/http") 
+        };
 
-        public virtual IEnumerable<string> PageableImports => new string[] { "net/http", "github.com/Azure/go-autorest/autorest/to" };
+        public virtual IEnumerable<string> PageableImports => new string[] 
+        { 
+            PrimaryTypeGo.GetImportLine(package: "net/http"), 
+            PrimaryTypeGo.GetImportLine(package: "github.com/Azure/go-autorest/autorest/to") 
+        };
 
-        public virtual IEnumerable<string> ValidationImport => new string[] { "github.com/Azure/go-autorest/autorest/validation" };
+        public virtual IEnumerable<string> ValidationImport => new string[] { PrimaryTypeGo.GetImportLine(package: "github.com/Azure/go-autorest/autorest/validation") };
 
         // CommonInitialisms are those "words" within a name that Golint expects to be uppercase.
         // See https://github.com/golang/lint/blob/master/lint.go for detail.

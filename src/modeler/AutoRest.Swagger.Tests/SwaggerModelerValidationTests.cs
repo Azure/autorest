@@ -67,7 +67,7 @@ namespace AutoRest.Swagger.Tests
         public void BooleanPropertiesValidation()
         {
             var messages = GetValidationMessagesForRule<EnumInsteadOfBoolean>("boolean-properties.json");
-            Assert.Equal(messages.Count(), 4);
+            Assert.Equal(messages.Count(), 5);
         }
 
         [Fact]

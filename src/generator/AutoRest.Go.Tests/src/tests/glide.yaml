@@ -7,5 +7,5 @@ import:
   - autorest/azure
   - autorest/date
   - autorest/validation
-- package: github.com/satori/uuid
+- package: github.com/satori/go.uuid
 - package: github.com/shopspring/decimal

@@ -91,7 +91,7 @@ namespace AutoRest.Go.Model
                 var imports = new HashSet<string>();
                 if (ModelTypes != null && ModelTypes.Cast<CompositeTypeGo>().Any(mtm => mtm.IsResponseType))
                 {
-                    imports.Add("github.com/Azure/go-autorest/autorest");
+                    imports.Add(PrimaryTypeGo.GetImportLine("github.com/Azure/go-autorest/autorest"));
                 }
                 ModelTypes.Cast<CompositeTypeGo>()
                     .ForEach(mt =>

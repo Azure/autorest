@@ -116,7 +116,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined. Enum Property: {0}.
+        ///   Looks up a localized string similar to Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: {0}.
         /// </summary>
         public static string BooleanPropertyNotRecommended {
             get {
@@ -177,7 +177,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;DELETE&apos; operation &apos;{0}&apos; must use method name &apos;Delete&apos;..
+        ///   Looks up a localized string similar to &apos;DELETE&apos; operation &apos;{0}&apos; should use method name &apos;Delete&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string DeleteOperationNameNotValid {
             get {
@@ -249,7 +249,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;GET&apos; operation &apos;{0}&apos; must use method name &apos;Get&apos; or Method name start with &apos;List&apos;.
+        ///   Looks up a localized string similar to &apos;GET&apos; operation &apos;{0}&apos; should use method name &apos;Get&apos; or Method name start with &apos;List&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string GetOperationNameNotValid {
             get {
@@ -330,7 +330,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Since operation &apos;{0}&apos; response has model definition &apos;{1}&apos;, it should be of the form &quot;*_list*&quot;.
+        ///   Looks up a localized string similar to Since operation &apos;{0}&apos; response has model definition &apos;{1}&apos;, it should be of the form &quot;*_list*&quot;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string ListOperationsNamingWarningMessage {
             get {
@@ -429,7 +429,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to &apos;{0}Model&apos;. Consider using the plural form of &apos;{1}&apos; to avoid this..
+        ///   Looks up a localized string similar to OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to &apos;{0}Model&apos;. Consider using the plural form of &apos;{1}&apos; to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string OperationIdNounConflictingModelNamesMessage {
             get {
@@ -438,7 +438,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Per the Noun_Verb convention for Operation Ids, the noun &apos;{0}&apos; should not appear after the underscore..
+        ///   Looks up a localized string similar to Per the Noun_Verb convention for Operation Ids, the noun &apos;{0}&apos; should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string OperationIdNounInVerb {
             get {
@@ -492,7 +492,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;PATCH&apos; operation &apos;{0}&apos; must use method name &apos;Update&apos;..
+        ///   Looks up a localized string similar to &apos;PATCH&apos; operation &apos;{0}&apos; should use method name &apos;Update&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string PatchOperationNameNotValid {
             get {
@@ -519,7 +519,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;PUT&apos; operation &apos;{0}&apos; must use method name &apos;Create&apos;..
+        ///   Looks up a localized string similar to &apos;PUT&apos; operation &apos;{0}&apos; should use method name &apos;Create&apos;. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change..
         /// </summary>
         public static string PutOperationNameNotValid {
             get {
