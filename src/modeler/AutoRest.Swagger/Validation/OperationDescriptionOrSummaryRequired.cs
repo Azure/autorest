@@ -20,6 +20,16 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.MissingSummaryDescription;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// The rule runs on each operation in isolation irrespective of the state and can be run in individual state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
+        /// <summary>
         /// This rule fails if the description and summary is null and their references are null
         /// </summary>
         /// <param name="entity">Entity being validated</param>

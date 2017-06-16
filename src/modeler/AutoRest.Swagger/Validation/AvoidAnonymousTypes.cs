@@ -34,6 +34,16 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.AnonymousTypesDiscouraged;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// The rule runs on each operation's parameters in isolation irrespective of the state and can be run in individual state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
+        /// <summary>
         /// An <paramref name="entity"/> fails this rule if it doesn't have a reference (meaning it's defined inline)
         /// </summary>
         /// <param name="entity">The entity to validate</param>

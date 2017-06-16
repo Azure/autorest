@@ -21,6 +21,16 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// Rule validates references for each json file, needs to run on individual state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+        
         private static readonly Regex MsdnRegex = new Regex(@"https?:\/\/msdn(?:.microsoft)?.com\/", RegexOptions.IgnoreCase);
 
         /// <summary>
