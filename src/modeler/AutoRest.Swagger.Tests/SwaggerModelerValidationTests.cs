@@ -618,14 +618,14 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void LocationPropertyWithoutXmsMutability()
         {
-            var messages = GetValidationMessagesForRule<SummaryAndDescriptionMustNotBeSame>("location-without-xms-mutability.json");
+            var messages = GetValidationMessagesForRule<LocationMustHaveXmsMutability>("location-without-xms-mutability.json");
             Assert.Equal(messages.Count(), 1);
         }
         
         [Fact]
         public void LocationPropertyWithIncorrectXmsMutability()
         {
-            var messages = GetValidationMessagesForRule<SummaryAndDescriptionMustNotBeSame>("location-with-incorrect-xms-mutability.json");
+            var messages = GetValidationMessagesForRule<LocationMustHaveXmsMutability>("location-with-incorrect-xms-mutability.json");
             Assert.Equal(messages.Count(), 1);
         }
     }
