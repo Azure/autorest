@@ -19,12 +19,16 @@ namespace AutoRest.Swagger.Validation.Core
         /// Initializes a top level context for rules
         /// </summary>
         /// <param name="root"></param>
-        public RuleContext(ServiceDefinition root, Uri file) : this(null)
+        public RuleContext(ServiceDefinition root, Uri file, ServiceDefinitionMetadata metadata) : this(null)
         {
             this.Root = root;
             this.Value = root;
             this.File = file;
-            PopulateResourceTypes(root);
+            if (metadata.ServiceDefinitionDocumentType == ServiceDefinitionDocumentType.ARM)
+            {
+                // populate resources only for ARM docs, this is an expensive operation!
+                PopulateResourceTypes(root);
+            }
         }
 
         /// <summary>

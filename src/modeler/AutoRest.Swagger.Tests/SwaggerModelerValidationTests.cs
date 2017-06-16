@@ -769,7 +769,7 @@ namespace AutoRest.Swagger.Tests
             var servDef = SwaggerParser.Parse(filePath, fileText);
             Uri uriPath = null;
             Uri.TryCreate(filePath, UriKind.RelativeOrAbsolute, out uriPath);
-            var context = new RuleContext(servDef, uriPath);
+            var context = new RuleContext(servDef, uriPath, new ServiceDefinitionMetadata() { MergeState = ServiceDefinitionDocumentState.Composed, ServiceDefinitionDocumentType = ServiceDefinitionDocumentType.ARM });
             Assert.Equal(4, context.ResourceModels.Count());
             Assert.Equal(1, context.TrackedResourceModels.Count());
             Assert.Equal(3, context.ProxyResourceModels.Count());
