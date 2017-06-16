@@ -58,7 +58,7 @@ namespace AutoRest.Swagger.Model.Utilities
                                                                         && serviceDefinition.Definitions.ContainsKey(modelName)
                                                                         && IsAllOfOnModelNames(modelName, serviceDefinition.Definitions, xmsAzureResourceModels));
 
-            var unfilteredResourceCandidates = resourceModels.Union(modelsAllOfOnXmsAzureResources);
+            var resourceCandidates = resourceModels.Union(modelsAllOfOnXmsAzureResources);
 
             // Now filter all the resource models that are returned from a POST operation only 
             var postOpResourceModels = serviceDefinition.Paths.Values.SelectMany(pathObj => pathObj.Where(opObj => opObj.Key.EqualsIgnoreCase("post"))
@@ -68,7 +68,7 @@ namespace AutoRest.Swagger.Model.Utilities
                                                                      .Except(getOperationsResponseModels);
             
             // if any model is returned only by a POST operation, disregard it
-            return unfilteredResourceCandidates.Except(postOpResourceModels);
+            return resourceCandidates.Except(postOpResourceModels);
         }
 
         public static bool IsODataProperty(string propName) => propName.ToLower().StartsWith("@");
