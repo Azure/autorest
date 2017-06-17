@@ -62,7 +62,7 @@ namespace AutoRest.Swagger.Model.Utilities
 
             // Now filter all the resource models that are returned from a POST operation only 
             var postOpResourceModels = serviceDefinition.Paths.Values.SelectMany(pathObj => pathObj.Where(opObj => opObj.Key.EqualsIgnoreCase("post"))
-                                                                        .SelectMany(opObj => opObj.Value.Responses?.Select(resp => resp.Value?.Schema?.Reference?.StripDefinitionPath())))
+                                                                        .SelectMany(opObj => opObj.Value.Responses?.Select(resp => resp.Value?.Schema?.Reference?.StripDefinitionPath())??Enumerable.Empty<string>()))
                                                                      .Where(model => !string.IsNullOrWhiteSpace(model))
                                                                      .Except(putOperationsResponseModels)
                                                                      .Except(getOperationsResponseModels);
