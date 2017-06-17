@@ -163,21 +163,6 @@ namespace AutoRest.Core.Model
         public List<ParameterTransformation> InputParameterTransformation { get; private set; } = new List<ParameterTransformation>();
 
         /// <summary>
-        /// Gets or sets request headers.
-        /// </summary>
-        public Dictionary<string, string> RequestHeaders { get; private set; } = new Dictionary<string, string>();
-
-        /// <summary>
-        /// Gets or sets the request format.
-        /// </summary>
-        public SerializationFormat RequestSerializationFormat { get; set; }
-
-        /// <summary>
-        /// Gets or sets the response format.
-        /// </summary>
-        public SerializationFormat ResponseSerializationFormat { get; set; }
-
-        /// <summary>
         /// Gets or sets response bodies by HttpStatusCode.
         /// and headers.
         /// </summary>

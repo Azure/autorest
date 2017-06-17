@@ -60,6 +60,9 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual Property ClientProperty { get; set; }
 
+        [JsonIgnore]
+        public bool IsContentTypeHeader => Location == Model.ParameterLocation.Header && SerializedName == "Content-Type";
+
         /// <summary>
         /// Gets or sets parameter location.
         /// </summary>
