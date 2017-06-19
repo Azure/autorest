@@ -64,7 +64,7 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 |`--use-internal-constructors`|Indicates whether ctor needs to be generated with `internal` protection level.|
 |`--use-datetimeoffset`|Indicates whether to use DateTimeOffset instead of DateTime to model date-time types|
 |`--models-name=NAME`|Name to use for the generated client models namespace and folder name. By default, uses the value of 'Models'. This is not currently supported by all code generators.|
-|`--output-file-name=FILENAME`|If set, will cause generated code to be output to a single file. Not supported by all code generators.|
+|`--output-file=FILENAME`|If set, will cause generated code to be output to a single file. Not supported by all code generators.|
 
 #### Validation
 |Option                                                                &nbsp;| Description |
