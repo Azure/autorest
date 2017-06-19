@@ -1514,8 +1514,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -1645,8 +1643,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: put
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -1772,8 +1768,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: delete
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             isNullable: true
@@ -1887,8 +1881,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2021,8 +2013,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: patch
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2148,8 +2138,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2221,8 +2209,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2319,8 +2305,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2456,8 +2440,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2558,8 +2540,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "post",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -2708,8 +2688,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "put",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -2849,8 +2827,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "delete",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "isNullable": true
@@ -2981,8 +2957,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3131,8 +3105,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "patch",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3266,8 +3238,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "post",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3353,8 +3323,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3467,8 +3435,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3622,8 +3588,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "post",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3710,8 +3674,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -3801,8 +3763,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {

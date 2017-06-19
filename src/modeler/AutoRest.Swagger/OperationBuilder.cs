@@ -234,9 +234,8 @@ namespace AutoRest.Swagger
         {
             foreach (var swaggerParameter in DeduplicateParameters(_operation.Parameters))
             {
+                var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(_swaggerModeler)).Build();
                 var actualSwaggerParameter = _swaggerModeler.Unwrap(swaggerParameter);
-
-                var parameter = ((ParameterBuilder)actualSwaggerParameter.GetBuilder(_swaggerModeler)).Build();
 
                 // enrich Content-Type header with "consumes"
                 if (parameter.IsContentTypeHeader && 
