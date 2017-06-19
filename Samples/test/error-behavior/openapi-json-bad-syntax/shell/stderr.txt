@@ -1,2 +1,2 @@
-ERROR: Syntax error: missed comma between flow collection entries
     - /Samples/test/error-behavior/openapi-json-bad-syntax/tiny.json:45:6
+ERROR: Syntax error: missed comma between flow collection entries
