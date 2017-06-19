@@ -42,6 +42,16 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.SecurityDefinitionsStructureValidation;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// Security definitions per json need to be validated
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
+        /// <summary>
         /// Checks for the presence and existence of the security definiton
         /// </summary>
         /// <param name="securityDefinitions"></param>

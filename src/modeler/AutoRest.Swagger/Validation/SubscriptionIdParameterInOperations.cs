@@ -24,12 +24,20 @@ namespace AutoRest.Swagger.Validation
 
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// The rule runs on each operation's parameters section in isolation irrespective of the state and can be run in individual state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
+        /// <summary>
         /// This rule passes if the parameters are not subscriptionId or api-version
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
-        // TODO: api-version validation needs to be added once the feature to distinguish rules between
-        // single and composite swaggers has been implemented.
         public override bool IsValid(SwaggerParameter Parameter) => 
            (!string.IsNullOrEmpty(Parameter.Reference) || Parameter.Schema != null || Parameter.Name?.ToLower().Equals(SubscriptionId) == false);
         

@@ -28,7 +28,17 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
 
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
 
+        /// <summary>
+        /// The rule could be violated by a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+        
         /// <summary>
         /// This rule passes if the model definition contains top level properties only from the allowed set: name, type,
         /// id, location, properties, tags, plan, sku, etag, managedBy, identity

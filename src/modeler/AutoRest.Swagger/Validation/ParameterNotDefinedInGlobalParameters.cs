@@ -52,8 +52,7 @@ namespace AutoRest.Swagger.Validation
 
 
         /// <summary>
-        /// When to apply the validation rule, before or after it has been merged as a part of its composite document
-        /// By default consider all rules to be applied for After only
+        /// Global parameters of each individual json need to be validated, hence individual state
         /// </summary>
         public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
 

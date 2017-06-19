@@ -25,7 +25,7 @@ Or install using the Package Manager Console.
 PM>Install-Package Microsoft.Rest.ClientRuntime
 ```
 
-###Use the Client:
+### Use the Client:
 ```csharp
 var client = new SwaggerPetstore();
 Pet myPet = client.FindPetById(10);

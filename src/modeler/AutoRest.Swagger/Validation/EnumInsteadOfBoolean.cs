@@ -44,29 +44,43 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// The rule could be violated by a property of a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
+        /// <summary>
         /// Validates whether properties of type boolean exist.
         /// </summary>
         /// <param name="definitions">Operation Definition to validate</param>
         /// <returns>true if there are no propeties of type boolean, false otherwise.</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(SwaggerObject entity, RuleContext context)
         {
-            if (entity.Type?.Equals(DataType.Boolean) == true)
+            if (entity.GetType() == typeof(Schema))
             {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, context.Parent.Key);
-            }
-            if (entity.GetType() == typeof(Schema) && ((Schema)entity).Properties != null)
-            {
-                foreach (KeyValuePair<string, Schema> property in ((Schema)entity).Properties)
+                if (((Schema)entity).Properties != null)
                 {
-                    if (property.Value?.Type?.Equals(DataType.Boolean) == true)
+                    foreach (KeyValuePair<string, Schema> property in ((Schema)entity).Properties)
                     {
-                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty(property.Key)), this, property.Key);
+                        if (property.Value?.Type?.Equals(DataType.Boolean) == true)
+                        {
+                            yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("properties").AppendProperty(property.Key)), this, property.Key);
+                        }
                     }
+                } 
+                else if (entity.Type?.Equals(DataType.Boolean) == true)
+                { 
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, context.Key);
                 }
             }
-            if (entity.GetType() == typeof(SwaggerParameter) && ((SwaggerParameter)entity).Schema?.Type?.Equals(DataType.Boolean) == true)
+            if (entity.GetType() == typeof(SwaggerParameter) && (entity.Type?.Equals(DataType.Boolean) == true || ((SwaggerParameter)entity).Schema?.Type?.Equals(DataType.Boolean) == true))
             {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, ((SwaggerParameter)entity).Name);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty("name")), this, ((SwaggerParameter)entity).Name);
             }
         }
     }

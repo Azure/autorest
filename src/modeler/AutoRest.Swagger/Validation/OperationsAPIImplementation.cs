@@ -45,7 +45,7 @@ namespace AutoRest.Swagger.Validation
         public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.SDKImpactingChanges;
 
         /// <summary>
-        /// Represents Service Definition Document Type 
+        /// Operations API may be defined in a different json found in the composed state
         /// </summary>
         public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 

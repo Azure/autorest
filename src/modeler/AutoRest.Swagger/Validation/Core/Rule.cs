@@ -25,14 +25,17 @@ namespace AutoRest.Swagger.Validation.Core
         /// <summary>
         /// What kind of open api document type this rule should be applied to
         /// </summary>
-        public virtual ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+        public abstract ServiceDefinitionDocumentType ServiceDefinitionDocumentType { get; }
 
         /// <summary>
-        /// When to apply the validation rule, before or after it has been merged as a part of 
-        /// its merged document as specified in the corresponding '.md' file
-        /// By default consider all rules to be applied for After only
+        /// Whether the rule should be applied to the individual or composed context based on
+        /// the corresponding .md file
+        /// In most cases this should be composed
+        /// This is because validation rules that run in individual mode will end up
+        /// throwing multiple validation messages for the same violation if related model/property,etc 
+        /// was referenced in multiple files
         /// </summary>
-        public virtual ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+        public abstract ServiceDefinitionDocumentState ValidationRuleMergeState { get; }
 
         /// <summary>
         /// Violation category of the Rule.

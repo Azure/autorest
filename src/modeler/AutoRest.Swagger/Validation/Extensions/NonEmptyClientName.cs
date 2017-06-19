@@ -3,6 +3,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
+using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
@@ -20,6 +21,17 @@ namespace AutoRest.Swagger.Validation
         /// Violation category of the Rule.
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// The rule could be violated by a property of a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 
         public override bool IsValid(object clientName)
         {

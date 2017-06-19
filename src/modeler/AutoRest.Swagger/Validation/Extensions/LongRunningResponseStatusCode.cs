@@ -49,14 +49,24 @@ namespace AutoRest.Swagger.Validation
         /// <returns>http verb as string</returns>
         protected static string GetHttpVerb(RuleContext context) => context?.Parent?.Parent?.Key;
 
-        ///// <summary>
-        ///// An x-ms-long-running-operation extension passes this rule if the operation that this extension has a valid response defined.
-        ///// </summary>
-        ///// <param name="longRunning">long running extension object.</param>
-        ///// <param name="context">Rule context.</param>
-        ///// <param name="formatParameters">list of parameters for message formatter.</param>
-        ///// <returns><c>true</c> if operation has valid response code modeled, otherwise <c>false</c>.</returns>
-        ///// <remarks>This rule corresponds to M2005.</remarks>
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// The rule runs on each operation in isolation irrespective of the state and can be run in individual state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
+        /// <summary>
+        /// An x-ms-long-running-operation extension passes this rule if the operation that this extension has a valid response defined.
+        /// </summary>
+        /// <param name="longRunning">long running extension object.</param>
+        /// <param name="context">Rule context.</param>
+        /// <param name="formatParameters">list of parameters for message formatter.</param>
+        /// <returns><c>true</c> if operation has valid response code modeled, otherwise <c>false</c>.</returns>
+        /// <remarks>This rule corresponds to M2005.</remarks>
         public override bool IsValid(object longRunning, RuleContext context, out object[] formatParameters)
         {
             bool isValid = true;

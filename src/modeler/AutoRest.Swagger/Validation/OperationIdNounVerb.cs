@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Validation.Core;
+using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -23,6 +24,17 @@ namespace AutoRest.Swagger.Validation
         /// Violation category of the Rule.
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+
+        /// <summary>
+        /// The rule runs on each operation in isolation irrespective of the state and can be run in individual state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
 
         /// <summary>
         /// This rule passes if the operation id doesn't contain a repeated value before and after the underscore
