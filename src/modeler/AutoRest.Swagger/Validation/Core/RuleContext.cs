@@ -24,11 +24,7 @@ namespace AutoRest.Swagger.Validation.Core
             this.Root = root;
             this.Value = root;
             this.File = file;
-            if (metadata.ServiceDefinitionDocumentType == ServiceDefinitionDocumentType.ARM)
-            {
-                // populate resources only for ARM docs, this is an expensive operation!
-                PopulateResourceTypes(root);
-            }
+            PopulateResourceTypes(root);
         }
 
         /// <summary>
