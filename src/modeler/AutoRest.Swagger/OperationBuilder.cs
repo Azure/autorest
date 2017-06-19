@@ -238,9 +238,10 @@ namespace AutoRest.Swagger
                 var actualSwaggerParameter = _swaggerModeler.Unwrap(swaggerParameter);
 
                 // enrich Content-Type header with "consumes"
-                if (parameter.IsContentTypeHeader && 
+                if (parameter.IsContentTypeHeader &&
                     actualSwaggerParameter.Enum == null && 
-                    swaggerParameter.Extensions.GetValue<JObject>("x-ms-enum") == null)
+                    swaggerParameter.Extensions.GetValue<JObject>("x-ms-enum") == null &&
+                    _effectiveConsumes.Count > 1)
                 {
                     actualSwaggerParameter.Enum = _effectiveConsumes.ToList();
                     actualSwaggerParameter.Extensions["x-ms-enum"] = 
