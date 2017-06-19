@@ -585,7 +585,7 @@ namespace AutoRest.Ruby.Model
             {
                 builder.AppendLine("request_mapper = {{{0}}}",
                     RequestBody.ModelType.ConstructMapper(RequestBody.SerializedName, RequestBody, false));
-                builder.AppendLine("{0} = {1}.to_json(request_mapper)", requestContent, RequestBody.Name);
+                builder.AppendLine("{0} = {1}.to_json({mapper: request_mapper})", requestContent, RequestBody.Name);
             }
             return builder.ToString();
         }
