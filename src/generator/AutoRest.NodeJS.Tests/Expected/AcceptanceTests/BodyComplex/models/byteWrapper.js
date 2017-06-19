@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the ByteWrapper class.
- * @constructor
- * @member {buffer} [field]
- *
+ * Class representing a ByteWrapper.
  */
 class ByteWrapper {
+  /**
+   * Create a ByteWrapper.
+   * @member {buffer} [field]
+   */
   constructor() {
   }
 

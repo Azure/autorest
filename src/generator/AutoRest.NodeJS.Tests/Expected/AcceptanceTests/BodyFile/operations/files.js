@@ -286,17 +286,12 @@ function _getEmptyFile(options, callback) {
   });
 }
 
-/**
- * @class
- * Files
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestSwaggerBATFileService.
- * Initializes a new instance of the Files class.
- * @constructor
- *
- * @param {AutoRestSwaggerBATFileService} client Reference to the service client.
- */
+/** Class representing a Files. */
 class Files {
+  /**
+   * Create a Files.
+   * @param {AutoRestSwaggerBATFileService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getFile = _getFile;

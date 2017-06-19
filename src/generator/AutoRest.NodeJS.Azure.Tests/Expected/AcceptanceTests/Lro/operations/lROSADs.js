@@ -5352,17 +5352,12 @@ function _beginPostAsyncRelativeRetryInvalidJsonPolling(options, callback) {
   });
 }
 
-/**
- * @class
- * LROSADs
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestLongRunningOperationTestService.
- * Initializes a new instance of the LROSADs class.
- * @constructor
- *
- * @param {AutoRestLongRunningOperationTestService} client Reference to the service client.
- */
+/** Class representing a LROSADs. */
 class LROSADs {
+  /**
+   * Create a LROSADs.
+   * @param {AutoRestLongRunningOperationTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._putNonRetry400 = _putNonRetry400;

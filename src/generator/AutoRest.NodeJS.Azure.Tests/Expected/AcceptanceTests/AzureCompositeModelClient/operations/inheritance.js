@@ -276,17 +276,12 @@ function _putValid(complexBody, options, callback) {
   });
 }
 
-/**
- * @class
- * Inheritance
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AzureCompositeModel.
- * Initializes a new instance of the Inheritance class.
- * @constructor
- *
- * @param {AzureCompositeModel} client Reference to the service client.
- */
+/** Class representing a Inheritance. */
 class Inheritance {
+  /**
+   * Create a Inheritance.
+   * @param {AzureCompositeModel} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getValid = _getValid;

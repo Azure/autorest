@@ -11,25 +11,22 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the CheckNameAvailabilityResult class.
- * @constructor
  * The CheckNameAvailability operation response.
- *
- * @member {boolean} [nameAvailable] Gets a boolean value that indicates
- * whether the name is available for you to use. If true, the name is
- * available. If false, the name has already been taken or invalid and cannot
- * be used.
- *
- * @member {string} [reason] Gets the reason that a storage account name could
- * not be used. The Reason element is only returned if NameAvailable is false.
- * Possible values include: 'AccountNameInvalid', 'AlreadyExists'
- *
- * @member {string} [message] Gets an error message explaining the Reason value
- * in more detail.
  *
  */
 class CheckNameAvailabilityResult {
+  /**
+   * Create a CheckNameAvailabilityResult.
+   * @member {boolean} [nameAvailable] Gets a boolean value that indicates
+   * whether the name is available for you to use. If true, the name is
+   * available. If false, the name has already been taken or invalid and cannot
+   * be used.
+   * @member {string} [reason] Gets the reason that a storage account name
+   * could not be used. The Reason element is only returned if NameAvailable is
+   * false. Possible values include: 'AccountNameInvalid', 'AlreadyExists'
+   * @member {string} [message] Gets an error message explaining the Reason
+   * value in more detail.
+   */
   constructor() {
   }
 

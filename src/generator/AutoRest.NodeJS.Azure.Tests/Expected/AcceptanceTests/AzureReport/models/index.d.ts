@@ -20,9 +20,7 @@ export { CloudError } from 'ms-rest-azure';
  * Initializes a new instance of the ErrorModel class.
  * @constructor
  * @member {number} [status]
- *
  * @member {string} [message]
- *
  */
 export interface ErrorModel {
   status?: number;

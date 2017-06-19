@@ -814,17 +814,12 @@ function _getSwaggerQueryValid(options, callback) {
   });
 }
 
-/**
- * @class
- * SkipUrlEncoding
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the SkipUrlEncoding class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
+/** Class representing a SkipUrlEncoding. */
 class SkipUrlEncoding {
+  /**
+   * Create a SkipUrlEncoding.
+   * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getMethodPathValid = _getMethodPathValid;

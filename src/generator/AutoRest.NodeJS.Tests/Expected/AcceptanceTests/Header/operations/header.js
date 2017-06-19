@@ -3117,17 +3117,12 @@ function _customRequestId(options, callback) {
   });
 }
 
-/**
- * @class
- * Header
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestSwaggerBATHeaderService.
- * Initializes a new instance of the Header class.
- * @constructor
- *
- * @param {AutoRestSwaggerBATHeaderService} client Reference to the service client.
- */
+/** Class representing a Header. */
 class Header {
+  /**
+   * Create a Header.
+   * @param {AutoRestSwaggerBATHeaderService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._paramExistingKey = _paramExistingKey;

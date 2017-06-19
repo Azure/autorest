@@ -1526,17 +1526,12 @@ function _getNullBase64UrlEncoded(options, callback) {
   });
 }
 
-/**
- * @class
- * String
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestSwaggerBATService.
- * Initializes a new instance of the String class.
- * @constructor
- *
- * @param {AutoRestSwaggerBATService} client Reference to the service client.
- */
+/** Class representing a String. */
 class String {
+  /**
+   * Create a String.
+   * @param {AutoRestSwaggerBATService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getNull = _getNull;

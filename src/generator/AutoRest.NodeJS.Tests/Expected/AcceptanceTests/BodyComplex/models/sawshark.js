@@ -13,13 +13,14 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Sawshark class.
- * @constructor
- * @member {buffer} [picture]
- *
+ * Class representing a Sawshark.
+ * @extends models['Shark']
  */
 class Sawshark extends models['Shark'] {
+  /**
+   * Create a Sawshark.
+   * @member {buffer} [picture]
+   */
   constructor() {
     super();
   }

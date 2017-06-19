@@ -240,17 +240,12 @@ function _paramGet(xMsClientRequestId, options, callback) {
   });
 }
 
-/**
- * @class
- * XMsClientRequestId
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the XMsClientRequestId class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
+/** Class representing a XMsClientRequestId. */
 class XMsClientRequestId {
+  /**
+   * Create a XMsClientRequestId.
+   * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._get = _get;

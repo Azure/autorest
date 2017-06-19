@@ -1631,17 +1631,12 @@ function _getNullUnixTime(options, callback) {
   });
 }
 
-/**
- * @class
- * IntModel
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the CompositeBoolInt.
- * Initializes a new instance of the IntModel class.
- * @constructor
- *
- * @param {CompositeBoolInt} client Reference to the service client.
- */
+/** Class representing a IntModel. */
 class IntModel {
+  /**
+   * Create a IntModel.
+   * @param {CompositeBoolInt} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getNull = _getNull;

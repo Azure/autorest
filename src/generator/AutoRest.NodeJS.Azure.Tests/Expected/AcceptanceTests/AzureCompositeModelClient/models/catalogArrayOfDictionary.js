@@ -13,13 +13,13 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the CatalogArrayOfDictionary class.
- * @constructor
- * @member {array} [productArrayOfDictionary] Array of dictionary of products
- *
+ * Class representing a CatalogArrayOfDictionary.
  */
 class CatalogArrayOfDictionary {
+  /**
+   * Create a CatalogArrayOfDictionary.
+   * @member {array} [productArrayOfDictionary] Array of dictionary of products
+   */
   constructor() {
   }
 

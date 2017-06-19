@@ -13,28 +13,21 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Endpoints class.
- * @constructor
  * The URIs that are used to perform a retrieval of a public blob, queue or
  * table object.
  *
- * @member {string} [blob] Gets the blob endpoint.
- *
- * @member {string} [queue] Gets the queue endpoint.
- *
- * @member {string} [table] Gets the table endpoint.
- *
- * @member {object} [dummyEndPoint] Dummy EndPoint
- *
- * @member {object} [fooPoint] Foo point
- *
- * @member {object} [fooPoint.barPoint] Bar point
- *
- * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
- *
  */
 class Endpoints {
+  /**
+   * Create a Endpoints.
+   * @member {string} [blob] Gets the blob endpoint.
+   * @member {string} [queue] Gets the queue endpoint.
+   * @member {string} [table] Gets the table endpoint.
+   * @member {object} [dummyEndPoint] Dummy EndPoint
+   * @member {object} [fooPoint] Foo point
+   * @member {object} [fooPoint.barPoint] Bar point
+   * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
+   */
   constructor() {
   }
 

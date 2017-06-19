@@ -244,17 +244,12 @@ function _putValid(complexBody, options, callback) {
   });
 }
 
-/**
- * @class
- * Inheritance
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestComplexTestService.
- * Initializes a new instance of the Inheritance class.
- * @constructor
- *
- * @param {AutoRestComplexTestService} client Reference to the service client.
- */
+/** Class representing a Inheritance. */
 class Inheritance {
+  /**
+   * Create a Inheritance.
+   * @param {AutoRestComplexTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getValid = _getValid;

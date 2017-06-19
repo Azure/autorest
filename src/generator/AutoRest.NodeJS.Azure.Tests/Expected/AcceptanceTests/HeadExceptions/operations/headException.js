@@ -335,17 +335,12 @@ function _head404(options, callback) {
   });
 }
 
-/**
- * @class
- * HeadException
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestHeadExceptionTestService.
- * Initializes a new instance of the HeadException class.
- * @constructor
- *
- * @param {AutoRestHeadExceptionTestService} client Reference to the service client.
- */
+/** Class representing a HeadException. */
 class HeadException {
+  /**
+   * Create a HeadException.
+   * @param {AutoRestHeadExceptionTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._head200 = _head200;

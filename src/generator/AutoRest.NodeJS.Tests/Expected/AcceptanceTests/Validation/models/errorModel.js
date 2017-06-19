@@ -11,17 +11,15 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the ErrorModel class.
- * @constructor
- * @member {number} [code]
- *
- * @member {string} [message]
- *
- * @member {string} [fields]
- *
+ * Class representing a ErrorModel.
  */
 class ErrorModel {
+  /**
+   * Create a ErrorModel.
+   * @member {number} [code]
+   * @member {string} [message]
+   * @member {string} [fields]
+   */
   constructor() {
   }
 

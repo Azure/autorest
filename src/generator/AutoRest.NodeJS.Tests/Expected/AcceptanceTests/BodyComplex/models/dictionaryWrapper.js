@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the DictionaryWrapper class.
- * @constructor
- * @member {object} [defaultProgram]
- *
+ * Class representing a DictionaryWrapper.
  */
 class DictionaryWrapper {
+  /**
+   * Create a DictionaryWrapper.
+   * @member {object} [defaultProgram]
+   */
   constructor() {
   }
 

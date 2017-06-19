@@ -584,17 +584,12 @@ function _postSwaggerGlobalValid(options, callback) {
   });
 }
 
-/**
- * @class
- * SubscriptionInCredentials
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the SubscriptionInCredentials class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
+/** Class representing a SubscriptionInCredentials. */
 class SubscriptionInCredentials {
+  /**
+   * Create a SubscriptionInCredentials.
+   * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._postMethodGlobalValid = _postMethodGlobalValid;

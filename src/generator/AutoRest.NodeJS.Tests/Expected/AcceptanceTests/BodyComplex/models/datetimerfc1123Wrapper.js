@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the Datetimerfc1123Wrapper class.
- * @constructor
- * @member {date} [field]
- *
- * @member {date} [now]
- *
+ * Class representing a Datetimerfc1123Wrapper.
  */
 class Datetimerfc1123Wrapper {
+  /**
+   * Create a Datetimerfc1123Wrapper.
+   * @member {date} [field]
+   * @member {date} [now]
+   */
   constructor() {
   }
 

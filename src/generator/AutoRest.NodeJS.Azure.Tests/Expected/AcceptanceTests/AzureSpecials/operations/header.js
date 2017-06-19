@@ -383,17 +383,12 @@ function _customNamedRequestIdHead(fooClientRequestId, options, callback) {
   });
 }
 
-/**
- * @class
- * Header
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the Header class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
+/** Class representing a Header. */
 class Header {
+  /**
+   * Create a Header.
+   * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._customNamedRequestId = _customNamedRequestId;

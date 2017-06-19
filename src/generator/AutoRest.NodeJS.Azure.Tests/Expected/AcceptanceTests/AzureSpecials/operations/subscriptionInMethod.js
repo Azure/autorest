@@ -478,17 +478,12 @@ function _postSwaggerLocalValid(subscriptionId, options, callback) {
   });
 }
 
-/**
- * @class
- * SubscriptionInMethod
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the SubscriptionInMethod class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
+/** Class representing a SubscriptionInMethod. */
 class SubscriptionInMethod {
+  /**
+   * Create a SubscriptionInMethod.
+   * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._postMethodLocalValid = _postMethodLocalValid;

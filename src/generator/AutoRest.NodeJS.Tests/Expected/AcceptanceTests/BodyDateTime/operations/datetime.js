@@ -2214,17 +2214,12 @@ function _getLocalNegativeOffsetMinDateTime(options, callback) {
   });
 }
 
-/**
- * @class
- * Datetime
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestDateTimeTestService.
- * Initializes a new instance of the Datetime class.
- * @constructor
- *
- * @param {AutoRestDateTimeTestService} client Reference to the service client.
- */
+/** Class representing a Datetime. */
 class Datetime {
+  /**
+   * Create a Datetime.
+   * @param {AutoRestDateTimeTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getNull = _getNull;

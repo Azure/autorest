@@ -11,16 +11,15 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the DoubleWrapper class.
- * @constructor
- * @member {number} [field1]
- *
- * @member {number}
- * [field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
- *
+ * Class representing a DoubleWrapper.
  */
 class DoubleWrapper {
+  /**
+   * Create a DoubleWrapper.
+   * @member {number} [field1]
+   * @member {number}
+   * [field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
+   */
   constructor() {
   }
 

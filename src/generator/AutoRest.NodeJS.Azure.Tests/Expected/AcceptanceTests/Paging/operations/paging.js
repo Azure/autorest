@@ -3181,17 +3181,12 @@ function _getMultiplePagesFailureUriNext(nextPageLink, options, callback) {
   });
 }
 
-/**
- * @class
- * Paging
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestPagingTestService.
- * Initializes a new instance of the Paging class.
- * @constructor
- *
- * @param {AutoRestPagingTestService} client Reference to the service client.
- */
+/** Class representing a Paging. */
 class Paging {
+  /**
+   * Create a Paging.
+   * @param {AutoRestPagingTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getSinglePages = _getSinglePages;

@@ -664,17 +664,12 @@ function _postSharedParameterGroupObject(options, callback) {
   });
 }
 
-/**
- * @class
- * ParameterGrouping
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestParameterGroupingTestService.
- * Initializes a new instance of the ParameterGrouping class.
- * @constructor
- *
- * @param {AutoRestParameterGroupingTestService} client Reference to the service client.
- */
+/** Class representing a ParameterGrouping. */
 class ParameterGrouping {
+  /**
+   * Create a ParameterGrouping.
+   * @param {AutoRestParameterGroupingTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._postRequired = _postRequired;

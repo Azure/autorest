@@ -151,17 +151,12 @@ function _getWithFilter(options, callback) {
   });
 }
 
-/**
- * @class
- * Odata
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the Odata class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
+/** Class representing a Odata. */
 class Odata {
+  /**
+   * Create a Odata.
+   * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getWithFilter = _getWithFilter;

@@ -20,9 +20,7 @@ export { CloudError } from 'ms-rest-azure';
  * Initializes a new instance of the ProductProperties class.
  * @constructor
  * @member {number} [id]
- *
  * @member {string} [name]
- *
  */
 export interface ProductProperties {
   id?: number;
@@ -34,11 +32,8 @@ export interface ProductProperties {
  * Initializes a new instance of the Product class.
  * @constructor
  * @member {object} [properties]
- *
  * @member {number} [properties.id]
- *
  * @member {string} [properties.name]
- *
  */
 export interface Product {
   properties?: ProductProperties;
@@ -49,9 +44,7 @@ export interface Product {
  * Initializes a new instance of the ProductResult class.
  * @constructor
  * @member {array} [values]
- *
  * @member {string} [nextLink]
- *
  */
 export interface ProductResult {
   values?: Product[];
@@ -63,9 +56,7 @@ export interface ProductResult {
  * Initializes a new instance of the OdataProductResult class.
  * @constructor
  * @member {array} [values]
- *
  * @member {string} [odatanextLink]
- *
  */
 export interface OdataProductResult {
   values?: Product[];
@@ -79,7 +70,6 @@ export interface OdataProductResult {
  * @member {string} [status] The status of the request. Possible values
  * include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
  * 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
  */
 export interface OperationResult {
   status?: string;
@@ -93,11 +83,9 @@ export interface OperationResult {
  *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
- *
  * @member {number} [timeout] Sets the maximum time that the server can spend
  * processing the request, in seconds. The default is 30 seconds. Default
  * value: 30 .
- *
  */
 export interface PagingGetMultiplePagesOptions {
   maxresults?: number;
@@ -112,11 +100,9 @@ export interface PagingGetMultiplePagesOptions {
  *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
- *
  * @member {number} [timeout] Sets the maximum time that the server can spend
  * processing the request, in seconds. The default is 30 seconds. Default
  * value: 30 .
- *
  */
 export interface PagingGetOdataMultiplePagesOptions {
   maxresults?: number;
@@ -131,13 +117,10 @@ export interface PagingGetOdataMultiplePagesOptions {
  *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
- *
  * @member {number} offset Offset of return value
- *
  * @member {number} [timeout] Sets the maximum time that the server can spend
  * processing the request, in seconds. The default is 30 seconds. Default
  * value: 30 .
- *
  */
 export interface PagingGetMultiplePagesWithOffsetOptions {
   maxresults?: number;
@@ -154,9 +137,7 @@ export interface PagingGetMultiplePagesWithOffsetOptions {
  * Paging_nextFragmentWithGrouping.
  *
  * @member {string} apiVersion Sets the api version to use.
- *
  * @member {string} tenant Sets the tenant to use.
- *
  */
 export interface CustomParameterGroup {
   apiVersion: string;
@@ -171,11 +152,9 @@ export interface CustomParameterGroup {
  *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
- *
  * @member {number} [timeout] Sets the maximum time that the server can spend
  * processing the request, in seconds. The default is 30 seconds. Default
  * value: 30 .
- *
  */
 export interface PagingGetMultiplePagesWithOffsetNextOptions {
   maxresults?: number;
@@ -187,9 +166,7 @@ export interface PagingGetMultiplePagesWithOffsetNextOptions {
  * Initializes a new instance of the ProductResult class.
  * @constructor
  * @member {array} [values]
- *
  * @member {string} [nextLink]
- *
  */
 export interface ProductResult {
   values?: Product[];
@@ -201,9 +178,7 @@ export interface ProductResult {
  * Initializes a new instance of the OdataProductResult class.
  * @constructor
  * @member {array} [values]
- *
  * @member {string} [odatanextLink]
- *
  */
 export interface OdataProductResult {
   values?: Product[];
@@ -216,9 +191,7 @@ export interface OdataProductResult {
  * Initializes a new instance of the ProductResult class.
  * @constructor
  * @member {array} [values]
- *
  * @member {string} [nextLink]
- *
  */
 export interface ProductResult extends Array<Product> {
   nextLink?: string;
@@ -229,9 +202,7 @@ export interface ProductResult extends Array<Product> {
  * Initializes a new instance of the OdataProductResult class.
  * @constructor
  * @member {array} [values]
- *
  * @member {string} [odatanextLink]
- *
  */
 export interface OdataProductResult extends Array<Product> {
   odatanextLink?: string;

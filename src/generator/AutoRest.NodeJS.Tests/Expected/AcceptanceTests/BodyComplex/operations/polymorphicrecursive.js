@@ -295,17 +295,12 @@ function _putValid(complexBody, options, callback) {
   });
 }
 
-/**
- * @class
- * Polymorphicrecursive
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestComplexTestService.
- * Initializes a new instance of the Polymorphicrecursive class.
- * @constructor
- *
- * @param {AutoRestComplexTestService} client Reference to the service client.
- */
+/** Class representing a Polymorphicrecursive. */
 class Polymorphicrecursive {
+  /**
+   * Create a Polymorphicrecursive.
+   * @param {AutoRestComplexTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getValid = _getValid;

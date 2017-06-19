@@ -19,17 +19,12 @@ const WebResource = msRest.WebResource;
 @:@(Include(new MethodTemplate(), method))
 @EmptyLine
 }
-/**
- * @@class
- * @Model.TypeName
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the @Model.CodeModel.Name.
- * Initializes a new instance of the @Model.TypeName class.
- * @@constructor
- *
- * @@param {@Model.CodeModel.Name} client Reference to the service client.
- */
+/** Class representing a @(Model.TypeName). */
 class @(Model.TypeName) {
+  /**
+   * Create a @Model.TypeName.
+   * @@param {@Model.CodeModel.Name} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
 @foreach (var method in Model.MethodTemplateModels)
