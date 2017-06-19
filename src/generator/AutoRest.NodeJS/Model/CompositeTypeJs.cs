@@ -161,8 +161,7 @@ namespace AutoRest.NodeJS.Model
         public static string ConstructPropertyDocumentation(string propertyDocumentation)
         {
             var builder = new IndentedStringBuilder("  ");
-            return builder.AppendLine(propertyDocumentation)
-                          .AppendLine(" * ").ToString();
+            return builder.AppendLine(propertyDocumentation).ToString();
         }
 
         public bool ContainsPropertiesInSequenceType()
