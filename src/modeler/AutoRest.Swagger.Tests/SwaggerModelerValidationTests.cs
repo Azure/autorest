@@ -37,9 +37,9 @@ namespace AutoRest.Swagger.Tests
 
         private IEnumerable<ValidationMessage> GetValidationMessagesForRule<TRule>(string swaggerFileName) where TRule : Rule
         {
-            var ruleInstance = (Rule)Activator.CreateInstance<TRule>();
+            var ruleInstance = Activator.CreateInstance<TRule>();
             var messages = ValidateSwagger(Path.Combine(PathToValidationResources, swaggerFileName), GetMetadataForRuleTest(ruleInstance));
-            return GetValidationMessagesForCategory(messages, ruleInstance.Severity).Where(message => message.Rule is TRule);
+            return GetValidationMessagesForCategory(messages, ruleInstance.Severity).Where(message => message.Rule.GetType() == typeof(TRule));
         }
 
         private ServiceDefinitionMetadata GetMetadataForRuleTest(Rule rule) =>
@@ -109,9 +109,7 @@ namespace AutoRest.Swagger.Tests
         public void OperationParametersValidation()
         {
             // ignore ParameterNotDefinedInGlobalParameters validation rule since it overlaps with this
-            var messages = GetValidationMessagesForRule<SubscriptionIdParameterInOperations>("operations-invalid-parameters.json").
-                            Where(msg => msg.Rule.GetType().Name != "ParameterNotDefinedInGlobalParameters");
-
+            var messages = GetValidationMessagesForRule<SubscriptionIdParameterInOperations>("operations-invalid-parameters.json");
             Assert.Equal(messages.Count(), 1);
         }
 
@@ -270,11 +268,11 @@ namespace AutoRest.Swagger.Tests
         public void OperationNameValidation()
         {
             var messages = GetValidationMessagesForRule<GetInOperationName>("operation-name-not-valid.json");
-            Assert.Equal(messages.Where(m => m.Rule.GetType() == typeof(GetInOperationName)).Count(), 1);
+            Assert.Equal(messages.Count(), 1);
             messages = GetValidationMessagesForRule<PutInOperationName>("operation-name-not-valid.json");
-            Assert.Equal(messages.Where(m => m.Rule.GetType() == typeof(PutInOperationName)).Count(), 1);
+            Assert.Equal(messages.Count(), 1);
             messages = GetValidationMessagesForRule<DeleteInOperationName>("operation-name-not-valid.json");
-            Assert.Equal(messages.Where(m => m.Rule.GetType() == typeof(DeleteInOperationName)).Count(), 1);
+            Assert.Equal(messages.Count(), 1);
         }
 
         [Fact]
