@@ -1,10 +1,10 @@
+WARNING (PutRequestResponseScheme/R2017/SDKViolation): A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: 'Services_CreateOrUpdate' Request Model: 'SearchServiceCreateOrUpdateParameters' Response Model: 'SearchServiceResource'
+    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
 ERROR (OperationsAPIImplementation/R3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Search/operations'.
     - /Samples/3a-literate-swagger/swagger.md:205:0 ($.paths)
     - /Samples/3a-literate-swagger/swagger.md:176:0 ($.paths)
     - /Samples/3a-literate-swagger/swagger.md:137:0 ($.paths)
     - /Samples/3a-literate-swagger/swagger.md:50:0 ($.paths)
-WARNING (PutRequestResponseScheme/R2017/SDKViolation): A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: 'Services_CreateOrUpdate' Request Model: 'SearchServiceCreateOrUpdateParameters' Response Model: 'SearchServiceResource'
-    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'QueryKeys_List'
     - /Samples/3a-literate-swagger/swagger.md:52:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys"].get)
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_CreateOrUpdate'
