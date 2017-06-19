@@ -1,6 +1,0 @@
-module.js:472
-    throw err;
-    ^
-
-Error: Cannot find module 'C:\work\autorest\src\core\AutoRest\bin\Debug\netcoreapp1.0\node_modules\autorest-core\app.js'
-   at ...

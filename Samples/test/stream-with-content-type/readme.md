@@ -16,9 +16,15 @@ One is supposed to set the dedicated property instead.
 
 ## Solution
 
+There are essentially two completely orthogonal changes we made to enable/improve this scenario.
+
+### "Fixed" C# generator
+
 The C# generator no longer tries to simply set a custom `Content-Type` header, preventing the runtime failure.
 In case of `Stream` request bodies, it will instead forward the parameter to the appropriate property when building the request.
 (Adding the same behavior to other types of request bodies is trivial now, but was not done intentionally, as we currently see more risk than value in doing so.)
+
+### Smart defaults
 
 To reduce duplication in the OpenAPI definition, a header parameter called `Content-Type` will automatically be enhanced with an `enum` definition populated with the `consumes` values of the operation.
 This behavior is language agnostic!

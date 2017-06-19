@@ -76,9 +76,6 @@ namespace AutoRest.Swagger
             return serviceType;
         }
 
-        public override IModelType ParentBuildServiceType(string serviceTypeName)
-        {
-            return base.BuildServiceType(serviceTypeName);
-        }
+        public override IModelType ParentBuildServiceType(string serviceTypeName) => base.BuildServiceType(serviceTypeName);
     }
 }
