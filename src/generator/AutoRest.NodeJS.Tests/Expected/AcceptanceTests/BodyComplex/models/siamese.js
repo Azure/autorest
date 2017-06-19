@@ -13,13 +13,14 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Siamese class.
- * @constructor
- * @member {string} [breed]
- *
+ * Class representing a Siamese.
+ * @extends models['Cat']
  */
 class Siamese extends models['Cat'] {
+  /**
+   * Create a Siamese.
+   * @member {string} [breed]
+   */
   constructor() {
     super();
   }

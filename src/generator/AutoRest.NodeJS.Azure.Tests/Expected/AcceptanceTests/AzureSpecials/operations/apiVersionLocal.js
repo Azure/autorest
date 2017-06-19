@@ -466,17 +466,12 @@ function _getSwaggerLocalValid(options, callback) {
   });
 }
 
-/**
- * @class
- * ApiVersionLocal
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the ApiVersionLocal class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
+/** Class representing a ApiVersionLocal. */
 class ApiVersionLocal {
+  /**
+   * Create a ApiVersionLocal.
+   * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getMethodLocalValid = _getMethodLocalValid;

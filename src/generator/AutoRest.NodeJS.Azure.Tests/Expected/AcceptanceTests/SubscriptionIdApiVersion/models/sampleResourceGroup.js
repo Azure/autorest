@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the SampleResourceGroup class.
- * @constructor
- * @member {string} [name] resource group name 'testgroup101'
- *
- * @member {string} [location] resource group location 'West US'
- *
+ * Class representing a SampleResourceGroup.
  */
 class SampleResourceGroup {
+  /**
+   * Create a SampleResourceGroup.
+   * @member {string} [name] resource group name 'testgroup101'
+   * @member {string} [location] resource group location 'West US'
+   */
   constructor() {
   }
 

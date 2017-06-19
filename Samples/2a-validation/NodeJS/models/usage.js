@@ -9,29 +9,24 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Usage class.
- * @constructor
  * Describes Storage Resource Usage.
- *
- * @member {string} unit Gets the unit of measurement. Possible values include:
- * 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond'
- *
- * @member {number} currentValue Gets the current count of the allocated
- * resources in the subscription.
- *
- * @member {number} limit Gets the maximum count of the resources that can be
- * allocated in the subscription.
- *
- * @member {object} name Gets the name of the type of usage.
- *
- * @member {string} [name.value] Gets a string describing the resource name.
- *
- * @member {string} [name.localizedValue] Gets a localized string describing
- * the resource name.
  *
  */
 class Usage {
+  /**
+   * Create a Usage.
+   * @member {string} unit Gets the unit of measurement. Possible values
+   * include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
+   * 'BytesPerSecond'
+   * @member {number} currentValue Gets the current count of the allocated
+   * resources in the subscription.
+   * @member {number} limit Gets the maximum count of the resources that can be
+   * allocated in the subscription.
+   * @member {object} name Gets the name of the type of usage.
+   * @member {string} [name.value] Gets a string describing the resource name.
+   * @member {string} [name.localizedValue] Gets a localized string describing
+   * the resource name.
+   */
   constructor() {
   }
 

@@ -13,11 +13,13 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Cookiecuttershark class.
- * @constructor
+ * Class representing a Cookiecuttershark.
+ * @extends models['Shark']
  */
 class Cookiecuttershark extends models['Shark'] {
+  /**
+   * Create a Cookiecuttershark.
+   */
   constructor() {
     super();
   }

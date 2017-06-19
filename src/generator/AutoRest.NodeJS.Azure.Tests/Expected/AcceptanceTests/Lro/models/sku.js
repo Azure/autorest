@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the Sku class.
- * @constructor
- * @member {string} [name]
- *
- * @member {string} [id]
- *
+ * Class representing a Sku.
  */
 class Sku {
+  /**
+   * Create a Sku.
+   * @member {string} [name]
+   * @member {string} [id]
+   */
   constructor() {
   }
 

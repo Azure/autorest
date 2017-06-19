@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the Product class.
- * @constructor
- * @member {number} id
- *
- * @member {string} [name]
- *
+ * Class representing a Product.
  */
 class Product {
+  /**
+   * Create a Product.
+   * @member {number} id
+   * @member {string} [name]
+   */
   constructor() {
   }
 

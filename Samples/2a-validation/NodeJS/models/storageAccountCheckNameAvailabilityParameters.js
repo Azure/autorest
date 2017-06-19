@@ -7,15 +7,15 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the StorageAccountCheckNameAvailabilityParameters class.
- * @constructor
- * @member {string} name
- *
- * @member {string} [type] Default value: 'Microsoft.Storage/storageAccounts' .
- *
+ * Class representing a StorageAccountCheckNameAvailabilityParameters.
  */
 class StorageAccountCheckNameAvailabilityParameters {
+  /**
+   * Create a StorageAccountCheckNameAvailabilityParameters.
+   * @member {string} name
+   * @member {string} [type] Default value: 'Microsoft.Storage/storageAccounts'
+   * .
+   */
   constructor() {
   }
 

@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the GenericUrl class.
- * @constructor
  * The Generic URL.
- *
- * @member {string} [genericValue] Generic URL value.
  *
  */
 class GenericUrl {
+  /**
+   * Create a GenericUrl.
+   * @member {string} [genericValue] Generic URL value.
+   */
   constructor() {
   }
 

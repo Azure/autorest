@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the Widget class.
- * @constructor
- * @member {number} [integer]
- *
- * @member {string} [string]
- *
+ * Class representing a Widget.
  */
 class Widget {
+  /**
+   * Create a Widget.
+   * @member {number} [integer]
+   * @member {string} [string]
+   */
   constructor() {
   }
 

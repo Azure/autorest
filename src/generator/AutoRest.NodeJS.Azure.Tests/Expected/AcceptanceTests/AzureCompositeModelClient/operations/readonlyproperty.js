@@ -277,17 +277,12 @@ function _putValid(options, callback) {
   });
 }
 
-/**
- * @class
- * Readonlyproperty
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AzureCompositeModel.
- * Initializes a new instance of the Readonlyproperty class.
- * @constructor
- *
- * @param {AzureCompositeModel} client Reference to the service client.
- */
+/** Class representing a Readonlyproperty. */
 class Readonlyproperty {
+  /**
+   * Create a Readonlyproperty.
+   * @param {AzureCompositeModel} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getValid = _getValid;

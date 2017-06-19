@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the ConstantProduct class.
- * @constructor
  * The product documentation.
  *
  */
 class ConstantProduct {
+  /**
+   * Create a ConstantProduct.
+   */
   constructor() {
   }
 

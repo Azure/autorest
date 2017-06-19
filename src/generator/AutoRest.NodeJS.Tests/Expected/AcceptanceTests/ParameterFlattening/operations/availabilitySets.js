@@ -151,17 +151,12 @@ function _update(resourceGroupName, avset, tags, options, callback) {
   });
 }
 
-/**
- * @class
- * AvailabilitySets
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestParameterFlattening.
- * Initializes a new instance of the AvailabilitySets class.
- * @constructor
- *
- * @param {AutoRestParameterFlattening} client Reference to the service client.
- */
+/** Class representing a AvailabilitySets. */
 class AvailabilitySets {
+  /**
+   * Create a AvailabilitySets.
+   * @param {AutoRestParameterFlattening} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._update = _update;

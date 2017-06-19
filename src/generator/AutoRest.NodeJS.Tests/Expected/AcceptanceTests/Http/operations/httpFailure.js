@@ -344,17 +344,12 @@ function _getNoModelEmpty(options, callback) {
   });
 }
 
-/**
- * @class
- * HttpFailure
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestHttpInfrastructureTestService.
- * Initializes a new instance of the HttpFailure class.
- * @constructor
- *
- * @param {AutoRestHttpInfrastructureTestService} client Reference to the service client.
- */
+/** Class representing a HttpFailure. */
 class HttpFailure {
+  /**
+   * Create a HttpFailure.
+   * @param {AutoRestHttpInfrastructureTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getEmptyError = _getEmptyError;

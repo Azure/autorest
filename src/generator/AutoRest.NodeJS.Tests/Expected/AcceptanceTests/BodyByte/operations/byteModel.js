@@ -586,17 +586,12 @@ function _getInvalid(options, callback) {
   });
 }
 
-/**
- * @class
- * ByteModel
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestSwaggerBATByteService.
- * Initializes a new instance of the ByteModel class.
- * @constructor
- *
- * @param {AutoRestSwaggerBATByteService} client Reference to the service client.
- */
+/** Class representing a ByteModel. */
 class ByteModel {
+  /**
+   * Create a ByteModel.
+   * @param {AutoRestSwaggerBATByteService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getNull = _getNull;

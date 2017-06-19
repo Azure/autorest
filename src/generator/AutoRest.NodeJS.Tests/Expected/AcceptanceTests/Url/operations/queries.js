@@ -3540,17 +3540,12 @@ function _arrayStringPipesValid(options, callback) {
   });
 }
 
-/**
- * @class
- * Queries
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestUrlTestService.
- * Initializes a new instance of the Queries class.
- * @constructor
- *
- * @param {AutoRestUrlTestService} client Reference to the service client.
- */
+/** Class representing a Queries. */
 class Queries {
+  /**
+   * Create a Queries.
+   * @param {AutoRestUrlTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getBooleanTrue = _getBooleanTrue;

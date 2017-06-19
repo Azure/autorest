@@ -814,17 +814,12 @@ function _getOptionalGlobalQuery(options, callback) {
   });
 }
 
-/**
- * @class
- * Implicit
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestRequiredOptionalTestService.
- * Initializes a new instance of the Implicit class.
- * @constructor
- *
- * @param {AutoRestRequiredOptionalTestService} client Reference to the service client.
- */
+/** Class representing a Implicit. */
 class Implicit {
+  /**
+   * Create a Implicit.
+   * @param {AutoRestRequiredOptionalTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getRequiredPath = _getRequiredPath;

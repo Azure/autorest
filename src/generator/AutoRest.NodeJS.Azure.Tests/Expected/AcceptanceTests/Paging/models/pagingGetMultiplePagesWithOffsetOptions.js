@@ -11,22 +11,19 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the PagingGetMultiplePagesWithOffsetOptions class.
- * @constructor
  * Additional parameters for the Paging_getMultiplePagesWithOffset operation.
- *
- * @member {number} [maxresults] Sets the maximum number of items to return in
- * the response.
- *
- * @member {number} offset Offset of return value
- *
- * @member {number} [timeout] Sets the maximum time that the server can spend
- * processing the request, in seconds. The default is 30 seconds. Default
- * value: 30 .
  *
  */
 class PagingGetMultiplePagesWithOffsetOptions {
+  /**
+   * Create a PagingGetMultiplePagesWithOffsetOptions.
+   * @member {number} [maxresults] Sets the maximum number of items to return
+   * in the response.
+   * @member {number} offset Offset of return value
+   * @member {number} [timeout] Sets the maximum time that the server can spend
+   * processing the request, in seconds. The default is 30 seconds. Default
+   * value: 30 .
+   */
   constructor() {
   }
 

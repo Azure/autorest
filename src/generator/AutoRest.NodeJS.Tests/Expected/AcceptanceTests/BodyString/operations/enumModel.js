@@ -735,17 +735,12 @@ function _putReferencedConstant(options, callback) {
   });
 }
 
-/**
- * @class
- * EnumModel
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestSwaggerBATService.
- * Initializes a new instance of the EnumModel class.
- * @constructor
- *
- * @param {AutoRestSwaggerBATService} client Reference to the service client.
- */
+/** Class representing a EnumModel. */
 class EnumModel {
+  /**
+   * Create a EnumModel.
+   * @param {AutoRestSwaggerBATService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getNotExpandable = _getNotExpandable;

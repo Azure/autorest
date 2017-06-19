@@ -13,17 +13,15 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the ClassWrapper class.
- * @constructor
- * @member {object} value
- *
- * @member {number} [value.id]
- *
- * @member {string} [value.name]
- *
+ * Class representing a ClassWrapper.
  */
 class ClassWrapper {
+  /**
+   * Create a ClassWrapper.
+   * @member {object} value
+   * @member {number} [value.id]
+   * @member {string} [value.name]
+   */
   constructor() {
   }
 

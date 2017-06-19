@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the StringOptionalWrapper class.
- * @constructor
- * @member {string} [value]
- *
+ * Class representing a StringOptionalWrapper.
  */
 class StringOptionalWrapper {
+  /**
+   * Create a StringOptionalWrapper.
+   * @member {string} [value]
+   */
   constructor() {
   }
 

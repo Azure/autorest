@@ -13,27 +13,21 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Product class.
- * @constructor
  * The product documentation.
- *
- * @member {array} [displayNames] Non required array of unique items from 0 to
- * 6 elements.
- *
- * @member {number} [capacity] Non required int betwen 0 and 100 exclusive.
- *
- * @member {string} [image] Image URL representing the product.
- *
- * @member {object} child
- *
- * @member {number} [child.count] Count
- *
- * @member {string} [constStringAsEnum] Constant string as Enum. Possible
- * values include: 'constant_string_as_enum'
  *
  */
 class Product {
+  /**
+   * Create a Product.
+   * @member {array} [displayNames] Non required array of unique items from 0
+   * to 6 elements.
+   * @member {number} [capacity] Non required int betwen 0 and 100 exclusive.
+   * @member {string} [image] Image URL representing the product.
+   * @member {object} child
+   * @member {number} [child.count] Count
+   * @member {string} [constStringAsEnum] Constant string as Enum. Possible
+   * values include: 'constant_string_as_enum'
+   */
   constructor() {
   }
 

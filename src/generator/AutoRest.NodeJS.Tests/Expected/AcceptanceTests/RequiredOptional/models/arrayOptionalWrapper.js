@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the ArrayOptionalWrapper class.
- * @constructor
- * @member {array} [value]
- *
+ * Class representing a ArrayOptionalWrapper.
  */
 class ArrayOptionalWrapper {
+  /**
+   * Create a ArrayOptionalWrapper.
+   * @member {array} [value]
+   */
   constructor() {
   }
 

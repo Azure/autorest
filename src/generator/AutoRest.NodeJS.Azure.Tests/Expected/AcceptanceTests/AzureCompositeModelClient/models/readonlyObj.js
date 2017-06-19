@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the ReadonlyObj class.
- * @constructor
- * @member {string} [id]
- *
- * @member {number} [size]
- *
+ * Class representing a ReadonlyObj.
  */
 class ReadonlyObj {
+  /**
+   * Create a ReadonlyObj.
+   * @member {string} [id]
+   * @member {number} [size]
+   */
   constructor() {
   }
 

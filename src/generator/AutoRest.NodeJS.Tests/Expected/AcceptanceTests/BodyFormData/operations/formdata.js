@@ -231,17 +231,12 @@ function _uploadFileViaBody(fileContent, options, callback) {
   });
 }
 
-/**
- * @class
- * Formdata
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestSwaggerBATFormDataService.
- * Initializes a new instance of the Formdata class.
- * @constructor
- *
- * @param {AutoRestSwaggerBATFormDataService} client Reference to the service client.
- */
+/** Class representing a Formdata. */
 class Formdata {
+  /**
+   * Create a Formdata.
+   * @param {AutoRestSwaggerBATFormDataService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._uploadFile = _uploadFile;

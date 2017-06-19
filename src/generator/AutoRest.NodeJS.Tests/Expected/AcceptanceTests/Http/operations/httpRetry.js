@@ -919,17 +919,12 @@ function _patch504(options, callback) {
   });
 }
 
-/**
- * @class
- * HttpRetry
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestHttpInfrastructureTestService.
- * Initializes a new instance of the HttpRetry class.
- * @constructor
- *
- * @param {AutoRestHttpInfrastructureTestService} client Reference to the service client.
- */
+/** Class representing a HttpRetry. */
 class HttpRetry {
+  /**
+   * Create a HttpRetry.
+   * @param {AutoRestHttpInfrastructureTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._head408 = _head408;

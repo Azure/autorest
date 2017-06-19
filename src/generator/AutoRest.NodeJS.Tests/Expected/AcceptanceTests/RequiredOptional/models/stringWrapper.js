@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the StringWrapper class.
- * @constructor
- * @member {string} value
- *
+ * Class representing a StringWrapper.
  */
 class StringWrapper {
+  /**
+   * Create a StringWrapper.
+   * @member {string} value
+   */
   constructor() {
   }
 

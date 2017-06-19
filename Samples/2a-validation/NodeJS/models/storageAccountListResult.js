@@ -7,13 +7,12 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the StorageAccountListResult class.
- * @constructor
  * The list storage accounts operation response.
- *
  */
 class StorageAccountListResult extends Array {
+  /**
+   * Create a StorageAccountListResult.
+   */
   constructor() {
     super();
   }

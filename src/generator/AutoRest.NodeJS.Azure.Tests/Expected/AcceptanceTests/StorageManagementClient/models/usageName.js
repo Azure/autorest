@@ -11,18 +11,16 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the UsageName class.
- * @constructor
  * The Usage Names.
- *
- * @member {string} [value] Gets a string describing the resource name.
- *
- * @member {string} [localizedValue] Gets a localized string describing the
- * resource name.
  *
  */
 class UsageName {
+  /**
+   * Create a UsageName.
+   * @member {string} [value] Gets a string describing the resource name.
+   * @member {string} [localizedValue] Gets a localized string describing the
+   * resource name.
+   */
   constructor() {
   }
 

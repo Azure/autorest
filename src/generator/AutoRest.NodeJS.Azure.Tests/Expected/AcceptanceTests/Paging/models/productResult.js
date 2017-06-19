@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the ProductResult class.
- * @constructor
- * @member {array} [values]
- *
- * @member {string} [nextLink]
- *
+ * Class representing a ProductResult.
  */
 class ProductResult extends Array {
+  /**
+   * Create a ProductResult.
+   * @member {array} [values]
+   * @member {string} [nextLink]
+   */
   constructor() {
     super();
   }
