@@ -82,8 +82,6 @@ operations:
             '#serializedName': body
         isAbsoluteUrl: false
         httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             isNullable: true

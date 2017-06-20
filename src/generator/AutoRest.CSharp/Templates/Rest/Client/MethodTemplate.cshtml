@@ -142,7 +142,7 @@ else
     _httpRequest.RequestUri = new System.Uri(_url);
     // Set Headers
     @(Model.SetDefaultHeaders)
-    @foreach (var parameter in Model.LogicalParameters.OfType<ParameterCs>().Where(p => p.Location == ParameterLocation.Header && !p.IsHeaderCollection))
+    @foreach (var parameter in Model.LogicalParameters.OfType<ParameterCs>().Where(p => p.Location == ParameterLocation.Header && !p.IsHeaderCollection && !p.IsContentTypeHeader))
     {
         if (!parameter.IsNullable())
         {
@@ -211,7 +211,7 @@ else
     if (@(Model.RequestBody.Name) != null && @(Model.RequestBody.Name) != System.IO.Stream.Null)
     {
       _httpRequest.Content = new System.Net.Http.StreamContent(@(Model.RequestBody.Name));
-      _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+      _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(@(Model.LocalParameters.Any(p => p.IsContentTypeHeader) ? $"{Model.LocalParameters.First(p => p.IsContentTypeHeader).Name.Value}.ToSerializedValue()" : $"\"{Model.RequestContentType}\""));
     }
         </text>
         }

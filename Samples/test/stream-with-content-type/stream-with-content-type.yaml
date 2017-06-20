@@ -1,0 +1,50 @@
+---
+swagger: '2.0'
+info:
+  title: Cowbell Moderator
+  version: '1.0'
+host: localhost
+schemes:
+- https
+consumes:
+- image/gif
+- image/jpeg
+- image/png
+- image/bmp
+- image/tiff
+produces:
+- application/json
+paths:
+  "/ProcessImage/FunctionA":
+    post:
+      operationId: Image_A
+      parameters:
+      - "$ref": "#/parameters/ImageStream"
+      - "$ref": "#/parameters/ImageContentType"
+      responses:
+        '200': {}
+  "/ProcessImage/FunctionB":
+    post:
+      operationId: Image_B
+      parameters:
+      - "$ref": "#/parameters/ImageStream"
+      - "$ref": "#/parameters/ImageContentType"
+      responses:
+        '200': {}
+parameters:
+  ImageStream:
+    name: Image
+    in: body
+    required: true
+    x-ms-parameter-location: method
+    description: An image stream.
+    schema:
+      type: file
+  ImageContentType:
+    name: Content-Type
+    x-ms-client-name: imageContentType
+    in: header
+    required: false
+    x-ms-parameter-location: method
+    description: The content type of the image.
+    type: string

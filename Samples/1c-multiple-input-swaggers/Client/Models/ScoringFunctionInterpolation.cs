@@ -24,4 +24,40 @@ namespace Searchservice.Models
         [EnumMember(Value = "logarithmic")]
         Logarithmic
     }
+    internal static class ScoringFunctionInterpolationEnumExtension
+    {
+        internal static string ToSerializedValue(this ScoringFunctionInterpolation? value )  =>
+            value == null ? null : (( ScoringFunctionInterpolation )value).ToSerializedValue();
+
+        internal static string ToSerializedValue(this ScoringFunctionInterpolation value )
+        {
+            switch( value )
+            {
+                case ScoringFunctionInterpolation.Linear:
+                    return "linear";
+                case ScoringFunctionInterpolation.Constant:
+                    return "constant";
+                case ScoringFunctionInterpolation.Quadratic:
+                    return "quadratic";
+                case ScoringFunctionInterpolation.Logarithmic:
+                    return "logarithmic";
+            }
+            return null;
+        }
+
+        internal static ScoringFunctionInterpolation? ParseScoringFunctionInterpolation( this string value )
+        {
+            switch( value )
+            {
+                case "linear":
+                    return ScoringFunctionInterpolation.Linear;
+                case "constant":
+                    return ScoringFunctionInterpolation.Constant;
+                case "quadratic":
+                    return ScoringFunctionInterpolation.Quadratic;
+                case "logarithmic":
+                    return ScoringFunctionInterpolation.Logarithmic;            }
+            return null;
+        }
+    }
 }

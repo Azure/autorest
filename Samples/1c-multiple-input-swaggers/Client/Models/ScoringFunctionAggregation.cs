@@ -26,4 +26,44 @@ namespace Searchservice.Models
         [EnumMember(Value = "firstMatching")]
         FirstMatching
     }
+    internal static class ScoringFunctionAggregationEnumExtension
+    {
+        internal static string ToSerializedValue(this ScoringFunctionAggregation? value )  =>
+            value == null ? null : (( ScoringFunctionAggregation )value).ToSerializedValue();
+
+        internal static string ToSerializedValue(this ScoringFunctionAggregation value )
+        {
+            switch( value )
+            {
+                case ScoringFunctionAggregation.Sum:
+                    return "sum";
+                case ScoringFunctionAggregation.Average:
+                    return "average";
+                case ScoringFunctionAggregation.Minimum:
+                    return "minimum";
+                case ScoringFunctionAggregation.Maximum:
+                    return "maximum";
+                case ScoringFunctionAggregation.FirstMatching:
+                    return "firstMatching";
+            }
+            return null;
+        }
+
+        internal static ScoringFunctionAggregation? ParseScoringFunctionAggregation( this string value )
+        {
+            switch( value )
+            {
+                case "sum":
+                    return ScoringFunctionAggregation.Sum;
+                case "average":
+                    return ScoringFunctionAggregation.Average;
+                case "minimum":
+                    return ScoringFunctionAggregation.Minimum;
+                case "maximum":
+                    return ScoringFunctionAggregation.Maximum;
+                case "firstMatching":
+                    return ScoringFunctionAggregation.FirstMatching;            }
+            return null;
+        }
+    }
 }

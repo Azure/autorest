@@ -641,6 +641,7 @@ task 'regenerate-samples', '', (done) ->
               sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
               sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
               (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file)   # minify exception stack traces
+              (sort file).to(file) if file.endsWith("stdout.txt") || file.endsWith("stderr.txt")
             )
           next null
         , true # don't fail on failures (since we wanna record them)

@@ -22,4 +22,36 @@ namespace Searchservice.Models
         [EnumMember(Value = "running")]
         Running
     }
+    internal static class IndexerStatusEnumExtension
+    {
+        internal static string ToSerializedValue(this IndexerStatus? value )  =>
+            value == null ? null : (( IndexerStatus )value).ToSerializedValue();
+
+        internal static string ToSerializedValue(this IndexerStatus value )
+        {
+            switch( value )
+            {
+                case IndexerStatus.Unknown:
+                    return "unknown";
+                case IndexerStatus.Error:
+                    return "error";
+                case IndexerStatus.Running:
+                    return "running";
+            }
+            return null;
+        }
+
+        internal static IndexerStatus? ParseIndexerStatus( this string value )
+        {
+            switch( value )
+            {
+                case "unknown":
+                    return IndexerStatus.Unknown;
+                case "error":
+                    return IndexerStatus.Error;
+                case "running":
+                    return IndexerStatus.Running;            }
+            return null;
+        }
+    }
 }
