@@ -24,7 +24,7 @@ directive: #array of directives:
     where: <document-query>               # jsonpath query to match 
     reason: <string>                      # [?]comment as to why this directive is added
     # one of:
-    supress: <message-id to suppress>     # suppress messages with matching message-id and this selection node
+    suppress: <message-id to suppress>     # suppress messages with matching message-id and this selection node
     set: <document-change>                # modify DOM with change before sending to plugin
     transform: <document-transformation>  # modify document via code before sending to plugin
 ```
