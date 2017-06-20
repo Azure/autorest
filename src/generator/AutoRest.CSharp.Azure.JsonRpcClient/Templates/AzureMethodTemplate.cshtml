@@ -11,7 +11,7 @@
 @{
     var xns = "Microsoft.Rest.ClientRuntime.Test.Azure.";
     var errorType = Model.DefaultResponse.Body.AsNullableTypeOrDefault();
-    var infoType = $"Microsoft.Rest.ClientRuntime.Test.Azure.AzureRequestInfo<{errorType}>";
+    var infoType = $"{xns}AzureRequestInfo<{errorType}>";
 }
 
 static readonly @(infoType) @(Model.Name)_RequestInfo =
