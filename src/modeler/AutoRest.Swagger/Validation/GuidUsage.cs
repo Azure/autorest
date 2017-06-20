@@ -65,8 +65,18 @@ namespace AutoRest.Swagger.Validation
                 if (!this.HandleSchema((Schema)definition.Value, definitions, out formatParameters, definition.Key))
                 {
                     formatParameters[1] = definition.Key;
-                    yield return new ValidationMessage(new FileObjectPath(context.File,
-                                context.Path.AppendProperty(definition.Key).AppendProperty("properties").AppendProperty((string)formatParameters[0])), this, formatParameters);
+                    var schema = (Schema)definition.Value;
+                    var propName = (string)formatParameters[0];
+                    if (schema.Properties?.ContainsKey(propName)==true)
+                    {
+                        yield return new ValidationMessage(new FileObjectPath(context.File,
+                                context.Path.AppendProperty(definition.Key).AppendProperty("properties").AppendProperty(propName)), this, formatParameters);
+                    }
+                    else
+                    {
+                        yield return new ValidationMessage(new FileObjectPath(context.File,
+                                context.Path.AppendProperty(definition.Key)), this, formatParameters);
+                    }
                 }
             }
         }
