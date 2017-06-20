@@ -345,14 +345,6 @@ namespace Fixtures.AcceptanceTestsHeader
             _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
-            if (contentType != null)
-            {
-                if (_httpRequest.Headers.Contains("Content-Type"))
-                {
-                    _httpRequest.Headers.Remove("Content-Type");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("Content-Type", contentType);
-            }
 
 
             if (customHeaders != null)

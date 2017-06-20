@@ -1625,7 +1625,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal("overwrite", responseExistingKey.Headers.UserAgent);
 
                 // POST param/existingkey
-                Assert.Throws<InvalidOperationException>(() => client.Header.ParamProtectedKey("text/html"));
+                client.Header.ParamProtectedKey("text/html"); // Content-Type header ignored by default now (according to spec.)
 
                 // POST response/protectedkey
                 var responseProtectedKey = client.Header.ResponseProtectedKeyWithHttpMessagesAsync().Result;

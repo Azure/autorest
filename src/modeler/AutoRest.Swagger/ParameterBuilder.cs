@@ -67,7 +67,7 @@ namespace AutoRest.Swagger
         public override IModelType BuildServiceType(string serviceTypeName)
         {
             var swaggerParameter = Modeler.Unwrap(_swaggerParameter);
-            
+
             // create service type
             var serviceType = swaggerParameter.In == ParameterLocation.Body ?
                 swaggerParameter.Schema.GetBuilder(Modeler).BuildServiceType(serviceTypeName) :
@@ -76,9 +76,6 @@ namespace AutoRest.Swagger
             return serviceType;
         }
 
-        public override IModelType ParentBuildServiceType(string serviceTypeName)
-        {
-            return base.BuildServiceType(serviceTypeName);
-        }
+        public override IModelType ParentBuildServiceType(string serviceTypeName) => base.BuildServiceType(serviceTypeName);
     }
 }
