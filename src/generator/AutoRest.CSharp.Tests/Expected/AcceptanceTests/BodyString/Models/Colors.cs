@@ -29,10 +29,10 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
     }
     internal static class ColorsEnumExtension
     {
-        internal static string ToSerializedValue(this Colors? value )  =>
-            value == null ? null : (( Colors )value).ToSerializedValue();
+        internal static string ToSerializedValue(this Colors? value)  =>
+            value == null ? null : ((Colors)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this Colors value )
+        internal static string ToSerializedValue(this Colors value)
         {
             switch( value )
             {
@@ -46,7 +46,7 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
             return null;
         }
 
-        internal static Colors? ParseColors( this string value )
+        internal static Colors? ParseColors(this string value)
         {
             switch( value )
             {
@@ -55,7 +55,8 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
                 case "green-color":
                     return Colors.GreenColor;
                 case "blue_color":
-                    return Colors.BlueColor;            }
+                    return Colors.BlueColor;
+            }
             return null;
         }
     }

@@ -24,10 +24,10 @@ namespace Searchservice.Models
     }
     internal static class ProvisioningStateEnumExtension
     {
-        internal static string ToSerializedValue(this ProvisioningState? value )  =>
-            value == null ? null : (( ProvisioningState )value).ToSerializedValue();
+        internal static string ToSerializedValue(this ProvisioningState? value)  =>
+            value == null ? null : ((ProvisioningState)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this ProvisioningState value )
+        internal static string ToSerializedValue(this ProvisioningState value)
         {
             switch( value )
             {
@@ -41,7 +41,7 @@ namespace Searchservice.Models
             return null;
         }
 
-        internal static ProvisioningState? ParseProvisioningState( this string value )
+        internal static ProvisioningState? ParseProvisioningState(this string value)
         {
             switch( value )
             {
@@ -50,7 +50,8 @@ namespace Searchservice.Models
                 case "ResolvingDNS":
                     return ProvisioningState.ResolvingDNS;
                 case "Succeeded":
-                    return ProvisioningState.Succeeded;            }
+                    return ProvisioningState.Succeeded;
+            }
             return null;
         }
     }

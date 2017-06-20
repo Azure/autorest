@@ -28,10 +28,10 @@ namespace Searchservice.Models
     }
     internal static class ScoringFunctionAggregationEnumExtension
     {
-        internal static string ToSerializedValue(this ScoringFunctionAggregation? value )  =>
-            value == null ? null : (( ScoringFunctionAggregation )value).ToSerializedValue();
+        internal static string ToSerializedValue(this ScoringFunctionAggregation? value)  =>
+            value == null ? null : ((ScoringFunctionAggregation)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this ScoringFunctionAggregation value )
+        internal static string ToSerializedValue(this ScoringFunctionAggregation value)
         {
             switch( value )
             {
@@ -49,7 +49,7 @@ namespace Searchservice.Models
             return null;
         }
 
-        internal static ScoringFunctionAggregation? ParseScoringFunctionAggregation( this string value )
+        internal static ScoringFunctionAggregation? ParseScoringFunctionAggregation(this string value)
         {
             switch( value )
             {
@@ -62,7 +62,8 @@ namespace Searchservice.Models
                 case "maximum":
                     return ScoringFunctionAggregation.Maximum;
                 case "firstMatching":
-                    return ScoringFunctionAggregation.FirstMatching;            }
+                    return ScoringFunctionAggregation.FirstMatching;
+            }
             return null;
         }
     }
