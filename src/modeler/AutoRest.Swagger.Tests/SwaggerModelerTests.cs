@@ -843,61 +843,6 @@ namespace AutoRest.Swagger.Tests
                 Assert.True(codeModel.Methods.All(m => m.Url == "/values/foo"));
             }
         }
-#if BAD_DEVELOPER_NO_COOKIE
-        [Fact]
-        public void TestSettingsFromSwagger()
-        {
-            using (NewContext)
-            {
-                var settings = new Settings
-                {
-                    Namespace = "Test",
-                    Modeler = "Swagger",
-                    CodeGenerator = "CSharp",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-x-ms-code-generation-settings.json"),
-                    Header = "NONE"
-                };
-                var modeler = ExtensionsLoader.GetModeler();
-                var client = modeler.Build();
-                var plugin = ExtensionsLoader.GetPlugin() as PluginCs;
-                Assert.NotNull(plugin);
-                settings.Validate();
-
-                Assert.Equal("MIT", settings.Header);
-                Assert.Equal(true, plugin.Settings.InternalConstructors);
-            }
-        }
-
-
-        [Fact]
-        public void TestParameterizedHostFromSwagger()
-        {
-            using (NewContext)
-            {
-                var settings = new Settings
-                {
-                    Namespace = "Test",
-                    Modeler = "Swagger",
-                    CodeGenerator = "CSharp",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-x-ms-parameterized-host.json"),
-                    Header = "NONE"
-                };
-
-                var modeler = ExtensionsLoader.GetModeler();
-                var client = modeler.Build();
-
-                var hostExtension = client.Extensions["x-ms-parameterized-host"] as JObject;
-                Assert.NotNull(hostExtension);
-
-                var hostTemplate = (string) hostExtension["hostTemplate"];
-                var jArrayParameters = hostExtension["parameters"] as JArray;
-                Assert.NotNull(jArrayParameters);
-
-                Assert.Equal(2, jArrayParameters.Count);
-                Assert.Equal("{accountName}.{host}", hostTemplate);
-            }
-        }
-#endif
 
         [Fact]
         public void TestYamlParsing()

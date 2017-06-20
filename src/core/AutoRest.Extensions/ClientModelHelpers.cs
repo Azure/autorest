@@ -25,8 +25,7 @@ namespace AutoRest.Extensions
                 throw new ArgumentNullException("propertyToCheck");
             }
 
-            return propertyToCheck.Extensions.ContainsKey(SwaggerExtensions.FlattenExtension) &&
-                (bool)propertyToCheck.Extensions[SwaggerExtensions.FlattenExtension];
+            return true == propertyToCheck.Extensions.Get<bool>(SwaggerExtensions.FlattenExtension);
         }
 
         /// <summary>

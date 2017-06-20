@@ -126,7 +126,7 @@ namespace AutoRest.Core.Utilities
 
         public static bool IsGenericOf(this Type type, Type genericType)
             => type.IsGenericType() && type.GetGenericTypeDefinition() == genericType;
-#if !LEGACY
+
         public static bool IsValueType(this Type type) => type.GetTypeInfo().IsValueType;
         public static bool IsEnum(this Type type) => type.GetTypeInfo().IsEnum;
         public static IEnumerable<T> GetCustomAttributes<T>(this Type type, bool inherit) where T : Attribute => type.GetTypeInfo().GetCustomAttributes<T>(inherit);
@@ -144,7 +144,6 @@ namespace AutoRest.Core.Utilities
                 return Directory.GetParent(a.Location.ToString()).ToString();
             }
         }
-#endif 
 
         public static string ToTypesString(this Type[] types) => types?.Aggregate("", (current, type) => $"{current}, {type?.FullName ?? "�null�" }").Trim(',') ?? "";
 
