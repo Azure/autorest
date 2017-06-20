@@ -13,26 +13,15 @@ namespace AutoRest.TypeScript.SuperAgent.Tests
         [Test]
         public void PassingTest()
         {
-            Func<string, string> parent = path => Directory.GetParent(path).FullName;
-            var currentPath = Directory.GetCurrentDirectory();
+            var workingDir = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\Resource");
+            var inputFile = Path.Combine(workingDir, "test1-tags.json");
 
             using (var context = new DependencyInjection.Context().Activate())
             {
-                var path = "";
-
-                try
-                {
-                    parent(parent(parent(currentPath)));
-                }
-                catch (NullReferenceException)
-                {
-                    path = "C:\\projects\\autorest\\src\\generator\\AutoRest.TypeScript.SuperAgent.Tests";
-                }
-
                 var settings = new Settings
                                {
-                                   Input = Path.Combine(path, "Resource\\test3.json"),
-                                   OutputDirectory = Path.Combine(currentPath, "test3.json"),
+                                   Input = inputFile,
+                                   OutputDirectory = workingDir,
                                    CodeGenerator = "Test"
                                };
 
