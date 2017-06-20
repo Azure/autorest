@@ -56,7 +56,7 @@ namespace AutoRest
         case "jsonrpcclient":
           return await new Generator(plugin, connection, sessionId).Process();
         case "csharp-simplifier":
-          return await new CSharpSimplifier(connection, sessionId).Process();         
+          return await new CSharpSimplifier(connection, sessionId).Process();
       }
       return false;
     }

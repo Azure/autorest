@@ -6,41 +6,58 @@ namespace AutoRest.CSharp.Azure.JsonRpcClient
 {
     public static class MethodPathEx
     {
-        public static IEnumerable<Tuple<string, bool>> GetParts(this string value)
+        /// <summary>
+        /// Split a swagger path to a sequence of tokens.
+        /// The format of path is "constant{id}constant{id}".
+        /// A token is either a constant { "..value..", false } or an identifier { "...id...", true }.
+        /// </summary>
+        /// <param name="path">a swagger path</param>
+        /// <returns></returns>
+        public static IEnumerable<Tuple<string, bool>> GetParts(this string path)
         {
-            while (value != string.Empty)
+            while (path != string.Empty)
             {
-                var index = value.IndexOf('{');
+                var index = path.IndexOf('{');
 
                 if (index < 0)
                 {
-                    yield return Tuple.Create(value, false);
+                    yield return Tuple.Create(path, false);
                     break;
                 }
 
                 if (index > 0)
                 {
-                    yield return Tuple.Create(value.Substring(0, index), false);
+                    yield return Tuple.Create(path.Substring(0, index), false);
                 }
 
-                value = value.Substring(index + 1);
+                path = path.Substring(index + 1);
 
-                index = value.IndexOf('}');
+                index = path.IndexOf('}');
 
                 if (index <= 0)
                 {
-                    throw new Exception("invalid url: " + value);
+                    throw new Exception("invalid url: " + path);
                 }
 
-                yield return Tuple.Create(value.Substring(0, index), true);
+                yield return Tuple.Create(path.Substring(0, index), true);
 
-                value = value.Substring(index + 1);
+                path = path.Substring(index + 1);
             }
         }
-
+        
+        /// <summary>
+        /// Parse a swagger URI.
+        /// </summary>
+        /// <param name="method"></param>
+        /// <returns></returns>
         public static IEnumerable<Tuple<string, bool>> GetUriParts(this Method method)
             => method.MethodGroup.CodeModel.BaseUrl.GetParts();
 
+        /// <summary>
+        /// Parse a swagger path.
+        /// </summary>
+        /// <param name="method"></param>
+        /// <returns></returns>
         public static IEnumerable<Tuple<string, bool>> GetPathParts(this Method method)
             => method.Url.Value.GetParts();
     }
