@@ -39,5 +39,15 @@ As those `consumes` values happen to be the same across the operations, only one
 ``` yaml
 input-file: stream-with-content-type.yaml
 csharp:
-  - output-folder: Client
+  - output-folder: ClientCSharp
+go:
+  - output-folder: ClientGo
+java:
+  - output-folder: ClientJava
+nodejs:
+  - output-folder: ClientNode
+python:
+  - output-folder: ClientPython
+ruby:
+  - output-folder: ClientRuby
 ```
