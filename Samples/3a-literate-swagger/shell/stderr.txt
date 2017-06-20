@@ -1,45 +1,45 @@
-ERROR (OperationsAPIImplementation/R3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Search/operations'.
-    - /Samples/3a-literate-swagger/swagger.md:205:0 ($.paths)
-    - /Samples/3a-literate-swagger/swagger.md:176:0 ($.paths)
     - /Samples/3a-literate-swagger/swagger.md:137:0 ($.paths)
-    - /Samples/3a-literate-swagger/swagger.md:50:0 ($.paths)
-ERROR (XmsResourceInPutResponse/R2062/RPCViolation): The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: 'Services_CreateOrUpdate' Model: 'SearchServiceResource'.
     - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
-WARNING (PutRequestResponseScheme/R2017/SDKViolation): A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: 'Services_CreateOrUpdate' Request Model: 'SearchServiceCreateOrUpdateParameters' Response Model: 'SearchServiceResource'
     - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
-ERROR (RequiredPropertiesMissingInResourceModel/R2020/RPCViolation): Model definition 'SearchServiceResource' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
-    - /Samples/3a-literate-swagger/swagger.md:283:2 ($.definitions.SearchServiceResource)
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'Error' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:391:2 ($.definitions.Error)
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'ErrorDetails' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:41:4 ($.definitions.ErrorDetails)
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'QueryKeys_List'
-    - /Samples/3a-literate-swagger/swagger.md:52:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys"].get)
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_CreateOrUpdate'
     - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_Delete'
+    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
+    - /Samples/3a-literate-swagger/swagger.md:176:0 ($.paths)
     - /Samples/3a-literate-swagger/swagger.md:178:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete)
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_List'
+    - /Samples/3a-literate-swagger/swagger.md:178:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete)
+    - /Samples/3a-literate-swagger/swagger.md:205:0 ($.paths)
     - /Samples/3a-literate-swagger/swagger.md:207:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get)
-WARNING (AvoidNestedProperties/R2001/SDKViolation): Consider using x-ms-client-flatten to provide a better end user experience
+    - /Samples/3a-literate-swagger/swagger.md:207:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get)
     - /Samples/3a-literate-swagger/swagger.md:264:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.properties)
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+    - /Samples/3a-literate-swagger/swagger.md:283:2 ($.definitions.SearchServiceResource)
+    - /Samples/3a-literate-swagger/swagger.md:391:2 ($.definitions.Error)
     - /Samples/3a-literate-swagger/swagger.md:394:6 ($.definitions.Error.properties.code)
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - /Samples/3a-literate-swagger/swagger.md:396:6 ($.definitions.Error.properties.message)
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'details' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
     - /Samples/3a-literate-swagger/swagger.md:398:6 ($.definitions.Error.properties.details)
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:43:8 ($.definitions.ErrorDetails.properties.code)
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'target' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)
-WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): QueryKeys_List lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
+    - /Samples/3a-literate-swagger/swagger.md:50:0 ($.paths)
     - /Samples/3a-literate-swagger/swagger.md:52:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys"].get)
+    - /Samples/3a-literate-swagger/swagger.md:52:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys"].get)
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:41:4 ($.definitions.ErrorDetails)
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:43:8 ($.definitions.ErrorDetails.properties.code)
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)
+ERROR (OperationsAPIImplementation/R3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Search/operations'.
+ERROR (RequiredPropertiesMissingInResourceModel/R2020/RPCViolation): Model definition 'SearchServiceResource' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
+ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'QueryKeys_List'
+ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_CreateOrUpdate'
+ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_Delete'
+ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_List'
+ERROR (XmsResourceInPutResponse/R2062/RPCViolation): The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: 'Services_CreateOrUpdate' Model: 'SearchServiceResource'.
+WARNING (AvoidNestedProperties/R2001/SDKViolation): Consider using x-ms-client-flatten to provide a better end user experience
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'details' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'Error' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'ErrorDetails' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'target' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): QueryKeys_List lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
 WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): Services_CreateOrUpdate lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
 WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): Services_Delete lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:178:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete)
 WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): Services_List lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
-    - /Samples/3a-literate-swagger/swagger.md:207:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get)
+WARNING (PutRequestResponseScheme/R2017/SDKViolation): A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: 'Services_CreateOrUpdate' Request Model: 'SearchServiceCreateOrUpdateParameters' Response Model: 'SearchServiceResource'

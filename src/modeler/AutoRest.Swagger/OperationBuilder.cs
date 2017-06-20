@@ -26,27 +26,19 @@ namespace AutoRest.Swagger
     /// </summary>
     public class OperationBuilder
     {
-        private IList<string> _effectiveProduces;
-        private IList<string> _effectiveConsumes;
-        private SwaggerModeler _swaggerModeler;
-        private Operation _operation;
+        private readonly IReadOnlyList<string> _effectiveProduces;
+        private readonly IReadOnlyList<string> _effectiveConsumes;
+        private readonly SwaggerModeler _swaggerModeler;
+        private readonly Operation _operation;
         private const string APP_JSON_MIME = "application/json";
         private const string APP_XML_MIME = "application/xml";
 
         public OperationBuilder(Operation operation, SwaggerModeler swaggerModeler)
         {
-            if (operation == null)
-            {
-                throw new ArgumentNullException("operation");
-            }
-            if (swaggerModeler == null)
-            {
-                throw new ArgumentNullException("swaggerModeler");
-            }
-            this._operation = operation;
-            this._swaggerModeler = swaggerModeler;
-            this._effectiveProduces = operation.Produces.Any() ? operation.Produces : swaggerModeler.ServiceDefinition.Produces;
-            this._effectiveConsumes = operation.Consumes.Any() ? operation.Consumes : swaggerModeler.ServiceDefinition.Consumes;
+            _operation = operation ?? throw new ArgumentNullException("operation");
+            _swaggerModeler = swaggerModeler ?? throw new ArgumentNullException("swaggerModeler");
+            _effectiveProduces = (operation.Produces.Any() ? operation.Produces : swaggerModeler.ServiceDefinition.Produces).ToList();
+            _effectiveConsumes = (operation.Consumes.Any() ? operation.Consumes : swaggerModeler.ServiceDefinition.Consumes).ToList();
         }
 
         public Method BuildMethod(HttpMethod httpMethod, string url, string methodName, string methodGroup)
@@ -243,17 +235,30 @@ namespace AutoRest.Swagger
             foreach (var swaggerParameter in DeduplicateParameters(_operation.Parameters))
             {
                 var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(_swaggerModeler)).Build();
+                var actualSwaggerParameter = _swaggerModeler.Unwrap(swaggerParameter);
+
+                if (parameter.IsContentTypeHeader){
+                    // you have to specify the content type, even if the OpenAPI definition claims it's optional
+                    parameter.IsRequired = true;
+                    // enrich Content-Type header with "consumes"
+                    if (actualSwaggerParameter.Enum == null && 
+                        swaggerParameter.Extensions.GetValue<JObject>("x-ms-enum") == null &&
+                        _effectiveConsumes.Count > 1)
+                    {
+                        actualSwaggerParameter.Enum = _effectiveConsumes.ToList();
+                        actualSwaggerParameter.Extensions["x-ms-enum"] = 
+                            JObject.FromObject(new
+                            {
+                                name = "ContentType",
+                                modelAsString = false
+                            });
+                        parameter = ((ParameterBuilder)actualSwaggerParameter.GetBuilder(_swaggerModeler)).Build();
+                    }
+                }
+
                 method.Add(parameter);
 
-                StringBuilder parameterName = new StringBuilder(parameter.Name);
-                parameterName = CollectionFormatBuilder.OnBuildMethodParameter(method, swaggerParameter,
-                    parameterName);
-
-                if (swaggerParameter.In == ParameterLocation.Header)
-                {
-                    method.RequestHeaders[swaggerParameter.Name] =
-                        string.Format(CultureInfo.InvariantCulture, "{{{0}}}", parameterName);
-                }
+                CollectionFormatBuilder.OnBuildMethodParameter(method, swaggerParameter, new StringBuilder(parameter.Name));
             }
         }
 

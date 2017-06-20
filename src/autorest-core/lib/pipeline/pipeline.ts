@@ -352,6 +352,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
         return scopeOutput;
       } catch (e) {
         config.Message({ Channel: Channel.Fatal, Text: `${nodeName} - FAILED` });
+        config.Message({ Channel: Channel.Fatal, Text: `${e}` });
         throw e;
       }
     };
