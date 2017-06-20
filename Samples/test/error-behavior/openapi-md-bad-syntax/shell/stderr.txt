@@ -6,4 +6,5 @@ ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entr
 ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
 ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
 ERROR: Syntax Error Encountered: Syntax error: incomplete explicit mapping pair; a key node is missed
+FATAL: Error: Error occurred. Exiting.
 FATAL: swagger-document/loader - FAILED

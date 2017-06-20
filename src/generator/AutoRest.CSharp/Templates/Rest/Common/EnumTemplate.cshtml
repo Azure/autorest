@@ -35,7 +35,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
           }
         }
     @:}
-    if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
+<text>
     internal static class @(Model.ClassName)EnumExtension
     {
         internal static string ToSerializedValue(this @(Model.ClassName)? value )  =>
@@ -68,7 +68,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             return null;
         }
     }
-</text>}
+</text>
     }
     else
     {

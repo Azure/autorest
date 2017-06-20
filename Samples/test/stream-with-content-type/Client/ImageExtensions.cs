@@ -57,7 +57,7 @@ namespace StreamWithContentType
             /// The content type of the image. Possible values include: 'image/gif',
             /// 'image/jpeg', 'image/png', 'image/bmp', 'image/tiff'
             /// </param>
-            public static void B(this IImage operations, Stream image, ContentType? imageContentType = default(ContentType?))
+            public static void B(this IImage operations, Stream image, ContentType imageContentType)
             {
                 operations.BAsync(image, imageContentType).GetAwaiter().GetResult();
             }
@@ -75,7 +75,7 @@ namespace StreamWithContentType
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BAsync(this IImage operations, Stream image, ContentType? imageContentType = default(ContentType?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task BAsync(this IImage operations, Stream image, ContentType imageContentType, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.BWithHttpMessagesAsync(image, imageContentType, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }

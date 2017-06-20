@@ -211,7 +211,7 @@ else
     if (@(Model.RequestBody.Name) != null && @(Model.RequestBody.Name) != System.IO.Stream.Null)
     {
       _httpRequest.Content = new System.Net.Http.StreamContent(@(Model.RequestBody.Name));
-      _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(@(Model.LocalParameters.Any(p => p.IsContentTypeHeader) ? $"JsonConvert.DeserializeObject(JsonConvert.SerializeObject({Model.LocalParameters.First(p => p.IsContentTypeHeader).Name.Value}))" : $"\"{Model.RequestContentType}\""));
+      _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(@(Model.LocalParameters.Any(p => p.IsContentTypeHeader) ? $"{Model.LocalParameters.First(p => p.IsContentTypeHeader).Name.Value}.ToSerializedValue()" : $"\"{Model.RequestContentType}\""));
     }
         </text>
         }

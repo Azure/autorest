@@ -237,20 +237,23 @@ namespace AutoRest.Swagger
                 var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(_swaggerModeler)).Build();
                 var actualSwaggerParameter = _swaggerModeler.Unwrap(swaggerParameter);
 
-                // enrich Content-Type header with "consumes"
-                if (parameter.IsContentTypeHeader &&
-                    actualSwaggerParameter.Enum == null && 
-                    swaggerParameter.Extensions.GetValue<JObject>("x-ms-enum") == null &&
-                    _effectiveConsumes.Count > 1)
-                {
-                    actualSwaggerParameter.Enum = _effectiveConsumes.ToList();
-                    actualSwaggerParameter.Extensions["x-ms-enum"] = 
-                        JObject.FromObject(new
-                        {
-                            name = "ContentType",
-                            modelAsString = false
-                        });
-                    parameter = ((ParameterBuilder)actualSwaggerParameter.GetBuilder(_swaggerModeler)).Build();
+                if (parameter.IsContentTypeHeader){
+                    // you have to specify the content type, even if the OpenAPI definition claims it's optional
+                    parameter.IsRequired = true;
+                    // enrich Content-Type header with "consumes"
+                    if (actualSwaggerParameter.Enum == null && 
+                        swaggerParameter.Extensions.GetValue<JObject>("x-ms-enum") == null &&
+                        _effectiveConsumes.Count > 1)
+                    {
+                        actualSwaggerParameter.Enum = _effectiveConsumes.ToList();
+                        actualSwaggerParameter.Extensions["x-ms-enum"] = 
+                            JObject.FromObject(new
+                            {
+                                name = "ContentType",
+                                modelAsString = false
+                            });
+                        parameter = ((ParameterBuilder)actualSwaggerParameter.GetBuilder(_swaggerModeler)).Build();
+                    }
                 }
 
                 method.Add(parameter);

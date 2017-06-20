@@ -56,6 +56,6 @@ namespace StreamWithContentType
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> BWithHttpMessagesAsync(Stream image, ContentType? imageContentType = default(ContentType?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> BWithHttpMessagesAsync(Stream image, ContentType imageContentType, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

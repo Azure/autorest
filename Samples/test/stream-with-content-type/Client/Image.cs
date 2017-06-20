@@ -117,7 +117,7 @@ namespace StreamWithContentType
             if (image != null && image != Stream.Null)
             {
               _httpRequest.Content = new StreamContent(image);
-              _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(JsonConvert.DeserializeObject(JsonConvert.SerializeObject(imageContentType)));
+              _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(imageContentType.ToSerializedValue());
             }
             // Send Request
             if (_shouldTrace)
@@ -191,7 +191,7 @@ namespace StreamWithContentType
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> BWithHttpMessagesAsync(Stream image, ContentType? imageContentType = default(ContentType?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> BWithHttpMessagesAsync(Stream image, ContentType imageContentType, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (image == null)
             {
@@ -241,7 +241,7 @@ namespace StreamWithContentType
             if (image != null && image != Stream.Null)
             {
               _httpRequest.Content = new StreamContent(image);
-              _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(JsonConvert.DeserializeObject(JsonConvert.SerializeObject(imageContentType)));
+              _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse(imageContentType.ToSerializedValue());
             }
             // Send Request
             if (_shouldTrace)
