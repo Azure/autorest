@@ -163,7 +163,7 @@ namespace AutoRest.Swagger
 
         private void UpdateSettings()
         {
-            if (ServiceDefinition.Info.CodeGenerationSettings != null)
+            if (ServiceDefinition?.Info?.CodeGenerationSettings != null)
             {
                 foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
                 {

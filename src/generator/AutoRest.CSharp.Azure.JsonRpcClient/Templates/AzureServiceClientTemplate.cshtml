@@ -101,7 +101,7 @@ namespace @Settings.Namespace
     
         @foreach (MethodCsa method in Model.Methods.Where(each => each.Group.IsNullOrEmpty()))
             {
-        @:@(Include(new AzureMethodTemplate(), (MethodCsa)method))
+        @:@(Include(new AutoRest.CSharp.Azure.JsonRpcClient.Templates.AzureMethodTemplate(), (MethodCsa)method))
         @EmptyLine
         @:
         }
