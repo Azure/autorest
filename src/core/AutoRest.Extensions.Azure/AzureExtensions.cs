@@ -306,30 +306,6 @@ namespace AutoRest.Extensions.Azure
             }));
         }
 
-        
-
-        /// <summary>
-        /// Determines a composite type as an External Resource if it's name equals "Resource" 
-        /// and it has an extension named "x-ms-azure-resource" marked as true.
-        /// </summary>
-        /// <param name="compositeType">Type to determine if it is an external resource</param>
-        /// <returns>True if it is an external resource, false otherwise</returns>
-        public static bool IsAzureResource(CompositeType compositeType)
-        {
-            if (compositeType == null)
-            {
-                return false;
-            }
-
-            if (compositeType.ComposedExtensions.ContainsKey(AzureResourceExtension))
-            {
-                var external = compositeType.ComposedExtensions[AzureResourceExtension] as bool?;
-                return (external == null || external.Value);
-            }
-
-            return false;
-        }
-
         /// <summary>
         /// Adds ListNext() method for each List method with x-ms-pageable extension.
         /// </summary>
