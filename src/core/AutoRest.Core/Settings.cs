@@ -258,14 +258,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public string OutputFileName { get; set; }
 
         /// <summary>
-        /// If set to true, print out help message.
-        /// </summary>
-        [SettingsAlias("?")]
-        [SettingsAlias("h")]
-        [SettingsAlias("help")]
-        public bool ShowHelp { get; set; }
-
-        /// <summary>
         /// If set to true, collect and print out more detailed messages.
         /// </summary>
         [SettingsAlias("verbose")]
@@ -308,12 +300,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsAlias("validation")]
         [SettingsInfo("The input validation severity level that will prevent code generation")]
         public Category ValidationLevel { get; set; }
-
-        /// <summary>
-        /// If set, preprocesses a swagger file by expanding and resolving some advanced convenience syntax.
-        /// </summary>
-        [SettingsAlias("preprocessor")]
-        public bool Preprocessor { get; set; }
 
         private static Dictionary<string, object> ParseArgs(string[] arguments)
         {
