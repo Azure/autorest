@@ -68,8 +68,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void AzureCustomBaseUriTests()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"), generator: "Azure.CSharp");
             using (var client = new AutoRestParameterizedHostTestClient(new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 // small modification to the "host" portion to include the port and the '.'
@@ -82,8 +80,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void AzureCustomBaseUriNegativeTests()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"), generator: "Azure.CSharp");
             using (var client = new AutoRestParameterizedHostTestClient(new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 // use a bad acct name
@@ -103,9 +99,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void AzureUrlTests()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("subscriptionId-apiVersion.json"), ExpectedPath("SubscriptionIdApiVersion"), generator: "Azure.CSharp");
-
             using (
                 var client =
                     new MicrosoftAzureTestUrlClient(Fixture.Uri,
@@ -121,9 +114,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void HeadTests()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("head.json"), ExpectedPath("Head"), generator: "Azure.CSharp");
-
             using (
                 var client = new AutoRestHeadTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
@@ -137,9 +127,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void HeadExceptionTests()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("head-exceptions.json"), ExpectedPath("HeadExceptions"), generator: "Azure.CSharp");
-
             using (
                 var client = new AutoRestHeadExceptionTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
@@ -153,8 +140,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void LroHappyPathTests()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("lro.json"), ExpectedPath("Lro"), generator: "Azure.CSharp");
             using (
                 var client = new AutoRestLongRunningOperationTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
@@ -256,8 +241,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void LroHappyPathTestsRest()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("lro.json"), ExpectedPath("Lro"), generator: "Azure.CSharp");
             using (
                 var client = new AutoRestLongRunningOperationTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
@@ -391,8 +374,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void PagingHappyPathTests()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("paging.json"), ExpectedPath("Paging"), generator: "Azure.CSharp");
             using (
                 var client = new AutoRestPagingTestServiceClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
@@ -484,8 +465,6 @@ namespace AutoRest.CSharp.Azure.Tests
 
         public void EnsureTestCoverage()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("azure-report.json"), ExpectedPath("AzureReport"), generator: "Azure.CSharp");
             using (var client =
                 new AutoRestReportServiceForAzureClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString())))
@@ -510,20 +489,11 @@ namespace AutoRest.CSharp.Azure.Tests
         }
 
         [Fact]
-        public void ResourceFlatteningGenerationTest()
-        {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("resource-flattening.json"), ExpectedPath("ResourceFlattening"), generator: "Azure.CSharp");
-        }
-
-        [Fact]
         public void AzureSpecialParametersTests()
         {
             var validSubscription = "1234-5678-9012-3456";
             var unencodedPath = "path1/path2/path3";
             var unencodedQuery = "value1&q2=value2&q3=value3";
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
             using (
                 var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString()))
@@ -562,8 +532,6 @@ namespace AutoRest.CSharp.Azure.Tests
         public void AzureODataTests()
         {
             var validSubscription = "1234-5678-9012-3456";
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
             using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
                     new TokenCredentials(Guid.NewGuid().ToString()))
             { SubscriptionId = validSubscription })
@@ -629,9 +597,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void CustomNamedRequestIdTest()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
-
             const string validSubscription = "1234-5678-9012-3456";
             const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
 
@@ -647,9 +612,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void CustomNamedRequestIdParameterGroupingTest()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
-
             const string validSubscription = "1234-5678-9012-3456";
             const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
 
@@ -669,9 +631,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void CustomNamedRequestIdHeadTest()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
-
             const string validSubscription = "1234-5678-9012-3456";
             const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
 
@@ -687,8 +646,6 @@ namespace AutoRest.CSharp.Azure.Tests
         [Fact]
         public void DurationTests()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("body-duration.json"), ExpectedPath("AzureBodyDuration"), generator: "Azure.CSharp");
             const string validSubscription = "1234-5678-9012-3456";
 
             using (var client = new AutoRestDurationTestServiceClient(Fixture.Uri,
