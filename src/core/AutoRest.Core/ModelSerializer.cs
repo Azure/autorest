@@ -21,10 +21,6 @@ namespace AutoRest.Core {
             return result;
         }
 
-        public virtual TCodeModel Load(IFileSystem fileSystem, string path) {
-            return Load(fileSystem.ReadAllText(path));
-        }
-
         public virtual TCodeModel Load(CodeModel codeModel) {
             return codeModel as TCodeModel ?? Load(ToJson(codeModel));
         }

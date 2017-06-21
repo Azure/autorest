@@ -995,7 +995,7 @@ namespace AutoRest.NodeJS.Model
         /// <returns></returns>
         public string GenerateMethodDocumentation(MethodFlavor flavor, Language language = Language.JavaScript)
         {
-            var template = new NodeJSTemplate<Object>();
+            var template = new Core.Template<Object>();
             var builder = new IndentedStringBuilder("  ");
             builder.AppendLine("/**");
             if (!String.IsNullOrEmpty(Summary))

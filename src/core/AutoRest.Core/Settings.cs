@@ -115,7 +115,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <summary>
         /// Gets or sets the path to the input specification file.
         /// </summary>
-        [SettingsInfo("The location of the input specification.", true)]
         [SettingsAlias("i")]
         [SettingsAlias("input")]
         public string Input { get; set; }
@@ -129,21 +128,18 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <summary>
         /// Gets or sets a name for the generated client models Namespace and Models output folder
         /// </summary>
-        [SettingsInfo("Name to use for the generated client models namespace and folder name. Not supported by all code generators.")]
         [SettingsAlias("mname")]
         public string ModelsName { get; set; }
 
         /// <summary>
         /// Gets or sets a base namespace for generated code.
         /// </summary>
-        [SettingsInfo("The namespace to use for generated code.")]
         [SettingsAlias("n")]
         public string Namespace { get; set; }
 
         /// <summary>
         /// Gets or sets the output directory for generated files. If not specified, uses 'Generated' as the default.
         /// </summary>
-        [SettingsInfo("The location for generated files. If not specified, uses \"Generated\" as the default.")]
         [SettingsAlias("o")]
         [SettingsAlias("output")]
         public string OutputDirectory { get; set; }
@@ -151,14 +147,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <summary>
         /// Gets or sets the code generation language.
         /// </summary>
-        [SettingsInfo("The code generator language. If not specified, defaults to CSharp.")]
         [SettingsAlias("g")]
         public string CodeGenerator { get; set; }
 
         /// <summary>
         /// Gets or sets the modeler to use for processing the input specification.
         /// </summary>
-        [SettingsInfo("The Modeler to use on the input. If not specified, defaults to Swagger.")]
         [SettingsAlias("m")]
         public string Modeler { get; set; }
 
@@ -169,12 +163,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// a value from the specification. For Swagger specifications,
         /// the value of the 'Title' field is used.
         /// </summary>
-        [SettingsInfo("Name to use for the generated client type. By default, uses " +
-                      "the value of the 'Title' field from the Swagger input.")]
         [SettingsAlias("name")]
         public string ClientName { get; set; }
 
-        [SettingsInfo("Disables post-codegeneration simplifier")]
         public bool DisableSimplifier { get; set; }
 
         /// <summary>
@@ -182,10 +173,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// If the number of properties in the request body is less than or
         /// equal to this value, then these properties will be represented as method arguments.
         /// </summary>
-        [SettingsInfo("The maximum number of properties in the request body. " +
-                      "If the number of properties in the request body is less " +
-                      "than or equal to this value, these properties will " +
-                      "be represented as method arguments.")]
         [SettingsAlias("ft")]
         public int PayloadFlatteningThreshold { get; set; }
 
@@ -194,17 +181,11 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// If the CodeGenerationMode is Server, AutoRest generates the server code for given spec
         /// else generates (by default) the client code for spec
         /// </summary>
-        [SettingsInfo("The code generation mode. " +
-                      "Possible values: rest, rest-client, rest-server. " +
-                      "Determines whether AutoRest generates " +
-                      "the client or server side code for given spec.")]
         public string CodeGenerationMode { get; set; }
 
         /// <summary>
         /// Gets or sets a comment header to include in each generated file.
         /// </summary>
-        [SettingsInfo("Text to include as a header comment in generated files. " +
-                      "Use NONE to suppress the default header.")]
         [SettingsAlias("header")]
         public string Header
         {
@@ -245,16 +226,11 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <summary>
         /// If set to true, generate client with a ServiceClientCredentials property and optional constructor parameter.
         /// </summary>
-        [SettingsInfo(
-            "If true, the generated client includes a ServiceClientCredentials property and constructor parameter. " +
-            "Authentication behaviors are implemented by extending the ServiceClientCredentials type.")]
         public bool AddCredentials { get; set; }
 
         /// <summary>
         /// If set, will cause generated code to be output to a single file. Not supported by all code generators.
         /// </summary>
-        [SettingsInfo(
-            "If set, will cause generated code to be output to a single file. Not supported by all code generators.")]
         public string OutputFileName { get; set; }
 
         /// <summary>
@@ -279,18 +255,15 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// PackageName of then generated code package. Should be then names wanted for the package in then package manager.
         /// </summary>
         [SettingsAlias("pn")]
-        [SettingsInfo("Package name of then generated code package. Should be then names wanted for the package in then package manager.")]
         public string PackageName { get; set; }
 
         /// <summary>
         /// PackageName of then generated code package. Should be then names wanted for the package in then package manager.
         /// </summary>
         [SettingsAlias("pv")]
-        [SettingsInfo("Package version of then generated code package. Should be then version wanted for the package in then package manager.")]
         public string PackageVersion { get; set; }
 
         [SettingsAlias("cgs")]
-        [SettingsInfo("The path for a json file containing code generation settings.")]
         public string CodeGenSettings { get; set; }
 
         /// <summary>
@@ -298,7 +271,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         [SettingsAlias("vl")]
         [SettingsAlias("validation")]
-        [SettingsInfo("The input validation severity level that will prevent code generation")]
         public Category ValidationLevel { get; set; }
 
         private static Dictionary<string, object> ParseArgs(string[] arguments)
@@ -344,11 +316,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public static Settings Create(string[] arguments)
         {
             var argsDictionary = ParseArgs(arguments);
-            if (argsDictionary.Count == 0)
-            {
-                argsDictionary["?"] = String.Empty;
-            }
-
             return Create(argsDictionary);
         }
 
@@ -367,10 +334,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public static Settings Create(IDictionary<string, object> settings)
         {
             var autoRestSettings = new Settings();
-            if (settings == null || settings.Count == 0)
-            {
-                autoRestSettings.ShowHelp = true;
-            }
 
             PopulateSettings(autoRestSettings, settings);
 
@@ -458,20 +421,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
                                 setting.Key, property.GetType().Name), exception);
                         }
                     }
-                }
-            }
-        }
-
-        public void Validate()
-        {
-            foreach (PropertyInfo property in (typeof(Settings)).GetProperties())
-            {
-                // If property value is not set - throw exception.
-                var doc = property.GetCustomAttributes<SettingsInfoAttribute>().FirstOrDefault();
-                if (doc != null && doc.IsRequired && property.GetValue(this) == null)
-                {
-                    Logger.Instance.Log(Category.Error, Resources.ParameterValueIsMissing, property.Name);
-                    throw new CodeGenerationException(string.Format(Resources.ParameterValueIsMissing, property.Name));
                 }
             }
         }

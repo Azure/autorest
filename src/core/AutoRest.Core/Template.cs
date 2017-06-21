@@ -14,7 +14,7 @@ namespace AutoRest.Core
     /// <summary>
     /// Base code generation template.
     /// </summary>
-    public abstract class Template<T> : ITemplate
+    public class Template<T> : ITemplate
     {
         protected const int MaximumCommentColumn = 80;
 
