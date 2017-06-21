@@ -24,10 +24,10 @@ namespace Searchservice.Models
     }
     internal static class IndexerStatusEnumExtension
     {
-        internal static string ToSerializedValue(this IndexerStatus? value )  =>
-            value == null ? null : (( IndexerStatus )value).ToSerializedValue();
+        internal static string ToSerializedValue(this IndexerStatus? value)  =>
+            value == null ? null : ((IndexerStatus)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this IndexerStatus value )
+        internal static string ToSerializedValue(this IndexerStatus value)
         {
             switch( value )
             {
@@ -41,7 +41,7 @@ namespace Searchservice.Models
             return null;
         }
 
-        internal static IndexerStatus? ParseIndexerStatus( this string value )
+        internal static IndexerStatus? ParseIndexerStatus(this string value)
         {
             switch( value )
             {
@@ -50,7 +50,8 @@ namespace Searchservice.Models
                 case "error":
                     return IndexerStatus.Error;
                 case "running":
-                    return IndexerStatus.Running;            }
+                    return IndexerStatus.Running;
+            }
             return null;
         }
     }

@@ -20,10 +20,10 @@ namespace Searchservice.Models
     }
     internal static class SuggesterSearchModeEnumExtension
     {
-        internal static string ToSerializedValue(this SuggesterSearchMode? value )  =>
-            value == null ? null : (( SuggesterSearchMode )value).ToSerializedValue();
+        internal static string ToSerializedValue(this SuggesterSearchMode? value)  =>
+            value == null ? null : ((SuggesterSearchMode)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this SuggesterSearchMode value )
+        internal static string ToSerializedValue(this SuggesterSearchMode value)
         {
             switch( value )
             {
@@ -33,12 +33,13 @@ namespace Searchservice.Models
             return null;
         }
 
-        internal static SuggesterSearchMode? ParseSuggesterSearchMode( this string value )
+        internal static SuggesterSearchMode? ParseSuggesterSearchMode(this string value)
         {
             switch( value )
             {
                 case "analyzingInfixMatching":
-                    return SuggesterSearchMode.AnalyzingInfixMatching;            }
+                    return SuggesterSearchMode.AnalyzingInfixMatching;
+            }
             return null;
         }
     }

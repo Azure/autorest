@@ -28,10 +28,10 @@ namespace Storage.Models
     }
     internal static class AccountTypeEnumExtension
     {
-        internal static string ToSerializedValue(this AccountType? value )  =>
-            value == null ? null : (( AccountType )value).ToSerializedValue();
+        internal static string ToSerializedValue(this AccountType? value)  =>
+            value == null ? null : ((AccountType)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this AccountType value )
+        internal static string ToSerializedValue(this AccountType value)
         {
             switch( value )
             {
@@ -49,7 +49,7 @@ namespace Storage.Models
             return null;
         }
 
-        internal static AccountType? ParseAccountType( this string value )
+        internal static AccountType? ParseAccountType(this string value)
         {
             switch( value )
             {
@@ -62,7 +62,8 @@ namespace Storage.Models
                 case "Standard_RAGRS":
                     return AccountType.StandardRAGRS;
                 case "Premium_LRS":
-                    return AccountType.PremiumLRS;            }
+                    return AccountType.PremiumLRS;
+            }
             return null;
         }
     }

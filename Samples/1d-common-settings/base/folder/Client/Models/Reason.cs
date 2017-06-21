@@ -23,10 +23,10 @@ namespace AwesomeNamespace.Models
     }
     internal static class ReasonEnumExtension
     {
-        internal static string ToSerializedValue(this Reason? value )  =>
-            value == null ? null : (( Reason )value).ToSerializedValue();
+        internal static string ToSerializedValue(this Reason? value)  =>
+            value == null ? null : ((Reason)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this Reason value )
+        internal static string ToSerializedValue(this Reason value)
         {
             switch( value )
             {
@@ -38,14 +38,15 @@ namespace AwesomeNamespace.Models
             return null;
         }
 
-        internal static Reason? ParseReason( this string value )
+        internal static Reason? ParseReason(this string value)
         {
             switch( value )
             {
                 case "AccountNameInvalid":
                     return Reason.AccountNameInvalid;
                 case "AlreadyExists":
-                    return Reason.AlreadyExists;            }
+                    return Reason.AlreadyExists;
+            }
             return null;
         }
     }

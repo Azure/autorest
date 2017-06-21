@@ -34,10 +34,10 @@ namespace AwesomeNamespace.Models
     }
     internal static class UsageUnitEnumExtension
     {
-        internal static string ToSerializedValue(this UsageUnit? value )  =>
-            value == null ? null : (( UsageUnit )value).ToSerializedValue();
+        internal static string ToSerializedValue(this UsageUnit? value)  =>
+            value == null ? null : ((UsageUnit)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this UsageUnit value )
+        internal static string ToSerializedValue(this UsageUnit value)
         {
             switch( value )
             {
@@ -57,7 +57,7 @@ namespace AwesomeNamespace.Models
             return null;
         }
 
-        internal static UsageUnit? ParseUsageUnit( this string value )
+        internal static UsageUnit? ParseUsageUnit(this string value)
         {
             switch( value )
             {
@@ -72,7 +72,8 @@ namespace AwesomeNamespace.Models
                 case "CountsPerSecond":
                     return UsageUnit.CountsPerSecond;
                 case "BytesPerSecond":
-                    return UsageUnit.BytesPerSecond;            }
+                    return UsageUnit.BytesPerSecond;
+            }
             return null;
         }
     }

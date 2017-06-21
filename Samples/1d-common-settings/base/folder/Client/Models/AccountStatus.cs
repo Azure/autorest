@@ -23,10 +23,10 @@ namespace AwesomeNamespace.Models
     }
     internal static class AccountStatusEnumExtension
     {
-        internal static string ToSerializedValue(this AccountStatus? value )  =>
-            value == null ? null : (( AccountStatus )value).ToSerializedValue();
+        internal static string ToSerializedValue(this AccountStatus? value)  =>
+            value == null ? null : ((AccountStatus)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this AccountStatus value )
+        internal static string ToSerializedValue(this AccountStatus value)
         {
             switch( value )
             {
@@ -38,14 +38,15 @@ namespace AwesomeNamespace.Models
             return null;
         }
 
-        internal static AccountStatus? ParseAccountStatus( this string value )
+        internal static AccountStatus? ParseAccountStatus(this string value)
         {
             switch( value )
             {
                 case "Available":
                     return AccountStatus.Available;
                 case "Unavailable":
-                    return AccountStatus.Unavailable;            }
+                    return AccountStatus.Unavailable;
+            }
             return null;
         }
     }

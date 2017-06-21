@@ -26,10 +26,10 @@ namespace Searchservice.Models
     }
     internal static class ScoringFunctionInterpolationEnumExtension
     {
-        internal static string ToSerializedValue(this ScoringFunctionInterpolation? value )  =>
-            value == null ? null : (( ScoringFunctionInterpolation )value).ToSerializedValue();
+        internal static string ToSerializedValue(this ScoringFunctionInterpolation? value)  =>
+            value == null ? null : ((ScoringFunctionInterpolation)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this ScoringFunctionInterpolation value )
+        internal static string ToSerializedValue(this ScoringFunctionInterpolation value)
         {
             switch( value )
             {
@@ -45,7 +45,7 @@ namespace Searchservice.Models
             return null;
         }
 
-        internal static ScoringFunctionInterpolation? ParseScoringFunctionInterpolation( this string value )
+        internal static ScoringFunctionInterpolation? ParseScoringFunctionInterpolation(this string value)
         {
             switch( value )
             {
@@ -56,7 +56,8 @@ namespace Searchservice.Models
                 case "quadratic":
                     return ScoringFunctionInterpolation.Quadratic;
                 case "logarithmic":
-                    return ScoringFunctionInterpolation.Logarithmic;            }
+                    return ScoringFunctionInterpolation.Logarithmic;
+            }
             return null;
         }
     }

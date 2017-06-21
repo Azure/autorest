@@ -29,10 +29,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     }
     internal static class GreyscaleColorsEnumExtension
     {
-        internal static string ToSerializedValue(this GreyscaleColors? value )  =>
-            value == null ? null : (( GreyscaleColors )value).ToSerializedValue();
+        internal static string ToSerializedValue(this GreyscaleColors? value)  =>
+            value == null ? null : ((GreyscaleColors)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this GreyscaleColors value )
+        internal static string ToSerializedValue(this GreyscaleColors value)
         {
             switch( value )
             {
@@ -46,7 +46,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
             return null;
         }
 
-        internal static GreyscaleColors? ParseGreyscaleColors( this string value )
+        internal static GreyscaleColors? ParseGreyscaleColors(this string value)
         {
             switch( value )
             {
@@ -55,7 +55,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
                 case "black":
                     return GreyscaleColors.Black;
                 case "GREY":
-                    return GreyscaleColors.GREY;            }
+                    return GreyscaleColors.GREY;
+            }
             return null;
         }
     }

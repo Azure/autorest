@@ -25,10 +25,10 @@ namespace Fixtures.AcceptanceTestsValidation.Models
     }
     internal static class EnumConstEnumExtension
     {
-        internal static string ToSerializedValue(this EnumConst? value )  =>
-            value == null ? null : (( EnumConst )value).ToSerializedValue();
+        internal static string ToSerializedValue(this EnumConst? value)  =>
+            value == null ? null : ((EnumConst)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this EnumConst value )
+        internal static string ToSerializedValue(this EnumConst value)
         {
             switch( value )
             {
@@ -38,12 +38,13 @@ namespace Fixtures.AcceptanceTestsValidation.Models
             return null;
         }
 
-        internal static EnumConst? ParseEnumConst( this string value )
+        internal static EnumConst? ParseEnumConst(this string value)
         {
             switch( value )
             {
                 case "constant_string_as_enum":
-                    return EnumConst.ConstantStringAsEnum;            }
+                    return EnumConst.ConstantStringAsEnum;
+            }
             return null;
         }
     }

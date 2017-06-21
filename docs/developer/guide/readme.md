@@ -1,4 +1,4 @@
-#New Developer Guide
+# New Developer Guide
 - [Building AutoRest](building-code.md)
 - [Working with Swagger Specifications](defining-clients-swagger.md)
 - [Writing Tests](writing-tests.md)

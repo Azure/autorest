@@ -29,10 +29,10 @@ namespace Fixtures.AcceptanceTestsUrl.Models
     }
     internal static class UriColorEnumExtension
     {
-        internal static string ToSerializedValue(this UriColor? value )  =>
-            value == null ? null : (( UriColor )value).ToSerializedValue();
+        internal static string ToSerializedValue(this UriColor? value)  =>
+            value == null ? null : ((UriColor)value).ToSerializedValue();
 
-        internal static string ToSerializedValue(this UriColor value )
+        internal static string ToSerializedValue(this UriColor value)
         {
             switch( value )
             {
@@ -46,7 +46,7 @@ namespace Fixtures.AcceptanceTestsUrl.Models
             return null;
         }
 
-        internal static UriColor? ParseUriColor( this string value )
+        internal static UriColor? ParseUriColor(this string value)
         {
             switch( value )
             {
@@ -55,7 +55,8 @@ namespace Fixtures.AcceptanceTestsUrl.Models
                 case "green color":
                     return UriColor.Greencolor;
                 case "blue color":
-                    return UriColor.Bluecolor;            }
+                    return UriColor.Bluecolor;
+            }
             return null;
         }
     }
