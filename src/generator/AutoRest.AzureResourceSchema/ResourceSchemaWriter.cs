@@ -88,7 +88,7 @@ namespace AutoRest.AzureResourceSchema
                                 shouldAddExpressionReference = (definition.Enum != null &&
                                                                 definition.Enum.Any() &&
                                                                 definitionName != "type" 
-                                                                // && definitionName != "apiVersion"  // api versions are templated in some templates. No idea why. 
+                                                                && definitionName != "apiVersion"  // api versions are templated in some templates. No idea why. 
                                                                 ) ||
                                                                definition.Pattern != null;
                                 break;
