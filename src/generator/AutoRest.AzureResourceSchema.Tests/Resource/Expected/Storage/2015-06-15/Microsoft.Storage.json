@@ -17,16 +17,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-06-15"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-06-15"
           ]
         },
         "location": {
