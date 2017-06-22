@@ -22,9 +22,6 @@ namespace AutoRest.Core
         {
         }
 
-        // TODO: header files aren't part of most target languages. Remove?
-        public virtual string HeaderFileExtension => null;
-
         public abstract string ImplementationFileExtension { get; }
 
         /// <summary>

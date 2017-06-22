@@ -12,7 +12,6 @@ namespace AutoRest.NodeJS
         /// <summary>
         ///     Change to true if you want to no longer generate the 3 d.ts files, for some reason
         /// </summary>
-        [SettingsInfo("Disables TypeScript generation.")]
         public bool DisableTypeScriptGeneration { get; set; }
 
         public virtual string Name => "NodeJS";

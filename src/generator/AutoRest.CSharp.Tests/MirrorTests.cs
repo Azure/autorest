@@ -49,10 +49,6 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void CanSerializeAndDeserializePrimitiveTypes()
         {
-            // first regen the spec
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("swagger-mirror-primitives.json"), ExpectedPath("Mirror.Primitives"));
-
             //Now run mocked tests using the client
             var product = MirrorTestHelpers.GenerateProduct();
             using (var client = MirrorTestHelpers.CreateDataClient())
@@ -65,8 +61,6 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void CanRoundTripSequences()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("swagger-mirror-sequences.json"), ExpectedPath("Mirror.Sequences"));
             using (var sequenceClient = MirrorTestHelpers.CreateSequenceClient())
             {
                 var testList = new List<int?> {1, 1, 2, 3, 5, 8, 13, 21};
@@ -106,10 +100,6 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void CanRoundtripPolymorphicTypes()
         {
-            SwaggerSpecRunner.RunTests(
-                SwaggerPath("swagger-mirror-polymorphic.json"),
-                ExpectedPath("Mirror.Polymorphic"));
-            
             var pets = new[]
             {
                 new Animal {Description = "Pet Only", Id = "1"},
