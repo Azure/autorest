@@ -12,6 +12,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.LoadBalanced.Model;
+using AutoRest.CSharp.LoadBalanced.Strategies;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Client;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Common;
 using AutoRest.Extensions;
@@ -112,6 +113,8 @@ namespace AutoRest.CSharp.LoadBalanced
                 {
                     continue;
                 }
+
+                model.PropertyTypeSelectionStrategy = new WrappedPropertyTypeSelectionStrategy();
 
                 var modelTemplate = new ModelTemplate{ Model = model };
                 var modelPath = Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}");

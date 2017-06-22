@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using AutoRest.Core.Model;
+using AutoRest.CSharp.LoadBalanced.Model;
+
+namespace AutoRest.CSharp.LoadBalanced.Strategies
+{
+    public interface IPropertyTypeSelectionStrategy
+    {
+        bool IsDateTime(Property property);
+
+        bool IsUrl(Property property);
+
+        bool IsDictionary(Property property);
+
+        #region wrappers.proto
+
+        bool IsUInt64Value(Property property);
+
+        bool IsInt32Value(Property property);
+
+        bool IsUInt32Value(Property property);
+
+        bool IsBoolValue(Property property);
+
+        bool IsStringValue(Property property);
+
+        bool IsBytesValue(Property property);
+
+        #endregion 
+
+        bool IsMoney(Property property);
+
+        bool IsGuid(Property property);
+
+        bool IsBoolean(Property property);
+
+        string GetConverterTypeName(Property property);
+
+        string GetJsonSerializationAttribute(Property property);
+
+        string GetPropertyTypeName(Property property);
+
+        IEnumerable<Property> GetPropertiesWhichRequireInitialization(CompositeTypeCs compositeType);
+    }
+}
