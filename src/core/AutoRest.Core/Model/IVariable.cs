@@ -158,6 +158,7 @@ namespace AutoRest.Core.Model
             set { _name.CopyFrom(value); }
         }
 
+        [JsonIgnore]
         public virtual string ModelTypeName => ModelType.Name;
 
         /// <Summary>
@@ -189,6 +190,7 @@ namespace AutoRest.Core.Model
             set { _modelType = value; }
         }
 
+        [JsonIgnore]
         public virtual HashSet<string> LocallyUsedNames => null;
 
         public virtual void Disambiguate()
@@ -201,6 +203,7 @@ namespace AutoRest.Core.Model
                 Name = name;
             }
         }
+
         [JsonIgnore]
         public abstract IParent Parent { get; set; }
         [JsonIgnore]
