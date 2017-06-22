@@ -45,14 +45,13 @@ sys.modules['fixtures'].__path__.append(join(tests, "SubscriptionIdApiVersion", 
 sys.modules['fixtures'].__path__.append(join(tests, "AzureBodyDuration", "fixtures"))
 sys.modules['fixtures'].__path__.append(join(tests, "AzureSpecials", "fixtures"))
 
-from msrest.exceptions import DeserializationError
+from msrest.exceptions import DeserializationError, ValidationError
 
 from fixtures.acceptancetestsazureparametergrouping import AutoRestParameterGroupingTestService
 from fixtures.acceptancetestssubscriptionidapiversion import MicrosoftAzureTestUrl
 from fixtures.acceptancetestsazurebodyduration import AutoRestDurationTestService
 from fixtures.acceptancetestsazurespecials import AutoRestAzureSpecialParametersTestClient
 
-from fixtures.acceptancetestscustombaseuri.exceptions import ValidationError
 from fixtures.acceptancetestsazureparametergrouping.models import (
     ParameterGroupingPostMultiParamGroupsSecondParamGroup,
     ParameterGroupingPostOptionalParameters,
