@@ -15,7 +15,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '3'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -38,7 +37,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '5'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -71,7 +69,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: Boolean
         modelType:
           $id: '8'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -102,7 +99,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: Reason
         modelType:
           $id: '10'
           $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
@@ -136,7 +132,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '12'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -174,7 +169,6 @@ modelTypes:
             modelAsString: false
         isRequired: true
         isConstant: false
-        modelTypeName: AccountType
         modelType:
           $id: '15'
           $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
@@ -226,7 +220,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '18'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -250,7 +243,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: 'Dictionary<string,String>'
         modelType:
           $id: '20'
           $type: 'AutoRest.Core.Model.DictionaryType, AutoRest.Core'
@@ -283,7 +275,6 @@ modelTypes:
           x-ms-client-flatten: true
         isRequired: false
         isConstant: false
-        modelTypeName: StorageAccountPropertiesCreateParameters
         modelType:
           $ref: '13'
         '#name': properties
@@ -311,7 +302,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '25'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -335,7 +325,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '27'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -359,7 +348,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '29'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -383,7 +371,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '31'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -419,7 +406,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '34'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -443,7 +429,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: Boolean
         modelType:
           $id: '36'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -485,7 +470,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: ProvisioningState
         modelType:
           $id: '39'
           $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
@@ -526,7 +510,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: AccountType
         modelType:
           $ref: '15'
         '#documentation': Gets the type of the storage account.
@@ -543,7 +526,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: Endpoints
         modelType:
           $ref: '23'
         '#documentation': >-
@@ -563,7 +545,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '43'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -591,7 +572,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: AccountStatus
         modelType:
           $id: '45'
           $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
@@ -625,7 +605,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: DateTime
         modelType:
           $id: '47'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -654,7 +633,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '49'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -685,7 +663,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: AccountStatus
         modelType:
           $ref: '45'
         '#documentation': >-
@@ -705,7 +682,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: DateTime
         modelType:
           $id: '52'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -730,7 +706,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: CustomDomain
         modelType:
           $ref: '32'
         '#documentation': Gets the user assigned custom domain assigned to this storage account.
@@ -747,7 +722,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: Endpoints
         modelType:
           $ref: '23'
         '#documentation': >-
@@ -778,7 +752,6 @@ modelTypes:
           x-ms-client-flatten: true
         isRequired: false
         isConstant: false
-        modelTypeName: StorageAccountProperties
         modelType:
           $ref: '37'
         '#name': properties
@@ -799,7 +772,6 @@ modelTypes:
           collectionFormat: none
           isRequired: false
           isConstant: false
-          modelTypeName: String
           modelType:
             $id: '59'
             $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -823,7 +795,6 @@ modelTypes:
           collectionFormat: none
           isRequired: false
           isConstant: false
-          modelTypeName: String
           modelType:
             $id: '61'
             $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -847,7 +818,6 @@ modelTypes:
           collectionFormat: none
           isRequired: false
           isConstant: false
-          modelTypeName: String
           modelType:
             $id: '63'
             $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -871,7 +841,6 @@ modelTypes:
           collectionFormat: none
           isRequired: false
           isConstant: false
-          modelTypeName: String
           modelType:
             $id: '65'
             $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -895,7 +864,6 @@ modelTypes:
           collectionFormat: none
           isRequired: false
           isConstant: false
-          modelTypeName: 'Dictionary<string,String>'
           modelType:
             $id: '67'
             $type: 'AutoRest.Core.Model.DictionaryType, AutoRest.Core'
@@ -943,7 +911,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '71'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -967,7 +934,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '73'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -999,7 +965,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: IList<StorageAccount>
         modelType:
           $id: '76'
           $type: 'AutoRest.Core.Model.SequenceType, AutoRest.Core'
@@ -1036,7 +1001,6 @@ modelTypes:
             modelAsString: false
         isRequired: false
         isConstant: false
-        modelTypeName: AccountType
         modelType:
           $ref: '15'
         '#documentation': >-
@@ -1056,7 +1020,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: CustomDomain
         modelType:
           $ref: '32'
         '#documentation': >-
@@ -1086,7 +1049,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: 'Dictionary<string,String>'
         modelType:
           $id: '82'
           $type: 'AutoRest.Core.Model.DictionaryType, AutoRest.Core'
@@ -1119,7 +1081,6 @@ modelTypes:
           x-ms-client-flatten: true
         isRequired: false
         isConstant: false
-        modelTypeName: StorageAccountPropertiesUpdateParameters
         modelType:
           $ref: '77'
         '#name': properties
@@ -1147,7 +1108,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '87'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1179,7 +1139,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '90'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1203,7 +1162,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '92'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1241,7 +1199,6 @@ modelTypes:
             modelAsString: false
         isRequired: true
         isConstant: false
-        modelTypeName: UsageUnit
         modelType:
           $id: '95'
           $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
@@ -1287,7 +1244,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: Int
         modelType:
           $id: '97'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1312,7 +1268,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: Int
         modelType:
           $id: '99'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1339,7 +1294,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: UsageName
         modelType:
           $ref: '88'
         '#documentation': Gets the name of the type of usage.
@@ -1364,7 +1318,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: IList<Usage>
         modelType:
           $id: '103'
           $type: 'AutoRest.Core.Model.SequenceType, AutoRest.Core'
@@ -1409,7 +1362,6 @@ properties:
     collectionFormat: none
     isRequired: true
     isConstant: false
-    modelTypeName: String
     modelType:
       $id: '105'
       $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1436,7 +1388,6 @@ properties:
     collectionFormat: none
     isRequired: true
     isConstant: false
-    modelTypeName: String
     modelType:
       $id: '107'
       $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1458,7 +1409,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: StorageAccountCheckNameAvailabilityParameters
             modelType:
               $ref: '1'
             '#documentation': >-
@@ -1475,7 +1425,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '110'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1496,7 +1445,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '112'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1546,7 +1494,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '114'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1568,7 +1515,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '116'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1590,7 +1536,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: StorageAccountCreateParameters
             modelType:
               $ref: '16'
             '#documentation': The parameters to provide for the created account.
@@ -1604,7 +1549,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '119'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1625,7 +1569,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '121'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1683,7 +1626,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '123'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1705,7 +1647,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '125'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1729,7 +1670,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '127'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1750,7 +1690,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '129'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1796,7 +1735,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '131'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1818,7 +1756,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '133'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1842,7 +1779,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '135'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1863,7 +1799,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '137'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1914,7 +1849,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '139'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1936,7 +1870,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '141'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1958,7 +1891,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: StorageAccountUpdateParameters
             modelType:
               $ref: '80'
             '#documentation': >-
@@ -1974,7 +1906,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '144'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -1995,7 +1926,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '146'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2056,7 +1986,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '148'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2078,7 +2007,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '150'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2099,7 +2027,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '152'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2120,7 +2047,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '154'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2170,7 +2096,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '156'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2191,7 +2116,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '158'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2245,7 +2169,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '160'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2266,7 +2189,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '162'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2287,7 +2209,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '164'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2341,7 +2262,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '166'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2363,7 +2283,6 @@ operations:
               MinLength: '3'
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '168'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2385,7 +2304,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: StorageAccountRegenerateKeyParameters
             modelType:
               $ref: '85'
             '#documentation': >-
@@ -2401,7 +2319,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '171'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2422,7 +2339,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '173'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -2479,7 +2395,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "StorageAccountCheckNameAvailabilityParameters",
                 "modelType": {
                   "$ref": "1"
                 },
@@ -2497,7 +2412,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "110",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2522,7 +2436,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "112",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2579,7 +2492,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "114",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2605,7 +2517,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "116",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2627,7 +2538,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "StorageAccountCreateParameters",
                 "modelType": {
                   "$ref": "16"
                 },
@@ -2645,7 +2555,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "119",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2670,7 +2579,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "121",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2733,7 +2641,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "123",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2759,7 +2666,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "125",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2784,7 +2690,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "127",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2809,7 +2714,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "129",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2863,7 +2767,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "131",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2889,7 +2792,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "133",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2914,7 +2816,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "135",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2939,7 +2840,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "137",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -2996,7 +2896,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "139",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3022,7 +2921,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "141",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3044,7 +2942,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "StorageAccountUpdateParameters",
                 "modelType": {
                   "$ref": "80"
                 },
@@ -3062,7 +2959,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "144",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3087,7 +2983,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "146",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3144,7 +3039,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "148",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3170,7 +3064,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "150",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3195,7 +3088,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "152",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3220,7 +3112,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "154",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3280,7 +3171,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "156",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3305,7 +3195,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "158",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3367,7 +3256,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "160",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3392,7 +3280,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "162",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3417,7 +3304,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "164",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3479,7 +3365,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "166",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3505,7 +3390,6 @@ operations:
                 },
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "168",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3527,7 +3411,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "StorageAccountRegenerateKeyParameters",
                 "modelType": {
                   "$ref": "85"
                 },
@@ -3545,7 +3428,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "171",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3570,7 +3452,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "173",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3635,7 +3516,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '175'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -3656,7 +3536,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: String
             modelType:
               $id: '177'
               $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -3720,7 +3599,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "175",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
@@ -3745,7 +3623,6 @@ operations:
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
-                "modelTypeName": "String",
                 "modelType": {
                   "$id": "177",
                   "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
