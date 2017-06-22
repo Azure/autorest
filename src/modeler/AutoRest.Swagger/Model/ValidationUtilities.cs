@@ -472,7 +472,7 @@ namespace AutoRest.Swagger.Model.Utilities
 
         private static KeyValuePair<string, string> GetChildAndImmediateParentResource(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
         {
-            Match match = resourcePathPattern.Match(path);
+            Match match = ResourcePathPattern.Match(path);
             KeyValuePair<string, string> result = new KeyValuePair<string, string>();
             if (match.Success)
             {
@@ -587,7 +587,7 @@ namespace AutoRest.Swagger.Model.Utilities
          *      Step 2: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases
          *      Step 3: databases
          */
-        private static readonly Regex resourcePathPattern = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(?<childresource>\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
+        public static readonly Regex ResourcePathPattern = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(?<childresource>\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
 
         public static IEnumerable<string> GetParentTrackedResources(IEnumerable<string> trackedResourceModels, IEnumerable<KeyValuePair<string, string>> childTrackedResourceModels)
             => trackedResourceModels.Where(resourceModel => !childTrackedResourceModels.Any(childModel => childModel.Key.Equals(resourceModel)));
