@@ -52,7 +52,7 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 |Option                                                                &nbsp;| Description |
 |------------------|-------------|
 |`--input-file=FILENAME`|Adds the given file to the list of input files for generation process|
-|`--ouptut-folder=DIRECTORY`|The location for generated files. If not specified, uses `./Generated` as the default|
+|`--output-folder=DIRECTORY`|The location for generated files. If not specified, uses `./Generated` as the default|
 |`--namespace=NAMESPACE`|sets the namespace to use for the generated code|
 |`--license-header=HEADER`| Text to include as a header comment in generated files. Use NONE to suppress the default header.|
 |`--add-credentials`|If specified, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type.|
