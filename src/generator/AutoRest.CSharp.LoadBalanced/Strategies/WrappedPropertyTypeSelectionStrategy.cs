@@ -13,8 +13,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
         public override bool IsDateTime(Property property)
         {
-            if(property.ModelType.Name == "string" && _datePostfixes.Any(
-                p => property.Name.RawValue.ToUpper().EndsWith(p.ToUpper())))
+            if(IsDateText(property))
             {
                 return true;
             }
@@ -76,6 +75,11 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
         public override string GetConverterTypeName(Property property)
         {
+            if(IsDateText(property))
+            {
+                return "AutoRest.CSharp.LoadBalanced.Json.DateTimeToStringConverter";
+            }
+
             var typeConverterName = base.GetConverterTypeName(property);
 
             if (string.IsNullOrWhiteSpace(typeConverterName))
@@ -85,6 +89,13 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
             // TODO: this is where we can put the custom wrapper related type converters
             return null;
+        }
+
+
+        protected bool IsDateText(Property property)
+        {
+            return property.ModelType.Name == "string" && _datePostfixes.Any(
+                       p => property.Name.RawValue.ToUpper().EndsWith(p.ToUpper()));
         }
     }
 }
