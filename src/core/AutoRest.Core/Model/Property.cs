@@ -66,10 +66,8 @@ namespace AutoRest.Core.Model
             }
         }
 
+        [JsonIgnore]
         public override string Qualifier => "Property";
-
-        [JsonProperty("$actualType", Order = -99)]
-        public string ActualType => GetType().FullName;
 
         /// <summary>
         ///     Indicates whether this property is read only.
@@ -90,6 +88,7 @@ namespace AutoRest.Core.Model
             set { _summary.CopyFrom(value); }
         }
 
+        [JsonIgnore]
         public virtual bool IsPolymorphicDiscriminator => true == (Parent as CompositeType)?.BasePolymorphicDiscriminator?.EqualsIgnoreCase(Name.RawValue);
 
         /// <summary>
@@ -100,6 +99,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Represents the path for getting to this property when holding the XML node of the parent object in your hand.
         /// </summary>
+        [JsonIgnore]
         public IEnumerable<string> RealXmlPath
         {
             get

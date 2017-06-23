@@ -26,7 +26,9 @@ namespace AutoRest.Core.Model
         private readonly Fixable<string> _url = new Fixable<string>();
         private MethodGroup _parent;
 
+        [JsonIgnore]
         public string Qualifier => "Method";
+        [JsonIgnore]
         public string QualifierType => "Method";
 
         [JsonIgnore]
