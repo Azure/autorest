@@ -16,13 +16,11 @@ namespace AutoRest.CSharp.JsonRpcClient
         /// <summary>
         ///     Indicates whether ctor needs to be generated with internal protection level.
         /// </summary>
-        [SettingsAlias("internal")]
         public bool InternalConstructors { get; set; }
 
         /// <summary>
         ///     Specifies mode for generating sync wrappers.
         /// </summary>
-        [SettingsAlias("syncMethods")]
         public SyncMethodsGenerationMode SyncMethods { get; set; }
 
         public bool UseDateTimeOffset { get; set; }

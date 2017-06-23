@@ -57,7 +57,6 @@ namespace AutoRest.Ruby
         ///     name of the SDK, otherwise the name of input swagger is converted
         ///     into Ruby style and taken as name.
         /// </summary>
-        [SettingsAlias("Name")]
         public string sdkName
         {
             get

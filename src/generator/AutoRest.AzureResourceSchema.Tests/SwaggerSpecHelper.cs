@@ -9,38 +9,32 @@ using AutoRest.Core.Utilities;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest.Swagger.Tests
+namespace AutoRest.AzureResourceSchema.Tests
 {
+    using AutoRest.Core.Logging;
+    using AutoRest.Core.Model;
+    using AutoRest.Swagger;
     using Core.Extensibility;
 
     public static class SwaggerSpecHelper
     {
-        public static void RunTests(string specFile, string resultFolder, string modeler = "Swagger", string plugin = "CSharp", string nameSpace = null)
+        public static void RunTests(string specFile, string resultFolder)
         {
             using (NewContext)
             {
-                var settings = new Settings
+                RunTests(
+                    new Settings
                     {
-                        Input = specFile,
+                        Input = specFile ?? throw new ArgumentNullException(nameof(specFile)),
                         Header = "MICROSOFT_MIT_NO_VERSION",
-                        Modeler = modeler,
-                        PayloadFlatteningThreshold = 1,
-                        CodeGenerator =  plugin,
-                        Namespace = nameSpace
-                    };
-
-                RunTests(resultFolder);
+                        PayloadFlatteningThreshold = 1
+                    },
+                    resultFolder ?? throw new ArgumentNullException(nameof(resultFolder)));
             }
         }
 
-        public static void RunTests(string resultFolder)
+        private static void RunTests(Settings settings, string resultFolder)
         {
-            if (resultFolder == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
-            var settings = Settings.Instance;
-
             settings.FileSystemInput = new MemoryFileSystem();
             settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));
             settings.FileSystemInput.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
@@ -50,16 +44,15 @@ namespace AutoRest.Swagger.Tests
                 ? resultFolder.Substring(expectedWithSeparator.Length)
                 : resultFolder;
 
-            var name = ExtensionsLoader.GetPlugin().Settings.Name;
+            var name = ExtensionsLoader.GetPlugin("AzureResourceSchema").Settings.Name;
             settings.Namespace = string.IsNullOrEmpty(settings.Namespace)
                 ? "Fixtures." + (name.Contains("Azure") ? "Azure." : "") + specFileName.
                     Replace(".cs", "").Replace(".Cs", "").Replace(".java", "").
                     Replace(".js", "").Replace(".", "").
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
                 : settings.Namespace;
-            settings.DisableSimplifier = true;
-
-            AutoRestController.Generate();
+            
+            Generate(settings);
 
             var actualFiles = settings.FileSystemOutput.GetFiles("", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
             var expectedFiles = Directory.Exists(resultFolder) ? Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray() : new string[0];
@@ -70,6 +63,53 @@ namespace AutoRest.Swagger.Tests
                 var actualFile = actualFiles[i];
                 var expectedFile = expectedFiles[i];
                 EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystemOutput.ReadAllText(actualFile));
+            }
+        }
+
+        private static void Generate(Settings settings)
+        {
+            CodeModel codeModel = null;
+
+            var modeler = new SwaggerModeler();
+
+            try
+            {
+                using (NewContext)
+                {
+                    // generate model from swagger 
+                    codeModel = modeler.Build();
+                }
+            }
+            catch (Exception exception)
+            {
+                throw ErrorManager.CreateError("Error generating client model", exception);
+            }
+
+            var plugin = ExtensionsLoader.GetPlugin("AzureResourceSchema");
+
+            try
+            {
+                var genericSerializer = new ModelSerializer<CodeModel>();
+                var modelAsJson = genericSerializer.ToJson(codeModel);
+
+                // ensure once we're doing language-specific work, that we're working
+                // in context provided by the language-specific transformer. 
+                using (plugin.Activate())
+                {
+                    // load model into language-specific code model
+                    codeModel = plugin.Serializer.Load(modelAsJson);
+
+                    // apply language-specific tranformation (more than just language-specific types)
+                    // used to be called "NormalizeClientModel" . 
+                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+
+                    // Generate code from CodeModel.
+                    plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                }
+            }
+            catch (Exception exception)
+            {
+                throw ErrorManager.CreateError("Error generating client code", exception);
             }
         }
 
