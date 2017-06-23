@@ -15,7 +15,6 @@ modelTypes:
         collectionFormat: none
         isRequired: false
         isConstant: false
-        modelTypeName: Long
         modelType:
           $id: '3'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -40,7 +39,6 @@ modelTypes:
         collectionFormat: none
         isRequired: true
         isConstant: false
-        modelTypeName: String
         modelType:
           $id: '5'
           $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
@@ -75,7 +73,6 @@ operations:
             collectionFormat: none
             isRequired: true
             isConstant: false
-            modelTypeName: Cowbell
             modelType:
               $ref: '1'
             '#name': body

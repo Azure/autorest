@@ -35,11 +35,6 @@ namespace AutoRest.Swagger
             }
         }
 
-        public override string Name
-        {
-            get { return "Swagger"; }
-        }
-
         /// <summary>
         /// Swagger service model.
         /// </summary>
@@ -358,9 +353,6 @@ namespace AutoRest.Swagger
             return swaggerParameter;
         }
 
-        public SchemaResolver Resolver
-        {
-            get { return new SchemaResolver(this); }
-        }
+        public SchemaResolver Resolver => new SchemaResolver(this);
     }
 }
