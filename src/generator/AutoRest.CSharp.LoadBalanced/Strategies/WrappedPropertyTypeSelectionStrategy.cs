@@ -77,7 +77,22 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
         {
             if(IsDateText(property))
             {
-                return "AutoRest.CSharp.LoadBalanced.Json.DateTimeToStringConverter";
+                return "AutoRest.CSharp.LoadBalanced.Json.DateTimeStringConverter";
+            }
+
+            if (IsGuid(property))
+            {
+                return "AutoRest.CSharp.LoadBalanced.Json.GuidStringConverter";
+            }
+
+            if (IsMoney(property))
+            {
+                return "AutoRest.CSharp.LoadBalanced.Json.MoneyStringConverter";
+            }
+
+            if (IsInt32Value(property))
+            {
+                return "AutoRest.CSharp.LoadBalanced.Json.Int32ValueConverter";
             }
 
             var typeConverterName = base.GetConverterTypeName(property);
