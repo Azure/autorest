@@ -16,8 +16,6 @@ namespace AutoRest.Core
     /// </summary>
     public class Template<T> : ITemplate
     {
-        protected const int MaximumCommentColumn = 80;
-
         private string _indentation;
         private string _lastLiteral = String.Empty;
 
@@ -232,7 +230,7 @@ namespace AutoRest.Core
             }
 
             int available =
-                MaximumCommentColumn - // Maximum desired width
+                (Settings.Instance?.MaximumCommentColumns ?? Settings.DefaultMaximumCommentColumns) - // Maximum desired width
                 Indentation.Length - // - Space used for indent
                 prefix.Length - // - Prefix //'s length
                 1; // - Extra space between prefix and text

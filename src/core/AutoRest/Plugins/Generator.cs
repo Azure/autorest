@@ -73,7 +73,8 @@ public class Generator : NewPlugin
             ClientName = GetXmsCodeGenSetting<string>(sd, "name") ?? await GetValue("override-client-name"),
             PayloadFlatteningThreshold = GetXmsCodeGenSetting<int?>(sd, "ft") ?? await GetValue<int?>("payload-flattening-threshold") ?? 0,
             AddCredentials = await GetValue<bool?>("add-credentials") ?? false,
-            Host = this
+            Host = this,
+            MaximumCommentColumns = await GetValue<int?>("max-comment-columns") ?? Settings.DefaultMaximumCommentColumns
         };
         var header = await GetValue("license-header");
         if (header != null)

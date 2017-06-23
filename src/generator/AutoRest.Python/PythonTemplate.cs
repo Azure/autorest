@@ -19,7 +19,7 @@ namespace AutoRest.Python
             comment = comment.Replace("\\", "\\\\");
 
             int available =
-                MaximumCommentColumn - // Maximum desired width
+                (Settings.Instance?.MaximumCommentColumns ?? Settings.DefaultMaximumCommentColumns) - // Maximum desired width
                 Indentation.Length - // - Space used for indent
                 prefix.Length - // - Prefix //'s length
                 1 - // - Extra space between prefix and text
