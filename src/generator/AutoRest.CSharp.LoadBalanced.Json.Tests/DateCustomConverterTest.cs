@@ -39,10 +39,10 @@ namespace AutoRest.CSharp.LoadBalanced.Json.Tests
 
         public class TestObject
         {
-            [JsonProperty("my"), JsonConverter(typeof(DateTimeToStringConverter))]
+            [JsonProperty("my"), JsonConverter(typeof(DateTimeStringConverter))]
             public DateTime MyDate { get; set; }
 
-            [JsonProperty("my2"), JsonConverter(typeof(DateTimeToStringConverter))]
+            [JsonProperty("my2"), JsonConverter(typeof(DateTimeStringConverter))]
             public DateTime? MyDate2 { get; set; }
         }
     }

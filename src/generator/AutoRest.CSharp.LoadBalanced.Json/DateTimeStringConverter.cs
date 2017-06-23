@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace AutoRest.CSharp.LoadBalanced.Json
 {
-    public class DateTimeToStringConverter : JsonConverter
+    public class DateTimeStringConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
