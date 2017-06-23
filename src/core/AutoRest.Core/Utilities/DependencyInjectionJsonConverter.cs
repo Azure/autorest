@@ -84,11 +84,10 @@ namespace AutoRest.Core.Utilities
         protected override object ReadJson(JObject jObject, Type objectType, object existingValue, JsonSerializer serializer)
         {
             // if there is a $type, we need to ask the serializer to try deserializing to that specific type.
-            var typeDeclaration = jObject.GetTypeDeclaration();
-            
-            if (typeDeclaration != null)
+            var typeName = jObject.GetTypeName();
+            if (typeName != null)
             {
-                return serializer.Deserialize(jObject.CreateReader(), typeDeclaration.Type);
+                return serializer.Deserialize(jObject.CreateReader(), Type.GetType($"AutoRest.Core.Model.{typeName}"));
             }
 
             // if there isn't a specified type *try* to use a LODIS factory for the type.

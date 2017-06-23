@@ -158,6 +158,7 @@ namespace AutoRest.Core.Model
             set { _name.CopyFrom(value); }
         }
 
+        [JsonIgnore]
         public virtual string ModelTypeName => ModelType.Name;
 
         /// <Summary>

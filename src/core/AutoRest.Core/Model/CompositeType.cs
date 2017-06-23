@@ -24,9 +24,6 @@ namespace AutoRest.Core.Model
         private string _documentation;
         private CompositeType _baseModelType;
 
-        public override string RefName => $"AutoRest.Core.Model.CompositeType, AutoRest.Core";
-
-
         partial void InitializeCollections();
         /// <summary>
         /// Initializes a new instance of CompositeType class.

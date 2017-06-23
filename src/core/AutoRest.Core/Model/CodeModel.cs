@@ -151,6 +151,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Reference to the container of this type.
         /// </summary>
+        [JsonIgnore]
         CodeModel IParent.CodeModel => this;
 
         [JsonIgnore]
@@ -161,7 +162,9 @@ namespace AutoRest.Core.Model
         public virtual IEnumerable<IChild> Children
             => ((IEnumerable<IChild>)ModelTypes).Concat(HeaderTypes).Concat(ErrorTypes).Concat(EnumTypes).Concat(Properties);
 
+        [JsonIgnore]
         public string Qualifier => "Client";
+        [JsonIgnore]
         public string QualifierType => "Service Client";
 
         [JsonIgnore]
@@ -175,6 +178,7 @@ namespace AutoRest.Core.Model
             }
         }
 
+        [JsonIgnore]
         public virtual HashSet<string> LocallyUsedNames => null;
         
         [JsonIgnore]

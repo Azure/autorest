@@ -48,6 +48,8 @@ namespace AutoRest.Core.Model
         {
             Name = name;
         }
+
+        [JsonIgnore]
         public bool IsCodeModelMethodGroup => Name.IsNullOrEmpty() || Name.EqualsIgnoreCase(CodeModel?.Name);
         /// <Summary>
         ///     The 'raw' name of the method group.
