@@ -45,7 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateTimeToStringConverter.cs" />
+    <Compile Include="DateTimeStringConverter.cs" />
+    <Compile Include="GuidStringConverter.cs" />
+    <Compile Include="Int32ValueConverter.cs" />
+    <Compile Include="JsonConverterBase.cs" />
+    <Compile Include="MoneyStringConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

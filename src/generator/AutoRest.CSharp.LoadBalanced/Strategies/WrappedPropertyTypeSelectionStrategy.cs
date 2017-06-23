@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             {
                 return true;
             }
-
+            //"type" : "integer", "format" : "int32",
             return base.IsMoney(property);
         }
 

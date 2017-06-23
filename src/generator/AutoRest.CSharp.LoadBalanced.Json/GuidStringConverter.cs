@@ -1,12 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoRest.CSharp.LoadBalanced.Json
 {
-    class GuidStringConverter
+    public class GuidStringConverter : JsonConverterBase<Guid, string>
     {
+        protected override bool TryParse(Guid model, out string dto)
+        {
+            dto = model.ToString();
+            return true;
+        }
+
+        protected override bool TryParse(string dto, out Guid model)
+        {
+            return Guid.TryParse(dto, out model);
+        }
     }
+
 }

@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.LoadBalanced.Json.Tests
         {
             var deserializedObject = JsonConvert.DeserializeObject<TestObject>(jsonText);
             Assert.AreEqual(testObject.MyDate, deserializedObject.MyDate);
+            Assert.AreEqual(testObject.MyDate2, deserializedObject.MyDate2);
         }
 
 
