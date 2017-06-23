@@ -10,6 +10,7 @@ using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Swagger;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -58,13 +59,12 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem inputFileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
+        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem inputFileSystem, string codeGenerator="CSharp")
         {
             using (NewContext)
             {
                 var settings = new Settings
                 {
-                    Modeler = modeler,
                     CodeGenerator = codeGenerator,
                     FileSystemInput = inputFileSystem,
                     OutputDirectory = "",
@@ -94,8 +94,8 @@ namespace AutoRest.CSharp.Unit.Tests
                 throw new Exception($"Can't find swagger file ${testName} [.yaml] [.json] [.md]");
             }
 
-            var plugin = ExtensionsLoader.GetPlugin();
-            var modeler = ExtensionsLoader.GetModeler();
+            var plugin = ExtensionsLoader.GetPlugin(settings.CodeGenerator);
+            var modeler = new SwaggerModeler();
             var codeModel = modeler.Build();
 
             using (plugin.Activate())
