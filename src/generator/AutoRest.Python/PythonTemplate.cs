@@ -25,8 +25,7 @@ namespace AutoRest.Python
                 1 - // - Extra space between prefix and text
                 1; // - Extra space for parameter start
 
-            return string.Join(Environment.NewLine + " ", comment.WordWrap(available)
-                .Select(s => string.Format(CultureInfo.InvariantCulture, "{0}{1}", prefix, s)));
+            return string.Join(Environment.NewLine + " ", comment.WordWrap(available).Select(s => $"{prefix}{s}"));
         }
     }
 }
