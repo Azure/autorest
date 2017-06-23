@@ -9,8 +9,6 @@ namespace AutoRest.Core
 {
     public abstract class Modeler
     {
-        public abstract string Name { get; }
-
         public Settings Settings => Settings.Instance;
 
         public abstract CodeModel Build();
