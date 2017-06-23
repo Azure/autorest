@@ -144,6 +144,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.LoadBalance
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.CSharp.LoadBalanced.Json", "src\generator\AutoRest.CSharp.LoadBalanced.Json\AutoRest.CSharp.LoadBalanced.Json.csproj", "{10AA2123-2580-46E3-8B99-1AC378CD0459}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.CSharp.LoadBalanced.Json.Tests", "src\generator\AutoRest.CSharp.LoadBalanced.Json.Tests\AutoRest.CSharp.LoadBalanced.Json.Tests.csproj", "{FDEEC678-DE2D-4380-80D9-89E171C69B9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -310,6 +312,10 @@ Global
 		{10AA2123-2580-46E3-8B99-1AC378CD0459}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10AA2123-2580-46E3-8B99-1AC378CD0459}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10AA2123-2580-46E3-8B99-1AC378CD0459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDEEC678-DE2D-4380-80D9-89E171C69B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDEEC678-DE2D-4380-80D9-89E171C69B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDEEC678-DE2D-4380-80D9-89E171C69B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDEEC678-DE2D-4380-80D9-89E171C69B9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -367,5 +373,6 @@ Global
 		{C024F83F-73E6-40F4-8150-128C70226301} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{10AA2123-2580-46E3-8B99-1AC378CD0459} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+		{FDEEC678-DE2D-4380-80D9-89E171C69B9C} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 	EndGlobalSection
 EndGlobal
