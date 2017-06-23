@@ -98,6 +98,10 @@ public class Generator : NewPlugin
             Settings.Instance.PackageName = await GetValue("package-name");
             Settings.Instance.PackageVersion = await GetValue("package-version");
         }
+        if (codeGenerator == "go")
+        {
+            Settings.Instance.PackageVersion = await GetValue("package-version");
+        }
 
         // process
         var plugin = ExtensionsLoader.GetPlugin(
