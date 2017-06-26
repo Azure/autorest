@@ -39,13 +39,6 @@ namespace AutoRest.Core.Utilities
             {
                 return serializer.ResolveReference<T>(reference);
             }
-            var id = jObject["$id"]?.Value<string>();
-            if (id != null)
-            {
-                var result = ReadJson(jObject, objectType, existingValue, serializer);
-                // serializer.ReferenceResolver.AddReference(serializer,id,result);
-                return result;
-            }
             return ReadJson(jObject, objectType, existingValue, serializer);
         }
 
