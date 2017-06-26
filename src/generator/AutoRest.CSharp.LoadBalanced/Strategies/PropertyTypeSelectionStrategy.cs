@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
             if (typeConverterName != null)
             {
-                return $"[JsonConverter(typeof({typeConverterName}))]";
+                return $"[JsonProperty(PropertyName = \"{property.SerializedName}\"), JsonConverter(typeof({typeConverterName}))]";
             }
 
             return IsDictionary(property) ? "[JsonExtensionData]" : 

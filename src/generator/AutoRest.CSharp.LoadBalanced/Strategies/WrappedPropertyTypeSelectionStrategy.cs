@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using AutoRest.Core.Model;
 using AutoRest.CSharp.LoadBalanced.Model;
 
@@ -88,7 +89,27 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
             if (IsMoney(property))
             {
-                return "AutoRest.CSharp.LoadBalanced.Json.MoneyConverter";
+                var attributeBuilder = new StringBuilder();
+                attributeBuilder.Append("AutoRest.CSharp.LoadBalanced.Json.MoneyConverter");
+                var options = new List<string>();
+
+
+                if (property.ModelType.Name == "string")
+                {
+                    options.Add("AutoRest.CSharp.LoadBalanced.Json.MoneyConverterOptions.SendAsText");
+                }
+
+                if (property.IsNullable())
+                {
+                    options.Add("AutoRest.CSharp.LoadBalanced.Json.MoneyConverterOptions.IsNullable");
+                }
+
+                if (options.Any())
+                {
+                    attributeBuilder.Append(", ").Append(string.Join(" | ", options));
+                }
+
+                return attributeBuilder.ToString();
             }
 
             if (IsInt32Value(property))
