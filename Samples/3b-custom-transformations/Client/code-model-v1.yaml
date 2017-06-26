@@ -938,9 +938,6 @@ namespace: ''
 modelsName: Models
 apiVersion: '2015-06-15'
 baseUrl: 'https://management.azure.com'
-methodGroupNames:
-  - StorageAccounts
-  - Usage
 documentation: The Storage Management Client.
 properties:
   - $id: '104'
@@ -1796,8 +1793,6 @@ operations:
         '#serializedName': StorageAccounts_RegenerateKey
         '#url': >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
-    usings:
-      - Models
     '#name': checkNameAvailability
     summary: |-
       {
@@ -2757,9 +2752,6 @@ operations:
             "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"
           }
         ],
-        "usings": [
-          "Models"
-        ],
         "#name": "checkNameAvailability"
       }
   - methods:
@@ -2826,8 +2818,6 @@ operations:
         '#group': Usage
         '#serializedName': Usage_List
         '#url': '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
-    usings:
-      - Models
     '#name': usages
     summary: |-
       {
@@ -2910,9 +2900,6 @@ operations:
             "#serializedName": "Usage_List",
             "#url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"
           }
-        ],
-        "usings": [
-          "Models"
         ],
         "#name": "usages"
       }
