@@ -28,8 +28,6 @@ namespace AutoRest.Core.Model
 
         [JsonIgnore]
         public string Qualifier => "Method";
-        [JsonIgnore]
-        public string QualifierType => "Method";
 
         [JsonIgnore]
         public MethodGroup MethodGroup

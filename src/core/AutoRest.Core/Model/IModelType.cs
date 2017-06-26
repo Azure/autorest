@@ -192,8 +192,6 @@ namespace AutoRest.Core.Model
         public abstract string Qualifier { get; }
 
         [JsonIgnore]
-        public virtual string QualifierType => Qualifier;
-        [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames { get { if (!string.IsNullOrEmpty(Name)) { yield return Name; } }}
         [JsonIgnore]
         public virtual IEnumerable<IIdentifier> IdentifiersInScope => this.SingleItemConcat(Parent?.IdentifiersInScope);

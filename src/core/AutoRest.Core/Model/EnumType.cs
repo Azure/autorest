@@ -21,8 +21,6 @@ namespace AutoRest.Core.Model
         [JsonIgnore]
         public override string Qualifier => "Enum";
         [JsonIgnore]
-        public override string QualifierType => "EnumType";
-        [JsonIgnore]
         public override IEnumerable<IChild> Children => Values;
 
         /// <summary>

@@ -155,9 +155,6 @@ namespace AutoRest.Core.Model
         public string Qualifier => "Operations";
 
         [JsonIgnore]
-        public string QualifierType => "Operation Group";
-
-        [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames
         {
             get
