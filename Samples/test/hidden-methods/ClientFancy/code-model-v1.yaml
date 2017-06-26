@@ -42,8 +42,6 @@ namespace: ''
 modelsName: Models
 apiVersion: 1.0.0
 baseUrl: 'https://localhost'
-methodGroupNames:
-  - Cowbell
 documentation: This is a sample.
 operations:
   - methods:
@@ -76,7 +74,5 @@ operations:
         '#group': Cowbell
         '#serializedName': Cowbell_Add
         '#url': /cowbell
-    usings:
-      - Models
     '#name': Cowbell
 '#name': CowbellFactory
