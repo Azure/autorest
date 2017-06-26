@@ -7,7 +7,7 @@
 Note that `github.com` URIs are supported, i.e. their raw content is extracted.
 
 ``` yaml 
-input-file: https://github.com/OAI/OpenAPI-Specification/blob/4b1c1167b99844fd3ca19dc0055bbdb0c5eff094/examples/v2.0/json/petstore.json
+input-file: petstore.yaml
 ```
 
 ## Generation
