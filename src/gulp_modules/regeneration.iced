@@ -682,12 +682,16 @@ task 'regenerate-delete', '', (done)->
     'src/generator/AutoRest.Python.Tests/Expected'
     'src/generator/AutoRest.Python.Azure.Tests/Expected'
     'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Expected'
-  source 'Samples/*/**/'
+  rmQueue = [] # buffered, since piped removal will cause `source` to fail midway (ENOENT)
+  source 'Samples/*/*/**/'
     .pipe foreach (each, next) ->
       configFile = path.join(each.path, "../readme.md")
-      console.log "rm -rf #{each.path}" if fs.existsSync configFile
-      rm "-rf", '#{each.path}' if fs.existsSync configFile
+      rmQueue.push each.path if fs.existsSync configFile
       next null
+    .on 'end', ->
+      for folder in rmQueue
+        console.log "rm -rf #{folder}"
+        rm "-rf", "#{folder}"
 
 task 'autorest-preview-build', '', ->
   exec "dotnet build #{basefolder}/src/dev/AutoRest.Preview/"
