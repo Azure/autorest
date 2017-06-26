@@ -161,5 +161,10 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
         {
             return properties;
         }
+
+        public virtual bool IsCollection(CompositeTypeCs compositeType)
+        {
+            return false;
+        }
     }
 }

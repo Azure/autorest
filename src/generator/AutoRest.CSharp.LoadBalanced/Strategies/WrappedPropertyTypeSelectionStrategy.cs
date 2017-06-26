@@ -11,7 +11,6 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
         private static string[] _datePostfixes = new[] {"When", "Time", "Date"};
         private static string[] _guidPostfixes = new[] { "By", "UserId", "Token" };
         private static string[] _moneyPostfixes = new[] { "Cost", "Rate", "Amount", "Price", "Discount", "Fee", "Percent" };
-        private readonly Type[] _moneyTypes = new[] { typeof(int), typeof(float), typeof(double) };
 
         public override bool IsDateTime(Property property)
         {
@@ -106,6 +105,18 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
             // TODO: this is where we can put the custom wrapper related type converters
             return null;
+        }
+
+        public override bool IsCollection(CompositeTypeCs compositeType)
+        {
+            if (!compositeType.Name.Value.EndsWith("List"))
+            {
+                return false;
+            }
+
+            var properties = compositeType.GetFilteredProperties().Where(p => p.ModelType is SequenceTypeCs);
+            
+            return properties.Count() == 1;
         }
 
         public override IEnumerable<Property> FilterProperties(Property[] properties)

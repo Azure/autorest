@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -33,7 +34,21 @@ namespace AutoRest.CSharp.LoadBalanced.Json
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var list = new List<T>();
+            IList<T> list = null;
+
+            if (existingValue != null)
+            {
+                list = existingValue as IList<T>;
+            }
+
+            if (list == null && objectType.IsClass)
+            {
+                list = (IList<T>) Activator.CreateInstance(objectType);
+            }
+            else
+            {
+                list = new List<T>();
+            }
 
             if (reader.Read() && reader.TokenType == JsonToken.PropertyName)
             {

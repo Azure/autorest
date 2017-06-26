@@ -48,6 +48,7 @@ namespace @Settings.Namespace
                     NullValueHandling = NullValueHandling.Ignore,
                     ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                     ContractResolver = new ReadOnlyJsonContractResolver(),
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                     Converters = new List<JsonConverter> { new Iso8601TimeSpanConverter() }
                 });
 
@@ -61,6 +62,7 @@ namespace @Settings.Namespace
                     NullValueHandling = NullValueHandling.Ignore,
                     ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                     ContractResolver = new ReadOnlyJsonContractResolver(),
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                     Converters = new List<JsonConverter> { new Iso8601TimeSpanConverter() }
                 });
 @EmptyLine

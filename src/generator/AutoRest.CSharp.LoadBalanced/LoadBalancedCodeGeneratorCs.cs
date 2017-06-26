@@ -88,27 +88,33 @@ namespace AutoRest.CSharp.LoadBalanced
             {
                 var methodGroup = (MethodGroupCs) methodGroup1;
 
-                if (!methodGroup.Name.IsNullOrEmpty())
+                if (methodGroup.Name.IsNullOrEmpty())
                 {
-                    // Operation
-                    var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                    var operationsFilePath = $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}";
-                    project.FilePaths.Add(operationsFilePath);
-
-                    await Write(operationsTemplate, operationsFilePath);
-
-                    // Operation interface
-                    var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                    var operationsInterfacePath =
-                        $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}";
-                    project.FilePaths.Add(operationsInterfacePath);
-
-                    await Write(operationsInterfaceTemplate, operationsInterfacePath);
+                    continue;
                 }
+
+                // Operation
+                var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
+                var operationsFilePath = $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}";
+                project.FilePaths.Add(operationsFilePath);
+
+                await Write(operationsTemplate, operationsFilePath);
+
+                // Operation interface
+                var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
+                var operationsInterfacePath =
+                    $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}";
+                project.FilePaths.Add(operationsInterfacePath);
+
+                await Write(operationsInterfaceTemplate, operationsInterfacePath);
             }
 
+
+
             // Models
-            foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
+            var models = codeModel.ModelTypes.Union(codeModel.HeaderTypes).Cast<CompositeTypeCs>();
+
+            foreach (var model in models)
             {
                 if (model.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
                     (bool)model.Extensions[SwaggerExtensions.ExternalExtension])
@@ -116,7 +122,17 @@ namespace AutoRest.CSharp.LoadBalanced
                     continue;
                 }
 
-                var modelTemplate = new ModelTemplate{ Model = model };
+                Template<CompositeTypeCs> modelTemplate = null;
+
+                if (model.PropertyTypeSelectionStrategy.IsCollection(model))
+                {
+                    modelTemplate = new CollectionModelTemplate { Model = model };
+                }
+                else
+                {
+                    modelTemplate = new ModelTemplate { Model = model };
+                }
+                
                 var modelPath = Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}");
                 project.FilePaths.Add(modelPath);
 

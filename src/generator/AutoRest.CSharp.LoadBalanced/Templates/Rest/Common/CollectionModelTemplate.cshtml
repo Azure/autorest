@@ -1,0 +1,20 @@
+﻿@using System.Linq
+@using AutoRest.CSharp.LoadBalanced.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.CompositeTypeCs>
+@Header("// ")
+@EmptyLine
+using Newtonsoft.Json;
+using System.Collections.Generic;
+@EmptyLine
+@{
+    var property = Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs);
+    var listName = property.ModelTypeName.Replace("System.Collections.Generic.IList", "List");
+    var genericPart = listName.Replace("List<", "").Replace(">", "");
+}
+namespace @(Settings.Namespace).@(Settings.ModelsName)
+{
+    [JsonConverter(typeof(WrappedListConverter<@genericPart>), "@property.Name.Value")
+    public partial class @Model.Name : @Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs).ModelTypeName.Replace("System.Collections.Generic.IList", "List")
+    {
+    }
+}
