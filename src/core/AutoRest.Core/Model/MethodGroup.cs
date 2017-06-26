@@ -139,6 +139,7 @@ namespace AutoRest.Core.Model
             set { _nameForProperty.CopyFrom(value); }
         }
 
+        [JsonIgnore]
         public virtual IEnumerable<string> Usings
         {
             get

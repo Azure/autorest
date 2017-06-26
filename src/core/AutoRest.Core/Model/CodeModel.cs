@@ -126,6 +126,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets the method groups.
         /// </summary>
+        [JsonIgnore]
         public virtual IEnumerable<string> MethodGroupNames => Operations.Where(group => !group.Name.IsNullOrEmpty()).Select(group => group.TypeName.Value);
 
         /// <summary>
