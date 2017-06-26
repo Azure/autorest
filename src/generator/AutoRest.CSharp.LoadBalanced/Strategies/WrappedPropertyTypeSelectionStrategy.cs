@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
             if (IsMoney(property))
             {
-                return "AutoRest.CSharp.LoadBalanced.Json.MoneyStringConverter";
+                return "AutoRest.CSharp.LoadBalanced.Json.MoneyConverter";
             }
 
             if (IsInt32Value(property))
