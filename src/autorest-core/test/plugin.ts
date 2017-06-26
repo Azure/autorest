@@ -122,7 +122,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
     // check results
     const codeModel = (await pluginScope.ReadStrict(results[0])).ReadData();
-    assert.notEqual(codeModel.indexOf("isPolymorphicDiscriminator"), -1);
+    assert.notEqual(codeModel.indexOf("isConstant"), -1);
   }
 
   @test @timeout(10000) async "AutoRest.dll Generator"() {
