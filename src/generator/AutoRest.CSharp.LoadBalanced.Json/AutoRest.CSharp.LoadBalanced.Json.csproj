@@ -53,6 +53,7 @@
     <Compile Include="MoneyConverterOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TryParser.cs" />
+    <Compile Include="WrappedListConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -52,6 +52,7 @@
     <Compile Include="GuidCustomConverterTest.cs" />
     <Compile Include="MoneyCustomConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WrappedListConverterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
