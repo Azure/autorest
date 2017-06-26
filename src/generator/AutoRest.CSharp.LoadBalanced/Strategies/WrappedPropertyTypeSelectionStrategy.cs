@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Model;
+using AutoRest.CSharp.LoadBalanced.Model;
 
 namespace AutoRest.CSharp.LoadBalanced.Strategies
 {
@@ -106,6 +108,17 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             return null;
         }
 
+        public override IEnumerable<Property> FilterProperties(Property[] properties)
+        {
+            // AllFields is not required 
+            return base.FilterProperties(properties).Where(p => p.Name.Value != "AllFields");
+        }
+
+        public override IEnumerable<Property> GetPropertiesWhichRequireInitialization(CompositeTypeCs compositeType)
+        {
+            var baseProperties = base.GetPropertiesWhichRequireInitialization(compositeType).ToArray();
+            return baseProperties.Where(p => p.Name.Value != "AllFields");
+        }
 
         protected bool IsDateText(Property property)
         {

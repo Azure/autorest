@@ -18,8 +18,16 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
         // TODO: this could just be the "required" parameters instead of required and all the optional ones
         // with defaults if we wanted a bit cleaner constructors
-        public IEnumerable<ConstructorParameterModel> Parameters => _model.AllPropertyTemplateModels.OrderBy(p => !p.Property.IsRequired).ThenBy(p => p.Depth)
-            .Select(p => new ConstructorParameterModel(p.Property));
+        public IEnumerable<ConstructorParameterModel> Parameters
+        {
+            get
+            {
+
+                return _model.AllPropertyTemplateModels.OrderBy(p => !p.Property.IsRequired).ThenBy(p => p.Depth)
+                    .Select(p => new ConstructorParameterModel(p.Property));
+
+            }
+        }
 
         public IEnumerable<string> SignatureDocumentation => CreateSignatureDocumentation(Parameters);
 

@@ -63,8 +63,9 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Mod
         }
     }
 
-    @foreach (ParameterCs parameter in Model.Parameters)
+    @foreach (var parameter1 in Model.Parameters)
     {
+        var parameter = (ParameterCs) parameter1;
         if (parameter.IsConstant && !parameter.IsClientProperty)
         {
     @:@(parameter.ModelTypeName) @(parameter.Name) = @(parameter.DefaultValue);

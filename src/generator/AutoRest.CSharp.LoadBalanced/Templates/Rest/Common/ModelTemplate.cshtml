@@ -1,11 +1,8 @@
 @using System.Linq
-@using System.Runtime.Remoting.Messaging
 @using AutoRest.Core
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
-@using AutoRest.CSharp
 @using AutoRest.CSharp.LoadBalanced
-@using AutoRest.CSharp.LoadBalanced.Model
 @using AutoRest.Extensions
 @inherits Template<global::AutoRest.CSharp.LoadBalanced.Model.CompositeTypeCs>
 @Header("// ")
@@ -51,15 +48,12 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// <summary>
         @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
         /// </summary>
-        @if (Model.Properties.Any(p => p.ModelType is CompositeType && ((CompositeType)p.ModelType).ContainsConstantProperties))
+        @if (Model.GetFilteredProperties().Any(p => p.ModelType is CompositeType && ((CompositeType)p.ModelType).ContainsConstantProperties))
         {
 <text>
         public @(Model.Name)()
         {
-            @foreach(var property in Model.ComposedProperties.Where(p => p.ModelType is CompositeType
-                && !p.IsConstant
-                && p.IsRequired
-                && ((CompositeType)p.ModelType).ContainsConstantProperties))
+            @foreach(var property in Model.GetPropertiesWhichRequireInitialization())
             {
             @:@(property.Name) = new @(property.ModelTypeName)();
             }
@@ -94,7 +88,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             @:@(property.Name) = new @(property.ModelTypeName)();
             }
 
-            foreach (var property in Model.Properties.Where(p => !p.IsConstant))
+            foreach (var property in Model.GetFilteredProperties().Where(p => !p.IsConstant))
             {
                 var propName = CodeNamer.Instance.CamelCase(property.Name);
                 if (property.Name.Value.Equals(propName))
@@ -110,7 +104,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:}
         }
 
-        @if (Model.Properties.Any(p => p.IsConstant))
+        @if (Model.GetFilteredProperties().Any(p => p.IsConstant))
         {
         @:/// <summary>
         @:@WrapComment("/// ", ("Static constructor for " + Model.Name + " class.").EscapeXmlComment())
@@ -125,7 +119,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         }
 
         @EmptyLine
-        @foreach (var property in Model.Properties.Where(p => !p.IsConstant))
+        @foreach (var property in Model.GetFilteredProperties().Where(p => !p.IsConstant))
         {
             if (!string.IsNullOrWhiteSpace(property.GetFormattedPropertySummary()))
             {
@@ -145,7 +139,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @EmptyLine
         }
 
-        @foreach (var property in Model.Properties.Where(p => p.IsConstant))
+        @foreach (var property in Model.GetFilteredProperties().Where(p => p.IsConstant))
         {
             if (!string.IsNullOrWhiteSpace(property.Documentation.EscapeXmlComment()))
             {
@@ -175,7 +169,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             @:base.Validate();
             }
 
-            foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant && p.IsNullable() ))
+            foreach (var property in Model.GetFilteredProperties().Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant && p.IsNullable() ))
             {
                 anythingToValidate = true;
             @:if (@property.Name == null)
@@ -184,7 +178,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             @:}
             @:
             }
-            foreach (var property in Model.Properties.Where(p => !p.IsConstant 
+            foreach (var property in Model.GetFilteredProperties().Where(p => !p.IsConstant 
                 && (p.Constraints.Any() || !(p.ModelType is PrimaryType))))
             {
                 anythingToValidate = true;
@@ -204,7 +198,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// </summary>
         internal System.Xml.Linq.XElement XmlSerialize(System.Xml.Linq.XElement result)
         {</text>
-        foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {<text>
+        foreach(var property in Model.GetFilteredProperties().Where(p => !p.IsConstant && !p.WasFlattened())) {<text>
         @if (property.IsNullable()) {<text>
             if( null != @(property.Name) ) 
             {</text>}
@@ -298,14 +292,14 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         internal static @Model.Name XmlDeserialize(System.Xml.Linq.XElement payload) 
         {
             var result = new @(Model.Name)();
-        @if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && p.XmlIsAttribute)) {<text>
+        @if (Model.GetFilteredProperties().Any(p => !p.IsConstant && !p.WasFlattened() && p.XmlIsAttribute)) {<text>
             System.Xml.Linq.XAttribute attribute;</text>
         }
-        @*@if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && !p.XmlIsAttribute)) {<text>
+        @*@if (Model.GetFilteredProperties().Any(p => !p.IsConstant && !p.WasFlattened() && !p.XmlIsAttribute)) {<text>
             System.Xml.Linq.XElement element;</text>
         }*@
 
-        @foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {
+        @foreach(var property in Model.GetFilteredProperties().Where(p => !p.IsConstant && !p.WasFlattened())) {
             @if (property.XmlIsAttribute) {<text>
             if( null != (attribute = payload.Attribute("@property.XmlName")))
             {

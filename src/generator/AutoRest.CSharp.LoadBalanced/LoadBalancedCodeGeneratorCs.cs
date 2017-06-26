@@ -33,6 +33,8 @@ namespace AutoRest.CSharp.LoadBalanced
 
         private async Task GenerateClientSideCode(CodeModelCs codeModel)
         {
+            CompositeTypeCs.DefaultPropertyTypeSelectionStrategy = new WrappedPropertyTypeSelectionStrategy();
+
             var usings = new List<string>(codeModel.Usings);
             var methods = codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()).Cast<MethodCs>().ToList();
 
@@ -114,8 +116,6 @@ namespace AutoRest.CSharp.LoadBalanced
                     continue;
                 }
 
-                model.PropertyTypeSelectionStrategy = new WrappedPropertyTypeSelectionStrategy();
-
                 var modelTemplate = new ModelTemplate{ Model = model };
                 var modelPath = Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}");
                 project.FilePaths.Add(modelPath);
@@ -136,6 +136,7 @@ namespace AutoRest.CSharp.LoadBalanced
             // Exceptions
             foreach (CompositeTypeCs exceptionType in codeModel.ErrorTypes)
             {
+
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
                 var exceptionFilePath =
                     Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");

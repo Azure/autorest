@@ -42,5 +42,6 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
         string GetPropertyTypeName(Property property);
 
         IEnumerable<Property> GetPropertiesWhichRequireInitialization(CompositeTypeCs compositeType);
+        IEnumerable<Property> FilterProperties(Property[] properties);
     }
 }

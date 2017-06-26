@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Model;
@@ -26,7 +27,10 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         }
 
         [JsonIgnore]
-        public IPropertyTypeSelectionStrategy PropertyTypeSelectionStrategy { get; set; }
+        public static IPropertyTypeSelectionStrategy DefaultPropertyTypeSelectionStrategy { get; set; }
+
+        [JsonIgnore]
+        public IPropertyTypeSelectionStrategy PropertyTypeSelectionStrategy => CompositeTypeCs.DefaultPropertyTypeSelectionStrategy ?? new WrappedPropertyTypeSelectionStrategy();
 
         [JsonIgnore]
         public string MethodQualifier => (BaseModelType.ShouldValidateChain()) ? "override" : "virtual";
@@ -51,15 +55,38 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             get
             {
-                if (Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+                if (!Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                 {
-                    var ext = Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
-                    if (ext?["name"] != null)
-                    {
-                        return ext["name"].ToString();
-                    }
+                    return Name + "Exception";
                 }
+
+                var ext = Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                if (ext?["name"] != null)
+                {
+                    return ext["name"].ToString();
+                }
+
                 return Name + "Exception";
+            }
+        }
+
+        public IEnumerable<Property> GetFilteredProperties()
+        {
+            if (PropertyTypeSelectionStrategy == null)
+            {
+                return base.Properties;
+            }
+
+            try
+            {
+                var properties = base.Properties.ToArray();
+                var filteredProperties = PropertyTypeSelectionStrategy.FilterProperties(properties).ToArray();
+                return filteredProperties;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 
@@ -79,11 +106,15 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             get
             {
-                var baseProperties =((BaseModelType as CompositeTypeCs)?.AllPropertyTemplateModels ??
+                var baseProperties = ((BaseModelType as CompositeTypeCs)?.AllPropertyTemplateModels ??
                     Enumerable.Empty<InheritedPropertyInfo>()).ReEnumerable();
 
+                var properties = PropertyTypeSelectionStrategy.FilterProperties(baseProperties.Select(b => b.Property).ToArray());
+
+                baseProperties = baseProperties.Where(b => properties.Contains(b.Property)).ReEnumerable();
+
                 int depth = baseProperties.Any() ? baseProperties.Max(p => p.Depth) : 0;
-                return baseProperties.Concat(Properties.Select(p => new InheritedPropertyInfo(p, depth)));
+                return baseProperties.Concat(GetFilteredProperties().Select(p => new InheritedPropertyInfo(p, depth)));
             }
         }
 

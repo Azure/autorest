@@ -156,5 +156,10 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
         {
             return modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123);
         }
+
+        public virtual IEnumerable<Property> FilterProperties(Property[] properties)
+        {
+            return properties;
+        }
     }
 }
