@@ -231,21 +231,6 @@ namespace AutoRest.Core.Model
         /// </summary>
         public bool Hidden { get; set; }
 
-        /// <summary>
-        /// Determines whether the specified method is structurally equal to this object.
-        /// </summary>
-        /// <param name="other">The object to compare with this object.</param>
-        public bool StructurallyEquals(Method other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-            return ReturnType.StructurallyEquals(other.ReturnType)
-                && Name.Equals(other.Name)
-                && Parameters.SequenceEqual(other.Parameters, new Utilities.EqualityComparer<Parameter>((a, b) => a.StructurallyEquals(b)));
-        }
-
         [JsonIgnore]
         public IEnumerable<string> MyReservedNames => Name.Value.SingleItemAsEnumerable();
 
