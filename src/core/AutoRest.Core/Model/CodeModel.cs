@@ -165,8 +165,6 @@ namespace AutoRest.Core.Model
 
         [JsonIgnore]
         public string Qualifier => "Client";
-        [JsonIgnore]
-        public string QualifierType => "Service Client";
 
         [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames

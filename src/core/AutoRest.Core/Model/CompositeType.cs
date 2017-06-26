@@ -187,9 +187,6 @@ namespace AutoRest.Core.Model
         [JsonIgnore]
         public override string Qualifier => "Model";
 
-        [JsonIgnore]
-        public override string QualifierType => "Model Type";
-
         public class CompositeTypeComparer : IComparer<CompositeType>
         {
             /// <summary>Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.</summary>

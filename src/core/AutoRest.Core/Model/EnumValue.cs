@@ -49,9 +49,8 @@ namespace AutoRest.Core.Model
 
         [JsonIgnore]
         public virtual string Qualifier => "EnumValue";
-        [JsonIgnore]
-        public virtual string QualifierType => "Enum Value";
 
+        [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames
         {
             get
