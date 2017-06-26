@@ -11,6 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Resource\Swagger\Validation\resource-model-fixed-properties-2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Swagger\Validation\resource-model-fixed-properties-1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resource\Swagger\Validation\default-valued-properties-in-patch-request.json" />
     <Content Include="Resource\Swagger\Validation\req-properties-in-patch-request.json" />
     <Content Include="Resource\Swagger\swagger-x-ms-discriminator-value.json">

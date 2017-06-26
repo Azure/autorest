@@ -129,6 +129,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(LocationMustHaveXmsMutability))]
         [CollectionRule(typeof(RequiredReadOnlyProperties))]
         [Rule(typeof(XmsPageableListByRGAndSubscriptions))]
+        [Rule(typeof(ResourceModelMustContainFixedProperties))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>
