@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "tslint:latest"
+  ],
+  "defaultSeverity": "warning",
+  "rules": {
+    "max-line-length": {
+      "options": [
+        240
+      ]
+    },
+    "typedef": {
+      "severity": "off"
+    },
+    "no-var-requires": {
+      "severity": "off"
+    },
+    "arrow-parens": {
+      "severity": "off"
+    },
+    "no-console": {
+      "severity": "off"
+    }
+  }
+}
