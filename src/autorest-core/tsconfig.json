@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": false,
     "module": "commonjs",
@@ -25,6 +26,7 @@
     "newLine": "LF"
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }

@@ -31,7 +31,7 @@ import * as uri from "../lib/ref/uri";
 
   @test async "EnumerateFiles local"() {
     let foundMyself = false;
-    for await (const file of uri.EnumerateFiles(uri.CreateFolderUri(__dirname))) {
+    for (const file of await uri.EnumerateFiles(uri.CreateFolderUri(__dirname))) {
       if (file === uri.CreateFileUri(__filename)) {
         foundMyself = true;
       }
@@ -41,7 +41,7 @@ import * as uri from "../lib/ref/uri";
 
   @test async "EnumerateFiles remote"() {
     let foundSomething = false;
-    for await (const file of uri.EnumerateFiles("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/", ["README.md"])) {
+    for (const file of await uri.EnumerateFiles("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/", ["README.md"])) {
       foundSomething = true;
     }
     assert.strictEqual(foundSomething, true);
