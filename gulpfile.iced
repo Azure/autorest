@@ -2,7 +2,7 @@
 global.basefolder = "#{__dirname}"
 
 # use our tweaked version of gulp with iced coffee.
-require './src/gulp_modules/gulp.iced'
+require './.gulp/gulp.iced'
 semver = require 'semver'
 
 # tasks required for this build 
@@ -91,10 +91,8 @@ Import
             more.push e
             n null
 
-
-task "list","",->
-  generatedFiles()
-    .pipe showFiles()
+  Dependencies:
+    "autorest" : ['autorest-core']
 
 task 'install/binaries', '', (done)->
   mkdir "-p", "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private"
@@ -114,6 +112,9 @@ task 'install', 'build and install the dev version of autorest',(done)->
     'install/binaries',
     -> done()
 
+task 'init-deps', '', (done) ->
+  done()
+
 task 'autorest', 'Runs AutoRest', (done)->
   if test "-f", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll" 
     
@@ -132,61 +133,37 @@ task 'autorest', 'Runs AutoRest', (done)->
     Fail "You must run #{ info 'gulp build'}' first"
 
 task 'init', "" ,(done)->
-  Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 6.9.5" if semver.lt( process.versions.node , "6.9.5" )
+  Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 7.10.0" if semver.lt( process.versions.node , "7.10.0" )
 
-  execute "npm -v", (code,stdout,stderr) -> 
-    isV5 = stdout.startsWith( "5" ) 
+  if (! test "-d","#{basefolder}/src/autorest-core") 
+    echo warning "\n#{ error 'NOTE:' } #{ info 'src/autorest-core'} appears to be missing \n      fixing with #{ info 'git checkout src/autorest-core'}"
+    echo warning "      in the future do a #{ info 'gulp clean'} before using #{ info 'git clean'} .\n"
+    exec "git checkout #{basefolder}/src/autorest-core"
 
-    if (! test "-d","#{basefolder}/src/autorest-core") 
-      echo warning "\n#{ error 'NOTE:' } #{ info 'src/autorest-core'} appears to be missing \n      fixing with #{ info 'git checkout src/autorest-core'}"
-      echo warning "      in the future do a #{ info 'gulp clean'} before using #{ info 'git clean'} .\n"
-      exec "git checkout #{basefolder}/src/autorest-core"
-
-    return done() if initialized
-    global.initialized = true
-    # if the node_modules isn't created, do it.
-    if isV5 
-      doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/package-lock.json") 
-    else 
-      doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
+  return done() if initialized
+  global.initialized = true
+  # if the node_modules isn't created, do it.
+  if fileExists "#{basefolder}/package-lock.json" 
+    doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/package-lock.json") 
+  else 
+    doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
       
-    typescriptProjectFolders()
-      .on 'end', -> 
-        if doit
-          echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
-          exec "npm install",{silent:false},(c,o,e)->
-            # after npm, hookup symlinks/junctions for dependent packages in projects
-            echo warning "\n#{ info 'NOTE:' } it also seems prudent to do a 'gulp clean' at this point.\n"
-            exec "gulp clean", (c,o,e) -> 
-              done null
-        else 
+  typescriptProjectFolders()
+    .on 'end', -> 
+      if doit || force
+        echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
+        exec "npm install", {cwd:basefolder,silent:true},(c,o,e)->
           done null
+      else 
+        done null
 
-      .pipe foreach (each,next) -> 
-        # is any of the TS projects node_modules out of date?
-        if isV5
-          doit = true if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/package-lock.json")
-        else 
-          doit = true if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/node_modules")
-        next null
+    .pipe foreach (each,next) -> 
+      # is any of the TS projects node_modules out of date?
+      # we are forcing npm4 for actual projects because npm5 is frustrating still.
+      if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/node_modules")
+        echo "node_modules in #{each.path} may be out of date."
+        doit = true
+      next null
+
     return null
   return null
-
-task 'find-rogue-node-modules','Shows the unrecognized node_modules folders in the source tree', ->
-  source ["**/node_modules", 
-    "!node_modules"
-    "!node_modules/**"
-    "!src/autorest/node_modules"
-    "!src/autorest/node_modules/**"
-    "!src/autorest-core/node_modules"
-    "!src/autorest-core/node_modules/**"
-    "!src/generator/AutoRest.NodeJS.Azure.Tests/node_modules"
-    "!src/generator/AutoRest.NodeJS.Azure.Tests/node_modules/**"
-    "!src/generator/AutoRest.NodeJS.Tests/node_modules"
-    "!src/generator/AutoRest.NodeJS.Tests/node_modules/**"
-    "!src/dev/TestServer/server/node_modules"
-    "!src/dev/TestServer/server/node_modules/**"
-    "!src/core/AutoRest/**"
-  ]
-    .pipe showFiles()
-  
