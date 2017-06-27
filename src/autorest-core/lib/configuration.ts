@@ -498,7 +498,7 @@ export class Configuration {
       // scan the filesystem items for the configuration.
       const configFiles = new Map<string, string>();
 
-      for await (const name of fileSystem.EnumerateFileUris(EnsureIsFolderUri(configFileOrFolderUri))) {
+      for (const name of await fileSystem.EnumerateFileUris(EnsureIsFolderUri(configFileOrFolderUri))) {
         if (name.endsWith(".md")) {
           const content = await fileSystem.ReadFile(name);
           if (content.indexOf(Constants.MagicString) > -1) {
