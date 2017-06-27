@@ -68,7 +68,7 @@ export class AutoRest extends EventEmitter {
 
   public static async LiterateToJson(content: string): Promise<string> {
     let autorest = new AutoRest({
-      EnumerateFileUris: async function* (folderUri: string): AsyncIterable<string> { },
+      EnumerateFileUris: async function (folderUri: string): Promise<Array<string>> { return []; },
       ReadFile: async (f: string): Promise<string> => f == "mem:///foo.md" ? content : ""
     });
     let result = "";

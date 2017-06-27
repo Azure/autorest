@@ -1,7 +1,10 @@
 {
   "name": "autorest-core",
   "version": "1.0.1",
-  "description": "AutoRest",
+  "description": "AutoRest core module",
+  "engines": {
+    "node": ">=7.10.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Azure/autorest.git"

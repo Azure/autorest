@@ -8,7 +8,7 @@
     "experimentalDecorators": true,
     "declaration": true,
     "stripInternal": true,
-    "target": "es2016",
+    "target": "es2017",
     "types": [
       "node"
     ],
