@@ -7,6 +7,7 @@ import { RunPipeline } from "./pipeline/pipeline";
 import { Push } from "./ref/linq";
 import { IEvent, EventEmitter } from "./events";
 import { IFileSystem } from "./file-system";
+import { Exception } from "./exception";
 import { Configuration, ConfigurationView, MessageEmitter } from "./configuration";
 export { ConfigurationView } from "./configuration";
 import { Message, Channel } from "./message";
@@ -67,7 +68,7 @@ export class AutoRest extends EventEmitter {
 
   public static async LiterateToJson(content: string): Promise<string> {
     let autorest = new AutoRest({
-      EnumerateFileUris: async function* (folderUri: string): AsyncIterable<string> { },
+      EnumerateFileUris: async function (folderUri: string): Promise<Array<string>> { return []; },
       ReadFile: async (f: string): Promise<string> => f == "mem:///foo.md" ? content : ""
     });
     let result = "";
@@ -171,7 +172,7 @@ export class AutoRest extends EventEmitter {
           if (view.GetEntry("allow-no-input")) {
             return true;
           } else {
-            return new Error("No input files provided.\n\nUse --help to get help information.");
+            return new Exception("No input files provided.\n\nUse --help to get help information.");
           }
         }
 

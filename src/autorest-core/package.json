@@ -1,7 +1,10 @@
 {
   "name": "autorest-core",
   "version": "1.0.1",
-  "description": "AutoRest",
+  "description": "AutoRest core module",
+  "engines": {
+    "node": ">=7.10.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Azure/autorest.git"
@@ -15,11 +18,11 @@
     "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
-  "main": "./index.js",
+  "main": "./main.js",
   "bin": {
     "autorest": "./app.js"
   },
-  "typings": "./index.d.ts",
+  "typings": "./main.d.ts",
   "devDependencies": {
     "@types/chalk": "*",
     "@types/marked": "*",
@@ -29,6 +32,7 @@
     "@types/source-map": "^0.5.0",
     "autorest-interactive": "https://github.com/olydis/autorest-interactive",
     "bluebird": "*",
+    "commonmark": "^0.27.0",
     "mocha": "3.2.0",
     "mocha-typescript": "1.0.22",
     "source-map-support": "^0.4.14",
