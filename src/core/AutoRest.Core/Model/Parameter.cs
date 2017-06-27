@@ -68,20 +68,6 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual ParameterLocation Location { get; set; }
 
-        /// <summary>
-        /// Determines whether the specified parameter is structurally equal to this object.
-        /// </summary>
-        /// <param name="other">The object to compare with this object.</param>
-        public bool StructurallyEquals(Parameter other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-            return ModelType.StructurallyEquals(other.ModelType)
-                && Name.Equals(other.Name);
-        }
-
         [JsonIgnore]
         public override IParent Parent
         {
