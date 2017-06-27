@@ -39,13 +39,6 @@ namespace AutoRest.Core.Utilities
             {
                 return serializer.ResolveReference<T>(reference);
             }
-            var id = jObject["$id"]?.Value<string>();
-            if (id != null)
-            {
-                var result = ReadJson(jObject, objectType, existingValue, serializer);
-                // serializer.ReferenceResolver.AddReference(serializer,id,result);
-                return result;
-            }
             return ReadJson(jObject, objectType, existingValue, serializer);
         }
 
@@ -84,11 +77,10 @@ namespace AutoRest.Core.Utilities
         protected override object ReadJson(JObject jObject, Type objectType, object existingValue, JsonSerializer serializer)
         {
             // if there is a $type, we need to ask the serializer to try deserializing to that specific type.
-            var typeDeclaration = jObject.GetTypeDeclaration();
-            
-            if (typeDeclaration != null)
+            var typeName = jObject.GetTypeName();
+            if (typeName != null)
             {
-                return serializer.Deserialize(jObject.CreateReader(), typeDeclaration.Type);
+                return serializer.Deserialize(jObject.CreateReader(), Type.GetType($"AutoRest.Core.Model.{typeName}"));
             }
 
             // if there isn't a specified type *try* to use a LODIS factory for the type.

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Utilities;
+using Newtonsoft.Json;
 
 namespace AutoRest.Core.Model
 {
@@ -26,6 +27,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// The member name to generate for this value.
         /// </summary>
+        [JsonIgnore]
         public string MemberName => CodeNamer.Instance.GetEnumMemberName(Name);
 
         /// <summary>
@@ -45,9 +47,10 @@ namespace AutoRest.Core.Model
             return -1;
         }
 
+        [JsonIgnore]
         public virtual string Qualifier => "EnumValue";
-        public virtual string QualifierType => "Enum Value";
 
+        [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames
         {
             get
@@ -58,6 +61,7 @@ namespace AutoRest.Core.Model
 
         public virtual HashSet<string> LocallyUsedNames => null;
 
+        [JsonIgnore]
         public IParent Parent => null;
 
         public virtual void Disambiguate()

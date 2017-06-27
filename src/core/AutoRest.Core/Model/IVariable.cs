@@ -62,6 +62,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual Dictionary<Constraint, string> Constraints { get; } = new Dictionary<Constraint, string>();
 
+        [JsonIgnore]
         public virtual bool? IsXNullable => Extensions.Get<bool>("x-nullable");
 
         [JsonProperty]
@@ -158,6 +159,7 @@ namespace AutoRest.Core.Model
             set { _name.CopyFrom(value); }
         }
 
+        [JsonIgnore]
         public virtual string ModelTypeName => ModelType.Name;
 
         /// <Summary>
@@ -205,8 +207,6 @@ namespace AutoRest.Core.Model
         public abstract IParent Parent { get; set; }
         [JsonIgnore]
         public abstract string Qualifier { get; }
-        [JsonIgnore]
-        public virtual string QualifierType => Qualifier;
         [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames  { get { if (!string.IsNullOrEmpty(Name)) { yield return Name; } }}
     }
