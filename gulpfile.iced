@@ -119,10 +119,11 @@ task 'autorest', 'Runs AutoRest', (done)->
     
     node = process.argv.shift()
     main = process.argv.shift()
-    main = "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core/app.js"
+    main = "#{basefolder}/src/autorest/dist/app"
     while( arg = process.argv.shift() ) 
       break if arg == 'autorest'
-      
+
+    process.argv.unshift "--version=#{basefolder}/src/autorest-core"
     process.argv.unshift main
     process.argv.unshift node
     cd process.env.INIT_CWD 

@@ -108,12 +108,6 @@ const networkEnabled: Promise<boolean> = new Promise<boolean>((r, j) => {
   });
 });
 
-async function info(): Promise<string> {
-  return `> __Build Information__
-> Autorest :  __${pkgVersion}__
-> NetCore framework :      __${frameworkVersion || "<none>"}__`;
-}
-
 const checkBootstrapper = new LazyPromise(async () => {
   if (await networkEnabled) {
     try {
@@ -176,7 +170,7 @@ const installedCores = new LazyPromise(async () => {
   return result.sort((a, b) => semver.compare(b.version, a.version));
 });
 
-export function IsUri(uri: string): boolean {
+function IsUri(uri: string): boolean {
   return /^([a-z0-9+.-]+):(?:\/\/(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(\/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(\/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$/i.test(uri);
 }
 
@@ -211,10 +205,11 @@ async function main() {
       await asyncIO.mkdir(dotnetFolder);
     }
 
+    // wait for the bootstrapper check to finish.
     await checkBootstrapper;
 
+    // did they ask for what is available?
     if (listAvailable) {
-
       let table = "";
       let max = 10;
       for (const v of await availableVersions) {
@@ -233,6 +228,7 @@ async function main() {
       }
     }
 
+    // 
     if (showInfo) {
       let table = "|Extension Name|Version|\n|-----|-----|";
       for (const ext of await installedCores) {
@@ -323,7 +319,7 @@ async function main() {
     console.trace(`Starting ${corePackage} from ${await selectedVersion.name}`)
     require(join(await selectedVersion.modulePath, "dist/app.js"));
   } catch (exception) {
-    console.log("outch");
+    console.log("Failure:");
     console.error(exception);
   }
 }
