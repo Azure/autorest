@@ -7,7 +7,7 @@ import { Exception, LazyPromise } from "@microsoft.azure/polyfill";
 import * as dns from "dns";
 import { homedir } from "os";
 import { dirname, join } from "path";
-import { Enumerable as IEnumerable, From, FromAsync } from "./lib/ref/linq";
+import { Enumerable as IEnumerable, From } from "./lib/ref/linq";
 
 import * as semver from "semver";
 
@@ -16,8 +16,8 @@ enhanceConsole();
 const rootFolder: string = join(homedir(), ".autorest");
 const dotnetFolder: string = join(homedir(), ".dotnet");
 
-const corePackage = "echo-cli"; // autorest-core"
-const minimumVersion = "^1.0.7"; // the minimum version of the core package required.
+const corePackage = "@microsoft.azure/autorest-core"; // autorest-core"
+const minimumVersion = "^2.0.0"; // the minimum version of the core package required.
 const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder);
 
 const pkgVersion: string = require(`${__dirname}/../package.json`).version;
@@ -116,43 +116,69 @@ async function info(): Promise<string> {
 
 const checkBootstrapper = new LazyPromise(async () => {
   if (await networkEnabled) {
-    const pkg = await (await extensionManager).findPackage("autorest", preview ? "preview" : "latest");
-    if (semver.gt(pkg.version, pkgVersion)) {
-      console.log(`\n ## There is a new version of AutoRest available (${pkg.version}).\n > You can install the newer version with with \`npm install -g autorest@${preview ? "preview" : "latest"}\`\n`);
+    try {
+      const pkg = await (await extensionManager).findPackage("autorest", preview ? "preview" : "latest");
+      if (semver.gt(pkg.version, pkgVersion)) {
+        console.log(`\n ## There is a new version of AutoRest available (${pkg.version}).\n > You can install the newer version with with \`npm install -g autorest@${preview ? "preview" : "latest"}\`\n`);
+      }
+    } catch (e) {
+      // no message then.
     }
   }
 });
 
-const availableVersions = FromAsync(new LazyPromise(async () => {
+const availableVersions = new LazyPromise(async () => {
   if (await networkEnabled) {
-    const vers = (await (await extensionManager).getPackageVersions(corePackage)).sort((b, a) => semver.compare(a, b));
-    if (preview) {
-      return vers;
-    }
-    const result = new Array<string>();
-    for (const ver of vers) {
-      if (!semver.prerelease(ver)) {
-        result.push(ver);
+    try {
+      const vers = (await (await extensionManager).getPackageVersions(corePackage)).sort((b, a) => semver.compare(a, b));
+      if (preview) {
+        return vers;
       }
+      const result = new Array<string>();
+      for (const ver of vers) {
+        if (!semver.prerelease(ver)) {
+          result.push(ver);
+        }
+      }
+      return result;
+    } catch (e) {
+      console.trace(`No available versions of package ${corePackage} found.`);
     }
-    return result;
+
   } else {
     console.trace(`Skipping getting available versions because network is not detected.`);
   }
   return [];
-}));
+});
 
-const installedCores = FromAsync<Extension>(new LazyPromise(async () => {
+const installedCores = new LazyPromise(async () => {
   const result = new Array<Extension>();
-  for (const extension of await (await extensionManager).getInstalledExtensions()) {
-    // find the autorest-core extension
-    const isRelease = !semver.prerelease(extension.version);
-    if (extension.name === corePackage && (preview || isRelease)) {
-      result.push(extension);
+  let table = "";
+  const extensions = await (await extensionManager).getInstalledExtensions();
+  if (extensions.length > 0) {
+    for (const extension of extensions) {
+      // find the autorest-core extension
+      const isRelease = !semver.prerelease(extension.version);
+      table += `\n|${extension.name}|${extension.version}|${isRelease}|`;
+      if (extension.name === corePackage && (preview || isRelease)) {
+        result.push(extension);
+      }
+    }
+    if (table) {
+      console.trace("# Showing All Installed Extensions\n\n|Extension Name|Version|isRelease|\n|-----|-----|----|" + table + "\n\n.");
+    }
+
+    if (result.length === 0) {
+      // no stable, but there are preview. return that set.
+      return extensions.sort((a, b) => semver.compare(b.version, a.version));
     }
   }
   return result.sort((a, b) => semver.compare(b.version, a.version));
-}));
+});
+
+export function IsUri(uri: string): boolean {
+  return /^([a-z0-9+.-]+):(?:\/\/(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(\/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(\/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$/i.test(uri);
+}
 
 async function main() {
 
@@ -216,15 +242,22 @@ async function main() {
       process.exit(0);
     }
 
-    currentVersion = (await installedCores).FirstOrDefault() || null;
+    currentVersion = From(await installedCores).FirstOrDefault() || null;
+
+    if (currentVersion) {
+      console.trace(`The most recent installed version is ${currentVersion.version}`);
+    } else {
+      console.trace(`No ${corePackage} is installed.`);
+    }
 
     if (currentVersion && requestedVersion === "latest-installed") {
       requestedVersion = currentVersion.version;
     }
 
-    let selectedVersion = (await installedCores).FirstOrDefault(each => each.version === requestedVersion);
+
+    let selectedVersion = From(await installedCores).FirstOrDefault(each => each.version === requestedVersion);
     // is the requested version installed?
-    if (!selectedVersion || force) {
+    while (!selectedVersion || force) {
       // nope -- let's try to get the version requested
       console.trace(`Requested version '${requestedVersion}' is not yet installed.`);
 
@@ -235,17 +268,35 @@ async function main() {
 
       // monikers for the latest version in the list
       if (requestedVersion === "latest" || requestedVersion === "latest-installed") {
-        requestedVersion = (await availableVersions).FirstOrDefault();
+        requestedVersion = From(await availableVersions).FirstOrDefault();
       }
 
-      requestedVersion = (await availableVersions).FirstOrDefault(each => semver.satisfies(each, requestedVersion));
+      // maybe they passed a path.
+      if (await asyncIO.exists(requestedVersion) || IsUri(requestedVersion)) {
+        console.trace(`Using package from local path: '${requestedVersion}'`);
+        try {
+          const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
+
+          selectedVersion = From(await (await extensionManager).getInstalledExtensions()).FirstOrDefault(each => each.version === pkg.version);
+          if (selectedVersion) {
+            console.trace(`Is Installed allready`);
+            break;
+          }
+          console.trace(`Package Info:'${pkg.version}' `);
+        } catch (e) {
+          // doesn't appear installed or anything, we'll let it get installed.
+        }
+
+      } else {
+        requestedVersion = From(await availableVersions).FirstOrDefault(each => semver.satisfies(each, requestedVersion));
+      }
 
       if (!requestedVersion) {
         throw new Exception(`The requested version '${requestedVersion}' is not available.`);
       }
 
       // this will throw if there is an issue with installing the extension.
-      console.trace(`Installing package ${corePackage}-${requestedVersion}`);
+      console.log(`**Installing package** ${corePackage}-${requestedVersion}\n[This will take a few moments...]`);
 
       const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
       const installer = (await extensionManager).installPackage(pkg, force);
@@ -255,6 +306,7 @@ async function main() {
 
       // select the newly installed version.
       selectedVersion = extension;
+      break;
     }
 
     const RemoveArgs = From<string>(["--version", "--list-installed", "--list-available", "--reset", "--latest", "--latest-release", "--runtime-id"]);
@@ -268,8 +320,8 @@ async function main() {
       process.argv.push("--allow-no-input");
     }
 
-    console.trace(`Starting ${corePackage} from ${await selectedVersion.packageJsonPath}`)
-    require(dirname(await selectedVersion.packageJsonPath));
+    console.trace(`Starting ${corePackage} from ${await selectedVersion.name}`)
+    require(join(await selectedVersion.modulePath, "dist/app.js"));
   } catch (exception) {
     console.log("outch");
     console.error(exception);
