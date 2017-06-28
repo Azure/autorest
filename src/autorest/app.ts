@@ -7,7 +7,7 @@ import { Exception, LazyPromise } from "@microsoft.azure/polyfill";
 import * as dns from "dns";
 import { homedir } from "os";
 import { dirname, join } from "path";
-import { Enumerable as IEnumerable, From, FromAsync } from "./lib/ref/linq";
+import { Enumerable as IEnumerable, From } from "./lib/ref/linq";
 
 import * as semver from "semver";
 
