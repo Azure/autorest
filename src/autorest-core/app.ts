@@ -7,9 +7,6 @@
 // start of autorest-ng
 // the console app starts for real here.
 
-// this file should get 'required' by the boostrapper
-require("./lib/polyfill.min.js");
-
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";

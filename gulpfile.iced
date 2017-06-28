@@ -108,7 +108,6 @@ task 'install/bootstrapper', 'Build and install the bootstrapper into the global
 
 task 'install', 'build and install the dev version of autorest',(done)->
   run [ 'build/typescript', 'build/dotnet/binaries' ],
-    'install/node-files',
     'install/binaries',
     -> done()
 
@@ -116,11 +115,11 @@ task 'init-deps', '', (done) ->
   done()
 
 task 'autorest', 'Runs AutoRest', (done)->
-  if test "-f", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll" 
+  if test "-f", "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/AutoRest.dll" 
     
     node = process.argv.shift()
     main = process.argv.shift()
-    main = "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js"
+    main = "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core/app.js"
     while( arg = process.argv.shift() ) 
       break if arg == 'autorest'
       
