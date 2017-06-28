@@ -19,9 +19,6 @@
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
   "main": "./dist/main.js",
-  "bin": {
-    "autorest": "./dist/app.js"
-  },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
     "@types/chalk": "*",
