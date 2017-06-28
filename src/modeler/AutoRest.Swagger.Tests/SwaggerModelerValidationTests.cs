@@ -626,20 +626,6 @@ namespace AutoRest.Swagger.Tests
             var messages = GetValidationMessagesForRule<LocationMustHaveXmsMutability>("location-with-incorrect-xms-mutability.json");
             Assert.Equal(messages.Count(), 1);
         }
-
-        [Fact]
-        public void ResourceModelMustContainFixedPropertiesWithoutRequiredProperties()
-        {
-            var messages = GetValidationMessagesForRule<ResourceModelMustContainFixedProperties>("resource-model-fixed-properties-1.json");
-            Assert.Equal(messages.Count(), 1);
-        }
-
-        [Fact]
-        public void ResourceModelMustContainFixedPropertiesWithAdditionalProperties()
-        {
-            var messages = GetValidationMessagesForRule<ResourceModelMustContainFixedProperties>("resource-model-fixed-properties-2.json");
-            Assert.Equal(messages.Count(), 1);
-        }
     }
 
     #region Positive tests

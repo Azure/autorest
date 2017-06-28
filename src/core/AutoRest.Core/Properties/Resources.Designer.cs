@@ -573,15 +573,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Resource model must contain id, name, type, location and tags properties with id, name and type as read-only. It should not have any other properties..
-        /// </summary>
-        public static string ResourceModelMustContainFixedProperties {
-            get {
-                return ResourceManager.GetString("ResourceModelMustContainFixedProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Every swagger/configuration must have a security definitions section and it must adhere to the structure described in: https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md.
         /// </summary>
         public static string SecurityDefinitionsStructureValidation {

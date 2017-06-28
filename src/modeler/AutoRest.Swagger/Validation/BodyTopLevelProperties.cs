@@ -3,11 +3,11 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Model.Utilities;
+using AutoRest.Swagger.Validation.Core;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -38,25 +38,7 @@ namespace AutoRest.Swagger.Validation
         /// composed state, to reduce duplicate messages, run validation rule in composed state
         /// </summary>
         public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
-        
-        /// <summary>
-        /// This rule passes if the model definition contains top level properties only from the allowed set: name, type,
-        /// id, location, properties, tags, plan, sku, etag, managedBy, identity
-        /// </summary>
-        /// <param name="definitions">The model definitions</param>
-        /// <param name="context">The context object</param>
-        /// <returns>validation messages</returns>
-        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
-        {
-            var resModels = context.ResourceModels;
-            var violatingModels = resModels.Where(resModel => definitions[resModel].Properties?.Keys.Except(AllowedTopLevelProperties).Any() == true);
-            foreach (var violatingModel in violatingModels)
-            {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(violatingModel).AppendProperty("properties")), this, 
-                    violatingModel, string.Join(",", definitions[violatingModel].Properties.Keys.Except(AllowedTopLevelProperties)));
-            }
-        }
-        
+
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>
@@ -70,11 +52,37 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
-
         /// <summary>
         /// What kind of change implementing this rule can cause.
         /// </summary>
         public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceImpactingChanges;
 
+        /// <summary>
+        /// This rule passes if the model definition contains top level properties only from the allowed set: name, type,
+        /// id, location, properties, tags, plan, sku, etag, managedBy, identity
+        /// </summary>
+        /// <param name="definitions">The model definitions</param>
+        /// <param name="context">The context object</param>
+        /// <returns>validation messages</returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
+        {
+            foreach(string resourceModel in context.ResourceModels)
+            {
+                IEnumerable<KeyValuePair<string, Schema>> topLevelProperties = ValidationUtilities.EnumerateProperties(resourceModel, definitions);
+                IEnumerable<KeyValuePair<string, Schema>> violatingProperties = topLevelProperties.Where(topLevelProperty => !AllowedTopLevelProperties.Contains(topLevelProperty.Key));
+
+                if (violatingProperties != null && violatingProperties.Count() != 0)
+                {
+                    List<string> list = new List<string>();
+                    foreach (KeyValuePair<string, Schema> property in violatingProperties)
+                    {
+                        list.Add(property.Key);
+                    }
+
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(resourceModel).AppendProperty("properties")), this,
+                    resourceModel, string.Join(",", list));
+                }
+            }
+        }
     }
 }
