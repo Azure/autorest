@@ -37,19 +37,6 @@ namespace AutoRest.Core.Model
         /// </summary>
         public IModelType Headers { get; set; }
 
-        /// <summary>
-        /// Determines whether the specified response is structurally equal to this object.
-        /// </summary>
-        /// <param name="other">The object to compare with this object.</param>
-        public bool StructurallyEquals(Response other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-            return (Body == null ? other.Body == null : Body.StructurallyEquals(other.Body))
-                && (Headers == null ? other.Headers == null : Headers.StructurallyEquals(other.Headers));
-        }
         public Dictionary<string, object> Extensions { get; set; } = new Dictionary<string, object>();
 
         public bool IsNullable => Extensions?.Get<bool>("x-nullable") ?? true;
