@@ -1,6 +1,3 @@
-// polyfills for language support 
-require("./lib/polyfill.min.js")
-
 import { DocumentPatterns } from './lib/core/lib/document-type';
 
 // exports the public AutoRest definitions

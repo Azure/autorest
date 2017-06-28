@@ -1,5 +1,3 @@
-// polyfills for language support
-require("../lib/polyfill.min.js");
 
 import { EnhancedPosition } from '../lib/ref/source-map';
 import { PumpMessagesToConsole } from "./test-utility";
