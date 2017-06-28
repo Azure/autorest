@@ -1,6 +1,6 @@
 {
-  "name": "autorest-core",
-  "version": "1.0.1",
+  "name": "@microsoft.azure/autorest-core",
+  "version": "2.0.0-preview",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=7.10.0"
@@ -18,11 +18,11 @@
     "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
-  "main": "./main.js",
+  "main": "./dist/main.js",
   "bin": {
-    "autorest": "./app.js"
+    "autorest": "./dist/app.js"
   },
-  "typings": "./main.d.ts",
+  "typings": "./dist/main.d.ts",
   "devDependencies": {
     "@types/chalk": "*",
     "@types/marked": "*",

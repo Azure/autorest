@@ -14,8 +14,6 @@ import * as promisify from "pify";
 import { Readable } from "stream";
 import { parse } from "url";
 import { sep } from "path";
-// polyfills for language support
-require("../polyfill.min.js");
 
 const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");
