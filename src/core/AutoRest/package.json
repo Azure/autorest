@@ -1,0 +1,29 @@
+{
+  "name": "@microsoft.azure/autorest-classic-generators",
+  "version": "2.0.0-preview",
+  "description": "The collection of classic generators for the AutoRest code generator.",
+  "engines": {
+    "dotnet": "~1.0.5"
+  },
+  "scripts": {
+    "start": "dotnet ./bin/netcoreapp1.0/AutoRest.dll --server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/autorest"
+  },
+  "readme": "https://github.com/Azure/AutoRest/readme.md",
+  "keywords": [
+    "autorest",
+    "classic-generator",
+    "swagger"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest/blob/master/README.md",
+  "devDependencies": {},
+  "dependencies": {}
+}

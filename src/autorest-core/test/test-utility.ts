@@ -2,9 +2,6 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-// polyfills for language support 
-require("../lib/polyfill.min.js");
-
 import { AutoRest } from '../lib/autorest-core';
 import { Message, Channel } from '../lib/message';
 

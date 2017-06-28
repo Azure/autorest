@@ -473,7 +473,7 @@ export class Configuration {
     if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
       const blocks = await this.ParseCodeBlocks(
-        await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../resources/default-configuration.md")),
+        await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
         new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments),
         "default-config");
       configSegments.push(...blocks);

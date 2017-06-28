@@ -6,6 +6,7 @@
     "sourceMap": true,
     "newLine": "LF",
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "declaration": true,
     "stripInternal": true,
     "target": "es2017",
