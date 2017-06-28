@@ -16,7 +16,7 @@ enhanceConsole();
 const rootFolder: string = join(homedir(), ".autorest");
 const dotnetFolder: string = join(homedir(), ".dotnet");
 
-const corePackage = "autorest-core"; // autorest-core"
+const corePackage = "@microsoft.azure/autorest-core"; // autorest-core"
 const minimumVersion = "^2.0.0"; // the minimum version of the core package required.
 const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder);
 
@@ -116,9 +116,13 @@ async function info(): Promise<string> {
 
 const checkBootstrapper = new LazyPromise(async () => {
   if (await networkEnabled) {
-    const pkg = await (await extensionManager).findPackage("autorest", preview ? "preview" : "latest");
-    if (semver.gt(pkg.version, pkgVersion)) {
-      console.log(`\n ## There is a new version of AutoRest available (${pkg.version}).\n > You can install the newer version with with \`npm install -g autorest@${preview ? "preview" : "latest"}\`\n`);
+    try {
+      const pkg = await (await extensionManager).findPackage("autorest", preview ? "preview" : "latest");
+      if (semver.gt(pkg.version, pkgVersion)) {
+        console.log(`\n ## There is a new version of AutoRest available (${pkg.version}).\n > You can install the newer version with with \`npm install -g autorest@${preview ? "preview" : "latest"}\`\n`);
+      }
+    } catch (e) {
+      // no message then.
     }
   }
 });
@@ -149,11 +153,24 @@ const availableVersions = new LazyPromise(async () => {
 
 const installedCores = new LazyPromise(async () => {
   const result = new Array<Extension>();
-  for (const extension of await (await extensionManager).getInstalledExtensions()) {
-    // find the autorest-core extension
-    const isRelease = !semver.prerelease(extension.version);
-    if (extension.name === corePackage && (preview || isRelease)) {
-      result.push(extension);
+  let table = "";
+  const extensions = await (await extensionManager).getInstalledExtensions();
+  if (extensions.length > 0) {
+    for (const extension of extensions) {
+      // find the autorest-core extension
+      const isRelease = !semver.prerelease(extension.version);
+      table += `\n|${extension.name}|${extension.version}|${isRelease}|`;
+      if (extension.name === corePackage && (preview || isRelease)) {
+        result.push(extension);
+      }
+    }
+    if (table) {
+      console.trace("# Showing All Installed Extensions\n\n|Extension Name|Version|isRelease|\n|-----|-----|----|" + table + "\n\n.");
+    }
+
+    if (result.length === 0) {
+      // no stable, but there are preview. return that set.
+      return extensions.sort((a, b) => semver.compare(b.version, a.version));
     }
   }
   return result.sort((a, b) => semver.compare(b.version, a.version));
@@ -227,9 +244,16 @@ async function main() {
 
     currentVersion = From(await installedCores).FirstOrDefault() || null;
 
+    if (currentVersion) {
+      console.trace(`The most recent installed version is ${currentVersion.version}`);
+    } else {
+      console.trace(`No ${corePackage} is installed.`);
+    }
+
     if (currentVersion && requestedVersion === "latest-installed") {
       requestedVersion = currentVersion.version;
     }
+
 
     let selectedVersion = From(await installedCores).FirstOrDefault(each => each.version === requestedVersion);
     // is the requested version installed?
@@ -248,7 +272,7 @@ async function main() {
       }
 
       // maybe they passed a path.
-      if (await asyncIO.isFile(requestedVersion) || IsUri(requestedVersion)) {
+      if (await asyncIO.exists(requestedVersion) || IsUri(requestedVersion)) {
         console.trace(`Using package from local path: '${requestedVersion}'`);
         try {
           const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
