@@ -170,7 +170,11 @@ const installedCores = new LazyPromise(async () => {
   return result.sort((a, b) => semver.compare(b.version, a.version));
 });
 
+<<<<<<< HEAD
 function IsUri(uri: string): boolean {
+=======
+export function IsUri(uri: string): boolean {
+>>>>>>> 906dfe377008cc56cabfb2e693032a82299eebc2
   return /^([a-z0-9+.-]+):(?:\/\/(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(\/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(\/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$/i.test(uri);
 }
 
