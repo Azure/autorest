@@ -73,11 +73,7 @@ namespace AutoRest.Swagger.Validation
 
                 if (violatingProperties != null && violatingProperties.Any())
                 {
-                    List<string> list = new List<string>();
-                    foreach (KeyValuePair<string, Schema> property in violatingProperties)
-                    {
-                        list.Add(property.Key);
-                    }
+                    IEnumerable<string> list = violatingProperties.Select(prop => prop.Key);
 
                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(resourceModel).AppendProperty("properties")), this,
                     resourceModel, string.Join(",", list));
