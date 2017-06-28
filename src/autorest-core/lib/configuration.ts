@@ -30,6 +30,7 @@ export interface AutoRestConfigurationImpl {
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
+  "use-extension"?: { [extensionName: string]: string };
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   "debug"?: boolean;
@@ -425,6 +426,11 @@ export class ConfigurationView {
 
 
 export class Configuration {
+  public constructor(
+    private fileSystem?: IFileSystem,
+    private configFileOrFolderUri?: string
+  ) { }
+
   private async ParseCodeBlocks(configFile: DataHandleRead, contextConfig: ConfigurationView, scope: string): Promise<AutoRestConfigurationImpl[]> {
     // load config
     const hConfig = await ParseCodeBlocks(
@@ -454,6 +460,8 @@ export class Configuration {
       : null;
     const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, "./") : (this.configFileOrFolderUri || "file:///");
 
+    const createView = () => new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments);
+
     const configSegments: any[] = [];
     // 1. overrides (CLI, ...)
     configSegments.push(...configs);
@@ -462,7 +470,7 @@ export class Configuration {
       const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(configFileUri),
-        new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments),
+        createView(),
         "config");
       configSegments.push(...blocks);
     }
@@ -471,18 +479,26 @@ export class Configuration {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
-        new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments),
+        createView(),
         "default-config");
       configSegments.push(...blocks);
     }
+    // 4. resolve externals
+    const loadedExtensions = new Set<string>();
+    while (true) {
+      const useExtensions = createView()["use-extension"] || {};
+      // find additional extensions
+      const extensionNames = Object.keys(useExtensions).filter(name => !loadedExtensions.has(name));
+      if (extensionNames.length === 0) {
+        break;
+      }
+      // acquire additional extensions
+      for (const extensionName of extensionNames) {
 
-    return new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments).Indexer;
-  }
+      }
+    }
 
-  public constructor(
-    private fileSystem?: IFileSystem,
-    private configFileOrFolderUri?: string
-  ) {
+    return createView().Indexer;
   }
 
   public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null): Promise<string | null> {
