@@ -71,7 +71,7 @@ namespace AutoRest.Swagger.Validation
                 IEnumerable<KeyValuePair<string, Schema>> topLevelProperties = ValidationUtilities.EnumerateProperties(resourceModel, definitions);
                 IEnumerable<KeyValuePair<string, Schema>> violatingProperties = topLevelProperties.Where(topLevelProperty => !AllowedTopLevelProperties.Contains(topLevelProperty.Key));
 
-                if (violatingProperties != null && violatingProperties.Count() != 0)
+                if (violatingProperties != null && violatingProperties.Any())
                 {
                     List<string> list = new List<string>();
                     foreach (KeyValuePair<string, Schema> property in violatingProperties)
