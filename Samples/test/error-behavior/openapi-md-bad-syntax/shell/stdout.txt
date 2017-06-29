@@ -1,4 +1,4 @@
-Process() Cancelled due to exception : Error occurred. Exiting.
-Error occurred. Exiting.
-{ Error: Error occurred. Exiting.
    at ...
+{ Error: Error occurred. Exiting.
+Error occurred. Exiting.
+Process() Cancelled due to exception : Error occurred. Exiting.

@@ -13,19 +13,17 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the SimpleProduct class.
- * @constructor
  * The product documentation.
  *
- * @member {string} maxProductDisplayName Display name of product.
- *
- * @member {string} [genericValue] Generic URL value.
- *
- * @member {string} [odatavalue] URL value.
- *
+ * @extends models['BaseProduct']
  */
 class SimpleProduct extends models['BaseProduct'] {
+  /**
+   * Create a SimpleProduct.
+   * @member {string} maxProductDisplayName Display name of product.
+   * @member {string} [genericValue] Generic URL value.
+   * @member {string} [odatavalue] URL value.
+   */
   constructor() {
     super();
   }

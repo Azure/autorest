@@ -13,19 +13,16 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Fish class.
- * @constructor
- * @member {string} [species]
- *
- * @member {number} length
- *
- * @member {array} [siblings]
- *
- * @member {string} fishtype Polymorphic Discriminator
- *
+ * Class representing a Fish.
  */
 class Fish {
+  /**
+   * Create a Fish.
+   * @member {string} [species]
+   * @member {number} length
+   * @member {array} [siblings]
+   * @member {string} fishtype Polymorphic Discriminator
+   */
   constructor() {
   }
 

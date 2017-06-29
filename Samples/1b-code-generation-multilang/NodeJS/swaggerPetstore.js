@@ -379,24 +379,17 @@ function _showPetById(petId, options, callback) {
   });
 }
 
-/**
- * @class
- * Initializes a new instance of the SwaggerPetstore class.
- * @constructor
- *
- * @param {string} [baseUri] - The base URI of the service.
- *
- * @param {object} [options] - The parameter options
- *
- * @param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @param {object} [options.requestOptions] - Options for the underlying request object
- * {@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
- *
- */
+/** Class representing a SwaggerPetstore. */
 class SwaggerPetstore extends ServiceClient {
+  /**
+   * Create a SwaggerPetstore.
+   * @param {string} [baseUri] - The base URI of the service.
+   * @param {object} [options] - The parameter options
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   */
   constructor(baseUri, options) {
 
     if (!options) options = {};

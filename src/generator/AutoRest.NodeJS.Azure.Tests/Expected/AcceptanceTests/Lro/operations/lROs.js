@@ -7781,17 +7781,12 @@ function _beginPostAsyncRetrycanceled(options, callback) {
   });
 }
 
-/**
- * @class
- * LROs
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestLongRunningOperationTestService.
- * Initializes a new instance of the LROs class.
- * @constructor
- *
- * @param {AutoRestLongRunningOperationTestService} client Reference to the service client.
- */
+/** Class representing a LROs. */
 class LROs {
+  /**
+   * Create a LROs.
+   * @param {AutoRestLongRunningOperationTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._put200Succeeded = _put200Succeeded;

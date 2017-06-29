@@ -16,9 +16,7 @@ import * as moment from "moment";
  * Initializes a new instance of the Widget class.
  * @constructor
  * @member {number} [integer]
- *
  * @member {string} [string]
- *
  */
 export interface Widget {
   integer?: number;
@@ -30,9 +28,7 @@ export interface Widget {
  * Initializes a new instance of the ErrorModel class.
  * @constructor
  * @member {number} [status]
- *
  * @member {string} [message]
- *
  */
 export interface ErrorModel {
   status?: number;

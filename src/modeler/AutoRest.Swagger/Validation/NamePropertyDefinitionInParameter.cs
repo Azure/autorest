@@ -35,6 +35,17 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.Default;
+
+        /// <summary>
+        /// The rule could be violated by a parameter referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
+        /// <summary>
         /// Validates if the swagger parameter has the "name" property set
         /// </summary>
         /// <param name="swaggerParameter"></param>

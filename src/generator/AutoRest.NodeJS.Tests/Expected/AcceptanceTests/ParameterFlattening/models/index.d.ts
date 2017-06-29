@@ -16,7 +16,6 @@ import * as moment from "moment";
  * Initializes a new instance of the AvailabilitySetUpdateParameters class.
  * @constructor
  * @member {object} tags A set of tags. A description about the set of tags.
- *
  */
 export interface AvailabilitySetUpdateParameters {
   tags: { [propertyName: string]: string };

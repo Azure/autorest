@@ -462,17 +462,12 @@ function _getSwaggerGlobalValid(options, callback) {
   });
 }
 
-/**
- * @class
- * ApiVersionDefault
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the ApiVersionDefault class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
+/** Class representing a ApiVersionDefault. */
 class ApiVersionDefault {
+  /**
+   * Create a ApiVersionDefault.
+   * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getMethodGlobalValid = _getMethodGlobalValid;

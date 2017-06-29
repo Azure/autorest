@@ -7,13 +7,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the StorageAccountRegenerateKeyParameters class.
- * @constructor
- * @member {string} keyName
- *
+ * Class representing a StorageAccountRegenerateKeyParameters.
  */
 class StorageAccountRegenerateKeyParameters {
+  /**
+   * Create a StorageAccountRegenerateKeyParameters.
+   * @member {string} keyName
+   */
   constructor() {
   }
 

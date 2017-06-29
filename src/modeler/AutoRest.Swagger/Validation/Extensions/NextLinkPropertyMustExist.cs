@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Logging;
+using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Validation.Core;
 using Newtonsoft.Json.Linq;
 
@@ -20,6 +21,17 @@ namespace AutoRest.Swagger.Validation
         /// Violation category of the Rule.
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// The rule could be violated by a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
 
         /// <summary>
         /// An x-ms-pageable extension passes this rule if the value for nextLinkName refers to a string property

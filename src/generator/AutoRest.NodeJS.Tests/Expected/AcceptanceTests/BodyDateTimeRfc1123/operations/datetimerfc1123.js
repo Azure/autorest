@@ -1046,17 +1046,12 @@ function _getUtcMinDateTime(options, callback) {
   });
 }
 
-/**
- * @class
- * Datetimerfc1123
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestRFC1123DateTimeTestService.
- * Initializes a new instance of the Datetimerfc1123 class.
- * @constructor
- *
- * @param {AutoRestRFC1123DateTimeTestService} client Reference to the service client.
- */
+/** Class representing a Datetimerfc1123. */
 class Datetimerfc1123 {
+  /**
+   * Create a Datetimerfc1123.
+   * @param {AutoRestRFC1123DateTimeTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getNull = _getNull;

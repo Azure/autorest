@@ -110,10 +110,10 @@ modelTypes:
           values:
             - name: AccountNameInvalid
               memberName: AccountNameInvalid
-              '#serializedName': AccountNameInvalid
+              serializedName: AccountNameInvalid
             - name: AlreadyExists
               memberName: AlreadyExists
-              '#serializedName': AlreadyExists
+              serializedName: AlreadyExists
           modelAsString: false
           declarationName: Reason
           extendedDocumentation: 'Possible values include: ''AccountNameInvalid'', ''AlreadyExists'''
@@ -182,19 +182,19 @@ modelTypes:
           values:
             - name: Standard_LRS
               memberName: StandardLRS
-              '#serializedName': Standard_LRS
+              serializedName: Standard_LRS
             - name: Standard_ZRS
               memberName: StandardZRS
-              '#serializedName': Standard_ZRS
+              serializedName: Standard_ZRS
             - name: Standard_GRS
               memberName: StandardGRS
-              '#serializedName': Standard_GRS
+              serializedName: Standard_GRS
             - name: Standard_RAGRS
               memberName: StandardRAGRS
-              '#serializedName': Standard_RAGRS
+              serializedName: Standard_RAGRS
             - name: Premium_LRS
               memberName: PremiumLRS
-              '#serializedName': Premium_LRS
+              serializedName: Premium_LRS
           modelAsString: false
           declarationName: AccountType
           extendedDocumentation: >-
@@ -493,13 +493,13 @@ modelTypes:
           values:
             - name: Creating
               memberName: Creating
-              '#serializedName': Creating
+              serializedName: Creating
             - name: ResolvingDNS
               memberName: ResolvingDNS
-              '#serializedName': ResolvingDNS
+              serializedName: ResolvingDNS
             - name: Succeeded
               memberName: Succeeded
-              '#serializedName': Succeeded
+              serializedName: Succeeded
           modelAsString: false
           declarationName: ProvisioningState
           extendedDocumentation: 'Possible values include: ''Creating'', ''ResolvingDNS'', ''Succeeded'''
@@ -599,10 +599,10 @@ modelTypes:
           values:
             - name: Available
               memberName: Available
-              '#serializedName': Available
+              serializedName: Available
             - name: Unavailable
               memberName: Unavailable
-              '#serializedName': Unavailable
+              serializedName: Unavailable
           modelAsString: false
           declarationName: AccountStatus
           extendedDocumentation: 'Possible values include: ''Available'', ''Unavailable'''
@@ -1249,22 +1249,22 @@ modelTypes:
           values:
             - name: Count
               memberName: Count
-              '#serializedName': Count
+              serializedName: Count
             - name: Bytes
               memberName: Bytes
-              '#serializedName': Bytes
+              serializedName: Bytes
             - name: Seconds
               memberName: Seconds
-              '#serializedName': Seconds
+              serializedName: Seconds
             - name: Percent
               memberName: Percent
-              '#serializedName': Percent
+              serializedName: Percent
             - name: CountsPerSecond
               memberName: CountsPerSecond
-              '#serializedName': CountsPerSecond
+              serializedName: CountsPerSecond
             - name: BytesPerSecond
               memberName: BytesPerSecond
-              '#serializedName': BytesPerSecond
+              serializedName: BytesPerSecond
           modelAsString: false
           declarationName: UsageUnit
           extendedDocumentation: >-
@@ -1514,8 +1514,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -1645,8 +1643,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: put
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -1772,8 +1768,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: delete
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             isNullable: true
@@ -1887,8 +1881,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2021,8 +2013,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: patch
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2148,8 +2138,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2221,8 +2209,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2319,8 +2305,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2456,8 +2440,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: post
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -2558,8 +2540,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "post",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -2708,8 +2688,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "put",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -2849,8 +2827,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "delete",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "isNullable": true
@@ -2981,8 +2957,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3131,8 +3105,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "patch",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3266,8 +3238,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "post",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3353,8 +3323,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3467,8 +3435,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3622,8 +3588,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "post",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {
@@ -3710,8 +3674,6 @@ operations:
             '#serializedName': subscriptionId
         isAbsoluteUrl: false
         httpMethod: get
-        requestSerializationFormat: none
-        responseSerializationFormat: none
         responses:
           OK:
             body:
@@ -3801,8 +3763,6 @@ operations:
             ],
             "isAbsoluteUrl": false,
             "httpMethod": "get",
-            "requestSerializationFormat": "none",
-            "responseSerializationFormat": "none",
             "responses": {
               "OK": {
                 "body": {

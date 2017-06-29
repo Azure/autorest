@@ -13,15 +13,15 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Cat class.
- * @constructor
- * @member {string} [color]
- *
- * @member {array} [hates]
- *
+ * Class representing a Cat.
+ * @extends models['Pet']
  */
 class Cat extends models['Pet'] {
+  /**
+   * Create a Cat.
+   * @member {string} [color]
+   * @member {array} [hates]
+   */
   constructor() {
     super();
   }

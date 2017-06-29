@@ -27,6 +27,17 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// The rule runs on each operation in isolation irrespective of the state and can be run in individual state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
+
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string,Dictionary<string, Operation>> entity, RuleContext context)
         {
             // get all operation objects that are either of get or post type

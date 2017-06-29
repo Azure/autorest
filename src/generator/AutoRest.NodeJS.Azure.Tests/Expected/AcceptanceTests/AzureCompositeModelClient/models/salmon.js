@@ -13,15 +13,15 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Salmon class.
- * @constructor
- * @member {string} [location]
- *
- * @member {boolean} [iswild]
- *
+ * Class representing a Salmon.
+ * @extends models['Fish']
  */
 class Salmon extends models['Fish'] {
+  /**
+   * Create a Salmon.
+   * @member {string} [location]
+   * @member {boolean} [iswild]
+   */
   constructor() {
     super();
   }

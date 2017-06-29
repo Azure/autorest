@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the IntWrapper class.
- * @constructor
- * @member {number} [field1]
- *
- * @member {number} [field2]
- *
+ * Class representing a IntWrapper.
  */
 class IntWrapper {
+  /**
+   * Create a IntWrapper.
+   * @member {number} [field1]
+   * @member {number} [field2]
+   */
   constructor() {
   }
 

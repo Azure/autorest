@@ -7,13 +7,12 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the UsageListResult class.
- * @constructor
  * The List Usages operation response.
- *
  */
 class UsageListResult extends Array {
+  /**
+   * Create a UsageListResult.
+   */
   constructor() {
     super();
   }

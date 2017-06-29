@@ -13,17 +13,17 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Product class.
- * @constructor
- * @member {string} [provisioningState]
- *
- * @member {string} [provisioningStateValues] Possible values include:
- * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
- * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
+ * Class representing a Product.
+ * @extends models['Resource']
  */
 class Product extends models['Resource'] {
+  /**
+   * Create a Product.
+   * @member {string} [provisioningState]
+   * @member {string} [provisioningStateValues] Possible values include:
+   * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
+   * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+   */
   constructor() {
     super();
   }

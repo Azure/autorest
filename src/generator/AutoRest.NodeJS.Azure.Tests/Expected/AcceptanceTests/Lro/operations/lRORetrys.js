@@ -1465,17 +1465,12 @@ function _beginPostAsyncRelativeRetrySucceeded(options, callback) {
   });
 }
 
-/**
- * @class
- * LRORetrys
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestLongRunningOperationTestService.
- * Initializes a new instance of the LRORetrys class.
- * @constructor
- *
- * @param {AutoRestLongRunningOperationTestService} client Reference to the service client.
- */
+/** Class representing a LRORetrys. */
 class LRORetrys {
+  /**
+   * Create a LRORetrys.
+   * @param {AutoRestLongRunningOperationTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._put201CreatingSucceeded200 = _put201CreatingSucceeded200;

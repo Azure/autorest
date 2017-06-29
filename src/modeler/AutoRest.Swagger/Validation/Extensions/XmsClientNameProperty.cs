@@ -41,6 +41,17 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// The rule could be violated by a property of a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
+        /// <summary>
         /// Validates if the name of property and x-ms-client-name(if exists) does not match.
         /// </summary>
         /// <param name="properties">Properties.</param>

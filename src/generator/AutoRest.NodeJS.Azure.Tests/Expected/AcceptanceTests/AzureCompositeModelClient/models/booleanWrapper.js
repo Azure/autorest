@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the BooleanWrapper class.
- * @constructor
- * @member {boolean} [fieldTrue]
- *
- * @member {boolean} [fieldFalse]
- *
+ * Class representing a BooleanWrapper.
  */
 class BooleanWrapper {
+  /**
+   * Create a BooleanWrapper.
+   * @member {boolean} [fieldTrue]
+   * @member {boolean} [fieldFalse]
+   */
   constructor() {
   }
 

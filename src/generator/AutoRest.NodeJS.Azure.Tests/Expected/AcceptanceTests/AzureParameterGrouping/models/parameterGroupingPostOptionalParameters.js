@@ -11,17 +11,15 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the ParameterGroupingPostOptionalParameters class.
- * @constructor
  * Additional parameters for the ParameterGrouping_postOptional operation.
- *
- * @member {string} [customHeader]
- *
- * @member {number} [query] Query parameter with default. Default value: 30 .
  *
  */
 class ParameterGroupingPostOptionalParameters {
+  /**
+   * Create a ParameterGroupingPostOptionalParameters.
+   * @member {string} [customHeader]
+   * @member {number} [query] Query parameter with default. Default value: 30 .
+   */
   constructor() {
   }
 

@@ -13,17 +13,15 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Product class.
- * @constructor
- * @member {object} [properties]
- *
- * @member {number} [properties.id]
- *
- * @member {string} [properties.name]
- *
+ * Class representing a Product.
  */
 class Product {
+  /**
+   * Create a Product.
+   * @member {object} [properties]
+   * @member {number} [properties.id]
+   * @member {string} [properties.name]
+   */
   constructor() {
   }
 

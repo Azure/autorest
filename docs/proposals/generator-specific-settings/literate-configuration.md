@@ -357,7 +357,7 @@ directive:
   - from: # specify multiple document 'namespace's (aka title)
       - My API
       - SomeOther API
-    suppress-validations:
+    suppress:
       - VE1025 # codes for validation suppression
       - VE1104   
 ```

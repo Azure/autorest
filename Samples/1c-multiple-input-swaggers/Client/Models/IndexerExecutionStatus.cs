@@ -24,4 +24,41 @@ namespace Searchservice.Models
         [EnumMember(Value = "reset")]
         Reset
     }
+    internal static class IndexerExecutionStatusEnumExtension
+    {
+        internal static string ToSerializedValue(this IndexerExecutionStatus? value)  =>
+            value == null ? null : ((IndexerExecutionStatus)value).ToSerializedValue();
+
+        internal static string ToSerializedValue(this IndexerExecutionStatus value)
+        {
+            switch( value )
+            {
+                case IndexerExecutionStatus.TransientFailure:
+                    return "transientFailure";
+                case IndexerExecutionStatus.Success:
+                    return "success";
+                case IndexerExecutionStatus.InProgress:
+                    return "inProgress";
+                case IndexerExecutionStatus.Reset:
+                    return "reset";
+            }
+            return null;
+        }
+
+        internal static IndexerExecutionStatus? ParseIndexerExecutionStatus(this string value)
+        {
+            switch( value )
+            {
+                case "transientFailure":
+                    return IndexerExecutionStatus.TransientFailure;
+                case "success":
+                    return IndexerExecutionStatus.Success;
+                case "inProgress":
+                    return IndexerExecutionStatus.InProgress;
+                case "reset":
+                    return IndexerExecutionStatus.Reset;
+            }
+            return null;
+        }
+    }
 }

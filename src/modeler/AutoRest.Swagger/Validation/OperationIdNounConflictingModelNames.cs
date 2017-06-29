@@ -26,6 +26,16 @@ namespace AutoRest.Swagger.Validation
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// Operation ids could conflict with models defined in the composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
+        /// <summary>
         /// Check if the noun part of an operationId (Noun_Verb) conflicts with any model names provided in the spec
         /// </summary>
         /// <param name="entity">The operation id to test</param>

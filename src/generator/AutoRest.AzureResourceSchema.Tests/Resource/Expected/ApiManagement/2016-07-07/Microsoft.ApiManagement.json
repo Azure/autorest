@@ -26,16 +26,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "location": {
@@ -148,16 +141,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "ApiContract": {
@@ -203,16 +189,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "OperationContract": {
@@ -248,16 +227,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "OAuth2AuthorizationServerContract": {
@@ -293,16 +265,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "data": {
@@ -343,16 +308,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "description": {
@@ -403,16 +361,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         }
       },
@@ -436,16 +387,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "description": {
@@ -499,16 +443,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "description": {
@@ -559,16 +496,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "ProductContract": {
@@ -625,16 +555,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         }
       },
@@ -667,16 +590,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         }
       },
@@ -700,16 +616,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "value": {
@@ -765,16 +674,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "userId": {
@@ -848,16 +750,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "email": {
@@ -1790,16 +1685,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "ApiContract": {
@@ -1845,16 +1733,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "OperationContract": {
@@ -1890,16 +1771,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "OAuth2AuthorizationServerContract": {
@@ -1935,16 +1809,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "data": {
@@ -1985,16 +1852,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "description": {
@@ -2045,16 +1905,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         }
       },
@@ -2078,16 +1931,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "description": {
@@ -2141,16 +1987,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "description": {
@@ -2201,16 +2040,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         }
       },
@@ -2243,16 +2075,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "ProductContract": {
@@ -2309,16 +2134,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         }
       },
@@ -2342,16 +2160,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "value": {
@@ -2405,16 +2216,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "userId": {
@@ -2484,16 +2288,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2016-07-07"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2016-07-07"
           ]
         },
         "email": {

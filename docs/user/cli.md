@@ -52,7 +52,7 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 |Option                                                                &nbsp;| Description |
 |------------------|-------------|
 |`--input-file=FILENAME`|Adds the given file to the list of input files for generation process|
-|`--ouptut-folder=DIRECTORY`|The location for generated files. If not specified, uses `./Generated` as the default|
+|`--output-folder=DIRECTORY`|The location for generated files. If not specified, uses `./Generated` as the default|
 |`--namespace=NAMESPACE`|sets the namespace to use for the generated code|
 |`--license-header=HEADER`| Text to include as a header comment in generated files. Use NONE to suppress the default header.|
 |`--add-credentials`|If specified, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type.|
@@ -64,7 +64,7 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 |`--use-internal-constructors`|Indicates whether ctor needs to be generated with `internal` protection level.|
 |`--use-datetimeoffset`|Indicates whether to use DateTimeOffset instead of DateTime to model date-time types|
 |`--models-name=NAME`|Name to use for the generated client models namespace and folder name. By default, uses the value of 'Models'. This is not currently supported by all code generators.|
-|`--output-file-name=FILENAME`|If set, will cause generated code to be output to a single file. Not supported by all code generators.|
+|`--output-file=FILENAME`|If set, will cause generated code to be output to a single file. Not supported by all code generators.|
 
 #### Validation
 |Option                                                                &nbsp;| Description |

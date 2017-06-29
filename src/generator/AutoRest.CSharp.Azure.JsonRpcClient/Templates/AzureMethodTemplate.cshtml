@@ -5,97 +5,117 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.Model
 @using AutoRest.CSharp.JsonRpcClient.Templates.Rest.Client
+@using AutoRest.CSharp.Azure.JsonRpcClient
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.MethodCsa>
 
-@if (!Model.IsLongRunningOperation)
-{
-@:@(Include(new AutoRest.CSharp.JsonRpcClient.Templates.Rest.Client.MethodTemplate(), (MethodCs)Model))
+@{
+    var xns = "Microsoft.Rest.ClientRuntime.Test.Azure.";
+    var errorType = Model.DefaultResponse.Body.AsNullableTypeOrDefault();
+    var infoType = $"{xns}AzureRequestInfo<{errorType}>";
 }
-else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
-{
-if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrWhiteSpace(Model.Summary))
-{
-@:/// <summary>
-@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
-if (!string.IsNullOrWhiteSpace(Model.ExternalDocsUrl))
-{
-@:/// <see href="@Model.ExternalDocsUrl" />
-}
-@:/// </summary>
-}
-if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
-{
-@:/// <remarks>
-@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
-@:/// </remarks>
-}
-foreach (var parameter in Model.LocalParameters)
-{
-@:/// <param name='@parameter.Name'>
-@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
-@:/// </param>
-}
-@:/// <param name='customHeaders'>
-@:/// The headers that will be added to request.
-@:/// </param>
-@:/// <param name='cancellationToken'>
-@:/// The cancellation token.
-@:/// </param>
-<text>
-@if (Model.Deprecated)
-{
-@:[System.Obsolete()]
-}
-@((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
-{
-    // Send request
-    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
 
-    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
-}
-</text>
-}
-else if (Model.HttpMethod == HttpMethod.Put || Model.HttpMethod == HttpMethod.Patch)
-{
-if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
-{
-@:/// <summary>
-@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
-if (!string.IsNullOrWhiteSpace(Model.ExternalDocsUrl))
-{
-@:/// <see href="@Model.ExternalDocsUrl" />
-}
-@:/// </summary>
-}
-if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
-{
-@:/// <remarks>
-@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
-@:/// </remarks>
-}
-foreach (var parameter in Model.LocalParameters)
-{
-@:/// <param name='@parameter.Name'>
-@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())@:
-@:/// </param>
-}
-@:/// <param name='customHeaders'>
-@:/// The headers that will be added to request.
-@:/// </param>
-@:/// <param name='cancellationToken'>
-@:/// The cancellation token.
-@:/// </param>
-<text>
-@if (Model.Deprecated)
-{
-@:[System.Obsolete()]
-}
-@((Model as MethodCs).AccessModifier) async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
-{
-    // Send Request
-    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders"))).ConfigureAwait(false);
+static readonly @(infoType) @(Model.Name)_RequestInfo =
+    new @(infoType)(
+        title: "@(Model.MethodGroup.CodeModel.Name)",
+        id: "@(Model.SerializedName)",
+        method: "@(Model.HttpMethod.ToString().ToUpper())",
+        // path = "@(Model.Url)"
+        path: new @(xns)AzurePathPart[]
+        {
+            @foreach (var p in Model.GetPathParts())
+            {
+            @:new @(xns)AzurePathPart(value: "@(p.Item1)", isParam: @(p.Item2 ? "true" : "false")),
+            }            
+        },
+        constList: new @(xns)AzureParam[]
+        {
+            @foreach (var p in Model.LogicalParameters.Where(x => x.IsConstant))
+            {
+            @:new @(xns)AzureParam(
+                @:new @(xns)AzureParamInfo(
+                    @:name: "@(p.SerializedName)",
+                    @:location: @(xns)AzureParamLocation.@(p.Location),
+                    // no validation for const parameters
+                    @:isRequired: false,
+                    // no validation for const parameters
+                    @:constraints: new @(xns)Constraints.AzureConstraint[0]),
+                @:@(p.GetExp())),
+            }
+        },
+        createException: error => new @(Model.OperationExceptionTypeString)(error.Message)
+        {
+            Request = error.Request,
+            Response = error.Response,
+            @if (Model.DefaultResponse.Body != null)
+            {
+            @:Body = error.Body,
+            }
+        },
+        isLongRunningOperation: @(Model.IsLongRunningOperation ? "true" : "false"));
 
-    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync(_response, customHeaders, cancellationToken).ConfigureAwait(false);
+@foreach (var p in Model.LogicalParameters.Where(x => !x.IsConstant))
+{
+@EmptyLine
+@:static readonly @(xns)AzureParamInfo @(Model.GetParameterInfoName(p)) = 
+    @:new @(xns)AzureParamInfo(
+        @:name: "@(p.SerializedName)",
+        @:location: @(xns)AzureParamLocation.@(p.Location),
+        @:isRequired: @(p.IsRequired ? "true" : "false"),
+        @:constraints: new @(xns)Constraints.AzureConstraint[]
+        @:{
+    foreach (var c in p.Constraints)
+    {
+            @:@(c.GetConstraint())
+    }
+        @:});
 }
-</text>
+
+@EmptyLine
+public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(
+    @(Model.GetAsyncMethodParameterDeclaration(true)))
+{
+    var params_ = new @(xns)AzureParam[]
+    {
+        @foreach (var p in Model.LogicalParameters.Where(x => !x.IsConstant))
+        {
+        @:new @(xns)AzureParam(
+            @:@(Model.GetParameterInfoName(p)),
+            @:@(p.GetExp())),
+        }
+    };
+    var operation_ = new @(xns)AzureRequest<@(errorType)>(
+        info: @(Model.Name)_RequestInfo,
+        @if (Model.IsCustomBaseUri)
+        {
+        @:baseUri: new @(xns)AzureParamBaseUri(
+            @:new @(xns)AzurePathPart[]
+            @:{
+                foreach (var p in Model.GetUriParts())
+                {
+                @:new @(xns)AzurePathPart(value: "@(p.Item1)", isParam: @(p.Item2 ? "true" : "false")),
+                }
+            @:}),        
+        }
+        else
+        {
+        @:baseUri: new @(xns)AzureConstBaseUri(@(Model.ClientReference).BaseUri),
+        }
+        paramList: params_,
+        customHeaders: customHeaders,
+        cancellationToken: cancellationToken);
+    return @(xns)ServiceClientEx.Call(
+        @(Model.ClientReference),
+        operation_,
+        @{
+            var returnType = Model.ReturnType;
+        }
+        @if (returnType.Body != null)
+        {
+        @:new @(xns)Tag<@(Model.OperationResponseReturnTypeString)>(),        
+        @:new @(xns)Tag<@(returnType.Body.AsNullableType(Model.IsXNullableReturnType))>());
+        }
+        else
+        {
+        @:new @(xns)Tag<@(Model.OperationResponseReturnTypeString)>());
+        }
 }

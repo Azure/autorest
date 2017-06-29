@@ -39,6 +39,17 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// x-ms-paths could theoretically overload a path in another json 
+        /// (however this is unlikely since we usually have one resource path per json)
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
         public override bool IsValid(Dictionary<string, Operation> xmsPath, RuleContext context)
         {
             return context?.GetServiceDefinition()?.Paths?.ContainsKey(GetBasePath(context.Key)) ?? false;

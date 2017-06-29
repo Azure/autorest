@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the ChildProduct class.
- * @constructor
  * The product documentation.
- *
- * @member {number} [count] Count
  *
  */
 class ChildProduct {
+  /**
+   * Create a ChildProduct.
+   * @member {number} [count] Count
+   */
   constructor() {
   }
 

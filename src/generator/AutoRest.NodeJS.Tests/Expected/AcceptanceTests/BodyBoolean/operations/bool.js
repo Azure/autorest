@@ -705,17 +705,12 @@ function _getInvalid(options, callback) {
   });
 }
 
-/**
- * @class
- * Bool
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestBoolTestService.
- * Initializes a new instance of the Bool class.
- * @constructor
- *
- * @param {AutoRestBoolTestService} client Reference to the service client.
- */
+/** Class representing a Bool. */
 class Bool {
+  /**
+   * Create a Bool.
+   * @param {AutoRestBoolTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getTrue = _getTrue;

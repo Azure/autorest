@@ -13,17 +13,15 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the ClassOptionalWrapper class.
- * @constructor
- * @member {object} [value]
- *
- * @member {number} [value.id]
- *
- * @member {string} [value.name]
- *
+ * Class representing a ClassOptionalWrapper.
  */
 class ClassOptionalWrapper {
+  /**
+   * Create a ClassOptionalWrapper.
+   * @member {object} [value]
+   * @member {number} [value.id]
+   * @member {string} [value.name]
+   */
   constructor() {
   }
 

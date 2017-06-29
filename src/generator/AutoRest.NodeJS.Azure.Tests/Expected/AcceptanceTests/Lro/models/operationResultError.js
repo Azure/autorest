@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the OperationResultError class.
- * @constructor
- * @member {number} [code] The error code for an operation failure
- *
- * @member {string} [message] The detailed arror message
- *
+ * Class representing a OperationResultError.
  */
 class OperationResultError {
+  /**
+   * Create a OperationResultError.
+   * @member {number} [code] The error code for an operation failure
+   * @member {string} [message] The detailed arror message
+   */
   constructor() {
   }
 

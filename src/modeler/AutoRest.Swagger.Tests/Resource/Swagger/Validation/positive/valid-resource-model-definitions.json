@@ -80,6 +80,21 @@
           }
         }
       }
+    },
+    "/foo/baz": {
+      "post": {
+        "operationId": "AzureRes_Fetch",
+        "description": "fetches an azure res",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "the resource",
+            "schema": {
+              "$ref": "#/definitions/PostRespAzureResource"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -216,6 +231,19 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type"
+        }
+      }
+    },
+    "PostRespAzureResource": {
+      "description": "resource returned by a post operation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "randomSampleProp": {
+          "type": "string"
         }
       }
     }

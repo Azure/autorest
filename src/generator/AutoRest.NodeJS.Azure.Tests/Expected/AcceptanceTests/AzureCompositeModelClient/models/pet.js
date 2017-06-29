@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the Pet class.
- * @constructor
- * @member {number} [id]
- *
- * @member {string} [name]
- *
+ * Class representing a Pet.
  */
 class Pet {
+  /**
+   * Create a Pet.
+   * @member {number} [id]
+   * @member {string} [name]
+   */
   constructor() {
   }
 

@@ -5,6 +5,8 @@ using System.Linq;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model;
+using System.Text.RegularExpressions;
+using AutoRest.Swagger.Model.Utilities;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -34,6 +36,40 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// ListByParent operation could be defined in a json different than the one where it is defined, hence need the composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
+
+        /// <summary>
+        /// For a given child tracked resource, finds the corresponding url
+        /// </summary>
+        /// <param name="childResource">The child tracked resource</param>
+        /// <param name="paths">The paths in which to find the child tracked resource</param>
+        /// <returns>The url corresponding to the child tracked resource</returns>
+        private string GetPathForChildResource(string childResource, Dictionary<string, Dictionary<string, Operation>> paths)
+        {
+            foreach (var path in paths.Keys)
+            {
+                Match match = ValidationUtilities.ResourcePathPattern.Match(path);
+                if (match.Success)
+                {
+                    if (match.Groups["childresource"].Value == childResource)
+                    {
+                        return path;
+                    }
+
+                }
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
         /// Validates if the child tracked resources have List by immediate parent operation.
         /// </summary>
         /// <param name="definitions"></param>
@@ -53,7 +89,7 @@ namespace AutoRest.Swagger.Validation
                     formatParameters[0] = childResourceMapping.Key;
                     formatParameters[1] = childResourceMapping.Value;
 
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Parent.Path.AppendProperty("definitions").AppendProperty(childResourceMapping.Key)), this, formatParameters);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Parent.Path.AppendProperty("paths").AppendProperty(GetPathForChildResource(childResourceMapping.Key, paths))), this, formatParameters);
                 }
             }
         }

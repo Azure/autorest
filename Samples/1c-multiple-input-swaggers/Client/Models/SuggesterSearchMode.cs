@@ -18,4 +18,29 @@ namespace Searchservice.Models
         [EnumMember(Value = "analyzingInfixMatching")]
         AnalyzingInfixMatching
     }
+    internal static class SuggesterSearchModeEnumExtension
+    {
+        internal static string ToSerializedValue(this SuggesterSearchMode? value)  =>
+            value == null ? null : ((SuggesterSearchMode)value).ToSerializedValue();
+
+        internal static string ToSerializedValue(this SuggesterSearchMode value)
+        {
+            switch( value )
+            {
+                case SuggesterSearchMode.AnalyzingInfixMatching:
+                    return "analyzingInfixMatching";
+            }
+            return null;
+        }
+
+        internal static SuggesterSearchMode? ParseSuggesterSearchMode(this string value)
+        {
+            switch( value )
+            {
+                case "analyzingInfixMatching":
+                    return SuggesterSearchMode.AnalyzingInfixMatching;
+            }
+            return null;
+        }
+    }
 }

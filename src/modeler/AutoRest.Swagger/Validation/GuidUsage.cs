@@ -40,6 +40,17 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// The rule could be violated by a porperty of a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
+        /// <summary>
         /// An <paramref name="definitions"/> fails this rule if one of the property has GUID,
         /// i.e. if the type of the definition is string and the format is uuid.
         /// </summary>
@@ -54,8 +65,18 @@ namespace AutoRest.Swagger.Validation
                 if (!this.HandleSchema((Schema)definition.Value, definitions, out formatParameters, definition.Key))
                 {
                     formatParameters[1] = definition.Key;
-                    yield return new ValidationMessage(new FileObjectPath(context.File,
-                                context.Path.AppendProperty(definition.Key).AppendProperty("properties").AppendProperty((string)formatParameters[0])), this, formatParameters);
+                    var schema = (Schema)definition.Value;
+                    var propName = (string)formatParameters[0];
+                    if (schema.Properties?.ContainsKey(propName)==true)
+                    {
+                        yield return new ValidationMessage(new FileObjectPath(context.File,
+                                context.Path.AppendProperty(definition.Key).AppendProperty("properties").AppendProperty(propName)), this, formatParameters);
+                    }
+                    else
+                    {
+                        yield return new ValidationMessage(new FileObjectPath(context.File,
+                                context.Path.AppendProperty(definition.Key)), this, formatParameters);
+                    }
                 }
             }
         }

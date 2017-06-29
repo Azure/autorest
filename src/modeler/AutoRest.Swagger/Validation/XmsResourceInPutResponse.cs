@@ -38,6 +38,21 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// Whether the rule should be applied to the individual or composed context based on
+        /// the corresponding .md file
+        /// In most cases this should be composed
+        /// This is because validation rules that run in individual mode will end up
+        /// throwing multiple validation messages for the same violation if related model/property,etc 
+        /// was referenced in multiple files
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
         // Verifies if a tracked resource has a corresponding PATCH operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context)
         {

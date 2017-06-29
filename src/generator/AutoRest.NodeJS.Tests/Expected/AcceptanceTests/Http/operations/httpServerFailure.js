@@ -495,17 +495,12 @@ function _delete505(options, callback) {
   });
 }
 
-/**
- * @class
- * HttpServerFailure
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestHttpInfrastructureTestService.
- * Initializes a new instance of the HttpServerFailure class.
- * @constructor
- *
- * @param {AutoRestHttpInfrastructureTestService} client Reference to the service client.
- */
+/** Class representing a HttpServerFailure. */
 class HttpServerFailure {
+  /**
+   * Create a HttpServerFailure.
+   * @param {AutoRestHttpInfrastructureTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._head501 = _head501;

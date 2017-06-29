@@ -11,19 +11,17 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the ParameterGroupingPostMultiParamGroupsSecondParamGroup class.
- * @constructor
  * Additional parameters for the ParameterGrouping_postMultiParamGroups
  * operation.
  *
- * @member {string} [headerTwo]
- *
- * @member {number} [queryTwo] Query parameter with default. Default value: 30
- * .
- *
  */
 class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
+  /**
+   * Create a ParameterGroupingPostMultiParamGroupsSecondParamGroup.
+   * @member {string} [headerTwo]
+   * @member {number} [queryTwo] Query parameter with default. Default value:
+   * 30 .
+   */
   constructor() {
   }
 

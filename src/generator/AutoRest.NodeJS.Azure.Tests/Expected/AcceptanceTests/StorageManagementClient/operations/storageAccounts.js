@@ -1527,17 +1527,12 @@ function _beginCreate(resourceGroupName, accountName, parameters, options, callb
   });
 }
 
-/**
- * @class
- * StorageAccounts
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the StorageManagementClient.
- * Initializes a new instance of the StorageAccounts class.
- * @constructor
- *
- * @param {StorageManagementClient} client Reference to the service client.
- */
+/** Class representing a StorageAccounts. */
 class StorageAccounts {
+  /**
+   * Create a StorageAccounts.
+   * @param {StorageManagementClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._checkNameAvailability = _checkNameAvailability;

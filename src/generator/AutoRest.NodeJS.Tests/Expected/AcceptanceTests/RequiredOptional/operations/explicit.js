@@ -2770,17 +2770,12 @@ function _postOptionalArrayHeader(options, callback) {
   });
 }
 
-/**
- * @class
- * Explicit
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestRequiredOptionalTestService.
- * Initializes a new instance of the Explicit class.
- * @constructor
- *
- * @param {AutoRestRequiredOptionalTestService} client Reference to the service client.
- */
+/** Class representing a Explicit. */
 class Explicit {
+  /**
+   * Create a Explicit.
+   * @param {AutoRestRequiredOptionalTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._postRequiredIntegerParameter = _postRequiredIntegerParameter;

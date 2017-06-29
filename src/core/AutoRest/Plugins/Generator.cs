@@ -84,6 +84,8 @@ public class Generator : NewPlugin
         Settings.Instance.CustomSettings.Add("SyncMethods", GetXmsCodeGenSetting<string>(sd, "syncMethods") ?? await GetValue("sync-methods") ?? "essential");
         Settings.Instance.CustomSettings.Add("UseDateTimeOffset", GetXmsCodeGenSetting<bool?>(sd, "useDateTimeOffset") ?? await GetValue<bool?>("use-datetimeoffset") ?? false);
         Settings.Instance.CustomSettings["ClientSideValidation"] = await GetValue<bool?>("client-side-validation") ?? false;
+        int defaultMaximumCommentColumns = codeGenerator == "go" ? 120 : Settings.DefaultMaximumCommentColumns;
+        Settings.Instance.MaximumCommentColumns = await GetValue<int?>("max-comment-columns") ?? defaultMaximumCommentColumns;
         if (codeGenerator == "csharp")
         {
             Settings.Instance.OutputFileName = await GetValue<string>("output-file");
@@ -94,6 +96,10 @@ public class Generator : NewPlugin
             var inputFile = await GetValue<string[]>("input-file");
             Settings.Instance.Input = inputFile.FirstOrDefault();
             Settings.Instance.PackageName = await GetValue("package-name");
+            Settings.Instance.PackageVersion = await GetValue("package-version");
+        }
+        if (codeGenerator == "go")
+        {
             Settings.Instance.PackageVersion = await GetValue("package-version");
         }
 

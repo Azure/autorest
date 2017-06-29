@@ -20,4 +20,33 @@ namespace Storage.Models
         [EnumMember(Value = "AlreadyExists")]
         AlreadyExists
     }
+    internal static class ReasonEnumExtension
+    {
+        internal static string ToSerializedValue(this Reason? value)  =>
+            value == null ? null : ((Reason)value).ToSerializedValue();
+
+        internal static string ToSerializedValue(this Reason value)
+        {
+            switch( value )
+            {
+                case Reason.AccountNameInvalid:
+                    return "AccountNameInvalid";
+                case Reason.AlreadyExists:
+                    return "AlreadyExists";
+            }
+            return null;
+        }
+
+        internal static Reason? ParseReason(this string value)
+        {
+            switch( value )
+            {
+                case "AccountNameInvalid":
+                    return Reason.AccountNameInvalid;
+                case "AlreadyExists":
+                    return Reason.AlreadyExists;
+            }
+            return null;
+        }
+    }
 }

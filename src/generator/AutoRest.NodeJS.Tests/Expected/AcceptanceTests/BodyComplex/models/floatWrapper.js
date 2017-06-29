@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the FloatWrapper class.
- * @constructor
- * @member {number} [field1]
- *
- * @member {number} [field2]
- *
+ * Class representing a FloatWrapper.
  */
 class FloatWrapper {
+  /**
+   * Create a FloatWrapper.
+   * @member {number} [field1]
+   * @member {number} [field2]
+   */
   constructor() {
   }
 

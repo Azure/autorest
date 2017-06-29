@@ -151,6 +151,6 @@ To Install AutoRest, install nodej.js 6.9.5 or later, and run
 (You don't want to download these files directly, there's no point.)
 """,                
       draft: false,
-      prerelease: if argv.nightly then true else false, 
+      prerelease: if argv.nightly or argv.preview then true else false, 
     }
 

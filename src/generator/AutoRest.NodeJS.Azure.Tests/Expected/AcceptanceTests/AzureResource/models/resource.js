@@ -13,23 +13,19 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Resource class.
- * @constructor
  * Some resource
  *
- * @member {string} [id] Resource Id
- *
- * @member {string} [type] Resource Type
- *
- * @member {object} [tags]
- *
- * @member {string} [location] Resource Location
- *
- * @member {string} [name] Resource Name
- *
+ * @extends models['BaseResource']
  */
 class Resource extends models['BaseResource'] {
+  /**
+   * Create a Resource.
+   * @member {string} [id] Resource Id
+   * @member {string} [type] Resource Type
+   * @member {object} [tags]
+   * @member {string} [location] Resource Location
+   * @member {string} [name] Resource Name
+   */
   constructor() {
     super();
   }

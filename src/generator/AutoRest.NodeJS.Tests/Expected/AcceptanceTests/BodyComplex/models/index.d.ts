@@ -16,9 +16,7 @@ import * as moment from "moment";
  * Initializes a new instance of the ErrorModel class.
  * @constructor
  * @member {number} [status]
- *
  * @member {string} [message]
- *
  */
 export interface ErrorModel {
   status?: number;
@@ -30,13 +28,10 @@ export interface ErrorModel {
  * Initializes a new instance of the Basic class.
  * @constructor
  * @member {number} [id] Basic Id
- *
  * @member {string} [name] Name property with a very long description that does
  * not fit on a single line and a line break.
- *
  * @member {string} [color] Possible values include: 'cyan', 'Magenta',
  * 'YELLOW', 'blacK'
- *
  */
 export interface Basic {
   id?: number;
@@ -49,9 +44,7 @@ export interface Basic {
  * Initializes a new instance of the Pet class.
  * @constructor
  * @member {number} [id]
- *
  * @member {string} [name]
- *
  */
 export interface Pet {
   id?: number;
@@ -63,7 +56,6 @@ export interface Pet {
  * Initializes a new instance of the Dog class.
  * @constructor
  * @member {string} [food]
- *
  */
 export interface Dog extends Pet {
   food?: string;
@@ -74,9 +66,7 @@ export interface Dog extends Pet {
  * Initializes a new instance of the Cat class.
  * @constructor
  * @member {string} [color]
- *
  * @member {array} [hates]
- *
  */
 export interface Cat extends Pet {
   color?: string;
@@ -88,7 +78,6 @@ export interface Cat extends Pet {
  * Initializes a new instance of the Siamese class.
  * @constructor
  * @member {string} [breed]
- *
  */
 export interface Siamese extends Cat {
   breed?: string;
@@ -99,13 +88,9 @@ export interface Siamese extends Cat {
  * Initializes a new instance of the Fish class.
  * @constructor
  * @member {string} [species]
- *
  * @member {number} length
- *
  * @member {array} [siblings]
- *
  * @member {string} fishtype Polymorphic Discriminator
- *
  */
 export interface Fish {
   species?: string;
@@ -119,9 +104,7 @@ export interface Fish {
  * Initializes a new instance of the Salmon class.
  * @constructor
  * @member {string} [location]
- *
  * @member {boolean} [iswild]
- *
  */
 export interface Salmon extends Fish {
   location?: string;
@@ -133,9 +116,7 @@ export interface Salmon extends Fish {
  * Initializes a new instance of the Shark class.
  * @constructor
  * @member {number} [age]
- *
  * @member {date} birthday
- *
  */
 export interface Shark extends Fish {
   age?: number;
@@ -147,7 +128,6 @@ export interface Shark extends Fish {
  * Initializes a new instance of the Sawshark class.
  * @constructor
  * @member {buffer} [picture]
- *
  */
 export interface Sawshark extends Shark {
   picture?: Buffer;
@@ -158,7 +138,6 @@ export interface Sawshark extends Shark {
  * Initializes a new instance of the Goblinshark class.
  * @constructor
  * @member {number} [jawsize]
- *
  */
 export interface Goblinshark extends Shark {
   jawsize?: number;
@@ -177,9 +156,7 @@ export interface Cookiecuttershark extends Shark {
  * Initializes a new instance of the IntWrapper class.
  * @constructor
  * @member {number} [field1]
- *
  * @member {number} [field2]
- *
  */
 export interface IntWrapper {
   field1?: number;
@@ -191,9 +168,7 @@ export interface IntWrapper {
  * Initializes a new instance of the LongWrapper class.
  * @constructor
  * @member {number} [field1]
- *
  * @member {number} [field2]
- *
  */
 export interface LongWrapper {
   field1?: number;
@@ -205,9 +180,7 @@ export interface LongWrapper {
  * Initializes a new instance of the FloatWrapper class.
  * @constructor
  * @member {number} [field1]
- *
  * @member {number} [field2]
- *
  */
 export interface FloatWrapper {
   field1?: number;
@@ -219,10 +192,8 @@ export interface FloatWrapper {
  * Initializes a new instance of the DoubleWrapper class.
  * @constructor
  * @member {number} [field1]
- *
  * @member {number}
  * [field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
- *
  */
 export interface DoubleWrapper {
   field1?: number;
@@ -234,9 +205,7 @@ export interface DoubleWrapper {
  * Initializes a new instance of the BooleanWrapper class.
  * @constructor
  * @member {boolean} [fieldTrue]
- *
  * @member {boolean} [fieldFalse]
- *
  */
 export interface BooleanWrapper {
   fieldTrue?: boolean;
@@ -248,11 +217,8 @@ export interface BooleanWrapper {
  * Initializes a new instance of the StringWrapper class.
  * @constructor
  * @member {string} [field]
- *
  * @member {string} [empty]
- *
  * @member {string} [nullProperty]
- *
  */
 export interface StringWrapper {
   field?: string;
@@ -265,9 +231,7 @@ export interface StringWrapper {
  * Initializes a new instance of the DateWrapper class.
  * @constructor
  * @member {date} [field]
- *
  * @member {date} [leap]
- *
  */
 export interface DateWrapper {
   field?: Date;
@@ -279,9 +243,7 @@ export interface DateWrapper {
  * Initializes a new instance of the DatetimeWrapper class.
  * @constructor
  * @member {date} [field]
- *
  * @member {date} [now]
- *
  */
 export interface DatetimeWrapper {
   field?: Date;
@@ -293,9 +255,7 @@ export interface DatetimeWrapper {
  * Initializes a new instance of the Datetimerfc1123Wrapper class.
  * @constructor
  * @member {date} [field]
- *
  * @member {date} [now]
- *
  */
 export interface Datetimerfc1123Wrapper {
   field?: Date;
@@ -307,7 +267,6 @@ export interface Datetimerfc1123Wrapper {
  * Initializes a new instance of the DurationWrapper class.
  * @constructor
  * @member {moment.duration} [field]
- *
  */
 export interface DurationWrapper {
   field?: moment.Duration;
@@ -318,7 +277,6 @@ export interface DurationWrapper {
  * Initializes a new instance of the ByteWrapper class.
  * @constructor
  * @member {buffer} [field]
- *
  */
 export interface ByteWrapper {
   field?: Buffer;
@@ -329,7 +287,6 @@ export interface ByteWrapper {
  * Initializes a new instance of the ArrayWrapper class.
  * @constructor
  * @member {array} [arrayProperty]
- *
  */
 export interface ArrayWrapper {
   arrayProperty?: string[];
@@ -340,7 +297,6 @@ export interface ArrayWrapper {
  * Initializes a new instance of the DictionaryWrapper class.
  * @constructor
  * @member {object} [defaultProgram]
- *
  */
 export interface DictionaryWrapper {
   defaultProgram?: { [propertyName: string]: string };
@@ -351,9 +307,7 @@ export interface DictionaryWrapper {
  * Initializes a new instance of the ReadonlyObj class.
  * @constructor
  * @member {string} [id]
- *
  * @member {number} [size]
- *
  */
 export interface ReadonlyObj {
   readonly id?: string;

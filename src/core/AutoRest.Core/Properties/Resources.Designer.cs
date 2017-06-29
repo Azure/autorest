@@ -636,7 +636,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The tracked resource, &apos;{0}&apos;, must have a list by resource group operation..
+        ///   Looks up a localized string similar to The tracked resource, &apos;{0}&apos;, must have a list by resource group operation.(This rule does not apply for tenant level resources.).
         /// </summary>
         public static string TrackedResourceListByResourceGroupOperationMissing {
             get {
@@ -645,7 +645,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The tracked resource, &apos;{0}&apos;, must have a list by subscriptions operation..
+        ///   Looks up a localized string similar to The tracked resource, &apos;{0}&apos;, must have a list by subscriptions operation.(This rule does not apply for tenant level resources.).
         /// </summary>
         public static string TrackedResourceListBySubscriptionsOperationMissing {
             get {

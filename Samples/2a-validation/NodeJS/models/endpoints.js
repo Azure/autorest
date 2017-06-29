@@ -7,22 +7,18 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the Endpoints class.
- * @constructor
  * The URIs that are used to perform a retrieval of a public blob, queue or
  * table object.
  *
- * @member {string} [blob] Gets the blob endpoint.
- *
- * @member {string} [queue] Gets the queue endpoint.
- *
- * @member {string} [table] Gets the table endpoint.
- *
- * @member {string} [file] Gets the file endpoint.
- *
  */
 class Endpoints {
+  /**
+   * Create a Endpoints.
+   * @member {string} [blob] Gets the blob endpoint.
+   * @member {string} [queue] Gets the queue endpoint.
+   * @member {string} [table] Gets the table endpoint.
+   * @member {string} [file] Gets the file endpoint.
+   */
   constructor() {
   }
 

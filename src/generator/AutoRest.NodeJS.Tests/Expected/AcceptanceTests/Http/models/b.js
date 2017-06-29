@@ -13,13 +13,14 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the B class.
- * @constructor
- * @member {string} [textStatusCode]
- *
+ * Class representing a B.
+ * @extends models['A']
  */
 class B extends models['A'] {
+  /**
+   * Create a B.
+   * @member {string} [textStatusCode]
+   */
   constructor() {
     super();
   }

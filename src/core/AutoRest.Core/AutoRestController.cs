@@ -75,9 +75,7 @@ namespace AutoRest.Core
             var plugin = ExtensionsLoader.GetPlugin();
             
             Console.ResetColor();
-            Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
 
-            Settings.Instance.Validate();
             try
             {
                 var genericSerializer = new ModelSerializer<CodeModel>();

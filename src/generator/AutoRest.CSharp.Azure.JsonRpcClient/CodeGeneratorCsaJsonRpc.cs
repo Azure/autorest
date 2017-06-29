@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Azure.JsonRpcClient
             }
 
             // Service client
-            var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel};
+            var serviceClientTemplate = new AutoRest.CSharp.Azure.JsonRpcClient.Templates.AzureServiceClientTemplate { Model = codeModel};
             await Write(serviceClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
 
             // Service client interface

@@ -933,17 +933,12 @@ function _getMinDate(options, callback) {
   });
 }
 
-/**
- * @class
- * DateModel
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestDateTestService.
- * Initializes a new instance of the DateModel class.
- * @constructor
- *
- * @param {AutoRestDateTestService} client Reference to the service client.
- */
+/** Class representing a DateModel. */
 class DateModel {
+  /**
+   * Create a DateModel.
+   * @param {AutoRestDateTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getNull = _getNull;

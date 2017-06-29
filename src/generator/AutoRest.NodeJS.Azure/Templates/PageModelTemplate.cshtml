@@ -10,32 +10,42 @@
 @EmptyLine
 'use strict';
 @EmptyLine
+
+@{
+    bool hasSummary = !String.IsNullOrEmpty(Model.Summary);
+    bool hasDocumentation = !String.IsNullOrEmpty(Model.Documentation);
+    bool summaryOrDoc = hasSummary || hasDocumentation;
+}
 /**
- * @@class
- * Initializes a new instance of the @(Model.Name) class.
- * @@constructor
-@if (!String.IsNullOrEmpty(Model.Summary))
-{
-@WrapComment(" * ", "@summary " + Model.Summary)@:
-@: *
+@if (summaryOrDoc) {
+    if (hasSummary)
+    {
+    @WrapComment(" * ", "@summary " + Model.Summary)@:
+    }
+    if (hasDocumentation)
+    {
+    @WrapComment(" * ", Model.Documentation)@:
+    }
 }
-@if (!String.IsNullOrEmpty(Model.Documentation))
+else
 {
-@WrapComment(" * ", Model.Documentation)@:
-@: *
+@: * Class representing a @(Model.Name).
 }
+ */
+class @(Model.Name) extends Array {
+  /**
+   * Create a @(Model.Name).
 @foreach (var property in Model.DocumentationPropertyList)
 {
     if (property.Name.ToLowerInvariant() != "value")
     {
-    @PageCompositeTypeJsa.ConstructPropertyDocumentation(
-                                WrapComment(" * ", "@member {" + PageCompositeTypeJsa.GetPropertyDocumentationType(property)
+        @PageCompositeTypeJsa.ConstructPropertyDocumentation(
+                                WrapComment("   * ", "@member {" + PageCompositeTypeJsa.GetPropertyDocumentationType(property)
                                                                 + "} " + PageCompositeTypeJsa.GetPropertyDocumentationName(property)
                                                     + " " + property.Documentation));
     }
 }
- */
-class @(Model.Name) extends Array {
+   */
   constructor() {
     super();
   }

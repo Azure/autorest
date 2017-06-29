@@ -40,12 +40,15 @@ namespace AutoRest.Swagger.Validation
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override Category Severity => Category.Warning;
-        
+
         /// <summary>
-        /// When to apply the validation rule, before or after it has been merged as a part of its composite document
-        /// By default consider all rules to be applied for After only
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// Rule applies to schemes defined in each json in individual state
         /// </summary>
         public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
-
     }
 }

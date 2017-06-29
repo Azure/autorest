@@ -58,7 +58,10 @@ namespace AutoRest.Swagger
             if ((SwaggerObject.Enum != null || xMsEnum != null) && type.KnownPrimaryType == KnownPrimaryType.String && !(IsSwaggerObjectConstant(SwaggerObject)))
             {
                 var enumType = New<EnumType>();
-                SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
+                if (SwaggerObject.Enum != null)
+                {
+                    SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
+                }
                 if (xMsEnum != null)
                 {
                     var enumObject = xMsEnum as JContainer;

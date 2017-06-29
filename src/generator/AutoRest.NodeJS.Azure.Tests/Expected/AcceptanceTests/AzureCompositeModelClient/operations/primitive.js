@@ -2853,17 +2853,12 @@ function _putByte(options, callback) {
   });
 }
 
-/**
- * @class
- * Primitive
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AzureCompositeModel.
- * Initializes a new instance of the Primitive class.
- * @constructor
- *
- * @param {AzureCompositeModel} client Reference to the service client.
- */
+/** Class representing a Primitive. */
 class Primitive {
+  /**
+   * Create a Primitive.
+   * @param {AzureCompositeModel} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getInt = _getInt;

@@ -3,6 +3,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
+using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
@@ -46,6 +47,16 @@ namespace AutoRest.Swagger.Validation
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override Category Severity => Category.Warning;
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// Rule needs to be run for every single json in individual state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
 
     }
 }

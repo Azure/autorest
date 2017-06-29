@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the LongWrapper class.
- * @constructor
- * @member {number} [field1]
- *
- * @member {number} [field2]
- *
+ * Class representing a LongWrapper.
  */
 class LongWrapper {
+  /**
+   * Create a LongWrapper.
+   * @member {number} [field1]
+   * @member {number} [field2]
+   */
   constructor() {
   }
 

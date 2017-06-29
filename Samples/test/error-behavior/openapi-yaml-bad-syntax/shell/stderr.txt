@@ -1,8 +1,8 @@
-ERROR: Syntax error: bad indentation of a mapping entry
     - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:31:14
-ERROR: Syntax error: incomplete explicit mapping pair; a key node is missed
     - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:31:15
-ERROR: Syntax error: bad indentation of a mapping entry
-    - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:37:4
-ERROR: Syntax error: can not read an implicit mapping pair; a colon is missed
     - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:37:27
+    - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:37:4
+ERROR: Syntax error: bad indentation of a mapping entry
+ERROR: Syntax error: bad indentation of a mapping entry
+ERROR: Syntax error: can not read an implicit mapping pair; a colon is missed
+ERROR: Syntax error: incomplete explicit mapping pair; a key node is missed

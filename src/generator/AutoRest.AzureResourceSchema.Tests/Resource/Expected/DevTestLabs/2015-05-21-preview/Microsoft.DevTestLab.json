@@ -17,16 +17,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -109,16 +102,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -176,16 +162,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -243,16 +222,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -310,16 +282,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -377,16 +342,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -444,16 +402,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -511,16 +462,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -1005,16 +949,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -1072,16 +1009,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -1139,16 +1069,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -1206,16 +1129,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -1273,16 +1189,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {
@@ -1340,16 +1249,9 @@
           ]
         },
         "apiVersion": {
-          "oneOf": [
-            {
-              "type": "string",
-              "enum": [
-                "2015-05-21-preview"
-              ]
-            },
-            {
-              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
+          "type": "string",
+          "enum": [
+            "2015-05-21-preview"
           ]
         },
         "properties": {

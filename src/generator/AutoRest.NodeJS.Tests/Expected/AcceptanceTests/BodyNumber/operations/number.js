@@ -2795,17 +2795,12 @@ function _getSmallDecimal(options, callback) {
   });
 }
 
-/**
- * @class
- * Number
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestNumberTestService.
- * Initializes a new instance of the Number class.
- * @constructor
- *
- * @param {AutoRestNumberTestService} client Reference to the service client.
- */
+/** Class representing a Number. */
 class Number {
+  /**
+   * Create a Number.
+   * @param {AutoRestNumberTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getNull = _getNull;

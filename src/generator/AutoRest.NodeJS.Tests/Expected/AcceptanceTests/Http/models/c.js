@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the C class.
- * @constructor
- * @member {string} [httpCode]
- *
+ * Class representing a C.
  */
 class C {
+  /**
+   * Create a C.
+   * @member {string} [httpCode]
+   */
   constructor() {
   }
 

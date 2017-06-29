@@ -57,10 +57,18 @@ namespace AutoRest.Swagger.Model.Utilities
                                                     .Where(modelName => !(IsBaseResourceModelName(modelName))
                                                                         && serviceDefinition.Definitions.ContainsKey(modelName)
                                                                         && IsAllOfOnModelNames(modelName, serviceDefinition.Definitions, xmsAzureResourceModels));
-            
-            // return the union 
-            return resourceModels.Union(modelsAllOfOnXmsAzureResources);
 
+            var resourceCandidates = resourceModels.Union(modelsAllOfOnXmsAzureResources);
+
+            // Now filter all the resource models that are returned from a POST operation only 
+            var postOpResourceModels = serviceDefinition.Paths.Values.SelectMany(pathObj => pathObj.Where(opObj => opObj.Key.EqualsIgnoreCase("post"))
+                                                                        .SelectMany(opObj => opObj.Value.Responses?.Select(resp => resp.Value?.Schema?.Reference?.StripDefinitionPath())??Enumerable.Empty<string>()))
+                                                                     .Where(model => !string.IsNullOrWhiteSpace(model))
+                                                                     .Except(putOperationsResponseModels)
+                                                                     .Except(getOperationsResponseModels);
+            
+            // if any model is returned only by a POST operation, disregard it
+            return resourceCandidates.Except(postOpResourceModels);
         }
 
         public static bool IsODataProperty(string propName) => propName.ToLower().StartsWith("@");
@@ -464,7 +472,7 @@ namespace AutoRest.Swagger.Model.Utilities
 
         private static KeyValuePair<string, string> GetChildAndImmediateParentResource(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
         {
-            Match match = resourcePathPattern.Match(path);
+            Match match = ResourcePathPattern.Match(path);
             KeyValuePair<string, string> result = new KeyValuePair<string, string>();
             if (match.Success)
             {
@@ -579,7 +587,7 @@ namespace AutoRest.Swagger.Model.Utilities
          *      Step 2: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases
          *      Step 3: databases
          */
-        private static readonly Regex resourcePathPattern = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(?<childresource>\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
+        public static readonly Regex ResourcePathPattern = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(?<childresource>\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
 
         public static IEnumerable<string> GetParentTrackedResources(IEnumerable<string> trackedResourceModels, IEnumerable<KeyValuePair<string, string>> childTrackedResourceModels)
             => trackedResourceModels.Where(resourceModel => !childTrackedResourceModels.Any(childModel => childModel.Key.Equals(resourceModel)));

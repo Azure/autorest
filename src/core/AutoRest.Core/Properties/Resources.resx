@@ -251,10 +251,10 @@ Modelers:
     <value>For the tracked resource '{0}', the x-ms-pageable extension values must be same for list by resource group and subscriptions operations.</value>
   </data>
   <data name="TrackedResourceListByResourceGroupOperationMissing" xml:space="preserve">
-    <value>The tracked resource, '{0}', must have a list by resource group operation.</value>
+    <value>The tracked resource, '{0}', must have a list by resource group operation.(This rule does not apply for tenant level resources.)</value>
   </data>
   <data name="TrackedResourceListBySubscriptionsOperationMissing" xml:space="preserve">
-    <value>The tracked resource, '{0}', must have a list by subscriptions operation.</value>
+    <value>The tracked resource, '{0}', must have a list by subscriptions operation.(This rule does not apply for tenant level resources.)</value>
   </data>
   <data name="EmptyClientName" xml:space="preserve">
     <value>Empty x-ms-client-name property.</value>

@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the WrappedProduct class.
- * @constructor
  * The wrapped produc.
- *
- * @member {string} [value] the product value
  *
  */
 class WrappedProduct {
+  /**
+   * Create a WrappedProduct.
+   * @member {string} [value] the product value
+   */
   constructor() {
   }
 
