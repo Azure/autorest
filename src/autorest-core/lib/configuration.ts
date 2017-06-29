@@ -5,6 +5,8 @@
 
 import { Extension, ExtensionManager } from "@microsoft.azure/extension";
 import { ChildProcess } from "child_process";
+import { homedir } from "os";
+import { join } from "path";
 import { Artifact } from './artifact';
 import * as Constants from './constants';
 import { DataHandleRead, DataStore } from './data-store/data-store';
@@ -504,7 +506,7 @@ export class Configuration {
       configSegments.push(...blocks);
     }
     // 4. resolve externals
-    const extMgr = await ExtensionManager.Create("");
+    const extMgr = await ExtensionManager.Create(join(homedir(), ".autorest"));
     while (true) {
       const useExtensions = createView().UseExtensions;
       // find additional extensions
