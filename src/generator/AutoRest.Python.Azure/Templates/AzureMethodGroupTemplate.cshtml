@@ -9,6 +9,7 @@
 @Header("# ").TrimMultilineHeader()
 # --------------------------------------------------------------------------
 @EmptyLine
+import uuid
 from msrest.pipeline import ClientRawResponse
 @if (Model.HasAnyCloudErrors)
 {
@@ -18,7 +19,6 @@ from msrest.pipeline import ClientRawResponse
 {
 @:from msrestazure.azure_operation import AzureOperationPoller
 }
-import uuid
 @if (Model.HasAnyModel)
 {
 @EmptyLine

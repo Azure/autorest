@@ -41,12 +41,16 @@ tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "CustomBaseUri"))
 
 from msrest.serialization import Deserializer
-from msrest.exceptions import DeserializationError, SerializationError, ClientRequestError
+from msrest.exceptions import (
+    DeserializationError,
+    SerializationError,
+    ClientRequestError,
+    ValidationError
+)
 from msrest.authentication import BasicTokenAuthentication
 
 from fixtures.acceptancetestscustombaseuri import AutoRestParameterizedHostTestClient
 
-from fixtures.acceptancetestscustombaseuri.exceptions import ValidationError
 from fixtures.acceptancetestscustombaseuri.models import Error, ErrorException
 
 

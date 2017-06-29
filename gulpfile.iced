@@ -189,4 +189,7 @@ task 'find-rogue-node-modules','Shows the unrecognized node_modules folders in t
     "!src/core/AutoRest/**"
   ]
     .pipe showFiles()
-  
+
+task 'clean','python', ()->
+  rm '-rf', "#{basefolder}/src/generator/Autorest.Python.Tests/.tox"
+  rm '-rf', "#{basefolder}/src/generator/Autorest.Python.Azure.Tests/.tox"

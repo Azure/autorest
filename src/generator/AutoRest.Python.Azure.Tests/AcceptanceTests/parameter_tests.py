@@ -38,21 +38,20 @@ from os.path import dirname, pardir, join, realpath
 cwd = dirname(realpath(__file__))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
+import fixtures # Ensure that fixtures is loaded on old python before the next line
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
-
 sys.modules['fixtures'].__path__.append(join(tests, "AzureParameterGrouping", "fixtures"))
 sys.modules['fixtures'].__path__.append(join(tests, "SubscriptionIdApiVersion", "fixtures"))
 sys.modules['fixtures'].__path__.append(join(tests, "AzureBodyDuration", "fixtures"))
 sys.modules['fixtures'].__path__.append(join(tests, "AzureSpecials", "fixtures"))
 
-from msrest.exceptions import DeserializationError
+from msrest.exceptions import DeserializationError, ValidationError
 
 from fixtures.acceptancetestsazureparametergrouping import AutoRestParameterGroupingTestService
 from fixtures.acceptancetestssubscriptionidapiversion import MicrosoftAzureTestUrl
 from fixtures.acceptancetestsazurebodyduration import AutoRestDurationTestService
 from fixtures.acceptancetestsazurespecials import AutoRestAzureSpecialParametersTestClient
 
-from fixtures.acceptancetestscustombaseuri.exceptions import ValidationError
 from fixtures.acceptancetestsazureparametergrouping.models import (
     ParameterGroupingPostMultiParamGroupsSecondParamGroup,
     ParameterGroupingPostOptionalParameters,
