@@ -2,15 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Globalization;
 using Newtonsoft.Json;
-using AutoRest.Core.Logging;
-using AutoRest.Core.Utilities.Collections;
-using AutoRest.Swagger.Validation;
-using System.Text.RegularExpressions;
-using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
@@ -59,81 +52,38 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The transfer protocol of the API.
         /// </summary>
-        [CollectionRule(typeof(HttpsSupportedScheme))]
         public IList<TransferProtocolScheme> Schemes { get; set; }
 
         /// <summary>
         /// A list of MIME types the service can consume.
         /// </summary>
-        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the APIs can produce.
         /// </summary>
-        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Produces { get; set; }
 
         /// <summary>
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
-        [Rule(typeof(UniqueResourcePaths))]
-        [Rule(typeof(ListInOperationName))]
-        [Rule(typeof(CollectionObjectPropertiesNaming))]
-        [Rule(typeof(PutGetPatchResponseSchema))]
-        [Rule(typeof(OperationsAPIImplementation))]
-        [Rule(typeof(ParameterizeProperties))]
-        [Rule(typeof(XmsResourceInPutResponse))]
-        [CollectionRule(typeof(InvalidVerbUsed))]
-        [CollectionRule(typeof(DeleteMustNotHaveRequestBody))]
-        [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
-        [Rule(typeof(PutRequestResponseScheme))]
-        [Rule(typeof(TrackedResourceListByImmediateParent))]
-        [Rule(typeof(XmsExamplesRequired))]
-        [Rule(typeof(LROStatusCodesReturnTypeSchema))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
         /// <summary>
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
         [JsonProperty("x-ms-paths")]
-        [Rule(typeof(ListInOperationName))]
-        [Rule(typeof(CollectionObjectPropertiesNaming))]
-        [Rule(typeof(ParameterizeProperties))]
-        [CollectionRule(typeof(XmsPathsMustOverloadPaths))]
-        [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
-        [Rule(typeof(XmsExamplesRequired))]
         public Dictionary<string, Dictionary<string, Operation>> CustomPaths { get; set; }
 
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger definition.
         /// </summary>
-        [Rule(typeof(ArmResourcePropertiesBag))]
-        [CollectionRule(typeof(EnumInsteadOfBoolean))]
-        [Rule(typeof(RequiredPropertiesMissingInResourceModel ))]
-        [Rule(typeof(ResourceHasXMsResourceEnabled))]
-        [Rule(typeof(GuidUsage))]
-        [Rule(typeof(InvalidSkuModel))]
-        [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
-        [Rule(typeof(TrackedResourceGetOperation))]
-        [Rule(typeof(TrackedResourceListByResourceGroup))]
-        [Rule(typeof(TrackedResourceListBySubscription))]
-        [Rule(typeof(TrackedResourcePatchOperation))]
-        [Rule(typeof(DescriptionAndTitleMissing))]
-        [Rule(typeof(PatchBodyParametersSchema))]
-        [Rule(typeof(BodyTopLevelProperties))]
-        [Rule(typeof(XmsEnumValidation))]
-        [Rule(typeof(LocationMustHaveXmsMutability))]
-        [CollectionRule(typeof(RequiredReadOnlyProperties))]
-        [Rule(typeof(XmsPageableListByRGAndSubscriptions))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>
         /// Dictionary of parameters that can be used across operations.
         /// This property does not define global parameters for all operations.
         /// </summary>
-        [Rule(typeof(ParameterNotDefinedInGlobalParameters))]
-        [CollectionRule(typeof(AnonymousBodyParameter))]
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
 
         /// <summary>
@@ -144,7 +94,6 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger security definition.
         /// </summary>
-        [Rule(typeof(SecurityDefinitionsStructure))]
         public Dictionary<string, SecurityDefinition> SecurityDefinitions { get; set; }
 
         /// <summary>

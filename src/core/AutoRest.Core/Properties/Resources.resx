@@ -214,4 +214,7 @@ Modelers:
   <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
     <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>
   </data>
+  <data name="InvalidIdentifierName" xml:space="preserve">
+    <value>Property name {0} cannot be used as an Identifier, as it contains only invalid characters.</value>
+  </data>
 </root>
