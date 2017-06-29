@@ -20,7 +20,7 @@ import { EmitArtifacts } from './artifact-emitter';
 import { GetAutoRestDotNetPlugin } from './plugins/autorest-dotnet';
 import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 
-export type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
+export type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<DataStoreViewReadonly | void>;
 interface PipelineNode {
   outputArtifact?: string;
   pluginName: string;
@@ -28,6 +28,9 @@ interface PipelineNode {
   inputs: string[];
 };
 
+function CreatePluginIdentity(): PipelinePlugin {
+  return async (config, input) => input;
+}
 function CreatePluginLoader(): PipelinePlugin {
   return async (config, input, working, output) => {
     let inputs = config.InputFileUris;
@@ -251,6 +254,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
+    "identity": CreatePluginIdentity(),
     "loader": CreatePluginLoader(),
     "md-override-loader": CreatePluginMdOverrideLoader(),
     "transform": CreatePluginTransformer(),
@@ -351,13 +355,13 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
         const scope = config.DataStore.CreateScope(nodeName);
         const scopeWorking = scope.CreateScope("working");
         const scopeOutput = scope.CreateScope("output");
-        await plugin(config,
+        const scopeResult = await plugin(config,
           inputScope,
           scopeWorking,
-          scopeOutput);
+          scopeOutput) || scopeOutput;
 
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END` });
-        return scopeOutput;
+        return scopeResult;
       } catch (e) {
         config.Message({ Channel: Channel.Fatal, Text: `${nodeName} - FAILED` });
         config.Message({ Channel: Channel.Fatal, Text: `${e}` });

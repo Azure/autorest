@@ -68,6 +68,9 @@ pipeline:
   swagger-document/transform:
     input: transform-immediate
     output-artifact: swagger-document
+  swagger-document/identity:
+    input: transform
+    output-artifact: swagger-document
   swagger-document/emitter:
     input: transform
     scope: scope-swagger-document/emitter
@@ -135,7 +138,7 @@ azure-validator-individual:
 ``` yaml
 pipeline:
   csharp/modeler:
-    input: swagger-document/transform
+    input: swagger-document/identity
     output-artifact: code-model-v1
     scope: csharp
   csharp/commonmarker:
@@ -150,7 +153,7 @@ pipeline:
   csharp/generate:
     plugin: csharp
     input: 
-      - swagger-document/transform
+      - swagger-document/identity
       - cm/transform
     output-artifact: source-file-csharp
   csharp/simplifier:
@@ -177,7 +180,7 @@ output-artifact:
 ``` yaml
 pipeline:
   go/modeler:
-    input: swagger-document/transform
+    input: swagger-document/identity
     output-artifact: code-model-v1
     scope: go
   go/commonmarker:
@@ -192,7 +195,7 @@ pipeline:
   go/generate:
     plugin: go
     input: 
-      - swagger-document/transform
+      - swagger-document/identity
       - cm/transform
     output-artifact: source-file-go
   go/transform:
@@ -215,7 +218,7 @@ output-artifact:
 ``` yaml
 pipeline:
   java/modeler:
-    input: swagger-document/transform
+    input: swagger-document/identity
     output-artifact: code-model-v1
     scope: java
   java/commonmarker:
@@ -230,7 +233,7 @@ pipeline:
   java/generate:
     plugin: java
     input: 
-      - swagger-document/transform
+      - swagger-document/identity
       - cm/transform
     output-artifact: source-file-java
   java/transform:
@@ -253,7 +256,7 @@ output-artifact:
 ``` yaml
 pipeline:
   python/modeler:
-    input: swagger-document/transform
+    input: swagger-document/identity
     output-artifact: code-model-v1
     scope: python
   python/commonmarker:
@@ -268,7 +271,7 @@ pipeline:
   python/generate:
     plugin: python
     input: 
-      - swagger-document/transform
+      - swagger-document/identity
       - cm/transform
     output-artifact: source-file-python
   python/transform:
@@ -291,7 +294,7 @@ output-artifact:
 ``` yaml
 pipeline:
   nodejs/modeler:
-    input: swagger-document/transform
+    input: swagger-document/identity
     output-artifact: code-model-v1
     scope: nodejs
   nodejs/commonmarker:
@@ -306,7 +309,7 @@ pipeline:
   nodejs/generate:
     plugin: nodejs
     input: 
-      - swagger-document/transform
+      - swagger-document/identity
       - cm/transform
     output-artifact: source-file-nodejs
   nodejs/transform:
@@ -329,7 +332,7 @@ output-artifact:
 ``` yaml
 pipeline:
   ruby/modeler:
-    input: swagger-document/transform
+    input: swagger-document/identity
     output-artifact: code-model-v1
     scope: ruby
   ruby/commonmarker:
@@ -344,7 +347,7 @@ pipeline:
   ruby/generate:
     plugin: ruby
     input: 
-      - swagger-document/transform
+      - swagger-document/identity
       - cm/transform
     output-artifact: source-file-ruby
   ruby/transform:
@@ -367,7 +370,7 @@ output-artifact:
 ``` yaml
 pipeline:
   azureresourceschema/modeler:
-    input: swagger-document/transform
+    input: swagger-document/identity
     output-artifact: code-model-v1
     scope: azureresourceschema
   azureresourceschema/commonmarker:
@@ -382,7 +385,7 @@ pipeline:
   azureresourceschema/generate:
     plugin: azureresourceschema
     input: 
-      - swagger-document/transform
+      - swagger-document/identity
       - cm/transform
     output-artifact: source-file-azureresourceschema
   azureresourceschema/transform:
@@ -404,13 +407,13 @@ output-artifact:
 ``` yaml
 pipeline:
   jsonrpcclient/modeler:
-    input: swagger-document/transform
+    input: swagger-document/identity
     output-artifact: code-model-v1
     scope: jsonrpcclient
   jsonrpcclient/generate:
     plugin: jsonrpcclient
     input: 
-      - swagger-document/transform
+      - swagger-document/identity
       - modeler
     output-artifact: source-file-jsonrpcclient
   jsonrpcclient/transform:
