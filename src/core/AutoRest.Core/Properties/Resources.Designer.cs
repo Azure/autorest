@@ -177,6 +177,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Property name {0} cannot be used as an Identifier, as it contains only invalid characters..
+        /// </summary>
+        public static string InvalidIdentifierName {
+            get {
+                return ResourceManager.GetString("InvalidIdentifierName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; code generator does not support code generation to a single file..
         /// </summary>
         public static string LanguageDoesNotSupportSingleFileGeneration {

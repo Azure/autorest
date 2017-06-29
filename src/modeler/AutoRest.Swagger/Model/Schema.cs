@@ -2,15 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
-using System.Globalization;
-
 using AutoRest.Core.Model;
-using AutoRest.Swagger.Validation.Core;
-using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
-
-using Newtonsoft.Json;
 
 namespace AutoRest.Swagger.Model
 {
@@ -34,10 +27,6 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Key is a type serviceTypeName.
         /// </summary>
-        [CollectionRule(typeof(AvoidNestedProperties))]
-        [Rule(typeof(XmsClientNameProperty))]
-        [Rule(typeof(DescriptionAndTitleMissing))]
-        [CollectionRule(typeof(RequiredReadOnlyProperties))]
         public Dictionary<string, Schema> Properties { get; set; }
 
         public bool ReadOnly { get; set; }

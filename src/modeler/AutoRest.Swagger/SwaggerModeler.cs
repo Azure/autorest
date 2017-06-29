@@ -15,7 +15,6 @@ using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger
 {
@@ -64,21 +63,7 @@ namespace AutoRest.Swagger
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
             ServiceDefinition = serviceDefinition;
-            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
-            {
-                // Look for semantic errors and warnings in the document.
-                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition, new ServiceDefinitionMetadata
-                {   // LEGACY MODE! set defaults for the metadata, marked to be deprecated
-                    ServiceDefinitionDocumentType = ServiceDefinitionDocumentType.ARM, 
-                    MergeState = ServiceDefinitionDocumentState.Composed
-                }))
-                {
-                    Logger.Instance.Log(validationEx);
-                }
-                return New<CodeModel>();
-            }
-
+            
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
