@@ -248,8 +248,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // externals (TODO: make these dynamically loaded)
   const oavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/plugins/openapi-validation-tools`);
-  const aiPluginHost = await AutoRestExtension.FromModule(`${__dirname}/../../node_modules/autorest-interactive`);
-  const aoavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/../../node_modules/@microsoft.azure/openapi-validator`);
+  const aiPluginHost = await AutoRestExtension.FromModule(`${__dirname}/../../../node_modules/autorest-interactive`);
+  const aoavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/../../../node_modules/@microsoft.azure/openapi-validator`);
   const autoRestDotNet = await GetAutoRestDotNetPlugin();
 
   // built-in plugins

@@ -33,6 +33,11 @@ swagger-document/transform:
   configScope: []
   inputs:
     - swagger-document/transform-immediate
+swagger-document/identity:
+  pluginName: identity
+  configScope: []
+  inputs:
+    - swagger-document/transform
 swagger-document/emitter:
   pluginName: emitter
   configScope:
@@ -70,7 +75,7 @@ csharp/modeler:
   configScope:
     - csharp
   inputs:
-    - swagger-document/transform
+    - swagger-document/identity
 csharp/commonmarker:
   pluginName: commonmarker
   configScope:
@@ -95,7 +100,7 @@ csharp/generate:
   configScope:
     - csharp
   inputs:
-    - swagger-document/transform
+    - swagger-document/identity
     - csharp/cm/transform
 csharp/simplifier:
   pluginName: csharp-simplifier
