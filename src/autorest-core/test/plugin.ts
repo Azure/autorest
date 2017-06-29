@@ -12,7 +12,7 @@ import { CancellationToken } from "../lib/ref/cancallation";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message, Channel } from "../lib/message";
 import { GetAutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
-import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
+import { AutoRestExtension } from "../lib/pipeline/plugin-endpoint";
 import { DataStore, QuickScope } from '../lib/data-store/data-store';
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
@@ -23,7 +23,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const scopeInput = dataStore.GetReadThroughScope();
     const scopeWork = dataStore.CreateScope("working");
 
-    const dummyPlugin = await AutoRestPlugin.FromModule(`${__dirname}/../lib/pipeline/plugins/dummy`);
+    const dummyPlugin = await AutoRestExtension.FromModule(`${__dirname}/../lib/pipeline/plugins/dummy`);
     const pluginNames = await dummyPlugin.GetPluginNames(cancellationToken);
     assert.deepStrictEqual(pluginNames, ["dummy"]);
     const messages: Message[] = [];
@@ -175,7 +175,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json";
     await scopeInput.Read(inputFileUri);
 
-    const validationPlugin = await AutoRestPlugin.FromModule("../../../../../Users/jobader/Documents/GitHub/autorest-interactive/index");
+    const validationPlugin = await AutoRestExtension.FromModule("../../../../../Users/jobader/Documents/GitHub/autorest-interactive/index");
     const pluginNames = await validationPlugin.GetPluginNames(cancellationToken);
 
     for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {

@@ -8,17 +8,17 @@ import { JsonPath, stringify } from "../ref/jsonpath";
 import { safeEval } from "../ref/safe-eval";
 import { LazyPromise } from "../lazy";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-import { AutoRestPlugin } from "./plugin-endpoint";
+import { AutoRestExtension } from "./plugin-endpoint";
 import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
 import { Channel } from "../message";
 import { ResolveUri } from "../ref/uri";
-import { ConfigurationView } from "../configuration";
-import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
-import { GetAutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
-import { ComposeSwaggers, LoadLiterateSwaggers, LoadLiterateSwaggerOverrides } from "./swagger-loader";
-import { IFileSystem } from "../file-system";
-import { EmitArtifacts } from "./artifact-emitter";
+import { ConfigurationView, GetExtension } from '../configuration';
+import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from '../data-store/data-store';
+import { IFileSystem } from '../file-system';
+import { EmitArtifacts } from './artifact-emitter';
+import { GetAutoRestDotNetPlugin } from './plugins/autorest-dotnet';
+import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<void>;
 interface PipelineNode {
@@ -93,7 +93,7 @@ function CreatePluginComposer(): PipelinePlugin {
     await (await output.Write("composed")).Forward(swagger);
   };
 }
-function CreatePluginExternal(host: PromiseLike<AutoRestPlugin>, pluginName: string): PipelinePlugin {
+function CreatePluginExternal(host: AutoRestExtension, pluginName: string): PipelinePlugin {
   return async (config, input, working, output) => {
     const plugin = await host;
     const pluginNames = await plugin.GetPluginNames(config.CancellationToken);
@@ -243,13 +243,13 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   const pipeline = BuildPipeline(configView);
   const fsInput = configView.DataStore.GetReadThroughScopeFileSystem(fileSystem);
 
-  // externals:
-  const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
-  const aiPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/autorest-interactive`));
-  const aoavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/@microsoft.azure/openapi-validator`));
-  const autoRestDotNet = new LazyPromise(async () => await GetAutoRestDotNetPlugin());
+  // externals (TODO: make these dynamically loaded)
+  const oavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/plugins/openapi-validation-tools`);
+  const aiPluginHost = await AutoRestExtension.FromModule(`${__dirname}/../../node_modules/autorest-interactive`);
+  const aoavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/../../node_modules/@microsoft.azure/openapi-validator`);
+  const autoRestDotNet = await GetAutoRestDotNetPlugin();
 
-  // TODO: enhance with custom declared plugins
+  // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     "loader": CreatePluginLoader(),
     "md-override-loader": CreatePluginMdOverrideLoader(),
@@ -304,6 +304,14 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
         output);
     }
   };
+
+  // dynamically loaded, auto-discovered plugins
+  for (const useExtension of configView.UseExtensions) {
+    const extension = await GetExtension(useExtension.fullyQualified);
+    for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
+      plugins[plugin] = CreatePluginExternal(extension, plugin);
+    }
+  }
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
