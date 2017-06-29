@@ -12,6 +12,7 @@ module Storage
 
       include MsRestAzure
 
+      include MsRest::JSONable
       # @return [String] Resource location
       attr_accessor :location
 
