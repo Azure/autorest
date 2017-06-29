@@ -184,9 +184,6 @@ Modelers:
   <data name="InitializingModeler" xml:space="preserve">
     <value>Initializing modeler.</value>
   </data>
-  <data name="InvalidIdentifierName" xml:space="preserve">
-    <value>Property name {0} cannot be used as an Identifier, as it contains only invalid characters.</value>
-  </data>
   <data name="LanguageDoesNotSupportSingleFileGeneration" xml:space="preserve">
     <value>'{0}' code generator does not support code generation to a single file.</value>
   </data>
@@ -196,65 +193,8 @@ Modelers:
   <data name="NamespaceConflictReasonMessage" xml:space="preserve">
     <value>{0} (already used in {1})</value>
   </data>
-  <data name="ParameterValueIsMissing" xml:space="preserve">
-    <value>Parameter '{0}' is required.</value>
-  </data>
-  <data name="ParameterValueIsNotValid" xml:space="preserve">
-    <value>Parameter '{0}' value is not valid. Expect '{1}'</value>
-  </data>
   <data name="TypeShouldBeAssemblyQualified" xml:space="preserve">
     <value>Type '{0}' name should be assembly qualified. For example 'ClassName, AssemblyName'</value>
-  </data>
-  <data name="AnonymousTypesDiscouraged" xml:space="preserve">
-    <value>Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.</value>
-  </data>
-  <data name="SecurityDefinitionsStructureValidation" xml:space="preserve">
-    <value>Every swagger/configuration must have a security definitions section and it must adhere to the structure described in: https://github.com/Azure/autorest/tree/master/docs/developer/validation-rules/security-definitions-structure-validation.md</value>
-  </data>
-  <data name="MsdnReferencesDiscouraged" xml:space="preserve">
-    <value>For better generated code quality, remove all references to "msdn.microsoft.com".</value>
-  </data>
-  <data name="APIVersionFormatIsNotValid" xml:space="preserve">
-    <value>API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.</value>
-  </data>
-  <data name="HttpVerbIsNotValid" xml:space="preserve">
-    <value>Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. </value>
-  </data>
-  <data name="RequiredReadOnlyPropertiesValidation" xml:space="preserve">
-    <value>Property '{0}' is a required property. It should not be marked as 'readonly'.</value>
-  </data>
-  <data name="ResourceModelIsNotValid" xml:space="preserve">
-    <value>Model definition '{0}' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.</value>
-  </data>
-  <data name="ResourceIsMsResourceNotValid" xml:space="preserve">
-    <value>A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.</value>
-  </data>
-  <data name="XmsClientNameInvalid" xml:space="preserve">
-    <value>Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model.</value>
-  </data>
-  <data name="DeleteMustNotHaveRequestBody" xml:space="preserve">
-    <value>'Delete' operation '{0}' must not have a request body.</value>
-  </data>
-  <data name="SkuModelIsNotValid" xml:space="preserve">
-    <value>Sku Model definition '{0}' is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties.</value>
-  </data>
-  <data name="PutGetPatchResponseInvalid" xml:space="preserve">
-    <value>{0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.</value>
-  </data>
-  <data name="OperationsAPINotImplemented" xml:space="preserve">
-    <value>Operations API must be implemented for '{0}'.</value>
-  </data>
-  <data name="TrackedResourceListByImmediateParentOperationMissing" xml:space="preserve">
-    <value>The child tracked resource, '{0}' with immediate parent '{1}', must have a list by immediate parent operation.</value>
-  </data>
-  <data name="XMSPagableListByRGAndSubscriptionsMismatch" xml:space="preserve">
-    <value>For the tracked resource '{0}', the x-ms-pageable extension values must be same for list by resource group and subscriptions operations.</value>
-  </data>
-  <data name="TrackedResourceListByResourceGroupOperationMissing" xml:space="preserve">
-    <value>The tracked resource, '{0}', must have a list by resource group operation.(This rule does not apply for tenant level resources.)</value>
-  </data>
-  <data name="TrackedResourceListBySubscriptionsOperationMissing" xml:space="preserve">
-    <value>The tracked resource, '{0}', must have a list by subscriptions operation.(This rule does not apply for tenant level resources.)</value>
   </data>
   <data name="EmptyClientName" xml:space="preserve">
     <value>Empty x-ms-client-name property.</value>
@@ -265,109 +205,13 @@ Modelers:
   <data name="UnknownFormat" xml:space="preserve">
     <value>'{0}' is not a known format.</value>
   </data>
-  <data name="MissingDescription" xml:space="preserve">
-    <value>{0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.</value>
+  <data name="ParameterValueIsMissing" xml:space="preserve">
+    <value>Parameter '{0}' is required.</value>
   </data>
-  <data name="MissingSummaryDescription" xml:space="preserve">
-    <value>{0} lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.</value>
-  </data>
-  <data name="MissingTitleDescription" xml:space="preserve">
-    <value>{0} lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.</value>
-  </data>
-  <data name="OnlyOneUnderscoreAllowedInOperationId" xml:space="preserve">
-    <value>Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.</value>
-  </data>
-  <data name="OperationIdMissing" xml:space="preserve">
-    <value>OperationId is required for all operations. Please add it for '{0}' operation of '{1}' path.</value>
-  </data>
-  <data name="XMSPathBaseNotInPaths" xml:space="preserve">
-    <value>Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.</value>
-  </data>
-  <data name="DescriptionNotDescriptive" xml:space="preserve">
-    <value>The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation.</value>
-  </data>
-  <data name="OperationIdNounInVerb" xml:space="preserve">
-    <value>Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
-  </data>
-  <data name="NonAppJsonTypeNotSupported" xml:space="preserve">
-    <value>Please make sure that media types other than 'application/json' are supported by your service.</value>
-  </data>
-  <data name="SupportedSchemesWarningMessage" xml:space="preserve">
-    <value>Azure Resource Management only supports HTTPS scheme.</value>
-  </data>
-  <data name="OperationParametersNotAllowedMessage" xml:space="preserve">
-    <value>Parameter "subscriptionId" is not allowed in the operations section, define it in the global parameters section instead</value>
-  </data>
-  <data name="ServiceDefinitionParametersMissingMessage" xml:space="preserve">
-    <value>Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition</value>
-  </data>
-  <data name="UniqueResourcePaths" xml:space="preserve">
-    <value>Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'.</value>
+  <data name="ParameterValueIsNotValid" xml:space="preserve">
+    <value>Parameter '{0}' value is not valid. Expect '{1}'</value>
   </data>
   <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
     <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>
-  </data>
-  <data name="GuidUsageNotRecommended" xml:space="preserve">
-    <value>Guid used in model definition '{1}' for property '{0}'. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.</value>
-  </data>
-  <data name="GetOperationNameNotValid" xml:space="preserve">
-    <value>'GET' operation '{0}' should use method name 'Get' or Method name start with 'List'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
-  </data>
-  <data name="InvalidMutabilityValueForReadOnly" xml:space="preserve">
-    <value>When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'.</value>
-  </data>
-  <data name="BooleanPropertyNotRecommended" xml:space="preserve">
-    <value>Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: {0}</value>
-  </data>
-  <data name="AllowedTopLevelProperties" xml:space="preserve">
-    <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Model definition '{0}' has extra properties ['{1}'].</value>
-  </data>
-  <data name="TrackedResourceGetOperationMissing" xml:space="preserve">
-    <value>Tracked resource '{0}' must have a get operation.</value>
-  </data>
-  <data name="DeleteOperationNameNotValid" xml:space="preserve">
-    <value>'DELETE' operation '{0}' should use method name 'Delete'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
-  </data>
-  <data name="PatchOperationNameNotValid" xml:space="preserve">
-    <value>'PATCH' operation '{0}' should use method name 'Update'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
-  </data>
-  <data name="PutOperationNameNotValid" xml:space="preserve">
-    <value>'PUT' operation '{0}' should use method name 'Create'. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
-  </data>
-  <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
-    <value>Collection object '{0}' returned by list operation '{1}' with 'x-ms-pageable' extension, has no property named 'value'.</value>
-  </data>
-  <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
-    <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>
-  </data>
-  <data name="BodyPropertyNameCamelCase" xml:space="preserve">
-    <value>Property named: '{0}', must follow camelCase style. Example: '{1}'.</value>
-  </data>
-  <data name="DefinitionsPropertiesNameCamelCase" xml:space="preserve">
-    <value>Property named: '{0}', for definition: '{1}' must follow camelCase style. Example: '{2}'.</value>
-  </data>
-  <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
-    <value>Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
-  </data>
-  <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
-    <value>Since operation '{0}' response has model definition '{1}', it should be of the form "*_list*". Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
-  </data>
-  <data name="LongRunningResponseNotValid" xml:space="preserve">
-    <value>A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.</value>
-  </data>
-  <data name="PutOperationResourceResponseValidationMessage" xml:space="preserve">
-    <value>The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: '{0}' Model: '{1}'.</value>
-  </data>
-  <data name="ParametersPropertiesValidation" xml:space="preserve">
-    <value>Parameter Must have the "name" property defined with non-empty string as its value</value>
-  </data>
-  <data name="OperationIdNounConflictingModelNamesMessage" xml:space="preserve">
-    <value>OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to '{0}Model'. Consider using the plural form of '{1}' to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.</value>
-  </data>
-  <data name="PutOperationRequestResponseSchemaMessage" xml:space="preserve">
-    <value>A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: '{0}' Request Model: '{1}' Response Model: '{2}'</value>
-  </data>
-  <data name="SummaryDescriptionVaidationError" xml:space="preserve">
-    <value>The summary and description values should not be same.</value>
   </data>
 </root>
