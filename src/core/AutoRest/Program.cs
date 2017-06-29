@@ -15,7 +15,6 @@ using AutoRest.Core.Parsing;
 using YamlDotNet.RepresentationModel;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using AutoRest.Swagger.Logging.Core;
 
 namespace AutoRest
 {
@@ -35,7 +34,6 @@ namespace AutoRest
                 {
                     bool generationFailed = false;
                     Settings settings = null;
-                    var jsonValidationLogListener = new JsonValidationLogListener();
                     try
                     {
                         settings = Settings.Create(args);
@@ -46,18 +44,6 @@ namespace AutoRest
                             settings.CustomSettings.Add("ClientSideValidation", true);
                         }
 
-                        // set up logging
-                        if (settings.JsonValidationMessages)
-                        {
-                            Logger.Instance.AddListener(jsonValidationLogListener);
-                        }
-                        else
-                        {
-                            Logger.Instance.AddListener(new ConsoleLogListener(
-                                settings.Debug ? Category.Debug : Category.Warning,
-                                settings.ValidationLevel,
-                                settings.Verbose));
-                        }
                         Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
 
                         Settings.AutoRestFolder = Path.GetDirectoryName( typeof(Program).GetAssembly().Location);
@@ -94,10 +80,6 @@ namespace AutoRest
                     }
                     finally
                     {
-                        if (settings != null && settings.JsonValidationMessages)
-                        {
-                            Console.WriteLine(jsonValidationLogListener.GetValidationMessagesAsJson());
-                        }
                         if (settings != null)
                         {
                             if (generationFailed)
