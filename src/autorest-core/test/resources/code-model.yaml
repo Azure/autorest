@@ -2,14 +2,11 @@
   "modelTypes": [
     {
       "$id": "1",
-      "$type": "AutoRest.Core.Model.CompositeType, AutoRest.Core",
-      "$actualType": "AutoRest.Core.Model.CompositeType",
+      "$type": "CompositeType",
       "properties": [
         {
           "$id": "2",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "code"
           ],
@@ -22,8 +19,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "3",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -36,9 +32,7 @@
         },
         {
           "$id": "4",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "target"
           ],
@@ -51,8 +45,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "5",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -65,9 +58,7 @@
         },
         {
           "$id": "6",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "message"
           ],
@@ -80,8 +71,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "7",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -101,14 +91,11 @@
     },
     {
       "$id": "8",
-      "$type": "AutoRest.Core.Model.CompositeType, AutoRest.Core",
-      "$actualType": "AutoRest.Core.Model.CompositeType",
+      "$type": "CompositeType",
       "properties": [
         {
           "$id": "9",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "code"
           ],
@@ -121,8 +108,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "10",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -135,9 +121,7 @@
         },
         {
           "$id": "11",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "message"
           ],
@@ -150,8 +134,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "12",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -164,9 +147,7 @@
         },
         {
           "$id": "13",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "target"
           ],
@@ -179,8 +160,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "14",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -193,9 +173,7 @@
         },
         {
           "$id": "15",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "details"
           ],
@@ -205,8 +183,7 @@
           "modelTypeName": "IList<ErrorDetails>",
           "modelType": {
             "$id": "16",
-            "$type": "AutoRest.Core.Model.SequenceType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.SequenceType",
+            "$type": "SequenceType",
             "elementType": {
               "$ref": "1"
             },
@@ -219,9 +196,7 @@
         },
         {
           "$id": "17",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "innerError"
           ],
@@ -234,8 +209,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "18",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -255,14 +229,11 @@
     },
     {
       "$id": "19",
-      "$type": "AutoRest.Core.Model.CompositeType, AutoRest.Core",
-      "$actualType": "AutoRest.Core.Model.CompositeType",
+      "$type": "CompositeType",
       "properties": [
         {
           "$id": "20",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "status"
           ],
@@ -281,8 +252,7 @@
           "modelTypeName": "NetworkOperationStatus",
           "modelType": {
             "$id": "21",
-            "$type": "AutoRest.Core.Model.EnumType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.EnumType",
+            "$type": "EnumType",
             "values": [
               {
                 "name": "InProgress",
@@ -314,9 +284,7 @@
         },
         {
           "$id": "22",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "error"
           ],
@@ -343,14 +311,11 @@
     },
     {
       "$id": "23",
-      "$type": "AutoRest.Core.Model.CompositeType, AutoRest.Core",
-      "$actualType": "AutoRest.Core.Model.CompositeType",
+      "$type": "CompositeType",
       "properties": [
         {
           "$id": "24",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "id"
           ],
@@ -363,8 +328,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "25",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -378,9 +342,7 @@
         },
         {
           "$id": "26",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": true,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "name"
           ],
@@ -393,8 +355,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "27",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -408,9 +369,7 @@
         },
         {
           "$id": "28",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": true,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "type"
           ],
@@ -423,8 +382,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "29",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -438,9 +396,7 @@
         },
         {
           "$id": "30",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "location"
           ],
@@ -453,8 +409,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "31",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -468,9 +423,7 @@
         },
         {
           "$id": "32",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "tags"
           ],
@@ -483,12 +436,10 @@
           "modelTypeName": "Dictionary<string,String>",
           "modelType": {
             "$id": "33",
-            "$type": "AutoRest.Core.Model.DictionaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.DictionaryType",
+            "$type": "DictionaryType",
             "valueType": {
               "$id": "34",
-              "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-              "$actualType": "AutoRest.Core.Model.PrimaryType",
+              "$type": "PrimaryType",
               "knownFormat": "none",
               "knownPrimaryType": "string",
               "isConstant": false,
@@ -517,14 +468,11 @@
     },
     {
       "$id": "35",
-      "$type": "AutoRest.Core.Model.CompositeType, AutoRest.Core",
-      "$actualType": "AutoRest.Core.Model.CompositeType",
+      "$type": "CompositeType",
       "properties": [
         {
           "$id": "36",
-          "$actualType": "AutoRest.Core.Model.Property",
           "isReadOnly": false,
-          "isPolymorphicDiscriminator": false,
           "realPath": [
             "id"
           ],
@@ -537,8 +485,7 @@
           "modelTypeName": "String",
           "modelType": {
             "$id": "37",
-            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "$type": "PrimaryType",
             "knownFormat": "none",
             "knownPrimaryType": "string",
             "isConstant": false,
@@ -574,9 +521,7 @@
   "properties": [
     {
       "$id": "38",
-      "$actualType": "AutoRest.Core.Model.Property",
       "isReadOnly": false,
-      "isPolymorphicDiscriminator": false,
       "realPath": [
         "subscriptionId"
       ],
@@ -589,8 +534,7 @@
       "modelTypeName": "String",
       "modelType": {
         "$id": "39",
-        "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-        "$actualType": "AutoRest.Core.Model.PrimaryType",
+        "$type": "PrimaryType",
         "knownFormat": "none",
         "knownPrimaryType": "string",
         "isConstant": false,
@@ -604,9 +548,7 @@
     },
     {
       "$id": "40",
-      "$actualType": "AutoRest.Core.Model.Property",
       "isReadOnly": false,
-      "isPolymorphicDiscriminator": false,
       "realPath": [
         "api-version"
       ],
@@ -619,8 +561,7 @@
       "modelTypeName": "String",
       "modelType": {
         "$id": "41",
-        "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-        "$actualType": "AutoRest.Core.Model.PrimaryType",
+        "$type": "PrimaryType",
         "knownFormat": "none",
         "knownPrimaryType": "string",
         "isConstant": false,
