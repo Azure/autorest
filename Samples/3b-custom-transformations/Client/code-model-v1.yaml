@@ -1,82 +1,54 @@
 ---
 modelTypes:
   - $id: '1'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '2'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - name
-        realXmlPath:
           - name
         collectionFormat: none
         isRequired: true
         isConstant: false
         modelType:
           $id: '3'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#name': name
         '#serializedName': name
       - $id: '4'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - type
-        realXmlPath:
           - type
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '5'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#defaultValue': Microsoft.Storage/storageAccounts
         '#name': type
         '#serializedName': type
     containsConstantProperties: false
-    className: StorageAccountCheckNameAvailabilityParameters
-    declarationName: StorageAccountCheckNameAvailabilityParameters
     '#serializedName': StorageAccountCheckNameAvailabilityParameters
     '#name': StorageAccountCheckNameAvailabilityParameters
   - $id: '6'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '7'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - nameAvailable
-        realXmlPath:
           - nameAvailable
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '8'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: boolean
-          className: Boolean
-          declarationName: Boolean
           '#name': Boolean
         '#documentation': >-
           Gets a boolean value that indicates whether the name is available for
@@ -85,12 +57,8 @@ modelTypes:
         '#name': nameAvailable
         '#serializedName': nameAvailable
       - $id: '9'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - reason
-        realXmlPath:
           - reason
         collectionFormat: none
         extensions:
@@ -101,19 +69,13 @@ modelTypes:
         isConstant: false
         modelType:
           $id: '10'
-          $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.EnumType
+          $type: EnumType
           values:
             - name: AccountNameInvalid
-              memberName: AccountNameInvalid
               serializedName: AccountNameInvalid
             - name: AlreadyExists
-              memberName: AlreadyExists
               serializedName: AlreadyExists
           modelAsString: false
-          declarationName: Reason
-          extendedDocumentation: 'Possible values include: ''AccountNameInvalid'', ''AlreadyExists'''
-          className: Reason
           '#serializedName': Reason
           '#name': Reason
         '#documentation': >-
@@ -122,45 +84,30 @@ modelTypes:
         '#name': reason
         '#serializedName': reason
       - $id: '11'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - message
-        realXmlPath:
           - message
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '12'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets an error message explaining the Reason value in more detail.
         '#name': message
         '#serializedName': message
     documentation: The CheckNameAvailability operation response.
     containsConstantProperties: false
-    className: CheckNameAvailabilityResult
-    declarationName: CheckNameAvailabilityResult
     '#serializedName': CheckNameAvailabilityResult
     '#name': CheckNameAvailabilityResult
   - $id: '13'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '14'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - accountType
-        realXmlPath:
           - accountType
         collectionFormat: none
         extensions:
@@ -171,104 +118,67 @@ modelTypes:
         isConstant: false
         modelType:
           $id: '15'
-          $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.EnumType
+          $type: EnumType
           values:
             - name: Standard_LRS
-              memberName: StandardLRS
               serializedName: Standard_LRS
             - name: Standard_ZRS
-              memberName: StandardZRS
               serializedName: Standard_ZRS
             - name: Standard_GRS
-              memberName: StandardGRS
               serializedName: Standard_GRS
             - name: Standard_RAGRS
-              memberName: StandardRAGRS
               serializedName: Standard_RAGRS
             - name: Premium_LRS
-              memberName: PremiumLRS
               serializedName: Premium_LRS
           modelAsString: false
-          declarationName: AccountType
-          extendedDocumentation: >-
-            Possible values include: 'Standard_LRS', 'Standard_ZRS',
-            'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
-          className: AccountType
           '#serializedName': AccountType
           '#name': AccountType
         '#documentation': Gets or sets the account type.
         '#name': accountType
         '#serializedName': accountType
     containsConstantProperties: false
-    className: StorageAccountPropertiesCreateParameters
-    declarationName: StorageAccountPropertiesCreateParameters
     '#serializedName': StorageAccountPropertiesCreateParameters
     '#name': StorageAccountPropertiesCreateParameters
   - $id: '16'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '17'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - location
-        realXmlPath:
           - location
         collectionFormat: none
         isRequired: true
         isConstant: false
         modelType:
           $id: '18'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Resource location
         '#name': location
         '#serializedName': location
       - $id: '19'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - tags
-        realXmlPath:
           - tags
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '20'
-          $type: 'AutoRest.Core.Model.DictionaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.DictionaryType
+          $type: DictionaryType
           valueType:
             $id: '21'
-            $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-            $actualType: AutoRest.Core.Model.PrimaryType
-            knownFormat: none
+            $type: PrimaryType
             knownPrimaryType: string
-            className: String
-            declarationName: String
             '#name': String
           supportsAdditionalProperties: false
-          className: 'Dictionary<string,String>'
-          declarationName: 'Dictionary<string,String>'
         '#documentation': Resource tags
         '#name': tags
         '#serializedName': tags
       - $id: '22'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - properties
-        realXmlPath:
           - properties
         collectionFormat: none
         extensions:
@@ -281,104 +191,69 @@ modelTypes:
         '#serializedName': properties
     documentation: The parameters to provide for the account.
     containsConstantProperties: false
-    className: StorageAccountCreateParameters
-    declarationName: StorageAccountCreateParameters
     extensions:
       x-ms-azure-resource: true
     '#serializedName': StorageAccountCreateParameters
     '#name': StorageAccountCreateParameters
   - $id: '23'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '24'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - blob
-        realXmlPath:
           - blob
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '25'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets the blob endpoint.
         '#name': blob
         '#serializedName': blob
       - $id: '26'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - queue
-        realXmlPath:
           - queue
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '27'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets the queue endpoint.
         '#name': queue
         '#serializedName': queue
       - $id: '28'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - table
-        realXmlPath:
           - table
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '29'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets the table endpoint.
         '#name': table
         '#serializedName': table
       - $id: '30'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - file
-        realXmlPath:
           - file
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '31'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets the file endpoint.
         '#name': file
@@ -387,56 +262,37 @@ modelTypes:
       The URIs that are used to perform a retrieval of a public blob, queue or
       table object.
     containsConstantProperties: false
-    className: Endpoints
-    declarationName: Endpoints
     '#serializedName': Endpoints
     '#name': Endpoints
   - $id: '32'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '33'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - name
-        realXmlPath:
           - name
         collectionFormat: none
         isRequired: true
         isConstant: false
         modelType:
           $id: '34'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets or sets the custom domain name. Name is the CNAME source.
         '#name': name
         '#serializedName': name
       - $id: '35'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - useSubDomain
-        realXmlPath:
           - useSubDomain
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '36'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: boolean
-          className: Boolean
-          declarationName: Boolean
           '#name': Boolean
         '#documentation': >-
           Indicates whether indirect CName validation is enabled. Default value
@@ -447,21 +303,14 @@ modelTypes:
       The custom domain assigned to this storage account. This can be set via
       Update.
     containsConstantProperties: false
-    className: CustomDomain
-    declarationName: CustomDomain
     '#serializedName': CustomDomain
     '#name': CustomDomain
   - $id: '37'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '38'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - provisioningState
-        realXmlPath:
           - provisioningState
         collectionFormat: none
         extensions:
@@ -472,22 +321,15 @@ modelTypes:
         isConstant: false
         modelType:
           $id: '39'
-          $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.EnumType
+          $type: EnumType
           values:
             - name: Creating
-              memberName: Creating
               serializedName: Creating
             - name: ResolvingDNS
-              memberName: ResolvingDNS
               serializedName: ResolvingDNS
             - name: Succeeded
-              memberName: Succeeded
               serializedName: Succeeded
           modelAsString: false
-          declarationName: ProvisioningState
-          extendedDocumentation: 'Possible values include: ''Creating'', ''ResolvingDNS'', ''Succeeded'''
-          className: ProvisioningState
           '#serializedName': ProvisioningState
           '#name': ProvisioningState
         '#documentation': >-
@@ -496,12 +338,8 @@ modelTypes:
         '#name': provisioningState
         '#serializedName': provisioningState
       - $id: '40'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - accountType
-        realXmlPath:
           - accountType
         collectionFormat: none
         extensions:
@@ -516,12 +354,8 @@ modelTypes:
         '#name': accountType
         '#serializedName': accountType
       - $id: '41'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - primaryEndpoints
-        realXmlPath:
           - primaryEndpoints
         collectionFormat: none
         isRequired: false
@@ -535,35 +369,23 @@ modelTypes:
         '#name': primaryEndpoints
         '#serializedName': primaryEndpoints
       - $id: '42'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - primaryLocation
-        realXmlPath:
           - primaryLocation
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '43'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets the location of the primary for the storage account.
         '#name': primaryLocation
         '#serializedName': primaryLocation
       - $id: '44'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - statusOfPrimary
-        realXmlPath:
           - statusOfPrimary
         collectionFormat: none
         extensions:
@@ -574,19 +396,13 @@ modelTypes:
         isConstant: false
         modelType:
           $id: '45'
-          $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.EnumType
+          $type: EnumType
           values:
             - name: Available
-              memberName: Available
               serializedName: Available
             - name: Unavailable
-              memberName: Unavailable
               serializedName: Unavailable
           modelAsString: false
-          declarationName: AccountStatus
-          extendedDocumentation: 'Possible values include: ''Available'', ''Unavailable'''
-          className: AccountStatus
           '#serializedName': AccountStatus
           '#name': AccountStatus
         '#documentation': >-
@@ -595,25 +411,17 @@ modelTypes:
         '#name': statusOfPrimary
         '#serializedName': statusOfPrimary
       - $id: '46'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - lastGeoFailoverTime
-        realXmlPath:
           - lastGeoFailoverTime
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '47'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
+          $type: PrimaryType
           format: date-time
-          knownFormat: date_time
           knownPrimaryType: dateTime
-          className: DateTime
-          declarationName: DateTime
           '#name': DateTime
         '#documentation': >-
           Gets the timestamp of the most recent instance of a failover to the
@@ -623,24 +431,16 @@ modelTypes:
         '#name': lastGeoFailoverTime
         '#serializedName': lastGeoFailoverTime
       - $id: '48'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - secondaryLocation
-        realXmlPath:
           - secondaryLocation
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '49'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': >-
           Gets the location of the geo replicated secondary for the storage
@@ -649,12 +449,8 @@ modelTypes:
         '#name': secondaryLocation
         '#serializedName': secondaryLocation
       - $id: '50'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - statusOfSecondary
-        realXmlPath:
           - statusOfSecondary
         collectionFormat: none
         extensions:
@@ -672,36 +468,24 @@ modelTypes:
         '#name': statusOfSecondary
         '#serializedName': statusOfSecondary
       - $id: '51'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - creationTime
-        realXmlPath:
           - creationTime
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '52'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
+          $type: PrimaryType
           format: date-time
-          knownFormat: date_time
           knownPrimaryType: dateTime
-          className: DateTime
-          declarationName: DateTime
           '#name': DateTime
         '#documentation': Gets the creation date and time of the storage account in UTC.
         '#name': creationTime
         '#serializedName': creationTime
       - $id: '53'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - customDomain
-        realXmlPath:
           - customDomain
         collectionFormat: none
         isRequired: false
@@ -712,12 +496,8 @@ modelTypes:
         '#name': customDomain
         '#serializedName': customDomain
       - $id: '54'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - secondaryEndpoints
-        realXmlPath:
           - secondaryEndpoints
         collectionFormat: none
         isRequired: false
@@ -731,21 +511,14 @@ modelTypes:
         '#name': secondaryEndpoints
         '#serializedName': secondaryEndpoints
     containsConstantProperties: false
-    className: StorageAccountProperties
-    declarationName: StorageAccountProperties
     '#serializedName': StorageAccountProperties
     '#name': StorageAccountProperties
   - $id: '55'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '56'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - properties
-        realXmlPath:
           - properties
         collectionFormat: none
         extensions:
@@ -758,208 +531,138 @@ modelTypes:
         '#serializedName': properties
     baseModelType:
       $id: '57'
-      $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-      $actualType: AutoRest.Core.Model.CompositeType
+      $type: CompositeType
       properties:
         - $id: '58'
-          $actualType: AutoRest.Core.Model.Property
           isReadOnly: true
-          isPolymorphicDiscriminator: false
           realPath:
-            - id
-          realXmlPath:
             - id
           collectionFormat: none
           isRequired: false
           isConstant: false
           modelType:
             $id: '59'
-            $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-            $actualType: AutoRest.Core.Model.PrimaryType
-            knownFormat: none
+            $type: PrimaryType
             knownPrimaryType: string
-            className: String
-            declarationName: String
             '#name': String
           '#documentation': Resource Id
           '#name': id
           '#serializedName': id
         - $id: '60'
-          $actualType: AutoRest.Core.Model.Property
           isReadOnly: true
-          isPolymorphicDiscriminator: false
           realPath:
-            - name
-          realXmlPath:
             - name
           collectionFormat: none
           isRequired: false
           isConstant: false
           modelType:
             $id: '61'
-            $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-            $actualType: AutoRest.Core.Model.PrimaryType
-            knownFormat: none
+            $type: PrimaryType
             knownPrimaryType: string
-            className: String
-            declarationName: String
             '#name': String
           '#documentation': Resource name
           '#name': name
           '#serializedName': name
         - $id: '62'
-          $actualType: AutoRest.Core.Model.Property
           isReadOnly: true
-          isPolymorphicDiscriminator: false
           realPath:
-            - type
-          realXmlPath:
             - type
           collectionFormat: none
           isRequired: false
           isConstant: false
           modelType:
             $id: '63'
-            $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-            $actualType: AutoRest.Core.Model.PrimaryType
-            knownFormat: none
+            $type: PrimaryType
             knownPrimaryType: string
-            className: String
-            declarationName: String
             '#name': String
           '#documentation': Resource type
           '#name': type
           '#serializedName': type
         - $id: '64'
-          $actualType: AutoRest.Core.Model.Property
           isReadOnly: false
-          isPolymorphicDiscriminator: false
           realPath:
-            - location
-          realXmlPath:
             - location
           collectionFormat: none
           isRequired: false
           isConstant: false
           modelType:
             $id: '65'
-            $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-            $actualType: AutoRest.Core.Model.PrimaryType
-            knownFormat: none
+            $type: PrimaryType
             knownPrimaryType: string
-            className: String
-            declarationName: String
             '#name': String
           '#documentation': Resource location
           '#name': location
           '#serializedName': location
         - $id: '66'
-          $actualType: AutoRest.Core.Model.Property
           isReadOnly: false
-          isPolymorphicDiscriminator: false
           realPath:
-            - tags
-          realXmlPath:
             - tags
           collectionFormat: none
           isRequired: false
           isConstant: false
           modelType:
             $id: '67'
-            $type: 'AutoRest.Core.Model.DictionaryType, AutoRest.Core'
-            $actualType: AutoRest.Core.Model.DictionaryType
+            $type: DictionaryType
             valueType:
               $id: '68'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             supportsAdditionalProperties: false
-            className: 'Dictionary<string,String>'
-            declarationName: 'Dictionary<string,String>'
           '#documentation': Resource tags
           '#name': tags
           '#serializedName': tags
       containsConstantProperties: false
-      className: Resource
-      declarationName: Resource
       extensions:
         x-ms-azure-resource: true
       '#serializedName': Resource
       '#name': Resource
     documentation: The storage account.
     containsConstantProperties: false
-    className: StorageAccount
-    declarationName: StorageAccount
     '#serializedName': StorageAccount
     '#name': StorageAccount
   - $id: '69'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '70'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - key1
-        realXmlPath:
           - key1
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '71'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets the value of key 1.
         '#name': key1
         '#serializedName': key1
       - $id: '72'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - key2
-        realXmlPath:
           - key2
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '73'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets the value of key 2.
         '#name': key2
         '#serializedName': key2
     documentation: The access keys for the storage account.
     containsConstantProperties: false
-    className: StorageAccountKeys
-    declarationName: StorageAccountKeys
     '#serializedName': StorageAccountKeys
     '#name': StorageAccountKeys
   - $id: '74'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '75'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
           - value
         collectionFormat: none
@@ -967,32 +670,22 @@ modelTypes:
         isConstant: false
         modelType:
           $id: '76'
-          $type: 'AutoRest.Core.Model.SequenceType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.SequenceType
+          $type: SequenceType
           elementType:
             $ref: '55'
-          className: IList<StorageAccount>
-          declarationName: IList<StorageAccount>
         '#documentation': Gets the list of storage accounts and their properties.
         '#name': value
         '#serializedName': value
     documentation: The list storage accounts operation response.
     containsConstantProperties: false
-    className: StorageAccountListResult
-    declarationName: StorageAccountListResult
     '#serializedName': StorageAccountListResult
     '#name': StorageAccountListResult
   - $id: '77'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '78'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - accountType
-        realXmlPath:
           - accountType
         collectionFormat: none
         extensions:
@@ -1010,12 +703,8 @@ modelTypes:
         '#name': accountType
         '#serializedName': accountType
       - $id: '79'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - customDomain
-        realXmlPath:
           - customDomain
         collectionFormat: none
         isRequired: false
@@ -1030,51 +719,33 @@ modelTypes:
         '#name': customDomain
         '#serializedName': customDomain
     containsConstantProperties: false
-    className: StorageAccountPropertiesUpdateParameters
-    declarationName: StorageAccountPropertiesUpdateParameters
     '#serializedName': StorageAccountPropertiesUpdateParameters
     '#name': StorageAccountPropertiesUpdateParameters
   - $id: '80'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '81'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - tags
-        realXmlPath:
           - tags
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '82'
-          $type: 'AutoRest.Core.Model.DictionaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.DictionaryType
+          $type: DictionaryType
           valueType:
             $id: '83'
-            $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-            $actualType: AutoRest.Core.Model.PrimaryType
-            knownFormat: none
+            $type: PrimaryType
             knownPrimaryType: string
-            className: String
-            declarationName: String
             '#name': String
           supportsAdditionalProperties: false
-          className: 'Dictionary<string,String>'
-          declarationName: 'Dictionary<string,String>'
         '#documentation': Resource tags
         '#name': tags
         '#serializedName': tags
       - $id: '84'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - properties
-        realXmlPath:
           - properties
         collectionFormat: none
         extensions:
@@ -1087,110 +758,73 @@ modelTypes:
         '#serializedName': properties
     documentation: The parameters to update on the account.
     containsConstantProperties: false
-    className: StorageAccountUpdateParameters
-    declarationName: StorageAccountUpdateParameters
     extensions:
       x-ms-azure-resource: true
     '#serializedName': StorageAccountUpdateParameters
     '#name': StorageAccountUpdateParameters
   - $id: '85'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '86'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - keyName
-        realXmlPath:
           - keyName
         collectionFormat: none
         isRequired: true
         isConstant: false
         modelType:
           $id: '87'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#name': keyName
         '#serializedName': keyName
     containsConstantProperties: false
-    className: StorageAccountRegenerateKeyParameters
-    declarationName: StorageAccountRegenerateKeyParameters
     '#serializedName': StorageAccountRegenerateKeyParameters
     '#name': StorageAccountRegenerateKeyParameters
   - $id: '88'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '89'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - value
-        realXmlPath:
           - value
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '90'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets a string describing the resource name.
         '#name': value
         '#serializedName': value
       - $id: '91'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - localizedValue
-        realXmlPath:
           - localizedValue
         collectionFormat: none
         isRequired: false
         isConstant: false
         modelType:
           $id: '92'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
-          knownFormat: none
+          $type: PrimaryType
           knownPrimaryType: string
-          className: String
-          declarationName: String
           '#name': String
         '#documentation': Gets a localized string describing the resource name.
         '#name': localizedValue
         '#serializedName': localizedValue
     documentation: The Usage Names.
     containsConstantProperties: false
-    className: UsageName
-    declarationName: UsageName
     '#serializedName': UsageName
     '#name': UsageName
   - $id: '93'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '94'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - unit
-        realXmlPath:
           - unit
         collectionFormat: none
         extensions:
@@ -1201,82 +835,54 @@ modelTypes:
         isConstant: false
         modelType:
           $id: '95'
-          $type: 'AutoRest.Core.Model.EnumType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.EnumType
+          $type: EnumType
           values:
             - name: Count
-              memberName: Count
               serializedName: Count
             - name: Bytes
-              memberName: Bytes
               serializedName: Bytes
             - name: Seconds
-              memberName: Seconds
               serializedName: Seconds
             - name: Percent
-              memberName: Percent
               serializedName: Percent
             - name: CountsPerSecond
-              memberName: CountsPerSecond
               serializedName: CountsPerSecond
             - name: BytesPerSecond
-              memberName: BytesPerSecond
               serializedName: BytesPerSecond
           modelAsString: false
-          declarationName: UsageUnit
-          extendedDocumentation: >-
-            Possible values include: 'Count', 'Bytes', 'Seconds', 'Percent',
-            'CountsPerSecond', 'BytesPerSecond'
-          className: UsageUnit
           '#serializedName': UsageUnit
           '#name': UsageUnit
         '#documentation': Gets the unit of measurement.
         '#name': unit
         '#serializedName': unit
       - $id: '96'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - currentValue
-        realXmlPath:
           - currentValue
         collectionFormat: none
         isRequired: true
         isConstant: false
         modelType:
           $id: '97'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
+          $type: PrimaryType
           format: int32
-          knownFormat: int32
           knownPrimaryType: int
-          className: Int
-          declarationName: Int
           '#name': Int
         '#documentation': Gets the current count of the allocated resources in the subscription.
         '#name': currentValue
         '#serializedName': currentValue
       - $id: '98'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - limit
-        realXmlPath:
           - limit
         collectionFormat: none
         isRequired: true
         isConstant: false
         modelType:
           $id: '99'
-          $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.PrimaryType
+          $type: PrimaryType
           format: int32
-          knownFormat: int32
           knownPrimaryType: int
-          className: Int
-          declarationName: Int
           '#name': Int
         '#documentation': >-
           Gets the maximum count of the resources that can be allocated in the
@@ -1284,12 +890,8 @@ modelTypes:
         '#name': limit
         '#serializedName': limit
       - $id: '100'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
-          - name
-        realXmlPath:
           - name
         collectionFormat: none
         isRequired: true
@@ -1301,18 +903,13 @@ modelTypes:
         '#serializedName': name
     documentation: DESCRIBES STORAGE RESOURCE USAGE.
     containsConstantProperties: false
-    className: Usage
-    declarationName: Usage
     '#serializedName': Usage
     '#name': Usage
   - $id: '101'
-    $type: 'AutoRest.Core.Model.CompositeType, AutoRest.Core'
-    $actualType: AutoRest.Core.Model.CompositeType
+    $type: CompositeType
     properties:
       - $id: '102'
-        $actualType: AutoRest.Core.Model.Property
         isReadOnly: false
-        isPolymorphicDiscriminator: false
         realPath:
           - value
         collectionFormat: none
@@ -1320,19 +917,14 @@ modelTypes:
         isConstant: false
         modelType:
           $id: '103'
-          $type: 'AutoRest.Core.Model.SequenceType, AutoRest.Core'
-          $actualType: AutoRest.Core.Model.SequenceType
+          $type: SequenceType
           elementType:
             $ref: '93'
-          className: IList<Usage>
-          declarationName: IList<Usage>
         '#documentation': Gets or sets the list Storage Resource Usages.
         '#name': value
         '#serializedName': value
     documentation: The List Usages operation response.
     containsConstantProperties: false
-    className: UsageListResult
-    declarationName: UsageListResult
     '#serializedName': UsageListResult
     '#name': UsageListResult
   - $ref: '57'
@@ -1346,30 +938,19 @@ namespace: ''
 modelsName: Models
 apiVersion: '2015-06-15'
 baseUrl: 'https://management.azure.com'
-methodGroupNames:
-  - StorageAccounts
-  - Usage
 documentation: The Storage Management Client.
 properties:
   - $id: '104'
-    $actualType: AutoRest.Core.Model.Property
     isReadOnly: false
-    isPolymorphicDiscriminator: false
     realPath:
-      - subscriptionId
-    realXmlPath:
       - subscriptionId
     collectionFormat: none
     isRequired: true
     isConstant: false
     modelType:
       $id: '105'
-      $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-      $actualType: AutoRest.Core.Model.PrimaryType
-      knownFormat: none
+      $type: PrimaryType
       knownPrimaryType: string
-      className: String
-      declarationName: String
       '#name': String
     '#documentation': >-
       Gets subscription credentials which uniquely identify Microsoft Azure
@@ -1378,24 +959,16 @@ properties:
     '#name': subscriptionId
     '#serializedName': subscriptionId
   - $id: '106'
-    $actualType: AutoRest.Core.Model.Property
     isReadOnly: false
-    isPolymorphicDiscriminator: false
     realPath:
-      - api-version
-    realXmlPath:
       - api-version
     collectionFormat: none
     isRequired: true
     isConstant: false
     modelType:
       $id: '107'
-      $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-      $actualType: AutoRest.Core.Model.PrimaryType
-      knownFormat: none
+      $type: PrimaryType
       knownPrimaryType: string
-      className: String
-      declarationName: String
       '#name': String
     '#documentation': Client Api Version.
     '#name': api-version
@@ -1404,7 +977,6 @@ operations:
   - methods:
       - parameters:
           - $id: '108'
-            isClientProperty: false
             location: body
             collectionFormat: none
             isRequired: true
@@ -1418,7 +990,6 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '109'
-            isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
@@ -1427,18 +998,13 @@ operations:
             isConstant: false
             modelType:
               $id: '110'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
             '#serializedName': api-version
           - $id: '111'
-            isClientProperty: true
             clientProperty:
               $ref: '104'
             location: path
@@ -1447,12 +1013,8 @@ operations:
             isConstant: false
             modelType:
               $id: '112'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1489,25 +1051,19 @@ operations:
           /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
       - parameters:
           - $id: '113'
-            isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
             modelType:
               $id: '114'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '115'
-            isClientProperty: false
             location: path
             collectionFormat: none
             constraints:
@@ -1517,12 +1073,8 @@ operations:
             isConstant: false
             modelType:
               $id: '116'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -1531,7 +1083,6 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '117'
-            isClientProperty: false
             location: body
             collectionFormat: none
             isRequired: true
@@ -1542,7 +1093,6 @@ operations:
             '#name': parameters
             '#serializedName': parameters
           - $id: '118'
-            isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
@@ -1551,18 +1101,13 @@ operations:
             isConstant: false
             modelType:
               $id: '119'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
             '#serializedName': api-version
           - $id: '120'
-            isClientProperty: true
             clientProperty:
               $ref: '104'
             location: path
@@ -1571,12 +1116,8 @@ operations:
             isConstant: false
             modelType:
               $id: '121'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1621,25 +1162,19 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '122'
-            isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
             modelType:
               $id: '123'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '124'
-            isClientProperty: false
             location: path
             collectionFormat: none
             constraints:
@@ -1649,12 +1184,8 @@ operations:
             isConstant: false
             modelType:
               $id: '125'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -1663,7 +1194,6 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '126'
-            isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
@@ -1672,18 +1202,13 @@ operations:
             isConstant: false
             modelType:
               $id: '127'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
             '#serializedName': api-version
           - $id: '128'
-            isClientProperty: true
             clientProperty:
               $ref: '104'
             location: path
@@ -1692,12 +1217,8 @@ operations:
             isConstant: false
             modelType:
               $id: '129'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1730,25 +1251,19 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '130'
-            isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
             modelType:
               $id: '131'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '132'
-            isClientProperty: false
             location: path
             collectionFormat: none
             constraints:
@@ -1758,12 +1273,8 @@ operations:
             isConstant: false
             modelType:
               $id: '133'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -1772,7 +1283,6 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '134'
-            isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
@@ -1781,18 +1291,13 @@ operations:
             isConstant: false
             modelType:
               $id: '135'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
             '#serializedName': api-version
           - $id: '136'
-            isClientProperty: true
             clientProperty:
               $ref: '104'
             location: path
@@ -1801,12 +1306,8 @@ operations:
             isConstant: false
             modelType:
               $id: '137'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1844,25 +1345,19 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '138'
-            isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
             modelType:
               $id: '139'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '140'
-            isClientProperty: false
             location: path
             collectionFormat: none
             constraints:
@@ -1872,12 +1367,8 @@ operations:
             isConstant: false
             modelType:
               $id: '141'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -1886,7 +1377,6 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '142'
-            isClientProperty: false
             location: body
             collectionFormat: none
             isRequired: true
@@ -1899,7 +1389,6 @@ operations:
             '#name': parameters
             '#serializedName': parameters
           - $id: '143'
-            isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
@@ -1908,18 +1397,13 @@ operations:
             isConstant: false
             modelType:
               $id: '144'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
             '#serializedName': api-version
           - $id: '145'
-            isClientProperty: true
             clientProperty:
               $ref: '104'
             location: path
@@ -1928,12 +1412,8 @@ operations:
             isConstant: false
             modelType:
               $id: '146'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -1981,25 +1461,19 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '147'
-            isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
             modelType:
               $id: '148'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': The name of the resource group.
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '149'
-            isClientProperty: false
             location: path
             collectionFormat: none
             constraints:
@@ -2009,18 +1483,13 @@ operations:
             isConstant: false
             modelType:
               $id: '150'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': The name of the storage account.
             '#name': accountName
             '#serializedName': accountName
           - $id: '151'
-            isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
@@ -2029,18 +1498,13 @@ operations:
             isConstant: false
             modelType:
               $id: '152'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
             '#serializedName': api-version
           - $id: '153'
-            isClientProperty: true
             clientProperty:
               $ref: '104'
             location: path
@@ -2049,12 +1513,8 @@ operations:
             isConstant: false
             modelType:
               $id: '154'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2089,7 +1549,6 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
       - parameters:
           - $id: '155'
-            isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
@@ -2098,18 +1557,13 @@ operations:
             isConstant: false
             modelType:
               $id: '156'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
             '#serializedName': api-version
           - $id: '157'
-            isClientProperty: true
             clientProperty:
               $ref: '104'
             location: path
@@ -2118,12 +1572,8 @@ operations:
             isConstant: false
             modelType:
               $id: '158'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2164,25 +1614,19 @@ operations:
           /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
       - parameters:
           - $id: '159'
-            isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
             modelType:
               $id: '160'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '161'
-            isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
@@ -2191,18 +1635,13 @@ operations:
             isConstant: false
             modelType:
               $id: '162'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
             '#serializedName': api-version
           - $id: '163'
-            isClientProperty: true
             clientProperty:
               $ref: '104'
             location: path
@@ -2211,12 +1650,8 @@ operations:
             isConstant: false
             modelType:
               $id: '164'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2257,25 +1692,19 @@ operations:
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts
       - parameters:
           - $id: '165'
-            isClientProperty: false
             location: path
             collectionFormat: none
             isRequired: true
             isConstant: false
             modelType:
               $id: '166'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': The name of the resource group within the user's subscription.
             '#name': resourceGroupName
             '#serializedName': resourceGroupName
           - $id: '167'
-            isClientProperty: false
             location: path
             collectionFormat: none
             constraints:
@@ -2285,12 +1714,8 @@ operations:
             isConstant: false
             modelType:
               $id: '168'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               The name of the storage account within the specified resource
@@ -2299,7 +1724,6 @@ operations:
             '#name': accountName
             '#serializedName': accountName
           - $id: '169'
-            isClientProperty: false
             location: body
             collectionFormat: none
             isRequired: true
@@ -2312,7 +1736,6 @@ operations:
             '#name': regenerateKey
             '#serializedName': regenerateKey
           - $id: '170'
-            isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
@@ -2321,18 +1744,13 @@ operations:
             isConstant: false
             modelType:
               $id: '171'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
             '#serializedName': api-version
           - $id: '172'
-            isClientProperty: true
             clientProperty:
               $ref: '104'
             location: path
@@ -2341,12 +1759,8 @@ operations:
             isConstant: false
             modelType:
               $id: '173'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -2379,9 +1793,6 @@ operations:
         '#serializedName': StorageAccounts_RegenerateKey
         '#url': >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
-    isCodeModelMethodGroup: false
-    usings:
-      - Models
     '#name': checkNameAvailability
     summary: |-
       {
@@ -2390,7 +1801,6 @@ operations:
             "parameters": [
               {
                 "$id": "108",
-                "isClientProperty": false,
                 "location": "body",
                 "collectionFormat": "none",
                 "isRequired": true,
@@ -2404,7 +1814,6 @@ operations:
               },
               {
                 "$id": "109",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
@@ -2414,12 +1823,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "110",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2428,7 +1833,6 @@ operations:
               },
               {
                 "$id": "111",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
                 },
@@ -2438,12 +1842,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "112",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -2487,19 +1887,14 @@ operations:
             "parameters": [
               {
                 "$id": "113",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
                 "modelType": {
                   "$id": "114",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -2508,7 +1903,6 @@ operations:
               },
               {
                 "$id": "115",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "constraints": {
@@ -2519,12 +1913,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "116",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -2533,7 +1923,6 @@ operations:
               },
               {
                 "$id": "117",
-                "isClientProperty": false,
                 "location": "body",
                 "collectionFormat": "none",
                 "isRequired": true,
@@ -2547,7 +1936,6 @@ operations:
               },
               {
                 "$id": "118",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
@@ -2557,12 +1945,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "119",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2571,7 +1955,6 @@ operations:
               },
               {
                 "$id": "120",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
                 },
@@ -2581,12 +1964,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "121",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -2636,19 +2015,14 @@ operations:
             "parameters": [
               {
                 "$id": "122",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
                 "modelType": {
                   "$id": "123",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -2657,7 +2031,6 @@ operations:
               },
               {
                 "$id": "124",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "constraints": {
@@ -2668,12 +2041,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "125",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -2682,7 +2051,6 @@ operations:
               },
               {
                 "$id": "126",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
@@ -2692,12 +2060,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "127",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2706,7 +2070,6 @@ operations:
               },
               {
                 "$id": "128",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
                 },
@@ -2716,12 +2079,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "129",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -2762,19 +2121,14 @@ operations:
             "parameters": [
               {
                 "$id": "130",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
                 "modelType": {
                   "$id": "131",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -2783,7 +2137,6 @@ operations:
               },
               {
                 "$id": "132",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "constraints": {
@@ -2794,12 +2147,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "133",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -2808,7 +2157,6 @@ operations:
               },
               {
                 "$id": "134",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
@@ -2818,12 +2166,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "135",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2832,7 +2176,6 @@ operations:
               },
               {
                 "$id": "136",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
                 },
@@ -2842,12 +2185,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "137",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -2891,19 +2230,14 @@ operations:
             "parameters": [
               {
                 "$id": "138",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
                 "modelType": {
                   "$id": "139",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -2912,7 +2246,6 @@ operations:
               },
               {
                 "$id": "140",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "constraints": {
@@ -2923,12 +2256,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "141",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -2937,7 +2266,6 @@ operations:
               },
               {
                 "$id": "142",
-                "isClientProperty": false,
                 "location": "body",
                 "collectionFormat": "none",
                 "isRequired": true,
@@ -2951,7 +2279,6 @@ operations:
               },
               {
                 "$id": "143",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
@@ -2961,12 +2288,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "144",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -2975,7 +2298,6 @@ operations:
               },
               {
                 "$id": "145",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
                 },
@@ -2985,12 +2307,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "146",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3034,19 +2352,14 @@ operations:
             "parameters": [
               {
                 "$id": "147",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
                 "modelType": {
                   "$id": "148",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group.",
@@ -3055,7 +2368,6 @@ operations:
               },
               {
                 "$id": "149",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "constraints": {
@@ -3066,12 +2378,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "150",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account.",
@@ -3080,7 +2388,6 @@ operations:
               },
               {
                 "$id": "151",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
@@ -3090,12 +2397,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "152",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3104,7 +2407,6 @@ operations:
               },
               {
                 "$id": "153",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
                 },
@@ -3114,12 +2416,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "154",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3163,7 +2461,6 @@ operations:
             "parameters": [
               {
                 "$id": "155",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
@@ -3173,12 +2470,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "156",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3187,7 +2480,6 @@ operations:
               },
               {
                 "$id": "157",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
                 },
@@ -3197,12 +2489,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "158",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3251,19 +2539,14 @@ operations:
             "parameters": [
               {
                 "$id": "159",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
                 "modelType": {
                   "$id": "160",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -3272,7 +2555,6 @@ operations:
               },
               {
                 "$id": "161",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
@@ -3282,12 +2564,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "162",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3296,7 +2574,6 @@ operations:
               },
               {
                 "$id": "163",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
                 },
@@ -3306,12 +2583,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "164",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3360,19 +2633,14 @@ operations:
             "parameters": [
               {
                 "$id": "165",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "isRequired": true,
                 "isConstant": false,
                 "modelType": {
                   "$id": "166",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the resource group within the user's subscription.",
@@ -3381,7 +2649,6 @@ operations:
               },
               {
                 "$id": "167",
-                "isClientProperty": false,
                 "location": "path",
                 "collectionFormat": "none",
                 "constraints": {
@@ -3392,12 +2659,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "168",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
@@ -3406,7 +2669,6 @@ operations:
               },
               {
                 "$id": "169",
-                "isClientProperty": false,
                 "location": "body",
                 "collectionFormat": "none",
                 "isRequired": true,
@@ -3420,7 +2682,6 @@ operations:
               },
               {
                 "$id": "170",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
@@ -3430,12 +2691,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "171",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3444,7 +2701,6 @@ operations:
               },
               {
                 "$id": "172",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
                 },
@@ -3454,12 +2710,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "173",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3500,16 +2752,11 @@ operations:
             "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"
           }
         ],
-        "isCodeModelMethodGroup": false,
-        "usings": [
-          "Models"
-        ],
         "#name": "checkNameAvailability"
       }
   - methods:
       - parameters:
           - $id: '174'
-            isClientProperty: true
             clientProperty:
               $ref: '106'
             location: query
@@ -3518,18 +2765,13 @@ operations:
             isConstant: false
             modelType:
               $id: '175'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': Client Api Version.
             '#name': api-version
             '#serializedName': api-version
           - $id: '176'
-            isClientProperty: true
             clientProperty:
               $ref: '104'
             location: path
@@ -3538,12 +2780,8 @@ operations:
             isConstant: false
             modelType:
               $id: '177'
-              $type: 'AutoRest.Core.Model.PrimaryType, AutoRest.Core'
-              $actualType: AutoRest.Core.Model.PrimaryType
-              knownFormat: none
+              $type: PrimaryType
               knownPrimaryType: string
-              className: String
-              declarationName: String
               '#name': String
             '#documentation': >-
               Gets subscription credentials which uniquely identify Microsoft
@@ -3580,9 +2818,6 @@ operations:
         '#group': Usage
         '#serializedName': Usage_List
         '#url': '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
-    isCodeModelMethodGroup: false
-    usings:
-      - Models
     '#name': usages
     summary: |-
       {
@@ -3591,7 +2826,6 @@ operations:
             "parameters": [
               {
                 "$id": "174",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "106"
                 },
@@ -3601,12 +2835,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "175",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Client Api Version.",
@@ -3615,7 +2845,6 @@ operations:
               },
               {
                 "$id": "176",
-                "isClientProperty": true,
                 "clientProperty": {
                   "$ref": "104"
                 },
@@ -3625,12 +2854,8 @@ operations:
                 "isConstant": false,
                 "modelType": {
                   "$id": "177",
-                  "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
-                  "$actualType": "AutoRest.Core.Model.PrimaryType",
-                  "knownFormat": "none",
+                  "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "className": "String",
-                  "declarationName": "String",
                   "#name": "String"
                 },
                 "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
@@ -3675,10 +2900,6 @@ operations:
             "#serializedName": "Usage_List",
             "#url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"
           }
-        ],
-        "isCodeModelMethodGroup": false,
-        "usings": [
-          "Models"
         ],
         "#name": "usages"
       }

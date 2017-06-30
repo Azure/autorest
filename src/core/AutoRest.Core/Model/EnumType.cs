@@ -15,11 +15,12 @@ namespace AutoRest.Core.Model
     /// </summary>
     public class EnumType : ModelType
     {
+        [JsonIgnore]
         protected virtual string ModelAsStringType => New<PrimaryType>(KnownPrimaryType.String).Name;
 
-        public override string RefName => "AutoRest.Core.Model.EnumType, AutoRest.Core";
+        [JsonIgnore]
         public override string Qualifier => "Enum";
-        public override string QualifierType => "EnumType";
+        [JsonIgnore]
         public override IEnumerable<IChild> Children => Values;
 
         /// <summary>
@@ -66,6 +67,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         public bool ModelAsString { get; set; }
 
+        [JsonIgnore]
         public override string DeclarationName => ModelAsString ? ModelAsStringType : base.DeclarationName;
 
         /// <summary>
@@ -85,6 +87,7 @@ namespace AutoRest.Core.Model
                 ModelAsString == (other as EnumType).ModelAsString;
         }
 
+        [JsonIgnore]
         public override string ExtendedDocumentation
             => $"Possible values include: {string.Join(", ", Values.Select(v => $"'{v.Name}'"))}";
     }
