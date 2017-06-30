@@ -18,8 +18,8 @@
     }
   ],
   "dependencies": {
-    "ms-rest": "^2.0.0",
-    "ms-rest-azure": "^2.0.0",
+    "ms-rest": "^2.2.1",
+    "ms-rest-azure": "^2.2.1",
     "jshint": "2.9.4",
     "moment": "^2.14.1",
     "mocha": "2.2.5",

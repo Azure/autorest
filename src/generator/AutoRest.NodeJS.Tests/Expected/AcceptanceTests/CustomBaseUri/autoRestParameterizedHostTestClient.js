@@ -30,7 +30,7 @@ class AutoRestParameterizedHostTestClient extends ServiceClient {
    * @param {object} [options.requestOptions] - Options for the underlying request object
    * {@link https://github.com/request/request#requestoptions-callback Options doc}
    * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-       * @param {string} [options.host] - A string value that is used as a global part of the parameterized host
+   * @param {string} [options.host] - A string value that is used as a global part of the parameterized host
    */
   constructor(options) {
 

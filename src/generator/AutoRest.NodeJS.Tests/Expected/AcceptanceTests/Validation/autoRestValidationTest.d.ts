@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as models from "./models";
 
-declare class AutoRestValidationTest {
+declare class AutoRestValidationTest extends ServiceClient {
   /**
    * @class
    * Initializes a new instance of the AutoRestValidationTest class.

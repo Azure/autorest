@@ -8,10 +8,20 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
-declare class AutoRestUrlTestService {
+/**
+ * AutoRestUrlTestServiceOptions for AutoRestUrlTestService.
+ */
+declare interface AutoRestUrlTestServiceOptions extends ServiceClientOptions {
+  /**
+   * @property {string} [globalStringQuery] - should contain value null
+   */
+  globalStringQuery?: String;
+}
+
+declare class AutoRestUrlTestService extends ServiceClient {
   /**
    * @class
    * Initializes a new instance of the AutoRestUrlTestService class.
@@ -33,7 +43,7 @@ declare class AutoRestUrlTestService {
    * @param {string} [options.globalStringQuery] - should contain value null
    *
    */
-  constructor(globalStringPath: string, baseUri?: string, options?: ServiceClientOptions);
+  constructor(globalStringPath: string, baseUri?: string, options?: AutoRestUrlTestServiceOptions);
 
   globalStringPath: string;
 

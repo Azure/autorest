@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
-declare class AutoRestRFC1123DateTimeTestService {
+declare class AutoRestRFC1123DateTimeTestService extends ServiceClient {
   /**
    * @class
    * Initializes a new instance of the AutoRestRFC1123DateTimeTestService class.

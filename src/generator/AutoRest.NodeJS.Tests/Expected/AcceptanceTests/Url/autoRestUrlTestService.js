@@ -32,7 +32,7 @@ class AutoRestUrlTestService extends ServiceClient {
    * @param {object} [options.requestOptions] - Options for the underlying request object
    * {@link https://github.com/request/request#requestoptions-callback Options doc}
    * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-       * @param {string} [options.globalStringQuery] - should contain value null
+   * @param {string} [options.globalStringQuery] - should contain value null
    */
   constructor(globalStringPath, baseUri, options) {
     if (globalStringPath === null || globalStringPath === undefined) {
