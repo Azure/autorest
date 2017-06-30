@@ -1,10 +1,15 @@
 task 'copy-dts-files', '', (done)->
   # this needs to run multiple times.
   global.completed['copy-dts-files'] = false
-  
+  copyDtsFiles(done)
+  return null
+
+copyDtsFiles = (done) =>
   # copy *.d.ts files 
   source ["#{basefolder}/src/autorest-core/dist/**/*.d.ts","!#{basefolder}/src/autorest-core/dist/test/**" ]
     .pipe destination "#{basefolder}/src/autorest/lib/core"
+    .on 'end', done
+  return null
 
 task 'fix-line-endings', 'typescript', ->
   typescriptFiles()
@@ -40,25 +45,27 @@ task 'build', 'typescript',["pre-build"], (done)->
   watcher = watchFiles ["#{basefolder}/src/autorest-core/dist/**/*.d.ts"], ["copy-dts-files"]
   
   typescriptProjectFolders()
-    .on 'end', -> 
-      run 'compile/typescript', -> 
+    .on 'end', ->
+      run 'compile/typescript', ->
         watcher._watcher.close() if !watch
         done()
 
-    .pipe where (each ) -> 
+    .pipe where (each ) ->
       return test "-f", "#{each.path}/tsconfig.json"
       
     .pipe foreach (each,next ) ->
       fn = filename each.path
-      deps =  ("compile/typescript/#{d.substring(d.indexOf('/')+1)}" for d in (global.Dependencies[fn] || []) )
+      deps = ("compile/typescript/#{d.substring(d.indexOf('/')+1)}" for d in (global.Dependencies[fn] || []))
       
-      task 'compile/typescript', fn,deps, (fin) ->
-        execute "#{basefolder}/node_modules/.bin/tsc --project #{each.path} ", {cwd: each.path }, (code,stdout,stderr) ->
-          if watch 
-            execute "#{basefolder}/node_modules/.bin/tsc --watch --project #{each.path}", (c,o,e)-> 
-             echo "watching #{fn}"
-            , (d) -> echo d.replace(/^src\//mig, "#{basefolder}/src/")
-          fin()
+      task 'compile/typescript', fn, deps, (fin) ->
+        copyDtsFiles ->
+          execute "#{basefolder}/node_modules/.bin/tsc --project #{each.path} ", {cwd: each.path }, (code,stdout,stderr) ->
+            if watch
+              execute "#{basefolder}/node_modules/.bin/tsc --watch --project #{each.path}", (c,o,e) ->
+              echo "watching #{fn}"
+              , (d) -> echo d.replace(/^src\//mig, "#{basefolder}/src/")
+            fin()
+          return null;
       next null
     return null
 
@@ -88,9 +95,9 @@ task 'npm-install', '', ['init-deps'], (done)->
 
 task 'pre-build', 'typescript', (done)-> 
   # symlink the build into the target folder for the binaries.
-  if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
-    mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
+  if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules"
+    mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules"
 
-  if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core"
-    fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core",'junction' 
+  if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core"
+    fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core",'junction' 
   done()

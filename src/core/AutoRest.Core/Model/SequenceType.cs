@@ -18,8 +18,9 @@ namespace AutoRest.Core.Model
             Name.OnGet+= v=> $"IList<{ElementType.Name}>";
         }
 
+        [JsonIgnore]
         public override string Qualifier => "Dictionary";
-        public override string RefName => $"AutoRest.Core.Model.SequenceType, AutoRest.Core";
+
         public override void Disambiguate()
         {
             // not needed, right?

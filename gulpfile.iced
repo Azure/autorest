@@ -22,7 +22,7 @@ Import
   autorest: (args,done,ignoreexitcode) ->
     # Run AutoRest from the original current directory.
     echo info "AutoRest #{args.join(' ')}"
-    execute "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
+    execute "node #{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core/dist/app.js #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
       return done(code,stdout,stderr)
 
   # which projects to care about
@@ -38,14 +38,14 @@ Import
     
   # assemblies that we sign
   assemblies: () -> 
-    source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**/AutoRest*"
+    source "src/core/AutoRest/bin/netcoreapp1.0/publish/**/AutoRest*"
       .pipe except /pdb$/i
       .pipe except /json$/i
       .pipe except /so$/i
       .pipe onlyFiles()
 
   packagefiles: () -> 
-    source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**"
+    source "src/core/AutoRest/bin/netcoreapp1.0/publish/**"
       .pipe except /pdb$/i
       .pipe onlyFiles()
   
@@ -96,7 +96,7 @@ Import
 
 task 'install/binaries', '', (done)->
   mkdir "-p", "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private"
-  source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**"
+  source "src/core/AutoRest/bin/netcoreapp1.0/publish/**"
     .pipe destination "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private" 
 
 task 'install/bootstrapper', 'Build and install the bootstrapper into the global node.js', (done) ->

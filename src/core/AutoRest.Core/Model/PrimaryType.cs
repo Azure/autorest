@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Utilities;
+using Newtonsoft.Json;
 
 namespace AutoRest.Core.Model
 {
@@ -27,9 +28,8 @@ namespace AutoRest.Core.Model
         }
 
         public override IEnumerable<IChild> Children => Enumerable.Empty<IChild>();
+        [JsonIgnore]
         public override string Qualifier => "PrimaryType";
-
-        public override string RefName => $"AutoRest.Core.Model.PrimaryType, AutoRest.Core";
 
         /// <summary>
         ///     Gets or sets the model type format.
@@ -40,6 +40,7 @@ namespace AutoRest.Core.Model
         ///     Returns the KnownFormat of the Format string (provided it matches a KnownFormat)
         ///     Otherwise, returns KnownFormat.none
         /// </summary>
+        [JsonIgnore]
         public KnownFormat KnownFormat => KnownFormatExtensions.Parse(Format);
 
         /// <summary>
