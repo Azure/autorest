@@ -265,7 +265,7 @@ export class ConfigurationView {
   // public methods
 
   public get UseExtensions(): Array<{ name: string, source: string, fullyQualified: string }> {
-    const useExtensions = this.config["use-extension"] || {};
+    const useExtensions = this.Indexer["use-extension"] || {};
     return Object.keys(useExtensions).map(name => {
       const source = useExtensions[name];
       return {
@@ -516,8 +516,15 @@ export class Configuration {
       }
       // acquire additional extensions
       for (const additionalExtension of additionalExtensions) {
+        // TODO: remove
+        if (additionalExtension.name === "@microsoft.azure/autorest-classic-generators")
+          additionalExtension.source = __dirname.replace("autorest-core\\dist\\lib", "core\\AutoRest");
+        // TODO: remove
+
         const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
-        const ext = await pack.install();
+        const extPromise = extMgr.installPackage(pack);
+        (extPromise as any).Message.Subscribe((s: any, m: any) => messageEmitter.Message.Dispatch({ Text: m, Channel: Channel.Verbose }));
+        const ext = await extPromise;
 
         // start extension
         loadedExtensions[additionalExtension.fullyQualified] = new LazyPromise(async () => AutoRestExtension.FromChildProcess(await ext.start()));

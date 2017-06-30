@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { SpawnJsonRpcAutoRest } from "../../interop/autorest-dotnet";
 import { FastStringify } from "../ref/yaml";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import { safeEval } from "../ref/safe-eval";
@@ -242,15 +243,28 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 }
 
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
-
-  const pipeline = BuildPipeline(configView);
-  const fsInput = configView.DataStore.GetReadThroughScopeFileSystem(fileSystem);
-
   // externals (TODO: make these dynamically loaded)
   const oavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/plugins/openapi-validation-tools`);
-  const aiPluginHost = await AutoRestExtension.FromModule(`${__dirname}/../../../node_modules/autorest-interactive`);
   const aoavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/../../../node_modules/@microsoft.azure/openapi-validator`);
   const autoRestDotNet = await GetAutoRestDotNetPlugin();
+
+  // __status scope
+  const startTime = Date.now();
+  (configView.Raw as any).__status = new Proxy<any>({}, {
+    async get(_, key) {
+      const expr = new Buffer(key.toString(), "base64").toString("ascii");
+      try {
+        return FastStringify(safeEval(expr, {
+          pipeline: pipeline.pipeline,
+          tasks: tasks,
+          startTime: startTime,
+          blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => configView.DataStore.Blame(uri, position)
+        }));
+      } catch (e) {
+        return "" + e;
+      }
+    }
+  });
 
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
@@ -278,35 +292,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
-    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)])),
-    "autorest-interactive": async (
-      config: ConfigurationView,
-      input: DataStoreViewReadonly,
-      working: DataStoreView,
-      output: DataStoreView) => {
-      const startTime = Date.now();
-      await CreatePluginExternal(aiPluginHost, "autorest-interactive")(
-        config.GetNestedConfigurationImmediate({
-          __status: new Proxy<any>({}, {
-            async get(_, key) {
-              const expr = new Buffer(key.toString(), "base64").toString("ascii");
-              try {
-                return FastStringify(safeEval(expr, {
-                  pipeline: pipeline.pipeline,
-                  tasks: tasks,
-                  startTime: startTime,
-                  blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => config.DataStore.Blame(uri, position)
-                }));
-              } catch (e) {
-                return "" + e;
-              }
-            }
-          })
-        }),
-        config.DataStore,
-        working,
-        output);
-    }
+    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)]))
   };
 
   // dynamically loaded, auto-discovered plugins
@@ -318,6 +304,9 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   }
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
+
+  const fsInput = configView.DataStore.GetReadThroughScopeFileSystem(fileSystem);
+  const pipeline = BuildPipeline(configView);
 
   const ScheduleNode: (nodeName: string) => Promise<DataStoreViewReadonly> =
     async (nodeName) => {

@@ -14,14 +14,9 @@ openapi-type: arm
 
 ### External Plugins
 
-``` yaml $(use-local-autorest)
+``` yaml
 use-extension:
-  @microsoft.azure/autorest-classic-generators: $(use-local-autorest)\src\core\AutoRest\bin\netcoreapp1.0
-```
-
-``` yaml !$(use-local-autorest)
-use-extension:
-  @microsoft.azure/autorest-classic-generators: 2.0.0-preview
+  "@microsoft.azure/autorest-classic-generators": 2.0.0-preview
 ```
 
 ### Graph
@@ -32,8 +27,6 @@ use-extension:
 pipeline:
   pipeline-emitter: # emits the pipeline graph
     scope: scope-pipeline-emitter
-  autorest-interactive:
-    scope: autorest-interactive
 
 scope-pipeline-emitter:
   input-artifact: pipeline

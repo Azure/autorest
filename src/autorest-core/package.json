@@ -27,7 +27,6 @@
     "@types/jsonpath": "^0.1.29",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
-    "autorest-interactive": "https://github.com/olydis/autorest-interactive",
     "bluebird": "*",
     "commonmark": "^0.27.0",
     "mocha": "3.2.0",
