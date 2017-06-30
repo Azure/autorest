@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
-declare class AutoRestSwaggerBATService {
+declare class AutoRestSwaggerBATService extends ServiceClient {
   /**
    * @class
    * Initializes a new instance of the AutoRestSwaggerBATService class.

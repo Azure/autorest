@@ -1883,7 +1883,7 @@ describe('nodejs', function () {
         testClient.paths.byteNull(null, function (error, result) {
           should.exist(error);
           should.not.exist(result);
-          testClient.paths.byteEmpty(new Buffer(''), function (error, result) {
+          testClient.paths.byteEmpty(function (error, result) {
             should.not.exist(error);
             testClient.paths.byteMultiByte(new Buffer('啊齄丂狛狜隣郎隣兀﨩'), function (error, result) {
               should.not.exist(error);
@@ -1894,11 +1894,11 @@ describe('nodejs', function () {
       });
 
       it('should work when path has string', function (done) {
-        testClient.paths.stringEmpty('', function (error, result) {
+        testClient.paths.stringEmpty(function (error, result) {
           should.not.exist(error);
           testClient.paths.stringNull(null, function (error, result) {
             should.exist(error);
-            testClient.paths.stringUrlEncoded('begin!*\'();:@ &=+$,/?#[]end', function (error, result) {
+            testClient.paths.stringUrlEncoded(function (error, result) {
               should.not.exist(error);
               done();
             });
@@ -1922,7 +1922,7 @@ describe('nodejs', function () {
       });
 
       it('should work when path has datetime', function (done) {
-        testClient.paths.dateTimeValid(new Date('2012-01-01T01:01:01Z'), function (error, result) {
+        testClient.paths.dateTimeValid(function (error, result) {
           should.not.exist(error);
           testClient.paths.dateTimeNull(null, function (error, result) {
             should.exist(error);
@@ -1960,9 +1960,9 @@ describe('nodejs', function () {
       });
 
       it('should work when path has bool', function (done) {
-        testClient.paths.getBooleanTrue(true, function (error, result) {
+        testClient.paths.getBooleanTrue(function (error, result) {
           should.not.exist(error);
-          testClient.paths.getBooleanFalse(false, function (error, result) {
+          testClient.paths.getBooleanFalse(function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -1970,9 +1970,9 @@ describe('nodejs', function () {
       });
 
       it('should work when path has double decimal values', function (done) {
-        testClient.paths.doubleDecimalNegative(-9999999.999, function (error, result) {
+        testClient.paths.doubleDecimalNegative(function (error, result) {
           should.not.exist(error);
-          testClient.paths.doubleDecimalPositive(9999999.999, function (error, result) {
+          testClient.paths.doubleDecimalPositive(function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -1980,9 +1980,9 @@ describe('nodejs', function () {
       });
 
       it('should work when path has float values', function (done) {
-        testClient.paths.floatScientificNegative(-1.034e-20, function (error, result) {
+        testClient.paths.floatScientificNegative(function (error, result) {
           should.not.exist(error);
-          testClient.paths.floatScientificPositive(1.034e20, function (error, result) {
+          testClient.paths.floatScientificPositive(function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -1990,9 +1990,9 @@ describe('nodejs', function () {
       });
 
       it('should work when path has integer values', function (done) {
-        testClient.paths.getIntNegativeOneMillion(-1000000, function (error, result) {
+        testClient.paths.getIntNegativeOneMillion(function (error, result) {
           should.not.exist(error);
-          testClient.paths.getIntOneMillion(1000000, function (error, result) {
+          testClient.paths.getIntOneMillion(function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -2000,9 +2000,9 @@ describe('nodejs', function () {
       });
 
       it('should work when path has big integer values', function (done) {
-        testClient.paths.getNegativeTenBillion(-10000000000, function (error, result) {
+        testClient.paths.getNegativeTenBillion(function (error, result) {
           should.not.exist(error);
-          testClient.paths.getTenBillion(10000000000, function (error, result) {
+          testClient.paths.getTenBillion(function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -2185,35 +2185,35 @@ describe('nodejs', function () {
           should.not.exist(error);
           testClient.httpSuccess.get200(function (error, result) {
             should.not.exist(error);
-            testClient.httpSuccess.put200(true, function (error, result) {
+            testClient.httpSuccess.put200({ booleanValue: true }, function (error, result) {
               should.not.exist(error);
-              testClient.httpSuccess.post200(true, function (error, result) {
+              testClient.httpSuccess.post200({ booleanValue: true }, function (error, result) {
                 should.not.exist(error);
-                testClient.httpSuccess.patch200(true, function (error, result) {
+                testClient.httpSuccess.patch200({ booleanValue: true }, function (error, result) {
                   should.not.exist(error);
-                  testClient.httpSuccess.delete200(true, function (error, result) {
+                  testClient.httpSuccess.delete200({ booleanValue: true }, function (error, result) {
                     should.not.exist(error);
-                    testClient.httpSuccess.put201(true, function (error, result) {
+                    testClient.httpSuccess.put201({ booleanValue: true }, function (error, result) {
                       should.not.exist(error);
-                      testClient.httpSuccess.post201(true, function (error, result) {
+                      testClient.httpSuccess.post201({ booleanValue: true }, function (error, result) {
                         should.not.exist(error);
-                        testClient.httpSuccess.put202(true, function (error, result) {
+                        testClient.httpSuccess.put202({ booleanValue: true }, function (error, result) {
                           should.not.exist(error);
-                          testClient.httpSuccess.post202(true, function (error, result) {
+                          testClient.httpSuccess.post202({ booleanValue: true }, function (error, result) {
                             should.not.exist(error);
-                            testClient.httpSuccess.patch202(true, function (error, result) {
+                            testClient.httpSuccess.patch202({ booleanValue: true }, function (error, result) {
                               should.not.exist(error);
-                              testClient.httpSuccess.delete202(true, function (error, result) {
+                              testClient.httpSuccess.delete202({ booleanValue: true }, function (error, result) {
                                 should.not.exist(error);
                                 testClient.httpSuccess.head204(function (error, result) {
                                   should.not.exist(error);
-                                  testClient.httpSuccess.put204(true, function (error, result) {
+                                  testClient.httpSuccess.put204({ booleanValue: true }, function (error, result) {
                                     should.not.exist(error);
-                                    testClient.httpSuccess.post204(true, function (error, result) {
+                                    testClient.httpSuccess.post204({ booleanValue: true }, function (error, result) {
                                       should.not.exist(error);
-                                      testClient.httpSuccess.delete204(true, function (error, result) {
+                                      testClient.httpSuccess.delete204({ booleanValue: true }, function (error, result) {
                                         should.not.exist(error);
-                                        testClient.httpSuccess.patch204(true, function (error, result) {
+                                        testClient.httpSuccess.patch204({ booleanValue: true }, function (error, result) {
                                           should.not.exist(error);
                                           testClient.httpSuccess.head404(function (error, result) {
                                             should.not.exist(error);
@@ -2250,7 +2250,7 @@ describe('nodejs', function () {
               testClient.httpRedirects.get301(function (error, result, request, response) {
                 should.not.exist(error);
                 response.statusCode.should.equal(200);
-                testClient.httpRedirects.put301(true, function (error, result, request, response) {
+                testClient.httpRedirects.put301({ booleanValue: true }, function (error, result, request, response) {
                   should.not.exist(error);
                   response.statusCode.should.equal(301);
                   testClient.httpRedirects.head302(function (error, result, request, response) {
@@ -2259,10 +2259,10 @@ describe('nodejs', function () {
                     testClient.httpRedirects.get302(function (error, result, request, response) {
                       should.not.exist(error);
                       response.statusCode.should.equal(200);
-                      testClient.httpRedirects.patch302(true, function (error, result, request, response) {
+                      testClient.httpRedirects.patch302({ booleanValue: true }, function (error, result, request, response) {
                         should.not.exist(error);
                         response.statusCode.should.equal(302);
-                        testClient.httpRedirects.post303(true, function (error, result, request, response) {
+                        testClient.httpRedirects.post303({ booleanValue: true }, function (error, result, request, response) {
                           should.not.exist(error);
                           response.statusCode.should.equal(200);
                           testClient.httpRedirects.head307(function (error, result, request, response) {
@@ -2274,16 +2274,16 @@ describe('nodejs', function () {
                               //TODO, 4042586: Support options operations in swagger modeler
                               //testClient.httpRedirects.options307(function (error, result, request, response) {
                               //  should.not.exist(error);
-                              testClient.httpRedirects.put307(true, function (error, result, request, response) {
+                              testClient.httpRedirects.put307({ booleanValue: true }, function (error, result, request, response) {
                                 should.not.exist(error);
                                 response.statusCode.should.equal(200);
-                                testClient.httpRedirects.post307(true, function (error, result, request, response) {
+                                testClient.httpRedirects.post307({ booleanValue: true }, function (error, result, request, response) {
                                   should.not.exist(error);
                                   response.statusCode.should.equal(200);
-                                  testClient.httpRedirects.patch307(true, function (error, result, request, response) {
+                                  testClient.httpRedirects.patch307({ booleanValue: true }, function (error, result, request, response) {
                                     should.not.exist(error);
                                     response.statusCode.should.equal(200);
-                                    testClient.httpRedirects.delete307(true, function (error, result, request, response) {
+                                    testClient.httpRedirects.delete307({ booleanValue: true }, function (error, result, request, response) {
                                       should.not.exist(error);
                                       response.statusCode.should.equal(200);
                                       done();
@@ -2312,16 +2312,16 @@ describe('nodejs', function () {
           testClient.httpClientFailure.get400(function (error, result) {
             should.exist(error);
             (<msRest.ServiceError>error).statusCode.should.equal(400);
-            testClient.httpClientFailure.put400(true, function (error, result) {
+            testClient.httpClientFailure.put400({ booleanValue: true }, function (error, result) {
               should.exist(error);
               (<msRest.ServiceError>error).statusCode.should.equal(400);
-              testClient.httpClientFailure.patch400(true, function (error, result) {
+              testClient.httpClientFailure.patch400({ booleanValue: true }, function (error, result) {
                 should.exist(error);
                 (<msRest.ServiceError>error).statusCode.should.equal(400);
-                testClient.httpClientFailure.post400(true, function (error, result) {
+                testClient.httpClientFailure.post400({ booleanValue: true }, function (error, result) {
                   should.exist(error);
                   (<msRest.ServiceError>error).statusCode.should.equal(400);
-                  testClient.httpClientFailure.delete400(true, function (error, result) {
+                  testClient.httpClientFailure.delete400({ booleanValue: true }, function (error, result) {
                     should.exist(error);
                     (<msRest.ServiceError>error).statusCode.should.equal(400);
                     testClient.httpClientFailure.head401(function (error, result) {
@@ -2333,19 +2333,19 @@ describe('nodejs', function () {
                         testClient.httpClientFailure.get403(function (error, result) {
                           should.exist(error);
                           (<msRest.ServiceError>error).statusCode.should.equal(403);
-                          testClient.httpClientFailure.put404(true, function (error, result) {
+                          testClient.httpClientFailure.put404({ booleanValue: true }, function (error, result) {
                             should.exist(error);
                             (<msRest.ServiceError>error).statusCode.should.equal(404);
-                            testClient.httpClientFailure.patch405(true, function (error, result) {
+                            testClient.httpClientFailure.patch405({ booleanValue: true }, function (error, result) {
                               should.exist(error);
                               (<msRest.ServiceError>error).statusCode.should.equal(405);
-                              testClient.httpClientFailure.post406(true, function (error, result) {
+                              testClient.httpClientFailure.post406({ booleanValue: true }, function (error, result) {
                                 should.exist(error);
                                 (<msRest.ServiceError>error).statusCode.should.equal(406);
-                                testClient.httpClientFailure.delete407(true, function (error, result) {
+                                testClient.httpClientFailure.delete407({ booleanValue: true }, function (error, result) {
                                   should.exist(error);
                                   (<msRest.ServiceError>error).statusCode.should.equal(407);
-                                  testClient.httpClientFailure.put409(true, function (error, result) {
+                                  testClient.httpClientFailure.put409({ booleanValue: true }, function (error, result) {
                                     should.exist(error);
                                     (<msRest.ServiceError>error).statusCode.should.equal(409);
                                     testClient.httpClientFailure.head410(function (error, result) {
@@ -2357,19 +2357,19 @@ describe('nodejs', function () {
                                         testClient.httpClientFailure.get412(function (error, result) {
                                           should.exist(error);
                                           (<msRest.ServiceError>error).statusCode.should.equal(412);
-                                          testClient.httpClientFailure.put413(true, function (error, result) {
+                                          testClient.httpClientFailure.put413({ booleanValue: true }, function (error, result) {
                                             should.exist(error);
                                             (<msRest.ServiceError>error).statusCode.should.equal(413);
-                                            testClient.httpClientFailure.patch414(true, function (error, result) {
+                                            testClient.httpClientFailure.patch414({ booleanValue: true }, function (error, result) {
                                               should.exist(error);
                                               (<msRest.ServiceError>error).statusCode.should.equal(414);
-                                              testClient.httpClientFailure.post415(true, function (error, result) {
+                                              testClient.httpClientFailure.post415({ booleanValue: true }, function (error, result) {
                                                 should.exist(error);
                                                 (<msRest.ServiceError>error).statusCode.should.equal(415);
                                                 testClient.httpClientFailure.get416(function (error, result) {
                                                   should.exist(error);
                                                   (<msRest.ServiceError>error).statusCode.should.equal(416);
-                                                  testClient.httpClientFailure.delete417(true, function (error, result) {
+                                                  testClient.httpClientFailure.delete417({ booleanValue: true }, function (error, result) {
                                                     should.exist(error);
                                                     (<msRest.ServiceError>error).statusCode.should.equal(417);
                                                     testClient.httpClientFailure.head429(function (error, result) {
@@ -2419,10 +2419,10 @@ describe('nodejs', function () {
           testClient.httpServerFailure.get501(function (error, result) {
             should.exist(error);
             (<msRest.ServiceError>error).statusCode.should.equal(501);
-            testClient.httpServerFailure.post505(true, function (error, result) {
+            testClient.httpServerFailure.post505({ booleanValue: true }, function (error, result) {
               should.exist(error);
               (<msRest.ServiceError>error).statusCode.should.equal(505);
-              testClient.httpServerFailure.delete505(true, function (error, result) {
+              testClient.httpServerFailure.delete505({ booleanValue: true }, function (error, result) {
                 should.exist(error);
                 (<msRest.ServiceError>error).statusCode.should.equal(505);
                 done();
@@ -2439,22 +2439,22 @@ describe('nodejs', function () {
           testClient.httpRetry.get502(function (error, result, request, response) {
             should.not.exist(error);
             response.statusCode.should.equal(200);
-            testClient.httpRetry.put500(true, function (error, result, request, response) {
+            testClient.httpRetry.put500({ booleanValue: true }, function (error, result, request, response) {
               should.not.exist(error);
               response.statusCode.should.equal(200);
-              testClient.httpRetry.patch500(true, function (error, result, request, response) {
+              testClient.httpRetry.patch500({ booleanValue: true }, function (error, result, request, response) {
                 should.not.exist(error);
                 response.statusCode.should.equal(200);
-                testClient.httpRetry.post503(true, function (error, result, request, response) {
+                testClient.httpRetry.post503({ booleanValue: true }, function (error, result, request, response) {
                   should.not.exist(error);
                   response.statusCode.should.equal(200);
-                  testClient.httpRetry.delete503(true, function (error, result, request, response) {
+                  testClient.httpRetry.delete503({ booleanValue: true }, function (error, result, request, response) {
                     should.not.exist(error);
                     response.statusCode.should.equal(200);
-                    testClient.httpRetry.put504(true, function (error, result, request, response) {
+                    testClient.httpRetry.put504({ booleanValue: true }, function (error, result, request, response) {
                       should.not.exist(error);
                       response.statusCode.should.equal(200);
-                      testClient.httpRetry.patch504(true, function (error, result, request, response) {
+                      testClient.httpRetry.patch504({ booleanValue: true }, function (error, result, request, response) {
                         should.not.exist(error);
                         response.statusCode.should.equal(200);
                         done();
