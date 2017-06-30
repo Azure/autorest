@@ -17,7 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
-    <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.JsonRpcClient/AutoRest.CSharp.JsonRpcClient.csproj" />
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions/AutoRest.Extensions.csproj" />
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions.Azure/AutoRest.Extensions.Azure.csproj" />
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />

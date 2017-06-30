@@ -132,13 +132,11 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("CollectionObjectPropertiesNamingMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Plugins:
         ///  CSharp:
         ///    TypeName: PluginCs, AutoRest.CSharp
-        ///  JsonRpcClient:
-        ///    TypeName: PluginCs, AutoRest.CSharp.JsonRpcClient
         ///  Azure.CSharp:
         ///    TypeName: PluginCsa, AutoRest.CSharp.Azure
         ///  Azure.CSharp.Fluent:

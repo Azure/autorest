@@ -1,12 +1,12 @@
 @using System
-@using AutoRest.CSharp.Azure.JsonRpcClient.Templates
+@using AutoRest.CSharp.Azure.Templates
 @using System.Linq
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.Model
-@using AutoRest.CSharp.JsonRpcClient.Templates.Rest.Client
-@using AutoRest.CSharp.Azure.JsonRpcClient
-@inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.MethodCsa>
+@using AutoRest.CSharp.Templates.Rest.Client
+
+@inherits AutoRest.CSharp.Azure.Templates.AzureMethodTemplate
 
 @{
     var xns = "Microsoft.Rest.ClientRuntime.Test.Azure.";
