@@ -11,7 +11,7 @@ using AutoRest.CSharp.Model;
 
 namespace AutoRest.CSharp.Azure.JsonRpcClient
 {
-    public sealed class PluginCsa : Plugin<GeneratorSettingsCsa, TransformerCsa, CodeGeneratorCsaJsonRpc, CodeNamerCsa, CodeModelCsa>
+    public sealed class PluginCsa : Plugin<GeneratorSettingsCs, TransformerCsa, CodeGeneratorCsaJsonRpc, CodeNamerCsa, CodeModelCsa>
     {
         public PluginCsa()
         {

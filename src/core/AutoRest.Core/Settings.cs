@@ -83,7 +83,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             // requests for settings.
             Singleton<Settings>.Instance = this;
 
-            FileSystemInput = new FileSystem();
+            FileSystemInput = new MemoryFileSystem();
             FileSystemOutput = new MemoryFileSystem();
             OutputDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Generated");
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
@@ -97,7 +97,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <summary>
         /// Gets or sets the IFileSystem used by code generation.
         /// </summary>
-        public IFileSystem FileSystemInput { get; set; }
+        public MemoryFileSystem FileSystemInput { get; set; }
 
         /// <summary>
         /// Gets the Uri for the path to the folder that contains the input specification file.

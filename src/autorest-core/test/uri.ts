@@ -100,4 +100,40 @@ import * as uri from "../lib/ref/uri";
       uri.ResolveUri("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/", "folder///file.md"),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/folder/file.md");
   }
+
+  @test async "ToRawDataUrl"() {
+    // GitHub blob
+    assert.strictEqual(
+      uri.ToRawDataUrl("https://github.com/Microsoft/vscode/blob/master/.gitignore"),
+      "https://raw.githubusercontent.com/Microsoft/vscode/master/.gitignore");
+    assert.strictEqual(
+      uri.ToRawDataUrl("https://github.com/Microsoft/TypeScript/blob/master/README.md"),
+      "https://raw.githubusercontent.com/Microsoft/TypeScript/master/README.md");
+    assert.strictEqual(
+      uri.ToRawDataUrl("https://github.com/Microsoft/TypeScript/blob/master/tests/cases/compiler/APISample_watcher.ts"),
+      "https://raw.githubusercontent.com/Microsoft/TypeScript/master/tests/cases/compiler/APISample_watcher.ts");
+    assert.strictEqual(
+      uri.ToRawDataUrl("https://github.com/Azure/azure-rest-api-specs/blob/master/arm-web/2015-08-01/AppServiceCertificateOrders.json"),
+      "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-web/2015-08-01/AppServiceCertificateOrders.json");
+
+    // unknown / already raw
+    assert.strictEqual(
+      uri.ToRawDataUrl("https://raw.githubusercontent.com/Microsoft/TypeScript/master/tests/cases/compiler/APISample_watcher.ts"),
+      "https://raw.githubusercontent.com/Microsoft/TypeScript/master/tests/cases/compiler/APISample_watcher.ts");
+    assert.strictEqual(
+      uri.ToRawDataUrl("https://assets.onestore.ms/cdnfiles/external/uhf/long/9a49a7e9d8e881327e81b9eb43dabc01de70a9bb/images/microsoft-gray.png"),
+      "https://assets.onestore.ms/cdnfiles/external/uhf/long/9a49a7e9d8e881327e81b9eb43dabc01de70a9bb/images/microsoft-gray.png");
+    assert.strictEqual(
+      uri.ToRawDataUrl("README.md"),
+      "README.md");
+    assert.strictEqual(
+      uri.ToRawDataUrl("compiler/APISample_watcher.ts"),
+      "compiler/APISample_watcher.ts");
+    assert.strictEqual(
+      uri.ToRawDataUrl("compiler\\APISample_watcher.ts"),
+      "compiler\APISample_watcher.ts");
+    assert.strictEqual(
+      uri.ToRawDataUrl("C:\\arm-web\\2015-08-01\\AppServiceCertificateOrders.json"),
+      "C:\\arm-web\\2015-08-01\\AppServiceCertificateOrders.json");
+  }
 }

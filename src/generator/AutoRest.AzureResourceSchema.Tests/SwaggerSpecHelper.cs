@@ -44,7 +44,7 @@ namespace AutoRest.AzureResourceSchema.Tests
                 ? resultFolder.Substring(expectedWithSeparator.Length)
                 : resultFolder;
 
-            var name = ExtensionsLoader.GetPlugin("AzureResourceSchema").Settings.Name;
+            var name = "AzureResourceSchema";
             settings.Namespace = string.IsNullOrEmpty(settings.Namespace)
                 ? "Fixtures." + (name.Contains("Azure") ? "Azure." : "") + specFileName.
                     Replace(".cs", "").Replace(".Cs", "").Replace(".java", "").

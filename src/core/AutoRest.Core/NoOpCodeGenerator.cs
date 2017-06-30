@@ -13,8 +13,6 @@ namespace AutoRest.Core
     {
         public class NoSettings : IGeneratorSettings
         {
-            public virtual string Name => "No op code generator";
-
             public virtual string Description => "No op code generator";
         }
     }

@@ -9,10 +9,6 @@ namespace AutoRest.CSharp.JsonRpcClient
 {
     public class GeneratorSettingsCs : IGeneratorSettings
     {
-        public virtual string Name => "CSharp.JsonRpcClient";
-
-        public virtual string Description => "Generic C# code generator.";
-
         /// <summary>
         ///     Indicates whether ctor needs to be generated with internal protection level.
         /// </summary>

@@ -16,29 +16,11 @@ namespace AutoRest.AzureResourceSchema.Tests
     public class AzureResourceSchemaCodeGeneratorTests
     {
         [Fact]
-        public void Description()
-        {
-            using (NewContext) {
-                new Settings();
-                Assert.Equal("Azure Resource Schema generator", CreatePlugin().Settings.Description);
-            }
-        }
-
-        [Fact]
         public void ImplementationFileExtension()
         {
             using (NewContext) {
                 new Settings();
                 Assert.Equal(".json", CreatePlugin().CodeGenerator.ImplementationFileExtension);
-            }
-        }
-
-        [Fact]
-        public void Name()
-        {
-            using (NewContext) {
-                new Settings();
-                Assert.Equal("AzureResourceSchema", CreatePlugin().Settings.Name);
             }
         }
 

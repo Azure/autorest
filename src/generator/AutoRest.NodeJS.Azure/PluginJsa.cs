@@ -8,14 +8,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.NodeJS.Azure
 {
-    public class GeneratorSettingsJsa : GeneratorSettingsJs
-    {
-        public override string Name => "Azure.NodeJS";
-
-        public override string Description => "Azure specific NodeJS code generator.";
-    }
-
-    public sealed class PluginJsa : Plugin<GeneratorSettingsJsa, TransformerJsa, CodeGeneratorJsa, CodeNamerJs, CodeModelJsa>
+    public sealed class PluginJsa : Plugin<GeneratorSettingsJs, TransformerJsa, CodeGeneratorJsa, CodeNamerJs, CodeModelJsa>
     {
         public PluginJsa()
         {

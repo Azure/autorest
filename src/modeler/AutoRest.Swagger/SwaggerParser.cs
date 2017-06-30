@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
 using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Logging;
@@ -14,7 +13,6 @@ using AutoRest.Swagger.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -22,7 +20,7 @@ namespace AutoRest.Swagger
     {
         public static Settings Settings => Settings.Instance;
 
-        public static ServiceDefinition Load(string path, IFileSystem fileSystem)
+        public static ServiceDefinition Load(string path, MemoryFileSystem fileSystem)
         {
             if (fileSystem == null)
             {
@@ -135,11 +133,6 @@ namespace AutoRest.Swagger
 
         public static string Normalize(string path, string swaggerDocument)
         {
-            if (!swaggerDocument.IsYaml()) // try parse as markdown if it is not YAML
-            {
-                Logger.Instance.Log(Category.Info, "Parsing as literate Swagger");
-                swaggerDocument = LiterateYamlParser.Parse(swaggerDocument);
-            }
             // normalize YAML to JSON since that's what we process
             swaggerDocument = swaggerDocument.EnsureYamlIsJson();
             swaggerDocument = ResolveExternalReferencesInJson(path, swaggerDocument);
