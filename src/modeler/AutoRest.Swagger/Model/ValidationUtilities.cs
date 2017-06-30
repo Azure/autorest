@@ -107,7 +107,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="modelName">model for which to check the  properties</param>
         /// <param name="definitions">dictionary of model definitions</param>
         /// <returns>List of properties found in model hierarchy</returns>
-        private static IEnumerable<KeyValuePair<string, Schema>> EnumerateProperties(string modelName, Dictionary<string, Schema> definitions)
+        public static IEnumerable<KeyValuePair<string, Schema>> EnumerateProperties(string modelName, Dictionary<string, Schema> definitions)
         {
             var modelsToCheck = EnumerateModelHierarchy(modelName, definitions);
             var propertiesList = new List<KeyValuePair<string, Schema>>();
