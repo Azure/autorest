@@ -18,7 +18,6 @@ import { ConfigurationView, GetExtension } from '../configuration';
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from '../data-store/data-store';
 import { IFileSystem } from '../file-system';
 import { EmitArtifacts } from './artifact-emitter';
-import { GetAutoRestDotNetPlugin } from './plugins/autorest-dotnet';
 import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<DataStoreViewReadonly | void>;
@@ -246,7 +245,6 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   // externals (TODO: make these dynamically loaded)
   const oavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/plugins/openapi-validation-tools`);
   const aoavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/../../../node_modules/@microsoft.azure/openapi-validator`);
-  const autoRestDotNet = await GetAutoRestDotNetPlugin();
 
   // __status scope
   const startTime = Date.now();
@@ -276,19 +274,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "compose": CreatePluginComposer(),
     "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
     "semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),
-    "azure-validator": CreatePluginExternal(autoRestDotNet, "azure-validator"),
     "azure-openapi-validator": CreatePluginExternal(aoavPluginHost, "azure-openapi-validator"),
-    "modeler": CreatePluginExternal(autoRestDotNet, "modeler"),
-
-    "csharp": CreatePluginExternal(autoRestDotNet, "csharp"),
-    "ruby": CreatePluginExternal(autoRestDotNet, "ruby"),
-    "nodejs": CreatePluginExternal(autoRestDotNet, "nodejs"),
-    "python": CreatePluginExternal(autoRestDotNet, "python"),
-    "go": CreatePluginExternal(autoRestDotNet, "go"),
-    "java": CreatePluginExternal(autoRestDotNet, "java"),
-    "azureresourceschema": CreatePluginExternal(autoRestDotNet, "azureresourceschema"),
-    "jsonrpcclient": CreatePluginExternal(autoRestDotNet, "jsonrpcclient"),
-    "csharp-simplifier": CreatePluginExternal(autoRestDotNet, "csharp-simplifier"),
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),

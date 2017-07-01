@@ -55,8 +55,11 @@ pipeline:
   swagger-document/individual/transform:
     input: loader
     output-artifact: swagger-document
+  swagger-document/individual/identity:
+    input: transform
+    output-artifact: swagger-document
   swagger-document/compose:
-    input: individual/transform
+    input: individual/identity
     output-artifact: swagger-document
   swagger-document/transform-immediate:
     input:
@@ -93,10 +96,10 @@ scope-cm/emitter:
 ``` yaml
 pipeline:
   swagger-document/model-validator:
-    input: transform
+    input: swagger-document/identity
     scope: model-validator
   swagger-document/semantic-validator:
-    input: transform
+    input: swagger-document/identity
     scope: semantic-validator
 ```
 
@@ -104,21 +107,13 @@ pipeline:
 
 ``` yaml
 pipeline:
-  # validator written in C#
-  swagger-document/azure-validator:
-    input: transform
-    scope: azure-validator-composed
-  swagger-document/individual/azure-validator:
-    input: individual/transform
-    scope: azure-validator-individual
-  # validator written in TypeScript
   swagger-document/azure-openapi-validator:
     input:
-      - transform
+      - swagger-document/identity
       - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
   swagger-document/individual/azure-openapi-validator:
     input: 
-      - transform
+      - swagger-document/identity
       - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
 ```
 

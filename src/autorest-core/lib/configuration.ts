@@ -508,7 +508,8 @@ export class Configuration {
     // 4. resolve externals
     const extMgr = await ExtensionManager.Create(join(homedir(), ".autorest"));
     while (true) {
-      const useExtensions = createView().UseExtensions;
+      const tmpView = createView();
+      const useExtensions = tmpView.UseExtensions;
       // find additional extensions
       const additionalExtensions = useExtensions.filter(ext => !(ext.fullyQualified in loadedExtensions));
       if (additionalExtensions.length === 0) {
@@ -523,7 +524,7 @@ export class Configuration {
 
         const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
         const extPromise = extMgr.installPackage(pack);
-        (extPromise as any).Message.Subscribe((s: any, m: any) => messageEmitter.Message.Dispatch({ Text: m, Channel: Channel.Verbose }));
+        (extPromise as any).Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose }));
         const ext = await extPromise;
 
         // start extension
@@ -533,7 +534,7 @@ export class Configuration {
         const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
         const blocks = await this.ParseCodeBlocks(
           await inputView.ReadStrict(CreateFileUri(await ext.configurationPath)),
-          createView(),
+          tmpView,
           `extension-config-${additionalExtension.fullyQualified}`);
         configSegments.push(...blocks);
       }

@@ -2,6 +2,18 @@
 
 Provides first generation, .NET based modeler and code generators.
 
+## Validation
+
+``` yaml
+pipeline:
+  swagger-document/azure-validator:
+    input: swagger-document/identity
+    scope: azure-validator-composed
+  swagger-document/individual/azure-validator:
+    input: swagger-document/individual/identity
+    scope: azure-validator-individual
+```
+
 ## C#
 
 ``` yaml
