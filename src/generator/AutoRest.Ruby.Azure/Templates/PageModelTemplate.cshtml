@@ -24,6 +24,7 @@ module @(Settings.Namespace)
       }
       @EmptyLine
     }
+      include MsRest::JSONable
 
     @if (Model.IsPolymorphic && Model.BaseModelType == null)
     {
