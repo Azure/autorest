@@ -17,11 +17,16 @@ swagger-document/individual/transform:
   configScope: []
   inputs:
     - swagger-document/loader
+swagger-document/individual/identity:
+  pluginName: identity
+  configScope: []
+  inputs:
+    - swagger-document/individual/transform
 swagger-document/compose:
   pluginName: compose
   configScope: []
   inputs:
-    - swagger-document/individual/transform
+    - swagger-document/individual/identity
 swagger-document/transform-immediate:
   pluginName: transform-immediate
   configScope: []
@@ -49,26 +54,26 @@ swagger-document/azure-validator:
   configScope:
     - azure-validator-composed
   inputs:
-    - swagger-document/transform
-swagger-document/individual/azure-validator:
-  pluginName: azure-validator
-  configScope:
-    - azure-validator-individual
-  inputs:
-    - swagger-document/individual/transform
+    - swagger-document/identity
 swagger-document/azure-openapi-validator:
   pluginName: azure-openapi-validator
   configScope:
     - azure-validator-composed
   inputs:
-    - swagger-document/transform
+    - swagger-document/identity
     - swagger-document/azure-validator
+swagger-document/individual/azure-validator:
+  pluginName: azure-validator
+  configScope:
+    - azure-validator-individual
+  inputs:
+    - swagger-document/individual/identity
 swagger-document/individual/azure-openapi-validator:
   pluginName: azure-openapi-validator
   configScope:
     - azure-validator-individual
   inputs:
-    - swagger-document/individual/transform
+    - swagger-document/identity
     - swagger-document/individual/azure-validator
 csharp/modeler:
   pluginName: modeler

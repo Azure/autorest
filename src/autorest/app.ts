@@ -253,7 +253,6 @@ async function main() {
       requestedVersion = currentVersion.version;
     }
 
-
     let selectedVersion = From(await installedCores).FirstOrDefault(each => each.version === requestedVersion);
     // is the requested version installed?
     while (!selectedVersion || force) {
