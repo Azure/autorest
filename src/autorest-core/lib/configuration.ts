@@ -519,7 +519,7 @@ export class Configuration {
       for (const additionalExtension of additionalExtensions) {
         // TODO: remove
         if (additionalExtension.name === "@microsoft.azure/autorest-classic-generators")
-          additionalExtension.source = __dirname.replace("autorest-core\\dist\\lib", "core\\AutoRest");
+          additionalExtension.source = __dirname.replace(/\\/g, "/").replace("autorest-core/dist/lib", "core/AutoRest");
         // TODO: remove
 
         const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);

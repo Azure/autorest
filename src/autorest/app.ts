@@ -11,6 +11,9 @@ import { Enumerable as IEnumerable, From } from "./lib/ref/linq";
 
 import * as semver from "semver";
 
+// DANGER!!! THIS SWALLOWS BACKSLASHES!!!
+// This cost me ~1h of debugging why "console.log(join(homedir(), ".autorest"));" prints "C:\Users\jobader.autorest"... 
+// Or rather left me looking in the wrong place for a file not found error on "C:\Users\jobader.autorest\x\y\z" where the problem was really in "z"
 enhanceConsole();
 
 const rootFolder: string = join(homedir(), ".autorest");
@@ -146,7 +149,7 @@ const availableVersions = new LazyPromise(async () => {
 });
 
 const installedCores = new LazyPromise(async () => {
-  const result = new Array<Extension>();
+  let result = new Array<Extension>();
   let table = "";
   const extensions = await (await extensionManager).getInstalledExtensions();
   if (extensions.length > 0) {
@@ -164,7 +167,7 @@ const installedCores = new LazyPromise(async () => {
 
     if (result.length === 0) {
       // no stable, but there are preview. return that set.
-      return extensions.sort((a, b) => semver.compare(b.version, a.version));
+      result = extensions.filter(ext => ext.name === corePackage);
     }
   }
   return result.sort((a, b) => semver.compare(b.version, a.version));
@@ -273,7 +276,7 @@ async function main() {
         try {
           const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
 
-          selectedVersion = From(await (await extensionManager).getInstalledExtensions()).FirstOrDefault(each => each.version === pkg.version);
+          selectedVersion = From(await (await extensionManager).getInstalledExtensions()).FirstOrDefault(each => /*each.name === pkg.name && ???*/each.version === pkg.version);
           if (selectedVersion) {
             console.trace(`Is Installed allready`);
             break;
@@ -316,7 +319,7 @@ async function main() {
       process.argv.push("--allow-no-input");
     }
 
-    console.trace(`Starting ${corePackage} from ${await selectedVersion.name}`)
+    console.trace(`Starting ${corePackage} from ${await selectedVersion.name}`);
     require(join(await selectedVersion.modulePath, "dist/app.js"));
   } catch (exception) {
     console.log("Failure:");
