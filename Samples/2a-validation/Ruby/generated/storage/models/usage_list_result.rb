@@ -12,7 +12,6 @@ module Storage
 
       include MsRestAzure
 
-      include MsRest::JSONable
       # @return [Array<Usage>] Gets or sets the list Storage Resource Usages.
       attr_accessor :value
 

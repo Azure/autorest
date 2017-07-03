@@ -78,7 +78,7 @@ module StreamWithContentType
           name: 'Stream'
         }
       }
-      request_content = image.to_json({mapper: request_mapper})
+      request_content = @client.serialize(request_mapper,  image)
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
       path_template = 'ProcessImage/FunctionA'
@@ -168,7 +168,7 @@ module StreamWithContentType
           name: 'Stream'
         }
       }
-      request_content = image.to_json({mapper: request_mapper})
+      request_content = @client.serialize(request_mapper,  image)
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
       path_template = 'ProcessImage/FunctionB'

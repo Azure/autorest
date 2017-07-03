@@ -10,7 +10,6 @@ module Petstore
     #
     #
     class Error
-      include MsRest::JSONable
       # @return [Integer]
       attr_accessor :code
 

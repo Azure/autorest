@@ -13,7 +13,6 @@ module Storage
 
       include MsRestAzure
 
-      include MsRest::JSONable
       # @return [String]
       attr_accessor :name
 

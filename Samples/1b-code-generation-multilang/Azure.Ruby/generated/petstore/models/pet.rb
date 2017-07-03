@@ -13,7 +13,6 @@ module Petstore
 
       include MsRestAzure
 
-      include MsRest::JSONable
       # @return [Integer]
       attr_accessor :id
 

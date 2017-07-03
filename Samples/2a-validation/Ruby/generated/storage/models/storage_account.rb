@@ -12,7 +12,6 @@ module Storage
 
       include MsRestAzure
 
-      include MsRest::JSONable
       # @return [ProvisioningState] Gets the status of the storage account at
       # the time the operation was called. Possible values include: 'Creating',
       # 'ResolvingDNS', 'Succeeded'

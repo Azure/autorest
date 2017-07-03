@@ -2,6 +2,6 @@ source 'https://rubygems.org'
 
 group :development, :local, :test do
   gem 'rspec'
-  gem 'ms_rest', '~> 0.6.3'
+  gem 'ms_rest', '~> 0.7.0'
   gem 'ms_rest_azure', '~> 0.8.0'
 end

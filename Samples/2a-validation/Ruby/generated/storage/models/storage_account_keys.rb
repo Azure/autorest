@@ -12,7 +12,6 @@ module Storage
 
       include MsRestAzure
 
-      include MsRest::JSONable
       # @return [String] Gets the value of key 1.
       attr_accessor :key1
 
