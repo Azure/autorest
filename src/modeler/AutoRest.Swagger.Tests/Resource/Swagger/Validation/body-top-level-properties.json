@@ -137,6 +137,11 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "foo": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
         }
       },
       "x-ms-azure-resource": true

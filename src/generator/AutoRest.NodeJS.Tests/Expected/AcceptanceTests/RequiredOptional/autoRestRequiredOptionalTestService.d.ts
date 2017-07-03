@@ -8,10 +8,20 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
-declare class AutoRestRequiredOptionalTestService {
+/**
+ * AutoRestRequiredOptionalTestServiceOptions for AutoRestRequiredOptionalTestService.
+ */
+declare interface AutoRestRequiredOptionalTestServiceOptions extends ServiceClientOptions {
+  /**
+   * @property {number} [optionalGlobalQuery] - number of items to skip
+   */
+  optionalGlobalQuery?: Number;
+}
+
+declare class AutoRestRequiredOptionalTestService extends ServiceClient {
   /**
    * @class
    * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
@@ -35,7 +45,7 @@ declare class AutoRestRequiredOptionalTestService {
    * @param {number} [options.optionalGlobalQuery] - number of items to skip
    *
    */
-  constructor(requiredGlobalPath: string, requiredGlobalQuery: string, baseUri?: string, options?: ServiceClientOptions);
+  constructor(requiredGlobalPath: string, requiredGlobalQuery: string, baseUri?: string, options?: AutoRestRequiredOptionalTestServiceOptions);
 
   requiredGlobalPath: string;
 

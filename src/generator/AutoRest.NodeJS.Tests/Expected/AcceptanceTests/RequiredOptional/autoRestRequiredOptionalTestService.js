@@ -33,7 +33,7 @@ class AutoRestRequiredOptionalTestService extends ServiceClient {
    * @param {object} [options.requestOptions] - Options for the underlying request object
    * {@link https://github.com/request/request#requestoptions-callback Options doc}
    * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-       * @param {number} [options.optionalGlobalQuery] - number of items to skip
+   * @param {number} [options.optionalGlobalQuery] - number of items to skip
    */
   constructor(requiredGlobalPath, requiredGlobalQuery, baseUri, options) {
     if (requiredGlobalPath === null || requiredGlobalPath === undefined) {

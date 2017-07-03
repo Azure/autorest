@@ -143,7 +143,7 @@ namespace AutoRest.Python.Model
                         validators.Add(string.Format(CultureInfo.InvariantCulture, "'multiple': {0}", constraints[constraint]));
                         break;
                     case Constraint.Pattern:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'pattern': '{0}'", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'pattern': r'{0}'", constraints[constraint]));
                         break;
                     case Constraint.UniqueItems:
                         var pythonBool = Convert.ToBoolean(constraints[constraint], CultureInfo.InvariantCulture) ? "True" : "False";
