@@ -12,6 +12,7 @@ module Storage
 
       include MsRestAzure
 
+      include MsRest::JSONable
       # @return [String] Gets a string describing the resource name.
       attr_accessor :value
 
