@@ -572,20 +572,19 @@ namespace AutoRest.Ruby.Model
         /// <summary>
         /// Constructs mapper for the request body.
         /// </summary>
-        /// <param name="requestContent">Name of the output variable.</param>
-        /// <returns>Mapper for the request content as string.</returns>
-        public string ConstructRequestBodyContent(string requestContent = "request_content")
+        /// <param name="outputVariable">Name of the output variable.</param>
+        /// <returns>Mapper for the request body as string.</returns>
+        public string ConstructRequestBodyMapper(string outputVariable = "request_mapper")
         {
             var builder = new IndentedStringBuilder("  ");
             if (RequestBody.ModelType is CompositeType)
             {
-                builder.AppendLine("{0} = {1}.to_json", requestContent, RequestBody.Name);
+                builder.AppendLine("{0} = {1}.mapper()", outputVariable, GetModelName(RequestBody.ModelType.Name));
             }
             else
             {
-                builder.AppendLine("request_mapper = {{{0}}}",
+                builder.AppendLine("{0} = {{{1}}}", outputVariable,
                     RequestBody.ModelType.ConstructMapper(RequestBody.SerializedName, RequestBody, false));
-                builder.AppendLine("{1} = @client.serialize(request_mapper, {0})", RequestBody.Name, requestContent);
             }
             return builder.ToString();
         }
@@ -606,14 +605,21 @@ namespace AutoRest.Ruby.Model
             }
 
             var builder = new IndentedStringBuilder("  ");
-            if (!(type is CompositeType) && !(MethodGroup.IsCodeModelMethodGroup))
+            if (type is CompositeType)
             {
-                builder.AppendLine("result_mapper = {{{0}}}", type.ConstructMapper(responseVariable, null, false));
-                builder.AppendLine("{1} = @client.deserialize(result_mapper, {0})", responseVariable, valueReference);
+                builder.AppendLine("result_mapper = {0}.mapper()", GetModelName(type.Name));
             }
             else
             {
-                builder.AppendLine("{1} = {2}.new.from_json({0})", responseVariable, valueReference, GetModelName(type.Name));
+                builder.AppendLine("result_mapper = {{{0}}}", type.ConstructMapper(responseVariable, null, false));
+            }
+            if (MethodGroup.IsCodeModelMethodGroup)
+            {
+                builder.AppendLine("{1} = self.deserialize(result_mapper, {0})", responseVariable, valueReference);
+            }
+            else
+            {
+                builder.AppendLine("{1} = @client.deserialize(result_mapper, {0})", responseVariable, valueReference);
             }
 
             return builder.ToString();
