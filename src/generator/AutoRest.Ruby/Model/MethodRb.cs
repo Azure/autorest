@@ -609,7 +609,7 @@ namespace AutoRest.Ruby.Model
             if (!(type is CompositeType) && !(MethodGroup.IsCodeModelMethodGroup))
             {
                 builder.AppendLine("result_mapper = {{{0}}}", type.ConstructMapper(responseVariable, null, false));
-                builder.AppendLine("{1} = Class.new.extend(MsRest::JSONable).from_json({0}, result_mapper)", responseVariable, valueReference);
+                builder.AppendLine("{1} = @client.deserialize(result_mapper, {0})", responseVariable, valueReference);
             }
             else
             {
