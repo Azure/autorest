@@ -411,7 +411,7 @@ namespace AutoRest.Extensions.Azure.Tests
 
 
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
 
@@ -435,7 +435,7 @@ namespace AutoRest.Extensions.Azure.Tests
 
 
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
                 Assert.NotNull(codeModel);
@@ -462,7 +462,7 @@ namespace AutoRest.Extensions.Azure.Tests
 
 
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
 
@@ -495,7 +495,7 @@ namespace AutoRest.Extensions.Azure.Tests
 
 
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
 
@@ -525,7 +525,7 @@ namespace AutoRest.Extensions.Azure.Tests
 
 
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
                 Assert.NotNull(codeModel);

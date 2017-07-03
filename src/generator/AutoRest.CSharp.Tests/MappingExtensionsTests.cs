@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Tests
                 settings.FileSystemInput.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
                 
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 var plugin = new PluginCs();
                 using (plugin.Activate())
                 {

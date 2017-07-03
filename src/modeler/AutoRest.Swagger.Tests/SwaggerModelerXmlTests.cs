@@ -29,8 +29,8 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Resource","Swagger", "swagger-xml.yaml")
                 };
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var modeler = new SwaggerModeler();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 foreach (var modelType in codeModel.ModelTypes)
                 {
                     Assert.Equal(modelType.Documentation, modelType.XmlName);
@@ -52,8 +52,8 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Resource","Swagger", "swagger-xml.yaml")
                 };
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var modeler = new SwaggerModeler();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 foreach (var property in codeModel.ModelTypes.SelectMany(m => m.Properties))
                 {
                     Assert.Equal(property.Name, string.Join(".", property.RealPath));
@@ -72,8 +72,8 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Resource","Swagger", "swagger-xml-paths.yaml")
                 };
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var modeler = new SwaggerModeler();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 foreach (var property in codeModel.ModelTypes.SelectMany(m => m.Properties))
                 {
                     var expectedRealPath = property.Documentation.StartsWith("CUSTOM_")

@@ -32,7 +32,7 @@ public class Modeler : NewPlugin
         var fs = new MemoryFileSystem();
         fs.WriteAllText(files[0], content);
 
-        var serviceDefinition = SwaggerParser.Load(files[0], fs);
+        var serviceDefinition = SwaggerParser.Parse(fs.ReadAllText(files[0]));
         var modeler = new SwaggerModeler();
         var codeModel = modeler.Build(serviceDefinition);
 

@@ -22,7 +22,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine("Resource","Swagger", "vendor-extension-in-path.json")
                 };
                 SwaggerModeler modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 // should return a valid model.
                 Assert.NotNull(clientModel);

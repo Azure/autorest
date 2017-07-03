@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 };
 
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 var plugin = new PluginCsa();
                 using (plugin.Activate()) {
                     codeModel = plugin.Serializer.Load(codeModel);

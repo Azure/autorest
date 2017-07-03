@@ -31,7 +31,7 @@ namespace AutoRest.Extensions.Tests
                     PayloadFlatteningThreshold = 3
                 };
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 SwaggerExtensions.NormalizeClientModel(clientModel);
 
                 Assert.NotNull(clientModel);
@@ -67,7 +67,7 @@ namespace AutoRest.Extensions.Tests
                     PayloadFlatteningThreshold = 3
                 };
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 SwaggerExtensions.NormalizeClientModel(clientModel);
 
                 Assert.NotNull(clientModel);
@@ -96,7 +96,7 @@ namespace AutoRest.Extensions.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-flatten.json")
                 };
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 SwaggerExtensions.NormalizeClientModel(clientModel);
 
                 Assert.NotNull(clientModel);
@@ -162,7 +162,7 @@ namespace AutoRest.Extensions.Tests
                 };
 
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 SwaggerExtensions.NormalizeClientModel(clientModel);
 
                 Assert.NotNull(clientModel);
@@ -207,7 +207,7 @@ namespace AutoRest.Extensions.Tests
                 };
 
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 SwaggerExtensions.NormalizeClientModel(clientModel);
 
                 Assert.NotNull(clientModel);

@@ -66,8 +66,8 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-simple-spec.json")
                 };
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var modeler = new SwaggerModeler();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 var description =
                     "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.";
@@ -124,107 +124,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void TestExternalReferences()
-        {
-            using (NewContext)
-            {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-external-ref-no-definitions.json")
-                };
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
-
-                Assert.NotNull(codeModel);
-                Assert.Equal(2, codeModel.ModelTypes.Count);
-            }
-        }
-
-        [Fact]
-        public void TestExternalReferencesWithAllOf()
-        {
-            using (NewContext)
-            {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-external-ref.json")
-                };
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
-
-                Assert.NotNull(codeModel);
-                Assert.Equal(7, codeModel.ModelTypes.Count);
-                Assert.Equal("ChildProduct", codeModel.ModelTypes.First(m => m.Name == "ChildProduct").Name);
-                Assert.Equal("Pet", codeModel.ModelTypes.First(m => m.Name == "Pet").Name);
-                Assert.Equal("Cat", codeModel.ModelTypes.First(m => m.Name == "Cat").Name);
-                Assert.Equal("SiameseCat", codeModel.ModelTypes.First(m => m.Name == "SiameseCat").Name);
-                Assert.Equal("Dog", codeModel.ModelTypes.First(m => m.Name == "Dog").Name);
-                Assert.Equal("Product", codeModel.ModelTypes.First(m => m.Name == "ChildProduct").BaseModelType.Name);
-            }
-        }
-
-        [Fact]
-        public void TestExternalReferencesWithReferencesInProperties()
-        {
-            using (NewContext)
-            {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-external-ref.json")
-                };
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
-
-                Assert.NotNull(codeModel);
-                Assert.Equal(7, codeModel.ModelTypes.Count);
-                Assert.Equal("ChildProduct", codeModel.ModelTypes.First(m => m.Name == "ChildProduct").Name);
-                Assert.Equal("Product",
-                    codeModel.ModelTypes.First(m => m.Name == "ChildProduct").Properties[1].ModelType.Name);
-            }
-        }
-
-        [Fact]
-        public void TestExternalReferencesWithExtension()
-        {
-            using (NewContext)
-            {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-external-ref-no-definitions.json")
-                };
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
-
-                Assert.NotNull(codeModel);
-                Assert.True(codeModel.ModelTypes.First().Extensions.ContainsKey("x-ms-external"));
-            }
-        }
-
-        [Fact]
-        public void TestRelativeCircularReferencesToExternalFiles()
-        {
-            using (NewContext)
-            {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "arm-network", "2016-12-01", "swagger", "applicationGateway.json")
-                };
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
-                Assert.NotNull(codeModel);
-                var modelTypes = codeModel.ModelTypes;
-                Assert.Equal("NetworkInterfaceIPConfigurationPropertiesFormat", modelTypes.First(m => m.Name == "NetworkInterfaceIPConfigurationPropertiesFormat").Name);
-                Assert.Equal("FooBarPool", modelTypes.First(m => m.Name == "FooBarPool").Name);
-                Assert.Equal("FooResource", modelTypes.First(m => m.Name == "FooResource").Name);
-            }
-        }
-
-        [Fact]
         public void TestcodeModelWithInheritance()
         {
             using (NewContext)
@@ -235,7 +134,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-allOf.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal("Pet", codeModel.ModelTypes.First(m => m.Name == "Pet").Name);
@@ -260,7 +159,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-x-ms-discriminator-value.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal("Pet", codeModel.ModelTypes.First(m => m.Name == "Pet").Name);
@@ -286,7 +185,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-polymorphism.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal("Pet", codeModel.ModelTypes.First(m => m.Name == "Pet").Name);
@@ -313,7 +212,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-allOf-circular.json")
                 };
                 var modeler = new SwaggerModeler();
-                var ex = Assert.Throws<InvalidOperationException>(() => modeler.Build());
+                var ex = Assert.Throws<InvalidOperationException>(() => modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input))));
                 Assert.Contains("circular", ex.Message, StringComparison.OrdinalIgnoreCase);
                 Assert.Contains("siamese", ex.Message, StringComparison.OrdinalIgnoreCase);
             }
@@ -330,7 +229,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-recursive-type.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal("Product", codeModel.ModelTypes.First(m => m.Name == "Product").Name);
@@ -351,7 +250,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-ref-allOf-inheritance.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 // the model has a few base type relationships which should be observed:
                 // RedisResource is a Resource
@@ -392,7 +291,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-no-content.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.Equal("DeleteBlob", codeModel.Methods[4].Name);
                 Assert.True(codeModel.Methods[4].ReturnType.Body.IsPrimaryType(KnownPrimaryType.Object));
@@ -413,7 +312,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-multiple-response-schemas.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal("GetSameResponse", codeModel.Methods[0].Name);
@@ -444,7 +343,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-multiple-response-schemas.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 var retType = codeModel.Methods.First(m => m.Name == "PatchDefaultResponse");
 
@@ -463,7 +362,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-global-responses.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.Equal(1, codeModel.Methods[0].Responses.Count);
                 Assert.NotNull(codeModel.Methods[0].Responses[HttpStatusCode.OK]);
@@ -481,7 +380,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-streaming.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal("GetWithStreamFormData", codeModel.Methods[0].Name);
@@ -516,7 +415,7 @@ namespace AutoRest.Swagger.Tests
                 };
 
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal(0, codeModel.Methods.Count(m => m.Group == null));
@@ -536,7 +435,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-data-types.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal("Int integer", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[0]));
@@ -657,7 +556,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-validation.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.Equal("resourceGroupName", codeModel.Methods[0].Parameters[1].Name);
                 Assert.Equal(true, codeModel.Methods[0].Parameters[1].IsRequired);
@@ -727,7 +626,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-validation.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.Equal("myintconst", codeModel.Methods[0].Parameters[4].Name);
                 Assert.Equal(true, codeModel.Methods[0].Parameters[4].ModelType.IsPrimaryType(KnownPrimaryType.Int));
@@ -786,7 +685,7 @@ namespace AutoRest.Swagger.Tests
                 };
                 var modeler = new SwaggerModeler();
 
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 Assert.Equal(false, codeModel.ModelTypes.First(m => m.Name == "NetworkInterfaceIPConfigurationPropertiesFormat").ContainsConstantProperties);
                 Assert.Equal(false, codeModel.ModelTypes.First(m => m.Name == "IPConfigurationPropertiesFormat").ContainsConstantProperties);
             }
@@ -803,7 +702,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-response-headers.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal(2, codeModel.Methods.Count);
@@ -836,7 +735,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-x-ms-paths.json")
                 };
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal(3, codeModel.Methods.Count);
@@ -855,8 +754,8 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-simple-spec.yaml")
                 };
 
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var modeler = new SwaggerModeler();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
             }
@@ -873,8 +772,8 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-additional-properties.yaml")
                 };
 
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var modeler = new SwaggerModeler();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
 
                 Assert.NotNull(codeModel);
                 Assert.Equal(5, codeModel.ModelTypes.Count);

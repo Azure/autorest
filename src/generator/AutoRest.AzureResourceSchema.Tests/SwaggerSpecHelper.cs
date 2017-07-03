@@ -77,7 +77,7 @@ namespace AutoRest.AzureResourceSchema.Tests
                 using (NewContext)
                 {
                     // generate model from swagger 
-                    codeModel = modeler.Build();
+                    codeModel = modeler.Build(SwaggerParser.Parse(Settings.Instance.FileSystemInput.ReadAllText(Settings.Instance.Input)));
                 }
             }
             catch (Exception exception)

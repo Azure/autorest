@@ -25,7 +25,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 };
 
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(Settings.Instance.Input)));
                 AzureExtensions.NormalizeAzureClientModel(codeModel);
 
                 Assert.Equal(7, codeModel.Methods.Count);

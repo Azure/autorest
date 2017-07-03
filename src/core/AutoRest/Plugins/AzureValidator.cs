@@ -78,7 +78,7 @@ public class AzureValidator : NewPlugin
             var fs = new MemoryFileSystem();
             fs.WriteAllText(file, content);
 
-            var serviceDefinition = SwaggerParser.Load(file, fs);
+            var serviceDefinition = SwaggerParser.Parse(fs.ReadAllText(file));
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
             var docTypeInput = (await GetValue<string>("openapi-type"));
             var docStateInput = (await GetValue<string>("merge-state"));

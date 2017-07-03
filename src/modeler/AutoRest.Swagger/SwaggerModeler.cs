@@ -19,8 +19,10 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger
 {
-    public class SwaggerModeler : Modeler
+    public class SwaggerModeler
     {
+        public Settings Settings => Settings.Instance;
+
         private const string BaseUriParameterName = "BaseUri";
 
         internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -45,39 +47,10 @@ namespace AutoRest.Swagger
         /// </summary>
         public CodeModel CodeModel { get; set; }
 
-        /// <summary>
-        /// Builds service model from swagger file.
-        /// </summary>
-        /// <returns></returns>
-        public override CodeModel Build()
-        {
-            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input))
-            {
-                throw ErrorManager.CreateError(Resources.InputRequired);
-            }
-            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystemInput);
-            return Build(serviceDefinition);
-        }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
             ServiceDefinition = serviceDefinition;
-            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
-            {
-                // Look for semantic errors and warnings in the document.
-                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition, new ServiceDefinitionMetadata
-                {   // LEGACY MODE! set defaults for the metadata, marked to be deprecated
-                    ServiceDefinitionDocumentType = ServiceDefinitionDocumentType.ARM, 
-                    MergeState = ServiceDefinitionDocumentState.Composed
-                }))
-                {
-                    Logger.Instance.Log(validationEx);
-                }
-                return New<CodeModel>();
-            }
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
             // Update settings
