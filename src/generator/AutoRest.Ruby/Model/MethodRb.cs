@@ -568,7 +568,7 @@ namespace AutoRest.Ruby.Model
 
             return modelName;
         }
-        
+
         /// <summary>
         /// Constructs mapper for the request body.
         /// </summary>
@@ -615,11 +615,11 @@ namespace AutoRest.Ruby.Model
             }
             if (MethodGroup.IsCodeModelMethodGroup)
             {
-                builder.AppendLine("{1} = self.deserialize(result_mapper, {0}, '{1}')", responseVariable, valueReference);
+                builder.AppendLine("{1} = self.deserialize(result_mapper, {0})", responseVariable, valueReference);
             }
             else
             {
-                builder.AppendLine("{1} = @client.deserialize(result_mapper, {0}, '{1}')", responseVariable, valueReference);
+                builder.AppendLine("{1} = @client.deserialize(result_mapper, {0})", responseVariable, valueReference);
             }
 
             return builder.ToString();

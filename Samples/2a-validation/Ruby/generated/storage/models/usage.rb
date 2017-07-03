@@ -12,6 +12,7 @@ module Storage
 
       include MsRestAzure
 
+      include MsRest::JSONable
       # @return [UsageUnit] Gets the unit of measurement. Possible values
       # include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
       # 'BytesPerSecond'

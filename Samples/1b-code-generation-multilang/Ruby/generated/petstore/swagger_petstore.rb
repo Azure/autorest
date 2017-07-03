@@ -163,7 +163,7 @@ module Petstore
                 }
               }
             }
-            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
+            result.body = self.deserialize(result_mapper, parsed_response)
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -319,7 +319,7 @@ module Petstore
                 }
               }
             }
-            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
+            result.body = self.deserialize(result_mapper, parsed_response)
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
