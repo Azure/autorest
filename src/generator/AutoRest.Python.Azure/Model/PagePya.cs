@@ -4,6 +4,8 @@
 using System;
 using AutoRest.Core;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Model;
+using AutoRest.Python.Model;
 
 namespace AutoRest.Python.Azure.Model
 {
@@ -11,7 +13,7 @@ namespace AutoRest.Python.Azure.Model
     {
         private readonly string _typeDefinitionName;
 
-        public PagePya(string className, string nextLinkName, string itemName, string itemType)
+        public PagePya(string className, string nextLinkName, string itemName, IModelType itemType)
         {
             this._typeDefinitionName = className;
             this.NextLinkName = nextLinkName;
@@ -25,7 +27,12 @@ namespace AutoRest.Python.Azure.Model
 
         public string TypeDefinitionName => CodeNamer.Instance.GetTypeName(_typeDefinitionName);
 
-        public string ItemType { get; private set; }
+        public IModelType ItemType { get; private set; }
+
+        public string GetReturnTypeDocumentation()
+        {
+            return (ItemType as IExtendedModelTypePy)?.ReturnTypeDocumentation ?? ItemType.Name;
+        }
 
         public bool Equals(PagePya other)
         {

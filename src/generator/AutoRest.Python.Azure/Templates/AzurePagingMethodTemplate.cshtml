@@ -17,6 +17,7 @@
         @ParameterWrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")
         @ParameterWrapComment(string.Empty, ":param bool raw: returns the direct response alongside the deserialized response")
         @ParameterWrapComment(string.Empty, ":param operation_config: :ref:`Operation configuration overrides<msrest:optionsforoperations>`.")
+        @ParameterWrapComment(string.Empty, ":return: An iterator like instance of " + Model.GetReturnTypeDocumentation(Model.PagedResponseContentClass))
         @ParameterWrapComment(string.Empty, string.Format(":rtype: {0}", Model.GetReturnTypeDocumentation(Model.ReturnType.Body)))
         @ParameterWrapComment(string.Empty, string.Format(":raises: {0}", Model.ExceptionDocumentation))
         """
@@ -98,11 +99,11 @@ else
             return response
 @EmptyLine
         # Deserialize response
-        deserialized = @(Model.PagedResponseClassName)(internal_paging, self._deserialize.dependencies)
+        deserialized = models.@(Model.PagedResponseClass.Name)(internal_paging, self._deserialize.dependencies)
 @EmptyLine
         if raw:
             @Model.AddIndividualResponseHeader(null)
-            client_raw_response = @(Model.PagedResponseClassName)(internal_paging, self._deserialize.dependencies, header_dict)
+            client_raw_response = models.@(Model.PagedResponseClass.Name)(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 @EmptyLine
         return deserialized
