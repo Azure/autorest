@@ -10,7 +10,7 @@ from msrest.paging import Paged
 
 class StorageAccountPaged(Paged):
     """
-    A paging container for iterating over a list of StorageAccount object
+    A paging container for iterating over a list of :class:`StorageAccount <storage.models.StorageAccount>` object
     """
 
     _attribute_map = {

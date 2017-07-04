@@ -41,6 +41,8 @@ class UsageOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Usage
+         <storage.models.Usage>`
         :rtype: :class:`UsagePaged <storage.models.UsagePaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
         """
