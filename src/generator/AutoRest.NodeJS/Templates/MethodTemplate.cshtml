@@ -77,10 +77,11 @@ function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCall
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = '@(Model.HttpMethod.ToString().ToUpper())';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
-
+  httpRequest.headers = {};
+  
   // Set Headers
+  httpRequest.headers['Content-Type'] = '@(Model.RequestContentType)';
   @(Model.SetDefaultHeaders)
   @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
   {
@@ -95,7 +96,6 @@ function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCall
       }
     }
   }
-  httpRequest.headers['Content-Type'] = '@(Model.RequestContentType)';
 
   @if (Model.RequestBody != null)
   {
