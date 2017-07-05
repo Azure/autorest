@@ -44,7 +44,6 @@ namespace AutoRest.Swagger
                 var swaggerService = JsonConvert.DeserializeObject<ServiceDefinition>(swaggerDocument, settings);
 
                 // for parameterized host, will be made available via JsonRpc accessible state in the future
-                ServiceDefinition.Instance = swaggerService;
                 if (swaggerService.Schemes == null || swaggerService.Schemes.Count != 1)
                 {
                     swaggerService.Schemes = new List<TransferProtocolScheme> { TransferProtocolScheme.Http };

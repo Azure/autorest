@@ -14,19 +14,15 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void AllowVendorExtensionInPath()
         {
-            using (NewContext)
-            {
-                var input = Path.Combine("Resource", "Swagger", "vendor-extension-in-path.json");
-                var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(input)));
+            var input = Path.Combine("Resource", "Swagger", "vendor-extension-in-path.json");
+            var modeler = new SwaggerModeler();
+            var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(input)));
 
-                // should return a valid model.
-                Assert.NotNull(clientModel);
+            // should return a valid model.
+            Assert.NotNull(clientModel);
 
-                // there should be one method in this generated api.
-                Assert.Equal(1, modeler.CodeModel.Methods.Count);
-            }
+            // there should be one method in this generated api.
+            Assert.Equal(1, modeler.CodeModel.Methods.Count);
         }
-
     }
 }

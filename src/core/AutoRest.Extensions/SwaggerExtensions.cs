@@ -99,7 +99,7 @@ namespace AutoRest.Extensions
 
                         if (!string.IsNullOrEmpty(parametersJson))
                         {
-                            var serviceDefinition = Singleton<ServiceDefinition>.Instance ?? ServiceDefinition.Instance;
+                            var serviceDefinition = Singleton<ServiceDefinition>.Instance;
                             var jsonSettings = new JsonSerializerSettings
                             {
                                 TypeNameHandling = TypeNameHandling.None,

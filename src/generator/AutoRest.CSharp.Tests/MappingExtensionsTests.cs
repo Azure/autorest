@@ -16,21 +16,19 @@ namespace AutoRest.CSharp.Tests
         [Fact]
         public void TestInputMapping()
         {
-            using (NewContext)
+            var input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-payload-flatten.json");
+            var modeler = new SwaggerModeler(new Settings { PayloadFlatteningThreshold = 3 });
+            var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(input)));
+            var plugin = new PluginCs();
+            using (plugin.Activate())
             {
-                var input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-payload-flatten.json");
-                var modeler = new SwaggerModeler(new Settings { PayloadFlatteningThreshold = 3 });
-                var clientModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(input)));
-                var plugin = new PluginCs();
-                using (plugin.Activate())
-                {
-                    clientModel = plugin.Serializer.Load(clientModel);
-                    clientModel = plugin.Transformer.TransformCodeModel(clientModel);
-                    CodeGeneratorCs generator = new CodeGeneratorCs();
+                clientModel = plugin.Serializer.Load(clientModel);
+                clientModel = plugin.Transformer.TransformCodeModel(clientModel);
+                CodeGeneratorCs generator = new CodeGeneratorCs();
 
-                    generator.Generate(clientModel).GetAwaiter().GetResult();
-                    string body = Settings.Instance.FileSystemOutput.ReadAllText(Path.Combine("Payload.cs"));
-                    Assert.True(body.ContainsMultiline(@"
+                generator.Generate(clientModel).GetAwaiter().GetResult();
+                string body = Settings.Instance.FileSystemOutput.ReadAllText(Path.Combine("Payload.cs"));
+                Assert.True(body.ContainsMultiline(@"
                     MinProduct minProduct = new MinProduct();
                     if (baseProductId != null || baseProductDescription != null || maxProductReference != null)
                     {
@@ -38,7 +36,6 @@ namespace AutoRest.CSharp.Tests
                         minProduct.BaseProductDescription = baseProductDescription;
                         minProduct.MaxProductReference = maxProductReference;
                     }"));
-                }
             }
         }
     }
