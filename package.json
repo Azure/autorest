@@ -65,9 +65,7 @@
     "tar.gz2": "^1.0.0",
     "tmp": "0.0.31",
     "unzipper": "^0.8.4",
-    "yauzl": "^2.7.0",
-    "@microsoft.azure/classic-openapi-validator": "F:\\artemp\\rcm\\azure-openapi-validator\\src\\dotnet\\AutoRest\\microsoft.azure-classic-openapi-validator-1.0.0.tgz",
-    "@microsoft.azure/openapi-validator": "F:\\artemp\\rcm\\azure-openapi-validator\\src\typescript\\microsoft.azure-openapi-validator-0.1.1.tgz"
+    "yauzl": "^2.7.0"
   },
   "dependencies": {}
 }
