@@ -70,15 +70,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         
         public Settings()
         {
-            if (!Context.IsActive)
-            {
-                throw new Exception("A context must be active before creating settings.");
-            }
-            if (Singleton<Settings>.HasInstanceInCurrentActivation)
-            {
-                throw new Exception("The current context already has settings. (Did you mean to create a nested context?)");
-            }
-
             // this instance of the settings object should be used for subsequent 
             // requests for settings.
             Singleton<Settings>.Instance = this;

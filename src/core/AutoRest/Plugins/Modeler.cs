@@ -17,7 +17,7 @@ public class Modeler : NewPlugin
 
     protected override async Task<bool> ProcessInternal()
     {
-        new Settings
+        var settings = new Settings
         {
             Namespace = await GetValue("namespace") ?? ""
         };
@@ -33,7 +33,7 @@ public class Modeler : NewPlugin
         fs.WriteAllText(files[0], content);
 
         var serviceDefinition = SwaggerParser.Parse(fs.ReadAllText(files[0]));
-        var modeler = new SwaggerModeler();
+        var modeler = new SwaggerModeler(settings);
         var codeModel = modeler.Build(serviceDefinition);
 
         var genericSerializer = new ModelSerializer<CodeModel>();

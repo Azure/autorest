@@ -21,26 +21,23 @@ namespace AutoRest.Swagger
 {
     public class SwaggerModeler
     {
-        public Settings Settings => Settings.Instance;
-
         private const string BaseUriParameterName = "BaseUri";
 
         internal Dictionary<string, string> ExtendedTypes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         internal Dictionary<string, CompositeType> GeneratedTypes = new Dictionary<string, CompositeType>();
         internal Dictionary<Schema, CompositeType> GeneratingTypes = new Dictionary<Schema, CompositeType>();
 
-        public SwaggerModeler() 
+        public SwaggerModeler(Settings settings = null)
         {
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
+            this.settings = settings ?? new Settings();
         }
 
         /// <summary>
         /// Swagger service model.
         /// </summary>
         public ServiceDefinition ServiceDefinition { get; set; }
+
+        private Settings settings;
 
         /// <summary>
         /// Client model.
@@ -136,10 +133,10 @@ namespace AutoRest.Swagger
                 foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
                 {
                     //Don't overwrite settings that come in from the command line
-                    if (!this.Settings.CustomSettings.ContainsKey(key))
-                        this.Settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
+                    if (!settings.CustomSettings.ContainsKey(key))
+                        settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
                 }
-                Settings.PopulateSettings(this.Settings, this.Settings.CustomSettings);
+                Settings.PopulateSettings(settings, settings.CustomSettings);
             }
         }
 
@@ -161,15 +158,15 @@ namespace AutoRest.Swagger
 
             CodeModel = New<CodeModel>();
 
-            if (string.IsNullOrWhiteSpace(Settings.ClientName) && ServiceDefinition.Info.Title == null)
+            if (string.IsNullOrWhiteSpace(settings.ClientName) && ServiceDefinition.Info.Title == null)
             {
                 throw ErrorManager.CreateError(Resources.TitleMissing);
             }
 
             CodeModel.Name = ServiceDefinition.Info.Title?.Replace(" ", "");
 
-            CodeModel.Namespace = Settings.Namespace;
-            CodeModel.ModelsName = Settings.ModelsName;
+            CodeModel.Namespace = settings.Namespace;
+            CodeModel.ModelsName = settings.ModelsName;
             CodeModel.ApiVersion = ServiceDefinition.Info.Version;
             CodeModel.Documentation = ServiceDefinition.Info.Description;
             CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",

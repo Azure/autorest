@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Unit.Tests
             }
 
             var plugin = ExtensionsLoader.GetPlugin(settings.CodeGenerator);
-            var modeler = new SwaggerModeler();
+            var modeler = new SwaggerModeler(Settings.Instance);
             var codeModel = modeler.Build(SwaggerParser.Parse(inputFileSystem.ReadAllText(Settings.Instance.Input)));
 
             using (plugin.Activate())

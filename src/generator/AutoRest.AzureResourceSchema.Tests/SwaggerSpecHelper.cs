@@ -70,7 +70,7 @@ namespace AutoRest.AzureResourceSchema.Tests
         {
             CodeModel codeModel = null;
 
-            var modeler = new SwaggerModeler();
+            var modeler = new SwaggerModeler(settings);
 
             try
             {

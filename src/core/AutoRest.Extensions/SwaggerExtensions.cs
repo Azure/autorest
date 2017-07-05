@@ -112,7 +112,7 @@ namespace AutoRest.Extensions
                             foreach (var swaggerParameter in swaggerParams)
                             {
                                 // Build parameter
-                                var modeler = new SwaggerModeler();
+                                var modeler = new SwaggerModeler(Settings.Instance);
                                 modeler.ServiceDefinition = serviceDefinition;
                                 modeler.CodeModel = codeModel;
                                 var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
