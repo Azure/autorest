@@ -3,22 +3,28 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BlameTree } from "./source-map/blaming";
-import { OperationAbortedException } from "./exception";
-import { TryDecodeEnhancedPositionFromName } from "./source-map/source-map";
-import { Suppressor } from "./pipeline/suppression";
-import { stringify } from "./ref/jsonpath";
-import { MergeOverwriteOrAppend, resolveRValue } from "./source-map/merging";
-import { DataHandleRead, DataStore } from "./data-store/data-store";
-import { EventEmitter, IEvent } from "./events";
-import { EvaluateGuard, ParseCodeBlocks } from "./parsing/literate-yaml";
-import { CreateFolderUri, EnsureIsFolderUri, ResolveUri } from "./ref/uri";
-import { From } from "./ref/linq";
-import { IFileSystem } from "./file-system";
-import * as Constants from "./constants";
-import { Channel, Message, SourceLocation, Range } from "./message";
-import { Artifact } from "./artifact";
-import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
+import { Extension, ExtensionManager } from "@microsoft.azure/extension";
+import { ChildProcess } from "child_process";
+import { homedir } from "os";
+import { join } from "path";
+import { Artifact } from './artifact';
+import * as Constants from './constants';
+import { DataHandleRead, DataStore } from './data-store/data-store';
+import { EventEmitter, IEvent } from './events';
+import { OperationAbortedException } from './exception';
+import { IFileSystem } from './file-system';
+import { LazyPromise } from './lazy';
+import { Channel, Message, Range, SourceLocation } from './message';
+import { EvaluateGuard, ParseCodeBlocks } from './parsing/literate-yaml';
+import { AutoRestExtension } from './pipeline/plugin-endpoint';
+import { Suppressor } from './pipeline/suppression';
+import { CancellationToken, CancellationTokenSource } from './ref/cancallation';
+import { stringify } from './ref/jsonpath';
+import { From } from './ref/linq';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ResolveUri } from './ref/uri';
+import { BlameTree } from './source-map/blaming';
+import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
+import { TryDecodeEnhancedPositionFromName } from './source-map/source-map';
 
 const RESOLVE_MACROS_AT_RUNTIME = true;
 
@@ -30,6 +36,7 @@ export interface AutoRestConfigurationImpl {
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
+  "use-extension"?: { [extensionName: string]: string };
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   "debug"?: boolean;
@@ -158,6 +165,10 @@ function ProxifyConfigurationView(cfgView: any) {
   });
 }
 
+const loadedExtensions: { [fullyQualified: string]: LazyPromise<AutoRestExtension> } = {};
+export async function GetExtension(fullyQualified: string): Promise<AutoRestExtension> {
+  return await loadedExtensions[fullyQualified];
+}
 
 export class ConfigurationView {
   [name: string]: any;
@@ -252,6 +263,18 @@ export class ConfigurationView {
   }
 
   // public methods
+
+  public get UseExtensions(): Array<{ name: string, source: string, fullyQualified: string }> {
+    const useExtensions = this.Indexer["use-extension"] || {};
+    return Object.keys(useExtensions).map(name => {
+      const source = useExtensions[name];
+      return {
+        name: name,
+        source: source,
+        fullyQualified: JSON.stringify([name, useExtensions[name]])
+      };
+    });
+  }
 
   public get Directives(): Iterable<DirectiveView> {
     return From(ValuesOf<Directive>(this.config["directive"]))
@@ -425,6 +448,11 @@ export class ConfigurationView {
 
 
 export class Configuration {
+  public constructor(
+    private fileSystem?: IFileSystem,
+    private configFileOrFolderUri?: string
+  ) { }
+
   private async ParseCodeBlocks(configFile: DataHandleRead, contextConfig: ConfigurationView, scope: string): Promise<AutoRestConfigurationImpl[]> {
     // load config
     const hConfig = await ParseCodeBlocks(
@@ -454,6 +482,8 @@ export class Configuration {
       : null;
     const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, "./") : (this.configFileOrFolderUri || "file:///");
 
+    const createView = () => new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments);
+
     const configSegments: any[] = [];
     // 1. overrides (CLI, ...)
     configSegments.push(...configs);
@@ -462,7 +492,7 @@ export class Configuration {
       const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(configFileUri),
-        new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments),
+        createView(),
         "config");
       configSegments.push(...blocks);
     }
@@ -471,18 +501,46 @@ export class Configuration {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
-        new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments),
+        createView(),
         "default-config");
       configSegments.push(...blocks);
     }
+    // 4. resolve externals
+    const extMgr = await ExtensionManager.Create(join(homedir(), ".autorest"));
+    while (true) {
+      const tmpView = createView();
+      const useExtensions = tmpView.UseExtensions;
+      // find additional extensions
+      const additionalExtensions = useExtensions.filter(ext => !(ext.fullyQualified in loadedExtensions));
+      if (additionalExtensions.length === 0) {
+        break;
+      }
+      // acquire additional extensions
+      for (const additionalExtension of additionalExtensions) {
+        // TODO: remove
+        if (additionalExtension.name === "@microsoft.azure/autorest-classic-generators")
+          additionalExtension.source = __dirname.replace(/\\/g, "/").replace("autorest-core/dist/lib", "core/AutoRest");
+        // TODO: remove
 
-    return new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments).Indexer;
-  }
+        const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
+        const extPromise = extMgr.installPackage(pack);
+        (extPromise as any).Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose }));
+        const ext = await extPromise;
 
-  public constructor(
-    private fileSystem?: IFileSystem,
-    private configFileOrFolderUri?: string
-  ) {
+        // start extension
+        loadedExtensions[additionalExtension.fullyQualified] = new LazyPromise(async () => AutoRestExtension.FromChildProcess(await ext.start()));
+
+        // merge config
+        const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
+        const blocks = await this.ParseCodeBlocks(
+          await inputView.ReadStrict(CreateFileUri(await ext.configurationPath)),
+          tmpView,
+          `extension-config-${additionalExtension.fullyQualified}`);
+        configSegments.push(...blocks);
+      }
+    }
+
+    return createView().Indexer;
   }
 
   public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null): Promise<string | null> {
