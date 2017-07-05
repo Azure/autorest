@@ -67,9 +67,10 @@ function _uploadFile(fileContent, fileName, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'POST';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'multipart/form-data';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -77,7 +78,6 @@ function _uploadFile(fileContent, fileName, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'multipart/form-data';
   // Serialize Request
   let formData = {};
   if (fileContent !== undefined && fileContent !== null) {
@@ -176,9 +176,10 @@ function _uploadFileViaBody(fileContent, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/octet-stream';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -186,7 +187,6 @@ function _uploadFileViaBody(fileContent, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/octet-stream';
   // Serialize Request
   let requestContent = fileContent;
   httpRequest.body = requestContent;
