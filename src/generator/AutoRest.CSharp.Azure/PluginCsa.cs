@@ -11,7 +11,7 @@ using AutoRest.CSharp.Model;
 
 namespace AutoRest.CSharp.Azure
 {
-    public sealed class PluginCsa : Plugin<GeneratorSettingsCsa, TransformerCsa, CodeGeneratorCsa, CodeNamerCsa, CodeModelCsa>
+    public class PluginCsa : Plugin<GeneratorSettingsCsa, TransformerCsa, CodeGeneratorCsa, CodeNamerCsa, CodeModelCsa>
     {
         public PluginCsa()
         {

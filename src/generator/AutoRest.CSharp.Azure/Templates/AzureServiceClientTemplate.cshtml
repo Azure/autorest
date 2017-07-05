@@ -102,7 +102,7 @@ namespace @Settings.Namespace
     
         @foreach (MethodCsa method in Model.Methods.Where(each => each.Group.IsNullOrEmpty()))
             {
-        @:@(Include(new AzureMethodTemplate(), (MethodCsa)method))
+        @:@(Include(DependencyInjection.New<AzureMethodTemplate>(), (MethodCsa)method))
         @EmptyLine
         @:
         }

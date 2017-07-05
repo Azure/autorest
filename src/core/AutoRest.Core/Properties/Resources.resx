@@ -124,8 +124,6 @@
     <value>Plugins:
   CSharp:
     TypeName: PluginCs, AutoRest.CSharp
-  JsonRpcClient:
-    TypeName: PluginCs, AutoRest.CSharp.JsonRpcClient
   Azure.CSharp:
     TypeName: PluginCsa, AutoRest.CSharp.Azure
   Azure.CSharp.Fluent:
