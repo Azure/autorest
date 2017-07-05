@@ -17,6 +17,8 @@ openapi-type: arm
 ``` yaml
 use-extension:
   "@microsoft.azure/autorest-classic-generators": 2.0.0-preview
+  "@microsoft.azure/classic-openapi-validator": "C:\\Users\\deshank\\Downloads\\microsoft.azure-classic-openapi-validator-1.0.0.tgz"
+  "@microsoft.azure/openapi-validator": "C:\\Users\\deshank\\Downloads\\microsoft.azure-openapi-validator-0.1.1.tgz"
 ```
 
 ### Graph
@@ -105,23 +107,25 @@ pipeline:
 
 ##### Azure Validator
 
-``` yaml
+``` yaml $(azure-validator)
 pipeline:
-  swagger-document/azure-openapi-validator:
+  swagger-document/openapi-validator:
     input:
       - swagger-document/identity
       - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
-  swagger-document/individual/azure-openapi-validator:
+  swagger-document/individual/openapi-validator:
     input: 
       - swagger-document/identity
       - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
-```
 
-``` yaml $(azure-validator)
-azure-validator-composed:
-  merge-state: composed
-azure-validator-individual:
-  merge-state: individual
+  swagger-document/classic-openapi-validator:
+    input:
+      - swagger-document/identity
+      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
+  swagger-document/individual/classic-openapi-validator:
+    input: 
+      - swagger-document/identity
+      - azure-validator # artificial predecessor in order to ensure order of messages for CI purposes
 ```
 
 # Validation

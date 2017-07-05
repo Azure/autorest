@@ -274,8 +274,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "compose": CreatePluginComposer(),
     "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
     "semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),
-    "azure-openapi-validator": CreatePluginExternal(aoavPluginHost, "azure-openapi-validator"),
-
+    "openapi-validator": CreatePluginExternal(aoavPluginHost, "openapi-validator"),
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
     "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)]))

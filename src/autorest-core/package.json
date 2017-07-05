@@ -45,8 +45,6 @@
     "linq-es2015": "^2.4.13",
     "oav": "0.4.1",
     "@microsoft.azure/extension": "~1.0.58",
-    "@microsoft.azure/classic-openapi-validator": "C:\\Users\\deshank\\Downloads\\microsoft.azure-classic-openapi-validator-1.0.0.tgz",
-    "@microsoft.azure/openapi-validator": "C:\\Users\\deshank\\Downloads\\microsoft.azure-openapi-validator-0.1.1.tgz",
     "pify": "^2.3.0",
     "safe-eval": "^0.3.0",
     "source-map": "^0.5.6",
