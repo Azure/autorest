@@ -19,7 +19,7 @@ namespace @Settings.Namespace
 {
 @EmptyLine
     /// <summary>@(model.Documentation.EscapeXmlComment())</summary>
-    public partial interface I@(clientName) : System.IDisposable
+    public partial interface I@(clientName) 
     {
      
     @foreach(MethodCs method in methods.Where( each => each.Group.IsNullOrEmpty()) )

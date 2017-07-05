@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.LoadBalanced
 
             var libPath = Path.Combine(Settings.Instance.OutputDirectory, "lib");
             
-            await new LibFolderTemplate(libPath).ExecuteAsync();
+            await new LibFolderCreator(libPath).ExecuteAsync();
 
             foreach (var client in clients)
             {

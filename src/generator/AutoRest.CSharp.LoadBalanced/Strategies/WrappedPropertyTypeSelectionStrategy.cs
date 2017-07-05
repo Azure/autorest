@@ -82,11 +82,11 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
             if (IsDateText(property))
             {
-                attributeBuilder.Append("DateTimeStringConverter");
+                attributeBuilder.Append("DateTimeStringConverter)");
             }
             else if (IsGuid(property))
             {
-                attributeBuilder.Append("GuidStringConverter");
+                attributeBuilder.Append("GuidStringConverter)");
             }
             else if (IsMoney(property))
             {
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             }
             else if (IsInt32Value(property))
             {
-                attributeBuilder.Append("Int32ValueConverter");
+                attributeBuilder.Append("Int32ValueConverter)");
             }
             else
             {
@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
                     return null;
                 }
 
-                attributeBuilder.Append(typeConverterName);
+                attributeBuilder.Append($"{typeConverterName})");
             }
 
             attributeBuilder.Append(")");

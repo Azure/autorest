@@ -45,7 +45,7 @@
 {
 @:[System.Obsolete()]
 }
-public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
+public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(false)))
 {
     @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
     {
@@ -100,7 +100,7 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Mod
                             {
                                 HttpVerb = verb,
                                 RestUrl = "@(Model.Url.TrimStart('/'))",
-                                CustomHeaders = customHeaders,
+                                CustomHeaders = new Dictionary<string, string> { { "Accept" , "application/vnd.api+json"}, { "Content-Type", "application/vnd.api+json" } },
                                 QueryParameters = queryParameters
                                 @(@Model.Body == null ? "" : ", Body = body")
                             };

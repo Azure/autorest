@@ -171,6 +171,7 @@ namespace @Settings.Namespace
         public class HttpRequestCommand
         {
             private const string JsonContentType = "application/json";
+            private readonly string _contentType;
             private readonly string _name;
             private readonly Verbs _verb;
             private readonly Lazy<string> _url;
@@ -193,6 +194,14 @@ namespace @Settings.Namespace
                 Dictionary<string, string> customHeaders = null,
                 object body = null)
             {
+                if (customHeaders != null && customHeaders.ContainsKey("Content-Type"))
+                {
+                    _contentType = customHeaders["Content-Type"];
+                }
+                else
+                {
+                    _contentType = JsonContentType;
+                }
                 _name = name;
                 _timeout = timeout;
                 _retryCount = retryCount;
@@ -209,7 +218,7 @@ namespace @Settings.Namespace
 @EmptyLine
             internal async Task<ExecuteResult> ExecuteAsync()
             {
-                var httpClient = new HttpClient(_name, _settings, JsonContentType, (int)_timeout.TotalMilliseconds, _retryCount, "");
+                var httpClient = new HttpClient(_name, _settings, _contentType, (int)_timeout.TotalMilliseconds, _retryCount, "");
 
                 var result = await httpClient.ExecuteAsync(
                     _verb, 
