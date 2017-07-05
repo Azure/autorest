@@ -16,7 +16,7 @@ openapi-type: arm
 
 ``` yaml
 use-extension:
-  "@microsoft.azure/autorest-classic-generators": 2.0.0-preview
+  "@microsoft.azure/autorest-classic-generators": "2.0.0-preview"
   "@microsoft.azure/classic-openapi-validator": "C:\\Users\\deshank\\Downloads\\microsoft.azure-classic-openapi-validator-1.0.0.tgz"
   "@microsoft.azure/openapi-validator": "C:\\Users\\deshank\\Downloads\\microsoft.azure-openapi-validator-0.1.1.tgz"
 ```
