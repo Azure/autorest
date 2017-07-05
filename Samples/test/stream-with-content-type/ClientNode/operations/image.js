@@ -66,9 +66,10 @@ function _a(image, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'POST';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'image/gif';
   if (imageContentType !== undefined && imageContentType !== null) {
     httpRequest.headers['Content-Type'] = imageContentType;
   }
@@ -79,7 +80,6 @@ function _a(image, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'image/gif';
   // Serialize Request
   let requestContent = image;
   httpRequest.body = requestContent;
@@ -177,9 +177,10 @@ function _b(image, imageContentType, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'POST';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'image/gif';
   if (imageContentType !== undefined && imageContentType !== null) {
     httpRequest.headers['Content-Type'] = imageContentType;
   }
@@ -190,7 +191,6 @@ function _b(image, imageContentType, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'image/gif';
   // Serialize Request
   let requestContent = image;
   httpRequest.body = requestContent;
