@@ -14,7 +14,7 @@ from msrest.paging import Paged
 
 class ProductPaged1(Paged):
     """
-    A paging container for iterating over a list of Product object
+    A paging container for iterating over a list of :class:`Product <fixtures.acceptancetestspaging.models.Product>` object
     """
 
     _attribute_map = {

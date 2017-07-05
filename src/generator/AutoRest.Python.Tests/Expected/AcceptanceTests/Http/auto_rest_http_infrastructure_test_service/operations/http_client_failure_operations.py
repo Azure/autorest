@@ -41,9 +41,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -80,9 +82,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -121,9 +125,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -169,9 +175,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -217,9 +225,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -265,9 +275,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -311,9 +323,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -350,9 +364,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -389,9 +405,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -430,9 +448,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -478,9 +498,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -526,9 +548,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -574,9 +598,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -622,9 +648,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -668,9 +696,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -707,9 +737,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -746,9 +778,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -787,9 +821,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -835,9 +871,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -883,9 +921,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -929,9 +969,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -970,9 +1012,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """
@@ -1016,9 +1060,11 @@ class HttpClientFailureOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>`
-        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
-         if raw=true
+        :return: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
+        :rtype: :class:`Error <fixtures.acceptancetestshttp.models.Error>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestshttp.models.ErrorException>`
         """

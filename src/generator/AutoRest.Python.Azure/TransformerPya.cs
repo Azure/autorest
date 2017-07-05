@@ -74,9 +74,10 @@ namespace AutoRest.Python.Azure
         }
 
         [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "nextLink")]
-        private string GetPagingSetting(CodeModelPya codeModel, CompositeType body, Dictionary<string, object> extensions, string valueTypeName,
+        private string GetPagingSetting(CodeModelPya codeModel, CompositeType body, Dictionary<string, object> extensions, IModelType valueType,
             IDictionary<int, string> typePageClasses, string methodName)
         {
+            string valueTypeName = valueType.Name;
             var ext = extensions[AzureExtensions.PageableExtension] as JContainer;
 
             var ignoreNextLink = false;
@@ -147,7 +148,7 @@ namespace AutoRest.Python.Azure
             className = typePageClasses[hash];
             ext["className"] = className;
 
-            var pageModel = new PagePya(className, nextLinkName, itemName, valueTypeName);
+            var pageModel = new PagePya(className, nextLinkName, itemName, valueType);
             if (!codeModel.PageModels.Contains(pageModel))
             {
                 codeModel.PageModels.Add(pageModel);
@@ -169,7 +170,7 @@ namespace AutoRest.Python.Azure
 
             var convertedTypes = new Dictionary<IModelType, Response>();
 
-            foreach (var method in codeModel.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
+            foreach (MethodPya method in codeModel.Methods.Where(m => m is MethodPya && m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key))
                 {
@@ -179,18 +180,21 @@ namespace AutoRest.Python.Azure
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
-                        string valueType = sequenceType.ElementType.Name;
-                        if (!codeModel.PageClasses.ContainsKey(valueType))
+                        var valueType = sequenceType.ElementType;
+                        string valueTypeName = valueType.Name;
+                        if (!codeModel.PageClasses.ContainsKey(valueTypeName))
                         {
-                            codeModel.PageClasses.Add(valueType, new Dictionary<int, string>());
+                            codeModel.PageClasses.Add(valueTypeName, new Dictionary<int, string>());
                         }
                         var pagableTypeName = GetPagingSetting(codeModel, compositType, method.Extensions, valueType,
-                            codeModel.PageClasses[valueType], method.SerializedName);
+                            codeModel.PageClasses[valueTypeName], method.SerializedName);
 
                         var pagedResult = New<CompositeType>(pagableTypeName);
                         
                         // make sure the parent reference is set.
                         pagedResult.CodeModel = codeModel;
+
+                        method.PagedResponseContentClass = valueType; // Save the content type model
 
                         convertedTypes[compositType] = new Response(pagedResult, null);
                         method.Responses[responseStatus] = convertedTypes[compositType];

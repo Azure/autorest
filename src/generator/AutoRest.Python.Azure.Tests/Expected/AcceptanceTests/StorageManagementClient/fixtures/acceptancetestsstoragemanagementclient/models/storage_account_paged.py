@@ -14,7 +14,7 @@ from msrest.paging import Paged
 
 class StorageAccountPaged(Paged):
     """
-    A paging container for iterating over a list of StorageAccount object
+    A paging container for iterating over a list of :class:`StorageAccount <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccount>` object
     """
 
     _attribute_map = {

@@ -10,7 +10,7 @@ from msrest.paging import Paged
 
 class UsagePaged(Paged):
     """
-    A paging container for iterating over a list of Usage object
+    A paging container for iterating over a list of :class:`Usage <storage.models.Usage>` object
     """
 
     _attribute_map = {

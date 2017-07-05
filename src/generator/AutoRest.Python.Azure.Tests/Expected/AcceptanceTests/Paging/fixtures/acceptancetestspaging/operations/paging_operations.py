@@ -42,6 +42,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged
          <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -107,6 +109,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged
          <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -186,6 +190,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged1
          <fixtures.acceptancetestspaging.models.ProductPaged1>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -264,6 +270,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged
          <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -343,6 +351,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged
          <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -403,6 +413,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged
          <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -461,6 +473,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged
          <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -519,6 +533,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged
          <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -577,6 +593,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged
          <fixtures.acceptancetestspaging.models.ProductPaged>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -639,6 +657,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged1
          <fixtures.acceptancetestspaging.models.ProductPaged1>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
@@ -712,6 +732,8 @@ class PagingOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
+        :return: An iterator like instance of :class:`Product
+         <fixtures.acceptancetestspaging.models.Product>`
         :rtype: :class:`ProductPaged1
          <fixtures.acceptancetestspaging.models.ProductPaged1>`
         :raises: :class:`CloudError<msrestazure.azure_exceptions.CloudError>`
