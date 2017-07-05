@@ -3,9 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// polyfills for language support
-require("../../polyfill.min.js");
-
 import { JsonPath, nodes } from '../../ref/jsonpath';
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types } from "../plugin-api";
@@ -13,8 +10,8 @@ import { EnhancedPosition, Mapping, RawSourceMap, SmartPosition } from "../../re
 import { Parse, Stringify } from "../../ref/yaml";
 import { Message, Channel } from "../../message";
 import { From } from "../../ref/linq";
-const utils = require("../../../node_modules/oav/lib/util/utils");
-const validation = require("../../../node_modules/oav/index");
+const utils = require("../../../../node_modules/oav/lib/util/utils");
+const validation = require("../../../../node_modules/oav/index");
 
 /**
  * The tools report paths in a way that does not represent indices as numbers.

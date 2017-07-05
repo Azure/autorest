@@ -15,33 +15,6 @@ import * as Constants from "./constants";
 import { Artifact } from "./artifact";
 
 export class AutoRest extends EventEmitter {
-  private _configurations = new Array<any>();
-  private _view: ConfigurationView | undefined;
-  public get view(): Promise<ConfigurationView> {
-    return (this._view) ? Promise.resolve(this._view) : this.RegenerateView(true);
-  }
-
-  public async RegenerateView(includeDefault: boolean = false): Promise<ConfigurationView> {
-    this.Invalidate();
-    const messageEmitter = new MessageEmitter();
-
-    // subscribe to the events for the current configuration view
-    messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
-    messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
-
-    return this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, includeDefault, ...this._configurations);
-  }
-
-  /**
-   *
-   * @param rootUri The rootUri of the workspace. Is null if no workspace is open.
-   * @param fileSystem The implementation of the filesystem to load and save files from the host application.
-   */
-  public constructor(private fileSystem?: IFileSystem, public configFileOrFolderUri?: string) {
-    super();
-  }
-
-
   /**
    *  Given a file's content, does this represent a swagger file of some sort?
    *
@@ -81,8 +54,8 @@ export class AutoRest extends EventEmitter {
       await (await autorest.Process()).finish;
       return result;
     } catch (x) {
+      return "";
     }
-    return "";
   }
 
   public static async IsConfigurationFile(content: string): Promise<boolean> {
@@ -95,8 +68,9 @@ export class AutoRest extends EventEmitter {
       case "markdown":
       case "md":
         return true;
+      default:
+        return false;
     }
-    return false;
   }
 
   public static IsSwaggerExtension(extension: string): boolean {
@@ -107,12 +81,52 @@ export class AutoRest extends EventEmitter {
       case "md":
       case "json":
         return true;
+      default:
+        return false;
     }
-    return false;
   }
 
   public static async DetectConfigurationFile(fileSystem: IFileSystem, documentPath?: string): Promise<string | null> {
     return Configuration.DetectConfigurationFile(fileSystem, (documentPath || null));
+  }
+
+
+  /**
+   * Event: Signals when a Process() finishes.
+   */
+  @EventEmitter.Event public Finished: IEvent<AutoRest, boolean | Error>;
+  /**
+   * Event: Signals when a File is generated
+   */
+  @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
+  /**
+   * Event: Signals when a message is generated
+   */
+  @EventEmitter.Event public Message: IEvent<AutoRest, Message>;
+
+  private _configurations = new Array<any>();
+  private _view: ConfigurationView | undefined;
+  public get view(): Promise<ConfigurationView> {
+    return this._view ? Promise.resolve(this._view) : this.RegenerateView(true);
+  }
+
+  /**
+   * @param fileSystem The implementation of the filesystem to load and save files from the host application.
+   * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
+   */
+  public constructor(private fileSystem?: IFileSystem, public configFileOrFolderUri?: string) {
+    super();
+  }
+
+  public async RegenerateView(includeDefault: boolean = false): Promise<ConfigurationView> {
+    this.Invalidate();
+    const messageEmitter = new MessageEmitter();
+
+    // subscribe to the events for the current configuration view
+    messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
+    messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
+
+    return this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, includeDefault, ...this._configurations);
   }
 
   public Invalidate() {
@@ -135,7 +149,7 @@ export class AutoRest extends EventEmitter {
 
   public get HasConfiguration(): Promise<boolean> {
     return new Promise<boolean>(async (r, f) => {
-      (await this.view);
+      await this.view;
       r(false);
     });
   }
@@ -147,7 +161,7 @@ export class AutoRest extends EventEmitter {
     let earlyCancel = false;
     let cancel: () => void = () => earlyCancel = true;
     const processInternal = async () => {
-      let view: ConfigurationView = <ConfigurationView><any>null;
+      let view: ConfigurationView = null as any;
       try {
         // grab the current configuration view.
         view = await this.view;
@@ -212,18 +226,4 @@ export class AutoRest extends EventEmitter {
       finish: processInternal()
     }
   }
-
-  /**
-   * Event: Signals when a Process() finishes.
-   */
-  @EventEmitter.Event public Finished: IEvent<AutoRest, boolean | Error>;
-
-  /**
-  * Event: Signals when a File is generated
-  */
-  @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
-  /**
-   * Event: Signals when a message is generated
-   */
-  @EventEmitter.Event public Message: IEvent<AutoRest, Message>;
 }
