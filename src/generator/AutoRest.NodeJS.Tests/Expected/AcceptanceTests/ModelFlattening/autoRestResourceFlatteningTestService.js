@@ -62,9 +62,10 @@ function _putArray(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -72,7 +73,6 @@ function _putArray(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -180,9 +180,10 @@ function _getArray(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -190,7 +191,6 @@ function _getArray(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -305,9 +305,10 @@ function _putWrappedArray(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -315,7 +316,6 @@ function _putWrappedArray(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -424,9 +424,10 @@ function _getWrappedArray(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -434,7 +435,6 @@ function _getWrappedArray(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -549,9 +549,10 @@ function _putDictionary(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -559,7 +560,6 @@ function _putDictionary(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -667,9 +667,10 @@ function _getDictionary(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -677,7 +678,6 @@ function _getDictionary(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -811,9 +811,10 @@ function _putResourceCollection(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -821,7 +822,6 @@ function _putResourceCollection(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -916,9 +916,10 @@ function _getResourceCollection(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -926,7 +927,6 @@ function _getResourceCollection(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -1042,9 +1042,10 @@ function _putSimpleProduct(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1052,7 +1053,6 @@ function _putSimpleProduct(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -1213,9 +1213,10 @@ function _postFlattenedSimpleProduct(productId, maxProductDisplayName, options, 
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'POST';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1223,7 +1224,6 @@ function _postFlattenedSimpleProduct(productId, maxProductDisplayName, options, 
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -1426,9 +1426,10 @@ function _putSimpleProductWithGrouping(flattenParameterGroup, options, callback)
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1436,7 +1437,6 @@ function _putSimpleProductWithGrouping(flattenParameterGroup, options, callback)
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;

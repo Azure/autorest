@@ -51,9 +51,10 @@ function _getFile(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -61,7 +62,6 @@ function _getFile(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   httpRequest.streamedResponse = true;
@@ -142,9 +142,10 @@ function _getFileLarge(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -152,7 +153,6 @@ function _getFileLarge(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   httpRequest.streamedResponse = true;
@@ -233,9 +233,10 @@ function _getEmptyFile(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -243,7 +244,6 @@ function _getEmptyFile(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   httpRequest.streamedResponse = true;

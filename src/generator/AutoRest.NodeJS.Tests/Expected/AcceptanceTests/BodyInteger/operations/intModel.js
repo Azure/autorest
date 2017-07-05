@@ -51,9 +51,10 @@ function _getNull(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -61,7 +62,6 @@ function _getNull(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -164,9 +164,10 @@ function _getInvalid(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -174,7 +175,6 @@ function _getInvalid(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -277,9 +277,10 @@ function _getOverflowInt32(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -287,7 +288,6 @@ function _getOverflowInt32(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -390,9 +390,10 @@ function _getUnderflowInt32(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -400,7 +401,6 @@ function _getUnderflowInt32(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -503,9 +503,10 @@ function _getOverflowInt64(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -513,7 +514,6 @@ function _getOverflowInt64(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -616,9 +616,10 @@ function _getUnderflowInt64(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -626,7 +627,6 @@ function _getUnderflowInt64(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -739,9 +739,10 @@ function _putMax32(intBody, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -749,7 +750,6 @@ function _putMax32(intBody, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -859,9 +859,10 @@ function _putMax64(intBody, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -869,7 +870,6 @@ function _putMax64(intBody, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -979,9 +979,10 @@ function _putMin32(intBody, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -989,7 +990,6 @@ function _putMin32(intBody, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -1099,9 +1099,10 @@ function _putMin64(intBody, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1109,7 +1110,6 @@ function _putMin64(intBody, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -1209,9 +1209,10 @@ function _getUnixTime(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1219,7 +1220,6 @@ function _getUnixTime(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -1333,9 +1333,10 @@ function _putUnixTimeDate(intBody, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1343,7 +1344,6 @@ function _putUnixTimeDate(intBody, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -1443,9 +1443,10 @@ function _getInvalidUnixTime(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1453,7 +1454,6 @@ function _getInvalidUnixTime(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -1556,9 +1556,10 @@ function _getNullUnixTime(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -1566,7 +1567,6 @@ function _getNullUnixTime(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {

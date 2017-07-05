@@ -391,9 +391,10 @@ function _beginPutAsyncRetrySucceeded(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -407,7 +408,6 @@ function _beginPutAsyncRetrySucceeded(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -543,9 +543,10 @@ function _beginPut201CreatingSucceeded200(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -559,7 +560,6 @@ function _beginPut201CreatingSucceeded200(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -710,9 +710,10 @@ function _beginPost202Retry200(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'POST';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -726,7 +727,6 @@ function _beginPost202Retry200(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -844,9 +844,10 @@ function _beginPostAsyncRetrySucceeded(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'POST';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -860,7 +861,6 @@ function _beginPostAsyncRetrySucceeded(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;

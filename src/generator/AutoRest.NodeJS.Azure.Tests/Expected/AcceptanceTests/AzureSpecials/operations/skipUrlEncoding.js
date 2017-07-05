@@ -71,9 +71,10 @@ function _getMethodPathValid(unencodedPathParam, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -87,7 +88,6 @@ function _getMethodPathValid(unencodedPathParam, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -186,9 +186,10 @@ function _getPathPathValid(unencodedPathParam, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -202,7 +203,6 @@ function _getPathPathValid(unencodedPathParam, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -296,9 +296,10 @@ function _getSwaggerPathValid(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -312,7 +313,6 @@ function _getSwaggerPathValid(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -412,9 +412,10 @@ function _getMethodQueryValid(q1, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -428,7 +429,6 @@ function _getMethodQueryValid(q1, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -529,9 +529,10 @@ function _getMethodQueryNull(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -545,7 +546,6 @@ function _getMethodQueryNull(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -645,9 +645,10 @@ function _getPathQueryValid(q1, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -661,7 +662,6 @@ function _getPathQueryValid(q1, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -756,9 +756,10 @@ function _getSwaggerQueryValid(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -772,7 +773,6 @@ function _getSwaggerQueryValid(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
