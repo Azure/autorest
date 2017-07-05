@@ -8,9 +8,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
