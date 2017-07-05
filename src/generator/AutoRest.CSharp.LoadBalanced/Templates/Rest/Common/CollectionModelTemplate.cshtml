@@ -5,6 +5,7 @@
 @EmptyLine
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using AutoRest.CSharp.LoadBalanced.Json;
 @EmptyLine
 @{
     var property = Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs);
@@ -13,7 +14,7 @@ using System.Collections.Generic;
 }
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
-    [JsonConverter(typeof(WrappedListConverter<@genericPart>), "@property.Name.Value")
+    [JsonConverter(typeof(WrappedListConverter<@genericPart>), "@property.Name.Value")]
     public partial class @Model.Name : @Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs).ModelTypeName.Replace("System.Collections.Generic.IList", "List")
     {
     }

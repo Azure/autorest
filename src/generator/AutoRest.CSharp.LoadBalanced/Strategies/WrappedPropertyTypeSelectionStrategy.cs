@@ -77,55 +77,60 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
         public override string GetConverterTypeName(Property property)
         {
-            if(IsDateText(property))
-            {
-                return "AutoRest.CSharp.LoadBalanced.Json.DateTimeStringConverter";
-            }
+            var attributeBuilder = new StringBuilder();
+            attributeBuilder.Append("JsonConverter(typeof(");
 
-            if (IsGuid(property))
+            if (IsDateText(property))
             {
-                return "AutoRest.CSharp.LoadBalanced.Json.GuidStringConverter";
+                attributeBuilder.Append("DateTimeStringConverter");
             }
-
-            if (IsMoney(property))
+            else if (IsGuid(property))
             {
-                var attributeBuilder = new StringBuilder();
-                attributeBuilder.Append("AutoRest.CSharp.LoadBalanced.Json.MoneyConverter");
+                attributeBuilder.Append("GuidStringConverter");
+            }
+            else if (IsMoney(property))
+            {
+                attributeBuilder.Append("MoneyConverter");
                 var options = new List<string>();
-
 
                 if (property.ModelType.Name == "string")
                 {
-                    options.Add("AutoRest.CSharp.LoadBalanced.Json.MoneyConverterOptions.SendAsText");
+                    options.Add("MoneyConverterOptions.SendAsText");
                 }
 
                 if (property.IsNullable())
                 {
-                    options.Add("AutoRest.CSharp.LoadBalanced.Json.MoneyConverterOptions.IsNullable");
+                    options.Add("MoneyConverterOptions.IsNullable");
                 }
 
                 if (options.Any())
                 {
-                    attributeBuilder.Append(", ").Append(string.Join(" | ", options));
+                    attributeBuilder.Append("), ").Append(string.Join(" | ", options));
+                }
+                else
+                {
+                    attributeBuilder.Append(")");
+                }
+            }
+            else if (IsInt32Value(property))
+            {
+                attributeBuilder.Append("Int32ValueConverter");
+            }
+            else
+            {
+                var typeConverterName = base.GetConverterTypeName(property);
+
+                if (string.IsNullOrWhiteSpace(typeConverterName))
+                {
+                    return null;
                 }
 
-                return attributeBuilder.ToString();
+                attributeBuilder.Append(typeConverterName);
             }
 
-            if (IsInt32Value(property))
-            {
-                return "AutoRest.CSharp.LoadBalanced.Json.Int32ValueConverter";
-            }
+            attributeBuilder.Append(")");
 
-            var typeConverterName = base.GetConverterTypeName(property);
-
-            if (string.IsNullOrWhiteSpace(typeConverterName))
-            {
-                return typeConverterName;
-            }
-
-            // TODO: this is where we can put the custom wrapper related type converters
-            return null;
+            return attributeBuilder.ToString();
         }
 
         public override bool IsCollection(CompositeTypeCs compositeType)

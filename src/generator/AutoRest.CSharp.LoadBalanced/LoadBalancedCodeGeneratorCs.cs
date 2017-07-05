@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -35,9 +36,10 @@ namespace AutoRest.CSharp.LoadBalanced
         {
             CompositeTypeCs.DefaultPropertyTypeSelectionStrategy = new WrappedPropertyTypeSelectionStrategy();
 
-            var usings = new List<string>(codeModel.Usings);
+            var usings = new List<string>();
+            var methodGroups = codeModel.Operations.Cast<MethodGroupCs>();
             var methods = codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()).Cast<MethodCs>().ToList();
-
+            
             var project = new ProjectModel
             {
                 RootNameSpace = codeModel.Namespace
@@ -48,35 +50,44 @@ namespace AutoRest.CSharp.LoadBalanced
             project.FilePaths.Add(metricsFilePath);
             await Write(metricsTemplate, metricsFilePath);
 
-            usings.Add("System");
-            usings.Add("System.Collections.Generic");
-            usings.Add("System.Linq");
-            usings.Add("System.Threading");
-            usings.Add("System.Threading.Tasks");
-            usings.Add("Microsoft.Rest");
-            usings.Add("System.IO");
-            usings.Add("Microsoft.Rest.Serialization");
-            usings.Add("Agoda.RoundRobin");
-            usings.Add("Newtonsoft.Json");
-            usings.Add("Agoda.SAPI.Client.Models");
+            usings.AddRange(new[]
+                            {
+                                "System", "System.Collections.Generic", "System.Linq", "System.Threading",
+                                "System.Threading.Tasks", "Microsoft.Rest", "System.IO",
+                                "Microsoft.Rest.Serialization", "Agoda.RoundRobin", "Newtonsoft.Json",
+                                "Agoda.SAPI.Client.Models", "Agoda.RoundRobin.Constants"
+                            });
 
-            codeModel.Usings = usings.Where(u => !string.IsNullOrWhiteSpace(u)).Distinct();
+            usings = usings.Where(u => !string.IsNullOrWhiteSpace(u)).Distinct().ToList();
 
-            // Service client
-            var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
+            codeModel.Usings = usings;
+            
+            var clients = methods.GroupBy(m => m.Tags.First()).ToArray();
 
-            var clientPath = $"{codeModel.Name}{ImplementationFileExtension}";
-            project.FilePaths.Add(clientPath);
+            var libPath = Path.Combine(Settings.Instance.OutputDirectory, "lib");
+            
+            await new LibFolderTemplate(libPath).ExecuteAsync();
 
-            await Write(serviceClientTemplate, clientPath);
+            foreach (var client in clients)
+            {
+                var clientName = $"{client.Key.ToPascalCase()}Client";
+                var clientMethods = client.ToArray();
+                var clientClassFileName = $"{clientName}.{ImplementationFileExtension}";
+                var clientInterfaceFileName = $"I{clientClassFileName}";
 
-            // Service client interface
-            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
+                var model = new Tuple<CodeModelCs, string, MethodCs[]>(codeModel, clientName, clientMethods);
 
-            var interfacePath = $"I{codeModel.Name}{ImplementationFileExtension}";
-            project.FilePaths.Add(interfacePath);
+                // Service client interface
+                var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = model };
+                await Write(serviceClientInterfaceTemplate, clientInterfaceFileName);
+                project.FilePaths.Add(clientInterfaceFileName);
 
-            await Write(serviceClientInterfaceTemplate, interfacePath);
+
+                // Service client
+                var serviceClientTemplate = new ServiceClientTemplate { Model = model };
+                project.FilePaths.Add(clientClassFileName);
+                await Write(serviceClientTemplate, clientClassFileName);
+            }
 
             var apiBaseTemplate = new ApiBaseTemplate {Model = codeModel};
             var apiBaseCsPath = "ApiBase.cs";
@@ -84,10 +95,8 @@ namespace AutoRest.CSharp.LoadBalanced
             await Write(apiBaseTemplate, apiBaseCsPath);
 
             // operations
-            foreach (var methodGroup1 in codeModel.Operations)
+            foreach (var methodGroup in methodGroups)
             {
-                var methodGroup = (MethodGroupCs) methodGroup1;
-
                 if (methodGroup.Name.IsNullOrEmpty())
                 {
                     continue;
@@ -108,8 +117,6 @@ namespace AutoRest.CSharp.LoadBalanced
 
                 await Write(operationsInterfaceTemplate, operationsInterfacePath);
             }
-
-
 
             // Models
             var models = codeModel.ModelTypes.Union(codeModel.HeaderTypes).Cast<CompositeTypeCs>();
@@ -152,24 +159,12 @@ namespace AutoRest.CSharp.LoadBalanced
             // Exceptions
             foreach (CompositeTypeCs exceptionType in codeModel.ErrorTypes)
             {
-
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
                 var exceptionFilePath =
                     Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
                 project.FilePaths.Add(exceptionFilePath);
 
                 await Write(exceptionTemplate, exceptionFilePath);
-            }
-            
-            // Xml Serialization
-            if (codeModel.ShouldGenerateXmlSerialization)
-            {
-                var xmlSerializationTemplate = new XmlSerializationTemplate();
-                var xmlSerializationPath = Path.Combine(Settings.Instance.ModelsName,
-                    $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}");
-                project.FilePaths.Add(xmlSerializationPath);
-
-                await Write(xmlSerializationTemplate, xmlSerializationPath);
             }
 
             var projectTemplate = new CsProjTemplate { Model = project };
