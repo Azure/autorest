@@ -44,7 +44,7 @@ public class Generator : NewPlugin
             throw new Exception($"Generator received incorrect number of inputs: ${files.Length} : {files.Aggregate("", (c,e)=> c+=","+e)}");
         }
 
-        var sd = Singleton<ServiceDefinition>.Instance = SwaggerParser.Parse("", await ReadFile(files[0]));
+        var sd = Singleton<ServiceDefinition>.Instance = SwaggerParser.Parse(await ReadFile(files[0]));
 
         // get internal name
         var language = new[] {

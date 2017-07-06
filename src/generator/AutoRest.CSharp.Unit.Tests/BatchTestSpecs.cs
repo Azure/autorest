@@ -27,24 +27,23 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact(Skip = "Manual Test")]  
         public async Task BatchTest()
         {
-            FileSystem fs = new FileSystem();
-            string path = @"C:\PathToSpecs"; //path to specs
-            Assert.True(fs.DirectoryExists(path), $"{path} does not exist");
+            var path = new DirectoryInfo(@"C:\PathToSpecs");
+            Assert.True(path.Exists, $"{path} does not exist");
 
             // get all of the json and yaml files from filesystem
-            string[] files = fs.GetFilesByExtension(path, SearchOption.AllDirectories, "json", "yaml");
+            var files = path.GetFiles("*.json", SearchOption.AllDirectories).Concat(path.GetFiles("*.yaml", SearchOption.AllDirectories));
             Assert.True(files.Count() > 0, $"{path} does not contain any json or yaml files");
 
-            foreach (string file in files)
+            foreach (var file in files)
             {
                 // Comment this block out if not needed
-                if (!fs.ReadAllText(file).Contains(@"""swagger"": ""2.0"""))
+                if (!File.ReadAllText(file.FullName).Contains(@"""swagger"": ""2.0"""))
                 {
                     //skip files that are not swagger files.
                     continue;
                 }
 
-                using (var memoryFileSystem = GenerateCodeForTestFromSpec(dirName: file))
+                using (var memoryFileSystem = GenerateCodeForTestFromSpec(dirName: file.FullName))
                 {
                     // Expected Files
                     Assert.True(memoryFileSystem.GetFiles("", "*.cs", SearchOption.TopDirectoryOnly).GetUpperBound(0) > 0);

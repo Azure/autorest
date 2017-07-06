@@ -44,7 +44,7 @@ namespace AutoRest.AzureResourceSchema.Tests
                 ? resultFolder.Substring(expectedWithSeparator.Length)
                 : resultFolder;
 
-            var name = ExtensionsLoader.GetPlugin("AzureResourceSchema").Settings.Name;
+            var name = "AzureResourceSchema";
             settings.Namespace = string.IsNullOrEmpty(settings.Namespace)
                 ? "Fixtures." + (name.Contains("Azure") ? "Azure." : "") + specFileName.
                     Replace(".cs", "").Replace(".Cs", "").Replace(".java", "").
@@ -70,14 +70,14 @@ namespace AutoRest.AzureResourceSchema.Tests
         {
             CodeModel codeModel = null;
 
-            var modeler = new SwaggerModeler();
+            var modeler = new SwaggerModeler(settings);
 
             try
             {
                 using (NewContext)
                 {
                     // generate model from swagger 
-                    codeModel = modeler.Build();
+                    codeModel = modeler.Build(SwaggerParser.Parse(Settings.Instance.FileSystemInput.ReadAllText(Settings.Instance.Input)));
                 }
             }
             catch (Exception exception)

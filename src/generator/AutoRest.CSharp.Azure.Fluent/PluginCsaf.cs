@@ -13,7 +13,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.Azure.Fluent
 {
-    public sealed class PluginCsaf : Plugin<GeneratorSettingsCsaf, TransformerCsaf, CodeGeneratorCsaf, CodeNamerCs, CodeModelCsaf>
+    public sealed class PluginCsaf : Plugin<GeneratorSettingsCs, TransformerCsaf, CodeGeneratorCsaf, CodeNamerCs, CodeModelCsaf>
     {
         public PluginCsaf()
         {
