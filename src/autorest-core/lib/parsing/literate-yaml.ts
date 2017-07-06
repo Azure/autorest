@@ -52,12 +52,12 @@ async function ParseCodeBlocksInternal(config: ConfigurationView, hLiterate: Dat
 
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
       // only consider YAML/JSON blocks
-      if (!/^(yaml|json)/i.test(codeBlock.info)) {
+      if (!/^(yaml|json)/i.test(codeBlock.info || "")) {
         continue;
       }
 
       // super-quick JSON block syntax check.
-      if (/^(json)/i.test(codeBlock.info)) {
+      if (/^(json)/i.test(codeBlock.info || "")) {
         // check syntax on JSON blocks with simple check first
         try {
           // quick check on data.

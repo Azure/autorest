@@ -1022,6 +1022,8 @@ operations:
               every service call.
             '#name': subscriptionId
             '#serializedName': subscriptionId
+        url: >-
+          /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
         isAbsoluteUrl: false
         httpMethod: post
         responses:
@@ -1047,8 +1049,6 @@ operations:
         '#name': CheckNameAvailability
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_CheckNameAvailability
-        '#url': >-
-          /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
       - parameters:
           - $id: '113'
             location: path
@@ -1125,6 +1125,8 @@ operations:
               every service call.
             '#name': subscriptionId
             '#serializedName': subscriptionId
+        url: >-
+          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
         httpMethod: put
         responses:
@@ -1158,8 +1160,6 @@ operations:
         '#name': Create
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_Create
-        '#url': >-
-          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '122'
             location: path
@@ -1226,6 +1226,8 @@ operations:
               every service call.
             '#name': subscriptionId
             '#serializedName': subscriptionId
+        url: >-
+          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
         httpMethod: delete
         responses:
@@ -1247,8 +1249,6 @@ operations:
         '#name': Delete
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_Delete
-        '#url': >-
-          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '130'
             location: path
@@ -1315,6 +1315,8 @@ operations:
               every service call.
             '#name': subscriptionId
             '#serializedName': subscriptionId
+        url: >-
+          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
         httpMethod: get
         responses:
@@ -1341,8 +1343,6 @@ operations:
         '#name': GetProperty
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_GetProperty
-        '#url': >-
-          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '138'
             location: path
@@ -1421,6 +1421,8 @@ operations:
               every service call.
             '#name': subscriptionId
             '#serializedName': subscriptionId
+        url: >-
+          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
         httpMethod: patch
         responses:
@@ -1457,8 +1459,6 @@ operations:
         '#name': Update
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_Update
-        '#url': >-
-          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
       - parameters:
           - $id: '147'
             location: path
@@ -1522,6 +1522,8 @@ operations:
               every service call.
             '#name': subscriptionId
             '#serializedName': subscriptionId
+        url: >-
+          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
         isAbsoluteUrl: false
         httpMethod: post
         responses:
@@ -1545,8 +1547,6 @@ operations:
         '#name': ListKeys
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_ListKeys
-        '#url': >-
-          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
       - parameters:
           - $id: '155'
             clientProperty:
@@ -1581,6 +1581,8 @@ operations:
               every service call.
             '#name': subscriptionId
             '#serializedName': subscriptionId
+        url: >-
+          /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
         isAbsoluteUrl: false
         httpMethod: get
         responses:
@@ -1610,8 +1612,6 @@ operations:
         '#name': List
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_List
-        '#url': >-
-          /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
       - parameters:
           - $id: '159'
             location: path
@@ -1659,6 +1659,8 @@ operations:
               every service call.
             '#name': subscriptionId
             '#serializedName': subscriptionId
+        url: >-
+          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts
         isAbsoluteUrl: false
         httpMethod: get
         responses:
@@ -1688,8 +1690,6 @@ operations:
         '#name': ListByResourceGroup
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_ListByResourceGroup
-        '#url': >-
-          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts
       - parameters:
           - $id: '165'
             location: path
@@ -1768,6 +1768,8 @@ operations:
               every service call.
             '#name': subscriptionId
             '#serializedName': subscriptionId
+        url: >-
+          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
         isAbsoluteUrl: false
         httpMethod: post
         responses:
@@ -1791,8 +1793,6 @@ operations:
         '#name': RegenerateKey
         '#group': StorageAccounts
         '#serializedName': StorageAccounts_RegenerateKey
-        '#url': >-
-          /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
     '#name': checkNameAvailability
     summary: |-
       {
@@ -1851,6 +1851,7 @@ operations:
                 "#serializedName": "subscriptionId"
               }
             ],
+            "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability",
             "isAbsoluteUrl": false,
             "httpMethod": "post",
             "responses": {
@@ -1880,8 +1881,7 @@ operations:
             "hidden": false,
             "#name": "CheckNameAvailability",
             "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_CheckNameAvailability",
-            "#url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"
+            "#serializedName": "StorageAccounts_CheckNameAvailability"
           },
           {
             "parameters": [
@@ -1973,6 +1973,7 @@ operations:
                 "#serializedName": "subscriptionId"
               }
             ],
+            "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "put",
             "responses": {
@@ -2008,8 +2009,7 @@ operations:
             "hidden": false,
             "#name": "Create",
             "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_Create",
-            "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"
+            "#serializedName": "StorageAccounts_Create"
           },
           {
             "parameters": [
@@ -2088,6 +2088,7 @@ operations:
                 "#serializedName": "subscriptionId"
               }
             ],
+            "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "delete",
             "responses": {
@@ -2114,8 +2115,7 @@ operations:
             "hidden": false,
             "#name": "Delete",
             "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_Delete",
-            "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"
+            "#serializedName": "StorageAccounts_Delete"
           },
           {
             "parameters": [
@@ -2194,6 +2194,7 @@ operations:
                 "#serializedName": "subscriptionId"
               }
             ],
+            "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
             "responses": {
@@ -2223,8 +2224,7 @@ operations:
             "hidden": false,
             "#name": "GetProperty",
             "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_GetProperty",
-            "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"
+            "#serializedName": "StorageAccounts_GetProperty"
           },
           {
             "parameters": [
@@ -2316,6 +2316,7 @@ operations:
                 "#serializedName": "subscriptionId"
               }
             ],
+            "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "patch",
             "responses": {
@@ -2345,8 +2346,7 @@ operations:
             "hidden": false,
             "#name": "Update",
             "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_Update",
-            "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"
+            "#serializedName": "StorageAccounts_Update"
           },
           {
             "parameters": [
@@ -2425,6 +2425,7 @@ operations:
                 "#serializedName": "subscriptionId"
               }
             ],
+            "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys",
             "isAbsoluteUrl": false,
             "httpMethod": "post",
             "responses": {
@@ -2454,8 +2455,7 @@ operations:
             "hidden": false,
             "#name": "ListKeys",
             "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_ListKeys",
-            "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys"
+            "#serializedName": "StorageAccounts_ListKeys"
           },
           {
             "parameters": [
@@ -2498,6 +2498,7 @@ operations:
                 "#serializedName": "subscriptionId"
               }
             ],
+            "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
             "responses": {
@@ -2532,8 +2533,7 @@ operations:
             "hidden": false,
             "#name": "List",
             "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_List",
-            "#url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts"
+            "#serializedName": "StorageAccounts_List"
           },
           {
             "parameters": [
@@ -2592,6 +2592,7 @@ operations:
                 "#serializedName": "subscriptionId"
               }
             ],
+            "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
             "responses": {
@@ -2626,8 +2627,7 @@ operations:
             "hidden": false,
             "#name": "ListByResourceGroup",
             "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_ListByResourceGroup",
-            "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts"
+            "#serializedName": "StorageAccounts_ListByResourceGroup"
           },
           {
             "parameters": [
@@ -2719,6 +2719,7 @@ operations:
                 "#serializedName": "subscriptionId"
               }
             ],
+            "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey",
             "isAbsoluteUrl": false,
             "httpMethod": "post",
             "responses": {
@@ -2748,8 +2749,7 @@ operations:
             "hidden": false,
             "#name": "RegenerateKey",
             "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_RegenerateKey",
-            "#url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"
+            "#serializedName": "StorageAccounts_RegenerateKey"
           }
         ],
         "#name": "checkNameAvailability"
@@ -2789,6 +2789,7 @@ operations:
               every service call.
             '#name': subscriptionId
             '#serializedName': subscriptionId
+        url: '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
         isAbsoluteUrl: false
         httpMethod: get
         responses:
@@ -2817,7 +2818,6 @@ operations:
         '#name': List
         '#group': Usage
         '#serializedName': Usage_List
-        '#url': '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
     '#name': usages
     summary: |-
       {
@@ -2863,6 +2863,7 @@ operations:
                 "#serializedName": "subscriptionId"
               }
             ],
+            "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
             "responses": {
@@ -2897,8 +2898,7 @@ operations:
             "hidden": false,
             "#name": "List",
             "#group": "Usage",
-            "#serializedName": "Usage_List",
-            "#url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"
+            "#serializedName": "Usage_List"
           }
         ],
         "#name": "usages"

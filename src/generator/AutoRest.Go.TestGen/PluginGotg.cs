@@ -10,7 +10,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Go.TestGen
 {
-    public sealed class PluginGotg : Plugin<GeneratorSettingsGo, TransformerGo, CodeGeneratorGotg, CodeNamerGo, CodeModelGo>
+    public sealed class PluginGotg : Plugin<IGeneratorSettings, TransformerGo, CodeGeneratorGotg, CodeNamerGo, CodeModelGo>
     {
         public PluginGotg()
         {

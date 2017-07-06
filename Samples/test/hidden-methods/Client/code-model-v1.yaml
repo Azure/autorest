@@ -55,6 +55,7 @@ operations:
               $ref: '1'
             '#name': body
             '#serializedName': body
+        url: /cowbell
         isAbsoluteUrl: false
         httpMethod: post
         responses:
@@ -73,6 +74,5 @@ operations:
         '#name': Add
         '#group': Cowbell
         '#serializedName': Cowbell_Add
-        '#url': /cowbell
     '#name': Cowbell
 '#name': CowbellFactory

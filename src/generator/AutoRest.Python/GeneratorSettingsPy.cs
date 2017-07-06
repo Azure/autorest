@@ -7,12 +7,9 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Python
 {
-    public class GeneratorSettingsPy : IsSingleton<GeneratorSettingsPy>, IGeneratorSettings
+    public class GeneratorSettingsPy : IGeneratorSettings
     {
-        public virtual string Name => "Python";
-
-        public virtual string Description => "Generic Python code generator.";
-
+        public static GeneratorSettingsPy Instance => Singleton<GeneratorSettingsPy>.Instance;
         public virtual string CredentialObject => "A msrest Authentication object<msrest.authentication>";
     }
 }
