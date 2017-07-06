@@ -14,8 +14,5 @@ namespace AutoRest.NodeJS
         /// </summary>
         public bool DisableTypeScriptGeneration { get; set; }
 
-        public virtual string Name => "NodeJS";
-        public virtual string Description => "Generic NodeJS code generator.";
-
     }
 }

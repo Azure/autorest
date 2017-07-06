@@ -29,17 +29,10 @@ namespace AutoRest.Core.Extensibility
             }
 
             IAnyPlugin plugin = null;
-
-            if (pluginName.EqualsIgnoreCase("None"))
-            {
-                plugin = new NoOpPlugin();
-            }
-            else
-            {
-                var config = AutoRestConfiguration.Get();
-                plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, pluginName);
-                Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
-            }
+            
+            var config = AutoRestConfiguration.Get();
+            plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, pluginName);
+            Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
             Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,
                 pluginName,
                 plugin.GetType().GetAssembly().GetName().Version);

@@ -104,21 +104,31 @@ export function CreateFolderUri(absolutePath: string): string {
   return EnsureIsFolderUri(CreateFileOrFolderUri(absolutePath));
 }
 
-export function EnsureIsFolderUri(uri: string) {
+export function EnsureIsFolderUri(uri: string): string {
   return EnsureIsFileUri(uri) + "/";
 }
-export function EnsureIsFileUri(uri: string) {
+export function EnsureIsFileUri(uri: string): string {
   return uri.replace(/\/$/g, "");
 }
 
-export function GetFilename(uri: string) {
+export function GetFilename(uri: string): string {
   return uri.split("/").reverse()[0].split("\\").reverse()[0];
 }
 
-export function GetFilenameWithoutExtension(uri: string) {
+export function GetFilenameWithoutExtension(uri: string): string {
   const lastPart = GetFilename(uri);
   const ext = lastPart.indexOf(".") === -1 ? "" : lastPart.split(".").reverse()[0];
   return lastPart.substr(0, lastPart.length - ext.length - 1);
+}
+
+export function ToRawDataUrl(uri: string): string {
+  // special URI handlers                                                                                        
+  // - GitHub                                                                                                    
+  if (uri.startsWith("https://github")) {
+    uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
+  }
+
+  return uri;
 }
 
 /**

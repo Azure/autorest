@@ -24,11 +24,6 @@ namespace AutoRest.Core.Parsing
         private static JsonSerializer JsonSerializer => new JsonSerializer();
 
         /// <summary>
-        /// Checks whether given text is a YAML document.
-        /// </summary>
-        public static bool IsYaml(this string text) => text.ParseYaml() != null;
-
-        /// <summary>
         /// Converts the YAML document to JSON.
         /// </summary>
         public static string EnsureYamlIsJson(this string text)
@@ -95,90 +90,5 @@ namespace AutoRest.Core.Parsing
                 return writer.ToString();
             }
         }
-        
-        /// <summary>
-        /// Merges to Yaml mapping nodes (~ dictionaries) as follows:
-        /// - members existing only in one node will be present in the result
-        /// - members existing in both nodes will
-        ///     - be present in the result, if they are identical
-        ///     - be merged if they are mapping or sequence nodes
-        ///     - THROW an exception otherwise
-        /// </summary>
-        public static T MergeYamlObjects<T>(T a, T b, ObjectPath path = null) where T : YamlNode
-        {
-            if (a == null)
-            {
-                throw new ArgumentNullException(nameof(a));
-            }
-            if (b == null)
-            {
-                throw new ArgumentNullException(nameof(b));
-            }
-            if (path == null)
-            {
-                path = ObjectPath.Empty;
-            }
-
-            // trivial case
-            if (a.Equals(b))
-            {
-                return a;
-            }
-
-            // mapping nodes
-            var aMapping = a as YamlMappingNode;
-            var bMapping = b as YamlMappingNode;
-            if (aMapping != null && bMapping != null)
-            {
-                // iterate all members
-                var result = new YamlMappingNode();
-                var keys = aMapping.Children.Keys.Concat(bMapping.Children.Keys).Distinct();
-                foreach (var key in keys)
-                {
-                    var subpath = path.AppendProperty(key.ToString());
-
-                    // forward if only present in one of the nodes
-                    if (!aMapping.Children.ContainsKey(key))
-                    {
-                        result.Children.Add(key, bMapping.Children[key]);
-                        continue;
-                    }
-                    if (!bMapping.Children.ContainsKey(key))
-                    {
-                        result.Children.Add(key, aMapping.Children[key]);
-                        continue;
-                    }
-
-                    // try merge objects otherwise
-                    var aMember = aMapping.Children[key];
-                    var bMember = bMapping.Children[key];
-                    result.Children.Add(key, MergeYamlObjects(aMember, bMember, subpath));
-                }
-                return result as T;
-            }
-
-            // sequence nodes
-            var aSequence = a as YamlSequenceNode;
-            var bSequence = b as YamlSequenceNode;
-            if (aSequence != null && bSequence != null)
-            {
-                return new YamlSequenceNode(aSequence.Children.Concat(bSequence.Children).Distinct()) as T;
-            }
-
-            // nothing worked
-            throw new Exception($"{path.JsonPath} has incomaptible values ({a}, {b}).");
-        }
-
-        public static YamlMappingNode MergeWith(this YamlMappingNode self, YamlMappingNode other)
-            => MergeYamlObjects(self, other);
-
-        public static void Set(this YamlMappingNode self, string key, YamlNode value)
-            => self.Children[new YamlScalarNode(key)] = value;
-
-        public static YamlNode Get(this YamlMappingNode self, string key)
-            => self.Children.ContainsKey(new YamlScalarNode(key)) ? self.Children[new YamlScalarNode(key)] : null;
-
-        public static void Remove(this YamlMappingNode self, string key)
-            => self.Children.Remove(new YamlScalarNode(key));
     }
 }
