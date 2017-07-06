@@ -18,7 +18,7 @@ openapi-type: arm
 use-extension:
   "@microsoft.azure/autorest-classic-generators": "2.0.0-preview"
   "@microsoft.azure/classic-openapi-validator": "C:\\repos\\azure-openapi-validator\\src\\dotnet\\AutoRest\\microsoft.azure-classic-openapi-validator-1.0.0.tgz"
-  "@microsoft.azure/openapi-validator": "C:\\repos\\azure-openapi-validator\\src\\typescript\\microsoft.azure-openapi-validator-0.1.1.tgz"
+  "@microsoft.azure/openapi-validator": "0.1.0"
 ```
 
 ### Graph
