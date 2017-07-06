@@ -244,7 +244,6 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   // externals (TODO: make these dynamically loaded)
   const oavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/plugins/openapi-validation-tools`);
-  const aoavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/../../../node_modules/@microsoft.azure/openapi-validator`);
 
   // __status scope
   const startTime = Date.now();
@@ -274,7 +273,6 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "compose": CreatePluginComposer(),
     "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
     "semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),
-    "azure-openapi-validator": CreatePluginExternal(aoavPluginHost, "azure-openapi-validator"),
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
