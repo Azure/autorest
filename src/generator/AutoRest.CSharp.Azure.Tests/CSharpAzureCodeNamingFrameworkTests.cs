@@ -20,13 +20,9 @@ namespace AutoRest.CSharp.Azure.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "azure-paging.json")
-                };
-
+                var input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "azure-paging.json");
                 var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = modeler.Build(SwaggerParser.Parse(File.ReadAllText(input)));
                 var plugin = new PluginCsa();
                 using (plugin.Activate()) {
                     codeModel = plugin.Serializer.Load(codeModel);

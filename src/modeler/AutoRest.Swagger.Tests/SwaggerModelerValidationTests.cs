@@ -28,7 +28,7 @@ namespace AutoRest.Swagger.Tests
             using (NewContext)
             {
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                var serviceDefinition = SwaggerParser.Parse(input, File.ReadAllText(input));
+                var serviceDefinition = SwaggerParser.Parse(File.ReadAllText(input));
                 return validator.GetValidationExceptions(new Uri(input, UriKind.RelativeOrAbsolute), serviceDefinition, metadata).OfType<ValidationMessage>();
             }
         }
@@ -769,7 +769,7 @@ namespace AutoRest.Swagger.Tests
         {
             var filePath = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-definitions.json");
             var fileText = System.IO.File.ReadAllText(filePath);
-            var servDef = SwaggerParser.Parse(filePath, fileText);
+            var servDef = SwaggerParser.Parse(fileText);
             Uri uriPath = null;
             Uri.TryCreate(filePath, UriKind.RelativeOrAbsolute, out uriPath);
             var context = new RuleContext(servDef, uriPath, new ServiceDefinitionMetadata() { MergeState = ServiceDefinitionDocumentState.Composed, ServiceDefinitionDocumentType = ServiceDefinitionDocumentType.ARM });

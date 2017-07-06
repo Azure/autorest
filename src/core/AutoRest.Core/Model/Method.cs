@@ -117,11 +117,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
             Justification = "Url might be used as a template, thus making it invalid url in certain scenarios.")]
-        public Fixable<string> Url
-        {
-            get { return _url; }
-            set { _url.CopyFrom(value); }
-        }
+        public virtual string Url { get; set; }
 
 
 

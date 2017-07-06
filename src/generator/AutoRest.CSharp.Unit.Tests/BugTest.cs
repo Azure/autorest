@@ -49,57 +49,6 @@ namespace AutoRest.CSharp.Unit.Tests {
         public BugTest() {
         }
 
-        internal static string Quote(string text) => $"{Q}{text}{Q}";
-
-        /// <summary>
-        ///     Tries to run VSCode
-        /// </summary>
-        /// <param name="args"></param>
-        internal bool StartVsCode(params object[] args) {
-            /*
-            ProcessStartInfo startInfo = null;
-            foreach (var exe in VsCode)
-            {
-                if (File.Exists(exe))
-                {
-                    startInfo =
-                        new ProcessStartInfo(exe,
-                            args.Aggregate(
-                                // $@"""{Path.Combine(exe, @"..\resources\app\out\cli.js")}""",
-                                "",
-                                (s, o) => $"{s} {Q}{o}{Q}"));
-                    startInfo.EnvironmentVariables.Add("ATOM_SHELL_INTERNAL_RUN_AS_NODE", "1");
-                    startInfo.UseShellExecute = false;
-                    break;
-                }
-            }
-            if (startInfo != null)
-            {
-                return Process.Start(startInfo) != null;
-            }
-            */
-            return false;
-        }
-
-        internal void ShowGeneratedCode(IFileSystem fileSystem) {
-            InspectWithFavoriteCodeEditor(fileSystem.SaveFilesToTemp(GetType().Name));
-        }
-
-        internal void InspectWithFavoriteCodeEditor(string folder, FileLinePositionSpan? span = null) {
-            if (span != null) {
-                FileLinePositionSpan s = (FileLinePositionSpan)span;
-                // when working locally on windows we can pop up vs code to see if the code failure.
-                if (!StartVsCode(
-                    folder,
-                    "-g",
-                    $"{Path.Combine(folder, s.Path)}:{s.StartLinePosition.Line + 1}:{s.StartLinePosition.Character + 1}")) {
-                    // todo: add code here to try another editor?
-                }
-            } else {
-                StartVsCode(folder);
-            }
-        }
-
         protected virtual MemoryFileSystem CreateMockFilesystem() => new MemoryFileSystem();
 
         protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp") {
@@ -109,16 +58,6 @@ namespace AutoRest.CSharp.Unit.Tests {
         protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator = "CSharp") {
             var fs = CreateMockFilesystem();
             return dirName.GenerateCodeInto(fs, codeGenerator);
-        }
-
-        protected virtual void WriteLine(object value) {
-            if (value != null) {
-                _output?.WriteLine(value.ToString());
-                Debug.WriteLine(value.ToString());
-            } else {
-                _output?.WriteLine("<null>");
-                Debug.WriteLine("<null>");
-            }
         }
 
         protected virtual void WriteLine(string format, params object[] values) {
@@ -204,22 +143,11 @@ namespace AutoRest.CSharp.Unit.Tests {
 
         };
 
-        protected async Task<CompilationResult> Compile(IFileSystem fileSystem) {
+        protected async Task<CompilationResult> Compile(MemoryFileSystem fileSystem) {
             var compiler = new CSharpCompiler(fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
                 .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadAllText(each))).ToArray(), _assemblies);
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
 
-#if false
-            // if it failed compiling and we're in an interactive session
-            if (!result.Succeeded && Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.UserInteractive) {
-                var error = result.Messages.FirstOrDefault(each => each.Severity == DiagnosticSeverity.Error);
-                if (error != null) {
-                    // use this to dump the files to disk for examination
-                    // open in Favorite Code Editor
-                    InspectWithFavoriteCodeEditor(fileSystem.SaveFilesToTemp(GetType().Name), error.Location.GetMappedLineSpan());
-                }
-            }
-#endif 
             return result;
         }
     }

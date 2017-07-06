@@ -24,7 +24,6 @@ namespace AutoRest.CSharp.Tests
         {
             using (NewContext)
             {
-
                 var codeModel = New<CodeModel>();
                 codeModel.Name = "azure always rocks!";
                 codeModel.Add(New<Property>(new
