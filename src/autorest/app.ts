@@ -275,7 +275,7 @@ async function main() {
         try {
           const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
 
-          selectedVersion = From(await (await extensionManager).getInstalledExtensions()).FirstOrDefault(each => /*each.name === pkg.name && ???*/each.version === pkg.version);
+          selectedVersion = From(await (await extensionManager).getInstalledExtensions()).FirstOrDefault(each => each.name === pkg.name && each.version === pkg.version);
           if (selectedVersion) {
             console.trace(`Is Installed allready`);
             break;
