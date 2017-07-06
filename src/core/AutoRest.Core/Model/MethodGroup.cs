@@ -48,6 +48,8 @@ namespace AutoRest.Core.Model
         {
             Name = name;
         }
+
+        [JsonIgnore]
         public bool IsCodeModelMethodGroup => Name.IsNullOrEmpty() || Name.EqualsIgnoreCase(CodeModel?.Name);
         /// <Summary>
         ///     The 'raw' name of the method group.
@@ -137,6 +139,7 @@ namespace AutoRest.Core.Model
             set { _nameForProperty.CopyFrom(value); }
         }
 
+        [JsonIgnore]
         public virtual IEnumerable<string> Usings
         {
             get
@@ -150,9 +153,6 @@ namespace AutoRest.Core.Model
 
         [JsonIgnore]
         public string Qualifier => "Operations";
-
-        [JsonIgnore]
-        public string QualifierType => "Operation Group";
 
         [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames

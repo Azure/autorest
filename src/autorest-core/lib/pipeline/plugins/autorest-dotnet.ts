@@ -5,9 +5,9 @@
 
 import { LazyPromise } from "../../lazy";
 import { SpawnJsonRpcAutoRest } from "../../../interop/autorest-dotnet";
-import { AutoRestPlugin } from "../plugin-endpoint";
+import { AutoRestExtension } from "../plugin-endpoint";
 
-const instance = new LazyPromise<AutoRestPlugin>(() => AutoRestPlugin.FromChildProcess(SpawnJsonRpcAutoRest()));
-export function GetAutoRestDotNetPlugin(): PromiseLike<AutoRestPlugin> {
+const instance = new LazyPromise<AutoRestExtension>(() => AutoRestExtension.FromChildProcess(SpawnJsonRpcAutoRest()));
+export function GetAutoRestDotNetPlugin(): PromiseLike<AutoRestExtension> {
   return instance;
 }

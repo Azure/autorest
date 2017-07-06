@@ -8,10 +8,20 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
-declare class AutoRestParameterizedHostTestClient {
+/**
+ * AutoRestParameterizedHostTestClientOptions for AutoRestParameterizedHostTestClient.
+ */
+declare interface AutoRestParameterizedHostTestClientOptions extends ServiceClientOptions {
+  /**
+   * @property {string} [host] - A string value that is used as a global part of the parameterized host
+   */
+  host?: String;
+}
+
+declare class AutoRestParameterizedHostTestClient extends ServiceClient {
   /**
    * @class
    * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
@@ -29,7 +39,7 @@ declare class AutoRestParameterizedHostTestClient {
    * @param {string} [options.host] - A string value that is used as a global part of the parameterized host
    *
    */
-  constructor(options?: ServiceClientOptions);
+  constructor(options?: AutoRestParameterizedHostTestClientOptions);
 
   host: string;
 

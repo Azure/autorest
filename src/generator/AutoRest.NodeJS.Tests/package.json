@@ -21,7 +21,7 @@
     "@types/mocha": "^2.2.39",
     "@types/should": "^8.1.30",
     "@types/node": "^6.0.66",
-    "ms-rest": "^2.0.0",
+    "ms-rest": "^2.2.1",
     "jshint": "2.9.4",
     "xunit-file": "0.0.5",
     "mocha": "^3.2.0",

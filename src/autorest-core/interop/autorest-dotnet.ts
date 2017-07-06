@@ -41,7 +41,7 @@ function AutoRestDllPath(): string {
 
 
   // try relative path to __dirname in solution
-  result = WalkUpPath(__dirname, "core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll", 8);
+  result = WalkUpPath(__dirname, "core/AutoRest/bin/netcoreapp1.0/AutoRest.dll", 8);
   if (result !== empty) {
     return result;
   }

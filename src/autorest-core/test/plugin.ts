@@ -2,9 +2,6 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-// polyfills for language support 
-require("../lib/polyfill.min.js");
-
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 import { PumpMessagesToConsole } from './test-utility';
@@ -15,7 +12,7 @@ import { CancellationToken } from "../lib/ref/cancallation";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message, Channel } from "../lib/message";
 import { GetAutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
-import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
+import { AutoRestExtension } from "../lib/pipeline/plugin-endpoint";
 import { DataStore, QuickScope } from '../lib/data-store/data-store';
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
@@ -26,7 +23,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const scopeInput = dataStore.GetReadThroughScope();
     const scopeWork = dataStore.CreateScope("working");
 
-    const dummyPlugin = await AutoRestPlugin.FromModule(`${__dirname}/../lib/pipeline/plugins/dummy`);
+    const dummyPlugin = await AutoRestExtension.FromModule(`${__dirname}/../lib/pipeline/plugins/dummy`);
     const pluginNames = await dummyPlugin.GetPluginNames(cancellationToken);
     assert.deepStrictEqual(pluginNames, ["dummy"]);
     const messages: Message[] = [];
@@ -122,7 +119,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
     // check results
     const codeModel = (await pluginScope.ReadStrict(results[0])).ReadData();
-    assert.notEqual(codeModel.indexOf("isPolymorphicDiscriminator"), -1);
+    assert.notEqual(codeModel.indexOf("isConstant"), -1);
   }
 
   @test @timeout(10000) async "AutoRest.dll Generator"() {
@@ -178,7 +175,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json";
     await scopeInput.Read(inputFileUri);
 
-    const validationPlugin = await AutoRestPlugin.FromModule("../../../../../Users/jobader/Documents/GitHub/autorest-interactive/index");
+    const validationPlugin = await AutoRestExtension.FromModule("../../../../../Users/jobader/Documents/GitHub/autorest-interactive/index");
     const pluginNames = await validationPlugin.GetPluginNames(cancellationToken);
 
     for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {

@@ -7,9 +7,6 @@
 // start of autorest-ng
 // the console app starts for real here.
 
-// this file should get 'required' by the boostrapper
-require("./lib/polyfill.min.js");
-
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
@@ -19,7 +16,6 @@ import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
 import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
-import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
@@ -38,21 +34,20 @@ function awaitable(child: ChildProcess): Promise<number> {
 }
 
 async function legacyMain(autorestArgs: string[]): Promise<number> {
-  if (autorestArgs.indexOf("-LEGACY") === -1) {
-    // generate virtual config file
-    const currentDirUri = CreateFolderUri(currentDirectory());
-    const dataStore = new DataStore();
-    const config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(x => true /*unsafe*/), autorestArgs);
+  // generate virtual config file
+  const currentDirUri = CreateFolderUri(currentDirectory());
+  const dataStore = new DataStore();
+  const config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(x => true /*unsafe*/), autorestArgs);
 
-    // autorest init
-    if (autorestArgs[0] === "init") {
-      const clientNameGuess = (config["override-info"] || {}).title || Parse<any>(await ReadUri(config["input-file"][0])).info.title;
-      await autorestInit(clientNameGuess, Array.isArray(config["input-file"]) ? config["input-file"] as any : []);
-      return 0;
-    }
-    // autorest init-min
-    if (autorestArgs[0] === "init-min") {
-      console.log(`# AutoRest Configuration (auto-generated, please adjust title)
+  // autorest init
+  if (autorestArgs[0] === "init") {
+    const clientNameGuess = (config["override-info"] || {}).title || Parse<any>(await ReadUri(config["input-file"][0])).info.title;
+    await autorestInit(clientNameGuess, Array.isArray(config["input-file"]) ? config["input-file"] as any : []);
+    return 0;
+  }
+  // autorest init-min
+  if (autorestArgs[0] === "init-min") {
+    console.log(`# AutoRest Configuration (auto-generated, please adjust title)
 
 > see https://aka.ms/autorest
 
@@ -63,57 +58,48 @@ ${Stringify(config).replace(/^---\n/, "")}
 ~~~
 
 `.replace(/~/g, "`"));
-      return 0;
-    }
-    // autorest init-cli
-    if (autorestArgs[0] === "init-cli") {
-      const args: string[] = [];
-      for (const node of nodes(config, "$..*")) {
-        const path = node.path.join(".");
-        const values = node.value instanceof Array ? node.value : (typeof node.value === "object" ? [] : [node.value]);
-        for (const value of values) {
-          args.push(`--${path}=${value}`);
-        }
-      }
-      console.log(args.join(" "));
-      return 0;
-    }
-
-    config["base-folder"] = currentDirUri;
-    const api = new AutoRest(new RealFileSystem());
-    await api.AddConfiguration(config);
-    const view = await api.view;
-    const outstanding = new OutstandingTaskAwaiter();
-    api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
-    subscribeMessages(api, () => { });
-
-    // warn about `--` arguments
-    for (var arg of autorestArgs) {
-      if (arg.startsWith("--")) {
-        view.Message({
-          Channel: Channel.Warning,
-          Text:
-          `The parameter ${arg} looks like it was meant for the new CLI! ` +
-          "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
-          "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."
-        });
+    return 0;
+  }
+  // autorest init-cli
+  if (autorestArgs[0] === "init-cli") {
+    const args: string[] = [];
+    for (const node of nodes(config, "$..*")) {
+      const path = node.path.join(".");
+      const values = node.value instanceof Array ? node.value : (typeof node.value === "object" ? [] : [node.value]);
+      for (const value of values) {
+        args.push(`--${path}=${value}`);
       }
     }
+    console.log(args.join(" "));
+    return 0;
+  }
 
-    const result = await api.Process().finish;
-    if (result != true) {
-      throw result;
+  config["base-folder"] = currentDirUri;
+  const api = new AutoRest(new RealFileSystem());
+  await api.AddConfiguration(config);
+  const view = await api.view;
+  const outstanding = new OutstandingTaskAwaiter();
+  api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
+  subscribeMessages(api, () => { });
+
+  // warn about `--` arguments
+  for (var arg of autorestArgs) {
+    if (arg.startsWith("--")) {
+      view.Message({
+        Channel: Channel.Warning,
+        Text:
+        `The parameter ${arg} looks like it was meant for the new CLI! ` +
+        "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
+        "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."
+      });
     }
-    await outstanding.Wait();
   }
-  else {
-    // exec
-    const autorestExe = SpawnLegacyAutoRest(autorestArgs);
-    autorestExe.stdout.pipe(process.stdout);
-    autorestExe.stderr.pipe(process.stderr);
-    const exitCode = await awaitable(autorestExe);
-    process.exit(exitCode);
+
+  const result = await api.Process().finish;
+  if (result != true) {
+    throw result;
   }
+  await outstanding.Wait();
 
   return 0;
 }

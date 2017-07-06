@@ -15,19 +15,22 @@ namespace AutoRest.Python.Model
 {
     public class MethodPy : Method
     {
-        public MethodPy()
+        public MethodPy() { }
+
+        public override string Url
         {
-            Url.OnGet += value =>
+            get
             {
+                var value = base.Url;
                 foreach (Match m in Regex.Matches(value, @"\{[\w]+:[\w]+\}"))
                 {
                     var formatter = m.Value.Split(':').First() + '}';
                     value = value.Replace(m.Value, formatter);
                 }
                 return value;
-            };
+            }
+            set => base.Url = value;
         }
-
 
         public bool AddCustomHeader => true;
 
@@ -237,7 +240,7 @@ namespace AutoRest.Python.Model
                         validators.Add(string.Format(CultureInfo.InvariantCulture, "multiple={0}", constraints[constraint]));
                         break;
                     case Constraint.Pattern:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "pattern='{0}'", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "pattern=r'{0}'", constraints[constraint]));
                         break;
                     case Constraint.UniqueItems:
                         var pythonBool = Convert.ToBoolean(constraints[constraint], CultureInfo.InvariantCulture) ? "True" : "False";

@@ -24,10 +24,7 @@ namespace AutoRest.Swagger.Model
         }
 
         [JsonIgnore]
-        public bool IsConstant
-        {
-            get { return IsRequired && Enum != null && Enum.Count == 1; }
-        }
+        public bool IsConstant => IsRequired && Enum != null && Enum.Count == 1;
 
         /// <summary>
         /// The schema defining the type used for the body parameter.

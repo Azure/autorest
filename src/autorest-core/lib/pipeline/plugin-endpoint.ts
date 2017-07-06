@@ -29,16 +29,16 @@ interface IAutoRestPluginInitiatorEndpoint {
   Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void>;
 }
 
-export class AutoRestPlugin extends EventEmitter {
+export class AutoRestExtension extends EventEmitter {
   private static lastSessionId: number = 0;
-  private static CreateSessionId(): string { return `session_${++AutoRestPlugin.lastSessionId}`; }
+  private static CreateSessionId(): string { return `session_${++AutoRestExtension.lastSessionId}`; }
 
-  public static async FromModule(modulePath: string): Promise<AutoRestPlugin> {
+  public static async FromModule(modulePath: string): Promise<AutoRestExtension> {
     const childProc = fork(modulePath, [], <any>{ silent: true });
-    return AutoRestPlugin.FromChildProcess(childProc);
+    return AutoRestExtension.FromChildProcess(childProc);
   }
 
-  public static async FromChildProcess(childProc: ChildProcess): Promise<AutoRestPlugin> {
+  public static async FromChildProcess(childProc: ChildProcess): Promise<AutoRestExtension> {
     // childProc.on("error", err => { throw err; });
     const channel = createMessageConnection(
       childProc.stdout,
@@ -46,7 +46,7 @@ export class AutoRestPlugin extends EventEmitter {
       console
     );
     childProc.stderr.pipe(process.stderr);
-    const plugin = new AutoRestPlugin(channel);
+    const plugin = new AutoRestExtension(channel);
     channel.listen();
     return plugin;
   }
@@ -103,10 +103,10 @@ export class AutoRestPlugin extends EventEmitter {
   }
 
   public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, onMessage: (message: Message) => void, cancellationToken: CancellationToken): Promise<boolean> {
-    const sid = AutoRestPlugin.CreateSessionId();
+    const sid = AutoRestExtension.CreateSessionId();
 
     // register endpoint
-    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.CreateEndpointFor(pluginName, configuration, inputScope, outputScope, onMessage, cancellationToken);
+    this.apiInitiatorEndpoints[sid] = AutoRestExtension.CreateEndpointFor(pluginName, configuration, inputScope, outputScope, onMessage, cancellationToken);
 
     // dispatch
     const result = await this.apiTarget.Process(pluginName, sid, cancellationToken);

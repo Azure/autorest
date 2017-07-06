@@ -59,12 +59,6 @@ namespace AutoRest.Python.Azure
             var versionTemplate = new VersionTemplate { Model = codeModel, };
             await Write(versionTemplate, Path.Combine(folderName, "version.py"));
 
-            var exceptionTemplate = new ExceptionTemplate { Model = codeModel, };
-            await Write(exceptionTemplate, Path.Combine(folderName, "exceptions.py"));
-
-            var credentialTemplate = new CredentialTemplate { Model = codeModel, };
-            await Write(credentialTemplate, Path.Combine(folderName, "credentials.py"));
-
             //Models
             var models = codeModel.ModelTemplateModels.Where(each => !each.Extensions.ContainsKey(AzureExtensions.ExternalExtension));
             if (models.Any())

@@ -87,7 +87,7 @@ export function ShallowCopy(input: any, ...filter: Array<string>): any {
 // Note: I am not convinced this works precisely as it should
 // but it works well enough for my needs right now
 // I will revisit it later.
-const macroRegEx = /\$\(([a-zA-Z0-9_-]*)\)/ig
+const macroRegEx = () => /\$\(([a-zA-Z0-9_-]*)\)/ig
 export function resolveRValue(value: any, propertyName: string, higherPriority: any, lowerPriority: any, jsAware: number = 0): any {
   if (value) {
     // resolves the actual macro value.
@@ -115,7 +115,7 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
 
     // resolve the macro value for strings
     if (typeof value === "string") {
-      const match = macroRegEx.exec(value.trim());
+      const match = macroRegEx().exec(value.trim());
       if (match) {
         if (match[0] === match.input) {
           // the target value should be the result without string twiddling
@@ -125,7 +125,7 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
           return resolve(match[0], match[1]);
         }
         // it looks like we should do a string replace.
-        return value.replace(macroRegEx, resolve)
+        return value.replace(macroRegEx(), resolve)
       }
     }
 

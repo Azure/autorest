@@ -14,9 +14,6 @@ namespace AutoRest.Swagger.Model
     /// </summary>
     public class ServiceDefinition : SpecObject
     {
-        // as long as AAAS does not provide that
-        public static ServiceDefinition Instance { get; set; }
-
         public ServiceDefinition()
         {
             Definitions = new Dictionary<string, Schema>();

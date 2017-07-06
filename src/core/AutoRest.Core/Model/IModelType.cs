@@ -28,20 +28,25 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Allows a type to append extra documentation on a property
         /// </summary>
+        [JsonIgnore]
         string ExtendedDocumentation { get; }
 
         /// <summary>
         /// Allows a type to specify what the default value looks like.
         /// </summary>
+        [JsonIgnore]
         string DefaultValue { get; }
 
         /// <summary>
         /// Allows a type to specify that it is a constant value
         /// </summary>
+        [JsonIgnore]
         bool IsConstant { get; }
 
+        [JsonIgnore]
         string DeclarationName { get; }
 
+        [JsonIgnore]
         string ClassName { get; }
 
         /// <summary>
@@ -83,18 +88,22 @@ namespace AutoRest.Core.Model
             protected set { _name.CopyFrom(value); }
         }
 
+        [JsonIgnore]
         public virtual string ClassName => Name.Value;
 
+        [JsonIgnore]
         public virtual string DeclarationName => Name.Value;
 
         /// <summary>
         /// Allows a type to append extra documentation on a property
         /// </summary>
+        [JsonIgnore]
         public virtual string ExtendedDocumentation => null;
 
         /// <summary>
         /// Allows a type to specify what the default value looks like.
         /// </summary>
+        [JsonIgnore]
         public virtual string DefaultValue => null;
 
         /// <summary>
@@ -133,8 +142,10 @@ namespace AutoRest.Core.Model
                 }
             }
         }
+
         public virtual HashSet<string> LocallyUsedNames { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
+        [JsonIgnore]
         public IParent Parent => CodeModel;
 
         public virtual void Disambiguate()
@@ -175,17 +186,11 @@ namespace AutoRest.Core.Model
         public Dictionary<string, object> Extensions { get; } = new Dictionary<string, object>();
 
         [JsonProperty("$type", Order = -100)]
-        public abstract string RefName { get; }
-
-        [JsonProperty("$actualType", Order = -99)]
-        public string ActualType => this.GetType().FullName;
-
+        public string RefName => GetType().Name;
 
         [JsonIgnore]
         public abstract string Qualifier { get; }
 
-        [JsonIgnore]
-        public virtual string QualifierType => Qualifier;
         [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames { get { if (!string.IsNullOrEmpty(Name)) { yield return Name; } }}
         [JsonIgnore]
