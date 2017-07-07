@@ -32,6 +32,10 @@ export interface AutoRestConfigurationImpl {
   "message-format"?: "json";
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
+  "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
+  "title"?: any;
+  "description"?: any;
+
   "debug"?: boolean;
   "verbose"?: boolean;
 
@@ -43,7 +47,6 @@ export interface AutoRestConfigurationImpl {
   "client-side-validation"?: boolean; // C#
   "fluent"?: boolean;
   "azure-arm"?: boolean;
-  "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
   "namespace"?: string;
   "license-header"?: string;
   "add-credentials"?: boolean;

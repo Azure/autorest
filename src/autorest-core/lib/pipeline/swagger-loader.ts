@@ -325,33 +325,50 @@ function getArrayValues<T>(obj: ObjectWithPath<T[]>): ObjectWithPath<T>[] {
   return o.map((x, i) => { return { obj: x, path: obj.path.concat([i]) }; });
 }
 
-export async function ComposeSwaggers(config: ConfigurationView, infoSection: any, inputSwaggers: DataHandleRead[], workingScope: DataStoreView, azureMode: boolean): Promise<DataHandleRead> {
-  if (azureMode) {
-    // prepare component Swaggers (override info, lift version param, ...)
-    for (let i = 0; i < inputSwaggers.length; ++i) {
-      const inputSwagger = inputSwaggers[i];
-      const outputSwagger = await workingScope.Write(`prepared_${i}.yaml`);
-      const swagger = inputSwagger.ReadObject<any>();
-      const mapping: Mappings = [];
-      const populate: (() => void)[] = []; // populate swagger; deferred in order to simplify source map generation
+function distinct<T>(list: T[]): T[] {
+  const sorted = list.slice().sort();
+  return sorted.filter((x, i) => i === 0 || x !== sorted[i - 1]);
+}
 
-      // digest "info"
-      const info = swagger.info;
-      const version = info.version;
-      delete info.title;
-      delete info.description;
-      delete info.version;
+export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: DataHandleRead[], workingScope: DataStoreView): Promise<DataHandleRead> {
+  const inputSwaggerObjects = inputSwaggers.map(sw => sw.ReadObject<any>());
+  const candidateTitles: string[] = overrideInfoTitle
+    ? [overrideInfoTitle]
+    : distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.title));
+  const candidateDescriptions: string[] = overrideInfoDescription
+    ? [overrideInfoDescription]
+    : distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.description).filter(i => !!i));
+  const uniqueVersion: boolean = distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.version)).length === 1;
 
-      // extract interesting nodes
-      const paths = From<ObjectWithPath<any>>([])
-        .Concat(getPropertyValues(getProperty({ obj: swagger, path: [] }, "paths")))
-        .Concat(getPropertyValues(getProperty({ obj: swagger, path: [] }, "x-ms-paths")));
-      const methods = paths.SelectMany(getPropertyValues);
-      const parameters =
-        methods.SelectMany(method => getArrayValues<any>(getProperty<any, any>(method, "parameters"))).Concat(
-          paths.SelectMany(path => getArrayValues<any>(getProperty<any, any>(path, "parameters"))));
+  if (candidateTitles.length != 1) throw new Error(`No unique title across OpenAPI definitions: ${candidateTitles.map(x => `'${x}'`).join(", ")}. Please adjust or provide an override.`);
+  if (candidateDescriptions.length != 1) candidateDescriptions.splice(0, candidateDescriptions.length);
 
-      // inline api-version params
+  // prepare component Swaggers (override info, lift version param, ...)
+  for (let i = 0; i < inputSwaggers.length; ++i) {
+    const inputSwagger = inputSwaggers[i];
+    const swagger = inputSwaggerObjects[i];
+    const outputSwagger = await workingScope.Write(`prepared_${i}.yaml`);
+    const mapping: Mappings = [];
+    const populate: (() => void)[] = []; // populate swagger; deferred in order to simplify source map generation
+
+    // digest "info"
+    const info = swagger.info;
+    const version = info.version;
+    delete info.title;
+    delete info.description;
+    if (!uniqueVersion) delete info.version;
+
+    // extract interesting nodes
+    const paths = From<ObjectWithPath<any>>([])
+      .Concat(getPropertyValues(getProperty({ obj: swagger, path: [] }, "paths")))
+      .Concat(getPropertyValues(getProperty({ obj: swagger, path: [] }, "x-ms-paths")));
+    const methods = paths.SelectMany(getPropertyValues);
+    const parameters =
+      methods.SelectMany(method => getArrayValues<any>(getProperty<any, any>(method, "parameters"))).Concat(
+        paths.SelectMany(path => getArrayValues<any>(getProperty<any, any>(path, "parameters"))));
+
+    // inline api-version params
+    if (!uniqueVersion) {
       const clientParams = swagger.parameters || {};
       const apiVersionClientParamName = Object.getOwnPropertyNames(clientParams).filter(n => clientParams[n].name === "api-version")[0];
       const apiVersionClientParam = apiVersionClientParamName ? clientParams[apiVersionClientParamName] : null;
@@ -385,46 +402,44 @@ export async function ComposeSwaggers(config: ConfigurationView, infoSection: an
         // remove api-version client param
         delete clientParams[apiVersionClientParamName];
       }
+    }
 
-      // inline produces/consumes
-      for (const pc of ["produces", "consumes"]) {
-        const clientPC = swagger[pc];
-        if (clientPC) {
-          for (const method of methods) {
-            if (!method.obj[pc]) {
-              populate.push(() => method.obj[pc] = Clone(clientPC));
-              mapping.push(...CreateAssignmentMapping(
-                clientPC, inputSwagger.key,
-                [pc], method.path.concat([pc]),
-                `inlining ${pc}`));
-            }
+    // inline produces/consumes
+    for (const pc of ["produces", "consumes"]) {
+      const clientPC = swagger[pc];
+      if (clientPC) {
+        for (const method of methods) {
+          if (!method.obj[pc]) {
+            populate.push(() => method.obj[pc] = Clone(clientPC));
+            mapping.push(...CreateAssignmentMapping(
+              clientPC, inputSwagger.key,
+              [pc], method.path.concat([pc]),
+              `inlining ${pc}`));
           }
         }
-        delete swagger[pc];
       }
-
-      // finish source map
-      mapping.push(...IdentitySourceMapping(inputSwagger.key, ToAst(swagger)));
-
-      // populate object
-      populate.forEach(f => f());
-
-      // write back
-      inputSwaggers[i] = await outputSwagger.WriteObject(swagger, mapping, [inputSwagger]);
+      delete swagger[pc];
     }
+
+    // finish source map
+    mapping.push(...IdentitySourceMapping(inputSwagger.key, ToAst(swagger)));
+
+    // populate object
+    populate.forEach(f => f());
+
+    // write back
+    inputSwaggers[i] = await outputSwagger.WriteObject(swagger, mapping, [inputSwagger]);
   }
 
-  const hwSwagger = await workingScope.Write("swagger.yaml");
-  let hSwagger = await MergeYamls(config, inputSwaggers, hwSwagger);
+  let hSwagger = await MergeYamls(config, inputSwaggers, await workingScope.Write("swagger.yaml"));
 
-  // custom info section
-  if (infoSection) {
-    const hwInfo = await workingScope.Write("info.yaml");
-    const hInfo = await hwInfo.WriteObject({ info: infoSection });
+  // override info section
+  const hwInfo = await workingScope.Write("info.yaml");
+  const info: any = { title: candidateTitles[0] };
+  if (candidateDescriptions[0]) info.description = candidateDescriptions[0];
+  const hInfo = await hwInfo.WriteObject({ info: info });
 
-    const hwSwagger = await workingScope.Write("swagger_customInfo.yaml");
-    hSwagger = await MergeYamls(config, [hSwagger, hInfo], hwSwagger);
-  }
+  hSwagger = await MergeYamls(config, [hSwagger, hInfo], await workingScope.Write("swagger_customInfo.yaml"));
 
   return hSwagger;
 }
