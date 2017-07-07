@@ -3,10 +3,10 @@
     - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:37:27
     - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:37:4
    at ...
-Error: No unique title across OpenAPI definitions: . Please adjust or provide an override.
 ERROR: Syntax error: bad indentation of a mapping entry
 ERROR: Syntax error: bad indentation of a mapping entry
 ERROR: Syntax error: can not read an implicit mapping pair; a colon is missed
 ERROR: Syntax error: incomplete explicit mapping pair; a key node is missed
-FATAL: Error: No unique title across OpenAPI definitions: . Please adjust or provide an override.
-FATAL: swagger-document/compose - FAILED
+Error: Syntax errors encountered.
+FATAL: Error: Syntax errors encountered.
+FATAL: swagger-document/loader - FAILED

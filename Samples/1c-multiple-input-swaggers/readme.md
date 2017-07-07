@@ -15,8 +15,7 @@ input-file:
 Since the info sections of the OpenAPI definition files differ, we choose a new title for the overall client:
 
 ``` yaml
-override-info:
-  title: Search and Storage
+title: Search and Storage
 ```
 
 ## Generation
