@@ -1,7 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Network"
+    "version": "2016-12-01",
+    "title": "Network",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -49,14 +51,7 @@
             "description": "The name of the application gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -105,14 +100,7 @@
             "description": "The name of the application gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -166,14 +154,7 @@
             "description": "Parameters supplied to the create or update application gateway operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -220,14 +201,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -263,14 +237,7 @@
         "description": "Gets all the application gateways in a subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -320,14 +287,7 @@
             "description": "The name of the application gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -375,14 +335,7 @@
             "description": "The name of the application gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -430,14 +383,7 @@
             "description": "The name of the application gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -492,14 +438,7 @@
             "description": "The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -553,14 +492,7 @@
             "description": "The name of the authorization."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -616,14 +548,7 @@
             "description": "The name of the authorization."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -684,14 +609,7 @@
             "description": "Parameters supplied to the create or update express route circuit authorization operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -745,14 +663,7 @@
             "description": "The name of the circuit."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -809,14 +720,7 @@
             "description": "The name of the peering."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -872,14 +776,7 @@
             "description": "The name of the peering."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -940,14 +837,7 @@
             "description": "Parameters supplied to the create or update express route circuit peering operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1001,14 +891,7 @@
             "description": "The name of the express route circuit."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1058,14 +941,7 @@
             "description": "The name of the express route circuit."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1114,14 +990,7 @@
             "description": "The name of express route circuit."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1175,14 +1044,7 @@
             "description": "Parameters supplied to the create or update express route circuit operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1250,14 +1112,7 @@
             "description": "The path of the device."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1322,14 +1177,7 @@
             "description": "The path of the device."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1394,14 +1242,7 @@
             "description": "The path of the device."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1452,14 +1293,7 @@
             "description": "The name of the express route circuit."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1513,14 +1347,7 @@
             "description": "The name of the peering."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1560,14 +1387,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1603,14 +1423,7 @@
         "description": "Gets all the express route circuits in a subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1646,14 +1459,7 @@
         "description": "Gets all the available express route service providers.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1703,14 +1509,7 @@
             "description": "The name of the load balancer."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1759,14 +1558,7 @@
             "description": "The name of the load balancer."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1827,14 +1619,7 @@
             "description": "Parameters supplied to the create or update load balancer operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1874,14 +1659,7 @@
         "description": "Gets all the load balancers in a subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1924,14 +1702,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1981,14 +1752,7 @@
             "description": "The name of the network interface."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2037,14 +1801,7 @@
             "description": "The name of the network interface."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2105,14 +1862,7 @@
             "description": "Parameters supplied to the create or update network interface operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2152,14 +1902,7 @@
         "description": "Gets all network interfaces in a subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2202,14 +1945,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2259,14 +1995,7 @@
             "description": "The name of the network interface."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2317,14 +2046,7 @@
             "description": "The name of the network interface."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2375,14 +2097,7 @@
             "description": "The name of the network security group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2431,14 +2146,7 @@
             "description": "The name of the network security group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2499,14 +2207,7 @@
             "description": "Parameters supplied to the create or update network security group operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2546,14 +2247,7 @@
         "description": "Gets all network security groups in a subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2596,14 +2290,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2660,14 +2347,7 @@
             "description": "The name of the security rule."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2723,14 +2403,7 @@
             "description": "The name of the security rule."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2791,14 +2464,7 @@
             "description": "Parameters supplied to the create or update network security rule operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2852,14 +2518,7 @@
             "description": "The name of the network security group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2918,14 +2577,7 @@
             "description": "Parameters that define the network watcher resource."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2976,14 +2628,7 @@
             "description": "The name of the network watcher."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3029,14 +2674,7 @@
             "description": "The name of the network watcher."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3076,14 +2714,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3119,14 +2750,7 @@
         "description": "Gets all network watchers by subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3185,14 +2809,7 @@
             "description": "Parameters that define the representation of topology."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3249,14 +2866,7 @@
             "description": "Parameters that define the IP flow to be verified."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3319,14 +2929,7 @@
             "description": "Parameters that define the source and destination endpoint."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3389,14 +2992,7 @@
             "description": "Parameters that define the VM to check security groups for."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3466,14 +3062,7 @@
             "description": "Parameters that define the create packet capture operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3525,14 +3114,7 @@
             "description": "The name of the packet capture session."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3585,14 +3167,7 @@
             "description": "The name of the packet capture session."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3647,14 +3222,7 @@
             "description": "The name of the packet capture session."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3709,14 +3277,7 @@
             "description": "The name given to the packet capture session."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3769,14 +3330,7 @@
             "description": "The name of the Network Watcher resource."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3836,14 +3390,7 @@
             "description": "Parameters that define the resource to troubleshoot."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3906,14 +3453,7 @@
             "description": "Parameters that define the resource to query the troubleshooting result."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3976,14 +3516,7 @@
             "description": "Parameters that define the configuration of flow log."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4046,14 +3579,7 @@
             "description": "Parameters that define a resource to query flow log status."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4106,14 +3632,7 @@
             "description": "The name of the subnet."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4162,14 +3681,7 @@
             "description": "The name of the subnet."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4230,14 +3742,7 @@
             "description": "Parameters supplied to the create or update public IP address operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4277,14 +3782,7 @@
         "description": "Gets all the public IP addresses in a subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4327,14 +3825,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4399,14 +3890,7 @@
             "description": "The name of the route filter."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4497,14 +3981,7 @@
             "description": "The name of the route filter."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4661,14 +4138,7 @@
             "description": "Parameters supplied to the create or update route filter operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4789,14 +4259,7 @@
             "description": "Parameters supplied to the update route filter operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4882,14 +4345,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -4969,14 +4425,7 @@
         "description": "Gets all route filters in a subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5047,14 +4496,7 @@
             "description": "The name of the rule."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5140,14 +4582,7 @@
             "description": "The name of the rule."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5270,14 +4705,7 @@
             "description": "Parameters supplied to the create or update route filter rule operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5388,14 +4816,7 @@
             "description": "Parameters supplied to the update route filter rule operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5476,14 +4897,7 @@
             "description": "The name of the route filter."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5531,14 +4945,7 @@
             "description": "The name of the route table."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5587,14 +4994,7 @@
             "description": "The name of the route table."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5655,14 +5055,7 @@
             "description": "Parameters supplied to the create or update route table operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5709,14 +5102,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5752,14 +5138,7 @@
         "description": "Gets all route tables in a subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5816,14 +5195,7 @@
             "description": "The name of the route."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5879,14 +5251,7 @@
             "description": "The name of the route."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -5947,14 +5312,7 @@
             "description": "Parameters supplied to the create or update route operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6008,14 +5366,7 @@
             "description": "The name of the route table."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6105,14 +5456,7 @@
         "description": "Gets all the available bgp service communities.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6154,14 +5498,7 @@
             "pattern": "^[-\\w\\._]+$"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6211,14 +5548,7 @@
             "description": "The name of the virtual network."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6267,14 +5597,7 @@
             "description": "The name of the virtual network."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6335,14 +5658,7 @@
             "description": "Parameters supplied to the create or update virtual network operation"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6382,14 +5698,7 @@
         "description": "Gets all virtual networks in a subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6432,14 +5741,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6496,14 +5798,7 @@
             "description": "The name of the subnet."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6559,14 +5854,7 @@
             "description": "The name of the subnet."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6634,14 +5922,7 @@
             "description": "Parameters supplied to the create or update subnet operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6695,14 +5976,7 @@
             "description": "The name of the virtual network."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6759,14 +6033,7 @@
             "description": "The name of the virtual network peering."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6822,14 +6089,7 @@
             "description": "The name of the virtual network peering."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6890,14 +6150,7 @@
             "description": "Parameters supplied to the create or update virtual network peering operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -6951,14 +6204,7 @@
             "description": "The name of the virtual network."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7012,14 +6258,7 @@
             "description": "The name of the virtual network."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7075,14 +6314,7 @@
             "description": "Parameters supplied to create or update virtual network gateway operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7134,14 +6366,7 @@
             "description": "The name of the virtual network gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7186,14 +6411,7 @@
             "description": "The name of the virtual network gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7237,14 +6455,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7301,14 +6512,7 @@
             "description": "Virtual network gateway vip address supplied to the begin reset of the active-active feature enabled gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7368,14 +6572,7 @@
             "description": "Parameters supplied to the generate virtual network gateway VPN client package operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7429,14 +6626,7 @@
             "description": "The IP address of the peer to retrieve the status of."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7487,14 +6677,7 @@
             "description": "The name of the virtual network gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7552,14 +6735,7 @@
             "description": "The IP address of the peer"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7619,14 +6795,7 @@
             "description": "Parameters supplied to the create or update virtual network gateway connection operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7678,14 +6847,7 @@
             "description": "The name of the virtual network gateway connection."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7730,14 +6892,7 @@
             "description": "The name of the virtual network gateway connection."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7797,14 +6952,7 @@
             "description": "Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7856,14 +7004,7 @@
             "description": "The virtual network gateway connection shared key name."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7903,14 +7044,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -7969,14 +7103,7 @@
             "description": "Parameters supplied to the begin reset virtual network gateway connection shared key operation through network resource provider."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -8036,14 +7163,7 @@
             "description": "Parameters supplied to the create or update local network gateway operation."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -8095,14 +7215,7 @@
             "description": "The name of the local network gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -8147,14 +7260,7 @@
             "description": "The name of the local network gateway."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -8198,14 +7304,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client API version.",
-            "enum": [
-              "2016-12-01"
-            ]
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -13728,6 +12827,13 @@
       "required": true,
       "type": "string",
       "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
     }
   }
 }

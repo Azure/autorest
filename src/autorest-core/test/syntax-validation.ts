@@ -9,22 +9,25 @@ require("../lib/polyfill.min.js");
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
+import { DataStore } from "../lib/data-store/data-store";
 import { Message, Channel } from "../lib/message";
 import { AutoRest } from "../lib/autorest-core";
 import { MemoryFileSystem } from "../lib/file-system";
+import { Parse } from "../lib/parsing/literate-yaml";
 
 @suite class SyntaxValidation {
   private async GetLoaderErrors(swagger: string): Promise<Message[]> {
+    const dataStore = new DataStore();
     const uri = "mem:///swagger.json";
-    const memFS = new MemoryFileSystem(new Map([
-      [uri, swagger]
-    ]));
-    const autoRest = new AutoRest(memFS);
-    autoRest.AddConfiguration({ "input-file": uri });
+    const hw = await dataStore.Write(uri);
+    const h = await hw.WriteData(swagger);
+
+    const autoRest = new AutoRest();
     const messages: Message[] = [];
 
     autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Error) { messages.push(m) } });
-    assert.equal(await autoRest.Process().finish, true);
+    Parse(await autoRest.view, h, dataStore.CreateScope("tmp"));
+
     return messages;
   }
 

@@ -340,8 +340,9 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
     : distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.description).filter(i => !!i));
   const uniqueVersion: boolean = distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.version)).length === 1;
 
-  if (candidateTitles.length != 1) throw new Error(`No unique title across OpenAPI definitions: ${candidateTitles.map(x => `'${x}'`).join(", ")}. Please adjust or provide an override.`);
-  if (candidateDescriptions.length != 1) candidateDescriptions.splice(0, candidateDescriptions.length);
+  if (candidateTitles.length === 0) throw new Error(`No 'title' in provided OpenAPI definition(s).`);
+  if (candidateTitles.length > 1) throw new Error(`No unique 'title' across OpenAPI definitions: ${candidateTitles.map(x => `'${x}'`).join(", ")}. Please adjust or provide an override.`);
+  if (candidateDescriptions.length !== 1) candidateDescriptions.splice(0, candidateDescriptions.length);
 
   // prepare component Swaggers (override info, lift version param, ...)
   for (let i = 0; i < inputSwaggers.length; ++i) {
@@ -409,7 +410,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
       const clientPC = swagger[pc];
       if (clientPC) {
         for (const method of methods) {
-          if (!method.obj[pc]) {
+          if (typeof method.obj === "object" && !method.obj[pc]) {
             populate.push(() => method.obj[pc] = Clone(clientPC));
             mapping.push(...CreateAssignmentMapping(
               clientPC, inputSwagger.key,
