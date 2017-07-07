@@ -120,7 +120,7 @@ export function ToRawDataUrl(uri: string): string {
   // special URI handlers                                                                                        
   // - GitHub                                                                                                    
   if (uri.startsWith("https://github")) {
-    uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
+    uri = uri.replace(/^https?:\/\/(github.com)(\/[^\/]+\/[^\/]+\/)(blob|tree)\/(.*)/ig, "https://raw.githubusercontent.com$2$4");
   }
 
   return uri;
