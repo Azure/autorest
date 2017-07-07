@@ -626,7 +626,21 @@ namespace AutoRest.Swagger.Tests
             var messages = GetValidationMessagesForRule<LocationMustHaveXmsMutability>("location-with-incorrect-xms-mutability.json");
             Assert.Equal(messages.Count(), 1);
         }
-    }
+
+        [Fact]
+        public void LongRunningHasExtensionValidation()
+        {
+            var messages = GetValidationMessagesForRule<LongRunningOperationsWithLongRunningExtension>("long-running-operation-without-extension.json");
+            Assert.Equal(messages.Count(), 1);
+        }
+
+        [Fact]
+        public void LongRunningHasExtensionTrueValidation()
+        {
+            var messages = GetValidationMessagesForRule<LongRunningOperationsWithLongRunningExtension>("long-running-operation-with-extension-false.json");
+            Assert.Equal(messages.Count(), 1);
+        }
+}
 
     #region Positive tests
 
@@ -798,6 +812,15 @@ namespace AutoRest.Swagger.Tests
             Assert.Empty(messages);
         }
 
+        /// <summary>
+        /// Verifies extension for long running operation
+        /// </summary>
+        [Fact]
+        public void ValidExtensionForLongRunningOperation()
+        {
+            var messages = GetValidationMessagesForRule<LongRunningOperationsWithLongRunningExtension>(Path.Combine("positive", "long-running-operation-extension.json"));
+            Assert.Empty(messages);
+        }
     }
 
     #endregion
