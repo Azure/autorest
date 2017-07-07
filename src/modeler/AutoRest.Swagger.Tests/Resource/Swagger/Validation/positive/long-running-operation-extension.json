@@ -37,36 +37,9 @@
       }
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "test subscription id"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "test api version"
-    }
+  "parameters": {    
   },
   "definitions": {
-    "OperationsListResult": {
-      "description": "List of operations",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "the operation"
-          },
-          "description": "List of Operations"
-        }
-      }
-    },
     "Model": {
       "properties": {
         "prop1": {

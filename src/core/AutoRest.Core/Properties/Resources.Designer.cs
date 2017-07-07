@@ -339,7 +339,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A long running operation must have &apos;x-ms-long-running-operation&apos; extension enabled..
+        ///   Looks up a localized string similar to A long running operation should have &apos;x-ms-long-running-operation&apos; extension enabled..
         /// </summary>
         public static string LongRunningOperationsWithLongRunningExtension {
             get {

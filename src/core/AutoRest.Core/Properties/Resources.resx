@@ -369,6 +369,6 @@ Modelers:
     <value>The summary and description values should not be same.</value>
   </data>
   <data name="LongRunningOperationsWithLongRunningExtension" xml:space="preserve">
-    <value>A long running operation must have 'x-ms-long-running-operation' extension enabled.</value>
+    <value>A long running operation should have 'x-ms-long-running-operation' extension enabled.</value>
   </data>
 </root>
