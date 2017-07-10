@@ -1,2 +1,6 @@
     - /Samples/test/error-behavior/openapi-json-bad-syntax/tiny.json:45:6
+   at ...
 ERROR: Syntax error: missed comma between flow collection entries
+Error: Syntax errors encountered.
+FATAL: Error: Syntax errors encountered.
+FATAL: swagger-document/loader - FAILED

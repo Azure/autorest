@@ -87,9 +87,10 @@ function CreatePluginTransformerImmediate(): PipelinePlugin {
 function CreatePluginComposer(): PipelinePlugin {
   return async (config, input, working, output) => {
     const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
-    const swagger = config.GetEntry("override-info") || swaggers.length !== 1
-      ? await ComposeSwaggers(config, config.GetEntry("override-info") || {}, swaggers, config.DataStore.CreateScope("compose"), true)
-      : swaggers[0];
+    const overrideInfo = config.GetEntry("override-info");
+    const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry("title");
+    const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry("description");
+    const swagger = await ComposeSwaggers(config, overrideTitle, overrideDescription, swaggers, config.DataStore.CreateScope("compose"));
     await (await output.Write("composed")).Forward(swagger);
   };
 }

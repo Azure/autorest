@@ -17,6 +17,13 @@ namespace ApplicationGateway
     using System.Threading;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// The Microsoft Azure Network management API provides a RESTful set of
+    /// web services that interact with Microsoft Azure Networks service to
+    /// manage your network resources. The API has entities that capture the
+    /// relationship between an end user and the Microsoft Azure Networks
+    /// service.
+    /// </summary>
     public partial class NetworkClient : ServiceClient<NetworkClient>, INetworkClient, IAzureClient
     {
         /// <summary>
@@ -45,6 +52,11 @@ namespace ApplicationGateway
         /// call.
         /// </summary>
         public string SubscriptionId { get; set; }
+
+        /// <summary>
+        /// Client API version.
+        /// </summary>
+        public string ApiVersion { get; private set; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.
@@ -409,6 +421,7 @@ namespace ApplicationGateway
             VirtualNetworkGatewayConnections = new VirtualNetworkGatewayConnectionsOperations(this);
             LocalNetworkGateways = new LocalNetworkGatewaysOperations(this);
             BaseUri = new System.Uri("https://management.azure.com");
+            ApiVersion = "2016-12-01";
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;
             GenerateClientRequestId = true;
@@ -479,11 +492,14 @@ namespace ApplicationGateway
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "location");
             }
+            if (ApiVersion == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "this.ApiVersion");
+            }
             if (SubscriptionId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.SubscriptionId");
             }
-            string apiVersion = "2016-12-01";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -493,7 +509,6 @@ namespace ApplicationGateway
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("location", location);
                 tracingParameters.Add("domainNameLabel", domainNameLabel);
-                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "CheckDnsNameAvailability", tracingParameters);
             }
@@ -507,9 +522,9 @@ namespace ApplicationGateway
             {
                 _queryParameters.Add(string.Format("domainNameLabel={0}", System.Uri.EscapeDataString(domainNameLabel)));
             }
-            if (apiVersion != null)
+            if (ApiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(ApiVersion)));
             }
             if (_queryParameters.Count > 0)
             {

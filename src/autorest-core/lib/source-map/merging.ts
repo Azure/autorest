@@ -207,9 +207,11 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
 export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
   const mappings: Mappings = [];
+  let failed = false;
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = yamlInputHandle.ReadData();
     resultObject = Merge(resultObject, yaml.Parse(rawYaml, (message, index) => {
+      failed = true;
       if (config) {
         config.Message({
           Channel: Channel.Error,
@@ -220,6 +222,8 @@ export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHand
     }) || {});
     mappings.push(...IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
   }
-
+  if (failed) {
+    throw new Error("Syntax errors encountered.");
+  }
   return yamlOutputHandle.WriteObject(resultObject, mappings, yamlInputHandles);
 }

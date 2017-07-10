@@ -1,21 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
+    "version": "2015-06-15",
     "title": "StorageManagementClient",
-    "description": "The Storage Management Client.",
-    "version": "2015-06-15"
+    "description": "The Storage Management Client."
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
-  ],
-  "consumes": [
-    "application/json",
-    "text/json"
-  ],
-  "produces": [
-    "application/json",
-    "text/json"
   ],
   "security": [
     {
@@ -67,7 +59,15 @@
               "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
           }
-        }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}": {
@@ -121,7 +121,15 @@
             "description": ""
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
       },
       "delete": {
         "tags": [
@@ -160,7 +168,15 @@
           "204": {
             "description": ""
           }
-        }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
       },
       "get": {
         "tags": [
@@ -199,7 +215,15 @@
               "$ref": "#/definitions/StorageAccount"
             }
           }
-        }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
       },
       "patch": {
         "tags": [
@@ -247,7 +271,15 @@
               "$ref": "#/definitions/StorageAccount"
             }
           }
-        }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys": {
@@ -288,7 +320,15 @@
               "$ref": "#/definitions/StorageAccountKeys"
             }
           }
-        }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts": {
@@ -316,7 +356,15 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts": {
@@ -351,7 +399,15 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
@@ -401,7 +457,15 @@
               "$ref": "#/definitions/StorageAccountKeys"
             }
           }
-        }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages": {
@@ -429,7 +493,15 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }
+        },
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ]
       }
     }
   },

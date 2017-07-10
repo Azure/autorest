@@ -14,6 +14,11 @@ namespace ApplicationGateway
     using System.Threading.Tasks;
 
     /// <summary>
+    /// The Microsoft Azure Network management API provides a RESTful set of
+    /// web services that interact with Microsoft Azure Networks service to
+    /// manage your network resources. The API has entities that capture the
+    /// relationship between an end user and the Microsoft Azure Networks
+    /// service.
     /// </summary>
     public partial interface INetworkClient : System.IDisposable
     {
@@ -43,6 +48,11 @@ namespace ApplicationGateway
         /// every service call.
         /// </summary>
         string SubscriptionId { get; set; }
+
+        /// <summary>
+        /// Client API version.
+        /// </summary>
+        string ApiVersion { get; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.

@@ -1,19 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Search Management",
     "version": "2015-02-28",
+    "title": "Search Management",
     "description": "> the above JSON query pushes this markdown section into node `$.info.description` of the OpenAPI definition.\n\nThis client that can be used to manage Azure Search services and API keys."
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
   ],
   "security": [
     {
@@ -69,6 +63,12 @@
             "$ref": "#/responses/error"
           }
         },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
         "description": "> `#QueryKeys_List` searches for an object that has a string property containing \"QueryKeys_List\".\n\nReturns the list of query API keys for the given Azure Search service."
       }
     },
@@ -121,6 +121,12 @@
             "$ref": "#/responses/error"
           }
         },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
         "description": "Creates or updates a Search service in the given resource group.\nIf the Search service already exists, all properties will be updated with the given values."
       },
       "delete": {
@@ -159,6 +165,12 @@
             "$ref": "#/responses/error"
           }
         },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
         "description": "Deletes a Search service in the given resource group, along with its associated resources."
       }
     },
@@ -193,6 +205,12 @@
             "$ref": "#/responses/error"
           }
         },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
         "description": "Returns a list of all Search services in the given resource group."
       }
     }
