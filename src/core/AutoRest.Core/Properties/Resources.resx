@@ -368,4 +368,7 @@ Modelers:
   <data name="SummaryDescriptionVaidationError" xml:space="preserve">
     <value>The summary and description values should not be same.</value>
   </data>
+  <data name="LongRunningOperationsWithLongRunningExtension" xml:space="preserve">
+    <value>A long running operation should have 'x-ms-long-running-operation' extension enabled.</value>
+  </data>
 </root>

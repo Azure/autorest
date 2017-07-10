@@ -132,7 +132,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("CollectionObjectPropertiesNamingMessage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Plugins:
         ///  CSharp:
@@ -148,7 +148,9 @@ namespace AutoRest.Core.Properties {
         ///  Azure.Ruby:
         ///    TypeName: PluginRba, AutoRest.Ruby.Azure
         ///  NodeJS:
-        ///    TypeName: PluginJs, Au [rest of string was truncated]&quot;;.
+        ///    TypeName: PluginJs, AutoRest.NodeJS
+        ///  Azure.NodeJS:
+        ///    TypeName: PluginJsa, AutoRest.NodeJS. [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ConfigurationKnownPlugins {
             get {
@@ -333,6 +335,15 @@ namespace AutoRest.Core.Properties {
         public static string ListOperationsNamingWarningMessage {
             get {
                 return ResourceManager.GetString("ListOperationsNamingWarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A long running operation should have &apos;x-ms-long-running-operation&apos; extension enabled..
+        /// </summary>
+        public static string LongRunningOperationsWithLongRunningExtension {
+            get {
+                return ResourceManager.GetString("LongRunningOperationsWithLongRunningExtension", resourceCulture);
             }
         }
         
