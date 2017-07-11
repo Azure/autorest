@@ -6,6 +6,10 @@ import * as assert from "assert";
 
 import { AutoRest } from "../lib/autorest-core";
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
+import { CreateConfiguration } from "../legacyCli";
+import { DataStore } from "../lib/data-store/data-store"
+import { RealFileSystem } from "../lib/file-system";
+import { Channel, Message } from "../lib/message";
 
 @suite class SwaggerLoading {
   @test @timeout(0) async "external reference resolving"() {
@@ -24,25 +28,25 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     assert.strictEqual(swaggerObj.definitions.SubResource != null, true);
   }
 
-  /*
-    @test @timeout(0) async "composite Swagger"() {
-      const dataStore = new DataStore();
-  
-      const config = await CreateConfiguration("file:///", dataStore.AsFileScopeReadThrough(),
-        [
-          "-i", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/compositeNetworkClient.json",
-          "-m", "CompositeSwagger"
-        ]);
-      assert.strictEqual(config["input-file"].length, 16);
-  
-      // load Swaggers
-      const configMgr = await  Configuration.Create("file:///config.yaml",config )
-      const swaggers = await LoadLiterateSwaggers(
-        dataStore.AsFileScopeReadThrough(),
-        configMgr.inputFileUris, dataStore.CreateScope("loader"));
-  
-      // compose Swaggers
-      const swagger = await ComposeSwaggers({}, swaggers, dataStore.CreateScope("compose"), true);
-    }
-  */
+  @test @timeout(0) async "composite Swagger"() {
+    const dataStore = new DataStore();
+
+    const config = await CreateConfiguration("file:///", dataStore.GetReadThroughScope(),
+      [
+        "-i", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/compositeNetworkClient.json",
+        "-m", "CompositeSwagger"
+      ]);
+    assert.strictEqual(config["input-file"].length, 16);
+    const autoRest = new AutoRest(new RealFileSystem());
+    await autoRest.AddConfiguration(config);
+
+    const messages: Message[] = [];
+
+    autoRest.Message.Subscribe((_, m) => { messages.push(m); });
+    // PumpMessagesToConsole(autoRest);
+    assert.equal(await autoRest.Process().finish, true);
+    // flag any fatal errors
+    assert.equal(messages.filter(m => m.Channel === Channel.Fatal).length, 0);
+    assert.notEqual(messages.length, 0);
+  }
 }
