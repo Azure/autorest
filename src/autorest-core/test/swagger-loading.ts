@@ -20,7 +20,7 @@ import { Channel, Message } from "../lib/message";
     const swaggerFile = await LoadLiterateSwagger(
       config,
       dataStore.GetReadThroughScope(),
-      "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-12-01/swagger/applicationGateway.json",
+      "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/087554c4480e144f715fe92f97621ff5603cd907/specification/network/resource-manager/Microsoft.Network/2016-12-01/applicationGateway.json",
       dataStore.CreateScope("work"));
     const swaggerObj = swaggerFile.ReadObject<any>();
 
@@ -33,10 +33,10 @@ import { Channel, Message } from "../lib/message";
 
     const config = await CreateConfiguration("file:///", dataStore.GetReadThroughScope(),
       [
-        "-i", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/compositeNetworkClient.json",
+        "-i", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/a2b46f557c6a17a95777a8a2f380cfecb9dac28e/arm-network/compositeNetworkClient.json",
         "-m", "CompositeSwagger"
       ]);
-    assert.strictEqual(config["input-file"].length, 16);
+    assert.strictEqual(config["input-file"].length, 18);
     const autoRest = new AutoRest(new RealFileSystem());
     await autoRest.AddConfiguration(config);
 
