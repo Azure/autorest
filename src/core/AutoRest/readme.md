@@ -14,6 +14,33 @@ pipeline:
     scope: azure-validator-individual
 ```
 
+## PHP
+
+``` yaml
+pipeline:
+  php/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: php
+  php/generate:
+    plugin: php
+    input: 
+      - swagger-document/identity
+      - modeler
+    output-artifact: source-file-php
+  php/emitter:
+    input: generate
+    scope: scope-php/emitter
+
+scope-php/emitter:
+  input-artifact: source-file-php
+  output-uri-expr: $key.split("/output/")[1]
+
+output-artifact:
+- source-file-php
+```
+
+
 ## C#
 
 ``` yaml

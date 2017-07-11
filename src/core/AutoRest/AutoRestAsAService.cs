@@ -35,7 +35,21 @@ namespace AutoRest
 
     public async Task<IEnumerable<string>> GetPluginNames()
     {
-      return new[] { "azure-validator", "modeler", "csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema", "csharp-simplifier", "jsonrpcclient" };
+      return new[]
+      {
+          "azure-validator",
+          "modeler",
+          "csharp",
+          "ruby",
+          "nodejs",
+          "python",
+          "go",
+          "java",
+          "azureresourceschema",
+          "csharp-simplifier",
+          "jsonrpcclient",
+          "php"
+      };
     }
 
     public async Task<bool> Process(string plugin, string sessionId)
@@ -54,6 +68,7 @@ namespace AutoRest
         case "java":
         case "azureresourceschema":
         case "jsonrpcclient":
+        case "php":
           return await new Generator(plugin, connection, sessionId).Process();
         case "csharp-simplifier":
           return await new CSharpSimplifier(connection, sessionId).Process();
