@@ -26,9 +26,11 @@ import { Parse } from "../lib/parsing/literate-yaml";
     const messages: Message[] = [];
 
     autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Error) { messages.push(m) } });
-    await Parse(await autoRest.view, h, dataStore.CreateScope("tmp"));
-
-    console.log(swagger, messages);
+    try {
+      await Parse(await autoRest.view, h, dataStore.CreateScope("tmp"));
+    } catch (e) {
+      // it'll also throw, but detailed messages are emitted first
+    }
 
     return messages;
   }
