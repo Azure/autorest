@@ -105,26 +105,6 @@ pipeline:
     scope: semantic-validator
 ```
 
-##### Azure Validator
-
-``` yaml $(azure-validator)
-pipeline:
-  swagger-document/openapi-validator:
-    input:
-      - swagger-document/identity
-  swagger-document/individual/openapi-validator:
-    input: 
-      - swagger-document/identity
-  
-  
-  swagger-document/classic-openapi-validator:
-    input:
-      - swagger-document/identity
-  swagger-document/individual/classic-openapi-validator:
-    input: 
-      - swagger-document/identity
-```
-
 # Validation
 
 ## Client Side Validation
