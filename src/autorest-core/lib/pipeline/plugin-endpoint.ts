@@ -81,7 +81,7 @@ export class AutoRestPlugin extends EventEmitter {
     channel.onNotification(IAutoRestPluginInitiator_Types.WriteFile, this.apiInitiator.WriteFile);
     channel.onNotification(IAutoRestPluginInitiator_Types.Message, this.apiInitiator.Message);
 
-    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Error("AutoRest plugin terminated.")); }));
+    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej("AutoRest plugin terminated."); }));
 
     // target
     this.apiTarget = {

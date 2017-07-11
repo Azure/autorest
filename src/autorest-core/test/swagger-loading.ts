@@ -34,7 +34,8 @@ import { Channel, Message } from "../lib/message";
     const config = await CreateConfiguration("file:///", dataStore.GetReadThroughScope(),
       [
         "-i", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/a2b46f557c6a17a95777a8a2f380cfecb9dac28e/arm-network/compositeNetworkClient.json",
-        "-m", "CompositeSwagger"
+        "-m", "CompositeSwagger",
+        "-g", "None"
       ]);
     assert.strictEqual(config["input-file"].length, 18);
     const autoRest = new AutoRest(new RealFileSystem());
