@@ -28,6 +28,8 @@ import { Parse } from "../lib/parsing/literate-yaml";
     autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Error) { messages.push(m) } });
     Parse(await autoRest.view, h, dataStore.CreateScope("tmp"));
 
+    console.log(swagger, messages);
+
     return messages;
   }
 
