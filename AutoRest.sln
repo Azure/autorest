@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest", "src\core\AutoRest\AutoRest.csproj", "{BE85FEB6-C008-4202-8799-CFA9D292D0B6}"
 EndProject
@@ -73,6 +73,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.JsonRpcClient", "src\generator\AutoRest.CSharp.JsonRpcClient\AutoRest.CSharp.JsonRpcClient.csproj", "{F2BA044F-511A-4B69-A65E-06E7CCBA1303}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Go.TestGen", "src\generator\AutoRest.Go.TestGen\AutoRest.Go.TestGen.csproj", "{F8264E20-08A8-4302-B0FD-331AA5F9DF19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Php", "src\generator\AutoRest.Php\AutoRest.Php.csproj", "{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -468,6 +470,18 @@ Global
 		{F8264E20-08A8-4302-B0FD-331AA5F9DF19}.Release|x64.Build.0 = Release|Any CPU
 		{F8264E20-08A8-4302-B0FD-331AA5F9DF19}.Release|x86.ActiveCfg = Release|Any CPU
 		{F8264E20-08A8-4302-B0FD-331AA5F9DF19}.Release|x86.Build.0 = Release|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Debug|x64.Build.0 = Debug|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Debug|x86.Build.0 = Debug|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Release|x64.ActiveCfg = Release|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Release|x64.Build.0 = Release|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Release|x86.ActiveCfg = Release|Any CPU
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -505,5 +519,6 @@ Global
 		{0364B91B-ED04-4AEB-A471-9A4F6F51A4B4} = {F74C5F5A-EC8E-4594-9118-CD6C3B08F9D5}
 		{F2BA044F-511A-4B69-A65E-06E7CCBA1303} = {F74C5F5A-EC8E-4594-9118-CD6C3B08F9D5}
 		{F8264E20-08A8-4302-B0FD-331AA5F9DF19} = {F74C5F5A-EC8E-4594-9118-CD6C3B08F9D5}
+		{D4F86E5A-02C0-417B-AA33-6FB3477F6C63} = {F74C5F5A-EC8E-4594-9118-CD6C3B08F9D5}
 	EndGlobalSection
 EndGlobal
