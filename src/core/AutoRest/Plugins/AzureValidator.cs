@@ -84,7 +84,7 @@ public class AzureValidator : NewPlugin
             var docStateInput = (await GetValue<string>("merge-state"));
 
             ServiceDefinitionDocumentType docType;
-            if (!Enum.TryParse<ServiceDefinitionDocumentType>(docTypeInput, true, out docType))
+            if (!Enum.TryParse<ServiceDefinitionDocumentType>(docTypeInput.Replace("-", ""), true, out docType))
             {
                 throw new Exception("Invalid Input for openapi-type: " + docTypeInput + ". Valid values are 'arm', 'data-plane' or 'default'.");
             }
