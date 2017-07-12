@@ -92,7 +92,12 @@ export function CreateFileOrFolderUri(absolutePath: string): string {
   if (!isAbsolute(absolutePath)) {
     throw new Error("Can only create file URIs from absolute paths.");
   }
-  return fileUri(absolutePath, { resolve: false });
+  let result = fileUri(absolutePath, { resolve: false });
+  // handle UNCs
+  if (absolutePath.startsWith("//") || absolutePath.startsWith("\\\\")) {
+    result = result.replace(/^file:\/\/\/\//, "file://");
+  }
+  return result;
 }
 export function CreateFileUri(absolutePath: string): string {
   return EnsureIsFileUri(CreateFileOrFolderUri(absolutePath));
@@ -180,8 +185,10 @@ function isAccessibleFile(localPath: string) {
 
 function FileUriToLocalPath(fileUri: string): string {
   const uri = parse(fileUri);
-  if (uri.protocol !== "file:") {
-    throw new Error(`Protocol '${uri.protocol}' not supported for writing.`);
+  if (!fileUri.startsWith("file:///")) {
+    throw new Error(!fileUri.startsWith("file://")
+      ? `Protocol '${uri.protocol}' not supported for writing.`
+      : `UNC paths not supported for writing.`);
   }
   // convert to path
   let p = uri.path;
@@ -192,7 +199,6 @@ function FileUriToLocalPath(fileUri: string): string {
     p = p.substr(p.startsWith("/") ? 1 : 0);
     p = p.replace(/\//g, "\\");
   }
-
   return decodeURI(p);
 }
 
