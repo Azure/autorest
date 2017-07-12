@@ -46,6 +46,16 @@ import { PumpMessagesToConsole } from './test-utility';
     assert.strictEqual(success, true);
   }
 
+  @test @timeout(60000) async "other configuration scenario"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-complicated.md"));
+    // PumpMessagesToConsole(autoRest);
+
+
+    const config = await autoRest.view;
+    assert.strictEqual(config["shouldwork"], true);
+
+  }
+
   @test @timeout(60000) async "complicated configuration scenario"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-complicated.md"));
     // PumpMessagesToConsole(autoRest);

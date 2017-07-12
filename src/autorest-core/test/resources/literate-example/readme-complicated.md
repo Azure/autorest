@@ -41,3 +41,13 @@ azure-arm: true
 input-file:
 - swagger.md
 ```
+
+``` yaml !$(notdefined)  
+shouldwork: true
+
+```
+
+``` yaml $(notdefined)  
+shouldnotwork: true
+
+```

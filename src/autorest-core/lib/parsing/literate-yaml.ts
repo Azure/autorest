@@ -113,9 +113,13 @@ export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolea
     return true;
   }
 
+  let guardResult = false;
+  let expressionFence: string = '';
   try {
-    const expressionFence = `${resolveRValue(fence, "", contextObject, null, 2)}`;
-    // is there unresolved values?  May be old-style, or not valid value yet.
+    expressionFence = `${resolveRValue(fence, "", contextObject, null, 2)}`;
+    // is there unresolved values?  May be old-style. Or the values aren't defined. 
+
+    // Let's run it only if there are no unresolved values for now. 
     if (expressionFence.indexOf("$(") == -1) {
       return safeEval<boolean>(expressionFence);
     }
@@ -123,22 +127,30 @@ export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolea
     // not a legal expression?
   }
 
-  // fall back to original behavior, where the whole expression is in the $( ... )
-  match = /\$\((.*)\)/.exec(fence);
-  const guardExpression = match && match[1];
+  // is this a single $( ... ) expression ?
+  match = /^\$\((.*)\)$/.exec(fence.trim());
+
+  const guardExpression = match && match[1].indexOf("$(") == -1 && match[1];
   if (!guardExpression) {
-    return true;
+    // Nope. this isn't an old style expression.
+    // at best, it can be an expression that doesn't have all the values resolved.
+    // let's resolve them to undefined and see what happens.
+    return safeEval<boolean>(fence.replace(/\$\(.*?\)/g, 'undefined'));
   }
+
+  // fall back to original behavior, where the whole expression is in the $( ... )
   const context = Object.assign({ $: contextObject }, contextObject);
-  let guardResult = false;
+
   try {
     guardResult = safeEval<boolean>(guardExpression, context);
   } catch (e) {
     try {
       guardResult = safeEval<boolean>("$['" + guardExpression + "']", context);
     } catch (e) {
-      console.error(`Could not evaulate guard expression '${guardExpression}'.`);
+      // at this point, it can only be an single-value expression that isn't resolved
+      // which means return 'false'
     }
   }
+
   return guardResult;
 }
