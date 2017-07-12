@@ -7,11 +7,6 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 ## Support Policy
 AutoRest is an open source tool -- if you need assistance, first check the documentation. If you find a bug or need some help, feel free to submit an [issue](https://github.com/Azure/autorest/issues)
 
-## What's New (06/14/2017)
-
-AutoRest has shipped a **Stable** build!
-
-Starting with the current version of AutoRest in `npm` (v 1.1.0), AutoRest will by default only look at `release` builds of the AutoRest core. and will be available in both `stable` and `prerelease` builds.
 
 **AutoRest will release a stable version on the second Wednesday of the month.**
 
