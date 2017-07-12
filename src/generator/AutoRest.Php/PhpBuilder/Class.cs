@@ -3,16 +3,22 @@ using System.Linq;
 
 namespace AutoRest.Php.PhpBuilder
 {
-    public sealed class Class
+    public sealed class Class : ILines
     {
         public string Name { get; }
 
         public IEnumerable<Method> Methods { get; }
 
-        public Class(string name, IEnumerable<Method> methods = null)
+        public IEnumerable<Property> Properties { get; }
+
+        public Class(
+            string name,
+            IEnumerable<Method> methods = null,
+            IEnumerable<Property> properties = null)
         {
             Name = name;
             Methods = methods.EmptyIfNull();
+            Properties = properties.EmptyIfNull();
         }
 
         public static string CreateName(params string[] names)
@@ -25,17 +31,11 @@ namespace AutoRest.Php.PhpBuilder
         public string GetFileName()
             => string.Join("/", GetNames()) + ".php";
 
-        public static string GetPhpName(string name)
-        {
-            name = name.Replace('-', '_');
-            return char.IsDigit(name[0]) ? $"_{name}" : name;
-        }
-
         const string Indent = "    ";
 
-        public IEnumerable<string> ToStringList()
+        public IEnumerable<string> ToLines()
         {
-            var names = GetNames().Select(GetPhpName).ToArray();
+            var names = GetNames().Select(Extensions.GetPhpName).ToArray();
             var @namespace = string.Join("\\", names.Take(names.Length - 1));
             var localName = names[names.Length - 1];
 
@@ -43,7 +43,8 @@ namespace AutoRest.Php.PhpBuilder
             yield return $"namespace {@namespace};";
             yield return $"final class {localName}";
             yield return "{";
-            foreach (var line in Methods.SelectMany(method => method.ToStringList()))
+            var objects = Methods.Select(Php.Extensions.UpCast<ILines>).Concat(Properties);
+            foreach (var line in objects.SelectMany(lines => lines.ToLines()))
             {
                 yield return $"{Indent}{line}";
             }

@@ -9,5 +9,8 @@ namespace AutoRest.Php
     {
         public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> value)
             => value ?? Enumerable.Empty<T>();
+
+        public static T UpCast<T>(this T value)
+            => value;
     }
 }
