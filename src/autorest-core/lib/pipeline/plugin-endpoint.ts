@@ -11,6 +11,7 @@ import { CancellationToken } from "../ref/cancallation";
 import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
 import { DataStoreViewReadonly, DataStoreView } from "../data-store/data-store";
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
+import { Exception } from "../exception";
 import { Message } from "../message";
 
 interface IAutoRestPluginTargetEndpoint {
@@ -81,7 +82,7 @@ export class AutoRestPlugin extends EventEmitter {
     channel.onNotification(IAutoRestPluginInitiator_Types.WriteFile, this.apiInitiator.WriteFile);
     channel.onNotification(IAutoRestPluginInitiator_Types.Message, this.apiInitiator.Message);
 
-    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Error("AutoRest plugin terminated.")); }));
+    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Exception("AutoRest plugin terminated.")); }));
 
     // target
     this.apiTarget = {
