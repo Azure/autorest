@@ -2,18 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text.RegularExpressions;
-using System.Diagnostics.CodeAnalysis;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Properties;
-using AutoRest.Swagger.Validation;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
@@ -21,7 +16,6 @@ namespace AutoRest.Swagger.Model
     /// Describes a single operation determining with this object is mandatory.
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject
     /// </summary>
-    [Rule(typeof(DefaultMustBeInEnum))]
     public abstract class SwaggerObject : SwaggerBase
     {
         private string _description;
@@ -35,7 +29,6 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The extending format for the previously mentioned type.
         /// </summary>
-        [Rule(typeof(ValidFormats))]
         public virtual string Format { get; set; }
 
         /// <summary>
@@ -47,7 +40,6 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Describes the type of items in the array.
         /// </summary>
-        [Rule(typeof(RequiredReadOnlyProperties))]
         public virtual Schema Items { get; set; }
 
         [JsonProperty(PropertyName = "$ref")]
@@ -58,7 +50,6 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         public virtual Schema AdditionalProperties { get; set; }
 
-        [Rule(typeof(DescriptiveDescriptionRequired))]
         public virtual string Description
         {
             get { return _description; }
