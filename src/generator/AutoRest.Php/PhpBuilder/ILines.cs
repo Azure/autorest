@@ -4,6 +4,6 @@ namespace AutoRest.Php.PhpBuilder
 {
     public interface ILines
     {
-        IEnumerable<string> ToLines();
+        IEnumerable<string> ToLines(string indent);
     }
 }

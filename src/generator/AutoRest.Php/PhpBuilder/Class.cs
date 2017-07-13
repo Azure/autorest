@@ -1,52 +1,50 @@
-﻿using System.Collections.Generic;
+﻿using AutoRest.Php.PhpBuilder.Functions;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace AutoRest.Php.PhpBuilder
 {
     public sealed class Class : ILines
     {
-        public string Name { get; }
+        public ClassName Name { get; }
 
-        public IEnumerable<Method> Methods { get; }
+        public Constructor Constructor { get; }
 
-        public IEnumerable<Property> Properties { get; }
+        public ImmutableList<Function> Functions { get; }
+
+        public ImmutableList<Property> Properties { get; }
 
         public Class(
             string name,
-            IEnumerable<Method> methods = null,
-            IEnumerable<Property> properties = null)
+            Constructor constructor = null,
+            ImmutableList<Function> functions = null,
+            ImmutableList<Property> properties = null)
         {
-            Name = name;
-            Methods = methods.EmptyIfNull();
+            Name = new ClassName(name);
+            Constructor = constructor;
+            Functions = functions.EmptyIfNull();
             Properties = properties.EmptyIfNull();
         }
 
         public static string CreateName(params string[] names)
             => string.Join("\\", names);
 
-        public IEnumerable<string> GetNames()
-            => Name
-                .Split(new[] { '.', '\\' });
-
-        public string GetFileName()
-            => string.Join("/", GetNames()) + ".php";
-
-        const string Indent = "    ";
-
-        public IEnumerable<string> ToLines()
+        public IEnumerable<string> ToLines(string indent)
         {
-            var names = GetNames().Select(Extensions.GetPhpName).ToArray();
-            var @namespace = string.Join("\\", names.Take(names.Length - 1));
-            var localName = names[names.Length - 1];
-
             yield return "<?php";
-            yield return $"namespace {@namespace};";
-            yield return $"final class {localName}";
+            yield return $"namespace {Name.PhpNamespace};";
+            yield return $"final class {Name.PhpLocalName}";
             yield return "{";
-            var objects = Methods.Select(Php.Extensions.UpCast<ILines>).Concat(Properties);
-            foreach (var line in objects.SelectMany(lines => lines.ToLines()))
+            var constructorList = Constructor == null
+                ? ImmutableList<ILines>.Empty
+                : ImmutableList.Create(Constructor.UpCast<ILines>());
+            var objects = constructorList
+                .Concat(Functions)
+                .Concat(Properties);
+            foreach (var line in objects.SelectMany(lines => lines.ToLines(indent)))
             {
-                yield return $"{Indent}{line}";
+                yield return $"{indent}{line}";
             }
             yield return "}";
         }

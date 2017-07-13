@@ -1,4 +1,6 @@
-﻿namespace AutoRest.Php.PhpBuilder
+﻿using System.Collections.Generic;
+
+namespace AutoRest.Php.PhpBuilder
 {
     public static class Extensions
     {
@@ -18,6 +20,16 @@
         {
             name = name.GetPhpName();
             return $"{char.ToLower(name[0])}{name.Substring(1)}";
+        }
+
+        public static IEnumerable<string> Comment(this IEnumerable<string> text)
+        {
+            yield return "/**";
+            foreach (var line in text)
+            {
+                yield return $" * {line}";
+            }
+            yield return " */";
         }
     }
 }
