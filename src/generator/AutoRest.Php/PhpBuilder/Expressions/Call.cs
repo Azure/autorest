@@ -1,4 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -22,5 +24,12 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public override string ToString()
             => $"{Left.ToString()}->{Function.GetCall(Parameters)}";
+
+        public override IEnumerable<string> ToLines(string indent)
+            => Left
+                .ToLines(indent)
+                .TransformLast(last => 
+                    Function.GetCall(Parameters).TransformFirst(first =>
+                        ImmutableList.Create($"{last}->{first}")));
     }
 }

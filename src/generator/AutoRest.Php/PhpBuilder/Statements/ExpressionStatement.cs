@@ -1,6 +1,8 @@
 ﻿using AutoRest.Php.PhpBuilder.Expressions;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 
 namespace AutoRest.Php.PhpBuilder.Statements
 {
@@ -14,8 +16,9 @@ namespace AutoRest.Php.PhpBuilder.Statements
         }
 
         public override IEnumerable<string> ToLines(string indent)
-        {
-            yield return $"{Expression.ToString()};";
-        }
+            => Expression
+                .ToLines(indent)
+                .WithBorders()
+                .Select(v => v.Value + (v.IsLast ? ";" : string.Empty));
     }
 }

@@ -1,4 +1,5 @@
-﻿using AutoRest.Php.PhpBuilder.Statements;
+﻿using System.Collections.Generic;
+using AutoRest.Php.PhpBuilder.Statements;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -12,12 +13,14 @@ namespace AutoRest.Php.PhpBuilder.Expressions
     /// Expression0: 
     ///     ThisPropertyRef
     /// </summary>
-    public abstract class Expression
+    public abstract class Expression : ILines
     {
         public Statement Return()
             => new Return(this);
 
         public Statement Statement()
             => new ExpressionStatement(this);
+
+        public abstract IEnumerable<string> ToLines(string indent);
     }
 }

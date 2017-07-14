@@ -1,4 +1,7 @@
-﻿namespace AutoRest.Php.PhpBuilder.Expressions
+﻿using System;
+using System.Collections.Generic;
+
+namespace AutoRest.Php.PhpBuilder.Expressions
 {
     public sealed class ObjectRef : Expression0
     {
@@ -11,5 +14,10 @@
 
         public override string ToString()
             => $"${Object.PhpName}";
+
+        public override IEnumerable<string> ToLines(string indent)
+        {
+            yield return $"${Object.PhpName}";
+        }
     }
 }

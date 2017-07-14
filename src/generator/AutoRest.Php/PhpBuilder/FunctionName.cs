@@ -1,4 +1,5 @@
 ﻿using AutoRest.Php.PhpBuilder.Expressions;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder
@@ -12,7 +13,9 @@ namespace AutoRest.Php.PhpBuilder
             PhpName = Original.GetPhpCamelName();
         }
 
-        public string GetCall(ImmutableList<Expression> parameters)
-            => $"{PhpName}({parameters.ToPhpCode()})";
+        public IEnumerable<string> GetCall(ImmutableList<Expression> parameters)
+        {
+            yield return $"{PhpName}({parameters.ToPhpCode()})";
+        }
     }
 }

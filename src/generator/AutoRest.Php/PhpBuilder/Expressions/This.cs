@@ -1,9 +1,17 @@
-﻿namespace AutoRest.Php.PhpBuilder.Expressions
+﻿using System;
+using System.Collections.Generic;
+
+namespace AutoRest.Php.PhpBuilder.Expressions
 {
     public sealed class This : Expression0
     {
         public override string ToString()
             => "$this";
+
+        public override IEnumerable<string> ToLines(string indent)
+        {
+            yield return "$this";
+        }
 
         public static This Instance { get; }
             = new This();
