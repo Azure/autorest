@@ -8,7 +8,7 @@ addons:
     - deadsnakes
     packages:
     # packages for python
-    - python3.5
+    - python3.6
 env:
   matrix:
   - MODE=main
