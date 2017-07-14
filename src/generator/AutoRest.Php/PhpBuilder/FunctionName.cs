@@ -13,6 +13,6 @@ namespace AutoRest.Php.PhpBuilder
         }
 
         public string GetCall(ImmutableList<Expression> parameters)
-            => $"{PhpName}({string.Join(", ", parameters)})";
+            => $"{PhpName}({parameters.ToPhpCode()})";
     }
 }

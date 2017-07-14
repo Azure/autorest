@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using AutoRest.Php.PhpBuilder.Expressions;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder
 {
@@ -31,5 +33,8 @@ namespace AutoRest.Php.PhpBuilder
             }
             yield return " */";
         }
-    }
+
+        public static string ToPhpCode(this IEnumerable<Expression> expressions)
+            => string.Join(", ", expressions);
+}
 }
