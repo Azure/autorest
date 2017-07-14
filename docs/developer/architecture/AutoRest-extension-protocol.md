@@ -2,6 +2,11 @@
 
 The protocol is bidirectional, i.e. AutoRest may call the API of the extension and vice versa. 
 
+## Implementations
+
+* TypeScript: [autorest-extension-base](https://github.com/olydis/autorest-extension-base) (example extension: [autorest-extension-helloworld](https://github.com/olydis/autorest-extension-helloworld))
+* C#: see [azure-openapi-validator](https://github.com/Azure/azure-openapi-validator/tree/master/src/dotnet)
+
 ## AutoRest ⇒ Extension
 
 ``` TypeScript
