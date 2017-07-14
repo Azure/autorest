@@ -165,6 +165,7 @@ pipeline:
     scope: scope-csharp/emitter
 
 scope-csharp/emitter:
+  can-clear-output-folder: true
   input-artifact: source-file-csharp
   output-uri-expr: $key.split("/output/")[1]
 

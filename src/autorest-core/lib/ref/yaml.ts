@@ -90,6 +90,9 @@ export function ResolveAnchorRef(yamlAstRoot: YAMLNode, anchorRef: string): YAML
  * Populates yamlNode.valueFunc with a function that creates a *mutable* object (i.e. no caching of the reference or such)
  */
 function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: (message: string, index: number) => void): () => any {
+  if (!yamlNode) {
+    return () => null;
+  }
   if (yamlNode.errors.length > 0) {
     for (const error of yamlNode.errors) {
       onError(`Syntax error: ${error.reason}`, error.mark.position);
