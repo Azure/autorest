@@ -247,9 +247,9 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   const config = (await api.view);
 
   try {
-    // is this a batch process?
-    if (config["batch"]) {
-      return await batch(api);
+    // maybe a resource schema batch process
+    if (config["resource-schema-batch"]) {
+      return await resourceSchemaBatch(api);
     }
 
     // maybe a merge process
@@ -257,10 +257,15 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
       return await merge(api);
     }
 
-    // Just regular ol' AutoRest!
-    const result = await api.Process().finish;
-    if (result != true) {
-      throw result;
+    if (config["batch"]) {
+      await batch(api);
+    }
+    else {
+      const result = await api.Process().finish;
+      // Just regular ol' AutoRest!
+      if (result != true) {
+        throw result;
+      }
     }
   }
   finally {
@@ -320,14 +325,14 @@ function getRds(schema: any, path: string): Array<string> {
   return result;
 }
 
-async function batch(api: AutoRest): Promise<number> {
+async function resourceSchemaBatch(api: AutoRest): Promise<number> {
   // get the configuration
   const outputs = new Map<string, string>();
   const schemas = new Array<string>();
 
   // ask for the view without 
   const config = await api.RegenerateView();
-  for (const batchConfig of config.GetNestedConfiguration("batch")) { // really, there should be only one
+  for (const batchConfig of config.GetNestedConfiguration("resource-schema-batch")) { // really, there should be only one
     for (const eachFile of batchConfig["input-file"]) {
       const path = ResolveUri(config.configFileFolderUri, eachFile);
       const content = await ReadUri(path);
@@ -389,52 +394,26 @@ async function batch(api: AutoRest): Promise<number> {
 }
 
 
-async function deprecatedBatch(api: AutoRest): Promise<number> {
-  // get the configuration
+async function batch(api: AutoRest): Promise<void> {
   const config = await api.view;
-  for (const batchConfig of config.GetNestedConfiguration("batch")) { // really, there should be only one
-    for (const eachGeneration of batchConfig.GetNestedConfiguration("for-each")) {
-      for (const configFile of eachGeneration["input-file"]) { // really, there should be only one here too.
-        const path = ResolveUri(config.configFileFolderUri, configFile);
-        const content = await ReadUri(path);
-        if (!AutoRest.IsConfigurationFile(content)) {
-          exitcode++;
-          console.error(`File ${path} is not a AutoRest configuration file.`);
-          continue;
-        }
+  const batchTaskConfigReference: any = {};
+  api.AddConfiguration(batchTaskConfigReference);
+  for (const batchTaskConfig of config.GetEntry("batch" as any)) {
+    config.Message({
+      Channel: Channel.Debug,
+      Text: "Processing next batch task."
+    });
 
-        // Create the autorest instance for that item
-        const instance = new AutoRest(new RealFileSystem(), path);
-        instance.GeneratedFile.Subscribe((_, file) => {
-          console.log(`writing ${file.uri}`);
-          return outstanding.Await(WriteString(file.uri, file.content))
-        });
-        subscribeMessages(instance, () => exitcode++);
+    // update batch task config section
+    for (const key of Object.keys(batchTaskConfigReference)) delete batchTaskConfigReference[key];
+    Object.assign(batchTaskConfigReference, batchTaskConfig);
+    api.Invalidate();
 
-        // set configuration for that item
-        instance.AddConfiguration(ShallowCopy(eachGeneration, "input-file"));
-        instance.AddConfiguration(ShallowCopy(batchConfig, "for-each"));
-
-        const newView = await instance.view;
-        // console.log(`Inputs: ${newView["input-file"]}`);
-
-        console.log(`Running autorest for ${path} `);
-
-        // ok, kick off the process for that one.
-
-        await instance.Process().finish.then((result) => {
-          console.log(`done: ${path}`);
-          exitcode++;
-          if (result != true) {
-            throw result;
-          }
-        });
-        break;
-
-      }
+    const result = await api.Process().finish;
+    if (result !== true) {
+      throw result;
     }
   }
-  return exitcode;
 }
 
 /**
