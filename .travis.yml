@@ -8,8 +8,8 @@ addons:
     - deadsnakes
     packages:
     # packages for python (including cryptography)
-    - python3.6
-    - python3.6-dev
+    - python3.5
+    - python3.5-dev
     - libssl-dev
     - libffi-dev
 env:
