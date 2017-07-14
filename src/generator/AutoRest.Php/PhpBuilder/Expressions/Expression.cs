@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoRest.Php.PhpBuilder.Statements;
+using System;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -20,7 +21,6 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public Statement Statement()
             => new ExpressionStatement(this);
-
         public abstract IEnumerable<string> ToLines(string indent);
     }
 }

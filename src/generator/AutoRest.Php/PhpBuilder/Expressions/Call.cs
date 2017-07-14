@@ -22,14 +22,14 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Parameters = parameters.EmptyIfNull();
         }
 
-        public override string ToString()
-            => $"{Left.ToString()}->{Function.GetCall(Parameters)}";
+        //public override string ToString()
+        //    => $"{Left.ToString()}->{Function.GetCall(Parameters)}";
 
         public override IEnumerable<string> ToLines(string indent)
-            => Left
-                .ToLines(indent)
-                .TransformLast(last => 
-                    Function.GetCall(Parameters).TransformFirst(first =>
-                        ImmutableList.Create($"{last}->{first}")));
+            => Function
+                .GetCall(Parameters, indent)
+                .Select((line, i) => (i.IsFirst ? L"->" : ))
+            yield return Left.ToString() + "->" + Function.GetCall(Parameters);
+        }
     }
 }

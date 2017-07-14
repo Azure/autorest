@@ -29,7 +29,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
         public override IEnumerable<string> ToLines(string indent)
             => Function
                 .GetCall(Parameters)
-                .WithBorders()
-                .Select(v => (v.IsFirst ? Class.AbsoluteName + "->" : string.Empty) + v.Value);
+                .Select((v, i) 
+                    => (i.IsFirst ? Class.AbsoluteName + "::" : string.Empty) + v);
     }
 }

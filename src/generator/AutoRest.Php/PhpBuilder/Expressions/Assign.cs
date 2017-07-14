@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -21,6 +19,8 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             => $"{Left.ToString()} = {Right.ToString()}";
 
         public override IEnumerable<string> ToLines(string indent)
-            => Left.BinaryOperation(" = ", Right, indent);
+        {
+            yield return Left.ToString() + " = " + Right.ToString();
+        }
     }
 }

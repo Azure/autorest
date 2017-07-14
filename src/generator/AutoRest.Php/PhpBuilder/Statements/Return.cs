@@ -18,10 +18,9 @@ namespace AutoRest.Php.PhpBuilder.Statements
         public override IEnumerable<string> ToLines(string indent)
             => Expression
                 .ToLines(indent)
-                .WithBorders()
-                .Select(v => 
-                    (v.IsFirst ? "return " : string.Empty) +
-                    v.Value +
-                    (v.IsLast ? ";" : string.Empty));
+                .Select((v, i) 
+                    => (i.IsFirst ? "return " : string.Empty) 
+                        + v
+                        + (i.IsLast ? ";" : string.Empty));
     }
 }

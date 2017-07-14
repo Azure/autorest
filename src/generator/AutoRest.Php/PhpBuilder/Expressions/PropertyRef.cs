@@ -23,7 +23,6 @@ namespace AutoRest.Php.PhpBuilder.Expressions
         public override IEnumerable<string> ToLines(string indent)
             => Left
                 .ToLines(indent)
-                .WithBorders()
-                .Select(v => v.Value + (v.IsLast ? "->" + Right.PhpName : string.Empty));
+                .Select((v, i) => v + (i.IsLast ? "->" + Right.PhpName : string.Empty));
     }
 }

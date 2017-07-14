@@ -13,9 +13,12 @@ namespace AutoRest.Php.PhpBuilder
             PhpName = Original.GetPhpCamelName();
         }
 
-        public IEnumerable<string> GetCall(ImmutableList<Expression> parameters)
-        {
-            yield return $"{PhpName}({parameters.ToPhpCode()})";
-        }
+        public IEnumerable<string> GetCall(ImmutableList<Expression> parameters, string indent)
+            => parameters
+                .ToPhpCode(indent)
+                .Select((line, i)
+                    => (i.IsFirst ? PhpName + "(" : string.Empty)
+                        + line
+                        + (i.IsLast ? ")" : string.Empty));
     }
 }
