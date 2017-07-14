@@ -8,6 +8,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -62,6 +63,21 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 return "";
+            }
+        }
+
+        /// <summary>
+        /// Attempts to infer the name of the service referenced by this CodeModel.
+        /// </summary>
+        [JsonIgnore]
+        public string ServiceName
+        {
+            get
+            {
+                var method = Methods[0];
+                var match = Regex.Match(input: method.Url, pattern: @"/providers/Microsoft\.(\w+)/");
+                var serviceName = match.Groups[1].Value;
+                return serviceName;
             }
         }
     }
