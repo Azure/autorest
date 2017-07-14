@@ -7,8 +7,11 @@ addons:
     sources:
     - deadsnakes
     packages:
-    # packages for python
+    # packages for python (including cryptography)
     - python3.6
+    - python3.6-dev
+    - libssl-dev
+    - libffi-dev
 env:
   matrix:
   - MODE=main
