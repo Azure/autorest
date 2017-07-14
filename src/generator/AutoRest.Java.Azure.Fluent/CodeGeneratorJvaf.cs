@@ -36,7 +36,7 @@ namespace AutoRest.Java.Azure.Fluent
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-            var packagePath = Path.Combine("src/main/java", cm.Namespace.Replace('.', '/'));
+            var packagePath = Path.Combine("src/main/java", cm.Namespace.ToLower().Replace('.', '/'));
 
             // get Azure Java specific codeModel
             var codeModel = cm as CodeModelJvaf;
@@ -113,17 +113,24 @@ namespace AutoRest.Java.Azure.Fluent
                 Model = new PackageInfoTemplateModel(cm, "implementation")
             }, Path.Combine(packagePath, "implementation", _packageInfoFileName));
 
-            // Manager
-            var method = codeModel.Methods[0];
-            var match = Regex.Match(input: method.Url, pattern: @"/providers/Microsoft\.(\w+)/");
-            var serviceName = match.Groups[1].Value;
+            object value;
+            bool regenerateManager;
+            if (Settings.Instance.CustomSettings.TryGetValue("RegenerateManager", out value) &&
+                bool.TryParse(value.ToString(), out regenerateManager) &&
+                regenerateManager)
+            {
+                // Manager
+                var method = codeModel.Methods[0];
+                var match = Regex.Match(input: method.Url, pattern: @"/providers/Microsoft\.(\w+)/");
+                var serviceName = match.Groups[1].Value;
 
-            await Write(
-                new AzureServiceManagerTemplate { Model = codeModel },
-                Path.Combine(packagePath, "implementation", serviceName + "Manager" + ImplementationFileExtension));
+                await Write(
+                    new AzureServiceManagerTemplate { Model = codeModel },
+                    Path.Combine(packagePath, "implementation", serviceName + "Manager" + ImplementationFileExtension));
 
-            // POM
-            await Write(new AzurePomTemplate { Model = codeModel }, "pom.xml");
+                // POM
+                await Write(new AzurePomTemplate { Model = codeModel }, "pom.xml");
+            }
         }
     }
 }
