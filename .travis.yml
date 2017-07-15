@@ -1,3 +1,4 @@
+group: deprecated-2017Q3
 language: csharp
 sudo: required
 dist: trusty
