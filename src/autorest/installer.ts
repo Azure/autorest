@@ -100,7 +100,7 @@ export class Installer {
     });
 
     unpack.on('finish', () => {
-      setTimeout(resolve, 200);
+      setTimeout(resolve, 500);
     });
 
   }
