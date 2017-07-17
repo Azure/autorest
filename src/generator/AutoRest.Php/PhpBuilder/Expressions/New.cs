@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -7,17 +6,17 @@ namespace AutoRest.Php.PhpBuilder.Expressions
     {
         public ClassName Type { get; }
 
-        public New(ClassName type)
+        public ImmutableList<Expression> Parameters { get; }
+
+        public New(ClassName type, ImmutableList<Expression> parameters = null)
         {
             Type = type;
+            Parameters = parameters.EmptyIfNull();
         }
 
-        public override string ToString()
-            => $"new {Type.AbsoluteName}";
-
-        public override IEnumerable<string> ToLines(string indent)
-        {
-            yield return $"new {Type.AbsoluteName}";
-        }
+        public override string ToCodeLine()
+            => "new " 
+                + Type.AbsoluteName 
+                + (Parameters.IsEmpty ? string.Empty : "(" + Parameters.ToPhpCode() + ")");
     }
 }

@@ -12,7 +12,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
 
         protected override string PhpName => "__construct";
 
-        public override IEnumerable<string> ToLines(string indent)
+        public override IEnumerable<string> ToCodeText(string indent)
             => GetBody(indent);
     }
 }

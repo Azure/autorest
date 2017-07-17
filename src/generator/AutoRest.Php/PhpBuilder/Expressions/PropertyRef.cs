@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-
-namespace AutoRest.Php.PhpBuilder.Expressions
+﻿namespace AutoRest.Php.PhpBuilder.Expressions
 {
     public sealed class PropertyRef : Expression0
     {
@@ -17,12 +12,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Right = right;
         }
 
-        public override string ToString()
-            => $"{Left.ToString()}->{Right.PhpName}";
-
-        public override IEnumerable<string> ToLines(string indent)
-            => Left
-                .ToLines(indent)
-                .Select((v, i) => v + (i.IsLast ? "->" + Right.PhpName : string.Empty));
+        public override string ToCodeLine()
+            => Left.ToCodeLine() + "->" + Right.PhpName;
     }
 }

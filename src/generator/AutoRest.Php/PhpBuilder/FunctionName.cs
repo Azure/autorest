@@ -1,6 +1,5 @@
 ﻿using AutoRest.Php.PhpBuilder.Expressions;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder
 {
@@ -13,12 +12,7 @@ namespace AutoRest.Php.PhpBuilder
             PhpName = Original.GetPhpCamelName();
         }
 
-        public IEnumerable<string> GetCall(ImmutableList<Expression> parameters, string indent)
-            => parameters
-                .ToPhpCode(indent)
-                .Select((line, i)
-                    => (i.IsFirst ? PhpName + "(" : string.Empty)
-                        + line
-                        + (i.IsLast ? ")" : string.Empty));
+        public string GetCall(IEnumerable<Expression> parameters)
+            => PhpName + "(" + parameters.ToPhpCode() + ")";
     }
 }

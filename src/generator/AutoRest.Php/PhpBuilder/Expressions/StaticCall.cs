@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
+﻿using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -23,13 +20,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Parameters = parameters.EmptyIfNull();
         }
 
-        public override string ToString()
-            => $"{Class.AbsoluteName}::{Function.GetCall(Parameters)}";
-
-        public override IEnumerable<string> ToLines(string indent)
-            => Function
-                .GetCall(Parameters)
-                .Select((v, i) 
-                    => (i.IsFirst ? Class.AbsoluteName + "::" : string.Empty) + v);
+        public override string ToCodeLine()
+            => Class.AbsoluteName + "::" + Function.GetCall(Parameters);
     }
 }

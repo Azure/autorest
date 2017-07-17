@@ -28,7 +28,8 @@ namespace AutoRest.Php.PhpBuilder
             FileName = $"{string.Join("/", Names)}.php";
         }
 
-        public New New() => new New(this);
+        public New New(ImmutableList<Expression> parameters = null) 
+            => new New(this, parameters);
 
         public StaticCall StaticCall(
             FunctionName function, ImmutableList<Expression> parameters = null)

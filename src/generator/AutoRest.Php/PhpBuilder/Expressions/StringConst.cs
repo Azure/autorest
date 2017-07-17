@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AutoRest.Php.PhpBuilder.Expressions
+﻿namespace AutoRest.Php.PhpBuilder.Expressions
 {
     public sealed class StringConst : Expression0
     {
@@ -12,12 +9,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Value = value;
         }
 
-        public override string ToString()
-            => $"\"{Value}\"";
-
-        public override IEnumerable<string> ToLines(string indent)
-        {
-            yield return $"\"{Value}\"";
-        }
+        public override string ToCodeLine()
+            => '"' + Value + '"';
     }
 }

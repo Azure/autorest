@@ -39,7 +39,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
             }
         }
 
-        public override IEnumerable<string> ToLines(string indent)
+        public override IEnumerable<string> ToCodeText(string indent)
         {
             foreach (var line in GetComment().Comment())
             {

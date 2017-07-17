@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder
 {
-    public sealed class Property : ILines
+    public sealed class Property : ICodeText
     {
         public ObjectName Name { get; }
 
@@ -11,14 +11,13 @@ namespace AutoRest.Php.PhpBuilder
 
         public Property(
             string name,
-            ClassName type,
-            bool isStatic = false)
+            ClassName type)
         {
             Name = new ObjectName(name);
             Type = type;
         }
 
-        public IEnumerable<string> ToLines(string indent)
+        public IEnumerable<string> ToCodeText(string indent)
         {
             foreach (var line in ImmutableList.Create($"@var {Type.AbsoluteName}").Comment())
             {

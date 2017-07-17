@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AutoRest.Php.PhpBuilder.Functions
 {
-    public abstract class Base : ILines
+    public abstract class Base : ICodeText
     {
         protected abstract string PhpName { get; }
 
@@ -17,7 +17,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
             Statements = statements;
         }
 
-        public abstract IEnumerable<string> ToLines(string indent);
+        public abstract IEnumerable<string> ToCodeText(string indent);
 
         public string GetSignature()
             => $"public function {PhpName}()";
@@ -26,7 +26,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
         {
             yield return GetSignature();
             yield return "{";
-            foreach (var line in Statements.SelectMany(s => s.ToLines(indent)))
+            foreach (var line in Statements.SelectMany(s => s.ToCodeText(indent)))
             {
                 yield return $"{indent}{line}";
             }

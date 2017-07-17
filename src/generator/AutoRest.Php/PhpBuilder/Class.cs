@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AutoRest.Php.PhpBuilder
 {
-    public sealed class Class : ILines
+    public sealed class Class : ICodeText
     {
         public ClassName Name { get; }
 
@@ -30,19 +30,19 @@ namespace AutoRest.Php.PhpBuilder
         public static string CreateName(params string[] names)
             => string.Join("\\", names);
 
-        public IEnumerable<string> ToLines(string indent)
+        public IEnumerable<string> ToCodeText(string indent)
         {
             yield return "<?php";
             yield return $"namespace {Name.PhpNamespace};";
             yield return $"final class {Name.PhpLocalName}";
             yield return "{";
             var constructorList = Constructor == null
-                ? ImmutableList<ILines>.Empty
-                : ImmutableList.Create(Constructor.UpCast<ILines>());
+                ? ImmutableList<ICodeText>.Empty
+                : ImmutableList.Create(Constructor.UpCast<ICodeText>());
             var objects = constructorList
                 .Concat(Functions)
                 .Concat(Properties);
-            foreach (var line in objects.SelectMany(lines => lines.ToLines(indent)))
+            foreach (var line in objects.SelectMany(lines => lines.ToCodeText(indent)))
             {
                 yield return $"{indent}{line}";
             }

@@ -2,8 +2,8 @@
 
 namespace AutoRest.Php.PhpBuilder.Statements
 {
-    public abstract class Statement : ILines
+    public abstract class Statement : ICodeText
     {
-        public abstract IEnumerable<string> ToLines(string indent);
+        public abstract IEnumerable<string> ToCodeText(string indent);
     }
 }

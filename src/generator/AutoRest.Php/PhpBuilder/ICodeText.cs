@@ -2,8 +2,8 @@
 
 namespace AutoRest.Php.PhpBuilder
 {
-    public interface ILines
+    public interface ICodeText
     {
-        IEnumerable<string> ToLines(string indent);
+        IEnumerable<string> ToCodeText(string indent);
     }
 }

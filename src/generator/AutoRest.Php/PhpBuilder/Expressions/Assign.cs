@@ -15,12 +15,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Right = right;
         }
 
-        public override string ToString()
-            => $"{Left.ToString()} = {Right.ToString()}";
-
-        public override IEnumerable<string> ToLines(string indent)
-        {
-            yield return Left.ToString() + " = " + Right.ToString();
-        }
+        public override string ToCodeLine()
+            => Left.ToCodeLine() + " = " + Right.ToCodeLine();
     }
 }
