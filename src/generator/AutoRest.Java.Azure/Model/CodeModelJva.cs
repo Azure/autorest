@@ -75,7 +75,7 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var method = Methods[0];
-                var match = Regex.Match(input: method.Url, pattern: @"/providers/Microsoft\.(\w+)/");
+                var match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
                 var serviceName = match.Groups[1].Value;
                 return serviceName;
             }
