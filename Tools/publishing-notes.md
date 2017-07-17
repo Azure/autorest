@@ -8,6 +8,9 @@ AutoRest is versioned in four files:
 ./src/autorest-core/package.json
 ./src/autorest/package.json
 ./src/common/common.proj
+./package/nuget/dotnet-autorest.csproj
+./package/nuget/package.json 
+
 ```
 
 Update the version in those locations.
