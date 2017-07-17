@@ -120,13 +120,9 @@ namespace AutoRest.Java.Azure.Fluent
                 regenerateManager)
             {
                 // Manager
-                var method = codeModel.Methods[0];
-                var match = Regex.Match(input: method.Url, pattern: @"/providers/Microsoft\.(\w+)/");
-                var serviceName = match.Groups[1].Value;
-
                 await Write(
                     new AzureServiceManagerTemplate { Model = codeModel },
-                    Path.Combine(packagePath, "implementation", serviceName + "Manager" + ImplementationFileExtension));
+                    Path.Combine(packagePath, "implementation", codeModel.ServiceName + "Manager" + ImplementationFileExtension));
 
                 // POM
                 await Write(new AzurePomTemplate { Model = codeModel }, "pom.xml");
