@@ -35,7 +35,8 @@ pipeline:
 scope-pipeline-emitter:
   input-artifact: pipeline
   is-object: true
-  output-uri-expr: pipeline
+  output-uri-expr: |
+    "pipeline"
 ```
 
 ##### Configuration
@@ -48,7 +49,8 @@ pipeline:
 scope-configuration-emitter:
   input-artifact: configuration
   is-object: true
-  output-uri-expr: configuration
+  output-uri-expr: |
+    "configuration"
 ```
 
 #### Loading
