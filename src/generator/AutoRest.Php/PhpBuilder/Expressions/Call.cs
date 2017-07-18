@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -25,5 +24,10 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public override string ToCodeLine()
             => Left.ToCodeLine() + "->" + Function.GetCall(Parameters);
+
+        public override IEnumerable<string> ToCodeText(string indent)
+            => Left.ToCodeText(indent).BinaryOperation(
+                "->" + Function.PhpName,
+                Parameters.ItemsWrap("(", ")", indent));
     }
 }

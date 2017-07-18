@@ -15,16 +15,20 @@ namespace AutoRest.Php.PhpBuilder
 
         public ImmutableList<Property> Properties { get; }
 
+        public ImmutableList<Const> Consts { get; }
+
         public Class(
             string name,
             Constructor constructor = null,
             ImmutableList<Function> functions = null,
-            ImmutableList<Property> properties = null)
+            ImmutableList<Property> properties = null,
+            ImmutableList<Const> consts = null)
         {
             Name = new ClassName(name);
             Constructor = constructor;
             Functions = functions.EmptyIfNull();
             Properties = properties.EmptyIfNull();
+            Consts = consts.EmptyIfNull();
         }
 
         public static string CreateName(params string[] names)
@@ -41,7 +45,8 @@ namespace AutoRest.Php.PhpBuilder
                 : ImmutableList.Create(Constructor.UpCast<ICodeText>());
             var objects = constructorList
                 .Concat(Functions)
-                .Concat(Properties);
+                .Concat(Properties)
+                .Concat(Consts);
             foreach (var line in objects.SelectMany(lines => lines.ToCodeText(indent)))
             {
                 yield return $"{indent}{line}";

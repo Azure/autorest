@@ -59,18 +59,6 @@ namespace AutoRest.Php
         static FunctionName CreateOperationFunction { get; }
             = new FunctionName("createOperation");
 
-        /// <summary>
-        /// $this->_client->createOperation({...parameters...})
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        static Expression0 CreateOperation(string operationId, string httpMethod)
-            => ClientRef.Call(
-                CreateOperationFunction, 
-                ImmutableList.Create<Expression>(
-                    new StringConst(operationId),
-                    new StringConst(httpMethod)));
-
         static Constructor CommonConstructor { get; }
             = new Constructor(ImmutableList.Create(ClientInit));
 
@@ -80,16 +68,24 @@ namespace AutoRest.Php
         static FunctionName CallFunction { get; }
             = new FunctionName("call");
 
-        static FunctionName AddParameter { get; }
-            = new FunctionName("addParameter");
+        // static FunctionName AddParameter { get; }
+        //    = new FunctionName("addParameter");
 
-        static ImmutableList<Statement> OperationInfoInit(Expression0 propertyRef, Method m)
+        static ImmutableList<Statement> OperationInfoInit(
+            Expression0 propertyRef, ConstName const_, Method m)
         {
-            var operationInfoCreate = CreateOperation(m.SerializedName, m.HttpMethod.ToString());
+            // $this->_client->createOperation({...parameters...})
+            var operationInfoCreate = ClientRef.Call(
+                CreateOperationFunction,
+                ImmutableList.Create<Expression>(
+                    new StringConst(m.Url),
+                    new StringConst(m.HttpMethod.ToString().ToLower()),
+                    const_.SelfConstRef()));
 
             var init = propertyRef.Assign(operationInfoCreate).Statement();
 
             // $this->{...property...}->addParameter({...name...}, {...location...})
+            /*
             var parameters = m.Parameters.Select(p => propertyRef
                 .Call(
                     AddParameter, 
@@ -97,15 +93,18 @@ namespace AutoRest.Php
                         new StringConst(p.SerializedName),
                         new StringConst(p.Location.ToString())))
                 .Statement());
+                */
 
             return ImmutableList
                 .Create(init)
-                .Concat(parameters)
+                // .Concat(parameters)
                 .ToImmutableList();
         }
 
         private sealed class PhpFunction
         {
+            public Const Const { get; }
+
             public PhpBuilder.Property Property { get; }
 
             public ImmutableList<Statement> Init { get; }
@@ -114,15 +113,19 @@ namespace AutoRest.Php
 
             public PhpFunction(Method m)
             {
+                var name = "_" + m.Name;
+
+                Const = new Const(name, Array.Empty);
+
                 Property = new PhpBuilder.Property(
-                    name: "_" + m.Name,
+                    name: name,
                     type: MicrosoftRestOperation);
 
                 var propertyRef = This
                     .Instance
                     .PropertyRef(Property.Name);
 
-                Init = OperationInfoInit(propertyRef, m);
+                Init = OperationInfoInit(propertyRef, Const.Name, m);
 
                 var call = propertyRef
                     .Call(CallFunction, ImmutableList.Create<Expression>(Array.Empty))
@@ -157,7 +160,8 @@ namespace AutoRest.Php
                     functions: functions.Select(f => f.Function).ToImmutableList(),
                     properties: CommonProperties
                         .Concat(functions.Select(f => f.Property))
-                        .ToImmutableList());
+                        .ToImmutableList(),
+                    consts: functions.Select(f => f.Const).ToImmutableList());
 
                 Property = new PhpBuilder.Property(o.Name, Class.Name);
 

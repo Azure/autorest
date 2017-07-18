@@ -14,7 +14,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
     /// Expression0: 
     ///     ThisPropertyRef
     /// </summary>
-    public abstract class Expression
+    public abstract class Expression : ICodeText, ICodeLine
     {
         public Statement Return()
             => new Return(this);
@@ -23,5 +23,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             => new ExpressionStatement(this);
 
         public abstract string ToCodeLine();
+
+        public abstract IEnumerable<string> ToCodeText(string indent);
     }
 }

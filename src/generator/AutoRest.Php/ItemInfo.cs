@@ -1,13 +1,21 @@
 ﻿namespace AutoRest.Php
 {
-    public struct ItemInfo
+    public struct ItemInfo<T>
     {
-        public bool IsFirst { get; }
+        public T Value { get; }
+
+        public long Count { get; }
+
+        public bool IsFirst => Count == 0;
+
         public bool IsLast { get; }
 
-        public ItemInfo(bool isFirst, bool isLast)
+        public bool IsOnlyOne => IsFirst && IsLast;
+
+        public ItemInfo(T value, long count, bool isLast)
         {
-            IsFirst = isFirst;
+            Value = value;
+            Count = count;
             IsLast = isLast;
         }
     }

@@ -13,8 +13,8 @@ namespace AutoRest.Php.PhpBuilder.Statements
         }
 
         public override IEnumerable<string> ToCodeText(string indent)
-        {
-            yield return "return " + Expression.ToCodeLine() + ";";
-        }
+            => Expression
+                .ToCodeText(indent)
+                .InlineWrap("return ", ";");
     }
 }

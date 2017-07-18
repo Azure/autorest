@@ -1,4 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -18,5 +20,10 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             => "new " 
                 + Type.AbsoluteName 
                 + (Parameters.IsEmpty ? string.Empty : "(" + Parameters.ToPhpCode() + ")");
+
+        public override IEnumerable<string> ToCodeText(string indent)
+            => Parameters
+                .ItemsWrap("(", ")", indent)
+                .InlineWrap("new " + Type.AbsoluteName, string.Empty);
     }
 }

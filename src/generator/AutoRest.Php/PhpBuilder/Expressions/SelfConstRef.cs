@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
-    public sealed class StringConst : Expression0
+    public sealed class SelfConstRef : Expression0
     {
-        public string Value { get; }
+        public ConstName Name { get; }
 
-        public StringConst(string value)
+        public SelfConstRef(ConstName name)
         {
-            Value = value;
+            Name = name;
         }
 
         public override string ToCodeLine()
-            => '"' + Value + '"';
+            => "self::" + Name.PhpName;
 
         public override IEnumerable<string> ToCodeText(string indent)
         {

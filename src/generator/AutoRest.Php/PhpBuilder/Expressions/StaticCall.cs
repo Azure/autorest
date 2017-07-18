@@ -1,4 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -22,5 +24,10 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public override string ToCodeLine()
             => Class.AbsoluteName + "::" + Function.GetCall(Parameters);
+
+        public override IEnumerable<string> ToCodeText(string indent)
+        {
+            yield return ToCodeLine();
+        }
     }
 }

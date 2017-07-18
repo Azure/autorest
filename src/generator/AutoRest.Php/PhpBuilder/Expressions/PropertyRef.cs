@@ -1,4 +1,6 @@
-﻿namespace AutoRest.Php.PhpBuilder.Expressions
+﻿using System.Collections.Generic;
+
+namespace AutoRest.Php.PhpBuilder.Expressions
 {
     public sealed class PropertyRef : Expression0
     {
@@ -14,5 +16,8 @@
 
         public override string ToCodeLine()
             => Left.ToCodeLine() + "->" + Right.PhpName;
+
+        public override IEnumerable<string> ToCodeText(string indent)
+            => Left.ToCodeText(indent).InlineWrap(string.Empty, "->" + Right.PhpName);
     }
 }
