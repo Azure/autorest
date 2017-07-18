@@ -1,4 +1,0 @@
-   at ...
-{ Error: Error occurred. Exiting.
-Error occurred. Exiting.
-Process() Cancelled due to exception : Error occurred. Exiting.
