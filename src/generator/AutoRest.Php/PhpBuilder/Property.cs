@@ -5,16 +5,16 @@ namespace AutoRest.Php.PhpBuilder
 {
     public sealed class Property : ICodeText
     {
-        public ObjectName Name { get; }
-
         public ClassName Type { get; }
 
-        public Property(
-            string name,
-            ClassName type)
+        public ObjectName Name { get; }
+
+        public Property(            
+            ClassName type,
+            string name)
         {
-            Name = new ObjectName(name);
             Type = type;
+            Name = new ObjectName(name);
         }
 
         public IEnumerable<string> ToCodeText(string indent)

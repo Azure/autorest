@@ -9,10 +9,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             yield return "$this";
         }
 
-        public static This Instance { get; }
-            = new This();
-
-        private This()
+        public This()
         {
         }
     }

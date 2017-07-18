@@ -17,7 +17,7 @@ namespace AutoRest.Php.PhpBuilder
 
         public IEnumerable<Const> Consts { get; }
 
-        private Class(
+        public Class(
             ClassName name,
             Constructor constructor,
             IEnumerable<Function> functions,
@@ -30,19 +30,6 @@ namespace AutoRest.Php.PhpBuilder
             Properties = properties;
             Consts = consts;
         }
-
-        public static Class Create(
-            string name,
-            Constructor constructor = null,
-            IEnumerable<Function> functions = null,
-            IEnumerable<Property> properties = null,
-            IEnumerable<Const> consts = null)
-            => new Class(
-                name: new ClassName(name),
-                constructor: constructor,
-                functions: functions.EmptyIfNull(),
-                properties: properties.EmptyIfNull(),
-                consts: consts.EmptyIfNull());
 
         public static string CreateName(params string[] names)
             => string.Join("\\", names);

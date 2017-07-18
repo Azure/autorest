@@ -8,8 +8,8 @@ namespace AutoRest.Php.PhpBuilder.Expressions
         public Expression Assign(Expression right)
             => new Assign(this, right);
 
-        public Expression0 PropertyRef(ObjectName right)
-            => new PropertyRef(this, right);
+        public Expression0 Arrow(Property right)
+            => new PropertyRef(this, right.Name);
 
         public Expression0 Call(
             FunctionName function,

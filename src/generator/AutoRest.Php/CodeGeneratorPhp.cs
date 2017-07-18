@@ -17,19 +17,19 @@ namespace AutoRest.Php
 
         public override string UsageInstructions => string.Empty;
 
-        static ClassName GetMicrosoftRestClass(string name)
-            => new ClassName($"Microsoft\\Rest\\{name}");
+        static string GetMicrosoftRestClass(string name)
+            => "Microsoft\\Rest\\" + name;
 
         /// <summary>
         /// Microsoft\Rest\Client
         /// </summary>
-        static ClassName MicrosoftRestClient { get; }
+        static string MicrosoftRestClient { get; }
             = GetMicrosoftRestClass("Client");
 
         /// <summary>
         /// Microsoft\Rest\Operation
         /// </summary>
-        static ClassName MicrosoftRestOperation { get; }
+        static string MicrosoftRestOperation { get; }
             = GetMicrosoftRestClass("Operation");
 
         /// <summary>
@@ -39,22 +39,20 @@ namespace AutoRest.Php
         /// private $_client
         /// </summary>
         static PhpBuilder.Property Client { get; }
-            = new PhpBuilder.Property(
-                name: "_client", 
-                type: MicrosoftRestClient);
+            = PHP.Property(MicrosoftRestClient, "_client");
 
         /// <summary>
         /// $this->_client
         /// </summary>
         static Expression0 ClientRef { get; }
-            = This.Instance.PropertyRef(Client.Name);
+            = PHP.This.Arrow(Client);
 
         /// <summary>
         /// $this->_client = new Microsoft\Rest\Client();
         /// </summary>
         static Statement ClientInit { get; }
             = ClientRef
-                .Assign(MicrosoftRestClient.New())
+                .Assign(PHP.New(MicrosoftRestClient))
                 .Statement();
 
         static FunctionName CreateOperationFunction { get; }
@@ -126,17 +124,17 @@ namespace AutoRest.Php
 
             private static IEnumerable<ArrayItem> CreateParameter(Core.Model.Parameter p)
             {
-                yield return ArrayItem.Create("name", p.SerializedName);
-                yield return ArrayItem.Create("in", p.Location.ToString().ToLower());
+                yield return PHP.KeyValue("name", p.SerializedName);
+                yield return PHP.KeyValue("in", p.Location.ToString().ToLower());
                 var phpType = PhpType.Create(p.ModelType);
-                yield return ArrayItem.Create("type", phpType.Type);
+                yield return PHP.KeyValue("type", phpType.Type);
                 if (phpType.Format != "none" && phpType.Format != null)
                 {
-                    yield return ArrayItem.Create("format", phpType.Format);
+                    yield return PHP.KeyValue("format", phpType.Format);
                 }
                 if (phpType.Items != null)
                 {
-                    yield return ArrayItem.Create("items", phpType.Items);
+                    yield return PHP.KeyValue("items", phpType.Items);
                 }
             }
 
@@ -146,26 +144,24 @@ namespace AutoRest.Php
 
                 var parameters = m.Parameters
                     .Select(p => CreateParameter(p))
-                    .Select(Array.Create)
-                    .Select(ArrayItem.Create);
+                    .Select(PHP.Array)
+                    .Select(PHP.KeyValue);
 
                 Const = Const.Create(
                     name,
-                    Array.Create(
-                        ArrayItem.Create("operationId", m.SerializedName),
-                        ArrayItem.Create("parameters", Array.Create(parameters))));
+                    PHP.Array(
+                        PHP.KeyValue("operationId", m.SerializedName),
+                        PHP.KeyValue("parameters", PHP.Array(parameters))));
 
                 Property = new PhpBuilder.Property(
                     name: name,
                     type: MicrosoftRestOperation);
 
-                var propertyRef = This
-                    .Instance
-                    .PropertyRef(Property.Name);
+                var propertyRef = PHP.This.Arrow(Property);
 
                 ConstructorStatements = OperationInfoInit(propertyRef, Const.Name, m);
 
-                var call = propertyRef.Call(CallFunction, Array.Empty).Return();
+                var call = propertyRef.Call(CallFunction, PHP.EmptyArray).Return();
 
                 Function = Function.Create(
                     name: m.Name,
@@ -190,7 +186,7 @@ namespace AutoRest.Php
                     Client.Name,
                     MicrosoftRestClient);
 
-                Class = Class.Create(
+                Class = PHP.Class(
                     name: Class.CreateName(@namespace, o.Name),
                     constructor: Constructor.Create(
                         parameters: ImmutableArray.Create(
@@ -204,30 +200,30 @@ namespace AutoRest.Php
                     properties: CommonProperties.Concat(functions.Select(f => f.Property)),
                     consts: functions.Select(f => f.Const));
 
-                Property = new PhpBuilder.Property(o.Name, Class.Name);
+                Property = PHP.Property(Class.Name, o.Name);
 
                 Function = Function.Create(
                     name: $"get{o.Name}",
                     @return: Class.Name,
                     statements: ImmutableArray.Create(
-                        This.Instance.PropertyRef(Property.Name).Return()));
+                        PHP.This.Arrow(Property).Return()));
             }
         }
 
         const string Indent = "    ";
 
         private static ArrayItem CreateProperty(Core.Model.Property property)
-            => ArrayItem.Create(property.SerializedName, Array.Empty);
+            => PHP.KeyValue(property.SerializedName, PHP.EmptyArray);
 
         private static ArrayItem CreateType(IModelType type)
         {
             var compositeType = type as CompositeType;
-            return ArrayItem.Create(
+            return PHP.KeyValue(
                 type.Name,
-                Array.Create(
-                    ArrayItem.Create(
+                PHP.Array(
+                    PHP.KeyValue(
                         "properties",
-                        Array.Create(
+                        PHP.Array(
                             compositeType.Properties.Select(CreateProperty)))));
         }
 
@@ -236,7 +232,7 @@ namespace AutoRest.Php
 
         private static Statement CreateClient { get; }
             = ClientRef
-                .Assign(MicrosoftRestClient.New(DefinitionsData.SelfConstRef()))
+                .Assign(PHP.New(MicrosoftRestClient, DefinitionsData.SelfConstRef()))
                 .Statement();
 
         public override async Task Generate(CodeModel codeModel)
@@ -246,8 +242,8 @@ namespace AutoRest.Php
             var phpOperations = operations.Select(o => new PhpFunctionGroup(@namespace, o));
             var definitions = Const.Create(
                 DefinitionsData,
-                Array.Create(codeModel.ModelTypes.Select(CreateType)));
-            var client = Class.Create(
+                PHP.Array(codeModel.ModelTypes.Select(CreateType)));
+            var client = PHP.Class(
                 name: Class.CreateName(@namespace, "Client"),
                 constructor: Constructor.Create(
                     statements: ImmutableArray.Create(CreateClient)),

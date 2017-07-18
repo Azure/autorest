@@ -29,6 +29,9 @@ namespace AutoRest.Php.PhpBuilder
             FileName = $"{string.Join("/", Names)}.php";
         }
 
+        public static implicit operator ClassName(string name)
+            => new ClassName(name);
+
         public New New(IEnumerable<Expression> parameters) 
             => new New(this, parameters);
 

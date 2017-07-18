@@ -8,23 +8,11 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public Expression Value { get; }
 
-        private ArrayItem(StringConst key, Expression value)
+        public ArrayItem(StringConst key, Expression value)
         {
             Key = key;
             Value = value;
         }
-
-        public static ArrayItem Create(StringConst key, Expression value)
-            => new ArrayItem(key, value);
-
-        public static ArrayItem Create(Expression value)
-            => new ArrayItem(null, value);
-
-        public static ArrayItem Create(string key, Expression value)
-            => Create(new StringConst(key), value);
-
-        public static ArrayItem Create(string key, string value)
-            => Create(key, new StringConst(value));
 
         public IEnumerable<string> ToCodeText(string indent)
         {

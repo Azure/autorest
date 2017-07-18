@@ -10,10 +10,10 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public IEnumerable<Expression> Parameters { get; }
 
-        public New(ClassName type, IEnumerable<Expression> parameters = null)
+        public New(ClassName type, IEnumerable<Expression> parameters)
         {
             Type = type;
-            Parameters = parameters.EmptyIfNull();
+            Parameters = parameters;
         }
 
         public override IEnumerable<string> ToCodeText(string indent)
