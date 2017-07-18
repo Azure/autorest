@@ -34,8 +34,8 @@ namespace AutoRest.Php.PhpBuilder
             yield return " */";
         }
 
-        public static string ToPhpCode(this IEnumerable<ICodeLine> expressions)
-            => string.Join(", ", expressions.Select(v => v.ToCodeLine()));
+        //public static string ToPhpCode(this IEnumerable<ICodeLine> expressions)
+        //    => string.Join(", ", expressions.Select(v => v.ToCodeLine()));
 
         public static IEnumerable<string> BinaryOperation(
             this IEnumerable<string> left, string operation, IEnumerable<string> right)
@@ -62,13 +62,16 @@ namespace AutoRest.Php.PhpBuilder
         }
 
         public static IEnumerable<string> ItemWrap(
-            this ItemInfo<ICodeLine> item, string open, string close, string indent)
+            this ItemInfo<ICodeText> item, string open, string close, string indent)
         {
-            var line = item.Value.ToCodeLine();
+            var lines = item.Value.ToCodeText(indent);
             // one line
             if (item.IsOnlyOne)
             {
-                yield return open + line + close;
+                foreach(var line in lines.InlineWrap(open, close))
+                {
+                    yield return line;
+                }
             }
             // multiline
             else
@@ -78,23 +81,29 @@ namespace AutoRest.Php.PhpBuilder
                 {
                     yield return open;
                 }
-                var newLine = indent + line;
+                var newLines = lines.Select(line => indent + line);
                 // middle line
                 if (!item.IsLast)
                 {
-                    yield return newLine + ",";
+                    foreach (var line in newLines.InlineWrap(string.Empty, ","))
+                    {
+                        yield return line;
+                    }
                 }
                 // last line
                 else
                 {
-                    yield return newLine;
+                    foreach (var line in newLines)
+                    {
+                        yield return line;
+                    }
                     yield return close;
                 }
             }
         }
 
         public static IEnumerable<string> ItemsWrap(
-            this IEnumerable<ICodeLine> items, string open, string close, string indent)
+            this IEnumerable<ICodeText> items, string open, string close, string indent)
             => items.SelectManyWithInfo(i => ItemWrap(i, open, close, indent), open + close);
 
         public static IEnumerable<string> InlineWrap(

@@ -1,7 +1,4 @@
-﻿using AutoRest.Php.PhpBuilder.Expressions;
-using System.Collections.Generic;
-
-namespace AutoRest.Php.PhpBuilder
+﻿namespace AutoRest.Php.PhpBuilder
 {
     public sealed class FunctionName : Name
     {
@@ -11,8 +8,5 @@ namespace AutoRest.Php.PhpBuilder
         {
             PhpName = Original.GetPhpCamelName();
         }
-
-        public string GetCall(IEnumerable<Expression> parameters)
-            => PhpName + "(" + parameters.ToPhpCode() + ")";
     }
 }

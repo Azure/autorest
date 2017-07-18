@@ -16,11 +16,6 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Parameters = parameters.EmptyIfNull();
         }
 
-        public override string ToCodeLine()
-            => "new " 
-                + Type.AbsoluteName 
-                + (Parameters.IsEmpty ? string.Empty : "(" + Parameters.ToPhpCode() + ")");
-
         public override IEnumerable<string> ToCodeText(string indent)
             => Parameters
                 .ItemsWrap("(", ")", indent)

@@ -12,12 +12,9 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Name = name;
         }
 
-        public override string ToCodeLine()
-            => "self::" + Name.PhpName;
-
         public override IEnumerable<string> ToCodeText(string indent)
         {
-            yield return ToCodeLine();
+            yield return "self::" + Name.PhpName;
         }
     }
 }

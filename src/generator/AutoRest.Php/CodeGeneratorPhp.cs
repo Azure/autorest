@@ -68,13 +68,10 @@ namespace AutoRest.Php
         static FunctionName CallFunction { get; }
             = new FunctionName("call");
 
-        // static FunctionName AddParameter { get; }
-        //    = new FunctionName("addParameter");
-
         static ImmutableList<Statement> OperationInfoInit(
             Expression0 propertyRef, ConstName const_, Method m)
         {
-            // $this->_client->createOperation({...parameters...})
+            // $this->_client->createOperation({...path...}, {...httpMethod...}, {...operation...})
             var operationInfoCreate = ClientRef.Call(
                 CreateOperationFunction,
                 ImmutableList.Create<Expression>(
@@ -82,23 +79,8 @@ namespace AutoRest.Php
                     new StringConst(m.HttpMethod.ToString().ToLower()),
                     const_.SelfConstRef()));
 
-            var init = propertyRef.Assign(operationInfoCreate).Statement();
-
-            // $this->{...property...}->addParameter({...name...}, {...location...})
-            /*
-            var parameters = m.Parameters.Select(p => propertyRef
-                .Call(
-                    AddParameter, 
-                    ImmutableList.Create<Expression>(
-                        new StringConst(p.SerializedName),
-                        new StringConst(p.Location.ToString())))
-                .Statement());
-                */
-
-            return ImmutableList
-                .Create(init)
-                // .Concat(parameters)
-                .ToImmutableList();
+            // $this->{...operation...} = 
+            return ImmutableList.Create(propertyRef.Assign(operationInfoCreate).Statement());
         }
 
         private sealed class PhpFunction
@@ -111,11 +93,34 @@ namespace AutoRest.Php
 
             public Function Function { get; }
 
+            private static string GetPhpType(IModelType modelType)
+            {
+                if (modelType is PrimaryType type)
+                {
+                    return type.KnownPrimaryType.ToString().ToLower();
+                }
+                else
+                {
+                    return modelType.Name;
+                }
+            }
+
             public PhpFunction(Method m)
             {
                 var name = "_" + m.Name;
 
-                Const = new Const(name, Array.Empty);
+                var parameters = m.Parameters
+                    .Select(p => Array.Create(
+                        ArrayItem.Create("name", p.SerializedName),
+                        ArrayItem.Create("in", p.Location.ToString().ToLower()),
+                        ArrayItem.Create("type", GetPhpType(p.ModelType))))
+                    .Select(ArrayItem.Create);
+
+                Const = new Const(
+                    name,
+                    Array.Create(
+                        ArrayItem.Create("operationId", m.SerializedName),
+                        ArrayItem.Create("parameters", Array.Create(parameters))));
 
                 Property = new PhpBuilder.Property(
                     name: name,

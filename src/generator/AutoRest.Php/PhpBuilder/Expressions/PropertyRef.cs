@@ -14,9 +14,6 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Right = right;
         }
 
-        public override string ToCodeLine()
-            => Left.ToCodeLine() + "->" + Right.PhpName;
-
         public override IEnumerable<string> ToCodeText(string indent)
             => Left.ToCodeText(indent).InlineWrap(string.Empty, "->" + Right.PhpName);
     }

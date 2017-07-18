@@ -22,12 +22,9 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Parameters = parameters.EmptyIfNull();
         }
 
-        public override string ToCodeLine()
-            => Class.AbsoluteName + "::" + Function.GetCall(Parameters);
-
         public override IEnumerable<string> ToCodeText(string indent)
-        {
-            yield return ToCodeLine();
-        }
+            => Parameters
+                .ItemsWrap("(", ")", indent)
+                .InlineWrap(Class.AbsoluteName + "::" + Function.PhpName, string.Empty);
     }
 }

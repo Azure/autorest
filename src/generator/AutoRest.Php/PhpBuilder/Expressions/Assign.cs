@@ -14,9 +14,6 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Right = right;
         }
 
-        public override string ToCodeLine()
-            => Left.ToCodeLine() + " = " + Right.ToCodeLine();
-
         public override IEnumerable<string> ToCodeText(string indent)
             => Left.ToCodeText(indent).BinaryOperation(" = ", Right.ToCodeText(indent));
     }

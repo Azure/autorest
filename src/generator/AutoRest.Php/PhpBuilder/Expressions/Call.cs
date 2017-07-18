@@ -22,9 +22,6 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Parameters = parameters.EmptyIfNull();
         }
 
-        public override string ToCodeLine()
-            => Left.ToCodeLine() + "->" + Function.GetCall(Parameters);
-
         public override IEnumerable<string> ToCodeText(string indent)
             => Left.ToCodeText(indent).BinaryOperation(
                 "->" + Function.PhpName,

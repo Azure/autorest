@@ -5,18 +5,20 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 {
     public sealed class Array : Expression0
     {
-        public ImmutableList<ArrayItem> Items { get; }
+        public IEnumerable<ArrayItem> Items { get; }
 
-        public Array(ImmutableList<ArrayItem> items)
+        private Array(IEnumerable<ArrayItem> items)
         {
             Items = items;
         }
 
-        public static Array Empty { get; }
-            = new Array(ImmutableList<ArrayItem>.Empty);
+        public static Array Create(IEnumerable<ArrayItem> items)
+            => new Array(items);
 
-        public override string ToCodeLine()
-            => "[" + Items.ToPhpCode() + "]";
+        public static Array Create(params ArrayItem[] items)
+            => new Array(items);
+
+        public static Array Empty { get; } = Create();
 
         public override IEnumerable<string> ToCodeText(string indent)
             => Items.ItemsWrap("[", "]", indent);

@@ -14,15 +14,13 @@ namespace AutoRest.Php.PhpBuilder.Expressions
     /// Expression0: 
     ///     ThisPropertyRef
     /// </summary>
-    public abstract class Expression : ICodeText, ICodeLine
+    public abstract class Expression : ICodeText
     {
         public Statement Return()
             => new Return(this);
 
         public Statement Statement()
             => new ExpressionStatement(this);
-
-        public abstract string ToCodeLine();
 
         public abstract IEnumerable<string> ToCodeText(string indent);
     }

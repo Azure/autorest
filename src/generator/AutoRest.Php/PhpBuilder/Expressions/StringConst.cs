@@ -12,12 +12,9 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             Value = value;
         }
 
-        public override string ToCodeLine()
-            => '"' + Value + '"';
-
         public override IEnumerable<string> ToCodeText(string indent)
         {
-            yield return ToCodeLine();
+            yield return '"' + Value + '"';
         }
     }
 }
