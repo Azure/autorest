@@ -1,5 +1,5 @@
 {
-  "id": "http://schema.management.azure.com/schemas/2016-01-01/Microsoft.Storage.json#",
+  "id": "https://schema.management.azure.com/schemas/2016-01-01/Microsoft.Storage.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Storage",
   "description": "Microsoft Storage Resource Types",
@@ -28,7 +28,7 @@
               "$ref": "#/definitions/Sku"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Required. Gets or sets the sku type."
@@ -43,7 +43,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Required. Indicates the type of storage account."
@@ -61,7 +61,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
@@ -72,7 +72,7 @@
               "$ref": "#/definitions/StorageAccountPropertiesCreateParameters"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
         }
@@ -103,7 +103,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates"
@@ -123,7 +123,7 @@
               "$ref": "#/definitions/EncryptionServices"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets the services which are encrypted."
@@ -137,7 +137,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets the encryption keySource(provider). Possible values (case-insensitive):  Microsoft.Storage"
@@ -157,7 +157,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "A boolean indicating whether or not the service is encrypted."
@@ -174,7 +174,7 @@
               "$ref": "#/definitions/EncryptionService"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The blob service."
@@ -198,7 +198,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the sku name. Required for account creation, optional for update. Note that in older versions, sku name was called accountType."
@@ -218,7 +218,7 @@
               "$ref": "#/definitions/CustomDomain"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property."
@@ -229,7 +229,7 @@
               "$ref": "#/definitions/Encryption"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Provides the encryption settings on the account. If left unspecified the account encryption settings will remain. The default setting is unencrypted."
@@ -244,7 +244,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Required for StandardBlob accounts. The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types."

@@ -1,6 +1,6 @@
 {
   "name": "autorest-core",
-  "version": "1.0.1",
+  "version": "1.2.2",
   "description": "AutoRest",
   "repository": {
     "type": "git",
@@ -21,21 +21,30 @@
   },
   "typings": "./index.d.ts",
   "devDependencies": {
+    "@types/chalk": "*",
+    "@types/marked": "*",
     "@types/commonmark": "^0.22.29",
     "@types/jsonpath": "^0.1.29",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
-    "mocha": "^3.2.0",
-    "mocha-typescript": "^1.0.22",
+    "autorest-interactive": "https://github.com/olydis/autorest-interactive",
+    "bluebird": "*",
+    "mocha": "3.2.0",
+    "mocha-typescript": "1.0.22",
     "source-map-support": "^0.4.14",
-    "typescript": "^2.3.0-dev.20170314"
+    "typescript": "2.3.3"
   },
   "dependencies": {
+    "chalk": "^1.1.2",
+    "marked": "^0.3.6",
+    "marked-terminal": "^2.0.0",
     "commonmark": "^0.27.0",
     "file-url": "^2.0.2",
     "get-uri": "^2.0.0",
     "jsonpath": "^0.2.11",
     "linq-es2015": "^2.4.13",
+    "oav": "0.4.1",
+    "@microsoft.azure/openapi-validator": "^0.1.0",
     "pify": "^2.3.0",
     "safe-eval": "^0.3.0",
     "source-map": "^0.5.6",

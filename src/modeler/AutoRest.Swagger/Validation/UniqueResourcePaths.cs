@@ -16,7 +16,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M2059";
+        public override string Id => "R2059";
 
         /// <summary>
         /// Violation category of the Rule.
@@ -35,6 +35,16 @@ namespace AutoRest.Swagger.Validation
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
         public override string MessageTemplate => Resources.UniqueResourcePaths;
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM;
+
+        /// <summary>
+        /// A single json must contain only one resource, hence needs to be run on the individual state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
 
         /// <summary>
         /// This rule passes if the paths contain reference to exactly one of the namespace resources

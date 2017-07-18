@@ -43,40 +43,29 @@ const ServiceClient = msRest.ServiceClient;
 @EmptyLine
 @{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
 @{var optionalParameters = Model.Properties.Where(p => (!p.IsRequired || p.IsRequired && !string.IsNullOrEmpty(p.DefaultValue)) && !p.IsConstant);}
-/**
- * @@class
- * Initializes a new instance of the @Model.Name class.
- * @@constructor
- *
+
+/** Class representing a @Model.Name. */
+class @(Model.Name) extends ServiceClient {
+  /**
+   * Create a @Model.Name.
 @foreach (var param in requiredParameters)
 {
-@: * @@param {@param.ModelType.Name.ToCamelCase()} @param.Name - @param.Documentation
-@: *
+  @: * @@param {@param.ModelType.Name.ToCamelCase()} @param.Name - @param.Documentation
 }
-
-@if(!Model.IsCustomBaseUri)
-{ 
-@: * @@param {string} [baseUri] - The base URI of the service.
-@: *
+@if (!Model.IsCustomBaseUri)
+{
+  @: * @@param {string} [baseUri] - The base URI of the service.
 }
-
- * @@param {object} [options] - The parameter options
- *
- * @@param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @@param {object} [options.requestOptions] - Options for the underlying request object
- * {@@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @@param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
- *
+   * @@param {object} [options] - The parameter options
+   * @@param {Array} [options.filters] - Filters to be added to the request pipeline
+   * @@param {object} [options.requestOptions] - Options for the underlying request object
+   * {@@link https://github.com/request/request#requestoptions-callback Options doc}
+   * @@param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
 @foreach (var param in optionalParameters)
 {
-@: * @@param {@param.ModelType.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
-@: *
+   @:* @@param {@param.ModelType.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
 }
- */
-class @(Model.Name) extends ServiceClient {
-
+   */
   constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParameters) ? Model.RequiredConstructorParameters + ", ": "")options) {
 @foreach (var param in requiredParameters)
 {

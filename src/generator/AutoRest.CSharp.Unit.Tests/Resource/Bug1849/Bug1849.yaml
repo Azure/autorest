@@ -1,0 +1,109 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  /operation:
+    get:
+      operationId: fancy
+      responses:
+        200:
+          type: integer
+    parameters:
+      - name: param1
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+      - name: param2
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: integer
+      - name: param3
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+          format: guid
+      - name: param2req
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: integer
+          x-nullable: false
+      - name: param3req
+        in: query
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+          format: guid
+          x-nullable: false
+      - name: param1x
+        in: query
+        required: true
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+      - name: param2x
+        in: query
+        required: true
+        type: array
+        collectionFormat: multi
+        items:
+          type: integer
+      - name: param3x
+        in: query
+        required: true
+        type: array
+        collectionFormat: multi
+        items:
+          type: string
+          format: guid
+      - name: param1p
+        in: path
+        type: array
+        collectionFormat: csv
+        items:
+          type: string
+      - name: param2p
+        in: path
+        type: array
+        collectionFormat: csv
+        items:
+          type: integer
+      - name: param3p
+        in: path
+        type: array
+        collectionFormat: csv
+        items:
+          type: string
+          format: guid
+      - name: param1xp
+        in: path
+        required: true
+        type: array
+        collectionFormat: csv
+        items:
+          type: string
+      - name: param2xp
+        in: path
+        required: true
+        type: array
+        collectionFormat: csv
+        items:
+          type: integer
+      - name: param3xp
+        in: path
+        required: true
+        type: array
+        collectionFormat: csv
+        items:
+          type: string
+          format: guid

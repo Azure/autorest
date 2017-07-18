@@ -13,17 +13,16 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the FlattenedProduct class.
- * @constructor
- * @member {string} [pname]
- *
- * @member {number} [lsize]
- *
- * @member {string} [provisioningState]
- *
+ * Class representing a FlattenedProduct.
+ * @extends models['Resource']
  */
 class FlattenedProduct extends models['Resource'] {
+  /**
+   * Create a FlattenedProduct.
+   * @member {string} [pname]
+   * @member {number} [lsize]
+   * @member {string} [provisioningState]
+   */
   constructor() {
     super();
   }

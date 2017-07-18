@@ -3,7 +3,25 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { safeEval } from "./safe-eval";
 import * as jsonpath from "jsonpath";
+
+// patch in smart filter expressions
+const handlers = (jsonpath as any).handlers;
+handlers.register("subscript-descendant-filter_expression", function (component: any, partial: any, count: any) {
+  var src = component.expression.value.slice(1);
+
+  var passable = function (key: any, value: any) {
+    try {
+      return safeEval(src.replace(/\@/g, "$$$$"), { "$$": value });
+    } catch (e) {
+      return false;
+    }
+  }
+
+  return eval("this").traverse(partial, null, passable, count);
+});
+// patch end
 
 export type JsonPathComponent = jsonpath.PathComponent;
 export type JsonPath = JsonPathComponent[];
@@ -17,15 +35,28 @@ export function stringify(jsonPath: JsonPath): string {
 }
 
 export function paths<T>(obj: T, jsonQuery: string): JsonPath[] {
-  return jsonpath.paths(obj, jsonQuery).map(x => x.slice(1));
+  return nodes(obj, jsonQuery).map(x => x.path);
 }
 
 export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: any }[] {
-  return jsonpath.nodes(obj, jsonQuery).map(x => { return { path: x.path.slice(1), value: x.value }; });
+  // jsonpath only accepts objects
+  if (obj instanceof Object) {
+    return jsonpath.nodes(obj, jsonQuery).map(x => { return { path: x.path.slice(1), value: x.value }; });
+  } else {
+    return matches(jsonQuery, []) ? [{ path: [], value: obj }] : [];
+  }
 }
 
 export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean {
-  return prefix.length <= path.length && path.slice(0, prefix.length).every((pc, i) => pc === prefix[i]);
+  if (prefix.length > path.length) {
+    return false;
+  }
+  for (let i = 0; i < prefix.length; ++i) {
+    if (prefix[i] !== path[i]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 export function CreateObject(jsonPath: JsonPath, leafObject: any): any {

@@ -515,21 +515,6 @@ namespace AutoRest.Core
                 return desiredName;
             }
 
-#if refactoring_out
-            // special case: properties can actually have the same name as a composite type 
-            // as long as that type is not the parent class of the property itself.
-            if (whoIsAsking is Property)
-            {
-                reservedNames = reservedNames.Where(each => !(each is CompositeType));
-
-                var parent = (whoIsAsking as IChild)?.Parent as IIdentifier;
-                if (parent != null)
-                {
-                    reservedNames = reservedNames.ConcatSingleItem(parent);
-                }
-            }
-#endif 
-
             var names = new HashSet<IIdentifier>(reservedNames.Where(each => !IsSpecialCase(whoIsAsking, each)));
 
             // is this a legal name? -- add a Qualifier Suffix (ie, Method/Model/Property/etc)

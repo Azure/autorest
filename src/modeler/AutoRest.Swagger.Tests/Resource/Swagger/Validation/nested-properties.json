@@ -9,6 +9,34 @@
   "schemes": [
     "https"
   ],
+  "paths": {
+    "/foo/bar": {
+      "get": {
+        "operationId": "Foo_Get",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Foo"
+            }
+          }
+        }
+      }
+    },
+    "/foo/bar1": {
+      "get": {
+        "operationId": "Foo1_Get",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Foo1"
+            }
+          }
+        }
+      }
+    }
+  },
   "basePath": "/",
   "definitions": {
     "Foo": {
@@ -17,6 +45,16 @@
         "properties": {
           "type": "object",
           "description": "bar"
+        }
+      }
+    },
+    "Foo1": {
+      "description": "Foo1",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "bar",
+          "x-ms-client-flatten": false
         }
       }
     }

@@ -1,85 +1,99 @@
-#AutoRest Command Line Interface Documentation
+# AutoRest Command Line Interface Documentation
 
-##Syntax
-`AutoRest.exe -Input <value> [-Verbose] [-Namespace <value>] [-OutputDirectory <value>] [-CodeGenerator <value>] [-Modeler <value>] [-ClientName <value>] [-PayloadFlatteningThreshold <value>] [-Header <value>] [-AddCredentials <value>] [-OutputFileName <value>]`
+## AutoRest
 
-##Parameters
-  **-Input** The location of the input specification. Aliases: -i, -input . The input file may be either in JSON or YAML format. 
-  
-  **-Namespace** The namespace to use for generated code. Aliases: -n
-  
-  **-OutputDirectory** The location for generated files. If not specified, uses "Generated" as the default. Aliases: -o, -output
-  
-  **-CodeGenerator** The code generator language. If not specified, defaults to CSharp. Aliases: -g
-  
-  **-Modeler** The Modeler to use on the input. If not specified, defaults to Swagger. Aliases: -m
-  
-  **-ClientName** Name to use for the generated client type. By default, uses the value of the 'Title' field from the Swagger input. Aliases: -name
+The AutoRest command line has been vastly simplified, with the preference to move things that were on the command line into a configuration file, with the ability to override the configuration file settings from the command line.
 
-  **-ModelsName** Name to use for the generated client models namespace and folder name. By default, uses the value of 'Models'. This is not currently supported by all code generators. Aliases: -mname
-  
-  **-PayloadFlatteningThreshold** The maximum number of properties in the request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as method arguments. Aliases: -ft
-  
-  **-Header** Text to include as a header comment in generated files. Use NONE to suppress the default header. Aliases: -header
-  
-  **-AddCredentials** If true, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type.
-  
-  **-OutputFileName** If set, will cause generated code to be output to a single file. Not supported by all code generators.
-  
-  **-Verbose** If set, will output verbose diagnostic messages.
-  
-  **-CodeGenSettings** Optionally specifies a JSON file that contains code generation settings equivalent to the swagger document containing the same content in the [x-ms-code-generation-settings] extension. Aliases: -cgs
-##Code Generators
-  **Ruby** Generic Ruby code generator.
-  
-  **Azure.Ruby** Azure specific Ruby code generator.
-  
-  **CSharp** Generic C# code generator.
-  
-  **Azure.CSharp** Azure specific C# code generator.
-  
-  **NodeJS** Generic NodeJS code generator.
-  
-  **Azure.NodeJS** Azure specific NodeJS code generator.
-  
-  **Java** Generic Java code generator.
-  
-  **Azure.Java** Azure specific Java code generator.
-  
-  **Python** Generic Python code generator.
-  
-  **Azure.Python** Azure specific Python code generator.
+### Command-line Usage
 
-  **Go** Generic Go code generator.
+> `autorest [config-file.md] [additional options]`
 
-##Code Generator Specific Settings
-###CSharp
+### Configuration file
 
-  **-SyncMethods** Specifies mode for generating sync wrappers. Supported value are `Essential` - generates only one sync returning body or header (default), `All` - generates one sync method for each async method, and `None` - does not generate any sync methods
-  
-  **-InternalConstructors** Indicates whether ctor needs to be generated with internal protection level.
-  
-  **-UseDateTimeOffset** Indicates whether to use DateTimeOffset instead of DateTime to model date-time types.
-  
+AutoRest will use a [configuration file](literate-file-formats/configuration.md) to control the code generation process. By default, AutoRest will look for a file called `readmd.md` or it can be passed on the command line. 
 
-##Examples
-  - Generate C# client in MyNamespace from swagger.json input:
-```bash
-AutoRest.exe -Namespace MyNamespace -Input swagger.json
+This is the preferred method, instead of passing all the information on the command line. 
+
+If you prefer to name your configuration file something else, you can supply the filename on the command line:
+
+``` bash
+autorest my_config.md 
 ```
 
-  - Generate C# client in MyNamespace including custom header from swagger.json input:
-```bash
-AutoRest.exe -Namespace MyNamespace -Header "Copyright Contoso Ltd" -Input swagger.json
+#### Passing additional options on the command line.
+
+It is possible to override settings from the configuration file on the command line by prefacing the value with double dash (`--`) and setting the value with an equals sign (`=`). Ie:
+
+``` bash
+autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=foo.bar
 ```
 
-  - Generate C# client with a credentials property in MyNamespace from swagger.json input and with code generation settings specified by settings.json:
-```bash
-AutoRest.exe -AddCredentials true -Namespace MyNamespace -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -CodeGenSettings settings.json
-```
+### Common Command-line Options 
 
-  - Generate C# client in MyNamespace with custom Models name from swagger.json input:
-```bash
-AutoRest.exe -Namespace MyNamespace -ModelsName MyModels -CodeGenerator CSharp -Modeler Swagger -Input swagger.json
-```
+#### Output Verbosity
 
+| Option | Description |
+|--------|-------------|
+|`--verbose`|show verbose output information|
+|`--debug`|show internal debug information|
+|`--quiet`|suppress output|
+
+#### Managing the installed/used AutoRest version
+
+|Option                              &nbsp;| Description |
+|------------------|-------------|
+|`--list-installed`|show all installed versions of AutoRest tools|
+|`--list-available=nn`|lists the last nn releases available from github (defaults to 10)|
+|`--version=version`|uses version of AutoRest (installing if necessary.)<br>For version you can use a version label (see --list-available) or<br>&nbsp;&nbsp;`latest` - get latest nightly build<br>&nbsp;&nbsp;`latest-release` - get latest release version|
+|`--reset`|remove all installed versions of AutoRest tools and install the latest (override with --version)|
+|`--runtime-id=id`|overrides the platform detection for the dotnet runtime (special case). Refer to the <a href="https://docs.microsoft.com/en-us/dotnet/articles/core/rid-catalog">Runtime Identifier (RID) catalog</a> for more details.|
+
+#### Commonly used Settings
+|Option                                                                &nbsp;| Description |
+|------------------|-------------|
+|`--input-file=FILENAME`|Adds the given file to the list of input files for generation process|
+|`--output-folder=DIRECTORY`|The location for generated files. If not specified, uses `./Generated` as the default|
+|`--namespace=NAMESPACE`|sets the namespace to use for the generated code|
+|`--license-header=HEADER`| Text to include as a header comment in generated files. Use NONE to suppress the default header.|
+|`--add-credentials`|If specified, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type.|
+|`--package-name=PACKAGENAME`|Name of the package (Ruby, Python)|
+|`--package-version=VERSION`|Version of the package (Ruby, Python)|
+|`--sync-methods=all\|essential\|none`|Specifies mode for generating sync wrappers. Supported value are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods|
+|`--payload-flattening-threshold=NUMBER`|The maximum number of properties in the request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as method arguments|
+|`--override-client-name=NAME`|Name to use for the generated client type. By default, uses the value of the 'Title' field from the input files|
+|`--use-internal-constructors`|Indicates whether ctor needs to be generated with `internal` protection level.|
+|`--use-datetimeoffset`|Indicates whether to use DateTimeOffset instead of DateTime to model date-time types|
+|`--models-name=NAME`|Name to use for the generated client models namespace and folder name. By default, uses the value of 'Models'. This is not currently supported by all code generators.|
+|`--output-file=FILENAME`|If set, will cause generated code to be output to a single file. Not supported by all code generators.|
+
+#### Validation
+|Option                                                                &nbsp;| Description |
+|------------------|-------------|
+|`--azure-validator`|If set, runs the Azure specific validator plugin.|
+|`--openapi-type=arm│default│data-plane`|Indicates the type of configuration file being passed to the `azure-validator` so that it can run the appropriate class of validation rules accordingly.|
+|`--model-validator`|If set, validates the provided OpenAPI definition(s) against provided `examples`.|
+|`--semantic-validator`|If set, semantically verifies the provided OpenAPI definition(s), e.g. checks that a parameter's specified `default` value matches the parameter's declared type.|
+
+Also, see [Samples/2a-validation](../../Samples/2a-validation) for an example of validation using a configuration file.
+
+#### Selecting the Language with which to generate code
+
+|Option                              &nbsp;| Description |
+|------------------|-------------|
+|`--csharp`|Runs the C# code generator|
+|`--nodejs`|Runs the nodejs javascript code generator|
+|`--python`|Runs the python code generator|
+|`--java`|Runs the java code generator|
+|`--ruby`|Runs the ruby code generator|
+|`--go`|Runs the go code generator|
+|`--azureresourceschema`|Runs the AzureResourceSchema|
+| &nbsp; | |
+|`--azure-arm`|Uses the `Azure` version of the specified code generator|
+
+You may generate one or more languages in a given invocation, ie:
+
+`autorest --csharp --python --ruby`
+
+To set a language-specific setting, prefix the setting with the language, ie:
+
+`autorest --csharp.namespace=Foo.Bar `

@@ -16,10 +16,7 @@ namespace AutoRest.CSharp.Model
 {
     public class MethodCs : Method
     {
-        public MethodCs()
-        {
-
-        }
+        public MethodCs() { }
         
         public bool IsCustomBaseUri
             => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
@@ -51,10 +48,7 @@ namespace AutoRest.CSharp.Model
         /// <summary>
         /// Generate the method parameter declaration for async methods and extensions
         /// </summary>
-        public virtual string GetAsyncMethodParameterDeclaration()
-        {
-            return this.GetAsyncMethodParameterDeclaration(false);
-        }
+        public virtual string GetAsyncMethodParameterDeclaration() => GetAsyncMethodParameterDeclaration(false);
 
         /// <summary>
         /// Generate the method parameter declaration for sync methods and extensions
@@ -111,7 +105,8 @@ namespace AutoRest.CSharp.Model
         /// <summary>
         /// Get the invocation args for an invocation with an async method
         /// </summary>
-        public string GetAsyncMethodInvocationArgs(string customHeaderReference, string cancellationTokenReference = "cancellationToken") => string.Join(", ", LocalParameters.Select(each => (string)each.Name).Concat(new[] { customHeaderReference, cancellationTokenReference }));
+        public string GetAsyncMethodInvocationArgs(string customHeaderReference, string cancellationTokenReference = "cancellationToken") => 
+            string.Join(", ", LocalParameters.Select(each => (string)each.Name).Concat(new[] { customHeaderReference, cancellationTokenReference }));
 
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
@@ -211,46 +206,22 @@ namespace AutoRest.CSharp.Model
         /// <summary>
         /// Get the expression for exception initialization with message.
         /// </summary>
-        public virtual string InitializeExceptionWithMessage
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public virtual string InitializeExceptionWithMessage => string.Empty;
 
         /// <summary>
         /// Get the expression for exception initialization with message.
         /// </summary>
-        public virtual string InitializeException
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public virtual string InitializeException => string.Empty;
 
         /// <summary>
         /// Gets the expression for response body initialization.
         /// </summary>
-        public virtual string InitializeResponseBody
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public virtual string InitializeResponseBody => string.Empty;
 
         /// <summary>
         /// Gets the expression for default header setting.
         /// </summary>
-        public virtual string SetDefaultHeaders
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public virtual string SetDefaultHeaders => string.Empty;
 
         /// <summary>
         /// Get the type name for the method's return type
@@ -279,6 +250,9 @@ namespace AutoRest.CSharp.Model
         /// </summary>
         [JsonIgnore]
         public ParameterCs RequestBody => Body as ParameterCs;
+
+        [JsonIgnore]
+        public string AccessModifier => Hidden ? "internal" : "public";
 
         /// <summary>
         /// Generate a reference to the ServiceClient
@@ -406,7 +380,7 @@ namespace AutoRest.CSharp.Model
                            .AppendLine("{").Indent()
                            .AppendLine("foreach (var _item in {0})", queryParameter.Name)
                            .AppendLine("{").Indent()
-                           .AppendLine(replaceString, queryParameter.SerializedName, "_item ?? string.Empty").Outdent()
+                           .AppendLine(replaceString, queryParameter.SerializedName, "\"\" + _item").Outdent()
                            .AppendLine("}").Outdent()
                            .AppendLine("}").Outdent();
                     }

@@ -1,5 +1,5 @@
 {
-  "id": "http://schema.management.azure.com/schemas/2016-07-07/Microsoft.ApiManagement.json#",
+  "id": "https://schema.management.azure.com/schemas/2016-07-07/Microsoft.ApiManagement.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.ApiManagement",
   "description": "Microsoft ApiManagement Resource Types",
@@ -14,7 +14,7 @@
               "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The name of the Api Management service."
@@ -44,7 +44,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Api Management service tags. A maximum of 10 tags can be provided for a resource, and each tag must have a key no greater than 128 characters (and value no greater than 256 characters)"
@@ -55,7 +55,7 @@
               "$ref": "#/definitions/ApiServiceProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Properties of the Api Management service."
@@ -66,7 +66,7 @@
               "$ref": "#/definitions/ApiServiceSkuProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Sku properties of the Api Management service."
@@ -129,7 +129,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "API identifier. Must be unique in the current API Management service instance."
@@ -152,7 +152,7 @@
               "$ref": "#/definitions/ApiContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "ApiContract."
@@ -200,7 +200,7 @@
               "$ref": "#/definitions/OperationContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "operation details."
@@ -238,7 +238,7 @@
               "$ref": "#/definitions/OAuth2AuthorizationServerContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "OAuth2 Authorization Server details."
@@ -296,7 +296,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Group identifier. Must be unique in the current API Management service instance."
@@ -349,7 +349,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "User identifier. Must be unique in the current API Management service instance."
@@ -405,7 +405,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Logger credentials."
@@ -416,7 +416,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "whether records are buffered in the logger before publishing. Default is assumed to be true."
@@ -484,7 +484,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Product identifier. Must be unique in the current API Management service instance."
@@ -507,7 +507,7 @@
               "$ref": "#/definitions/ProductContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
         },
@@ -543,7 +543,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "API identifier. Must be unique in the current API Management service instance."
@@ -578,7 +578,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Group identifier. Must be unique in the current API Management service instance."
@@ -636,7 +636,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Collection of tags associated with a property."
@@ -647,7 +647,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The value which determines the value should be encrypted or not. Default value is false."
@@ -713,7 +713,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Initial subscription state."
@@ -738,7 +738,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "User identifier. Must be unique in the current API Management service instance."
@@ -785,7 +785,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Account state."
@@ -826,7 +826,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Sku type in the location."
@@ -837,7 +837,7 @@
               "type": "integer"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Sku Unit count at the location."
@@ -851,7 +851,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Static IP addresses of the location virtual machines."
@@ -862,7 +862,7 @@
               "$ref": "#/definitions/VirtualNetworkConfiguration"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Virtual network configuration for the location."
@@ -908,7 +908,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Protocols over which API is made available."
@@ -919,7 +919,7 @@
               "$ref": "#/definitions/AuthenticationSettingsContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Collection of authentication settings included into this API."
@@ -930,7 +930,7 @@
               "$ref": "#/definitions/SubscriptionKeyParameterNamesContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Protocols over which API is made available."
@@ -1006,7 +1006,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Custom hostname configuration of the Api Management service."
@@ -1020,7 +1020,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Static ip addresses of the Api Management service virtual machines. Available only for Standard and Premium Sku."
@@ -1031,7 +1031,7 @@
               "$ref": "#/definitions/VirtualNetworkConfiguration"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Virtual network configuration of the Api Management service."
@@ -1045,7 +1045,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Additional datacenter locations description of the Api Management service."
@@ -1059,7 +1059,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Custom properties of the Api Management service."
@@ -1075,7 +1075,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Virtual private network type of the Api Management service."
@@ -1097,7 +1097,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Name of the Sku."
@@ -1108,7 +1108,7 @@
               "type": "integer"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Capacity of the Sku (number of deployed units of the Sku)."
@@ -1125,7 +1125,7 @@
               "$ref": "#/definitions/OAuth2AuthenticationSettingsContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
         }
@@ -1179,7 +1179,7 @@
               "$ref": "#/definitions/CertificateInformation"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Certificate information."
@@ -1244,7 +1244,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Supported methods of authorization."
@@ -1262,7 +1262,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Supported methods of authorization."
@@ -1276,7 +1276,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Token request body parameters."
@@ -1291,7 +1291,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "whether Auhtorizatoin Server supports client credentials in body or not. See http://tools.ietf.org/html/rfc6749#section-3.1 ."
@@ -1315,7 +1315,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Form of an authorization grant, which the client uses to request the access token. See http://tools.ietf.org/html/rfc6749#section-4 ."
@@ -1333,7 +1333,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Form of an authorization grant, which the client uses to request the access token. See http://tools.ietf.org/html/rfc6749#section-4 ."
@@ -1388,7 +1388,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Collection of URL template parameters."
@@ -1403,7 +1403,7 @@
               "$ref": "#/definitions/RequestContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Operation request."
@@ -1417,7 +1417,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Array of Operation responses."
@@ -1455,7 +1455,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "whether parameter is required or not."
@@ -1469,7 +1469,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Parameter values."
@@ -1508,7 +1508,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true."
@@ -1519,7 +1519,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false."
@@ -1530,7 +1530,7 @@
               "type": "integer"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
@@ -1545,7 +1545,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators."
@@ -1589,7 +1589,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Collection of operation request query parameters."
@@ -1603,7 +1603,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Collection of operation request headers."
@@ -1617,7 +1617,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Collection of operation request representations."
@@ -1634,7 +1634,7 @@
               "type": "integer"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Operation response status code."
@@ -1652,7 +1652,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Collection of operation response representations."
@@ -1673,7 +1673,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "API identifier. Must be unique in the current API Management service instance."
@@ -1696,7 +1696,7 @@
               "$ref": "#/definitions/ApiContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "ApiContract."
@@ -1744,7 +1744,7 @@
               "$ref": "#/definitions/OperationContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "operation details."
@@ -1782,7 +1782,7 @@
               "$ref": "#/definitions/OAuth2AuthorizationServerContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "OAuth2 Authorization Server details."
@@ -1840,7 +1840,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Group identifier. Must be unique in the current API Management service instance."
@@ -1893,7 +1893,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "User identifier. Must be unique in the current API Management service instance."
@@ -1949,7 +1949,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Logger credentials."
@@ -1960,7 +1960,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "whether records are buffered in the logger before publishing. Default is assumed to be true."
@@ -2028,7 +2028,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "API identifier. Must be unique in the current API Management service instance."
@@ -2063,7 +2063,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Product identifier. Must be unique in the current API Management service instance."
@@ -2086,7 +2086,7 @@
               "$ref": "#/definitions/ProductContract"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
         },
@@ -2122,7 +2122,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Group identifier. Must be unique in the current API Management service instance."
@@ -2178,7 +2178,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Collection of tags associated with a property."
@@ -2189,7 +2189,7 @@
               "type": "boolean"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The value which determines the value should be encrypted or not. Default value is false."
@@ -2251,7 +2251,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Initial subscription state."
@@ -2276,7 +2276,7 @@
               "pattern": "^[^*#&+:<>?]+$"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "User identifier. Must be unique in the current API Management service instance."
@@ -2319,7 +2319,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Account state."

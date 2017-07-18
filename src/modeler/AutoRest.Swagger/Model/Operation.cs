@@ -12,7 +12,8 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Describes a single API operation on a path.
     /// </summary>
-    [Rule(typeof(OperationDescriptionRequired))]
+    [Rule(typeof(OperationDescriptionOrSummaryRequired))]
+    [Rule(typeof(SummaryAndDescriptionMustNotBeSame))]
     public class Operation : SwaggerBase
     {
         private string _description;
@@ -35,11 +36,12 @@ namespace AutoRest.Swagger.Model
         /// operation id to uniquely identify an operation.
         /// </summary>
         [Rule(typeof(OneUnderscoreInOperationId))]
-        [Rule(typeof(OperationIdNounInVerb))]
-        [Rule(typeof(GetOperationNameValidation))]
-        [Rule(typeof(PutOperationNameValidation))]
-        [Rule(typeof(PatchOperationNameValidation))]
-        [Rule(typeof(DeleteOperationNameValidation))]
+        [Rule(typeof(OperationIdNounVerb))]
+        [Rule(typeof(GetInOperationName))]
+        [Rule(typeof(PutInOperationName))]
+        [Rule(typeof(PatchInOperationName))]
+        [Rule(typeof(DeleteInOperationName))]
+        [Rule(typeof(OperationIdNounConflictingModelNames))]
         public string OperationId { get; set; }
 
         public string Summary
@@ -63,13 +65,13 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// A list of MIME types the operation can consume.
         /// </summary>
-        [CollectionRule(typeof(NonAppJsonTypeWarning))]
+        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the operation can produce. 
         /// </summary>
-        [CollectionRule(typeof(NonAppJsonTypeWarning))]
+        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Produces { get; set; }
 
         /// <summary>
@@ -77,8 +79,8 @@ namespace AutoRest.Swagger.Model
         /// If a parameter is already defined at the Path Item, the 
         /// new definition will override it, but can never remove it.
         /// </summary>
-        [CollectionRule(typeof(OperationParametersValidation))]
-        [CollectionRule(typeof(BooleanPropertyNotRecommended))]
+        [CollectionRule(typeof(SubscriptionIdParameterInOperations))]
+        [CollectionRule(typeof(EnumInsteadOfBoolean))]
         [CollectionRule(typeof(AnonymousBodyParameter))]
         public IList<SwaggerParameter> Parameters { get; set; }
 
@@ -90,7 +92,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The transfer protocol for the operation. 
         /// </summary>
-        [CollectionRule(typeof(SupportedSchemesWarning))]
+        [CollectionRule(typeof(HttpsSupportedScheme))]
         public IList<TransferProtocolScheme> Schemes { get; set; }
 
         public bool Deprecated { get; set; }
@@ -103,114 +105,6 @@ namespace AutoRest.Swagger.Model
         /// top-level security declaration, an empty array can be used.
         /// </summary>
         public IList<Dictionary<string, List<string>>> Security { get; set; }
-
-        /// <summary>
-        /// Compare a modified document node (this) to a previous one and look for breaking as well as non-breaking changes.
-        /// </summary>
-        /// <param name="context">The modified document context.</param>
-        /// <param name="previous">The original document model.</param>
-        /// <returns>A list of messages from the comparison.</returns>
-        public override IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
-        {
-            var priorOperation = previous as Operation;
-
-            var currentRoot = (context.CurrentRoot as ServiceDefinition);
-            var previousRoot = (context.PreviousRoot as ServiceDefinition);
-
-            if (priorOperation == null)
-            {
-                throw new ArgumentException("previous");
-            }
-
-            base.Compare(context, previous);
-
-            if (!OperationId.Equals(priorOperation.OperationId))
-            {
-                context.LogBreakingChange(ComparisonMessages.ModifiedOperationId);
-            }
-
-            CheckParameters(context, priorOperation);
-
-            if (Responses != null && priorOperation.Responses != null)
-            {
-                foreach (var response in Responses)
-                {
-                    var oldResponse = priorOperation.FindResponse(response.Key, priorOperation.Responses);
-
-                    context.PushProperty(response.Key);
-
-                    if (oldResponse == null)
-                    {
-                        context.LogBreakingChange(ComparisonMessages.AddingResponseCode, response.Key);
-                    }
-                    else
-                    {
-                        response.Value.Compare(context, oldResponse);
-                    }
-
-                    context.Pop();
-                }
-
-                foreach (var response in priorOperation.Responses)
-                {
-                    var newResponse = this.FindResponse(response.Key, this.Responses);
-
-                    if (newResponse == null)
-                    {
-                        context.PushProperty(response.Key);
-                        context.LogBreakingChange(ComparisonMessages.RemovedResponseCode, response.Key);
-                        context.Pop();
-                    }
-                }
-            }
-
-            return context.Messages;
-        }
-
-        private void CheckParameters(ComparisonContext context, Operation priorOperation)
-        {
-            // Check that no parameters were removed or reordered, and compare them if it's not the case.
-
-            var currentRoot = (context.CurrentRoot as ServiceDefinition);
-            var previousRoot = (context.PreviousRoot as ServiceDefinition);
-
-            foreach (var oldParam in priorOperation.Parameters
-                .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, previousRoot.Parameters)))
-            {
-                SwaggerParameter newParam = FindParameter(oldParam.Name, Parameters, currentRoot.Parameters);
-
-                context.PushProperty(oldParam.Name);
-
-                if (newParam != null)
-                {
-                    newParam.Compare(context, oldParam);
-                }
-                else if (oldParam.IsRequired)
-                {
-                    context.LogBreakingChange(ComparisonMessages.RemovedRequiredParameter, oldParam.Name);
-                }
-
-                context.Pop();
-            }
-
-            // Check that no required parameters were added.
-
-            foreach (var newParam in Parameters
-                .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, currentRoot.Parameters))
-                .Where(p => p != null && p.IsRequired))
-            {
-                if (newParam == null) continue;
-
-                SwaggerParameter oldParam = FindParameter(newParam.Name, priorOperation.Parameters, previousRoot.Parameters);
-
-                if (oldParam == null)
-                {
-                    context.PushProperty(newParam.Name);
-                    context.LogBreakingChange(ComparisonMessages.AddingRequiredParameter, newParam.Name);
-                    context.Pop();
-                }
-            }
-        }
 
         private SwaggerParameter FindParameter(string name, IEnumerable<SwaggerParameter> operationParameters, IDictionary<string, SwaggerParameter> clientParameters)
         {

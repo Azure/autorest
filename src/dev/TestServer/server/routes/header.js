@@ -16,7 +16,9 @@ var header = function (coverage, optionalCoverage) {
         utils.send400(res, next, "Did not like scenario \"" + req.params.scenario + "\" with value " + req.get("User-Agent"));
       }
     } else if (req.params.scenario === "protectedkey") {
-      if (req.get("Content-Type") !== "text/html") {
+      //We are making this change in the test server because for data plane we have to support scenarios where the user can override
+      //the protected header like Content-Type by providing one.
+      if (req.get("Content-Type") === "text/html") {
         optionalCoverage['HeaderParameterProtectedKey']++;
         res.status(200).end();
       } else {

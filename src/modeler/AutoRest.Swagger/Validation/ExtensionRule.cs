@@ -16,6 +16,8 @@ namespace AutoRest.Swagger.Validation
 
         /// <summary>
         /// Overridable method that lets a child rule return multiple validation messages for the <paramref name="entity"/>
+        /// Override this method when trying to apply a rule for a composite/array type object or when manipulating the path
+        /// where violation occurs. Eg.: LROStatusCodesReturnTypeSchema.
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -44,6 +46,8 @@ namespace AutoRest.Swagger.Validation
 
         /// <summary>
         /// Overridable method that lets a child rule specify if <paramref name="entity"/> passes validation
+        /// IsValid is to be overridden for leaf nodes where the path to be reported is the same as the node
+        /// on which the validation rule is being set as an attribute. Eg.: A description for a property/parameter
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>

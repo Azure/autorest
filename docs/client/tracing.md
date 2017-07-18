@@ -1,4 +1,4 @@
-#Tracing
+# Tracing
 Clients generated with AutoRest come with an extensible tracing infrastructure. The following events are traced when the client is executed:
 
 - EnterMethod - operation method is entered
@@ -52,7 +52,7 @@ ServiceClientTracing.IsEnabled = true;
 ```
 
 ## Custom Tracing
-In order to trace AutoRest generated client implement a custom type that extends [IServiceClientTracingInterceptor](../Microsoft.Rest/ClientRuntime/IServiceClientTracingInterceptor.cs).
+In order to trace AutoRest generated client implement a custom type that extends [IServiceClientTracingInterceptor](https://github.com/Azure/azure-sdk-for-net/blob/psSdkJson6/src/SdkCommon/ClientRuntime/ClientRuntime/IServiceClientTracingInterceptor.cs).
 ```csharp
 using Microsoft.Rest;
 ...

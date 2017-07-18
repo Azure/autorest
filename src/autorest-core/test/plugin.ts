@@ -7,21 +7,23 @@ require("../lib/polyfill.min.js");
 
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
+import { PumpMessagesToConsole } from './test-utility';
 
-import { AutoRest } from '../lib/autorest-core';
+import { RealFileSystem } from "../lib/file-system";
+import { AutoRest } from "../lib/autorest-core";
 import { CancellationToken } from "../lib/ref/cancallation";
-import { CreateFileUri, ResolveUri } from "../lib/ref/uri";
-import { Message } from "../lib/message";
-import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
+import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
+import { Message, Channel } from "../lib/message";
+import { GetAutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
-import { DataStore } from "../lib/data-store/data-store";
+import { DataStore, QuickScope } from '../lib/data-store/data-store';
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
 @suite class Plugins {
   @test async "plugin loading and communication"() {
     const cancellationToken = CancellationToken.None;
     const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.CreateScope("input");
+    const scopeInput = dataStore.GetReadThroughScope();
     const scopeWork = dataStore.CreateScope("working");
 
     const dummyPlugin = await AutoRestPlugin.FromModule(`${__dirname}/../lib/pipeline/plugins/dummy`);
@@ -41,32 +43,25 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     assert.strictEqual(message.Details, 42);
   }
 
-  // SKIPPING because Amar's tool is resolved hacky right now (waiting for "getting plugin bits to disk part")
-  @skip @test @timeout(10000) async "openapi-validation-tools"() {
-    const cancellationToken = CancellationToken.None;
-    const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.CreateScope("input").AsFileScopeReadThrough();
+  // TODO: remodel if we figure out acquisition story
+  @test @timeout(0) async "openapi-validation-tools"() {
+    const autoRest = new AutoRest(new RealFileSystem());
+    autoRest.AddConfiguration({ "input-file": "https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json" });
+    autoRest.AddConfiguration({ "model-validator": true });
+    autoRest.AddConfiguration({ "semantic-validator": true });
 
-    const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json";
-    await scopeInput.Read(inputFileUri);
-
-    const validationPlugin = await AutoRestPlugin.FromModule("./lib/pipeline/plugins/openapi-validation-tools");
-    const pluginNames = await validationPlugin.GetPluginNames(cancellationToken);
-    assert.deepStrictEqual(pluginNames.length, 2);
-
-    for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
-      const scopeWork = dataStore.CreateScope(`working_${pluginIndex}`);
-      const messages: Message[] = [];
-      const result = await validationPlugin.Process(
-        pluginNames[pluginIndex], _ => null,
-        scopeInput,
-        scopeWork.CreateScope("output"),
-        m => messages.push(m),
-        cancellationToken);
-      assert.strictEqual(result, true);
-      assert.strictEqual(messages.length, (await scopeInput.Enum()).length);
-      const message = messages[0];
+    const errorMessages: Message[] = [];
+    autoRest.Message.Subscribe((_, m) => {
+      if (m.Channel === Channel.Error) {
+        errorMessages.push(m);
+      }
+    });
+    assert.strictEqual(await autoRest.Process().finish, true);
+    const expectedNumErrors = 2;
+    if (errorMessages.length !== expectedNumErrors) {
+      console.log(JSON.stringify(errorMessages, null, 2));
     }
+    assert.strictEqual(errorMessages.length, expectedNumErrors);
   }
 
   @test @timeout(10000) async "AutoRest.dll AzureValidator"() {
@@ -77,15 +72,20 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     // load swagger
     const swagger = await LoadLiterateSwagger(
       config,
-      dataStore.CreateScope("input").AsFileScopeReadThrough(),
+      dataStore.GetReadThroughScope(),
       "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
     // call validator
-    const autorestPlugin = AutoRestDotNetPlugin.Get();
+    const autorestPlugin = await GetAutoRestDotNetPlugin();
     const pluginScope = dataStore.CreateScope("plugin");
     const messages: Message[] = [];
-    const resultScope = await autorestPlugin.Validate(swagger, pluginScope, m => messages.push(m));
+    let currConfig: any = {
+      'openapi-type': 'arm',
+      'merge-state': 'composed'
+    };
+    const result = await autorestPlugin.Process("azure-validator", key => currConfig[key], new QuickScope([swagger]), pluginScope, m => messages.push(m), CancellationToken.None);
+    assert.strictEqual(result, true);
 
     // check results
     assert.notEqual(messages.length, 0);
@@ -93,10 +93,8 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       assert.ok(message);
       assert.ok(message.Details.code);
       assert.ok(message.Text);
-      assert.ok(message.Details.jsonref);
-      assert.ok(message.Details["json-path"]);
       assert.ok(message.Details.validationCategory);
-      assert.strictEqual(message.Plugin, "AzureValidator");
+      assert.strictEqual(message.Plugin, "azure-validator");
     }
   }
 
@@ -108,46 +106,60 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     // load swagger
     const swagger = await LoadLiterateSwagger(
       config,
-      dataStore.CreateScope("input").AsFileScopeReadThrough(),
+      dataStore.GetReadThroughScope(),
       "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
     // call modeler
-    const autorestPlugin = AutoRestDotNetPlugin.Get();
+    const autorestPlugin = await GetAutoRestDotNetPlugin();
     const pluginScope = dataStore.CreateScope("plugin");
-    const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope, { namespace: "SomeNamespace" }, m => null);
+    const result = await autorestPlugin.Process("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickScope([swagger]), pluginScope, m => null, CancellationToken.None);
+    assert.strictEqual(result, true);
+    const results = await pluginScope.Enum();
+    if (results.length !== 1) {
+      throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
+    }
 
     // check results
-    const codeModel = await codeModelHandle.ReadData();
+    const codeModel = (await pluginScope.ReadStrict(results[0])).ReadData();
     assert.notEqual(codeModel.indexOf("isPolymorphicDiscriminator"), -1);
   }
 
   @test @timeout(10000) async "AutoRest.dll Generator"() {
+    const autoRest = new AutoRest(new RealFileSystem());
+    autoRest.AddConfiguration({
+      namespace: "SomeNamespace",
+      "license-header": null,
+      "payload-flattening-threshold": 0,
+      "add-credentials": false,
+      "package-name": "rubyrubyrubyruby"
+    });
+    const config = await autoRest.view;
     const dataStore = new DataStore(CancellationToken.None);
 
+    // load swagger
+    const swagger = await LoadLiterateSwagger(
+      config,
+      dataStore.GetReadThroughScope(),
+      "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
+      dataStore.CreateScope("loader"));
+
     // load code model
-    const codeModelUri = ResolveUri(CreateFileUri(__dirname) + "/", "resources/code-model.yaml");
-    const inputScope = dataStore.CreateScope("input").AsFileScopeReadThrough(uri => uri === codeModelUri);
+    const codeModelUri = ResolveUri(CreateFolderUri(__dirname), "resources/code-model.yaml");
+    const inputScope = dataStore.GetReadThroughScope(uri => uri === codeModelUri);
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 
     // call generator
-    const autorestPlugin = AutoRestDotNetPlugin.Get();
-    const pluginScope = dataStore.CreateScope("plugin");
-    const resultScope = await autorestPlugin.GenerateCode(
-      codeModelHandle,
-      pluginScope,
-      {
-        codeGenerator: "Azure.CSharp",
-        namespace: "SomeNamespace",
-        header: null,
-        payloadFlatteningThreshold: 0,
-        internalConstructors: false,
-        syncMethods: "essential",
-        useDateTimeOffset: false,
-        addCredentials: false,
-        rubyPackageName: "rubyrubyrubyruby"
-      },
-      m => null);
+    const autorestPlugin = await GetAutoRestDotNetPlugin();
+    const resultScope = dataStore.CreateScope("output");
+    const result = await autorestPlugin.Process(
+      "csharp",
+      key => config.GetEntry(key as any),
+      new QuickScope([swagger, codeModelHandle]),
+      resultScope,
+      m => null,
+      CancellationToken.None);
+    assert.strictEqual(result, true);
 
     // check results
     const results = await resultScope.Enum();
@@ -161,7 +173,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
   @test @skip @timeout(0) async "custom plugin module"() {
     const cancellationToken = CancellationToken.None;
     const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.CreateScope("input").AsFileScopeReadThrough();
+    const scopeInput = dataStore.GetReadThroughScope();
 
     const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json";
     await scopeInput.Read(inputFileUri);

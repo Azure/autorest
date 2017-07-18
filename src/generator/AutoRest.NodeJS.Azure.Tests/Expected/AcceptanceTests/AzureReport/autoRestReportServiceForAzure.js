@@ -72,9 +72,10 @@ function _getReport(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -88,7 +89,6 @@ function _getReport(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -160,32 +160,21 @@ function _getReport(options, callback) {
   });
 }
 
-/**
- * @class
- * Initializes a new instance of the AutoRestReportServiceForAzure class.
- * @constructor
- *
- * @param {credentials} credentials - Credentials needed for the client to connect to Azure.
- *
- * @param {string} [baseUri] - The base URI of the service.
- *
- * @param {object} [options] - The parameter options
- *
- * @param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @param {object} [options.requestOptions] - Options for the underlying request object
- * {@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
- *
- * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
- *
- * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
- *
- * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
- *
- */
+/** Class representing a AutoRestReportServiceForAzure. */
 class AutoRestReportServiceForAzure extends ServiceClient {
+  /**
+   * Create a AutoRestReportServiceForAzure.
+   * @param {credentials} credentials - Credentials needed for the client to connect to Azure.
+   * @param {string} [baseUri] - The base URI of the service.
+   * @param {object} [options] - The parameter options
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
+   * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+   * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+   */
   constructor(credentials, baseUri, options) {
     if (credentials === null || credentials === undefined) {
       throw new Error('\'credentials\' cannot be null.');

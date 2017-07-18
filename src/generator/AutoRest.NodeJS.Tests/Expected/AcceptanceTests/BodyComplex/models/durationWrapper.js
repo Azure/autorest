@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the DurationWrapper class.
- * @constructor
- * @member {moment.duration} [field]
- *
+ * Class representing a DurationWrapper.
  */
 class DurationWrapper {
+  /**
+   * Create a DurationWrapper.
+   * @member {moment.duration} [field]
+   */
   constructor() {
   }
 

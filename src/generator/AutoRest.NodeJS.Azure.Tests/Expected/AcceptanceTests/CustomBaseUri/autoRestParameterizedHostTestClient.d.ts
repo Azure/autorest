@@ -8,10 +8,33 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse, ServiceClientCredentials } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse, ServiceClientCredentials } from 'ms-rest';
+import { AzureServiceClient, AzureServiceClientOptions } from 'ms-rest-azure';
 import * as operations from "./operations";
 
-declare class AutoRestParameterizedHostTestClient {
+/**
+ * AutoRestParameterizedHostTestClientOptions for AutoRestParameterizedHostTestClient.
+ */
+declare interface AutoRestParameterizedHostTestClientOptions extends ServiceClientOptions {
+        /**
+        * @property {string} [host] - A string value that is used as a global part of the parameterized host
+        */
+        host?: String;
+        /**
+        * @property {string} [acceptLanguage] - Gets or sets the preferred language for the response.
+        */
+        acceptLanguage?: String;
+        /**
+        * @property {number} [longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+        */
+        longRunningOperationRetryTimeout?: Number;
+        /**
+        * @property {boolean} [generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+        */
+        generateClientRequestId?: Boolean;
+    }
+
+declare class AutoRestParameterizedHostTestClient extends AzureServiceClient {
   /**
    * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
    * @constructor
@@ -37,7 +60,7 @@ declare class AutoRestParameterizedHostTestClient {
    * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
    *
    */
-  constructor(credentials: ServiceClientCredentials, options?: ServiceClientOptions);
+  constructor(credentials: ServiceClientCredentials, options?: AutoRestParameterizedHostTestClientOptions);
 
   credentials: ServiceClientCredentials;
 

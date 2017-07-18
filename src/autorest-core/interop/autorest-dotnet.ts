@@ -66,9 +66,12 @@ function DotNetPath() {
 }
 
 export function SpawnLegacyAutoRest(args: string[]): ChildProcess {
+  const autorestdll = AutoRestDllPath();
+  const dotnet = /autorest.src.core/ig.test(autorestdll) ? "dotnet" : DotNetPath();
+
   return spawn(
-    DotNetPath(),
-    [AutoRestDllPath(), ...args]);
+    dotnet,
+    [autorestdll, ...args]);
 }
 
 export function SpawnJsonRpcAutoRest(): ChildProcess {

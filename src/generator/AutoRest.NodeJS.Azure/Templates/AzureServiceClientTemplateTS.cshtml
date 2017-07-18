@@ -1,13 +1,16 @@
 ﻿@using System.Linq
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
-@using AutoRest.NodeJS
 @using AutoRest.NodeJS.Templates
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.CodeModelJs>
+@using AutoRest.NodeJS.Azure.Model
+@using AutoRest.NodeJS.Azure.Templates
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.Model.CodeModelJsa>
 /*
 @Header(" * ")
  */
 @EmptyLine
 @Model.ConstructImportTS()
+@Model.ConstructImportTSAzure()
 @if (Model.MethodTemplateModels.Any())
 {
 @:import * as models from "./models";
@@ -16,9 +19,26 @@
 @:import * as operations from "./operations";
 }
 @EmptyLine
-declare class @(Model.Name) {
 @{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
 @{var optionalParameters = Model.Properties.Where(p => (!p.IsRequired || p.IsRequired && !string.IsNullOrEmpty(p.DefaultValue)) && !p.IsConstant);}
+@{var clientOptionType = Model.shouldOptionsInterfaceBeDeclared ? Model.Name + "Options" : "AzureServiceClientOptions"; }
+@if (Model.shouldOptionsInterfaceBeDeclared)
+{
+@:/**
+ @:* @(Model.Name)Options for @(Model.Name).
+ @:*/
+@:declare interface @(Model.Name)Options extends ServiceClientOptions {
+    foreach (var param in optionalParameters)
+    {
+        @:/**
+        @:* @@property {@param.ModelType.Name.ToCamelCase()} [@param.Name] - @param.Documentation
+        @:*/
+        @:@param.Name?: @param.ModelType.Name;
+    }
+    @:}
+    @EmptyLine
+}
+declare class @(Model.Name) extends AzureServiceClient {
   /**
    * Initializes a new instance of the @Model.Name class.
    * @@constructor
@@ -49,7 +69,7 @@ declare class @(Model.Name) {
    @:*
 }
    */
-  constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParametersTS) ? Model.RequiredConstructorParametersTS + ", " : "")options?: ServiceClientOptions);
+  constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParametersTS) ? Model.RequiredConstructorParametersTS + ", " : "")options?: @clientOptionType);
 
 @foreach (var property in Model.Properties)
 {

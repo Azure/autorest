@@ -135,7 +135,7 @@ namespace AutoRest.NodeJS.Model
                         builder.AppendLine(",");
                     }
                 }
-                
+
                 return builder.ToString();
             }
         }
@@ -198,7 +198,7 @@ namespace AutoRest.NodeJS.Model
         public string ConstructImportTS()
         {
             IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.TwoSpaces);
-            builder.Append("import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse");
+            builder.Append("import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse");
             if (Properties.Any(p => p.Name.EqualsIgnoreCase("credentials")))
             {
                 builder.Append(", ServiceClientCredentials");

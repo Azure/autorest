@@ -107,9 +107,10 @@ function _getAllWithValues(localStringPath, pathItemStringPath, options, callbac
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -117,7 +118,6 @@ function _getAllWithValues(localStringPath, pathItemStringPath, options, callbac
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -252,9 +252,10 @@ function _getGlobalQueryNull(localStringPath, pathItemStringPath, options, callb
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -262,7 +263,6 @@ function _getGlobalQueryNull(localStringPath, pathItemStringPath, options, callb
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -396,9 +396,10 @@ function _getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, option
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -406,7 +407,6 @@ function _getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, option
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -539,9 +539,10 @@ function _getLocalPathItemQueryNull(localStringPath, pathItemStringPath, options
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -549,7 +550,6 @@ function _getLocalPathItemQueryNull(localStringPath, pathItemStringPath, options
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -591,17 +591,12 @@ function _getLocalPathItemQueryNull(localStringPath, pathItemStringPath, options
   });
 }
 
-/**
- * @class
- * PathItems
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestUrlTestService.
- * Initializes a new instance of the PathItems class.
- * @constructor
- *
- * @param {AutoRestUrlTestService} client Reference to the service client.
- */
+/** Class representing a PathItems. */
 class PathItems {
+  /**
+   * Create a PathItems.
+   * @param {AutoRestUrlTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getAllWithValues = _getAllWithValues;

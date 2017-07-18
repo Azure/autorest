@@ -7,10 +7,6 @@
     "src/autorest/**/*.js": true,
     "src/autorest/**/*.js.map": true,
     "src/autorest/**/*.d.ts": true,
-    "src/vscode-autorest/**/*.js": true,
-    "src/vscode-autorest/**/*.js.map": true,
-    "src/vscode-autorest/**/*.d.ts": true,
-    "src/vscode-autorest/node_modules/**": true,
     "src/autorest/node_modules/**": true,
     "src/autorest-core/node_modules/**": true,
     "**/.git": true,
@@ -19,6 +15,9 @@
     "**/.DS_Store": true
   },
   "csharp.suppressDotnetRestoreNotification": true,
+  "[csharp]": {
+    "editor.tabSize": 4
+  },
   "[typescript]": {
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,

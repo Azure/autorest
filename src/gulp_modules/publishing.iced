@@ -8,9 +8,7 @@ task 'zip-autorest', '', () ->
     .pipe zip package_name
     .pipe destination packages
 
-task 'install-node-files' ,'', (done)->
-  # install autorest files into dotnet-output-folder
-  # install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish",done
+task 'install/node-files' ,'', (done)->
   if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules"
     mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules"
   
@@ -23,13 +21,13 @@ task 'package','From scratch build, sign, and package autorest', (done) ->
   run 'clean',
     'restore'
     [ 'build/typescript', 'build/dotnet/binaries' ],
-    [ 'sign-assemblies', 'install-node-files' ],
+    [ 'sign-assemblies', 'install/node-files' ],
     'zip-autorest' 
     -> done()
 
 task 'publish', 'Builds, signs, publishes autorest binaries to GitHub Release',(done) ->
   run 'package',
-    'upload:github'
+    'upload/github'
     -> done()
 
 task 'copy-vscode-files-to-work', '', ->
@@ -105,36 +103,41 @@ task 'copy-vscode-files-to-work', '', ->
   ]
     .pipe destination "#{workdir}/" 
 
-task 'package-vscode', "creates the autorest vscode extension package.",["build/typescript"],(done)-> 
-  echo "updating version in package.json file"
-  execute "npm version patch", {cwd: "#{basefolder}/src/vscode-autorest" },(c,o,e)->
-    run ["copy-vscode-files-to-work"], -> 
-      echo "patching package.json file to include autorest package"
-      pkg = require("#{workdir}/package.json")
-      pkg.dependencies.autorest="*"
-      JSON.stringify(pkg).to("#{workdir}/package.json");
+task 'package/vscode', "creates the autorest vscode extension package.",(done)-> 
+  run "clean", "build", -> 
+    echo "updating version in package.json file"
+    execute "npm version patch", {cwd: "#{basefolder}/src/vscode-autorest" },(c,o,e)->
+      run "copy-vscode-files-to-work", -> 
+        echo "patching package.json file to include autorest package"
+        pkg = require("#{workdir}/package.json")
+        pkg.dependencies.autorest="*"
+        JSON.stringify(pkg).to("#{workdir}/package.json");
 
-      execute "vsce package", {cwd: "#{workdir}" },(c,o,e)->
-        mv "#{workdir}/*.vsix","#{basefolder}/src/vscode-autorest/"
-        rm '-rf', workdir
-        name = "#{basefolder}/src/vscode-autorest/autorest-#{pkg.version}.vsix"
-        echo "Package Created:\n   #{name}"
-        done()
+        execute "vsce package", {cwd: "#{workdir}" },(c,o,e)->
+          mv "#{workdir}/*.vsix","#{basefolder}/src/vscode-autorest/"
+          rm '-rf', workdir
+          name = "#{basefolder}/src/vscode-autorest/autorest-#{pkg.version}.vsix"
+          echo "Package Created:\n   #{name}"
+          done()
 
   return null
   
-
+task 'publish/vscode', "uploads the autorest vscode extension package.",(done)-> 
+  pkg = require("#{basefolder}/src/vscode-autorest/package.json")
+  execute "vsce publish --packagePath #{basefolder}/src/vscode-autorest/autorest-#{pkg.version}.vsix", {silent:false},(c,o,e)->
+    done()
+    
 task 'publish/autorest', '', ['build/typescript'], (done) ->
   execute "npm publish ", {cwd: "#{basefolder}/src/autorest" }, done
 
-task 'upload:github','', ->
+task 'upload/github','', ->
   Fail "needs --github_apikey=... or GITHUB_APIKEY set" if !github_apikey
   Fail "Missing package file #{packages}/#{package_name}" if !exists("#{packages}/#{package_name}")
 
   source "#{packages}/#{package_name}"
     .pipe ghrelease {
       token: github_apikey,   
-      owner: 'azure',
+      owner: github_feed,
       repo: 'autorest',
       tag: "v#{release_name}",       
       name: "#{release_name}", 
@@ -148,6 +151,6 @@ To Install AutoRest, install nodej.js 6.9.5 or later, and run
 (You don't want to download these files directly, there's no point.)
 """,                
       draft: false,
-      prerelease: if argv.nightly then true else false, 
+      prerelease: if argv.nightly or argv.preview then true else false, 
     }
 

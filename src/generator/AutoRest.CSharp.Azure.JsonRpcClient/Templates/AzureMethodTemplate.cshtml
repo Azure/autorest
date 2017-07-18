@@ -1,0 +1,121 @@
+@using System
+@using AutoRest.CSharp.Azure.Templates
+@using System.Linq
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Model
+@using AutoRest.CSharp.Templates.Rest.Client
+
+@inherits AutoRest.CSharp.Azure.Templates.AzureMethodTemplate
+
+@{
+    var xns = "Microsoft.Rest.ClientRuntime.Test.Azure.";
+    var errorType = Model.DefaultResponse.Body.AsNullableTypeOrDefault();
+    var infoType = $"{xns}AzureRequestInfo<{errorType}>";
+}
+
+static readonly @(infoType) @(Model.Name)_RequestInfo =
+    new @(infoType)(
+        title: "@(Model.MethodGroup.CodeModel.Name)",
+        id: "@(Model.SerializedName)",
+        method: "@(Model.HttpMethod.ToString().ToUpper())",
+        // path = "@(Model.Url)"
+        path: new @(xns)AzurePathPart[]
+        {
+            @foreach (var p in Model.GetPathParts())
+            {
+            @:new @(xns)AzurePathPart(value: "@(p.Item1)", isParam: @(p.Item2 ? "true" : "false")),
+            }            
+        },
+        constList: new @(xns)AzureParam[]
+        {
+            @foreach (var p in Model.LogicalParameters.Where(x => x.IsConstant))
+            {
+            @:new @(xns)AzureParam(
+                @:new @(xns)AzureParamInfo(
+                    @:name: "@(p.SerializedName)",
+                    @:location: @(xns)AzureParamLocation.@(p.Location),
+                    // no validation for const parameters
+                    @:isRequired: false,
+                    // no validation for const parameters
+                    @:constraints: new @(xns)Constraints.AzureConstraint[0]),
+                @:@(p.GetExp())),
+            }
+        },
+        createException: error => new @(Model.OperationExceptionTypeString)(error.Message)
+        {
+            Request = error.Request,
+            Response = error.Response,
+            @if (Model.DefaultResponse.Body != null)
+            {
+            @:Body = error.Body,
+            }
+        },
+        isLongRunningOperation: @(Model.IsLongRunningOperation ? "true" : "false"));
+
+@foreach (var p in Model.LogicalParameters.Where(x => !x.IsConstant))
+{
+@EmptyLine
+@:static readonly @(xns)AzureParamInfo @(Model.GetParameterInfoName(p)) = 
+    @:new @(xns)AzureParamInfo(
+        @:name: "@(p.SerializedName)",
+        @:location: @(xns)AzureParamLocation.@(p.Location),
+        @:isRequired: @(p.IsRequired ? "true" : "false"),
+        @:constraints: new @(xns)Constraints.AzureConstraint[]
+        @:{
+    foreach (var c in p.Constraints)
+    {
+            @:@(c.GetConstraint())
+    }
+        @:});
+}
+
+@EmptyLine
+public System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(
+    @(Model.GetAsyncMethodParameterDeclaration(true)))
+{
+    var params_ = new @(xns)AzureParam[]
+    {
+        @foreach (var p in Model.LogicalParameters.Where(x => !x.IsConstant))
+        {
+        @:new @(xns)AzureParam(
+            @:@(Model.GetParameterInfoName(p)),
+            @:@(p.GetExp())),
+        }
+    };
+    var operation_ = new @(xns)AzureRequest<@(errorType)>(
+        info: @(Model.Name)_RequestInfo,
+        @if (Model.IsCustomBaseUri)
+        {
+        @:baseUri: new @(xns)AzureParamBaseUri(
+            @:new @(xns)AzurePathPart[]
+            @:{
+                foreach (var p in Model.GetUriParts())
+                {
+                @:new @(xns)AzurePathPart(value: "@(p.Item1)", isParam: @(p.Item2 ? "true" : "false")),
+                }
+            @:}),        
+        }
+        else
+        {
+        @:baseUri: new @(xns)AzureConstBaseUri(@(Model.ClientReference).BaseUri),
+        }
+        paramList: params_,
+        customHeaders: customHeaders,
+        cancellationToken: cancellationToken);
+    return @(xns)ServiceClientEx.Call(
+        @(Model.ClientReference),
+        operation_,
+        @{
+            var returnType = Model.ReturnType;
+        }
+        @if (returnType.Body != null)
+        {
+        @:new @(xns)Tag<@(Model.OperationResponseReturnTypeString)>(),        
+        @:new @(xns)Tag<@(returnType.Body.AsNullableType(Model.IsXNullableReturnType))>());
+        }
+        else
+        {
+        @:new @(xns)Tag<@(Model.OperationResponseReturnTypeString)>());
+        }
+}

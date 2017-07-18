@@ -124,9 +124,10 @@ function _validationOfMethodParameters(resourceGroupName, id, options, callback)
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -134,7 +135,6 @@ function _validationOfMethodParameters(resourceGroupName, id, options, callback)
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -314,9 +314,10 @@ function _validationOfBody(resourceGroupName, id, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -324,7 +325,6 @@ function _validationOfBody(resourceGroupName, id, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -435,9 +435,10 @@ function _getWithConstantInPath(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -445,7 +446,6 @@ function _getWithConstantInPath(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -540,9 +540,10 @@ function _postWithConstantInBody(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'POST';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -550,7 +551,6 @@ function _postWithConstantInBody(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -619,28 +619,19 @@ function _postWithConstantInBody(options, callback) {
   });
 }
 
-/**
- * @class
- * Initializes a new instance of the AutoRestValidationTest class.
- * @constructor
- *
- * @param {string} subscriptionId - Subscription ID.
- *
- * @param {string} apiVersion - Required string following pattern \d{2}-\d{2}-\d{4}
- *
- * @param {string} [baseUri] - The base URI of the service.
- *
- * @param {object} [options] - The parameter options
- *
- * @param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @param {object} [options.requestOptions] - Options for the underlying request object
- * {@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
- *
- */
+/** Class representing a AutoRestValidationTest. */
 class AutoRestValidationTest extends ServiceClient {
+  /**
+   * Create a AutoRestValidationTest.
+   * @param {string} subscriptionId - Subscription ID.
+   * @param {string} apiVersion - Required string following pattern \d{2}-\d{2}-\d{4}
+   * @param {string} [baseUri] - The base URI of the service.
+   * @param {object} [options] - The parameter options
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   */
   constructor(subscriptionId, apiVersion, baseUri, options) {
     if (subscriptionId === null || subscriptionId === undefined) {
       throw new Error('\'subscriptionId\' cannot be null.');

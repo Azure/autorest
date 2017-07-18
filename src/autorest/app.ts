@@ -27,6 +27,7 @@ class App {
   private static reset: boolean = cli.reset || false;
 
   private static help: string = cli.help || false;
+  private static feed: string = cli.feed || "azure";
 
   private static networkEnabled: boolean = true;
   private static pkgVersion: string = require(`${__dirname}/package.json`).version;
@@ -44,7 +45,7 @@ class App {
   }
 
   private static async GetReleases(): Promise<IEnumerable<Release>> {
-    return (await Github.List()).Where(each => semver.valid(each.name, false) != null);
+    return (await Github.List(App.feed)).Where(each => semver.valid(each.name, false) != null);
   }
 
   private static async CheckBootstrapperVersion() {
@@ -82,9 +83,10 @@ class App {
                           __latest-release__ - get latest release version
   *--reset*              remove all installed versions of AutoRest tools
                         and install the latest (override with *--version*)
-  *--runtime-id*=__id__        overrides the platform detection for the dotnet runtime.
+  *--runtime-id*=__id__      overrides the platform detection for the dotnet runtime.
 
-## __Using AutoRest__`);
+  SEE ALSO : https://aka.ms/autorest/cli for additional documentation
+`);
   }
 
   private static async ListAvailable() {
@@ -117,13 +119,23 @@ class App {
       this.networkEnabled = networkEnabled;
       Console.Debug(`Network Enabled: ${this.networkEnabled}`);
 
-      const RemoveArgs = From<string>(["--version", "--list-installed", "--list-available", "--reset", "--latest", "--latest-release", "--debug", "--verbose", "--quiet", "--runtime-id"]);
+      const RemoveArgs = From<string>(["--version", "--list-installed", "--list-available", "--reset", "--latest", "--latest-release", "--runtime-id"]);
 
       // Remove bootstrapper args from cmdline
       process.argv = From<string>(process.argv).Where(each => !RemoveArgs.Any(i => each === i || each.startsWith(`${i}=`) || each.startsWith(`${i}:`))).ToArray();
 
+      // use this to make the core aware that this run may be legal even without any inputs
+      // this is a valid scenario for "preparation calls" to autorest like `autorest --reset` or `autorest --latest`
+      const allowNoInput = () => {
+        // if there is *any* other argument left, that's an indicator that the core is supposed to do something
+        if (process.argv.length <= 2 /*expecting node and this script*/) {
+          process.argv.push("--allow-no-input");
+        }
+      };
+
       if (this.reset) {
         rm('-rf', Installer.RootFolder);
+        allowNoInput();
       }
 
       // check if we're up to date with the bootstrapper
@@ -143,8 +155,7 @@ class App {
       if (this.help) {
         this.ShowHelp();
         // remove other arguments and send -help o 
-        process.argv.length = 2;
-        process.argv.push('--help');
+        process.exit(0);
       }
 
       if (this.listAvailable || this.listInstalled) {
@@ -175,6 +186,9 @@ class App {
           // or, grab the latest version
           this.version = 'latest';
         }
+      } else {
+        // a version was explicitly asked for => may just be a preparation call
+        allowNoInput();
       }
 
       // if necessary, go get the package we need.
@@ -183,7 +197,7 @@ class App {
           // find out the latest version
           let releases = await this.GetReleases();
 
-          if (this.version == 'latest-release') {
+          if (this.version === 'latest-release') {
             Console.Verbose('Requested "latest-release" version');
             releases = releases.Where(each => each.prerelease == false);
           } else {
@@ -238,7 +252,7 @@ class App {
           Console.Verbose(`Attempting to install it.`);
           // install that version
           try {
-            return Installer.InstallAutoRest(this.version);
+            return Installer.InstallAutoRest(this.version, App.feed);
           } catch (exception) {
             Console.Exit(`Unable to install AutoRest version '${this.version}'`);
           }

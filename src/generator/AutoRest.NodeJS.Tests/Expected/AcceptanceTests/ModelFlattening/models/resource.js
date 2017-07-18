@@ -11,21 +11,17 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the Resource class.
- * @constructor
- * @member {string} [id] Resource Id
- *
- * @member {string} [type] Resource Type
- *
- * @member {object} [tags]
- *
- * @member {string} [location] Resource Location
- *
- * @member {string} [name] Resource Name
- *
+ * Class representing a Resource.
  */
 class Resource {
+  /**
+   * Create a Resource.
+   * @member {string} [id] Resource Id
+   * @member {string} [type] Resource Type
+   * @member {object} [tags]
+   * @member {string} [location] Resource Location
+   * @member {string} [name] Resource Name
+   */
   constructor() {
   }
 

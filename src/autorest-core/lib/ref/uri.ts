@@ -3,6 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+export function IsUri(uri: string): boolean {
+  return /^([a-z0-9+.-]+):(?:\/\/(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(\/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(\/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$/i.test(uri);
+}
+
 /***********************
  * Data aquisition
  ***********************/
@@ -10,7 +14,7 @@ import * as promisify from "pify";
 import { Readable } from "stream";
 import { parse } from "url";
 import { sep } from "path";
-// polyfills for language support 
+// polyfills for language support
 require("../polyfill.min.js");
 
 const stripBom: (text: string) => string = require("strip-bom");
@@ -31,7 +35,12 @@ export async function ReadUri(uri: string): Promise<string> {
       readable.on("error", err => reject(err));
     });
 
-    return stripBom(await readAll);
+    let result = await readAll;
+    // fix up UTF16le files
+    if (result.charCodeAt(0) === 65533 && result.charCodeAt(1) === 65533) {
+      result = Buffer.from(result.slice(2)).toString("utf16le");
+    }
+    return stripBom(result);
   } catch (e) {
     throw new Error(`Failed to load '${uri}' (${e})`);
   }
@@ -50,9 +59,28 @@ export async function ExistsUri(uri: string): Promise<boolean> {
 /***********************
  * URI manipulation
  ***********************/
-import { isAbsolute, dirname } from "path";
+import { dirname } from "path";
 const URI = require("urijs");
 const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
+
+
+/**
+ *  remake of path.isAbsolute... because it's platform dependent:
+ * Windows: C:\\... -> true    /... -> true
+ * Linux:   C:\\... -> false   /... -> true
+ */
+function isAbsolute(path: string): boolean {
+  return !!path.match(/^([a-zA-Z]:)?(\/|\\)/);
+}
+
+/**
+ * determines what an absolute URI is for our purposes, consider:
+ * - we had Ruby try to use "Azure::ARM::SQL" as a file name, so that should not be considered absolute
+ * - we want simple, easily predictable semantics
+ */
+function isUriAbsolute(url: string): boolean {
+  return /^[a-z]+:\/\//.test(url);
+}
 
 /**
  * Create a 'file:///' URI from given absolute path.
@@ -60,14 +88,22 @@ const fileUri: (path: string, options: { resolve: boolean }) => string = require
  * - "C:\swagger\storage.yaml" -> "file:///C:/swagger/storage.yaml"
  * - "/input/swagger.yaml" -> "file:///input/swagger.yaml"
  */
-export function CreateFileUri(absolutePath: string): string {
+export function CreateFileOrFolderUri(absolutePath: string): string {
   if (!isAbsolute(absolutePath)) {
     throw new Error("Can only create file URIs from absolute paths.");
   }
-  return EnsureIsFileUri(fileUri(absolutePath, { resolve: false }));
+  let result = fileUri(absolutePath, { resolve: false });
+  // handle UNCs
+  if (absolutePath.startsWith("//") || absolutePath.startsWith("\\\\")) {
+    result = result.replace(/^file:\/\/\/\//, "file://");
+  }
+  return result;
+}
+export function CreateFileUri(absolutePath: string): string {
+  return EnsureIsFileUri(CreateFileOrFolderUri(absolutePath));
 }
 export function CreateFolderUri(absolutePath: string): string {
-  return EnsureIsFolderUri(CreateFileUri(absolutePath));
+  return EnsureIsFolderUri(CreateFileOrFolderUri(absolutePath));
 }
 
 export function EnsureIsFolderUri(uri: string) {
@@ -96,13 +132,23 @@ export function GetFilenameWithoutExtension(uri: string) {
  */
 export function ResolveUri(baseUri: string, pathOrUri: string): string {
   if (isAbsolute(pathOrUri)) {
-    return CreateFileUri(pathOrUri);
+    return CreateFileOrFolderUri(pathOrUri);
   }
+  // known here: `pathOrUri` is eiher URI (relative or absolute) or relative path - which we can normalize to a relative URI
   pathOrUri = pathOrUri.replace(/\\/g, "/");
+  // known here: `pathOrUri` is a URI (relative or absolute)
+  if (isUriAbsolute(pathOrUri)) {
+    return pathOrUri;
+  }
+  // known here: `pathOrUri` is a relative URI
   if (!baseUri) {
     throw new Error("'pathOrUri' was detected to be relative so 'baseUri' is required");
   }
-  return new URI(pathOrUri).absoluteTo(baseUri).toString();
+  try {
+    return new URI(pathOrUri).absoluteTo(baseUri).toString();
+  } catch (e) {
+    throw new Error(`Failed resolving '${pathOrUri}' against '${baseUri}'.`);
+  }
 }
 
 export function ParentFolderUri(uri: string): string | null {
@@ -119,11 +165,15 @@ export function ParentFolderUri(uri: string): string | null {
   return uri.slice(0, uri.length - compLen);
 }
 
+export function MakeRelativeUri(baseUri: string, absoluteUri: string): string {
+  return new URI(absoluteUri).relativeTo(baseUri).toString();
+}
+
 /***********************
  * OS abstraction (writing files, enumerating files)
  ***********************/
 import { readdir, mkdir, exists, writeFile } from "./async";
-import { lstatSync } from "fs";
+import { lstatSync, unlinkSync, rmdirSync } from "fs";
 
 function isAccessibleFile(localPath: string) {
   try {
@@ -135,8 +185,10 @@ function isAccessibleFile(localPath: string) {
 
 function FileUriToLocalPath(fileUri: string): string {
   const uri = parse(fileUri);
-  if (uri.protocol !== "file:") {
-    throw new Error(`Protocol '${uri.protocol}' not supported for writing.`);
+  if (!fileUri.startsWith("file:///")) {
+    throw new Error(!fileUri.startsWith("file://")
+      ? `Protocol '${uri.protocol}' not supported for writing.`
+      : `UNC paths not supported for writing.`);
   }
   // convert to path
   let p = uri.path;
@@ -147,7 +199,7 @@ function FileUriToLocalPath(fileUri: string): string {
     p = p.substr(p.startsWith("/") ? 1 : 0);
     p = p.replace(/\//g, "\\");
   }
-  return p;
+  return decodeURI(p);
 }
 
 export async function* EnumerateFiles(folderUri: string, probeFiles: string[] = []): AsyncIterable<string> {
@@ -195,17 +247,24 @@ export function WriteString(fileUri: string, data: string): Promise<void> {
   return WriteStringInternal(FileUriToLocalPath(fileUri), data);
 }
 
-
-
-
-
-
-
-/// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
-async function* yieldFromMap(): AsyncIterable<string> {
-  yield* ["hello", "world"];
-};
-async function foo() {
-  for await (const each of yieldFromMap()) {
-  }
+/**
+ * Clears a folder on the local file system.
+ * @param folderUri  Folder uri.
+ */
+export async function ClearFolder(folderUri: string): Promise<void> {
+  const path = FileUriToLocalPath(folderUri);
+  const deleteFolderRecursive = async (path: string) => {
+    if (await exists(path)) {
+      for (const file of await readdir(path)) {
+        var curPath = path + "/" + file;
+        if (lstatSync(curPath).isDirectory()) {
+          await deleteFolderRecursive(curPath);
+        } else {
+          unlinkSync(curPath);
+        }
+      }
+      rmdirSync(path);
+    }
+  };
+  await deleteFolderRecursive(path);
 }

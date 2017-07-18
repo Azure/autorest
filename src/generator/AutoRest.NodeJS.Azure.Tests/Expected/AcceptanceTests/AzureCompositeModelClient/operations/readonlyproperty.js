@@ -65,9 +65,10 @@ function _getValid(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -81,7 +82,6 @@ function _getValid(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -205,9 +205,10 @@ function _putValid(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -221,7 +222,6 @@ function _putValid(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -277,17 +277,12 @@ function _putValid(options, callback) {
   });
 }
 
-/**
- * @class
- * Readonlyproperty
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AzureCompositeModel.
- * Initializes a new instance of the Readonlyproperty class.
- * @constructor
- *
- * @param {AzureCompositeModel} client Reference to the service client.
- */
+/** Class representing a Readonlyproperty. */
 class Readonlyproperty {
+  /**
+   * Create a Readonlyproperty.
+   * @param {AzureCompositeModel} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getValid = _getValid;

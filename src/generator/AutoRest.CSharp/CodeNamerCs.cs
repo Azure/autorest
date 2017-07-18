@@ -43,6 +43,11 @@ namespace AutoRest.CSharp
                 });
         }
 
+        public override string GetEnumMemberName(string name)
+        {
+            return base.GetEnumMemberName(name.Replace('/', '-'));
+        }
+
         /// <summary>
         /// Returns true when the name comparison is a special case and should not 
         /// be used to determine name conflicts.

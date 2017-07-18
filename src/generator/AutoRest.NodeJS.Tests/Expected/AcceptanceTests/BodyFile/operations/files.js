@@ -51,9 +51,10 @@ function _getFile(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -61,7 +62,6 @@ function _getFile(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   httpRequest.streamedResponse = true;
@@ -142,9 +142,10 @@ function _getFileLarge(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -152,7 +153,6 @@ function _getFileLarge(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   httpRequest.streamedResponse = true;
@@ -233,9 +233,10 @@ function _getEmptyFile(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -243,7 +244,6 @@ function _getEmptyFile(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   httpRequest.streamedResponse = true;
@@ -286,17 +286,12 @@ function _getEmptyFile(options, callback) {
   });
 }
 
-/**
- * @class
- * Files
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestSwaggerBATFileService.
- * Initializes a new instance of the Files class.
- * @constructor
- *
- * @param {AutoRestSwaggerBATFileService} client Reference to the service client.
- */
+/** Class representing a Files. */
 class Files {
+  /**
+   * Create a Files.
+   * @param {AutoRestSwaggerBATFileService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getFile = _getFile;

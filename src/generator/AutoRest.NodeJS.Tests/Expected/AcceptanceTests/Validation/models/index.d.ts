@@ -18,7 +18,6 @@ import * as moment from "moment";
  * The product documentation.
  *
  * @member {number} [count] Count
- *
  */
 export interface ChildProduct {
   count?: number;
@@ -42,18 +41,12 @@ export interface ConstantProduct {
  *
  * @member {array} [displayNames] Non required array of unique items from 0 to
  * 6 elements.
- *
  * @member {number} [capacity] Non required int betwen 0 and 100 exclusive.
- *
  * @member {string} [image] Image URL representing the product.
- *
  * @member {object} child
- *
  * @member {number} [child.count] Count
- *
  * @member {string} [constStringAsEnum] Constant string as Enum. Possible
  * values include: 'constant_string_as_enum'
- *
  */
 export interface Product {
   displayNames?: string[];
@@ -68,11 +61,8 @@ export interface Product {
  * Initializes a new instance of the ErrorModel class.
  * @constructor
  * @member {number} [code]
- *
  * @member {string} [message]
- *
  * @member {string} [fields]
- *
  */
 export interface ErrorModel {
   code?: number;

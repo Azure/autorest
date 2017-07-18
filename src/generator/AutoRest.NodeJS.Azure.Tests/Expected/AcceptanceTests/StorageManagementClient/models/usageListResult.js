@@ -13,15 +13,14 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the UsageListResult class.
- * @constructor
  * The List Usages operation response.
- *
- * @member {array} [value] Gets or sets the list Storage Resource Usages.
  *
  */
 class UsageListResult {
+  /**
+   * Create a UsageListResult.
+   * @member {array} [value] Gets or sets the list Storage Resource Usages.
+   */
   constructor() {
   }
 

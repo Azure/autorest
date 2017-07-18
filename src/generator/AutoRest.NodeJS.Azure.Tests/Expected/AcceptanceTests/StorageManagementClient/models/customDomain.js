@@ -11,20 +11,19 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the CustomDomain class.
- * @constructor
  * The custom domain assigned to this storage account. This can be set via
  * Update.
  *
- * @member {string} [name] Gets or sets the custom domain name. Name is the
- * CNAME source.
- *
- * @member {boolean} [useSubDomain] Indicates whether indirect CName validation
- * is enabled. Default value is false. This should only be set on updates
- *
  */
 class CustomDomain {
+  /**
+   * Create a CustomDomain.
+   * @member {string} [name] Gets or sets the custom domain name. Name is the
+   * CNAME source.
+   * @member {boolean} [useSubDomain] Indicates whether indirect CName
+   * validation is enabled. Default value is false. This should only be set on
+   * updates
+   */
   constructor() {
   }
 

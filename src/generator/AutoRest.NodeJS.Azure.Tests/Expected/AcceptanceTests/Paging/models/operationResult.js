@@ -11,15 +11,15 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the OperationResult class.
- * @constructor
- * @member {string} [status] The status of the request. Possible values
- * include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
- * 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
+ * Class representing a OperationResult.
  */
 class OperationResult {
+  /**
+   * Create a OperationResult.
+   * @member {string} [status] The status of the request. Possible values
+   * include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
+   * 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+   */
   constructor() {
   }
 

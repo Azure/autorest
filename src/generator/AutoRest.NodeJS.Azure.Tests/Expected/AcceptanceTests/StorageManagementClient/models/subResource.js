@@ -13,13 +13,14 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the SubResource class.
- * @constructor
- * @member {string} [id] Resource Id
- *
+ * Class representing a SubResource.
+ * @extends models['BaseResource']
  */
 class SubResource extends models['BaseResource'] {
+  /**
+   * Create a SubResource.
+   * @member {string} [id] Resource Id
+   */
   constructor() {
     super();
   }

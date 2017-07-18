@@ -13,13 +13,13 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the CatalogDictionary class.
- * @constructor
- * @member {object} [productDictionary] Dictionary of products
- *
+ * Class representing a CatalogDictionary.
  */
 class CatalogDictionary {
+  /**
+   * Create a CatalogDictionary.
+   * @member {object} [productDictionary] Dictionary of products
+   */
   constructor() {
   }
 

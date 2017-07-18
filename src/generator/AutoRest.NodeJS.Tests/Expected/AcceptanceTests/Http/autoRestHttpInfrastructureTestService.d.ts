@@ -8,10 +8,10 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
-declare class AutoRestHttpInfrastructureTestService {
+declare class AutoRestHttpInfrastructureTestService extends ServiceClient {
   /**
    * @class
    * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.

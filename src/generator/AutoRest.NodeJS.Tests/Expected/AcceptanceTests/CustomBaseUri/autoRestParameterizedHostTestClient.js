@@ -21,24 +21,17 @@ const models = require('./models');
 const operations = require('./operations');
 
 
-/**
- * @class
- * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
- * @constructor
- *
- * @param {object} [options] - The parameter options
- *
- * @param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @param {object} [options.requestOptions] - Options for the underlying request object
- * {@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
- *
- * @param {string} [options.host] - A string value that is used as a global part of the parameterized host
- *
- */
+/** Class representing a AutoRestParameterizedHostTestClient. */
 class AutoRestParameterizedHostTestClient extends ServiceClient {
+  /**
+   * Create a AutoRestParameterizedHostTestClient.
+   * @param {object} [options] - The parameter options
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   * @param {string} [options.host] - A string value that is used as a global part of the parameterized host
+   */
   constructor(options) {
 
     if (!options) options = {};

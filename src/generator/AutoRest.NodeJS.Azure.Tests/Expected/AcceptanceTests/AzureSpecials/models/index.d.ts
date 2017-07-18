@@ -10,6 +10,7 @@
 
 import { BaseResource } from 'ms-rest-azure';
 import { CloudError } from 'ms-rest-azure';
+import * as moment from 'moment';
 
 export { BaseResource } from 'ms-rest-azure';
 export { CloudError } from 'ms-rest-azure';
@@ -20,11 +21,8 @@ export { CloudError } from 'ms-rest-azure';
  * Initializes a new instance of the ErrorModel class.
  * @constructor
  * @member {number} [status]
- *
  * @member {number} [constantId]
- *
  * @member {string} [message]
- *
  */
 export interface ErrorModel {
   status?: number;
@@ -37,9 +35,7 @@ export interface ErrorModel {
  * Initializes a new instance of the OdataFilter class.
  * @constructor
  * @member {number} [id]
- *
  * @member {string} [name]
- *
  */
 export interface OdataFilter {
   id?: number;
@@ -54,7 +50,6 @@ export interface OdataFilter {
  * operation.
  *
  * @member {string} fooClientRequestId The fooRequestId
- *
  */
 export interface HeaderCustomNamedRequestIdParamGroupingParameters {
   fooClientRequestId: string;

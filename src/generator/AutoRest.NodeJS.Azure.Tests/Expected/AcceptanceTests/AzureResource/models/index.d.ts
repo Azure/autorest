@@ -10,6 +10,7 @@
 
 import { BaseResource } from 'ms-rest-azure';
 import { CloudError } from 'ms-rest-azure';
+import * as moment from 'moment';
 
 export { BaseResource } from 'ms-rest-azure';
 export { CloudError } from 'ms-rest-azure';
@@ -20,9 +21,7 @@ export { CloudError } from 'ms-rest-azure';
  * Initializes a new instance of the ErrorModel class.
  * @constructor
  * @member {number} [status]
- *
  * @member {string} [message]
- *
  */
 export interface ErrorModel {
   status?: number;
@@ -36,15 +35,10 @@ export interface ErrorModel {
  * Some resource
  *
  * @member {string} [id] Resource Id
- *
  * @member {string} [type] Resource Type
- *
  * @member {object} [tags]
- *
  * @member {string} [location] Resource Location
- *
  * @member {string} [name] Resource Name
- *
  */
 export interface Resource extends BaseResource {
   readonly id?: string;
@@ -59,11 +53,8 @@ export interface Resource extends BaseResource {
  * Initializes a new instance of the FlattenedProduct class.
  * @constructor
  * @member {string} [pname]
- *
  * @member {number} [lsize]
- *
  * @member {string} [provisioningState]
- *
  */
 export interface FlattenedProduct extends Resource {
   pname?: string;
@@ -76,17 +67,11 @@ export interface FlattenedProduct extends Resource {
  * Initializes a new instance of the ResourceCollection class.
  * @constructor
  * @member {object} [productresource]
- *
  * @member {string} [productresource.pname]
- *
  * @member {number} [productresource.lsize]
- *
  * @member {string} [productresource.provisioningState]
- *
  * @member {array} [arrayofresources]
- *
  * @member {object} [dictionaryofresources]
- *
  */
 export interface ResourceCollection {
   productresource?: FlattenedProduct;

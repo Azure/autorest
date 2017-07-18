@@ -1,11 +1,11 @@
+import { isAbsolute } from 'path';
 /*---------------------------------------------------------------------------------------------
 *  Copyright (c) Microsoft Corporation. All rights reserved.
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import * as path from "path";
 import { ResolveUri, GetFilenameWithoutExtension } from "./lib/ref/uri";
-import { DataHandleRead, DataStoreViewReadonly } from "./lib/data-store/data-store";
+import { DataStoreViewReadonly } from "./lib/data-store/data-store";
 import { AutoRestConfigurationImpl } from "./lib/configuration";
 
 const regexLegacyArg = /^-[^-]/;
@@ -16,7 +16,7 @@ export function isLegacy(args: string[]): boolean {
 
 async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: string, targetConfig: AutoRestConfigurationImpl): Promise<void> {
   const compositeSwaggerFile = await inputScope.ReadStrict(uri);
-  const data = await compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
+  const data = compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
   const documents = data.documents;
   targetConfig["input-file"] = documents.map(d => ResolveUri(uri, d));
 
@@ -60,12 +60,11 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
   const codegenerator = switches["g"] || switches["codegenerator"] || "CSharp";
   const usedCodeGenerator = codegenerator.toLowerCase().replace("azure.", "").replace(".fluent", "");
   if (codegenerator.toLowerCase() === "none") {
-    result["azure-arm"] = true;
+    (<any>result)["azure-validator"] = true;
   } else {
     (<any>result)[usedCodeGenerator] = {};
     if (codegenerator.toLowerCase().startsWith("azure.")) {
-      result["azure-arm"] = true;
-      result["disable-validation"] = true;
+      (<any>result)[usedCodeGenerator]["azure-arm"] = true;
     }
     if (codegenerator.toLowerCase().endsWith(".fluent")) {
       result["fluent"] = true;
@@ -74,17 +73,23 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   result["license-header"] = switches["header"] || undefined;
 
-  result["payload-flattening-threshold"] = parseInt(switches["fs"] || switches["payloadflatteningthreshold"] || "0");
+  result["payload-flattening-threshold"] = parseInt(switches["ft"] || switches["payloadflatteningthreshold"] || "0");
 
-  result["sync-methods"] = <any>switches["syncmethods"] || null;
+  result["sync-methods"] = <any>switches["syncmethods"] || undefined;
 
   result["add-credentials"] = switches["addcredentials"] === null || ((switches["addcredentials"] + "").toLowerCase() === "true");
 
-  if (usedCodeGenerator === "ruby") {
-    result["package-name"] = GetFilenameWithoutExtension(inputFile).replace(/[^a-zA-Z0-9-_]/g, "").replace(/-/g, '_').replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
+  if (usedCodeGenerator === "ruby" || usedCodeGenerator === "python" || usedCodeGenerator === "go") {
+    result["package-version"] = switches["pv"] || switches["packageversion"] || undefined;
+    result["package-name"] = switches["pn"] || switches["packagename"] || undefined;
   }
 
-  result["output-file"] = switches["outputfilename"] || undefined;
+  const outputFile = result["output-file"] = switches["outputfilename"] || undefined;
+  if (outputFile && isAbsolute(outputFile)) {
+    const splitAt = Math.max(outputFile.lastIndexOf("/"), outputFile.lastIndexOf("\\"));
+    result["output-file"] = outputFile.slice(splitAt + 1);
+    result["output-folder"] = outputFile.slice(0, splitAt);
+  }
 
   result["message-format"] = switches["jsonvalidationmessages"] !== undefined ? "json" : undefined;
 

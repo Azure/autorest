@@ -11,16 +11,15 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the HeaderCustomNamedRequestIdParamGroupingParameters class.
- * @constructor
  * Additional parameters for the Header_customNamedRequestIdParamGrouping
  * operation.
  *
- * @member {string} fooClientRequestId The fooRequestId
- *
  */
 class HeaderCustomNamedRequestIdParamGroupingParameters {
+  /**
+   * Create a HeaderCustomNamedRequestIdParamGroupingParameters.
+   * @member {string} fooClientRequestId The fooRequestId
+   */
   constructor() {
   }
 

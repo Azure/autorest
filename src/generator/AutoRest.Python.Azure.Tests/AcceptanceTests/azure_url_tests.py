@@ -38,16 +38,17 @@ from os.path import dirname, pardir, join, realpath
 cwd = dirname(realpath(__file__))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
+import fixtures # Ensure that fixtures is loaded on old python before the next line
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
-sys.path.append(join(tests, "SubscriptionIdApiVersion"))
+sys.modules['fixtures'].__path__.append(join(tests, "SubscriptionIdApiVersion", "fixtures"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 
-from microsoftazuretesturl import MicrosoftAzureTestUrl
+from fixtures.acceptancetestssubscriptionidapiversion import MicrosoftAzureTestUrl
 
-from microsoftazuretesturl.models import ErrorException, SampleResourceGroup
+from fixtures.acceptancetestssubscriptionidapiversion.models import ErrorException, SampleResourceGroup
 
 class AzureUrlTests(unittest.TestCase):
 

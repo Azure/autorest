@@ -7,8 +7,8 @@ vfs = require('vinyl-fs');
 
 module.exports =
   # lets us just handle each item in a stream easily.
-  foreach: (delegate) -> 
-    through.obj ( each, enc, done ) -> 
+  foreach: (delegate) ->
+    through.obj { concurrency: threshold }, ( each, enc, done ) -> 
       delegate each, done, this
 
   toArray: (result,passthru) => 
@@ -34,6 +34,9 @@ module.exports =
     options.follow = true
     vfs.src( globs, options) 
 
+  watchFiles: (src,tasks) ->
+    gulp.watch( src,tasks) 
+
   destination: (globs, options ) -> 
     gulp.dest( globs, options) 
 
@@ -58,7 +61,7 @@ module.exports =
     
     # add the new task.
     # gulp.task name, deps, fn
-    if name isnt "init" and name isnt "npm-install" and ! name.startsWith "clean"
+    if name isnt "init" and name isnt "npm-install" and name isnt "copy-dts-files" and ! name.startsWith "clean"
       deps.unshift "init" 
 
     if fn.length # see if the task function has arguments (betcha never saw that before!)
@@ -194,14 +197,14 @@ module.exports =
         fn = (queue.shift())
         fn() 
 
-      if code            
+      if code and !options.ignoreexitcode
         echo error "Exec Failed #{quiet_info options.cwd} :: #{info cmdline}"  
         if( stderr.length )
           echo error "(stderr)"
           echo marked  ">> #{error stderr}"
         if( stdout.length ) 
           echo warning "(stdout)" 
-          echo marked ">> #{ warning stdout}" 
+          echo warning stdout
 
         Fail "Execute Task failed, fast exit"
       callback(code,stdout,stderr)
@@ -216,8 +219,8 @@ module.exports.task 'build', 'builds project', ->
 
 module.exports.task 'clean', 'cleans the project files', -> 
 
-# task for vscode
-module.exports.task 'code', 'launches vscode', -> 
+# task for vs code
+module.exports.task 'code', 'launches vs code', -> 
   exec "code #{basefolder}"
 
 module.exports.task 'release-only', '', (done)-> 

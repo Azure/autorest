@@ -51,9 +51,10 @@ function _getEmptyError(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -61,7 +62,6 @@ function _getEmptyError(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -164,9 +164,10 @@ function _getNoModelError(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -174,7 +175,6 @@ function _getNoModelError(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -273,9 +273,10 @@ function _getNoModelEmpty(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -283,7 +284,6 @@ function _getNoModelEmpty(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -344,17 +344,12 @@ function _getNoModelEmpty(options, callback) {
   });
 }
 
-/**
- * @class
- * HttpFailure
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestHttpInfrastructureTestService.
- * Initializes a new instance of the HttpFailure class.
- * @constructor
- *
- * @param {AutoRestHttpInfrastructureTestService} client Reference to the service client.
- */
+/** Class representing a HttpFailure. */
 class HttpFailure {
+  /**
+   * Create a HttpFailure.
+   * @param {AutoRestHttpInfrastructureTestService} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getEmptyError = _getEmptyError;

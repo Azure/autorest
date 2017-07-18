@@ -13,13 +13,14 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Goblinshark class.
- * @constructor
- * @member {number} [jawsize]
- *
+ * Class representing a Goblinshark.
+ * @extends models['Shark']
  */
 class Goblinshark extends models['Shark'] {
+  /**
+   * Create a Goblinshark.
+   * @member {number} [jawsize]
+   */
   constructor() {
     super();
   }

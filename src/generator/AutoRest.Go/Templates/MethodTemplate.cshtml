@@ -10,23 +10,6 @@
 @inherits AutoRest.Core.Template<AutoRest.Go.Model.MethodGo>
 
 @{
-    StringBuilder sb = new StringBuilder();
-    foreach (var parameter in Model.LocalParameters)
-    {
-        if (!string.IsNullOrEmpty(parameter.Documentation))
-        {
-            sb.Append(parameter.Name);
-            sb.Append(" is ");
-            sb.Append(parameter.Documentation.FixedValue.ToSentence());
-            sb.Append(" ");
-        }
-        if (parameter.ModelType.PrimaryType(KnownPrimaryType.Stream))
-        {
-            sb.Append(parameter.Name);
-            sb.Append(" will be closed upon successful return. Callers should ensure closure when receiving an error.");
-        }
-    }
-
     List<string> pd = Model.PrepareDecorators;
     List<string> rd = Model.RespondDecorators;
     rd.Insert(0, "resp");
@@ -36,38 +19,75 @@
 @if (Model.LocalParameters.Count() > 0)
 {
 @://
-@WrapComment("// ", sb.ToString())
+@WrapComment("// ", Model.ParametersDocumentation)
 }
 
-func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature) {
-    @if (Model.ParameterValidations.Length > 0)
-    {
+func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature(false)) {
+@if (Model.ReturnViaChannel)
+{
+    @:resultChan := make(chan @(Model.MethodReturnType), 1)
+    @:errChan:= make(chan error, 1)
+}
+@if (Model.ParameterValidations.Length > 0)
+{
     @:if err := validation.Validate([]validation.Validation{
-         @:@(Model.ParameterValidations)}); err != nil {
-             @:return result, @(Model.ValidationError)
-    @:}
-    @:@EmptyLine
+    @:@(Model.ParameterValidations)}); err != nil {
+    @if (Model.ReturnViaChannel)
+    {
+    @:errChan <- @(Model.ValidationError)
+    @:close(errChan)
+    @:close(resultChan)
+    @:return resultChan, errChan
     }
-    req, err := client.@(Model.PreparerMethodName)(@(Model.HelperInvocationParameters))
-    if err != nil {
-        return result, @(Model.AutorestError("Failure preparing request"))
+    else
+    {
+    @:return result, @(Model.ValidationError)
     }
+@:}
+@:@EmptyLine
+}
+@if (Model.ReturnViaChannel)
+{
+    @:go func() {
+        @:var err error
+        @:var result @(Model.MethodReturnType)
 
-    @EmptyLine
+        @:defer func() {
+            @:if err != nil {
+                @:errChan <- err
+            @:}
+            @:resultChan <- result
+            @:close(resultChan)
+            @:close(errChan)
+        @:}()
+}
+    req, err := client.@(Model.PreparerMethodName)(@(Model.HelperInvocationParameters(false)))
+    if err != nil {
+        err = @(Model.AutorestError("Failure preparing request"))
+        return
+    }
+@EmptyLine
     resp, err := client.@(Model.SenderMethodName)(req)
     if err != nil {
         @(Model.Response)
-        return result, @(Model.AutorestError("Failure sending request", "resp"))
+        err = @(Model.AutorestError("Failure sending request", "resp"))
+        return
     }
-
-    @EmptyLine
+@EmptyLine
     result, err = client.@(Model.ResponderMethodName)(resp)
     if err != nil {
         err = @(Model.AutorestError("Failure responding to request", "resp"))
     }
-
+@if (Model.ReturnViaChannel)
+{
+    @:}()
+    @:return resultChan, errChan
+}
+else
+{
     @EmptyLine
-    return
+    @:return
+}
 }
 
 @EmptyLine
@@ -85,7 +105,8 @@ func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParameter
 }
 @if (Model.QueryParameters.Any())
 {
-    @if (Model.QueryParameters.Any(p => p.GetParameterName().IsApiVersion())) 
+    @if (Model.QueryParameters.Any(p => p.GetParameterName().IsApiVersion())
+        && !Model.LocalParameters.Any(p => p.GetParameterName().IsApiVersion())) 
     {
         @:@(string.Format("const APIVersion = \"{0}\"", Model.APIVersion))
     }
@@ -151,7 +172,7 @@ func (client @(Model.Owner)) @(Model.SenderMethodName)(req *http.Request) (*http
 @EmptyLine
 // @(Model.ResponderMethodName) handles the response to the @(Model.Name) request. The method always
 // closes the http.Response Body.
-func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (@(Model.MethodReturnSignature)) { 
+func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (@(Model.MethodReturnSignature(true))) { 
     @if (Model.ReturnValue().Body.IsStreamType())
     {
     @:result.Value = &resp.Body
@@ -167,7 +188,7 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
 {
 @:@EmptyLine
 @:// @(Model.NextMethodName) retrieves the next set of results, if any.
-@:func (client @(Model.Owner)) @(Model.NextMethodName)(lastResults @(Model.ReturnValue().Body.Name)) (@Model.MethodReturnSignature) {
+@:func (client @(Model.Owner)) @(Model.NextMethodName)(lastResults @(Model.ReturnValue().Body.Name)) (@Model.MethodReturnSignature(true)) {
     @:req, err := lastResults.@((Model.ReturnValue().Body as CompositeTypeGo).PreparerMethodName)()
     @:if err != nil {
         @:return result, @(Model.AutorestError("Failure preparing next results request"))
@@ -191,5 +212,61 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
 
     @EmptyLine
     @:return
+@:}
+}
+
+@if (Model.IsPageable && !Model.IsNextMethod && Model.ListElement != null)
+{
+@:@EmptyLine
+@:// @(Model.ListCompleteMethodName) gets all elements from the list without paging.
+@:func (client @(Model.Owner)) @(Model.ListCompleteMethodName) @(Model.MethodParametersSignatureComplete) @(Model.MethodReturnSignatureComplete) {
+    @:resultChan := make(chan @((Model.ListElement.ModelType as SequenceTypeGo).GetElement))
+    @:errChan := make(chan error, 1)
+    @:go func() {
+        @:defer func() {
+			@:close(resultChan)
+			@:close(errChan)
+		@:}()
+        @:list, err := client.@(Model.Name)(@(Model.HelperInvocationParameters(false)))
+        @:if err != nil {
+            @:errChan <- err
+            @:return
+        @:}
+        @:if list.@(Model.ListElement.Name) != nil {
+            @:for _, item := range *list.@(Model.ListElement.Name) {
+                @:select {
+                @:case <- cancel:
+                    @:return
+                @:case resultChan <- item:
+                    @: // Intentionally left blank
+                @:}
+            @:}
+        @:}
+         @:for list.@(Model.NextLink) != nil {
+                if (Model.NextAlreadyDefined)
+                {
+                    @:list, err = client.@(Model.NextOperationName)(@(Model.NextMethod.HelperInvocationParameters(true)))
+                }
+                else
+                {
+                    @:list, err = client.@(Model.NextMethodName)(list)
+                }
+                    @:if err != nil {
+                        @:errChan <- err
+                        @:return
+                    @:}            
+                    @:if list.@(Model.ListElement.Name) != nil {
+                        @:for _, item := range *list.@(Model.ListElement.Name) {
+                            @:select {
+                            @:case <- cancel:
+                                @:return
+                            @:case resultChan <- item:
+                                @: // Intentionally left blank
+                            @:}
+                        @:}
+                    @:}
+                @:}
+    @:}()
+    @:return resultChan, errChan
 @:}
 }

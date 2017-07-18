@@ -38,23 +38,30 @@ from os.path import dirname, pardir, join, realpath
 cwd = dirname(realpath(__file__))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
+import fixtures # Ensure that fixtures is loaded on old python before the next line
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
-sys.path.append(join(tests, "Paging"))
+sys.modules['fixtures'].__path__.append(join(tests, "Paging", "fixtures"))
+
+# Import mock from Autorest.Python.Tests
+mockfiles = realpath(join(cwd, pardir, pardir, "AutoRest.Python.Tests", "AcceptanceTests"))
+sys.path.append(mockfiles)
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrestazure.azure_exceptions import CloudError
 from msrest.authentication import BasicTokenAuthentication
 
-from autorestpagingtestservice import AutoRestPagingTestService
-from autorestpagingtestservice.models import PagingGetMultiplePagesWithOffsetOptions
+from fixtures.acceptancetestspaging import AutoRestPagingTestService
+from fixtures.acceptancetestspaging.models import PagingGetMultiplePagesWithOffsetOptions
+
+from http_tests import TestAuthentication
 
 class PagingTests(unittest.TestCase):
 
     def setUp(self):
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         self.client = AutoRestPagingTestService(cred, base_url="http://localhost:3000")
-        self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
+        self.client._client.creds = TestAuthentication()
         return super(PagingTests, self).setUp()
 
     def test_paging_happy_path(self):
@@ -78,8 +85,8 @@ class PagingTests(unittest.TestCase):
         eq = [e for e in items if e not in more_items]
         self.assertEqual(len(eq), 0)
 
-        with self.assertRaises(GeneratorExit):
-            pages.next()
+        with self.assertRaises(StopIteration):
+            next(pages)
 
         pages = self.client.paging.get_odata_multiple_pages()
         self.assertIsNotNone(pages.next_link)

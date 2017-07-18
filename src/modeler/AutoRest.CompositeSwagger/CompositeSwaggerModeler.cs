@@ -13,8 +13,6 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Collections.Generic;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using YamlDotNet.RepresentationModel;
 using AutoRest.Core.Parsing;
@@ -142,15 +140,6 @@ namespace AutoRest.CompositeSwagger
                 throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture, "{0}. {1}",
                     Resources.ErrorParsingSpec, ex.Message), ex);
             }
-        }
-        
-        /// <summary>
-        /// Copares two versions of the same service specification.
-        /// </summary>
-        /// <returns></returns>
-        public override IEnumerable<LogMessage> Compare()
-        {
-            throw new NotImplementedException("Version comparison of compositions. Please run the comparison on individual specifications");
         }
     }
 }

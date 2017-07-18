@@ -33,7 +33,7 @@ Install 'chalk'
 Install 'yargs'
 Install 'ghrelease', 'gulp-github-release'
 Install 'eol', 'gulp-line-ending-corrector'
-Install 'through', 'through2'
+Install 'through', 'through2-parallel'
 Install 'run', 'run-sequence'
 Install 'except', './except.iced'
 
@@ -76,16 +76,17 @@ process.env.tmp = process.env.tmp or "#{basefolder}/tmp"
 
 Import 
   versionsuffix: if argv["version-suffix"]? then "--version-suffix=#{argv["version-suffix"]}" else ""
-  version: argv.version or cat "#{basefolder}/VERSION"
+  version: argv.version or (cat "#{basefolder}/VERSION").trim()
   configuration: if argv.configuration then configString( argv.configuration)  else (if argv.release then 'Release' else 'Debug')
   github_apikey: argv.github_apikey or process.env.GITHUB_APIKEY or null
   nuget_apikey: argv.nuget_apikey or process.env.NUGET_APIKEY or null
   myget_apikey: argv.myget_apikey or process.env.MYGET_APIKEY or null
   npm_apikey:  argv.npm_apikey or process.env.NPM_APIKEY or null
+  github_feed: argv.feed or "azure"
   today: moment().format('YYYYMMDD')
   now: moment().format('YYYYMMDD-HHmm')
   force: argv.force or false
-  threshold: argv.threshold or ((os.cpus().length)-1 )
+  threshold: argv.threshold or ((os.cpus().length)-1) or 1
   verbose: argv.verbose or null
   workdir: "#{process.env.tmp}/gulp/#{guid()}"
   watch: argv.watch or false

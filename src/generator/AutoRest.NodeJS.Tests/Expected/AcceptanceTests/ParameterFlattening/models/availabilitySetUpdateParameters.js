@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the AvailabilitySetUpdateParameters class.
- * @constructor
- * @member {object} tags A set of tags. A description about the set of tags.
- *
+ * Class representing a AvailabilitySetUpdateParameters.
  */
 class AvailabilitySetUpdateParameters {
+  /**
+   * Create a AvailabilitySetUpdateParameters.
+   * @member {object} tags A set of tags. A description about the set of tags.
+   */
   constructor() {
   }
 

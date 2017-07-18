@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the OdataFilter class.
- * @constructor
- * @member {number} [id]
- *
- * @member {string} [name]
- *
+ * Class representing a OdataFilter.
  */
 class OdataFilter {
+  /**
+   * Create a OdataFilter.
+   * @member {number} [id]
+   * @member {string} [name]
+   */
   constructor() {
   }
 

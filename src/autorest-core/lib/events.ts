@@ -1,9 +1,14 @@
-import * as events from 'events';
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+import * as events from "events";
 
 export interface IEvent<TSender extends events.EventEmitter, TArgs> {
   Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
   Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void;
-  /* @internal */ Dispatch(args: TArgs): void;
+  Dispatch(args: TArgs): void;
 }
 
 export class EventDispatcher<TSender extends EventEmitter, TArgs> implements IEvent<TSender, TArgs> {

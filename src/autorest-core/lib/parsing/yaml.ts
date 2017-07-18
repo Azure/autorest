@@ -1,10 +1,10 @@
-import { EnhancedPosition, PositionEnhancements } from '../ref/source-map';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, ResolveAnchorRef, StringifyAst } from "../ref/yaml";
+import { EnhancedPosition } from "../ref/source-map";
+import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, ResolveAnchorRef } from "../ref/yaml";
 import { JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { IndexToPosition } from "./text-utility";
 import { DataHandleRead } from "../data-store/data-store";
@@ -64,7 +64,6 @@ function ResolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPa
 }
 
 export function ResolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPath: JsonPath): YAMLNode {
-  const yamlAstFirst = yamlAstCurrent;
   try {
     for (const jsonPathPart of jsonPath) {
       yamlAstCurrent = ResolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathPart, true);
@@ -119,18 +118,18 @@ export function ReplaceNode(yamlAstRoot: YAMLNode, target: YAMLNode, value: YAML
 /**
  * Resolves the text position of a JSON path in raw YAML.
  */
-export async function ResolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath): Promise<EnhancedPosition> {
+export function ResolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath): EnhancedPosition {
   //let node = (await (await yamlFile.ReadMetadata()).resolvePathCache)[stringify(jsonPath)];
-  const yamlAst = await yamlFile.ReadYamlAst();
+  const yamlAst = yamlFile.ReadYamlAst();
   const node = ResolveRelativeNode(yamlAst, yamlAst, jsonPath);
   return CreateEnhancedPosition(yamlFile, jsonPath, node);
 }
 
-export async function CreateEnhancedPosition(yamlFile: DataHandleRead, jsonPath: JsonPath, node: YAMLNode): Promise<EnhancedPosition> {
+export function CreateEnhancedPosition(yamlFile: DataHandleRead, jsonPath: JsonPath, node: YAMLNode): EnhancedPosition {
   const startIdx = jsonPath.length === 0 ? 0 : node.startPosition;
   const endIdx = node.endPosition;
-  const startPos = await IndexToPosition(yamlFile, startIdx);
-  const endPos = await IndexToPosition(yamlFile, endIdx);
+  const startPos = IndexToPosition(yamlFile, startIdx);
+  const endPos = IndexToPosition(yamlFile, endIdx);
 
   const result: EnhancedPosition = { column: startPos.column, line: startPos.line };
   result.path = jsonPath;

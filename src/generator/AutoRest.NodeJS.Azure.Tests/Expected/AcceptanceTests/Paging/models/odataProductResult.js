@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the OdataProductResult class.
- * @constructor
- * @member {array} [values]
- *
- * @member {string} [odatanextLink]
- *
+ * Class representing a OdataProductResult.
  */
 class OdataProductResult extends Array {
+  /**
+   * Create a OdataProductResult.
+   * @member {array} [values]
+   * @member {string} [odatanextLink]
+   */
   constructor() {
     super();
   }

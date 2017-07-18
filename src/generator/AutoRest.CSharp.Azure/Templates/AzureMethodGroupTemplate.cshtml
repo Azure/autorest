@@ -1,5 +1,7 @@
 ﻿@using AutoRest.CSharp.Azure.Model
 @using AutoRest.CSharp.Azure.Templates
+@using AutoRest.Core.Utilities
+
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodGroupCs>
 @Header("// ")
 @EmptyLine
@@ -41,7 +43,7 @@ namespace @Settings.Namespace
         @EmptyLine
         @foreach (var method in Model.Methods)
         {
-        @:@(Include(new AzureMethodTemplate(), (MethodCsa)method))
+        @:@(Include(DependencyInjection.New<AzureMethodTemplate>(), (MethodCsa)method))
         @EmptyLine
         }
     }

@@ -13,15 +13,15 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the Shark class.
- * @constructor
- * @member {number} [age]
- *
- * @member {date} birthday
- *
+ * Class representing a Shark.
+ * @extends models['Fish']
  */
 class Shark extends models['Fish'] {
+  /**
+   * Create a Shark.
+   * @member {number} [age]
+   * @member {date} birthday
+   */
   constructor() {
     super();
   }

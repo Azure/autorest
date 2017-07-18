@@ -62,7 +62,6 @@ namespace Microsoft.Perks.JsonRPC
                 else if (jsonText.StartsWith("[") && jsonText.EndsWith("]"))
                 {
                     // try to parse it.
-                    // Log($"It's an array (batch!)");
                     try
                     {
                         json = JArray.Parse(jsonText);
@@ -188,7 +187,6 @@ namespace Microsoft.Perks.JsonRPC
             {
                 try
                 {
-                    // Log("Listen");
                     var ch = _reader?.PeekByte();
                     if (-1 == ch)
                     {
@@ -207,17 +205,11 @@ namespace Microsoft.Perks.JsonRPC
                     }
 
                     // We're looking at headers
-                    // Log("Found Headers:");
                     var headers = new Dictionary<string, string>();
                     var line = _reader.ReadAsciiLine();
                     while (!string.IsNullOrWhiteSpace(line))
                     {
-                        // Log($"     '{line}'");
                         var bits = line.Split(new[] { ':' }, 2);
-                        if (bits.Length != 2)
-                        {
-                            // Log($"header not right! {line}");
-                        }
                         headers.Add(bits[0].Trim(), bits[1].Trim());
                         line = _reader.ReadAsciiLine();
                     }
@@ -255,70 +247,58 @@ namespace Microsoft.Perks.JsonRPC
             return false;
         }
 
-        public async Task Process(JToken content)
+        public void Process(JToken content)
         {
-            // Log("IN PROCESS");
-            if (content == null)
-            {
-                // Log("BAD CONTENT");
-                return;
-            }
             if (content is JObject)
             {
-                Log($"RECV '{content}'");
-
-                var jobject = content as JObject;
-                try
-                {
-
-                    if (jobject.Properties().Any(each => each.Name == "method"))
+                Task.Factory.StartNew(async () => {
+                    var jobject = content as JObject;
+                    try
                     {
-                        var method = jobject.Property("method").Value.ToString();
-                        var id = jobject.Property("id")?.Value.ToString();
-                        // this is a method call.
-                        // pass it to the service that is listening...
-                        //Log($"Dispatching: {method}");
-                        if (_dispatch.TryGetValue(method, out Func<JToken, Task<string>> fn))
+                        if (jobject.Properties().Any(each => each.Name == "method"))
                         {
-                            var parameters = jobject.Property("params").Value;
-                            var result = await fn(parameters);
-                            if (id != null)
+                            var method = jobject.Property("method").Value.ToString();
+                            var id = jobject.Property("id")?.Value.ToString();
+                            // this is a method call.
+                            // pass it to the service that is listening...
+                            if (_dispatch.TryGetValue(method, out Func<JToken, Task<string>> fn))
                             {
-                                // if this is a request, send the response.
-                                await this.Send(ProtocolExtensions.Response(id, result));
+                                var parameters = jobject.Property("params").Value;
+                                var result = await fn(parameters);
+                                if (id != null)
+                                {
+                                    // if this is a request, send the response.
+                                    await Respond(id, result);
+                                }
                             }
-                            // 
+                            return;
                         }
-                        return;
-                    }
 
-                    // this is a result from a previous call.
-                    if (jobject.Properties().Any(each => each.Name == "result"))
-                    {
-                        var id = jobject.Property("id")?.Value.ToString();
-                        if (!string.IsNullOrEmpty(id))
+                        // this is a result from a previous call.
+                        if (jobject.Properties().Any(each => each.Name == "result"))
                         {
-
-                            var f = _tasks[id];
-                            _tasks.Remove(id);
-                            //Log($"result data: {jobject.Property("result").Value.ToString()}");
-                            f.SetCompleted(jobject.Property("result").Value);
-                            //Log("Should have unblocked?");
+                            var id = jobject.Property("id")?.Value.ToString();
+                            if (!string.IsNullOrEmpty(id))
+                            {
+                                ICallerResponse f = null;
+                                lock( _tasks )
+                                {
+                                    f = _tasks[id];
+                                    _tasks.Remove(id);
+                                }
+                                f.SetCompleted(jobject.Property("result").Value);
+                            }
                         }
-
                     }
-
-                }
-                catch (Exception e)
-                {
-                    //Log($"[PROCESS ERROR]: {e.GetType().FullName}/{e.Message}/{e.StackTrace}");
-                    //Log($"[LISTEN CONTENT]: {jobject.ToString()}");
-                }
+                    catch (Exception e)
+                    {
+                        Console.Error.WriteLine(e);
+                    }
+                });
             }
             if (content is JArray)
             {
-                //Log("TODO: Batch");
-                return;
+                Console.Error.WriteLine("Unhandled: Batch Request");
             }
         }
 
@@ -358,7 +338,7 @@ namespace Microsoft.Perks.JsonRPC
         private async Task Send(string text)
         {
             _streamReady.WaitOne();
-            Log($"SEND {text}");
+            
             await _writer.WriteAsync($"Content-Length: {Encoding.UTF8.GetByteCount(text)}\r\n\r\n");
             await _writer.WriteAsync(text);
             _streamReady.Release();
@@ -368,9 +348,9 @@ namespace Microsoft.Perks.JsonRPC
         {
             await Send(ProtocolExtensions.Error(id, code, message)).ConfigureAwait(false);
         }
-        public async Task Respond(string request, string value)
+        public async Task Respond(string id, string value)
         {
-            await Send(ProtocolExtensions.Response(request, value)).ConfigureAwait(false);
+            await Send(ProtocolExtensions.Response(id, value)).ConfigureAwait(false);
         }
 
         public async Task Notify(string methodName, params object[] values) =>
@@ -380,18 +360,18 @@ namespace Microsoft.Perks.JsonRPC
 
         public async Task<T> Request<T>(string methodName, params object[] values)
         {
-            var id = Interlocked.Increment(ref _requestId).ToString();
+            var id = Interlocked.Decrement(ref _requestId).ToString();
             var response = new CallerResponse<T>(id);
-            _tasks.Add(id, response);
+            lock( _tasks ) { _tasks.Add(id, response); }
             await Send(ProtocolExtensions.Request(id, methodName, values)).ConfigureAwait(false);
             return await response.Task.ConfigureAwait(false);
         }
 
         public async Task<T> RequestWithObject<T>(string methodName, object parameter)
         {
-            var id = Interlocked.Increment(ref _requestId).ToString();
+            var id = Interlocked.Decrement(ref _requestId).ToString();
             var response = new CallerResponse<T>(id);
-            _tasks.Add(id, response);
+            lock( _tasks ) { _tasks.Add(id, response); }
             await Send(ProtocolExtensions.Request(id, methodName, parameter)).ConfigureAwait(false);
             return await response.Task.ConfigureAwait(false);
         }
@@ -400,8 +380,5 @@ namespace Microsoft.Perks.JsonRPC
             await Send(calls.JsonArray());
 
         public System.Runtime.CompilerServices.TaskAwaiter GetAwaiter() => _loop.GetAwaiter();
-
-
-
     }
 }

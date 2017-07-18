@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    
+  <PropertyGroup>
+    <PackageType>DotnetCliTool</PackageType>
+    <IsTool>false</IsTool>
+    <ContentTargetFolders>.</ContentTargetFolders>
+    <PackageVersion>1.2.2</PackageVersion>
+    <PackageId>AutoRest</PackageId>
+    <Title>AutoRest Code Generation Tool</Title>
+    <Authors>Microsoft, Azure-SDK</Authors>
+    <Description>The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is a spec that describes the REST API using the Open API Initiative format.</Description>
+    <Copyright>(C) 2017 Microsoft Corporation</Copyright>
+    <PackageLicenseUrl>https://github.com/Azure/autorest/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://aka.ms/autorest</PackageProjectUrl>
+    <PackageTags>Swagger;OpenAPI;AutoRest;CodeGenerator</PackageTags>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <AssemblyName>dotnet-autorest</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <RuntimeIdentifiers>win7-x64;win7-x86;osx.10.10-x64;osx.10.11-x64;ubuntu.14.04-x64;ubuntu.16.04-x64;centos.7-x64;rhel.7.2-x64;debian.8-x64;fedora.23-x64;opensuse.13.2-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+  <ItemGroup>
+      <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="1.0.3"/>
+    <Content Include="node_modules/**/*" />
+    <Content Include="tools/**" />
+    
+  </ItemGroup>
+</Project>

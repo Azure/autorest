@@ -1,5 +1,5 @@
 {
-  "id": "http://schema.management.azure.com/schemas/2016-09-01/Microsoft.Authorization.json#",
+  "id": "https://schema.management.azure.com/schemas/2016-09-01/Microsoft.Authorization.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Authorization",
   "description": "Microsoft Authorization Resource Types",
@@ -28,7 +28,7 @@
               "$ref": "#/definitions/ManagementLockProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The properties of the lock."
@@ -67,7 +67,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The lock level of the management lock."
@@ -85,7 +85,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The owners of the management lock."

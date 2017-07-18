@@ -19,7 +19,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// Initializes a top level context for rules
         /// </summary>
         /// <param name="root"></param>
-        public RuleContext(ServiceDefinition root, Uri file) : this(null)
+        public RuleContext(ServiceDefinition root, Uri file, ServiceDefinitionMetadata metadata) : this(null)
         {
             this.Root = root;
             this.Value = root;
@@ -38,6 +38,8 @@ namespace AutoRest.Swagger.Validation.Core
             this.File = parent?.File;
             this.ResourceModels = parent?.ResourceModels;
             this.TrackedResourceModels = parent?.TrackedResourceModels;
+            this.ChildTrackedResourceModels = parent?.ChildTrackedResourceModels;
+            this.ParentTrackedResourceModels = parent?.ParentTrackedResourceModels;
             this.ProxyResourceModels = parent?.ProxyResourceModels;
         }
 
@@ -101,6 +103,16 @@ namespace AutoRest.Swagger.Validation.Core
         public IEnumerable<string> TrackedResourceModels { get; private set; }
 
         /// <summary>
+        /// List of child tracked resources in serviceDefinition
+        /// </summary>
+        public IEnumerable<KeyValuePair<string, string>> ChildTrackedResourceModels { get; private set; }
+
+        /// <summary>
+        /// List of parent tracked resources in serviceDefinition
+        /// </summary>
+        public IEnumerable<string> ParentTrackedResourceModels { get; private set; }
+
+        /// <summary>
         /// List of proxy resources in serviceDefinition
         /// </summary>
         public IEnumerable<string> ProxyResourceModels { get; private set; }
@@ -109,7 +121,7 @@ namespace AutoRest.Swagger.Validation.Core
             Parent == null
                 ? ObjectPath.Empty
                 : Key == null
-                    ? Parent.Path.AppendIndex(Index.Value)
+                    ? (Index.Value == -1 ? Parent.Path : Parent.Path.AppendIndex(Index.Value))
                     : Parent.Path.AppendProperty(Key);
 
         public Uri File { get; private set;  }
@@ -121,6 +133,8 @@ namespace AutoRest.Swagger.Validation.Core
         {
             this.ResourceModels = ValidationUtilities.GetResourceModels(serviceDefinition).ToList();
             this.TrackedResourceModels = ValidationUtilities.GetTrackedResources(this.ResourceModels, serviceDefinition.Definitions).ToList();
+            this.ChildTrackedResourceModels = ValidationUtilities.GetChildTrackedResourcesWithImmediateParent(serviceDefinition).ToList();
+            this.ParentTrackedResourceModels = ValidationUtilities.GetParentTrackedResources(this.TrackedResourceModels, this.ChildTrackedResourceModels).ToList();
             this.ProxyResourceModels = this.ResourceModels.Except(this.TrackedResourceModels).ToList();
         }
 

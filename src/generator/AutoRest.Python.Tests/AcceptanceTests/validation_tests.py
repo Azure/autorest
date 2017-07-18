@@ -43,8 +43,8 @@ sys.path.append(join(tests, "Validation"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError, ValidationError
 
-from autorestvalidationtest import AutoRestValidationTest
-from autorestvalidationtest.models import (
+from auto_rest_validation_test import AutoRestValidationTest
+from auto_rest_validation_test.models import (
     Product,
     ConstantProduct,
     ChildProduct)
@@ -55,8 +55,8 @@ class ValidationTests(unittest.TestCase):
     def test_constant_values(self):
         client = AutoRestValidationTest(
             "abc123",
-            "12-34-5678",
             base_url="http://localhost:3000")
+        client.api_version = "12-34-5678"
 
         client.get_with_constant_in_path()
 
@@ -67,8 +67,8 @@ class ValidationTests(unittest.TestCase):
     def test_validation(self):
         client = AutoRestValidationTest(
             "abc123",
-            "12-34-5678",
             base_url="http://localhost:3000")
+        client.api_version = "12-34-5678"
 
         try:
             client.validation_of_method_parameters("1", 100)
@@ -130,14 +130,14 @@ class ValidationTests(unittest.TestCase):
 
         client2 = AutoRestValidationTest(
             "abc123",
-            "abc",
             base_url="http://localhost:3000")
+        client2.api_version = "abc"
 
         try:
             client2.validation_of_method_parameters("123", 150)
         except ValidationError as err:
             self.assertEqual(err.rule, "pattern")
-            self.assertEqual(err.target, "self.config.api_version")
+            self.assertEqual(err.target, "self.api_version")
 
 
 if __name__ == '__main__':

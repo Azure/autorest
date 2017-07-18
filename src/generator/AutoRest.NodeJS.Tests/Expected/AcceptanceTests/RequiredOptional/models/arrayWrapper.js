@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the ArrayWrapper class.
- * @constructor
- * @member {array} value
- *
+ * Class representing a ArrayWrapper.
  */
 class ArrayWrapper {
+  /**
+   * Create a ArrayWrapper.
+   * @member {array} value
+   */
   constructor() {
   }
 

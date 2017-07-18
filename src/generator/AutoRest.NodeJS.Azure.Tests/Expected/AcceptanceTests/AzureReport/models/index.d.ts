@@ -10,6 +10,7 @@
 
 import { BaseResource } from 'ms-rest-azure';
 import { CloudError } from 'ms-rest-azure';
+import * as moment from 'moment';
 
 export { BaseResource } from 'ms-rest-azure';
 export { CloudError } from 'ms-rest-azure';
@@ -20,9 +21,7 @@ export { CloudError } from 'ms-rest-azure';
  * Initializes a new instance of the ErrorModel class.
  * @constructor
  * @member {number} [status]
- *
  * @member {string} [message]
- *
  */
 export interface ErrorModel {
   status?: number;

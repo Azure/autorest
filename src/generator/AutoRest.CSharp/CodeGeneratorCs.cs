@@ -20,7 +20,7 @@ namespace AutoRest.CSharp
 {
     public class CodeGeneratorCs : CodeGenerator
     {
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.2.0";
+        protected const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.3.8";
 
         public override bool IsSingleFileGenerationSupported => true;
 
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp
 
         public override string ImplementationFileExtension => ".cs";
 
-        private async Task GenerateServerSideCode(CodeModelCs codeModel)
+        protected virtual async Task GenerateServerSideCode(CodeModelCs codeModel)
         {
             foreach (string methodGrp in codeModel.MethodGroupNames)
             {
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp
             }
         }
 
-        private async Task GenerateClientSideCode(CodeModelCs codeModel)
+        protected virtual async Task GenerateClientSideCode(CodeModelCs codeModel)
         {
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };

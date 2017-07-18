@@ -4,14 +4,14 @@ First, download the petstore.json example file:
 
 | Platform | Command |
 |----|---|
-|PowerShell|`iwr https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json -o petstore.json`|
-|Linux/OS X|`curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json`|
+|PowerShell|`iwr https://raw.githubusercontent.com/Azure/autorest/master/Samples/1a-code-generation-minimal/petstore.json -o petstore.json`|
+|Linux/OS X|`curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/1a-code-generation-minimal/petstore.json`|
 
 Next, generate the client:
  
 ``` powershell
 # generate the client
-> autorest -Input petstore.json -CodeGenerator CSharp -OutputDirectory CSharp_PetStore -Namespace PetStore
+> autorest --input-file=petstore.json --csharp --output-folder=CSharp_PetStore --namespace=PetStore
 The Microsoft.Rest.ClientRuntime.2.2.0 nuget package is required to compile the generated code.
 
 # show what got generated:

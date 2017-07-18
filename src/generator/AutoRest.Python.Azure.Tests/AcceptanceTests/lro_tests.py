@@ -38,16 +38,23 @@ from os.path import dirname, pardir, join, realpath
 cwd = dirname(realpath(__file__))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
+import fixtures # Ensure that fixtures is loaded on old python before the next line
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
-sys.path.append(join(tests, "Lro"))
+sys.modules['fixtures'].__path__.append(join(tests, "Lro", "fixtures"))
+
+# Import mock from Autorest.Python.Tests
+mockfiles = realpath(join(cwd, pardir, pardir, "AutoRest.Python.Tests", "AcceptanceTests"))
+sys.path.append(mockfiles)
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
-from autorestlongrunningoperationtestservice import AutoRestLongRunningOperationTestService
-from autorestlongrunningoperationtestservice.models import *
+from fixtures.acceptancetestslro import AutoRestLongRunningOperationTestService
+from fixtures.acceptancetestslro.models import *
+
+from http_tests import TestAuthentication
 
 class LroTests(unittest.TestCase):
 
@@ -55,14 +62,13 @@ class LroTests(unittest.TestCase):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         self.client = AutoRestLongRunningOperationTestService(cred, base_url="http://localhost:3000")
-
+        self.client._client.creds = TestAuthentication()
         self.client.config.long_running_operation_timeout = 0
-        self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
         return super(LroTests, self).setUp()
 
     def assertRaisesWithMessage(self, msg, func, *args, **kwargs):
         try:
-            func(*args, **kwargs)
+            func(*args, **kwargs).result()
             self.fail("CloudError wasn't raised as expected")
 
         except CloudError as err:
@@ -81,13 +87,13 @@ class LroTests(unittest.TestCase):
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
         self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Failed",
-            self.client.lr_os.put201_creating_failed200(product).result)
+            self.client.lr_os.put201_creating_failed200, product)
 
         process = self.client.lr_os.put200_updating_succeeded204(product)
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
         self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Canceled",
-            self.client.lr_os.put200_acceptedcanceled200(product).result)
+            self.client.lr_os.put200_acceptedcanceled200, product)
 
         # Testing raw
         process = self.client.lr_os.put201_creating_succeeded200(product, raw=True)
@@ -139,10 +145,10 @@ class LroTests(unittest.TestCase):
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
         self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Failed",
-            self.client.lr_os.put_async_retry_failed(product).result)
+            self.client.lr_os.put_async_retry_failed, product)
 
         self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Canceled",
-            self.client.lr_os.put_async_no_retrycanceled(product).result)
+            self.client.lr_os.put_async_no_retrycanceled, product)
 
         self.assertIsNone(self.client.lr_os.delete204_succeeded().result())
         self.assertIsNone(self.client.lr_os.delete202_retry200().result())
@@ -154,10 +160,10 @@ class LroTests(unittest.TestCase):
         self.assertIsNone(self.client.lr_os.delete_async_no_header_in_retry().result())
 
         self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Canceled",
-            self.client.lr_os.delete_async_retrycanceled().result)
+            self.client.lr_os.delete_async_retrycanceled)
 
         self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Failed",
-            self.client.lr_os.delete_async_retry_failed().result)
+            self.client.lr_os.delete_async_retry_failed)
 
         self.assertIsNone(self.client.lr_os.delete_async_retry_succeeded().result())
 
@@ -173,10 +179,10 @@ class LroTests(unittest.TestCase):
         self.assertIsNone(self.client.lr_os.post202_no_retry204(product).result())
 
         self.assertRaisesWithMessage("Internal Server Error",
-            self.client.lr_os.post_async_retry_failed().result)
+            self.client.lr_os.post_async_retry_failed)
 
         self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Canceled",
-            self.client.lr_os.post_async_retrycanceled().result)
+            self.client.lr_os.post_async_retrycanceled)
 
         prod = self.client.lr_os.post_async_retry_succeeded().result()
         self.assertEqual(prod.id, "100")
@@ -220,40 +226,40 @@ class LroTests(unittest.TestCase):
         product = Product(location="West US")
 
         self.assertRaisesWithMessage("Expected bad request message",
-            self.client.lrosa_ds.put_non_retry400(product).result)
+            self.client.lrosa_ds.put_non_retry400, product)
 
         self.assertRaisesWithMessage("Error from the server",
-            self.client.lrosa_ds.put_non_retry201_creating400(product).result)
+            self.client.lrosa_ds.put_non_retry201_creating400, product)
 
         self.assertRaisesWithMessage("Operation failed with status: 'Bad Request'",
-            self.client.lrosa_ds.put_async_relative_retry400(product).result)
+            self.client.lrosa_ds.put_async_relative_retry400, product)
 
         self.assertRaisesWithMessage("Expected bad request message",
-            self.client.lrosa_ds.delete_non_retry400().result)
+            self.client.lrosa_ds.delete_non_retry400)
 
         self.assertRaisesWithMessage("Expected bad request message",
-            self.client.lrosa_ds.delete202_non_retry400().result)
+            self.client.lrosa_ds.delete202_non_retry400)
 
         self.assertRaisesWithMessage("Expected bad request message",
-            self.client.lrosa_ds.delete_async_relative_retry400().result)
+            self.client.lrosa_ds.delete_async_relative_retry400)
 
         self.assertRaisesWithMessage("Expected bad request message",
-            self.client.lrosa_ds.post_non_retry400(product).result)
+            self.client.lrosa_ds.post_non_retry400, product)
 
         self.assertRaisesWithMessage("Expected bad request message",
-            self.client.lrosa_ds.post202_non_retry400(product).result)
+            self.client.lrosa_ds.post202_non_retry400, product)
 
         self.assertRaisesWithMessage("Expected bad request message",
-            self.client.lrosa_ds.post_async_relative_retry400(product).result)
+            self.client.lrosa_ds.post_async_relative_retry400, product)
 
         self.assertRaisesWithMessage("The response from long running operation does not contain a body.",
-            self.client.lrosa_ds.put_error201_no_provisioning_state_payload(product).result)
+            self.client.lrosa_ds.put_error201_no_provisioning_state_payload, product)
 
         self.assertRaisesWithMessage("The response from long running operation does not contain a body.",
-            self.client.lrosa_ds.put_async_relative_retry_no_status(product).result)
+            self.client.lrosa_ds.put_async_relative_retry_no_status, product)
 
         self.assertRaisesWithMessage("The response from long running operation does not contain a body.",
-            self.client.lrosa_ds.put_async_relative_retry_no_status_payload(product).result)
+            self.client.lrosa_ds.put_async_relative_retry_no_status_payload, product)
 
         with self.assertRaises(DeserializationError):
             self.client.lrosa_ds.put200_invalid_json(product).result()
@@ -285,13 +291,13 @@ class LroTests(unittest.TestCase):
         self.client.lrosa_ds.delete204_succeeded().result()
 
         self.assertRaisesWithMessage("The response from long running operation does not contain a body.",
-            self.client.lrosa_ds.delete_async_relative_retry_no_status().result)
+            self.client.lrosa_ds.delete_async_relative_retry_no_status)
 
         self.assertRaisesWithMessage("Location header is missing from long running operation.",
-            self.client.lrosa_ds.post202_no_location().result)
+            self.client.lrosa_ds.post202_no_location)
 
         self.assertRaisesWithMessage("The response from long running operation does not contain a body.",
-            self.client.lrosa_ds.post_async_relative_retry_no_payload().result)
+            self.client.lrosa_ds.post_async_relative_retry_no_payload)
 
 
 if __name__ == '__main__':

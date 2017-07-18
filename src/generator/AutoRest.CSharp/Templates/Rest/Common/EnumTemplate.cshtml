@@ -14,21 +14,34 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @:[Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     @:public enum @Model.ClassName
     @:{
-        for (int i = 0; i < Model.Values.Count - 1; i++)
+        var last = Model.Values.Last();
+        foreach (var value in Model.Values)
         {
-@:        [System.Runtime.Serialization.EnumMember(Value = "@Model.Values[i].SerializedName")]
-@:        @(Model.Values[i].MemberName),
+            if (value.Description != null)
+            {<text>
+        /// <summary>
+        @WrapComment("/// ", value.Description)
+        /// </summary>
+</text>
         }
-@:        [System.Runtime.Serialization.EnumMember(Value = "@Model.Values.Last().SerializedName")]
-@:        @(Model.Values.Last().MemberName)
+@:        [System.Runtime.Serialization.EnumMember(Value = "@value.SerializedName")]
+          if (value == last)
+          {
+@:        @(value.MemberName)
+          }
+          else
+          {
+@:        @(value.MemberName),
+          }
+        }
     @:}
-    if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
+<text>
     internal static class @(Model.ClassName)EnumExtension
     {
-        internal static string ToSerializedValue(this @(Model.ClassName)? value )  =>
-            value == null ? null : (( @(Model.ClassName) )value).ToSerializedValue();
+        internal static string ToSerializedValue(this @(Model.ClassName)? value)  =>
+            value == null ? null : ((@(Model.ClassName))value).ToSerializedValue();
 @EmptyLine
-        internal static string ToSerializedValue(this @(Model.ClassName) value )
+        internal static string ToSerializedValue(this @(Model.ClassName) value)
         {
             switch( value )
             {
@@ -42,7 +55,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             return null;
         }
 @EmptyLine
-        internal static @(Model.ClassName)? Parse@(Model.ClassName)( this string value )
+        internal static @(Model.ClassName)? Parse@(Model.ClassName)(this string value)
         {
             switch( value )
             {
@@ -51,11 +64,12 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 case "@Model.Values[i].SerializedName":
                     return @(Model.ClassName).@(Model.Values[i].MemberName);</text>
             }
+
             }
             return null;
         }
     }
-</text>}
+</text>
     }
     else
     {
@@ -63,6 +77,13 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     @:{
         foreach (var t in Model.Values)
         {
+            if (t.Description != null)
+            {<text>
+        /// <summary>
+        @WrapComment("/// ", t.Description)
+        /// </summary>
+</text>
+            }
 @:        public const string @t.MemberName = "@t.SerializedName";
         }
     @:}

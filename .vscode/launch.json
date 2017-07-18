@@ -1,56 +1,39 @@
 {
   "version": "0.2.0",
   "configurations": [
+
     {
-      "name": "Client Side",
-      "type": "extensionHost",
-      "request": "launch",
-      "runtimeExecutable": "${execPath}",
-      "args": [
-        "--extensionDevelopmentPath=${workspaceRoot}/src/vscode-autorest"
-      ],
-      "stopOnEntry": false,
-      "sourceMaps": true
-      // "preLaunchTask": "build/typescript"
-    },
-    {
-      "name": "Launch Tests",
-      "type": "extensionHost",
-      "request": "launch",
-      "runtimeExecutable": "${execPath}",
-      "args": [
-        "--extensionDevelopmentPath=${workspaceRoot}/src/vscode-autorest",
-        "--extensionTestsPath=${workspaceRoot}/src/vscode-autorest"
-      ],
-      "stopOnEntry": false,
-      "sourceMaps": true,
-      "preLaunchTask": "build/typescript"
-    },
-    {
-      "name": "Server Side",
       "type": "node",
-      "request": "attach",
-      "port": 6009,
-      "sourceMaps": true,
-      "protocol": "legacy"
+      "protocol": "inspector",
+      "request": "launch",
+      "name": "run tests",
+      "program": "${workspaceRoot}/src/autorest-core/node_modules/mocha/bin/_mocha",
+      "args": [
+        "test",
+        "-g",
+        "TestConfiguration"
+      ],
+      "cwd": "${workspaceRoot}/src/autorest-core"
     },
     {
-      "diagnosticLogging": true,
-      "type": "node2",
+      "type": "node",
+      "protocol": "inspector",
       "request": "launch",
       "name": "run bootstrapper",
       "program": "${workspaceRoot}/src/autorest/app.js",
       "cwd": "${workspaceRoot}",
       "preLaunchTask": "build/typescript"
-    }
-  ],
-  "compounds": [
+    },
     {
-      "name": "Both",
-      "configurations": [
-        "Client Side",
-        "Server Side"
-      ]
+      "type": "node",
+      "protocol": "inspector",
+      "request": "launch",
+      "name": "run autorest",
+      "program": "${workspaceRoot}/src/autorest-core/app.js",
+      "args" : [
+        "C:/work/github/azure-rest-api-specs/profile/all.md"
+      ],
+      "cwd": "${workspaceRoot}"
     }
   ]
 }

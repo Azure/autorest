@@ -1,7 +1,15 @@
+task 'copy-dts-files', '', (done)->
+  # this needs to run multiple times.
+  global.completed['copy-dts-files'] = false
+  
+  # copy *.d.ts files 
+  source ["#{basefolder}/src/autorest-core/**/*.d.ts","!#{basefolder}/src/autorest-core/node_modules/**","!#{basefolder}/src/autorest-core/test/**" ]
+    .pipe destination "#{basefolder}/src/autorest/lib/core"
+
 # build task for tsc 
 task 'build', 'typescript', (done)-> 
-  count = 3
-
+  count = 2
+  
   # symlink the build into the target folder for the binaries.
   if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
     mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
@@ -9,19 +17,31 @@ task 'build', 'typescript', (done)->
   if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core"
     fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core",'junction' 
 
-  typescriptProjects()
-    .pipe foreach (each,next) ->
-      cmd = "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path}"
-      cmd = "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path} --watch" if watch
-      proc = execute cmd,{retry:2} ,(code,stdout,stderr)->
-        # echo stdout.replace("src/","#{basefolder}/src/".trim()) 
-        count--
-        if count is 0
-          done()
-      , (data)-> 
-        echo data.replace(/^src\//mig, "#{basefolder}/src/")
+  # Compile the core
+  execute "#{basefolder}/node_modules/.bin/tsc --project #{basefolder}/src/autorest-core", (c,o,e)-> 
+    # after this is compiled, then we can compile the other one.
+    run "copy-dts-files", ->
+      execute "#{basefolder}/node_modules/.bin/tsc --project #{basefolder}/src/autorest", (cc,oo,ee)-> 
+        # after this is compiled we can go into watch mode if we are told to.
+        if watch 
+          watchFiles ["#{basefolder}/src/autorest-core/**/*.d.ts"], ["copy-dts-files"]
 
-      next null
+          execute "#{basefolder}/node_modules/.bin/tsc --watch --project #{basefolder}/src/autorest-core", (c,o,e)-> 
+            #nothing
+            echo "hi"
+          , (d) -> echo d.replace(/^src\//mig, "#{basefolder}/src/")
+          execute "#{basefolder}/node_modules/.bin/tsc --watch --project #{basefolder}/src/autorest", (c,o,e)->  
+            #nothing
+            echo "there"
+          , (d) -> echo d.replace(/^src\//mig, "#{basefolder}/src/")
+        
+        done();
+      , (d) ->  # fix filenames for vscode consumption
+        echo d.replace(/^src\//mig, "#{basefolder}/src/")    
+
+  , (data) -> # fix filenames for vscode consumption
+    echo data.replace(/^src\//mig, "#{basefolder}/src/")
+
   return null
 
 task 'fix-line-endings', 'typescript', ->
@@ -64,7 +84,8 @@ task 'test', 'typescript',['build/typescript'], (done)->
         next null
 
 task 'npm-install', 'typescript', (done)-> 
-  count = 7
+  global.threshold =1
+  count = 5
   npminstalls()
     .pipe foreach (each,next)-> 
       #count++

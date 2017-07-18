@@ -19,14 +19,13 @@ namespace AutoRest.Python
             comment = comment.Replace("\\", "\\\\");
 
             int available =
-                MaximumCommentColumn - // Maximum desired width
+                (Settings.Instance?.MaximumCommentColumns ?? Settings.DefaultMaximumCommentColumns) - // Maximum desired width
                 Indentation.Length - // - Space used for indent
                 prefix.Length - // - Prefix //'s length
                 1 - // - Extra space between prefix and text
                 1; // - Extra space for parameter start
 
-            return string.Join(Environment.NewLine + " ", comment.WordWrap(available)
-                .Select(s => string.Format(CultureInfo.InvariantCulture, "{0}{1}", prefix, s)));
+            return string.Join(Environment.NewLine + " ", comment.WordWrap(available).Select(s => $"{prefix}{s}"));
         }
     }
 }

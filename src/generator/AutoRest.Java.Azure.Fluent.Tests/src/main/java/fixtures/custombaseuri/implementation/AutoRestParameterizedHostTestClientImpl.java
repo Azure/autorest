@@ -181,8 +181,6 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
      */
     @Override
     public String userAgent() {
-        return String.format("Azure-SDK-For-Java/%s (%s)",
-                getClass().getPackage().getImplementationVersion(),
-                "AutoRestParameterizedHostTestClient, 1.0.0");
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestParameterizedHostTestClient", "1.0.0");
     }
 }

@@ -1,4 +1,9 @@
-import { EnhancedPosition, Position, SmartPosition } from './ref/source-map';
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+import { EnhancedPosition, Position } from "./ref/source-map";
 
 export enum Channel {
   Information = <any>"information",
@@ -21,11 +26,14 @@ export interface Range {
 }
 
 export interface Message {
-  Channel?: Channel;
+  Channel: Channel;
   Key?: Iterable<string>;
   Details?: any;
   Text: string;
+
+  // injected or modified by core
   Source?: Array<SourceLocation>;
   Range?: Iterable<Range>;
   Plugin?: string;
+  FormattedMessage?: string;
 };

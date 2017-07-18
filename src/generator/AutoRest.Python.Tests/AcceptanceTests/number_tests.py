@@ -44,7 +44,7 @@ sys.path.append(join(tests, "BodyNumber"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestnumbertestservice import AutoRestNumberTestService
+from auto_rest_number_test_service import AutoRestNumberTestService
 
 
 class NumberTests(unittest.TestCase):

@@ -17,9 +17,26 @@
 @:import * as operations from "./operations";
 }
 @EmptyLine
-declare class @(Model.Name) {
 @{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
 @{var optionalParameters = Model.Properties.Where(p => (!p.IsRequired || p.IsRequired && !string.IsNullOrEmpty(p.DefaultValue)) && !p.IsConstant);}
+@{var clientOptionType = optionalParameters.Count() > 0 ? Model.Name + "Options" : "ServiceClientOptions"; }
+@if (optionalParameters.Count() > 0)
+{
+@:/**
+ @:* @(Model.Name)Options for @(Model.Name).
+ @:*/
+@:declare interface @(Model.Name)Options extends ServiceClientOptions {
+    foreach (var param in optionalParameters)
+    {
+  @:/**
+   @:* @@property {@param.ModelType.Name.ToCamelCase()} [@param.Name] - @param.Documentation
+   @:*/
+  @:@param.Name?: @param.ModelType.Name;
+    }
+@:}
+@EmptyLine
+}
+declare class @(Model.Name) extends ServiceClient {
   /**
    * @@class
    * Initializes a new instance of the @Model.Name class.
@@ -50,7 +67,7 @@ declare class @(Model.Name) {
    @:*
 }
    */
-  constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParametersTS) ? Model.RequiredConstructorParametersTS + ", ": "")options?: ServiceClientOptions);
+  constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParametersTS) ? Model.RequiredConstructorParametersTS + ", ": "")options?: @clientOptionType);
 
 @foreach (var property in Model.Properties)
 {

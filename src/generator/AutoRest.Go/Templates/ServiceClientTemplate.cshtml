@@ -20,7 +20,7 @@ package @Model.Namespace
 import (
 @foreach (var import in imports)
 {
-    @:"@(import)"
+    @:@(import)
 }
 )
 
@@ -31,10 +31,7 @@ const (
         @:// DefaultBaseURI is the default URI used for the service @(Model.ServiceName)
         @:DefaultBaseURI = "@Model.BaseUrl"
     }
-    else
-    {
         @(Model.ConstGlobalDefaultParameters)
-    }
 )
 
 @EmptyLine
@@ -83,7 +80,14 @@ func New(@(Model.GlobalParameters))@(Model.BaseClient) {
             {
                 if (!p.SerializedName.Value.IsApiVersion())
                 {
-                @:@(string.Format("{0}: {1},", p.Name, p.Name.Value.ToSentence()))
+                    if (p.DefaultValue.FixedValue.IsNullOrEmpty())
+                    {
+                        @:@(string.Format("{0}: {1},", p.Name, p.Name.Value.ToSentence()))
+                    }
+                    else
+                    {
+                        @:@(string.Format("{0}: Default{1},", p.Name, p.Name.Value.ToPascalCase()))
+                    }
                 }
             }
         }

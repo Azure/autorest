@@ -23,12 +23,17 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M3016";
+        public override string Id => "R3014";
 
         /// <summary>
         /// Violation category of the Rule.
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
+        /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceImpactingChanges;
 
         /// <summary>;
         /// The template message for this Rule. 
@@ -43,24 +48,37 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
-        ///// <summary>
-        ///// Validates whether property names are camelCase in body parameters.
-        ///// </summary>
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.Default;
+
+        /// <summary>
+        /// The rule could be violated by a porperty of a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
+        /// <summary>
+        /// Validates whether property names are camelCase in body parameters.
+        /// </summary>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Operation> path, RuleContext context)
         {
             foreach (string operation in path.Keys)
             {
                 if (path[operation]?.Parameters != null)
                 {
-                    foreach (SwaggerParameter param in path[operation].Parameters)
+                    for (var i=0; i<path[operation].Parameters.Count; ++i)
                     {
-                        if (param.In == ParameterLocation.Body && param.Schema?.Properties != null)
+                        if (path[operation].Parameters[i].In == ParameterLocation.Body && path[operation].Parameters[i].Schema?.Properties != null)
                         {
-                            foreach (KeyValuePair<string, Schema> prop in param.Schema?.Properties)
+                            foreach (KeyValuePair<string, Schema> prop in path[operation].Parameters[i].Schema?.Properties)
                             {
-                                if (!ValidationUtilities.isNameCamelCase(prop.Key))
+                                if (!ValidationUtilities.IsODataProperty(prop.Key) && !ValidationUtilities.IsNameCamelCase(prop.Key))
                                 {
-                                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, prop.Key, ValidationUtilities.ToCamelCase(prop.Key));
+                                    yield return new ValidationMessage(new FileObjectPath(context.File, 
+                                        context.Path.AppendProperty(operation).AppendProperty("parameters").AppendIndex(i).AppendProperty("schema").AppendProperty("properties").AppendProperty(prop.Key)), 
+                                        this, prop.Key, ValidationUtilities.GetCamelCasedSuggestion(prop.Key));
                                 }
                             }
                         }

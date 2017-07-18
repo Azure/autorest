@@ -1,17 +1,18 @@
-import { EventEmitter, IEvent } from '../events';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { MultiPromise, MultiPromiseUtility } from '../multi-promise';
+import { LazyPromise } from "../lazy";
+import { EventEmitter } from "../events";
 import { fork, ChildProcess } from "child_process";
-import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../ref/source-map";
+import { Mappings, RawSourceMap, SmartPosition } from "../ref/source-map";
 import { CancellationToken } from "../ref/cancallation";
 import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
-import { DataStoreViewReadonly, DataStoreView, DataHandleRead } from "../data-store/data-store";
+import { DataStoreViewReadonly, DataStoreView } from "../data-store/data-store";
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
-import { Channel, Message } from "../message";
+import { Exception } from "../exception";
+import { Message } from "../message";
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
@@ -61,8 +62,10 @@ export class AutoRestPlugin extends EventEmitter {
           return await (endpoint as any)[fnName](...rest);
         }
       } catch (e) {
-        console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
-        console.error(e);
+        if (e != "Cancellation requested.") {
+          console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
+          console.error(e);
+        }
       }
     };
     this.apiInitiator = {
@@ -79,13 +82,15 @@ export class AutoRestPlugin extends EventEmitter {
     channel.onNotification(IAutoRestPluginInitiator_Types.WriteFile, this.apiInitiator.WriteFile);
     channel.onNotification(IAutoRestPluginInitiator_Types.Message, this.apiInitiator.Message);
 
+    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Exception("AutoRest plugin terminated.")); }));
+
     // target
     this.apiTarget = {
       async GetPluginNames(cancellationToken: CancellationToken): Promise<string[]> {
-        return await channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken);
+        return await Promise.race([terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken)]);
       },
       async Process(pluginName: string, sessionId: string, cancellationToken: CancellationToken): Promise<boolean> {
-        return await channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken);
+        return await Promise.race([terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken)]);
       }
     };
   }
@@ -117,27 +122,25 @@ export class AutoRestPlugin extends EventEmitter {
   }
 
   private static CreateEndpointFor(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, onMessage: (message: Message) => void, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
-    let messageId: number = 0;
-
-    const inputFileHandles = async () => {
-      const inputFileNames = [...await inputScope.Enum()];
-      const inputFiles = await Promise.all(inputFileNames.map(fn => inputScope.ReadStrict(fn)));
-      return inputFiles;
-    }
+    const inputFileNames = new LazyPromise(async () => inputScope.Enum());
+    const inputFileHandles = new LazyPromise(async () => {
+      const names = await inputFileNames;
+      return await Promise.all(names.map(fn => inputScope.ReadStrict(fn)));
+    });
 
     let finishNotifications: Promise<void> = Promise.resolve();
     const apiInitiator: IAutoRestPluginInitiatorEndpoint = {
       FinishNotifications(): Promise<void> { return finishNotifications; },
       async ReadFile(filename: string): Promise<string> {
         const file = await inputScope.ReadStrict(filename);
-        return await file.ReadData();
+        return file.ReadData();
       },
       async GetValue(key: string): Promise<any> {
-        return configuration(key);
+        const result = configuration(key);
+        return result === undefined ? null : result;
       },
       async ListInputs(): Promise<string[]> {
-        const result = await inputScope.Enum();
-        return [...result];
+        return await inputFileNames;
       },
 
       async WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void> {
@@ -150,15 +153,15 @@ export class AutoRestPlugin extends EventEmitter {
 
         const file = await outputScope.Write(filename);
         if (typeof (sourceMap as any).mappings === "string") {
-          await file.WriteDataWithSourceMap(content, async () => sourceMap);
+          await file.WriteDataWithSourceMap(content, () => sourceMap as any);
         } else {
-          await file.WriteData(content, sourceMap as Mappings, await inputFileHandles());
+          await file.WriteData(content, sourceMap as Mappings, await inputFileHandles);
         }
 
         await finishPrev;
         notify();
       },
-      async Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void> {
+      async Message(message: Message): Promise<void> {
         const finishPrev = finishNotifications;
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);

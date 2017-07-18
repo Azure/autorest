@@ -1,5 +1,5 @@
 {
-  "id": "http://schema.management.azure.com/schemas/2015-10-01-preview/Microsoft.DataLakeAnalytics.json#",
+  "id": "https://schema.management.azure.com/schemas/2015-10-01-preview/Microsoft.DataLakeAnalytics.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.DataLakeAnalytics",
   "description": "Microsoft DataLakeAnalytics Resource Types",
@@ -35,7 +35,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the value of custom properties."
@@ -46,7 +46,7 @@
               "$ref": "#/definitions/DataLakeAnalyticsAccountProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the properties defined by Data Lake Analytics all properties are specific to each resource provider."
@@ -97,7 +97,7 @@
               "$ref": "#/definitions/DataLakeStoreAccountInfoProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the properties for the Data Lake Store account being added."
@@ -135,7 +135,7 @@
               "$ref": "#/definitions/StorageAccountProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the properties for the Azure Storage account being added."
@@ -175,7 +175,7 @@
               "$ref": "#/definitions/DataLakeStoreAccountInfoProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the properties for the Data Lake Store account being added."
@@ -213,7 +213,7 @@
               "$ref": "#/definitions/StorageAccountProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the properties for the Azure Storage account being added."
@@ -240,7 +240,7 @@
               "type": "integer"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the maximum supported degree of parallelism for this account."
@@ -251,7 +251,7 @@
               "type": "integer"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the maximum supported jobs running under the account at the same time."
@@ -265,7 +265,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the list of Data Lake storage accounts associated with this account."
@@ -279,7 +279,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the list of Azure Blob storage accounts associated with this account."
@@ -300,7 +300,7 @@
               "$ref": "#/definitions/DataLakeStoreAccountInfoProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the properties associated with this Data Lake Store account."
@@ -334,7 +334,7 @@
               "$ref": "#/definitions/StorageAccountProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Gets or sets the properties associated with this storage account."

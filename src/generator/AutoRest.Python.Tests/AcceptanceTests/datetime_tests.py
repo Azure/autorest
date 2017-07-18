@@ -43,7 +43,7 @@ sys.path.append(join(tests, "BodyDateTime"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError, SerializationError
 
-from autorestdatetimetestservice import AutoRestDateTimeTestService
+from auto_rest_date_time_test_service import AutoRestDateTimeTestService
 
 
 class DatetimeTests(unittest.TestCase):

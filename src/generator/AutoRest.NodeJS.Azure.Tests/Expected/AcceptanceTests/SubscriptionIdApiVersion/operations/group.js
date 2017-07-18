@@ -79,9 +79,10 @@ function _getSampleResourceGroup(resourceGroupName, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -95,7 +96,6 @@ function _getSampleResourceGroup(resourceGroupName, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -154,17 +154,12 @@ function _getSampleResourceGroup(resourceGroupName, options, callback) {
   });
 }
 
-/**
- * @class
- * Group
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the MicrosoftAzureTestUrl.
- * Initializes a new instance of the Group class.
- * @constructor
- *
- * @param {MicrosoftAzureTestUrl} client Reference to the service client.
- */
+/** Class representing a Group. */
 class Group {
+  /**
+   * Create a Group.
+   * @param {MicrosoftAzureTestUrl} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._getSampleResourceGroup = _getSampleResourceGroup;

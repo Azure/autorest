@@ -11,15 +11,14 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the DateWrapper class.
- * @constructor
- * @member {date} [field]
- *
- * @member {date} [leap]
- *
+ * Class representing a DateWrapper.
  */
 class DateWrapper {
+  /**
+   * Create a DateWrapper.
+   * @member {date} [field]
+   * @member {date} [leap]
+   */
   constructor() {
   }
 

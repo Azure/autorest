@@ -89,9 +89,10 @@ function _update(resourceGroupName, avset, tags, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PATCH';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -99,7 +100,6 @@ function _update(resourceGroupName, avset, tags, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -151,17 +151,12 @@ function _update(resourceGroupName, avset, tags, options, callback) {
   });
 }
 
-/**
- * @class
- * AvailabilitySets
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestParameterFlattening.
- * Initializes a new instance of the AvailabilitySets class.
- * @constructor
- *
- * @param {AutoRestParameterFlattening} client Reference to the service client.
- */
+/** Class representing a AvailabilitySets. */
 class AvailabilitySets {
+  /**
+   * Create a AvailabilitySets.
+   * @param {AutoRestParameterFlattening} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._update = _update;

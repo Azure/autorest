@@ -1,0 +1,1 @@
+@dotnet %~dp0/dotnet-autorest.dll %*

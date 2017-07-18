@@ -11,6 +11,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Resource\Swagger\Validation\default-valued-properties-in-patch-request.json" />
+    <Content Include="Resource\Swagger\Validation\req-properties-in-patch-request.json" />
+    <Content Include="Resource\Swagger\swagger-x-ms-discriminator-value.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Swagger\Validation\swagger-list-by-immediate-parent-2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Swagger\Validation\swagger-list-by-immediate-parent.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resource\Swagger\Validation\security-definitions-validations-11.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -59,4 +70,6 @@
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
   </ItemGroup>
+ 
+  <ProjectExtensions><VisualStudio><UserProperties Resource_4Swagger_4swagger-x-ms-discriminator-value_1json__JSONSchema="..\..\..\..\..\schema\swagger-extensions.json" /></VisualStudio></ProjectExtensions>
 </Project>

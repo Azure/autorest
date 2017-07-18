@@ -154,14 +154,8 @@ namespace AutoRest.Core.Model
         CodeModel IParent.CodeModel => this;
 
         [JsonIgnore]
-        public virtual IEnumerable<IIdentifier> IdentifiersInScope
-        {
-            get
-            {
-                return ((IEnumerable<IIdentifier>)Operations).Concat(ModelTypes).ConcatSingleItem(this);
-                //yield return this;
-            }
-        }
+        public virtual IEnumerable<IIdentifier> IdentifiersInScope => 
+            ((IEnumerable<IIdentifier>)Operations).Concat(ModelTypes).ConcatSingleItem(this);
 
         [JsonIgnore]
         public virtual IEnumerable<IChild> Children
@@ -182,10 +176,10 @@ namespace AutoRest.Core.Model
         }
 
         public virtual HashSet<string> LocallyUsedNames => null;
-
-        public bool ShouldGenerateXmlSerialization =>
-            Methods.Any(method => 
+        
+        [JsonIgnore]
+        public bool ShouldGenerateXmlSerialization => Methods.Any(method => 
                 method.RequestContentType == "application/xml" || 
-                (method.ResponseContentTypes?.Any(rct => rct.StartsWith("application/xml")) ?? false));
+                (method.ResponseContentTypes?.Any(rct => rct.StartsWith("application/xml")) ?? false)) && (Settings.Instance.Host?.GetValue<bool?>("enable-xml").Result == true);
     }
 }

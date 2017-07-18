@@ -25,9 +25,6 @@ namespace AutoRest.Simplify
 
         public async Task Run(MemoryFileSystem fs)
         {
-            var op = new AzureAsyncOperation();
-            var restOp = new RestException();
-
             var files = fs.GetFiles("", "*.cs", SearchOption.AllDirectories).
                 ToDictionary(each => each, each => fs.ReadAllText(each));
 
@@ -42,7 +39,6 @@ namespace AutoRest.Simplify
                 typeof(XElement).GetAssembly().Location,
                 typeof(JsonConvert).GetAssembly().Location
             };
-
 
             var projectId = ProjectId.CreateNewId();
             var solution = new AdhocWorkspace().CurrentSolution

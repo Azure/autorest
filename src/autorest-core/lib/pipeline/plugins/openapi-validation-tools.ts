@@ -3,41 +3,170 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+// polyfills for language support
+require("../../polyfill.min.js");
+
+import { JsonPath, nodes } from '../../ref/jsonpath';
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types } from "../plugin-api";
-import { SmartPosition, Mapping, RawSourceMap } from "../../ref/source-map";
+import { EnhancedPosition, Mapping, RawSourceMap, SmartPosition } from "../../ref/source-map";
 import { Parse, Stringify } from "../../ref/yaml";
-import { Message } from "../../message";
-const utils = require("../../../../../../openapi-validation-tools/lib/util/utils");
-const validation = require("../../../../../../openapi-validation-tools/index");
+import { Message, Channel } from "../../message";
+import { From } from "../../ref/linq";
+const utils = require("../../../node_modules/oav/lib/util/utils");
+const validation = require("../../../node_modules/oav/index");
+
+/**
+ * The tools report paths in a way that does not represent indices as numbers.
+ * This method tries to recover this information.
+ */
+function UnAmarifyPath(path: string[]): JsonPath {
+  const result: JsonPath = path.slice();
+  for (let i = 1; i < result.length; ++i) {
+    const num = +result[i];
+    if (!isNaN(num) && result[i - 1] === "parameters") {
+      result[i] = num;
+    }
+  }
+  return result;
+}
 
 class OpenApiValidationSemantic {
-  public static readonly Name = "semantic validation";
+  public static readonly Name = "semantic-validator";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
+    // console.log('I am in OpenApiValidationSemantic');
     const swaggerFileNames = await initiator.ListInputs(sessionId);
     for (const swaggerFileName of swaggerFileNames) {
       const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
       const swagger = Parse<any>(swaggerFile);
-      utils.docCache[swaggerFileName] = swagger;
-      const specValidationResult = await validation.validateSpec(swaggerFileName, "off");
-      initiator.WriteFile(sessionId, swaggerFileName, Stringify(specValidationResult));
+
+      Object.defineProperty(utils, "docCache", {
+        configurable: true,
+        get: () => <any>{ "cache.json": swagger },
+        set: () => { }
+      });
+      const specValidationResult = await validation.validateSpec("cache.json", { "consoleLogLevel": "off" });
+      const messages = specValidationResult.validateSpec;
+      for (const message of messages.errors) {
+        initiator.Message(sessionId, {
+          Channel: Channel.Error,
+          Details: message,
+          Text: message.message,
+          Source: [{ document: swaggerFileName, Position: <any>{ path: UnAmarifyPath(message["jsonref"].split("#/")[1].split("/")) } }]
+        });
+      }
+      for (const message of messages.warnings) {
+        initiator.Message(sessionId, {
+          Channel: Channel.Warning,
+          Details: message,
+          Text: message.message,
+          Source: [{ document: swaggerFileName, Position: <any>{ path: UnAmarifyPath(message["jsonref"].split("#/")[1].split("/")) } }]
+        });
+      }
     }
     return true;
   }
 }
 
 class OpenApiValidationExample {
-  public static readonly Name = "example validation";
+  public static readonly Name = "model-validator";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
     const swaggerFileNames = await initiator.ListInputs(sessionId);
     for (const swaggerFileName of swaggerFileNames) {
       const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
       const swagger = Parse<any>(swaggerFile);
-      utils.docCache[swaggerFileName] = swagger;
-      const specValidationResult = await validation.validateExamples(swaggerFileName, null, "off");
-      initiator.WriteFile(sessionId, swaggerFileName, Stringify(specValidationResult));
+
+      Object.defineProperty(utils, "docCache", {
+        configurable: true,
+        get: () => <any>{ "cache.json": swagger },
+        set: () => { }
+      });
+      const specValidationResult = await validation.validateExamples("cache.json", null, { "consoleLogLevel": "off" });
+
+      for (const op of Object.getOwnPropertyNames(specValidationResult.operations)) {
+        const opObj = specValidationResult.operations[op]["x-ms-examples"];
+        // remove circular reference...
+        opObj.scenarios = null;
+
+        // invalid?
+        if (opObj.isValid === false) {
+          // get path to x-ms-examples in swagger
+          const xmsexPath = From(nodes(swagger, `$.paths[*][?(@.operationId==='${op}')]["x-ms-examples"]`))
+            .Select(x => x.path)
+            .FirstOrDefault();
+          if (!xmsexPath) {
+            throw new Error("Model Validator: Path to x-ms-examples not found.");
+          }
+
+          // console.error(JSON.stringify(opObj, null, 2));
+          initiator.Message(sessionId, {
+            Channel: Channel.Verbose,
+            Details: opObj,
+            Text: "Model validator found issue (see details).",
+            Source: [{ document: swaggerFileName, Position: <any>{ path: xmsexPath } }]
+          });
+
+          // request
+          const request = opObj.request;
+          if (request.isValid === false) {
+            const error = request.error;
+            const innerErrors = error.innerErrors;
+
+            if (!innerErrors || !innerErrors.length) {
+              throw new Error("Model Validator: Unexpected format.");
+            }
+
+            for (const error of innerErrors) {
+              const path = UnAmarifyPath(error.path);
+              // console.error(JSON.stringify(error, null, 2));
+              initiator.Message(sessionId, {
+                Channel: Channel.Error,
+                Details: error,
+                Text: error.message,
+                Key: [error.code],
+                Source: [
+                  { document: swaggerFileName, Position: <any>{ path: xmsexPath } },
+                  { document: swaggerFileName, Position: <any>{ path: path } }
+                ]
+              });
+
+              // TODO: more detailed error by traversing into "error.errors"? Can Amar make this easier?
+            }
+          }
+
+          // responses
+          const responseCodes = Object.getOwnPropertyNames(opObj.responses);
+          for (const responseCode of responseCodes) {
+            const response = opObj.responses[responseCode];
+            if (response.isValid === false) {
+              const error = response.error;
+              const innerErrors = error.innerErrors;
+
+              if (!innerErrors || !innerErrors.length) {
+                throw new Error("Model Validator: Unexpected format.");
+              }
+
+              for (const error of innerErrors) {
+                // console.error(JSON.stringify(error, null, 2));
+                initiator.Message(sessionId, {
+                  Channel: Channel.Error,
+                  Details: error,
+                  Text: error.message,
+                  Key: [error.code],
+                  Source: [
+                    { document: swaggerFileName, Position: <any>{ path: xmsexPath } },
+                    { document: swaggerFileName, Position: <any>{ path: xmsexPath.slice(0, xmsexPath.length - 1).concat(["responses", responseCode]) } }
+                  ]
+                });
+
+                // TODO: more detailed error by traversing into "error.errors"? Can Amar make this easier?
+              }
+            }
+          }
+        }
+      }
     }
     return true;
   }

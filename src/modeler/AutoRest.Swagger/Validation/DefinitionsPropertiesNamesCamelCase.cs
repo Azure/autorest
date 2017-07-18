@@ -23,7 +23,12 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M3016";
+        public override string Id => "R3016";
+
+        /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public override ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.ServiceImpactingChanges;
 
         /// <summary>
         /// Violation category of the Rule.
@@ -44,6 +49,17 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.Default;
+
+        /// <summary>
+        /// The rule could be violated by a porperty of a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
+        /// <summary>
         /// Validates whether property names are camelCase for definitions.
         /// </summary>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
@@ -54,9 +70,9 @@ namespace AutoRest.Swagger.Validation
                 {
                     foreach (KeyValuePair<string, Schema> prop in definition.Value.Properties)
                     {
-                        if (!ValidationUtilities.isNameCamelCase(prop.Key))
+                        if (!ValidationUtilities.IsODataProperty(prop.Key) && !ValidationUtilities.IsNameCamelCase(prop.Key))
                         {
-                            yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, prop.Key, definition.Key, ValidationUtilities.ToCamelCase(prop.Key));
+                            yield return new ValidationMessage(new FileObjectPath(context.File, context.Path.AppendProperty(definition.Key).AppendProperty("properties").AppendProperty(prop.Key)), this, prop.Key, definition.Key, ValidationUtilities.GetCamelCasedSuggestion(prop.Key));
                         }
                     }
                 }

@@ -44,7 +44,7 @@ definitions:
     const input = await inputWrite.WriteData(this.exampleObject);
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
-      const result = await ManipulateObject(input, await dataStore.Write(`manip${(await dataStore.Enum()).length}`), jsonQuery, x => x);
+      const result = await ManipulateObject(input, await dataStore.Write(`manip${(await dataStore.Enum()).length}`), jsonQuery, (_, x) => x);
       assert.strictEqual(result.anyHit, anyHit, jsonQuery);
     };
 
@@ -69,9 +69,9 @@ definitions:
     const input = await inputWrite.WriteData(this.exampleObject);
 
     // remove all models that don't have a description
-    const result = await ManipulateObject(input, await dataStore.Write(`manip1`), "$.definitions[?(!@.description)]", x => undefined);
+    const result = await ManipulateObject(input, await dataStore.Write(`manip1`), "$.definitions[?(!@.description)]", (_, x) => undefined);
     assert.strictEqual(result.anyHit, true);
-    const resultRaw = await result.result.ReadData();
+    const resultRaw = result.result.ReadData();
     assert.ok(resultRaw.indexOf("NodeA") !== -1);
     assert.ok(resultRaw.indexOf("NodeB") === -1);
   }
@@ -85,35 +85,35 @@ definitions:
     {
       // override all existing model descriptions
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, await dataStore.Write(`manip1`), "$.definitions.*.description", x => bestDescriptionEver);
+      const result = await ManipulateObject(input, await dataStore.Write(`manip1`), "$.definitions.*.description", (_, x) => bestDescriptionEver);
       assert.strictEqual(result.anyHit, true);
-      const resultObject = await result.result.ReadObject<any>();
+      const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
     }
     {
       // override & insert all model descriptions
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, await dataStore.Write(`manip2`), "$.definitions.*", x => { x.description = bestDescriptionEver; return x; });
+      const result = await ManipulateObject(input, await dataStore.Write(`manip2`), "$.definitions.*", (_, x) => { x.description = bestDescriptionEver; return x; });
       assert.strictEqual(result.anyHit, true);
-      const resultObject = await result.result.ReadObject<any>();
+      const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
       assert.strictEqual(resultObject.definitions.NodeB.description, bestDescriptionEver);
     }
     {
       // make all descriptions upper case
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, await dataStore.Write(`manip3`), "$..description", x => (x as string).toUpperCase());
+      const result = await ManipulateObject(input, await dataStore.Write(`manip3`), "$..description", (_, x) => (x as string).toUpperCase());
       assert.strictEqual(result.anyHit, true);
-      const resultObject = await result.result.ReadObject<any>();
+      const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, "DESCRIPTION");
       assert.strictEqual(resultObject.paths["/api/circular"].get.description, "FUN TIME");
     }
     {
       // make all descriptions upper case by using safe-eval
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, await dataStore.Write(`manip4`), "$..description", x => safeEval("$.toUpperCase()", { $: x }));
+      const result = await ManipulateObject(input, await dataStore.Write(`manip4`), "$..description", (_, x) => safeEval("$.toUpperCase()", { $: x }));
       assert.strictEqual(result.anyHit, true);
-      const resultObject = await result.result.ReadObject<any>();
+      const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, "DESCRIPTION");
       assert.strictEqual(resultObject.paths["/api/circular"].get.description, "FUN TIME");
     }

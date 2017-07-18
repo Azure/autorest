@@ -7,11 +7,11 @@ import * as assert from "assert";
 import { AutoRest } from "../lib/autorest-core";
 import { RealFileSystem } from "../lib/file-system";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
-import { Message } from "../lib/message";
+import { Message, Channel } from "../lib/message";
 import { PumpMessagesToConsole } from './test-utility';
 
 @suite class EndToEnd {
-  @test @skip @timeout(60000) async "network full game"() {
+  @test @timeout(120000) async "network full game"() {
     const autoRest = new AutoRest(new RealFileSystem());
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
@@ -35,13 +35,25 @@ import { PumpMessagesToConsole } from './test-utility';
     });
 
     autoRest.AddConfiguration({
-      __specials: { infoSectionOverride: { title: "Network" } } // TODO: adjust, as the config evolves
+      "override-info": {
+        title: "Network"
+      }
     });
 
     // TODO: generate for all, probe results
 
     const success = await autoRest.Process().finish;
     assert.strictEqual(success, true);
+  }
+
+  @test @timeout(60000) async "other configuration scenario"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-complicated.md"));
+    // PumpMessagesToConsole(autoRest);
+
+
+    const config = await autoRest.view;
+    assert.strictEqual(config["shouldwork"], true);
+
   }
 
   @test @timeout(60000) async "complicated configuration scenario"() {
@@ -53,16 +65,54 @@ import { PumpMessagesToConsole } from './test-utility';
       "cmd-line-complex": {
         "true": true,
         "false": false
-      }
+      },
+      "azure-validator": true
     });
 
     const config = await autoRest.view;
-    assert.strictEqual(config.AzureArm, true);
-    assert.strictEqual([...config.InputFileUris].length, 1);
+    assert.strictEqual(config.InputFileUris.length, 1);
 
     const messages: Message[] = [];
-    autoRest.Warning.Subscribe((_, m) => messages.push(m));
-    await autoRest.Process().finish;
+
+    autoRest.Message.Subscribe((_, m) => { if (m.Channel === Channel.Warning) { messages.push(m); } });
+    assert.equal(await autoRest.Process().finish, true);
+    assert.notEqual(messages.length, 0);
+  }
+  // testing end-to-end for non-arm type validation rules. Since all validation rules are currently defaulted to 
+  // ARM, non-ARM documents should show 0 validation messages
+  // TODO: fix this test when validation rules are properly categorized
+  @test @timeout(60000) async "non-arm type spec testing"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
+    autoRest.AddConfiguration({
+      "openapi-type": "default",
+      "azure-validator": true
+    });
+
+    const config = await autoRest.view;
+    const messages: Message[] = [];
+
+    autoRest.Message.Subscribe((_, m) => { messages.push(m); });
+    assert.equal(await autoRest.Process().finish, true);
+    assert.notEqual(messages.length, 0);
+    // flag any fatal errors
+    assert.equal(messages.filter(m => m.Channel === Channel.Fatal).length, 0);
+  }
+  @test @timeout(60000) async "arm type spec testing"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
+    autoRest.AddConfiguration({
+      "openapi-type": "arm",
+      "azure-validator": true
+    });
+
+    const config = await autoRest.view;
+
+    const messages: Message[] = [];
+
+    autoRest.Message.Subscribe((_, m) => { messages.push(m); });
+    // PumpMessagesToConsole(autoRest);
+    assert.equal(await autoRest.Process().finish, true);
+    // flag any fatal errors
+    assert.equal(messages.filter(m => m.Channel === Channel.Fatal).length, 0);
     assert.notEqual(messages.length, 0);
   }
 }

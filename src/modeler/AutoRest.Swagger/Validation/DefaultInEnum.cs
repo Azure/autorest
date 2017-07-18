@@ -35,7 +35,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M2027";
+        public override string Id => "R2027";
 
         /// <summary>
         /// Violation category of the Rule.
@@ -63,5 +63,17 @@ namespace AutoRest.Swagger.Validation
         ///     The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override Category Severity => Category.Error;
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.Default;
+
+        /// <summary>
+        /// The rule could be violated by a porperty of a model referenced by many jsons belonging to the same
+        /// composed state, to reduce duplicate messages, run validation rule in composed state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Composed;
+
     }
 }

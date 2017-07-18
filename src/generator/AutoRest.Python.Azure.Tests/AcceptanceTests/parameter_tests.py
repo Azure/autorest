@@ -38,21 +38,21 @@ from os.path import dirname, pardir, join, realpath
 cwd = dirname(realpath(__file__))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
+import fixtures # Ensure that fixtures is loaded on old python before the next line
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
+sys.modules['fixtures'].__path__.append(join(tests, "AzureParameterGrouping", "fixtures"))
+sys.modules['fixtures'].__path__.append(join(tests, "SubscriptionIdApiVersion", "fixtures"))
+sys.modules['fixtures'].__path__.append(join(tests, "AzureBodyDuration", "fixtures"))
+sys.modules['fixtures'].__path__.append(join(tests, "AzureSpecials", "fixtures"))
 
-sys.path.append(join(tests, "AzureParameterGrouping"))
-sys.path.append(join(tests, "SubscriptionIdApiVersion"))
-sys.path.append(join(tests, "AzureBodyDuration"))
-sys.path.append(join(tests, "AzureSpecials"))
-from msrest.exceptions import DeserializationError
+from msrest.exceptions import DeserializationError, ValidationError
 
-from autorestparametergroupingtestservice import AutoRestParameterGroupingTestService
-from microsoftazuretesturl import MicrosoftAzureTestUrl
-from autorestdurationtestservice import AutoRestDurationTestService
-from autorestazurespecialparameterstestclient import AutoRestAzureSpecialParametersTestClient
+from fixtures.acceptancetestsazureparametergrouping import AutoRestParameterGroupingTestService
+from fixtures.acceptancetestssubscriptionidapiversion import MicrosoftAzureTestUrl
+from fixtures.acceptancetestsazurebodyduration import AutoRestDurationTestService
+from fixtures.acceptancetestsazurespecials import AutoRestAzureSpecialParametersTestClient
 
-from autorestparameterizedhosttestclient.exceptions import ValidationError
-from autorestparametergroupingtestservice.models import (
+from fixtures.acceptancetestsazureparametergrouping.models import (
     ParameterGroupingPostMultiParamGroupsSecondParamGroup,
     ParameterGroupingPostOptionalParameters,
     ParameterGroupingPostRequiredParameters,

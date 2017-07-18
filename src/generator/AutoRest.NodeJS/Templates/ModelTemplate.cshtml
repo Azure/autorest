@@ -14,30 +14,38 @@
 @:const models = require('./index');
 @EmptyLine
 }
+
+@{ 
+    bool isInherited = Model.BaseModelType != null;
+    bool hasSummary = !String.IsNullOrEmpty(Model.Summary);
+    bool hasDocumentation = !String.IsNullOrEmpty(Model.Documentation);
+    bool summaryOrDoc = hasSummary || hasDocumentation;
+}
 /**
- * @@class
- * Initializes a new instance of the @(Model.Name) class.
- * @@constructor
-@if (!String.IsNullOrEmpty(Model.Summary))
+    @if (summaryOrDoc)
+    {
+if (hasSummary)
 {
-  @WrapComment(" * ", "@summary " + Model.Summary)@:
+    @WrapComment(" * ", "@summary " + Model.Summary)@:
+ @: *
+}
+if (hasDocumentation)
+{
+   @WrapComment(" * ", Model.Documentation)@:
 @: *
 }
-@if (!String.IsNullOrEmpty(Model.Documentation))
+    }
+    else
+    {
+@: * Class representing a @(Model.Name).
+    }
+@if (isInherited)
 {
-  @WrapComment(" * ", Model.Documentation)@:
-@: *
-}
-@foreach (var property in Model.DocumentationPropertyList)
-{
-    @CompositeTypeJs.ConstructPropertyDocumentation(
-                      WrapComment(" * ", "@member {" + CompositeTypeJs.GetPropertyDocumentationType(property)
-                                                     + "} " + CompositeTypeJs.GetPropertyDocumentationName(property)
-                                                     + " " + CompositeTypeJs.GetPropertyDocumentationString(property)))
+@: * @@extends models['@(Model.BaseModelType.Name)']
 }
  */
 @{
-    if (Model.BaseModelType != null)
+    if (isInherited)
     {
 @:class @(Model.Name) extends models['@(Model.BaseModelType.Name)'] {
     }
@@ -45,6 +53,18 @@
     {
 @:class @(Model.Name) {
     }
+    }
+  /**
+   * Create a @(Model.Name).
+@foreach (var property in Model.DocumentationPropertyList)
+{
+    @CompositeTypeJs.ConstructPropertyDocumentation(
+                      WrapComment("   * ", "@member {" + CompositeTypeJs.GetPropertyDocumentationType(property)
+                                                     + "} " + CompositeTypeJs.GetPropertyDocumentationName(property)
+                                                     + " " + CompositeTypeJs.GetPropertyDocumentationString(property)))
+}
+   */
+@{
   @:constructor() {
     if (Model.BaseModelType != null)
     {

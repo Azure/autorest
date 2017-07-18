@@ -168,11 +168,19 @@ namespace AutoRest.Swagger
                 Uri filePath = null;
                 Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out filePath);
                 swaggerService.FilePath = filePath;
+                if (swaggerService.Schemes == null || swaggerService.Schemes.Count != 1)
+                {
+                    swaggerService.Schemes = new List<TransferProtocolScheme> { TransferProtocolScheme.Http };
+                }
+                if (string.IsNullOrEmpty(swaggerService.Host))
+                {
+                    swaggerService.Host = "localhost";
+                }
                 return swaggerService;
             }
             catch (JsonException ex)
             {
-                throw ErrorManager.CreateError("{0}. {1}", Resources.ErrorParsingSpec, ex.Message);
+                throw ErrorManager.CreateError("{0}. {1}\n{2}", Resources.ErrorParsingSpec, ex.Message,swaggerDocument);
             }
         }
     }

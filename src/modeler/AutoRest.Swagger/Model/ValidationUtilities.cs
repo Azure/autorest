@@ -5,44 +5,24 @@ using AutoRest.Swagger;
 using AutoRest.Core.Utilities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using AutoRest.Swagger.Validation;
+using System.Text;
+using System;
 
 namespace AutoRest.Swagger.Model.Utilities
 {
     public static class ValidationUtilities
     {
-        private static readonly string XmsPageable = "x-ms-pageable";
-        private static readonly Regex UrlResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
-        private static readonly IEnumerable<string> baseResourceModelNames = 
+        public static readonly string XmsPageable = "x-ms-pageable";
+        private static readonly IEnumerable<string> BaseResourceModelNames = 
             new List<string>() { "trackedresource", "proxyresource", "resource" };
 
-        private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
+        private static readonly Regex ResourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
+        private static readonly Regex PropNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,3}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,3}[a-z0-9\$-]+)*[A-Z]{1,3}$");
 
-        public static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<resource>[^{/]+))");
-
-        private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
-
-        // This needs to be deprecated in favor of context.TrackedResources
-        public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
-        {
-            if (schema.AllOf != null)
-            {
-                foreach (Schema item in schema.AllOf)
-                {
-                    if (UrlResRegEx.IsMatch(item.Reference))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return IsTrackedResource(Schema.FindReferencedSchema(item.Reference, definitions), definitions);
-                    }
-                }
-            }
-            return false;
-        }
+        public static readonly Regex listBySidRegEx = new Regex(@".+_(List|ListBySubscriptionId|ListBySubscription|ListBySubscriptions)$", RegexOptions.IgnoreCase);
+        public static readonly Regex listByRgRegEx = new Regex(@".+_ListByResourceGroup$", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Populates a list of 'Resource' models found in the service definition
@@ -77,18 +57,28 @@ namespace AutoRest.Swagger.Model.Utilities
                                                     .Where(modelName => !(IsBaseResourceModelName(modelName))
                                                                         && serviceDefinition.Definitions.ContainsKey(modelName)
                                                                         && IsAllOfOnModelNames(modelName, serviceDefinition.Definitions, xmsAzureResourceModels));
-            
-            // return the union 
-            return resourceModels.Union(modelsAllOfOnXmsAzureResources);
 
+            var resourceCandidates = resourceModels.Union(modelsAllOfOnXmsAzureResources);
+
+            // Now filter all the resource models that are returned from a POST operation only 
+            var postOpResourceModels = serviceDefinition.Paths.Values.SelectMany(pathObj => pathObj.Where(opObj => opObj.Key.EqualsIgnoreCase("post"))
+                                                                        .SelectMany(opObj => opObj.Value.Responses?.Select(resp => resp.Value?.Schema?.Reference?.StripDefinitionPath())??Enumerable.Empty<string>()))
+                                                                     .Where(model => !string.IsNullOrWhiteSpace(model))
+                                                                     .Except(putOperationsResponseModels)
+                                                                     .Except(getOperationsResponseModels);
+            
+            // if any model is returned only by a POST operation, disregard it
+            return resourceCandidates.Except(postOpResourceModels);
         }
 
+        public static bool IsODataProperty(string propName) => propName.ToLower().StartsWith("@");
+       
         /// <summary>
         /// checks if a model is a base resource type (resource, trackedresource or proxyresource)
         /// </summary>
         /// <param name="modelName">model name to check</param>
         /// <returns> true if model is a base resource type </returns>
-        public static bool IsBaseResourceModelName(string modelName) => baseResourceModelNames.Contains(modelName.ToLower());
+        public static bool IsBaseResourceModelName(string modelName) => BaseResourceModelNames.Contains(modelName.ToLower());
 
         /// <summary>
         /// Returns the cumulative list of all 'allOfed' references for a model
@@ -117,7 +107,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="modelName">model for which to check the  properties</param>
         /// <param name="definitions">dictionary of model definitions</param>
         /// <returns>List of properties found in model hierarchy</returns>
-        private static IEnumerable<KeyValuePair<string, Schema>> EnumerateProperties(string modelName, Dictionary<string, Schema> definitions)
+        public static IEnumerable<KeyValuePair<string, Schema>> EnumerateProperties(string modelName, Dictionary<string, Schema> definitions)
         {
             var modelsToCheck = EnumerateModelHierarchy(modelName, definitions);
             var propertiesList = new List<KeyValuePair<string, Schema>>();
@@ -136,13 +126,13 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="modelName">model for which to check the required properties</param>
         /// <param name="definitions">dictionary of model definitions</param>
         /// <param name="propertyList">List of required properties found in model hierarchy</param>
-        private static IEnumerable<string> EnumerateRequiredProperties(string modelName, Dictionary<string, Schema> definitions)
+        public static IEnumerable<string> EnumerateRequiredProperties(string modelName, Dictionary<string, Schema> definitions)
         {
             var modelsToCheck = EnumerateModelHierarchy(modelName, definitions);
             var propertiesList = new List<string>();
             foreach (var modelRef in modelsToCheck)
             {
-                if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Properties?.Any() != true) continue;
+                if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Required?.Any() != true) continue;
                 
                 propertiesList = propertiesList.Union(definitions[modelRef].Required.Where(reqProp => !string.IsNullOrEmpty(reqProp))).ToList();
             }
@@ -155,9 +145,12 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="modelName">model for which to find the read only properties</param>
         /// <param name="definitions">dictionary of model definitions</param>
         /// <param name="propertyList">List of read only properties found in model hierarchy</param>
-        private static IEnumerable<string> EnumerateReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions)
+        public static IEnumerable<string> EnumerateReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions)
             => EnumerateProperties(modelName, definitions).Where(prop => prop.Value.ReadOnly).Select(prop => prop.Key);
 
+
+        public static IEnumerable<KeyValuePair<string, Schema>> EnumerateDefaultValuedProperties(string modelName, Dictionary<string, Schema> definitions) 
+            => EnumerateProperties(modelName, definitions).Where(prop => prop.Value.Default != null);
 
         /// <summary>
         /// Checks if model hierarchy consists of given set of properties
@@ -194,7 +187,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <returns>true if the model hierarchy contains all of the read only properties</returns>
         public static bool ContainsReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> readOnlyPropertiesToCheck)
         {
-            var propertyList = EnumerateRequiredProperties(modelName, definitions);
+            var propertyList = EnumerateReadOnlyProperties(modelName, definitions);
             return !readOnlyPropertiesToCheck.Except(propertyList).Any();
         }
 
@@ -219,7 +212,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="definitions">model definitions in which to find the x-ms-azure-resource extension</param>
         /// <returns>list of model names that have the x-ms-azure-resource extension set on them</returns>
-        private static IEnumerable<string> GetXmsAzureResourceModels(Dictionary<string, Schema> definitions)
+        public static IEnumerable<string> GetXmsAzureResourceModels(Dictionary<string, Schema> definitions)
             => definitions.Where(defPair =>
                             defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource") == true &&
                             defPair.Value.Extensions["x-ms-azure-resource"].Equals(true))
@@ -265,8 +258,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="op">Operation for which to check the x-ms-pageable extension</param>
         /// <returns>true if operation is x-ms-pageable</returns>
-        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions.GetValue<object>(XmsPageable) != null);
-
+        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions?.GetValue<object>(XmsPageable) != null);
 
         /// <summary>
         /// Determines if an operation returns an object of array type
@@ -283,20 +275,24 @@ namespace AutoRest.Swagger.Model.Utilities
             if (op.Responses["200"]?.Schema?.Reference?.Equals(string.Empty) == false)
             {
                 var modelLink = op.Responses["200"].Schema.Reference;
+
+                var def = entity.Definitions.GetValueOrNull(modelLink.StripDefinitionPath());
+
                 // if the object has more than 2 properties, we can assume its a composite object
                 // that does not represent a collection of some type
-                if ((entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Count ?? 2) >= 2)
+                var propertyCount = def?.Properties?.Values?.Count;
+                if (propertyCount == null || propertyCount > 2)
                 {
                     return false;
                 }
 
                 // if the object is an allof on some other object, let's consider it to be a composite object
-                if (entity.Definitions[modelLink.StripDefinitionPath()].AllOf != null)
+                if (def.AllOf != null)
                 {
                     return false;
                 }
 
-                if (entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Any(type => type.Type == DataType.Array) ?? false)
+                if (def.Properties.Values.Any(type => type.Type == DataType.Array))
                 {
                     return true;
                 }
@@ -335,23 +331,13 @@ namespace AutoRest.Swagger.Model.Utilities
         private static IEnumerable<Operation> SelectOperationsFromPaths(string id, Dictionary<string, Dictionary<string, Operation>> paths)
             => paths.Values.SelectMany(pathObjs=>pathObjs.Where(pair => pair.Key.ToLower().Equals(id.ToLower())).Select(pair => pair.Value));
 
-        /// <summary>
-        /// Returns whether a string follows camel case style, allowing for 2 consecutive upper case characters for acronyms.
-        /// </summary>
-        /// <param name="name">String to check for style</param>
-        /// <returns>true if "name" follows camel case style (allows for 2 consecutive upper case characters), false otherwise.</returns>
-        public static bool isNameCamelCase(string name)
-        {
-            Regex propNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)*[A-Z]{1,2}$");
-            return (propNameRegEx.IsMatch(name));
-        }
 
         /// <summary>
         /// Returns a suggestion of camel case styled string based on the string passed as parameter.
         /// </summary>
         /// <param name="name">String to convert to camel case style</param>
         /// <returns>A string that conforms with camel case style based on the string passed as parameter.</returns>
-        public static string ToCamelCase(string name)
+        public static string GetCamelCasedSuggestion(string name)
         {
             StringBuilder sb = new StringBuilder(name);
             if (sb.Length > 0)
@@ -359,7 +345,7 @@ namespace AutoRest.Swagger.Model.Utilities
                 sb[0] = sb[0].ToString().ToLower()[0];
             }
             bool firstUpper = true;
-            for (int i = 1; i < name.Length; i++)
+            for (int i = 1; i<name.Length; i++)
             {
                 if (char.IsUpper(sb[i]) && firstUpper)
                 {
@@ -376,6 +362,13 @@ namespace AutoRest.Swagger.Model.Utilities
             }
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Returns whether a string follows camel case style, allowing for 2 consecutive upper case characters for acronyms.
+        /// </summary>
+        /// <param name="name">String to check for style</param>
+        /// <returns>true if "name" follows camel case style (allows for 2 consecutive upper case characters), false otherwise.</returns>
+        public static bool IsNameCamelCase(string name) => PropNameRegEx.IsMatch(name);
 
         /// <summary>
         /// Evaluates if the reference is of the provided data type.
@@ -407,19 +400,259 @@ namespace AutoRest.Swagger.Model.Utilities
         }
 
         /// <summary>
+        /// Checks if the reference to match is an array response of the reference
+        /// </summary>
+        /// <param name="reference"></param>
+        /// <param name="referenceToMatch"></param>
+        /// <param name="definitions"></param>
+        /// <returns></returns>
+        private static bool IsArrayOf(string reference, string referenceToMatch, Dictionary<string, Schema> definitions)
+        {
+            if (reference == null)
+                return false;
+
+            Schema schema = Schema.FindReferencedSchema(reference, definitions);
+            return schema.Properties.Any(property => property.Value.Type == DataType.Array && property.Value.Items?.Reference?.EndsWith("/" + referenceToMatch) == true);
+        }
+
+        /// <summary>
         /// Returns array of resource providers
         /// </summary>
         /// <param name="paths">Dictionary of paths to look for</param>
         /// <returns>Array of resource providers</returns>
         public static IEnumerable<string> GetResourceProviders(Dictionary<string, Dictionary<string, Operation>> paths)
         {
-            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
+            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => ResourceProviderPathPattern.Matches(path)
                                                     .OfType<Match>()
                                                     .Select(match => match.Groups["resPath"].Value.ToString()))
                                                     .Distinct()
                                                     .ToList();
 
             return resourceProviders;
+        }
+
+
+        /// <summary>
+        /// Given an operation Id, returns the path where it is found
+        /// </summary>
+        /// <param name="operationId">operationId to look for</param>
+        /// <param name="paths">Dictionary of paths to look for</param>
+        /// <returns>path object which contains the operationId</returns>
+        public static KeyValuePair<string, Dictionary<string, Operation>>  GetOperationIdPath(string operationId, Dictionary<string, Dictionary<string, Operation>> paths)
+            => paths.Where(pathObj => pathObj.Value.Values.Where(op => op.OperationId == operationId).Any()).First();
+
+        /// <summary>
+        /// Given an operation Id, returns the corresponding verb for it
+        /// </summary>
+        /// <param name="operationId">operationId to look for</param>
+        /// <param name="paths">Dictionary of paths</param>
+        /// <returns>HTTP verb corresponding to the operationId</returns>
+        public static string GetOperationIdVerb(string operationId, KeyValuePair<string, Dictionary<string, Operation>> pathObj)
+            => pathObj.Value.First(opObj => opObj.Value.OperationId == operationId).Key;
+
+        /// <summary>
+        /// Get the list of all ChildTrackedResources along with their immediate parents.
+        /// </summary>
+        /// <param name="serviceDefinition">Service Definition</param>
+        /// <returns>list of child tracked resources</returns>
+        public static IEnumerable<KeyValuePair<string, string>> GetChildTrackedResourcesWithImmediateParent(ServiceDefinition serviceDefinition)
+        {
+            LinkedList<KeyValuePair<string, string>> result = new LinkedList<KeyValuePair<string, string>>();
+            foreach (KeyValuePair<string, Dictionary<string, Operation>> pathDefinition in serviceDefinition.Paths)
+            {
+                KeyValuePair<string, string> childResourceMapping = GetChildAndImmediateParentResource(pathDefinition.Key, serviceDefinition.Paths, serviceDefinition.Definitions);
+                if (childResourceMapping.Key != null && childResourceMapping.Value != null)
+                {
+                    result.AddLast(new LinkedListNode<KeyValuePair<string, string>>(new KeyValuePair<string, string>(childResourceMapping.Key, childResourceMapping.Value)));
+                }
+            }
+
+            return result;
+        }
+
+        private static KeyValuePair<string, string> GetChildAndImmediateParentResource(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
+        {
+            Match match = ResourcePathPattern.Match(path);
+            KeyValuePair<string, string> result = new KeyValuePair<string, string>();
+            if (match.Success)
+            {
+                string childResourceName = match.Groups["childresource"].Value;
+                string immediateParentResourceNameInPath = GetImmediateParentResourceName(path);
+                string immediateParentResourceNameActual = GetActualParentResourceName(immediateParentResourceNameInPath, paths, definitions);
+                result = new KeyValuePair<string, string>(childResourceName, immediateParentResourceNameActual);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the immediate parent resource name
+        /// </summary>
+        /// <param name="childResourcePaths">paths that fits the child resource criteria</param>
+        /// <returns>name of the immediate parent resource name</returns>
+        private static string GetImmediateParentResourceName(string pathToEvaluate)
+        {
+            pathToEvaluate = pathToEvaluate.Substring(0, pathToEvaluate.LastIndexOf("/{"));
+            pathToEvaluate = pathToEvaluate.Substring(0, pathToEvaluate.LastIndexOf("/{"));
+            return pathToEvaluate.Substring(pathToEvaluate.LastIndexOf("/") + 1);
+        }
+
+        /// <summary>
+        /// Gets the actual parent resource name. For example, the name in Path could be 'servers'. The actual parent name is 'server'.
+        /// </summary>
+        /// <param name="nameInPath"></param>
+        /// <param name="paths"></param>
+        /// <param name="definitions"></param>
+        /// <returns></returns>
+        private static string GetActualParentResourceName(string nameInPath, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
+        {
+            Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/.*/" + nameInPath + "/{[^/]+}$", RegexOptions.IgnoreCase);
+
+            IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> matchingPaths = paths.Where((KeyValuePair<string, Dictionary<string, Operation>> pth) => pathRegEx.IsMatch(pth.Key));
+            if (!matchingPaths.Any()) return null;
+            KeyValuePair<string, Dictionary<string, Operation>> path = matchingPaths.First();
+
+            IEnumerable<KeyValuePair<string, Operation>> operations = path.Value.Where(op => op.Key.Equals("get", StringComparison.CurrentCultureIgnoreCase));
+            if (!operations.Any()) return null;
+            KeyValuePair<string, Operation> operation = operations.First();
+
+            IEnumerable<KeyValuePair<string, OperationResponse>> responses = operation.Value.Responses.Where(resp => resp.Key.Equals("200"));
+            if (!responses.Any()) return null;
+            KeyValuePair<string, OperationResponse> response = responses.First();
+
+            return GetReferencedModel(response.Value.Schema.Reference, definitions);
+        }
+
+        private static string GetReferencedModel(String schema, Dictionary<string, Schema> definitions)
+        {
+            Schema referencedSchema = Schema.FindReferencedSchema(schema, definitions);
+
+            if (referencedSchema == null) return null;
+
+            if (referencedSchema.Reference == null)
+            {
+                IEnumerable<KeyValuePair<string, Schema>> definition = definitions.Where(def => def.Value == referencedSchema);
+                if (!definition.Any()) return null;
+                return definition.First().Key;
+            }
+
+            return GetReferencedModel(referencedSchema.Reference, definitions);
+        }
+
+        /*
+         * This regular expression tries to filter the paths which has child resources. Now we could take the following paths:
+         *
+         *      Case 1: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}
+         *      Case 2: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/poweroff
+         *      Case 3: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases
+         *      Case 4: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{database1}
+         *      Case 5: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{database1}/restart
+         *
+         * Case 1 does not have a child resource. So, this can be rejected.
+         *
+         * Case 2 & Case 3 are special cases. Here, Case 3 does have a child resource - 'databases'. But, Case 2 does not have a child resource. The 'poweroff' is 
+         * an operation - not a child resource. But, it is difficult to determine, using regular expressions, whether the 'poweroff' is an operation or child resource.
+         * We could filter both and determine based on the response whether it is a child resource. While this is valid, it seems to be complex. So, a decision has been
+         * made to reject this pattern altogether and not look for child resource in this path pattern. Note: Case 5 is also rejected for the same reason.
+         *
+         * Case 4 is a valid scenario which has a child resource. Also, in this pattern, there is no ambiguity about any operation. So, in order to find the path, with 
+         * child resources, we use only this pattern. i.e. the path must have atleast one parent resource similar to '/servers/{server1}' followed by any number of child
+         * resources and end with the child resource pattern - similar to '/databases/{database1}'.
+         *
+         * Note: If in a swagger file, there are the following paths:
+         *
+         *      1: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}
+         *      2: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases
+         *
+         * and do not have the following path:
+         *
+         *      3: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{database1}
+         *
+         * then we will miss the child resource 'databases'. But, the possibility of such an occurence is extremely rare, if not impossible. It is quite possible that 
+         * 1 & 3 are present without 2 and 1-2-3 are present. So, it is fine to use this logic.
+         *
+         * Immediate Parent Resource Logic
+         * ===============================
+         * The path with the child resource has been determined and the name of the child resource has been identified. Now, in order to find the immediate parent resource,
+         * consider the following cases:
+         *
+         *      1. /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{databases1} - Child: databases-Immediate Parent: servers
+         *      2. /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{databases1}/disks/{disk1} - Child: disks-Immediate Parent: databases
+         *
+         *  So, we do string manipulation to determine the immediate parent. We find the last index of "/{" twice and remove after that. Then we find the last index of "/" and find the string after that.
+         *  To visualize it:
+         *
+         *      Start: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{databases1}/disks/{disk1}
+         *      Step 1: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases/{databases1}/disks
+         *      Step 2: /subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.Sql/servers/{server1}/databases
+         *      Step 3: databases
+         */
+        public static readonly Regex ResourcePathPattern = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(?<childresource>\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
+
+        public static IEnumerable<string> GetParentTrackedResources(IEnumerable<string> trackedResourceModels, IEnumerable<KeyValuePair<string, string>> childTrackedResourceModels)
+            => trackedResourceModels.Where(resourceModel => !childTrackedResourceModels.Any(childModel => childModel.Key.Equals(resourceModel)));
+
+        /// <summary>
+        /// For the provided resource model, it gets the operation which ends with ListByResourceGroup and returns the resource model.
+        /// </summary>
+        /// <param name="resourceModel"></param>
+        /// <param name="definitions"></param>
+        /// <param name="serviceDefinition"></param>
+        /// <returns>Gets the operation which ends with ListByResourceGroup and returns the resource model.</returns>
+        public static Operation GetListByResourceGroupOperation(string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition)
+        {
+            return GetListByXOperation(resourceModel, definitions, serviceDefinition, listByRgRegEx);
+        }
+
+        /// <summary>
+        /// For the provided resource model, it gets the operation which matches with ListBySubscription and returns the resource model.
+        /// </summary>
+        /// <param name="resourceModel"></param>
+        /// <param name="definitions"></param>
+        /// <param name="serviceDefinition"></param>
+        /// <returns>Gets the operation which matches with ListBySubscription and returns the resource model.</returns>
+        public static Operation GetListBySubscriptionOperation(string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition)
+        {
+            return GetListByXOperation(resourceModel, definitions, serviceDefinition, listBySidRegEx);
+        }
+
+        /// <summary>
+        /// For the provided resource model, it gets the operation which matches with specified regex and returns the resource model.
+        /// </summary>
+        /// <param name="resourceModel"></param>
+        /// <param name="definitions"></param>
+        /// <param name="serviceDefinition"></param>
+        /// <param name="regEx"></param>
+        /// <returns>Gets the operation which matches with specified regex and returns the resource model.</returns>
+        private static Operation GetListByXOperation(string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition, Regex regEx)
+        {
+            return GetListByOperation(regEx, resourceModel, definitions, serviceDefinition);
+        }
+
+        /// <summary>
+        /// For the provided resource model, it gets the operation which matches with specified regex and returns the resource model.
+        /// </summary>
+        /// <param name="regEx"></param>
+        /// <param name="resourceModel"></param>
+        /// <param name="definitions"></param>
+        /// <param name="serviceDefinition"></param>
+        /// <returns>Gets the operation which matches with specified regex and returns the resource model.</returns>
+        private static Operation GetListByOperation(Regex regEx, string resourceModel, Dictionary<string, Schema> definitions, ServiceDefinition serviceDefinition)
+        {
+            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", serviceDefinition);
+
+            IEnumerable<Operation> operations = getOperations.Where(operation => regEx.IsMatch(operation.OperationId) &&
+                    IsXmsPageableResponseOperation(operation) &&
+                    operation.Responses.Any(
+                           response => response.Key.Equals("200") &&
+                           IsArrayOf(response.Value.Schema?.Reference, resourceModel, definitions)));
+
+            if (operations != null && operations.Count() != 0)
+            {
+                return operations.First();
+            }
+
+            return null;
         }
     }
 }

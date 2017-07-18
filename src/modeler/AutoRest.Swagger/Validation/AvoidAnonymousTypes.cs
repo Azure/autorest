@@ -13,7 +13,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M2026";
+        public override string Id => "R2026";
 
         /// <summary>
         /// Violation category of the Rule.
@@ -32,6 +32,16 @@ namespace AutoRest.Swagger.Validation
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
         public override string MessageTemplate => Resources.AnonymousTypesDiscouraged;
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public override ServiceDefinitionDocumentType ServiceDefinitionDocumentType => ServiceDefinitionDocumentType.ARM | ServiceDefinitionDocumentType.DataPlane;
+
+        /// <summary>
+        /// The rule runs on each operation's parameters in isolation irrespective of the state and can be run in individual state
+        /// </summary>
+        public override ServiceDefinitionDocumentState ValidationRuleMergeState => ServiceDefinitionDocumentState.Individual;
 
         /// <summary>
         /// An <paramref name="entity"/> fails this rule if it doesn't have a reference (meaning it's defined inline)

@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Utilities.Collections;
-using Newtonsoft.Json;
 using AutoRest.Core.Utilities;
 
 namespace AutoRest.Swagger.Validation.Core
 {
     internal static class RulesExtensions
     {
-        private static readonly Type JsonExtensionDataType = typeof(JsonExtensionDataAttribute);
-
         /// <summary>
         /// Gets an enumerable of properties for <paramref name="entity" /> that can be validated
         /// </summary>
@@ -49,24 +46,12 @@ namespace AutoRest.Swagger.Validation.Core
                    dictType.GenericTypeArguments[1] != typeof(object);
         }
 
-        public static IEnumerable<Rule> GetValidationRules(this PropertyInfo property)
-        {
-            var propertyRules = property.GetCustomAttributes<RuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
-            return propertyRules.Concat(UniversalRules).ReEnumerable();
-        }
+        public static IEnumerable<Rule> GetValidationRules(this PropertyInfo property) =>  property.GetCustomAttributes<RuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
 
-        public static IEnumerable<Rule> GetValidationCollectionRules(this PropertyInfo property)
-        {
-            var collectionRules = property.GetCustomAttributes<CollectionRuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
-            return collectionRules.Concat(UniversalRules).ReEnumerable();
-        }
+        public static IEnumerable<Rule> GetValidationCollectionRules(this PropertyInfo property) => property.GetCustomAttributes<CollectionRuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
 
         public static IEnumerable<Rule> GetValidationRules(this Type type)
             => type.GetCustomAttributes<RuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
 
-        /// <summary>
-        /// The collection of rules that apply to all properties regardless of other rules.
-        /// </summary>
-        public static IEnumerable<Rule> UniversalRules = new[] { new NoControlCharacters() };
     }
 }

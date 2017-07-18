@@ -163,21 +163,6 @@ namespace AutoRest.Core.Model
         public List<ParameterTransformation> InputParameterTransformation { get; private set; } = new List<ParameterTransformation>();
 
         /// <summary>
-        /// Gets or sets request headers.
-        /// </summary>
-        public Dictionary<string, string> RequestHeaders { get; private set; } = new Dictionary<string, string>();
-
-        /// <summary>
-        /// Gets or sets the request format.
-        /// </summary>
-        public SerializationFormat RequestSerializationFormat { get; set; }
-
-        /// <summary>
-        /// Gets or sets the response format.
-        /// </summary>
-        public SerializationFormat ResponseSerializationFormat { get; set; }
-
-        /// <summary>
         /// Gets or sets response bodies by HttpStatusCode.
         /// and headers.
         /// </summary>
@@ -238,21 +223,13 @@ namespace AutoRest.Core.Model
         /// Indicates if the method is deprecated.
         /// </summary>
         public bool Deprecated { get; set; }
-
+        
         /// <summary>
-        /// Determines whether the specified method is structurally equal to this object.
+        /// Indicates if the method is supposed to be hidden from end-users.
+        /// This is useful if a convenience layer is built around the method,
+        /// rendering the method itself required but confusing or useless to end-users
         /// </summary>
-        /// <param name="other">The object to compare with this object.</param>
-        public bool StructurallyEquals(Method other)
-        {
-            if (other == null)
-            {
-                return false;
-            }
-            return ReturnType.StructurallyEquals(other.ReturnType)
-                && Name.Equals(other.Name)
-                && Parameters.SequenceEqual(other.Parameters, new Utilities.EqualityComparer<Parameter>((a, b) => a.StructurallyEquals(b)));
-        }
+        public bool Hidden { get; set; }
 
         [JsonIgnore]
         public IEnumerable<string> MyReservedNames => Name.Value.SingleItemAsEnumerable();

@@ -3,6 +3,7 @@
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp
+@using AutoRest.CSharp.Model
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodCs>
 @{
 if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
@@ -36,7 +37,7 @@ if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == S
 {
 @:[System.Obsolete()]
 }
-@:public static @Model.ReturnTypeString @(Model.Name)(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(false)))
+@:@((Model as MethodCs).AccessModifier) static @Model.ReturnTypeString @(Model.Name)(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(false)))
 @:{
     if (Model.ReturnType.Body != null)
     {
@@ -86,7 +87,7 @@ foreach (var parameter in Model.LocalParameters)
 {
 @:[System.Obsolete()]
 }
-@:public static async @Model.TaskExtensionReturnTypeString @(Model.Name)Async(@Model.GetExtensionParameters(Model.GetAsyncMethodParameterDeclaration()))
+@:@((Model as MethodCs).AccessModifier) static async @Model.TaskExtensionReturnTypeString @(Model.Name)Async(@Model.GetExtensionParameters(Model.GetAsyncMethodParameterDeclaration()))
 @:{
     if (Model.ReturnType.Body != null)
     {
@@ -152,7 +153,7 @@ foreach (var parameter in Model.LocalParameters)
 {
 @:[System.Obsolete()]
 }
-@:public static @Model.OperationResponseReturnTypeString @(Model.Name)WithHttpMessages(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(true)))
+@:@((Model as MethodCs).AccessModifier) static @Model.OperationResponseReturnTypeString @(Model.Name)WithHttpMessages(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(true)))
 @:{
 @:    return operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders", "System.Threading.CancellationToken.None"))).ConfigureAwait(false).GetAwaiter().GetResult();
 @:}

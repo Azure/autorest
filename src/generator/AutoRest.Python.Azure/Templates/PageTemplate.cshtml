@@ -13,12 +13,12 @@ from msrest.paging import Paged
 @EmptyLine
 class @(Model.TypeDefinitionName)(Paged):
     """
-    A paging container for iterating over a list of @Model.ItemType object
+    A paging container for iterating over a list of @(Model.GetReturnTypeDocumentation()) object
     """
 @EmptyLine
     _attribute_map = {
         'next_link': {'key': '@Model.NextLinkName', 'type': 'str'},
-        'current_page': {'key': '@Model.ItemName', 'type': '[@Model.ItemType]'}
+        'current_page': {'key': '@Model.ItemName', 'type': '[@Model.ItemType.Name]'}
     }
 @EmptyLine
     def __init__(self, *args, **kwargs):

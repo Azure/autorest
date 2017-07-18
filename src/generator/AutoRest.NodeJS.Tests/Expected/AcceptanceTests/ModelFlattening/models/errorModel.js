@@ -13,17 +13,15 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the ErrorModel class.
- * @constructor
- * @member {number} [status]
- *
- * @member {string} [message]
- *
- * @member {object} [parentError]
- *
+ * Class representing a ErrorModel.
  */
 class ErrorModel {
+  /**
+   * Create a ErrorModel.
+   * @member {number} [status]
+   * @member {string} [message]
+   * @member {object} [parentError]
+   */
   constructor() {
   }
 

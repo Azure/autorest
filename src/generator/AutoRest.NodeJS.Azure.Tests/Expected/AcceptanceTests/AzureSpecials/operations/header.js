@@ -70,9 +70,10 @@ function _customNamedRequestId(fooClientRequestId, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'POST';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['foo-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -89,7 +90,6 @@ function _customNamedRequestId(fooClientRequestId, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -204,9 +204,10 @@ function _customNamedRequestIdParamGrouping(headerCustomNamedRequestIdParamGroup
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'POST';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['foo-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -223,7 +224,6 @@ function _customNamedRequestIdParamGrouping(headerCustomNamedRequestIdParamGroup
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -321,9 +321,10 @@ function _customNamedRequestIdHead(fooClientRequestId, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'HEAD';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['foo-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -340,7 +341,6 @@ function _customNamedRequestIdHead(fooClientRequestId, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -383,17 +383,12 @@ function _customNamedRequestIdHead(fooClientRequestId, options, callback) {
   });
 }
 
-/**
- * @class
- * Header
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the Header class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
+/** Class representing a Header. */
 class Header {
+  /**
+   * Create a Header.
+   * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._customNamedRequestId = _customNamedRequestId;

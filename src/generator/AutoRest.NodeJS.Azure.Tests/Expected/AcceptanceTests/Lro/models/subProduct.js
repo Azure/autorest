@@ -13,17 +13,17 @@
 const models = require('./index');
 
 /**
- * @class
- * Initializes a new instance of the SubProduct class.
- * @constructor
- * @member {string} [provisioningState]
- *
- * @member {string} [provisioningStateValues] Possible values include:
- * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
- * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
- *
+ * Class representing a SubProduct.
+ * @extends models['SubResource']
  */
 class SubProduct extends models['SubResource'] {
+  /**
+   * Create a SubProduct.
+   * @member {string} [provisioningState]
+   * @member {string} [provisioningStateValues] Possible values include:
+   * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
+   * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+   */
   constructor() {
     super();
   }

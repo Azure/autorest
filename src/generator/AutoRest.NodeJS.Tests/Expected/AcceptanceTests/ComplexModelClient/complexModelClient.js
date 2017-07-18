@@ -81,9 +81,10 @@ function _list(resourceGroupName, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -91,7 +92,6 @@ function _list(resourceGroupName, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -222,9 +222,10 @@ function _create(subscriptionId, resourceGroupName, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'POST';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -232,7 +233,6 @@ function _create(subscriptionId, resourceGroupName, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -377,9 +377,10 @@ function _update(subscriptionId, resourceGroupName, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if(options) {
     for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
@@ -387,7 +388,6 @@ function _update(subscriptionId, resourceGroupName, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
   let requestContent = null;
   let requestModel = null;
@@ -460,24 +460,17 @@ function _update(subscriptionId, resourceGroupName, options, callback) {
   });
 }
 
-/**
- * @class
- * Initializes a new instance of the ComplexModelClient class.
- * @constructor
- *
- * @param {string} [baseUri] - The base URI of the service.
- *
- * @param {object} [options] - The parameter options
- *
- * @param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @param {object} [options.requestOptions] - Options for the underlying request object
- * {@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
- *
- */
+/** Class representing a ComplexModelClient. */
 class ComplexModelClient extends ServiceClient {
+  /**
+   * Create a ComplexModelClient.
+   * @param {string} [baseUri] - The base URI of the service.
+   * @param {object} [options] - The parameter options
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   */
   constructor(baseUri, options) {
 
     if (!options) options = {};

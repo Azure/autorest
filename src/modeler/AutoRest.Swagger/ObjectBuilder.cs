@@ -12,6 +12,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using Newtonsoft.Json.Linq;
 
 namespace AutoRest.Swagger
 {
@@ -53,19 +54,40 @@ namespace AutoRest.Swagger
             }
             type.XmlProperties = (SwaggerObject as Schema)?.Xml;
             type.Format = SwaggerObject.Format;
-            if (SwaggerObject.Enum != null && type.KnownPrimaryType == KnownPrimaryType.String && !(IsSwaggerObjectConstant(SwaggerObject)))
+            var xMsEnum = SwaggerObject.Extensions.GetValue<JToken>(Core.Model.XmsExtensions.Enum.Name);
+            if ((SwaggerObject.Enum != null || xMsEnum != null) && type.KnownPrimaryType == KnownPrimaryType.String && !(IsSwaggerObjectConstant(SwaggerObject)))
             {
                 var enumType = New<EnumType>();
-                SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
-                if (SwaggerObject.Extensions.ContainsKey(Core.Model.XmsExtensions.Enum.Name))
+                if (SwaggerObject.Enum != null)
                 {
-                    var enumObject = SwaggerObject.Extensions[Core.Model.XmsExtensions.Enum.Name] as Newtonsoft.Json.Linq.JContainer;
+                    SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
+                }
+                if (xMsEnum != null)
+                {
+                    var enumObject = xMsEnum as JContainer;
                     if (enumObject != null)
                     {
-                        enumType.SetName( enumObject["name"].ToString() );
+                        enumType.SetName(enumObject["name"].ToString() );
                         if (enumObject["modelAsString"] != null)
                         {
                             enumType.ModelAsString = bool.Parse(enumObject["modelAsString"].ToString());
+                        }
+                        var valueOverrides = enumObject["values"] as JArray;
+                        if (valueOverrides != null)
+                        {
+                            enumType.Values.Clear();
+                            foreach (var valueOverride in valueOverrides)
+                            {
+                                var value = valueOverride["value"];
+                                var description = valueOverride["description"];
+                                var name = valueOverride["name"] ?? value;
+                                enumType.Values.Add(new EnumValue
+                                {
+                                    Name = (string)name,
+                                    SerializedName = (string)value,
+                                    Description = (string)description
+                                });
+                            }
                         }
                     }
                     enumType.SerializedName = enumType.Name;

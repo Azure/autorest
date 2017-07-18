@@ -43,7 +43,7 @@ sys.path.append(join(tests, "BodyDuration"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestdurationtestservice import AutoRestDurationTestService
+from auto_rest_duration_test_service import AutoRestDurationTestService
 
 
 class DurationTests(unittest.TestCase):

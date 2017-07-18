@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the D class.
- * @constructor
- * @member {string} [httpStatusCode]
- *
+ * Class representing a D.
  */
 class D {
+  /**
+   * Create a D.
+   * @member {string} [httpStatusCode]
+   */
   constructor() {
   }
 

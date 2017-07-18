@@ -1,5 +1,5 @@
 {
-  "id": "http://schema.management.azure.com/schemas/2015-02-28/Microsoft.Search.json#",
+  "id": "https://schema.management.azure.com/schemas/2015-02-28/Microsoft.Search.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Search",
   "description": "Microsoft Search Resource Types",
@@ -35,7 +35,7 @@
               }
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Tags to help categorize the Search service in the Azure Portal."
@@ -46,7 +46,7 @@
               "$ref": "#/definitions/SearchServiceProperties"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "Properties of the Search service."
@@ -71,7 +71,7 @@
               "$ref": "#/definitions/Sku"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The SKU of the Search Service, which determines price tier and capacity limits."
@@ -82,7 +82,7 @@
               "type": "integer"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The number of replicas in the Search service. If specified, it must be a value between 1 and 6 inclusive."
@@ -93,7 +93,7 @@
               "type": "integer"
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12."
@@ -115,7 +115,7 @@
               ]
             },
             {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+              "$ref": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
           "description": "The SKU of the Search service."

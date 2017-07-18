@@ -37,46 +37,46 @@ public class Message
   public SourceLocation[] Source { get; set; }
 }
 
-public abstract class NewPlugin
+public abstract class NewPlugin :  AutoRest.Core.IHost
 {
-  private IDisposable Start => NewContext;
+    private IDisposable Start => NewContext;
 
-  public Task<string> ReadFile(string filename) => _connection.Request<string>("ReadFile", _sessionId, filename);
-  public Task<T> GetValue<T>(string key) => _connection.Request<T>("GetValue", _sessionId, key);
-  public Task<string> GetValue(string key) => GetValue<string>(key);
-  public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId);
+    public Task<string> ReadFile(string filename) => _connection.Request<string>("ReadFile", _sessionId, filename);
+    public Task<T> GetValue<T>(string key) => _connection.Request<T>("GetValue", _sessionId, key);
+    public Task<string> GetValue(string key) => GetValue<string>(key);
+    public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId);
 
-  public void Message(Message message, object sourcemap) => _connection.Notify("Message", _sessionId, message, sourcemap);
-  public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
+    public void Message(Message message) => _connection.Notify("Message", _sessionId, message);
+    public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
 
-  protected string _sessionId;
-  private Connection _connection;
+    protected string _sessionId;
+    private Connection _connection;
 
-  public NewPlugin(Connection connection, string sessionId)
-  {
-    _sessionId = sessionId;
-    _connection = connection;
-  }
-    
-  public async Task<bool> Process()
-  {
-    try
+    public NewPlugin(Connection connection, string sessionId)
     {
-      using (Start)
-      {
-        return await ProcessInternal();
-      }
+        _sessionId = sessionId;
+        _connection = connection;
     }
-    catch (Exception e)
-    {
-      Message(new Message
-      {
-          Channel = "fatal",
-          Text = e.ToString()
-      }, null);
-      return false;
-    }
-  }
 
-  protected abstract Task<bool> ProcessInternal();
+    public async Task<bool> Process()
+    {
+        try
+        {
+            using (Start)
+            {
+                return await ProcessInternal();
+            }
+        }
+        catch (Exception e)
+        {
+            Message(new Message
+            {
+                Channel = "fatal",
+                Text = e.ToString()
+            });
+            return false;
+        }
+    }
+
+    protected abstract Task<bool> ProcessInternal();
 }

@@ -75,9 +75,7 @@ namespace AutoRest.Core
             var plugin = ExtensionsLoader.GetPlugin();
             
             Console.ResetColor();
-            Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
 
-            Settings.Instance.Validate();
             try
             {
                 var genericSerializer = new ModelSerializer<CodeModel>();
@@ -102,32 +100,6 @@ namespace AutoRest.Core
             {
                 throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
             }
-        }
-
-        /// <summary>
-        /// Compares two specifications.
-        /// </summary>
-        public static void Compare()
-        {
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
-            Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
-            Modeler modeler = ExtensionsLoader.GetModeler();
-
-            try
-            {
-                foreach (var message in modeler.Compare())
-                {
-                    Logger.Instance.Log(message);
-                }
-            }
-            catch (Exception exception)
-            {
-                throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
-            }
-
         }
     }
 }

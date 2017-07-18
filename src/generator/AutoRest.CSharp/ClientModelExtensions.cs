@@ -51,7 +51,7 @@ namespace AutoRest.CSharp
 
         public static bool ShouldValidateChain(this IModelType model)
         {
-            if (model == null)
+            if (model == null || !Singleton<GeneratorSettingsCs>.Instance.ClientSideValidation)
             {
                 return false;
             }
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp
 
         private static bool ShouldValidate(this IModelType model)
         {
-            if (model == null)
+            if (model == null || !Singleton<GeneratorSettingsCs>.Instance.ClientSideValidation)
             {
                 return false;
             }
@@ -205,14 +205,6 @@ namespace AutoRest.CSharp
             if (enumType != null && enumType.ModelAsString)
             {
                 primaryType = New<PrimaryType>(KnownPrimaryType.String);
-            }
-
-            if (primaryType == null || primaryType.KnownPrimaryType != KnownPrimaryType.String)
-            {
-                throw new InvalidOperationException(
-                    string.Format(CultureInfo.InvariantCulture, 
-                    "Cannot generate a formatted sequence from a " +
-                                  "non-string List parameter {0}", parameter));
             }
 
             return string.Format(CultureInfo.InvariantCulture,
@@ -391,18 +383,7 @@ namespace AutoRest.CSharp
         /// </summary>
         private static string ToLiteral(string input)
         {
-#if LEGACY            
-            using (var writer = new StringWriter())
-            {
-                using (var provider = CodeDomProvider.CreateProvider("CSharp"))
-                {
-                    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
-                    return writer.ToString();
-                }
-            }
-#else 
             return "\"" + input.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
-#endif             
         }
 
         private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, IModelType type)

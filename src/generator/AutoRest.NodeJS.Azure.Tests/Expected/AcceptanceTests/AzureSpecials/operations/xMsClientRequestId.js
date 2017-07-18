@@ -65,9 +65,10 @@ function _get(options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -81,7 +82,6 @@ function _get(options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -179,9 +179,10 @@ function _paramGet(xMsClientRequestId, options, callback) {
   // Create HTTP transport objects
   let httpRequest = new WebResource();
   httpRequest.method = 'GET';
-  httpRequest.headers = {};
   httpRequest.url = requestUrl;
+  httpRequest.headers = {};
   // Set Headers
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   if (this.client.generateClientRequestId) {
       httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
@@ -198,7 +199,6 @@ function _paramGet(xMsClientRequestId, options, callback) {
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
   return client.pipeline(httpRequest, (err, response, responseBody) => {
@@ -240,17 +240,12 @@ function _paramGet(xMsClientRequestId, options, callback) {
   });
 }
 
-/**
- * @class
- * XMsClientRequestId
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestAzureSpecialParametersTestClient.
- * Initializes a new instance of the XMsClientRequestId class.
- * @constructor
- *
- * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
- */
+/** Class representing a XMsClientRequestId. */
 class XMsClientRequestId {
+  /**
+   * Create a XMsClientRequestId.
+   * @param {AutoRestAzureSpecialParametersTestClient} client Reference to the service client.
+   */
   constructor(client) {
     this.client = client;
     this._get = _get;

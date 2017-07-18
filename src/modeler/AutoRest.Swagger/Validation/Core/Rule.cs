@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using AutoRest.Core.Logging;
+using AutoRest.Swagger.Model;
 using System;
 
 namespace AutoRest.Swagger.Validation.Core
@@ -19,12 +20,32 @@ namespace AutoRest.Swagger.Validation.Core
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public virtual string Id => "!!! implement me and make me abstract !!!";
+        public abstract string Id { get; }
+
+        /// <summary>
+        /// What kind of open api document type this rule should be applied to
+        /// </summary>
+        public abstract ServiceDefinitionDocumentType ServiceDefinitionDocumentType { get; }
+
+        /// <summary>
+        /// Whether the rule should be applied to the individual or composed context based on
+        /// the corresponding .md file
+        /// In most cases this should be composed
+        /// This is because validation rules that run in individual mode will end up
+        /// throwing multiple validation messages for the same violation if related model/property,etc 
+        /// was referenced in multiple files
+        /// </summary>
+        public abstract ServiceDefinitionDocumentState ValidationRuleMergeState { get; }
 
         /// <summary>
         /// Violation category of the Rule.
         /// </summary>
-        public virtual ValidationCategory ValidationCategory => ValidationCategory.None; // !!! implement me and make me abstract !!!
+        public abstract ValidationCategory ValidationCategory { get; }
+
+        /// <summary>
+        /// What kind of change implementing this rule can cause.
+        /// </summary>
+        public virtual ValidationChangesImpact ValidationChangesImpact => ValidationChangesImpact.None;
 
         /// <summary>
         /// The template message for this Rule. 

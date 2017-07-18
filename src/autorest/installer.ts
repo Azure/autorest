@@ -100,7 +100,7 @@ export class Installer {
     });
 
     unpack.on('finish', () => {
-      setTimeout(resolve, 200);
+      setTimeout(resolve, 500);
     });
 
   }
@@ -111,8 +111,8 @@ export class Installer {
       runtimeId = pi.runtimeId;
     }
 
-    const fwks = await Github.GetAssets('dotnet-runtime-1.0.3');
-    const runtime = fwks.FirstOrDefault(each => each.name.startsWith(`dotnet-${runtimeId}.1.0.3`));
+    const fwks = await Github.GetAssets('dotnet-runtime-1.0.5');
+    const runtime = fwks.FirstOrDefault(each => each.name.startsWith(`dotnet-${runtimeId}.1.0.5`));
 
     if (runtime == null) {
       throw `Unable to find framework for ${runtimeId}`
@@ -124,8 +124,8 @@ export class Installer {
     });
   }
 
-  public static async InstallAutoRest(version: string) {
-    const asset = (await Github.GetAssets(`v${version}`)).FirstOrDefault();
+  public static async InstallAutoRest(version: string, feed: string = "azure") {
+    const asset = (await Github.GetAssets(`v${version}`, feed)).FirstOrDefault();
 
     if (asset == null) {
       throw `Unable to find asset for version '${version}'`

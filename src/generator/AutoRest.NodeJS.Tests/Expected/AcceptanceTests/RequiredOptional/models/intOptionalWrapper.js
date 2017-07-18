@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the IntOptionalWrapper class.
- * @constructor
- * @member {number} [value]
- *
+ * Class representing a IntOptionalWrapper.
  */
 class IntOptionalWrapper {
+  /**
+   * Create a IntOptionalWrapper.
+   * @member {number} [value]
+   */
   constructor() {
   }
 

@@ -23,19 +23,21 @@ namespace AutoRest.Python.Azure.Model
 
         public IEnumerable<Parameter> PagingParameters { get; set; }
 
-        public string PagedResponseClassName
+        public IModelType PagedResponseClass
         {
             get
             {
                 var ext = this.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
                 if (ext == null)
                 {
-                    return string.Empty;
+                    return null;
                 }
 
-                return "models." + (string)ext["className"];
+                return this.ReturnType.Body;
             }
         }
+
+        public IModelType PagedResponseContentClass { get; set; }
 
         public string ClientRequestIdString => AzureExtensions.GetClientRequestIdString(this);
 

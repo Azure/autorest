@@ -1,4 +1,4 @@
-#Client Operations
+# Client Operations
 
 ## Calling operations
 AutoRest provides both synchronous and asynchronous method overloads for each service operation. Use the following syntax to call the synchronous method:

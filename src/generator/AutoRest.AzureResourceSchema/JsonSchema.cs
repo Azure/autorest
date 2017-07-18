@@ -187,11 +187,6 @@ namespace AutoRest.AzureResourceSchema
         /// <returns></returns>
         public JsonSchema AddEnum(string enumValue, params string[] extraEnumValues)
         {
-            if (string.IsNullOrWhiteSpace(enumValue))
-            {
-                throw new ArgumentException("enumValue cannot be null or whitespace", "enumValue");
-            }
-
             if (enumList == null)
             {
                 enumList = new List<string>();

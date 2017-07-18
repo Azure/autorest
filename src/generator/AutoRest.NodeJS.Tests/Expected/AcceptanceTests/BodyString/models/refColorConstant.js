@@ -11,13 +11,13 @@
 'use strict';
 
 /**
- * @class
- * Initializes a new instance of the RefColorConstant class.
- * @constructor
- * @member {string} [field1] Sample string.
- *
+ * Class representing a RefColorConstant.
  */
 class RefColorConstant {
+  /**
+   * Create a RefColorConstant.
+   * @member {string} [field1] Sample string.
+   */
   constructor() {
   }
 
