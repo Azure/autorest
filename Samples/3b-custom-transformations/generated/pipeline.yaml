@@ -4,6 +4,11 @@ pipeline-emitter:
   configScope:
     - scope-pipeline-emitter
   inputs: []
+configuration-emitter:
+  pluginName: configuration-emitter
+  configScope:
+    - scope-configuration-emitter
+  inputs: []
 swagger-document-override/md-override-loader:
   pluginName: md-override-loader
   configScope: []
