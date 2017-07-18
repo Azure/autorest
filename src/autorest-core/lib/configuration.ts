@@ -546,7 +546,7 @@ export class Configuration {
     return createView().Indexer;
   }
 
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null): Promise<string | null> {
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, walkUpFolders: boolean = false): Promise<string | null> {
     if (!configFileOrFolderUri || configFileOrFolderUri.endsWith(".md")) {
       return configFileOrFolderUri;
     }
@@ -576,7 +576,7 @@ export class Configuration {
 
       // walk up
       const newUriToConfigFileOrWorkingFolder = ResolveUri(configFileOrFolderUri, "..");
-      configFileOrFolderUri = newUriToConfigFileOrWorkingFolder === configFileOrFolderUri
+      configFileOrFolderUri = !walkUpFolders || newUriToConfigFileOrWorkingFolder === configFileOrFolderUri
         ? null
         : newUriToConfigFileOrWorkingFolder;
     }
