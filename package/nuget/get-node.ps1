@@ -6,7 +6,7 @@
     The version of Node.js to download.
 #>
 $progressPreference = 'silentlyContinue'  
-$Version = "7.10.0"
+$Version = "8.1.4"
 $DistRootUri = "https://nodejs.org/dist/v$Version"
 $LayoutRoot = "$PSScriptRoot\"
 if (!(Test-Path $LayoutRoot)) { $null = mkdir $LayoutRoot }

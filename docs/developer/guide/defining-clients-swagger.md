@@ -1,5 +1,5 @@
 
-#Working with OpenAPI Specifications
+# Working with Swagger Specifications
 
 > NOTE: OpenAPI is the official name of the specification that was formerly called "Swagger". 
 
@@ -295,7 +295,7 @@ Example of a constant in a definition:
    }
  }
 ```
-become
+becomes
 ``` cs
 /// <summary>
 /// The product documentation.

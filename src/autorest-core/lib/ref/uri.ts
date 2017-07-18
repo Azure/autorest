@@ -173,7 +173,7 @@ export function MakeRelativeUri(baseUri: string, absoluteUri: string): string {
  * OS abstraction (writing files, enumerating files)
  ***********************/
 import { readdir, mkdir, exists, writeFile } from "./async";
-import { lstatSync } from "fs";
+import { lstatSync, unlinkSync, rmdirSync } from "fs";
 
 function isAccessibleFile(localPath: string) {
   try {
@@ -245,4 +245,26 @@ async function WriteStringInternal(fileName: string, data: string): Promise<void
  */
 export function WriteString(fileUri: string, data: string): Promise<void> {
   return WriteStringInternal(FileUriToLocalPath(fileUri), data);
+}
+
+/**
+ * Clears a folder on the local file system.
+ * @param folderUri  Folder uri.
+ */
+export async function ClearFolder(folderUri: string): Promise<void> {
+  const path = FileUriToLocalPath(folderUri);
+  const deleteFolderRecursive = async (path: string) => {
+    if (await exists(path)) {
+      for (const file of await readdir(path)) {
+        var curPath = path + "/" + file;
+        if (lstatSync(curPath).isDirectory()) {
+          await deleteFolderRecursive(curPath);
+        } else {
+          unlinkSync(curPath);
+        }
+      }
+      rmdirSync(path);
+    }
+  };
+  await deleteFolderRecursive(path);
 }

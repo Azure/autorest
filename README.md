@@ -90,22 +90,6 @@ or
 
 Other Linux platforms *might* work -- if the platform is listed https://github.com/Azure/autorest/releases/tag/dotnet-runtime-1.0.4 -- there is a fairly good chance that it'll work. As more testing is completed, we'll ensure that we update the status here.
 
-### _PREVIEW AVAILABLE_ : Installer EXE for AutoRest now online 
-You can test out the PREVIEW AutoRest installer from : https://github.com/Azure/autorest/releases/download/dotnet-runtime-1.0.3/AutoInstaller.exe
-
-> **Note**: 
-> The Installer is a work-in-progress -- it has been tested for the happy path, some functionality isn't yet implemented:
-> - Remove/Uninstall - not yet implemented
-> - Upgrade - minimally tested
-> - About and Project buttons - not yet implemented
-> - not yet codesiged
-> - no silent/unattended mode yet
-> <br>
-> <br> ![image](https://cloud.githubusercontent.com/assets/133736/23370663/440ff1c4-fcca-11e6-9b66-5e0da642af55.png) <br>
-
-> - Feedback welcome at https://github.com/Azure/autorest/issues/1884
-
-
 # Getting Started using AutoRest ![image](./docs/images/normal.png)
 
 Start by reading the documentation for using AutoRest:

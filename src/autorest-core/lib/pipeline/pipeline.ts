@@ -12,7 +12,7 @@ import { AutoRestPlugin } from "./plugin-endpoint";
 import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
 import { Channel } from "../message";
-import { ResolveUri } from "../ref/uri";
+import { ClearFolder, ResolveUri } from "../ref/uri";
 import { ConfigurationView } from "../configuration";
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
 import { GetAutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
@@ -127,7 +127,11 @@ function CreateCommonmarkProcessor(): PipelinePlugin {
 }
 function CreateArtifactEmitter(inputOverride?: () => Promise<DataStoreViewReadonly>): PipelinePlugin {
   return async (config, input, working, output) => {
-    return EmitArtifacts(
+    // clear output-folder if requested
+    if (config.GetEntry("can-clear-output-folder" as any) && config.GetEntry("clear-output-folder" as any)) {
+      await ClearFolder(config.OutputFolderUri);
+    }
+    await EmitArtifacts(
       config,
       config.GetEntry("input-artifact" as any),
       key => ResolveUri(
