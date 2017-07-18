@@ -292,7 +292,8 @@ public partial class StorageManagementClient : ServiceClient<StorageManagementCl
 
 OpenAPI 2.0 has a built-in limitation on paths. Only one operation can be mapped to a path and http method. There are some APIs, however, where multiple distinct operations are mapped to the same path and same http method. For example `GET /mypath/query-drive?op=file` and `GET /mypath/query-drive?op=folder` may return two different model types (stream in the first example and JSON model representing Folder in the second). Since OpenAPI does not treat query parameters as part of the path the above 2 operations may not co-exist in the standard "paths" element.
 
-To overcome this limitation an "x-ms-paths" extension was introduced parallel to "paths". Urls under "x-ms-paths" are allowed to have query parameters for disambiguation, however they are removed during model parsing.
+To overcome this limitation an "x-ms-paths" extension was introduced parallel to "paths". URLs under "x-ms-paths" are allowed to have query parameters for disambiguation, however they are not actually used.
+
 
 **Parent element**: [Swagger Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#swaggerObject)
 
@@ -300,25 +301,27 @@ To overcome this limitation an "x-ms-paths" extension was introduced parallel to
 The `x-ms-paths` extension has the same schema as [Paths Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathsObject) with exception that [Path Item Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathItemObject) can have query parameters.
 
 **Example**:
-```json5
-"paths":{
-   "/pets": {
-        "get": {
-            "parameters": [
-                {
-                     "name": "name",
-                     "required": true
-                }
-            ]
-        }
-   }
-},
-"x-ms-paths":{   
-   "/pets?color={color}": {
-        "get": {}
-   },
-}
+```yaml
+paths:
+   "/pets":
+        get:
+            ...
+x-ms-paths:
+   "/pets?color={color}":
+        get:
+            parameters:
+              - name: color
+                in: query
+                # Declaring this parameter is still necessary! 
+                # The `?color={color}` part of the path is
+                # completely ignored and only serves the purpose
+                # of disambiguation and documentation.
+            ...
 ```
+
+As in the example above, there should be one "overload" of the operation in the `paths` section.
+While technically this is not necessary (one could have put both `/pets` and `/pets?color={color}` into `x-ms-paths`), it makes sense to resort to `x-ms-paths` as little as possible in order to provide other OpenAPI tools with as much information as possible.
+We recommend putting the most generic overload into the `paths` section.
 
 ## x-ms-client-name
 
