@@ -18,7 +18,6 @@ import { ConfigurationView, GetExtension } from '../configuration';
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
 import { IFileSystem } from "../file-system";
 import { EmitArtifacts } from "./artifact-emitter";
-import { GetAutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<DataStoreViewReadonly | void>;

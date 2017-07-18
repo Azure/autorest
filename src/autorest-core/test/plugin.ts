@@ -6,40 +6,28 @@ import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 import { PumpMessagesToConsole } from './test-utility';
 
+import { Extension, ExtensionManager } from "@microsoft.azure/extension";
 import { RealFileSystem } from "../lib/file-system";
 import { AutoRest } from "../lib/autorest-core";
 import { CancellationToken } from "../lib/ref/cancallation";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message, Channel } from "../lib/message";
-import { GetAutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestExtension } from "../lib/pipeline/plugin-endpoint";
 import { DataStore, QuickScope } from '../lib/data-store/data-store';
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
+import { homedir } from "os";
+import { join } from "path";
+
+async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
+  const extMgr = await ExtensionManager.Create(join(homedir(), ".autorest"));
+  const name = "@microsoft.azure/autorest-classic-generators";
+  const source = __dirname.replace(/\\/g, "/").replace("autorest-core/test", "core/AutoRest");
+  const pack = await extMgr.findPackage(name, source);
+  const ext = await extMgr.installPackage(pack);
+  return AutoRestExtension.FromChildProcess(name, await ext.start());
+}
 
 @suite class Plugins {
-  @test async "plugin loading and communication"() {
-    const cancellationToken = CancellationToken.None;
-    const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.GetReadThroughScope();
-    const scopeWork = dataStore.CreateScope("working");
-
-    const dummyPlugin = await AutoRestExtension.FromModule(`${__dirname}/../lib/pipeline/plugins/dummy`);
-    const pluginNames = await dummyPlugin.GetPluginNames(cancellationToken);
-    assert.deepStrictEqual(pluginNames, ["dummy"]);
-    const messages: Message[] = [];
-    const result = await dummyPlugin.Process(
-      "dummy",
-      key => key,
-      scopeInput,
-      scopeWork,
-      m => messages.push(m),
-      cancellationToken);
-    assert.strictEqual(result, true);
-    assert.strictEqual(messages.length, 1);
-    const message = messages[0];
-    assert.strictEqual(message.Details, 42);
-  }
-
   // TODO: remodel if we figure out acquisition story
   @test @timeout(0) async "openapi-validation-tools"() {
     const autoRest = new AutoRest(new RealFileSystem());

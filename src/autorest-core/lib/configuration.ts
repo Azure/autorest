@@ -531,7 +531,7 @@ export class Configuration {
         const ext = await extPromise;
 
         // start extension
-        loadedExtensions[additionalExtension.fullyQualified] = new LazyPromise(async () => AutoRestExtension.FromChildProcess(await ext.start()));
+        loadedExtensions[additionalExtension.fullyQualified] = new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await ext.start()));
 
         // merge config
         const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
