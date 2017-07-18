@@ -87,14 +87,13 @@ Suffixes:
 | ------------ |:------:|
 | CSharp       | Cs     |
 | CSharp Azure | Csa    |
-| Java         | Ja     |
-| Java Azure   | Jaa    |
+| Java         | Jv     |
+| Java Azure   | Jva    |
 | Javascript   | Js     |
 | js  Azure    | Jsa    |
 | Ruby         | Rb     |
 | Ruby Azure   | Rba    |
 | Go           | Go     |
-| Go Azure     | Goa    |
 | Python       | Py     |
 | Python Azure | Pya    |
 
