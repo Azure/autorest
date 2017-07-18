@@ -61,6 +61,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
   const usedCodeGenerator = codegenerator.toLowerCase().replace("azure.", "").replace(".fluent", "");
   if (codegenerator.toLowerCase() === "none") {
     (<any>result)["azure-validator"] = true;
+    (<any>result)["openapi-type"] = "arm";
   } else {
     (<any>result)[usedCodeGenerator] = {};
     if (codegenerator.toLowerCase().startsWith("azure.")) {

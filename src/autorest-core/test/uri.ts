@@ -131,7 +131,7 @@ import * as uri from "../lib/ref/uri";
       "compiler/APISample_watcher.ts");
     assert.strictEqual(
       uri.ToRawDataUrl("compiler\\APISample_watcher.ts"),
-      "compiler\APISample_watcher.ts");
+      "compiler\\APISample_watcher.ts");
     assert.strictEqual(
       uri.ToRawDataUrl("C:\\arm-web\\2015-08-01\\AppServiceCertificateOrders.json"),
       "C:\\arm-web\\2015-08-01\\AppServiceCertificateOrders.json");

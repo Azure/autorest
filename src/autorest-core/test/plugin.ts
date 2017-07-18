@@ -9,7 +9,7 @@ import { PumpMessagesToConsole } from './test-utility';
 import { Extension, ExtensionManager } from "@microsoft.azure/extension";
 import { RealFileSystem } from "../lib/file-system";
 import { AutoRest } from "../lib/autorest-core";
-import { CancellationToken } from "../lib/ref/cancallation";
+import { CancellationToken } from "../lib/ref/cancellation";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message, Channel } from "../lib/message";
 import { AutoRestExtension } from "../lib/pipeline/plugin-endpoint";
@@ -21,7 +21,7 @@ import { join } from "path";
 async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
   const extMgr = await ExtensionManager.Create(join(homedir(), ".autorest"));
   const name = "@microsoft.azure/autorest-classic-generators";
-  const source = __dirname.replace(/\\/g, "/").replace("autorest-core/test", "core/AutoRest");
+  const source = __dirname.replace(/\\/g, "/").replace("autorest-core/dist/test", "core/AutoRest");
   const pack = await extMgr.findPackage(name, source);
   const ext = await extMgr.installPackage(pack);
   return AutoRestExtension.FromChildProcess(name, await ext.start());
@@ -29,11 +29,12 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
 
 @suite class Plugins {
   // TODO: remodel if we figure out acquisition story
-  @test @timeout(0) async "openapi-validation-tools"() {
+  @test @timeout(0) async "Validation Tools"() {
     const autoRest = new AutoRest(new RealFileSystem());
     autoRest.AddConfiguration({ "input-file": "https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json" });
     autoRest.AddConfiguration({ "model-validator": true });
     autoRest.AddConfiguration({ "semantic-validator": true });
+    autoRest.AddConfiguration({ "azure-validator": true });
 
     const errorMessages: Message[] = [];
     autoRest.Message.Subscribe((_, m) => {
@@ -42,45 +43,11 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
       }
     });
     assert.strictEqual(await autoRest.Process().finish, true);
-    const expectedNumErrors = 2;
+    const expectedNumErrors = 3;
     if (errorMessages.length !== expectedNumErrors) {
       console.log(JSON.stringify(errorMessages, null, 2));
     }
     assert.strictEqual(errorMessages.length, expectedNumErrors);
-  }
-
-  @test @timeout(10000) async "AutoRest.dll AzureValidator"() {
-    const autoRest = new AutoRest();
-    const config = await autoRest.view;
-    const dataStore = config.DataStore;
-
-    // load swagger
-    const swagger = await LoadLiterateSwagger(
-      config,
-      dataStore.GetReadThroughScope(),
-      "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
-      dataStore.CreateScope("loader"));
-
-    // call validator
-    const autorestPlugin = await GetAutoRestDotNetPlugin();
-    const pluginScope = dataStore.CreateScope("plugin");
-    const messages: Message[] = [];
-    let currConfig: any = {
-      'openapi-type': 'arm',
-      'merge-state': 'composed'
-    };
-    const result = await autorestPlugin.Process("azure-validator", key => currConfig[key], new QuickScope([swagger]), pluginScope, m => messages.push(m), CancellationToken.None);
-    assert.strictEqual(result, true);
-
-    // check results
-    assert.notEqual(messages.length, 0);
-    for (const message of messages) {
-      assert.ok(message);
-      assert.ok(message.Details.code);
-      assert.ok(message.Text);
-      assert.ok(message.Details.validationCategory);
-      assert.strictEqual(message.Plugin, "azure-validator");
-    }
   }
 
   @test @timeout(10000) async "AutoRest.dll Modeler"() {
@@ -92,7 +59,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     const swagger = await LoadLiterateSwagger(
       config,
       dataStore.GetReadThroughScope(),
-      "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
+      "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
     // call modeler
@@ -126,11 +93,11 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     const swagger = await LoadLiterateSwagger(
       config,
       dataStore.GetReadThroughScope(),
-      "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
+      "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
     // load code model
-    const codeModelUri = ResolveUri(CreateFolderUri(__dirname), "resources/code-model.yaml");
+    const codeModelUri = ResolveUri(CreateFolderUri(__dirname), "../../test/resources/code-model.yaml");
     const inputScope = dataStore.GetReadThroughScope(uri => uri === codeModelUri);
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 
@@ -160,7 +127,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     const dataStore = new DataStore(cancellationToken);
     const scopeInput = dataStore.GetReadThroughScope();
 
-    const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json";
+    const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json";
     await scopeInput.Read(inputFileUri);
 
     const validationPlugin = await AutoRestExtension.FromModule("../../../../../Users/jobader/Documents/GitHub/autorest-interactive/index");
