@@ -1,2 +1,0 @@
-    - /Samples/test/error-behavior/config-bad-syntax/readme.md:6:0
-ERROR: Syntax error: Invalid YAML object.
