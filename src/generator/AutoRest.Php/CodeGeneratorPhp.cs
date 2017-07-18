@@ -4,6 +4,7 @@ using AutoRest.Php.PhpBuilder;
 using AutoRest.Php.PhpBuilder.Expressions;
 using AutoRest.Php.PhpBuilder.Functions;
 using AutoRest.Php.PhpBuilder.Statements;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace AutoRest.Php
         /// <summary>
         /// Microsoft\Rest\Client
         /// </summary>
-        static ClassName MicrosoftRestClient { get; } 
+        static ClassName MicrosoftRestClient { get; }
             = GetMicrosoftRestClass("Client");
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace AutoRest.Php
             = This.Instance.PropertyRef(Client.Name);
 
         /// <summary>
-        /// $this->_client = new Microsoft\Rest\Client;
+        /// $this->_client = new Microsoft\Rest\Client();
         /// </summary>
         static Statement ClientInit { get; }
             = ClientRef
@@ -60,10 +61,10 @@ namespace AutoRest.Php
             = new FunctionName("createOperation");
 
         static Constructor CommonConstructor { get; }
-            = new Constructor(ImmutableList.Create(ClientInit));
+            = Constructor.Create(statements: ImmutableArray.Create(ClientInit));
 
-        static ImmutableList<PhpBuilder.Property> CommonProperties { get; }
-            = ImmutableList.Create(Client);
+        static ImmutableArray<PhpBuilder.Property> CommonProperties { get; }
+            = ImmutableArray.Create(Client);
 
         static FunctionName CallFunction { get; }
             = new FunctionName("call");
@@ -83,25 +84,59 @@ namespace AutoRest.Php
             return ImmutableList.Create(propertyRef.Assign(operationInfoCreate).Statement());
         }
 
+        private sealed class PhpType
+        {
+            public string Type { get; }
+
+            public string Format { get; }
+
+            public string Items { get; }
+
+            public PhpType(string type, string format = null, string items = null)
+            {
+                Type = type;
+                Format = format;
+                Items = items;
+            }
+
+            public static PhpType Create(IModelType modelType)
+            {
+                if (modelType is PrimaryType type)
+                {
+                    return new PhpType(
+                        type.KnownPrimaryType.ToString().ToLower(),
+                        type.KnownFormat.ToString().ToLower());
+                }
+                else
+                {
+                    return new PhpType(modelType.Name);
+                }
+            }
+        }
+
         private sealed class PhpFunction
         {
             public Const Const { get; }
 
             public PhpBuilder.Property Property { get; }
 
-            public ImmutableList<Statement> Init { get; }
+            public ImmutableList<Statement> ConstructorStatements { get; }
 
             public Function Function { get; }
 
-            private static string GetPhpType(IModelType modelType)
+            private static IEnumerable<ArrayItem> CreateParameter(Core.Model.Parameter p)
             {
-                if (modelType is PrimaryType type)
+                yield return ArrayItem.Create("name", p.SerializedName);
+                yield return ArrayItem.Create("in", p.Location.ToString().ToLower());
+                var phpType = PhpType.Create(p.ModelType);
+                yield return ArrayItem.Create("type", phpType.Type);
+                if (phpType.Format != "none" && phpType.Format != null)
                 {
-                    return type.KnownPrimaryType.ToString().ToLower();
+                    yield return ArrayItem.Create("format", phpType.Format);
                 }
-                else
+                if (phpType.Items != null)
                 {
-                    return modelType.Name;
+                    yield return ArrayItem.Create("items", phpType.Items);
                 }
             }
 
@@ -110,13 +145,11 @@ namespace AutoRest.Php
                 var name = "_" + m.Name;
 
                 var parameters = m.Parameters
-                    .Select(p => Array.Create(
-                        ArrayItem.Create("name", p.SerializedName),
-                        ArrayItem.Create("in", p.Location.ToString().ToLower()),
-                        ArrayItem.Create("type", GetPhpType(p.ModelType))))
+                    .Select(p => CreateParameter(p))
+                    .Select(Array.Create)
                     .Select(ArrayItem.Create);
 
-                Const = new Const(
+                Const = Const.Create(
                     name,
                     Array.Create(
                         ArrayItem.Create("operationId", m.SerializedName),
@@ -130,17 +163,14 @@ namespace AutoRest.Php
                     .Instance
                     .PropertyRef(Property.Name);
 
-                Init = OperationInfoInit(propertyRef, Const.Name, m);
+                ConstructorStatements = OperationInfoInit(propertyRef, Const.Name, m);
 
-                var call = propertyRef
-                    .Call(CallFunction, ImmutableList.Create<Expression>(Array.Empty))
-                    .Return();
+                var call = propertyRef.Call(CallFunction, Array.Empty).Return();
 
-                Function = new Function(
+                Function = Function.Create(
                     name: m.Name,
-                    @return: null,
                     description: m.Description,
-                    statements: ImmutableList.Create(call));
+                    statements: ImmutableArray.Create(call));
             }
         }
 
@@ -154,52 +184,86 @@ namespace AutoRest.Php
 
             public PhpFunctionGroup(string @namespace, MethodGroup o)
             {
-                var functions = o.Methods.Select(m => new PhpFunction(m)).ToImmutableList();
+                var functions = o.Methods.Select(m => new PhpFunction(m));
 
-                Class = new Class(
+                var clientParameter = PhpBuilder.Functions.Parameter.Create(
+                    Client.Name,
+                    MicrosoftRestClient);
+
+                Class = Class.Create(
                     name: Class.CreateName(@namespace, o.Name),
-                    constructor: new Constructor(CommonConstructor
-                        .Statements
-                        .Concat(functions.SelectMany(f => f.Init))
-                        .ToImmutableList()),
-                    functions: functions.Select(f => f.Function).ToImmutableList(),
-                    properties: CommonProperties
-                        .Concat(functions.Select(f => f.Property))
-                        .ToImmutableList(),
-                    consts: functions.Select(f => f.Const).ToImmutableList());
+                    constructor: Constructor.Create(
+                        parameters: ImmutableArray.Create(
+                            PhpBuilder.Functions.Parameter.Create(
+                                Client.Name,
+                                MicrosoftRestClient)),
+                        statements: ImmutableArray
+                            .Create(ClientRef.Assign(clientParameter.Ref()).Statement())
+                            .Concat(functions.SelectMany(f => f.ConstructorStatements))),
+                    functions: functions.Select(f => f.Function),
+                    properties: CommonProperties.Concat(functions.Select(f => f.Property)),
+                    consts: functions.Select(f => f.Const));
 
                 Property = new PhpBuilder.Property(o.Name, Class.Name);
 
-                Function = new Function(
+                Function = Function.Create(
                     name: $"get{o.Name}",
                     @return: Class.Name,
-                    statements: ImmutableList.Create(
+                    statements: ImmutableArray.Create(
                         This.Instance.PropertyRef(Property.Name).Return()));
             }
         }
 
         const string Indent = "    ";
 
+        private static ArrayItem CreateProperty(Core.Model.Property property)
+            => ArrayItem.Create(property.SerializedName, Array.Empty);
+
+        private static ArrayItem CreateType(IModelType type)
+        {
+            var compositeType = type as CompositeType;
+            return ArrayItem.Create(
+                type.Name,
+                Array.Create(
+                    ArrayItem.Create(
+                        "properties",
+                        Array.Create(
+                            compositeType.Properties.Select(CreateProperty)))));
+        }
+
+        private static ConstName DefinitionsData { get; }
+            = new ConstName("_DEFINITIONS_DATA");
+
+        private static Statement CreateClient { get; }
+            = ClientRef
+                .Assign(MicrosoftRestClient.New(DefinitionsData.SelfConstRef()))
+                .Statement();
+
         public override async Task Generate(CodeModel codeModel)
         {
             var @namespace = Class.CreateName(codeModel.Namespace, codeModel.ApiVersion);
             var operations = codeModel.Operations;
             var phpOperations = operations.Select(o => new PhpFunctionGroup(@namespace, o));
-            var client = new Class(
+            var definitions = Const.Create(
+                DefinitionsData,
+                Array.Create(codeModel.ModelTypes.Select(CreateType)));
+            var client = Class.Create(
                 name: Class.CreateName(@namespace, "Client"),
-                constructor: CommonConstructor,
-                functions: phpOperations
-                    .Select(o => o.Function)
-                    .ToImmutableList(),
+                constructor: Constructor.Create(
+                    statements: ImmutableArray.Create(CreateClient)),
+                functions: phpOperations.Select(o => o.Function),
                 properties: phpOperations
                     .Select(o => o.Property)
-                    .Concat(CommonProperties)
-                    .ToImmutableList());
+                    .Concat(CommonProperties),
+                consts: ImmutableArray.Create(definitions));
             foreach (var class_ in phpOperations
                 .Select(o => o.Class)
-                .Concat(ImmutableList.Create(client)))
+                .Concat(ImmutableArray.Create(client)))
             {
-                await Write(string.Join("\n", class_.ToCodeText(Indent)), class_.Name.FileName, false);
+                await Write(
+                    string.Join("\n", class_.ToCodeText(Indent)),
+                    class_.Name.FileName,
+                    false);
             }
         }
     }

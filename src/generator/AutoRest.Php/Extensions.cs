@@ -10,6 +10,9 @@ namespace AutoRest.Php
         public static ImmutableList<T> EmptyIfNull<T>(this ImmutableList<T> value)
             => value ?? ImmutableList<T>.Empty;
 
+        public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> source)
+            => source ?? Enumerable.Empty<T>();
+
         public static T UpCast<T>(this T value) => value;
 
         public static ItemInfo<T> WithItemInfo<T>(this T value, long count, bool isLast)
@@ -47,8 +50,6 @@ namespace AutoRest.Php
             R empty = default(R))
             => source.SelectWithInfo(map, new[] { empty }).SelectMany(v => v);
 
-        //public static IEnumerable<T> SelectMany<T>(this IEnumerable<IEnumerable<T>> source)
-        //    => source.SelectMany(v => v);
 
         public static string Then(this bool p, string value)
             => p ? value : string.Empty;

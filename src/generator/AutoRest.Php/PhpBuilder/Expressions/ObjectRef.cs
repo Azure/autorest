@@ -14,7 +14,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public override IEnumerable<string> ToCodeText(string indent)
         {
-            yield return "$" + Object.PhpName;
+            yield return Object.PhpFullName;
         }
     }
 }

@@ -11,25 +11,38 @@ namespace AutoRest.Php.PhpBuilder
 
         public Constructor Constructor { get; }
 
-        public ImmutableList<Function> Functions { get; }
+        public IEnumerable<Function> Functions { get; }
 
-        public ImmutableList<Property> Properties { get; }
+        public IEnumerable<Property> Properties { get; }
 
-        public ImmutableList<Const> Consts { get; }
+        public IEnumerable<Const> Consts { get; }
 
-        public Class(
+        private Class(
+            ClassName name,
+            Constructor constructor,
+            IEnumerable<Function> functions,
+            IEnumerable<Property> properties,
+            IEnumerable<Const> consts)
+        {
+            Name = name;
+            Constructor = constructor;
+            Functions = functions;
+            Properties = properties;
+            Consts = consts;
+        }
+
+        public static Class Create(
             string name,
             Constructor constructor = null,
-            ImmutableList<Function> functions = null,
-            ImmutableList<Property> properties = null,
-            ImmutableList<Const> consts = null)
-        {
-            Name = new ClassName(name);
-            Constructor = constructor;
-            Functions = functions.EmptyIfNull();
-            Properties = properties.EmptyIfNull();
-            Consts = consts.EmptyIfNull();
-        }
+            IEnumerable<Function> functions = null,
+            IEnumerable<Property> properties = null,
+            IEnumerable<Const> consts = null)
+            => new Class(
+                name: new ClassName(name),
+                constructor: constructor,
+                functions: functions.EmptyIfNull(),
+                properties: properties.EmptyIfNull(),
+                consts: consts.EmptyIfNull());
 
         public static string CreateName(params string[] names)
             => string.Join("\\", names);

@@ -23,7 +23,7 @@ namespace AutoRest.Php.PhpBuilder
             {
                 yield return line;
             }
-            yield return $"private ${Name.PhpName};";
+            yield return "private " + Name.PhpFullName + ";";
         }
     }
 }

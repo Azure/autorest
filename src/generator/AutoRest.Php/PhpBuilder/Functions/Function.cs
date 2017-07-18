@@ -1,6 +1,5 @@
 ﻿using AutoRest.Php.PhpBuilder.Statements;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder.Functions
 {
@@ -8,46 +7,47 @@ namespace AutoRest.Php.PhpBuilder.Functions
     {
         public FunctionName Name { get; }
 
-        public ClassName Return { get; }
+        public override ClassName Return { get; }
 
         public string Description { get; }
 
         protected override string PhpName 
             => Name.PhpName;
 
-        public Function(
+        private Function(
             string name,
             ClassName @return,
-            string description = null,
-            ImmutableList<Statement> statements = null):
-            base(statements)
+            IEnumerable<Parameter> parameters,
+            string description,
+            IEnumerable<Statement> statements):
+            base(parameters, description, statements)
         {
             Name = new FunctionName(name);
             Return = @return;
             Description = description;
         }
 
-        private IEnumerable<string> GetComment()
-        {
-            if (Description != null)
-            {
-                yield return Description;
-            }
-            if (Return != null)
-            {
-                yield return $"@return {Return.AbsoluteName}";
-            }
-        }
+        public static Function Create(
+            string name,
+            ClassName @return = null,
+            IEnumerable<Parameter> parameters = null,
+            string description = null,
+            IEnumerable<Statement> statements = null)
+            => new Function(
+                name: name,
+                @return: @return,
+                parameters: parameters.EmptyIfNull(),
+                description: description,
+                statements: statements);
 
         public override IEnumerable<string> ToCodeText(string indent)
         {
-            foreach (var line in GetComment().Comment())
-            {
-                yield return line;
-            }
             if (Statements == null)
             {
-                yield return $"{GetSignature()};";
+                foreach (var line in GetSignature(indent).InlineWrap(string.Empty, ";"))
+                {
+                    yield return line;
+                }
             }
             else
             {

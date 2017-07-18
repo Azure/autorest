@@ -8,9 +8,9 @@ namespace AutoRest.Php.PhpBuilder.Expressions
     {
         public ClassName Type { get; }
 
-        public ImmutableList<Expression> Parameters { get; }
+        public IEnumerable<Expression> Parameters { get; }
 
-        public New(ClassName type, ImmutableList<Expression> parameters = null)
+        public New(ClassName type, IEnumerable<Expression> parameters = null)
         {
             Type = type;
             Parameters = parameters.EmptyIfNull();

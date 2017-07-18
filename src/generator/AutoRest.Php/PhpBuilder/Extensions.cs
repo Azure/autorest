@@ -1,5 +1,4 @@
-﻿using AutoRest.Php.PhpBuilder.Expressions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace AutoRest.Php.PhpBuilder
@@ -21,7 +20,7 @@ namespace AutoRest.Php.PhpBuilder
         public static string GetPhpCamelName(this string name)
         {
             name = name.GetPhpName();
-            return $"{char.ToLower(name[0])}{name.Substring(1)}";
+            return char.ToLower(name[0]) + name.Substring(1);
         }
 
         public static IEnumerable<string> Comment(this IEnumerable<string> text)
@@ -29,13 +28,10 @@ namespace AutoRest.Php.PhpBuilder
             yield return "/**";
             foreach (var line in text)
             {
-                yield return $" * {line}";
+                yield return " * " + line;
             }
             yield return " */";
         }
-
-        //public static string ToPhpCode(this IEnumerable<ICodeLine> expressions)
-        //    => string.Join(", ", expressions.Select(v => v.ToCodeLine()));
 
         public static IEnumerable<string> BinaryOperation(
             this IEnumerable<string> left, string operation, IEnumerable<string> right)

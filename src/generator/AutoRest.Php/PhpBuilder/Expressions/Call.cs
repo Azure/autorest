@@ -10,12 +10,12 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public FunctionName Function { get; }
 
-        public ImmutableList<Expression> Parameters { get; }
+        public IEnumerable<Expression> Parameters { get; }
 
         public Call(
             Expression0 left,
             FunctionName function,
-            ImmutableList<Expression> parameters = null)
+            IEnumerable<Expression> parameters = null)
         {
             Left = left;
             Function = function;

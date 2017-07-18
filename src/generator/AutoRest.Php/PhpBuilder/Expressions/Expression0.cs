@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -12,7 +13,12 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public Expression0 Call(
             FunctionName function,
-            ImmutableList<Expression> parameters = null)
+            IEnumerable<Expression> parameters)
+            => new Call(this, function, parameters);
+
+        public Expression0 Call(
+            FunctionName function,
+            params Expression[] parameters)
             => new Call(this, function, parameters);
     }
 }

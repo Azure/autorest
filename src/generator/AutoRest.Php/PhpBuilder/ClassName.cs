@@ -1,4 +1,5 @@
 ﻿using AutoRest.Php.PhpBuilder.Expressions;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
@@ -28,7 +29,10 @@ namespace AutoRest.Php.PhpBuilder
             FileName = $"{string.Join("/", Names)}.php";
         }
 
-        public New New(ImmutableList<Expression> parameters = null) 
+        public New New(IEnumerable<Expression> parameters) 
+            => new New(this, parameters);
+
+        public New New(params Expression[] parameters)
             => new New(this, parameters);
 
         public StaticCall StaticCall(
