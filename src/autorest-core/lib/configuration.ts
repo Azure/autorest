@@ -18,7 +18,7 @@ import { Channel, Message, Range, SourceLocation } from './message';
 import { EvaluateGuard, ParseCodeBlocks } from './parsing/literate-yaml';
 import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
-import { CancellationToken, CancellationTokenSource } from './ref/cancallation';
+import { CancellationToken, CancellationTokenSource } from './ref/cancellation';
 import { stringify } from './ref/jsonpath';
 import { From } from './ref/linq';
 import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ResolveUri } from './ref/uri';
@@ -168,9 +168,9 @@ function ProxifyConfigurationView(cfgView: any) {
   });
 }
 
-const loadedExtensions: { [fullyQualified: string]: LazyPromise<AutoRestExtension> } = {};
+const loadedExtensions: { [fullyQualified: string]: { extension: Extension, autorestExtension: LazyPromise<AutoRestExtension> } } = {};
 export async function GetExtension(fullyQualified: string): Promise<AutoRestExtension> {
-  return await loadedExtensions[fullyQualified];
+  return await loadedExtensions[fullyQualified].autorestExtension;
 }
 
 export class ConfigurationView {
@@ -510,33 +510,41 @@ export class Configuration {
     }
     // 4. resolve externals
     const extMgr = await ExtensionManager.Create(join(homedir(), ".autorest"));
+    const addedExtensions = new Set<string>();
     while (true) {
       const tmpView = createView();
-      const useExtensions = tmpView.UseExtensions;
-      // find additional extensions
-      const additionalExtensions = useExtensions.filter(ext => !(ext.fullyQualified in loadedExtensions));
+      const additionalExtensions = tmpView.UseExtensions.filter(ext => !addedExtensions.has(ext.fullyQualified));
       if (additionalExtensions.length === 0) {
         break;
       }
       // acquire additional extensions
       for (const additionalExtension of additionalExtensions) {
+        addedExtensions.add(additionalExtension.fullyQualified);
+
         // TODO: remove
         if (additionalExtension.name === "@microsoft.azure/autorest-classic-generators")
           additionalExtension.source = __dirname.replace(/\\/g, "/").replace("autorest-core/dist/lib", "core/AutoRest");
         // TODO: remove
 
-        const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
-        const extPromise = extMgr.installPackage(pack);
-        (extPromise as any).Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose }));
-        const ext = await extPromise;
+        let ext = loadedExtensions[additionalExtension.fullyQualified];
+        if (!ext) {
+          // acquire extension
+          const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
+          const extPromise = extMgr.installPackage(pack);
+          (extPromise as any).Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose }));
+          const extension = await extPromise;
 
-        // start extension
-        loadedExtensions[additionalExtension.fullyQualified] = new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await ext.start()));
+          // start extension
+          ext = loadedExtensions[additionalExtension.fullyQualified] = {
+            extension: extension,
+            autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start()))
+          };
+        }
 
         // merge config
         const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
         const blocks = await this.ParseCodeBlocks(
-          await inputView.ReadStrict(CreateFileUri(await ext.configurationPath)),
+          await inputView.ReadStrict(CreateFileUri(await ext.extension.configurationPath)),
           tmpView,
           `extension-config-${additionalExtension.fullyQualified}`);
         configSegments.push(...blocks);

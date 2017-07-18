@@ -169,7 +169,7 @@ export class AutoRest extends EventEmitter {
         // you can't use this again!
         this._view = undefined;
 
-        // expose cancallation token
+        // expose cancellation token
         cancel = () => {
           if (view) {
             view.CancellationTokenSource.cancel();

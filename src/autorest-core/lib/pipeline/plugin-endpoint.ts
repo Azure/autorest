@@ -7,7 +7,7 @@ import { LazyPromise } from "../lazy";
 import { EventEmitter } from "../events";
 import { fork, ChildProcess } from "child_process";
 import { Mappings, RawSourceMap, SmartPosition } from "../ref/source-map";
-import { CancellationToken } from "../ref/cancallation";
+import { CancellationToken } from "../ref/cancellation";
 import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
 import { DataStoreViewReadonly, DataStoreView } from "../data-store/data-store";
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
