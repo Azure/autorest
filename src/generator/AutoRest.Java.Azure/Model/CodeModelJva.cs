@@ -82,7 +82,7 @@ namespace AutoRest.Java.Azure.Model
         }
 
 
-        const string targetVersion = "1.1.3";
+        const string targetVersion = "1.1.0";
         /// <summary>
         /// The Azure SDK version to reference in the generated POM.
         /// </summary>
@@ -104,8 +104,14 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var versionParts = targetVersion.Split('.');
-                var minorVersion = int.Parse(versionParts[1]) + 1;
-                var result = "V" + versionParts[0] + "_" + minorVersion + "_0";
+                var minorVersion = int.Parse(versionParts[1]);
+                var patchVersion = int.Parse(versionParts[2]);
+
+                var newMinorVersion = patchVersion == 0
+                    ? minorVersion
+                    : minorVersion + 1;
+
+                var result = "V" + versionParts[0] + "_" + newMinorVersion + "_0";
                 return result;
             }
         }
