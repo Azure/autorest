@@ -25,6 +25,8 @@ use-extension:
 
 #### Reflection
 
+##### Pipeline
+
 ``` yaml
 pipeline:
   pipeline-emitter: # emits the pipeline graph
@@ -33,8 +35,20 @@ pipeline:
 scope-pipeline-emitter:
   input-artifact: pipeline
   is-object: true
-  output-uri-expr: |
-    "pipeline"
+  output-uri-expr: pipeline
+```
+
+##### Configuration
+
+``` yaml
+pipeline:
+  configuration-emitter: # emits the pipeline graph
+    scope: scope-configuration-emitter
+
+scope-configuration-emitter:
+  input-artifact: configuration
+  is-object: true
+  output-uri-expr: configuration
 ```
 
 #### Loading

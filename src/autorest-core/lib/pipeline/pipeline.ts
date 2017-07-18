@@ -282,7 +282,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
-    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)]))
+    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)])),
+    "configuration-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("configuration")).WriteObject(configView.Raw)]))
   };
 
   // dynamically loaded, auto-discovered plugins
