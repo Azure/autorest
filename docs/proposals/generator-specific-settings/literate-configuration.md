@@ -156,6 +156,8 @@ From the command-line, this would look like:
 
 > `AutoRest.exe readme.md --some-value=true --num-cowbells=3`
 
+See example 3c and the [azure-rest-api-specs repository](https://github.com/Azure/azure-rest-api-specs/tree/current/specification) to see guards in action.
+
 #### JSONPath document reference
 
 [JSONPath](http://goessner.net/articles/JsonPath/) will be used to reference nodes in the swagger document object model.
