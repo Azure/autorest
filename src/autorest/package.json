@@ -25,6 +25,9 @@
   "bin": {
     "autorest": "./dist/app.js"
   },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha ./dist/test"
+  },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
     "@types/commonmark": "^0.22.29",

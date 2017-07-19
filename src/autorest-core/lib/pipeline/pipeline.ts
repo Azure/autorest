@@ -18,7 +18,6 @@ import { ConfigurationView, GetExtension } from '../configuration';
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
 import { IFileSystem } from "../file-system";
 import { EmitArtifacts } from "./artifact-emitter";
-import { GetAutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<DataStoreViewReadonly | void>;
@@ -282,7 +281,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
-    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)]))
+    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)])),
+    "configuration-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("configuration")).WriteObject(configView.Raw)]))
   };
 
   // dynamically loaded, auto-discovered plugins

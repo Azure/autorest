@@ -7,7 +7,7 @@ import { LazyPromise } from "../lazy";
 import { EventEmitter } from "../events";
 import { fork, ChildProcess } from "child_process";
 import { Mappings, RawSourceMap, SmartPosition } from "../ref/source-map";
-import { CancellationToken } from "../ref/cancallation";
+import { CancellationToken } from "../ref/cancellation";
 import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
 import { DataStoreViewReadonly, DataStoreView } from "../data-store/data-store";
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
@@ -36,10 +36,10 @@ export class AutoRestExtension extends EventEmitter {
 
   public static async FromModule(modulePath: string): Promise<AutoRestExtension> {
     const childProc = fork(modulePath, [], <any>{ silent: true });
-    return AutoRestExtension.FromChildProcess(childProc);
+    return AutoRestExtension.FromChildProcess(modulePath, childProc);
   }
 
-  public static async FromChildProcess(childProc: ChildProcess): Promise<AutoRestExtension> {
+  public static async FromChildProcess(extensionName: string, childProc: ChildProcess): Promise<AutoRestExtension> {
     // childProc.on("error", err => { throw err; });
     const channel = createMessageConnection(
       childProc.stdout,
@@ -47,12 +47,12 @@ export class AutoRestExtension extends EventEmitter {
       console
     );
     childProc.stderr.pipe(process.stderr);
-    const plugin = new AutoRestExtension(channel);
+    const plugin = new AutoRestExtension(extensionName, channel);
     channel.listen();
     return plugin;
   }
 
-  public constructor(channel: MessageConnection) {
+  public constructor(extensionName: string, channel: MessageConnection) {
     super();
     // initiator
     const dispatcher = (fnName: string) => async (sessionId: string, ...rest: any[]) => {
@@ -82,7 +82,7 @@ export class AutoRestExtension extends EventEmitter {
     channel.onNotification(IAutoRestPluginInitiator_Types.WriteFile, this.apiInitiator.WriteFile);
     channel.onNotification(IAutoRestPluginInitiator_Types.Message, this.apiInitiator.Message);
 
-    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Exception("AutoRest plugin terminated.")); }));
+    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Exception("AutoRest extension terminated: " + extensionName)); }));
 
     // target
     this.apiTarget = {

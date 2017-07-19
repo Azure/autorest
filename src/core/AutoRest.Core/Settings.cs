@@ -78,7 +78,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             FileSystemOutput = new MemoryFileSystem();
             OutputDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Generated");
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-            Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, Settings.Version);
+            Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeaderWithoutVersion, Settings.Version);
             CodeGenerator = "CSharp";
             ModelsName = "Models";
             CodeGenerationMode = "rest-client";

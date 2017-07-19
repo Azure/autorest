@@ -44,7 +44,7 @@ import { PumpMessagesToConsole } from './test-utility';
   }
 
   @test @timeout(60000) async "other configuration scenario"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-complicated.md"));
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-complicated.md"));
     // PumpMessagesToConsole(autoRest);
 
 
@@ -54,7 +54,7 @@ import { PumpMessagesToConsole } from './test-utility';
   }
 
   @test @timeout(60000) async "complicated configuration scenario"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-complicated.md"));
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-complicated.md"));
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
       "cmd-line-true": true,
@@ -62,8 +62,7 @@ import { PumpMessagesToConsole } from './test-utility';
       "cmd-line-complex": {
         "true": true,
         "false": false
-      },
-      "azure-validator": true
+      }
     });
 
     const config = await autoRest.view;
@@ -79,7 +78,7 @@ import { PumpMessagesToConsole } from './test-utility';
   // ARM, non-ARM documents should show 0 validation messages
   // TODO: fix this test when validation rules are properly categorized
   @test @timeout(60000) async "non-arm type spec testing"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/validation-options/readme.md"));
     autoRest.AddConfiguration({
       "openapi-type": "default",
       "azure-validator": true
@@ -95,7 +94,7 @@ import { PumpMessagesToConsole } from './test-utility';
     assert.equal(messages.filter(m => m.Channel === Channel.Fatal).length, 0);
   }
   @test @timeout(60000) async "arm type spec testing"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/validation-options/readme.md"));
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/validation-options/readme.md"));
     autoRest.AddConfiguration({
       "openapi-type": "arm",
       "azure-validator": true

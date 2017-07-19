@@ -9,12 +9,12 @@ import { Message, Channel } from "../lib/message";
 @suite class Directive {
 
   @test @timeout(0) async "suppression"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
     autoRest.Message.Subscribe((_, m) => m.Channel === Channel.Fatal ? console.error(m.Text) : "");
 
     // reference run
     await autoRest.ResetConfiguration();
-    await autoRest.AddConfiguration({ "azure-validator": true });
+    await autoRest.AddConfiguration({ "azure-validator": true, "openapi-type": "arm" });
     let numWarningsRef: number;
     {
       const messages: Message[] = [];
@@ -29,7 +29,7 @@ import { Message, Channel } from "../lib/message";
 
     // muted run
     await autoRest.ResetConfiguration();
-    await autoRest.AddConfiguration({ "azure-validator": true });
+    await autoRest.AddConfiguration({ "azure-validator": true, "openapi-type": "arm" });
     await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "R4000", "PutRequestResponseScheme"] } });
     {
       const messages: Message[] = [];
@@ -48,7 +48,7 @@ import { Message, Channel } from "../lib/message";
     // makes sure that neither all nor nothing was returned
     const pickyRun = async (directive: any) => {
       await autoRest.ResetConfiguration();
-      await autoRest.AddConfiguration({ "azure-validator": true });
+      await autoRest.AddConfiguration({ "azure-validator": true, "openapi-type": "arm" });
       await autoRest.AddConfiguration({ directive: directive });
       {
         const messages: Message[] = [];
@@ -87,7 +87,7 @@ import { Message, Channel } from "../lib/message";
   }
 
   @test @timeout(0) async "set descriptions on different levels"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
 
     const GenerateCodeModel = async (config: any) => {
       await autoRest.ResetConfiguration();

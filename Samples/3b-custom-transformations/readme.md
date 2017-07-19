@@ -12,6 +12,7 @@ output-artifact:
  - swagger-document.json
  - code-model-v1.yaml
  - pipeline.yaml
+ - configuration.yaml
 csharp:
   output-folder: Client
 ```
