@@ -5,14 +5,14 @@ namespace AutoRest.Php.PhpBuilder.Functions
 {
     public sealed class Parameter : ICodeText
     {
+        public IType Type { get; }
+
         public ObjectName Name { get; }
 
-        public ClassName Type { get; }
-
-        public Parameter(ObjectName name, ClassName type)
+        public Parameter(IType type, ObjectName name)
         {
-            Name = name;
             Type = type;
+            Name = name;
         }
 
         public IEnumerable<string> ToCodeText(string indent)

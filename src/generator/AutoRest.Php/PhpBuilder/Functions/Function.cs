@@ -14,11 +14,11 @@ namespace AutoRest.Php.PhpBuilder.Functions
 
         public Function(
             string name,
-            ClassName @return,
-            IEnumerable<Parameter> parameters,
             string description,
-            IEnumerable<Statement> statements):
-            base(parameters, description, statements)
+            IEnumerable<Parameter> parameters,
+            ClassName @return,
+            IEnumerable<Statement> body):
+            base(description, parameters, body)
         {
             Name = new FunctionName(name);
             Return = @return;

@@ -39,7 +39,7 @@ namespace AutoRest.Php
         /// private $_client
         /// </summary>
         static PhpBuilder.Property Client { get; }
-            = PHP.Property(MicrosoftRestClient, "_client");
+            = PHP.Property(new ClassName(MicrosoftRestClient), "_client");
 
         /// <summary>
         /// $this->_client
@@ -139,7 +139,7 @@ namespace AutoRest.Php
                         PHP.KeyValue("operationId", m.SerializedName),
                         PHP.KeyValue("parameters", PHP.Array(parameters))));
 
-                Property = PHP.Property(MicrosoftRestOperation, name);
+                Property = PHP.Property(new ClassName(MicrosoftRestOperation), name);
 
                 var thisProperty = PHP.This.Arrow(Property);
 
@@ -150,7 +150,7 @@ namespace AutoRest.Php
                 Function = PHP.Function(
                     name: m.Name,
                     description: m.Description,
-                    statements: PHP.Statements(call));
+                    body: PHP.Statements(call));
             }
         }
 
@@ -167,17 +167,17 @@ namespace AutoRest.Php
                 var functions = o.Methods.Select(m => new PhpFunction(m));
 
                 var clientParameter = PHP.Parameter(
-                    Client.Name,
-                    MicrosoftRestClient);
+                    type: PHP.Class(MicrosoftRestClient),
+                    name: Client.Name);
 
                 Class = PHP.Class(
                     name: Class.CreateName(@namespace, o.Name),
                     constructor: PHP.Constructor(
-                        parameters: ImmutableArray.Create(
+                        parameters: PHP.Parameters(
                             PHP.Parameter(
-                                Client.Name,
-                                MicrosoftRestClient)),
-                        statements: PHP
+                                type: PHP.Class(MicrosoftRestClient),
+                                name: Client.Name)),
+                        body: PHP
                             .Statements(ThisClient.Assign(clientParameter.Ref()).Statement())
                             .Concat(functions.SelectMany(f => f.ConstructorStatements))),
                     functions: functions.Select(f => f.Function),
@@ -189,7 +189,7 @@ namespace AutoRest.Php
                 Function = PHP.Function(
                     name: $"get{o.Name}",
                     @return: Class.Name,
-                    statements: PHP.Statements(
+                    body: PHP.Statements(
                         PHP.Return(PHP.This.Arrow(Property))));
             }
         }
@@ -215,7 +215,7 @@ namespace AutoRest.Php
 
         private static Statement CreateClient { get; }
             = ThisClient
-                .Assign(PHP.New(MicrosoftRestClient, PHP.SelfScope(DefinitionsData)))
+                .Assign(PHP.New(new ClassName(MicrosoftRestClient), PHP.SelfScope(DefinitionsData)))
                 .Statement();
 
         public override async Task Generate(CodeModel codeModel)
@@ -229,7 +229,7 @@ namespace AutoRest.Php
             var client = PHP.Class(
                 name: Class.CreateName(@namespace, "Client"),
                 constructor: PHP.Constructor(
-                    statements: PHP.Statements(CreateClient)),
+                    body: PHP.Statements(CreateClient)),
                 functions: phpOperations.Select(o => o.Function),
                 properties: phpOperations
                     .Select(o => o.Property)

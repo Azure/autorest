@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System;
 
 namespace AutoRest.Php.PhpBuilder
 {
-    public sealed class Class : ICodeText
+    public sealed class Class : ICodeText, IType
     {
         public ClassName Name { get; }
 
@@ -16,6 +17,8 @@ namespace AutoRest.Php.PhpBuilder
         public IEnumerable<Property> Properties { get; }
 
         public IEnumerable<Const> Consts { get; }
+
+        public string AbsoluteName => Name.AbsoluteName;
 
         public Class(
             ClassName name,

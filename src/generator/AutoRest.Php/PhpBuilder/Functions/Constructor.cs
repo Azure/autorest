@@ -6,10 +6,10 @@ namespace AutoRest.Php.PhpBuilder.Functions
     public sealed class Constructor : Base
     {
         public Constructor(
-            IEnumerable<Parameter> parameters,
             string description,
-            IEnumerable<Statement> statements)
-            : base(parameters, description, statements)
+            IEnumerable<Parameter> parameters,
+            IEnumerable<Statement> body)
+            : base(description, parameters, body)
         {
         }
 

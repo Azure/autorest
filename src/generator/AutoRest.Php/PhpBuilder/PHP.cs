@@ -141,26 +141,26 @@ namespace AutoRest.Php.PhpBuilder
             => new Return(expression);
 
         /// <summary>
-        /// public function name ( parameters ) { statements }
+        /// public function name ( parameters ) { body }
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="return"></param>
-        /// <param name="parameters"></param>
         /// <param name="description"></param>
-        /// <param name="statements"></param>
+        /// <param name="parameters"></param>
+        /// <param name="return"></param>
+        /// <param name="body"></param>
         /// <returns></returns>
         public static Function Function(
             string name,
-            ClassName @return = null,
-            IEnumerable<Parameter> parameters = null,
             string description = null,
-            IEnumerable<Statement> statements = null)
+            IEnumerable<Parameter> parameters = null,
+            ClassName @return = null,            
+            IEnumerable<Statement> body = null)
             => new Function(
                 name: name,
-                @return: @return,
+                description: description,                
                 parameters: parameters.EmptyIfNull(),
-                description: description,
-                statements: statements);
+                @return: @return,
+                body: body);
 
         /// <summary>
         /// const name = expression ;
@@ -177,21 +177,24 @@ namespace AutoRest.Php.PhpBuilder
         /// <param name="name"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static Parameter Parameter(ObjectName name, ClassName type)
-            => new Parameter(name, type);
+        public static Parameter Parameter(IType type, ObjectName name)
+            => new Parameter(type, name);
 
         /// <summary>
         /// public function __constructor( parameters ) { statements }
         /// </summary>
-        /// <param name="parameters"></param>
         /// <param name="description"></param>
-        /// <param name="statements"></param>
-        /// <returns></returns>
+        /// <param name="parameters"></param>
+        /// <param name="body"></param>
+        /// <returns>PHP constructor</returns>
         public static Constructor Constructor(
-            IEnumerable<Parameter> parameters = null,
             string description = null,
-            IEnumerable<Statement> statements = null)
-            => new Constructor(parameters.EmptyIfNull(), description, statements);
+            IEnumerable<Parameter> parameters = null,
+            IEnumerable<Statement> body = null)
+            => new Constructor(
+                description: description,
+                parameters: parameters.EmptyIfNull(), 
+                body: body.EmptyIfNull());
 
         public static IEnumerable<Parameter> Parameters(params Parameter[] parameters)
             => parameters;

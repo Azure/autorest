@@ -11,19 +11,19 @@ namespace AutoRest.Php.PhpBuilder.Functions
 
         public abstract ClassName Return { get; }
 
-        public IEnumerable<Parameter> Parameters { get; }
-
         public string Description { get; }
+
+        public IEnumerable<Parameter> Parameters { get; }
 
         public IEnumerable<Statement> Body { get; }
 
         protected Base(
-            IEnumerable<Parameter> parameters,
             string description,
+            IEnumerable<Parameter> parameters,
             IEnumerable<Statement> body)
         {
-            Parameters = parameters;
             Description = description;
+            Parameters = parameters;
             Body = body;
         }
 
