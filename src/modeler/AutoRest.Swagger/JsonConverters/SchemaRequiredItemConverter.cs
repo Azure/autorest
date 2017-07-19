@@ -26,7 +26,7 @@ namespace AutoRest.Swagger.JsonConverters
                 GetSettings(serializer));
 
             //Per JSON schema 4.0, each node uses the "IsRequired" field (an array) to call out mandatory properties.
-            foreach (var key in schema.Required)
+            foreach (var key in schema.Required ?? Enumerable.Empty<string>())
             {
                 if (schema.Properties != null && schema.Properties.TryGetValue(key, out var value))
                 {
@@ -34,7 +34,8 @@ namespace AutoRest.Swagger.JsonConverters
                 }
                 else
                 {
-                    throw new Exception($"Required property '{key}' does not exist in the schema.");
+                    // see https://github.com/Azure/autorest/issues/2210
+                    // throw new Exception($"Required property '{key}' does not exist in the schema.");
                 }
             }
 
