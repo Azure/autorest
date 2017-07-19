@@ -16,9 +16,6 @@ namespace AutoRest.Php.PhpBuilder.Expressions
     /// </summary>
     public abstract class Expression : ICodeText
     {
-        public Statement Return()
-            => new Return(this);
-
         public Statement Statement()
             => new ExpressionStatement(this);
 

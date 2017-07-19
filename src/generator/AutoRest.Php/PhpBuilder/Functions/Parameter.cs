@@ -9,18 +9,15 @@ namespace AutoRest.Php.PhpBuilder.Functions
 
         public ClassName Type { get; }
 
-        private Parameter(ObjectName name, ClassName type)
+        public Parameter(ObjectName name, ClassName type)
         {
             Name = name;
             Type = type;
         }
 
-        public static Parameter Create(ObjectName name, ClassName type)
-            => new Parameter(name, type);
-
         public IEnumerable<string> ToCodeText(string indent)
         {
-            yield return Name.PhpFullName;
+            yield return Type.AbsoluteName + " " + Name.PhpFullName;
         }
 
         public ObjectRef Ref()

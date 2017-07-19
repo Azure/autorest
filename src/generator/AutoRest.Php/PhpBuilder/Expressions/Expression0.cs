@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Immutable;
-
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
     public abstract class Expression0 : Expression
@@ -12,13 +10,13 @@ namespace AutoRest.Php.PhpBuilder.Expressions
             => new PropertyRef(this, right.Name);
 
         public Expression0 Call(
-            FunctionName function,
+            string function,
             IEnumerable<Expression> parameters)
-            => new Call(this, function, parameters);
+            => new Call(this, new FunctionName(function), parameters);
 
         public Expression0 Call(
-            FunctionName function,
+            string function,
             params Expression[] parameters)
-            => new Call(this, function, parameters);
+            => new Call(this, new FunctionName(function), parameters);
     }
 }

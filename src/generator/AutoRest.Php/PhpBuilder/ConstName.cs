@@ -1,6 +1,4 @@
-﻿using AutoRest.Php.PhpBuilder.Expressions;
-
-namespace AutoRest.Php.PhpBuilder
+﻿namespace AutoRest.Php.PhpBuilder
 {
     public sealed class ConstName : Name
     {
@@ -11,7 +9,7 @@ namespace AutoRest.Php.PhpBuilder
             PhpName = original.ToUpper();
         }
 
-        public SelfConstRef SelfConstRef()
-            => new SelfConstRef(this);
+        public static implicit operator ConstName(string name)
+            => new ConstName(name);
     }
 }

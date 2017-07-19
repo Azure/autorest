@@ -44,42 +44,28 @@ namespace AutoRest.Php
         /// <summary>
         /// $this->_client
         /// </summary>
-        static Expression0 ClientRef { get; }
+        static Expression0 ThisClient { get; }
             = PHP.This.Arrow(Client);
 
-        /// <summary>
-        /// $this->_client = new Microsoft\Rest\Client();
-        /// </summary>
-        static Statement ClientInit { get; }
-            = ClientRef
-                .Assign(PHP.New(MicrosoftRestClient))
-                .Statement();
+        const string CreateOperation = "createOperation";
 
-        static FunctionName CreateOperationFunction { get; }
-            = new FunctionName("createOperation");
+        static IEnumerable<PhpBuilder.Property> CommonProperties { get; }
+            = new[] { Client };
 
-        static Constructor CommonConstructor { get; }
-            = Constructor.Create(statements: ImmutableArray.Create(ClientInit));
+        const string CallFunction = "call";
 
-        static ImmutableArray<PhpBuilder.Property> CommonProperties { get; }
-            = ImmutableArray.Create(Client);
-
-        static FunctionName CallFunction { get; }
-            = new FunctionName("call");
-
-        static ImmutableList<Statement> OperationInfoInit(
-            Expression0 propertyRef, ConstName const_, Method m)
+        static IEnumerable<Statement> OperationInfoInit(
+            Expression0 property, ConstName const_, Method m)
         {
             // $this->_client->createOperation({...path...}, {...httpMethod...}, {...operation...})
-            var operationInfoCreate = ClientRef.Call(
-                CreateOperationFunction,
-                ImmutableList.Create<Expression>(
-                    new StringConst(m.Url),
-                    new StringConst(m.HttpMethod.ToString().ToLower()),
-                    const_.SelfConstRef()));
+            var operationInfoCreate = ThisClient.Call(
+                CreateOperation,
+                PHP.String(m.Url),
+                PHP.String(m.HttpMethod.ToString().ToLower()),
+                PHP.SelfScope(const_));
 
             // $this->{...operation...} = 
-            return ImmutableList.Create(propertyRef.Assign(operationInfoCreate).Statement());
+            return PHP.Statements(property.Assign(operationInfoCreate).Statement());
         }
 
         private sealed class PhpType
@@ -118,7 +104,7 @@ namespace AutoRest.Php
 
             public PhpBuilder.Property Property { get; }
 
-            public ImmutableList<Statement> ConstructorStatements { get; }
+            public IEnumerable<Statement> ConstructorStatements { get; }
 
             public Function Function { get; }
 
@@ -147,26 +133,24 @@ namespace AutoRest.Php
                     .Select(PHP.Array)
                     .Select(PHP.KeyValue);
 
-                Const = Const.Create(
+                Const = PHP.Const(
                     name,
                     PHP.Array(
                         PHP.KeyValue("operationId", m.SerializedName),
                         PHP.KeyValue("parameters", PHP.Array(parameters))));
 
-                Property = new PhpBuilder.Property(
-                    name: name,
-                    type: MicrosoftRestOperation);
+                Property = PHP.Property(MicrosoftRestOperation, name);
 
-                var propertyRef = PHP.This.Arrow(Property);
+                var thisProperty = PHP.This.Arrow(Property);
 
-                ConstructorStatements = OperationInfoInit(propertyRef, Const.Name, m);
+                ConstructorStatements = OperationInfoInit(thisProperty, Const.Name, m);
 
-                var call = propertyRef.Call(CallFunction, PHP.EmptyArray).Return();
+                var call = PHP.Return(thisProperty.Call(CallFunction, PHP.EmptyArray));
 
-                Function = Function.Create(
+                Function = PHP.Function(
                     name: m.Name,
                     description: m.Description,
-                    statements: ImmutableArray.Create(call));
+                    statements: PHP.Statements(call));
             }
         }
 
@@ -182,19 +166,19 @@ namespace AutoRest.Php
             {
                 var functions = o.Methods.Select(m => new PhpFunction(m));
 
-                var clientParameter = PhpBuilder.Functions.Parameter.Create(
+                var clientParameter = PHP.Parameter(
                     Client.Name,
                     MicrosoftRestClient);
 
                 Class = PHP.Class(
                     name: Class.CreateName(@namespace, o.Name),
-                    constructor: Constructor.Create(
+                    constructor: PHP.Constructor(
                         parameters: ImmutableArray.Create(
-                            PhpBuilder.Functions.Parameter.Create(
+                            PHP.Parameter(
                                 Client.Name,
                                 MicrosoftRestClient)),
-                        statements: ImmutableArray
-                            .Create(ClientRef.Assign(clientParameter.Ref()).Statement())
+                        statements: PHP
+                            .Statements(ThisClient.Assign(clientParameter.Ref()).Statement())
                             .Concat(functions.SelectMany(f => f.ConstructorStatements))),
                     functions: functions.Select(f => f.Function),
                     properties: CommonProperties.Concat(functions.Select(f => f.Property)),
@@ -202,11 +186,11 @@ namespace AutoRest.Php
 
                 Property = PHP.Property(Class.Name, o.Name);
 
-                Function = Function.Create(
+                Function = PHP.Function(
                     name: $"get{o.Name}",
                     @return: Class.Name,
-                    statements: ImmutableArray.Create(
-                        PHP.This.Arrow(Property).Return()));
+                    statements: PHP.Statements(
+                        PHP.Return(PHP.This.Arrow(Property))));
             }
         }
 
@@ -227,12 +211,11 @@ namespace AutoRest.Php
                             compositeType.Properties.Select(CreateProperty)))));
         }
 
-        private static ConstName DefinitionsData { get; }
-            = new ConstName("_DEFINITIONS_DATA");
+        private const string DefinitionsData = "_DEFINITIONS_DATA";
 
         private static Statement CreateClient { get; }
-            = ClientRef
-                .Assign(PHP.New(MicrosoftRestClient, DefinitionsData.SelfConstRef()))
+            = ThisClient
+                .Assign(PHP.New(MicrosoftRestClient, PHP.SelfScope(DefinitionsData)))
                 .Statement();
 
         public override async Task Generate(CodeModel codeModel)
@@ -240,18 +223,18 @@ namespace AutoRest.Php
             var @namespace = Class.CreateName(codeModel.Namespace, codeModel.ApiVersion);
             var operations = codeModel.Operations;
             var phpOperations = operations.Select(o => new PhpFunctionGroup(@namespace, o));
-            var definitions = Const.Create(
+            var definitions = PHP.Const(
                 DefinitionsData,
                 PHP.Array(codeModel.ModelTypes.Select(CreateType)));
             var client = PHP.Class(
                 name: Class.CreateName(@namespace, "Client"),
-                constructor: Constructor.Create(
-                    statements: ImmutableArray.Create(CreateClient)),
+                constructor: PHP.Constructor(
+                    statements: PHP.Statements(CreateClient)),
                 functions: phpOperations.Select(o => o.Function),
                 properties: phpOperations
                     .Select(o => o.Property)
                     .Concat(CommonProperties),
-                consts: ImmutableArray.Create(definitions));
+                consts: PHP.Consts(definitions));
             foreach (var class_ in phpOperations
                 .Select(o => o.Class)
                 .Concat(ImmutableArray.Create(client)))

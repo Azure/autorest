@@ -15,16 +15,16 @@ namespace AutoRest.Php.PhpBuilder.Functions
 
         public string Description { get; }
 
-        public IEnumerable<Statement> Statements { get; }
+        public IEnumerable<Statement> Body { get; }
 
         protected Base(
             IEnumerable<Parameter> parameters,
             string description,
-            IEnumerable<Statement> statements)
+            IEnumerable<Statement> body)
         {
             Parameters = parameters;
             Description = description;
-            Statements = statements;
+            Body = body;
         }
 
         public abstract IEnumerable<string> ToCodeText(string indent);
@@ -59,7 +59,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
                 yield return line;
             }
             yield return "{";
-            foreach (var line in Statements.SelectMany(s => s.ToCodeText(indent)))
+            foreach (var line in Body.SelectMany(s => s.ToCodeText(indent)))
             {
                 yield return $"{indent}{line}";
             }

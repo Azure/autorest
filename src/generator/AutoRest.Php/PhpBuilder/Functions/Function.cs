@@ -9,12 +9,10 @@ namespace AutoRest.Php.PhpBuilder.Functions
 
         public override ClassName Return { get; }
 
-        public string Description { get; }
-
         protected override string PhpName 
             => Name.PhpName;
 
-        private Function(
+        public Function(
             string name,
             ClassName @return,
             IEnumerable<Parameter> parameters,
@@ -24,25 +22,11 @@ namespace AutoRest.Php.PhpBuilder.Functions
         {
             Name = new FunctionName(name);
             Return = @return;
-            Description = description;
         }
-
-        public static Function Create(
-            string name,
-            ClassName @return = null,
-            IEnumerable<Parameter> parameters = null,
-            string description = null,
-            IEnumerable<Statement> statements = null)
-            => new Function(
-                name: name,
-                @return: @return,
-                parameters: parameters.EmptyIfNull(),
-                description: description,
-                statements: statements);
 
         public override IEnumerable<string> ToCodeText(string indent)
         {
-            if (Statements == null)
+            if (Body == null)
             {
                 foreach (var line in GetSignature(indent).InlineWrap(string.Empty, ";"))
                 {
