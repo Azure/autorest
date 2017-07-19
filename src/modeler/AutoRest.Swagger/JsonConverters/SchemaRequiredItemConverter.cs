@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -24,21 +25,16 @@ namespace AutoRest.Swagger.JsonConverters
             var schema = JsonConvert.DeserializeObject<Schema>(jo.ToString(),
                 GetSettings(serializer));
 
-            var requiredList = new List<string>();
             //Per JSON schema 4.0, each node uses the "IsRequired" field (an array) to call out mandatory properties.
-            var requiredProperties = new JArray(schema.Required);
-            foreach (var requiredProperty in requiredProperties)
+            foreach (var key in schema.Required)
             {
-                requiredList.Add((string) requiredProperty);
-            }
-            schema.Required = requiredList;
-            if (schema.Properties != null)
-            {
-                foreach (var key in schema.Properties.Keys)
+                if (schema.Properties != null && schema.Properties.TryGetValue(key, out var value))
                 {
-                    Schema value = schema.Properties[key];
-                    bool inRequiredList = (requiredProperties.FirstOrDefault(p => (string) p == key) != null);
-                    value.IsRequired = inRequiredList;
+                    value.IsRequired = true;
+                }
+                else
+                {
+                    throw new Exception($"Required property '{key}' does not exist in the schema.");
                 }
             }
 
