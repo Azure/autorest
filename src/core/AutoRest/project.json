@@ -74,7 +74,8 @@
     "System.Reflection.Metadata": {
       "version": "1.0.21",
       "type": "build"
-    }
+    },
+    "AutoRest.CSharp.LoadBalanced.Json": "1.0.0-*"
   },
 
   "disabled_dependencies": {

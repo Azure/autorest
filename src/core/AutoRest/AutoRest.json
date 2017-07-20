@@ -3,7 +3,7 @@
     "AutoRest.TypeScript.SuperAgent": {
       "type": "PluginTs, AutoRest.TypeScript.SuperAgent"
     },
-    "PluginLoadBalancedCs": {
+    "LoadBalancedCs": {
       "type": "LoadBalancedPluginCs, AutoRest.CSharp.LoadBalanced"
     },
     "CSharp": {
