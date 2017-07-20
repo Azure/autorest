@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "authors": [ "Microsoft" ],
 
@@ -34,7 +34,8 @@
     "Microsoft.Rest.ClientRuntime": "2.3.2",
     "NUnit": "3.5.0",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "AutoRest.CSharp.LoadBalanced": "1.0.0-*"
+    "AutoRest.CSharp.LoadBalanced": "1.0.0-*",
+    "AutoRest.CSharp.LoadBalanced.Json": "1.0.0-*"
   },
 
   "content": [
