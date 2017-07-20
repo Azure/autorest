@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.LoadBalanced.Tests
    [TestFixture]
     public class OutputTest
     {
-        [Test]
+        [Test, Ignore("local test ")]
         public void PassingTest()
         {
             Func<string, string> parent = path => Directory.GetParent(path).FullName;
