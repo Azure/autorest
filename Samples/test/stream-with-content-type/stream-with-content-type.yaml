@@ -31,6 +31,28 @@ paths:
       - "$ref": "#/parameters/ImageContentType"
       responses:
         '200': {}
+  "/ProcessImage/FunctionTA":
+    post:
+      consumes:
+      - text/plain
+      - text/json
+      operationId: Text_A
+      parameters:
+      - "$ref": "#/parameters/TextStream"
+      - "$ref": "#/parameters/TextContentType"
+      responses:
+        '200': {}
+  "/ProcessImage/FunctionTB":
+    post:
+      consumes:
+      - text/plain
+      - text/xml
+      operationId: Text_B
+      parameters:
+      - "$ref": "#/parameters/TextStream"
+      - "$ref": "#/parameters/TextContentType"
+      responses:
+        '200': {}
 parameters:
   ImageStream:
     name: Image
@@ -43,6 +65,21 @@ parameters:
   ImageContentType:
     name: Content-Type
     x-ms-client-name: imageContentType
+    in: header
+    required: false
+    x-ms-parameter-location: method
+    description: The content type of the image.
+    type: string
+  TextStream:
+    name: Text
+    in: body
+    required: true
+    x-ms-parameter-location: method
+    description: A text stream.
+    schema:
+      type: file
+  TextContentType:
+    name: Content-Type
     in: header
     required: false
     x-ms-parameter-location: method
