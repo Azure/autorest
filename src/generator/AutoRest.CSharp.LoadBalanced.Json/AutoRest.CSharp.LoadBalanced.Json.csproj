@@ -49,6 +49,7 @@
     <Compile Include="GuidStringConverter.cs" />
     <Compile Include="Int32ValueConverter.cs" />
     <Compile Include="JsonConverterBase.cs" />
+    <Compile Include="MetaAttributes.cs" />
     <Compile Include="MoneyConverter.cs" />
     <Compile Include="MoneyConverterOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

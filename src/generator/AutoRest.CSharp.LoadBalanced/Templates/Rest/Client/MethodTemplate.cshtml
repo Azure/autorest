@@ -9,42 +9,11 @@
 @using AutoRest.Extensions
 @inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.MethodCs>
 
-@if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
-{
-@:/// <summary>
-@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
-    if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
-    {
-@:/// <see href="@Model.ExternalDocsUrl" />
-    }
-@:/// </summary>
-}
-@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
-{
-@:/// <remarks>
-@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
-@:/// </remarks>
-}
-@foreach (var parameter in Model.LocalParameters)
-{
-@:/// <param name='@parameter.Name'>@(parameter.Documentation.EscapeXmlComment())</param>
-}
-/// <param name='customHeaders'>Headers that will be added to request.</param>
-/// <exception cref="@(Model.OperationExceptionTypeString)">Thrown when the operation returned an invalid status code</exception>
-@if (Model.Responses.Where(r => r.Value.Body != null).Any())
-{
-@:/// <exception cref="Microsoft.Rest.SerializationException">Thrown when unable to deserialize the response</exception>
-}
-@if (Model.Parameters.Cast<ParameterCs>().Any(p => !p.IsConstant && p.IsRequired &&p.IsNullable()))
-{
-@:/// <exception cref="Microsoft.Rest.ValidationException">Thrown when a required parameter is null</exception>
-@:/// <exception cref="System.ArgumentNullException">Thrown when a required parameter is null</exception>
-    }
-/// <return>A response object containing the response body and response headers.</return>
 @if (Model.Deprecated)
 {
 @:[System.Obsolete()]
 }
+[Description("@((String.IsNullOrEmpty(Model.Description) ? "" : Model.Description.EscapeXmlComment()))"), Summary("@((String.IsNullOrEmpty(Model.Summary) ? "" : Model.Summary.EscapeXmlComment()))"), Url("@(Model.FromattedUrl)"), Verb("@(Model.HttpMethod.ToString().ToUpper())"), Tags("@(string.Join(",", Model.Tags))")]
 public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(false)))
 {
     @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
@@ -85,23 +54,27 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Mod
 
     }
     @Model.BuildInputMappings()
-@EmptyLine
     var verb = Verbs.@(Model.HttpMethod.ToString().ToUpper());
 @EmptyLine
-    var queryParameters = new Dictionary<string, object>
-        {
-    @foreach (var parameter in Model.LogicalParameters.Where(p => !p.IsClientProperty))
+@if (Model.QueryParameters.Any())
+{
+@:    var queryParameters = new Dictionary<string, object>
+@:    {
+    foreach (var parameter in Model.QueryParameters)
     {
-@:            { "@(parameter.Name)", @(parameter.Name) },
+@:         { "@(parameter.Name.RawValue)", @(parameter.Name) },
     }
-        };
+@:    };
+
+}
+
 @EmptyLine
     var requestParameters = new RequestParameters
                             {
                                 HttpVerb = verb,
-                                RestUrl = "@(Model.Url.TrimStart('/'))",
-                                CustomHeaders = new Dictionary<string, string> { { "Accept" , "application/vnd.api+json"}, { "Content-Type", "application/vnd.api+json" } },
-                                QueryParameters = queryParameters
+                                RestUrl = "@(Model.FromattedUrl)",
+                                CustomHeaders = _defaultHeaders,
+                                QueryParameters = @(Model.QueryParameters.Any() ? "queryParameters" : "new Dictionary<string, object>()")
                                 @(@Model.Body == null ? "" : ", Body = body")
                             };
 @EmptyLine

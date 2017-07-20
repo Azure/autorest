@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
             List<string> declarations = new List<string>();
             foreach (var parameter in LocalParameters)
             {
-                string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
+                string format = (parameter.IsRequired ? "[Description(\"{3}\")] {0} {1}" : "{0} {1} = {2}");
 
                 string defaultValue = $"default({parameter.ModelTypeName})";
                 if (!string.IsNullOrEmpty(parameter.DefaultValue) && parameter.ModelType is PrimaryType)
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                     defaultValue = parameter.DefaultValue;
                 }
                 declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                    format, parameter.ModelTypeName, parameter.Name, defaultValue));
+                    format, parameter.ModelTypeName, parameter.Name, defaultValue, parameter.Documentation.EscapeXmlComment()));
             }
 
             if (addCustomHeaderParameters)

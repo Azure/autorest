@@ -55,7 +55,8 @@ namespace AutoRest.CSharp.LoadBalanced
                                 "System", "System.Collections.Generic", "System.Linq", "System.Threading",
                                 "System.Threading.Tasks", "Microsoft.Rest", "System.IO",
                                 "Microsoft.Rest.Serialization", "Agoda.RoundRobin", "Newtonsoft.Json",
-                                "Agoda.SAPI.Client.Models", "Agoda.RoundRobin.Constants"
+                                "Agoda.SAPI.Client.Models", "Agoda.RoundRobin.Constants", "System.ComponentModel",
+                                "AutoRest.CSharp.LoadBalanced.Json"
                             });
 
             usings = usings.Where(u => !string.IsNullOrWhiteSpace(u)).Distinct().ToList();

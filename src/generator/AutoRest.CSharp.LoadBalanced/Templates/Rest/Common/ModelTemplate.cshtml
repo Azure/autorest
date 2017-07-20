@@ -162,7 +162,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:/// Thrown if validation fails
         @:/// </exception>
         @:public @Model.MethodQualifier void Validate()
-        @:{
+        @:{/*
             bool anythingToValidate = false;
 
             if (Model.BaseModelType != null && Model.BaseModelType.ShouldValidateChain())
@@ -191,7 +191,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {
             @://Nothing to validate
             }
-        @:}
+        @:*/}
 }
     }
 }

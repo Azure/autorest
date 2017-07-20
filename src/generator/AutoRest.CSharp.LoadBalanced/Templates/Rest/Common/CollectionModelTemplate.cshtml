@@ -1,4 +1,5 @@
 ﻿@using System.Linq
+@using AutoRest.Core.Utilities
 @using AutoRest.CSharp.LoadBalanced.Model
 @inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.CompositeTypeCs>
 @Header("// ")
@@ -14,7 +15,7 @@ using AutoRest.CSharp.LoadBalanced.Json;
 }
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
-    [JsonConverter(typeof(WrappedListConverter<@genericPart>), "@property.Name.Value")]
+    [JsonConverter(typeof(WrappedListConverter<@genericPart>), "@property.Name.Value.ToCamelCase()")]
     public partial class @Model.Name : @Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs).ModelTypeName.Replace("System.Collections.Generic.IList", "List")
     {
     }

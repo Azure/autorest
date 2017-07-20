@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using Microsoft.Rest;
@@ -9,6 +12,7 @@ using System.Threading.Tasks;
 using Agoda.RoundRobin;
 using Agoda.RoundRobin.Constants;
 using Microsoft.Rest.Serialization;
+using Agoda.Http.Client.WinHttp;
 @EmptyLine
 namespace @Settings.Namespace
 {
@@ -218,18 +222,62 @@ namespace @Settings.Namespace
 @EmptyLine
             internal async Task<ExecuteResult> ExecuteAsync()
             {
-                var httpClient = new HttpClient(_name, _settings, _contentType, (int)_timeout.TotalMilliseconds, _retryCount, "");
+                var baseUrl = _settings.First().Url.TrimEnd('/');
+                var fullUrl = baseUrl + "/" + _url.Value.TrimStart('/');
+                var request = new HttpRequestLite
+                              {
+                                  Url = fullUrl,
+                                  ContentType = _contentType,
+                                  ContentLength = _requestContent.Value.Length
+                              };
 
+                var headers =
+                    _customHeaders.Where(k => k.Key != "Content-Type" && k.Key != "Accept")
+                        .ToDictionary(k => k.Key, k => k.Value);
+                if (_customHeaders.ContainsKey("Accept"))
+                {
+                    request.Accept = _customHeaders["Accept"];
+                }
+                foreach (var header in headers)
+                {
+                    request.Headers.Add(header.Key, header.Value);
+                }
+                request.Headers.Add("Connection", "close");
+                request.Method = _verb.ToString();
+                var result = new ExecuteResult();
+                try
+                {
+                    using (var stream = request.GetRequestStream())
+                    {
+                        stream.Write(_requestContent.Value, 0, _requestContent.Value.Length);
+                        using (var response = request.GetResponse())
+                        using (var responseStream = response.GetResponseStream())
+                        {
+                            result.Status = (int) response.StatusCode;
+                            using (var reader = new StreamReader(responseStream, Encoding.UTF8))
+                            {
+                                result.Results = reader.ReadToEnd();
+                            }
+                            return result;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+                /*
+                var httpClient = new HttpClient(_name, _settings, _contentType, (int)_timeout.TotalMilliseconds, _retryCount, "");
                 var result = await httpClient.ExecuteAsync(
-                    _verb, 
-                    _url.Value, 
-                    _requestContent.Value, 
-                    false, 
-                    new ErrorList(), 
+                    _verb,
+                    _url.Value,
+                    _requestContent.Value,
+                    false,
+                    new ErrorList(),
                     true,
                     _customHeaders);
-
                 return result;
+                */
             }
 @EmptyLine
             protected string GetUrl(string restUrl, Dictionary<string, object> queryParameters)
