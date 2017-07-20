@@ -191,21 +191,7 @@ async function main() {
 
     if (args.reset) {
       console.trace(`Resetting autorest extension folder '${rootFolder}' and  '${dotnetFolder}'`);
-      force = true;
-
-      try {
-        await asyncIO.rmdir(rootFolder);
-      } catch (e) {
-        // who cares
-      }
-      try {
-        await asyncIO.rmdir(dotnetFolder);
-      } catch (e) {
-        // who cares
-      }
-
-      await asyncIO.mkdir(rootFolder);
-      await asyncIO.mkdir(dotnetFolder);
+      (await extensionManager).reset();
     }
 
     // wait for the bootstrapper check to finish.
@@ -294,12 +280,10 @@ async function main() {
       }
 
       // this will throw if there is an issue with installing the extension.
-      console.log(`**Installing package** ${corePackage}-${requestedVersion}\n[This will take a few moments...]`);
+      console.log(`**Installing package** ${corePackage}@${requestedVersion}\n[This will take a few moments...]`);
 
       const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
-      const installer = (await extensionManager).installPackage(pkg, force);
-      installer.Message.Subscribe((s, m) => { console.trace(`Installer: ${m}`); });
-      const extension = await installer;
+      const extension = await (await extensionManager).installPackage(pkg, force, 5 * 60 * 1000, installer => installer.Message.Subscribe((s, m) => { console.trace(`Installer: ${m}`); }));
       console.trace(`Extension location: ${extension.packageJsonPath}`);
 
       // select the newly installed version.
@@ -318,7 +302,7 @@ async function main() {
       process.argv.push("--allow-no-input");
     }
 
-    console.trace(`Starting ${corePackage} from ${await selectedVersion.name}`);
+    console.trace(`Starting ${corePackage} from ${await selectedVersion.location}`);
     require(join(await selectedVersion.modulePath, "dist/app.js"));
   } catch (exception) {
     console.log("Failure:");

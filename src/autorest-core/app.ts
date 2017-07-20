@@ -20,7 +20,6 @@ import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
 import { Exception, OperationCanceledException } from "./lib/exception";
-import { Console } from "./lib/console";
 
 /**
  * Legacy AutoRest
@@ -324,7 +323,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       const content = await ReadUri(path);
       if (!AutoRest.IsSwaggerFile(content)) {
         exitcode++;
-        Console.Error(`File ${path} is not a OpenAPI file.`);
+        console.error(`File ${path} is not a OpenAPI file.`);
         continue;
       }
 
@@ -362,7 +361,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       // console.log(`Inputs: ${newView["input-file"]}`);
       // newView.Dump()
 
-      Console.Log(`Running autorest for *${path}* `);
+      console.log(`Running autorest for *${path}* `);
 
       // ok, kick off the process for that one.
       await instance.Process().finish.then((result) => {
