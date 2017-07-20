@@ -39,6 +39,7 @@
     "commonmark": "^0.27.0",
     "jsonpath": "^0.2.11",
     "mocha": "3.2.0",
+    "npm": "4.6.0",
     "mocha-typescript": "1.0.22",
     "source-map": "^0.5.6",
     "source-map-support": "^0.4.14",
@@ -47,10 +48,10 @@
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz"
   },
   "dependencies": {
-    "@microsoft.azure/async-io": "~1.0.18",
-    "@microsoft.azure/console": "~1.0.27",
-    "@microsoft.azure/extension": "git+https://github.com/olydis/perks.node.git#extension",
-    "@microsoft.azure/polyfill": "~1.0.16",
+    "@microsoft.azure/async-io": "~1.0.20",
+    "@microsoft.azure/console": "~1.0.29",
+    "@microsoft.azure/extension": "~1.0.62",
+    "@microsoft.azure/polyfill": "~1.0.17",
     "linq-es2015": "^2.4.24",
     "semver": "^5.3.0"
   }
