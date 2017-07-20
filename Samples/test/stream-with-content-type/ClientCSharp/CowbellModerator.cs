@@ -38,6 +38,11 @@ namespace StreamWithContentType
         public virtual IImage Image { get; private set; }
 
         /// <summary>
+        /// Gets the IText.
+        /// </summary>
+        public virtual IText Text { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the CowbellModerator class.
         /// </summary>
         /// <param name='handlers'>
@@ -117,6 +122,7 @@ namespace StreamWithContentType
         private void Initialize()
         {
             Image = new Image(this);
+            Text = new Text(this);
             BaseUri = new System.Uri("https://localhost");
             SerializationSettings = new JsonSerializerSettings
             {

@@ -16,6 +16,9 @@ module StreamWithContentType
     # @return [Image] image
     attr_reader :image
 
+    # @return [Text] text
+    attr_reader :text
+
     #
     # Creates initializes a new instance of the CowbellModerator class.
     # @param credentials [MsRest::ServiceClientCredentials] credentials to authorize HTTP requests made by the service client.
@@ -30,6 +33,7 @@ module StreamWithContentType
       @credentials = credentials
 
       @image = Image.new(self)
+      @text = Text.new(self)
       add_telemetry
     end
 
