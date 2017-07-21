@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Generic;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -10,16 +8,16 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public FunctionName Function { get; }
 
-        public ImmutableList<Expression> Parameters { get; }
+        public IEnumerable<Expression> Parameters { get; }
 
         public StaticCall(
             ClassName @class,
             FunctionName function,
-            ImmutableList<Expression> parameters = null)
+            IEnumerable<Expression> parameters)
         {
             Class = @class;
             Function = function;
-            Parameters = parameters.EmptyIfNull();
+            Parameters = parameters;
         }
 
         public override IEnumerable<string> ToCodeText(string indent)

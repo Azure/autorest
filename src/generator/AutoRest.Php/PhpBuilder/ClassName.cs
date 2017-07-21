@@ -26,11 +26,8 @@ namespace AutoRest.Php.PhpBuilder
             PhpNamespace = string.Join("\\", PhpNames.Take(PhpNames.Count - 1));
             PhpLocalName = PhpNames[PhpNames.Count - 1];
             AbsoluteName = $"\\{string.Join("\\", PhpNames)}";
-            FileName = $"{string.Join("/", Names)}.php";
+            FileName = $"{string.Join("/", PhpNames)}.php";
         }
-
-        // public static implicit operator ClassName(string name)
-        //    => new ClassName(name);
 
         public New New(IEnumerable<Expression> parameters) 
             => new New(this, parameters);
@@ -39,7 +36,7 @@ namespace AutoRest.Php.PhpBuilder
             => new New(this, parameters);
 
         public StaticCall StaticCall(
-            FunctionName function, ImmutableList<Expression> parameters = null)
+            FunctionName function, params Expression[] parameters)
             => new StaticCall(this, function, parameters);
     }
 }

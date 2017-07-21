@@ -20,17 +20,20 @@ namespace AutoRest.Php
         static string GetMicrosoftRestClass(string name)
             => "Microsoft\\Rest\\" + name;
 
-        /// <summary>
-        /// Microsoft\Rest\Client
-        /// </summary>
-        static string MicrosoftRestClient { get; }
-            = GetMicrosoftRestClass("Client");
+        static string MicrosoftRestClientStatic { get; }
+            = GetMicrosoftRestClass("ClientStatic");
 
         /// <summary>
-        /// Microsoft\Rest\Operation
+        /// Microsoft\Rest\ClientInterface
         /// </summary>
-        static string MicrosoftRestOperation { get; }
-            = GetMicrosoftRestClass("Operation");
+        static string MicrosoftRestClientInterface { get; }
+            = GetMicrosoftRestClass("ClientInterface");
+
+        /// <summary>
+        /// Microsoft\Rest\OperationInterface
+        /// </summary>
+        static string MicrosoftRestOperationInterface { get; }
+            = GetMicrosoftRestClass("OperationInterface");
 
         /// <summary>
         /// /**
@@ -39,7 +42,7 @@ namespace AutoRest.Php
         /// private $_client
         /// </summary>
         static PhpBuilder.Property Client { get; }
-            = PHP.Property(new ClassName(MicrosoftRestClient), "_client");
+            = PHP.Property(new ClassName(MicrosoftRestClientInterface), "_client");
 
         /// <summary>
         /// $this->_client
@@ -47,7 +50,7 @@ namespace AutoRest.Php
         static Expression0 ThisClient { get; }
             = PHP.This.Arrow(Client);
 
-        const string CreateOperation = "createOperation";
+        const string CreateOperationFromData = "createOperationFromData";
 
         static IEnumerable<PhpBuilder.Property> CommonProperties { get; }
             = new[] { Client };
@@ -59,7 +62,7 @@ namespace AutoRest.Php
         {
             // $this->_client->createOperation({...path...}, {...httpMethod...}, {...operation...})
             var operationInfoCreate = ThisClient.Call(
-                CreateOperation,
+                CreateOperationFromData,
                 PHP.String(m.Url),
                 PHP.String(m.HttpMethod.ToString().ToLower()),
                 PHP.SelfScope(const_));
@@ -126,7 +129,7 @@ namespace AutoRest.Php
 
             public PhpFunction(Method m)
             {
-                var name = "_" + m.Name;
+                var name = "_" + m.Name + "_operation";
 
                 var parameters = m.Parameters
                     .Select(p => CreateParameter(p))
@@ -139,7 +142,7 @@ namespace AutoRest.Php
                         PHP.KeyValue("operationId", m.SerializedName),
                         PHP.KeyValue("parameters", PHP.Array(parameters))));
 
-                Property = PHP.Property(new ClassName(MicrosoftRestOperation), name);
+                Property = PHP.Property(new ClassName(MicrosoftRestOperationInterface), name);
 
                 var thisProperty = PHP.This.Arrow(Property);
 
@@ -162,12 +165,14 @@ namespace AutoRest.Php
 
             public Function Function { get; }
 
+            public Statement Create { get; }
+
             public PhpFunctionGroup(string @namespace, MethodGroup o)
             {
                 var functions = o.Methods.Select(m => new PhpFunction(m));
 
                 var clientParameter = PHP.Parameter(
-                    type: PHP.Class(MicrosoftRestClient),
+                    type: PHP.Class(MicrosoftRestClientInterface),
                     name: Client.Name);
 
                 Class = PHP.Class(
@@ -175,7 +180,7 @@ namespace AutoRest.Php
                     constructor: PHP.Constructor(
                         parameters: PHP.Parameters(
                             PHP.Parameter(
-                                type: PHP.Class(MicrosoftRestClient),
+                                type: PHP.Class(MicrosoftRestClientInterface),
                                 name: Client.Name)),
                         body: PHP
                             .Statements(ThisClient.Assign(clientParameter.Ref()).Statement())
@@ -184,58 +189,96 @@ namespace AutoRest.Php
                     properties: CommonProperties.Concat(functions.Select(f => f.Property)),
                     consts: functions.Select(f => f.Const));
 
-                Property = PHP.Property(Class.Name, o.Name);
+                Property = PHP.Property(Class.Name, "_" + o.Name + "_group");
+
+                Create = PHP.This.Arrow(Property).Assign(PHP.New(Class.Name, ThisClient)).Statement();
 
                 Function = PHP.Function(
                     name: $"get{o.Name}",
                     @return: Class.Name,
-                    body: PHP.Statements(
-                        PHP.Return(PHP.This.Arrow(Property))));
+                    body: PHP.Statements(PHP.Return(PHP.This.Arrow(Property))));
             }
         }
 
         const string Indent = "    ";
 
-        private static ArrayItem CreateProperty(Core.Model.Property property)
-            => PHP.KeyValue(property.SerializedName, PHP.EmptyArray);
+        static ArrayItem StringType { get; } = PHP.KeyValue("type", "string");
 
-        private static ArrayItem CreateType(IModelType type)
-        {
-            var compositeType = type as CompositeType;
-            return PHP.KeyValue(
-                type.Name,
-                PHP.Array(
-                    PHP.KeyValue(
+        static ArrayItem ObjectType { get; } = PHP.KeyValue("type", "object");
+
+        static ArrayItem ArrayType { get; } = PHP.KeyValue("type", "array");
+
+        private static Array CreateCompositeTypeBody(CompositeType type)
+            => PHP.Array(PHP.KeyValue(
+                "properties",
+                PHP.Array(type.Properties.Select(CreateProperty))));
+
+        private static Array CreateTypeBody(IModelType type)
+            => type is CompositeType compositeType
+                ? PHP.Array(PHP.KeyValue("$ref", "#/definitions/" + compositeType.Name))
+                : CreateTypeDefBody(type);
+
+        private static Array CreateTypeDefBody(IModelType type)
+            => type is CompositeType compositeType
+                    ? PHP.Array(PHP.KeyValue(
                         "properties",
                         PHP.Array(
-                            compositeType.Properties.Select(CreateProperty)))));
-        }
+                            compositeType.Properties.Select(CreateProperty))))
+                : type is PrimaryType primaryType
+                    ? PHP.Array(StringType)
+                : type is EnumType enumType
+                    ? PHP.Array(StringType, PHP.KeyValue("enum", PHP.EmptyArray))
+                : type is DictionaryType dictionaryType
+                    ? PHP.Array(
+                        ObjectType,
+                        PHP.KeyValue(
+                            "additionalProperties",
+                            CreateTypeBody(dictionaryType.ValueType)))
+                : type is SequenceType sequenceType
+                    ? PHP.Array(
+                        ArrayType,
+                        PHP.KeyValue(
+                            "items",
+                            CreateTypeBody(sequenceType.ElementType)))
+                : PHP.EmptyArray;
+
+        private static ArrayItem CreateProperty(Core.Model.Property property)
+            => PHP.KeyValue(property.SerializedName, CreateTypeBody(property.ModelType));
+
+        private static ArrayItem CreateTypeDef(IModelType type)
+            => PHP.KeyValue(type.Name, CreateTypeDefBody(type));
 
         private const string DefinitionsData = "_DEFINITIONS_DATA";
 
         private static Statement CreateClient { get; }
             = ThisClient
-                .Assign(PHP.New(new ClassName(MicrosoftRestClient), PHP.SelfScope(DefinitionsData)))
+                .Assign(new ClassName(MicrosoftRestClientStatic).StaticCall(
+                    new FunctionName("createFromData"), PHP.SelfScope(DefinitionsData)))
                 .Statement();
 
         public override async Task Generate(CodeModel codeModel)
         {
             var @namespace = Class.CreateName(codeModel.Namespace, codeModel.ApiVersion);
-            var operations = codeModel.Operations;
-            var phpOperations = operations.Select(o => new PhpFunctionGroup(@namespace, o));
+            var groups = codeModel.Operations;
+            var phpGroups = groups.Select(o => new PhpFunctionGroup(@namespace, o));
+
             var definitions = PHP.Const(
                 DefinitionsData,
-                PHP.Array(codeModel.ModelTypes.Select(CreateType)));
+                PHP.Array(codeModel.ModelTypes.Select(CreateTypeDef)));
+
             var client = PHP.Class(
                 name: Class.CreateName(@namespace, "Client"),
                 constructor: PHP.Constructor(
-                    body: PHP.Statements(CreateClient)),
-                functions: phpOperations.Select(o => o.Function),
-                properties: phpOperations
+                    body: PHP
+                        .Statements(CreateClient)
+                        .Concat(phpGroups.Select(g => g.Create))),
+                functions: phpGroups.Select(o => o.Function),
+                properties: phpGroups
                     .Select(o => o.Property)
                     .Concat(CommonProperties),
                 consts: PHP.Consts(definitions));
-            foreach (var class_ in phpOperations
+
+            foreach (var class_ in phpGroups
                 .Select(o => o.Class)
                 .Concat(ImmutableArray.Create(client)))
             {

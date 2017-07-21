@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AutoRest.Php.PhpBuilder.Expressions
 {
@@ -14,7 +13,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public override IEnumerable<string> ToCodeText(string indent)
         {
-            yield return '"' + Value + '"';
+            yield return "'" + Value + "'";
         }
     }
 }
