@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions } from 'ms-rest';
 import * as operations from "./operations";
 
 /**
@@ -18,7 +18,7 @@ declare interface AutoRestUrlTestServiceOptions extends ServiceClientOptions {
   /**
    * @property {string} [globalStringQuery] - should contain value null
    */
-  globalStringQuery?: String;
+  globalStringQuery?: string;
 }
 
 declare class AutoRestUrlTestService extends ServiceClient {
