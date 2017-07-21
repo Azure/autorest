@@ -341,6 +341,39 @@ var complex = function (coverage) {
       }
     ]
   };
+    var rawSalmon =
+ {
+    'fishtype': 'smart_salmon',
+    'location': 'alaska',
+    'iswild': true,
+    'species': 'king',
+    'length': 1.0,
+    'siblings': [
+      {
+        'fishtype': 'shark',
+        'age': 6,
+        'birthday': '2012-01-05T01:00:00Z',
+        'length': 20.0,
+        'species': 'predator',
+      },
+      {
+        'fishtype': 'sawshark',
+        'age': 105,
+        'birthday': '1900-01-05T01:00:00Z',
+        'length': 10.0,
+        'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+        'species': 'dangerous',
+      },
+      {
+        'fishtype': 'goblin',
+        'age': 1,
+        'birthday': '2015-08-08T00:00:00Z',
+        'length': 30.0,
+        'species': 'scary',
+        'jawsize': 5
+      }
+    ]
+  };
   
   router.put('/polymorphism/:scenario', function (req, res, next) {
     if (req.params.scenario === 'valid') {
@@ -348,6 +381,14 @@ var complex = function (coverage) {
       console.log(JSON.stringify(rawFish, null, 4));
       if (_.isEqual(utils.coerceDate(req.body), rawFish)) {
         coverage['putComplexPolymorphismValid']++;
+        res.status(200).end();
+      } else {
+        utils.send400(res, next, "Did not like complex polymorphism req " + util.inspect(req.body));
+      }
+    } else if (req.params.scenario === 'validx') {
+      console.log(JSON.stringify(req.body, null, 4));
+      console.log(JSON.stringify(rawSalmon, null, 4));
+      if (_.isEqual(utils.coerceDate(req.body), rawSalmon)) {
         res.status(200).end();
       } else {
         utils.send400(res, next, "Did not like complex polymorphism req " + util.inspect(req.body));
@@ -361,6 +402,8 @@ var complex = function (coverage) {
     if (req.params.scenario === 'valid') {
       coverage['getComplexPolymorphismValid']++;
       res.status(200).end(JSON.stringify(rawFish));
+    } else if (req.params.scenario === 'validx') {
+      res.status(200).end(JSON.stringify(rawSalmon));
     } else {
       utils.send400(res, next, 'Must provide a valid scenario.');
     }

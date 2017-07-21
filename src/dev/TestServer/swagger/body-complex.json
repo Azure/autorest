@@ -987,6 +987,50 @@
         }
       }
     },
+    "/complex/polymorphism/validx": {
+      "get": {
+        "operationId": "polymorphism_getValidx",
+        "description": "Get complex types that are polymorphic, but not at the root of the hierarchy",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/salmon"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "polymorphism_putValidx",
+        "description": "Put complex types that are polymorphic, but not at the root of the hierarchy",
+        "parameters": [
+          {
+            "name": "complexBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/salmon"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/complex/polymorphism/missingrequired/invalid": {
       "put": {
         "operationId": "polymorphism_putValidMissingRequired",
@@ -1102,7 +1146,7 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }  
+        }
       }
     }
   },
@@ -1130,7 +1174,12 @@
         },
         "color": {
           "type": "string",
-          "enum": [ "cyan", "Magenta", "YELLOW", "blacK" ],
+          "enum": [
+            "cyan",
+            "Magenta",
+            "YELLOW",
+            "blacK"
+          ],
           "x-ms-enum": {
             "name": "CMYKColors",
             "modelAsString": true
@@ -1192,7 +1241,10 @@
     },
     "Fish": {
       "discriminator": "fishtype",
-      "required": [ "fishtype", "length" ],
+      "required": [
+        "fishtype",
+        "length"
+      ],
       "properties": {
         "fishtype": {
           "type": "string"
@@ -1227,13 +1279,27 @@
         }
       }
     },
+    "smart_salmon": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/salmon"
+        }
+      ],
+      "properties": {
+        "college_degree": {
+          "type": "string"
+        }
+      }
+    },
     "shark": {
       "allOf": [
         {
           "$ref": "#/definitions/Fish"
         }
       ],
-      "required": [ "birthday" ],
+      "required": [
+        "birthday"
+      ],
       "properties": {
         "age": {
           "type": "integer",
@@ -1440,7 +1506,9 @@
       "description": "API ID.",
       "required": true,
       "type": "string",
-      "enum": [ "2014-04-01-preview" ]
+      "enum": [
+        "2014-04-01-preview"
+      ]
     }
   }
 }
