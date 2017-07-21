@@ -3,7 +3,7 @@
     "AutoRest.TypeScript.SuperAgent": {
       "type": "PluginTs, AutoRest.TypeScript.SuperAgent"
     },
-    "LoadBalancedCs": {
+    "AutoRest.CSharp.LoadBalanced": {
       "type": "LoadBalancedPluginCs, AutoRest.CSharp.LoadBalanced"
     },
     "CSharp": {
@@ -53,6 +53,9 @@
   "codeGenerators": {
     "CodeGeneratorTs": {
       "type": "CodeGeneratorTs, AutoRest.TypeScript.SuperAgent"
+    },
+    "LoadBalancedCodeGeneratorCs": {
+      "type": "LoadBalancedCodeGeneratorCs, AutoRest.CSharp.LoadBalanced"
     },
     "Ruby": {
       "type": "RubyCodeGenerator, AutoRest.Ruby"
