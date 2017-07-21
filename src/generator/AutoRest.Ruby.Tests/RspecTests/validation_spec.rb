@@ -24,7 +24,7 @@ describe 'Validation Module' do
   it 'should work with constant in body' do
     product = ValidationModule::Models::Product.new
     product.child = Hash.new
-    result = @client.post_with_constant_in_body_async({ 'child' => {} }).value!
+    result = @client.post_with_constant_in_body_async(product).value!
     expect(result.response.status).to eq(200)
   end
 end
