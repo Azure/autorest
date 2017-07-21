@@ -143,6 +143,67 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             }
 
             /// <summary>
+            /// Get complex types that are polymorphic, but not at the root of the
+            /// hierarchy
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static SmartSalmon GetValidx(this IPolymorphism operations)
+            {
+                return operations.GetValidxAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get complex types that are polymorphic, but not at the root of the
+            /// hierarchy
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SmartSalmon> GetValidxAsync(this IPolymorphism operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetValidxWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put complex types that are polymorphic, but not at the root of the
+            /// hierarchy
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// </param>
+            public static void PutValidx(this IPolymorphism operations, SmartSalmon complexBody)
+            {
+                operations.PutValidxAsync(complexBody).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types that are polymorphic, but not at the root of the
+            /// hierarchy
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutValidxAsync(this IPolymorphism operations, SmartSalmon complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutValidxWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
             /// Put complex types that are polymorphic, attempting to omit required
             /// 'birthday' field - the request should not be allowed from the client
             /// </summary>

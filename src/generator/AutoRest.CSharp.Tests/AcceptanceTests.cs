@@ -1029,7 +1029,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal("abc", basicResult.Name);
                 Assert.Equal(CMYKColors.YELLOW, basicResult.Color);
                 // PUT basic/valid
-                var basicRequest = new Basic {Id = 2, Name = "abc", Color = CMYKColors.Magenta};
+                var basicRequest = new Basic { Id = 2, Name = "abc", Color = CMYKColors.Magenta };
                 client.Basic.PutValid(basicRequest);
                 // GET basic/empty
                 basicResult = client.Basic.GetEmpty();
@@ -1052,21 +1052,21 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal(-1, intResult.Field1);
                 Assert.Equal(2, intResult.Field2);
                 // PUT primitive/integer
-                var intRequest = new IntWrapper {Field1 = -1, Field2 = 2};
+                var intRequest = new IntWrapper { Field1 = -1, Field2 = 2 };
                 client.Primitive.PutInt(intRequest);
                 // GET primitive/long
                 var longResult = client.Primitive.GetLong();
                 Assert.Equal(1099511627775, longResult.Field1);
                 Assert.Equal(-999511627788, longResult.Field2);
                 // PUT primitive/long
-                var longRequest = new LongWrapper {Field1 = 1099511627775, Field2 = -999511627788};
+                var longRequest = new LongWrapper { Field1 = 1099511627775, Field2 = -999511627788 };
                 client.Primitive.PutLong(longRequest);
                 // GET primitive/float
                 var floatResult = client.Primitive.GetFloat();
                 Assert.Equal(1.05, floatResult.Field1);
                 Assert.Equal(-0.003, floatResult.Field2);
                 // PUT primitive/float
-                var floatRequest = new FloatWrapper {Field1 = 1.05, Field2 = -0.003};
+                var floatRequest = new FloatWrapper { Field1 = 1.05, Field2 = -0.003 };
                 client.Primitive.PutFloat(floatRequest);
                 // GET primitive/double
                 var doubleResult = client.Primitive.GetDouble();
@@ -1086,7 +1086,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal(true, boolResult.FieldTrue);
                 Assert.Equal(false, boolResult.FieldFalse);
                 // PUT primitive/bool
-                var boolRequest = new BooleanWrapper {FieldFalse = false, FieldTrue = true};
+                var boolRequest = new BooleanWrapper { FieldFalse = false, FieldTrue = true };
                 client.Primitive.PutBool(boolRequest);
                 // GET primitive/string
                 var stringResult = client.Primitive.GetString();
@@ -1094,7 +1094,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.Equal("", stringResult.Empty);
                 Assert.Equal(null, stringResult.NullProperty);
                 // PUT primitive/string
-                var stringRequest = new StringWrapper {NullProperty = null, Empty = "", Field = "goodrequest"};
+                var stringRequest = new StringWrapper { NullProperty = null, Empty = "", Field = "goodrequest" };
                 client.Primitive.PutString(stringRequest);
                 // GET primitive/date
                 client.Primitive.GetDate();
@@ -1127,7 +1127,7 @@ namespace AutoRest.CSharp.Tests
 
                 // GET primitive/byte
                 var byteResult = client.Primitive.GetByte();
-                var bytes = new byte[] {0x0FF, 0x0FE, 0x0FD, 0x0FC, 0x000, 0x0FA, 0x0F9, 0x0F8, 0x0F7, 0x0F6};
+                var bytes = new byte[] { 0x0FF, 0x0FE, 0x0FD, 0x0FC, 0x000, 0x0FA, 0x0F9, 0x0F8, 0x0F7, 0x0F6 };
                 Assert.Equal(bytes, byteResult.Field);
                 // PUT primitive/byte
                 client.Primitive.PutByte(bytes);
@@ -1208,52 +1208,104 @@ namespace AutoRest.CSharp.Tests
                 client.Inheritance.PutValid(inheritanceRequest);
 
                 /* COMPLEX TYPES THAT INVOLVE POLYMORPHISM */
-                // GET polymorphism/valid
-                var polymorphismResult = client.Polymorphism.GetValid() as Salmon;
-                Assert.NotNull(polymorphismResult);
-                Assert.Equal("alaska", polymorphismResult.Location);
-                Assert.Equal(3, polymorphismResult.Siblings.Count);
-                Assert.IsType(typeof(Shark), polymorphismResult.Siblings[0]);
-                Assert.IsType(typeof(Sawshark), polymorphismResult.Siblings[1]);
-                Assert.IsType(typeof(Goblinshark), polymorphismResult.Siblings[2]);
-                Assert.Equal(6, ((Shark) polymorphismResult.Siblings[0]).Age);
-                Assert.Equal(105, ((Sawshark) polymorphismResult.Siblings[1]).Age);
-                Assert.Equal(1, ((Goblinshark) polymorphismResult.Siblings[2]).Age);
-                // PUT polymorphism/valid
-                var polymorphismRequest = new Salmon
-                {
-                    Iswild = true,
-                    Length = 1,
-                    Location = "alaska",
-                    Species = "king",
-                    Siblings = new List<Fish>
+                { 
+                    // GET polymorphism/valid
+                    var polymorphismResult = client.Polymorphism.GetValid() as Salmon;
+                    Assert.NotNull(polymorphismResult);
+                    Assert.Equal("alaska", polymorphismResult.Location);
+                    Assert.Equal(3, polymorphismResult.Siblings.Count);
+                    Assert.IsType(typeof(Shark), polymorphismResult.Siblings[0]);
+                    Assert.IsType(typeof(Sawshark), polymorphismResult.Siblings[1]);
+                    Assert.IsType(typeof(Goblinshark), polymorphismResult.Siblings[2]);
+                    Assert.Equal(6, ((Shark)polymorphismResult.Siblings[0]).Age);
+                    Assert.Equal(105, ((Sawshark)polymorphismResult.Siblings[1]).Age);
+                    Assert.Equal(1, ((Goblinshark)polymorphismResult.Siblings[2]).Age);
+                    // PUT polymorphism/valid
+                    var polymorphismRequest = new Salmon
                     {
-                        new Shark
+                        Iswild = true,
+                        Length = 1,
+                        Location = "alaska",
+                        Species = "king",
+                        Siblings = new List<Fish>
                         {
-                            Age = 6,
-                            Length = 20,
-                            Species = "predator",
-                            Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
-                        },
-                        new Sawshark
-                        {
-                            Age = 105,
-                            Length = 10,
-                            Species = "dangerous",
-                            Birthday = new DateTime(1900, 1, 5, 1, 0, 0, DateTimeKind.Utc),
-                            Picture = new byte[] {255, 255, 255, 255, 254}
-                        },
-                        new Goblinshark
-                        {
-                            Age = 1,
-                            Length = 30,
-                            Species = "scary",
-                            Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Jawsize = 5
+                            new Shark
+                            {
+                                Age = 6,
+                                Length = 20,
+                                Species = "predator",
+                                Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
+                            },
+                            new Sawshark
+                            {
+                                Age = 105,
+                                Length = 10,
+                                Species = "dangerous",
+                                Birthday = new DateTime(1900, 1, 5, 1, 0, 0, DateTimeKind.Utc),
+                                Picture = new byte[] {255, 255, 255, 255, 254}
+                            },
+                            new Goblinshark
+                            {
+                                Age = 1,
+                                Length = 30,
+                                Species = "scary",
+                                Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
+                                Jawsize = 5
+                            }
                         }
-                    }
-                };
-                client.Polymorphism.PutValid(polymorphismRequest);
+                    };
+                    client.Polymorphism.PutValid(polymorphismRequest);
+                }
+
+                /* COMPLEX TYPES THAT INVOLVE POLYMORPHISM: not the peek of the hierarchy */
+                {
+                    // GET polymorphism/valid
+                    var polymorphismResult = client.Polymorphism.GetValidx() as SmartSalmon;
+                    Assert.NotNull(polymorphismResult);
+                    Assert.Equal("alaska", polymorphismResult.Location);
+                    Assert.Equal(3, polymorphismResult.Siblings.Count);
+                    Assert.IsType(typeof(Shark), polymorphismResult.Siblings[0]);
+                    Assert.IsType(typeof(Sawshark), polymorphismResult.Siblings[1]);
+                    Assert.IsType(typeof(Goblinshark), polymorphismResult.Siblings[2]);
+                    Assert.Equal(6, ((Shark)polymorphismResult.Siblings[0]).Age);
+                    Assert.Equal(105, ((Sawshark)polymorphismResult.Siblings[1]).Age);
+                    Assert.Equal(1, ((Goblinshark)polymorphismResult.Siblings[2]).Age);
+                    // PUT polymorphism/valid
+                    var polymorphismRequest = new SmartSalmon
+                    {
+                        Iswild = true,
+                        Length = 1,
+                        Location = "alaska",
+                        Species = "king",
+                        Siblings = new List<Fish>
+                        {
+                            new Shark
+                            {
+                                Age = 6,
+                                Length = 20,
+                                Species = "predator",
+                                Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
+                            },
+                            new Sawshark
+                            {
+                                Age = 105,
+                                Length = 10,
+                                Species = "dangerous",
+                                Birthday = new DateTime(1900, 1, 5, 1, 0, 0, DateTimeKind.Utc),
+                                Picture = new byte[] {255, 255, 255, 255, 254}
+                            },
+                            new Goblinshark
+                            {
+                                Age = 1,
+                                Length = 30,
+                                Species = "scary",
+                                Birthday = new DateTime(2015, 8, 8, 0, 0, 0, DateTimeKind.Utc),
+                                Jawsize = 5
+                            }
+                        }
+                    };
+                    client.Polymorphism.PutValidx(polymorphismRequest);
+                }
 
                 /* COMPLEX TYPES THAT INVOLVE RECURSIVE REFERENCE */
                 // GET polymorphicrecursive/valid

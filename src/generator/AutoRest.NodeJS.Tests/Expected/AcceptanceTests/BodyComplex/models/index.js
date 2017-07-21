@@ -22,6 +22,7 @@ exports.Cat = require('./cat');
 exports.Siamese = require('./siamese');
 exports.Fish = require('./fish');
 exports.Salmon = require('./salmon');
+exports.SmartSalmon = require('./smartSalmon');
 exports.Shark = require('./shark');
 exports.Sawshark = require('./sawshark');
 exports.Goblinshark = require('./goblinshark');
@@ -43,6 +44,7 @@ exports.ReadonlyObj = require('./readonlyObj');
 exports.discriminators = {
   'Fish' : exports.Fish,
   'Fish.salmon' : exports.Salmon,
+  'Fish.smart_salmon' : exports.SmartSalmon,
   'Fish.shark' : exports.Shark,
   'Fish.sawshark' : exports.Sawshark,
   'Fish.goblin' : exports.Goblinshark,

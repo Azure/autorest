@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
+import fixtures.bodycomplex.models.SmartSalmon;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
@@ -62,6 +63,14 @@ public class PolymorphismsImpl implements Polymorphisms {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValid" })
         @PUT("complex/polymorphism/valid")
         Observable<Response<ResponseBody>> putValid(@Body Fish complexBody);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getValidx" })
+        @GET("complex/polymorphism/validx")
+        Observable<Response<ResponseBody>> getValidx();
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidx" })
+        @PUT("complex/polymorphism/validx")
+        Observable<Response<ResponseBody>> putValidx(@Body SmartSalmon complexBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidMissingRequired" })
         @PUT("complex/polymorphism/missingrequired/invalid")
@@ -330,6 +339,145 @@ public class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get complex types that are polymorphic, but not at the root of the hierarchy.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the SmartSalmon object if successful.
+     */
+    public SmartSalmon getValidx() {
+        return getValidxWithServiceResponseAsync().toBlocking().single().body();
+    }
+
+    /**
+     * Get complex types that are polymorphic, but not at the root of the hierarchy.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<SmartSalmon> getValidxAsync(final ServiceCallback<SmartSalmon> serviceCallback) {
+        return ServiceFuture.fromResponse(getValidxWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get complex types that are polymorphic, but not at the root of the hierarchy.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SmartSalmon object
+     */
+    public Observable<SmartSalmon> getValidxAsync() {
+        return getValidxWithServiceResponseAsync().map(new Func1<ServiceResponse<SmartSalmon>, SmartSalmon>() {
+            @Override
+            public SmartSalmon call(ServiceResponse<SmartSalmon> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Get complex types that are polymorphic, but not at the root of the hierarchy.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SmartSalmon object
+     */
+    public Observable<ServiceResponse<SmartSalmon>> getValidxWithServiceResponseAsync() {
+        return service.getValidx()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SmartSalmon>>>() {
+                @Override
+                public Observable<ServiceResponse<SmartSalmon>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<SmartSalmon> clientResponse = getValidxDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<SmartSalmon> getValidxDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return this.client.restClient().responseBuilderFactory().<SmartSalmon, ErrorException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<SmartSalmon>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Put complex types that are polymorphic, but not at the root of the hierarchy.
+     *
+     * @param complexBody the SmartSalmon value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     */
+    public void putValidx(SmartSalmon complexBody) {
+        putValidxWithServiceResponseAsync(complexBody).toBlocking().single().body();
+    }
+
+    /**
+     * Put complex types that are polymorphic, but not at the root of the hierarchy.
+     *
+     * @param complexBody the SmartSalmon value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Void> putValidxAsync(SmartSalmon complexBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putValidxWithServiceResponseAsync(complexBody), serviceCallback);
+    }
+
+    /**
+     * Put complex types that are polymorphic, but not at the root of the hierarchy.
+     *
+     * @param complexBody the SmartSalmon value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> putValidxAsync(SmartSalmon complexBody) {
+        return putValidxWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Put complex types that are polymorphic, but not at the root of the hierarchy.
+     *
+     * @param complexBody the SmartSalmon value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putValidxWithServiceResponseAsync(SmartSalmon complexBody) {
+        if (complexBody == null) {
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
+        }
+        Validator.validate(complexBody);
+        return service.putValidx(complexBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putValidxDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<Void> putValidxDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

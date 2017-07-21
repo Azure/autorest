@@ -181,6 +181,16 @@ export interface Salmon extends Fish {
 
 /**
  * @class
+ * Initializes a new instance of the SmartSalmon class.
+ * @constructor
+ * @member {string} [collegeDegree]
+ */
+export interface SmartSalmon extends Salmon {
+  collegeDegree?: string;
+}
+
+/**
+ * @class
  * Initializes a new instance of the Shark class.
  * @constructor
  * @member {number} [age]

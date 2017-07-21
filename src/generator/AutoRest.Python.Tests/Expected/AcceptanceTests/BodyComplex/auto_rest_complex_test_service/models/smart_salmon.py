@@ -9,11 +9,11 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .fish import Fish
+from .salmon import Salmon
 
 
-class Salmon(Fish):
-    """Salmon.
+class SmartSalmon(Salmon):
+    """SmartSalmon.
 
     :param species:
     :type species: str
@@ -28,6 +28,8 @@ class Salmon(Fish):
     :type location: str
     :param iswild:
     :type iswild: bool
+    :param college_degree:
+    :type college_degree: str
     """
 
     _validation = {
@@ -42,14 +44,10 @@ class Salmon(Fish):
         'fishtype': {'key': 'fishtype', 'type': 'str'},
         'location': {'key': 'location', 'type': 'str'},
         'iswild': {'key': 'iswild', 'type': 'bool'},
+        'college_degree': {'key': 'college_degree', 'type': 'str'},
     }
 
-    _subtype_map = {
-        'fishtype': {'smart_salmon': 'SmartSalmon'}
-    }
-
-    def __init__(self, length, species=None, siblings=None, location=None, iswild=None):
-        super(Salmon, self).__init__(species=species, length=length, siblings=siblings)
-        self.location = location
-        self.iswild = iswild
-        self.fishtype = 'salmon'
+    def __init__(self, length, species=None, siblings=None, location=None, iswild=None, college_degree=None):
+        super(SmartSalmon, self).__init__(species=species, length=length, siblings=siblings, location=location, iswild=iswild)
+        self.college_degree = college_degree
+        self.fishtype = 'smart_salmon'

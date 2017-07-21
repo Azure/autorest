@@ -17,6 +17,7 @@ from .cat import Cat
 from .siamese import Siamese
 from .fish import Fish
 from .salmon import Salmon
+from .smart_salmon import SmartSalmon
 from .shark import Shark
 from .sawshark import Sawshark
 from .goblinshark import Goblinshark
@@ -48,6 +49,7 @@ __all__ = [
     'Siamese',
     'Fish',
     'Salmon',
+    'SmartSalmon',
     'Shark',
     'Sawshark',
     'Goblinshark',
