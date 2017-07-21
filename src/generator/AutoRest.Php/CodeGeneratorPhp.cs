@@ -115,15 +115,19 @@ namespace AutoRest.Php
             {
                 yield return PHP.KeyValue("name", p.SerializedName);
                 yield return PHP.KeyValue("in", p.Location.ToString().ToLower());
-                var phpType = PhpType.Create(p.ModelType);
-                yield return PHP.KeyValue("type", phpType.Type);
-                if (phpType.Format != "none" && phpType.Format != null)
+
+                var type = p.ModelType;
+                var body = CreateTypeBody(type);
+                if (type is CompositeType)
                 {
-                    yield return PHP.KeyValue("format", phpType.Format);
+                    yield return PHP.KeyValue("schema", body);
                 }
-                if (phpType.Items != null)
+                else
                 {
-                    yield return PHP.KeyValue("items", phpType.Items);
+                    foreach (var item in body.Items)
+                    {
+                        yield return item;
+                    }
                 }
             }
 
@@ -202,11 +206,71 @@ namespace AutoRest.Php
 
         const string Indent = "    ";
 
-        static ArrayItem StringType { get; } = PHP.KeyValue("type", "string");
+        static ArrayItem TypeItem(string type)
+            => PHP.KeyValue("type", type);
 
-        static ArrayItem ObjectType { get; } = PHP.KeyValue("type", "object");
+        static ArrayItem FormatItem(string format)
+            => PHP.KeyValue("format", format);
 
-        static ArrayItem ArrayType { get; } = PHP.KeyValue("type", "array");
+        static ArrayItem StringTypeItem { get; } = TypeItem("string");
+
+        static ArrayItem IntegerTypeItem { get; } = TypeItem("integer");
+
+        static IEnumerable<ArrayItem> GetPrimitiveType(PrimaryType type)
+        {
+            switch (type.KnownPrimaryType)
+            {
+                case KnownPrimaryType.Int:
+                    yield return IntegerTypeItem;
+                    yield return FormatItem("int32");
+                    break;
+                case KnownPrimaryType.Long:
+                    yield return IntegerTypeItem;
+                    yield return FormatItem("int64");
+                    break;
+                case KnownPrimaryType.Double:
+                    yield return TypeItem("number");
+                    yield return FormatItem("double");
+                    break;
+                case KnownPrimaryType.Decimal:
+                    yield return TypeItem("number");
+                    yield return FormatItem("decimal");
+                    break;
+                case KnownPrimaryType.String:
+                    yield return StringTypeItem;
+                    break;
+                case KnownPrimaryType.Boolean:
+                    yield return TypeItem("boolean");
+                    break;
+                case KnownPrimaryType.Date:
+                    yield return StringTypeItem;
+                    yield return FormatItem("date");
+                    break;
+                case KnownPrimaryType.DateTime:
+                    yield return StringTypeItem;
+                    yield return FormatItem("date-time");
+                    break;
+                case KnownPrimaryType.TimeSpan:
+                    yield return StringTypeItem;
+                    yield return FormatItem("duration");
+                    break;
+                case KnownPrimaryType.Object:
+                    yield return TypeItem("object");
+                    break;
+                case KnownPrimaryType.Uuid:
+                    yield return StringTypeItem;
+                    yield return FormatItem("uuid");
+                    break;
+                case KnownPrimaryType.DateTimeRfc1123:
+                    yield return StringTypeItem;
+                    yield return FormatItem("date-time-rfc1123");
+                    break;
+            }
+        }
+
+        static ArrayItem ObjectTypeItem { get; } = TypeItem("object");
+
+        static ArrayItem ArrayTypeItem { get; } = TypeItem("array");
 
         private static Array CreateCompositeTypeBody(CompositeType type)
             => PHP.Array(PHP.KeyValue(
@@ -225,18 +289,18 @@ namespace AutoRest.Php
                         PHP.Array(
                             compositeType.Properties.Select(CreateProperty))))
                 : type is PrimaryType primaryType
-                    ? PHP.Array(StringType)
+                    ? PHP.Array(GetPrimitiveType(primaryType))
                 : type is EnumType enumType
-                    ? PHP.Array(StringType, PHP.KeyValue("enum", PHP.EmptyArray))
+                    ? PHP.Array(StringTypeItem, PHP.KeyValue("enum", PHP.EmptyArray))
                 : type is DictionaryType dictionaryType
                     ? PHP.Array(
-                        ObjectType,
+                        ObjectTypeItem,
                         PHP.KeyValue(
                             "additionalProperties",
                             CreateTypeBody(dictionaryType.ValueType)))
                 : type is SequenceType sequenceType
                     ? PHP.Array(
-                        ArrayType,
+                        ArrayTypeItem,
                         PHP.KeyValue(
                             "items",
                             CreateTypeBody(sequenceType.ElementType)))
@@ -258,25 +322,38 @@ namespace AutoRest.Php
 
         public override async Task Generate(CodeModel codeModel)
         {
-            var @namespace = Class.CreateName(codeModel.Namespace, codeModel.ApiVersion);
-            var groups = codeModel.Operations;
-            var phpGroups = groups.Select(o => new PhpFunctionGroup(@namespace, o));
+            var @namespace = Class.CreateName(
+                codeModel.Namespace, codeModel.ApiVersion.Replace(".", "_"));
+
+            var phpGroups = codeModel.Operations
+                .Where(o => o.Name.RawValue != string.Empty)
+                .Select(o => new PhpFunctionGroup(@namespace, o));
+
+            var phpFunctions = codeModel.Operations
+                .Where(o => o.Name.RawValue == string.Empty)
+                .SelectMany(o => o.Methods.Select(m => new PhpFunction(m)));
 
             var definitions = PHP.Const(
                 DefinitionsData,
                 PHP.Array(codeModel.ModelTypes.Select(CreateTypeDef)));
 
             var client = PHP.Class(
-                name: Class.CreateName(@namespace, "Client"),
+                name: Class.CreateName(@namespace, codeModel.Name),
                 constructor: PHP.Constructor(
                     body: PHP
                         .Statements(CreateClient)
-                        .Concat(phpGroups.Select(g => g.Create))),
-                functions: phpGroups.Select(o => o.Function),
+                        .Concat(phpGroups.Select(g => g.Create))
+                        .Concat(phpFunctions.SelectMany(f => f.ConstructorStatements))),
+                functions: phpGroups
+                    .Select(o => o.Function)
+                    .Concat(phpFunctions.Select(f => f.Function)),
                 properties: phpGroups
                     .Select(o => o.Property)
-                    .Concat(CommonProperties),
-                consts: PHP.Consts(definitions));
+                    .Concat(CommonProperties)
+                    .Concat(phpFunctions.Select(f => f.Property)),
+                consts: PHP
+                    .Consts(definitions)
+                    .Concat(phpFunctions.Select(f => f.Const)));
 
             foreach (var class_ in phpGroups
                 .Select(o => o.Class)

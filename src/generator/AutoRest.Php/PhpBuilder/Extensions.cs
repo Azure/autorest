@@ -14,7 +14,7 @@ namespace AutoRest.Php.PhpBuilder
                     name += "_";
                     break;
             }
-            return char.IsDigit(name[0]).Then("_") + name;
+            return name.Length > 0 ? char.IsDigit(name[0]).Then("_") + name : string.Empty;
         }
 
         public static string GetPhpCamelName(this string name)

@@ -1,4 +1,5 @@
 ﻿using AutoRest.Php.PhpBuilder.Expressions;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
