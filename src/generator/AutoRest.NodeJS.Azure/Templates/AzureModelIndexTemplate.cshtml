@@ -19,6 +19,10 @@ exports.CloudError = msRestAzure.CloudError;
 {
 @:exports.@model.Name = require('./@model.NameAsFileName.ToCamelCase()');
 }
+@foreach (var model in Model.PageTemplateModels)
+{
+@:exports.@model.Name = require('./@model.NameAsFileName.ToCamelCase()');
+}
 @if (!string.IsNullOrWhiteSpace(Model.PolymorphicDictionary))
 {
 @:exports.discriminators = {

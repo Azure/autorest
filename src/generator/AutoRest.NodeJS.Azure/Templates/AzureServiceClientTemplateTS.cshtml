@@ -27,16 +27,16 @@
 @:/**
  @:* @(Model.Name)Options for @(Model.Name).
  @:*/
-@:declare interface @(Model.Name)Options extends ServiceClientOptions {
-    foreach (var param in optionalParameters)
-    {
-        @:/**
-        @:* @@property {@param.ModelType.Name.ToCamelCase()} [@param.Name] - @param.Documentation
-        @:*/
-        @:@param.Name?: @param.ModelType.Name;
-    }
-    @:}
-    @EmptyLine
+@:declare interface @(Model.Name)Options extends AzureServiceClientOptions {
+foreach (var param in optionalParameters)
+{
+  @:/**
+   @:* @@property {@param.ModelType.Name.ToCamelCase()} [@param.Name] - @param.Documentation
+   @:*/
+  @:@param.Name?: @param.ModelType.TSType(false);
+}
+@:}
+@EmptyLine
 }
 declare class @(Model.Name) extends AzureServiceClient {
   /**
@@ -76,10 +76,9 @@ declare class @(Model.Name) extends AzureServiceClient {
   @EmptyLine
   @:@(property.Name): @(property.ModelType.TSType(false));
 }
-
+@EmptyLine
 @if (Model.MethodGroupModels.Any())
 {
-@EmptyLine
   @:// Operation groups
 foreach (var methodGroup in Model.MethodGroupModels)
 {
