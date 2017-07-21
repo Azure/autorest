@@ -11,6 +11,7 @@ namespace AutoRest.Php.PhpBuilder
             switch(name.ToLower())
             {
                 case "list":
+                case "clone":
                     name += "_";
                     break;
             }

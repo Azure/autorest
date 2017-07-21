@@ -265,6 +265,13 @@ namespace AutoRest.Php
                     yield return StringTypeItem;
                     yield return FormatItem("date-time-rfc1123");
                     break;
+                case KnownPrimaryType.ByteArray:
+                    yield return StringTypeItem;
+                    yield return FormatItem("byte");
+                    break;
+                default:
+                    yield return TypeItem(type.KnownPrimaryType.ToString());
+                    break;
             }
         }
 
