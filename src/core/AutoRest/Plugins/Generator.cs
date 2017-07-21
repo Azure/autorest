@@ -103,6 +103,10 @@ public class Generator : NewPlugin
         {
             Settings.Instance.PackageVersion = await GetValue("package-version");
         }
+        if (codeGenerator == "java")
+        {
+            Settings.Instance.RegenerateManager = await GetValue<bool?>("regenerate-manager") ?? false;
+        }
 
         // process
         var plugin = ExtensionsLoader.GetPlugin(

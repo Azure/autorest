@@ -113,11 +113,7 @@ namespace AutoRest.Java.Azure.Fluent
                 Model = new PackageInfoTemplateModel(cm, "implementation")
             }, Path.Combine(packagePath, "implementation", _packageInfoFileName));
 
-            object value;
-            bool regenerateManager;
-            if (Settings.Instance.CustomSettings.TryGetValue("RegenerateManager", out value) &&
-                bool.TryParse(value.ToString(), out regenerateManager) &&
-                regenerateManager)
+            if (Settings.Instance.RegenerateManager)
             {
                 // Manager
                 await Write(
