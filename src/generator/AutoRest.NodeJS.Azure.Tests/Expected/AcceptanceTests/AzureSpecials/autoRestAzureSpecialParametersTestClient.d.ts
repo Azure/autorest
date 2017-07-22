@@ -33,8 +33,6 @@ declare class AutoRestAzureSpecialParametersTestClient extends AzureServiceClien
    *
    * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
    *
-   * @param {string} [options.apiVersion] - The api version, which appears in the query, the value is always '2015-07-01-preview'
-   *
    * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
    *
    * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
