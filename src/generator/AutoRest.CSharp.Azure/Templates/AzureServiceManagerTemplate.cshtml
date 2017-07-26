@@ -1,0 +1,110 @@
+﻿@using System
+@using AutoRest.CSharp.Azure.Templates
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Azure.Model
+@using AutoRest.CSharp.Model
+@using AutoRest.CSharp.Templates.Rest.Client
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.Model.CodeModelCsa>
+
+@{
+    var serviceName = Model.ServiceName;
+    var className = serviceName + "Manager";
+}
+
+@Header("// ")
+
+using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
+using System;
+using System.Linq;
+using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
+
+namespace Microsoft.Azure.Management.$(Model.serviceName).Fluent
+{
+    public class @className : Manager<I@(Model.Name)>, I@(className)
+    {
+        #region ctrs
+
+        private StorageManager(RestClient restClient, string subscriptionId) :
+            base(restClient, subscriptionId, new StorageManagementClient(new Uri(restClient.BaseUri),
+                restClient.Credentials,
+                restClient.RootHttpHandler,
+                restClient.Handlers.ToArray())
+            {
+            SubscriptionId = subscriptionId
+            })
+        {
+        }
+
+        #endregion
+
+        #region StorageManager builder
+
+        /// <summary>
+        /// Creates an instance of @(className) that exposes storage resource management API entry points.
+        /// </summary>
+        /// <param name="credentials">the credentials to use</param>
+        /// <param name="subscriptionId">the subscription UUID</param>
+        /// <returns>the @(className)</returns>
+        public static I@(className) Authenticate(AzureCredentials credentials, string subscriptionId)
+        {
+        return Authenticate(RestClient.Configure()
+                .WithEnvironment(credentials.Environment)
+                .WithCredentials(credentials)
+                .WithDelegatingHandler(new ProviderRegistrationDelegatingHandler(credentials))
+                .Build(), subscriptionId);
+        }
+
+        /// <summary>
+        /// Creates an instance of @(className) that exposes storage resource management API entry points.
+        /// </summary>
+        /// <param name="restClient">the RestClient to be used for API calls.</param>
+        /// <param name="subscriptionId">the subscription UUID</param>
+        /// <returns>the @(className)</returns>
+        public static I@(className) Authenticate(RestClient restClient, string subscriptionId)
+        {
+            return new @(className)(restClient, subscriptionId);
+        }
+
+        /// <summary>
+        /// Get a Configurable instance that can be used to create StorageManager with optional configuration.
+        /// </summary>
+        /// <returns>the instance allowing configurations</returns>
+        public static IConfigurable Configure()
+        {
+            return new Configurable();
+        }
+
+        #endregion
+
+
+        #region IConfigurable and it's implementation
+
+        /// <summary>
+        /// The inteface allowing configurations to be set.
+        ///
+        </summary>
+        public interface IConfigurable : IAzureConfigurable<IConfigurable>
+        {
+            IStorageManager Authenticate(AzureCredentials credentials, string subscriptionId);
+        }
+
+        protected class Configurable :
+            AzureConfigurable<IConfigurable>,
+            IConfigurable
+        {
+            /// <summary>
+            /// Creates an instance of @(className) that exposes storage management API entry points.
+            /// </summary>
+            /// <param name="credentials">credentials the credentials to use</param>
+            /// <param name="subscriptionId">The subscription UUID</param>
+            /// <returns>the interface exposing @(serviceName) management API entry points that work in a subscription</returns>
+            public IStorageManager Authenticate(AzureCredentials credentials, string subscriptionId)
+            {
+                return new @(className)(BuildRestClient(credentials), subscriptionId);
+            }
+        }
+
+        #endregion
+    }
+}
