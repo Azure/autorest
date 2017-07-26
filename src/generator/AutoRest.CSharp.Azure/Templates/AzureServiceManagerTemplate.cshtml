@@ -19,26 +19,26 @@ using System;
 using System.Linq;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
 
-namespace Microsoft.Azure.Management.$(Model.serviceName).Fluent
+namespace Microsoft.Azure.Management.@(serviceName).Fluent
 {
     public class @className : Manager<I@(Model.Name)>, I@(className)
     {
         #region ctrs
 
-        private StorageManager(RestClient restClient, string subscriptionId) :
-            base(restClient, subscriptionId, new StorageManagementClient(new Uri(restClient.BaseUri),
+        private @(className)(RestClient restClient, string subscriptionId) :
+            base(restClient, subscriptionId, new @(Model.Name)(new Uri(restClient.BaseUri),
                 restClient.Credentials,
                 restClient.RootHttpHandler,
                 restClient.Handlers.ToArray())
             {
-            SubscriptionId = subscriptionId
+                SubscriptionId = subscriptionId
             })
         {
         }
 
         #endregion
 
-        #region StorageManager builder
+        #region @className builder
 
         /// <summary>
         /// Creates an instance of @(className) that exposes storage resource management API entry points.
@@ -82,11 +82,10 @@ namespace Microsoft.Azure.Management.$(Model.serviceName).Fluent
 
         /// <summary>
         /// The inteface allowing configurations to be set.
-        ///
-        </summary>
+        /// </summary>
         public interface IConfigurable : IAzureConfigurable<IConfigurable>
         {
-            IStorageManager Authenticate(AzureCredentials credentials, string subscriptionId);
+            I@(className) Authenticate(AzureCredentials credentials, string subscriptionId);
         }
 
         protected class Configurable :
@@ -94,17 +93,25 @@ namespace Microsoft.Azure.Management.$(Model.serviceName).Fluent
             IConfigurable
         {
             /// <summary>
-            /// Creates an instance of @(className) that exposes storage management API entry points.
+            /// Creates an instance of @(className) that exposes @(serviceName) management API entry points.
             /// </summary>
             /// <param name="credentials">credentials the credentials to use</param>
             /// <param name="subscriptionId">The subscription UUID</param>
             /// <returns>the interface exposing @(serviceName) management API entry points that work in a subscription</returns>
-            public IStorageManager Authenticate(AzureCredentials credentials, string subscriptionId)
+            public I@(className) Authenticate(AzureCredentials credentials, string subscriptionId)
             {
                 return new @(className)(BuildRestClient(credentials), subscriptionId);
             }
         }
 
         #endregion
+    }
+    
+
+    /// <summary>
+    /// Entry point to Azure @(serviceName) resource management.
+    /// </summary>
+    public interface I@(className) : IManager<I@(Model.Name)>
+    {
     }
 }
