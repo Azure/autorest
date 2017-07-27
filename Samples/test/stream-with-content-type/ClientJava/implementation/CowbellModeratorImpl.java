@@ -8,6 +8,7 @@ package streamwithcontenttype.implementation;
 
 import .CowbellModerator;
 import .Images;
+import .Texts;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
@@ -29,6 +30,19 @@ public class CowbellModeratorImpl extends ServiceClient implements CowbellModera
      */
     public Images images() {
         return this.images;
+    }
+
+    /**
+     * The Texts object to access its operations.
+     */
+    private Texts texts;
+
+    /**
+     * Gets the Texts object to access its operations.
+     * @return the Texts object.
+     */
+    public Texts texts() {
+        return this.texts;
     }
 
     /**
@@ -83,5 +97,6 @@ public class CowbellModeratorImpl extends ServiceClient implements CowbellModera
 
     private void initialize() {
         this.images = new ImagesImpl(retrofit(), this);
+        this.texts = new TextsImpl(retrofit(), this);
     }
 }

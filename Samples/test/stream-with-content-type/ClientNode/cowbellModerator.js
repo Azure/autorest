@@ -41,6 +41,7 @@ class CowbellModerator extends ServiceClient {
     let packageInfo = this.getPackageJsonInfo(__dirname);
     this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
     this.image = new operations.Image(this);
+    this.text = new operations.Text(this);
     msRest.addSerializationMixin(this);
   }
 

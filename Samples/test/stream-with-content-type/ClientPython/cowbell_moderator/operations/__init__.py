@@ -6,7 +6,9 @@
 # --------------------------------------------------------------------------
 
 from .image_operations import ImageOperations
+from .text_operations import TextOperations
 
 __all__ = [
     'ImageOperations',
+    'TextOperations',
 ]

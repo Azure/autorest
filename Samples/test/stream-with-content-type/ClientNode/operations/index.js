@@ -11,3 +11,4 @@
 'use strict';
 
 exports.Image = require('./image');
+exports.Text = require('./text');
