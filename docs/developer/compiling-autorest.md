@@ -63,7 +63,7 @@ gulp clean
 
 ## Common `gulp` commands
 
-### Build the whole project (c# and typscript bits)
+### Build the whole project (c# and typescript bits)
 `gulp build` - ensures that the dotnet-cli packages are restored, then compiles the typescript and c# projects in parallel.
 
 ### Clean out build artifacts from the project
