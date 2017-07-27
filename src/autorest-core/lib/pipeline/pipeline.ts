@@ -249,7 +249,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   const fsInput = configView.DataStore.GetReadThroughScopeFileSystem(fileSystem);
 
   // externals:
-  const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/plugins/openapi-validation-tools`));
+  const oavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/oav/lib/autorestPlugin/pluginHost`));
   const aiPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/autorest-interactive`));
   const aoavPluginHost = new LazyPromise(async () => await AutoRestPlugin.FromModule(`${__dirname}/../../node_modules/@microsoft.azure/openapi-validator`));
   const autoRestDotNet = new LazyPromise(async () => await GetAutoRestDotNetPlugin());
@@ -262,7 +262,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "transform-immediate": CreatePluginTransformerImmediate(),
     "compose": CreatePluginComposer(),
     "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
-    "semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),
+    //"semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),
     "azure-validator": CreatePluginExternal(autoRestDotNet, "azure-validator"),
     "azure-openapi-validator": CreatePluginExternal(aoavPluginHost, "azure-openapi-validator"),
     "modeler": CreatePluginExternal(autoRestDotNet, "modeler"),
