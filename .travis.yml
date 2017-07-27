@@ -43,7 +43,7 @@ install:
     bundle install
     pip install --user tox
     # Install go
-    sudo apt-get install golang-1.8-go
+    eval "$(curl -sL https://raw.githubusercontent.com/travis-ci/gimme/master/gimme | GIMME_GO_VERSION=1.8 bash)"
     export GOPATH=`pwd`/src/generator/AutoRest.Go.Tests
     sudo chmod -R 777 `echo $GOPATH`
     sudo apt-get install git -y
