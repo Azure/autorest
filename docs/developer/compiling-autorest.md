@@ -92,7 +92,7 @@ gulp clean
 `gulp autorest-cli` - Runs AutoRest (via the `node` front-end. This will soon be the default.)
 
 ### Testing 
-`gulp regenerate` - regenerate all expected code for tests (There are many fine-grained `rengenerate-*` tasks, find them with `gulp -T` if you need them. )
+`gulp regenerate` - regenerate all expected code for tests (There are many fine-grained `regenerate-*` tasks, find them with `gulp -T` if you need them. )
 
 `gulp test` - runs all tests<br>
 `gulp test-dotnet` - runs dotnet tests<br>
