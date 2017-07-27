@@ -88,7 +88,7 @@ function isUriAbsolute(url: string): boolean {
  */
 export function CreateFileOrFolderUri(absolutePath: string): string {
   if (!isAbsolute(absolutePath)) {
-    throw new Error("Can only create file URIs from absolute paths.");
+    throw new Error(`Can only create file URIs from absolute paths. Got '${absolutePath}'`);
   }
   let result = fileUri(absolutePath, { resolve: false });
   // handle UNCs

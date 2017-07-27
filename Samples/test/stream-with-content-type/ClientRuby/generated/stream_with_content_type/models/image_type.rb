@@ -6,9 +6,9 @@
 module StreamWithContentType
   module Models
     #
-    # Defines values for ContentType
+    # Defines values for ImageType
     #
-    module ContentType
+    module ImageType
       Imagegif = "image/gif"
       Imagejpeg = "image/jpeg"
       Imagepng = "image/png"

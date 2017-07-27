@@ -43,6 +43,12 @@ namespace AutoRest.Swagger
         /// </summary>
         public CodeModel CodeModel { get; set; }
 
+        /// <summary>
+        /// Operations may have a content type parameter.
+        /// We collect allowed values and create a dedicated enum for convenience.
+        /// </summary>
+        public HashSet<string> ContentTypeChoices { get; } = new HashSet<string>();
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
@@ -121,6 +127,15 @@ namespace AutoRest.Swagger
             }
             CodeModel.AddRange(methods);
             
+            // Build ContentType enum
+            if (ContentTypeChoices.Count > 0)
+            {
+                var enumType = New<EnumType>();
+                enumType.ModelAsString = true;
+                enumType.SetName("ContentTypes");
+                enumType.Values.AddRange(ContentTypeChoices.Select(v => new EnumValue { Name = v, SerializedName = v }));
+                CodeModel.Add(enumType);
+            }
 
             return CodeModel;
         }

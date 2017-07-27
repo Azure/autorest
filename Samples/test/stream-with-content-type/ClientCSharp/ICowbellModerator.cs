@@ -34,5 +34,10 @@ namespace StreamWithContentType
         /// </summary>
         IImage Image { get; }
 
+        /// <summary>
+        /// Gets the IText.
+        /// </summary>
+        IText Text { get; }
+
     }
 }
