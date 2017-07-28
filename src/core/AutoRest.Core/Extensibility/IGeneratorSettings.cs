@@ -4,9 +4,8 @@
 
 namespace AutoRest.Core.Extensibility
 {
-    public interface IGeneratorSettings
+    public class IGeneratorSettings
     {
-        string Name { get; }
-        string Description { get; }
+        public IGeneratorSettings() { }
     }
 }

@@ -4,9 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { LineIndices } from "../parsing/text-utility";
-import { CancellationToken } from "../ref/cancallation";
+import { CancellationToken } from "../ref/cancellation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
-import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from "../ref/uri";
+import { EnsureIsFolderUri, ReadUri, ResolveUri, ToRawDataUrl, WriteString } from "../ref/uri";
 import { FastStringify, ParseNode, ParseToAst as parseAst, YAMLNode } from "../ref/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
@@ -145,11 +145,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
       throw new Error(`Provided URI '${uri}' violated the filter`);
     }
 
-    // special URI handlers
-    // - GitHub
-    if (uri.startsWith("https://github")) {
-      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
-    }
+    uri = ToRawDataUrl(uri);
 
     // prope cache
     const existingData = await this.slave.Read(uri);

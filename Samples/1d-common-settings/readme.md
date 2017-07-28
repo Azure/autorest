@@ -68,7 +68,7 @@ csharp:
   - output-folder: AzureClient
     azure-arm: true
     add-credentials: true # generates `Credentials` property
-    license-header: MICROSOFT_MIT # override the `license-header` defined at the top level. (see above)
+    license-header: MICROSOFT_MIT_NO_VERSION # override the `license-header` defined at the top level. (see above)
     sync-methods: none # other possible values: essential, all
     payload-flattening-threshold: 3 # body parameter types with 3 or less properties cause method to expect those properties instead of an object 
     client-side-validation: false # disable client side validation

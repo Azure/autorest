@@ -2,18 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 using System;
 using System.Linq;
-using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
 using AutoRest.Core.Utilities;
-using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
     /// <summary>
     /// Describes a single API operation on a path.
     /// </summary>
-    [Rule(typeof(OperationDescriptionOrSummaryRequired))]
-    [Rule(typeof(SummaryAndDescriptionMustNotBeSame))]
     public class Operation : SwaggerBase
     {
         private string _description;
@@ -35,13 +31,6 @@ namespace AutoRest.Swagger.Model
         /// operations described in the API. Tools and libraries MAY use the 
         /// operation id to uniquely identify an operation.
         /// </summary>
-        [Rule(typeof(OneUnderscoreInOperationId))]
-        [Rule(typeof(OperationIdNounVerb))]
-        [Rule(typeof(GetInOperationName))]
-        [Rule(typeof(PutInOperationName))]
-        [Rule(typeof(PatchInOperationName))]
-        [Rule(typeof(DeleteInOperationName))]
-        [Rule(typeof(OperationIdNounConflictingModelNames))]
         public string OperationId { get; set; }
 
         public string Summary
@@ -50,7 +39,6 @@ namespace AutoRest.Swagger.Model
             set { _summary = value.StripControlCharacters(); }
         }
 
-        [Rule(typeof(AvoidMsdnReferences))]
         public string Description
         {
             get { return _description; }
@@ -65,13 +53,11 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// A list of MIME types the operation can consume.
         /// </summary>
-        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Consumes { get; set; }
 
         /// <summary>
         /// A list of MIME types the operation can produce. 
         /// </summary>
-        [CollectionRule(typeof(NonApplicationJsonType))]
         public IList<string> Produces { get; set; }
 
         /// <summary>
@@ -79,9 +65,6 @@ namespace AutoRest.Swagger.Model
         /// If a parameter is already defined at the Path Item, the 
         /// new definition will override it, but can never remove it.
         /// </summary>
-        [CollectionRule(typeof(SubscriptionIdParameterInOperations))]
-        [CollectionRule(typeof(EnumInsteadOfBoolean))]
-        [CollectionRule(typeof(AnonymousBodyParameter))]
         public IList<SwaggerParameter> Parameters { get; set; }
 
         /// <summary>
@@ -92,7 +75,6 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The transfer protocol for the operation. 
         /// </summary>
-        [CollectionRule(typeof(HttpsSupportedScheme))]
         public IList<TransferProtocolScheme> Schemes { get; set; }
 
         public bool Deprecated { get; set; }

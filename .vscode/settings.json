@@ -24,7 +24,14 @@
     "editor.tabSize": 2,
     "editor.detectIndentation": false
   },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false
+  },
   "files.associations": {
     "*.iced": "coffeescript"
-  }
+  },
+  "tslint.alwaysShowRuleFailuresAsWarnings": true
 }

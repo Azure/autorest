@@ -13,17 +13,14 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Core.Utilities
 {
-    public class MemoryFileSystem : IFileSystem, IDisposable
+    public class MemoryFileSystem : IDisposable
     {
         private const string FolderKey = "Folder";
 
         private Dictionary<string, StringBuilder> _virtualStore =
             new Dictionary<string, StringBuilder>();
 
-        public Dictionary<string, StringBuilder> VirtualStore
-        {
-            get { return _virtualStore; }
-        }
+        public Dictionary<string, StringBuilder> VirtualStore => _virtualStore;
 
         public bool IsCompletePath(string path)
            => Uri.IsWellFormedUriString(path, UriKind.Relative);
@@ -93,17 +90,6 @@ namespace AutoRest.Core.Utilities
             => VirtualStore.ContainsKey(path) 
             || VirtualStore.ContainsKey(path.Replace("/", "\\")) 
             || VirtualStore.ContainsKey(path.Replace("\\", "/")); // TODO: uniform treatment
-
-        public void DeleteFile(string path)
-        {
-            if (VirtualStore.ContainsKey(path))
-            {
-                VirtualStore.Remove(path);
-            }
-        }
-
-        public bool DirectoryExists(string path)
-            => VirtualStore.Keys.Any(key => key.StartsWith(path, StringComparison.Ordinal));
 
         public void CreateDirectory(string path)
             => VirtualStore[path] = new StringBuilder(FolderKey);
@@ -182,34 +168,6 @@ namespace AutoRest.Core.Utilities
             if (disposing)
             {
                 _virtualStore?.Clear();
-            }
-        }
-
-        public void CommitToDisk(string targetDirectory)
-        {
-            var fs = new FileSystem();
-            foreach (var entry in VirtualStore)
-            {
-                if (entry.Value.ToString() == FolderKey)
-                {
-                    var targetDirName = Path.Combine(targetDirectory, entry.Key);
-                    fs.CreateDirectory(targetDirName);
-                }
-                else
-                {
-                    var targetFileName = Path.Combine(targetDirectory, entry.Key);
-                    var targetFileDir = Path.GetDirectoryName(targetFileName);
-                    fs.CreateDirectory(targetFileDir);
-                    fs.WriteAllText(targetFileName, entry.Value.ToString());
-                }
-            }
-        }
-
-        public string CurrentDirectory
-        {
-            get
-            {
-                return "";
             }
         }
     }

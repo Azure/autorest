@@ -12,42 +12,23 @@ AutoRest is an open source tool -- if you need assistance, first check the docum
 
 Using `npm` you can upgrade to the latest stable version of AutoRest:
 
-``` powershell
-# Install latest autorest package
-npm install -g autorest
+## Autorest 2.0 Branch
 
-# Update the generator plugins to the latest stable version
-autorest --reset
-```
+AutoRest is making a a few structural changes, along with eliminating some deprecated legacy behavior.
 
-You can still access the nightly build of the generator plugins by using `--prerelease` on the autorest command line:
+Notable changes in this branch:
+- Bumping required node.js version to 7.10 or greater. (Will add checks in to ensure that this is the case)<br> This enables us to target the `ES2017` javascript standard, vastly simplifying compiled code and has significant performance benefits. 
+- Bumping Dotnet/CLI SDK and Runtime to 2.0
+- Updated bootstrapper that implements use-extension
+- Moving common TypeScript code into the Perks.Node project so that they can be built and reused independently of building AutoRest.
+- Removing all remaining Legacy CLI features, standardizing on the `--switch` format for all cmdline operations
 
-``` powershell
-# install the latest nightly autorest generators 
-autorest --latest --prerelease 
 
-# revert back to the latest stable release of autorest generators:
-autorest --reset 
-```
+---
 
-If you're living life on the edge (and know what you're doing!) you can access the `next` version of the main autorest package from npm:
+The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
 
-``` powershell
-# install the 'next' version of the autorest package 
-npm install autorest@next 
-
-# revert to the 'stable' version of the autorest package 
-npm install autorest@latest 
-```
-Features-in-progress in AutoRest will be found in the 'next' version, and use at your own risk :D
-
-## What's Next 
-
-The finishing touches on the extension model are being made right now in the `@next` version of autorest, which will
-make it possible to install and manage extensions on a fine-grained level, as well as being able to publish a plugin written in different languages. 
-
-We've already started on the path to OpenAPI 3 support, a new code modeler, which will lead to generators for some languages, and new language support!
-
+[![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
 
 # Installing Autorest 
 

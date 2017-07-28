@@ -6,6 +6,8 @@
     <!-- <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),AutoRest.sln))/</SolutionDir> -->
     <Common>$(MsBuildThisFileDirectory)</Common>
     <SolutionDir>$(Common)../../</SolutionDir>
+    <BaseOutputPath>$(MSBuildProjectDirectory)/bin</BaseOutputPath>
+    <OutputPath>$(BaseOutputPath)</OutputPath>
   </PropertyGroup>
 
   <Target Name="Nuke" AfterTargets="clean" >

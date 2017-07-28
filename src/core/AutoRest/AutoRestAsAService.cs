@@ -54,8 +54,6 @@ namespace AutoRest
     {
       switch (plugin)
       {
-        case "azure-validator":
-          return await new AzureValidator(connection, sessionId).Process();
         case "modeler":
           return await new Modeler(connection, sessionId).Process();
         case "csharp":

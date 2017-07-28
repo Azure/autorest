@@ -1,5 +1,3 @@
-// polyfills for language support
-require("../lib/polyfill.min.js");
 
 import { EnhancedPosition } from '../lib/ref/source-map';
 import { PumpMessagesToConsole } from "./test-utility";
@@ -16,7 +14,7 @@ import { parse } from "../lib/ref/jsonpath";
 @suite class Blaming {
 
   @test @timeout(0) async "end to end blaming with literate swagger"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-composite.md"));
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-composite.md"));
     // PumpMessagesToConsole(autoRest);
     const view = await autoRest.view;
     assert.equal(await autoRest.Process().finish, true);
@@ -68,8 +66,8 @@ import { parse } from "../lib/ref/jsonpath";
   }
 
   @test @timeout(0) async "generate resolved swagger with source map"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/small-input/"));
-    await autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/small-input/"));
+    autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const files: Artifact[] = [];
     autoRest.GeneratedFile.Subscribe((_, a) => files.push(a));
     assert.equal(await autoRest.Process().finish, true);
@@ -83,10 +81,10 @@ import { parse } from "../lib/ref/jsonpath";
   }
 
   @test @timeout(0) async "large swagger performance"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/large-input/"));
-    await autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/large-input/"));
+    autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const messages: Message[] = [];
-    autoRest.Message.Subscribe((_, m) => messages.push(m)); // was warning.
+    autoRest.Message.Subscribe((_, m) => messages.push(m));
     assert.equal(await autoRest.Process().finish, true);
     assert.notEqual(messages.length, 0);
   }

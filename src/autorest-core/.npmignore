@@ -2,5 +2,9 @@
 !*.d.ts
 *.js.map
 tsconfig.json
-.npmignore
 bin
+test/
+dist/test/
+package/
+.npmignore
+*.tgz
