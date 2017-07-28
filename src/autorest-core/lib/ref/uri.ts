@@ -153,7 +153,14 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
     throw new Error("'pathOrUri' was detected to be relative so 'baseUri' is required");
   }
   try {
-    return new URI(pathOrUri).absoluteTo(baseUri).toString();
+    const base = new URI(baseUri);
+    const relative = new URI(pathOrUri);
+    const result = relative.absoluteTo(base);
+    // GitHub authentication token forwarding
+    if (base.protocol() === "https" && base.hostname() === "raw.githubusercontent.com" && base.query().startsWith("token=")) {
+      result.addQuery("token", base.query().slice("token=".length));
+    }
+    return result.toString()
   } catch (e) {
     throw new Error(`Failed resolving '${pathOrUri}' against '${baseUri}'.`);
   }

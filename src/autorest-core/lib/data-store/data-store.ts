@@ -176,11 +176,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
   }
 
   public async Read(uri: string): Promise<DataHandleRead | null> {
-    // special URI handlers
-    // - GitHub
-    if (uri.startsWith("https://github")) {
-      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
-    }
+    uri = ToRawDataUrl(uri);
 
     // sync cache (inner stuff is racey!)
     if (!this.cache[uri]) {

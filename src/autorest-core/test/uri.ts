@@ -99,6 +99,16 @@ import * as uri from "../lib/ref/uri";
     assert.strictEqual(
       uri.ResolveUri("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/", "folder///file.md"),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/folder/file.md");
+    // token forwarding
+    assert.strictEqual(
+      uri.ResolveUri("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/file1.json?token=asd%3Dnot_really_a_token123%3D", "./file2.json"),
+      "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/file2.json?token=asd%3Dnot_really_a_token123%3D");
+    assert.strictEqual(
+      uri.ResolveUri("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/file1.json?token=asd%3Dnot_really_a_token123%3D", "https://evil.com/file2.json"),
+      "https://evil.com/file2.json");
+    assert.strictEqual(
+      uri.ResolveUri("https://somewhere.com/file1.json?token=asd%3Dnot_really_a_token123%3D", "./file2.json"),
+      "https://somewhere.com/file2.json");
   }
 
   @test async "ToRawDataUrl"() {
