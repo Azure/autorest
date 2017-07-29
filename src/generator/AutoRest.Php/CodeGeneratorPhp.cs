@@ -4,6 +4,8 @@ using AutoRest.Php.PhpBuilder;
 using AutoRest.Php.PhpBuilder.Expressions;
 using AutoRest.Php.PhpBuilder.Functions;
 using AutoRest.Php.PhpBuilder.Statements;
+using AutoRest.Php.PhpBuilder.Types;
+using AutoRest.Php.SwaggerBuilder;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -63,8 +65,8 @@ namespace AutoRest.Php
             // $this->_client->createOperation({...path...}, {...httpMethod...}, {...operation...})
             var operationInfoCreate = ThisClient.Call(
                 CreateOperationFromData,
-                PHP.String(m.Url),
-                PHP.String(m.HttpMethod.ToString().ToLower()),
+                PHP.StringConst(m.Url),
+                PHP.StringConst(m.HttpMethod.ToString().ToLower()),
                 PHP.SelfScope(const_));
 
             // $this->{...operation...} = 
@@ -117,7 +119,7 @@ namespace AutoRest.Php
                 yield return PHP.KeyValue("in", p.Location.ToString().ToLower());
 
                 var type = p.ModelType;
-                var body = CreateTypeBody(type);
+                var body = Schema.Create(type).ToPhp();
                 if (type is CompositeType)
                 {
                     yield return PHP.KeyValue("schema", body);
@@ -137,14 +139,14 @@ namespace AutoRest.Php
 
                 var parameters = m.Parameters
                     .Select(p => CreateParameter(p))
-                    .Select(PHP.Array)
+                    .Select(PHP.CreateArray)
                     .Select(PHP.KeyValue);
 
                 Const = PHP.Const(
                     name,
-                    PHP.Array(
+                    PHP.CreateArray(
                         PHP.KeyValue("operationId", m.SerializedName),
-                        PHP.KeyValue("parameters", PHP.Array(parameters))));
+                        PHP.KeyValue("parameters", PHP.CreateArray(parameters))));
 
                 Property = PHP.Property(new ClassName(MicrosoftRestOperationInterface), name);
 
@@ -157,6 +159,10 @@ namespace AutoRest.Php
                 Function = PHP.Function(
                     name: m.Name,
                     description: m.Description,
+                    parameters: m.Parameters.Select(p => PHP
+                        .Parameter(
+                            Schema.Create(p.ModelType).ToPhpType(),
+                            new ObjectName(p.SerializedName))),
                     body: PHP.Statements(call));
             }
         }
@@ -206,119 +212,6 @@ namespace AutoRest.Php
 
         const string Indent = "    ";
 
-        static ArrayItem TypeItem(string type)
-            => PHP.KeyValue("type", type);
-
-        static ArrayItem FormatItem(string format)
-            => PHP.KeyValue("format", format);
-
-        static ArrayItem StringTypeItem { get; } = TypeItem("string");
-
-        static ArrayItem IntegerTypeItem { get; } = TypeItem("integer");
-
-        static IEnumerable<ArrayItem> GetPrimitiveType(PrimaryType type)
-        {
-            switch (type.KnownPrimaryType)
-            {
-                case KnownPrimaryType.Int:
-                    yield return IntegerTypeItem;
-                    yield return FormatItem("int32");
-                    break;
-                case KnownPrimaryType.Long:
-                    yield return IntegerTypeItem;
-                    yield return FormatItem("int64");
-                    break;
-                case KnownPrimaryType.Double:
-                    yield return TypeItem("number");
-                    yield return FormatItem("double");
-                    break;
-                case KnownPrimaryType.Decimal:
-                    yield return TypeItem("number");
-                    yield return FormatItem("decimal");
-                    break;
-                case KnownPrimaryType.String:
-                    yield return StringTypeItem;
-                    break;
-                case KnownPrimaryType.Boolean:
-                    yield return TypeItem("boolean");
-                    break;
-                case KnownPrimaryType.Date:
-                    yield return StringTypeItem;
-                    yield return FormatItem("date");
-                    break;
-                case KnownPrimaryType.DateTime:
-                    yield return StringTypeItem;
-                    yield return FormatItem("date-time");
-                    break;
-                case KnownPrimaryType.TimeSpan:
-                    yield return StringTypeItem;
-                    yield return FormatItem("duration");
-                    break;
-                case KnownPrimaryType.Object:
-                    yield return TypeItem("object");
-                    break;
-                case KnownPrimaryType.Uuid:
-                    yield return StringTypeItem;
-                    yield return FormatItem("uuid");
-                    break;
-                case KnownPrimaryType.DateTimeRfc1123:
-                    yield return StringTypeItem;
-                    yield return FormatItem("date-time-rfc1123");
-                    break;
-                case KnownPrimaryType.ByteArray:
-                    yield return StringTypeItem;
-                    yield return FormatItem("byte");
-                    break;
-                default:
-                    yield return TypeItem(type.KnownPrimaryType.ToString());
-                    break;
-            }
-        }
-
-        static ArrayItem ObjectTypeItem { get; } = TypeItem("object");
-
-        static ArrayItem ArrayTypeItem { get; } = TypeItem("array");
-
-        private static Array CreateCompositeTypeBody(CompositeType type)
-            => PHP.Array(PHP.KeyValue(
-                "properties",
-                PHP.Array(type.Properties.Select(CreateProperty))));
-
-        private static Array CreateTypeBody(IModelType type)
-            => type is CompositeType compositeType
-                ? PHP.Array(PHP.KeyValue("$ref", "#/definitions/" + compositeType.Name))
-                : CreateTypeDefBody(type);
-
-        private static Array CreateTypeDefBody(IModelType type)
-            => type is CompositeType compositeType
-                    ? PHP.Array(PHP.KeyValue(
-                        "properties",
-                        PHP.Array(
-                            compositeType.Properties.Select(CreateProperty))))
-                : type is PrimaryType primaryType
-                    ? PHP.Array(GetPrimitiveType(primaryType))
-                : type is EnumType enumType
-                    ? PHP.Array(StringTypeItem, PHP.KeyValue("enum", PHP.EmptyArray))
-                : type is DictionaryType dictionaryType
-                    ? PHP.Array(
-                        ObjectTypeItem,
-                        PHP.KeyValue(
-                            "additionalProperties",
-                            CreateTypeBody(dictionaryType.ValueType)))
-                : type is SequenceType sequenceType
-                    ? PHP.Array(
-                        ArrayTypeItem,
-                        PHP.KeyValue(
-                            "items",
-                            CreateTypeBody(sequenceType.ElementType)))
-                : PHP.EmptyArray;
-
-        private static ArrayItem CreateProperty(Core.Model.Property property)
-            => PHP.KeyValue(property.SerializedName, CreateTypeBody(property.ModelType));
-
-        private static ArrayItem CreateTypeDef(IModelType type)
-            => PHP.KeyValue(type.Name, CreateTypeDefBody(type));
-
         private const string DefinitionsData = "_DEFINITIONS_DATA";
 
         private static Statement CreateClient { get; }
@@ -342,7 +235,7 @@ namespace AutoRest.Php
 
             var definitions = PHP.Const(
                 DefinitionsData,
-                PHP.Array(codeModel.ModelTypes.Select(CreateTypeDef)));
+                codeModel.ModelTypes.CreateSwaggerDefinitions().ToPhp());
 
             var client = PHP.Class(
                 name: Class.CreateName(@namespace, codeModel.Name),

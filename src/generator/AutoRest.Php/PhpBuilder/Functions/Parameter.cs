@@ -1,4 +1,5 @@
 ﻿using AutoRest.Php.PhpBuilder.Expressions;
+using AutoRest.Php.PhpBuilder.Types;
 using System.Collections.Generic;
 
 namespace AutoRest.Php.PhpBuilder.Functions
@@ -17,7 +18,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
 
         public IEnumerable<string> ToCodeText(string indent)
         {
-            yield return Type.AbsoluteName + " " + Name.PhpFullName;
+            yield return Type.ToParameterPrefix() + Name.PhpFullName;
         }
 
         public ObjectRef Ref()

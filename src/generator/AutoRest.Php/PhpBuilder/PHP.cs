@@ -1,6 +1,7 @@
 ﻿using AutoRest.Php.PhpBuilder.Expressions;
 using AutoRest.Php.PhpBuilder.Functions;
 using AutoRest.Php.PhpBuilder.Statements;
+using AutoRest.Php.PhpBuilder.Types;
 using System.Collections.Generic;
 
 namespace AutoRest.Php.PhpBuilder
@@ -12,21 +13,21 @@ namespace AutoRest.Php.PhpBuilder
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public static Array Array(IEnumerable<ArrayItem> items)
-            => new Array(items);
+        public static Expressions.Array CreateArray(IEnumerable<ArrayItem> items)
+            => new Expressions.Array(items);
 
         /// <summary>
         /// [ items ]
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        public static Array Array(params ArrayItem[] items)
-            => new Array(items);
+        public static Expressions.Array CreateArray(params ArrayItem[] items)
+            => new Expressions.Array(items);
 
         /// <summary>
         /// []
         /// </summary>
-        public static Array EmptyArray { get; } = Array();
+        public static Expressions.Array EmptyArray { get; } = CreateArray();
 
         /// <summary>
         /// key => value
@@ -113,7 +114,7 @@ namespace AutoRest.Php.PhpBuilder
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static StringConst String(string value)
+        public static StringConst StringConst(string value)
             => new StringConst(value);
 
         /// <summary>
@@ -206,5 +207,13 @@ namespace AutoRest.Php.PhpBuilder
         /// <returns></returns>
         public static IEnumerable<Const> Consts(params Const[] consts)
             => consts;
+
+        public static IType String { get; } = new PrimitiveType("string");
+
+        public static IType Integer { get; } = new PrimitiveType("integer");
+
+        public static IType Boolean { get; } = new PrimitiveType("boolean");
+
+        public static IType Array { get; } = new Types.Array();
     }
 }

@@ -7,6 +7,9 @@ namespace AutoRest.Php
 {
     public static class Extensions
     {
+        public static KeyValuePair<K, V> KeyValue<K, V>(this K key, V value)
+            => new KeyValuePair<K, V>(key, value);
+
         public static ImmutableList<T> EmptyIfNull<T>(this ImmutableList<T> value)
             => value ?? ImmutableList<T>.Empty;
 

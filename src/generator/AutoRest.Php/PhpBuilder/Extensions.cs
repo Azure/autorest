@@ -7,7 +7,9 @@ namespace AutoRest.Php.PhpBuilder
     {
         public static string GetPhpName(this string name)
         {
-            name = name.Replace('-', '_');
+            name = name
+                .Replace('-', '_')
+                .Replace('$', '_');
             switch(name.ToLower())
             {
                 case "list":
