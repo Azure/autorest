@@ -9,6 +9,7 @@ using AutoRest.Extensions.Azure;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using AutoRest.Core.Utilities;
+using AutoRest.Core;
 
 namespace AutoRest.CSharp.Azure.Model
 {
@@ -44,6 +45,11 @@ namespace AutoRest.CSharp.Azure.Model
         {
             get
             {
+                if (Settings.Instance.CustomSettings.TryGetValue("ServiceName", out object obj))
+                {
+                    return obj.ToString();
+                }
+
                 var method = Methods[0];
                 var match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
                 var serviceName = match.Groups[1].Value.ToPascalCase();
