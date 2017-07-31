@@ -626,7 +626,7 @@ task 'regenerate-ars', '', (done) ->
 task 'regenerate-samples', '', (done) ->
   source 'Samples/*/**/readme.md'
     .pipe foreach (each,next)->
-      autorest [each.path]
+      autorest [each.path, "--clear-output-folder"]
         , (code,stdout,stderr) ->
           outputFolder = path.join(each.path, "../shell")
           mkdir outputFolder if !(test "-d", outputFolder)
@@ -682,16 +682,6 @@ task 'regenerate-delete', '', (done)->
     'src/generator/AutoRest.Python.Tests/Expected'
     'src/generator/AutoRest.Python.Azure.Tests/Expected'
     'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Expected'
-  rmQueue = [] # buffered, since piped removal will cause `source` to fail midway (ENOENT)
-  source 'Samples/*/*/**/'
-    .pipe foreach (each, next) ->
-      configFile = path.join(each.path, "../readme.md")
-      rmQueue.push each.path if fs.existsSync configFile
-      next null
-    .on 'end', ->
-      for folder in rmQueue
-        console.log "rm -rf #{folder}"
-        rm "-rf", "#{folder}"
 
 task 'autorest-preview-build', '', ->
   exec "dotnet build #{basefolder}/src/dev/AutoRest.Preview/"

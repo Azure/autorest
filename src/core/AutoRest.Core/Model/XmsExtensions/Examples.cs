@@ -23,6 +23,6 @@ namespace AutoRest.Core.Model.XmsExtensions
     public class ExampleResponse
     {
         public Dictionary<string, string> Headers { get; set; }
-        public Dictionary<string, JToken> Body { get; set; }
+        public JToken Body { get; set; }
     }
 }
