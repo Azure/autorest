@@ -117,7 +117,14 @@ public class Generator : NewPlugin
             Settings.Instance.Namespace = Settings.Instance.Namespace ?? CodeNamer.Instance.GetNamespaceName(altNamespace);
             var codeModel = plugin.Serializer.Load(modelAsJson);
             codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-            plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+            if (await GetValue<bool?>("sample-generation") ?? false)
+            {
+                plugin.CodeGenerator.GenerateSamples(codeModel).GetAwaiter().GetResult();
+            }
+            else
+            {
+                plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+            }
         }
 
         // write out files
