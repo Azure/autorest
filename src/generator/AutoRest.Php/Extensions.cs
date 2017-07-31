@@ -7,6 +7,19 @@ namespace AutoRest.Php
 {
     public static class Extensions
     {
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> seq, T value)
+        {
+            foreach (var i in seq)
+            {
+                yield return i;
+            }
+            yield return value;
+        }
+
+        public static IEnumerable<T> AppendIfNotNull<T>(this IEnumerable<T> seq, T value)
+            where T : class
+            => value == null ? seq : seq.Append(value);
+
         public static KeyValuePair<K, V> KeyValue<K, V>(this K key, V value)
             => new KeyValuePair<K, V>(key, value);
 

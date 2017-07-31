@@ -1,17 +1,17 @@
 ﻿using AutoRest.Core.Model;
 using AutoRest.Php.PhpBuilder;
-using AutoRest.Php.PhpBuilder.Expressions;
 using AutoRest.Php.PhpBuilder.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Php.JsonBuilder;
 
 namespace AutoRest.Php.SwaggerBuilder
 {
     /// <summary>
     /// https://swagger.io/specification/#schemaObject
     /// </summary>
-    public sealed class Schema
+    public class Schema : JsonBuilder.Object
     {
         public string Ref { get; }
 
@@ -27,53 +27,26 @@ namespace AutoRest.Php.SwaggerBuilder
 
         public Schema Items { get; }
 
-        public PhpBuilder.Expressions.Array ToPhp()
-            => PHP.CreateArray(ToPhpItems());
-
-        private IEnumerable<ArrayItem> ToPhpItems()
-        {
-            if (Ref != null)
-            {
-                yield return PHP.KeyValue("$ref", Ref);
-            }
-            if (Type != null)
-            {
-                yield return PHP.KeyValue("type", Type);
-            }
-            if (Format != null)
-            {
-                yield return PHP.KeyValue("format", Format);
-            }
-            if (Enum)
-            {
-                yield return PHP.KeyValue("enum", PHP.EmptyArray);
-            }
-            if (Properties != null)
-            {
-                yield return PHP.KeyValue("properties", Properties.ToPhp());
-            }
-            if (AdditionalProperties != null)
-            {
-                yield return PHP.KeyValue("additionalProperties", AdditionalProperties.ToPhp());
-            }
-            if (Items != null)
-            {
-                yield return PHP.KeyValue("items", Items.ToPhp());
-            }
-        }
-
         public IType ToPhpType()
         {
             if (Ref != null)
             {
-                return PHP.Array;
+                return PHP.Array();
             }
             switch (Type)
             {
                 case "string":
                     return PHP.String;
                 case "integer":
-                    return PHP.Integer;
+                    switch (Format)
+                    {
+                        case "int32":
+                            return PHP.Integer;
+                        case "int64":
+                            return PHP.String;
+                        default:
+                            throw new Exception("unknown integer format: " + Format);
+                    }                    
                 case "boolean":
                     return PHP.Boolean;
                 default:
@@ -90,6 +63,10 @@ namespace AutoRest.Php.SwaggerBuilder
 
         public static Schema Create(IModelType type)
         {
+            if (type == null)
+            {
+                return null;
+            }
             switch (type)
             {
                 case CompositeType compositeType:
@@ -150,6 +127,38 @@ namespace AutoRest.Php.SwaggerBuilder
             => new Schema(
                 type: "object",
                 additionalProperties: additionalProperties);
+
+        public override IEnumerable<KeyValuePair<string, Token>> GetProperties()
+        {
+            if (Ref != null)
+            {
+                yield return Json.Property("$ref", Ref);
+            }
+            if (Type != null)
+            {
+                yield return Json.Property("type", Type);
+            }
+            if (Format != null)
+            {
+                yield return Json.Property("format", Format);
+            }
+            if (Enum)
+            {
+                yield return Json.Property("enum", Json.Array<JsonBuilder.String>());
+            }
+            if (Properties != null)
+            {
+                yield return Json.Property("properties", Json.Object(Properties));
+            }
+            if (AdditionalProperties != null)
+            {
+                yield return Json.Property("additionalProperties", AdditionalProperties);
+            }
+            if (Items != null)
+            {
+                yield return Json.Property("items", Items);
+            }
+        }
 
         private Schema(
             string @ref = null,

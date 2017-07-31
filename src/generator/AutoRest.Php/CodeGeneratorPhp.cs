@@ -9,6 +9,7 @@ using AutoRest.Php.SwaggerBuilder;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace AutoRest.Php
@@ -103,7 +104,7 @@ namespace AutoRest.Php
             }
         }
 
-        private sealed class PhpFunction
+        private sealed class PhpOperation
         {
             public Const Const { get; }
 
@@ -113,40 +114,13 @@ namespace AutoRest.Php
 
             public Function Function { get; }
 
-            private static IEnumerable<ArrayItem> CreateParameter(Core.Model.Parameter p)
-            {
-                yield return PHP.KeyValue("name", p.SerializedName);
-                yield return PHP.KeyValue("in", p.Location.ToString().ToLower());
-
-                var type = p.ModelType;
-                var body = Schema.Create(type).ToPhp();
-                if (type is CompositeType)
-                {
-                    yield return PHP.KeyValue("schema", body);
-                }
-                else
-                {
-                    foreach (var item in body.Items)
-                    {
-                        yield return item;
-                    }
-                }
-            }
-
-            public PhpFunction(Method m)
+            public PhpOperation(Method m)
             {
                 var name = "_" + m.Name + "_operation";
 
-                var parameters = m.Parameters
-                    .Select(p => CreateParameter(p))
-                    .Select(PHP.CreateArray)
-                    .Select(PHP.KeyValue);
-
                 Const = PHP.Const(
                     name,
-                    PHP.CreateArray(
-                        PHP.KeyValue("operationId", m.SerializedName),
-                        PHP.KeyValue("parameters", PHP.CreateArray(parameters))));
+                    PHP.FromJson(Operation.Create(m)));
 
                 Property = PHP.Property(new ClassName(MicrosoftRestOperationInterface), name);
 
@@ -154,11 +128,16 @@ namespace AutoRest.Php
 
                 ConstructorStatements = OperationInfoInit(thisProperty, Const.Name, m);
 
-                var call = PHP.Return(thisProperty.Call(CallFunction, PHP.EmptyArray));
+                var call = PHP.Return(thisProperty.Call(
+                    CallFunction,
+                    PHP.CreateArray(m.Parameters.Select(p => PHP.KeyValue(
+                        p.SerializedName,
+                        new ObjectName(p.SerializedName).Ref())))));
 
                 Function = PHP.Function(
                     name: m.Name,
                     description: m.Description,
+                    @return: PHP.String,
                     parameters: m.Parameters.Select(p => PHP
                         .Parameter(
                             Schema.Create(p.ModelType).ToPhpType(),
@@ -179,7 +158,7 @@ namespace AutoRest.Php
 
             public PhpFunctionGroup(string @namespace, MethodGroup o)
             {
-                var functions = o.Methods.Select(m => new PhpFunction(m));
+                var functions = o.Methods.Select(m => new PhpOperation(m));
 
                 var clientParameter = PHP.Parameter(
                     type: PHP.Class(MicrosoftRestClientInterface),
@@ -205,7 +184,7 @@ namespace AutoRest.Php
 
                 Function = PHP.Function(
                     name: $"get{o.Name}",
-                    @return: Class.Name,
+                    @return: Class,
                     body: PHP.Statements(PHP.Return(PHP.This.Arrow(Property))));
             }
         }
@@ -231,11 +210,11 @@ namespace AutoRest.Php
 
             var phpFunctions = codeModel.Operations
                 .Where(o => o.Name.RawValue == string.Empty)
-                .SelectMany(o => o.Methods.Select(m => new PhpFunction(m)));
+                .SelectMany(o => o.Methods.Select(m => new PhpOperation(m)));
 
             var definitions = PHP.Const(
                 DefinitionsData,
-                codeModel.ModelTypes.CreateSwaggerDefinitions().ToPhp());
+                PHP.FromJson(Definitions.Create(codeModel.ModelTypes)));
 
             var client = PHP.Class(
                 name: Class.CreateName(@namespace, codeModel.Name),

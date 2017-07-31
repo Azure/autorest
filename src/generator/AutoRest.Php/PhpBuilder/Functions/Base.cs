@@ -1,5 +1,6 @@
 ﻿using AutoRest.Core.Utilities.Collections;
 using AutoRest.Php.PhpBuilder.Statements;
+using AutoRest.Php.PhpBuilder.Types;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,7 +10,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
     {
         protected abstract string PhpName { get; }
 
-        public abstract ClassName Return { get; }
+        public abstract IType Return { get; }
 
         public string Description { get; }
 

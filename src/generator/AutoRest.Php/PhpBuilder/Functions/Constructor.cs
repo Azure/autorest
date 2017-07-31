@@ -1,4 +1,5 @@
 ﻿using AutoRest.Php.PhpBuilder.Statements;
+using AutoRest.Php.PhpBuilder.Types;
 using System.Collections.Generic;
 
 namespace AutoRest.Php.PhpBuilder.Functions
@@ -15,7 +16,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
 
         protected override string PhpName => "__construct";
 
-        public override ClassName Return => null;
+        public override IType Return => null;
 
         public override IEnumerable<string> ToCodeText(string indent)
             => GetBody(indent);

@@ -1,4 +1,5 @@
 ﻿using AutoRest.Core.Model;
+using AutoRest.Php.JsonBuilder;
 using AutoRest.Php.PhpBuilder;
 using AutoRest.Php.PhpBuilder.Expressions;
 using System.Collections.Generic;
@@ -11,13 +12,13 @@ namespace AutoRest.Php.SwaggerBuilder
     /// </summary>
     public static class Definitions
     {
-        public static IEnumerable<KeyValuePair<string, Schema>> CreateSwaggerDefinitions(
-            this IEnumerable<CompositeType> modelTypes)
-            => modelTypes.Select(type => Extensions.KeyValue(
-                    type.SerializedName.FixedValue,
-                    Schema.CreateDefinition(type)));
+        public static Object<Schema> Create(
+            IEnumerable<CompositeType> modelTypes)
+            => Json.Object(modelTypes.Select(type => Extensions.KeyValue(
+                type.SerializedName.FixedValue,
+                Schema.CreateDefinition(type))));
 
-        public static Array ToPhp(this IEnumerable<KeyValuePair<string, Schema>> definitions)
-            => PHP.CreateArray(definitions.Select(p => PHP.KeyValue(p.Key, p.Value.ToPhp())));
+        //public static Array ToPhp(IEnumerable<KeyValuePair<string, Schema>> definitions)
+        //    => PHP.CreateArray(definitions.Select(p => PHP.KeyValue(p.Key, PHP.FromJson(p.Value))));
     }
 }

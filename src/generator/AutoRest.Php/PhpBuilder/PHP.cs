@@ -1,8 +1,11 @@
-﻿using AutoRest.Php.PhpBuilder.Expressions;
+﻿using AutoRest.Php.JsonBuilder;
+using AutoRest.Php.PhpBuilder.Expressions;
 using AutoRest.Php.PhpBuilder.Functions;
 using AutoRest.Php.PhpBuilder.Statements;
 using AutoRest.Php.PhpBuilder.Types;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace AutoRest.Php.PhpBuilder
 {
@@ -154,7 +157,7 @@ namespace AutoRest.Php.PhpBuilder
             string name,
             string description = null,
             IEnumerable<Parameter> parameters = null,
-            ClassName @return = null,            
+            IType @return = null,            
             IEnumerable<Statement> body = null)
             => new Function(
                 name: name,
@@ -214,6 +217,26 @@ namespace AutoRest.Php.PhpBuilder
 
         public static IType Boolean { get; } = new PrimitiveType("boolean");
 
-        public static IType Array { get; } = new Types.Array();
+        public static IType Array(IType type = null) 
+            => new Types.Array(type);
+
+        public static Expression FromJson(Token token)
+            => token.Accept(new FromJsonVisitor());
+
+        private sealed class FromJsonVisitor : IVisitor<Expression>
+        {
+            public Expression Visit(JsonBuilder.String @string)
+                => StringConst(@string.Value);
+
+            public Expression Visit(JsonBuilder.Object @object)
+                => CreateArray(@object
+                    .GetProperties()
+                    .Select(kv => KeyValue(kv.Key, FromJson(kv.Value))));
+
+            public Expression Visit(JsonBuilder.Array array)
+                => CreateArray(array
+                    .GetItems()
+                    .Select(v => KeyValue(FromJson(v))));
+        }
     }
 }

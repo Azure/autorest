@@ -1,4 +1,5 @@
 ﻿using AutoRest.Php.PhpBuilder.Statements;
+using AutoRest.Php.PhpBuilder.Types;
 using System.Collections.Generic;
 
 namespace AutoRest.Php.PhpBuilder.Functions
@@ -7,7 +8,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
     {
         public FunctionName Name { get; }
 
-        public override ClassName Return { get; }
+        public override IType Return { get; }
 
         protected override string PhpName 
             => Name.PhpName;
@@ -16,7 +17,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
             string name,
             string description,
             IEnumerable<Parameter> parameters,
-            ClassName @return,
+            IType @return,
             IEnumerable<Statement> body):
             base(description, parameters, body)
         {
