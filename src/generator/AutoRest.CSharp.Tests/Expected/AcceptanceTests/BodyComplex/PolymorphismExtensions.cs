@@ -149,7 +149,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static SmartSalmon GetValidx(this IPolymorphism operations)
+            public static Salmon GetValidx(this IPolymorphism operations)
             {
                 return operations.GetValidxAsync().GetAwaiter().GetResult();
             }
@@ -164,7 +164,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SmartSalmon> GetValidxAsync(this IPolymorphism operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Salmon> GetValidxAsync(this IPolymorphism operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidxWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -181,7 +181,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             /// <param name='complexBody'>
             /// </param>
-            public static void PutValidx(this IPolymorphism operations, SmartSalmon complexBody)
+            public static void PutValidx(this IPolymorphism operations, Salmon complexBody)
             {
                 operations.PutValidxAsync(complexBody).GetAwaiter().GetResult();
             }
@@ -198,7 +198,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidxAsync(this IPolymorphism operations, SmartSalmon complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidxAsync(this IPolymorphism operations, Salmon complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.PutValidxWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }

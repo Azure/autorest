@@ -107,7 +107,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<AzureOperationResponse<SmartSalmonInner>> GetValidxWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<SalmonInner>> GetValidxWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types that are polymorphic, but not at the root of the
         /// hierarchy
@@ -126,7 +126,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<AzureOperationResponse> PutValidxWithHttpMessagesAsync(SmartSalmonInner complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PutValidxWithHttpMessagesAsync(SalmonInner complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types that are polymorphic, attempting to omit required
         /// 'birthday' field - the request should not be allowed from the

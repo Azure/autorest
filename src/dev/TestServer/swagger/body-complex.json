@@ -994,7 +994,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/smart_salmon"
+              "$ref": "#/definitions/salmon"
             }
           },
           "default": {
@@ -1013,7 +1013,7 @@
             "name": "complexBody",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/smart_salmon"
+              "$ref": "#/definitions/salmon"
             },
             "required": true
           }

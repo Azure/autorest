@@ -106,7 +106,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<SmartSalmon>> GetValidxWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Salmon>> GetValidxWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types that are polymorphic, but not at the root of the
         /// hierarchy
@@ -125,7 +125,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> PutValidxWithHttpMessagesAsync(SmartSalmon complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutValidxWithHttpMessagesAsync(Salmon complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put complex types that are polymorphic, attempting to omit required
         /// 'birthday' field - the request should not be allowed from the

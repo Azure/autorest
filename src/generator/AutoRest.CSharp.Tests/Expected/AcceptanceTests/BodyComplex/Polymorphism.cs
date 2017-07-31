@@ -357,7 +357,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<SmartSalmon>> GetValidxWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Salmon>> GetValidxWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -438,7 +438,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<SmartSalmon>();
+            var _result = new HttpOperationResponse<Salmon>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -447,7 +447,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<SmartSalmon>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Salmon>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -490,7 +490,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> PutValidxWithHttpMessagesAsync(SmartSalmon complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutValidxWithHttpMessagesAsync(Salmon complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (complexBody == null)
             {
