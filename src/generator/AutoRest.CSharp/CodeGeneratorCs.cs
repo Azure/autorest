@@ -192,7 +192,7 @@ namespace AutoRest.CSharp
                     Logger.Instance.Log(Category.Error, $"Required property '{prop.Name}' of type '{type.ClassName}' not found.");
                 }
             }
-            result.AppendLine(string.Join("\n,", propertyInitializers));
+            result.AppendLine(string.Join(",\n", propertyInitializers));
             result.Append(totalIndent + "}");
             return result.ToString();
         }
@@ -241,7 +241,8 @@ namespace AutoRest.CSharp
             result.AppendLine();
 
             // call
-            result.AppendLine($"await {clientInstanceName}{(g.Name.IsNullOrEmpty() ? "" : "." + g.NameForProperty)}.{m.Name}Async({string.Join(", ", paramaters)});");
+            result.AppendLine($"await {clientInstanceName}{(g.Name.IsNullOrEmpty() ? "" : "." + g.NameForProperty)}.{m.Name}Async(" +
+                $"{string.Join(", ", paramaters.Select(param => "\n    " + param))});");
 
             return result.ToString();
         }

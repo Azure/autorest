@@ -276,5 +276,7 @@ export async function ClearFolder(folderUri: string): Promise<void> {
       rmdirSync(path);
     }
   };
-  await deleteFolderRecursive(path);
+  try {
+    await deleteFolderRecursive(path);
+  } catch (e) { }
 }

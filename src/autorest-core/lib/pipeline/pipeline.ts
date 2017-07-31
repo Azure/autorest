@@ -129,17 +129,22 @@ function CreateCommonmarkProcessor(): PipelinePlugin {
 }
 function CreateArtifactEmitter(inputOverride?: () => Promise<DataStoreViewReadonly>): PipelinePlugin {
   return async (config, input, working, output) => {
-    // clear output-folder if requested
-    if (config.GetEntry("can-clear-output-folder" as any) && config.GetEntry("clear-output-folder" as any)) {
-      await ClearFolder(config.OutputFolderUri);
+    if (inputOverride) {
+      input = await inputOverride();
     }
+
+    // clear output-folder if requested
+    if (config.GetEntry("clear-output-folder" as any)) {
+      await ClearFolder(config.OutputFolderUri); // TODO: emit corresponding event
+    }
+
     await EmitArtifacts(
       config,
       config.GetEntry("input-artifact" as any),
       key => ResolveUri(
         config.OutputFolderUri,
         safeEval<string>(config.GetEntry("output-uri-expr" as any), { $key: key, $config: config.Raw })),
-      inputOverride ? await inputOverride() : input,
+      input,
       config.GetEntry("is-object" as any));
   };
 }
