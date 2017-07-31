@@ -6,15 +6,15 @@ namespace AutoRest.Php.SwaggerBuilder
     /// <summary>
     /// https://swagger.io/specification/#parameter-object-49
     /// </summary>
-    public sealed class Parameter : Object
+    public sealed class ParameterObject : Object
     {
         public string Name { get; }
 
         public string In { get; }
 
-        public Schema Schema { get; }
+        public SchemaObject Schema { get; }
 
-        public override IEnumerable<KeyValuePair<string, Token>> GetProperties()
+        public override IEnumerable<Property> GetProperties()
         {
             if (Name != null)
             {
@@ -30,16 +30,16 @@ namespace AutoRest.Php.SwaggerBuilder
             }
         }
 
-        public static Parameter Create(Core.Model.Parameter parameter)
-            => new Parameter(                
+        public static ParameterObject Create(Core.Model.Parameter parameter)
+            => new ParameterObject(                
                 name: parameter.SerializedName,
                 @in: parameter.Location.ToString().ToLower(),
-                schema: Schema.Create(parameter.ModelType));
+                schema: SchemaObject.Create(parameter.ModelType));
 
-        private Parameter(
+        private ParameterObject(
             string name,
             string @in,
-            Schema schema)
+            SchemaObject schema)
         {
             Name = name;
             In = @in;

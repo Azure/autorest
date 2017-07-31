@@ -119,7 +119,7 @@ namespace AutoRest.Php
 
                 Const = PHP.Const(
                     name,
-                    PHP.FromJson(Operation.Create(m)));
+                    PHP.FromJson(OperationObject.Create(m)));
 
                 Property = PHP.Property(new ClassName(MicrosoftRestOperationInterface), name);
 
@@ -139,7 +139,7 @@ namespace AutoRest.Php
                     @return: PHP.String,
                     parameters: m.Parameters.Select(p => PHP
                         .Parameter(
-                            Schema.Create(p.ModelType).ToPhpType(),
+                            SchemaObject.Create(p.ModelType).ToPhpType(),
                             new ObjectName(p.SerializedName))),
                     body: PHP.Statements(call));
             }
@@ -179,7 +179,11 @@ namespace AutoRest.Php
 
                 Property = PHP.Property(Class.Name, "_" + o.Name + "_group");
 
-                Create = PHP.This.Arrow(Property).Assign(PHP.New(Class.Name, ThisClient)).Statement();
+                Create = PHP
+                    .This
+                    .Arrow(Property)
+                    .Assign(PHP.New(Class.Name, ThisClient))
+                    .Statement();
 
                 Function = PHP.Function(
                     name: $"get{o.Name}",
@@ -190,14 +194,22 @@ namespace AutoRest.Php
 
         const string Indent = "    ";
 
-        private const string DefinitionsData = "_DEFINITIONS_DATA";
+        private const string SwaggerObjectData = "_SWAGGER_OBJECT_DATA";
+
+        public static PhpBuilder.Functions.Parameter RunTimeParameter { get; }
+            = PHP.Parameter(
+                PHP.Class(GetMicrosoftRestClass("RunTimeInterface")),
+                new ObjectName("_runTime"));
 
         private static Statement CreateClient { get; }
             = ThisClient
-                .Assign(new ClassName(MicrosoftRestRunTimeStatic)
-                    .StaticCall("create")
-                    .Call("createClientFromData", PHP.SelfScope(DefinitionsData)))
+                .Assign(RunTimeParameter
+                    .Ref()
+                    .Call("createClientFromData", PHP.SelfScope(SwaggerObjectData)))
                 .Statement();
+
+        public static IEnumerable<PhpBuilder.Functions.Parameter> ClientConstructorParameters { get; }
+            = PHP.Parameters(RunTimeParameter);
 
         public override async Task Generate(CodeModel codeModel)
         {
@@ -213,12 +225,13 @@ namespace AutoRest.Php
                 .SelectMany(o => o.Methods.Select(m => new PhpOperation(m)));
 
             var definitions = PHP.Const(
-                DefinitionsData,
-                PHP.FromJson(Definitions.Create(codeModel.ModelTypes)));
+                SwaggerObjectData,
+                PHP.FromJson(SwaggerObject.Create(codeModel)));
 
             var client = PHP.Class(
                 name: Class.CreateName(@namespace, codeModel.Name),
                 constructor: PHP.Constructor(
+                    parameters: ClientConstructorParameters,
                     body: PHP
                         .Statements(CreateClient)
                         .Concat(phpGroups.Select(g => g.Create))

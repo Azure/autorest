@@ -231,7 +231,7 @@ namespace AutoRest.Php.PhpBuilder
             public Expression Visit(JsonBuilder.Object @object)
                 => CreateArray(@object
                     .GetProperties()
-                    .Select(kv => KeyValue(kv.Key, FromJson(kv.Value))));
+                    .Select(p => KeyValue(p.Name, FromJson(p.GetValue()))));
 
             public Expression Visit(JsonBuilder.Array array)
                 => CreateArray(array

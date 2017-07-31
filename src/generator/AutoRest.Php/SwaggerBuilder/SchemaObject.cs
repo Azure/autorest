@@ -11,7 +11,7 @@ namespace AutoRest.Php.SwaggerBuilder
     /// <summary>
     /// https://swagger.io/specification/#schemaObject
     /// </summary>
-    public class Schema : JsonBuilder.Object
+    public class SchemaObject : JsonBuilder.Object
     {
         public string Ref { get; }
 
@@ -21,11 +21,11 @@ namespace AutoRest.Php.SwaggerBuilder
 
         public bool Enum { get; }
 
-        public IEnumerable<KeyValuePair<string, Schema>> Properties { get; }
+        public IEnumerable<Property<SchemaObject>> Properties { get; }
 
-        public Schema AdditionalProperties { get; }
+        public SchemaObject AdditionalProperties { get; }
 
-        public Schema Items { get; }
+        public SchemaObject Items { get; }
 
         public IType ToPhpType()
         {
@@ -54,14 +54,14 @@ namespace AutoRest.Php.SwaggerBuilder
             }
         }
 
-        public static Schema CreateDefinition(CompositeType type)
-            => new Schema(properties: type
+        public static SchemaObject CreateDefinition(CompositeType type)
+            => new SchemaObject(properties: type
                 .Properties
-                .Select(p => Extensions.KeyValue(
+                .Select(p => Json.Property(
                     p.SerializedName.FixedValue,
                     Create(p.ModelType))));
 
-        public static Schema Create(IModelType type)
+        public static SchemaObject Create(IModelType type)
         {
             if (type == null)
             {
@@ -70,7 +70,7 @@ namespace AutoRest.Php.SwaggerBuilder
             switch (type)
             {
                 case CompositeType compositeType:
-                    return new Schema(@ref: "#/definitions/" + compositeType.SerializedName);
+                    return new SchemaObject(@ref: "#/definitions/" + compositeType.SerializedName);
                 case EnumType enumType:
                     return String(@enum: true);
                 case PrimaryType primaryType:
@@ -78,7 +78,7 @@ namespace AutoRest.Php.SwaggerBuilder
                 case DictionaryType dictionaryType:
                     return Object(additionalProperties: Create(dictionaryType.ValueType));
                 case SequenceType sequenceType:
-                    return new Schema(
+                    return new SchemaObject(
                         type: "array",
                         items: Create(sequenceType.ElementType));
                 default:
@@ -86,18 +86,18 @@ namespace AutoRest.Php.SwaggerBuilder
             }
         }
 
-        private static Schema Primary(PrimaryType type)
+        private static SchemaObject Primary(PrimaryType type)
             => PrimaryTypes[type.KnownPrimaryType];
 
-        private static IReadOnlyDictionary<KnownPrimaryType, Schema> PrimaryTypes { get; }
-            = new Dictionary<KnownPrimaryType, Schema>
+        private static IReadOnlyDictionary<KnownPrimaryType, SchemaObject> PrimaryTypes { get; }
+            = new Dictionary<KnownPrimaryType, SchemaObject>
             {
                 { KnownPrimaryType.Int, Integer("int32") },
                 { KnownPrimaryType.Long, Integer("int64") },
                 { KnownPrimaryType.Double, Number("double") },
                 { KnownPrimaryType.Decimal, Number("decimal") },
                 { KnownPrimaryType.String, String() },
-                { KnownPrimaryType.Boolean, new Schema(type: "boolean") },
+                { KnownPrimaryType.Boolean, new SchemaObject(type: "boolean") },
                 { KnownPrimaryType.Date, String("date") },
                 { KnownPrimaryType.DateTime, String("date-time") },
                 { KnownPrimaryType.TimeSpan, String("duration") },
@@ -107,28 +107,28 @@ namespace AutoRest.Php.SwaggerBuilder
                 { KnownPrimaryType.ByteArray, String("byte") }
             };
 
-        private static Schema Integer(string format)
-            => new Schema(
+        private static SchemaObject Integer(string format)
+            => new SchemaObject(
                 type: "integer",
                 format: format);
 
-        private static Schema Number(string format)
-            => new Schema(
+        private static SchemaObject Number(string format)
+            => new SchemaObject(
                 type: "number",
                 format: format);
 
-        private static Schema String(string format = null, bool @enum = false)
-            => new Schema(
+        private static SchemaObject String(string format = null, bool @enum = false)
+            => new SchemaObject(
                 type: "string",
                 format: format, 
                 @enum: @enum);
 
-        private static Schema Object(Schema additionalProperties = null)
-            => new Schema(
+        private static SchemaObject Object(SchemaObject additionalProperties = null)
+            => new SchemaObject(
                 type: "object",
                 additionalProperties: additionalProperties);
 
-        public override IEnumerable<KeyValuePair<string, Token>> GetProperties()
+        public override IEnumerable<JsonBuilder.Property> GetProperties()
         {
             if (Ref != null)
             {
@@ -160,14 +160,14 @@ namespace AutoRest.Php.SwaggerBuilder
             }
         }
 
-        private Schema(
+        private SchemaObject(
             string @ref = null,
             string type = null,
             string format = null,
             bool @enum =  false,
-            IEnumerable<KeyValuePair<string, Schema>> properties = null,
-            Schema additionalProperties = null,
-            Schema items = null)
+            IEnumerable<Property<SchemaObject>> properties = null,
+            SchemaObject additionalProperties = null,
+            SchemaObject items = null)
         {
             Ref = @ref;
             Type = type;

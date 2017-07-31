@@ -5,33 +5,33 @@ using System.Linq;
 
 namespace AutoRest.Php.SwaggerBuilder
 {
-    public sealed class Operation : Object
+    public sealed class OperationObject : Object
     {
         public string OperationId { get; }
 
-        public Array<Parameter> Parameters { get; }
+        public Array<ParameterObject> Parameters { get; }
 
-        public Object<Response> Responses { get; }
+        public Object<ResponseObject> Responses { get; }
 
-        public static Operation Create(Method m)
-            => new Operation(
+        public static OperationObject Create(Method m)
+            => new OperationObject(
                 m.SerializedName,
-                Json.Array(m.Parameters.Select(Parameter.Create)),
-                Json.Object(m.Responses.Select(r => Extensions.KeyValue(
+                Json.Array(m.Parameters.Select(ParameterObject.Create)),
+                Json.Object(m.Responses.Select(r => Json.Property(
                     ((int)r.Key).ToString(),
-                    Response.Create(r.Value)))));
+                    ResponseObject.Create(r.Value)))));
 
-        public Operation(
+        public OperationObject(
             string operationId,
-            Array<Parameter> parameters,
-            Object<Response> responses)
+            Array<ParameterObject> parameters,
+            Object<ResponseObject> responses)
         {
             OperationId = operationId;
             Parameters = parameters;
             Responses = responses;
         }
 
-        public override IEnumerable<KeyValuePair<string, Token>> GetProperties()
+        public override IEnumerable<JsonBuilder.Property> GetProperties()
         {
             yield return Json.Property("operationId", OperationId);
             yield return Json.Property("parameters", Parameters);

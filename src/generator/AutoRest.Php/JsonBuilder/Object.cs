@@ -9,18 +9,18 @@ namespace AutoRest.Php.JsonBuilder
         public override R Accept<R>(IVisitor<R> visitor)
             => visitor.Visit(this);
 
-        public abstract IEnumerable<KeyValuePair<string, Token>> GetProperties();
+        public abstract IEnumerable<Property> GetProperties();
     }
 
     public sealed class Object<T> : Object
         where T : Token
     {
-        public override IEnumerable<KeyValuePair<string, Token>> GetProperties()
-            => Properties.Select(v => new KeyValuePair<string, Token>(v.Key, v.Value));
+        public override IEnumerable<Property> GetProperties()
+            => Properties;
 
-        public IEnumerable<KeyValuePair<string, T>> Properties { get; }
+        public IEnumerable<Property<T>> Properties { get; }
 
-        public Object(IEnumerable<KeyValuePair<string, T>> properties)
+        public Object(IEnumerable<Property<T>> properties)
         {
             Properties = properties;
         }
