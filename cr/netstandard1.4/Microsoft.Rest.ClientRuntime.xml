@@ -1,0 +1,2129 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Rest.ClientRuntime</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Rest.BasicAuthenticationCredentials">
+            <summary>
+            Basic Auth credentials for use with a REST Service Client.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.BasicAuthenticationCredentials.UserName">
+            <summary>
+            Basic auth UserName.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.BasicAuthenticationCredentials.Password">
+            <summary>
+            Basic auth password.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.BasicAuthenticationCredentials.ProcessHttpRequestAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Add the Basic Authentication Header to each outgoing request
+            </summary>
+            <param name="request">The outgoing request</param>
+            <param name="cancellationToken">A token to cancel the operation</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.HttpExtensions">
+            <summary>
+            Extensions for manipulating HTTP request and response objects.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.HttpExtensions.AsString(System.Net.Http.HttpContent)">
+            <summary>
+            Formats an HttpContent object as String.
+            </summary>
+            <param name="content">The HttpContent to format.</param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.HttpExtensions.GetContentHeaders(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Get the content headers of an HtttRequestMessage.
+            </summary>
+            <param name="request">The request message.</param>
+            <returns>The content headers.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.HttpExtensions.GetContentHeaders(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Get the content headers of an HttpResponseMessage.
+            </summary>
+            <param name="response">The response message.</param>
+            <returns>The content headers.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.HttpExtensions.AsFormattedString(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Returns string representation of a HttpRequestMessage.
+            </summary>
+            <param name="httpRequest">Request object to format.</param>
+            <returns>The string, formatted into curly braces.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.HttpExtensions.AsFormattedString(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Returns string representation of a HttpResponseMessage.
+            </summary>
+            <param name="httpResponse">Response object to format.</param>
+            <returns>The string, formatted into curly braces.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.HttpExtensions.AsFormattedString``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            Converts given dictionary into a log string.
+            </summary>
+            <typeparam name="TKey">The dictionary key type.</typeparam>
+            <typeparam name="TValue">The dictionary value type.</typeparam>
+            <param name="dictionary">The dictionary object.</param>
+            <returns>The string, formatted into curly braces.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.HttpExtensions.ToJson(System.Net.Http.Headers.HttpHeaders)">
+            <summary>
+            Serializes HttpHeaders as Json dictionary.
+            </summary>
+            <param name="headers">HttpHeaders</param>
+            <returns>Json string</returns>
+        </member>
+        <member name="M:Microsoft.Rest.HttpExtensions.ToJson(System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}})">
+            <summary>
+            Serializes header dictionary as Json dictionary.
+            </summary>
+            <param name="headers">Dictionary</param>
+            <returns>Json string</returns>
+        </member>
+        <member name="M:Microsoft.Rest.HttpExtensions.GetHeadersAsJson(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Serializes HttpResponseHeaders and HttpContentHeaders as Json dictionary.
+            </summary>
+            <param name="message">HttpResponseMessage</param>
+            <returns>Json string</returns>
+        </member>
+        <member name="T:Microsoft.Rest.HttpMessageWrapper">
+            <summary>
+            Base class used to wrap HTTP requests and responses to preserve data after disposal of 
+            HttpClient.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.HttpMessageWrapper.#ctor">
+            <summary>
+            Initializes a new instance of the HttpMessageWrapper class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpMessageWrapper.Content">
+            <summary>
+            Exposes the HTTP message contents.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpMessageWrapper.Headers">
+            <summary>
+            Gets the collection of HTTP headers.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.HttpMessageWrapper.CopyHeaders(System.Net.Http.Headers.HttpHeaders)">
+            <summary>
+            Copies HTTP message headers to the error object.
+            </summary>
+            <param name="headers">Collection of HTTP headers.</param>
+        </member>
+        <member name="T:Microsoft.Rest.HttpOperationException">
+            <summary>
+            Exception thrown for an invalid response with custom error information.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpOperationException.Request">
+            <summary>
+            Gets information about the associated HTTP request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpOperationException.Response">
+            <summary>
+            Gets information about the associated HTTP response.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpOperationException.Body">
+            <summary>
+            Gets or sets the response object.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.HttpOperationException.#ctor">
+            <summary>
+            Initializes a new instance of the HttpOperationException class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.HttpOperationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the HttpOperationException class.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:Microsoft.Rest.HttpOperationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the HttpOperationException class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="T:Microsoft.Rest.IHttpOperationResponse">
+            <summary>
+            Represents the base return type of all ServiceClient REST operations without response body.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.IHttpOperationResponse.Request">
+            <summary>
+            Gets information about the associated HTTP request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.IHttpOperationResponse.Response">
+            <summary>
+            Gets information about the associated HTTP response.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.IHttpOperationResponse`1">
+            <summary>
+            Represents the base return type of all ServiceClient REST operations with response body.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.IHttpOperationResponse`1.Body">
+            <summary>
+            Gets or sets the response object.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.IHttpOperationHeaderResponse`1">
+            <summary>
+            Represents the base return type of all ServiceClient REST operations with a header response.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Microsoft.Rest.IHttpOperationHeaderResponse`1.Headers">
+            <summary>
+            Gets or sets the response header object.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.IHttpOperationResponse`2">
+            <summary>
+            Represents the base return type of all ServiceClient REST operations with response body and header.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.HttpOperationResponse">
+            <summary>
+            Represents the base return type of all ServiceClient REST operations without response body.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.HttpOperationResponse._disposed">
+            <summary>
+            Indicates whether the HttpOperationResponse has been disposed. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpOperationResponse.Request">
+            <summary>
+            Gets information about the associated HTTP request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpOperationResponse.Response">
+            <summary>
+            Gets information about the associated HTTP response.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.HttpOperationResponse.Dispose">
+            <summary>
+            Dispose the HttpOperationResponse.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.HttpOperationResponse.Dispose(System.Boolean)">
+            <summary>
+            Dispose the HttpClient and Handlers.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to releases only unmanaged resources.</param>
+        </member>
+        <member name="T:Microsoft.Rest.HttpOperationResponse`1">
+            <summary>
+            Represents the base return type of all ServiceClient REST operations.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpOperationResponse`1.Body">
+            <summary>
+            Gets or sets the response object.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.HttpOperationHeaderResponse`1">
+            <summary>
+            Represents the base return type of all ServiceClient REST operations.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.HttpOperationResponse`2">
+            <summary>
+            Represents the base return type of all ServiceClient REST operations.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpOperationResponse`2.Headers">
+            <summary>
+            Gets or sets the response header object.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.HttpRequestMessageWrapper">
+            <summary>
+            Wrapper around HttpRequestMessage type that copies properties of HttpRequestMessage so that
+            they are available after the HttpClient gets disposed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.HttpRequestMessageWrapper.#ctor(System.Net.Http.HttpRequestMessage,System.String)">
+            <summary>
+            Initializes a new instance of the HttpRequestMessageWrapper class from HttpRequestMessage
+            and content.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpRequestMessageWrapper.Method">
+            <summary>
+            Gets or sets the HTTP method used by the HTTP request message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpRequestMessageWrapper.RequestUri">
+            <summary>
+            Gets or sets the Uri used for the HTTP request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpRequestMessageWrapper.Properties">
+            <summary>
+            Gets a set of properties for the HTTP request.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.HttpResponseMessageWrapper">
+            <summary>
+            Wrapper around HttpResponseMessage type that copies properties of HttpResponseMessage so that
+            they are available after the HttpClient gets disposed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.HttpResponseMessageWrapper.#ctor(System.Net.Http.HttpResponseMessage,System.String)">
+            <summary>
+            Initializes a new instance of the HttpResponseMessageWrapper class from HttpResponseMessage
+            and content.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpResponseMessageWrapper.StatusCode">
+            <summary>
+            Gets or sets the status code of the HTTP response.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.HttpResponseMessageWrapper.ReasonPhrase">
+            <summary>
+            Exposes the reason phrase, typically sent along with the status code. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.IServiceClientTracingInterceptor">
+            <summary>
+            The IServiceClientTracingInterceptor provides useful information about cloud
+            operations.  Interception is global and a tracing interceptor can be
+            added via TracingAdapter.AddTracingInterceptor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.Configuration(System.String,System.String,System.String)">
+            <summary>
+            Probe configuration for the value of a setting.
+            </summary>
+            <param name="source">The configuration source.</param>
+            <param name="name">The name of the setting.</param>
+            <param name="value">The value of the setting in the source.</param>
+        </member>
+        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.EnterMethod(System.String,System.Object,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Enter a method.
+            </summary>
+            <param name="invocationId">Method invocation identifier.</param>
+            <param name="instance">The instance with the method.</param>
+            <param name="method">Name of the method.</param>
+            <param name="parameters">Method parameters.</param>
+        </member>
+        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.ExitMethod(System.String,System.Object)">
+            <summary>
+            Exit a method.  Note: Exit will not be called in the event of an
+            error.
+            </summary>
+            <param name="invocationId">Method invocation identifier.</param>
+            <param name="returnValue">Method return value.</param>
+        </member>
+        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.Information(System.String)">
+            <summary>
+            Trace information.
+            </summary>
+            <param name="message">The information to trace.</param>
+        </member>
+        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.ReceiveResponse(System.String,System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Receive an HTTP response.
+            </summary>
+            <param name="invocationId">Method invocation identifier.</param>
+            <param name="response">The response instance.</param>
+        </member>
+        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.SendRequest(System.String,System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Send an HTTP request.
+            </summary>
+            <param name="invocationId">Method invocation identifier.</param>
+            <param name="request">The request about to be sent.</param>
+        </member>
+        <member name="M:Microsoft.Rest.IServiceClientTracingInterceptor.TraceError(System.String,System.Exception)">
+            <summary>
+            Raise an error.
+            </summary>
+            <param name="invocationId">Method invocation identifier.</param>
+            <param name="exception">The error.</param>
+        </member>
+        <member name="T:Microsoft.Rest.IServiceOperations`1">
+            <summary>
+            Interface used to group operations of a ServiceClient.
+            </summary>
+            <typeparam name="TClient">Type of the ServiceClient.</typeparam>
+        </member>
+        <member name="P:Microsoft.Rest.IServiceOperations`1.Client">
+            <summary>
+            Gets a reference to the ServiceClient.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.ITokenProvider">
+            <summary>
+            Interface to a source of access tokens.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.ITokenProvider.GetAuthenticationHeaderAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets the authentication header with token.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.ClientRuntime.Properties.Resources">
+            <summary>
+               A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ResourceManager">
+            <summary>
+               Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.Culture">
+            <summary>
+               Overrides the current thread's CurrentUICulture property for all
+               resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ArgumentCannotBeGreaterThanBaseline">
+            <summary>
+               Looks up a localized string similar to The specified argument {0} cannot be greater than its ceiling value of {1}..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ArgumentCannotBeNegative">
+            <summary>
+               Looks up a localized string similar to The specified argument {0} cannot be initialized with a negative value..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.DefaultHttpOperationExceptionMessage">
+            <summary>
+               Looks up a localized string similar to Received unexpected Http response status code {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.DefaultRetryStrategyMappingNotFound">
+            <summary>
+               Looks up a localized string similar to Default retry strategy for technology {0}, named &apos;{1}&apos;, is not defined..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.DefaultRetryStrategyNotFound">
+            <summary>
+               Looks up a localized string similar to Default retry strategy for technology {0} was not not defined, and there is no overall default strategy..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ExceptionRetryHandlerMissing">
+            <summary>
+               Looks up a localized string similar to Retry handler is not present in the HttpClient handler stack..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ExceptionRetryManagerAlreadySet">
+            <summary>
+               Looks up a localized string similar to The RetryManager is already set..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ExceptionRetryManagerNotSet">
+            <summary>
+               Looks up a localized string similar to The default RetryManager has not been set. Set it by invoking the RetryManager.SetDefault static method, or if you are using declarative configuration, you can invoke the RetryPolicyFactory.CreateDefault() method to automatically create the retry manager from the configuration file..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ITransientErrorDetectionStrategyNotImplemented">
+            <summary>
+               Looks up a localized string similar to The error detection strategy type must implement the ITransientErrorDetectionStrategy interface..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ResponseStatusCodeError">
+            <summary>
+               Looks up a localized string similar to Response status code indicates server error: {0} ({1})..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.RetryStrategyNotFound">
+            <summary>
+               Looks up a localized string similar to The retry strategy with name &apos;{0}&apos; cannot be found..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.StringCannotBeEmpty">
+            <summary>
+               Looks up a localized string similar to The specified string argument {0} must not be empty..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.TaskCannotBeNull">
+            <summary>
+               Looks up a localized string similar to The specified argument &apos;{0}&apos; cannot return a null task when invoked..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.TaskMustBeScheduled">
+            <summary>
+               Looks up a localized string similar to The specified argument &apos;{0}&apos; must return a scheduled task (also known as &quot;hot&quot; task) when invoked..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.TokenProviderCannotBeNull">
+            <summary>
+               Looks up a localized string similar to You must specify a token provider or raw access token before using token credentials..
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationCannotBeNull">
+            <summary>
+               Looks up a localized string similar to cannot be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationEnum">
+            <summary>
+               Looks up a localized string similar to cannot have value other than.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationExclusiveMaximum">
+            <summary>
+               Looks up a localized string similar to is equal or exceeds maximum value of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationExclusiveMinimum">
+            <summary>
+               Looks up a localized string similar to is less than or equal minimum value of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationMaximum">
+            <summary>
+               Looks up a localized string similar to exceeds maximum value of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationMaximumItems">
+            <summary>
+               Looks up a localized string similar to exceeds maximum item count of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationMaximumLength">
+            <summary>
+               Looks up a localized string similar to exceeds maximum length of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationMinimum">
+            <summary>
+               Looks up a localized string similar to is less than minimum value of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationMinimumItems">
+            <summary>
+               Looks up a localized string similar to contains less items than.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationMinimumLength">
+            <summary>
+               Looks up a localized string similar to is less than minimum length of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationMultipleOf">
+            <summary>
+               Looks up a localized string similar to has to be multiple of.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationPattern">
+            <summary>
+               Looks up a localized string similar to does not match expected pattern.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.ValidationUniqueItems">
+            <summary>
+               Looks up a localized string similar to collection contains duplicate items.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ClientRuntime.Properties.Resources.WebRequestHandlerNotFound">
+            <summary>
+               Looks up a localized string similar to The service client &apos;{0}&apos; did not contain an implementation of &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.RestException">
+            <summary>
+            Generic exception for Microsoft Rest Client. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.RestException.#ctor">
+            <summary>
+            Initializes a new instance of the RestException class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.RestException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the RestException class.
+            </summary>
+            <param name="message">The exception message.</param>
+        </member>
+        <member name="M:Microsoft.Rest.RestException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the RestException class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="T:Microsoft.Rest.RetryDelegatingHandler">
+            <summary>
+            Http retry handler.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.RetryDelegatingHandler.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.RetryDelegatingHandler"/> class. 
+            Sets default retry policy base on Exponential Backoff.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.RetryDelegatingHandler.#ctor(System.Net.Http.DelegatingHandler)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.RetryDelegatingHandler"/> class. Sets 
+            the default retry policy base on Exponential Backoff.
+            </summary>
+            <param name="innerHandler">Inner http handler.</param>
+        </member>
+        <member name="M:Microsoft.Rest.RetryDelegatingHandler.#ctor(Microsoft.Rest.TransientFaultHandling.RetryPolicy,System.Net.Http.DelegatingHandler)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.RetryDelegatingHandler"/> class. 
+            </summary>
+            <param name="retryPolicy">Retry policy to use.</param>
+            <param name="innerHandler">Inner http handler.</param>
+        </member>
+        <member name="P:Microsoft.Rest.RetryDelegatingHandler.RetryPolicy">
+            <summary>
+            Gets or sets retry policy.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.RetryDelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Sends an HTTP request to the inner handler to send to the server as an asynchronous
+            operation. Retries request if needed based on Retry Policy.
+            </summary>
+            <param name="request">The HTTP request message to send to the server.</param>
+            <param name="cancellationToken">A cancellation token to cancel operation.</param>
+            <returns>Returns System.Threading.Tasks.Task&lt;TResult&gt;. The 
+            task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="E:Microsoft.Rest.RetryDelegatingHandler.Retrying">
+            <summary>
+            An instance of a callback delegate that will be invoked whenever a retry condition is encountered.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.SerializationException">
+            <summary>
+            Serialization exception for Microsoft Rest Client. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.SerializationException.#ctor">
+            <summary>
+            Initializes a new instance of the SerializationException class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.SerializationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the SerializationException class.
+            </summary>
+            <param name="message">Exception message.</param>
+        </member>
+        <member name="M:Microsoft.Rest.SerializationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the SerializationException class.
+            </summary>
+            <param name="message">Exception message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="M:Microsoft.Rest.SerializationException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the SerializationException class from a message and a content.
+            </summary>
+            <param name="message">The exception message</param>
+            <param name="content">The failed content</param>
+            <param name="innerException">The inner AdalException with additional details</param>
+        </member>
+        <member name="P:Microsoft.Rest.SerializationException.Content">
+            <summary>
+            Gets of sets content that failed to serialize.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.Base64UrlJsonConverter.ToBase64UrlString(System.Byte[])">
+            <summary>
+            Converts a byte array to a Base64Url encoded string
+            </summary>
+            <param name="input">The byte array to convert</param>
+            <returns>The Base64Url encoded form of the input</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.Base64UrlJsonConverter.FromBase64UrlString(System.String)">
+            <summary>
+            Converts a Base64Url encoded string to a byte array
+            </summary>
+            <param name="input">The Base64Url encoded string</param>
+            <returns>The byte array represented by the enconded string</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.Base64UrlJsonConverter.Pad(System.String)">
+            <summary>
+            Adds padding to the input
+            </summary>
+            <param name="input"> the input string </param>
+            <returns> the padded string </returns>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.DateJsonConverter">
+            <summary>
+            JsonConverter that handles serialization for dates in yyyy-MM-dd format.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.DateJsonConverter.#ctor">
+            <summary>
+            Initializes a new instance of DateJsonConverter.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter">
+            <summary>
+            JsonConverter that handles serialization for dates in RFC1123 format.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter.#ctor">
+            <summary>
+            Initializes a new instance of DateJsonConverter.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.Iso8601TimeSpanConverter">
+            <summary>
+            Converter used to convert timespan to ISO8601 format
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.Iso8601TimeSpanConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the specified object to JSON.
+            </summary>
+            <param name="writer">The JSON writer.</param>
+            <param name="value">The value to serialize.</param>
+            <param name="serializer">The JSON serializer.</param> 
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.Iso8601TimeSpanConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON token.
+            </summary>
+            <param name="reader">The JSON reader.</param>
+            <param name="objectType">The object type.</param>
+            <param name="existingValue">The existing value of object being read.</param>
+            <param name="serializer">The JSON serializer.</param>
+            <returns>The object value.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.Iso8601TimeSpanConverter.CanConvert(System.Type)">
+            <summary>
+            Determines whether this instance can convert the specified object type.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <returns>true if this instance can convert the specified object type; otherwise, false.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.JsonConverterHelper">
+            <summary>
+            Helper class for JsonConverters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.JsonConverterHelper.SerializeProperties(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Serializes properties of the value object into JsonWriter.
+            </summary>
+            <param name="writer">The JSON writer.</param>
+            <param name="value">The value to serialize.</param>
+            <param name="serializer">The JSON serializer.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.JsonConverterHelper.SerializeProperties(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer,System.Predicate{Newtonsoft.Json.Serialization.JsonProperty})">
+            <summary>
+            Serializes properties of the value object into JsonWriter.
+            </summary>
+            <param name="writer">The JSON writer.</param>
+            <param name="value">The value to serialize.</param>
+            <param name="serializer">The JSON serializer.</param>
+            <param name="filter">If specified filters JsonProperties to be serialized.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.JsonTransformationAttribute">
+            <summary>
+            Instructs the Microsoft.Rest.Serialization.TransformationJsonConverter to 
+            transform properties of the type based on dot convention.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1">
+            <summary>
+            JsonConverter that handles deserialization for polymorphic objects
+            based on discriminator field.
+            </summary>
+            <typeparam name="T">The base type.</typeparam>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1.#ctor(System.String)">
+            <summary>
+            Initializes an instance of the PolymorphicDeserializeJsonConverter.
+            </summary>
+            <param name="discriminatorField">The JSON field used as a discriminator</param>
+        </member>
+        <member name="P:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1.CanWrite">
+            <summary>
+            Returns false.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1.CanConvert(System.Type)">
+            <summary>
+            Returns true if the object being deserialized is assignable to the base type. False otherwise.
+            </summary>
+            <param name="objectType">The type of the object to check.</param>
+            <returns>True if the object being deserialized is assignable to the base type. False otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads a JSON field and deserializes into an appropriate object based on discriminator
+            field and object name. If JsonObject attribute is available, its value is used instead.
+            </summary>
+            <param name="reader">The JSON reader.</param>
+            <param name="objectType">The type of the object.</param>
+            <param name="existingValue">The existing value.</param>
+            <param name="serializer">The JSON serializer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Throws NotSupportedException.
+            </summary>
+            <param name="writer">The JSON writer.</param>
+            <param name="value">The value to serialize.</param>
+            <param name="serializer">The JSON serializer.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.PolymorphicJsonConverter">
+            <summary>
+            Base JSON converter for polymorphic objects.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.Serialization.PolymorphicJsonConverter.Discriminator">
+            <summary>
+            Discriminator property name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicJsonConverter.GetDerivedType(System.Type,System.String)">
+            <summary>
+            Returns type that matches specified name.
+            </summary>
+            <param name="baseType">Base type.</param>
+            <param name="name">Derived type name</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1">
+            <summary>
+            JsonConverter that handles serialization for polymorphic objects
+            based on discriminator field.
+            </summary>
+            <typeparam name="T">The base type.</typeparam>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1.#ctor(System.String)">
+            <summary>
+            Initializes an instance of the PolymorphicSerializeJsonConverter.
+            </summary>
+            <param name="discriminatorField">The JSON field used as a discriminator</param>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1.CanConvert(System.Type)">
+            <summary>
+            Returns true if the object being serialized is assignable from the base type. False otherwise.
+            </summary>
+            <param name="objectType">The type of the object to check.</param>
+            <returns>True if the object being serialized is assignable from the base type. False otherwise.</returns>
+        </member>
+        <member name="P:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1.CanRead">
+            <summary>
+            Returns false.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Throws NotSupportedException.
+            </summary>
+            <param name="reader">The JSON reader.</param>
+            <param name="objectType">The type of the object.</param>
+            <param name="existingValue">The existing value.</param>
+            <param name="serializer">The JSON serializer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter`1.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Serializes an object into a JSON string based on discriminator
+            field and object name. If JsonObject attribute is available, its value is used instead.
+            </summary>
+            <param name="writer">The JSON writer.</param>
+            <param name="value">The value to serialize.</param>
+            <param name="serializer">The JSON serializer.</param>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver">
+            <summary>
+            JSON contract resolver that ignores read-only properties during serialization.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver.CreateProperty(System.Reflection.MemberInfo,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            Creates a JsonProperty for the given MemberInfo.
+            </summary>
+            <param name="member">The member to create a JsonProperty for.</param>
+            <param name="memberSerialization">The member's parent MemberSerialization.</param>
+            <returns>A created JsonProperty for the given MemberInfo.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.SafeJsonConvert">
+            <summary>
+            Provides an alternative to JSON.NET's JsonConvert that does not inherit any settings from
+            JsonConvert.DefaultSettings.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject``1(System.String,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Deserializes the given JSON into an instance of type T.
+            </summary>
+            <typeparam name="T">The type to which to deserialize.</typeparam>
+            <param name="json">The JSON to deserialize.</param>
+            <param name="settings">JsonSerializerSettings to control deserialization.</param>
+            <returns>An instance of type T deserialized from the given JSON.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject``1(System.String,Newtonsoft.Json.JsonConverter[])">
+            <summary>
+            Deserializes the given JSON into an instance of type T using the given JsonConverters.
+            </summary>
+            <typeparam name="T">The type to which to deserialize.</typeparam>
+            <param name="json">The JSON to deserialize.</param>
+            <param name="converters">A collection of JsonConverters to control deserialization.</param>
+            <returns>An instance of type T deserialized from the given JSON.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(System.Object,Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Serializes the given object into JSON.
+            </summary>
+            <param name="obj">The object to serialize.</param>
+            <param name="settings">JsonSerializerSettings to control serialization.</param>
+            <returns>A string containing the JSON representation of the given object.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(System.Object,Newtonsoft.Json.JsonConverter[])">
+            <summary>
+            Serializes the given object into JSON using the given JsonConverters.
+            </summary>
+            <param name="obj">The object to serialize.</param>
+            <param name="converters">A collection of JsonConverters to control serialization.</param>
+            <returns>A string containing the JSON representation of the given object.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.Serialization.TransformationJsonConverter">
+            <summary>
+            JsonConverter that provides serialization for with optional object transformation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.TransformationJsonConverter.CanConvert(System.Type)">
+            <summary>
+            Returns true if the object being serialized contains JsonTransformationAttribute. False otherwise.
+            </summary>
+            <param name="objectType">The type of the object to check.</param>
+            <returns>True if the object being serialized contains JsonTransformationAttribute. False otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.TransformationJsonConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Deserializes an object from a JSON string and flattens out Properties.
+            </summary>
+            <param name="reader">The JSON reader.</param>
+            <param name="objectType">The type of the object.</param>
+            <param name="existingValue">The existing value.</param>
+            <param name="serializer">The JSON serializer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.TransformationJsonConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Serializes an object into a JSON string adding Properties. 
+            </summary>
+            <param name="writer">The JSON writer.</param>
+            <param name="value">The value to serialize.</param>
+            <param name="serializer">The JSON serializer.</param>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.UnixTimeJsonConverter.ToUnixTime(System.DateTime)">
+            <summary>
+            Converts a byte array to a Base64Url encoded string
+            </summary>
+            <param name="input">The byte array to convert</param>
+            <returns>The Base64Url encoded form of the input</returns>
+        </member>
+        <member name="M:Microsoft.Rest.Serialization.UnixTimeJsonConverter.FromUnixTime(System.Nullable{System.Int64})">
+            <summary>
+            Converts a Base64Url encoded string to a byte array
+            </summary>
+            <param name="input">The Base64Url encoded string</param>
+            <returns>The byte array represented by the enconded string</returns>
+        </member>
+        <member name="T:Microsoft.Rest.ServiceClient`1">
+            <summary>
+            ServiceClient is the abstraction for accessing REST operations and their payload data types..
+            </summary>
+            <typeparam name="T">Type of the ServiceClient.</typeparam>
+        </member>
+        <member name="F:Microsoft.Rest.ServiceClient`1.FXVERSION">
+            <summary>
+            ProductName string to be used to set Framework Version in UserAgent
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.ServiceClient`1._defaultUserAgentInfoList">
+            <summary>
+            List of default UserAgent info that will be added to HttpClient instance
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.ServiceClient`1._disposed">
+            <summary>
+            Indicates whether the ServiceClient has been disposed. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.ServiceClient`1._clientVersion">
+            <summary>
+            Field used for ClientVersion property
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.ServiceClient`1._fxVersion">
+            <summary>
+            Field used for Framework Version property
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClient`1.DefaultUserAgentInfoList">
+            <summary>
+            List of default info that gets added to DefaultHeaders.UserAgent of HttpClient
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClient`1.ClientVersion">
+            <summary>
+            Gets the AssemblyInformationalVersion if available
+            if not it gets the AssemblyFileVerion
+            if neither are available it will default to the Assembly Version of a service client.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClient`1.FrameworkVersion">
+            <summary>
+            Get file version for System.dll
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClient`1.FirstMessageHandler">
+            <summary>
+            Reference to the first HTTP handler (which is the start of send HTTP
+            pipeline).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClient`1.HttpClientHandler">
+            <summary>
+            Reference to the innermost HTTP handler (which is the end of send HTTP
+            pipeline).
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.#ctor">
+            <summary>
+            Initializes a new instance of the ServiceClient class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the ServiceClient class.
+            </summary>
+            <param name="httpClient">HttpClient</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.#ctor(System.Net.Http.DelegatingHandler[])">
+            <summary>
+            Initializes a new instance of the ServiceClient class.
+            </summary>
+            <param name="handlers">List of handlers from top to bottom (outer handler is the first in the list)</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.#ctor(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])">
+            <summary>
+            Initializes ServiceClient using base HttpClientHandler and list of handlers.
+            </summary>
+            <param name="rootHandler">Base HttpClientHandler.</param>
+            <param name="handlers">List of handlers from top to bottom (outer handler is the first in the list)</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.CreateRootHandler">
+            <summary>
+            Create a new instance of the root handler.
+            </summary>
+            <returns>HttpClientHandler created.</returns>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClient`1.HttpClient">
+            <summary>
+            Gets the HttpClient used for making HTTP requests.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClient`1.UserAgent">
+            <summary>
+            Gets the UserAgent collection which can be augmented with custom
+            user agent strings.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClient`1.HttpMessageHandlers">
+            <summary>
+            Get the HTTP pipelines for the given service client.
+            </summary>
+            <returns>The client's HTTP pipeline.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.SetRetryPolicy(Microsoft.Rest.TransientFaultHandling.RetryPolicy)">
+            <summary>
+            Sets retry policy for the client.
+            </summary>
+            <param name="retryPolicy">Retry policy to set.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.Dispose">
+            <summary>
+            Dispose the ServiceClient.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.Dispose(System.Boolean)">
+            <summary>
+            Dispose the HttpClient and Handlers.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to releases only unmanaged resources.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.InitializeHttpClient(System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])">
+            <summary>
+            Initializes HttpClient using HttpClientHandler.
+            </summary>
+            <param name="httpClientHandler">Base HttpClientHandler.</param>
+            <param name="handlers">List of handlers from top to bottom (outer handler is the first in the list)</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.InitializeHttpClient(System.Net.Http.HttpClient,System.Net.Http.HttpClientHandler,System.Net.Http.DelegatingHandler[])">
+            <summary>
+            Initialize service client with provided HttpClient
+            </summary>
+            <param name="httpClient">HttpClient</param>
+            <param name="httpClientHandler">HttpClientHandler</param>
+            <param name="handlers">List of handlers from top to bottom (outer handler is the first in the list)</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String)">
+            <summary>
+            Sets the product name to be used in the user agent header when making requests
+            </summary>
+            <param name="productName">Name of the product to be used in the user agent</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.SetUserAgent(System.String,System.String)">
+            <summary>
+            Sets the product name and version to be used in the user agent header when making requests
+            </summary>
+            <param name="productName">Name of the product to be used in the user agent</param>
+            <param name="version">Version of the product to be used in the user agent</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.CleanUserAgentInfoEntry(System.String)">
+            <summary>
+            Cleaning unsupported characters from user agent strings
+            </summary>
+            <param name="infoEntry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClient`1.MergeUserAgentInfo(System.Collections.Generic.List{System.Net.Http.Headers.ProductInfoHeaderValue})">
+            <summary>
+            Finds if default UserAgent info is already set in UserAgent collection, if not it will add it
+            We do this because, now we accept passed in HttpClient.
+            So for any reason the passed HttpClient has our default UserAgent info (based on key name), we will not verify and check the values and will honor those values
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.ServiceClientCredentials">
+            <summary>
+            ServiceClientCredentials is the abstraction for credentials used by ServiceClients accessing REST services.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientCredentials.InitializeServiceClient``1(Microsoft.Rest.ServiceClient{``0})">
+            <summary>
+            Initialize a ServiceClient instance for accessing REST APIs with these credentials. 
+            </summary>
+            <typeparam name="T">Type of ServiceClient.</typeparam>
+            <param name="client">The ServiceClient.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientCredentials.ProcessHttpRequestAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Apply the credentials to the HTTP request.
+            </summary>
+            <param name="request">The HTTP request message.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>
+            Task that will complete when processing has finished.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Rest.ServiceClientTracing">
+            <summary>
+            Provides a set of methods and properties that help you trace the service client.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.ServiceClientTracing._interceptors">
+            <summary>
+            The collection of tracing interceptors to notify.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.ServiceClientTracing._threadSafeInterceptors">
+            <summary>
+            A read-only, thread-safe collection of tracing interceptors.  Since
+            List is only thread-safe for reads (and adding/removing tracing
+            interceptors isn't a very common operation), we simply replace the
+            entire collection of interceptors so any enumeration of the list
+            in progress on a different thread will not be affected by the
+            change.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.ServiceClientTracing._lock">
+            <summary>
+            Lock used to synchronize mutation of the tracing interceptors.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.ServiceClientTracing._nextInvocationId">
+            <summary>
+            The invocation identifier.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClientTracing.IsEnabled">
+            <summary>
+            Gets or sets a value indicating whether tracing is enabled.
+            Tracing can be disabled for performance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClientTracing.TracingInterceptors">
+            <summary>
+            Gets a sequence of the tracing interceptors to notify of changes.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ServiceClientTracing.NextInvocationId">
+            <summary>
+            Get the next invocation identifier.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientTracing.AddTracingInterceptor(Microsoft.Rest.IServiceClientTracingInterceptor)">
+            <summary>
+            Add a tracing interceptor to be notified of changes.
+            </summary>
+            <param name="interceptor">The tracing interceptor.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientTracing.RemoveTracingInterceptor(Microsoft.Rest.IServiceClientTracingInterceptor)">
+            <summary>
+            Remove a tracing interceptor from change notifications.
+            </summary>
+            <param name="interceptor">The tracing interceptor.</param>
+            <returns>True if the tracing interceptor was found and removed; false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientTracing.Information(System.String,System.Object[])">
+            <summary>
+            Write the informational tracing message.
+            </summary>
+            <param name="message">The message to trace.</param>
+            <param name="parameters">An object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientTracing.Configuration(System.String,System.String,System.String)">
+            <summary>
+            Represents the tracing configuration for the value of a setting.
+            </summary>
+            <param name="source">The configuration source.</param>
+            <param name="name">The name of the setting.</param>
+            <param name="value">The value of the setting in the source.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientTracing.Information(System.String)">
+            <summary>
+            Specifies the tracing information.
+            </summary>
+            <param name="message">The message to trace.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientTracing.Enter(System.String,System.Object,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Represents the tracing entry.
+            </summary>
+            <param name="invocationId"></param>
+            <param name="instance">The tracing instance.</param>
+            <param name="method">The tracing method.</param>
+            <param name="parameters">Method parameters.</param>     
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientTracing.SendRequest(System.String,System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Sends a tracing request.
+            </summary>
+            <param name="invocationId">The invocation identifier.</param>
+            <param name="request">The request about to be sent.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientTracing.ReceiveResponse(System.String,System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Receives a tracing response.
+            </summary>
+            <param name="invocationId">The invocation identifier.</param>
+            <param name="response">The response message instance.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientTracing.Error(System.String,System.Exception)">
+            <summary>
+            Represents the tracing error.
+            </summary>
+            <param name="invocationId">The invocation identifier.</param>
+            <param name="ex">The tracing exception.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ServiceClientTracing.Exit(System.String,System.Object)">
+            <summary>
+            Abandons the tracing method.
+            </summary>
+            <param name="invocationId">The invocation identifier.</param>
+            <param name="result">Method return result.</param>
+        </member>
+        <member name="T:Microsoft.Rest.StringTokenProvider">
+            <summary>
+            A simple token provider that always provides a static access token.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.StringTokenProvider.#ctor(System.String,System.String)">
+            <summary>
+            Create a token provider for the given token type that returns the given 
+            access token.
+            </summary>
+            <param name="accessToken">The access token to return.</param>
+            <param name="tokenType">The token type of the given access token.</param>
+        </member>
+        <member name="P:Microsoft.Rest.StringTokenProvider.TokenType">
+            <summary>
+            Gets the token type of this access token.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.StringTokenProvider.GetAuthenticationHeaderAsync(System.Threading.CancellationToken)">
+            <summary>
+            Returns the static access token.
+            </summary>
+            <param name="cancellationToken">The cancellation token for this action.  
+            This will not be used since the returned token is static.</param>
+            <returns>The access token.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TokenCredentials">
+            <summary>
+            Token based credentials for use with a REST Service Client.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.TokenCredentials.BearerTokenType">
+            <summary>
+            The bearer token type, as serialized in an http Authentication header.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TokenCredentials.TokenProvider">
+            <summary>
+            Gets or sets secure token used to authenticate against Microsoft Azure API. 
+            No anonymous requests are allowed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TokenCredentials.TenantId">
+            <summary>
+            Gets Tenant ID
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TokenCredentials.CallerId">
+            <summary>
+            Gets UserInfo.DisplayableId
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TokenCredentials.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TokenCredentials"/>
+            class with the given 'Bearer' token.
+            </summary>
+            <param name="token">Valid JSON Web Token (JWT).</param>
+        </member>
+        <member name="M:Microsoft.Rest.TokenCredentials.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TokenCredentials"/>
+            class with the given token and token type.
+            </summary>
+            <param name="token">Valid JSON Web Token (JWT).</param>
+            <param name="tokenType">The token type of the given token.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TokenCredentials.#ctor(Microsoft.Rest.ITokenProvider)">
+            <summary>
+            Create an access token credentials object, given an interface to a token source.
+            </summary>
+            <param name="tokenProvider">The source of tokens for these credentials.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TokenCredentials.#ctor(Microsoft.Rest.ITokenProvider,System.String,System.String)">
+            <summary>
+            Create an access token credentials object, given an interface to a token source.
+            </summary>
+            <param name="tokenProvider">The source of tokens for these credentials.</param>
+            <param name="tenantId">Tenant ID from AuthenticationResult</param>
+            <param name="callerId">UserInfo.DisplayableId field from AuthenticationResult</param>
+        </member>
+        <member name="M:Microsoft.Rest.TokenCredentials.ProcessHttpRequestAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Apply the credentials to the HTTP request.
+            </summary>
+            <param name="request">The HTTP request.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>
+            Task that will complete when processing has completed.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.AsyncExecution`1">
+            <summary>
+            Handles the execution and retries of the user-initiated task.
+            </summary>
+            <typeparam name="TResult">The result type of the user-initiated task.</typeparam>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.AsyncExecution">
+            <summary>
+            Provides a wrapper for a non-generic <see cref="T:System.Threading.Tasks.Task"/> and calls into the pipeline
+            to retry only the generic version of the <see cref="T:System.Threading.Tasks.Task"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.AsyncExecution.StartAsGenericTask(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Wraps the non-generic <see cref="T:System.Threading.Tasks.Task"/> into a generic <see cref="T:System.Threading.Tasks.Task"/>.
+            </summary>
+            <param name="taskAction">The task to wrap.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that wraps the non-generic <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy">
+            <summary>
+            A retry strategy with backoff parameters for calculating the exponential delay between retries.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy.DefaultClientBackoff">
+            <summary>
+            Represents the default amount of time used when calculating a random delta in the exponential 
+            delay between retries.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy.DefaultMaxBackoff">
+            <summary>
+            Represents the default maximum amount of time used when calculating the exponential 
+            delay between retries.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy.DefaultMinBackoff">
+            <summary>
+            Represents the default minimum amount of time used when calculating the exponential 
+            delay between retries.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy"/> class. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy.#ctor(System.Int32,System.TimeSpan,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy"/> class with the specified 
+            retry settings.
+            </summary>
+            <param name="retryCount">The maximum number of retry attempts.</param>
+            <param name="minBackoff">The minimum backoff time</param>
+            <param name="maxBackoff">The maximum backoff time.</param>
+            <param name="deltaBackoff">The value that will be used to calculate a random delta in the exponential delay 
+            between retries.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy.#ctor(System.String,System.Int32,System.TimeSpan,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy"/> class with the specified name and 
+            retry settings.
+            </summary>
+            <param name="name">The name of the retry strategy.</param>
+            <param name="retryCount">The maximum number of retry attempts.</param>
+            <param name="minBackoff">The minimum backoff time</param>
+            <param name="maxBackoff">The maximum backoff time.</param>
+            <param name="deltaBackoff">The value that will be used to calculate a random delta in the exponential delay 
+            between retries.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy.#ctor(System.String,System.Int32,System.TimeSpan,System.TimeSpan,System.TimeSpan,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy"/> class with the specified name, 
+            retry settings, and fast retry option.
+            </summary>
+            <param name="name">The name of the retry strategy.</param>
+            <param name="retryCount">The maximum number of retry attempts.</param>
+            <param name="minBackoff">The minimum backoff time</param>
+            <param name="maxBackoff">The maximum backoff time.</param>
+            <param name="deltaBackoff">The value that will be used to calculate a random delta in the exponential delay 
+            between retries.</param>
+            <param name="firstFastRetry">true to immediately retry in the first attempt; otherwise, false. The subsequent 
+            retries will remain subject to the configured retry interval.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.ExponentialBackoffRetryStrategy.GetShouldRetryHandler">
+            <summary>
+            Returns the corresponding ShouldRetry delegate.
+            </summary>
+            <returns>The ShouldRetry delegate.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy">
+            <summary>
+            Represents a retry strategy with a specified number of retry attempts and a default, fixed 
+            time interval between retries.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy"/> class. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy"/> class with the 
+            specified number of retry attempts. 
+            </summary>
+            <param name="retryCount">The number of retry attempts.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy.#ctor(System.Int32,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy"/> class with the 
+            specified number of retry attempts and time interval. 
+            </summary>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="retryInterval">The time interval between retries.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy.#ctor(System.String,System.Int32,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy"/> class with the 
+            specified number of retry attempts, time interval, and retry strategy. 
+            </summary>
+            <param name="name">The retry strategy name.</param>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="retryInterval">The time interval between retries.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy.#ctor(System.String,System.Int32,System.TimeSpan,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy"/> class with the 
+            specified number of retry attempts, time interval, retry strategy, and fast start option. 
+            </summary>
+            <param name="name">The retry strategy name.</param>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="retryInterval">The time interval between retries.</param>
+            <param name="firstFastRetry">true to immediately retry in the first attempt; otherwise, false. 
+            The subsequent retries will remain subject to the configured retry interval.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.FixedIntervalRetryStrategy.GetShouldRetryHandler">
+            <summary>
+            Returns the corresponding ShouldRetry delegate.
+            </summary>
+            <returns>The ShouldRetry delegate.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.Guard">
+            <summary>
+            Implements the common guard methods.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.Guard.ArgumentNotNull(System.Object,System.String)">
+            <summary>
+            Checks an argument to ensure that it isn't null.
+            </summary>
+            <param name="argumentValue">The argument value to check.</param>
+            <param name="argumentName">The name of the argument.</param>
+            <returns>The return value should be ignored. It is intended to be used only when validating arguments during instance creation (for example, when calling the base constructor).</returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.Guard.ArgumentNotNegativeValue(System.Int32,System.String)">
+            <summary>
+            Checks an argument to ensure that its 32-bit signed value isn't negative.
+            </summary>
+            <param name="argumentValue">The <see cref="T:System.Int32"/> value of the argument.</param>
+            <param name="argumentName">The name of the argument for diagnostic purposes.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.Guard.ArgumentNotNegativeValue(System.Int64,System.String)">
+            <summary>
+            Checks an argument to ensure that its 64-bit signed value isn't negative.
+            </summary>
+            <param name="argumentValue">The <see cref="T:System.Int64"/> value of the argument.</param>
+            <param name="argumentName">The name of the argument for diagnostic purposes.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.Guard.ArgumentNotGreaterThan(System.Double,System.Double,System.String)">
+            <summary>
+            Checks an argument to ensure that its value doesn't exceed the specified ceiling baseline.
+            </summary>
+            <param name="argumentValue">The <see cref="T:System.Double"/> value of the argument.</param>
+            <param name="ceilingValue">The <see cref="T:System.Double"/> ceiling value of the argument.</param>
+            <param name="argumentName">The name of the argument for diagnostic purposes.</param>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.HttpRequestWithStatusException">
+            <summary>
+            Inherits HttpRequestException adding HttpStatusCode to the exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.HttpRequestWithStatusException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.HttpRequestWithStatusException"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.HttpRequestWithStatusException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.HttpRequestWithStatusException"/> class
+            with a specific message that describes the current exception.
+            </summary>
+            <param name="message">A message that describes the current exception.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.HttpRequestWithStatusException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.HttpRequestWithStatusException"/> class
+            with a specific message that describes the current exception and an inner
+            exception.
+            </summary>
+            <param name="message">A message that describes the current exception.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.HttpRequestWithStatusException.StatusCode">
+            <summary>
+            Http status code.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.HttpStatusCodeErrorDetectionStrategy">
+            <summary>
+            Default Http error detection strategy based on Http Status Code.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.HttpStatusCodeErrorDetectionStrategy.IsTransient(System.Exception)">
+            <summary>
+            Returns true if status code in HttpRequestExceptionWithStatus exception is greater 
+            than or equal to 500 and not NotImplemented (501) or HttpVersionNotSupported (505).
+            </summary>
+            <param name="ex">Exception to check against.</param>
+            <returns>True if exception is transient otherwise false.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy">
+            <summary>
+            A retry strategy with a specified number of retry attempts and an incremental time 
+            interval between retries.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy.DefaultRetryIncrement">
+            <summary>
+            Represents the default time increment between retry attempts in the progressive delay policy.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy"/> class. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy.#ctor(System.Int32,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy"/> class with the specified retry settings.
+            </summary>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="initialInterval">The initial interval that will apply for the first retry.</param>
+            <param name="increment">The incremental time value that will be used to calculate the progressive 
+            delay between retries.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy.#ctor(System.String,System.Int32,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy"/> class with the specified name and retry settings.
+            </summary>
+            <param name="name">The retry strategy name.</param>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="initialInterval">The initial interval that will apply for the first retry.</param>
+            <param name="increment">The incremental time value that will be used to calculate the progressive 
+            delay between retries.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy.#ctor(System.String,System.Int32,System.TimeSpan,System.TimeSpan,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy"/> class with the specified number of retry attempts, 
+            time interval, retry strategy, and fast start option. 
+            </summary>
+            <param name="name">The retry strategy name.</param>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="initialInterval">The initial interval that will apply for the first retry.</param>
+            <param name="increment">The incremental time value that will be used to calculate the progressive delay between 
+            retries.</param>
+            <param name="firstFastRetry">true to immediately retry in the first attempt; otherwise, false. The subsequent 
+            retries will remain subject to the configured retry interval.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.IncrementalRetryStrategy.GetShouldRetryHandler">
+            <summary>
+            Returns the corresponding ShouldRetry delegate.
+            </summary>
+            <returns>The ShouldRetry delegate.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy">
+            <summary>
+            Defines an interface that must be implemented by custom components responsible for 
+            detecting specific transient conditions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy.IsTransient(System.Exception)">
+            <summary>
+            Determines whether the specified exception represents a transient failure that 
+            can be compensated by a retry.
+            </summary>
+            <param name="ex">The exception object to be verified.</param>
+            <returns>true if the specified exception is considered as transient; otherwise, 
+            false.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.RetryCondition">
+            <summary>
+            Defines a retry condition.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryCondition.#ctor(System.Boolean,System.TimeSpan)">
+            <param name="retryAllowed">Is retry allowed.</param>
+            <param name="delay">The delay that indicates how long the current thread will be suspended before.
+            the next iteration is invoked.</param>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryCondition.DelayBeforeRetry">
+            <summary>
+            Gets or sets the retry interval value for retry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryCondition.RetryAllowed">
+            <summary>
+            Gets or sets a value indicating whether retry attempt is allowed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.RetryingEventArgs">
+            <summary>
+            Contains information that is required for the <see cref="E:Microsoft.Rest.TransientFaultHandling.RetryPolicy.Retrying"/> event.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryingEventArgs.#ctor(System.Int32,System.TimeSpan,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryingEventArgs"/> class.
+            </summary>
+            <param name="currentRetryCount">The current retry attempt count.</param>
+            <param name="delay">The delay that indicates how long the current thread will be 
+            suspended before the next iteration is invoked.</param>
+            <param name="lastException">The exception that caused the retry conditions to occur.</param>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryingEventArgs.CurrentRetryCount">
+            <summary>
+            Gets the current retry count.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryingEventArgs.Delay">
+            <summary>
+            Gets the delay that indicates how long the current thread will be suspended before the 
+            next iteration is invoked.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryingEventArgs.LastException">
+            <summary>
+            Gets the exception that caused the retry conditions to occur.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.RetryManager">
+            <summary>
+            Provides the entry point to the retry functionality.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryManager.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Rest.TransientFaultHandling.RetryStrategy})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryManager"/> class.
+            </summary>
+            <param name="retryStrategies">The complete set of retry strategies.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryManager.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Rest.TransientFaultHandling.RetryStrategy},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryManager"/> class with the specified retry 
+            strategies and default retry strategy name.
+            </summary>
+            <param name="retryStrategies">The complete set of retry strategies.</param>
+            <param name="defaultRetryStrategyName">The default retry strategy.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryManager.#ctor(System.Collections.Generic.IEnumerable{Microsoft.Rest.TransientFaultHandling.RetryStrategy},System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryManager"/> class with the specified retry 
+            strategies and defaults.
+            </summary>
+            <param name="retryStrategies">The complete set of retry strategies.</param>
+            <param name="defaultRetryStrategyName">The default retry strategy.</param>
+            <param name="defaultRetryStrategyNamesMap">The names of the default strategies for different technologies.</param>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryManager.Instance">
+            <summary>
+            Gets the default <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryManager"/> for the application.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryManager.DefaultRetryStrategyName">
+            <summary>
+            Gets or sets the default retry strategy name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryManager.SetDefault(Microsoft.Rest.TransientFaultHandling.RetryManager)">
+            <summary>
+            Sets the specified retry manager as the default retry manager.
+            Will throw an exception if the manager is already set.
+            </summary>
+            <param name="retryManager">The retry manager.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryManager.SetDefault(Microsoft.Rest.TransientFaultHandling.RetryManager,System.Boolean)">
+            <summary>
+            Sets the specified retry manager as the default retry manager.
+            </summary>
+            <param name="retryManager">The retry manager.</param>
+            <param name="throwIfSet">true to throw an exception if the manager is already set; otherwise, false.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryManager.GetRetryPolicy``1">
+            <summary>
+            Returns a retry policy with the specified error detection strategy and the default retry strategy 
+            defined in the configuration. 
+            </summary>
+            <typeparam name="T">The type that implements the <see cref="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy"/> 
+            interface that is responsible for detecting transient conditions.</typeparam>
+            <returns>A new retry policy with the specified error detection strategy and the default retry 
+            strategy defined in the configuration.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryManager.GetRetryPolicy``1(System.String)">
+            <summary>
+            Returns a retry policy with the specified error detection strategy and retry strategy.
+            </summary>
+            <typeparam name="T">The type that implements the <see cref="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy"/> 
+            interface that is responsible for detecting transient conditions.</typeparam>
+            <param name="retryStrategyName">The retry strategy name, as defined in the configuration.</param>
+            <returns>A new retry policy with the specified error detection strategy and the default retry 
+            strategy defined in the configuration.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryManager.GetRetryStrategy">
+            <summary>
+            Returns the default retry strategy defined in the configuration.
+            </summary>
+            <returns>The retry strategy that matches the default strategy.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryManager.GetRetryStrategy(System.String)">
+            <summary>
+            Returns the retry strategy that matches the specified name.
+            </summary>
+            <param name="retryStrategyName">The retry strategy name.</param>
+            <returns>The retry strategy that matches the specified name.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryManager.GetDefaultRetryStrategy(System.String)">
+            <summary>
+            Returns the retry strategy for the specified technology.
+            </summary>
+            <param name="technology">The technology to get the default retry strategy for.</param>
+            <returns>The retry strategy for the specified technology.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy">
+            <summary>
+            Provides the base implementation of the retry mechanism for unreliable actions and 
+            transient conditions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.#ctor(Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy,Microsoft.Rest.TransientFaultHandling.RetryStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy"/> class with the specified number of retry 
+            attempts and parameters defining the progressive delay between retries.
+            </summary>
+            <param name="errorDetectionStrategy">The <see cref="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy"/> that is 
+            responsible for detecting transient conditions.</param>
+            <param name="retryStrategy">The strategy to use for this retry policy.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.#ctor(Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy"/> class with the specified number of retry 
+            attempts and default fixed time interval between retries.
+            </summary>
+            <param name="errorDetectionStrategy">The <see cref="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy"/> that is responsible 
+            for detecting transient conditions.</param>
+            <param name="retryCount">The number of retry attempts.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.#ctor(Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy,System.Int32,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy"/> class with the specified number of retry 
+            attempts and fixed time interval between retries.
+            </summary>
+            <param name="errorDetectionStrategy">The <see cref="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy"/> that is responsible 
+            for detecting transient conditions.</param>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="retryInterval">The interval between retries.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.#ctor(Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy,System.Int32,System.TimeSpan,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy"/> class with the specified number of retry attempts 
+            and backoff parameters for calculating the exponential delay between retries.
+            </summary>
+            <param name="errorDetectionStrategy">The <see cref="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy"/> that is responsible 
+            for detecting transient conditions.</param>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="minBackoff">The minimum backoff time.</param>
+            <param name="maxBackoff">The maximum backoff time.</param>
+            <param name="deltaBackoff">The time value that will be used to calculate a random delta in the exponential delay 
+            between retries.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.#ctor(Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy,System.Int32,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy"/> class with the specified number of retry 
+            attempts and parameters defining the progressive delay between retries.
+            </summary>
+            <param name="errorDetectionStrategy">The <see cref="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy"/> that is responsible for 
+            detecting transient conditions.</param>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="initialInterval">The initial interval that will apply for the first retry.</param>
+            <param name="increment">The incremental time value that will be used to calculate the progressive delay between 
+            retries.</param>
+        </member>
+        <member name="E:Microsoft.Rest.TransientFaultHandling.RetryPolicy.Retrying">
+            <summary>
+            An instance of a callback delegate that will be invoked whenever a retry condition is encountered.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryPolicy.RetryStrategy">
+            <summary>
+            Gets the retry strategy.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryPolicy.ErrorDetectionStrategy">
+            <summary>
+            Gets the instance of the error detection strategy.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.ExecuteAction(System.Action)">
+            <summary>
+            Repetitively executes the specified action while it satisfies the current retry policy.
+            </summary>
+            <param name="action">A delegate that represents the executable action that doesn't return any results.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.ExecuteAction``1(System.Func{``0})">
+            <summary>
+            Repetitively executes the specified action while it satisfies the current retry policy.
+            </summary>
+            <typeparam name="TResult">The type of result expected from the executable action.</typeparam>
+            <param name="func">A delegate that represents the executable action that returns the result of 
+            type <typeparamref name="TResult"/>.</param>
+            <returns>The result from the action.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.ExecuteAsync(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Repetitively executes the specified asynchronous task while it satisfies the current retry policy.
+            </summary>
+            <param name="taskAction">A function that returns a started task (also known as "hot" task).</param>
+            <returns>
+            A task that will run to completion if the original task completes successfully (either the
+            first time or after retrying transient failures). If the task fails with a non-transient error or
+            the retry limit is reached, the returned task will transition to a faulted state and the exception must be observed.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.ExecuteAsync(System.Func{System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+            <summary>
+            Repetitively executes the specified asynchronous task while it satisfies the current retry policy.
+            </summary>
+            <param name="taskAction">A function that returns a started task (also known as "hot" task).</param>
+            <param name="cancellationToken">The token used to cancel the retry operation. This token does not cancel 
+            the execution of the asynchronous task.</param>
+            <returns>
+            Returns a task that will run to completion if the original task completes successfully (either the
+            first time or after retrying transient failures). If the task fails with a non-transient error or
+            the retry limit is reached, the returned task will transition to a faulted state and the exception must be observed.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.ExecuteAsync``1(System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Repeatedly executes the specified asynchronous task while it satisfies the current retry policy.
+            </summary>
+            <param name="taskFunc">A function that returns a started task (also known as "hot" task).</param>
+            <returns>
+            Returns a task that will run to completion if the original task completes successfully (either the
+            first time or after retrying transient failures). If the task fails with a non-transient error or
+            the retry limit is reached, the returned task will transition to a faulted state and the exception 
+            must be observed.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.ExecuteAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">
+            <summary>
+            Repeatedly executes the specified asynchronous task while it satisfies the current retry policy.
+            </summary>
+            <param name="taskFunc">A function that returns a started task (also known as "hot" task).</param>
+            <param name="cancellationToken">The token used to cancel the retry operation. This token does not 
+            cancel the execution of the asynchronous task.</param>
+            <returns>
+            Returns a task that will run to completion if the original task completes successfully (either the
+            first time or after retrying transient failures). If the task fails with a non-transient error or
+            the retry limit is reached, the returned task will transition to a faulted state and the exception must 
+            be observed.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy.OnRetrying(System.Int32,System.Exception,System.TimeSpan)">
+            <summary>
+            Notifies the subscribers whenever a retry condition is encountered.
+            </summary>
+            <param name="retryCount">The current retry attempt count.</param>
+            <param name="lastError">The exception that caused the retry conditions to occur.</param>
+            <param name="delay">The delay that indicates how long the current thread will be suspended before 
+            the next iteration is invoked.</param>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1">
+            <summary>
+            Provides a generic version of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy"/> class.
+            </summary>
+            <typeparam name="T">The type that implements the <see cref="T:Microsoft.Rest.TransientFaultHandling.ITransientErrorDetectionStrategy"/> 
+            interface that is responsible for detecting transient conditions.</typeparam>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1.#ctor(Microsoft.Rest.TransientFaultHandling.RetryStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1"/> class with the specified number of 
+            retry attempts and parameters defining the progressive delay between retries.
+            </summary>
+            <param name="retryStrategy">The strategy to use for this retry policy.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1"/> class with the specified number of 
+            retry attempts and the default fixed time interval between retries.
+            </summary>
+            <param name="retryCount">The number of retry attempts.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1.#ctor(System.Int32,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1"/> class with the specified number of 
+            retry attempts and a fixed time interval between retries.
+            </summary>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="retryInterval">The interval between retries.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1.#ctor(System.Int32,System.TimeSpan,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1"/> class with the specified number of 
+            retry attempts and backoff parameters for calculating the exponential delay between retries.
+            </summary>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="minBackoff">The minimum backoff time.</param>
+            <param name="maxBackoff">The maximum backoff time.</param>
+            <param name="deltaBackoff">The time value that will be used to calculate a random delta in the 
+            exponential delay between retries.</param>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1.#ctor(System.Int32,System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryPolicy`1"/> class with the specified number of 
+            retry attempts and parameters defining the progressive delay between retries.
+            </summary>
+            <param name="retryCount">The number of retry attempts.</param>
+            <param name="initialInterval">The initial interval that will apply for the first retry.</param>
+            <param name="increment">The incremental time value that will be used to calculate the progressive delay 
+            between retries.</param>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.ShouldRetryHandler">
+            <summary>
+            Defines a callback delegate that will be invoked whenever a retry condition is encountered.
+            </summary>
+            <param name="retryCount">The current retry attempt count.</param>
+            <param name="lastException">The exception that caused the retry conditions to occur.</param>
+            <returns>A retry condition instance</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.RetryStrategy">
+            <summary>
+            Represents a retry strategy that determines the number of retry attempts and the interval 
+            between retries.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.TransientFaultHandling.RetryStrategy.DefaultClientRetryCount">
+            <summary>
+            Represents the default number of retry attempts.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.TransientFaultHandling.RetryStrategy.DefaultRetryInterval">
+            <summary>
+            Represents the default interval between retries.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Rest.TransientFaultHandling.RetryStrategy.DefaultFirstFastRetry">
+            <summary>
+            Represents the default flag indicating whether the first retry attempt will be made immediately,
+            whereas subsequent retries will remain subject to the retry interval.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryStrategy.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Rest.TransientFaultHandling.RetryStrategy"/> class. 
+            </summary>
+            <param name="name">The name of the retry strategy.</param>
+            <param name="firstFastRetry">true to immediately retry in the first attempt; otherwise, false. 
+            The subsequent retries will remain subject to the configured retry interval.</param>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryStrategy.FastFirstRetry">
+            <summary>
+            Gets or sets a value indicating whether the first retry attempt will be made immediately,
+            whereas subsequent retries will remain subject to the retry interval.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.TransientFaultHandling.RetryStrategy.Name">
+            <summary>
+            Gets the name of the retry strategy.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.RetryStrategy.GetShouldRetryHandler">
+            <summary>
+            Returns the corresponding ShouldRetry delegate.
+            </summary>
+            <returns>The ShouldRetry delegate.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TransientFaultHandling.TransientErrorIgnoreStrategy">
+            <summary>
+            Retry strategy that ignores any transient errors.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TransientFaultHandling.TransientErrorIgnoreStrategy.IsTransient(System.Exception)">
+            <summary>
+            Always returns false.
+            </summary>
+            <param name="ex">The exception.</param>
+            <returns>Always false.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.TypeConversion">
+            <summary>
+            Static conversion utility methods.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.TypeConversion.FromBase64String(System.String)">
+            <summary>
+            Converts a string to a UTF8-encoded string.
+            </summary>
+            <param name="value">The string of base-64 digits to convert.</param>
+            <returns>The UTF8-encoded string.</returns>
+        </member>
+        <member name="M:Microsoft.Rest.TypeConversion.TryParseUri(System.String)">
+            <summary>
+            Uses Uri.TryCreate to parse a string as a relative or absolute Uri.
+            </summary>
+            <param name="value">The string to parse.</param>
+            <returns>Uri or null.</returns>
+        </member>
+        <member name="T:Microsoft.Rest.ValidationException">
+            <summary>
+            Validation exception for Microsoft Rest Client. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ValidationException.Rule">
+            <summary>
+            Gets validation rule. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ValidationException.Target">
+            <summary>
+            Gets validation target. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Rest.ValidationException.Details">
+            <summary>
+            Gets validation details.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+            <param name="message">Exception message.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+            <param name="rule">Validation rule.</param>
+            <param name="target">Target of the validation.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor(System.String,System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+            <param name="rule">Validation rule.</param>
+            <param name="target">Target of the validation.</param>
+            <param name="details">Validation details.</param>
+        </member>
+        <member name="M:Microsoft.Rest.ValidationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the ValidationException class.
+            </summary>
+            <param name="message">The exception message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="T:Microsoft.Rest.ValidationRules">
+            <summary>
+            Defines set of validation rules.
+            </summary>
+        </member>
+    </members>
+</doc>
