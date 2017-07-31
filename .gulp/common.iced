@@ -83,7 +83,7 @@ module.exports =
     
     # add the new task.
     # gulp.task name, deps, fn
-    skip = (name.startsWith "init") or (name.startsWith "npm-install") or (name.startsWith "clean") or (name is "copy-dts-files") or (name is "nuke")
+    skip = (name.startsWith "init") or (name.startsWith "npm-install") or (name.startsWith "clean") or (name is "copy-dts-files") or (name.startsWith "nuke")
     
     if !skip
       deps.unshift "init" 
