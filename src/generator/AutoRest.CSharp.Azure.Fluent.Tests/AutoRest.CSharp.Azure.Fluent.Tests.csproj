@@ -10,7 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.8" />
+    <Reference Include="Microsoft.Rest.ClientRuntime">
+      <HintPath>..\..\..\cr\netstandard1.4\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.8" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.0.0" />
