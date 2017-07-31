@@ -9,7 +9,6 @@ using AutoRest.Php.SwaggerBuilder;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace AutoRest.Php
@@ -23,8 +22,8 @@ namespace AutoRest.Php
         static string GetMicrosoftRestClass(string name)
             => "Microsoft\\Rest\\" + name;
 
-        static string MicrosoftRestClientStatic { get; }
-            = GetMicrosoftRestClass("ClientStatic");
+        static string MicrosoftRestRunTimeStatic { get; }
+            = GetMicrosoftRestClass("RunTimeStatic");
 
         /// <summary>
         /// Microsoft\Rest\ClientInterface
@@ -195,8 +194,9 @@ namespace AutoRest.Php
 
         private static Statement CreateClient { get; }
             = ThisClient
-                .Assign(new ClassName(MicrosoftRestClientStatic).StaticCall(
-                    new FunctionName("createFromData"), PHP.SelfScope(DefinitionsData)))
+                .Assign(new ClassName(MicrosoftRestRunTimeStatic)
+                    .StaticCall("create")
+                    .Call("createClientFromData", PHP.SelfScope(DefinitionsData)))
                 .Statement();
 
         public override async Task Generate(CodeModel codeModel)

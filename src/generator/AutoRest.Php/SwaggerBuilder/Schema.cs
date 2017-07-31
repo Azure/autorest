@@ -46,7 +46,7 @@ namespace AutoRest.Php.SwaggerBuilder
                             return PHP.String;
                         default:
                             throw new Exception("unknown integer format: " + Format);
-                    }                    
+                    }
                 case "boolean":
                     return PHP.Boolean;
                 default:
@@ -82,7 +82,7 @@ namespace AutoRest.Php.SwaggerBuilder
                         type: "array",
                         items: Create(sequenceType.ElementType));
                 default:
-                    throw new System.Exception("unknown type: " + type.Name);
+                    throw new Exception("unknown type: " + type.Name);
             }
         }
 
