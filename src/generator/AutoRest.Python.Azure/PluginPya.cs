@@ -12,7 +12,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Python.Azure
 {
-    public sealed class PluginPya :Plugin<GeneratorSettingsPya, TransformerPya, CodeGeneratorPya, CodeNamerPy,CodeModelPya>
+    public sealed class PluginPya : Plugin<GeneratorSettingsPya, TransformerPya, CodeGeneratorPya, CodeNamerPy,CodeModelPya>
     {
         public PluginPya()
         {

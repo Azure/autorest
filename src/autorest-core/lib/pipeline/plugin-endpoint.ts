@@ -7,7 +7,7 @@ import { LazyPromise } from "../lazy";
 import { EventEmitter } from "../events";
 import { fork, ChildProcess } from "child_process";
 import { Mappings, RawSourceMap, SmartPosition } from "../ref/source-map";
-import { CancellationToken } from "../ref/cancallation";
+import { CancellationToken } from "../ref/cancellation";
 import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
 import { DataStoreViewReadonly, DataStoreView } from "../data-store/data-store";
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
@@ -30,16 +30,16 @@ interface IAutoRestPluginInitiatorEndpoint {
   Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void>;
 }
 
-export class AutoRestPlugin extends EventEmitter {
+export class AutoRestExtension extends EventEmitter {
   private static lastSessionId: number = 0;
-  private static CreateSessionId(): string { return `session_${++AutoRestPlugin.lastSessionId}`; }
+  private static CreateSessionId(): string { return `session_${++AutoRestExtension.lastSessionId}`; }
 
-  public static async FromModule(modulePath: string): Promise<AutoRestPlugin> {
+  public static async FromModule(modulePath: string): Promise<AutoRestExtension> {
     const childProc = fork(modulePath, [], <any>{ silent: true });
-    return AutoRestPlugin.FromChildProcess(childProc);
+    return AutoRestExtension.FromChildProcess(modulePath, childProc);
   }
 
-  public static async FromChildProcess(childProc: ChildProcess): Promise<AutoRestPlugin> {
+  public static async FromChildProcess(extensionName: string, childProc: ChildProcess): Promise<AutoRestExtension> {
     // childProc.on("error", err => { throw err; });
     const channel = createMessageConnection(
       childProc.stdout,
@@ -47,12 +47,12 @@ export class AutoRestPlugin extends EventEmitter {
       console
     );
     childProc.stderr.pipe(process.stderr);
-    const plugin = new AutoRestPlugin(channel);
+    const plugin = new AutoRestExtension(extensionName, channel);
     channel.listen();
     return plugin;
   }
 
-  public constructor(channel: MessageConnection) {
+  public constructor(extensionName: string, channel: MessageConnection) {
     super();
     // initiator
     const dispatcher = (fnName: string) => async (sessionId: string, ...rest: any[]) => {
@@ -82,7 +82,7 @@ export class AutoRestPlugin extends EventEmitter {
     channel.onNotification(IAutoRestPluginInitiator_Types.WriteFile, this.apiInitiator.WriteFile);
     channel.onNotification(IAutoRestPluginInitiator_Types.Message, this.apiInitiator.Message);
 
-    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Exception("AutoRest plugin terminated.")); }));
+    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Exception("AutoRest extension terminated: " + extensionName)); }));
 
     // target
     this.apiTarget = {
@@ -104,10 +104,10 @@ export class AutoRestPlugin extends EventEmitter {
   }
 
   public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, onMessage: (message: Message) => void, cancellationToken: CancellationToken): Promise<boolean> {
-    const sid = AutoRestPlugin.CreateSessionId();
+    const sid = AutoRestExtension.CreateSessionId();
 
     // register endpoint
-    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.CreateEndpointFor(pluginName, configuration, inputScope, outputScope, onMessage, cancellationToken);
+    this.apiInitiatorEndpoints[sid] = AutoRestExtension.CreateEndpointFor(pluginName, configuration, inputScope, outputScope, onMessage, cancellationToken);
 
     // dispatch
     const result = await this.apiTarget.Process(pluginName, sid, cancellationToken);

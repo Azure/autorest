@@ -12,8 +12,6 @@ addons:
 env:
   matrix:
   - MODE=main
-  #- MODE=diffRegenExpected
-  #- MODE=diffRegenSpecsRepo
 matrix:
   fast_finish: true
   allow_failures:
@@ -24,8 +22,8 @@ before_install:
   - export PATH=$PATH:./node_modules/.bin
 install:
     # Install npm
-  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 6.9.5
-  - npm install -g npm@'>=1.4.3'
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 7.10.0
+  - npm install -g npm@'>=5.0.4'
   - npm install
     # Install runtime
   - |-
@@ -35,67 +33,37 @@ install:
     sudo apt-get install dotnet-dev-1.0.0-rc4-004769 -y
     # Install dev dependencies
   - |-
-    if [[ $MODE == 'main' ]]; then 
-      set -ex
-      set -o pipefail
-      # select JDK
-      jdk_switcher use oraclejdk8
-      # Install ruby dependencies
-      rvm use 2.3.0 --install
-      gem install bundler
-      bundle install
-      pip install --user tox
-      # Install go
-      sudo curl -O https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
-      sudo tar -xvf go1.8.3.linux-amd64.tar.gz > /dev/null
-      sudo mv go /usr/local/
-      export PATH=$PATH:/usr/local/go/bin
-      export GOPATH=`pwd`/src/generator/AutoRest.Go.Tests
-      sudo chmod -R 777 `echo $GOPATH`
-      sudo apt-get install git -y
-      sudo add-apt-repository ppa:masterminds/glide -y && sudo apt-get update
-      sudo apt-get install glide
-    fi
+    set -e
+    set -o pipefail
+    # select JDK
+    jdk_switcher use oraclejdk8
+    # Install ruby dependencies
+    rvm use 2.3.0 --install
+    gem install bundler
+    bundle install
+    pip install --user tox
+    # Install go
+    sudo curl -O https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
+    sudo tar -xvf go1.8.3.linux-amd64.tar.gz > /dev/null
+    sudo mv go /usr/local/
+    export PATH=$PATH:/usr/local/go/bin
+    export GOPATH=`pwd`/src/generator/AutoRest.Go.Tests
+    sudo chmod -R 777 `echo $GOPATH`
+    sudo apt-get install git -y
+    sudo add-apt-repository ppa:masterminds/glide -y && sudo apt-get update
+    sudo apt-get install glide
 script:
-  - set -ex
+  - set -e
   - set -o pipefail
   - gulp build
-  - |-
-    if [[ $MODE == 'main' ]]; then
-      gulp test
-    elif [[ $MODE == 'diffRegenExpected' ]]; then
-      gulp regenerate
-      git diff -w
-      ! git diff -w | grep -q "@@"
-    elif [[ $MODE == 'diffRegenSpecsRepo' ]]; then
-      gens=(CSharp Azure.CSharp Azure.CSharp.Fluent Ruby Azure.Ruby NodeJS Azure.NodeJS Python Azure.Python Go Java Azure.Java Azure.Java.Fluent AzureResourceSchema)
-      specs=/tmp/repos/specs
-      arRef=/tmp/repos/autorest
-      # retrieve specs
-      git clone https://github.com/Azure/azure-rest-api-specs $specs
-      # prepare reference AutoRest
-      git clone https://github.com/Azure/autorest $arRef
-      pushd $arRef
-      npm install
-      gulp build
-
-      # REGEN using reference AutoRest
-      for gen in "${gens[@]}"
-      do
-        echo "REGENERATING FOR $gen"
-        find $specs -regex '[^/]*/[^/]*/.*/[^/]*.json' -exec gulp autorest -n Test -m Swagger          -g $gen -i {} -o {}_Swagger          > {}_Swagger/out.txt          2>&1 \;
-        find $specs -regex '[^/]*/[^/]*/.*/[^/]*.json' -exec gulp autorest -n Test -m CompositeSwagger -g $gen -i {} -o {}_CompositeSwagger > {}_CompositeSwagger/out.txt 2>&1 \;
-      done
-    fi
+  - gulp test
 after_script:
   - |-
-    if [[ $MODE == 'main' ]]; then 
-      echo "========== Server log: ============"
-      pwd
-      ls -al
-      ls -al TestResults
-      cat TestResults/*.log
-    fi
+    echo "========== Server log: ============"
+    pwd
+    ls -al
+    ls -al TestResults
+    cat TestResults/*.log
 notifications:
   slack:
     secure: d0PFVLcyqcMxNtmZ8JaEpIBzXbUbZCgKs8QtBB5qEIXDnxflSR3AhczlILNhTBKtMEBlwVzsz65yP09XcmvB6xpAfJbHqSRzk2frKa5viPcAD8Wr/NYamt9/UiTCsnql8MqzjVy0tLdMscXKRmsUey4YF570zl0b7gAbq7XTqxM=

@@ -49,24 +49,6 @@ namespace AutoRest.Core.Utilities
         }
 
         /// <summary>
-        /// Returns a collection of the descendant elements for this collection.
-        /// </summary>
-        /// <typeparam name='T'>Type of elements in the sequence.</typeparam>
-        /// <param name="items">Child collection</param>
-        /// <param name="childSelector">Child selector</param>
-        /// <returns>List of all items and descendants of each item</returns>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "By design.")]
-        public static IEnumerable<T> Descendants<T>(this IEnumerable<T> items, Func<T, IEnumerable<T>> childSelector)
-        {
-            foreach (var item in items)
-            {
-                foreach (var childResult in childSelector(item).Descendants(childSelector))
-                    yield return childResult;
-                yield return item;
-            }
-        }
-
-        /// <summary>
         ///     Determines whether the collection object is either null or an empty collection.
         /// </summary>
         /// <typeparam name="T"> </typeparam>
@@ -474,11 +456,8 @@ namespace AutoRest.Core.Utilities
         public static bool IsNullOrEmpty(this Fixable<string> str) => string.IsNullOrWhiteSpace(str?.Value);
         public static bool Contains( this Fixable<string> str, string contained) => true == str?.Value?.Contains(contained);
         public static bool Contains(this Fixable<string> str, char chr) => true == str?.Value?.Contains(chr);
-        public static int IndexOf(this Fixable<string> str, string text) => str?.Value?.IndexOf(text,StringComparison.Ordinal) ?? -1;
         public static int IndexOf(this Fixable<string> str, char chr) => str?.Value?.IndexOf(chr) ?? -1;
-        public static int IndexOfIgnoreCase(this Fixable<string> str, string text) => str?.Value?.IndexOf(text, StringComparison.OrdinalIgnoreCase) ?? -1;
         public static bool StartsWith(this Fixable<string> str, string startsWith) => true == str?.Value?.StartsWith(startsWith, StringComparison.Ordinal);
-        public static bool StartsWithIgnoreCase(this Fixable<string> str, string startsWith) => true == str?.Value?.StartsWith(startsWith, StringComparison.OrdinalIgnoreCase);
 
         public static string EnsureEndsWith(this string str, string suffix) => string.IsNullOrEmpty(str) ? str : (str.EndsWith(suffix) ? str : str + suffix);
         public static string EnsureEndsWith(this Fixable<string> str, string suffix) => str.IsNullOrEmpty() ? str.Value : str.Value.EnsureEndsWith(suffix);
@@ -504,10 +483,6 @@ namespace AutoRest.Core.Utilities
             return result;
         }
 
-        public static string TrimStart(this Fixable<string> str, char ch) => str.Value.TrimStart(ch);
-        public static string TrimEnd(this Fixable<string> str, char ch) => str.Value.TrimEnd(ch);
-
-
         public static void Disambiguate(this IEnumerable<IChild> children)
         {
             foreach (var child in children)
@@ -524,9 +499,5 @@ namespace AutoRest.Core.Utilities
         private static string[] LFOnly = new[] { ".py", ".rb", ".ts", ".js", ".java", ".go",".json" };
         public static bool IsFileLineFeedOnly(this string filename) => LFOnly.Any(each => filename.EndsWith(each, StringComparison.OrdinalIgnoreCase));
         public static string LineEnding(this string filename) => filename.IsFileLineFeedOnly() ? "\n" : "\r\n";
-
-        public static string AdjustGithubUrl(this string url) => Regex.Replace(url,
-            @"^((http|https)\:\/\/)?github\.com\/(?<user>[^\/]+)\/(?<repo>[^\/]+)\/blob\/(?<branch>[^\/]+)\/(?<file>.+)$",
-            @"https://raw.githubusercontent.com/${user}/${repo}/${branch}/${file}");
     }
 }
