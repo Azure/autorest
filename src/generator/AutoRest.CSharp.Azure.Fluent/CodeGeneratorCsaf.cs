@@ -128,6 +128,10 @@ namespace AutoRest.CSharp.Azure.Fluent
                 await Write(
                     new AzureCsprojTemplate { Model = codeModel },
                     $"Microsoft.Azure.Management.{codeModel.ServiceName}.Fluent.csproj");
+
+                await Write(
+                    new AzureAssemblyInfoTemplate { Model = codeModel },
+                    "Properties/AssemblyInfo.cs");
             }
         }
     }
