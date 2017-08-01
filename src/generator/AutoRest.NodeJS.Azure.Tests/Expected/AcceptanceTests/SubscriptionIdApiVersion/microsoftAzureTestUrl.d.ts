@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-import { ServiceClientCredentials } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse, ServiceClientCredentials } from 'ms-rest';
 import { AzureServiceClient, AzureServiceClientOptions } from 'ms-rest-azure';
 import * as operations from "./operations";
 
@@ -32,6 +32,8 @@ declare class MicrosoftAzureTestUrl extends AzureServiceClient {
    * {@link https://github.com/request/request#requestoptions-callback Options doc}
    *
    * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   *
+   * @param {string} [options.apiVersion] - API Version with value '2014-04-01-preview'.
    *
    * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
    *
