@@ -23,7 +23,7 @@ namespace AutoRest.NodeJS.Azure.Model
 
 
         [JsonIgnore]
-        public override IEnumerable<CompositeTypeJs> ModelTemplateModels => ModelTypes.Cast<CompositeTypeJs>().Concat(PageTemplateModels);
+        public override IEnumerable<CompositeTypeJs> ModelTemplateModels => ModelTypes.Cast<CompositeTypeJs>().Concat(PageTemplateModels).Where(each => !PageTemplateModels.Any(ptm => ptm.Name.EqualsIgnoreCase(each.Name)));
 
 
 
@@ -46,12 +46,26 @@ namespace AutoRest.NodeJS.Azure.Model
         {
             get
             {
-                List<string> predefinedOptionalParameters = new List<string>() { "apiVersion", "acceptLanguage", "longRunningOperationRetryTimeout", "generateClientRequestId" };
+                List<string> predefinedOptionalParameters = new List<string>() { "apiVersion", "acceptLanguage", "longRunningOperationRetryTimeout", "generateClientRequestId", "rpRegistrationRetryTimeout" };
                 var optionalParameters = this.Properties.Where(
                     p => (!p.IsRequired || p.IsRequired && !string.IsNullOrEmpty(p.DefaultValue)) 
                     && !p.IsConstant && !predefinedOptionalParameters.Contains(p.Name));
                 return optionalParameters.Count() > 0;
             }
+        }
+
+        public override string ConstructImportTS()
+        {
+            IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.TwoSpaces);
+            if (this.MethodTemplateModels.Any())
+            {
+                builder.Append("import { ServiceClient, ServiceClientOptions, ServiceCallback, HttpOperationResponse, ServiceClientCredentials } from 'ms-rest';");
+            }
+            else
+            {
+                builder.Append("import { ServiceClientCredentials } from 'ms-rest';");
+            }
+            return builder.ToString();
         }
 
         public string ConstructImportTSAzure()
