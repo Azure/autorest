@@ -497,7 +497,7 @@ export class Configuration {
     configSegments.push(...configs);
     // 2. file
     if (configFileUri !== null) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
+      const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(createView(), this.fileSystem as IFileSystem);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(configFileUri),
         createView(),

@@ -7,8 +7,6 @@
 // start of autorest-ng
 // the console app starts for real here.
 
-import { Artifact } from './lib/artifact';
-import { githubAuthTokenSettingKey } from './lib/read-uri';
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
@@ -19,7 +17,7 @@ import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
 import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
-import { DataStore } from "./lib/data-store/data-store";
+import { DataStore, githubAuthTokenSettingKey } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
 import { Exception, OperationCanceledException } from "./lib/exception";
 

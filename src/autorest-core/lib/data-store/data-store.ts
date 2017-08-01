@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ConfigurationView } from '../autorest-core';
 import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancellation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
@@ -101,31 +102,31 @@ export abstract class DataStoreView extends DataStoreViewReadonly {
 }
 
 class DataStoreViewScope extends DataStoreView {
-  constructor(private name: string, private slave: DataStoreView) {
+  constructor(private name: string, private view: DataStoreView) {
     super();
   }
 
   public get BaseUri(): string {
-    return ResolveUri(this.slave.BaseUri, `${this.name}/`);
+    return ResolveUri(this.view.BaseUri, `${this.name}/`);
   }
 
   public Write(uri: string): Promise<DataHandleWrite> {
     uri = ResolveUri(this.BaseUri, uri);
-    return this.slave.Write(uri);
+    return this.view.Write(uri);
   }
 
-  public Read(uri: string): Promise<DataHandleRead> {
+  public Read(uri: string): Promise<DataHandleRead | null> {
     uri = ResolveUri(this.BaseUri, uri);
     if (!uri.startsWith(this.BaseUri)) {
       throw new Error(`Cannot access '${uri}' because it is out of scope.`);
     }
-    return this.slave.Read(uri);
+    return this.view.Read(uri);
   }
 
   public async Enum(): Promise<string[]> {
-    const parentResult = await this.slave.Enum();
+    const parentResult = await this.view.Enum();
     return From(parentResult)
-      .Select(key => ResolveUri(this.slave.BaseUri, key))
+      .Select(key => ResolveUri(this.view.BaseUri, key))
       .Where(key => key.startsWith(this.BaseUri))
       .Select(key => key.substr(this.BaseUri.length))
       .ToArray();
@@ -135,7 +136,7 @@ class DataStoreViewScope extends DataStoreView {
 class DataStoreViewReadThrough extends DataStoreViewReadonly {
   private uris: string[] = [];
 
-  constructor(private slave: DataStore, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
+  constructor(private storage: DataStore, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
     super();
   }
 
@@ -148,7 +149,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
     uri = ToRawDataUrl(uri);
 
     // prope cache
-    const existingData = await this.slave.Read(uri);
+    const existingData = await this.storage.Read(uri);
     if (existingData !== null) {
       this.uris.push(uri);
       return existingData;
@@ -156,22 +157,24 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 
     // populate cache
     const data = await ReadUri(uri);
-    const writeHandle = await this.slave.Write(uri);
+    const writeHandle = await this.storage.Write(uri);
     const readHandle = await writeHandle.WriteData(data);
     this.uris.push(uri);
     return readHandle;
   }
 
   public async Enum(): Promise<string[]> {
-    return this.slave.Enum();
+    return this.storage.Enum();
   }
 }
 
+export const githubAuthTokenSettingKey = "github-auth-token";
+
 class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
   private uris: string[] = [];
-  private cache: { [uri: string]: Promise<DataHandleRead> } = {};
+  private cache: { [uri: string]: Promise<DataHandleRead | null> } = {};
 
-  constructor(private slave: DataStore, private fs: IFileSystem) {
+  constructor(private slave: DataStore, private config: ConfigurationView, private fs: IFileSystem) {
     super();
   }
 
@@ -188,10 +191,17 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
           return existingData;
         }
 
+        // check for GitHub OAuth token
+        const headers: { [key: string]: string } = {};
+        const githubAuthToken = this.config.GetEntry(githubAuthTokenSettingKey as any);
+        if (githubAuthToken) {
+          headers.authorization = `Bearer ${githubAuthToken}`;
+        }
+
         // populate cache
         let data: string | null = null;
         try {
-          data = await this.fs.ReadFile(uri) || await ReadUri(uri);
+          data = await this.fs.ReadFile(uri) || await ReadUri(uri, headers);
         } finally {
           if (!data) {
             return null;
@@ -232,8 +242,8 @@ export class DataStore extends DataStoreView {
     return new DataStoreViewReadThrough(this, customUriFilter);
   }
 
-  public GetReadThroughScopeFileSystem(fs: IFileSystem): DataStoreViewReadonly {
-    return new DataStoreViewReadThroughFS(this, fs);
+  public GetReadThroughScopeFileSystem(config: ConfigurationView, fs: IFileSystem): DataStoreViewReadonly {
+    return new DataStoreViewReadThroughFS(this, config, fs);
   }
 
   /****************
