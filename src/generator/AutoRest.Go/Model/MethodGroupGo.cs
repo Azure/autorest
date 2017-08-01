@@ -8,6 +8,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Go;
 using AutoRest.Extensions;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Go.Model
 {
@@ -86,7 +87,7 @@ namespace AutoRest.Go.Model
                     {
                         mg.ReturnType.Body.AddImports(imports);
                     }
-                    if (!string.IsNullOrEmpty(mg.ParameterValidations))
+                    if (mg.ShouldValidate())
                         validationImports = true;
                 });
 
