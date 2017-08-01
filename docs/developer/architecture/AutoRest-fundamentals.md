@@ -9,18 +9,18 @@ This way, both executing the bootstrapper or taking it as a dependency lets user
 
 ## The Pipeline
 
-When executed, the core constructs a graph of processing steps, the "pipeline", which is then scheduled.
+When executed, the core constructs a graph of processing steps, the "pipeline", which is then scheduled for execution.
 When using the CLI, this graph is constructed using the CLI parameters and (potentially) a configuration file.
 AAAL users may also use configuration files or construct configuration in memory.
 Only the core handles disk access, individual pipeline steps are executed in isolation.
 
 ### Example
 
-![Example Pipeline](./pipeline.svg)
+![Example Pipeline](./pipeline.png)
 
 ### Predefined Pipeline Steps
 
-AutoRest core contains with a predefined set of potential pipeline steps, including:
+AutoRest core contains a predefined set of potential pipeline steps, including:
 - *OpenAPI definition loader*: Loads and fully resolves all `input-file`s. For the CLI, they are loaded from disk or network. AAAL users may pass their own virtual file system.
 - *transformer*: Independent of the document type (OpenAPI definition, generated soruces, intermediate representations, ...), it allows users to transform the data in the pipeline, e.g. rename operations in the Swagger, search and replace curse words in generated sources with "cowbell"
 - *composer*: Composes all OpenAPI definitions of one AutoRest run to a single, logically equivalent OpenAPI definition. (This is what the current generation of code generators deals with best.)
