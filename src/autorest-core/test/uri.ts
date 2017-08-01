@@ -104,7 +104,7 @@ import * as uri from "../lib/ref/uri";
       uri.ResolveUri("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/file1.json?token=asd%3Dnot_really_a_token123%3D", "./file2.json"),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/file2.json?token=asd%3Dnot_really_a_token123%3D");
     assert.strictEqual(
-      uri.ResolveUri("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/file1.json?taken=asd%3Dnot_really_a_token123%3D", "./file2.json"),
+      uri.ResolveUri("https://myprivatepage.com/file1.json?token=asd%3Dnot_really_a_token123%3D", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/file2.json"),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/file2.json");
     assert.strictEqual(
       uri.ResolveUri("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/file1.json?token=asd%3Dnot_really_a_token123%3D", "https://evil.com/file2.json"),

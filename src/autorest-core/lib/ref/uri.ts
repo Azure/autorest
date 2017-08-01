@@ -158,8 +158,9 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
     const result = relative.absoluteTo(base);
     // GitHub simple token forwarding, for when you pass a URI to a private repo file with `?token=` query parameter.
     // this may be easier for quick testing than getting and passing an OAuth token.  
-    if (base.protocol() === "https" && base.hostname() === "raw.githubusercontent.com" && base.query().startsWith("token=")) {
-      result.addQuery("token", base.query().slice("token=".length));
+    if (base.protocol() === "https" && base.hostname() === "raw.githubusercontent.com" &&
+      result.protocol() === "https" && result.hostname() === "raw.githubusercontent.com") {
+      result.query(base.query());
     }
     return result.toString()
   } catch (e) {
