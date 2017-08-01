@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin / env node
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -7,6 +7,7 @@
 // start of autorest-ng
 // the console app starts for real here.
 
+import { Artifact } from '../autorest/lib/core/lib/artifact';
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
@@ -228,9 +229,10 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
 
   // listen for output messages and file writes
   subscribeMessages(api, () => exitcode++);
-  let outstanding: Promise<void> = Promise.resolve();
-  api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
-  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(async () => { try { await ClearFolder(folder); } catch (e) { } }));
+  const artifacts: Artifact[] = [];
+  const clearFolders: string[] = [];
+  api.GeneratedFile.Subscribe((_, artifact) => artifacts.push(artifact));
+  api.ClearFolder.Subscribe((_, folder) => clearFolders.push(folder));
   const config = (await api.view);
 
   try {
@@ -254,10 +256,17 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
         throw result;
       }
     }
+
+    // perform file system operations.
+    for (const folder of clearFolders) {
+      try { await ClearFolder(folder); } catch (e) { }
+    }
+    for (const artifact of artifacts) {
+      await WriteString(artifact.uri, artifact.content);
+    }
   }
-  finally {
-    // wait for any outstanding file writes to complete before we bail.
-    await outstanding;
+  catch (e) {
+    exitcode = exitcode || 1;
   }
 
   // return the exit code to the caller.

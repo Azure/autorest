@@ -177,8 +177,6 @@ namespace AutoRest.CSharp
             var properties = type.Properties.ToArray();
 
             var result = new StringBuilder();
-            result.AppendLine($"new {type.ClassName}");
-            result.AppendLine(totalIndent + "{");
             var propertyInitializers = new List<string>();
             foreach (var prop in properties)
             {
@@ -192,24 +190,85 @@ namespace AutoRest.CSharp
                     Logger.Instance.Log(Category.Error, $"Required property '{prop.Name}' of type '{type.ClassName}' not found.");
                 }
             }
-            result.AppendLine(string.Join(",\n", propertyInitializers));
-            result.Append(totalIndent + "}");
+            if (propertyInitializers.Count > 0)
+            {
+                // special treatment for SubResource
+                if (type.ClassName.Split('.').Last() == "SubResource" && properties.Length == 1 && properties[0].SerializedName == "id")
+                {
+                    result.Append($"new {type.ClassName}({obj.SelectToken("id").ToString(Newtonsoft.Json.Formatting.None)})");
+                }
+                else
+                {
+                    result.AppendLine($"new {type.ClassName}");
+                    result.AppendLine(totalIndent + "{");
+                    result.AppendLine(string.Join(",\n", propertyInitializers));
+                    result.Append(totalIndent + "}");
+                }
+            }
+            else
+            {
+                result.Append($"new {type.ClassName}()");
+            }
+            return result.ToString();
+        }
+
+        private string CreateSequenceInitializer(SequenceType type, JArray arr, int indent = 0)
+        {
+            if (arr == null)
+            {
+                return "null";
+            }
+
+            var indentString = new string(' ', 4);
+            var totalIndent = string.Concat(Enumerable.Repeat(indentString, indent));
+
+            var result = new StringBuilder();
+            var itemInitializer = new List<string>();
+            foreach (var item in arr)
+            {
+                itemInitializer.Add(totalIndent + indentString + CreateInitializer(type.ElementType, item, indent + 1));
+            }
+            if (itemInitializer.Count > 0)
+            {
+                result.AppendLine($"new List<{type.ElementType.ClassName}>");
+                result.AppendLine(totalIndent + "{");
+                result.AppendLine(string.Join(",\n", itemInitializer));
+                result.Append(totalIndent + "}");
+            }
+            else
+            {
+                result.Append($"new List<{type.ElementType.ClassName}>()");
+            }
             return result.ToString();
         }
 
         private string CreateInitializer(IModelType type, JToken token, int indent = 0)
             => type is CompositeType ct
             ? CreateObjectInitializer(ct, token as JObject, indent)
+            : type is SequenceType st
+            ? CreateSequenceInitializer(st, token as JArray, indent)
             : CodeNamer.Instance.EscapeDefaultValue(token.ToString(), type);
 
-        public override string GenerateSample(CodeModel cm, MethodGroup g, Method m, AutoRest.Core.Model.XmsExtensions.Example example)
+        public override string GenerateSample(bool isolateSnippet, CodeModel cm, MethodGroup g, Method m, string exampleName, AutoRest.Core.Model.XmsExtensions.Example example)
         {
             var clientInstanceName = "client";
             var codeModel = cm as CodeModelCs;
             var method = m as MethodCs;
             var group = g as MethodGroupCs;
 
-            var result = new IndentedStringBuilder();
+            var result = new StringBuilder();
+            if (isolateSnippet)
+            {
+                result.AppendLine("{");
+                result.AppendLine("// Client: " + cm.Name);
+                if (!g.Name.IsNullOrEmpty())
+                {
+                    result.AppendLine("// Group: " + g.Name);
+                }
+                result.AppendLine("// Method: " + m.Name);
+                result.AppendLine("// Example: " + exampleName);
+                result.AppendLine();
+            }
 
             // parameter preparation
             var paramaters = new List<string>();
@@ -223,7 +282,7 @@ namespace AutoRest.CSharp
                     // initialize composite type beforehand
                     if (formalParameter.ModelType is CompositeType ct)
                     {
-                        result.Append($"var {formalParameter.Name} = {value};");
+                        result.AppendLine($"var {formalParameter.Name} = {value};");
                         value = formalParameter.Name;
                     }
                     paramaters.Add((contiguous ? "" : formalParameter.Name + ": ") + value);
@@ -241,9 +300,16 @@ namespace AutoRest.CSharp
             result.AppendLine();
 
             // call
-            result.AppendLine($"await {clientInstanceName}{(g.Name.IsNullOrEmpty() ? "" : "." + g.NameForProperty)}.{m.Name}Async(" +
+            var returnTypeName = method.ReturnType.Body?.Name ?? method.ReturnType.Headers?.Name;
+            returnTypeName = returnTypeName?.ToCamelCase();
+
+            result.AppendLine($"{(returnTypeName == null ? "" : $"var {returnTypeName} = ")}await {clientInstanceName}{(g.Name.IsNullOrEmpty() ? "" : "." + g.NameForProperty)}.{m.Name}Async(" +
                 $"{string.Join(", ", paramaters.Select(param => "\n    " + param))});");
 
+            if (isolateSnippet)
+            {
+                result.AppendLine("}");
+            }
             return result.ToString();
         }
     }

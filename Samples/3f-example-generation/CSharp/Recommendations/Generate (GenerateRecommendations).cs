@@ -1,2 +1,0 @@
-
-await client.Recommendations.GenerateAsync();

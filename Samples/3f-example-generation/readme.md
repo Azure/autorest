@@ -4,11 +4,16 @@
 
 ## Input
 
-The following OpenAPI definition references 8 examples.
-
 ``` yaml 
-input-file: https://github.com/Azure/azure-rest-api-specs/blob/087554c4480e144f715fe92f97621ff5603cd907/specification/advisor/resource-manager/Microsoft.Advisor/2016-07-12-preview/advisor.json
+input-file:
+- https://github.com/Azure/azure-rest-api-specs/blob/53b26d1ed62c7b1958009153cba534b52f17da62/specification/network/resource-manager/Microsoft.Network/2017-06-01/loadBalancer.json
+- https://github.com/Azure/azure-rest-api-specs/blob/53b26d1ed62c7b1958009153cba534b52f17da62/specification/network/resource-manager/Microsoft.Network/2017-06-01/network.json
+- https://github.com/Azure/azure-rest-api-specs/blob/53b26d1ed62c7b1958009153cba534b52f17da62/specification/network/resource-manager/Microsoft.Network/2017-06-01/networkInterface.json
+- https://github.com/Azure/azure-rest-api-specs/blob/53b26d1ed62c7b1958009153cba534b52f17da62/specification/network/resource-manager/Microsoft.Network/2017-06-01/networkSecurityGroup.json
+- https://github.com/Azure/azure-rest-api-specs/blob/53b26d1ed62c7b1958009153cba534b52f17da62/specification/network/resource-manager/Microsoft.Network/2017-06-01/networkWatcher.json
+- https://github.com/Azure/azure-rest-api-specs/blob/53b26d1ed62c7b1958009153cba534b52f17da62/specification/network/resource-manager/Microsoft.Network/2017-06-01/publicIpAddress.json
 ```
+
 
 ## Generation
 
@@ -16,6 +21,7 @@ Generate samples instead of REST client code.
 
 ``` yaml
 sample-generation: true
+output-file: combined
 ```
 
 ### CSharp

@@ -13,6 +13,7 @@ using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace AutoRest.Core
 {
@@ -57,13 +58,15 @@ namespace AutoRest.Core
         /// <summary>
         /// Generates example code from an x-ms-examples section.
         /// </summary>
-        public virtual string GenerateSample(CodeModel cm, MethodGroup g, Method m, Model.XmsExtensions.Example example) => null;
+        public virtual string GenerateSample(bool isolateSnippet, CodeModel cm, MethodGroup g, Method m, string exampleName, Model.XmsExtensions.Example example) => null;
 
         /// <summary>
         /// Generates code samples and outputs them in the file system.
         /// </summary>
         public async Task GenerateSamples(CodeModel codeModel)
         {
+            var singleFile = Settings.Instance.OutputFileName != null;
+            var outputs = new List<Tuple<MethodGroup, Method, string, string>>();
             foreach (var group in codeModel.Operations)
             {
                 foreach (var method in group.Methods)
@@ -73,16 +76,29 @@ namespace AutoRest.Core
                     foreach (var example in examples)
                     {
                         Logger.Instance.Log(Category.Info, $"Generating example '{example.Key}' of '{group.Name}/{method.Name}'");
-                        var content = GenerateSample(codeModel, group, method, example.Value);
+                        var content = GenerateSample(singleFile, codeModel, group, method, example.Key, example.Value);
                         if (content != null)
                         {
-                            await Write(content, $"{group.Name}/{method.Name} ({example.Key}){ImplementationFileExtension}");
+                            outputs.Add(new Tuple<MethodGroup, Method, string, string>(group, method, example.Key, content));
                         }
                         else
                         {
                             Logger.Instance.Log(Category.Warning, $"Did not generate example '{example.Key}' of '{group.Name}/{method.Name}'");
                         }
                     }
+                }
+            }
+
+            if (singleFile)
+            {
+                await Write(string.Join("\n\n", outputs.Select(output => output.Item4)), Settings.Instance.OutputFileName);
+            }
+            else
+            {
+                foreach (var output in outputs)
+                {
+                    var folder = string.IsNullOrEmpty(output.Item1.Name) ? "" : (output.Item1.Name + "/");
+                    await Write(output.Item4, $"{folder}{output.Item2.Name} ({output.Item3}){ImplementationFileExtension}");
                 }
             }
         }
