@@ -17,14 +17,14 @@ import { sep } from "path";
 
 const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");
-const getUriAsync: (uri: string) => Promise<Readable> = promisify(getUri);
+const getUriAsync: (uri: string, options: { headers: { [key: string]: string } }) => Promise<Readable> = promisify(getUri);
 
 /**
  * Loads a UTF8 string from given URI.
  */
-export async function ReadUri(uri: string): Promise<string> {
+export async function ReadUri(uri: string, headers: { [key: string]: string } = {}): Promise<string> {
   try {
-    const readable = await getUriAsync(uri);
+    const readable = await getUriAsync(uri, { headers: headers });
 
     const readAll = new Promise<string>(function (resolve, reject) {
       let result = "";
@@ -156,7 +156,8 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
     const base = new URI(baseUri);
     const relative = new URI(pathOrUri);
     const result = relative.absoluteTo(base);
-    // GitHub authentication token forwarding
+    // GitHub simple token forwarding, for when you pass a URI to a private repo file with `?token=` query parameter.
+    // this may be easier for quick testing than getting and passing an OAuth token.  
     if (base.protocol() === "https" && base.hostname() === "raw.githubusercontent.com" && base.query().startsWith("token=")) {
       result.addQuery("token", base.query().slice("token=".length));
     }

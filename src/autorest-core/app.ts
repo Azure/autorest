@@ -8,6 +8,7 @@
 // the console app starts for real here.
 
 import { Artifact } from './lib/artifact';
+import { githubAuthTokenSettingKey } from './lib/read-uri';
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
@@ -21,6 +22,16 @@ import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
 import { Exception, OperationCanceledException } from "./lib/exception";
+
+function getGitHubAuthConfiguration(): any {
+  const token = process.env.GITHUB_AUTH_TOKEN;
+
+  const result: any = {};
+  if (token) {
+    result[githubAuthTokenSettingKey] = token;
+  }
+  return result;
+}
 
 /**
  * Legacy AutoRest
@@ -76,7 +87,8 @@ ${Stringify(config).replace(/^---\n/, "")}
 
   config["base-folder"] = currentDirUri;
   const api = new AutoRest(new RealFileSystem());
-  await api.AddConfiguration(config);
+  api.AddConfiguration(config);
+  api.AddConfiguration(getGitHubAuthConfiguration());
   const view = await api.view;
   let outstanding: Promise<void> = Promise.resolve();
   api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
@@ -226,6 +238,7 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   // get an instance of AutoRest and add the command line switches to the configuration.
   const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
   api.AddConfiguration(args.switches);
+  api.AddConfiguration(getGitHubAuthConfiguration());
 
   // listen for output messages and file writes
   subscribeMessages(api, () => exitcode++);
