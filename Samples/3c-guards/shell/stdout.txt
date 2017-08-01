@@ -1,1 +1,63 @@
-
+INFORMATION: [WRITING] EnumTemplate => Models\AccountStatus.cs
+INFORMATION: [WRITING] EnumTemplate => models\AccountStatus.java
+INFORMATION: [WRITING] EnumTemplate => Models\AccountType.cs
+INFORMATION: [WRITING] EnumTemplate => models\AccountType.java
+INFORMATION: [WRITING] EnumTemplate => Models\ProvisioningState.cs
+INFORMATION: [WRITING] EnumTemplate => models\ProvisioningState.java
+INFORMATION: [WRITING] EnumTemplate => Models\Reason.cs
+INFORMATION: [WRITING] EnumTemplate => models\Reason.java
+INFORMATION: [WRITING] EnumTemplate => Models\UsageUnit.cs
+INFORMATION: [WRITING] EnumTemplate => models\UsageUnit.java
+INFORMATION: [WRITING] ExtensionsTemplate => StorageAccountsExtensions.cs
+INFORMATION: [WRITING] ExtensionsTemplate => UsageOperationsExtensions.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IStorageAccounts.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IUsageOperations.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => StorageAccounts.java
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => Usages.java
+INFORMATION: [WRITING] MethodGroupTemplate => implementation\StorageAccountsImpl.java
+INFORMATION: [WRITING] MethodGroupTemplate => implementation\UsagesImpl.java
+INFORMATION: [WRITING] MethodGroupTemplate => StorageAccounts.cs
+INFORMATION: [WRITING] MethodGroupTemplate => UsageOperations.cs
+INFORMATION: [WRITING] ModelTemplate => Models\CheckNameAvailabilityResult.cs
+INFORMATION: [WRITING] ModelTemplate => models\CheckNameAvailabilityResult.java
+INFORMATION: [WRITING] ModelTemplate => Models\CustomDomain.cs
+INFORMATION: [WRITING] ModelTemplate => models\CustomDomain.java
+INFORMATION: [WRITING] ModelTemplate => Models\Endpoints.cs
+INFORMATION: [WRITING] ModelTemplate => models\Endpoints.java
+INFORMATION: [WRITING] ModelTemplate => Models\Resource.cs
+INFORMATION: [WRITING] ModelTemplate => models\Resource.java
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccount.cs
+INFORMATION: [WRITING] ModelTemplate => models\StorageAccount.java
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountCheckNameAvailabilityParameters.cs
+INFORMATION: [WRITING] ModelTemplate => models\StorageAccountCheckNameAvailabilityParameters.java
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountCreateParameters.cs
+INFORMATION: [WRITING] ModelTemplate => models\StorageAccountCreateParameters.java
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountKeys.cs
+INFORMATION: [WRITING] ModelTemplate => models\StorageAccountKeys.java
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountListResult.cs
+INFORMATION: [WRITING] ModelTemplate => models\StorageAccountListResult.java
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountRegenerateKeyParameters.cs
+INFORMATION: [WRITING] ModelTemplate => models\StorageAccountRegenerateKeyParameters.java
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountUpdateParameters.cs
+INFORMATION: [WRITING] ModelTemplate => models\StorageAccountUpdateParameters.java
+INFORMATION: [WRITING] ModelTemplate => Models\Usage.cs
+INFORMATION: [WRITING] ModelTemplate => models\Usage.java
+INFORMATION: [WRITING] ModelTemplate => Models\UsageListResult.cs
+INFORMATION: [WRITING] ModelTemplate => models\UsageListResult.java
+INFORMATION: [WRITING] ModelTemplate => Models\UsageName.cs
+INFORMATION: [WRITING] ModelTemplate => models\UsageName.java
+INFORMATION: [WRITING] PackageInfoTemplate => implementation\package-info.java
+INFORMATION: [WRITING] PackageInfoTemplate => models\package-info.java
+INFORMATION: [WRITING] PackageInfoTemplate => package-info.java
+INFORMATION: [WRITING] ServiceClientInterfaceTemplate => IStorageManagementClient.cs
+INFORMATION: [WRITING] ServiceClientInterfaceTemplate => StorageManagementClient.java
+INFORMATION: [WRITING] ServiceClientTemplate => implementation\StorageManagementClientImpl.java
+INFORMATION: [WRITING] ServiceClientTemplate => StorageManagementClient.cs
+INFORMATION: Defaulting to generate client side Code
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating Rest Code
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Successfully initialized CSharp Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Java Code Generator 1.2.2.0

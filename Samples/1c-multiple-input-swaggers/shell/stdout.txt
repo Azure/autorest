@@ -1,1 +1,61 @@
-
+INFORMATION: [WRITING] EnumTemplate => Models\AccountStatus.cs
+INFORMATION: [WRITING] EnumTemplate => Models\AccountType.cs
+INFORMATION: [WRITING] EnumTemplate => Models\IndexerExecutionStatus.cs
+INFORMATION: [WRITING] EnumTemplate => Models\IndexerStatus.cs
+INFORMATION: [WRITING] EnumTemplate => Models\ProvisioningState.cs
+INFORMATION: [WRITING] EnumTemplate => Models\Reason.cs
+INFORMATION: [WRITING] EnumTemplate => Models\ScoringFunctionAggregation.cs
+INFORMATION: [WRITING] EnumTemplate => Models\ScoringFunctionInterpolation.cs
+INFORMATION: [WRITING] EnumTemplate => Models\SuggesterSearchMode.cs
+INFORMATION: [WRITING] EnumTemplate => Models\UsageUnit.cs
+INFORMATION: [WRITING] ExtensionsTemplate => DataSourcesExtensions.cs
+INFORMATION: [WRITING] ExtensionsTemplate => IndexersExtensions.cs
+INFORMATION: [WRITING] ExtensionsTemplate => IndexesExtensions.cs
+INFORMATION: [WRITING] ExtensionsTemplate => StorageAccountsExtensions.cs
+INFORMATION: [WRITING] ExtensionsTemplate => UsageOperationsExtensions.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IDataSources.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IIndexers.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IIndexes.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IStorageAccounts.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IUsageOperations.cs
+INFORMATION: [WRITING] MethodGroupTemplate => DataSources.cs
+INFORMATION: [WRITING] MethodGroupTemplate => Indexers.cs
+INFORMATION: [WRITING] MethodGroupTemplate => Indexes.cs
+INFORMATION: [WRITING] MethodGroupTemplate => StorageAccounts.cs
+INFORMATION: [WRITING] MethodGroupTemplate => UsageOperations.cs
+INFORMATION: [WRITING] ModelTemplate => Models\CheckNameAvailabilityResult.cs
+INFORMATION: [WRITING] ModelTemplate => Models\CorsOptions.cs
+INFORMATION: [WRITING] ModelTemplate => Models\CustomDomain.cs
+INFORMATION: [WRITING] ModelTemplate => Models\DataChangeDetectionPolicy.cs
+INFORMATION: [WRITING] ModelTemplate => Models\DataContainer.cs
+INFORMATION: [WRITING] ModelTemplate => Models\DataDeletionDetectionPolicy.cs
+INFORMATION: [WRITING] ModelTemplate => Models\DataSource.cs
+INFORMATION: [WRITING] ModelTemplate => Models\DataSourceCredentials.cs
+INFORMATION: [WRITING] ModelTemplate => Models\Endpoints.cs
+INFORMATION: [WRITING] ModelTemplate => Models\HighWaterMarkChangeDetectionPolicy.cs
+INFORMATION: [WRITING] ModelTemplate => Models\Index.cs
+INFORMATION: [WRITING] ModelTemplate => Models\Indexer.cs
+INFORMATION: [WRITING] ModelTemplate => Models\IndexingParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\ItemError.cs
+INFORMATION: [WRITING] ModelTemplate => Models\Resource.cs
+INFORMATION: [WRITING] ModelTemplate => Models\SearchRequestOptions.cs
+INFORMATION: [WRITING] ModelTemplate => Models\SoftDeleteColumnDeletionDetectionPolicy.cs
+INFORMATION: [WRITING] ModelTemplate => Models\SqlIntegratedChangeTrackingPolicy.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccount.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountCheckNameAvailabilityParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountCreateParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountKeys.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountListResult.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountRegenerateKeyParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountUpdateParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\TagScoringParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\Usage.cs
+INFORMATION: [WRITING] ModelTemplate => Models\UsageListResult.cs
+INFORMATION: [WRITING] ModelTemplate => Models\UsageName.cs
+INFORMATION: [WRITING] ServiceClientInterfaceTemplate => ISearchandStorage.cs
+INFORMATION: [WRITING] ServiceClientTemplate => SearchandStorage.cs
+INFORMATION: Defaulting to generate client side Code
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating Rest Code
+INFORMATION: Initializing code generator.
+INFORMATION: Successfully initialized CSharp Code Generator 1.2.2.0

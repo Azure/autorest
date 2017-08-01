@@ -1,1 +1,32 @@
-
+INFORMATION: [WRITING] EnumTemplate => Models\AccountStatus.cs
+INFORMATION: [WRITING] EnumTemplate => Models\AccountType.cs
+INFORMATION: [WRITING] EnumTemplate => Models\ProvisioningState.cs
+INFORMATION: [WRITING] EnumTemplate => Models\Reason.cs
+INFORMATION: [WRITING] EnumTemplate => Models\UsageUnit.cs
+INFORMATION: [WRITING] ExtensionsTemplate => StorageAccountsExtensions.cs
+INFORMATION: [WRITING] ExtensionsTemplate => UsageOperationsExtensions.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IStorageAccounts.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IUsageOperations.cs
+INFORMATION: [WRITING] MethodGroupTemplate => StorageAccounts.cs
+INFORMATION: [WRITING] MethodGroupTemplate => UsageOperations.cs
+INFORMATION: [WRITING] ModelTemplate => Models\CheckNameAvailabilityResult.cs
+INFORMATION: [WRITING] ModelTemplate => Models\CustomDomain.cs
+INFORMATION: [WRITING] ModelTemplate => Models\Endpoints.cs
+INFORMATION: [WRITING] ModelTemplate => Models\Resource.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccount.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountCheckNameAvailabilityParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountCreateParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountKeys.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountListResult.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountRegenerateKeyParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\StorageAccountUpdateParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\Usage.cs
+INFORMATION: [WRITING] ModelTemplate => Models\UsageListResult.cs
+INFORMATION: [WRITING] ModelTemplate => Models\UsageName.cs
+INFORMATION: [WRITING] ServiceClientInterfaceTemplate => IStorageManagementClient.cs
+INFORMATION: [WRITING] ServiceClientTemplate => StorageManagementClient.cs
+INFORMATION: Defaulting to generate client side Code
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating Rest Code
+INFORMATION: Initializing code generator.
+INFORMATION: Successfully initialized CSharp Code Generator 1.2.2.0

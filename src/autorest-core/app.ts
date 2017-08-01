@@ -79,7 +79,7 @@ ${Stringify(config).replace(/^---\n/, "")}
   const view = await api.view;
   let outstanding: Promise<void> = Promise.resolve();
   api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
-  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(() => ClearFolder(folder)));
+  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(async () => { try { await ClearFolder(folder); } catch (e) { } }));
   subscribeMessages(api, () => { });
 
   // warn about `--` arguments
@@ -230,7 +230,7 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   subscribeMessages(api, () => exitcode++);
   let outstanding: Promise<void> = Promise.resolve();
   api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
-  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(() => ClearFolder(folder)));
+  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(async () => { try { await ClearFolder(folder); } catch (e) { } }));
   const config = (await api.view);
 
   try {

@@ -1,1 +1,17 @@
-
+INFORMATION: [WRITING] AzureMethodGroupTemplate => BatchAccountOperations.cs
+INFORMATION: [WRITING] AzureServiceClientTemplate => BatchManagementDummyClient.cs
+INFORMATION: [WRITING] ExtensionsTemplate => BatchAccountOperationsExtensions.cs
+INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IBatchAccountOperations.cs
+INFORMATION: [WRITING] ModelTemplate => Models\AutoStorageBaseProperties.cs
+INFORMATION: [WRITING] ModelTemplate => Models\BatchAccount.cs
+INFORMATION: [WRITING] ModelTemplate => Models\BatchAccountCreateParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\BatchAccountUpdateParameters.cs
+INFORMATION: [WRITING] ModelTemplate => Models\KeyVaultReference.cs
+INFORMATION: [WRITING] ModelTemplate => Models\Operation.cs
+INFORMATION: [WRITING] ModelTemplate => Models\OperationDisplay.cs
+INFORMATION: [WRITING] ModelTemplate => Models\Resource.cs
+INFORMATION: [WRITING] ModelTemplate => Models\RetryHeader.cs
+INFORMATION: [WRITING] ServiceClientInterfaceTemplate => IBatchManagementDummyClient.cs
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Initializing code generator.
+INFORMATION: Successfully initialized Azure.CSharp Code Generator 1.2.2.0

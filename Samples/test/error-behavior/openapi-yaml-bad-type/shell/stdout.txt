@@ -1,1 +1,8 @@
-
+INFORMATION: [WRITING] ModelTemplate => Models\Cowbell.cs
+INFORMATION: [WRITING] ServiceClientInterfaceTemplate => ICowbellFactory.cs
+INFORMATION: [WRITING] ServiceClientTemplate => CowbellFactory.cs
+INFORMATION: Defaulting to generate client side Code
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating Rest Code
+INFORMATION: Initializing code generator.
+INFORMATION: Successfully initialized CSharp Code Generator 1.2.2.0
