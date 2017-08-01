@@ -111,7 +111,7 @@ namespace AutoRest.Core
         /// <returns></returns>
         public virtual async Task Write(ITemplate template, string fileName)
         {
-            Logger.Instance.Log(Category.Info, $"[WRITING] {template.GetType().Name} => {fileName}");
+            Logger.Instance.Log(Category.Debug, $"[WRITING] {template.GetType().Name} => {fileName}");
             template.Settings = Settings.Instance;
             var stringBuilder = new StringBuilder();
             using (template.TextWriter = new StringWriter(stringBuilder))
