@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Xml.ReaderWriter" Version="4.3.0" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.8" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.0.0" />
