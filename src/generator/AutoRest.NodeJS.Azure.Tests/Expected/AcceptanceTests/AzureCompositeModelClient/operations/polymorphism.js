@@ -322,7 +322,7 @@ function _putValid(complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object if an error did not occur.
- *                      See {@link SmartSalmon} for more information.
+ *                      See {@link Salmon} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -418,7 +418,7 @@ function _getValidx(options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          let resultMapper = new client.models['SmartSalmon']().mapper();
+          let resultMapper = new client.models['Salmon']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
@@ -438,11 +438,17 @@ function _getValidx(options, callback) {
  *
  * @param {object} complexBody
  *
- * @param {string} [complexBody.collegeDegree]
- *
  * @param {string} [complexBody.location]
  *
  * @param {boolean} [complexBody.iswild]
+ *
+ * @param {string} [complexBody.species]
+ *
+ * @param {number} complexBody.length
+ *
+ * @param {array} [complexBody.siblings]
+ *
+ * @param {string} complexBody.fishtype Polymorphic Discriminator
  *
  * @param {object} [options] Optional Parameters.
  *
@@ -516,7 +522,7 @@ function _putValidx(complexBody, options, callback) {
   let requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
-      let requestModelMapper = new client.models['SmartSalmon']().mapper();
+      let requestModelMapper = new client.models['Salmon']().mapper();
       requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
       requestContent = JSON.stringify(requestModel);
     }
@@ -992,7 +998,7 @@ class Polymorphism {
    *
    * @returns {Promise} A promise is returned
    *
-   * @resolve {HttpOperationResponse<SmartSalmon>} - The deserialized result object.
+   * @resolve {HttpOperationResponse<Salmon>} - The deserialized result object.
    *
    * @reject {Error} - The error object.
    */
@@ -1025,7 +1031,7 @@ class Polymorphism {
    *
    * {Promise} A promise is returned
    *
-   *                      @resolve {SmartSalmon} - The deserialized result object.
+   *                      @resolve {Salmon} - The deserialized result object.
    *
    *                      @reject {Error} - The error object.
    *
@@ -1034,7 +1040,7 @@ class Polymorphism {
    *                      {Error}  err        - The Error object if an error occurred, null otherwise.
    *
    *                      {object} [result]   - The deserialized result object if an error did not occur.
-   *                      See {@link SmartSalmon} for more information.
+   *                      See {@link Salmon} for more information.
    *
    *                      {object} [request]  - The HTTP Request object if an error did not occur.
    *
@@ -1065,11 +1071,17 @@ class Polymorphism {
    *
    * @param {object} complexBody
    *
-   * @param {string} [complexBody.collegeDegree]
-   *
    * @param {string} [complexBody.location]
    *
    * @param {boolean} [complexBody.iswild]
+   *
+   * @param {string} [complexBody.species]
+   *
+   * @param {number} complexBody.length
+   *
+   * @param {array} [complexBody.siblings]
+   *
+   * @param {string} complexBody.fishtype Polymorphic Discriminator
    *
    * @param {object} [options] Optional Parameters.
    *
@@ -1101,11 +1113,17 @@ class Polymorphism {
    *
    * @param {object} complexBody
    *
-   * @param {string} [complexBody.collegeDegree]
-   *
    * @param {string} [complexBody.location]
    *
    * @param {boolean} [complexBody.iswild]
+   *
+   * @param {string} [complexBody.species]
+   *
+   * @param {number} complexBody.length
+   *
+   * @param {array} [complexBody.siblings]
+   *
+   * @param {string} complexBody.fishtype Polymorphic Discriminator
    *
    * @param {object} [options] Optional Parameters.
    *

@@ -169,12 +169,12 @@ class PolymorphismOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :return: :class:`SmartSalmon
-         <fixtures.acceptancetestsbodycomplex.models.SmartSalmon>` or
+        :return: :class:`Salmon
+         <fixtures.acceptancetestsbodycomplex.models.Salmon>` or
          :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
          raw=true
-        :rtype: :class:`SmartSalmon
-         <fixtures.acceptancetestsbodycomplex.models.SmartSalmon>` or
+        :rtype: :class:`Salmon
+         <fixtures.acceptancetestsbodycomplex.models.Salmon>` or
          :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
         :raises:
          :class:`ErrorException<fixtures.acceptancetestsbodycomplex.models.ErrorException>`
@@ -201,7 +201,7 @@ class PolymorphismOperations(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('SmartSalmon', response)
+            deserialized = self._deserialize('Salmon', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -215,8 +215,8 @@ class PolymorphismOperations(object):
         hierarchy.
 
         :param complex_body:
-        :type complex_body: :class:`SmartSalmon
-         <fixtures.acceptancetestsbodycomplex.models.SmartSalmon>`
+        :type complex_body: :class:`Salmon
+         <fixtures.acceptancetestsbodycomplex.models.Salmon>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -243,7 +243,7 @@ class PolymorphismOperations(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'SmartSalmon')
+        body_content = self._serialize.body(complex_body, 'Salmon')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

@@ -2529,11 +2529,11 @@ export interface Polymorphism {
      *
      * @returns {Promise} A promise is returned
      *
-     * @resolve {HttpOperationResponse<SmartSalmon>} - The deserialized result object.
+     * @resolve {HttpOperationResponse<Salmon>} - The deserialized result object.
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    getValidxWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.SmartSalmon>>;
+    getValidxWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.Salmon>>;
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy
@@ -2550,7 +2550,7 @@ export interface Polymorphism {
      *
      * {Promise} A promise is returned.
      *
-     *                      @resolve {SmartSalmon} - The deserialized result object.
+     *                      @resolve {Salmon} - The deserialized result object.
      *
      *                      @reject {Error|ServiceError} - The error object.
      *
@@ -2558,16 +2558,16 @@ export interface Polymorphism {
      *
      *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
      *
-     *                      {SmartSalmon} [result]   - The deserialized result object if an error did not occur.
-     *                      See {@link SmartSalmon} for more information.
+     *                      {Salmon} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link Salmon} for more information.
      *
      *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    getValidx(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.SmartSalmon>;
-    getValidx(callback: ServiceCallback<models.SmartSalmon>): void;
-    getValidx(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SmartSalmon>): void;
+    getValidx(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.Salmon>;
+    getValidx(callback: ServiceCallback<models.Salmon>): void;
+    getValidx(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Salmon>): void;
 
 
     /**
@@ -2575,11 +2575,17 @@ export interface Polymorphism {
      *
      * @param {object} complexBody
      *
-     * @param {string} [complexBody.collegeDegree]
-     *
      * @param {string} [complexBody.location]
      *
      * @param {boolean} [complexBody.iswild]
+     *
+     * @param {string} [complexBody.species]
+     *
+     * @param {number} complexBody.length
+     *
+     * @param {array} [complexBody.siblings]
+     *
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      *
      * @param {object} [options] Optional Parameters.
      *
@@ -2592,18 +2598,24 @@ export interface Polymorphism {
      *
      * @reject {Error|ServiceError} - The error object.
      */
-    putValidxWithHttpOperationResponse(complexBody: models.SmartSalmon, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+    putValidxWithHttpOperationResponse(complexBody: models.Salmon, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy
      *
      * @param {object} complexBody
      *
-     * @param {string} [complexBody.collegeDegree]
-     *
      * @param {string} [complexBody.location]
      *
      * @param {boolean} [complexBody.iswild]
+     *
+     * @param {string} [complexBody.species]
+     *
+     * @param {number} complexBody.length
+     *
+     * @param {array} [complexBody.siblings]
+     *
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
      *
      * @param {object} [options] Optional Parameters.
      *
@@ -2631,9 +2643,9 @@ export interface Polymorphism {
      *
      *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
      */
-    putValidx(complexBody: models.SmartSalmon, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
-    putValidx(complexBody: models.SmartSalmon, callback: ServiceCallback<void>): void;
-    putValidx(complexBody: models.SmartSalmon, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValidx(complexBody: models.Salmon, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
+    putValidx(complexBody: models.Salmon, callback: ServiceCallback<void>): void;
+    putValidx(complexBody: models.Salmon, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 
 
     /**

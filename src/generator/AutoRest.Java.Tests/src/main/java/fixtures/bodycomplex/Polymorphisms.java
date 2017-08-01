@@ -15,7 +15,7 @@ import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
-import fixtures.bodycomplex.models.SmartSalmon;
+import fixtures.bodycomplex.models.Salmon;
 import java.io.IOException;
 import rx.Observable;
 
@@ -231,9 +231,9 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the SmartSalmon object if successful.
+     * @return the Salmon object if successful.
      */
-    SmartSalmon getValidx();
+    Salmon getValidx();
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy.
@@ -242,61 +242,61 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<SmartSalmon> getValidxAsync(final ServiceCallback<SmartSalmon> serviceCallback);
+    ServiceFuture<Salmon> getValidxAsync(final ServiceCallback<Salmon> serviceCallback);
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SmartSalmon object
+     * @return the observable to the Salmon object
      */
-    Observable<SmartSalmon> getValidxAsync();
+    Observable<Salmon> getValidxAsync();
 
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SmartSalmon object
+     * @return the observable to the Salmon object
      */
-    Observable<ServiceResponse<SmartSalmon>> getValidxWithServiceResponseAsync();
+    Observable<ServiceResponse<Salmon>> getValidxWithServiceResponseAsync();
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy.
      *
-     * @param complexBody the SmartSalmon value
+     * @param complexBody the Salmon value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    void putValidx(SmartSalmon complexBody);
+    void putValidx(Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy.
      *
-     * @param complexBody the SmartSalmon value
+     * @param complexBody the Salmon value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> putValidxAsync(SmartSalmon complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidxAsync(Salmon complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy.
      *
-     * @param complexBody the SmartSalmon value
+     * @param complexBody the Salmon value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putValidxAsync(SmartSalmon complexBody);
+    Observable<Void> putValidxAsync(Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy.
      *
-     * @param complexBody the SmartSalmon value
+     * @param complexBody the Salmon value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidxWithServiceResponseAsync(SmartSalmon complexBody);
+    Observable<ServiceResponse<Void>> putValidxWithServiceResponseAsync(Salmon complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.

@@ -19,7 +19,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
-import fixtures.bodycomplex.models.SmartSalmon;
+import fixtures.bodycomplex.models.Salmon;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
@@ -70,7 +70,7 @@ public class PolymorphismsImpl implements Polymorphisms {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidx" })
         @PUT("complex/polymorphism/validx")
-        Observable<Response<ResponseBody>> putValidx(@Body SmartSalmon complexBody);
+        Observable<Response<ResponseBody>> putValidx(@Body Salmon complexBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidMissingRequired" })
         @PUT("complex/polymorphism/missingrequired/invalid")
@@ -351,9 +351,9 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the SmartSalmon object if successful.
+     * @return the Salmon object if successful.
      */
-    public SmartSalmon getValidx() {
+    public Salmon getValidx() {
         return getValidxWithServiceResponseAsync().toBlocking().single().body();
     }
 
@@ -364,7 +364,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SmartSalmon> getValidxAsync(final ServiceCallback<SmartSalmon> serviceCallback) {
+    public ServiceFuture<Salmon> getValidxAsync(final ServiceCallback<Salmon> serviceCallback) {
         return ServiceFuture.fromResponse(getValidxWithServiceResponseAsync(), serviceCallback);
     }
 
@@ -372,12 +372,12 @@ public class PolymorphismsImpl implements Polymorphisms {
      * Get complex types that are polymorphic, but not at the root of the hierarchy.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SmartSalmon object
+     * @return the observable to the Salmon object
      */
-    public Observable<SmartSalmon> getValidxAsync() {
-        return getValidxWithServiceResponseAsync().map(new Func1<ServiceResponse<SmartSalmon>, SmartSalmon>() {
+    public Observable<Salmon> getValidxAsync() {
+        return getValidxWithServiceResponseAsync().map(new Func1<ServiceResponse<Salmon>, Salmon>() {
             @Override
-            public SmartSalmon call(ServiceResponse<SmartSalmon> response) {
+            public Salmon call(ServiceResponse<Salmon> response) {
                 return response.body();
             }
         });
@@ -387,15 +387,15 @@ public class PolymorphismsImpl implements Polymorphisms {
      * Get complex types that are polymorphic, but not at the root of the hierarchy.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SmartSalmon object
+     * @return the observable to the Salmon object
      */
-    public Observable<ServiceResponse<SmartSalmon>> getValidxWithServiceResponseAsync() {
+    public Observable<ServiceResponse<Salmon>> getValidxWithServiceResponseAsync() {
         return service.getValidx()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SmartSalmon>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Salmon>>>() {
                 @Override
-                public Observable<ServiceResponse<SmartSalmon>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Salmon>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<SmartSalmon> clientResponse = getValidxDelegate(response);
+                        ServiceResponse<Salmon> clientResponse = getValidxDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -404,9 +404,9 @@ public class PolymorphismsImpl implements Polymorphisms {
             });
     }
 
-    private ServiceResponse<SmartSalmon> getValidxDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<SmartSalmon, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<SmartSalmon>() { }.getType())
+    private ServiceResponse<Salmon> getValidxDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Salmon, ErrorException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Salmon>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -414,35 +414,35 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy.
      *
-     * @param complexBody the SmartSalmon value
+     * @param complexBody the Salmon value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putValidx(SmartSalmon complexBody) {
+    public void putValidx(Salmon complexBody) {
         putValidxWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy.
      *
-     * @param complexBody the SmartSalmon value
+     * @param complexBody the Salmon value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putValidxAsync(SmartSalmon complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidxAsync(Salmon complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(putValidxWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy.
      *
-     * @param complexBody the SmartSalmon value
+     * @param complexBody the Salmon value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putValidxAsync(SmartSalmon complexBody) {
+    public Observable<Void> putValidxAsync(Salmon complexBody) {
         return putValidxWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
@@ -454,11 +454,11 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy.
      *
-     * @param complexBody the SmartSalmon value
+     * @param complexBody the Salmon value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putValidxWithServiceResponseAsync(SmartSalmon complexBody) {
+    public Observable<ServiceResponse<Void>> putValidxWithServiceResponseAsync(Salmon complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
