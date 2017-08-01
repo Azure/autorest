@@ -111,6 +111,12 @@ task 'install', 'build and install the dev version of autorest',(done)->
     'install/binaries',
     -> done()
 
+task 'nuke' , '' , (done)->
+  # remove the copied dts files
+  rm "#{basefolder}/package-lock.json"
+  rmdir  "#{basefolder}/src/autorest/lib/core", ->
+    rmdir "#{basefolder}/node_modules", done
+
 task 'init-deps', '', (done) ->
   done()
 
@@ -152,7 +158,9 @@ task 'init', "" ,(done)->
     .on 'end', -> 
       if doit || force
         echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
+        echo "Running npm install for project folder."
         exec "npm install", {cwd:basefolder,silent:true},(c,o,e)->
+          echo "Completed Running npm install for project folder."
           done null
       else 
         done null
