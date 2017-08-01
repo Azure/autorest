@@ -7,7 +7,7 @@
 // start of autorest-ng
 // the console app starts for real here.
 
-import { Artifact } from '../autorest/lib/core/lib/artifact';
+import { Artifact } from './lib/artifact';
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
