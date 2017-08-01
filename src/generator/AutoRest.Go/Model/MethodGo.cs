@@ -214,8 +214,9 @@ namespace AutoRest.Go.Model
             return $"{retVal}, {errVal}";
         }
 
-        public bool ShouldValidate() {
-            return !ParameterValidations.IsNullOrEmpty();
+        public bool ShouldValidate()
+        {
+            return Singleton<GeneratorSettingsGo>.Instance.ClientSideValidation;
         }
 
         public string NextMethodName => $"{Name}NextResults";
