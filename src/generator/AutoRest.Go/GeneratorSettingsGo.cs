@@ -12,5 +12,10 @@ namespace AutoRest.Go
         public virtual string Name => "Go";
 
         public virtual string Description => "Generic Go code generator.";
+
+        /// <summary>
+        /// Indicates whether to generate client side validation.
+        /// </summary>
+        public bool ClientSideValidation { get; set; }
     }
 }

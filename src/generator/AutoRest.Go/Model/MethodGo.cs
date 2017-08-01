@@ -14,6 +14,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Go.Model
 {
@@ -211,6 +212,10 @@ namespace AutoRest.Go.Model
             }
 
             return $"{retVal}, {errVal}";
+        }
+
+        public bool ShouldValidate() {
+            return !ParameterValidations.IsNullOrEmpty();
         }
 
         public string NextMethodName => $"{Name}NextResults";
