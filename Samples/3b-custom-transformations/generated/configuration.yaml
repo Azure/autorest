@@ -45,7 +45,6 @@ output-artifact:
   - source-file-ruby
   - source-file-azureresourceschema
   - source-file-jsonrpcclient
-clear-output-folder: {}
 azure-arm: true
 azure-validator: true
 csharp:
