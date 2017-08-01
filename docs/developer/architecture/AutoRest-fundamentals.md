@@ -16,7 +16,7 @@ Only the core handles disk access, individual pipeline steps are executed in iso
 
 ### Example
 
-![Example Pipeline](./pipeline.svg)
+![Example Pipeline](./pipeline.png)
 
 ### Predefined Pipeline Steps
 
