@@ -157,7 +157,7 @@ task 'init', "" ,(done)->
   typescriptProjectFolders()
     .on 'end', -> 
       if doit || force
-        echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - rxunning 'npm install' for you.\n"
+        echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
         echo "Running npm install for project folder."
         exec "npm install", {cwd:basefolder,silent:true},(c,o,e)->
           echo "Completed Running npm install for project folder."
