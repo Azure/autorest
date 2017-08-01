@@ -15,7 +15,7 @@ import { ShallowCopy } from "./lib/source-map/merging";
 import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
-import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
+import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
@@ -77,8 +77,9 @@ ${Stringify(config).replace(/^---\n/, "")}
   const api = new AutoRest(new RealFileSystem());
   await api.AddConfiguration(config);
   const view = await api.view;
-  const outstanding = new OutstandingTaskAwaiter();
-  api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
+  let outstanding: Promise<void> = Promise.resolve();
+  api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
+  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(() => ClearFolder(folder)));
   subscribeMessages(api, () => { });
 
   // warn about `--` arguments
@@ -98,7 +99,7 @@ ${Stringify(config).replace(/^---\n/, "")}
   if (result != true) {
     throw result;
   }
-  await outstanding.Wait();
+  await outstanding;
 
   return 0;
 }
@@ -207,7 +208,6 @@ csharp:
 }
 
 let exitcode = 0;
-const outstanding = new OutstandingTaskAwaiter();
 let args: CommandLineArgs;
 
 async function currentMain(autorestArgs: string[]): Promise<number> {
@@ -228,7 +228,9 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
 
   // listen for output messages and file writes
   subscribeMessages(api, () => exitcode++);
-  api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
+  let outstanding: Promise<void> = Promise.resolve();
+  api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
+  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(() => ClearFolder(folder)));
   const config = (await api.view);
 
   try {
@@ -255,7 +257,7 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   }
   finally {
     // wait for any outstanding file writes to complete before we bail.
-    await outstanding.Wait();
+    await outstanding;
   }
 
   // return the exit code to the caller.
@@ -315,6 +317,8 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
   const outputs = new Map<string, string>();
   const schemas = new Array<string>();
 
+  let outstanding: Promise<void> = Promise.resolve();
+
   // ask for the view without 
   const config = await api.RegenerateView();
   for (const batchConfig of config.GetNestedConfiguration("resource-schema-batch")) { // really, there should be only one
@@ -335,7 +339,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
           if (!outputs.has(file.uri)) {
             // Console.Log(`  Writing  *${file.uri}*`);
             outputs.set(file.uri, file.content);
-            outstanding.Await(WriteString(file.uri, file.content))
+            outstanding = outstanding.then(() => WriteString(file.uri, file.content))
             schemas.push(...getRds(more, file.uri));
             return;
           } else {
@@ -347,7 +351,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
             existing.definitions = shallowMerge(existing.definitions, more.definitions);
             const content = JSON.stringify(existing, null, 2);
             outputs.set(file.uri, content);
-            outstanding.Await(WriteString(file.uri, content));
+            outstanding = outstanding.then(() => WriteString(file.uri, content));
           }
         }
       });
@@ -364,7 +368,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       console.log(`Running autorest for *${path}* `);
 
       // ok, kick off the process for that one.
-      await instance.Process().finish.then((result) => {
+      await instance.Process().finish.then(async (result) => {
         if (result != true) {
           exitcode++;
           throw result;

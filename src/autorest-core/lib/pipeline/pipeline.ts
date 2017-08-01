@@ -12,7 +12,7 @@ import { AutoRestExtension } from "./plugin-endpoint";
 import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
 import { Channel } from "../message";
-import { ClearFolder, ResolveUri } from "../ref/uri";
+import { ResolveUri } from "../ref/uri";
 import { ConfigurationView, GetExtension } from '../configuration';
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
 import { IFileSystem } from "../file-system";
@@ -135,7 +135,7 @@ function CreateArtifactEmitter(inputOverride?: () => Promise<DataStoreViewReadon
 
     // clear output-folder if requested
     if (config.GetEntry("clear-output-folder" as any)) {
-      await ClearFolder(config.OutputFolderUri); // TODO: emit corresponding event
+      config.ClearFolder.Dispatch(config.OutputFolderUri);
     }
 
     await EmitArtifacts(

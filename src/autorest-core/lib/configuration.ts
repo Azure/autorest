@@ -137,6 +137,10 @@ export class MessageEmitter extends EventEmitter {
   */
   @EventEmitter.Event public GeneratedFile: IEvent<MessageEmitter, Artifact>;
   /**
+   * Event: Signals when a Folder is supposed to be cleared
+   */
+  @EventEmitter.Event public ClearFolder: IEvent<MessageEmitter, string>;
+  /**
    * Event: Signals when a message is generated
    */
   @EventEmitter.Event public Message: IEvent<MessageEmitter, Message>;
@@ -249,6 +253,7 @@ export class ConfigurationView {
   /* @internal */ public get CancellationToken(): CancellationToken { return this.messageEmitter.CancellationToken; }
   /* @internal */ public get CancellationTokenSource(): CancellationTokenSource { return this.messageEmitter.CancellationTokenSource; }
   /* @internal */ public get GeneratedFile(): IEvent<MessageEmitter, Artifact> { return this.messageEmitter.GeneratedFile; }
+  /* @internal */ public get ClearFolder(): IEvent<MessageEmitter, string> { return this.messageEmitter.ClearFolder; }
 
   private config: AutoRestConfigurationImpl;
   private rawConfig: AutoRestConfigurationImpl;
