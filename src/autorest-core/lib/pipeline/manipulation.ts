@@ -6,7 +6,7 @@
 import { nodes } from "../ref/jsonpath";
 import { safeEval } from "../ref/safe-eval";
 import { ManipulateObject } from "./object-manipulator";
-import { DataHandleRead, DataStoreView } from "../data-store/data-store";
+import { DataHandleRead, DataSink } from '../data-store/data-store';
 import { DirectiveView } from "../configuration";
 import { ConfigurationView } from "../autorest-core";
 import { From } from "../ref/linq";
@@ -35,15 +35,14 @@ export class Manipulator {
     return matchesFrom;
   }
 
-  private async ProcessInternal(data: DataHandleRead, scope: DataStoreView, documentId?: string): Promise<DataHandleRead> {
+  private async ProcessInternal(data: DataHandleRead, sink: DataSink, documentId?: string): Promise<DataHandleRead> {
     for (const trans of this.transformations) {
       // matches filter?
       if (this.MatchesSourceFilter(documentId || data.key, trans)) {
         for (const w of trans.where) {
           // transform
           for (const t of trans.transform) {
-            const target = await scope.Write(`transform_${++this.ctr}.yaml`);
-            const result = await ManipulateObject(data, target, w,
+            const result = await ManipulateObject(data, sink, w,
               (doc, obj, path) => safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path })/*,
               {
                 reason: trans.reason,
@@ -60,8 +59,7 @@ export class Manipulator {
           }
           // set
           for (const s of trans.set) {
-            const target = await scope.Write(`set_${++this.ctr}.yaml`);
-            const result = await ManipulateObject(data, target, w, obj => s/*,
+            const result = await ManipulateObject(data, sink, w, obj => s/*,
               {
                 reason: trans.reason,
                 transformerSourceHandle: // TODO
@@ -110,13 +108,13 @@ export class Manipulator {
     return data;
   }
 
-  public async Process(data: DataHandleRead, scope: DataStoreView, documentId?: string): Promise<DataHandleRead> {
+  public async Process(data: DataHandleRead, sink: DataSink, documentId?: string): Promise<DataHandleRead> {
     // if the input data is not an object (e.g. raw source code) transform to string object and back
     const needsTransform = !data.IsObject();
 
-    const trans1 = needsTransform ? await (await scope.Write(`trans_input?${data.key}`)).WriteObject(data.ReadData()) : data;
-    const result = await this.ProcessInternal(trans1, scope, documentId);
-    const trans2 = needsTransform ? await (await scope.Write(`trans_output?${data.key}`)).WriteData(result.ReadObject<string>()) : result;
+    const trans1 = needsTransform ? await sink.WriteObject(`trans_input?${data.key}`, data.ReadData()) : data;
+    const result = await this.ProcessInternal(trans1, sink, documentId);
+    const trans2 = needsTransform ? await sink.WriteObject(`trans_output?${data.key}`, result.ReadObject<string>()) : result;
     return trans2;
   }
 }

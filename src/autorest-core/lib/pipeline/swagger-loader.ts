@@ -14,7 +14,7 @@ import { Channel, SourceLocation } from "../message";
 import { OperationAbortedException } from "../exception";
 import { safeEval } from "../ref/safe-eval";
 import { ConfigurationView } from "../autorest-core";
-import { DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/data-store";
+import { DataHandleRead, DataSink, DataSource } from '../data-store/data-store';
 import { IsPrefix, JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { ResolvePath, ResolveRelativeNode } from "../parsing/yaml";
 import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNodeWithPath } from "../ref/yaml";
@@ -29,8 +29,8 @@ let ctr = 0;
 
 async function EnsureCompleteDefinitionIsPresent(
   config: ConfigurationView,
-  inputScope: DataStoreViewReadonly,
-  workingScope: DataStoreView,
+  inputScope: DataSource,
+  sink: DataSink,
   visitedEntities: string[],
   externalFiles: { [uri: string]: DataHandleRead },
   sourceFileUri: string,
@@ -51,7 +51,7 @@ async function EnsureCompleteDefinitionIsPresent(
         })
         throw new OperationAbortedException();
       }
-      const externalFile = await ParseLiterateYaml(config, file, workingScope.CreateScope(`ext_${Object.getOwnPropertyNames(externalFiles).length}`));
+      const externalFile = await ParseLiterateYaml(config, file, sink);
       externalFiles[fileUri] = externalFile;
     }
   };
@@ -126,7 +126,7 @@ async function EnsureCompleteDefinitionIsPresent(
       visitedEntities.push(entityPath);
       if (sourceDocObj[referencedEntityType][referencedModelName] === undefined) {
         if (fileUri != null) {
-          sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, fileUri, referencedEntityType, referencedModelName);
+          sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, sink, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, fileUri, referencedEntityType, referencedModelName);
           const extObj = externalFiles[fileUri].ReadObject<any>();
           inputs.push(externalFiles[fileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = extObj[referencedEntityType][referencedModelName];
@@ -136,7 +136,7 @@ async function EnsureCompleteDefinitionIsPresent(
             `resolving '${refPath}' in '${currentFileUri}'`));
         }
         else {
-          sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, referencedEntityType, referencedModelName);
+          sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, sink, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, referencedEntityType, referencedModelName);
           const currentObj = externalFiles[currentFileUri].ReadObject<any>();
           inputs.push(externalFiles[currentFileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = currentObj[referencedEntityType][referencedModelName];
@@ -168,7 +168,7 @@ async function EnsureCompleteDefinitionIsPresent(
       const model = refs[1];
       if (typeof defSec === "string" && typeof model === "string" && visitedEntities.indexOf(model) === -1) {
         //recursively check if the model is completely defined.
-        sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, defSec, model);
+        sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, sink, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, defSec, model);
         const currentObj = externalFiles[currentFileUri].ReadObject<any>();
         inputs.push(externalFiles[currentFileUri]);
         sourceDocObj[defSec][model] = currentObj[defSec][model];
@@ -181,13 +181,11 @@ async function EnsureCompleteDefinitionIsPresent(
   }
 
   // commit back
-  const target = await workingScope.Write(`revision_${++ctr}.yaml`);
-  externalFiles[sourceFileUri] = await target.WriteObject(sourceDocObj, sourceDocMappings, [...Object.getOwnPropertyNames(externalFiles).map(x => externalFiles[x]), sourceDoc] /* inputs */ /*TODO: fix*/);
+  externalFiles[sourceFileUri] = await sink.WriteObject("revision", sourceDocObj, sourceDocMappings, [...Object.getOwnPropertyNames(externalFiles).map(x => externalFiles[x]), sourceDoc] /* inputs */ /*TODO: fix*/);
   return sourceDocMappings;
 }
 
-async function StripExternalReferences(swagger: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
-  const result = await workingScope.Write("result.yaml");
+async function StripExternalReferences(swagger: DataHandleRead, sink: DataSink): Promise<DataHandleRead> {
   const ast = CloneAst(swagger.ReadYamlAst());
   const mapping = IdentitySourceMapping(swagger.key, ast);
   for (const node of Descendants(ast)) {
@@ -198,10 +196,10 @@ async function StripExternalReferences(swagger: DataHandleRead, workingScope: Da
       }
     }
   }
-  return await result.WriteData(StringifyAst(ast), mapping, [swagger]);
+  return await sink.WriteData("result.yaml", StringifyAst(ast), mapping, [swagger]);
 }
 
-export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
+export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandleRead> {
   const commonmark = await inputScope.ReadStrict(inputFileUri);
   const rawCommonmark = commonmark.ReadData();
   const commonmarkNode = await ParseCommonmark(rawCommonmark);
@@ -270,43 +268,42 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
     state.push(...[...CommonmarkSubHeadings(x.node)].map(y => { return { node: y, query: clue || x.query }; }));
   }
 
-  const resultHandle = await workingScope.Write("override-directives");
-  return resultHandle.WriteObject({ directive: directives }, mappings, [commonmark]);
+  return sink.WriteObject("override-directives", { directive: directives }, mappings, [commonmark]);
 }
 
-export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
-  const data = await ParseLiterateYaml(config, await inputScope.ReadStrict(inputFileUri), workingScope.CreateScope("yaml"));
+export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandleRead> {
+  const data = await ParseLiterateYaml(config, await inputScope.ReadStrict(inputFileUri), sink);
   const externalFiles: { [uri: string]: DataHandleRead } = {};
   externalFiles[inputFileUri] = data;
   await EnsureCompleteDefinitionIsPresent(config,
     inputScope,
-    workingScope.CreateScope("ref-resolving"),
+    sink,
     [],
     externalFiles,
     inputFileUri,
     data.ReadObject<any>(),
     IdentitySourceMapping(data.key, data.ReadYamlAst()));
-  const result = await StripExternalReferences(externalFiles[inputFileUri], workingScope.CreateScope("strip-ext-references"));
+  const result = await StripExternalReferences(externalFiles[inputFileUri], sink);
   return result;
 }
 
-export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUris: string[], workingScope: DataStoreView): Promise<DataHandleRead[]> {
+export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope: DataSource, inputFileUris: string[], sink: DataSink): Promise<DataHandleRead[]> {
   const rawSwaggers: DataHandleRead[] = [];
   let i = 0;
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
-    const pluginInput = await LoadLiterateSwagger(config, inputScope, inputFileUri, workingScope.CreateScope("swagger_" + i));
+    const pluginInput = await LoadLiterateSwagger(config, inputScope, inputFileUri, sink);
     rawSwaggers.push(pluginInput);
     i++;
   }
   return rawSwaggers;
 }
-export async function LoadLiterateSwaggerOverrides(config: ConfigurationView, inputScope: DataStoreViewReadonly, inputFileUris: string[], workingScope: DataStoreView): Promise<DataHandleRead[]> {
+export async function LoadLiterateSwaggerOverrides(config: ConfigurationView, inputScope: DataSource, inputFileUris: string[], sink: DataSink): Promise<DataHandleRead[]> {
   const rawSwaggers: DataHandleRead[] = [];
   let i = 0;
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
-    const pluginInput = await LoadLiterateSwaggerOverride(config, inputScope, inputFileUri, workingScope.CreateScope("swagger_" + i));
+    const pluginInput = await LoadLiterateSwaggerOverride(config, inputScope, inputFileUri, sink);
     rawSwaggers.push(pluginInput);
     i++;
   }
@@ -331,7 +328,7 @@ function distinct<T>(list: T[]): T[] {
   return sorted.filter((x, i) => i === 0 || x !== sorted[i - 1]);
 }
 
-export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: DataHandleRead[], workingScope: DataStoreView): Promise<DataHandleRead> {
+export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: DataHandleRead[], sink: DataSink): Promise<DataHandleRead> {
   const inputSwaggerObjects = inputSwaggers.map(sw => sw.ReadObject<any>());
   const candidateTitles: string[] = overrideInfoTitle
     ? [overrideInfoTitle]
@@ -349,7 +346,6 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
   for (let i = 0; i < inputSwaggers.length; ++i) {
     const inputSwagger = inputSwaggers[i];
     const swagger = inputSwaggerObjects[i];
-    const outputSwagger = await workingScope.Write(`prepared_${i}.yaml`);
     const mapping: Mappings = [];
     const populate: (() => void)[] = []; // populate swagger; deferred in order to simplify source map generation
 
@@ -430,18 +426,17 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
     populate.forEach(f => f());
 
     // write back
-    inputSwaggers[i] = await outputSwagger.WriteObject(swagger, mapping, [inputSwagger]);
+    inputSwaggers[i] = await sink.WriteObject("prepared", swagger, mapping, [inputSwagger]);
   }
 
-  let hSwagger = await MergeYamls(config, inputSwaggers, await workingScope.Write("swagger.yaml"));
+  let hSwagger = await MergeYamls(config, inputSwaggers, sink);
 
   // override info section
-  const hwInfo = await workingScope.Write("info.yaml");
   const info: any = { title: candidateTitles[0] };
   if (candidateDescriptions[0]) info.description = candidateDescriptions[0];
-  const hInfo = await hwInfo.WriteObject({ info: info });
+  const hInfo = await sink.WriteObject("info.yaml", { info: info });
 
-  hSwagger = await MergeYamls(config, [hSwagger, hInfo], await workingScope.Write("swagger_customInfo.yaml"));
+  hSwagger = await MergeYamls(config, [hSwagger, hInfo], sink);
 
   return hSwagger;
 }

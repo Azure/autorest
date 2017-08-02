@@ -472,7 +472,7 @@ export class Configuration {
     const hConfig = await ParseCodeBlocks(
       contextConfig,
       configFile,
-      contextConfig.DataStore.CreateScope(scope));
+      contextConfig.DataStore.DataSink);
 
     const blocks = hConfig.map(each => {
       const block = each.data.ReadObject<AutoRestConfigurationImpl>();

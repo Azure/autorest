@@ -19,7 +19,7 @@ import { Channel, Message } from "../lib/message";
       config,
       dataStore.GetReadThroughScope(new RealFileSystem()),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/087554c4480e144f715fe92f97621ff5603cd907/specification/network/resource-manager/Microsoft.Network/2016-12-01/applicationGateway.json",
-      dataStore.CreateScope("work"));
+      dataStore.DataSink);
     const swaggerObj = swaggerFile.ReadObject<any>();
 
     // check presence of SubResource (imported from "./network.json")

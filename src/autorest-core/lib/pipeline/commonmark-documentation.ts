@@ -19,7 +19,7 @@ import {
 } from "../ref/yaml";
 import { IdentitySourceMapping } from "../source-map/merging";
 import { From } from "../ref/linq";
-import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
+import { DataHandleRead, DataSink } from '../data-store/data-store';
 
 function IsDocumentationField(path: JsonPath) {
   const last = path[path.length - 1];
@@ -44,7 +44,7 @@ export function PlainTextVersion(commonmarkAst: Node): string {
   return result.trim();
 }
 
-export async function ProcessCodeModel(codeModel: DataHandleRead, scope: DataStoreView): Promise<DataHandleRead> {
+export async function ProcessCodeModel(codeModel: DataHandleRead, sink: DataSink): Promise<DataHandleRead> {
   const ast = CloneAst(codeModel.ReadYamlAst());
   let mapping = IdentitySourceMapping(codeModel.key, ast);
 
@@ -77,6 +77,5 @@ export async function ProcessCodeModel(codeModel: DataHandleRead, scope: DataSto
     }
   }
 
-  const targetHandle = await scope.Write("codeModel.yaml");
-  return await targetHandle.WriteData(StringifyAst(ast), mapping, [codeModel]);
+  return await sink.WriteData("codeModel.yaml", StringifyAst(ast), mapping, [codeModel]);
 }

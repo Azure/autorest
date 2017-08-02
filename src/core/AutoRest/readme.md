@@ -64,7 +64,7 @@ pipeline:
 
 scope-csharp/emitter:
   input-artifact: source-file-csharp
-  output-uri-expr: $key.split("/output/")[1]
+  output-uri-expr: $key
 
 output-artifact:
 - source-file-csharp
@@ -102,7 +102,7 @@ pipeline:
 
 scope-go/emitter:
   input-artifact: source-file-go
-  output-uri-expr: $key.split("/output/")[1]
+  output-uri-expr: $key
 
 output-artifact:
 - source-file-go
@@ -140,7 +140,7 @@ pipeline:
 
 scope-java/emitter:
   input-artifact: source-file-java
-  output-uri-expr: $key.split("/output/")[1]
+  output-uri-expr: $key
 
 output-artifact:
 - source-file-java
@@ -178,7 +178,7 @@ pipeline:
 
 scope-python/emitter:
   input-artifact: source-file-python
-  output-uri-expr: $key.split("/output/")[1]
+  output-uri-expr: $key
 
 output-artifact:
 - source-file-python
@@ -216,7 +216,7 @@ pipeline:
 
 scope-nodejs/emitter:
   input-artifact: source-file-nodejs
-  output-uri-expr: $key.split("/output/")[1]
+  output-uri-expr: $key
 
 output-artifact:
 - source-file-nodejs
@@ -254,7 +254,7 @@ pipeline:
 
 scope-ruby/emitter:
   input-artifact: source-file-ruby
-  output-uri-expr: $key.split("/output/")[1]
+  output-uri-expr: $key
 
 output-artifact:
 - source-file-ruby
@@ -292,7 +292,7 @@ pipeline:
 
 scope-azureresourceschema/emitter:
   input-artifact: source-file-azureresourceschema
-  output-uri-expr: $key.split("/output/")[1]
+  output-uri-expr: $key
 output-artifact:
 - source-file-azureresourceschema
 ```
@@ -320,7 +320,7 @@ pipeline:
 
 scope-jsonrpcclient/emitter:
   input-artifact: source-file-jsonrpcclient
-  output-uri-expr: $key.split("/output/")[1]
+  output-uri-expr: $key
 output-artifact:
 - source-file-jsonrpcclient
 ```
