@@ -272,13 +272,13 @@ namespace AutoRest.Core.Utilities
             return null;
         }
 
-        public static T GetValue<T>(this IDictionary<string, object> dictionary, string key) where T:class
+        public static T GetValue<T>(this IDictionary<string, object> dictionary, string key) where T : class
         {
             if (dictionary.TryGetValue(key, out object value))
             {
                 if (value is T)
                 {
-                    return (T) value;
+                    return (T)value;
                 }
                 try
                 {
