@@ -1,12 +1,3 @@
-INFORMATION: [WRITING] ExtensionsTemplate => SwaggerPetstoreExtensions.cs
-INFORMATION: [WRITING] ModelTemplate => Models\Category.cs
-INFORMATION: [WRITING] ModelTemplate => Models\Order.cs
-INFORMATION: [WRITING] ModelTemplate => Models\Pet.cs
-INFORMATION: [WRITING] ModelTemplate => Models\Tag.cs
-INFORMATION: [WRITING] ModelTemplate => Models\User.cs
-INFORMATION: [WRITING] ServiceClientInterfaceTemplate => ISwaggerPetstore.cs
-INFORMATION: [WRITING] ServiceClientTemplate => SwaggerPetstore.cs
-INFORMATION: [WRITING] XmlSerializationTemplate => Models\XmlSerialization.cs
 INFORMATION: Defaulting to generate client side Code
 INFORMATION: Generating client model from swagger model.
 INFORMATION: Generating Rest Code

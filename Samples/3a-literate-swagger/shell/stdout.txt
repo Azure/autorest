@@ -1,20 +1,3 @@
-INFORMATION: [WRITING] AzureMethodGroupTemplate => QueryKeysOperations.cs
-INFORMATION: [WRITING] AzureMethodGroupTemplate => ServicesOperations.cs
-INFORMATION: [WRITING] AzureServiceClientTemplate => SearchManagementClient.cs
-INFORMATION: [WRITING] ExceptionTemplate => Models\ErrorException.cs
-INFORMATION: [WRITING] ExtensionsTemplate => QueryKeysOperationsExtensions.cs
-INFORMATION: [WRITING] ExtensionsTemplate => ServicesOperationsExtensions.cs
-INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IQueryKeysOperations.cs
-INFORMATION: [WRITING] MethodGroupInterfaceTemplate => IServicesOperations.cs
-INFORMATION: [WRITING] ModelTemplate => Models\Error.cs
-INFORMATION: [WRITING] ModelTemplate => Models\ErrorDetails.cs
-INFORMATION: [WRITING] ModelTemplate => Models\ListQueryKeysResult.cs
-INFORMATION: [WRITING] ModelTemplate => Models\QueryKey.cs
-INFORMATION: [WRITING] ModelTemplate => Models\SearchServiceCreateOrUpdateParameters.cs
-INFORMATION: [WRITING] ModelTemplate => Models\SearchServiceListResult.cs
-INFORMATION: [WRITING] ModelTemplate => Models\SearchServiceProperties.cs
-INFORMATION: [WRITING] ModelTemplate => Models\SearchServiceResource.cs
-INFORMATION: [WRITING] ServiceClientInterfaceTemplate => ISearchManagementClient.cs
 INFORMATION: Generating client model from swagger model.
 INFORMATION: Initializing code generator.
 INFORMATION: Successfully initialized Azure.CSharp Code Generator 1.2.2.0

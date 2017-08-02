@@ -1,9 +1,3 @@
-INFORMATION: [WRITING] ExtensionsTemplate => CowbellOperationsExtensions.cs
-INFORMATION: [WRITING] MethodGroupInterfaceTemplate => ICowbellOperations.cs
-INFORMATION: [WRITING] MethodGroupTemplate => CowbellOperations.cs
-INFORMATION: [WRITING] ModelTemplate => Models\Cowbell.cs
-INFORMATION: [WRITING] ServiceClientInterfaceTemplate => ICowbellFactory.cs
-INFORMATION: [WRITING] ServiceClientTemplate => CowbellFactory.cs
 INFORMATION: Defaulting to generate client side Code
 INFORMATION: Generating client model from swagger model.
 INFORMATION: Generating Rest Code
