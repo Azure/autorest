@@ -299,7 +299,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
-  const fsInput = configView.DataStore.GetReadThroughScopeFileSystem(fileSystem);
+  const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
   const pipeline = BuildPipeline(configView);
 
   const ScheduleNode: (nodeName: string) => Promise<DataStoreViewReadonly> =

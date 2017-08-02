@@ -135,42 +135,7 @@ class DataStoreViewScope extends DataStoreView {
 
 class DataStoreViewReadThrough extends DataStoreViewReadonly {
   private uris: string[] = [];
-
-  constructor(private storage: DataStore, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
-    super();
-  }
-
-  public async Read(uri: string): Promise<DataHandleRead> {
-    // validation before hitting the file system or web
-    if (!this.customUriFilter(uri)) {
-      throw new Error(`Provided URI '${uri}' violated the filter`);
-    }
-
-    uri = ToRawDataUrl(uri);
-
-    // prope cache
-    const existingData = await this.storage.Read(uri);
-    if (existingData !== null) {
-      this.uris.push(uri);
-      return existingData;
-    }
-
-    // populate cache
-    const data = await ReadUri(uri);
-    const writeHandle = await this.storage.Write(uri);
-    const readHandle = await writeHandle.WriteData(data);
-    this.uris.push(uri);
-    return readHandle;
-  }
-
-  public async Enum(): Promise<string[]> {
-    return this.storage.Enum();
-  }
-}
-
-class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
-  private uris: string[] = [];
-  private cache: { [uri: string]: Promise<DataHandleRead | null> } = {};
+  private cache: { [uri: string]: Promise<DataHandleRead> } = {};
 
   constructor(private slave: DataStore, private fs: IFileSystem) {
     super();
@@ -229,12 +194,8 @@ export class DataStore extends DataStoreView {
     }
   }
 
-  public GetReadThroughScope(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
-    return new DataStoreViewReadThrough(this, customUriFilter);
-  }
-
-  public GetReadThroughScopeFileSystem(fs: IFileSystem): DataStoreViewReadonly {
-    return new DataStoreViewReadThroughFS(this, fs);
+  public GetReadThroughScope(fs: IFileSystem): DataStoreViewReadonly {
+    return new DataStoreViewReadThrough(this, fs);
   }
 
   /****************

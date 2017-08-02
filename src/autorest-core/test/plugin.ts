@@ -60,7 +60,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     // load swagger
     const swagger = await LoadLiterateSwagger(
       config,
-      dataStore.GetReadThroughScope(),
+      dataStore.GetReadThroughScope(new RealFileSystem()),
       "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
@@ -95,13 +95,13 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     // load swagger
     const swagger = await LoadLiterateSwagger(
       config,
-      dataStore.GetReadThroughScope(),
+      dataStore.GetReadThroughScope(new RealFileSystem()),
       "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
     // load code model
     const codeModelUri = ResolveUri(CreateFolderUri(__dirname), "../../test/resources/code-model.yaml");
-    const inputScope = dataStore.GetReadThroughScope(uri => uri === codeModelUri);
+    const inputScope = dataStore.GetReadThroughScope(new RealFileSystem());
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 
     // call generator
@@ -128,7 +128,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
   @test @skip @timeout(0) async "custom plugin module"() {
     const cancellationToken = CancellationToken.None;
     const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.GetReadThroughScope();
+    const scopeInput = dataStore.GetReadThroughScope(new RealFileSystem());
 
     const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json";
     await scopeInput.Read(inputFileUri);

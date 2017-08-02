@@ -12,7 +12,7 @@ import * as Constants from './constants';
 import { DataHandleRead, DataStore } from './data-store/data-store';
 import { EventEmitter, IEvent } from './events';
 import { OperationAbortedException } from './exception';
-import { IFileSystem } from './file-system';
+import { IFileSystem, RealFileSystem } from './file-system';
 import { LazyPromise } from './lazy';
 import { Channel, Message, Range, SourceLocation } from './message';
 import { EvaluateGuard, ParseCodeBlocks } from './parsing/literate-yaml';
@@ -503,7 +503,7 @@ export class Configuration {
     configSegments.push(...configs);
     // 2. file
     if (configFileUri !== null) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
+      const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem as IFileSystem);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(configFileUri),
         createView(),
@@ -512,7 +512,7 @@ export class Configuration {
     }
     // 3. default configuration
     if (includeDefault) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
+      const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
         createView(),
@@ -555,7 +555,7 @@ export class Configuration {
         }
 
         // merge config
-        const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
+        const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
         const blocks = await this.ParseCodeBlocks(
           await inputView.ReadStrict(CreateFileUri(await ext.extension.configurationPath)),
           tmpView,
