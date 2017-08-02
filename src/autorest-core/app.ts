@@ -7,11 +7,11 @@
 // start of autorest-ng
 // the console app starts for real here.
 
-import { AutoRestConfigurationImpl } from './lib/configuration';
+import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configuration';
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
-import { AutoRest } from "./lib/autorest-core";
+import { AutoRest, ConfigurationView } from './lib/autorest-core';
 import { ShallowCopy } from "./lib/source-map/merging";
 import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
@@ -21,16 +21,6 @@ import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
 import { Exception, OperationCanceledException } from "./lib/exception";
-
-function getGitHubAuthConfiguration(): AutoRestConfigurationImpl {
-  const token = process.env.GITHUB_AUTH_TOKEN;
-
-  const result: AutoRestConfigurationImpl = {};
-  if (token) {
-    result["github-auth-token"] = token;
-  }
-  return result;
-}
 
 /**
  * Legacy AutoRest
@@ -87,7 +77,6 @@ ${Stringify(config).replace(/^---\n/, "")}
   config["base-folder"] = currentDirUri;
   const api = new AutoRest(new RealFileSystem());
   api.AddConfiguration(config);
-  api.AddConfiguration(getGitHubAuthConfiguration());
   const view = await api.view;
   let outstanding: Promise<void> = Promise.resolve();
   api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
@@ -235,9 +224,8 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   const currentDirUri = CreateFolderUri(currentDirectory());
 
   // get an instance of AutoRest and add the command line switches to the configuration.
-  const api: AutoRest = new AutoRest(new EnhancedFileSystem(() => api.view), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
+  const api = new AutoRest(new EnhancedFileSystem((MergeConfigurations(...args.switches) as any)["github-auth-token"] || process.env.GITHUB_AUTH_TOKEN), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
   api.AddConfiguration(args.switches);
-  api.AddConfiguration(getGitHubAuthConfiguration());
 
   // listen for output messages and file writes
   subscribeMessages(api, () => exitcode++);

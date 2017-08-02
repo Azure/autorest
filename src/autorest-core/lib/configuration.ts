@@ -36,7 +36,6 @@ export interface AutoRestConfigurationImpl {
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
-  "github-auth-token"?: string;
   "use-extension"?: { [extensionName: string]: string };
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
@@ -65,8 +64,16 @@ export interface AutoRestConfigurationImpl {
   "openapi-type"?: string // the specification type (ARM/Data-Plane/Default)
 }
 
+export function MergeConfigurations(...configs: AutoRestConfigurationImpl[]): AutoRestConfigurationImpl {
+  let result: AutoRestConfigurationImpl = {};
+  for (const config of configs) {
+    result = MergeConfiguration(result, config);
+  }
+  return result;
+}
+
 // TODO: operate on DataHandleRead and create source map!
-function MergeConfigurations(higherPriority: AutoRestConfigurationImpl, lowerPriority: AutoRestConfigurationImpl): AutoRestConfigurationImpl {
+function MergeConfiguration(higherPriority: AutoRestConfigurationImpl, lowerPriority: AutoRestConfigurationImpl): AutoRestConfigurationImpl {
   // check guard
   if (lowerPriority.__info && !EvaluateGuard(lowerPriority.__info, higherPriority)) {
     // guard false? => skip
@@ -199,13 +206,11 @@ export class ConfigurationView {
       "output-artifact": [],
     };
 
-    for (const config of configs) {
-      this.rawConfig = MergeConfigurations(this.rawConfig, config);
-    }
+    this.rawConfig = MergeConfigurations(this.rawConfig, ...configs);
 
     // default values that are the least priority.
     // TODO: why is this here and not in default-configuration?
-    this.rawConfig = MergeConfigurations(this.rawConfig, <any>{
+    this.rawConfig = MergeConfiguration(this.rawConfig, <any>{
       "base-folder": ".",
       "output-folder": "generated",
       "debug": false,

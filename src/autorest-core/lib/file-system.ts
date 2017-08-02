@@ -71,7 +71,7 @@ export class RealFileSystem implements IFileSystem {
 // handles:
 // - GitHub auth
 export class EnhancedFileSystem implements IFileSystem {
-  public constructor(private config: () => Promise<ConfigurationView | null>) {
+  public constructor(private githubAuthToken?: string) {
   }
 
   EnumerateFileUris(folderUri: string): Promise<string[]> {
@@ -80,21 +80,11 @@ export class EnhancedFileSystem implements IFileSystem {
     ]);
   }
   async ReadFile(uri: string): Promise<string> {
-    const config = await this.config();
-
     const headers: { [key: string]: string } = {};
-    if (config !== null) {
-      // check for GitHub OAuth token
-      if (uri.startsWith("https://raw.githubusercontent.com")) {
-        const githubAuthToken = config.GetEntry("github-auth-token");
-        if (githubAuthToken) {
-          config.Message({
-            Channel: Channel.Information,
-            Text: `Using GitHub OAuth token for requesting '${uri}'`
-          });
-          headers.authorization = `Bearer ${githubAuthToken}`;
-        }
-      }
+
+    // check for GitHub OAuth token
+    if (this.githubAuthToken && uri.startsWith("https://raw.githubusercontent.com")) {
+      headers.authorization = `Bearer ${this.githubAuthToken}`;
     }
 
     return ReadUri(uri, headers);
