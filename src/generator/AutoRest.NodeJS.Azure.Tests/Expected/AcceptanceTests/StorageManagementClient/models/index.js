@@ -28,6 +28,7 @@ exports.Endpoints = require('./endpoints');
 exports.CustomDomain = require('./customDomain');
 exports.StorageAccount = require('./storageAccount');
 exports.StorageAccountKeys = require('./storageAccountKeys');
+exports.StorageAccountListResult = require('./storageAccountListResult');
 exports.StorageAccountUpdateParameters = require('./storageAccountUpdateParameters');
 exports.StorageAccountRegenerateKeyParameters = require('./storageAccountRegenerateKeyParameters');
 exports.UsageName = require('./usageName');

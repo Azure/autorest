@@ -22,11 +22,14 @@ task 'clean' , 'typescript', (done)->
       rmdir "#{each.path}/dist/" , ->
         next null
 
-task 'nuke' , '',['clean'], (done)->
+
+task 'nuke' , 'typescript', (done)->
+  unlink "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core" if exists  "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core"
   typescriptProjectFolders()
     .pipe foreach (each,next)->
       rmdir "#{each.path}/node_modules/" , ->
-        next null
+        rmdir "#{each.path}/dist/" , ->
+          next null
 
 task 'test', 'typescript',['build/typescript'], (done)->
   typescriptProjectFolders()

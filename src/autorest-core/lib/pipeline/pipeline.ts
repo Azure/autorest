@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { SpawnJsonRpcAutoRest } from "../../interop/autorest-dotnet";
 import { FastStringify } from "../ref/yaml";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import { safeEval } from "../ref/safe-eval";

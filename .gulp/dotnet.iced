@@ -27,6 +27,14 @@ task 'clean','dotnet', (done)->
     done()
 
 ###############################################
+task 'nuke' , 'dotnet', (done)->
+  projects()
+    .pipe where (each,next) ->  
+      assets = "#{folder each.path}/obj"
+      rmdir assets, ->
+        next null
+
+###############################################
 task 'build','dotnet',['restore'], (done) ->
   global.ts_ready++
   execute "dotnet build -c #{configuration} #{solution} /nologo /clp:NoSummary", (code, stdout, stderr) ->
