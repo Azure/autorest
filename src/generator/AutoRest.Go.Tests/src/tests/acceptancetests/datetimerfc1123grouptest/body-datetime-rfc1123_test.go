@@ -39,6 +39,7 @@ func (s *DateTimeRfc1123GroupSuite) TestGetNullDateTimeRFC1123(c *chk.C) {
 func (s *DateTimeRfc1123GroupSuite) TestGetUnderflowDateTimeRFC1123(c *chk.C) {
 	res, err := datetimerfc1123Client.GetUnderflow()
 	c.Assert(err, chk.NotNil)
+	c.Assert(err, chk.ErrorMatches, ".*day out of range.*")
 }
 
 func (s *DateTimeRfc1123GroupSuite) TestGetOverflowDateTimeRFC1123(c *chk.C) {
