@@ -54,7 +54,7 @@ namespace AutoRest.Swagger
         {
             ServiceDefinition = serviceDefinition;
             
-            Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
+            Logger.Instance.Log(Category.Debug, Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
 

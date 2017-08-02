@@ -19,7 +19,7 @@ namespace AutoRest.Core.Extensibility
     {
         public static IAnyPlugin GetPlugin(string pluginName)
         {
-            Logger.Instance.Log(Category.Info, Resources.InitializingCodeGenerator);
+            Logger.Instance.Log(Category.Debug, Resources.InitializingCodeGenerator);
 
             if (string.IsNullOrEmpty(pluginName))
             {
@@ -33,7 +33,7 @@ namespace AutoRest.Core.Extensibility
             var config = AutoRestConfiguration.Get();
             plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, pluginName);
             Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
-            Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,
+            Logger.Instance.Log(Category.Debug, Resources.GeneratorInitialized,
                 pluginName,
                 plugin.GetType().GetAssembly().GetName().Version);
             return plugin;

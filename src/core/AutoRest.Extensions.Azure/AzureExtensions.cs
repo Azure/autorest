@@ -111,7 +111,7 @@ namespace AutoRest.Extensions.Azure
                 }
                 else
                 {
-                    Logger.Instance.Log(Category.Info, Resources.HeadMethodPossibleIncorrectSpecification, method.Name);
+                    Logger.Instance.Log(Category.Warning, Resources.HeadMethodPossibleIncorrectSpecification, method.Name);
                 }
             }
         }

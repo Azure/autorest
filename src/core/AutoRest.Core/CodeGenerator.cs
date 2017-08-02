@@ -75,7 +75,7 @@ namespace AutoRest.Core
                     var examples = Model.XmsExtensions.Examples.FromJObject(examplesRaw);
                     foreach (var example in examples)
                     {
-                        Logger.Instance.Log(Category.Info, $"Generating example '{example.Key}' of '{group.Name}/{method.Name}'");
+                        Logger.Instance.Log(Category.Debug, $"Generating example '{example.Key}' of '{group.Name}/{method.Name}'");
                         var content = GenerateSample(singleFile, codeModel, group, method, example.Key, example.Value);
                         if (content != null)
                         {
