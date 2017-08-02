@@ -7,6 +7,7 @@
 // start of autorest-ng
 // the console app starts for real here.
 
+import { AutoRestConfigurationImpl } from './lib/configuration';
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
@@ -17,16 +18,16 @@ import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
 import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
-import { DataStore, githubAuthTokenSettingKey } from "./lib/data-store/data-store";
-import { RealFileSystem } from "./lib/file-system";
+import { DataStore } from "./lib/data-store/data-store";
+import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
 import { Exception, OperationCanceledException } from "./lib/exception";
 
-function getGitHubAuthConfiguration(): any {
+function getGitHubAuthConfiguration(): AutoRestConfigurationImpl {
   const token = process.env.GITHUB_AUTH_TOKEN;
 
-  const result: any = {};
+  const result: AutoRestConfigurationImpl = {};
   if (token) {
-    result[githubAuthTokenSettingKey] = token;
+    result["github-auth-token"] = token;
   }
   return result;
 }
@@ -50,7 +51,7 @@ async function legacyMain(autorestArgs: string[]): Promise<number> {
 
   // autorest init
   if (autorestArgs[0] === "init") {
-    const clientNameGuess = (config["override-info"] || {}).title || Parse<any>(await ReadUri(config["input-file"][0])).info.title;
+    const clientNameGuess = (config["override-info"] || {}).title || Parse<any>(await ReadUri((config["input-file"] as any)[0])).info.title;
     await autorestInit(clientNameGuess, Array.isArray(config["input-file"]) ? config["input-file"] as any : []);
     return 0;
   }
@@ -234,7 +235,7 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   const currentDirUri = CreateFolderUri(currentDirectory());
 
   // get an instance of AutoRest and add the command line switches to the configuration.
-  const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
+  const api: AutoRest = new AutoRest(new EnhancedFileSystem(() => api.view), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
   api.AddConfiguration(args.switches);
   api.AddConfiguration(getGitHubAuthConfiguration());
 

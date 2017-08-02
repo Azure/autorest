@@ -50,7 +50,7 @@ export abstract class DataStoreViewReadonly {
   public async ReadStrict(uri: string): Promise<DataHandleRead> {
     const result = await this.Read(uri);
     if (result === null) {
-      throw new Error(`Failed to read '${uri}'. Key not found.`);
+      throw new Error(`Could not to read '${uri}'.`);
     }
     return result;
   }
@@ -168,13 +168,11 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
   }
 }
 
-export const githubAuthTokenSettingKey = "github-auth-token";
-
 class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
   private uris: string[] = [];
   private cache: { [uri: string]: Promise<DataHandleRead | null> } = {};
 
-  constructor(private slave: DataStore, private config: ConfigurationView, private fs: IFileSystem) {
+  constructor(private slave: DataStore, private fs: IFileSystem) {
     super();
   }
 
@@ -191,17 +189,10 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
           return existingData;
         }
 
-        // check for GitHub OAuth token
-        const headers: { [key: string]: string } = {};
-        const githubAuthToken = this.config.GetEntry(githubAuthTokenSettingKey as any);
-        if (githubAuthToken) {
-          headers.authorization = `Bearer ${githubAuthToken}`;
-        }
-
         // populate cache
         let data: string | null = null;
         try {
-          data = await this.fs.ReadFile(uri) || await ReadUri(uri, headers);
+          data = await this.fs.ReadFile(uri) || await ReadUri(uri);
         } finally {
           if (!data) {
             return null;
@@ -242,8 +233,8 @@ export class DataStore extends DataStoreView {
     return new DataStoreViewReadThrough(this, customUriFilter);
   }
 
-  public GetReadThroughScopeFileSystem(config: ConfigurationView, fs: IFileSystem): DataStoreViewReadonly {
-    return new DataStoreViewReadThroughFS(this, config, fs);
+  public GetReadThroughScopeFileSystem(fs: IFileSystem): DataStoreViewReadonly {
+    return new DataStoreViewReadThroughFS(this, fs);
   }
 
   /****************

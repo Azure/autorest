@@ -31,11 +31,12 @@ const RESOLVE_MACROS_AT_RUNTIME = true;
 export interface AutoRestConfigurationImpl {
   __info?: string | null;
   "allow-no-input"?: boolean;
-  "input-file": string[] | string;
+  "input-file"?: string[] | string;
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
+  "github-auth-token"?: string;
   "use-extension"?: { [extensionName: string]: string };
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
@@ -497,7 +498,7 @@ export class Configuration {
     configSegments.push(...configs);
     // 2. file
     if (configFileUri !== null) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(createView(), this.fileSystem as IFileSystem);
+      const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(configFileUri),
         createView(),
