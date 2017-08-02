@@ -7,6 +7,7 @@
 // start of autorest-ng
 // the console app starts for real here.
 
+import { Artifact } from './lib/artifact';
 import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configuration';
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
