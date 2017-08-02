@@ -2,11 +2,13 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
+import { MessageEmitter } from './configuration';
+import { ConfigurationView } from './autorest-core';
+import { Channel } from "./message";
 import { EnumerateFiles } from "./ref/uri";
 import { From } from "./ref/linq";
 import { ResolveUri, ReadUri, WriteString } from "./ref/uri";
-import * as Constants from "./constants";
+import * as Constants from './constants';
 
 export interface IFileSystem {
   EnumerateFileUris(folderUri: string): Promise<Array<string>>;
@@ -56,11 +58,38 @@ export class RealFileSystem implements IFileSystem {
 
   EnumerateFileUris(folderUri: string): Promise<string[]> {
     return EnumerateFiles(folderUri, [
-      Constants.DefaultConfiguratiion
+      Constants.DefaultConfiguration
     ]);
   }
   async ReadFile(uri: string): Promise<string> {
     return ReadUri(uri);
+  }
+  async WriteFile(uri: string, content: string): Promise<void> {
+    return WriteString(uri, content);
+  }
+}
+
+// handles:
+// - GitHub auth
+export class EnhancedFileSystem implements IFileSystem {
+  public constructor(private githubAuthToken?: string) {
+  }
+
+  EnumerateFileUris(folderUri: string): Promise<string[]> {
+    return EnumerateFiles(folderUri, [
+      Constants.DefaultConfiguration
+    ]);
+  }
+  async ReadFile(uri: string): Promise<string> {
+    const headers: { [key: string]: string } = {};
+
+    // check for GitHub OAuth token
+    if (this.githubAuthToken && uri.startsWith("https://raw.githubusercontent.com")) {
+      console.log(`Used GitHub authentication token to request '${uri}'.`);
+      headers.authorization = `Bearer ${this.githubAuthToken}`;
+    }
+
+    return ReadUri(uri, headers);
   }
   async WriteFile(uri: string, content: string): Promise<void> {
     return WriteString(uri, content);

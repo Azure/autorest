@@ -8,10 +8,11 @@
 // the console app starts for real here.
 
 import { Artifact } from './lib/artifact';
+import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configuration';
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
-import { AutoRest } from "./lib/autorest-core";
+import { AutoRest, ConfigurationView } from './lib/autorest-core';
 import { ShallowCopy } from "./lib/source-map/merging";
 import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
@@ -19,7 +20,7 @@ import { ChildProcess } from "child_process";
 import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
-import { RealFileSystem } from "./lib/file-system";
+import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
 import { Exception, OperationCanceledException } from "./lib/exception";
 
 /**
@@ -41,7 +42,7 @@ async function legacyMain(autorestArgs: string[]): Promise<number> {
 
   // autorest init
   if (autorestArgs[0] === "init") {
-    const clientNameGuess = (config["override-info"] || {}).title || Parse<any>(await ReadUri(config["input-file"][0])).info.title;
+    const clientNameGuess = (config["override-info"] || {}).title || Parse<any>(await ReadUri((config["input-file"] as any)[0])).info.title;
     await autorestInit(clientNameGuess, Array.isArray(config["input-file"]) ? config["input-file"] as any : []);
     return 0;
   }
@@ -76,7 +77,7 @@ ${Stringify(config).replace(/^---\n/, "")}
 
   config["base-folder"] = currentDirUri;
   const api = new AutoRest(new RealFileSystem());
-  await api.AddConfiguration(config);
+  api.AddConfiguration(config);
   const view = await api.view;
   let outstanding: Promise<void> = Promise.resolve();
   api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
@@ -224,7 +225,7 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   const currentDirUri = CreateFolderUri(currentDirectory());
 
   // get an instance of AutoRest and add the command line switches to the configuration.
-  const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
+  const api = new AutoRest(new EnhancedFileSystem((MergeConfigurations(...args.switches) as any)["github-auth-token"] || process.env.GITHUB_AUTH_TOKEN), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
   api.AddConfiguration(args.switches);
 
   // listen for output messages and file writes

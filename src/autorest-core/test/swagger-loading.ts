@@ -34,7 +34,7 @@ import { Channel, Message } from "../lib/message";
         "-m", "CompositeSwagger",
         "-g", "None"
       ]);
-    assert.strictEqual(config["input-file"].length, 18);
+    assert.strictEqual((config["input-file"] as any).length, 18);
     const autoRest = new AutoRest(new RealFileSystem());
     await autoRest.AddConfiguration(config);
 

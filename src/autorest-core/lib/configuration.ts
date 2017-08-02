@@ -31,7 +31,7 @@ const RESOLVE_MACROS_AT_RUNTIME = true;
 export interface AutoRestConfigurationImpl {
   __info?: string | null;
   "allow-no-input"?: boolean;
-  "input-file": string[] | string;
+  "input-file"?: string[] | string;
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
@@ -64,8 +64,16 @@ export interface AutoRestConfigurationImpl {
   "openapi-type"?: string // the specification type (ARM/Data-Plane/Default)
 }
 
+export function MergeConfigurations(...configs: AutoRestConfigurationImpl[]): AutoRestConfigurationImpl {
+  let result: AutoRestConfigurationImpl = {};
+  for (const config of configs) {
+    result = MergeConfiguration(result, config);
+  }
+  return result;
+}
+
 // TODO: operate on DataHandleRead and create source map!
-function MergeConfigurations(higherPriority: AutoRestConfigurationImpl, lowerPriority: AutoRestConfigurationImpl): AutoRestConfigurationImpl {
+function MergeConfiguration(higherPriority: AutoRestConfigurationImpl, lowerPriority: AutoRestConfigurationImpl): AutoRestConfigurationImpl {
   // check guard
   if (lowerPriority.__info && !EvaluateGuard(lowerPriority.__info, higherPriority)) {
     // guard false? => skip
@@ -198,13 +206,11 @@ export class ConfigurationView {
       "output-artifact": [],
     };
 
-    for (const config of configs) {
-      this.rawConfig = MergeConfigurations(this.rawConfig, config);
-    }
+    this.rawConfig = MergeConfigurations(this.rawConfig, ...configs);
 
     // default values that are the least priority.
     // TODO: why is this here and not in default-configuration?
-    this.rawConfig = MergeConfigurations(this.rawConfig, <any>{
+    this.rawConfig = MergeConfiguration(this.rawConfig, <any>{
       "base-folder": ".",
       "output-folder": "generated",
       "debug": false,
@@ -486,7 +492,7 @@ export class Configuration {
 
   public async CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView> {
     const configFileUri = this.fileSystem && this.configFileOrFolderUri
-      ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri)
+      ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
       : null;
     const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, "./") : (this.configFileOrFolderUri || "file:///");
 
@@ -558,7 +564,9 @@ export class Configuration {
     return createView().Indexer;
   }
 
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, walkUpFolders: boolean = false): Promise<string | null> {
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders: boolean = false): Promise<string | null> {
+    const originalConfigFileOrFolderUri = configFileOrFolderUri;
+
     if (!configFileOrFolderUri || configFileOrFolderUri.endsWith(".md")) {
       return configFileOrFolderUri;
     }
@@ -580,7 +588,7 @@ export class Configuration {
       if (configFiles.size > 0) {
         // it's the readme.md or the shortest filename.
         const found =
-          From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguratiion)) ||
+          From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguration)) ||
           From<string>(configFiles.keys()).OrderBy(each => each.length).First();
 
         return found;
@@ -591,6 +599,13 @@ export class Configuration {
       configFileOrFolderUri = !walkUpFolders || newUriToConfigFileOrWorkingFolder === configFileOrFolderUri
         ? null
         : newUriToConfigFileOrWorkingFolder;
+    }
+
+    if (messageEmitter) {
+      messageEmitter.Message.Dispatch({
+        Channel: Channel.Warning,
+        Text: `No configuration found at '${originalConfigFileOrFolderUri}'.`
+      });
     }
 
     return null;
