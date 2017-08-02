@@ -648,22 +648,24 @@ task 'regenerate-samples', '', (done) ->
   return null
 
 task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], (done) ->
-  run ['regenerate-ars',
-      'regenerate-cs'
-      'regenerate-csazure'
-      'regenerate-csazurefluent'
-      'regenerate-go'
-      'regenerate-java'
-      'regenerate-javaazure'
-      'regenerate-javaazurefluent'
-      'regenerate-node'
-      'regenerate-nodeazure'
-      'regenerate-python'
-      'regenerate-pythonazure'
-      'regenerate-ruby'
-      'regenerate-rubyazure'
-      'regenerate-samples'], done
-  return null
+  # remove the installed autorest so that it doesn't use an old one.
+  rmdir "#{os.homedir()}/.autorest" , ->
+    run ['regenerate-ars',
+        'regenerate-cs'
+        'regenerate-csazure'
+        'regenerate-csazurefluent'
+        'regenerate-go'
+        'regenerate-java'
+        'regenerate-javaazure'
+        'regenerate-javaazurefluent'
+        'regenerate-node'
+        'regenerate-nodeazure'
+        'regenerate-python'
+        'regenerate-pythonazure'
+        'regenerate-ruby'
+        'regenerate-rubyazure'
+        'regenerate-samples'], done
+    return null
   
 
 path = require('path')
