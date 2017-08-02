@@ -2,6 +2,7 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+import { MessageEmitter } from './configuration';
 import { ConfigurationView } from './autorest-core';
 import { Channel } from "./message";
 import { EnumerateFiles } from "./ref/uri";
@@ -57,7 +58,7 @@ export class RealFileSystem implements IFileSystem {
 
   EnumerateFileUris(folderUri: string): Promise<string[]> {
     return EnumerateFiles(folderUri, [
-      Constants.DefaultConfiguratiion
+      Constants.DefaultConfiguration
     ]);
   }
   async ReadFile(uri: string): Promise<string> {
@@ -76,7 +77,7 @@ export class EnhancedFileSystem implements IFileSystem {
 
   EnumerateFileUris(folderUri: string): Promise<string[]> {
     return EnumerateFiles(folderUri, [
-      Constants.DefaultConfiguratiion
+      Constants.DefaultConfiguration
     ]);
   }
   async ReadFile(uri: string): Promise<string> {
@@ -84,6 +85,7 @@ export class EnhancedFileSystem implements IFileSystem {
 
     // check for GitHub OAuth token
     if (this.githubAuthToken && uri.startsWith("https://raw.githubusercontent.com")) {
+      console.log(`Used GitHub authentication token to request '${uri}'.`);
       headers.authorization = `Bearer ${this.githubAuthToken}`;
     }
 

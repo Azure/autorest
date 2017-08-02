@@ -492,7 +492,7 @@ export class Configuration {
 
   public async CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView> {
     const configFileUri = this.fileSystem && this.configFileOrFolderUri
-      ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri)
+      ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
       : null;
     const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, "./") : (this.configFileOrFolderUri || "file:///");
 
@@ -564,7 +564,9 @@ export class Configuration {
     return createView().Indexer;
   }
 
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, walkUpFolders: boolean = false): Promise<string | null> {
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders: boolean = false): Promise<string | null> {
+    const originalConfigFileOrFolderUri = configFileOrFolderUri;
+
     if (!configFileOrFolderUri || configFileOrFolderUri.endsWith(".md")) {
       return configFileOrFolderUri;
     }
@@ -586,7 +588,7 @@ export class Configuration {
       if (configFiles.size > 0) {
         // it's the readme.md or the shortest filename.
         const found =
-          From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguratiion)) ||
+          From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguration)) ||
           From<string>(configFiles.keys()).OrderBy(each => each.length).First();
 
         return found;
@@ -597,6 +599,13 @@ export class Configuration {
       configFileOrFolderUri = !walkUpFolders || newUriToConfigFileOrWorkingFolder === configFileOrFolderUri
         ? null
         : newUriToConfigFileOrWorkingFolder;
+    }
+
+    if (messageEmitter) {
+      messageEmitter.Message.Dispatch({
+        Channel: Channel.Warning,
+        Text: `No configuration found at '${originalConfigFileOrFolderUri}'.`
+      });
     }
 
     return null;
