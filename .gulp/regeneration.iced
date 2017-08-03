@@ -647,7 +647,7 @@ task 'regenerate-samples', '', (done) ->
         , true # don't fail on failures (since we wanna record them)
   return null
 
-task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], (done) ->
+task 'regenerate', "regenerate expected code for tests", ['reset','regenerate-delete'], (done) ->
   # remove the installed autorest so that it doesn't use an old one.
   rmdir "#{os.homedir()}/.autorest" , ->
     run ['regenerate-ars',
