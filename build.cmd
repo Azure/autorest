@@ -1,1 +1,1 @@
-npm install && gulp restore build test 
+npm install && gulp restore --force && gulp build  && gulp test 

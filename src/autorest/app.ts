@@ -99,7 +99,7 @@ const args = cli
 const preview: boolean = args.preview;
 const home: string = args.home || process.env["autorest.home"] || homedir();
 process.env["autorest.home"] = home;
-console.log(process.env["autorest.home"]);
+console.trace(`Autorest Home folder: ${process.env["autorest.home"]}`);
 const rootFolder: string = join(home, ".autorest");
 const dotnetFolder: string = join(home, ".dotnet");
 

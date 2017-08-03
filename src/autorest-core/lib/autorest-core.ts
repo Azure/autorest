@@ -101,6 +101,10 @@ export class AutoRest extends EventEmitter {
    */
   @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
   /**
+   * Event: Signals when a Folder is supposed to be cleared
+   */
+  @EventEmitter.Event public ClearFolder: IEvent<AutoRest, string>;
+  /**
    * Event: Signals when a message is generated
    */
   @EventEmitter.Event public Message: IEvent<AutoRest, Message>;
@@ -127,6 +131,7 @@ export class AutoRest extends EventEmitter {
 
     // subscribe to the events for the current configuration view
     messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
+    messageEmitter.ClearFolder.Subscribe((cfg, folder) => this.ClearFolder.Dispatch(folder));
     messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
     return this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, includeDefault, ...this._configurations);

@@ -25,6 +25,7 @@ require 'shelljs/global'
 Install 'marked'
 Install 'vinyl'
 Install 'os'
+Install 'path'
 Install 'fs'
 Install 'gulp'
 Install 'util'
@@ -71,7 +72,9 @@ configString = (s)->
 
 ###############################################
 # Global values
+process.env["autorest.home"] = path.normalize("#{os.tmpdir()}/autorest#{hashCode(basefolder)}")
 process.env.tmp = process.env.tmp or "#{basefolder}/tmp"
+
 
 Import 
   versionsuffix: if argv["version-suffix"]? then "--version-suffix=#{argv["version-suffix"]}" else ""

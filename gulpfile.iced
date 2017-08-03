@@ -94,6 +94,13 @@ Import
   Dependencies:
     "autorest" : ['autorest-core']
 
+task 'reset', 'clean the (tmp) autorest home folder', (done) ->
+  if test "-d" , process.env["autorest.home"] 
+    echo "Cleaning autorest home folder for this working folder '#{process.env["autorest.home"]}'"
+    rmdir process.env["autorest.home"] , done
+  else
+    done()
+
 task 'install/binaries', '', (done)->
   mkdir "-p", "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private"
   source "src/core/AutoRest/bin/netcoreapp1.0/publish/**"
@@ -161,12 +168,13 @@ task 'init', "" ,(done)->
   typescriptProjectFolders()
     .on 'end', -> 
       if doit || force
-        rm "#{basefolder}/package-lock.json"
-        echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
-        echo "Running npm install for project folder."
-        exec "npm install", {cwd:basefolder,silent:true},(c,o,e)->
-          echo "Completed Running npm install for project folder."
-          done null
+        run [ 'reset' ] , ->
+          rm "#{basefolder}/package-lock.json" if fileExists "#{basefolder}/package-lock.json" 
+          echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
+          echo "Running npm install for project folder."
+          exec "npm install", {cwd:basefolder,silent:true},(c,o,e)->
+            echo "Completed Running npm install for project folder."
+            done null
       else 
         done null
 
