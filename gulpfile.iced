@@ -150,7 +150,7 @@ task 'init', "" ,(done)->
   Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 7.10.0" if semver.lt( process.versions.node , "7.10.0" )
 
   # we no longer need this symlinked in place. remove it if it is there.
-  unlink "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core" if exists "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core"
+  unlink "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core" if  test "-d",  "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core"
 
   if (! test "-d","#{basefolder}/src/autorest-core") 
     echo warning "\n#{ error 'NOTE:' } #{ info 'src/autorest-core'} appears to be missing \n      fixing with #{ info 'git checkout src/autorest-core'}"
