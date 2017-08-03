@@ -36,15 +36,6 @@ namespace AutoRest.Php
         /// </summary>
         static string MicrosoftRestOperationInterface { get; }
             = GetMicrosoftRestClass("OperationInterface");
-       
-        /// <summary>
-        /// /**
-        ///  * @var Microsoft\Rest\Client
-        ///  */
-        /// private $_client
-        /// </summary>
-        //static PhpBuilder.Property Client { get; }
-        //    = PHP.Property(new ClassName(MicrosoftRestClientInterface), "_client");
 
         static PhpBuilder.Functions.Parameter ClientParameter { get; }
             = PHP.Parameter(
@@ -127,9 +118,11 @@ namespace AutoRest.Php
 
                 ConstructorStatements = OperationInfoInit(thisProperty, m);
 
+                var parameters = m.Parameters.Where(p => !p.IsConstant && !p.IsApiVersion());
+
                 var call = PHP.Return(thisProperty.Call(
                     CallFunction,
-                    PHP.CreateArray(m.Parameters.Select(p => PHP.KeyValue(
+                    PHP.CreateArray(parameters.Select(p => PHP.KeyValue(
                         p.SerializedName,
                         new ObjectName(p.SerializedName).Ref())))));
 
@@ -137,7 +130,7 @@ namespace AutoRest.Php
                     name: m.Name,
                     description: m.Description,
                     @return: PHP.String,
-                    parameters: m.Parameters.Select(p => PHP
+                    parameters: parameters.Select(p => PHP
                         .Parameter(
                             SchemaObject.Create(p.ModelType).ToPhpType(),
                             new ObjectName(p.SerializedName))),
@@ -158,10 +151,6 @@ namespace AutoRest.Php
             public PhpFunctionGroup(string @namespace, MethodGroup o)
             {
                 var functions = o.Methods.Select(m => new PhpOperation(m));
-
-                //var clientParameter = PHP.Parameter(
-                //    type: PHP.Class(MicrosoftRestClientInterface),
-                //    name: Client.Name);
 
                 Class = PHP.Class(
                     name: Class.CreateName(@namespace, o.Name),

@@ -13,7 +13,7 @@ namespace AutoRest.Php.PhpBuilder.Expressions
 
         public override IEnumerable<string> ToCodeText(string indent)
         {
-            yield return "'" + Value + "'";
+            yield return "'" + Value.Replace("'", @"\'") + "'";
         }
     }
 }

@@ -1,15 +1,12 @@
 ﻿namespace AutoRest.Php.JsonBuilder
 {
-    public sealed class String : Token
+    public sealed class String : Primitive<string>
     {
         public override R Accept<R>(IVisitor<R> visitor)
             => visitor.Visit(this);
 
-        public string Value { get; }
-
-        public String(string value)
+        public String(string value) : base(value)
         {
-            Value = value;
         }
     }
 }

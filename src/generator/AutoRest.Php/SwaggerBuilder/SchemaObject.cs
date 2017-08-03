@@ -19,7 +19,7 @@ namespace AutoRest.Php.SwaggerBuilder
 
         public string Format { get; }
 
-        public bool Enum { get; }
+        public IEnumerable<string> Enum { get; }
 
         public IEnumerable<Property<SchemaObject>> Properties { get; }
 
@@ -72,7 +72,7 @@ namespace AutoRest.Php.SwaggerBuilder
                 case CompositeType compositeType:
                     return new SchemaObject(@ref: "#/definitions/" + compositeType.SerializedName);
                 case EnumType enumType:
-                    return String(@enum: true);
+                    return String(@enum: enumType.Values.Select(v => v.SerializedName));
                 case PrimaryType primaryType:
                     return Primary(primaryType);
                 case DictionaryType dictionaryType:
@@ -83,6 +83,19 @@ namespace AutoRest.Php.SwaggerBuilder
                         items: Create(sequenceType.ElementType));
                 default:
                     throw new Exception("unknown type: " + type.Name);
+            }
+        }
+
+        public static SchemaObject Const(IModelType type, string value)
+        {
+            if (type is PrimaryType primaryType 
+                && primaryType.KnownPrimaryType == KnownPrimaryType.String)
+            {
+                return String(@enum: new[] { value });
+            }
+            else
+            {
+                throw new Exception("unknown type: " + type.Name);
             }
         }
 
@@ -117,7 +130,9 @@ namespace AutoRest.Php.SwaggerBuilder
                 type: "number",
                 format: format);
 
-        private static SchemaObject String(string format = null, bool @enum = false)
+        private static SchemaObject String(
+            string format = null,
+            IEnumerable<string> @enum = null)
             => new SchemaObject(
                 type: "string",
                 format: format, 
@@ -142,9 +157,11 @@ namespace AutoRest.Php.SwaggerBuilder
             {
                 yield return Json.Property("format", Format);
             }
-            if (Enum)
+            if (Enum != null)
             {
-                yield return Json.Property("enum", Json.Array<JsonBuilder.String>());
+                yield return Json.Property(
+                    "enum",
+                    Json.Array(Enum.Select(v => new JsonBuilder.String(v))));
             }
             if (Properties != null)
             {
@@ -164,7 +181,7 @@ namespace AutoRest.Php.SwaggerBuilder
             string @ref = null,
             string type = null,
             string format = null,
-            bool @enum =  false,
+            IEnumerable<string> @enum = null,
             IEnumerable<Property<SchemaObject>> properties = null,
             SchemaObject additionalProperties = null,
             SchemaObject items = null)

@@ -120,6 +120,9 @@ namespace AutoRest.Php.PhpBuilder
         public static StringConst StringConst(string value)
             => new StringConst(value);
 
+        public static BooleanConst BooleanConst(bool value)
+            => new BooleanConst(value);
+
         /// <summary>
         /// self::name
         /// </summary>
@@ -237,6 +240,9 @@ namespace AutoRest.Php.PhpBuilder
                 => CreateArray(array
                     .GetItems()
                     .Select(v => KeyValue(FromJson(v))));
+
+            public Expression Visit(JsonBuilder.Boolean boolean)
+                => BooleanConst(boolean.Value);
         }
     }
 }

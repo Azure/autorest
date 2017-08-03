@@ -11,6 +11,9 @@ namespace AutoRest.Php.JsonBuilder
         public static Property<String> Property(string name, string value)
             => new Property<String>(name, new String(value));
 
+        public static Property<Boolean> Property(string name, bool value)
+            => new Property<Boolean>(name, new Boolean(value));
+
         public static Array<T> Array<T>(IEnumerable<T> items)
             where T : Token
             => new Array<T>(items);

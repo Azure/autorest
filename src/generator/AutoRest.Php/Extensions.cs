@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoRest.Core.Model;
+using AutoRest.Extensions.Azure;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -69,5 +71,8 @@ namespace AutoRest.Php
 
         public static string Then(this bool p, string value)
             => p ? value : string.Empty;
+
+        public static bool IsApiVersion(this Parameter p)
+            => p.SerializedName == AzureExtensions.ApiVersion;
     }
 }

@@ -12,6 +12,8 @@ namespace AutoRest.Php.SwaggerBuilder
 
         public string In { get; }
 
+        public bool Required { get; }
+
         public SchemaObject Schema { get; }
 
         public override IEnumerable<Property> GetProperties()
@@ -24,6 +26,7 @@ namespace AutoRest.Php.SwaggerBuilder
             {
                 yield return Json.Property("in", In);
             }
+            yield return Json.Property("required", Required);
             foreach (var token in Schema.GetProperties())
             {
                 yield return token;
@@ -34,15 +37,23 @@ namespace AutoRest.Php.SwaggerBuilder
             => new ParameterObject(                
                 name: parameter.SerializedName,
                 @in: parameter.Location.ToString().ToLower(),
-                schema: SchemaObject.Create(parameter.ModelType));
+                required: parameter.IsRequired,
+                schema: 
+                    parameter.IsApiVersion() 
+                        ? SchemaObject.Const(parameter.ModelType, parameter.Method.CodeModel.ApiVersion)
+                    : parameter.IsConstant
+                        ? SchemaObject.Const(parameter.ModelType, parameter.DefaultValue)
+                        : SchemaObject.Create(parameter.ModelType));
 
         private ParameterObject(
             string name,
             string @in,
+            bool required,
             SchemaObject schema)
         {
             Name = name;
             In = @in;
+            Required = required;
             Schema = schema;
         }
     }
