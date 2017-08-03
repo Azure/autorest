@@ -37,7 +37,7 @@
     "typescript": "2.4.1"
   },
   "dependencies": {
-    "@microsoft.azure/extension": "~1.0.66",
+    "@microsoft.azure/extension": "~1.0.67",
     "@microsoft.azure/openapi-validator": "^0.1.0",
     "chalk": "^1.1.2",
     "commonmark": "^0.27.0",

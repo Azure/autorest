@@ -22,7 +22,7 @@ Import
   autorest: (args,done,ignoreexitcode) ->
     # Run AutoRest from the original current directory.
     echo info "AutoRest #{args.join(' ')}"
-    execute "node #{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core/dist/app.js #{args.map((a) -> "\"#{a}\"").join(' ')}" , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
+    execute "node #{basefolder}/src/autorest-core/dist/app.js #{args.map((a) -> "\"#{a}\"").join(' ')} \"--use-extension={ @microsoft.azure/autorest-classic-generators : \"#{basefolder}/src/core/AutoRest\" } \"  " , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
       return done(code,stdout,stderr)
 
   # which projects to care about
@@ -130,6 +130,7 @@ task 'autorest', 'Runs AutoRest', (done)->
       break if arg == 'autorest'
 
     process.argv.unshift "--version=#{basefolder}/src/autorest-core"
+    process.argv.unshift "--use-extension={'@microsoft.azure/autorest-classic-generators':'#{basefolder}/src/core/AutoRest'}"
     process.argv.unshift main
     process.argv.unshift node
     cd process.env.INIT_CWD 
@@ -140,6 +141,9 @@ task 'autorest', 'Runs AutoRest', (done)->
 
 task 'init', "" ,(done)->
   Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 7.10.0" if semver.lt( process.versions.node , "7.10.0" )
+
+  # we no longer need this symlinked in place. remove it if it is there.
+  unlink "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core" if exists "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core"
 
   if (! test "-d","#{basefolder}/src/autorest-core") 
     echo warning "\n#{ error 'NOTE:' } #{ info 'src/autorest-core'} appears to be missing \n      fixing with #{ info 'git checkout src/autorest-core'}"
@@ -157,6 +161,7 @@ task 'init', "" ,(done)->
   typescriptProjectFolders()
     .on 'end', -> 
       if doit || force
+        rm "#{basefolder}/package-lock.json"
         echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
         echo "Running npm install for project folder."
         exec "npm install", {cwd:basefolder,silent:true},(c,o,e)->
