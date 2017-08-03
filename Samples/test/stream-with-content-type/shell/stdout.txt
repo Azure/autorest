@@ -1,3 +1,19 @@
+(C) 2017 **Microsoft Corporation.**  
+[This will take a few moments...]
+**Installing package** @microsoft.azure/autorest-core@C:\work\github\autorest/src/autorest-core
+# AutoRest code generation utility.
+14:22:46WARNING: 10 exported name(s) unnecessarily contains the service name. Please consider removing the service name.
+14:22:46WARNING: The name 'A' unnecessarily contains the service name; the service name will be trimmed.
+14:22:46WARNING: The name 'A' unnecessarily contains the service name; the service name will be trimmed.
+14:22:46WARNING: The name 'B' unnecessarily contains the service name; the service name will be trimmed.
+14:22:46WARNING: The name 'B' unnecessarily contains the service name; the service name will be trimmed.
+14:22:46WARNING: The name 'C' unnecessarily contains the service name; the service name will be trimmed.
+14:22:46WARNING: The name 'ContentTypes' unnecessarily contains the service name; the service name will be trimmed.
+14:22:46WARNING: The name 'D' unnecessarily contains the service name; the service name will be trimmed.
+14:22:46WARNING: The name 'ImageType' unnecessarily contains the service name; the service name will be trimmed.
+14:22:46WARNING: The name 'ImageTypeRestricted' unnecessarily contains the service name; the service name will be trimmed.
+14:22:46WARNING: The name 'ImageTypeRestrictedStrings' unnecessarily contains the service name; the service name will be trimmed.
+https://aka.ms/autorest
 INFORMATION: Defaulting to generate client side Code
 INFORMATION: Generating client model from swagger model.
 INFORMATION: Generating client model from swagger model.
@@ -18,3 +34,4 @@ INFORMATION: Successfully initialized Java Code Generator 1.2.2.0
 INFORMATION: Successfully initialized NodeJS Code Generator 1.2.2.0
 INFORMATION: Successfully initialized Python Code Generator 1.2.2.0
 INFORMATION: Successfully initialized Ruby Code Generator 1.2.2.0
+Network Enabled: true

@@ -16,7 +16,6 @@ import * as semver from "semver";
 // Or rather left me looking in the wrong place for a file not found error on "C:\Users\jobader.autorest\x\y\z" where the problem was really in "z"
 enhanceConsole();
 
-
 const pkgVersion: string = require(`${__dirname}/../package.json`).version;
 
 // heavy customization, restart from scratch

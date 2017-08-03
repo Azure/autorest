@@ -1,8 +1,2 @@
     - mem:///csharp/transform/working/trans_input?mem:///csharp/simplifier/output/StorageAccounts.cs:1:0
-    - mem:///csharp/transform/working/trans_input?mem:///csharp/simplifier/output/StorageAccounts.cs:1:0
-    - mem:///csharp/transform/working/trans_input?mem:///csharp/simplifier/output/StorageAccounts.cs:1:0
-    - mem:///csharp/transform/working/trans_input?mem:///csharp/simplifier/output/StorageAccounts.cs:1:0
 ERROR: we want some cowbell - found none
-WARNING: Custom test failed
-WARNING: Custom test failed
-WARNING: we want some cowbell - found none

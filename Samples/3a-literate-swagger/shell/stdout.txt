@@ -1,3 +1,37 @@
+    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
+    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
+    - /Samples/3a-literate-swagger/swagger.md:178:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete)
+    - /Samples/3a-literate-swagger/swagger.md:207:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get)
+    - /Samples/3a-literate-swagger/swagger.md:264:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.properties)
+    - /Samples/3a-literate-swagger/swagger.md:391:2 ($.definitions.Error)
+    - /Samples/3a-literate-swagger/swagger.md:394:6 ($.definitions.Error.properties.code)
+    - /Samples/3a-literate-swagger/swagger.md:396:6 ($.definitions.Error.properties.message)
+    - /Samples/3a-literate-swagger/swagger.md:398:6 ($.definitions.Error.properties.details)
+    - /Samples/3a-literate-swagger/swagger.md:52:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys"].get)
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:41:4 ($.definitions.ErrorDetails)
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:43:8 ($.definitions.ErrorDetails.properties.code)
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)
+(C) 2017 **Microsoft Corporation.**  
+[This will take a few moments...]
+**Installing package** @microsoft.azure/autorest-core@C:\work\github\autorest/src/autorest-core
+# AutoRest code generation utility.
+14:21:32WARNING (AvoidNestedProperties/R2001/SDKViolation): Consider using x-ms-client-flatten to provide a better end user experience
+14:21:32WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+14:21:32WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+14:21:32WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'details' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+14:21:32WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'Error' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+14:21:32WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'ErrorDetails' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+14:21:32WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+14:21:32WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'target' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+14:21:32WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): QueryKeys_List lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
+14:21:32WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): Services_CreateOrUpdate lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
+14:21:32WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): Services_Delete lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
+14:21:32WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): Services_List lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
+14:21:32WARNING (PutRequestResponseScheme/R2017/SDKViolation): A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: 'Services_CreateOrUpdate' Request Model: 'SearchServiceCreateOrUpdateParameters' Response Model: 'SearchServiceResource'
+14:21:33WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
+https://aka.ms/autorest
 INFORMATION: Generating client model from swagger model.
 INFORMATION: Initializing code generator.
 INFORMATION: Successfully initialized Azure.CSharp Code Generator 1.2.2.0
+Network Enabled: true

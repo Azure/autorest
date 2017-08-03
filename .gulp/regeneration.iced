@@ -626,7 +626,7 @@ task 'regenerate-ars', '', (done) ->
 task 'regenerate-samples', '', (done) ->
   source 'Samples/*/**/readme.md'
     .pipe foreach (each,next)->
-      autorest [each.path, "--clear-output-folder"]
+      autorest [each.path]
         , (code,stdout,stderr) ->
           outputFolder = path.join(each.path, "../shell")
           mkdir outputFolder if !(test "-d", outputFolder)
@@ -647,7 +647,7 @@ task 'regenerate-samples', '', (done) ->
         , true # don't fail on failures (since we wanna record them)
   return null
 
-task 'regenerate', "regenerate expected code for tests", ['reset','regenerate-delete'], (done) ->
+task 'regenerate', "regenerate expected code for tests", ['reset'], (done) ->
   # remove the installed autorest so that it doesn't use an old one.
   rmdir "#{os.homedir()}/.autorest" , ->
     run ['regenerate-ars',
@@ -670,21 +670,7 @@ task 'regenerate', "regenerate expected code for tests", ['reset','regenerate-de
 
 path = require('path')
 
-task 'regenerate-delete', '', (done)->
-  rm "-rf",
-    'src/generator/AutoRest.CSharp.Tests/Expected'
-    'src/generator/AutoRest.CSharp.Azure.Tests/Expected'
-    'src/generator/AutoRest.CSharp.Azure.Fluent.Tests/Expected'
-    'src/generator/AutoRest.Go.Tests/src/tests/generated'
-    'src/generator/AutoRest.Java.Tests/src/main/java'
-    'src/generator/AutoRest.Java.Azure.Tests/src/main/java'
-    'src/generator/AutoRest.Java.Azure.Fluent.Tests/src/main/java'
-    'src/generator/AutoRest.NodeJS.Tests/Expected'
-    'src/generator/AutoRest.NodeJS.Azure.Tests/Expected'
-    'src/generator/AutoRest.Python.Tests/Expected'
-    'src/generator/AutoRest.Python.Azure.Tests/Expected'
-    'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Expected'
-  done()
+
 
 task 'autorest-preview-build', '', ->
   exec "dotnet build #{basefolder}/src/dev/AutoRest.Preview/"

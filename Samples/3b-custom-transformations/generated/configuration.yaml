@@ -45,6 +45,10 @@ output-artifact:
   - source-file-ruby
   - source-file-azureresourceschema
   - source-file-jsonrpcclient
+use-extension:
+  '@microsoft.azure/autorest-classic-generators': 'C:\work\github\autorest/src/core/AutoRest'
+  '@microsoft.azure/classic-openapi-validator': '>=0.0.6-preview'
+  '@microsoft.azure/openapi-validator': '>=0.1.2-preview'
 clear-output-folder: {}
 azure-arm: true
 azure-validator: true
@@ -53,10 +57,6 @@ csharp:
 __info: yaml
 output-folder: generated
 openapi-type: arm
-use-extension:
-  '@microsoft.azure/autorest-classic-generators': 2.0.0-preview1
-  '@microsoft.azure/classic-openapi-validator': 0.0.6-preview
-  '@microsoft.azure/openapi-validator': 0.1.2-preview
 pipeline:
   pipeline-emitter:
     scope: scope-pipeline-emitter

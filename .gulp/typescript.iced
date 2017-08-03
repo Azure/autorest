@@ -56,6 +56,7 @@ task 'build', 'typescript', (done)->
       return test "-f", "#{each.path}/tsconfig.json"
       
     .pipe foreach (each,next ) ->
+      echo each
       fn = filename each.path
       deps = ("compile/typescript/#{d.substring(d.indexOf('/')+1)}" for d in (global.Dependencies[fn] || []))
       
