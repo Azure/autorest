@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-import { ServiceClient, ServiceClientOptions } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
 /**
@@ -18,7 +18,7 @@ declare interface AutoRestRequiredOptionalTestServiceOptions extends ServiceClie
   /**
    * @property {number} [optionalGlobalQuery] - number of items to skip
    */
-  optionalGlobalQuery?: number;
+  optionalGlobalQuery?: Number;
 }
 
 declare class AutoRestRequiredOptionalTestService extends ServiceClient {

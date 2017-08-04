@@ -42,6 +42,30 @@ export interface Product {
 
 /**
  * @class
+ * Initializes a new instance of the ProductResult class.
+ * @constructor
+ * @member {array} [values]
+ * @member {string} [nextLink]
+ */
+export interface ProductResult {
+  values?: Product[];
+  nextLink?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the OdataProductResult class.
+ * @constructor
+ * @member {array} [values]
+ * @member {string} [odatanextLink]
+ */
+export interface OdataProductResult {
+  values?: Product[];
+  odatanextLink?: string;
+}
+
+/**
+ * @class
  * Initializes a new instance of the OperationResult class.
  * @constructor
  * @member {string} [status] The status of the request. Possible values
@@ -136,6 +160,30 @@ export interface CustomParameterGroup {
 export interface PagingGetMultiplePagesWithOffsetNextOptions {
   maxresults?: number;
   timeout?: number;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the ProductResult class.
+ * @constructor
+ * @member {array} [values]
+ * @member {string} [nextLink]
+ */
+export interface ProductResult {
+  values?: Product[];
+  nextLink?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the OdataProductResult class.
+ * @constructor
+ * @member {array} [values]
+ * @member {string} [odatanextLink]
+ */
+export interface OdataProductResult {
+  values?: Product[];
+  odatanextLink?: string;
 }
 
 
