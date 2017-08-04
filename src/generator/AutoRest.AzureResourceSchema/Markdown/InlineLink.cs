@@ -23,11 +23,7 @@ namespace AutoRest.AzureResourceSchema.Markdown
 
         public override string ToMarkdown()
         {
-            // if the destination doesn't start with http then assume it's on the same page
-            if (!_dest.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                return $"[{_s}](#{_dest})";
-            else
-                return $"[{_s}](#{_dest})";
+            return $"[{_s}]({_dest})";
         }
     }
 }

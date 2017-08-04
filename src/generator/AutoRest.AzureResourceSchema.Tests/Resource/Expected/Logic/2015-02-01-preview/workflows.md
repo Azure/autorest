@@ -43,9 +43,7 @@ To create a Microsoft.Logic/workflows resource, add the following JSON to the re
     },
     "parameters": {}
   },
-  "resources": [
-    null
-  ]
+  "resources": []
 }
 ```
 ## Property values
@@ -63,7 +61,7 @@ The following tables describe the values you need to set in the schema.
 |  location | string | No | Gets or sets the resource location. |
 |  tags | object | No | Gets or sets the resource tags. |
 |  properties | object | Yes | Gets or sets the workflow properties. - [WorkflowProperties object](#WorkflowProperties) |
-|  resources | array | No | [workflows_accessKeys_childResource object](#workflows_accessKeys_childResource) |
+|  resources | array | No | [accessKeys](./workflows/accessKeys.md) |
 
 
 <a id="WorkflowProperties" />
@@ -76,17 +74,6 @@ The following tables describe the values you need to set in the schema.
 |  definition | object | No | Gets or sets the definition. |
 |  parametersLink | object | No | Gets or sets the link to parameters. - [ContentLink object](#ContentLink) |
 |  parameters | object | No | Gets or sets the parameters. |
-
-
-<a id="workflows_accessKeys_childResource" />
-### workflows_accessKeys_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | accessKeys |
-|  apiVersion | enum | Yes | 2015-02-01-preview |
-|  id | string | No | Gets or sets the resource id. |
-|  properties | object | Yes | Gets or sets the workflow access key properties. - [WorkflowAccessKeyProperties object](#WorkflowAccessKeyProperties) |
 
 
 <a id="Sku" />
@@ -106,14 +93,6 @@ The following tables describe the values you need to set in the schema.
 |  contentSize | integer | No | Gets or sets the content size. |
 |  contentHash | object | No | Gets or sets the content hash. - [ContentHash object](#ContentHash) |
 |  metadata | object | No | Gets or sets the metadata. |
-
-
-<a id="WorkflowAccessKeyProperties" />
-### WorkflowAccessKeyProperties object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  notBefore | string | No | Gets or sets the not-before time. |
-|  notAfter | string | No | Gets or sets the not-after time. |
 
 
 <a id="ResourceReference" />

@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { SpawnJsonRpcAutoRest } from "../../interop/autorest-dotnet";
 import { FastStringify } from "../ref/yaml";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import { safeEval } from "../ref/safe-eval";
@@ -13,7 +12,7 @@ import { AutoRestExtension } from "./plugin-endpoint";
 import { Manipulator } from "./manipulation";
 import { ProcessCodeModel } from "./commonmark-documentation";
 import { Channel } from "../message";
-import { ClearFolder, ResolveUri } from "../ref/uri";
+import { ResolveUri } from "../ref/uri";
 import { ConfigurationView, GetExtension } from '../configuration';
 import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
 import { IFileSystem } from "../file-system";
@@ -130,17 +129,22 @@ function CreateCommonmarkProcessor(): PipelinePlugin {
 }
 function CreateArtifactEmitter(inputOverride?: () => Promise<DataStoreViewReadonly>): PipelinePlugin {
   return async (config, input, working, output) => {
-    // clear output-folder if requested
-    if (config.GetEntry("can-clear-output-folder" as any) && config.GetEntry("clear-output-folder" as any)) {
-      await ClearFolder(config.OutputFolderUri);
+    if (inputOverride) {
+      input = await inputOverride();
     }
+
+    // clear output-folder if requested
+    if (config.GetEntry("clear-output-folder" as any)) {
+      config.ClearFolder.Dispatch(config.OutputFolderUri);
+    }
+
     await EmitArtifacts(
       config,
       config.GetEntry("input-artifact" as any),
       key => ResolveUri(
         config.OutputFolderUri,
         safeEval<string>(config.GetEntry("output-uri-expr" as any), { $key: key, $config: config.Raw })),
-      inputOverride ? await inputOverride() : input,
+      input,
       config.GetEntry("is-object" as any));
   };
 }

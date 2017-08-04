@@ -387,9 +387,7 @@ To create a Microsoft.Network/networkSecurityGroups resource, add the following 
     "provisioningState": "string"
   },
   "etag": "string",
-  "resources": [
-    null
-  ]
+  "resources": []
 }
 ```
 ## Property values
@@ -408,7 +406,7 @@ The following tables describe the values you need to set in the schema.
 |  tags | object | No | Resource tags |
 |  properties | object | Yes | [NetworkSecurityGroupPropertiesFormat object](#NetworkSecurityGroupPropertiesFormat) |
 |  etag | string | No | Gets a unique read-only string that changes whenever the resource is updated |
-|  resources | array | No | [networkSecurityGroups_securityRules_childResource object](#networkSecurityGroups_securityRules_childResource) |
+|  resources | array | No | [securityRules](./networkSecurityGroups/securityRules.md) |
 
 
 <a id="NetworkSecurityGroupPropertiesFormat" />
@@ -421,18 +419,6 @@ The following tables describe the values you need to set in the schema.
 |  subnets | array | No | Gets collection of references to subnets - [Subnet object](#Subnet) |
 |  resourceGuid | string | No | Gets or sets resource guid property of the network security group resource |
 |  provisioningState | string | No | Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed |
-
-
-<a id="networkSecurityGroups_securityRules_childResource" />
-### networkSecurityGroups_securityRules_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | securityRules |
-|  apiVersion | enum | Yes | 2016-03-30 |
-|  id | string | No | Resource Id |
-|  properties | object | Yes | [SecurityRulePropertiesFormat object](#SecurityRulePropertiesFormat) |
-|  etag | string | No | A unique read-only string that changes whenever the resource is updated |
 
 
 <a id="SecurityRule" />
