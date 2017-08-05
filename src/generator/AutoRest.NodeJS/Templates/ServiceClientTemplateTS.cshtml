@@ -26,13 +26,13 @@
  @:* @(Model.Name)Options for @(Model.Name).
  @:*/
 @:declare interface @(Model.Name)Options extends ServiceClientOptions {
-    foreach (var param in optionalParameters)
-    {
+foreach (var param in optionalParameters)
+{
   @:/**
    @:* @@property {@param.ModelType.Name.ToCamelCase()} [@param.Name] - @param.Documentation
    @:*/
-  @:@param.Name?: @param.ModelType.Name;
-    }
+  @:@param.Name?: @param.ModelType.TSType(false);
+ }
 @:}
 @EmptyLine
 }
