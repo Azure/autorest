@@ -13,17 +13,17 @@ package @(Settings.Namespace.ToLower())@Model.ModelsPackage;
 <text>
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-@EmptyLine
 </text>
 }
 else
 {
 <text>
-import com.fasterxml.jackson.annotation.JsonValue;
-@EmptyLine
+import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.microsoft.rest.ExpandableStringEnum;
 </text>
 }
-
+@EmptyLine
 /**
  * Defines values for @(Model.Name).
  */
@@ -79,49 +79,28 @@ public enum @(Model.Name) {
 else
 {
 <text>
-public final class @(Model.Name) {
+public final class @(Model.Name) extends ExpandableStringEnum<@(Model.Name)> {
 @for (int i = 0; i < Model.Values.Count; i++)
 {
 @:    /** Static value @(Model.Values[i].SerializedName) for @(Model.Name). */
-@:    public static final @(Model.Name) @(Model.Values[i].MemberName) = new @(Model.Name)("@(Model.Values[i].SerializedName)");
+@:    public static final @(Model.Name) @(Model.Values[i].MemberName) = fromString("@(Model.Values[i].SerializedName)");
 @EmptyLine
 }
-    private String value;
+    /**
+     * Creates or finds a @(Model.Name) from its string representation.
+     * @@param name a name to look for
+     * @@return the corresponding @(Model.Name)
+     */
+    @@JsonCreator
+    public static @(Model.Name) fromString(String name) {
+        return fromString(name, @(Model.Name).class);
+    }
 @EmptyLine
     /**
-     * Creates a custom value for @(Model.Name).
-     * @@param value the custom value
+     * @@return known @(Model.Name) values
      */
-    public @(Model.Name)(String value) {
-        this.value = value;
-    }
-@EmptyLine
-    @@JsonValue
-    @@Override
-    public String toString() {
-        return value;
-    }
-@EmptyLine
-    @@Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-@EmptyLine
-    @@Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof @(Model.Name))) {
-            return false;
-        }
-        if (obj == this) {
-            return true;
-        }
-
-        @(Model.Name) rhs = (@(Model.Name)) obj;
-        if (value == null) {
-            return rhs.value == null;
-        } else {
-            return value.equals(rhs.value);
-        }
+    public static Collection<@(Model.Name)> values() {
+        return values(@(Model.Name).class);
     }
 }
 </text>
