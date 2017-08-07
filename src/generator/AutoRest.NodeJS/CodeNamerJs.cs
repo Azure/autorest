@@ -38,7 +38,7 @@ namespace AutoRest.NodeJS
                 "private", "protected", "public", "return", "short",
                 "static", "super", "switch", "synchronized", "this",
                 "throw", "transient", "true", "try", "typeof", "util",
-                "var", "void", "volatile", "while", "with", "yield"
+                "var", "void", "volatile", "while", "with", "yield", "pipeline"
             });
         }
 

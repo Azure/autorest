@@ -64,7 +64,7 @@ namespace AutoRest.NodeJS.Model
             {
                 throw new ArgumentNullException(nameof(model));
             }
-
+            
             // BaseResource and CloudError are specified in the ClientRuntime. 
             // They are required explicitly in a different way. Hence, they
             // are not included in the ordered list.
@@ -195,10 +195,18 @@ namespace AutoRest.NodeJS.Model
             }
         }
 
-        public string ConstructImportTS()
+        public virtual string ConstructImportTS()
         {
             IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.TwoSpaces);
-            builder.Append("import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse");
+            if (this.MethodTemplateModels.Any())
+            {
+                builder.Append("import { ServiceClient, ServiceClientOptions, ServiceCallback, HttpOperationResponse");
+            }
+            else
+            {
+                builder.Append("import { ServiceClient, ServiceClientOptions");
+            }
+
             if (Properties.Any(p => p.Name.EqualsIgnoreCase("credentials")))
             {
                 builder.Append(", ServiceClientCredentials");
