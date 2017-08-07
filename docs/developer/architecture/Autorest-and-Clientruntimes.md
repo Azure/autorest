@@ -18,8 +18,7 @@ This is to ensure latest packages do not affect the AutoRest nightly builds with
 
 Following is a list of the clientruntime libraries referenced under AutoRest :
 
-1. **C#** [located here] 
-    (https://github.com/Azure/azure-sdk-for-net/tree/AutoRest/src/ClientRuntime)
+1. **C#** [located here](https://github.com/Azure/azure-sdk-for-net/tree/AutoRest/src/ClientRuntime)
     and referenced via [nuget feeds](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime/)
 
 2. **Node** [located here](https://github.com/Azure/azure-sdk-for-node/tree/master/runtime) and referenced via [npm feeds](https://www.npmjs.com/package/ms-rest)

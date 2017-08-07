@@ -80,9 +80,7 @@ To create a Microsoft.Network/expressRouteCircuits resource, add the following J
     "gatewayManagerEtag": "string"
   },
   "etag": "string",
-  "resources": [
-    null
-  ]
+  "resources": []
 }
 ```
 ## Property values
@@ -102,7 +100,7 @@ The following tables describe the values you need to set in the schema.
 |  sku | object | No | Gets or sets sku - [ExpressRouteCircuitSku object](#ExpressRouteCircuitSku) |
 |  properties | object | Yes | [ExpressRouteCircuitPropertiesFormat object](#ExpressRouteCircuitPropertiesFormat) |
 |  etag | string | No | Gets a unique read-only string that changes whenever the resource is updated |
-|  resources | array | No | [expressRouteCircuits_peerings_childResource object](#expressRouteCircuits_peerings_childResource) [expressRouteCircuits_authorizations_childResource object](#expressRouteCircuits_authorizations_childResource) |
+|  resources | array | No | [peerings](./expressRouteCircuits/peerings.md) [authorizations](./expressRouteCircuits/authorizations.md) |
 
 
 <a id="ExpressRouteCircuitSku" />
@@ -128,30 +126,6 @@ The following tables describe the values you need to set in the schema.
 |  serviceProviderProperties | object | No | Gets or sets ServiceProviderProperties - [ExpressRouteCircuitServiceProviderProperties object](#ExpressRouteCircuitServiceProviderProperties) |
 |  provisioningState | string | No | Gets provisioning state of the PublicIP resource Updating/Deleting/Failed |
 |  gatewayManagerEtag | string | No | Gets or sets the GatewayManager Etag |
-
-
-<a id="expressRouteCircuits_peerings_childResource" />
-### expressRouteCircuits_peerings_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | peerings |
-|  apiVersion | enum | Yes | 2016-09-01 |
-|  id | string | No | Resource Id |
-|  properties | object | Yes | [ExpressRouteCircuitPeeringPropertiesFormat object](#ExpressRouteCircuitPeeringPropertiesFormat) |
-|  etag | string | No | A unique read-only string that changes whenever the resource is updated |
-
-
-<a id="expressRouteCircuits_authorizations_childResource" />
-### expressRouteCircuits_authorizations_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | authorizations |
-|  apiVersion | enum | Yes | 2016-09-01 |
-|  id | string | No | Resource Id |
-|  properties | object | Yes | [AuthorizationPropertiesFormat object](#AuthorizationPropertiesFormat) |
-|  etag | string | No | A unique read-only string that changes whenever the resource is updated |
 
 
 <a id="ExpressRouteCircuitAuthorization" />
@@ -183,6 +157,15 @@ The following tables describe the values you need to set in the schema.
 |  bandwidthInMbps | integer | No | Gets or sets BandwidthInMbps. |
 
 
+<a id="AuthorizationPropertiesFormat" />
+### AuthorizationPropertiesFormat object
+|  Name | Type | Required | Value |
+|  ---- | ---- | ---- | ---- |
+|  authorizationKey | string | No | Gets or sets the authorization key |
+|  authorizationUseStatus | enum | No | Gets or sets AuthorizationUseStatus. - Available or InUse |
+|  provisioningState | string | No | Gets provisioning state of the PublicIP resource Updating/Deleting/Failed |
+
+
 <a id="ExpressRouteCircuitPeeringPropertiesFormat" />
 ### ExpressRouteCircuitPeeringPropertiesFormat object
 |  Name | Type | Required | Value |
@@ -202,15 +185,6 @@ The following tables describe the values you need to set in the schema.
 |  provisioningState | string | No | Gets provisioning state of the PublicIP resource Updating/Deleting/Failed |
 |  gatewayManagerEtag | string | No | Gets or sets the GatewayManager Etag |
 |  lastModifiedBy | string | No | Gets whether the provider or the customer last modified the peering |
-
-
-<a id="AuthorizationPropertiesFormat" />
-### AuthorizationPropertiesFormat object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  authorizationKey | string | No | Gets or sets the authorization key |
-|  authorizationUseStatus | enum | No | Gets or sets AuthorizationUseStatus. - Available or InUse |
-|  provisioningState | string | No | Gets provisioning state of the PublicIP resource Updating/Deleting/Failed |
 
 
 <a id="ExpressRouteCircuitPeeringConfig" />

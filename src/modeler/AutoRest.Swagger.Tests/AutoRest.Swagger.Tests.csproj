@@ -11,57 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Resource\Swagger\Validation\default-valued-properties-in-patch-request.json" />
-    <Content Include="Resource\Swagger\Validation\req-properties-in-patch-request.json" />
     <Content Include="Resource\Swagger\swagger-x-ms-discriminator-value.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\swagger-list-by-immediate-parent-2.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\swagger-list-by-immediate-parent.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-11.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-10.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-9.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-8.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-7.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-6.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-5.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-4.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-3.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-2.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\security-definitions-validations-1.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\positive\property-names-casing-valid.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\positive\swagger-skumodel-validation-valid.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resource\Swagger\Validation\property-names-casing.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

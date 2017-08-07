@@ -1,12 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Globalization;
 using Newtonsoft.Json;
-using AutoRest.Swagger.Validation;
-using System.Collections.Generic;
-using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
@@ -14,9 +9,6 @@ namespace AutoRest.Swagger.Model
     /// Describes a single operation parameter.
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject 
     /// </summary>
-    [Rule(typeof(NamePropertyDefinitionInParameter))]
-    [Rule(typeof(ParameterDescriptionRequired))]
-    [Rule(typeof(XmsClientNameParameter))]
     public class SwaggerParameter : SwaggerObject
     {
         private bool _isRequired;
@@ -32,15 +24,11 @@ namespace AutoRest.Swagger.Model
         }
 
         [JsonIgnore]
-        public bool IsConstant
-        {
-            get { return IsRequired && Enum != null && Enum.Count == 1; }
-        }
+        public bool IsConstant => IsRequired && Enum != null && Enum.Count == 1;
 
         /// <summary>
         /// The schema defining the type used for the body parameter.
         /// </summary>
-        [Rule(typeof(RequiredReadOnlyProperties))]
         public Schema Schema { get; set; }
     }
 }

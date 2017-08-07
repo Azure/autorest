@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 Assert.True(fileSystem.FileExists(@"Models\StorageServiceProperties.cs"));
                 Assert.True(fileSystem.FileExists(@"SimpleAPI.cs"));
-                fileSystem.WriteAllText("Program.cs", new FileSystem().ReadAllText(Path.Combine("Resource", "XmlSerialization", "GeneratedCode", "Program._cs")));
+                fileSystem.WriteAllText("Program.cs", File.ReadAllText(Path.Combine("Resource", "XmlSerialization", "GeneratedCode", "Program._cs")));
                 
                 var result = await Compile(fileSystem);
                 

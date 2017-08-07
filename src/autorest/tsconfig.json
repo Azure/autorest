@@ -1,22 +1,24 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "outDir": "dist",
     "noImplicitAny": false,
     "module": "commonjs",
     "sourceMap": true,
+    "newLine": "LF",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "stripInternal": true,
+    "target": "es2017",
     "types": [
       "node"
     ],
-    "newLine": "LF",
-    "experimentalDecorators": true,
-    "declaration": true,
-    "stripInternal": true,
-    "noEmitHelpers": true,
     "lib": [
       "esnext"
     ]
   },
   "exclude": [
+    "dist",
     "node_modules"
   ]
 }

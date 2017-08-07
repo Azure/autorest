@@ -4,14 +4,9 @@
 'use strict';
 
 import should = require('should');
-import http = require('http');
-import assert = require('assert');
 import * as msRest from 'ms-rest';
 
 import reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/autoRestRequiredOptionalTestService');
-
-var dummyToken = 'dummy12321343423';
-var credentials = new msRest.TokenCredentials(dummyToken);
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';
@@ -68,7 +63,7 @@ describe('nodejs', function () {
         });
       });
       it('should throw error on null values for required integer properties', function (done) {
-        testClient.explicit.postRequiredIntegerProperty(<any>{ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredIntegerProperty(<any>{ 'value': null }, function (error: msRest.ServiceError, result: any) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');
@@ -111,7 +106,7 @@ describe('nodejs', function () {
         });
       });
       it('should throw error on null values for required string properties', function (done) {
-        testClient.explicit.postRequiredStringProperty(<any>{ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredStringProperty(<any>{ 'value': null }, function (error: msRest.ServiceError, result: any) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');
@@ -154,7 +149,7 @@ describe('nodejs', function () {
         });
       });
       it('should throw error on null values for required class properties', function (done) {
-        testClient.explicit.postRequiredClassProperty(<any>{ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredClassProperty(<any>{ 'value': null }, function (error: msRest.ServiceError, result: any) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');
@@ -183,7 +178,7 @@ describe('nodejs', function () {
         });
       });
       it('should throw error on null values for required array properties', function (done) {
-        testClient.explicit.postRequiredArrayProperty(<any>{ 'value': null }, function (error, result) {
+        testClient.explicit.postRequiredArrayProperty(<any>{ 'value': null }, function (error: msRest.ServiceError, result: any) {
           should.exist(error);
           error.message.should.containEql('value');
           error.message.should.containEql('cannot be null or undefined');

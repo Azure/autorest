@@ -2,9 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Utilities;
-using AutoRest.Swagger.Validation;
-using AutoRest.Swagger.Validation.Core;
-using System;
 
 namespace AutoRest.Swagger.Model
 {
@@ -23,7 +20,6 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Description of external Swagger doc.
         /// </summary>
-        [Rule(typeof(AvoidMsdnReferences))]
         public string Description
         {
             get { return _description; }

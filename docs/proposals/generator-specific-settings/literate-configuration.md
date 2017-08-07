@@ -49,9 +49,10 @@ how to use any of the tools required.
 > 
 > ## AutoRest configuration ...
 > ``` yaml
-> autorest: 
->   minimum-version: 1.0 # specify the version of Autorest to use
->   # (more settings here...)
+> csharp: 
+>   client-side-validation: false # disable client side validation of constraints
+>
+> # (more settings here...)
 > ```
 > ~~~
 
@@ -64,7 +65,7 @@ how to use any of the tools required.
 # not 'inputs'
 input-file: foo.yaml
 
-base-folder: c:/output/folder
+output-folder: c:/output/folder
 ```
 
 - elements should be parsed to take either a single value, or an an array of values where possible, AutoRest should figure out what to do.
@@ -83,7 +84,7 @@ input-file:
 
 ``` yaml
 output-folder: c:/my/output/folder
-log-file: c:/my/output/logs.txt
+package-name: test-name
 ```
 
 - In order to decrease ambiguity, we shall have a list of preferred purposes and nouns that should be used if possible. In the case of a new purpose or noun, new ones should be considered and added to the master list.
@@ -124,7 +125,7 @@ You can set (override) a value for a meta-variable in the host environment (cmdl
 
 |Environment|Setting|Description|
 |-----------|-------|-----------|
-| via cmdline | `-some-value=true` | sets the `$(some-value)` meta variable to `true` |
+| via cmdline | `--some-value=true` | sets the `$(some-value)` meta variable to `true` |
 | via VSCode | (via UI) |in the VSCode UI, a setting can be set via a property by a value in the editor preferences, or via the UI (like a toggle, etc) <br>As the VSCode exensibility improves to support custom UI, this can be enhanced further.
 | via CI (environment?) | `$env:autorest-some-variable = true` | environment variables prefixed with `autorest-` are implicity added as metavariables|
 
@@ -139,20 +140,23 @@ In addition to simple **macro-value** replacement, meta-variables can be used to
 
 ~~~ markdown
 ## Debug Version
-When the `$(some-value)` is set to `true`, this section will be activated.
+When the `$(some-value)` is set to `true` and `num-cowbells` is set to 3, this section will be activated.
 
-``` yaml enabled=$(some-value)
+``` yaml $(some-value) && $(num-cowbells) == 3
 output-folder: "$(base-folder)/Generated/Debug"
 log-folder: "$(output-folder)/logs" 
 log-level: debug
 ```
 ~~~
 
-In the above case, the `some-value` meta-variable would have to evaluate to `true` before that codeblock would be included in the configuration.
+In the above case, the `some-value` meta-variable would have to evaluate to `true` and `num-cowbells` to 3 before that code block would be included in the configuration.
+After substituting the variables, arbitrary JavaScript expressions are allowed as guards.
 
 From the command-line, this would look like:
 
-> `AutoRest.exe readme.md -some-value=true`
+> `AutoRest.exe readme.md --some-value=true --num-cowbells=3`
+
+See example 3c and the [azure-rest-api-specs repository](https://github.com/Azure/azure-rest-api-specs/tree/current/specification) to see guards in action.
 
 #### JSONPath document reference
 

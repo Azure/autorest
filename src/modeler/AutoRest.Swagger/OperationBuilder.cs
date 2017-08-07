@@ -234,30 +234,37 @@ namespace AutoRest.Swagger
         {
             foreach (var swaggerParameter in DeduplicateParameters(_operation.Parameters))
             {
-                var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(_swaggerModeler)).Build();
                 var actualSwaggerParameter = _swaggerModeler.Unwrap(swaggerParameter);
-
-                if (parameter.IsContentTypeHeader){
-                    // you have to specify the content type, even if the OpenAPI definition claims it's optional
-                    parameter.IsRequired = true;
+                if (actualSwaggerParameter.In == ParameterLocation.Header && actualSwaggerParameter.Name == "Content-Type") {
                     // enrich Content-Type header with "consumes"
                     if (actualSwaggerParameter.Enum == null && 
-                        swaggerParameter.Extensions.GetValue<JObject>("x-ms-enum") == null &&
                         _effectiveConsumes.Count > 1)
                     {
-                        actualSwaggerParameter.Enum = _effectiveConsumes.ToList();
-                        actualSwaggerParameter.Extensions["x-ms-enum"] = 
-                            JObject.FromObject(new
-                            {
-                                name = "ContentType",
-                                modelAsString = false
-                            });
-                        parameter = ((ParameterBuilder)actualSwaggerParameter.GetBuilder(_swaggerModeler)).Build();
+                        swaggerParameter.Default = actualSwaggerParameter.Default;
+                        swaggerParameter.Description = actualSwaggerParameter.Description;
+                        swaggerParameter.Extensions = actualSwaggerParameter.Extensions;
+                        swaggerParameter.In = actualSwaggerParameter.In;
+                        swaggerParameter.IsRequired = actualSwaggerParameter.IsRequired;
+                        swaggerParameter.Name = actualSwaggerParameter.Name;
+                        swaggerParameter.Schema = actualSwaggerParameter.Schema;
+                        swaggerParameter.Type = actualSwaggerParameter.Type;
+                        swaggerParameter.Enum = _effectiveConsumes.ToList();
+
+                        // if not treated explicitly, add choices to the global choices
+                        if (swaggerParameter.Extensions.GetValue<JObject>("x-ms-enum") == null) {
+                            _swaggerModeler.ContentTypeChoices.UnionWith(_effectiveConsumes);
+                        }
+
+                        var ctParameter = ((ParameterBuilder)swaggerParameter.GetBuilder(_swaggerModeler)).Build();
+                        // you have to specify the content type, even if the OpenAPI definition claims it's optional
+                        ctParameter.IsRequired = true;
+                        method.Add(ctParameter);
+                        continue;
                     }
                 }
 
+                var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(_swaggerModeler)).Build();
                 method.Add(parameter);
-
                 CollectionFormatBuilder.OnBuildMethodParameter(method, swaggerParameter, new StringBuilder(parameter.Name));
             }
         }

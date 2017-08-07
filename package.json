@@ -4,7 +4,8 @@
   "description": "Tools for AutoRest build processes",
   "scripts": {
     "test": "gulp test",
-    "install": "gulp npm-install"
+    "build": "gulp build --threshold=1",
+    "install": "gulp npm-install --verbose --threshold=1"
   },
   "repository": {
     "type": "git",
@@ -52,9 +53,8 @@
     "typescript": "2.3.3",
     "vinyl-paths": "^2.1.0",
     "vinyl-fs": "^2.4.4",
-    "yargs": "^6.6.0"
-  },
-  "dependencies": {
+    "yargs": "^6.6.0",
+    "npm": "^4.6.1",
     "@types/request": "0.0.39",
     "@types/shelljs": "^0.6.0",
     "http-proxy-agent": "^1.0.0",
@@ -62,11 +62,11 @@
     "linq-es2015": "^2.4.13",
     "request": "^2.79.0",
     "semver": "^5.3.0",
-    "shelljs": "^0.7.6",
     "streamsink": "^1.2.0",
     "tar.gz2": "^1.0.0",
     "tmp": "0.0.31",
     "unzipper": "^0.8.4",
     "yauzl": "^2.7.0"
-  }
+  },
+  "dependencies": {}
 }
