@@ -221,8 +221,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().putAsyncRelativeRetryInvalidHeader(product);
             fail();
-        } catch (RuntimeException ex) {
-            Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
+        } catch (NumberFormatException ex) {
+            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
         }
     }
 
@@ -243,8 +243,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().delete202RetryInvalidHeader();
             fail();
-        } catch (RuntimeException ex) {
-            Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
+        } catch (NumberFormatException ex) {
+            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
         }
     }
 
@@ -253,8 +253,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().deleteAsyncRelativeRetryInvalidHeader();
             fail();
-        } catch (RuntimeException ex) {
-            Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
+        } catch (NumberFormatException ex) {
+            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
         }
     }
 
@@ -275,8 +275,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().post202RetryInvalidHeader(product);
             fail();
-        } catch (RuntimeException ex) {
-            Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
+        } catch (NumberFormatException ex) {
+            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
         }
     }
 
@@ -287,8 +287,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().postAsyncRelativeRetryInvalidHeader(product);
             fail();
-        } catch (RuntimeException ex) {
-            Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
+        } catch (NumberFormatException ex) {
+            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
         }
     }
 
