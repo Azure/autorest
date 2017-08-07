@@ -10,58 +10,40 @@
 
 package fixtures.bodycomplex.models;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.microsoft.rest.ExpandableStringEnum;
 
 /**
  * Defines values for CMYKColors.
  */
-public final class CMYKColors {
+public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
     /** Static value cyan for CMYKColors. */
-    public static final CMYKColors CYAN = new CMYKColors("cyan");
+    public static final CMYKColors CYAN = fromString("cyan");
 
     /** Static value Magenta for CMYKColors. */
-    public static final CMYKColors MAGENTA = new CMYKColors("Magenta");
+    public static final CMYKColors MAGENTA = fromString("Magenta");
 
     /** Static value YELLOW for CMYKColors. */
-    public static final CMYKColors YELLOW = new CMYKColors("YELLOW");
+    public static final CMYKColors YELLOW = fromString("YELLOW");
 
     /** Static value blacK for CMYKColors. */
-    public static final CMYKColors BLACK = new CMYKColors("blacK");
-
-    private String value;
+    public static final CMYKColors BLACK = fromString("blacK");
 
     /**
-     * Creates a custom value for CMYKColors.
-     * @param value the custom value
+     * Creates or finds a CMYKColors from its string representation.
+     * @param name a name to look for
+     * @return the corresponding CMYKColors
      */
-    public CMYKColors(String value) {
-        this.value = value;
+    @JsonCreator
+    public static CMYKColors fromString(String name) {
+        return fromString(name, CMYKColors.class);
     }
 
-    @JsonValue
-    @Override
-    public String toString() {
-        return value;
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof CMYKColors)) {
-            return false;
-        }
-        if (obj == this) {
-            return true;
-        }
-        CMYKColors rhs = (CMYKColors) obj;
-        if (value == null) {
-            return rhs.value == null;
-        } else {
-            return value.equals(rhs.value);
-        }
+    /**
+     * @return known CMYKColors values
+     */
+    public static Collection<CMYKColors> values() {
+        return values(CMYKColors.class);
     }
 }
