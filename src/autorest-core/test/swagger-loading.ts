@@ -1,6 +1,3 @@
-// polyfills for language support 
-require("../lib/polyfill.min.js");
-
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
@@ -37,7 +34,7 @@ import { Channel, Message } from "../lib/message";
         "-m", "CompositeSwagger",
         "-g", "None"
       ]);
-    assert.strictEqual(config["input-file"].length, 18);
+    assert.strictEqual((config["input-file"] as any).length, 18);
     const autoRest = new AutoRest(new RealFileSystem());
     await autoRest.AddConfiguration(config);
 

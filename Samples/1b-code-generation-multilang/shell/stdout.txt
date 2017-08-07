@@ -1,1 +1,35 @@
-
+INFORMATION: Defaulting to generate client side Code
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating Rest Code
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Successfully initialized Azure.CSharp Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Azure.CSharp.Fluent Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Azure.Java Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Azure.Java.Fluent Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Azure.NodeJS Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Azure.Ruby Code Generator 1.2.2.0
+INFORMATION: Successfully initialized CSharp Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Go Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Java Code Generator 1.2.2.0
+INFORMATION: Successfully initialized NodeJS Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Ruby Code Generator 1.2.2.0

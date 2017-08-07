@@ -13,7 +13,7 @@ export async function Parse(hConfigFile: DataHandleRead, intermediateScope: Data
   for (const codeBlock of ParseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;
 
-    const data = codeBlock.literal;
+    const data = codeBlock.literal || "";
     const mappings = GetSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
     const hwCodeBlock = await intermediateScope.Write(codeBlockKey);
@@ -73,15 +73,16 @@ function CommonmarkParentHeading(startNode: commonmark.Node): commonmark.Node | 
     ? startNode.level
     : commonmarkHeadingMaxLevel;
 
-  while (startNode != null && (startNode.type !== commonmarkHeadingNodeType || startNode.level >= currentLevel)) {
-    startNode = startNode.prev || startNode.parent;
+  let resultNode: commonmark.Node | null = startNode;
+  while (resultNode != null && (resultNode.type !== commonmarkHeadingNodeType || resultNode.level >= currentLevel)) {
+    resultNode = resultNode.prev || resultNode.parent;
   }
 
-  return startNode;
+  return resultNode;
 }
 
-export function* CommonmarkSubHeadings(startNode: commonmark.Node): Iterable<commonmark.Node> {
-  if (startNode.type === commonmarkHeadingNodeType || !startNode.prev) {
+export function* CommonmarkSubHeadings(startNode: commonmark.Node | null): Iterable<commonmark.Node> {
+  if (startNode && (startNode.type === commonmarkHeadingNodeType || !startNode.prev)) {
     const currentLevel = startNode.level;
     let maxLevel = commonmarkHeadingMaxLevel;
 
@@ -114,6 +115,7 @@ export function CommonmarkHeadingText(headingNode: commonmark.Node): string {
 
 export function CommonmarkHeadingFollowingText(headingNode: commonmark.Node): [number, number] {
   let subNode = headingNode.next;
+  if (subNode === null) { throw new Error("No node found after heading node"); }
   const startPos = subNode.sourcepos[0];
   while (subNode.next
     && subNode.next.type !== "code_block"

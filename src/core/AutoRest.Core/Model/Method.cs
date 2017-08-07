@@ -26,8 +26,8 @@ namespace AutoRest.Core.Model
         private readonly Fixable<string> _url = new Fixable<string>();
         private MethodGroup _parent;
 
+        [JsonIgnore]
         public string Qualifier => "Method";
-        public string QualifierType => "Method";
 
         [JsonIgnore]
         public MethodGroup MethodGroup
@@ -117,11 +117,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
             Justification = "Url might be used as a template, thus making it invalid url in certain scenarios.")]
-        public Fixable<string> Url
-        {
-            get { return _url; }
-            set { _url.CopyFrom(value); }
-        }
+        public virtual string Url { get; set; }
 
 
 

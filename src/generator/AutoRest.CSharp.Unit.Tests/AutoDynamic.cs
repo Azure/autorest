@@ -41,24 +41,6 @@ namespace AutoRest.CSharp.Unit.Tests
             _wrapped = o;
         }
 
-        /// <summary>
-        ///     Returns a JSON representation.
-        /// </summary>
-        /// <returns>a JSON string</returns>
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(
-                _wrapped,
-                Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    Converters = new JsonConverter[] {new StringEnumConverter()},
-                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                    NullValueHandling = NullValueHandling.Ignore,
-                    ObjectCreationHandling = ObjectCreationHandling.Reuse
-                });
-        }
-
         private bool CheckResult(object result, out object outresult)
         {
             if (result == null || result.GetType().GetTypeInfo().IsPrimitive

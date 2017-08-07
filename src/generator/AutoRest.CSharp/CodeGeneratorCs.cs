@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,8 @@ using AutoRest.CSharp.Templates.Rest.Client;
 using AutoRest.CSharp.Templates.Rest.Common;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Extensions;
+using Newtonsoft.Json.Linq;
+using System.Text;
 
 namespace AutoRest.CSharp
 {
@@ -159,6 +162,155 @@ namespace AutoRest.CSharp
                     string.Format(CultureInfo.InvariantCulture,
                         string.Format(AutoRest.Core.Properties.Resources.ParameterValueIsNotValid, Settings.Instance.CodeGenerationMode, "server/client"), "CodeGenerator"));
             }
+        }
+
+        private string CreateObjectInitializer(CompositeType type, JObject obj, int indent = 0)
+        {
+            if (obj == null)
+            {
+                return "null";
+            }
+
+            var indentString = new string(' ', 4);
+            var totalIndent = string.Concat(Enumerable.Repeat(indentString, indent));
+
+            var properties = type.Properties.ToArray();
+
+            var result = new StringBuilder();
+            var propertyInitializers = new List<string>();
+            foreach (var prop in properties)
+            {
+                var propValue = obj.SelectToken(prop.SerializedName);
+                if (propValue != null)
+                {
+                    propertyInitializers.Add(totalIndent + indentString + $"{prop.Name} = {CreateInitializer(prop.ModelType, propValue, indent + 1)}");
+                }
+                else if (prop.IsRequired)
+                {
+                    Logger.Instance.Log(Category.Error, $"Required property '{prop.Name}' of type '{type.ClassName}' not found.");
+                }
+            }
+            if (propertyInitializers.Count > 0)
+            {
+                // special treatment for SubResource
+                if (type.ClassName.Split('.').Last() == "SubResource" && properties.Length == 1 && properties[0].SerializedName == "id")
+                {
+                    result.Append($"new {type.ClassName}({obj.SelectToken("id").ToString(Newtonsoft.Json.Formatting.None)})");
+                }
+                else
+                {
+                    result.AppendLine($"new {type.ClassName}");
+                    result.AppendLine(totalIndent + "{");
+                    result.AppendLine(string.Join(",\n", propertyInitializers));
+                    result.Append(totalIndent + "}");
+                }
+            }
+            else
+            {
+                result.Append($"new {type.ClassName}()");
+            }
+            return result.ToString();
+        }
+
+        private string CreateSequenceInitializer(SequenceType type, JArray arr, int indent = 0)
+        {
+            if (arr == null)
+            {
+                return "null";
+            }
+
+            var indentString = new string(' ', 4);
+            var totalIndent = string.Concat(Enumerable.Repeat(indentString, indent));
+
+            var result = new StringBuilder();
+            var itemInitializer = new List<string>();
+            foreach (var item in arr)
+            {
+                itemInitializer.Add(totalIndent + indentString + CreateInitializer(type.ElementType, item, indent + 1));
+            }
+            if (itemInitializer.Count > 0)
+            {
+                result.AppendLine($"new List<{type.ElementType.ClassName}>");
+                result.AppendLine(totalIndent + "{");
+                result.AppendLine(string.Join(",\n", itemInitializer));
+                result.Append(totalIndent + "}");
+            }
+            else
+            {
+                result.Append($"new List<{type.ElementType.ClassName}>()");
+            }
+            return result.ToString();
+        }
+
+        private string CreateInitializer(IModelType type, JToken token, int indent = 0)
+            => type is CompositeType ct
+            ? CreateObjectInitializer(ct, token as JObject, indent)
+            : type is SequenceType st
+            ? CreateSequenceInitializer(st, token as JArray, indent)
+            : CodeNamer.Instance.EscapeDefaultValue(token.ToString(), type);
+
+        public override string GenerateSample(bool isolateSnippet, CodeModel cm, MethodGroup g, Method m, string exampleName, AutoRest.Core.Model.XmsExtensions.Example example)
+        {
+            var clientInstanceName = "client";
+            var codeModel = cm as CodeModelCs;
+            var method = m as MethodCs;
+            var group = g as MethodGroupCs;
+
+            var result = new StringBuilder();
+            if (isolateSnippet)
+            {
+                result.AppendLine("{");
+                result.AppendLine("// Client: " + cm.Name);
+                if (!g.Name.IsNullOrEmpty())
+                {
+                    result.AppendLine("// Group: " + g.Name);
+                }
+                result.AppendLine("// Method: " + m.Name);
+                result.AppendLine("// Example: " + exampleName);
+                result.AppendLine();
+            }
+
+            // parameter preparation
+            var paramaters = new List<string>();
+            var contiguous = false; // true;
+            foreach (var formalParameter in method.LocalParameters)
+            {
+                // parameter found in x-ms-examples?
+                if (example.Parameters.TryGetValue(formalParameter.SerializedName, out JToken token))
+                {
+                    var value = CreateInitializer(formalParameter.ModelType, token);
+                    // initialize composite type beforehand
+                    if (formalParameter.ModelType is CompositeType ct)
+                    {
+                        result.AppendLine($"var {formalParameter.Name} = {value};");
+                        value = formalParameter.Name;
+                    }
+                    paramaters.Add((contiguous ? "" : formalParameter.Name + ": ") + value);
+                }
+                else if (formalParameter.IsRequired) // ...but it should be there!
+                {
+                    Logger.Instance.Log(Category.Error, $"Required parameter '{formalParameter.SerializedName}' not found.");
+                    return null;
+                }
+                else
+                {
+                    contiguous = false;
+                }
+            }
+            result.AppendLine();
+
+            // call
+            var returnTypeName = method.ReturnType.Body?.Name ?? method.ReturnType.Headers?.Name;
+            returnTypeName = returnTypeName?.ToCamelCase();
+
+            result.AppendLine($"{(returnTypeName == null ? "" : $"var {returnTypeName} = ")}await {clientInstanceName}{(g.Name.IsNullOrEmpty() ? "" : "." + g.NameForProperty)}.{m.Name}Async(" +
+                $"{string.Join(", ", paramaters.Select(param => "\n    " + param))});");
+
+            if (isolateSnippet)
+            {
+                result.AppendLine("}");
+            }
+            return result.ToString();
         }
     }
 }

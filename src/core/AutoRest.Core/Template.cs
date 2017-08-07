@@ -27,17 +27,7 @@ namespace AutoRest.Core
         /// <summary>
         /// Adds empty line to the template.
         /// </summary>
-        public string EmptyLine
-        {
-            get { return TemplateConstants.EmptyLine + "\r\n"; }
-        }
-
-        public virtual void BeginWriteAttribute(string name, string prefix, int prefixOffset, string suffix, int suffixOffset, int attributeValuesCount) {
-        }
-        public virtual void EndWriteAttribute() {
-        }
-        public void WriteAttributeValue(string prefix, int prefixOffset, object value, int valueOffset, int valueLength, bool isLiteral) {
-        }
+        public string EmptyLine => TemplateConstants.EmptyLine + "\r\n";
         
         /// <summary>
         /// Gets or sets settings.
@@ -58,31 +48,6 @@ namespace AutoRest.Core
         }
 
         /// <summary>
-        /// Write the attribute string directly to the output
-        /// </summary>
-        /// <param name="attribute"></param>
-        /// <param name="tuple1"></param>
-        /// <param name="tuple2"></param>
-        /// <param name="tuple3"></param>
-        protected void WriteAttribute(string attribute,
-                                     Tuple<string, int> tuple1,
-                                     Tuple<string, int> tuple2,
-                                     Tuple<Tuple<string, int>, Tuple<object, int>, bool> tuple3)
-        {
-            string value = string.Empty;
-
-            if (attribute == "cref")
-            {
-                value = string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", tuple1?.Item1, tuple3?.Item2?.Item1.ToString(), tuple2?.Item1);
-            }
-            else
-            {
-                throw new NotImplementedException(attribute + " attributes are not yet implemented");
-            }
-            WriteLiteral(value);
-        }
-
-        /// <summary>
         /// Write the given value directly to the output
         /// </summary>
         /// <param name="value"></param>
@@ -92,15 +57,6 @@ namespace AutoRest.Core
             {
                 _lastLiteral = value;
             }
-            WriteLiteralTo(TextWriter, value);
-        }
-
-        /// <summary>
-        /// Write the given value directly to the output
-        /// </summary>
-        /// <param name="value"></param>
-        protected void WriteLiteral(object value)
-        {
             WriteLiteralTo(TextWriter, value);
         }
 
@@ -156,16 +112,6 @@ namespace AutoRest.Core
         protected void WriteTo(TextWriter writer, string value)
         {
             WriteLiteralTo(writer, value);
-        }
-
-        /// <summary>
-        /// Writes the specified <paramref name="value"/> without HTML encoding to the <paramref name="writer"/>.
-        /// </summary>
-        /// <param name="writer">The <see cref="System.IO.TextWriter"/> instance to write to.</param>
-        /// <param name="value">The <see cref="object"/> to write.</param>
-        protected void WriteLiteralTo(TextWriter writer, object value)
-        {
-            WriteLiteralTo(writer, Convert.ToString(value, CultureInfo.InvariantCulture));
         }
 
         /// <summary>

@@ -221,8 +221,9 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
     let clue: string | null = null;
     let node = x.node.firstChild;
     while (node) {
-      if (node.literal.endsWith("(")
-        && (((node.next || {}).next || {}).literal || "").startsWith(")")
+      if ((node.literal || "").endsWith("(")
+        && (((node.next || <any>{}).next || {}).literal || "").startsWith(")")
+        && node.next
         && node.next.type === "code") {
         clue = node.next.literal;
         break;
@@ -410,8 +411,8 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
       const clientPC = swagger[pc];
       if (clientPC) {
         for (const method of methods) {
-          if (typeof method.obj === "object" && !method.obj[pc]) {
-            populate.push(() => method.obj[pc] = Clone(clientPC));
+          if (typeof method.obj === "object" && !(method.obj as any)[pc]) {
+            populate.push(() => (method.obj as any)[pc] = Clone(clientPC));
             mapping.push(...CreateAssignmentMapping(
               clientPC, inputSwagger.key,
               [pc], method.path.concat([pc]),

@@ -126,6 +126,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets the method groups.
         /// </summary>
+        [JsonIgnore]
         public virtual IEnumerable<string> MethodGroupNames => Operations.Where(group => !group.Name.IsNullOrEmpty()).Select(group => group.TypeName.Value);
 
         /// <summary>
@@ -151,6 +152,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Reference to the container of this type.
         /// </summary>
+        [JsonIgnore]
         CodeModel IParent.CodeModel => this;
 
         [JsonIgnore]
@@ -161,8 +163,8 @@ namespace AutoRest.Core.Model
         public virtual IEnumerable<IChild> Children
             => ((IEnumerable<IChild>)ModelTypes).Concat(HeaderTypes).Concat(ErrorTypes).Concat(EnumTypes).Concat(Properties);
 
+        [JsonIgnore]
         public string Qualifier => "Client";
-        public string QualifierType => "Service Client";
 
         [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames
@@ -175,6 +177,7 @@ namespace AutoRest.Core.Model
             }
         }
 
+        [JsonIgnore]
         public virtual HashSet<string> LocallyUsedNames => null;
         
         [JsonIgnore]

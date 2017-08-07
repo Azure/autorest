@@ -3,10 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ConfigurationView } from '../autorest-core';
 import { LineIndices } from "../parsing/text-utility";
-import { CancellationToken } from "../ref/cancallation";
+import { CancellationToken } from "../ref/cancellation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
-import { EnsureIsFolderUri, ReadUri, ResolveUri, WriteString } from "../ref/uri";
+import { EnsureIsFolderUri, ReadUri, ResolveUri, ToRawDataUrl, WriteString } from "../ref/uri";
 import { FastStringify, ParseNode, ParseToAst as parseAst, YAMLNode } from "../ref/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
@@ -49,7 +50,7 @@ export abstract class DataStoreViewReadonly {
   public async ReadStrict(uri: string): Promise<DataHandleRead> {
     const result = await this.Read(uri);
     if (result === null) {
-      throw new Error(`Failed to read '${uri}'. Key not found.`);
+      throw new Error(`Could not to read '${uri}'.`);
     }
     return result;
   }
@@ -101,31 +102,31 @@ export abstract class DataStoreView extends DataStoreViewReadonly {
 }
 
 class DataStoreViewScope extends DataStoreView {
-  constructor(private name: string, private slave: DataStoreView) {
+  constructor(private name: string, private view: DataStoreView) {
     super();
   }
 
   public get BaseUri(): string {
-    return ResolveUri(this.slave.BaseUri, `${this.name}/`);
+    return ResolveUri(this.view.BaseUri, `${this.name}/`);
   }
 
   public Write(uri: string): Promise<DataHandleWrite> {
     uri = ResolveUri(this.BaseUri, uri);
-    return this.slave.Write(uri);
+    return this.view.Write(uri);
   }
 
-  public Read(uri: string): Promise<DataHandleRead> {
+  public Read(uri: string): Promise<DataHandleRead | null> {
     uri = ResolveUri(this.BaseUri, uri);
     if (!uri.startsWith(this.BaseUri)) {
       throw new Error(`Cannot access '${uri}' because it is out of scope.`);
     }
-    return this.slave.Read(uri);
+    return this.view.Read(uri);
   }
 
   public async Enum(): Promise<string[]> {
-    const parentResult = await this.slave.Enum();
+    const parentResult = await this.view.Enum();
     return From(parentResult)
-      .Select(key => ResolveUri(this.slave.BaseUri, key))
+      .Select(key => ResolveUri(this.view.BaseUri, key))
       .Where(key => key.startsWith(this.BaseUri))
       .Select(key => key.substr(this.BaseUri.length))
       .ToArray();
@@ -135,7 +136,7 @@ class DataStoreViewScope extends DataStoreView {
 class DataStoreViewReadThrough extends DataStoreViewReadonly {
   private uris: string[] = [];
 
-  constructor(private slave: DataStore, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
+  constructor(private storage: DataStore, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
     super();
   }
 
@@ -145,14 +146,10 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
       throw new Error(`Provided URI '${uri}' violated the filter`);
     }
 
-    // special URI handlers
-    // - GitHub
-    if (uri.startsWith("https://github")) {
-      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
-    }
+    uri = ToRawDataUrl(uri);
 
     // prope cache
-    const existingData = await this.slave.Read(uri);
+    const existingData = await this.storage.Read(uri);
     if (existingData !== null) {
       this.uris.push(uri);
       return existingData;
@@ -160,31 +157,27 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 
     // populate cache
     const data = await ReadUri(uri);
-    const writeHandle = await this.slave.Write(uri);
+    const writeHandle = await this.storage.Write(uri);
     const readHandle = await writeHandle.WriteData(data);
     this.uris.push(uri);
     return readHandle;
   }
 
   public async Enum(): Promise<string[]> {
-    return this.slave.Enum();
+    return this.storage.Enum();
   }
 }
 
 class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
   private uris: string[] = [];
-  private cache: { [uri: string]: Promise<DataHandleRead> } = {};
+  private cache: { [uri: string]: Promise<DataHandleRead | null> } = {};
 
   constructor(private slave: DataStore, private fs: IFileSystem) {
     super();
   }
 
   public async Read(uri: string): Promise<DataHandleRead | null> {
-    // special URI handlers
-    // - GitHub
-    if (uri.startsWith("https://github")) {
-      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
-    }
+    uri = ToRawDataUrl(uri);
 
     // sync cache (inner stuff is racey!)
     if (!this.cache[uri]) {

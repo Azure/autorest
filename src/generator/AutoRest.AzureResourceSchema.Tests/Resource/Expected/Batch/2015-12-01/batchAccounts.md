@@ -16,9 +16,7 @@ To create a Microsoft.Batch/batchAccounts resource, add the following JSON to th
       "storageAccountId": "string"
     }
   },
-  "resources": [
-    null
-  ]
+  "resources": []
 }
 ```
 ## Property values
@@ -35,7 +33,7 @@ The following tables describe the values you need to set in the schema.
 |  location | string | No | The region in which the account is created. |
 |  tags | object | No | The user specified tags associated with the account. |
 |  properties | object | Yes | The properties of the account. - [AccountBaseProperties object](#AccountBaseProperties) |
-|  resources | array | No | [batchAccounts_applications_childResource object](#batchAccounts_applications_childResource) |
+|  resources | array | No | [applications](./batchAccounts/applications.md) |
 
 
 <a id="AccountBaseProperties" />
@@ -45,30 +43,9 @@ The following tables describe the values you need to set in the schema.
 |  autoStorage | object | No | The properties related to auto storage account. - [AutoStorageBaseProperties object](#AutoStorageBaseProperties) |
 
 
-<a id="batchAccounts_applications_childResource" />
-### batchAccounts_applications_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | applications |
-|  apiVersion | enum | Yes | 2015-12-01 |
-|  allowUpdates | boolean | No | A value indicating whether packages within the application may be overwritten using the same version string. |
-|  displayName | string | No | The display name for the application. |
-|  resources | array | No | [batchAccounts_applications_versions_childResource object](#batchAccounts_applications_versions_childResource) |
-
-
 <a id="AutoStorageBaseProperties" />
 ### AutoStorageBaseProperties object
 |  Name | Type | Required | Value |
 |  ---- | ---- | ---- | ---- |
 |  storageAccountId | string | Yes | The resource id of the storage account to be used for auto storage account. |
-
-
-<a id="batchAccounts_applications_versions_childResource" />
-### batchAccounts_applications_versions_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | versions |
-|  apiVersion | enum | Yes | 2015-12-01 |
 

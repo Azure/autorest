@@ -12,7 +12,6 @@
    <ItemGroup>
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
-    <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.CompositeSwagger/AutoRest.CompositeSwagger.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp/AutoRest.CSharp.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Azure/AutoRest.CSharp.Azure.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.NodeJS/AutoRest.NodeJS.csproj" />

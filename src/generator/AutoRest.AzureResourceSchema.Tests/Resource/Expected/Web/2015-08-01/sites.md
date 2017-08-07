@@ -196,9 +196,7 @@ To create a Microsoft.Web/sites resource, add the following JSON to the resource
       "trafficManagerProfileName": "string"
     }
   },
-  "resources": [
-    null
-  ]
+  "resources": []
 }
 ```
 ## Property values
@@ -217,7 +215,7 @@ The following tables describe the values you need to set in the schema.
 |  location | string | Yes | Resource Location |
 |  tags | object | No | Resource tags |
 |  properties | object | Yes | [Site_properties object](#Site_properties) |
-|  resources | array | No | [sites_hybridconnection_childResource object](#sites_hybridconnection_childResource) [sites_premieraddons_childResource object](#sites_premieraddons_childResource) [sites_hostNameBindings_childResource object](#sites_hostNameBindings_childResource) [sites_deployments_childResource object](#sites_deployments_childResource) [sites_slots_childResource object](#sites_slots_childResource) [sites_virtualNetworkConnections_childResource object](#sites_virtualNetworkConnections_childResource) |
+|  resources | array | No | [hybridconnection](./sites/hybridconnection.md) [premieraddons](./sites/premieraddons.md) [hostNameBindings](./sites/hostNameBindings.md) [deployments](./sites/deployments.md) [slots](./sites/slots.md) [virtualNetworkConnections](./sites/virtualNetworkConnections.md) |
 
 
 <a id="Site_properties" />
@@ -242,92 +240,6 @@ The following tables describe the values you need to set in the schema.
             This only applies to function container |
 |  cloningInfo | object | No | This is only valid for web app creation. If specified, web app is cloned from
             a source web app - [CloningInfo object](#CloningInfo) |
-
-
-<a id="sites_hybridconnection_childResource" />
-### sites_hybridconnection_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | hybridconnection |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [RelayServiceConnectionEntity_properties object](#RelayServiceConnectionEntity_properties) |
-
-
-<a id="sites_premieraddons_childResource" />
-### sites_premieraddons_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | premieraddons |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  location | string | No | Geo region resource belongs to e.g. SouthCentralUS, SouthEastAsia |
-|  tags | object | No | Tags associated with resource |
-|  plan | object | No | Azure resource manager plan - [ArmPlan object](#ArmPlan) |
-|  properties | object | Yes | Resource specific properties |
-|  sku | object | No | Sku description of the resource - [SkuDescription object](#SkuDescription) |
-
-
-<a id="sites_hostNameBindings_childResource" />
-### sites_hostNameBindings_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | hostNameBindings |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [HostNameBinding_properties object](#HostNameBinding_properties) |
-
-
-<a id="sites_deployments_childResource" />
-### sites_deployments_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | deployments |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [Deployment_properties object](#Deployment_properties) |
-
-
-<a id="sites_slots_childResource" />
-### sites_slots_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | slots |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [Site_properties object](#Site_properties) |
-|  resources | array | No | [sites_slots_hybridconnection_childResource object](#sites_slots_hybridconnection_childResource) [sites_slots_premieraddons_childResource object](#sites_slots_premieraddons_childResource) [sites_slots_hostNameBindings_childResource object](#sites_slots_hostNameBindings_childResource) [sites_slots_deployments_childResource object](#sites_slots_deployments_childResource) |
-
-
-<a id="sites_virtualNetworkConnections_childResource" />
-### sites_virtualNetworkConnections_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | virtualNetworkConnections |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [VnetInfo_properties object](#VnetInfo_properties) |
-|  resources | array | No | [sites_virtualNetworkConnections_gateways_childResource object](#sites_virtualNetworkConnections_gateways_childResource) |
 
 
 <a id="HostNameSslState" />
@@ -384,153 +296,6 @@ The following tables describe the values you need to set in the schema.
 |  trafficManagerProfileName | string | No | Name of traffic manager profile to create. This is only needed if traffic manager profile does not already exist |
 
 
-<a id="RelayServiceConnectionEntity_properties" />
-### RelayServiceConnectionEntity_properties object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  entityName | string | No |  |
-|  entityConnectionString | string | No |  |
-|  resourceType | string | No |  |
-|  resourceConnectionString | string | No |  |
-|  hostname | string | No |  |
-|  port | integer | No |  |
-|  biztalkUri | string | No |  |
-
-
-<a id="ArmPlan" />
-### ArmPlan object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | No | The name |
-|  publisher | string | No | The publisher |
-|  product | string | No | The product |
-|  promotionCode | string | No | The promotion code |
-|  version | string | No | Version of product |
-
-
-<a id="SkuDescription" />
-### SkuDescription object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | No | Name of the resource sku |
-|  tier | string | No | Service Tier of the resource sku |
-|  size | string | No | Size specifier of the resource sku |
-|  family | string | No | Family code of the resource sku |
-|  capacity | integer | No | Current number of instances assigned to the resource |
-
-
-<a id="HostNameBinding_properties" />
-### HostNameBinding_properties object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | No | Hostname |
-|  siteName | string | No | Web app name |
-|  domainId | string | No | Fully qualified ARM domain resource URI |
-|  azureResourceName | string | No | Azure resource name |
-|  azureResourceType | enum | No | Azure resource type. - Website or TrafficManager |
-|  customHostNameDnsRecordType | enum | No | Custom DNS record type. - CName or A |
-|  hostNameType | enum | No | Host name type. - Verified or Managed |
-
-
-<a id="Deployment_properties" />
-### Deployment_properties object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  id | string | No | Id |
-|  status | integer | No | Status |
-|  message | string | No | Message |
-|  author | string | No | Author |
-|  deployer | string | No | Deployer |
-|  author_email | string | No | AuthorEmail |
-|  start_time | string | No | StartTime |
-|  end_time | string | No | EndTime |
-|  active | boolean | No | Active |
-|  details | string | No | Detail |
-
-
-<a id="sites_slots_hybridconnection_childResource" />
-### sites_slots_hybridconnection_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | hybridconnection |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [RelayServiceConnectionEntity_properties object](#RelayServiceConnectionEntity_properties) |
-
-
-<a id="sites_slots_premieraddons_childResource" />
-### sites_slots_premieraddons_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | premieraddons |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  location | string | No | Geo region resource belongs to e.g. SouthCentralUS, SouthEastAsia |
-|  tags | object | No | Tags associated with resource |
-|  plan | object | No | Azure resource manager plan - [ArmPlan object](#ArmPlan) |
-|  properties | object | Yes | Resource specific properties |
-|  sku | object | No | Sku description of the resource - [SkuDescription object](#SkuDescription) |
-
-
-<a id="sites_slots_hostNameBindings_childResource" />
-### sites_slots_hostNameBindings_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | hostNameBindings |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [HostNameBinding_properties object](#HostNameBinding_properties) |
-
-
-<a id="sites_slots_deployments_childResource" />
-### sites_slots_deployments_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | deployments |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [Deployment_properties object](#Deployment_properties) |
-
-
-<a id="VnetInfo_properties" />
-### VnetInfo_properties object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  vnetResourceId | string | No | The vnet resource id |
-|  certThumbprint | string | No | The client certificate thumbprint |
-|  certBlob | string | No | A certificate file (.cer) blob containing the public key of the private key used to authenticate a
-            Point-To-Site VPN connection. |
-|  routes | array | No | The routes that this virtual network connection uses. - [VnetRoute object](#VnetRoute) |
-|  resyncRequired | boolean | No | Flag to determine if a resync is required |
-|  dnsServers | string | No | Dns servers to be used by this VNET. This should be a comma-separated list of IP addresses. |
-
-
-<a id="sites_virtualNetworkConnections_gateways_childResource" />
-### sites_virtualNetworkConnections_gateways_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | gateways |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [VnetGateway_properties object](#VnetGateway_properties) |
-
-
 <a id="SiteConfig_properties" />
 ### SiteConfig_properties object
 |  Name | Type | Required | Value |
@@ -575,27 +340,6 @@ The following tables describe the values you need to set in the schema.
 |  autoSwapSlotName | string | No | Auto swap slot name |
 |  localMySqlEnabled | boolean | No | Local mysql enabled |
 |  ipSecurityRestrictions | array | No | Ip Security restrictions - [IpSecurityRestriction object](#IpSecurityRestriction) |
-
-
-<a id="VnetRoute" />
-### VnetRoute object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  id | string | No | Resource Id |
-|  name | string | No | Resource Name |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  type | string | No | Resource type |
-|  tags | object | No | Resource tags |
-|  properties | object | No | [VnetRoute_properties object](#VnetRoute_properties) |
-
-
-<a id="VnetGateway_properties" />
-### VnetGateway_properties object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  vnetName | string | No | The VNET name. |
-|  vpnPackageUri | string | No | The URI where the Vpn package can be downloaded |
 
 
 <a id="NameValuePair" />
@@ -679,22 +423,6 @@ The following tables describe the values you need to set in the schema.
 |  ---- | ---- | ---- | ---- |
 |  ipAddress | string | No | IP address the security restriction is valid for |
 |  subnetMask | string | No | Subnet mask for the range of IP addresses the restriction is valid for |
-
-
-<a id="VnetRoute_properties" />
-### VnetRoute_properties object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | No | The name of this route. This is only returned by the server and does not need to be set by the client. |
-|  startAddress | string | No | The starting address for this route. This may also include a CIDR notation, in which case the end address must not be specified. |
-|  endAddress | string | No | The ending address for this route. If the start address is specified in CIDR notation, this must be omitted. |
-|  routeType | string | No | The type of route this is:
-            DEFAULT - By default, every web app has routes to the local address ranges specified by RFC1918
-            INHERITED - Routes inherited from the real Virtual Network routes
-            STATIC - Static route set on the web app only
-
-            These values will be used for syncing a Web App's routes with those from a Virtual Network. This operation will clear all DEFAULT and INHERITED routes and replace them
-            with new INHERITED routes. |
 
 
 <a id="VirtualDirectory" />

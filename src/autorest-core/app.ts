@@ -7,24 +7,21 @@
 // start of autorest-ng
 // the console app starts for real here.
 
-// this file should get 'required' by the boostrapper
-require("./lib/polyfill.min.js");
-
+import { Artifact } from './lib/artifact';
+import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configuration';
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
-import { AutoRest } from "./lib/autorest-core";
+import { AutoRest, ConfigurationView } from './lib/autorest-core';
 import { ShallowCopy } from "./lib/source-map/merging";
 import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
-import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
-import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
+import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
-import { RealFileSystem } from "./lib/file-system";
+import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
 import { Exception, OperationCanceledException } from "./lib/exception";
-import { Console } from "./lib/console";
 
 /**
  * Legacy AutoRest
@@ -38,21 +35,20 @@ function awaitable(child: ChildProcess): Promise<number> {
 }
 
 async function legacyMain(autorestArgs: string[]): Promise<number> {
-  if (autorestArgs.indexOf("-LEGACY") === -1) {
-    // generate virtual config file
-    const currentDirUri = CreateFolderUri(currentDirectory());
-    const dataStore = new DataStore();
-    const config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(x => true /*unsafe*/), autorestArgs);
+  // generate virtual config file
+  const currentDirUri = CreateFolderUri(currentDirectory());
+  const dataStore = new DataStore();
+  const config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(x => true /*unsafe*/), autorestArgs);
 
-    // autorest init
-    if (autorestArgs[0] === "init") {
-      const clientNameGuess = (config["override-info"] || {}).title || Parse<any>(await ReadUri(config["input-file"][0])).info.title;
-      await autorestInit(clientNameGuess, Array.isArray(config["input-file"]) ? config["input-file"] as any : []);
-      return 0;
-    }
-    // autorest init-min
-    if (autorestArgs[0] === "init-min") {
-      console.log(`# AutoRest Configuration (auto-generated, please adjust title)
+  // autorest init
+  if (autorestArgs[0] === "init") {
+    const clientNameGuess = (config["override-info"] || {}).title || Parse<any>(await ReadUri((config["input-file"] as any)[0])).info.title;
+    await autorestInit(clientNameGuess, Array.isArray(config["input-file"]) ? config["input-file"] as any : []);
+    return 0;
+  }
+  // autorest init-min
+  if (autorestArgs[0] === "init-min") {
+    console.log(`# AutoRest Configuration (auto-generated, please adjust title)
 
 > see https://aka.ms/autorest
 
@@ -63,57 +59,49 @@ ${Stringify(config).replace(/^---\n/, "")}
 ~~~
 
 `.replace(/~/g, "`"));
-      return 0;
-    }
-    // autorest init-cli
-    if (autorestArgs[0] === "init-cli") {
-      const args: string[] = [];
-      for (const node of nodes(config, "$..*")) {
-        const path = node.path.join(".");
-        const values = node.value instanceof Array ? node.value : (typeof node.value === "object" ? [] : [node.value]);
-        for (const value of values) {
-          args.push(`--${path}=${value}`);
-        }
-      }
-      console.log(args.join(" "));
-      return 0;
-    }
-
-    config["base-folder"] = currentDirUri;
-    const api = new AutoRest(new RealFileSystem());
-    await api.AddConfiguration(config);
-    const view = await api.view;
-    const outstanding = new OutstandingTaskAwaiter();
-    api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
-    subscribeMessages(api, () => { });
-
-    // warn about `--` arguments
-    for (var arg of autorestArgs) {
-      if (arg.startsWith("--")) {
-        view.Message({
-          Channel: Channel.Warning,
-          Text:
-          `The parameter ${arg} looks like it was meant for the new CLI! ` +
-          "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
-          "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."
-        });
+    return 0;
+  }
+  // autorest init-cli
+  if (autorestArgs[0] === "init-cli") {
+    const args: string[] = [];
+    for (const node of nodes(config, "$..*")) {
+      const path = node.path.join(".");
+      const values = node.value instanceof Array ? node.value : (typeof node.value === "object" ? [] : [node.value]);
+      for (const value of values) {
+        args.push(`--${path}=${value}`);
       }
     }
+    console.log(args.join(" "));
+    return 0;
+  }
 
-    const result = await api.Process().finish;
-    if (result != true) {
-      throw result;
+  config["base-folder"] = currentDirUri;
+  const api = new AutoRest(new RealFileSystem());
+  api.AddConfiguration(config);
+  const view = await api.view;
+  let outstanding: Promise<void> = Promise.resolve();
+  api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
+  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(async () => { try { await ClearFolder(folder); } catch (e) { } }));
+  subscribeMessages(api, () => { });
+
+  // warn about `--` arguments
+  for (var arg of autorestArgs) {
+    if (arg.startsWith("--")) {
+      view.Message({
+        Channel: Channel.Warning,
+        Text:
+        `The parameter ${arg} looks like it was meant for the new CLI! ` +
+        "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
+        "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."
+      });
     }
-    await outstanding.Wait();
   }
-  else {
-    // exec
-    const autorestExe = SpawnLegacyAutoRest(autorestArgs);
-    autorestExe.stdout.pipe(process.stdout);
-    autorestExe.stderr.pipe(process.stderr);
-    const exitCode = await awaitable(autorestExe);
-    process.exit(exitCode);
+
+  const result = await api.Process().finish;
+  if (result != true) {
+    throw result;
   }
+  await outstanding;
 
   return 0;
 }
@@ -222,7 +210,6 @@ csharp:
 }
 
 let exitcode = 0;
-const outstanding = new OutstandingTaskAwaiter();
 let args: CommandLineArgs;
 
 async function currentMain(autorestArgs: string[]): Promise<number> {
@@ -238,12 +225,15 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   const currentDirUri = CreateFolderUri(currentDirectory());
 
   // get an instance of AutoRest and add the command line switches to the configuration.
-  const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
+  const api = new AutoRest(new EnhancedFileSystem((MergeConfigurations(...args.switches) as any)["github-auth-token"] || process.env.GITHUB_AUTH_TOKEN), ResolveUri(currentDirUri, args.configFileOrFolder || "."));
   api.AddConfiguration(args.switches);
 
   // listen for output messages and file writes
   subscribeMessages(api, () => exitcode++);
-  api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
+  const artifacts: Artifact[] = [];
+  const clearFolders: string[] = [];
+  api.GeneratedFile.Subscribe((_, artifact) => artifacts.push(artifact));
+  api.ClearFolder.Subscribe((_, folder) => clearFolders.push(folder));
   const config = (await api.view);
 
   try {
@@ -267,10 +257,17 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
         throw result;
       }
     }
+
+    // perform file system operations.
+    for (const folder of clearFolders) {
+      try { await ClearFolder(folder); } catch (e) { }
+    }
+    for (const artifact of artifacts) {
+      await WriteString(artifact.uri, artifact.content);
+    }
   }
-  finally {
-    // wait for any outstanding file writes to complete before we bail.
-    await outstanding.Wait();
+  catch (e) {
+    exitcode = exitcode || 1;
   }
 
   // return the exit code to the caller.
@@ -330,6 +327,8 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
   const outputs = new Map<string, string>();
   const schemas = new Array<string>();
 
+  let outstanding: Promise<void> = Promise.resolve();
+
   // ask for the view without 
   const config = await api.RegenerateView();
   for (const batchConfig of config.GetNestedConfiguration("resource-schema-batch")) { // really, there should be only one
@@ -338,7 +337,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       const content = await ReadUri(path);
       if (!AutoRest.IsSwaggerFile(content)) {
         exitcode++;
-        Console.Error(`File ${path} is not a OpenAPI file.`);
+        console.error(`File ${path} is not a OpenAPI file.`);
         continue;
       }
 
@@ -350,7 +349,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
           if (!outputs.has(file.uri)) {
             // Console.Log(`  Writing  *${file.uri}*`);
             outputs.set(file.uri, file.content);
-            outstanding.Await(WriteString(file.uri, file.content))
+            outstanding = outstanding.then(() => WriteString(file.uri, file.content))
             schemas.push(...getRds(more, file.uri));
             return;
           } else {
@@ -362,7 +361,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
             existing.definitions = shallowMerge(existing.definitions, more.definitions);
             const content = JSON.stringify(existing, null, 2);
             outputs.set(file.uri, content);
-            outstanding.Await(WriteString(file.uri, content));
+            outstanding = outstanding.then(() => WriteString(file.uri, content));
           }
         }
       });
@@ -376,10 +375,10 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       // console.log(`Inputs: ${newView["input-file"]}`);
       // newView.Dump()
 
-      Console.Log(`Running autorest for *${path}* `);
+      console.log(`Running autorest for *${path}* `);
 
       // ok, kick off the process for that one.
-      await instance.Process().finish.then((result) => {
+      await instance.Process().finish.then(async (result) => {
         if (result != true) {
           exitcode++;
           throw result;

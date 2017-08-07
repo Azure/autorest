@@ -227,7 +227,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             Regex leading = new Regex("^/+");
             Regex trailing = new Regex("/+$");
-            var methodUrl = trailing.Replace(leading.Replace(method.Url.Value, ""), "");
+            var methodUrl = trailing.Replace(leading.Replace(method.Url, ""), "");
             if (method.HttpMethod == HttpMethod.Get)
             {
                 var urlSplits = methodUrl.Split('/');
