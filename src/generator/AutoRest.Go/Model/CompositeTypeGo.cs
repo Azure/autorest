@@ -115,6 +115,7 @@ namespace AutoRest.Go.Model
             if (BaseIsPolymorphic && !IsPolymorphic)
             {
                 imports.Add("\"encoding/json\"");
+                imports.Add("\"errors\"");
             }
         }
 

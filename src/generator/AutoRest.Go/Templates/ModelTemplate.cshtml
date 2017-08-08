@@ -15,6 +15,27 @@
     @:As@(dt.Name) () (*@(dt.Name), bool)
     }
 @:}
+
+@:@EmptyLine
+@:func unmarshal@(Model.Name)(b []byte) (@(Model.Name), error){
+    @:var m map[string]interface{}
+	@:err := json.Unmarshal(b, &m)
+	@:if err != nil {
+		@:return nil, err
+	@:}
+    @:@EmptyLine
+    @:switch m["@(Model.PolymorphicDiscriminator)"] {
+    foreach (var dt in Model.DerivedTypes)
+    {
+    @:case "@(dt.SerializedName)":
+        @:var s @(dt.Name)
+        @:err := json.Unmarshal(b, &s)
+        @:return s, err
+    }
+    @:default:
+        @:return nil, errors.New("Unsupported type")
+    @:}
+@:}
 }
 else
 {
