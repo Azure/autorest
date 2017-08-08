@@ -5,39 +5,72 @@ modelTypes:
     properties:
       - $id: '2'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - id
         collectionFormat: none
+        defaultValue:
+          fixed: false
+          raw: '42'
+        documentation:
+          fixed: false
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: id
+        serializedName:
+          fixed: false
+          raw: id
         modelType:
           $id: '3'
           $type: PrimaryType
           format: int64
           knownPrimaryType: long
-          '#name': Long
-        '#defaultValue': '42'
-        '#name': id
-        '#serializedName': id
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: Long
       - $id: '4'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - name
         collectionFormat: none
+        defaultValue:
+          fixed: false
+          raw: shiny
+        documentation:
+          fixed: false
         isRequired: true
         isConstant: false
+        name:
+          fixed: false
+          raw: name
+        serializedName:
+          fixed: false
+          raw: name
         modelType:
           $id: '5'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#defaultValue': shiny
-        '#name': name
-        '#serializedName': name
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
+    serializedName: Cowbell
     documentation: A cowbell.
     containsConstantProperties: false
-    '#serializedName': Cowbell
-    '#name': Cowbell
+    name:
+      fixed: false
+      raw: Cowbell
+name:
+  fixed: false
+  raw: CowbellFactory
 namespace: ''
 modelsName: Models
 apiVersion: 1.0.0
@@ -49,12 +82,29 @@ operations:
           - $id: '6'
             location: body
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: body
+            serializedName:
+              fixed: false
+              raw: body
             modelType:
               $ref: '1'
-            '#name': body
-            '#serializedName': body
+        name:
+          fixed: false
+          raw: Add
+        group:
+          fixed: false
+          raw: Cowbell
+        serializedName:
+          fixed: false
+          raw: Cowbell_Add
         url: /cowbell
         isAbsoluteUrl: false
         httpMethod: post
@@ -71,8 +121,14 @@ operations:
           - application/json
         deprecated: false
         hidden: true
-        '#name': Add
-        '#group': Cowbell
-        '#serializedName': Cowbell_Add
-    '#name': Cowbell
-'#name': CowbellFactory
+    name:
+      fixed: false
+      raw: Cowbell
+    typeName:
+      fixed: false
+    nameForParameter:
+      fixed: false
+    nameForVariable:
+      fixed: false
+    nameForProperty:
+      fixed: false

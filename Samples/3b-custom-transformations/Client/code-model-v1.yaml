@@ -5,68 +5,127 @@ modelTypes:
     properties:
       - $id: '2'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - name
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
         isRequired: true
         isConstant: false
+        name:
+          fixed: false
+          raw: name
+        serializedName:
+          fixed: false
+          raw: name
         modelType:
           $id: '3'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#name': name
-        '#serializedName': name
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
       - $id: '4'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - type
         collectionFormat: none
+        defaultValue:
+          fixed: false
+          raw: Microsoft.Storage/storageAccounts
+        documentation:
+          fixed: false
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: type
+        serializedName:
+          fixed: false
+          raw: type
         modelType:
           $id: '5'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#defaultValue': Microsoft.Storage/storageAccounts
-        '#name': type
-        '#serializedName': type
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
+    serializedName: StorageAccountCheckNameAvailabilityParameters
     containsConstantProperties: false
-    '#serializedName': StorageAccountCheckNameAvailabilityParameters
-    '#name': StorageAccountCheckNameAvailabilityParameters
+    name:
+      fixed: false
+      raw: StorageAccountCheckNameAvailabilityParameters
   - $id: '6'
     $type: CompositeType
     properties:
       - $id: '7'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - nameAvailable
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets a boolean value that indicates whether the name is available
+            for you to use. If true, the name is available. If false, the name
+            has already been taken or invalid and cannot be used.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: nameAvailable
+        serializedName:
+          fixed: false
+          raw: nameAvailable
         modelType:
           $id: '8'
           $type: PrimaryType
           knownPrimaryType: boolean
-          '#name': Boolean
-        '#documentation': >-
-          Gets a boolean value that indicates whether the name is available for
-          you to use. If true, the name is available. If false, the name has
-          already been taken or invalid and cannot be used.
-        '#name': nameAvailable
-        '#serializedName': nameAvailable
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: Boolean
       - $id: '9'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - reason
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the reason that a storage account name could not be used. The
+            Reason element is only returned if NameAvailable is false.
         extensions:
           x-ms-enum:
             name: Reason
             modelAsString: false
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: reason
+        serializedName:
+          fixed: false
+          raw: reason
         modelType:
           $id: '10'
           $type: EnumType
@@ -75,47 +134,75 @@ modelTypes:
               serializedName: AccountNameInvalid
             - name: AlreadyExists
               serializedName: AlreadyExists
+          serializedName:
+            fixed: false
+            raw: Reason
           modelAsString: false
-          '#serializedName': Reason
-          '#name': Reason
-        '#documentation': >-
-          Gets the reason that a storage account name could not be used. The
-          Reason element is only returned if NameAvailable is false.
-        '#name': reason
-        '#serializedName': reason
+          name:
+            fixed: false
+            raw: Reason
       - $id: '11'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - message
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets an error message explaining the Reason value in more detail.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: message
+        serializedName:
+          fixed: false
+          raw: message
         modelType:
           $id: '12'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets an error message explaining the Reason value in more detail.
-        '#name': message
-        '#serializedName': message
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
+    serializedName: CheckNameAvailabilityResult
     documentation: The CheckNameAvailability operation response.
     containsConstantProperties: false
-    '#serializedName': CheckNameAvailabilityResult
-    '#name': CheckNameAvailabilityResult
+    name:
+      fixed: false
+      raw: CheckNameAvailabilityResult
   - $id: '13'
     $type: CompositeType
     properties:
       - $id: '14'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - accountType
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets or sets the account type.
         extensions:
           x-ms-enum:
             name: AccountType
             modelAsString: false
         isRequired: true
         isConstant: false
+        name:
+          fixed: false
+          raw: accountType
+        serializedName:
+          fixed: false
+          raw: accountType
         modelType:
           $id: '15'
           $type: EnumType
@@ -130,40 +217,70 @@ modelTypes:
               serializedName: Standard_RAGRS
             - name: Premium_LRS
               serializedName: Premium_LRS
+          serializedName:
+            fixed: false
+            raw: AccountType
           modelAsString: false
-          '#serializedName': AccountType
-          '#name': AccountType
-        '#documentation': Gets or sets the account type.
-        '#name': accountType
-        '#serializedName': accountType
+          name:
+            fixed: false
+            raw: AccountType
+    serializedName: StorageAccountPropertiesCreateParameters
     containsConstantProperties: false
-    '#serializedName': StorageAccountPropertiesCreateParameters
-    '#name': StorageAccountPropertiesCreateParameters
+    name:
+      fixed: false
+      raw: StorageAccountPropertiesCreateParameters
   - $id: '16'
     $type: CompositeType
     properties:
       - $id: '17'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - location
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Resource location
         isRequired: true
         isConstant: false
+        name:
+          fixed: false
+          raw: location
+        serializedName:
+          fixed: false
+          raw: location
         modelType:
           $id: '18'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Resource location
-        '#name': location
-        '#serializedName': location
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
       - $id: '19'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - tags
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Resource tags
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: tags
+        serializedName:
+          fixed: false
+          raw: tags
         modelType:
           $id: '20'
           $type: DictionaryType
@@ -171,154 +288,272 @@ modelTypes:
             $id: '21'
             $type: PrimaryType
             knownPrimaryType: string
-            '#name': String
+            serializedName:
+              fixed: false
+            name:
+              fixed: false
+              raw: String
           supportsAdditionalProperties: false
-        '#documentation': Resource tags
-        '#name': tags
-        '#serializedName': tags
+          name:
+            fixed: false
       - $id: '22'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - properties
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
         extensions:
           x-ms-client-flatten: true
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: properties
+        serializedName:
+          fixed: false
+          raw: properties
         modelType:
           $ref: '13'
-        '#name': properties
-        '#serializedName': properties
+    serializedName: StorageAccountCreateParameters
     documentation: The parameters to provide for the account.
     containsConstantProperties: false
+    name:
+      fixed: false
+      raw: StorageAccountCreateParameters
     extensions:
       x-ms-azure-resource: true
-    '#serializedName': StorageAccountCreateParameters
-    '#name': StorageAccountCreateParameters
   - $id: '23'
     $type: CompositeType
     properties:
       - $id: '24'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - blob
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the blob endpoint.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: blob
+        serializedName:
+          fixed: false
+          raw: blob
         modelType:
           $id: '25'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets the blob endpoint.
-        '#name': blob
-        '#serializedName': blob
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
       - $id: '26'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - queue
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the queue endpoint.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: queue
+        serializedName:
+          fixed: false
+          raw: queue
         modelType:
           $id: '27'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets the queue endpoint.
-        '#name': queue
-        '#serializedName': queue
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
       - $id: '28'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - table
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the table endpoint.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: table
+        serializedName:
+          fixed: false
+          raw: table
         modelType:
           $id: '29'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets the table endpoint.
-        '#name': table
-        '#serializedName': table
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
       - $id: '30'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - file
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the file endpoint.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: file
+        serializedName:
+          fixed: false
+          raw: file
         modelType:
           $id: '31'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets the file endpoint.
-        '#name': file
-        '#serializedName': file
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
+    serializedName: Endpoints
     documentation: >-
       The URIs that are used to perform a retrieval of a public blob, queue or
       table object.
     containsConstantProperties: false
-    '#serializedName': Endpoints
-    '#name': Endpoints
+    name:
+      fixed: false
+      raw: Endpoints
   - $id: '32'
     $type: CompositeType
     properties:
       - $id: '33'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - name
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets or sets the custom domain name. Name is the CNAME source.
         isRequired: true
         isConstant: false
+        name:
+          fixed: false
+          raw: name
+        serializedName:
+          fixed: false
+          raw: name
         modelType:
           $id: '34'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets or sets the custom domain name. Name is the CNAME source.
-        '#name': name
-        '#serializedName': name
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
       - $id: '35'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - useSubDomain
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Indicates whether indirect CName validation is enabled. Default
+            value is false. This should only be set on updates
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: useSubDomain
+        serializedName:
+          fixed: false
+          raw: useSubDomain
         modelType:
           $id: '36'
           $type: PrimaryType
           knownPrimaryType: boolean
-          '#name': Boolean
-        '#documentation': >-
-          Indicates whether indirect CName validation is enabled. Default value
-          is false. This should only be set on updates
-        '#name': useSubDomain
-        '#serializedName': useSubDomain
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: Boolean
+    serializedName: CustomDomain
     documentation: >-
       The custom domain assigned to this storage account. This can be set via
       Update.
     containsConstantProperties: false
-    '#serializedName': CustomDomain
-    '#name': CustomDomain
+    name:
+      fixed: false
+      raw: CustomDomain
   - $id: '37'
     $type: CompositeType
     properties:
       - $id: '38'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - provisioningState
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the status of the storage account at the time the operation was
+            called.
         extensions:
           x-ms-enum:
             name: ProvisioningState
             modelAsString: false
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: provisioningState
+        serializedName:
+          fixed: false
+          raw: provisioningState
         modelType:
           $id: '39'
           $type: EnumType
@@ -329,71 +564,119 @@ modelTypes:
               serializedName: ResolvingDNS
             - name: Succeeded
               serializedName: Succeeded
+          serializedName:
+            fixed: false
+            raw: ProvisioningState
           modelAsString: false
-          '#serializedName': ProvisioningState
-          '#name': ProvisioningState
-        '#documentation': >-
-          Gets the status of the storage account at the time the operation was
-          called.
-        '#name': provisioningState
-        '#serializedName': provisioningState
+          name:
+            fixed: false
+            raw: ProvisioningState
       - $id: '40'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - accountType
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the type of the storage account.
         extensions:
           x-ms-enum:
             name: AccountType
             modelAsString: false
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: accountType
+        serializedName:
+          fixed: false
+          raw: accountType
         modelType:
           $ref: '15'
-        '#documentation': Gets the type of the storage account.
-        '#name': accountType
-        '#serializedName': accountType
       - $id: '41'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - primaryEndpoints
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the URLs that are used to perform a retrieval of a public blob,
+            queue or table object.Note that StandardZRS and PremiumLRS accounts
+            only return the blob endpoint.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: primaryEndpoints
+        serializedName:
+          fixed: false
+          raw: primaryEndpoints
         modelType:
           $ref: '23'
-        '#documentation': >-
-          Gets the URLs that are used to perform a retrieval of a public blob,
-          queue or table object.Note that StandardZRS and PremiumLRS accounts
-          only return the blob endpoint.
-        '#name': primaryEndpoints
-        '#serializedName': primaryEndpoints
       - $id: '42'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - primaryLocation
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the location of the primary for the storage account.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: primaryLocation
+        serializedName:
+          fixed: false
+          raw: primaryLocation
         modelType:
           $id: '43'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets the location of the primary for the storage account.
-        '#name': primaryLocation
-        '#serializedName': primaryLocation
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
       - $id: '44'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - statusOfPrimary
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the status indicating whether the primary location of the
+            storage account is available or unavailable.
         extensions:
           x-ms-enum:
             name: AccountStatus
             modelAsString: false
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: statusOfPrimary
+        serializedName:
+          fixed: false
+          raw: statusOfPrimary
         modelType:
           $id: '45'
           $type: EnumType
@@ -402,204 +685,359 @@ modelTypes:
               serializedName: Available
             - name: Unavailable
               serializedName: Unavailable
+          serializedName:
+            fixed: false
+            raw: AccountStatus
           modelAsString: false
-          '#serializedName': AccountStatus
-          '#name': AccountStatus
-        '#documentation': >-
-          Gets the status indicating whether the primary location of the storage
-          account is available or unavailable.
-        '#name': statusOfPrimary
-        '#serializedName': statusOfPrimary
+          name:
+            fixed: false
+            raw: AccountStatus
       - $id: '46'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - lastGeoFailoverTime
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the timestamp of the most recent instance of a failover to the
+            secondary location. Only the most recent timestamp is retained. This
+            element is not returned if there has never been a failover instance.
+            Only available if the accountType is StandardGRS or StandardRAGRS.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: lastGeoFailoverTime
+        serializedName:
+          fixed: false
+          raw: lastGeoFailoverTime
         modelType:
           $id: '47'
           $type: PrimaryType
           format: date-time
           knownPrimaryType: dateTime
-          '#name': DateTime
-        '#documentation': >-
-          Gets the timestamp of the most recent instance of a failover to the
-          secondary location. Only the most recent timestamp is retained. This
-          element is not returned if there has never been a failover instance.
-          Only available if the accountType is StandardGRS or StandardRAGRS.
-        '#name': lastGeoFailoverTime
-        '#serializedName': lastGeoFailoverTime
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: DateTime
       - $id: '48'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - secondaryLocation
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the location of the geo replicated secondary for the storage
+            account. Only available if the accountType is StandardGRS or
+            StandardRAGRS.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: secondaryLocation
+        serializedName:
+          fixed: false
+          raw: secondaryLocation
         modelType:
           $id: '49'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': >-
-          Gets the location of the geo replicated secondary for the storage
-          account. Only available if the accountType is StandardGRS or
-          StandardRAGRS.
-        '#name': secondaryLocation
-        '#serializedName': secondaryLocation
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
       - $id: '50'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - statusOfSecondary
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the status indicating whether the secondary location of the
+            storage account is available or unavailable. Only available if the
+            accountType is StandardGRS or StandardRAGRS.
         extensions:
           x-ms-enum:
             name: AccountStatus
             modelAsString: false
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: statusOfSecondary
+        serializedName:
+          fixed: false
+          raw: statusOfSecondary
         modelType:
           $ref: '45'
-        '#documentation': >-
-          Gets the status indicating whether the secondary location of the
-          storage account is available or unavailable. Only available if the
-          accountType is StandardGRS or StandardRAGRS.
-        '#name': statusOfSecondary
-        '#serializedName': statusOfSecondary
       - $id: '51'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - creationTime
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the creation date and time of the storage account in UTC.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: creationTime
+        serializedName:
+          fixed: false
+          raw: creationTime
         modelType:
           $id: '52'
           $type: PrimaryType
           format: date-time
           knownPrimaryType: dateTime
-          '#name': DateTime
-        '#documentation': Gets the creation date and time of the storage account in UTC.
-        '#name': creationTime
-        '#serializedName': creationTime
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: DateTime
       - $id: '53'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - customDomain
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the user assigned custom domain assigned to this storage
+            account.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: customDomain
+        serializedName:
+          fixed: false
+          raw: customDomain
         modelType:
           $ref: '32'
-        '#documentation': Gets the user assigned custom domain assigned to this storage account.
-        '#name': customDomain
-        '#serializedName': customDomain
       - $id: '54'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - secondaryEndpoints
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the URLs that are used to perform a retrieval of a public blob,
+            queue or table object from the secondary location of the storage
+            account. Only available if the accountType is StandardRAGRS.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: secondaryEndpoints
+        serializedName:
+          fixed: false
+          raw: secondaryEndpoints
         modelType:
           $ref: '23'
-        '#documentation': >-
-          Gets the URLs that are used to perform a retrieval of a public blob,
-          queue or table object from the secondary location of the storage
-          account. Only available if the accountType is StandardRAGRS.
-        '#name': secondaryEndpoints
-        '#serializedName': secondaryEndpoints
+    serializedName: StorageAccountProperties
     containsConstantProperties: false
-    '#serializedName': StorageAccountProperties
-    '#name': StorageAccountProperties
+    name:
+      fixed: false
+      raw: StorageAccountProperties
   - $id: '55'
     $type: CompositeType
     properties:
       - $id: '56'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - properties
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
         extensions:
           x-ms-client-flatten: true
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: properties
+        serializedName:
+          fixed: false
+          raw: properties
         modelType:
           $ref: '37'
-        '#name': properties
-        '#serializedName': properties
+    serializedName: StorageAccount
     baseModelType:
       $id: '57'
       $type: CompositeType
       properties:
         - $id: '58'
           isReadOnly: true
+          summary:
+            fixed: false
           realPath:
             - id
           collectionFormat: none
+          defaultValue:
+            fixed: false
+          documentation:
+            fixed: false
+            raw: Resource Id
           isRequired: false
           isConstant: false
+          name:
+            fixed: false
+            raw: id
+          serializedName:
+            fixed: false
+            raw: id
           modelType:
             $id: '59'
             $type: PrimaryType
             knownPrimaryType: string
-            '#name': String
-          '#documentation': Resource Id
-          '#name': id
-          '#serializedName': id
+            serializedName:
+              fixed: false
+            name:
+              fixed: false
+              raw: String
         - $id: '60'
           isReadOnly: true
+          summary:
+            fixed: false
           realPath:
             - name
           collectionFormat: none
+          defaultValue:
+            fixed: false
+          documentation:
+            fixed: false
+            raw: Resource name
           isRequired: false
           isConstant: false
+          name:
+            fixed: false
+            raw: name
+          serializedName:
+            fixed: false
+            raw: name
           modelType:
             $id: '61'
             $type: PrimaryType
             knownPrimaryType: string
-            '#name': String
-          '#documentation': Resource name
-          '#name': name
-          '#serializedName': name
+            serializedName:
+              fixed: false
+            name:
+              fixed: false
+              raw: String
         - $id: '62'
           isReadOnly: true
+          summary:
+            fixed: false
           realPath:
             - type
           collectionFormat: none
+          defaultValue:
+            fixed: false
+          documentation:
+            fixed: false
+            raw: Resource type
           isRequired: false
           isConstant: false
+          name:
+            fixed: false
+            raw: type
+          serializedName:
+            fixed: false
+            raw: type
           modelType:
             $id: '63'
             $type: PrimaryType
             knownPrimaryType: string
-            '#name': String
-          '#documentation': Resource type
-          '#name': type
-          '#serializedName': type
+            serializedName:
+              fixed: false
+            name:
+              fixed: false
+              raw: String
         - $id: '64'
           isReadOnly: false
+          summary:
+            fixed: false
           realPath:
             - location
           collectionFormat: none
+          defaultValue:
+            fixed: false
+          documentation:
+            fixed: false
+            raw: Resource location
           isRequired: false
           isConstant: false
+          name:
+            fixed: false
+            raw: location
+          serializedName:
+            fixed: false
+            raw: location
           modelType:
             $id: '65'
             $type: PrimaryType
             knownPrimaryType: string
-            '#name': String
-          '#documentation': Resource location
-          '#name': location
-          '#serializedName': location
+            serializedName:
+              fixed: false
+            name:
+              fixed: false
+              raw: String
         - $id: '66'
           isReadOnly: false
+          summary:
+            fixed: false
           realPath:
             - tags
           collectionFormat: none
+          defaultValue:
+            fixed: false
+          documentation:
+            fixed: false
+            raw: Resource tags
           isRequired: false
           isConstant: false
+          name:
+            fixed: false
+            raw: tags
+          serializedName:
+            fixed: false
+            raw: tags
           modelType:
             $id: '67'
             $type: DictionaryType
@@ -607,130 +1045,215 @@ modelTypes:
               $id: '68'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
             supportsAdditionalProperties: false
-          '#documentation': Resource tags
-          '#name': tags
-          '#serializedName': tags
+            name:
+              fixed: false
+      serializedName: Resource
       containsConstantProperties: false
+      name:
+        fixed: false
+        raw: Resource
       extensions:
         x-ms-azure-resource: true
-      '#serializedName': Resource
-      '#name': Resource
     documentation: The storage account.
     containsConstantProperties: false
-    '#serializedName': StorageAccount
-    '#name': StorageAccount
+    name:
+      fixed: false
+      raw: StorageAccount
   - $id: '69'
     $type: CompositeType
     properties:
       - $id: '70'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - key1
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the value of key 1.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: key1
+        serializedName:
+          fixed: false
+          raw: key1
         modelType:
           $id: '71'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets the value of key 1.
-        '#name': key1
-        '#serializedName': key1
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
       - $id: '72'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - key2
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the value of key 2.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: key2
+        serializedName:
+          fixed: false
+          raw: key2
         modelType:
           $id: '73'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets the value of key 2.
-        '#name': key2
-        '#serializedName': key2
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
+    serializedName: StorageAccountKeys
     documentation: The access keys for the storage account.
     containsConstantProperties: false
-    '#serializedName': StorageAccountKeys
-    '#name': StorageAccountKeys
+    name:
+      fixed: false
+      raw: StorageAccountKeys
   - $id: '74'
     $type: CompositeType
     properties:
       - $id: '75'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - value
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the list of storage accounts and their properties.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: value
+        serializedName:
+          fixed: false
+          raw: value
         modelType:
           $id: '76'
           $type: SequenceType
           elementType:
             $ref: '55'
-        '#documentation': Gets the list of storage accounts and their properties.
-        '#name': value
-        '#serializedName': value
+          name:
+            fixed: false
+    serializedName: StorageAccountListResult
     documentation: The list storage accounts operation response.
     containsConstantProperties: false
-    '#serializedName': StorageAccountListResult
-    '#name': StorageAccountListResult
+    name:
+      fixed: false
+      raw: StorageAccountListResult
   - $id: '77'
     $type: CompositeType
     properties:
       - $id: '78'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - accountType
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets or sets the account type. Note that StandardZRS and PremiumLRS
+            accounts cannot be changed to other account types, and other account
+            types cannot be changed to StandardZRS or PremiumLRS.
         extensions:
           x-ms-enum:
             name: AccountType
             modelAsString: false
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: accountType
+        serializedName:
+          fixed: false
+          raw: accountType
         modelType:
           $ref: '15'
-        '#documentation': >-
-          Gets or sets the account type. Note that StandardZRS and PremiumLRS
-          accounts cannot be changed to other account types, and other account
-          types cannot be changed to StandardZRS or PremiumLRS.
-        '#name': accountType
-        '#serializedName': accountType
       - $id: '79'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - customDomain
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            User domain assigned to the storage account. Name is the CNAME
+            source. Only one custom domain is supported per storage account at
+            this time. To clear the existing custom domain, use an empty string
+            for the custom domain name property.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: customDomain
+        serializedName:
+          fixed: false
+          raw: customDomain
         modelType:
           $ref: '32'
-        '#documentation': >-
-          User domain assigned to the storage account. Name is the CNAME source.
-          Only one custom domain is supported per storage account at this time.
-          To clear the existing custom domain, use an empty string for the
-          custom domain name property.
-        '#name': customDomain
-        '#serializedName': customDomain
+    serializedName: StorageAccountPropertiesUpdateParameters
     containsConstantProperties: false
-    '#serializedName': StorageAccountPropertiesUpdateParameters
-    '#name': StorageAccountPropertiesUpdateParameters
+    name:
+      fixed: false
+      raw: StorageAccountPropertiesUpdateParameters
   - $id: '80'
     $type: CompositeType
     properties:
       - $id: '81'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - tags
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Resource tags
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: tags
+        serializedName:
+          fixed: false
+          raw: tags
         modelType:
           $id: '82'
           $type: DictionaryType
@@ -738,101 +1261,175 @@ modelTypes:
             $id: '83'
             $type: PrimaryType
             knownPrimaryType: string
-            '#name': String
+            serializedName:
+              fixed: false
+            name:
+              fixed: false
+              raw: String
           supportsAdditionalProperties: false
-        '#documentation': Resource tags
-        '#name': tags
-        '#serializedName': tags
+          name:
+            fixed: false
       - $id: '84'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - properties
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
         extensions:
           x-ms-client-flatten: true
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: properties
+        serializedName:
+          fixed: false
+          raw: properties
         modelType:
           $ref: '77'
-        '#name': properties
-        '#serializedName': properties
+    serializedName: StorageAccountUpdateParameters
     documentation: The parameters to update on the account.
     containsConstantProperties: false
+    name:
+      fixed: false
+      raw: StorageAccountUpdateParameters
     extensions:
       x-ms-azure-resource: true
-    '#serializedName': StorageAccountUpdateParameters
-    '#name': StorageAccountUpdateParameters
   - $id: '85'
     $type: CompositeType
     properties:
       - $id: '86'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - keyName
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
         isRequired: true
         isConstant: false
+        name:
+          fixed: false
+          raw: keyName
+        serializedName:
+          fixed: false
+          raw: keyName
         modelType:
           $id: '87'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#name': keyName
-        '#serializedName': keyName
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
+    serializedName: StorageAccountRegenerateKeyParameters
     containsConstantProperties: false
-    '#serializedName': StorageAccountRegenerateKeyParameters
-    '#name': StorageAccountRegenerateKeyParameters
+    name:
+      fixed: false
+      raw: StorageAccountRegenerateKeyParameters
   - $id: '88'
     $type: CompositeType
     properties:
       - $id: '89'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - value
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets a string describing the resource name.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: value
+        serializedName:
+          fixed: false
+          raw: value
         modelType:
           $id: '90'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets a string describing the resource name.
-        '#name': value
-        '#serializedName': value
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
       - $id: '91'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - localizedValue
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets a localized string describing the resource name.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: localizedValue
+        serializedName:
+          fixed: false
+          raw: localizedValue
         modelType:
           $id: '92'
           $type: PrimaryType
           knownPrimaryType: string
-          '#name': String
-        '#documentation': Gets a localized string describing the resource name.
-        '#name': localizedValue
-        '#serializedName': localizedValue
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: String
+    serializedName: UsageName
     documentation: The Usage Names.
     containsConstantProperties: false
-    '#serializedName': UsageName
-    '#name': UsageName
+    name:
+      fixed: false
+      raw: UsageName
   - $id: '93'
     $type: CompositeType
     properties:
       - $id: '94'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - unit
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the unit of measurement.
         extensions:
           x-ms-enum:
             name: UsageUnit
             modelAsString: false
         isRequired: true
         isConstant: false
+        name:
+          fixed: false
+          raw: unit
+        serializedName:
+          fixed: false
+          raw: unit
         modelType:
           $id: '95'
           $type: EnumType
@@ -849,84 +1446,141 @@ modelTypes:
               serializedName: CountsPerSecond
             - name: BytesPerSecond
               serializedName: BytesPerSecond
+          serializedName:
+            fixed: false
+            raw: UsageUnit
           modelAsString: false
-          '#serializedName': UsageUnit
-          '#name': UsageUnit
-        '#documentation': Gets the unit of measurement.
-        '#name': unit
-        '#serializedName': unit
+          name:
+            fixed: false
+            raw: UsageUnit
       - $id: '96'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - currentValue
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the current count of the allocated resources in the
+            subscription.
         isRequired: true
         isConstant: false
+        name:
+          fixed: false
+          raw: currentValue
+        serializedName:
+          fixed: false
+          raw: currentValue
         modelType:
           $id: '97'
           $type: PrimaryType
           format: int32
           knownPrimaryType: int
-          '#name': Int
-        '#documentation': Gets the current count of the allocated resources in the subscription.
-        '#name': currentValue
-        '#serializedName': currentValue
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: Int
       - $id: '98'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - limit
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: >-
+            Gets the maximum count of the resources that can be allocated in the
+            subscription.
         isRequired: true
         isConstant: false
+        name:
+          fixed: false
+          raw: limit
+        serializedName:
+          fixed: false
+          raw: limit
         modelType:
           $id: '99'
           $type: PrimaryType
           format: int32
           knownPrimaryType: int
-          '#name': Int
-        '#documentation': >-
-          Gets the maximum count of the resources that can be allocated in the
-          subscription.
-        '#name': limit
-        '#serializedName': limit
+          serializedName:
+            fixed: false
+          name:
+            fixed: false
+            raw: Int
       - $id: '100'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - name
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets the name of the type of usage.
         isRequired: true
         isConstant: false
+        name:
+          fixed: false
+          raw: name
+        serializedName:
+          fixed: false
+          raw: name
         modelType:
           $ref: '88'
-        '#documentation': Gets the name of the type of usage.
-        '#name': name
-        '#serializedName': name
+    serializedName: Usage
     documentation: DESCRIBES STORAGE RESOURCE USAGE.
     containsConstantProperties: false
-    '#serializedName': Usage
-    '#name': Usage
+    name:
+      fixed: false
+      raw: Usage
   - $id: '101'
     $type: CompositeType
     properties:
       - $id: '102'
         isReadOnly: false
+        summary:
+          fixed: false
         realPath:
           - value
         collectionFormat: none
+        defaultValue:
+          fixed: false
+        documentation:
+          fixed: false
+          raw: Gets or sets the list Storage Resource Usages.
         isRequired: false
         isConstant: false
+        name:
+          fixed: false
+          raw: value
+        serializedName:
+          fixed: false
+          raw: value
         modelType:
           $id: '103'
           $type: SequenceType
           elementType:
             $ref: '93'
-        '#documentation': Gets or sets the list Storage Resource Usages.
-        '#name': value
-        '#serializedName': value
+          name:
+            fixed: false
+    serializedName: UsageListResult
     documentation: The List Usages operation response.
     containsConstantProperties: false
-    '#serializedName': UsageListResult
-    '#name': UsageListResult
+    name:
+      fixed: false
+      raw: UsageListResult
   - $ref: '57'
 enumTypes:
   - $ref: '10'
@@ -934,6 +1588,9 @@ enumTypes:
   - $ref: '39'
   - $ref: '45'
   - $ref: '95'
+name:
+  fixed: false
+  raw: StorageManagementClient
 namespace: ''
 modelsName: Models
 apiVersion: '2015-06-15'
@@ -942,86 +1599,155 @@ documentation: The Storage Management Client.
 properties:
   - $id: '104'
     isReadOnly: false
+    summary:
+      fixed: false
     realPath:
       - subscriptionId
     collectionFormat: none
+    defaultValue:
+      fixed: false
+    documentation:
+      fixed: false
+      raw: >-
+        Gets subscription credentials which uniquely identify Microsoft Azure
+        subscription. The subscription ID forms part of the URI for every
+        service call.
     isRequired: true
     isConstant: false
+    name:
+      fixed: false
+      raw: subscriptionId
+    serializedName:
+      fixed: false
+      raw: subscriptionId
     modelType:
       $id: '105'
       $type: PrimaryType
       knownPrimaryType: string
-      '#name': String
-    '#documentation': >-
-      Gets subscription credentials which uniquely identify Microsoft Azure
-      subscription. The subscription ID forms part of the URI for every service
-      call.
-    '#name': subscriptionId
-    '#serializedName': subscriptionId
+      serializedName:
+        fixed: false
+      name:
+        fixed: false
+        raw: String
   - $id: '106'
     isReadOnly: false
+    summary:
+      fixed: false
     realPath:
       - api-version
     collectionFormat: none
+    defaultValue:
+      fixed: false
+    documentation:
+      fixed: false
+      raw: Client Api Version.
     isRequired: true
     isConstant: false
+    name:
+      fixed: false
+      raw: api-version
+    serializedName:
+      fixed: false
+      raw: api-version
     modelType:
       $id: '107'
       $type: PrimaryType
       knownPrimaryType: string
-      '#name': String
-    '#documentation': Client Api Version.
-    '#name': api-version
-    '#serializedName': api-version
+      serializedName:
+        fixed: false
+      name:
+        fixed: false
+        raw: String
 operations:
   - methods:
       - parameters:
           - $id: '108'
             location: body
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                The name of the storage account within the specified resource
+                group. Storage account names must be between 3 and 24 characters
+                in length and use numbers and lower-case letters only.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: accountName
+            serializedName:
+              fixed: false
+              raw: accountName
             modelType:
               $ref: '1'
-            '#documentation': >-
-              The name of the storage account within the specified resource
-              group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.
-            '#name': accountName
-            '#serializedName': accountName
           - $id: '109'
             clientProperty:
               $ref: '106'
             location: query
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: Client Api Version.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: api-version
+            serializedName:
+              fixed: false
+              raw: api-version
             modelType:
               $id: '110'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '111'
             clientProperty:
               $ref: '104'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Gets subscription credentials which uniquely identify Microsoft
+                Azure subscription. The subscription ID forms part of the URI
+                for every service call.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: subscriptionId
+            serializedName:
+              fixed: false
+              raw: subscriptionId
             modelType:
               $id: '112'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
+        name:
+          fixed: false
+          raw: CheckNameAvailability
+        group:
+          fixed: false
+          raw: StorageAccounts
+        serializedName:
+          fixed: false
+          raw: StorageAccounts_CheckNameAvailability
         url: >-
           /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
         isAbsoluteUrl: false
@@ -1046,85 +1772,147 @@ operations:
           - text/json
         deprecated: false
         hidden: false
-        '#name': CheckNameAvailability
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_CheckNameAvailability
       - parameters:
           - $id: '113'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: The name of the resource group within the user's subscription.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: resourceGroupName
+            serializedName:
+              fixed: false
+              raw: resourceGroupName
             modelType:
               $id: '114'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '115'
             location: path
             collectionFormat: none
             constraints:
               MaxLength: '24'
               MinLength: '3'
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                The name of the storage account within the specified resource
+                group. Storage account names must be between 3 and 24 characters
+                in length and use numbers and lower-case letters only.  
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: accountName
+            serializedName:
+              fixed: false
+              raw: accountName
             modelType:
               $id: '116'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              The name of the storage account within the specified resource
-              group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.  
-            '#name': accountName
-            '#serializedName': accountName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '117'
             location: body
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: The parameters to provide for the created account.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: parameters
+            serializedName:
+              fixed: false
+              raw: parameters
             modelType:
               $ref: '16'
-            '#documentation': The parameters to provide for the created account.
-            '#name': parameters
-            '#serializedName': parameters
           - $id: '118'
             clientProperty:
               $ref: '106'
             location: query
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: Client Api Version.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: api-version
+            serializedName:
+              fixed: false
+              raw: api-version
             modelType:
               $id: '119'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '120'
             clientProperty:
               $ref: '104'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Gets subscription credentials which uniquely identify Microsoft
+                Azure subscription. The subscription ID forms part of the URI
+                for every service call.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: subscriptionId
+            serializedName:
+              fixed: false
+              raw: subscriptionId
             modelType:
               $id: '121'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
+        name:
+          fixed: false
+          raw: Create
+        group:
+          fixed: false
+          raw: StorageAccounts
+        serializedName:
+          fixed: false
+          raw: StorageAccounts_Create
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
@@ -1157,75 +1945,129 @@ operations:
           x-ms-long-running-operation: true
         deprecated: false
         hidden: false
-        '#name': Create
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_Create
       - parameters:
           - $id: '122'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: The name of the resource group within the user's subscription.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: resourceGroupName
+            serializedName:
+              fixed: false
+              raw: resourceGroupName
             modelType:
               $id: '123'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '124'
             location: path
             collectionFormat: none
             constraints:
               MaxLength: '24'
               MinLength: '3'
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                The name of the storage account within the specified resource
+                group. Storage account names must be between 3 and 24 characters
+                in length and use numbers and lower-case letters only.  
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: accountName
+            serializedName:
+              fixed: false
+              raw: accountName
             modelType:
               $id: '125'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              The name of the storage account within the specified resource
-              group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.  
-            '#name': accountName
-            '#serializedName': accountName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '126'
             clientProperty:
               $ref: '106'
             location: query
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: Client Api Version.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: api-version
+            serializedName:
+              fixed: false
+              raw: api-version
             modelType:
               $id: '127'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '128'
             clientProperty:
               $ref: '104'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Gets subscription credentials which uniquely identify Microsoft
+                Azure subscription. The subscription ID forms part of the URI
+                for every service call.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: subscriptionId
+            serializedName:
+              fixed: false
+              raw: subscriptionId
             modelType:
               $id: '129'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
+        name:
+          fixed: false
+          raw: Delete
+        group:
+          fixed: false
+          raw: StorageAccounts
+        serializedName:
+          fixed: false
+          raw: StorageAccounts_Delete
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
@@ -1246,75 +2088,129 @@ operations:
           - text/json
         deprecated: false
         hidden: false
-        '#name': Delete
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_Delete
       - parameters:
           - $id: '130'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: The name of the resource group within the user's subscription.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: resourceGroupName
+            serializedName:
+              fixed: false
+              raw: resourceGroupName
             modelType:
               $id: '131'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '132'
             location: path
             collectionFormat: none
             constraints:
               MaxLength: '24'
               MinLength: '3'
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                The name of the storage account within the specified resource
+                group. Storage account names must be between 3 and 24 characters
+                in length and use numbers and lower-case letters only.  
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: accountName
+            serializedName:
+              fixed: false
+              raw: accountName
             modelType:
               $id: '133'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              The name of the storage account within the specified resource
-              group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.  
-            '#name': accountName
-            '#serializedName': accountName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '134'
             clientProperty:
               $ref: '106'
             location: query
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: Client Api Version.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: api-version
+            serializedName:
+              fixed: false
+              raw: api-version
             modelType:
               $id: '135'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '136'
             clientProperty:
               $ref: '104'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Gets subscription credentials which uniquely identify Microsoft
+                Azure subscription. The subscription ID forms part of the URI
+                for every service call.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: subscriptionId
+            serializedName:
+              fixed: false
+              raw: subscriptionId
             modelType:
               $id: '137'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
+        name:
+          fixed: false
+          raw: GetProperty
+        group:
+          fixed: false
+          raw: StorageAccounts
+        serializedName:
+          fixed: false
+          raw: StorageAccounts_GetProperty
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
@@ -1340,87 +2236,149 @@ operations:
           - text/json
         deprecated: false
         hidden: false
-        '#name': GetProperty
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_GetProperty
       - parameters:
           - $id: '138'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: The name of the resource group within the user's subscription.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: resourceGroupName
+            serializedName:
+              fixed: false
+              raw: resourceGroupName
             modelType:
               $id: '139'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '140'
             location: path
             collectionFormat: none
             constraints:
               MaxLength: '24'
               MinLength: '3'
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                The name of the storage account within the specified resource
+                group. Storage account names must be between 3 and 24 characters
+                in length and use numbers and lower-case letters only.  
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: accountName
+            serializedName:
+              fixed: false
+              raw: accountName
             modelType:
               $id: '141'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              The name of the storage account within the specified resource
-              group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.  
-            '#name': accountName
-            '#serializedName': accountName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '142'
             location: body
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                The parameters to update on the account. Note that only one
+                property can be changed at a time using this API. 
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: parameters
+            serializedName:
+              fixed: false
+              raw: parameters
             modelType:
               $ref: '80'
-            '#documentation': >-
-              The parameters to update on the account. Note that only one
-              property can be changed at a time using this API. 
-            '#name': parameters
-            '#serializedName': parameters
           - $id: '143'
             clientProperty:
               $ref: '106'
             location: query
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: Client Api Version.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: api-version
+            serializedName:
+              fixed: false
+              raw: api-version
             modelType:
               $id: '144'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '145'
             clientProperty:
               $ref: '104'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Gets subscription credentials which uniquely identify Microsoft
+                Azure subscription. The subscription ID forms part of the URI
+                for every service call.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: subscriptionId
+            serializedName:
+              fixed: false
+              raw: subscriptionId
             modelType:
               $id: '146'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
+        name:
+          fixed: false
+          raw: Update
+        group:
+          fixed: false
+          raw: StorageAccounts
+        serializedName:
+          fixed: false
+          raw: StorageAccounts_Update
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
@@ -1456,72 +2414,126 @@ operations:
           - text/json
         deprecated: false
         hidden: false
-        '#name': Update
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_Update
       - parameters:
           - $id: '147'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: The name of the resource group.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: resourceGroupName
+            serializedName:
+              fixed: false
+              raw: resourceGroupName
             modelType:
               $id: '148'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': The name of the resource group.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '149'
             location: path
             collectionFormat: none
             constraints:
               MaxLength: '24'
               MinLength: '3'
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: The name of the storage account.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: accountName
+            serializedName:
+              fixed: false
+              raw: accountName
             modelType:
               $id: '150'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': The name of the storage account.
-            '#name': accountName
-            '#serializedName': accountName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '151'
             clientProperty:
               $ref: '106'
             location: query
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: Client Api Version.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: api-version
+            serializedName:
+              fixed: false
+              raw: api-version
             modelType:
               $id: '152'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '153'
             clientProperty:
               $ref: '104'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Gets subscription credentials which uniquely identify Microsoft
+                Azure subscription. The subscription ID forms part of the URI
+                for every service call.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: subscriptionId
+            serializedName:
+              fixed: false
+              raw: subscriptionId
             modelType:
               $id: '154'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
+        name:
+          fixed: false
+          raw: ListKeys
+        group:
+          fixed: false
+          raw: StorageAccounts
+        serializedName:
+          fixed: false
+          raw: StorageAccounts_ListKeys
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
         isAbsoluteUrl: false
@@ -1544,43 +2556,73 @@ operations:
           - text/json
         deprecated: false
         hidden: false
-        '#name': ListKeys
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_ListKeys
       - parameters:
           - $id: '155'
             clientProperty:
               $ref: '106'
             location: query
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: Client Api Version.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: api-version
+            serializedName:
+              fixed: false
+              raw: api-version
             modelType:
               $id: '156'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '157'
             clientProperty:
               $ref: '104'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Gets subscription credentials which uniquely identify Microsoft
+                Azure subscription. The subscription ID forms part of the URI
+                for every service call.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: subscriptionId
+            serializedName:
+              fixed: false
+              raw: subscriptionId
             modelType:
               $id: '158'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
+        name:
+          fixed: false
+          raw: List
+        group:
+          fixed: false
+          raw: StorageAccounts
+        serializedName:
+          fixed: false
+          raw: StorageAccounts_List
         url: >-
           /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
         isAbsoluteUrl: false
@@ -1609,56 +2651,98 @@ operations:
             nextLinkName: null
         deprecated: false
         hidden: false
-        '#name': List
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_List
       - parameters:
           - $id: '159'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: The name of the resource group within the user's subscription.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: resourceGroupName
+            serializedName:
+              fixed: false
+              raw: resourceGroupName
             modelType:
               $id: '160'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '161'
             clientProperty:
               $ref: '106'
             location: query
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: Client Api Version.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: api-version
+            serializedName:
+              fixed: false
+              raw: api-version
             modelType:
               $id: '162'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '163'
             clientProperty:
               $ref: '104'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Gets subscription credentials which uniquely identify Microsoft
+                Azure subscription. The subscription ID forms part of the URI
+                for every service call.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: subscriptionId
+            serializedName:
+              fixed: false
+              raw: subscriptionId
             modelType:
               $id: '164'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
+        name:
+          fixed: false
+          raw: ListByResourceGroup
+        group:
+          fixed: false
+          raw: StorageAccounts
+        serializedName:
+          fixed: false
+          raw: StorageAccounts_ListByResourceGroup
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts
         isAbsoluteUrl: false
@@ -1687,87 +2771,149 @@ operations:
             nextLinkName: null
         deprecated: false
         hidden: false
-        '#name': ListByResourceGroup
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_ListByResourceGroup
       - parameters:
           - $id: '165'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: The name of the resource group within the user's subscription.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: resourceGroupName
+            serializedName:
+              fixed: false
+              raw: resourceGroupName
             modelType:
               $id: '166'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': The name of the resource group within the user's subscription.
-            '#name': resourceGroupName
-            '#serializedName': resourceGroupName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '167'
             location: path
             collectionFormat: none
             constraints:
               MaxLength: '24'
               MinLength: '3'
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                The name of the storage account within the specified resource
+                group. Storage account names must be between 3 and 24 characters
+                in length and use numbers and lower-case letters only.  
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: accountName
+            serializedName:
+              fixed: false
+              raw: accountName
             modelType:
               $id: '168'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              The name of the storage account within the specified resource
-              group. Storage account names must be between 3 and 24 characters
-              in length and use numbers and lower-case letters only.  
-            '#name': accountName
-            '#serializedName': accountName
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '169'
             location: body
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Specifies name of the key which should be regenerated. key1 or
+                key2 for the default keys
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: regenerateKey
+            serializedName:
+              fixed: false
+              raw: regenerateKey
             modelType:
               $ref: '85'
-            '#documentation': >-
-              Specifies name of the key which should be regenerated. key1 or
-              key2 for the default keys
-            '#name': regenerateKey
-            '#serializedName': regenerateKey
           - $id: '170'
             clientProperty:
               $ref: '106'
             location: query
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: Client Api Version.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: api-version
+            serializedName:
+              fixed: false
+              raw: api-version
             modelType:
               $id: '171'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '172'
             clientProperty:
               $ref: '104'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Gets subscription credentials which uniquely identify Microsoft
+                Azure subscription. The subscription ID forms part of the URI
+                for every service call.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: subscriptionId
+            serializedName:
+              fixed: false
+              raw: subscriptionId
             modelType:
               $id: '173'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
+        name:
+          fixed: false
+          raw: RegenerateKey
+        group:
+          fixed: false
+          raw: StorageAccounts
+        serializedName:
+          fixed: false
+          raw: StorageAccounts_RegenerateKey
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
         isAbsoluteUrl: false
@@ -1790,10 +2936,17 @@ operations:
           - text/json
         deprecated: false
         hidden: false
-        '#name': RegenerateKey
-        '#group': StorageAccounts
-        '#serializedName': StorageAccounts_RegenerateKey
-    '#name': checkNameAvailability
+    name:
+      fixed: false
+      raw: checkNameAvailability
+    typeName:
+      fixed: false
+    nameForParameter:
+      fixed: false
+    nameForVariable:
+      fixed: false
+    nameForProperty:
+      fixed: false
     summary: |-
       {
         "methods": [
@@ -1803,14 +2956,26 @@ operations:
                 "$id": "108",
                 "location": "body",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
                 "modelType": {
                   "$ref": "1"
-                },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                }
               },
               {
                 "$id": "109",
@@ -1819,17 +2984,35 @@ operations:
                 },
                 "location": "query",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Client Api Version."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
                 "modelType": {
                   "$id": "110",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "111",
@@ -1838,19 +3021,49 @@ operations:
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
                 "modelType": {
                   "$id": "112",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               }
             ],
+            "name": {
+              "fixed": false,
+              "raw": "CheckNameAvailability"
+            },
+            "group": {
+              "fixed": false,
+              "raw": "StorageAccounts"
+            },
+            "serializedName": {
+              "fixed": false,
+              "raw": "StorageAccounts_CheckNameAvailability"
+            },
             "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability",
             "isAbsoluteUrl": false,
             "httpMethod": "post",
@@ -1878,10 +3091,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
-            "hidden": false,
-            "#name": "CheckNameAvailability",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_CheckNameAvailability"
+            "hidden": false
           },
           {
             "parameters": [
@@ -1889,17 +3099,35 @@ operations:
                 "$id": "113",
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the resource group within the user's subscription."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
                 "modelType": {
                   "$id": "114",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "115",
@@ -1909,30 +3137,60 @@ operations:
                   "MaxLength": "24",
                   "MinLength": "3"
                 },
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
                 "modelType": {
                   "$id": "116",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "117",
                 "location": "body",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The parameters to provide for the created account."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "parameters"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "parameters"
+                },
                 "modelType": {
                   "$ref": "16"
-                },
-                "#documentation": "The parameters to provide for the created account.",
-                "#name": "parameters",
-                "#serializedName": "parameters"
+                }
               },
               {
                 "$id": "118",
@@ -1941,17 +3199,35 @@ operations:
                 },
                 "location": "query",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Client Api Version."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
                 "modelType": {
                   "$id": "119",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "120",
@@ -1960,19 +3236,49 @@ operations:
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
                 "modelType": {
                   "$id": "121",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               }
             ],
+            "name": {
+              "fixed": false,
+              "raw": "Create"
+            },
+            "group": {
+              "fixed": false,
+              "raw": "StorageAccounts"
+            },
+            "serializedName": {
+              "fixed": false,
+              "raw": "StorageAccounts_Create"
+            },
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "put",
@@ -2006,10 +3312,7 @@ operations:
               "x-ms-long-running-operation": true
             },
             "deprecated": false,
-            "hidden": false,
-            "#name": "Create",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_Create"
+            "hidden": false
           },
           {
             "parameters": [
@@ -2017,17 +3320,35 @@ operations:
                 "$id": "122",
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the resource group within the user's subscription."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
                 "modelType": {
                   "$id": "123",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "124",
@@ -2037,17 +3358,35 @@ operations:
                   "MaxLength": "24",
                   "MinLength": "3"
                 },
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
                 "modelType": {
                   "$id": "125",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "126",
@@ -2056,17 +3395,35 @@ operations:
                 },
                 "location": "query",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Client Api Version."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
                 "modelType": {
                   "$id": "127",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "128",
@@ -2075,19 +3432,49 @@ operations:
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
                 "modelType": {
                   "$id": "129",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               }
             ],
+            "name": {
+              "fixed": false,
+              "raw": "Delete"
+            },
+            "group": {
+              "fixed": false,
+              "raw": "StorageAccounts"
+            },
+            "serializedName": {
+              "fixed": false,
+              "raw": "StorageAccounts_Delete"
+            },
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "delete",
@@ -2112,10 +3499,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
-            "hidden": false,
-            "#name": "Delete",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_Delete"
+            "hidden": false
           },
           {
             "parameters": [
@@ -2123,17 +3507,35 @@ operations:
                 "$id": "130",
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the resource group within the user's subscription."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
                 "modelType": {
                   "$id": "131",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "132",
@@ -2143,17 +3545,35 @@ operations:
                   "MaxLength": "24",
                   "MinLength": "3"
                 },
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
                 "modelType": {
                   "$id": "133",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "134",
@@ -2162,17 +3582,35 @@ operations:
                 },
                 "location": "query",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Client Api Version."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
                 "modelType": {
                   "$id": "135",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "136",
@@ -2181,19 +3619,49 @@ operations:
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
                 "modelType": {
                   "$id": "137",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               }
             ],
+            "name": {
+              "fixed": false,
+              "raw": "GetProperty"
+            },
+            "group": {
+              "fixed": false,
+              "raw": "StorageAccounts"
+            },
+            "serializedName": {
+              "fixed": false,
+              "raw": "StorageAccounts_GetProperty"
+            },
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
@@ -2221,10 +3689,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
-            "hidden": false,
-            "#name": "GetProperty",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_GetProperty"
+            "hidden": false
           },
           {
             "parameters": [
@@ -2232,17 +3697,35 @@ operations:
                 "$id": "138",
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the resource group within the user's subscription."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
                 "modelType": {
                   "$id": "139",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "140",
@@ -2252,30 +3735,60 @@ operations:
                   "MaxLength": "24",
                   "MinLength": "3"
                 },
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
                 "modelType": {
                   "$id": "141",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "142",
                 "location": "body",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The parameters to update on the account. Note that only one property can be changed at a time using this API. "
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "parameters"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "parameters"
+                },
                 "modelType": {
                   "$ref": "80"
-                },
-                "#documentation": "The parameters to update on the account. Note that only one property can be changed at a time using this API. ",
-                "#name": "parameters",
-                "#serializedName": "parameters"
+                }
               },
               {
                 "$id": "143",
@@ -2284,17 +3797,35 @@ operations:
                 },
                 "location": "query",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Client Api Version."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
                 "modelType": {
                   "$id": "144",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "145",
@@ -2303,19 +3834,49 @@ operations:
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
                 "modelType": {
                   "$id": "146",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               }
             ],
+            "name": {
+              "fixed": false,
+              "raw": "Update"
+            },
+            "group": {
+              "fixed": false,
+              "raw": "StorageAccounts"
+            },
+            "serializedName": {
+              "fixed": false,
+              "raw": "StorageAccounts_Update"
+            },
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "patch",
@@ -2343,10 +3904,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
-            "hidden": false,
-            "#name": "Update",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_Update"
+            "hidden": false
           },
           {
             "parameters": [
@@ -2354,17 +3912,35 @@ operations:
                 "$id": "147",
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the resource group."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
                 "modelType": {
                   "$id": "148",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "149",
@@ -2374,17 +3950,35 @@ operations:
                   "MaxLength": "24",
                   "MinLength": "3"
                 },
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the storage account."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
                 "modelType": {
                   "$id": "150",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the storage account.",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "151",
@@ -2393,17 +3987,35 @@ operations:
                 },
                 "location": "query",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Client Api Version."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
                 "modelType": {
                   "$id": "152",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "153",
@@ -2412,19 +4024,49 @@ operations:
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
                 "modelType": {
                   "$id": "154",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               }
             ],
+            "name": {
+              "fixed": false,
+              "raw": "ListKeys"
+            },
+            "group": {
+              "fixed": false,
+              "raw": "StorageAccounts"
+            },
+            "serializedName": {
+              "fixed": false,
+              "raw": "StorageAccounts_ListKeys"
+            },
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys",
             "isAbsoluteUrl": false,
             "httpMethod": "post",
@@ -2452,10 +4094,7 @@ operations:
               "text/json"
             ],
             "deprecated": false,
-            "hidden": false,
-            "#name": "ListKeys",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_ListKeys"
+            "hidden": false
           },
           {
             "parameters": [
@@ -2466,17 +4105,35 @@ operations:
                 },
                 "location": "query",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Client Api Version."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
                 "modelType": {
                   "$id": "156",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "157",
@@ -2485,19 +4142,49 @@ operations:
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
                 "modelType": {
                   "$id": "158",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               }
             ],
+            "name": {
+              "fixed": false,
+              "raw": "List"
+            },
+            "group": {
+              "fixed": false,
+              "raw": "StorageAccounts"
+            },
+            "serializedName": {
+              "fixed": false,
+              "raw": "StorageAccounts_List"
+            },
             "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
@@ -2530,10 +4217,7 @@ operations:
               }
             },
             "deprecated": false,
-            "hidden": false,
-            "#name": "List",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_List"
+            "hidden": false
           },
           {
             "parameters": [
@@ -2541,17 +4225,35 @@ operations:
                 "$id": "159",
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the resource group within the user's subscription."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
                 "modelType": {
                   "$id": "160",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "161",
@@ -2560,17 +4262,35 @@ operations:
                 },
                 "location": "query",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Client Api Version."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
                 "modelType": {
                   "$id": "162",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "163",
@@ -2579,19 +4299,49 @@ operations:
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
                 "modelType": {
                   "$id": "164",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               }
             ],
+            "name": {
+              "fixed": false,
+              "raw": "ListByResourceGroup"
+            },
+            "group": {
+              "fixed": false,
+              "raw": "StorageAccounts"
+            },
+            "serializedName": {
+              "fixed": false,
+              "raw": "StorageAccounts_ListByResourceGroup"
+            },
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
@@ -2624,10 +4374,7 @@ operations:
               }
             },
             "deprecated": false,
-            "hidden": false,
-            "#name": "ListByResourceGroup",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_ListByResourceGroup"
+            "hidden": false
           },
           {
             "parameters": [
@@ -2635,17 +4382,35 @@ operations:
                 "$id": "165",
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the resource group within the user's subscription."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "resourceGroupName"
+                },
                 "modelType": {
                   "$id": "166",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the resource group within the user's subscription.",
-                "#name": "resourceGroupName",
-                "#serializedName": "resourceGroupName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "167",
@@ -2655,30 +4420,60 @@ operations:
                   "MaxLength": "24",
                   "MinLength": "3"
                 },
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "accountName"
+                },
                 "modelType": {
                   "$id": "168",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-                "#name": "accountName",
-                "#serializedName": "accountName"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "169",
                 "location": "body",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Specifies name of the key which should be regenerated. key1 or key2 for the default keys"
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "regenerateKey"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "regenerateKey"
+                },
                 "modelType": {
                   "$ref": "85"
-                },
-                "#documentation": "Specifies name of the key which should be regenerated. key1 or key2 for the default keys",
-                "#name": "regenerateKey",
-                "#serializedName": "regenerateKey"
+                }
               },
               {
                 "$id": "170",
@@ -2687,17 +4482,35 @@ operations:
                 },
                 "location": "query",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Client Api Version."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
                 "modelType": {
                   "$id": "171",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "172",
@@ -2706,19 +4519,49 @@ operations:
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
                 "modelType": {
                   "$id": "173",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               }
             ],
+            "name": {
+              "fixed": false,
+              "raw": "RegenerateKey"
+            },
+            "group": {
+              "fixed": false,
+              "raw": "StorageAccounts"
+            },
+            "serializedName": {
+              "fixed": false,
+              "raw": "StorageAccounts_RegenerateKey"
+            },
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey",
             "isAbsoluteUrl": false,
             "httpMethod": "post",
@@ -2746,13 +4589,25 @@ operations:
               "text/json"
             ],
             "deprecated": false,
-            "hidden": false,
-            "#name": "RegenerateKey",
-            "#group": "StorageAccounts",
-            "#serializedName": "StorageAccounts_RegenerateKey"
+            "hidden": false
           }
         ],
-        "#name": "checkNameAvailability"
+        "name": {
+          "fixed": false,
+          "raw": "checkNameAvailability"
+        },
+        "typeName": {
+          "fixed": false
+        },
+        "nameForParameter": {
+          "fixed": false
+        },
+        "nameForVariable": {
+          "fixed": false
+        },
+        "nameForProperty": {
+          "fixed": false
+        }
       }
   - methods:
       - parameters:
@@ -2761,34 +4616,67 @@ operations:
               $ref: '106'
             location: query
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: Client Api Version.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: api-version
+            serializedName:
+              fixed: false
+              raw: api-version
             modelType:
               $id: '175'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': Client Api Version.
-            '#name': api-version
-            '#serializedName': api-version
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
           - $id: '176'
             clientProperty:
               $ref: '104'
             location: path
             collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+              raw: >-
+                Gets subscription credentials which uniquely identify Microsoft
+                Azure subscription. The subscription ID forms part of the URI
+                for every service call.
             isRequired: true
             isConstant: false
+            name:
+              fixed: false
+              raw: subscriptionId
+            serializedName:
+              fixed: false
+              raw: subscriptionId
             modelType:
               $id: '177'
               $type: PrimaryType
               knownPrimaryType: string
-              '#name': String
-            '#documentation': >-
-              Gets subscription credentials which uniquely identify Microsoft
-              Azure subscription. The subscription ID forms part of the URI for
-              every service call.
-            '#name': subscriptionId
-            '#serializedName': subscriptionId
+              serializedName:
+                fixed: false
+              name:
+                fixed: false
+                raw: String
+        name:
+          fixed: false
+          raw: List
+        group:
+          fixed: false
+          raw: Usage
+        serializedName:
+          fixed: false
+          raw: Usage_List
         url: '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
         isAbsoluteUrl: false
         httpMethod: get
@@ -2815,10 +4703,17 @@ operations:
             nextLinkName: null
         deprecated: false
         hidden: false
-        '#name': List
-        '#group': Usage
-        '#serializedName': Usage_List
-    '#name': usages
+    name:
+      fixed: false
+      raw: usages
+    typeName:
+      fixed: false
+    nameForParameter:
+      fixed: false
+    nameForVariable:
+      fixed: false
+    nameForProperty:
+      fixed: false
     summary: |-
       {
         "methods": [
@@ -2831,17 +4726,35 @@ operations:
                 },
                 "location": "query",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Client Api Version."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "api-version"
+                },
                 "modelType": {
                   "$id": "175",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Client Api Version.",
-                "#name": "api-version",
-                "#serializedName": "api-version"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               },
               {
                 "$id": "176",
@@ -2850,19 +4763,49 @@ operations:
                 },
                 "location": "path",
                 "collectionFormat": "none",
+                "defaultValue": {
+                  "fixed": false
+                },
+                "documentation": {
+                  "fixed": false,
+                  "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+                },
                 "isRequired": true,
                 "isConstant": false,
+                "name": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
+                "serializedName": {
+                  "fixed": false,
+                  "raw": "subscriptionId"
+                },
                 "modelType": {
                   "$id": "177",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "#name": "String"
-                },
-                "#documentation": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-                "#name": "subscriptionId",
-                "#serializedName": "subscriptionId"
+                  "serializedName": {
+                    "fixed": false
+                  },
+                  "name": {
+                    "fixed": false,
+                    "raw": "String"
+                  }
+                }
               }
             ],
+            "name": {
+              "fixed": false,
+              "raw": "List"
+            },
+            "group": {
+              "fixed": false,
+              "raw": "Usage"
+            },
+            "serializedName": {
+              "fixed": false,
+              "raw": "Usage_List"
+            },
             "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
@@ -2895,12 +4838,23 @@ operations:
               }
             },
             "deprecated": false,
-            "hidden": false,
-            "#name": "List",
-            "#group": "Usage",
-            "#serializedName": "Usage_List"
+            "hidden": false
           }
         ],
-        "#name": "usages"
+        "name": {
+          "fixed": false,
+          "raw": "usages"
+        },
+        "typeName": {
+          "fixed": false
+        },
+        "nameForParameter": {
+          "fixed": false
+        },
+        "nameForVariable": {
+          "fixed": false
+        },
+        "nameForProperty": {
+          "fixed": false
+        }
       }
-'#name': StorageManagementClient

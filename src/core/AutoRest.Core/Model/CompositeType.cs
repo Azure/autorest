@@ -53,11 +53,7 @@ namespace AutoRest.Core.Model
         /// <code>SerializedName.OnGet</code> and <code>SerializedName.OnSet</code> events in this class' constructor.
         /// (ie <code> SerializedName.OnGet += serializedName => serializedName.ToUpper();</code> )
         /// </remarks>
-        public Fixable<string> SerializedName
-        {
-            get { return _serializedName; }
-            set { _serializedName.CopyFrom(value); }
-        }
+        public string SerializedName { get; set; }
 
         /// <summary>
         /// Gets the union of Parent and current type properties
