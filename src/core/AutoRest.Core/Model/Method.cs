@@ -23,7 +23,6 @@ namespace AutoRest.Core.Model
         private string _summary;
         private readonly Fixable<string> _name = new Fixable<string>();
         private readonly Fixable<string> _group = new Fixable<string>();
-        private readonly Fixable<string> _url = new Fixable<string>();
         private MethodGroup _parent;
 
         [JsonIgnore]

@@ -14,18 +14,14 @@ namespace AutoRest.NodeJS.Model
     {
         protected MethodGroupJs() : base()
         {
-            InitializeProperties();
         }
 
         protected MethodGroupJs(string name): base(name)
         {
-            InitializeProperties();
         }
 
-        protected void InitializeProperties()
-        {
-            NameForProperty.OnGet += value => CodeNamer.Instance.GetPropertyName(TypeName);
-        }
+        public override string NameForProperty => CodeNamer.Instance.GetPropertyName(TypeName);
+
         [JsonIgnore]
         public IEnumerable<MethodJs> MethodTemplateModels => Methods.Cast<MethodJs>();
 
