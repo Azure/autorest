@@ -39,6 +39,22 @@ else
         @:Alias: (Alias)(s),
     @:})
 @:}
+
+foreach (var st in Model.SiblingTypes)
+{
+@:@EmptyLine
+@:// As@(st.Name) is the @(Model.BaseModelType.Name) implementation for @(Model.Name).
+@:func (s @(Model.Name)) As@(st.Name)() (*@(st.Name), bool) {
+    if (st.Equals(Model))
+    {
+    @:return &s, true
+    }
+    else
+    {
+    @:return nil, false
+    }
+@:}
+}
 }
 
 @if (!string.IsNullOrEmpty(Model.NextLink) && Model.PreparerNeeded)

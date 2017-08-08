@@ -28,6 +28,8 @@ namespace AutoRest.Go.Model
 
         public IEnumerable<CompositeType> DerivedTypes => CodeModel.ModelTypes.Where(t => t.DerivesFrom(this));
 
+        public IEnumerable<CompositeType> SiblingTypes => (BaseModelType as CompositeTypeGo).DerivedTypes;
+
         public CompositeTypeGo()
         {
 
