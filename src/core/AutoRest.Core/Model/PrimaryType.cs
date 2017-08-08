@@ -48,26 +48,6 @@ namespace AutoRest.Core.Model
         /// </summary>
         public KnownPrimaryType KnownPrimaryType { get; set; }
 
-        /// <Summary>
-        /// Backing field for <code>SerializedName</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _serializedName = new Fixable<string>();
-
-        /// <Summary>
-        /// The name on the wire for the model type.
-        /// </Summary>
-        /// <remarks>
-        /// The Get and Set operations for this accessor may be overridden by using the 
-        /// <code>SerializedName.OnGet</code> and <code>SerializedName.OnSet</code> events in this class' constructor.
-        /// (ie <code> SerializedName.OnGet += serializedName => serializedName.ToUpper();</code> )
-        /// </remarks>
-        public Fixable<string> SerializedName
-        {
-            get { return _serializedName; }
-            set { _serializedName.CopyFrom(value); }
-        }
-
         public override void Disambiguate()
         {
             // not needed, right?

@@ -558,7 +558,7 @@ namespace AutoRest.Ruby
             }
             else
             {
-                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} is not a supported primary Type for {1}.", primary.KnownPrimaryType, primary.SerializedName));
+                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} is not a supported primary Type for {1}.", primary.KnownPrimaryType, primary.Name));
             }
 
             return builder.ToString();
