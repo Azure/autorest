@@ -5,8 +5,6 @@ modelTypes:
     properties:
       - $id: '2'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - id
         collectionFormat: none
@@ -35,8 +33,6 @@ modelTypes:
             raw: Long
       - $id: '4'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - name
         collectionFormat: none
@@ -68,9 +64,7 @@ modelTypes:
     name:
       fixed: false
       raw: Cowbell
-name:
-  fixed: false
-  raw: CowbellFactory
+name: CowbellFactory
 namespace: ''
 modelsName: Models
 apiVersion: 1.0.0
@@ -102,9 +96,7 @@ operations:
         group:
           fixed: false
           raw: Cowbell
-        serializedName:
-          fixed: false
-          raw: Cowbell_Add
+        serializedName: Cowbell_Add
         url: /cowbell
         isAbsoluteUrl: false
         httpMethod: post

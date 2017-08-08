@@ -5,8 +5,6 @@ modelTypes:
     properties:
       - $id: '2'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - name
         collectionFormat: none
@@ -33,8 +31,6 @@ modelTypes:
             raw: String
       - $id: '4'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - type
         collectionFormat: none
@@ -70,8 +66,6 @@ modelTypes:
     properties:
       - $id: '7'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - nameAvailable
         collectionFormat: none
@@ -102,8 +96,6 @@ modelTypes:
             raw: Boolean
       - $id: '9'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - reason
         collectionFormat: none
@@ -134,17 +126,12 @@ modelTypes:
               serializedName: AccountNameInvalid
             - name: AlreadyExists
               serializedName: AlreadyExists
-          serializedName:
-            fixed: false
-            raw: Reason
           modelAsString: false
           name:
             fixed: false
             raw: Reason
       - $id: '11'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - message
         collectionFormat: none
@@ -181,8 +168,6 @@ modelTypes:
     properties:
       - $id: '14'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - accountType
         collectionFormat: none
@@ -217,9 +202,6 @@ modelTypes:
               serializedName: Standard_RAGRS
             - name: Premium_LRS
               serializedName: Premium_LRS
-          serializedName:
-            fixed: false
-            raw: AccountType
           modelAsString: false
           name:
             fixed: false
@@ -234,8 +216,6 @@ modelTypes:
     properties:
       - $id: '17'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - location
         collectionFormat: none
@@ -263,8 +243,6 @@ modelTypes:
             raw: String
       - $id: '19'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - tags
         collectionFormat: none
@@ -298,8 +276,6 @@ modelTypes:
             fixed: false
       - $id: '22'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - properties
         collectionFormat: none
@@ -332,8 +308,6 @@ modelTypes:
     properties:
       - $id: '24'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - blob
         collectionFormat: none
@@ -361,8 +335,6 @@ modelTypes:
             raw: String
       - $id: '26'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - queue
         collectionFormat: none
@@ -390,8 +362,6 @@ modelTypes:
             raw: String
       - $id: '28'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - table
         collectionFormat: none
@@ -419,8 +389,6 @@ modelTypes:
             raw: String
       - $id: '30'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - file
         collectionFormat: none
@@ -459,8 +427,6 @@ modelTypes:
     properties:
       - $id: '33'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - name
         collectionFormat: none
@@ -488,8 +454,6 @@ modelTypes:
             raw: String
       - $id: '35'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - useSubDomain
         collectionFormat: none
@@ -530,8 +494,6 @@ modelTypes:
     properties:
       - $id: '38'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - provisioningState
         collectionFormat: none
@@ -564,17 +526,12 @@ modelTypes:
               serializedName: ResolvingDNS
             - name: Succeeded
               serializedName: Succeeded
-          serializedName:
-            fixed: false
-            raw: ProvisioningState
           modelAsString: false
           name:
             fixed: false
             raw: ProvisioningState
       - $id: '40'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - accountType
         collectionFormat: none
@@ -599,8 +556,6 @@ modelTypes:
           $ref: '15'
       - $id: '41'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - primaryEndpoints
         collectionFormat: none
@@ -624,8 +579,6 @@ modelTypes:
           $ref: '23'
       - $id: '42'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - primaryLocation
         collectionFormat: none
@@ -653,8 +606,6 @@ modelTypes:
             raw: String
       - $id: '44'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - statusOfPrimary
         collectionFormat: none
@@ -685,17 +636,12 @@ modelTypes:
               serializedName: Available
             - name: Unavailable
               serializedName: Unavailable
-          serializedName:
-            fixed: false
-            raw: AccountStatus
           modelAsString: false
           name:
             fixed: false
             raw: AccountStatus
       - $id: '46'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - lastGeoFailoverTime
         collectionFormat: none
@@ -728,8 +674,6 @@ modelTypes:
             raw: DateTime
       - $id: '48'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - secondaryLocation
         collectionFormat: none
@@ -760,8 +704,6 @@ modelTypes:
             raw: String
       - $id: '50'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - statusOfSecondary
         collectionFormat: none
@@ -789,8 +731,6 @@ modelTypes:
           $ref: '45'
       - $id: '51'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - creationTime
         collectionFormat: none
@@ -819,8 +759,6 @@ modelTypes:
             raw: DateTime
       - $id: '53'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - customDomain
         collectionFormat: none
@@ -843,8 +781,6 @@ modelTypes:
           $ref: '32'
       - $id: '54'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - secondaryEndpoints
         collectionFormat: none
@@ -876,8 +812,6 @@ modelTypes:
     properties:
       - $id: '56'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - properties
         collectionFormat: none
@@ -904,8 +838,6 @@ modelTypes:
       properties:
         - $id: '58'
           isReadOnly: true
-          summary:
-            fixed: false
           realPath:
             - id
           collectionFormat: none
@@ -933,8 +865,6 @@ modelTypes:
               raw: String
         - $id: '60'
           isReadOnly: true
-          summary:
-            fixed: false
           realPath:
             - name
           collectionFormat: none
@@ -962,8 +892,6 @@ modelTypes:
               raw: String
         - $id: '62'
           isReadOnly: true
-          summary:
-            fixed: false
           realPath:
             - type
           collectionFormat: none
@@ -991,8 +919,6 @@ modelTypes:
               raw: String
         - $id: '64'
           isReadOnly: false
-          summary:
-            fixed: false
           realPath:
             - location
           collectionFormat: none
@@ -1020,8 +946,6 @@ modelTypes:
               raw: String
         - $id: '66'
           isReadOnly: false
-          summary:
-            fixed: false
           realPath:
             - tags
           collectionFormat: none
@@ -1070,8 +994,6 @@ modelTypes:
     properties:
       - $id: '70'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - key1
         collectionFormat: none
@@ -1099,8 +1021,6 @@ modelTypes:
             raw: String
       - $id: '72'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - key2
         collectionFormat: none
@@ -1137,8 +1057,6 @@ modelTypes:
     properties:
       - $id: '75'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - value
         collectionFormat: none
@@ -1173,8 +1091,6 @@ modelTypes:
     properties:
       - $id: '78'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - accountType
         collectionFormat: none
@@ -1202,8 +1118,6 @@ modelTypes:
           $ref: '15'
       - $id: '79'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - customDomain
         collectionFormat: none
@@ -1236,8 +1150,6 @@ modelTypes:
     properties:
       - $id: '81'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - tags
         collectionFormat: none
@@ -1271,8 +1183,6 @@ modelTypes:
             fixed: false
       - $id: '84'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - properties
         collectionFormat: none
@@ -1305,8 +1215,6 @@ modelTypes:
     properties:
       - $id: '86'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - keyName
         collectionFormat: none
@@ -1341,8 +1249,6 @@ modelTypes:
     properties:
       - $id: '89'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - value
         collectionFormat: none
@@ -1370,8 +1276,6 @@ modelTypes:
             raw: String
       - $id: '91'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - localizedValue
         collectionFormat: none
@@ -1408,8 +1312,6 @@ modelTypes:
     properties:
       - $id: '94'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - unit
         collectionFormat: none
@@ -1446,17 +1348,12 @@ modelTypes:
               serializedName: CountsPerSecond
             - name: BytesPerSecond
               serializedName: BytesPerSecond
-          serializedName:
-            fixed: false
-            raw: UsageUnit
           modelAsString: false
           name:
             fixed: false
             raw: UsageUnit
       - $id: '96'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - currentValue
         collectionFormat: none
@@ -1487,8 +1384,6 @@ modelTypes:
             raw: Int
       - $id: '98'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - limit
         collectionFormat: none
@@ -1519,8 +1414,6 @@ modelTypes:
             raw: Int
       - $id: '100'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - name
         collectionFormat: none
@@ -1550,8 +1443,6 @@ modelTypes:
     properties:
       - $id: '102'
         isReadOnly: false
-        summary:
-          fixed: false
         realPath:
           - value
         collectionFormat: none
@@ -1588,9 +1479,7 @@ enumTypes:
   - $ref: '39'
   - $ref: '45'
   - $ref: '95'
-name:
-  fixed: false
-  raw: StorageManagementClient
+name: StorageManagementClient
 namespace: ''
 modelsName: Models
 apiVersion: '2015-06-15'
@@ -1599,8 +1488,6 @@ documentation: The Storage Management Client.
 properties:
   - $id: '104'
     isReadOnly: false
-    summary:
-      fixed: false
     realPath:
       - subscriptionId
     collectionFormat: none
@@ -1631,8 +1518,6 @@ properties:
         raw: String
   - $id: '106'
     isReadOnly: false
-    summary:
-      fixed: false
     realPath:
       - api-version
     collectionFormat: none
@@ -1745,9 +1630,7 @@ operations:
         group:
           fixed: false
           raw: StorageAccounts
-        serializedName:
-          fixed: false
-          raw: StorageAccounts_CheckNameAvailability
+        serializedName: StorageAccounts_CheckNameAvailability
         url: >-
           /subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability
         isAbsoluteUrl: false
@@ -1910,9 +1793,7 @@ operations:
         group:
           fixed: false
           raw: StorageAccounts
-        serializedName:
-          fixed: false
-          raw: StorageAccounts_Create
+        serializedName: StorageAccounts_Create
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
@@ -2065,9 +1946,7 @@ operations:
         group:
           fixed: false
           raw: StorageAccounts
-        serializedName:
-          fixed: false
-          raw: StorageAccounts_Delete
+        serializedName: StorageAccounts_Delete
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
@@ -2208,9 +2087,7 @@ operations:
         group:
           fixed: false
           raw: StorageAccounts
-        serializedName:
-          fixed: false
-          raw: StorageAccounts_GetProperty
+        serializedName: StorageAccounts_GetProperty
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
@@ -2376,9 +2253,7 @@ operations:
         group:
           fixed: false
           raw: StorageAccounts
-        serializedName:
-          fixed: false
-          raw: StorageAccounts_Update
+        serializedName: StorageAccounts_Update
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
         isAbsoluteUrl: false
@@ -2531,9 +2406,7 @@ operations:
         group:
           fixed: false
           raw: StorageAccounts
-        serializedName:
-          fixed: false
-          raw: StorageAccounts_ListKeys
+        serializedName: StorageAccounts_ListKeys
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
         isAbsoluteUrl: false
@@ -2620,9 +2493,7 @@ operations:
         group:
           fixed: false
           raw: StorageAccounts
-        serializedName:
-          fixed: false
-          raw: StorageAccounts_List
+        serializedName: StorageAccounts_List
         url: >-
           /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
         isAbsoluteUrl: false
@@ -2740,9 +2611,7 @@ operations:
         group:
           fixed: false
           raw: StorageAccounts
-        serializedName:
-          fixed: false
-          raw: StorageAccounts_ListByResourceGroup
+        serializedName: StorageAccounts_ListByResourceGroup
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts
         isAbsoluteUrl: false
@@ -2911,9 +2780,7 @@ operations:
         group:
           fixed: false
           raw: StorageAccounts
-        serializedName:
-          fixed: false
-          raw: StorageAccounts_RegenerateKey
+        serializedName: StorageAccounts_RegenerateKey
         url: >-
           /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
         isAbsoluteUrl: false
@@ -3060,10 +2927,7 @@ operations:
               "fixed": false,
               "raw": "StorageAccounts"
             },
-            "serializedName": {
-              "fixed": false,
-              "raw": "StorageAccounts_CheckNameAvailability"
-            },
+            "serializedName": "StorageAccounts_CheckNameAvailability",
             "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability",
             "isAbsoluteUrl": false,
             "httpMethod": "post",
@@ -3275,10 +3139,7 @@ operations:
               "fixed": false,
               "raw": "StorageAccounts"
             },
-            "serializedName": {
-              "fixed": false,
-              "raw": "StorageAccounts_Create"
-            },
+            "serializedName": "StorageAccounts_Create",
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "put",
@@ -3471,10 +3332,7 @@ operations:
               "fixed": false,
               "raw": "StorageAccounts"
             },
-            "serializedName": {
-              "fixed": false,
-              "raw": "StorageAccounts_Delete"
-            },
+            "serializedName": "StorageAccounts_Delete",
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "delete",
@@ -3658,10 +3516,7 @@ operations:
               "fixed": false,
               "raw": "StorageAccounts"
             },
-            "serializedName": {
-              "fixed": false,
-              "raw": "StorageAccounts_GetProperty"
-            },
+            "serializedName": "StorageAccounts_GetProperty",
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
@@ -3873,10 +3728,7 @@ operations:
               "fixed": false,
               "raw": "StorageAccounts"
             },
-            "serializedName": {
-              "fixed": false,
-              "raw": "StorageAccounts_Update"
-            },
+            "serializedName": "StorageAccounts_Update",
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}",
             "isAbsoluteUrl": false,
             "httpMethod": "patch",
@@ -4063,10 +3915,7 @@ operations:
               "fixed": false,
               "raw": "StorageAccounts"
             },
-            "serializedName": {
-              "fixed": false,
-              "raw": "StorageAccounts_ListKeys"
-            },
+            "serializedName": "StorageAccounts_ListKeys",
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys",
             "isAbsoluteUrl": false,
             "httpMethod": "post",
@@ -4181,10 +4030,7 @@ operations:
               "fixed": false,
               "raw": "StorageAccounts"
             },
-            "serializedName": {
-              "fixed": false,
-              "raw": "StorageAccounts_List"
-            },
+            "serializedName": "StorageAccounts_List",
             "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
@@ -4338,10 +4184,7 @@ operations:
               "fixed": false,
               "raw": "StorageAccounts"
             },
-            "serializedName": {
-              "fixed": false,
-              "raw": "StorageAccounts_ListByResourceGroup"
-            },
+            "serializedName": "StorageAccounts_ListByResourceGroup",
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts",
             "isAbsoluteUrl": false,
             "httpMethod": "get",
@@ -4558,10 +4401,7 @@ operations:
               "fixed": false,
               "raw": "StorageAccounts"
             },
-            "serializedName": {
-              "fixed": false,
-              "raw": "StorageAccounts_RegenerateKey"
-            },
+            "serializedName": "StorageAccounts_RegenerateKey",
             "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey",
             "isAbsoluteUrl": false,
             "httpMethod": "post",
@@ -4674,9 +4514,7 @@ operations:
         group:
           fixed: false
           raw: Usage
-        serializedName:
-          fixed: false
-          raw: Usage_List
+        serializedName: Usage_List
         url: '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
         isAbsoluteUrl: false
         httpMethod: get
@@ -4802,10 +4640,7 @@ operations:
               "fixed": false,
               "raw": "Usage"
             },
-            "serializedName": {
-              "fixed": false,
-              "raw": "Usage_List"
-            },
+            "serializedName": "Usage_List",
             "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages",
             "isAbsoluteUrl": false,
             "httpMethod": "get",

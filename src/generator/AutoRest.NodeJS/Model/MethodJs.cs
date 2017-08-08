@@ -341,7 +341,7 @@ namespace AutoRest.NodeJS.Model
                                 propertyParameter.ModelType = property.ModelType;
                                 propertyParameter.IsRequired = property.IsRequired;
                                 propertyParameter.Name.FixedValue = param.Name + "." + property.Name;
-                                string documentationString = string.Join(" ", (new[] { property.Summary, property.Documentation }).Where(s => !string.IsNullOrEmpty(s)));
+                                string documentationString = string.Join(" ", (new[] { property.Summary, property.Documentation.Value }).Where(s => !string.IsNullOrEmpty(s)));
                                 propertyParameter.Documentation = documentationString;
                                 traversalStack.Push(propertyParameter);
                             }
