@@ -201,8 +201,9 @@ namespace AutoRest.Php
 
         public override async Task Generate(CodeModel codeModel)
         {
-            var @namespace = Class.CreateName(
-                codeModel.Namespace, codeModel.ApiVersion.Replace(".", "_"));
+            var codeModelNamespace = codeModel.Namespace;
+            var apiVersion = codeModel.ApiVersion.Replace(".", "_");
+            var @namespace = Class.CreateName(codeModelNamespace, apiVersion);
 
             var phpGroups = codeModel.Operations
                 .Where(o => o.Name.RawValue != string.Empty)

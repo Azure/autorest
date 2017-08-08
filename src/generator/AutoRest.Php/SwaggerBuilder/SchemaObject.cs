@@ -61,11 +61,18 @@ namespace AutoRest.Php.SwaggerBuilder
         }
 
         public static SchemaObject CreateDefinition(CompositeType type)
-            => new SchemaObject(properties: type
-                .Properties
-                .Select(p => Json.Property(
-                    p.SerializedName.FixedValue,
-                    Create(p.ModelType))));
+        {
+            var additionalProperties = type.Properties.FirstOrDefault(p => p.SerializedName.FixedValue == null);
+            var properties = type.Properties.Where(p => p.SerializedName.FixedValue != null);
+            var swaggerProperties = properties.Select(p => Json.Property(
+                p.SerializedName.FixedValue,
+                Create(p.ModelType)));
+            return additionalProperties == null
+                ? new SchemaObject(properties: swaggerProperties)
+                : new SchemaObject(
+                    properties: swaggerProperties,
+                    additionalProperties: Create(additionalProperties.ModelType));
+        }
 
         public static SchemaObject Create(IModelType type)
         {
