@@ -7,12 +7,24 @@
 @inherits AutoRest.Core.Template<AutoRest.Go.Model.CompositeTypeGo>
 
 @WrapComment("// ", string.Format("{0} is {1}", Model.Name, Model.Documentation.ToSentence()))
-type @Model.Name struct {
+@if (Model.IsPolymorphic)
+{
+@:type @(Model.Name) interface {
+    foreach (var dt in Model.DerivedTypes)
+    {
+    @:As@(dt.Name) () (*@(dt.Name), bool)
+    }
+@:}
+}
+else
+{
+@:type @(Model.Name) struct {
 @if (Model.IsResponseType)
 {
     @:autorest.Response `json:"-"`
 }
     @(Model.Fields())
+@:}
 }
 
 @if (!string.IsNullOrEmpty(Model.NextLink) && Model.PreparerNeeded)

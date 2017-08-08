@@ -359,6 +359,20 @@ namespace AutoRest.Go
             return (type is PrimaryType || type is SequenceType || type is DictionaryType || type is EnumType);
         }
 
+        /// <summary>
+        /// Determines whether one composite type derives directly or indirectly from another.
+        /// </summary>
+        /// <param name="type">Type to test.</param>
+        /// <param name="possibleAncestorType">Type that may be an ancestor of this type.</param>
+        /// <returns>true if the type is an ancestor, false otherwise.</returns>
+        public static bool DerivesFrom(this CompositeType type, CompositeType possibleAncestorType)
+        {
+            return
+                type.BaseModelType != null &&
+                (type.BaseModelType.Equals(possibleAncestorType) ||
+                 type.BaseModelType.DerivesFrom(possibleAncestorType));
+        }
+
         /////////////////////////////////////////////////////////////////////////////////////////
         // Validate code
         //

@@ -26,6 +26,8 @@ namespace AutoRest.Go.Model
 
         public bool PreparerNeeded = false;
 
+        public IEnumerable<CompositeType> DerivedTypes => CodeModel.ModelTypes.Where(t => t.DerivesFrom(this));
+
         public CompositeTypeGo()
         {
 
