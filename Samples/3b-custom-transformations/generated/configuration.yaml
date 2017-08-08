@@ -46,7 +46,7 @@ output-artifact:
   - source-file-azureresourceschema
   - source-file-jsonrpcclient
 use-extension:
-  '@microsoft.azure/autorest-classic-generators': 'C:\work\github\autorest/src/core/AutoRest'
+
   '@microsoft.azure/classic-openapi-validator': '>=0.0.6-preview'
   '@microsoft.azure/openapi-validator': '>=0.1.2-preview'
 clear-output-folder: {}

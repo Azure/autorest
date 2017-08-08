@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@microsoft.azure/extension": "~1.0.69",
+    "@microsoft.azure/async-io": "~1.0.21",
     "@microsoft.azure/openapi-validator": "^0.1.5-preview",
     "chalk": "^1.1.2",
     "commonmark": "^0.27.0",

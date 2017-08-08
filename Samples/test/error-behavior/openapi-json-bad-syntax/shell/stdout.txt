@@ -1,7 +1,4 @@
 (C) 2017 **Microsoft Corporation.**  
-[This will take a few moments...]
-**Installing package** @microsoft.azure/autorest-core@C:\work\github\autorest/src/autorest-core
 # AutoRest code generation utility.
 https://aka.ms/autorest
-Network Enabled: true
 Process() Cancelled due to exception : Syntax errors encountered.

@@ -72,7 +72,6 @@ task 'build', 'typescript', (done)->
     return null
 
 task 'npm-install', '', ['init-deps'], (done)-> 
-  # global.threshold =1
   typescriptProjectFolders()
     .on 'end', -> 
       run 'npm-install', ->
@@ -88,8 +87,6 @@ task 'npm-install', '', ['init-deps'], (done)->
       task 'npm-install', fn,deps, (fin) ->
         echo "Running npm install for #{each.path}."
         execute "#{basefolder}/node_modules/.bin/npm install", {cwd: each.path, silent:false }, (code,stdout,stderr) ->
-          # echo stderr
-          # echo stdout
           fin()
 
       next null

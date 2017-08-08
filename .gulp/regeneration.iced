@@ -630,8 +630,10 @@ task 'regenerate-samples', '', (done) ->
       count++
       autorest [each.path]
         , (code,stdout,stderr) ->
-          count--
-          done() if( count == 0 ) 
+          setTimeout () => 
+            count--
+            done() if( count == 0 ) 
+          , 100
           outputFolder = path.join(each.path, "../shell")
           mkdir outputFolder if !(test "-d", outputFolder)
           ShellString(code).to(path.join(outputFolder, "code.txt"))
@@ -648,6 +650,13 @@ task 'regenerate-samples', '', (done) ->
               (sort file).to(file) if file.endsWith("stdout.txt") || file.endsWith("stderr.txt")
             )
           
+          (find path.join(each.path, ".."))
+            .filter((file) -> file.match(/.(yaml)$/))
+            .forEach((file) -> 
+              sed "-i", /.*autorest.src.*/ig, "", file  # source file names
+
+            )
+
           next null
         , true # don't fail on failures (since we wanna record them)
       return null;

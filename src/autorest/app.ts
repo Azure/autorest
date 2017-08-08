@@ -193,7 +193,7 @@ async function main() {
     process.exit(0);
   }
 
-  console.info(`Network Enabled: ${await networkEnabled}`);
+  console.trace(`Network Enabled: ${await networkEnabled}`);
 
   try {
     await asyncIO.mkdir(rootFolder);
@@ -290,7 +290,7 @@ async function main() {
       }
 
       // this will throw if there is an issue with installing the extension.
-      console.log(`**Installing package** ${corePackage}@${requestedVersion}\n[This will take a few moments...]`);
+      console.trace(`**Installing package** ${corePackage}@${requestedVersion}\n[This will take a few moments...]`);
 
       const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
       const extension = await (await extensionManager).installPackage(pkg, force, 5 * 60 * 1000, installer => installer.Message.Subscribe((s, m) => { console.trace(`Installer: ${m}`); }));

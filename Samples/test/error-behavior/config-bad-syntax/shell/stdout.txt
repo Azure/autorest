@@ -1,9 +1,6 @@
    at ...
 (C) 2017 **Microsoft Corporation.**  
-[This will take a few moments...]
-{ Error: Error occurred. Exiting.
-**Installing package** @microsoft.azure/autorest-core@C:\work\github\autorest/src/autorest-core
+[OperationAbortedException] Error occurred. Exiting.
+{ Error: [OperationAbortedException] Error occurred. Exiting.
 # AutoRest code generation utility.
-Error occurred. Exiting.
 https://aka.ms/autorest
-Network Enabled: true
