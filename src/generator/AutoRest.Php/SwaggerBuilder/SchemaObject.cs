@@ -49,6 +49,8 @@ namespace AutoRest.Php.SwaggerBuilder
                     }
                 case "boolean":
                     return PHP.Boolean;
+                case "file":
+                    return PHP.String;
                 case "array":
                     return PHP.Array(Items.ToPhpType());
                 case "object":
@@ -104,7 +106,13 @@ namespace AutoRest.Php.SwaggerBuilder
         }
 
         private static SchemaObject Primary(PrimaryType type)
-            => PrimaryTypes[type.KnownPrimaryType];
+        {
+            if (!PrimaryTypes.TryGetValue(type.KnownPrimaryType, out var result))
+            {
+                throw new Exception("PHP: unknown type: " + type.KnownPrimaryType);
+            }
+            return result;
+        }
 
         private static IReadOnlyDictionary<KnownPrimaryType, SchemaObject> PrimaryTypes { get; }
             = new Dictionary<KnownPrimaryType, SchemaObject>
@@ -121,7 +129,8 @@ namespace AutoRest.Php.SwaggerBuilder
                 { KnownPrimaryType.Object, Object() },
                 { KnownPrimaryType.Uuid, String("uuid") },
                 { KnownPrimaryType.DateTimeRfc1123, String("date-time-rfc1123") },
-                { KnownPrimaryType.ByteArray, String("byte") }
+                { KnownPrimaryType.ByteArray, String("byte") },
+                { KnownPrimaryType.Stream, new SchemaObject(type: "file") },
             };
 
         private static SchemaObject Integer(string format)
