@@ -116,7 +116,7 @@ import { Message, Channel } from "../lib/message";
     const codeModelSetDescr1 = await GenerateCodeModel({ directive: { from: "swagger-document", where: "$..description", set: "cowbell" } });
 
     // set descriptions in code model
-    const codeModelSetDescr2 = await GenerateCodeModel({ directive: { from: "code-model-v1", where: ["$..description", "$..documentation.raw"], set: "cowbell" } });
+    const codeModelSetDescr2 = await GenerateCodeModel({ directive: { from: "code-model-v1", where: ["$..description", "$..documentation"], set: "cowbell" } });
 
     // transform descriptions in resolved swagger
     const codeModelSetDescr3 = await GenerateCodeModel({ directive: { from: "swagger-document", where: "$..description", transform: "return 'cowbell'" } });
