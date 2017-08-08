@@ -20,6 +20,7 @@ import { Parse } from "../lib/parsing/literate-yaml";
     const h = await hw.WriteData(swagger);
 
     const autoRest = new AutoRest();
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     const messages: Message[] = [];
 
     autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Error) { messages.push(m) } });

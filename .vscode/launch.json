@@ -8,9 +8,9 @@
       "name": "run tests",
       "program": "${workspaceRoot}/src/autorest-core/node_modules/mocha/bin/_mocha",
       "args": [
-        "test",
+        "dist/test",
         "-g",
-        "TestConfiguration"
+        "blaming"
       ],
       "cwd": "${workspaceRoot}/src/autorest-core"
     },

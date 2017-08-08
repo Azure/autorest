@@ -1,3 +1,6 @@
+(C) 2017 **Microsoft Corporation.**  
+# AutoRest code generation utility.
+https://aka.ms/autorest
 INFORMATION: Defaulting to generate client side Code
 INFORMATION: Generating client model from swagger model.
 INFORMATION: Generating client model from swagger model.
@@ -33,3 +36,9 @@ INFORMATION: Successfully initialized Go Code Generator 1.2.2.0
 INFORMATION: Successfully initialized Java Code Generator 1.2.2.0
 INFORMATION: Successfully initialized NodeJS Code Generator 1.2.2.0
 INFORMATION: Successfully initialized Ruby Code Generator 1.2.2.0
+WARNING: 5 exported name(s) unnecessarily contains the service name. Please consider removing the service name.
+WARNING: The name 'CreatePets' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Error' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ListPets' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Pet' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ShowPetByID' unnecessarily contains the service name; the service name will be trimmed.

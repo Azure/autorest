@@ -5,7 +5,7 @@
 
 import { Extension, ExtensionManager } from "@microsoft.azure/extension";
 import { ChildProcess } from "child_process";
-import { homedir } from "os";
+
 import { join } from "path";
 import { Artifact } from './artifact';
 import * as Constants from './constants';
@@ -464,7 +464,7 @@ export class ConfigurationView {
 export class Configuration {
   public constructor(
     private fileSystem?: IFileSystem,
-    private configFileOrFolderUri?: string
+    private configFileOrFolderUri?: string,
   ) { }
 
   private async ParseCodeBlocks(configFile: DataHandleRead, contextConfig: ConfigurationView, scope: string): Promise<AutoRestConfigurationImpl[]> {
@@ -520,7 +520,7 @@ export class Configuration {
       configSegments.push(...blocks);
     }
     // 4. resolve externals
-    const extMgr = await ExtensionManager.Create(join(homedir(), ".autorest"));
+    const extMgr = await ExtensionManager.Create(join(process.env["autorest.home"], ".autorest"));
     const addedExtensions = new Set<string>();
     while (true) {
       const tmpView = createView();
@@ -532,23 +532,26 @@ export class Configuration {
       for (const additionalExtension of additionalExtensions) {
         addedExtensions.add(additionalExtension.fullyQualified);
 
-        // TODO: remove
-        if (additionalExtension.name === "@microsoft.azure/autorest-classic-generators")
-          additionalExtension.source = __dirname.replace(/\\/g, "/").replace("autorest-core/dist/lib", "core/AutoRest");
-        // TODO: remove
-
         let ext = loadedExtensions[additionalExtension.fullyQualified];
 
         if (!ext) {
-          // acquire extension
-          const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
-          const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, progressInit => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
+          const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
+          if (installedExtension) {
+            ext = loadedExtensions[additionalExtension.fullyQualified] = {
+              extension: installedExtension,
+              autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await installedExtension.start()))
+            };
+          } else {
+            // acquire extension
+            const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
+            const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, progressInit => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
+            // start extension
+            ext = loadedExtensions[additionalExtension.fullyQualified] = {
+              extension: extension,
+              autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start()))
+            };
+          }
 
-          // start extension
-          ext = loadedExtensions[additionalExtension.fullyQualified] = {
-            extension: extension,
-            autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start()))
-          };
         }
 
         // merge config

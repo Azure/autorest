@@ -1,3 +1,6 @@
+(C) 2017 **Microsoft Corporation.**  
+# AutoRest code generation utility.
+https://aka.ms/autorest
 INFORMATION: Generating client model from swagger model.
 INFORMATION: Generating client model from swagger model.
 INFORMATION: Generating client model from swagger model.

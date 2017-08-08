@@ -30,7 +30,6 @@ class StorageManagementClient extends ServiceClient {
    * @param {object} [options.requestOptions] - Options for the underlying request object
    * {@link https://github.com/request/request#requestoptions-callback Options doc}
    * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-   * @param {string} [options.apiVersion] - Client Api Version.
    * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
    * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
    * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
@@ -60,9 +59,6 @@ class StorageManagementClient extends ServiceClient {
 
     let packageInfo = this.getPackageJsonInfo(__dirname);
     this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
-    if(options.apiVersion !== null && options.apiVersion !== undefined) {
-      this.apiVersion = options.apiVersion;
-    }
     if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
       this.acceptLanguage = options.acceptLanguage;
     }

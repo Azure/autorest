@@ -10,6 +10,7 @@ import { PumpMessagesToConsole } from './test-utility';
 @suite class EndToEnd {
   @test @timeout(120000) async "network full game"() {
     const autoRest = new AutoRest(new RealFileSystem());
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
       "input-file": [
@@ -45,6 +46,7 @@ import { PumpMessagesToConsole } from './test-utility';
 
   @test @timeout(60000) async "other configuration scenario"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-complicated.md"));
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     // PumpMessagesToConsole(autoRest);
 
 
@@ -55,6 +57,7 @@ import { PumpMessagesToConsole } from './test-utility';
 
   @test @timeout(60000) async "complicated configuration scenario"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-complicated.md"));
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
       "cmd-line-true": true,
@@ -79,6 +82,7 @@ import { PumpMessagesToConsole } from './test-utility';
   // TODO: fix this test when validation rules are properly categorized
   @test @timeout(60000) async "non-arm type spec testing"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/validation-options/readme.md"));
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     autoRest.AddConfiguration({
       "openapi-type": "default",
       "azure-validator": true
@@ -95,6 +99,7 @@ import { PumpMessagesToConsole } from './test-utility';
   }
   @test @timeout(60000) async "arm type spec testing"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/validation-options/readme.md"));
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     autoRest.AddConfiguration({
       "openapi-type": "arm",
       "azure-validator": true

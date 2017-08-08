@@ -11,6 +11,7 @@ import { Channel, Message } from "../lib/message";
 @suite class SwaggerLoading {
   @test @timeout(0) async "external reference resolving"() {
     const autoRest = new AutoRest();
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
@@ -36,6 +37,7 @@ import { Channel, Message } from "../lib/message";
       ]);
     assert.strictEqual((config["input-file"] as any).length, 18);
     const autoRest = new AutoRest(new RealFileSystem());
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     await autoRest.AddConfiguration(config);
 
     const messages: Message[] = [];
