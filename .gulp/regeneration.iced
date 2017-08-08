@@ -630,6 +630,8 @@ task 'regenerate-samples', '', (done) ->
       count++
       autorest [each.path]
         , (code,stdout,stderr) ->
+          count--
+          done() if( count == 0 ) 
           outputFolder = path.join(each.path, "../shell")
           mkdir outputFolder if !(test "-d", outputFolder)
           ShellString(code).to(path.join(outputFolder, "code.txt"))
@@ -645,8 +647,7 @@ task 'regenerate-samples', '', (done) ->
               (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file)   # minify exception stack traces
               (sort file).to(file) if file.endsWith("stdout.txt") || file.endsWith("stderr.txt")
             )
-          count--
-          done() if( count == 0 ) 
+          
           next null
         , true # don't fail on failures (since we wanna record them)
       return null;
