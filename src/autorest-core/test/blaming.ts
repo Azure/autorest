@@ -13,7 +13,7 @@ import { parse } from "../lib/ref/jsonpath";
 
 @suite class Blaming {
 
-  @test @timeout(0) async "end to end blaming with literate swagger"() {
+  @test @skip @timeout(0) async "end to end blaming with literate swagger"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-composite.md"));
 
     autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
@@ -41,8 +41,7 @@ import { parse } from "../lib/ref/jsonpath";
       // assert.equal(blameInputs.length, 2); // TODO: blame configuration file segments!
     }
 
-
-    // path with existant node in path
+    // path with existent node in path
     {
       let msg = {
         Text: 'Phoney message to test', Channel: Channel.Warning, Source: [<SourceLocation>
