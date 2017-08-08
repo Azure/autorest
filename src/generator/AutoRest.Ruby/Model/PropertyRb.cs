@@ -12,10 +12,15 @@ namespace AutoRest.Ruby.Model
     {
         protected PropertyRb()
         {
-            // properties with dots in serialized name should escape . with back slash. For example: 'odata.nextLink'
-            // 1. When properties are flattened use serialized name directly
-            // 2. When properties are not flattened and have . in serialized name then escape . with back slash
-            SerializedName.OnGet += serializedName => (this.WasFlattened() ? serializedName : serializedName?.Replace(".", "\\\\."));
+        }
+
+        // properties with dots in serialized name should escape . with back slash. For example: 'odata.nextLink'
+        // 1. When properties are flattened use serialized name directly
+        // 2. When properties are not flattened and have . in serialized name then escape . with back slash
+        public override string SerializedName
+        {
+            get => this.WasFlattened() ? base.SerializedName : base.SerializedName?.Replace(".", "\\\\.");
+            set => base.SerializedName = value;
         }
     }
 }

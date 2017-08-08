@@ -346,7 +346,7 @@ namespace AutoRest.Extensions
             {
                 propertyName = propertyName.Replace(".", "\\\\.");
             }
-            property.SerializedName.FixedValue = basePath + "." + propertyName;
+            property.SerializedName = basePath + "." + propertyName;
             return property;
         }
 

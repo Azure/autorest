@@ -23,19 +23,19 @@ namespace AutoRest.Python.Model
                 return value.ToPythonCase();
             };
             DefaultValue.OnGet += value => value.Else(PythonConstants.None);
+        }
 
-            SerializedName.OnGet += value =>
+        public override string SerializedName
+        {
+            get
             {
-                if (value != null)
+                if (base.SerializedName != null && base.SerializedName.IndexOf(".") > -1 && base.SerializedName.IndexOf("\\\\") == -1 && !Extensions.ContainsKey("x-ms-client-flatten-original-type-name"))
                 {
-                    if (value.IndexOf(".") > -1 && value.IndexOf("\\\\") == -1 &&
-                        !Extensions.ContainsKey("x-ms-client-flatten-original-type-name"))
-                    {
-                        return value.Replace(".", "\\\\.");
-                    }
+                    return base.SerializedName.Replace(".", "\\\\.");
                 }
-                return value;
-            };
+                return base.SerializedName;
+            }
+            set => base.SerializedName = value;
         }
 
         public bool IsSpecialConstant { get; set; }

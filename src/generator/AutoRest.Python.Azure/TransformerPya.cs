@@ -94,18 +94,18 @@ namespace AutoRest.Python.Azure
             var findItem = false;
             foreach (var property in body.ComposedProperties)
             {
-                var propName = property.SerializedName.Value;
+                var propName = property.SerializedName;
 
                 if (propName == nextLinkName)
                 {
                     findNextLink = true;
-                    nextLinkName = property.SerializedName.FixedValue = property.SerializedName.Value.Replace(".", "\\\\.");
+                    nextLinkName = property.SerializedName = property.SerializedName.Replace(".", "\\\\.");
 
                 }
                 else if (propName == itemName)
                 {
                     findItem = true;
-                    itemName = property.SerializedName.FixedValue = property.SerializedName.Value.Replace(".", "\\\\.");
+                    itemName = property.SerializedName = property.SerializedName.Replace(".", "\\\\.");
                 }
 
                 if (propName == nextLinkName.Replace(".", "\\\\."))

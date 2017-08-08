@@ -68,7 +68,7 @@ namespace AutoRest.Swagger
 
                 var clientProperty = New<Property>();
                 clientProperty.LoadFrom(parameter);
-                clientProperty.RealPath = new string[] { parameter.SerializedName.Value };
+                clientProperty.RealPath = new string[] { parameter.SerializedName };
 
                 CodeModel.Add(clientProperty);
             }

@@ -24,8 +24,12 @@ namespace AutoRest.NodeJS.Model
                 return CodeNamer.Instance.GetPropertyName(name);
 
             };
+        }
 
-            SerializedName.OnGet += serializedName => (this.WasFlattened() ? serializedName : serializedName?.Replace(".", "\\\\."))?.Replace("\\\\\\\\","\\\\");
+        public override string SerializedName
+        {
+            get => (this.WasFlattened() ? base.SerializedName : base.SerializedName?.Replace(".", "\\\\."))?.Replace("\\\\\\\\", "\\\\");
+            set => base.SerializedName = value;
         }
     }
 }
