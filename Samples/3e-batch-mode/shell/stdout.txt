@@ -1,0 +1,9 @@
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Generating client model from swagger model.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Initializing code generator.
+INFORMATION: Successfully initialized Azure.CSharp Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Java Code Generator 1.2.2.0
+INFORMATION: Successfully initialized Ruby Code Generator 1.2.2.0

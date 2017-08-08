@@ -20,9 +20,13 @@ require 'generated/stream_with_content_type/module_definition'
 
 module StreamWithContentType
   autoload :Image,                                              'generated/stream_with_content_type/image.rb'
+  autoload :Text,                                               'generated/stream_with_content_type/text.rb'
   autoload :CowbellModerator,                                   'generated/stream_with_content_type/cowbell_moderator.rb'
 
   module Models
-    autoload :ContentType,                                        'generated/stream_with_content_type/models/content_type.rb'
+    autoload :ImageType,                                          'generated/stream_with_content_type/models/image_type.rb'
+    autoload :ImageTypeRestricted,                                'generated/stream_with_content_type/models/image_type_restricted.rb'
+    autoload :ImageTypeRestrictedStrings,                         'generated/stream_with_content_type/models/image_type_restricted_strings.rb'
+    autoload :ContentTypes,                                       'generated/stream_with_content_type/models/content_types.rb'
   end
 end

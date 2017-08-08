@@ -8,10 +8,29 @@
 from enum import Enum
 
 
-class ContentType(Enum):
+class ImageType(Enum):
 
     imagegif = "image/gif"
     imagejpeg = "image/jpeg"
     imagepng = "image/png"
     imagebmp = "image/bmp"
     imagetiff = "image/tiff"
+
+
+class ImageTypeRestricted(Enum):
+
+    imagepng = "image/png"
+    imagetiff = "image/tiff"
+
+
+class ImageTypeRestrictedStrings(Enum):
+
+    imagepng = "image/png"
+    imagetiff = "image/tiff"
+
+
+class ContentTypes(Enum):
+
+    textplain = "text/plain"
+    textjson = "text/json"
+    textxml = "text/xml"

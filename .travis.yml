@@ -43,11 +43,9 @@ install:
     bundle install
     pip install --user tox
     # Install go
-    sudo curl -O https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
-    sudo tar -xvf go1.8.3.linux-amd64.tar.gz > /dev/null
-    sudo mv go /usr/local/
-    export PATH=$PATH:/usr/local/go/bin
+    eval "$(curl -sL https://raw.githubusercontent.com/travis-ci/gimme/master/gimme | GIMME_GO_VERSION=1.8 bash)"
     export GOPATH=`pwd`/src/generator/AutoRest.Go.Tests
+    go version
     sudo chmod -R 777 `echo $GOPATH`
     sudo apt-get install git -y
     sudo add-apt-repository ppa:masterminds/glide -y && sudo apt-get update

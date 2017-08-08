@@ -214,6 +214,8 @@ namespace AutoRest.Extensions.Azure
                 {
                     // copy the method 
                     var m = Duplicate(method);
+                    // x-ms-examples of source method do not really apply
+                    m.Extensions.Remove(Core.Model.XmsExtensions.Examples.Name);
 
                     // change the name, remove the extension.
                     m.Name = "Begin" + m.Name.ToPascalCase();
@@ -344,6 +346,8 @@ namespace AutoRest.Extensions.Azure
                     if (nextLinkMethod == null)
                     {
                         nextLinkMethod = Duplicate<Method>(method);
+                        // x-ms-examples of source method do not apply
+                        nextLinkMethod.Extensions.Remove(Core.Model.XmsExtensions.Examples.Name);
 
                         if (!string.IsNullOrEmpty(pageableExtension.OperationName))
                         {

@@ -30,4 +30,10 @@ public interface CowbellModerator {
      */
     Images images();
 
+    /**
+     * Gets the Texts object to access its operations.
+     * @return the Texts object.
+     */
+    Texts texts();
+
 }
