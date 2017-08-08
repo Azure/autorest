@@ -18,16 +18,12 @@ modelTypes:
         name:
           fixed: false
           raw: id
-        serializedName:
-          fixed: false
-          raw: id
+        serializedName: id
         modelType:
           $id: '3'
           $type: PrimaryType
           format: int64
           knownPrimaryType: long
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: Long
@@ -46,15 +42,11 @@ modelTypes:
         name:
           fixed: false
           raw: name
-        serializedName:
-          fixed: false
-          raw: name
+        serializedName: name
         modelType:
           $id: '5'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -85,9 +77,7 @@ operations:
             name:
               fixed: false
               raw: body
-            serializedName:
-              fixed: false
-              raw: body
+            serializedName: body
             modelType:
               $ref: '1'
         name:
@@ -118,9 +108,4 @@ operations:
       raw: Cowbell
     typeName:
       fixed: false
-    nameForParameter:
-      fixed: false
-    nameForVariable:
-      fixed: false
-    nameForProperty:
-      fixed: false
+    nameForProperty: Cowbell

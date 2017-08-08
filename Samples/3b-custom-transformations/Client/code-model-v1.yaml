@@ -17,15 +17,11 @@ modelTypes:
         name:
           fixed: false
           raw: name
-        serializedName:
-          fixed: false
-          raw: name
+        serializedName: name
         modelType:
           $id: '3'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -44,15 +40,11 @@ modelTypes:
         name:
           fixed: false
           raw: type
-        serializedName:
-          fixed: false
-          raw: type
+        serializedName: type
         modelType:
           $id: '5'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -82,15 +74,11 @@ modelTypes:
         name:
           fixed: false
           raw: nameAvailable
-        serializedName:
-          fixed: false
-          raw: nameAvailable
+        serializedName: nameAvailable
         modelType:
           $id: '8'
           $type: PrimaryType
           knownPrimaryType: boolean
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: Boolean
@@ -115,9 +103,7 @@ modelTypes:
         name:
           fixed: false
           raw: reason
-        serializedName:
-          fixed: false
-          raw: reason
+        serializedName: reason
         modelType:
           $id: '10'
           $type: EnumType
@@ -145,15 +131,11 @@ modelTypes:
         name:
           fixed: false
           raw: message
-        serializedName:
-          fixed: false
-          raw: message
+        serializedName: message
         modelType:
           $id: '12'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -185,9 +167,7 @@ modelTypes:
         name:
           fixed: false
           raw: accountType
-        serializedName:
-          fixed: false
-          raw: accountType
+        serializedName: accountType
         modelType:
           $id: '15'
           $type: EnumType
@@ -229,15 +209,11 @@ modelTypes:
         name:
           fixed: false
           raw: location
-        serializedName:
-          fixed: false
-          raw: location
+        serializedName: location
         modelType:
           $id: '18'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -256,9 +232,7 @@ modelTypes:
         name:
           fixed: false
           raw: tags
-        serializedName:
-          fixed: false
-          raw: tags
+        serializedName: tags
         modelType:
           $id: '20'
           $type: DictionaryType
@@ -266,8 +240,6 @@ modelTypes:
             $id: '21'
             $type: PrimaryType
             knownPrimaryType: string
-            serializedName:
-              fixed: false
             name:
               fixed: false
               raw: String
@@ -290,9 +262,7 @@ modelTypes:
         name:
           fixed: false
           raw: properties
-        serializedName:
-          fixed: false
-          raw: properties
+        serializedName: properties
         modelType:
           $ref: '13'
     serializedName: StorageAccountCreateParameters
@@ -321,15 +291,11 @@ modelTypes:
         name:
           fixed: false
           raw: blob
-        serializedName:
-          fixed: false
-          raw: blob
+        serializedName: blob
         modelType:
           $id: '25'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -348,15 +314,11 @@ modelTypes:
         name:
           fixed: false
           raw: queue
-        serializedName:
-          fixed: false
-          raw: queue
+        serializedName: queue
         modelType:
           $id: '27'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -375,15 +337,11 @@ modelTypes:
         name:
           fixed: false
           raw: table
-        serializedName:
-          fixed: false
-          raw: table
+        serializedName: table
         modelType:
           $id: '29'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -402,15 +360,11 @@ modelTypes:
         name:
           fixed: false
           raw: file
-        serializedName:
-          fixed: false
-          raw: file
+        serializedName: file
         modelType:
           $id: '31'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -440,15 +394,11 @@ modelTypes:
         name:
           fixed: false
           raw: name
-        serializedName:
-          fixed: false
-          raw: name
+        serializedName: name
         modelType:
           $id: '34'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -469,15 +419,11 @@ modelTypes:
         name:
           fixed: false
           raw: useSubDomain
-        serializedName:
-          fixed: false
-          raw: useSubDomain
+        serializedName: useSubDomain
         modelType:
           $id: '36'
           $type: PrimaryType
           knownPrimaryType: boolean
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: Boolean
@@ -513,9 +459,7 @@ modelTypes:
         name:
           fixed: false
           raw: provisioningState
-        serializedName:
-          fixed: false
-          raw: provisioningState
+        serializedName: provisioningState
         modelType:
           $id: '39'
           $type: EnumType
@@ -549,9 +493,7 @@ modelTypes:
         name:
           fixed: false
           raw: accountType
-        serializedName:
-          fixed: false
-          raw: accountType
+        serializedName: accountType
         modelType:
           $ref: '15'
       - $id: '41'
@@ -572,9 +514,7 @@ modelTypes:
         name:
           fixed: false
           raw: primaryEndpoints
-        serializedName:
-          fixed: false
-          raw: primaryEndpoints
+        serializedName: primaryEndpoints
         modelType:
           $ref: '23'
       - $id: '42'
@@ -592,15 +532,11 @@ modelTypes:
         name:
           fixed: false
           raw: primaryLocation
-        serializedName:
-          fixed: false
-          raw: primaryLocation
+        serializedName: primaryLocation
         modelType:
           $id: '43'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -625,9 +561,7 @@ modelTypes:
         name:
           fixed: false
           raw: statusOfPrimary
-        serializedName:
-          fixed: false
-          raw: statusOfPrimary
+        serializedName: statusOfPrimary
         modelType:
           $id: '45'
           $type: EnumType
@@ -659,16 +593,12 @@ modelTypes:
         name:
           fixed: false
           raw: lastGeoFailoverTime
-        serializedName:
-          fixed: false
-          raw: lastGeoFailoverTime
+        serializedName: lastGeoFailoverTime
         modelType:
           $id: '47'
           $type: PrimaryType
           format: date-time
           knownPrimaryType: dateTime
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: DateTime
@@ -690,15 +620,11 @@ modelTypes:
         name:
           fixed: false
           raw: secondaryLocation
-        serializedName:
-          fixed: false
-          raw: secondaryLocation
+        serializedName: secondaryLocation
         modelType:
           $id: '49'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -724,9 +650,7 @@ modelTypes:
         name:
           fixed: false
           raw: statusOfSecondary
-        serializedName:
-          fixed: false
-          raw: statusOfSecondary
+        serializedName: statusOfSecondary
         modelType:
           $ref: '45'
       - $id: '51'
@@ -744,16 +668,12 @@ modelTypes:
         name:
           fixed: false
           raw: creationTime
-        serializedName:
-          fixed: false
-          raw: creationTime
+        serializedName: creationTime
         modelType:
           $id: '52'
           $type: PrimaryType
           format: date-time
           knownPrimaryType: dateTime
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: DateTime
@@ -774,9 +694,7 @@ modelTypes:
         name:
           fixed: false
           raw: customDomain
-        serializedName:
-          fixed: false
-          raw: customDomain
+        serializedName: customDomain
         modelType:
           $ref: '32'
       - $id: '54'
@@ -797,9 +715,7 @@ modelTypes:
         name:
           fixed: false
           raw: secondaryEndpoints
-        serializedName:
-          fixed: false
-          raw: secondaryEndpoints
+        serializedName: secondaryEndpoints
         modelType:
           $ref: '23'
     serializedName: StorageAccountProperties
@@ -826,9 +742,7 @@ modelTypes:
         name:
           fixed: false
           raw: properties
-        serializedName:
-          fixed: false
-          raw: properties
+        serializedName: properties
         modelType:
           $ref: '37'
     serializedName: StorageAccount
@@ -851,15 +765,11 @@ modelTypes:
           name:
             fixed: false
             raw: id
-          serializedName:
-            fixed: false
-            raw: id
+          serializedName: id
           modelType:
             $id: '59'
             $type: PrimaryType
             knownPrimaryType: string
-            serializedName:
-              fixed: false
             name:
               fixed: false
               raw: String
@@ -878,15 +788,11 @@ modelTypes:
           name:
             fixed: false
             raw: name
-          serializedName:
-            fixed: false
-            raw: name
+          serializedName: name
           modelType:
             $id: '61'
             $type: PrimaryType
             knownPrimaryType: string
-            serializedName:
-              fixed: false
             name:
               fixed: false
               raw: String
@@ -905,15 +811,11 @@ modelTypes:
           name:
             fixed: false
             raw: type
-          serializedName:
-            fixed: false
-            raw: type
+          serializedName: type
           modelType:
             $id: '63'
             $type: PrimaryType
             knownPrimaryType: string
-            serializedName:
-              fixed: false
             name:
               fixed: false
               raw: String
@@ -932,15 +834,11 @@ modelTypes:
           name:
             fixed: false
             raw: location
-          serializedName:
-            fixed: false
-            raw: location
+          serializedName: location
           modelType:
             $id: '65'
             $type: PrimaryType
             knownPrimaryType: string
-            serializedName:
-              fixed: false
             name:
               fixed: false
               raw: String
@@ -959,9 +857,7 @@ modelTypes:
           name:
             fixed: false
             raw: tags
-          serializedName:
-            fixed: false
-            raw: tags
+          serializedName: tags
           modelType:
             $id: '67'
             $type: DictionaryType
@@ -969,8 +865,6 @@ modelTypes:
               $id: '68'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1007,15 +901,11 @@ modelTypes:
         name:
           fixed: false
           raw: key1
-        serializedName:
-          fixed: false
-          raw: key1
+        serializedName: key1
         modelType:
           $id: '71'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -1034,15 +924,11 @@ modelTypes:
         name:
           fixed: false
           raw: key2
-        serializedName:
-          fixed: false
-          raw: key2
+        serializedName: key2
         modelType:
           $id: '73'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -1070,9 +956,7 @@ modelTypes:
         name:
           fixed: false
           raw: value
-        serializedName:
-          fixed: false
-          raw: value
+        serializedName: value
         modelType:
           $id: '76'
           $type: SequenceType
@@ -1111,9 +995,7 @@ modelTypes:
         name:
           fixed: false
           raw: accountType
-        serializedName:
-          fixed: false
-          raw: accountType
+        serializedName: accountType
         modelType:
           $ref: '15'
       - $id: '79'
@@ -1135,9 +1017,7 @@ modelTypes:
         name:
           fixed: false
           raw: customDomain
-        serializedName:
-          fixed: false
-          raw: customDomain
+        serializedName: customDomain
         modelType:
           $ref: '32'
     serializedName: StorageAccountPropertiesUpdateParameters
@@ -1163,9 +1043,7 @@ modelTypes:
         name:
           fixed: false
           raw: tags
-        serializedName:
-          fixed: false
-          raw: tags
+        serializedName: tags
         modelType:
           $id: '82'
           $type: DictionaryType
@@ -1173,8 +1051,6 @@ modelTypes:
             $id: '83'
             $type: PrimaryType
             knownPrimaryType: string
-            serializedName:
-              fixed: false
             name:
               fixed: false
               raw: String
@@ -1197,9 +1073,7 @@ modelTypes:
         name:
           fixed: false
           raw: properties
-        serializedName:
-          fixed: false
-          raw: properties
+        serializedName: properties
         modelType:
           $ref: '77'
     serializedName: StorageAccountUpdateParameters
@@ -1227,15 +1101,11 @@ modelTypes:
         name:
           fixed: false
           raw: keyName
-        serializedName:
-          fixed: false
-          raw: keyName
+        serializedName: keyName
         modelType:
           $id: '87'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -1262,15 +1132,11 @@ modelTypes:
         name:
           fixed: false
           raw: value
-        serializedName:
-          fixed: false
-          raw: value
+        serializedName: value
         modelType:
           $id: '90'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -1289,15 +1155,11 @@ modelTypes:
         name:
           fixed: false
           raw: localizedValue
-        serializedName:
-          fixed: false
-          raw: localizedValue
+        serializedName: localizedValue
         modelType:
           $id: '92'
           $type: PrimaryType
           knownPrimaryType: string
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: String
@@ -1329,9 +1191,7 @@ modelTypes:
         name:
           fixed: false
           raw: unit
-        serializedName:
-          fixed: false
-          raw: unit
+        serializedName: unit
         modelType:
           $id: '95'
           $type: EnumType
@@ -1369,16 +1229,12 @@ modelTypes:
         name:
           fixed: false
           raw: currentValue
-        serializedName:
-          fixed: false
-          raw: currentValue
+        serializedName: currentValue
         modelType:
           $id: '97'
           $type: PrimaryType
           format: int32
           knownPrimaryType: int
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: Int
@@ -1399,16 +1255,12 @@ modelTypes:
         name:
           fixed: false
           raw: limit
-        serializedName:
-          fixed: false
-          raw: limit
+        serializedName: limit
         modelType:
           $id: '99'
           $type: PrimaryType
           format: int32
           knownPrimaryType: int
-          serializedName:
-            fixed: false
           name:
             fixed: false
             raw: Int
@@ -1427,9 +1279,7 @@ modelTypes:
         name:
           fixed: false
           raw: name
-        serializedName:
-          fixed: false
-          raw: name
+        serializedName: name
         modelType:
           $ref: '88'
     serializedName: Usage
@@ -1456,9 +1306,7 @@ modelTypes:
         name:
           fixed: false
           raw: value
-        serializedName:
-          fixed: false
-          raw: value
+        serializedName: value
         modelType:
           $id: '103'
           $type: SequenceType
@@ -1504,15 +1352,11 @@ properties:
     name:
       fixed: false
       raw: subscriptionId
-    serializedName:
-      fixed: false
-      raw: subscriptionId
+    serializedName: subscriptionId
     modelType:
       $id: '105'
       $type: PrimaryType
       knownPrimaryType: string
-      serializedName:
-        fixed: false
       name:
         fixed: false
         raw: String
@@ -1531,15 +1375,11 @@ properties:
     name:
       fixed: false
       raw: api-version
-    serializedName:
-      fixed: false
-      raw: api-version
+    serializedName: api-version
     modelType:
       $id: '107'
       $type: PrimaryType
       knownPrimaryType: string
-      serializedName:
-        fixed: false
       name:
         fixed: false
         raw: String
@@ -1562,9 +1402,7 @@ operations:
             name:
               fixed: false
               raw: accountName
-            serializedName:
-              fixed: false
-              raw: accountName
+            serializedName: accountName
             modelType:
               $ref: '1'
           - $id: '109'
@@ -1582,15 +1420,11 @@ operations:
             name:
               fixed: false
               raw: api-version
-            serializedName:
-              fixed: false
-              raw: api-version
+            serializedName: api-version
             modelType:
               $id: '110'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1612,15 +1446,11 @@ operations:
             name:
               fixed: false
               raw: subscriptionId
-            serializedName:
-              fixed: false
-              raw: subscriptionId
+            serializedName: subscriptionId
             modelType:
               $id: '112'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1669,15 +1499,11 @@ operations:
             name:
               fixed: false
               raw: resourceGroupName
-            serializedName:
-              fixed: false
-              raw: resourceGroupName
+            serializedName: resourceGroupName
             modelType:
               $id: '114'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1700,15 +1526,11 @@ operations:
             name:
               fixed: false
               raw: accountName
-            serializedName:
-              fixed: false
-              raw: accountName
+            serializedName: accountName
             modelType:
               $id: '116'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1725,9 +1547,7 @@ operations:
             name:
               fixed: false
               raw: parameters
-            serializedName:
-              fixed: false
-              raw: parameters
+            serializedName: parameters
             modelType:
               $ref: '16'
           - $id: '118'
@@ -1745,15 +1565,11 @@ operations:
             name:
               fixed: false
               raw: api-version
-            serializedName:
-              fixed: false
-              raw: api-version
+            serializedName: api-version
             modelType:
               $id: '119'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1775,15 +1591,11 @@ operations:
             name:
               fixed: false
               raw: subscriptionId
-            serializedName:
-              fixed: false
-              raw: subscriptionId
+            serializedName: subscriptionId
             modelType:
               $id: '121'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1840,15 +1652,11 @@ operations:
             name:
               fixed: false
               raw: resourceGroupName
-            serializedName:
-              fixed: false
-              raw: resourceGroupName
+            serializedName: resourceGroupName
             modelType:
               $id: '123'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1871,15 +1679,11 @@ operations:
             name:
               fixed: false
               raw: accountName
-            serializedName:
-              fixed: false
-              raw: accountName
+            serializedName: accountName
             modelType:
               $id: '125'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1898,15 +1702,11 @@ operations:
             name:
               fixed: false
               raw: api-version
-            serializedName:
-              fixed: false
-              raw: api-version
+            serializedName: api-version
             modelType:
               $id: '127'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1928,15 +1728,11 @@ operations:
             name:
               fixed: false
               raw: subscriptionId
-            serializedName:
-              fixed: false
-              raw: subscriptionId
+            serializedName: subscriptionId
             modelType:
               $id: '129'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -1981,15 +1777,11 @@ operations:
             name:
               fixed: false
               raw: resourceGroupName
-            serializedName:
-              fixed: false
-              raw: resourceGroupName
+            serializedName: resourceGroupName
             modelType:
               $id: '131'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2012,15 +1804,11 @@ operations:
             name:
               fixed: false
               raw: accountName
-            serializedName:
-              fixed: false
-              raw: accountName
+            serializedName: accountName
             modelType:
               $id: '133'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2039,15 +1827,11 @@ operations:
             name:
               fixed: false
               raw: api-version
-            serializedName:
-              fixed: false
-              raw: api-version
+            serializedName: api-version
             modelType:
               $id: '135'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2069,15 +1853,11 @@ operations:
             name:
               fixed: false
               raw: subscriptionId
-            serializedName:
-              fixed: false
-              raw: subscriptionId
+            serializedName: subscriptionId
             modelType:
               $id: '137'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2127,15 +1907,11 @@ operations:
             name:
               fixed: false
               raw: resourceGroupName
-            serializedName:
-              fixed: false
-              raw: resourceGroupName
+            serializedName: resourceGroupName
             modelType:
               $id: '139'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2158,15 +1934,11 @@ operations:
             name:
               fixed: false
               raw: accountName
-            serializedName:
-              fixed: false
-              raw: accountName
+            serializedName: accountName
             modelType:
               $id: '141'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2185,9 +1957,7 @@ operations:
             name:
               fixed: false
               raw: parameters
-            serializedName:
-              fixed: false
-              raw: parameters
+            serializedName: parameters
             modelType:
               $ref: '80'
           - $id: '143'
@@ -2205,15 +1975,11 @@ operations:
             name:
               fixed: false
               raw: api-version
-            serializedName:
-              fixed: false
-              raw: api-version
+            serializedName: api-version
             modelType:
               $id: '144'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2235,15 +2001,11 @@ operations:
             name:
               fixed: false
               raw: subscriptionId
-            serializedName:
-              fixed: false
-              raw: subscriptionId
+            serializedName: subscriptionId
             modelType:
               $id: '146'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2303,15 +2065,11 @@ operations:
             name:
               fixed: false
               raw: resourceGroupName
-            serializedName:
-              fixed: false
-              raw: resourceGroupName
+            serializedName: resourceGroupName
             modelType:
               $id: '148'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2331,15 +2089,11 @@ operations:
             name:
               fixed: false
               raw: accountName
-            serializedName:
-              fixed: false
-              raw: accountName
+            serializedName: accountName
             modelType:
               $id: '150'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2358,15 +2112,11 @@ operations:
             name:
               fixed: false
               raw: api-version
-            serializedName:
-              fixed: false
-              raw: api-version
+            serializedName: api-version
             modelType:
               $id: '152'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2388,15 +2138,11 @@ operations:
             name:
               fixed: false
               raw: subscriptionId
-            serializedName:
-              fixed: false
-              raw: subscriptionId
+            serializedName: subscriptionId
             modelType:
               $id: '154'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2445,15 +2191,11 @@ operations:
             name:
               fixed: false
               raw: api-version
-            serializedName:
-              fixed: false
-              raw: api-version
+            serializedName: api-version
             modelType:
               $id: '156'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2475,15 +2217,11 @@ operations:
             name:
               fixed: false
               raw: subscriptionId
-            serializedName:
-              fixed: false
-              raw: subscriptionId
+            serializedName: subscriptionId
             modelType:
               $id: '158'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2536,15 +2274,11 @@ operations:
             name:
               fixed: false
               raw: resourceGroupName
-            serializedName:
-              fixed: false
-              raw: resourceGroupName
+            serializedName: resourceGroupName
             modelType:
               $id: '160'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2563,15 +2297,11 @@ operations:
             name:
               fixed: false
               raw: api-version
-            serializedName:
-              fixed: false
-              raw: api-version
+            serializedName: api-version
             modelType:
               $id: '162'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2593,15 +2323,11 @@ operations:
             name:
               fixed: false
               raw: subscriptionId
-            serializedName:
-              fixed: false
-              raw: subscriptionId
+            serializedName: subscriptionId
             modelType:
               $id: '164'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2654,15 +2380,11 @@ operations:
             name:
               fixed: false
               raw: resourceGroupName
-            serializedName:
-              fixed: false
-              raw: resourceGroupName
+            serializedName: resourceGroupName
             modelType:
               $id: '166'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2685,15 +2407,11 @@ operations:
             name:
               fixed: false
               raw: accountName
-            serializedName:
-              fixed: false
-              raw: accountName
+            serializedName: accountName
             modelType:
               $id: '168'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2712,9 +2430,7 @@ operations:
             name:
               fixed: false
               raw: regenerateKey
-            serializedName:
-              fixed: false
-              raw: regenerateKey
+            serializedName: regenerateKey
             modelType:
               $ref: '85'
           - $id: '170'
@@ -2732,15 +2448,11 @@ operations:
             name:
               fixed: false
               raw: api-version
-            serializedName:
-              fixed: false
-              raw: api-version
+            serializedName: api-version
             modelType:
               $id: '171'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2762,15 +2474,11 @@ operations:
             name:
               fixed: false
               raw: subscriptionId
-            serializedName:
-              fixed: false
-              raw: subscriptionId
+            serializedName: subscriptionId
             modelType:
               $id: '173'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -2808,12 +2516,7 @@ operations:
       raw: checkNameAvailability
     typeName:
       fixed: false
-    nameForParameter:
-      fixed: false
-    nameForVariable:
-      fixed: false
-    nameForProperty:
-      fixed: false
+    nameForProperty: StorageAccounts
     summary: |-
       {
         "methods": [
@@ -2836,10 +2539,7 @@ operations:
                   "fixed": false,
                   "raw": "accountName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "accountName"
-                },
+                "serializedName": "accountName",
                 "modelType": {
                   "$ref": "1"
                 }
@@ -2864,17 +2564,11 @@ operations:
                   "fixed": false,
                   "raw": "api-version"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "api-version"
-                },
+                "serializedName": "api-version",
                 "modelType": {
                   "$id": "110",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -2901,17 +2595,11 @@ operations:
                   "fixed": false,
                   "raw": "subscriptionId"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "subscriptionId"
-                },
+                "serializedName": "subscriptionId",
                 "modelType": {
                   "$id": "112",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -2976,17 +2664,11 @@ operations:
                   "fixed": false,
                   "raw": "resourceGroupName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "resourceGroupName"
-                },
+                "serializedName": "resourceGroupName",
                 "modelType": {
                   "$id": "114",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3014,17 +2696,11 @@ operations:
                   "fixed": false,
                   "raw": "accountName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "accountName"
-                },
+                "serializedName": "accountName",
                 "modelType": {
                   "$id": "116",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3048,10 +2724,7 @@ operations:
                   "fixed": false,
                   "raw": "parameters"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "parameters"
-                },
+                "serializedName": "parameters",
                 "modelType": {
                   "$ref": "16"
                 }
@@ -3076,17 +2749,11 @@ operations:
                   "fixed": false,
                   "raw": "api-version"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "api-version"
-                },
+                "serializedName": "api-version",
                 "modelType": {
                   "$id": "119",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3113,17 +2780,11 @@ operations:
                   "fixed": false,
                   "raw": "subscriptionId"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "subscriptionId"
-                },
+                "serializedName": "subscriptionId",
                 "modelType": {
                   "$id": "121",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3194,17 +2855,11 @@ operations:
                   "fixed": false,
                   "raw": "resourceGroupName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "resourceGroupName"
-                },
+                "serializedName": "resourceGroupName",
                 "modelType": {
                   "$id": "123",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3232,17 +2887,11 @@ operations:
                   "fixed": false,
                   "raw": "accountName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "accountName"
-                },
+                "serializedName": "accountName",
                 "modelType": {
                   "$id": "125",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3269,17 +2918,11 @@ operations:
                   "fixed": false,
                   "raw": "api-version"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "api-version"
-                },
+                "serializedName": "api-version",
                 "modelType": {
                   "$id": "127",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3306,17 +2949,11 @@ operations:
                   "fixed": false,
                   "raw": "subscriptionId"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "subscriptionId"
-                },
+                "serializedName": "subscriptionId",
                 "modelType": {
                   "$id": "129",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3378,17 +3015,11 @@ operations:
                   "fixed": false,
                   "raw": "resourceGroupName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "resourceGroupName"
-                },
+                "serializedName": "resourceGroupName",
                 "modelType": {
                   "$id": "131",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3416,17 +3047,11 @@ operations:
                   "fixed": false,
                   "raw": "accountName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "accountName"
-                },
+                "serializedName": "accountName",
                 "modelType": {
                   "$id": "133",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3453,17 +3078,11 @@ operations:
                   "fixed": false,
                   "raw": "api-version"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "api-version"
-                },
+                "serializedName": "api-version",
                 "modelType": {
                   "$id": "135",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3490,17 +3109,11 @@ operations:
                   "fixed": false,
                   "raw": "subscriptionId"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "subscriptionId"
-                },
+                "serializedName": "subscriptionId",
                 "modelType": {
                   "$id": "137",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3565,17 +3178,11 @@ operations:
                   "fixed": false,
                   "raw": "resourceGroupName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "resourceGroupName"
-                },
+                "serializedName": "resourceGroupName",
                 "modelType": {
                   "$id": "139",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3603,17 +3210,11 @@ operations:
                   "fixed": false,
                   "raw": "accountName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "accountName"
-                },
+                "serializedName": "accountName",
                 "modelType": {
                   "$id": "141",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3637,10 +3238,7 @@ operations:
                   "fixed": false,
                   "raw": "parameters"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "parameters"
-                },
+                "serializedName": "parameters",
                 "modelType": {
                   "$ref": "80"
                 }
@@ -3665,17 +3263,11 @@ operations:
                   "fixed": false,
                   "raw": "api-version"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "api-version"
-                },
+                "serializedName": "api-version",
                 "modelType": {
                   "$id": "144",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3702,17 +3294,11 @@ operations:
                   "fixed": false,
                   "raw": "subscriptionId"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "subscriptionId"
-                },
+                "serializedName": "subscriptionId",
                 "modelType": {
                   "$id": "146",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3777,17 +3363,11 @@ operations:
                   "fixed": false,
                   "raw": "resourceGroupName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "resourceGroupName"
-                },
+                "serializedName": "resourceGroupName",
                 "modelType": {
                   "$id": "148",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3815,17 +3395,11 @@ operations:
                   "fixed": false,
                   "raw": "accountName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "accountName"
-                },
+                "serializedName": "accountName",
                 "modelType": {
                   "$id": "150",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3852,17 +3426,11 @@ operations:
                   "fixed": false,
                   "raw": "api-version"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "api-version"
-                },
+                "serializedName": "api-version",
                 "modelType": {
                   "$id": "152",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3889,17 +3457,11 @@ operations:
                   "fixed": false,
                   "raw": "subscriptionId"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "subscriptionId"
-                },
+                "serializedName": "subscriptionId",
                 "modelType": {
                   "$id": "154",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -3967,17 +3529,11 @@ operations:
                   "fixed": false,
                   "raw": "api-version"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "api-version"
-                },
+                "serializedName": "api-version",
                 "modelType": {
                   "$id": "156",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4004,17 +3560,11 @@ operations:
                   "fixed": false,
                   "raw": "subscriptionId"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "subscriptionId"
-                },
+                "serializedName": "subscriptionId",
                 "modelType": {
                   "$id": "158",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4084,17 +3634,11 @@ operations:
                   "fixed": false,
                   "raw": "resourceGroupName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "resourceGroupName"
-                },
+                "serializedName": "resourceGroupName",
                 "modelType": {
                   "$id": "160",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4121,17 +3665,11 @@ operations:
                   "fixed": false,
                   "raw": "api-version"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "api-version"
-                },
+                "serializedName": "api-version",
                 "modelType": {
                   "$id": "162",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4158,17 +3696,11 @@ operations:
                   "fixed": false,
                   "raw": "subscriptionId"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "subscriptionId"
-                },
+                "serializedName": "subscriptionId",
                 "modelType": {
                   "$id": "164",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4238,17 +3770,11 @@ operations:
                   "fixed": false,
                   "raw": "resourceGroupName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "resourceGroupName"
-                },
+                "serializedName": "resourceGroupName",
                 "modelType": {
                   "$id": "166",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4276,17 +3802,11 @@ operations:
                   "fixed": false,
                   "raw": "accountName"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "accountName"
-                },
+                "serializedName": "accountName",
                 "modelType": {
                   "$id": "168",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4310,10 +3830,7 @@ operations:
                   "fixed": false,
                   "raw": "regenerateKey"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "regenerateKey"
-                },
+                "serializedName": "regenerateKey",
                 "modelType": {
                   "$ref": "85"
                 }
@@ -4338,17 +3855,11 @@ operations:
                   "fixed": false,
                   "raw": "api-version"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "api-version"
-                },
+                "serializedName": "api-version",
                 "modelType": {
                   "$id": "171",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4375,17 +3886,11 @@ operations:
                   "fixed": false,
                   "raw": "subscriptionId"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "subscriptionId"
-                },
+                "serializedName": "subscriptionId",
                 "modelType": {
                   "$id": "173",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4439,15 +3944,7 @@ operations:
         "typeName": {
           "fixed": false
         },
-        "nameForParameter": {
-          "fixed": false
-        },
-        "nameForVariable": {
-          "fixed": false
-        },
-        "nameForProperty": {
-          "fixed": false
-        }
+        "nameForProperty": "StorageAccounts"
       }
   - methods:
       - parameters:
@@ -4466,15 +3963,11 @@ operations:
             name:
               fixed: false
               raw: api-version
-            serializedName:
-              fixed: false
-              raw: api-version
+            serializedName: api-version
             modelType:
               $id: '175'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -4496,15 +3989,11 @@ operations:
             name:
               fixed: false
               raw: subscriptionId
-            serializedName:
-              fixed: false
-              raw: subscriptionId
+            serializedName: subscriptionId
             modelType:
               $id: '177'
               $type: PrimaryType
               knownPrimaryType: string
-              serializedName:
-                fixed: false
               name:
                 fixed: false
                 raw: String
@@ -4546,12 +4035,7 @@ operations:
       raw: usages
     typeName:
       fixed: false
-    nameForParameter:
-      fixed: false
-    nameForVariable:
-      fixed: false
-    nameForProperty:
-      fixed: false
+    nameForProperty: Usage
     summary: |-
       {
         "methods": [
@@ -4577,17 +4061,11 @@ operations:
                   "fixed": false,
                   "raw": "api-version"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "api-version"
-                },
+                "serializedName": "api-version",
                 "modelType": {
                   "$id": "175",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4614,17 +4092,11 @@ operations:
                   "fixed": false,
                   "raw": "subscriptionId"
                 },
-                "serializedName": {
-                  "fixed": false,
-                  "raw": "subscriptionId"
-                },
+                "serializedName": "subscriptionId",
                 "modelType": {
                   "$id": "177",
                   "$type": "PrimaryType",
                   "knownPrimaryType": "string",
-                  "serializedName": {
-                    "fixed": false
-                  },
                   "name": {
                     "fixed": false,
                     "raw": "String"
@@ -4683,13 +4155,5 @@ operations:
         "typeName": {
           "fixed": false
         },
-        "nameForParameter": {
-          "fixed": false
-        },
-        "nameForVariable": {
-          "fixed": false
-        },
-        "nameForProperty": {
-          "fixed": false
-        }
+        "nameForProperty": "Usage"
       }

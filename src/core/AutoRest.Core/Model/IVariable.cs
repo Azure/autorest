@@ -165,6 +165,7 @@ namespace AutoRest.Core.Model
         /// <Summary>
         /// The name on the wire for the variable.
         /// </Summary>
+        [JsonProperty]
         public virtual string SerializedName { get; set; }
 
         /// <summary>

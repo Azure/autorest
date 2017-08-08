@@ -445,7 +445,7 @@ namespace AutoRest.Core.Utilities
         public static bool Equals(this Fixable<string> s1, string s2, StringComparison comparison) => ReferenceEquals(s1.Value, s2) || s1.Value.Equals(s2, comparison);
         public static bool Equals(this string s1, Fixable<string> s2, StringComparison comparison) => ReferenceEquals(s1, s2.Value) || s1.Equals(s2.Value, comparison);
         public static bool EqualsIgnoreCase(this Fixable<string> s1, string s2) => ReferenceEquals(s1.Value, s2) || true == s1.Value?.Equals(s2, StringComparison.OrdinalIgnoreCase);
-        public static bool EqualsIgnoreCase(this string s1, Fixable<string> s2) => ReferenceEquals(s1,s2.Value) || s1.Equals(s2.Value, StringComparison.OrdinalIgnoreCase);
+        public static bool EqualsIgnoreCase(this string s1, Fixable<string> s2) => ReferenceEquals(s1,s2.Value) || (s1?.Equals(s2.Value, StringComparison.OrdinalIgnoreCase) ?? false);
         public static bool EqualsIgnoreCase(this Fixable<string> s1, Fixable<string> s2) => ReferenceEquals(s1.Value, s2.Value) || s1.Value.Equals(s2.Value, StringComparison.OrdinalIgnoreCase);
 
         public static char CharAt(this Fixable<string> str, int index) => str.Value[index];

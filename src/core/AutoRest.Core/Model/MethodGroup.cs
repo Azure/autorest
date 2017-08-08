@@ -75,19 +75,7 @@ namespace AutoRest.Core.Model
             set { _typeName.CopyFrom(value); }
         }
 
-        /// <Summary>
-        /// Backing field for <code>NameForParameter</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _nameForParameter = new Fixable<string>();
-
         public virtual HashSet<string> LocallyUsedNames => null;
-
-        /// <Summary>
-        /// Backing field for <code>InstanceName</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _nameForProperty = new Fixable<string>();
 
         /// <Summary>
         /// The name that an instance of the generated class should be called.
