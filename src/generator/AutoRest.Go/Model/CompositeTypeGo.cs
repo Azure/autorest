@@ -110,6 +110,10 @@ namespace AutoRest.Go.Model
         public void AddImports(HashSet<string> imports)
         {
             Properties.ForEach(p => p.ModelType.AddImports(imports));
+            if (BaseIsPolymorphic && !IsPolymorphic)
+            {
+                imports.Add("\"encoding/json\"");
+            }
         }
 
         public string Fields()
@@ -178,6 +182,10 @@ namespace AutoRest.Go.Model
                     // important, i.e. we don't want to flatten primary types like dictionaries.
                     indented.AppendFormat("*{0} {1}\n", property.ModelType.Name, property.JsonTag());
                     property.Extensions[SwaggerExtensions.FlattenOriginalTypeName] = Name;
+                }
+                else if (property.ModelType is CompositeType && (property.ModelType as CompositeTypeGo).IsPolymorphic)
+                {
+                    indented.AppendFormat("{0} {1} {2}\n", property.Name, property.ModelType.Name, property.JsonTag());
                 }
                 else
                 {

@@ -27,6 +27,20 @@ else
 @:}
 }
 
+@if (Model.BaseIsPolymorphic && !Model.IsPolymorphic)
+{
+@:@EmptyLine
+@:// MarshalJSON is the custom marshaler for @(Model.Name).
+@:func (s @(Model.Name))MarshalJSON() ([]byte, error){
+    @:type Alias @(Model.Name)
+    @:return json.Marshal(&struct {
+        @:Alias
+    @:}{
+        @:Alias: (Alias)(s),
+    @:})
+@:}
+}
+
 @if (!string.IsNullOrEmpty(Model.NextLink) && Model.PreparerNeeded)
 {
 @:@EmptyLine
