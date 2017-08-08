@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
+import { ServiceClient, ServiceClientOptions } from 'ms-rest';
 import * as operations from "./operations";
 
 /**
@@ -18,7 +18,7 @@ declare interface AutoRestParameterizedHostTestClientOptions extends ServiceClie
   /**
    * @property {string} [host] - A string value that is used as a global part of the parameterized host
    */
-  host?: String;
+  host?: string;
 }
 
 declare class AutoRestParameterizedHostTestClient extends ServiceClient {

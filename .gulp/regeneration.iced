@@ -624,8 +624,10 @@ task 'regenerate-ars', '', (done) ->
   return null
 
 task 'regenerate-samples', '', (done) ->
+  count = 0
   source 'Samples/*/**/readme.md'
     .pipe foreach (each,next)->
+      count++
       autorest [each.path]
         , (code,stdout,stderr) ->
           outputFolder = path.join(each.path, "../shell")
@@ -643,8 +645,11 @@ task 'regenerate-samples', '', (done) ->
               (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file)   # minify exception stack traces
               (sort file).to(file) if file.endsWith("stdout.txt") || file.endsWith("stderr.txt")
             )
+          count--
+          done() if( count == 0 ) 
           next null
         , true # don't fail on failures (since we wanna record them)
+      return null;
   return null
 
 task 'regenerate', "regenerate expected code for tests", ['reset'], (done) ->

@@ -49,8 +49,8 @@
   },
   "dependencies": {
     "@microsoft.azure/async-io": "~1.0.21",
-    "@microsoft.azure/console": "~1.0.29",
-    "@microsoft.azure/extension": "~1.0.67",
+    "@microsoft.azure/console": "~1.0.31",
+    "@microsoft.azure/extension": "~1.0.69",
     "@microsoft.azure/polyfill": "~1.0.17",
     "linq-es2015": "^2.4.24",
     "semver": "^5.3.0"

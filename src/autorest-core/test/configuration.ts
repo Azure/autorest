@@ -42,6 +42,7 @@ csharp:
 `]]));
 
     const autorest = new AutoRest.AutoRest(f, MemoryFileSystem.DefaultVirtualRootUri + "readme.md");
+    autorest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     let cfg = await autorest.view;
 
     // console.log(cfg.Raw);

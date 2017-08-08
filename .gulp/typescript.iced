@@ -56,7 +56,6 @@ task 'build', 'typescript', (done)->
       return test "-f", "#{each.path}/tsconfig.json"
       
     .pipe foreach (each,next ) ->
-      echo each
       fn = filename each.path
       deps = ("compile/typescript/#{d.substring(d.indexOf('/')+1)}" for d in (global.Dependencies[fn] || []))
       
@@ -73,7 +72,7 @@ task 'build', 'typescript', (done)->
     return null
 
 task 'npm-install', '', ['init-deps'], (done)-> 
-  global.threshold =1
+  # global.threshold =1
   typescriptProjectFolders()
     .on 'end', -> 
       run 'npm-install', ->
@@ -89,8 +88,8 @@ task 'npm-install', '', ['init-deps'], (done)->
       task 'npm-install', fn,deps, (fin) ->
         echo "Running npm install for #{each.path}."
         execute "#{basefolder}/node_modules/.bin/npm install", {cwd: each.path, silent:false }, (code,stdout,stderr) ->
-          echo stderr
-          echo stdout
+          # echo stderr
+          # echo stdout
           fin()
 
       next null
