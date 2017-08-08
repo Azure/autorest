@@ -79,7 +79,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     assert.notEqual(codeModel.indexOf("isConstant"), -1);
   }
 
-  @test @timeout(10000) async "AutoRest.dll Generator"() {
+  @test @skip @timeout(10000) async "AutoRest.dll Generator"() {
     const autoRest = new AutoRest(new RealFileSystem());
     autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     autoRest.AddConfiguration({
