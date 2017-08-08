@@ -53,6 +53,7 @@ public class Generator : NewPlugin
             "NodeJS",
             "Python",
             "Go",
+            "Php",
             "Java",
             "AzureResourceSchema",
             "JsonRpcClient" }
