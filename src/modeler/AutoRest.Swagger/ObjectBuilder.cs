@@ -90,7 +90,6 @@ namespace AutoRest.Swagger
                             }
                         }
                     }
-                    enumType.SerializedName = enumType.Name;
                     if (string.IsNullOrEmpty(enumType.Name))
                     {
                         throw new InvalidOperationException(
@@ -125,7 +124,6 @@ namespace AutoRest.Swagger
                 {
                     enumType.ModelAsString = true;
                     enumType.SetName( string.Empty);
-                    enumType.SerializedName = string.Empty;
                 }
                 enumType.XmlProperties = (SwaggerObject as Schema)?.Xml;
                 return enumType;
