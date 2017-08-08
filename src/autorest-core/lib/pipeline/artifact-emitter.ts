@@ -8,13 +8,13 @@ import { Stringify, YAMLNode } from "../ref/yaml";
 import { IdentitySourceMapping } from "../source-map/merging";
 import { Channel } from "../message";
 import { ConfigurationView } from "../configuration";
-import { DataHandleRead, DataSource } from "../data-store/data-store";
+import { DataHandle, DataSource } from "../data-store/data-store";
 
 function IsOutputArtifactOrMapRequested(config: ConfigurationView, artifactType: string) {
   return config.IsOutputArtifactRequested(artifactType) || config.IsOutputArtifactRequested(artifactType + ".map");
 }
 
-async function EmitArtifactInternal(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead): Promise<void> {
+async function EmitArtifactInternal(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandle): Promise<void> {
   config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
   if (config.IsOutputArtifactRequested(artifactType)) {
     config.GeneratedFile.Dispatch({
@@ -32,7 +32,7 @@ async function EmitArtifactInternal(config: ConfigurationView, artifactType: str
   }
 }
 let emitCtr = 0;
-async function EmitArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandleRead, isObject: boolean): Promise<void> {
+async function EmitArtifact(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandle, isObject: boolean): Promise<void> {
   await EmitArtifactInternal(config, artifactType, uri, handle);
 
   if (isObject) {

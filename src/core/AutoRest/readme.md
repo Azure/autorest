@@ -2,30 +2,13 @@
 
 Provides first generation, .NET based modeler and code generators.
 
-## PHP
+## Common Items
+
+### Transformation scope for `string` artifacts
 
 ``` yaml
-pipeline:
-  php/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: php
-  php/generate:
-    plugin: php
-    input: 
-      - swagger-document/identity
-      - modeler
-    output-artifact: source-file-php
-  php/emitter:
-    input: generate
-    scope: scope-php/emitter
-
-scope-php/emitter:
-  input-artifact: source-file-php
-  output-uri-expr: $key.split("/output/")[1]
-
-output-artifact:
-- source-file-php
+scope-transform-string:
+  is-object: false
 ```
 
 ## C#
@@ -58,6 +41,7 @@ pipeline:
   csharp/transform:
     input: simplifier
     output-artifact: source-file-csharp
+    scope: scope-transform-string
   csharp/emitter:
     input: transform
     scope: scope-csharp/emitter
@@ -96,6 +80,7 @@ pipeline:
   go/transform:
     input: generate
     output-artifact: source-file-go
+    scope: scope-transform-string
   go/emitter:
     input: transform
     scope: scope-go/emitter
@@ -134,6 +119,7 @@ pipeline:
   java/transform:
     input: generate
     output-artifact: source-file-java
+    scope: scope-transform-string
   java/emitter:
     input: transform
     scope: scope-java/emitter
@@ -172,6 +158,7 @@ pipeline:
   python/transform:
     input: generate
     output-artifact: source-file-python
+    scope: scope-transform-string
   python/emitter:
     input: transform
     scope: scope-python/emitter
@@ -210,6 +197,7 @@ pipeline:
   nodejs/transform:
     input: generate
     output-artifact: source-file-nodejs
+    scope: scope-transform-string
   nodejs/emitter:
     input: transform
     scope: scope-nodejs/emitter
@@ -248,6 +236,7 @@ pipeline:
   ruby/transform:
     input: generate
     output-artifact: source-file-ruby
+    scope: scope-transform-string
   ruby/emitter:
     input: transform
     scope: scope-ruby/emitter
@@ -258,6 +247,32 @@ scope-ruby/emitter:
 
 output-artifact:
 - source-file-ruby
+```
+
+## PHP
+
+``` yaml
+pipeline:
+  php/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: php
+  php/generate:
+    plugin: php
+    input: 
+      - swagger-document/identity
+      - modeler
+    output-artifact: source-file-php
+  php/emitter:
+    input: generate
+    scope: scope-php/emitter
+
+scope-php/emitter:
+  input-artifact: source-file-php
+  output-uri-expr: $key
+
+output-artifact:
+- source-file-php
 ```
 
 ## Azure Resource Schema
@@ -286,6 +301,7 @@ pipeline:
   azureresourceschema/transform:
     input: generate
     output-artifact: source-file-azureresourceschema
+    scope: scope-transform-string
   azureresourceschema/emitter:
     input: transform
     scope: scope-azureresourceschema/emitter
@@ -314,6 +330,7 @@ pipeline:
   jsonrpcclient/transform:
     input: generate
     output-artifact: source-file-jsonrpcclient
+    scope: scope-transform-string
   jsonrpcclient/emitter:
     input: transform
     scope: scope-jsonrpcclient/emitter

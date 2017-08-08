@@ -14,7 +14,7 @@ import { ProcessCodeModel } from "./commonmark-documentation";
 import { Channel } from "../message";
 import { ResolveUri } from "../ref/uri";
 import { ConfigurationView, GetExtension } from '../configuration';
-import { DataHandleRead, DataSink, DataSource, QuickDataSource } from '../data-store/data-store';
+import { DataHandle, DataSink, DataSource, QuickDataSource } from '../data-store/data-store';
 import { IFileSystem } from "../file-system";
 import { EmitArtifacts } from "./artifact-emitter";
 import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
@@ -37,9 +37,9 @@ function CreatePluginLoader(): PipelinePlugin {
       config,
       input,
       inputs, sink);
-    const result: DataHandleRead[] = [];
+    const result: DataHandle[] = [];
     for (let i = 0; i < inputs.length; ++i) {
-      result.push(await sink.Forward(encodeURIComponent(inputs[i]), swaggers[i]));
+      result.push(await sink.Forward(inputs[i], swaggers[i]));
     }
     return new QuickDataSource(result);
   };
@@ -51,9 +51,9 @@ function CreatePluginMdOverrideLoader(): PipelinePlugin {
       config,
       input,
       inputs, sink);
-    const result: DataHandleRead[] = [];
+    const result: DataHandle[] = [];
     for (let i = 0; i < inputs.length; ++i) {
-      result.push(await sink.Forward(encodeURIComponent(inputs[i]), swaggers[i]));
+      result.push(await sink.Forward(inputs[i], swaggers[i]));
     }
     return new QuickDataSource(result);
   };
@@ -61,12 +61,13 @@ function CreatePluginMdOverrideLoader(): PipelinePlugin {
 
 function CreatePluginTransformer(): PipelinePlugin {
   return async (config, input, sink) => {
+    const isObject = config.GetEntry("is-object" as any) === false ? false : true;
     const manipulator = new Manipulator(config);
     const files = await input.Enum();
-    const result: DataHandleRead[] = [];
+    const result: DataHandle[] = [];
     for (let file of files) {
       const fileIn = await input.ReadStrict(file);
-      const fileOut = await manipulator.Process(fileIn, sink, fileIn.Description);
+      const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
       result.push(await sink.Forward(fileIn.Description, fileOut));
     }
     return new QuickDataSource(result);
@@ -74,12 +75,13 @@ function CreatePluginTransformer(): PipelinePlugin {
 }
 function CreatePluginTransformerImmediate(): PipelinePlugin {
   return async (config, input, sink) => {
+    const isObject = config.GetEntry("is-object" as any) === false ? false : true;
     const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
     const scopes = await Promise.all(files.slice(0, files.length - 1).map(f => input.ReadStrict(f)));
     const manipulator = new Manipulator(config.GetNestedConfigurationImmediate(...scopes.map(s => s.ReadObject<any>())));
     const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);
-    const fileOut = await manipulator.Process(fileIn, sink, fileIn.Description);
+    const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
     return new QuickDataSource([await sink.Forward("swagger-document", fileOut)]);
   };
 }
@@ -101,7 +103,7 @@ function CreatePluginExternal(host: AutoRestExtension, pluginName: string): Pipe
       throw new Error(`Plugin ${pluginName} not found.`);
     }
 
-    const results: DataHandleRead[] = [];
+    const results: DataHandle[] = [];
     const result = await plugin.Process(
       pluginName,
       key => config.GetEntry(key as any),
@@ -119,7 +121,7 @@ function CreatePluginExternal(host: AutoRestExtension, pluginName: string): Pipe
 function CreateCommonmarkProcessor(): PipelinePlugin {
   return async (config, input, sink) => {
     const files = await input.Enum();
-    const results: DataHandleRead[] = [];
+    const results: DataHandle[] = [];
     for (let file of files) {
       const fileIn = await input.ReadStrict(file);
       const fileOut = await ProcessCodeModel(fileIn, sink);
@@ -318,7 +320,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       if (inputScopes.length === 0) {
         inputScopes = [fsInput];
       } else {
-        const handles: DataHandleRead[] = [];
+        const handles: DataHandle[] = [];
         for (const pscope of inputScopes) {
           const scope = await pscope;
           for (const handle of await scope.Enum()) {
@@ -360,7 +362,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   const barrierRobust = new OutstandingTaskAwaiter();
   for (const name of Object.keys(pipeline.pipeline)) {
     const task = getTask(name);
-    const taskx: { _state: "running" | "failed" | "complete", _result: () => DataHandleRead[], _finishedAt: number } = task as any;
+    const taskx: { _state: "running" | "failed" | "complete", _result: () => DataHandle[], _finishedAt: number } = task as any;
     taskx._state = "running";
     task.then(async x => {
       const res = await Promise.all((await x.Enum()).map(key => x.ReadStrict(key)));

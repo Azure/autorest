@@ -13,7 +13,7 @@ import { CancellationToken } from "../lib/ref/cancellation";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message, Channel } from "../lib/message";
 import { AutoRestExtension } from "../lib/pipeline/plugin-endpoint";
-import { DataHandleRead, DataStore, QuickDataSource } from '../lib/data-store/data-store';
+import { DataHandle, DataStore, QuickDataSource } from '../lib/data-store/data-store';
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 import { homedir } from "os";
 import { join } from "path";
@@ -66,7 +66,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
 
     // call modeler
     const autorestPlugin = await GetAutoRestDotNetPlugin();
-    const results: DataHandleRead[] = [];
+    const results: DataHandle[] = [];
     const result = await autorestPlugin.Process("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickDataSource([swagger]), dataStore.DataSink, f => results.push(f), m => null, CancellationToken.None);
     assert.strictEqual(result, true);
     if (results.length !== 1) {
@@ -105,7 +105,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
 
     // call generator
     const autorestPlugin = await GetAutoRestDotNetPlugin();
-    const results: DataHandleRead[] = [];
+    const results: DataHandle[] = [];
     const result = await autorestPlugin.Process(
       "csharp",
       key => config.GetEntry(key as any),

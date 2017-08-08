@@ -9,7 +9,7 @@ import { ChildProcess } from "child_process";
 import { join } from "path";
 import { Artifact } from './artifact';
 import * as Constants from './constants';
-import { DataHandleRead, DataStore } from './data-store/data-store';
+import { DataHandle, DataStore } from './data-store/data-store';
 import { EventEmitter, IEvent } from './events';
 import { OperationAbortedException } from './exception';
 import { IFileSystem, RealFileSystem } from './file-system';
@@ -366,7 +366,7 @@ export class ConfigurationView {
                 if (path) {
                   this.Message({
                     Channel: Channel.Warning,
-                    Text: `Could not find the exact path ${JSON.stringify(path)} for ${JSON.stringify(m.Details)}`
+                    Text: `Could not find the exact path ${JSON.stringify(path)} for ${JSON.stringify(m.Text)}`
                   });
                   if (path.length === 0) {
                     throw e;
@@ -378,9 +378,11 @@ export class ConfigurationView {
               }
             }
           } catch (e) {
-            // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
-            //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
-            //console.log(e);
+            this.Message({
+              Channel: Channel.Warning,
+              Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
+              Details: e
+            });
             return [s];
           }
 
@@ -436,15 +438,20 @@ export class ConfigurationView {
             let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join("/")})` : ""}: ${mx.Text}`;
             for (const source of mx.Source || []) {
               if (source.Position) {
-                text += `\n    - ${source.document}`;
-                if (source.Position.line !== undefined) {
-                  text += `:${source.Position.line}`;
-                  if (source.Position.column !== undefined) {
-                    text += `:${source.Position.column}`;
+                try {
+                  const friendlyName = this.DataStore.ReadStrictSync(source.document).Description;
+                  text += `\n    - ${friendlyName}`;
+                  if (source.Position.line !== undefined) {
+                    text += `:${source.Position.line}`;
+                    if (source.Position.column !== undefined) {
+                      text += `:${source.Position.column}`;
+                    }
                   }
-                }
-                if (source.Position.path) {
-                  text += ` (${stringify(source.Position.path)})`;
+                  if (source.Position.path) {
+                    text += ` (${stringify(source.Position.path)})`;
+                  }
+                } catch (e) {
+                  // no friendly name, so nothing more specific to show
                 }
               }
             }
@@ -467,7 +474,7 @@ export class Configuration {
     private configFileOrFolderUri?: string,
   ) { }
 
-  private async ParseCodeBlocks(configFile: DataHandleRead, contextConfig: ConfigurationView, scope: string): Promise<AutoRestConfigurationImpl[]> {
+  private async ParseCodeBlocks(configFile: DataHandle, contextConfig: ConfigurationView, scope: string): Promise<AutoRestConfigurationImpl[]> {
     // load config
     const hConfig = await ParseCodeBlocks(
       contextConfig,

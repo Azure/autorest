@@ -6,7 +6,7 @@
 import { nodes } from "../ref/jsonpath";
 import { safeEval } from "../ref/safe-eval";
 import { ManipulateObject } from "./object-manipulator";
-import { DataHandleRead, DataSink } from '../data-store/data-store';
+import { DataHandle, DataSink } from '../data-store/data-store';
 import { DirectiveView } from "../configuration";
 import { ConfigurationView } from "../autorest-core";
 import { From } from "../ref/linq";
@@ -35,7 +35,7 @@ export class Manipulator {
     return matchesFrom;
   }
 
-  private async ProcessInternal(data: DataHandleRead, sink: DataSink, documentId?: string): Promise<DataHandleRead> {
+  private async ProcessInternal(data: DataHandle, sink: DataSink, documentId?: string): Promise<DataHandle> {
     for (const trans of this.transformations) {
       // matches filter?
       if (this.MatchesSourceFilter(documentId || data.key, trans)) {
@@ -108,13 +108,10 @@ export class Manipulator {
     return data;
   }
 
-  public async Process(data: DataHandleRead, sink: DataSink, documentId?: string): Promise<DataHandleRead> {
-    // if the input data is not an object (e.g. raw source code) transform to string object and back
-    const needsTransform = !data.IsObject();
-
-    const trans1 = needsTransform ? await sink.WriteObject(`trans_input?${data.key}`, data.ReadData()) : data;
+  public async Process(data: DataHandle, sink: DataSink, isObject: boolean, documentId?: string): Promise<DataHandle> {
+    const trans1 = !isObject ? await sink.WriteObject(`trans_input?${data.key}`, data.ReadData()) : data;
     const result = await this.ProcessInternal(trans1, sink, documentId);
-    const trans2 = needsTransform ? await sink.WriteObject(`trans_output?${data.key}`, result.ReadObject<string>()) : result;
+    const trans2 = !isObject ? await sink.WriteData(`trans_output?${data.key}`, result.ReadObject<string>()) : result;
     return trans2;
   }
 }

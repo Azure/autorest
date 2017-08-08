@@ -14,7 +14,7 @@ import { Channel, SourceLocation } from "../message";
 import { OperationAbortedException } from "../exception";
 import { safeEval } from "../ref/safe-eval";
 import { ConfigurationView } from "../autorest-core";
-import { DataHandleRead, DataSink, DataSource } from '../data-store/data-store';
+import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
 import { IsPrefix, JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { ResolvePath, ResolveRelativeNode } from "../parsing/yaml";
 import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNodeWithPath } from "../ref/yaml";
@@ -32,7 +32,7 @@ async function EnsureCompleteDefinitionIsPresent(
   inputScope: DataSource,
   sink: DataSink,
   visitedEntities: string[],
-  externalFiles: { [uri: string]: DataHandleRead },
+  externalFiles: { [uri: string]: DataHandle },
   sourceFileUri: string,
   sourceDocObj: any,
   sourceDocMappings: Mapping[],
@@ -82,7 +82,7 @@ async function EnsureCompleteDefinitionIsPresent(
     }
   }
 
-  const inputs: DataHandleRead[] = [sourceDoc];
+  const inputs: DataHandle[] = [sourceDoc];
   for (const { node, path } of references) {
 
     const complaintLocation: SourceLocation = { document: currentFileUri, Position: <any>{ path: path } };
@@ -185,7 +185,7 @@ async function EnsureCompleteDefinitionIsPresent(
   return sourceDocMappings;
 }
 
-async function StripExternalReferences(swagger: DataHandleRead, sink: DataSink): Promise<DataHandleRead> {
+async function StripExternalReferences(swagger: DataHandle, sink: DataSink): Promise<DataHandle> {
   const ast = CloneAst(swagger.ReadYamlAst());
   const mapping = IdentitySourceMapping(swagger.key, ast);
   for (const node of Descendants(ast)) {
@@ -199,7 +199,7 @@ async function StripExternalReferences(swagger: DataHandleRead, sink: DataSink):
   return await sink.WriteData("result.yaml", StringifyAst(ast), mapping, [swagger]);
 }
 
-export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandleRead> {
+export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
   const commonmark = await inputScope.ReadStrict(inputFileUri);
   const rawCommonmark = commonmark.ReadData();
   const commonmarkNode = await ParseCommonmark(rawCommonmark);
@@ -271,9 +271,9 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
   return sink.WriteObject("override-directives", { directive: directives }, mappings, [commonmark]);
 }
 
-export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandleRead> {
+export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
   const data = await ParseLiterateYaml(config, await inputScope.ReadStrict(inputFileUri), sink);
-  const externalFiles: { [uri: string]: DataHandleRead } = {};
+  const externalFiles: { [uri: string]: DataHandle } = {};
   externalFiles[inputFileUri] = data;
   await EnsureCompleteDefinitionIsPresent(config,
     inputScope,
@@ -287,8 +287,8 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
   return result;
 }
 
-export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope: DataSource, inputFileUris: string[], sink: DataSink): Promise<DataHandleRead[]> {
-  const rawSwaggers: DataHandleRead[] = [];
+export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope: DataSource, inputFileUris: string[], sink: DataSink): Promise<DataHandle[]> {
+  const rawSwaggers: DataHandle[] = [];
   let i = 0;
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
@@ -298,8 +298,8 @@ export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope
   }
   return rawSwaggers;
 }
-export async function LoadLiterateSwaggerOverrides(config: ConfigurationView, inputScope: DataSource, inputFileUris: string[], sink: DataSink): Promise<DataHandleRead[]> {
-  const rawSwaggers: DataHandleRead[] = [];
+export async function LoadLiterateSwaggerOverrides(config: ConfigurationView, inputScope: DataSource, inputFileUris: string[], sink: DataSink): Promise<DataHandle[]> {
+  const rawSwaggers: DataHandle[] = [];
   let i = 0;
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
@@ -328,7 +328,7 @@ function distinct<T>(list: T[]): T[] {
   return sorted.filter((x, i) => i === 0 || x !== sorted[i - 1]);
 }
 
-export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: DataHandleRead[], sink: DataSink): Promise<DataHandleRead> {
+export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: DataHandle[], sink: DataSink): Promise<DataHandle> {
   const inputSwaggerObjects = inputSwaggers.map(sw => sw.ReadObject<any>());
   const candidateTitles: string[] = overrideInfoTitle
     ? [overrideInfoTitle]

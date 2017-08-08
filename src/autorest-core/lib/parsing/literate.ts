@@ -5,10 +5,10 @@
 
 import * as commonmark from '../ref/commonmark';
 import { Mappings } from "../ref/source-map";
-import { DataHandleRead, DataSink } from '../data-store/data-store';
+import { DataHandle, DataSink } from '../data-store/data-store';
 
-export async function Parse(hConfigFile: DataHandleRead, sink: DataSink): Promise<{ data: DataHandleRead, codeBlock: commonmark.Node }[]> {
-  const result: { data: DataHandleRead, codeBlock: commonmark.Node }[] = [];
+export async function Parse(hConfigFile: DataHandle, sink: DataSink): Promise<{ data: DataHandle, codeBlock: commonmark.Node }[]> {
+  const result: { data: DataHandle, codeBlock: commonmark.Node }[] = [];
   const rawMarkdown = hConfigFile.ReadData();
   for (const codeBlock of ParseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;

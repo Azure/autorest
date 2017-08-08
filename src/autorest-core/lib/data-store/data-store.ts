@@ -45,9 +45,9 @@ type Store = { [uri: string]: Data };
 
 export abstract class DataSource {
   public abstract Enum(): Promise<string[]>;
-  public abstract Read(uri: string): Promise<DataHandleRead | null>;
+  public abstract Read(uri: string): Promise<DataHandle | null>;
 
-  public async ReadStrict(uri: string): Promise<DataHandleRead> {
+  public async ReadStrict(uri: string): Promise<DataHandle> {
     const result = await this.Read(uri);
     if (result === null) {
       throw new Error(`Could not to read '${uri}'.`);
@@ -73,7 +73,7 @@ export abstract class DataSource {
 }
 
 export class QuickDataSource extends DataSource {
-  public constructor(private handles: DataHandleRead[]) {
+  public constructor(private handles: DataHandle[]) {
     super();
   }
 
@@ -81,7 +81,7 @@ export class QuickDataSource extends DataSource {
     return this.handles.map(x => x.key);
   }
 
-  public async Read(key: string): Promise<DataHandleRead | null> {
+  public async Read(key: string): Promise<DataHandle | null> {
     const data = this.handles.filter(x => x.key === key)[0];
     return data || null;
   }
@@ -89,13 +89,13 @@ export class QuickDataSource extends DataSource {
 
 class ReadThroughDataSource extends DataSource {
   private uris: string[] = [];
-  private cache: { [uri: string]: Promise<DataHandleRead | null> } = {};
+  private cache: { [uri: string]: Promise<DataHandle | null> } = {};
 
   constructor(private store: DataStore, private fs: IFileSystem) {
     super();
   }
 
-  public async Read(uri: string): Promise<DataHandleRead | null> {
+  public async Read(uri: string): Promise<DataHandle | null> {
     uri = ToRawDataUrl(uri);
 
     // sync cache (inner stuff is racey!)
@@ -157,7 +157,7 @@ export class DataStore {
 
   private uid = 0;
 
-  private async WriteDataInternal(uri: string, data: string, metadata: Metadata): Promise<DataHandleRead> {
+  private async WriteDataInternal(uri: string, data: string, metadata: Metadata): Promise<DataHandle> {
     this.ThrowIfCancelled();
     if (this.store[uri]) {
       throw new Error(`can only write '${uri}' once`);
@@ -170,7 +170,7 @@ export class DataStore {
     return this.Read(uri);
   }
 
-  public async WriteData(description: string, data: string, sourceMapFactory?: (self: DataHandleRead) => RawSourceMap): Promise<DataHandleRead> {
+  public async WriteData(description: string, data: string, sourceMapFactory?: (self: DataHandle) => RawSourceMap): Promise<DataHandle> {
     const uri = this.createUri(description);
 
     // metadata
@@ -178,7 +178,7 @@ export class DataStore {
     const result = await this.WriteDataInternal(uri, data, metadata);
     metadata.sourceMap = new Lazy(() => {
       if (!sourceMapFactory) {
-        return <RawSourceMap>{};
+        return new SourceMapGenerator().toJSON();
       }
       const sourceMap = sourceMapFactory(result);
 
@@ -232,21 +232,21 @@ export class DataStore {
     );
   }
 
-  public ReadStrictSync(absoluteUri: string): DataHandleRead {
+  public ReadStrictSync(absoluteUri: string): DataHandle {
     const entry = this.store[absoluteUri];
     if (entry === undefined) {
       throw new Error(`Object '${absoluteUri}' does not exist.`);
     }
-    return new DataHandleRead(absoluteUri, entry);
+    return new DataHandle(absoluteUri, entry);
   }
 
-  public async Read(uri: string): Promise<DataHandleRead> {
+  public async Read(uri: string): Promise<DataHandle> {
     uri = ResolveUri(this.BaseUri, uri);
     const data = this.store[uri];
     if (!data) {
       throw new Error(`Could not to read '${uri}'.`);
     }
-    return new DataHandleRead(uri, data);
+    return new DataHandle(uri, data);
   }
 
   public Blame(absoluteUri: string, position: SmartPosition): BlameTree {
@@ -298,15 +298,15 @@ export class DataStore {
 
 export class DataSink {
   constructor(
-    private write: (description: string, rawData: string, metadataFactory: (readHandle: DataHandleRead) => RawSourceMap) => Promise<DataHandleRead>,
-    private forward: (description: string, input: DataHandleRead) => Promise<DataHandleRead>) {
+    private write: (description: string, rawData: string, metadataFactory: (readHandle: DataHandle) => RawSourceMap) => Promise<DataHandle>,
+    private forward: (description: string, input: DataHandle) => Promise<DataHandle>) {
   }
 
-  public async WriteDataWithSourceMap(description: string, data: string, sourceMapFactory: (readHandle: DataHandleRead) => RawSourceMap): Promise<DataHandleRead> {
+  public async WriteDataWithSourceMap(description: string, data: string, sourceMapFactory: (readHandle: DataHandle) => RawSourceMap): Promise<DataHandle> {
     return await this.write(description, data, sourceMapFactory);
   }
 
-  public async WriteData(description: string, data: string, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
+  public async WriteData(description: string, data: string, mappings: Mappings = [], mappingSources: DataHandle[] = []): Promise<DataHandle> {
     return await this.WriteDataWithSourceMap(description, data, readHandle => {
       const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
       Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
@@ -314,16 +314,16 @@ export class DataSink {
     });
   }
 
-  public WriteObject<T>(description: string, obj: T, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
+  public WriteObject<T>(description: string, obj: T, mappings: Mappings = [], mappingSources: DataHandle[] = []): Promise<DataHandle> {
     return this.WriteData(description, FastStringify(obj), mappings, mappingSources);
   }
 
-  public Forward(description: string, input: DataHandleRead): Promise<DataHandleRead> {
+  public Forward(description: string, input: DataHandle): Promise<DataHandle> {
     return this.forward(description, input);
   }
 }
 
-export class DataHandleRead {
+export class DataHandle {
   constructor(public readonly key: string, private read: Data) {
   }
 
