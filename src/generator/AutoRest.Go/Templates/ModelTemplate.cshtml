@@ -78,6 +78,48 @@ foreach (var st in Model.SiblingTypes)
 }
 }
 
+@if (Model.HasPolymorphicFields) {
+@:// UnmarshalJSON is the custom unmarshaler for @(Model.Name) struct.
+@:func (s *@(Model.Name)) UnmarshalJSON(b []byte) error {
+	@:var m map[string]*json.RawMessage
+	@:err := json.Unmarshal(b, &m)
+	@:if err != nil {
+		@:return err
+	@:}
+    
+    @:var v *json.RawMessage
+    foreach (var p in Model.Properties)
+    {
+    @:@EmptyLine
+    @:v = m["@(p.SerializedName)"]
+    @:if v != nil {
+        @if (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic)
+        {
+        @:f, err := unmarshal@(p.ModelType.Name)(*m["@(p.SerializedName)"])
+        }
+        else
+        {
+        @:var f @(p.ModelType.Name)
+        @:err = json.Unmarshal(*m["@(p.SerializedName)"], &f)
+        }
+        @:if err != nil {
+            @:return err
+        @:}
+        @if (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic)
+        {
+        @:s.@(p.Name) = f
+        }
+        else
+        {
+        @:s.@(p.Name) = &f
+        }
+    @:}
+    }
+
+    @:return nil
+@:}
+}
+
 @if (!string.IsNullOrEmpty(Model.NextLink) && Model.PreparerNeeded)
 {
 @:@EmptyLine

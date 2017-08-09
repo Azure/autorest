@@ -30,6 +30,8 @@ namespace AutoRest.Go.Model
 
         public IEnumerable<CompositeType> SiblingTypes => (BaseModelType as CompositeTypeGo).DerivedTypes;
 
+        public bool HasPolymorphicFields => Properties.Any(p => p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic);
+
         public CompositeTypeGo()
         {
 
