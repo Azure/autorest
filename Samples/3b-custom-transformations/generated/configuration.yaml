@@ -37,6 +37,7 @@ output-artifact:
   - code-model-v1.yaml
   - pipeline.yaml
   - configuration.yaml
+  - source-file-php
   - source-file-csharp
   - source-file-go
   - source-file-java
@@ -118,6 +119,22 @@ pipeline:
   swagger-document/semantic-validator:
     input: swagger-document/identity
     scope: semantic-validator
+    suffixes: []
+  php/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: php
+    suffixes: []
+  php/generate:
+    plugin: php
+    input:
+      - swagger-document/identity
+      - modeler
+    output-artifact: source-file-php
+    suffixes: []
+  php/emitter:
+    input: generate
+    scope: scope-php/emitter
     suffixes: []
   csharp/modeler:
     input: swagger-document/identity
@@ -422,6 +439,9 @@ scope-cm/emitter:
   output-uri-expr: |
     "code-model-v1"
 client-side-validation: true
+scope-php/emitter:
+  input-artifact: source-file-php
+  output-uri-expr: '$key.split("/output/")[1]'
 scope-csharp/emitter:
   input-artifact: source-file-csharp
   output-uri-expr: '$key.split("/output/")[1]'
