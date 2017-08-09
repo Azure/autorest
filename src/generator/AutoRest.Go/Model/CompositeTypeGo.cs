@@ -7,6 +7,7 @@ using AutoRest.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Go.Model
 {
@@ -108,6 +109,31 @@ namespace AutoRest.Go.Model
         }
 
         /// <summary>
+        /// If PolymorphicDiscriminator is set, makes sure we have a PolymorphicDiscriminator property.
+        /// </summary>
+        private void AddPolymorphicPropertyIfNecessary()
+        {
+            if (!string.IsNullOrEmpty(PolymorphicDiscriminator) && Properties.All(p => p.SerializedName != PolymorphicDiscriminator))
+            {
+                var newProp = base.Add(New<Property>(new
+                {
+                    Name = CodeNamerGo.Instance.PascalCase(PolymorphicDiscriminator),
+                    SerializedName = PolymorphicDiscriminator,
+                    // Documentation = "Polymorphic Discriminator",
+                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                }));
+                newProp.Name.FixedValue = newProp.Name.RawValue;
+            }            
+        }
+
+        public override Property Add(Property item)
+        {
+            var property = base.Add(item) as PropertyGo;
+            AddPolymorphicPropertyIfNecessary();
+            return property;
+        }
+
+        /// <summary>
         /// Add imports for composite types.
         /// </summary>
         /// <param name="imports"></param>
@@ -118,11 +144,13 @@ namespace AutoRest.Go.Model
             {
                 imports.Add("\"encoding/json\"");
                 imports.Add("\"errors\"");
+                imports.Add("\"github.com/Azure/go-autorest/autorest/to\"");
             }
         }
 
         public string Fields()
         {
+            AddPolymorphicPropertyIfNecessary();
             var indented = new IndentedStringBuilder("    ");
             var properties = Properties.Cast<PropertyGo>().ToList();
 
