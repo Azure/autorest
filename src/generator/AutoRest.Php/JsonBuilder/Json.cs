@@ -25,5 +25,8 @@ namespace AutoRest.Php.JsonBuilder
         public static Object<T> Object<T>(IEnumerable<Property<T>> items)
             where T : Token
             => new Object<T>(items);
+
+        public static String String(string value)
+            => new String(value);
     }
 }

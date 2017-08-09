@@ -127,10 +127,12 @@ namespace AutoRest.Php
                     name: m.Name,
                     description: m.Description,
                     @return: m.ReturnType.Body == null ? null : SchemaObject.Create(m.ReturnType.Body).ToPhpType(),
-                    parameters: parameters.Select(p => PHP
-                        .Parameter(
-                            SchemaObject.Create(p.ModelType).ToPhpType(),
-                            new ObjectName(p.SerializedName))),
+                    parameters: parameters.Select(p => {
+                        var phpType = SchemaObject.Create(p.ModelType).ToPhpType();
+                        return PHP.Parameter(
+                            p.IsRequired ? phpType : new Nullable(phpType),
+                            new ObjectName(p.SerializedName));
+                    }),
                     body: PHP.Statements(call));
             }
         }
@@ -201,12 +203,6 @@ namespace AutoRest.Php
 
         public override async Task Generate(CodeModel codeModel)
         {
-            /*
-            var apiVersion = codeModel.ApiVersion?.Replace(".", "_");
-            var @namespace = apiVersion == null 
-                ? Class.CreateName(codeModelNamespace) 
-                : Class.CreateName(codeModelNamespace, apiVersion);
-            */
             var @namespace = Class.CreateName(codeModel.Namespace);
 
             var phpGroups = codeModel.Operations

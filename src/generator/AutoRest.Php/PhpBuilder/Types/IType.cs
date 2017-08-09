@@ -5,5 +5,7 @@
         string AbsoluteName { get; }
 
         string ToParameterPrefix();
+
+        string ToParameterSuffix();
     }
 }

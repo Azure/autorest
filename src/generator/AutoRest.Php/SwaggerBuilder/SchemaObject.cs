@@ -9,7 +9,7 @@ using AutoRest.Php.JsonBuilder;
 namespace AutoRest.Php.SwaggerBuilder
 {
     /// <summary>
-    /// https://swagger.io/specification/#schemaObject
+    /// https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject
     /// </summary>
     public class SchemaObject : JsonBuilder.Object
     {
@@ -26,6 +26,8 @@ namespace AutoRest.Php.SwaggerBuilder
         public SchemaObject AdditionalProperties { get; }
 
         public SchemaObject Items { get; }
+
+        public IEnumerable<string> Required { get; }
 
         public IType ToPhpType()
         {
@@ -62,16 +64,21 @@ namespace AutoRest.Php.SwaggerBuilder
 
         public static SchemaObject CreateDefinition(CompositeType type)
         {
-            var additionalProperties = type.Properties.FirstOrDefault(p => p.SerializedName.FixedValue == null);
-            var properties = type.Properties.Where(p => p.SerializedName.FixedValue != null);
+            var additionalProperties = type.Properties
+                .FirstOrDefault(p => p.SerializedName.FixedValue == null);
+            var properties = type.Properties
+                .Where(p => p.SerializedName.FixedValue != null);
             var swaggerProperties = properties.Select(p => Json.Property(
                 p.SerializedName.FixedValue,
                 Create(p.ModelType)));
-            return additionalProperties == null
-                ? new SchemaObject(properties: swaggerProperties)
-                : new SchemaObject(
-                    properties: swaggerProperties,
-                    additionalProperties: Create(additionalProperties.ModelType));
+            return new SchemaObject(
+                properties: swaggerProperties,
+                additionalProperties: additionalProperties == null 
+                    ? null 
+                    : Create(additionalProperties.ModelType),
+                required: properties
+                    .Where(p => p.IsRequired)
+                    .Select(p => p.SerializedName.FixedValue));
         }
 
         public static SchemaObject Create(IModelType type)
@@ -181,7 +188,7 @@ namespace AutoRest.Php.SwaggerBuilder
             {
                 yield return Json.Property(
                     "enum",
-                    Json.Array(Enum.Select(v => new JsonBuilder.String(v))));
+                    Json.Array(Enum.Select(Json.String)));
             }
             if (Properties != null)
             {
@@ -195,6 +202,12 @@ namespace AutoRest.Php.SwaggerBuilder
             {
                 yield return Json.Property("items", Items);
             }
+            if (Required != null)
+            {
+                yield return Json.Property(
+                    "required",
+                    Json.Array(Required.Select(Json.String)));
+            }
         }
 
         private SchemaObject(
@@ -204,7 +217,8 @@ namespace AutoRest.Php.SwaggerBuilder
             IEnumerable<string> @enum = null,
             IEnumerable<Property<SchemaObject>> properties = null,
             SchemaObject additionalProperties = null,
-            SchemaObject items = null)
+            SchemaObject items = null,
+            IEnumerable<string> required = null)
         {
             Ref = @ref;
             Type = type;
@@ -213,6 +227,7 @@ namespace AutoRest.Php.SwaggerBuilder
             Properties = properties;
             AdditionalProperties = additionalProperties;
             Items = items;
+            Required = required;
         }
     }
 }

@@ -12,5 +12,7 @@ namespace AutoRest.Php.PhpBuilder.Types
         }
 
         public string ToParameterPrefix() => string.Empty;
+
+        public string ToParameterSuffix() => string.Empty;
     }
 }
