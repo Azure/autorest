@@ -39,8 +39,6 @@ namespace AutoRest.Extensions
         public const string ExternalExtension = "x-ms-external";
         public const string HeaderCollectionPrefix = "x-ms-header-collection-prefix";
 
-        private static bool hostChecked = false;
-
         /// <summary>
         /// Normalizes client model using generic extensions.
         /// </summary>
@@ -66,7 +64,7 @@ namespace AutoRest.Extensions
                     throw new ArgumentNullException("codeModel");
                 }
 
-                if (codeModel.Extensions.ContainsKey(ParameterizedHostExtension) && !hostChecked)
+                if (codeModel.Extensions.ContainsKey(ParameterizedHostExtension))
                 {
                     var hostExtension = codeModel.Extensions[ParameterizedHostExtension] as JObject;
 
@@ -157,7 +155,6 @@ namespace AutoRest.Extensions
                     }
                 }
             }
-            hostChecked = true;
         }
 
         /// <summary>
