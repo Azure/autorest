@@ -115,7 +115,7 @@ namespace AutoRest.Go
 
         public static string ToIdiomaticShortName(this string value)
         {
-            return string.Concat(value.ToPhrase().Split(new char[]{' '}).Select(w => w[0]));
+            return CodeNamerGo.Instance.GetVariableName(string.Concat(value.ToPhrase().Split(new char[]{' '}).Select(w => w[0])));
         }
 
         /// <summary>
