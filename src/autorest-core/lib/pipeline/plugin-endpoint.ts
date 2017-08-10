@@ -52,9 +52,24 @@ export class AutoRestExtension extends EventEmitter {
     return plugin;
   }
 
-  private constructor(extensionName: string, reader: Readable, writer: Writable) {
+  // Exposed through __status and consumed by tools like autorest-interactive.
+  private inspectTraffic: [number, boolean /*outgoing (core => ext)*/, string][] = [];
+
+  private constructor(private extensionName: string, reader: Readable, writer: Writable) {
     super();
-    const channel = createMessageConnection(reader, writer, console);
+    // hook in inspectors
+    reader.on("data", chunk => {
+      try { this.inspectTraffic.push([Date.now(), false, chunk.toString()]); } catch (e) { }
+    });
+    const writerProxy = new Writable({
+      write: (chunk: string | Buffer, encoding: string, callback: Function) => {
+        try { this.inspectTraffic.push([Date.now(), true, chunk.toString()]); } catch (e) { }
+        return writer.write(chunk, encoding, callback);
+      }
+    });
+
+    // create channel
+    const channel = createMessageConnection(reader, writerProxy, console);
     channel.listen();
 
     // initiator

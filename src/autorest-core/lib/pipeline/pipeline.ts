@@ -261,12 +261,14 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // __status scope
   const startTime = Date.now();
+  const externalInspection: { [pluginName: string]: AutoRestExtension } = {};
   (configView.Raw as any).__status = new Proxy<any>({}, {
     async get(_, key) {
       const expr = new Buffer(key.toString(), "base64").toString("ascii");
       try {
         return FastStringify(safeEval(expr, {
           pipeline: pipeline.pipeline,
+          external: externalInspection,
           tasks: tasks,
           startTime: startTime,
           blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => configView.DataStore.Blame(uri, position)
@@ -299,6 +301,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     const extension = await GetExtension(useExtension.fullyQualified);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
       plugins[plugin] = CreatePluginExternal(extension, plugin);
+      externalInspection[plugin] = extension;
     }
   }
 
