@@ -78,7 +78,7 @@ namespace AutoRest.Php.SwaggerBuilder
                     : Create(additionalProperties.ModelType),
                 required: properties
                     .Where(p => p.IsRequired)
-                    .Select(p => p.SerializedName.FixedValue));
+                    .Select(p => p.SerializedName));
         }
 
         public static SchemaObject Create(IModelType type)

@@ -64,9 +64,11 @@ namespace AutoRest.Extensions
                     throw new ArgumentNullException("codeModel");
                 }
 
-                if (codeModel.Extensions.ContainsKey(ParameterizedHostExtension))
+                if (codeModel.Extensions.TryGetValue(ParameterizedHostExtension, out var extensionObject) &&
+                    !codeModel.Extensions.ContainsKey(ParameterizedHostExtension + "DONE"))
                 {
-                    var hostExtension = codeModel.Extensions[ParameterizedHostExtension] as JObject;
+                    var hostExtension = extensionObject as JObject;
+                    codeModel.Extensions.Add(ParameterizedHostExtension + "DONE", true);
 
                     if (hostExtension != null)
                     {
