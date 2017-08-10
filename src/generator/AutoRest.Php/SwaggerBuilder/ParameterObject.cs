@@ -20,22 +20,23 @@ namespace AutoRest.Php.SwaggerBuilder
 
         public override IEnumerable<Property> GetProperties()
         {
-            if (Name != null)
-            {
-                yield return Json.Property("name", Name);
-            }
-            if (In != null)
-            {
-                yield return Json.Property("in", In);
-            }
+            yield return Json.Property("name", Name);
+            yield return Json.Property("in", In);
             yield return Json.Property("required", Required);
             if (XMsSkipUrlEncoding)
             {
                 yield return Json.Property("x-ms-skip-url-encoding", true);
             }
-            foreach (var token in Schema.GetProperties())
+            if (In == "body")
             {
-                yield return token;
+                yield return Json.Property("schema", Schema);
+            }
+            else
+            {
+                foreach (var token in Schema.GetProperties())
+                {
+                    yield return token;
+                }
             }
         }
 
