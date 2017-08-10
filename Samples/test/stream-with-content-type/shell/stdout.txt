@@ -1,26 +1,6 @@
 (C) 2017 **Microsoft Corporation.**  
 # AutoRest code generation utility.
 https://aka.ms/autorest
-INFORMATION: Defaulting to generate client side Code
-INFORMATION: Generating client model from swagger model.
-INFORMATION: Generating client model from swagger model.
-INFORMATION: Generating client model from swagger model.
-INFORMATION: Generating client model from swagger model.
-INFORMATION: Generating client model from swagger model.
-INFORMATION: Generating client model from swagger model.
-INFORMATION: Generating Rest Code
-INFORMATION: Initializing code generator.
-INFORMATION: Initializing code generator.
-INFORMATION: Initializing code generator.
-INFORMATION: Initializing code generator.
-INFORMATION: Initializing code generator.
-INFORMATION: Initializing code generator.
-INFORMATION: Successfully initialized CSharp Code Generator 1.2.2.0
-INFORMATION: Successfully initialized Go Code Generator 1.2.2.0
-INFORMATION: Successfully initialized Java Code Generator 1.2.2.0
-INFORMATION: Successfully initialized NodeJS Code Generator 1.2.2.0
-INFORMATION: Successfully initialized Python Code Generator 1.2.2.0
-INFORMATION: Successfully initialized Ruby Code Generator 1.2.2.0
 WARNING: 10 exported name(s) unnecessarily contains the service name. Please consider removing the service name.
 WARNING: The name 'A' unnecessarily contains the service name; the service name will be trimmed.
 WARNING: The name 'A' unnecessarily contains the service name; the service name will be trimmed.
