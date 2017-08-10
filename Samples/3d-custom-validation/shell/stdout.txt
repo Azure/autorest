@@ -1,6 +1,6 @@
-    - mem:///csharp/transform/working/trans_input?mem:///csharp/simplifier/output/StorageAccounts.cs:1:0
-    - mem:///csharp/transform/working/trans_input?mem:///csharp/simplifier/output/StorageAccounts.cs:1:0
-    - mem:///csharp/transform/working/trans_input?mem:///csharp/simplifier/output/StorageAccounts.cs:1:0
+    - trans_input?mem:1:0
+    - trans_input?mem:1:0
+    - trans_input?mem:1:0
 (C) 2017 **Microsoft Corporation.**  
 # AutoRest code generation utility.
 https://aka.ms/autorest

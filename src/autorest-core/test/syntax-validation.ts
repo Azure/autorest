@@ -16,8 +16,7 @@ import { Parse } from "../lib/parsing/literate-yaml";
   private async GetLoaderErrors(swagger: string): Promise<Message[]> {
     const dataStore = new DataStore();
     const uri = "mem:///swagger.json";
-    const hw = await dataStore.Write(uri);
-    const h = await hw.WriteData(swagger);
+    const h = await dataStore.WriteData(uri, swagger);
 
     const autoRest = new AutoRest();
     autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
@@ -25,7 +24,7 @@ import { Parse } from "../lib/parsing/literate-yaml";
 
     autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Error) { messages.push(m) } });
     try {
-      await Parse(await autoRest.view, h, dataStore.CreateScope("tmp"));
+      await Parse(await autoRest.view, h, dataStore.DataSink);
     } catch (e) {
       // it'll also throw, but detailed messages are emitted first
     }

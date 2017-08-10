@@ -14,12 +14,12 @@ import { ProcessCodeModel } from "./commonmark-documentation";
 import { Channel } from "../message";
 import { ResolveUri } from "../ref/uri";
 import { ConfigurationView, GetExtension } from '../configuration';
-import { DataHandleRead, DataStoreView, DataStoreViewReadonly, QuickScope } from "../data-store/data-store";
+import { DataHandle, DataSink, DataSource, QuickDataSource } from '../data-store/data-store';
 import { IFileSystem } from "../file-system";
 import { EmitArtifacts } from "./artifact-emitter";
 import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 
-export type PipelinePlugin = (config: ConfigurationView, input: DataStoreViewReadonly, working: DataStoreView, output: DataStoreView) => Promise<DataStoreViewReadonly | void>;
+export type PipelinePlugin = (config: ConfigurationView, input: DataSource, sink: DataSink) => Promise<DataSource>;
 interface PipelineNode {
   outputArtifact?: string;
   pluginName: string;
@@ -31,104 +31,108 @@ function CreatePluginIdentity(): PipelinePlugin {
   return async (config, input) => input;
 }
 function CreatePluginLoader(): PipelinePlugin {
-  return async (config, input, working, output) => {
+  return async (config, input, sink) => {
     let inputs = config.InputFileUris;
     const swaggers = await LoadLiterateSwaggers(
       config,
       input,
-      inputs, working);
+      inputs, sink);
+    const result: DataHandle[] = [];
     for (let i = 0; i < inputs.length; ++i) {
-      await (await output.Write(`./${i}/_` + encodeURIComponent(inputs[i]))).Forward(swaggers[i]);
+      result.push(await sink.Forward(inputs[i], swaggers[i]));
     }
+    return new QuickDataSource(result);
   };
 }
 function CreatePluginMdOverrideLoader(): PipelinePlugin {
-  return async (config, input, working, output) => {
+  return async (config, input, sink) => {
     let inputs = config.InputFileUris;
     const swaggers = await LoadLiterateSwaggerOverrides(
       config,
       input,
-      inputs, working);
+      inputs, sink);
+    const result: DataHandle[] = [];
     for (let i = 0; i < inputs.length; ++i) {
-      await (await output.Write(`./${i}/_` + encodeURIComponent(inputs[i]))).Forward(swaggers[i]);
+      result.push(await sink.Forward(inputs[i], swaggers[i]));
     }
+    return new QuickDataSource(result);
   };
 }
 
 function CreatePluginTransformer(): PipelinePlugin {
-  return async (config, input, working, output) => {
-    const documentIdResolver: (key: string) => string = key => {
-      const parts = key.split("/_");
-      return parts.length === 1 ? parts[0] : decodeURIComponent(parts[parts.length - 1]);
-    };
+  return async (config, input, sink) => {
+    const isObject = config.GetEntry("is-object" as any) === false ? false : true;
     const manipulator = new Manipulator(config);
     const files = await input.Enum();
+    const result: DataHandle[] = [];
     for (let file of files) {
       const fileIn = await input.ReadStrict(file);
-      file = file.substr(file.indexOf("/output/") + "/output/".length);
-      const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
-      await (await output.Write("./" + file)).Forward(fileOut);
+      const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
+      result.push(await sink.Forward(fileIn.Description, fileOut));
     }
+    return new QuickDataSource(result);
   };
 }
 function CreatePluginTransformerImmediate(): PipelinePlugin {
-  return async (config, input, working, output) => {
-    const documentIdResolver: (key: string) => string = key => {
-      const parts = key.split("/_");
-      return parts.length === 1 ? parts[0] : decodeURIComponent(parts[parts.length - 1]);
-    };
+  return async (config, input, sink) => {
+    const isObject = config.GetEntry("is-object" as any) === false ? false : true;
     const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
     const scopes = await Promise.all(files.slice(0, files.length - 1).map(f => input.ReadStrict(f)));
     const manipulator = new Manipulator(config.GetNestedConfigurationImmediate(...scopes.map(s => s.ReadObject<any>())));
     const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);
-    const fileOut = await manipulator.Process(fileIn, working, documentIdResolver(file));
-    await (await output.Write("swagger-document")).Forward(fileOut);
+    const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
+    return new QuickDataSource([await sink.Forward("swagger-document", fileOut)]);
   };
 }
 function CreatePluginComposer(): PipelinePlugin {
-  return async (config, input, working, output) => {
+  return async (config, input, sink) => {
     const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
     const overrideInfo = config.GetEntry("override-info");
     const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry("title");
     const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry("description");
-    const swagger = await ComposeSwaggers(config, overrideTitle, overrideDescription, swaggers, config.DataStore.CreateScope("compose"));
-    await (await output.Write("composed")).Forward(swagger);
+    const swagger = await ComposeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
+    return new QuickDataSource([await sink.Forward("composed", swagger)]);
   };
 }
 function CreatePluginExternal(host: AutoRestExtension, pluginName: string): PipelinePlugin {
-  return async (config, input, working, output) => {
+  return async (config, input, sink) => {
     const plugin = await host;
     const pluginNames = await plugin.GetPluginNames(config.CancellationToken);
     if (pluginNames.indexOf(pluginName) === -1) {
       throw new Error(`Plugin ${pluginName} not found.`);
     }
 
+    const results: DataHandle[] = [];
     const result = await plugin.Process(
       pluginName,
       key => config.GetEntry(key as any),
       input,
-      output,
+      sink,
+      f => results.push(f),
       config.Message.bind(config),
       config.CancellationToken);
     if (!result) {
       throw new Error(`Plugin ${pluginName} reported failure.`);
     }
+    return new QuickDataSource(results);
   };
 }
 function CreateCommonmarkProcessor(): PipelinePlugin {
-  return async (config, input, working, output) => {
+  return async (config, input, sink) => {
     const files = await input.Enum();
+    const results: DataHandle[] = [];
     for (let file of files) {
       const fileIn = await input.ReadStrict(file);
-      const fileOut = await ProcessCodeModel(fileIn, working);
+      const fileOut = await ProcessCodeModel(fileIn, sink);
       file = file.substr(file.indexOf("/output/") + "/output/".length);
-      await (await output.Write("./" + file + "/_code-model-v1")).Forward(fileOut);
+      results.push(await sink.Forward("code-model-v1", fileOut));
     }
+    return new QuickDataSource(results);
   };
 }
-function CreateArtifactEmitter(inputOverride?: () => Promise<DataStoreViewReadonly>): PipelinePlugin {
-  return async (config, input, working, output) => {
+function CreateArtifactEmitter(inputOverride?: () => Promise<DataSource>): PipelinePlugin {
+  return async (config, input, sink) => {
     if (inputOverride) {
       input = await inputOverride();
     }
@@ -146,6 +150,7 @@ function CreateArtifactEmitter(inputOverride?: () => Promise<DataStoreViewReadon
         safeEval<string>(config.GetEntry("output-uri-expr" as any), { $key: key, $config: config.Raw })),
       input,
       config.GetEntry("is-object" as any));
+    return new QuickDataSource([]);
   };
 }
 
@@ -285,8 +290,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
-    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("pipeline")).WriteObject(pipeline.pipeline)])),
-    "configuration-emitter": CreateArtifactEmitter(async () => new QuickScope([await (await configView.DataStore.Write("configuration")).WriteObject(configView.Raw)]))
+    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.DataSink.WriteObject("pipeline", pipeline.pipeline)])),
+    "configuration-emitter": CreateArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.DataSink.WriteObject("configuration", configView.Raw)]))
   };
 
   // dynamically loaded, auto-discovered plugins
@@ -299,10 +304,10 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
-  const fsInput = configView.DataStore.GetReadThroughScopeFileSystem(fileSystem);
+  const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
   const pipeline = BuildPipeline(configView);
 
-  const ScheduleNode: (nodeName: string) => Promise<DataStoreViewReadonly> =
+  const ScheduleNode: (nodeName: string) => Promise<DataSource> =
     async (nodeName) => {
       const node = pipeline.pipeline[nodeName];
 
@@ -311,18 +316,18 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       }
 
       // get input
-      let inputScopes: DataStoreViewReadonly[] = await Promise.all(node.inputs.map(getTask));
+      let inputScopes: DataSource[] = await Promise.all(node.inputs.map(getTask));
       if (inputScopes.length === 0) {
         inputScopes = [fsInput];
       } else {
-        const handles: DataHandleRead[] = [];
+        const handles: DataHandle[] = [];
         for (const pscope of inputScopes) {
           const scope = await pscope;
           for (const handle of await scope.Enum()) {
             handles.push(await scope.ReadStrict(handle));
           }
         }
-        inputScopes = [new QuickScope(handles)];
+        inputScopes = [new QuickDataSource(handles)];
       }
       const inputScope = inputScopes[0];
 
@@ -335,13 +340,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       try {
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START` });
 
-        const scope = config.DataStore.CreateScope(nodeName);
-        const scopeWorking = scope.CreateScope("working");
-        const scopeOutput = scope.CreateScope("output");
-        const scopeResult = await plugin(config,
-          inputScope,
-          scopeWorking,
-          scopeOutput) || scopeOutput;
+        const scopeResult = await plugin(config, inputScope, config.DataStore.DataSink);
 
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END` });
         return scopeResult;
@@ -353,7 +352,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     };
 
   // schedule pipeline
-  const tasks: { [name: string]: Promise<DataStoreViewReadonly> } = {};
+  const tasks: { [name: string]: Promise<DataSource> } = {};
   const getTask = (name: string) => name in tasks ?
     tasks[name] :
     tasks[name] = ScheduleNode(name);
@@ -363,7 +362,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   const barrierRobust = new OutstandingTaskAwaiter();
   for (const name of Object.keys(pipeline.pipeline)) {
     const task = getTask(name);
-    const taskx: { _state: "running" | "failed" | "complete", _result: () => DataHandleRead[], _finishedAt: number } = task as any;
+    const taskx: { _state: "running" | "failed" | "complete", _result: () => DataHandle[], _finishedAt: number } = task as any;
     taskx._state = "running";
     task.then(async x => {
       const res = await Promise.all((await x.Enum()).map(key => x.ReadStrict(key)));

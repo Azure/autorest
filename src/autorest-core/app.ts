@@ -39,7 +39,7 @@ async function legacyMain(autorestArgs: string[]): Promise<number> {
   // generate virtual config file
   const currentDirUri = CreateFolderUri(currentDirectory());
   const dataStore = new DataStore();
-  const config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(x => true /*unsafe*/), autorestArgs);
+  const config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(new RealFileSystem()), autorestArgs);
 
   // autorest init
   if (autorestArgs[0] === "init") {

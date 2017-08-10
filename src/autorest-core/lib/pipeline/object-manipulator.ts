@@ -6,21 +6,21 @@
 import { IdentitySourceMapping } from "../source-map/merging";
 import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNode } from "../ref/yaml";
 import { ReplaceNode, ResolveRelativeNode } from "../parsing/yaml";
-import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
+import { DataHandle, DataSink } from "../data-store/data-store";
 import { IsPrefix, JsonPath, nodes, paths, stringify } from "../ref/jsonpath";
 import { Mapping, SmartPosition } from "../ref/source-map";
 import { From } from "../ref/linq";
 
 export async function ManipulateObject(
-  src: DataHandleRead,
-  target: DataHandleWrite,
+  src: DataHandle,
+  target: DataSink,
   whereJsonQuery: string,
   transformer: (doc: any, obj: any, path: JsonPath) => any, // transforming to `undefined` results in removal
   mappingInfo?: {
-    transformerSourceHandle: DataHandleRead,
+    transformerSourceHandle: DataHandle,
     transformerSourcePosition: SmartPosition,
     reason: string
-  }): Promise<{ anyHit: boolean, result: DataHandleRead }> {
+  }): Promise<{ anyHit: boolean, result: DataHandle }> {
 
   // find paths matched by `whereJsonQuery`
   const doc = src.ReadObject<any>();
@@ -82,7 +82,7 @@ export async function ManipulateObject(
   }
 
   // write back
-  const resultHandle = await target.WriteData(StringifyAst(ast), mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
+  const resultHandle = await target.WriteData("manipulated", StringifyAst(ast), mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
   return {
     anyHit: true,
     result: resultHandle

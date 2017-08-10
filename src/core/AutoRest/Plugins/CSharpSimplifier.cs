@@ -9,8 +9,6 @@ using System.Text.RegularExpressions;
 
 public class CSharpSimplifier : NewPlugin
 {
-    static readonly Regex ExpectedUriPrefix = new Regex("^mem:///csharp/generate/([0-9]+/)?output/");
-
     public CSharpSimplifier(Connection connection, string sessionId) : base(connection, sessionId)
     { }
 
@@ -22,11 +20,7 @@ public class CSharpSimplifier : NewPlugin
         var files = await ListInputs();
         foreach (var file in files)
         {
-            if (!ExpectedUriPrefix.IsMatch(file))
-            {
-                throw new FormatException($"Unexpected file URI format: '{file}'");
-            }
-            fs.WriteAllText(ExpectedUriPrefix.Replace(file, ""), await ReadFile(file));
+            fs.WriteAllText(file, await ReadFile(file));
         }
 
         // simplify

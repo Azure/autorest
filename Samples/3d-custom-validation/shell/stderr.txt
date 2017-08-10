@@ -1,2 +1,2 @@
-    - mem:///csharp/transform/working/trans_input?mem:///csharp/simplifier/output/StorageAccounts.cs:1:0
+    - trans_input?mem:1:0
 ERROR: we want some cowbell - found none
