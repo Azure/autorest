@@ -99,23 +99,23 @@ namespace AutoRest.Python.Azure
                 if (propName == nextLinkName)
                 {
                     findNextLink = true;
-                    nextLinkName = property.SerializedName = property.SerializedName.Replace(".", "\\\\.");
+                    nextLinkName = property.SerializedName = property.SerializedName.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\");
 
                 }
                 else if (propName == itemName)
                 {
                     findItem = true;
-                    itemName = property.SerializedName = property.SerializedName.Replace(".", "\\\\.");
+                    itemName = property.SerializedName = property.SerializedName.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\");
                 }
 
-                if (propName == nextLinkName.Replace(".", "\\\\."))
+                if (propName == nextLinkName.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\"))
                 {
-                    nextLinkName = nextLinkName.Replace(".", "\\\\.");
+                    nextLinkName = nextLinkName.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\");
                     findNextLink = true;
                 }
-                else if (propName == itemName.Replace(".", "\\\\."))
+                else if (propName == itemName.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\"))
                 {
-                    itemName = itemName.Replace(".", "\\\\.");
+                    itemName = itemName.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\");
                     findItem = true;
                 }
             }

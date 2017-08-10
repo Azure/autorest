@@ -31,7 +31,7 @@ namespace AutoRest.Python.Model
             {
                 if (base.SerializedName != null && base.SerializedName.IndexOf(".") > -1 && base.SerializedName.IndexOf("\\\\") == -1 && !Extensions.ContainsKey("x-ms-client-flatten-original-type-name"))
                 {
-                    return base.SerializedName.Replace(".", "\\\\.");
+                    return base.SerializedName.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\");
                 }
                 return base.SerializedName;
             }

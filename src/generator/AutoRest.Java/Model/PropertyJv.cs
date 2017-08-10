@@ -17,7 +17,7 @@ namespace AutoRest.Java.Model
 
         public override string SerializedName
         {
-            get => Extensions.ContainsKey(SwaggerExtensions.FlattenOriginalTypeName) ? base.SerializedName : base.SerializedName?.Replace(".", "\\\\.");
+            get => Extensions.ContainsKey(SwaggerExtensions.FlattenOriginalTypeName) ? base.SerializedName : base.SerializedName?.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\");
             set => base.SerializedName = value;
         }
 

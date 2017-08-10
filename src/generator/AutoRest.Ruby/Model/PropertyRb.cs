@@ -19,7 +19,7 @@ namespace AutoRest.Ruby.Model
         // 2. When properties are not flattened and have . in serialized name then escape . with back slash
         public override string SerializedName
         {
-            get => this.WasFlattened() ? base.SerializedName : base.SerializedName?.Replace(".", "\\\\.");
+            get => this.WasFlattened() ? base.SerializedName : base.SerializedName?.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\");
             set => base.SerializedName = value;
         }
     }
