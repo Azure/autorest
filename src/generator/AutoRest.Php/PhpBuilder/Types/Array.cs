@@ -1,4 +1,6 @@
-﻿namespace AutoRest.Php.PhpBuilder.Types
+﻿using System;
+
+namespace AutoRest.Php.PhpBuilder.Types
 {
     public sealed class Array : IType
     {
@@ -6,6 +8,9 @@
             => Items == null ? "array" : Items.AbsoluteName + "[]";
 
         public string ToParameterPrefix() => "array ";
+
+        public string ToParameterSuffix()
+            => string.Empty;
 
         public IType Items { get; }
 

@@ -18,7 +18,7 @@ namespace AutoRest.Php.PhpBuilder.Functions
 
         public IEnumerable<string> ToCodeText(string indent)
         {
-            yield return Type.ToParameterPrefix() + Name.PhpFullName;
+            yield return Type.ToParameterPrefix() + Name.PhpFullName + Type.ToParameterSuffix();
         }
 
         public ObjectRef Ref()

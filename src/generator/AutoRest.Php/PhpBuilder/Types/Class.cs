@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System;
 
 namespace AutoRest.Php.PhpBuilder.Types
 {
@@ -57,5 +58,8 @@ namespace AutoRest.Php.PhpBuilder.Types
             }
             yield return "}";
         }
+
+        public string ToParameterSuffix()
+            => string.Empty;
     }
 }
