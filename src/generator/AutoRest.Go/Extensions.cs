@@ -113,6 +113,11 @@ namespace AutoRest.Go
             return WordSplitPattern.Split(value).Where(s => !string.IsNullOrEmpty(s)).ToArray();
         }
 
+        public static string ToIdiomaticShortName(this string value)
+        {
+            return string.Concat(value.ToPhrase().Split(new char[]{' '}).Select(w => w[0]));
+        }
+
         /// <summary>
         /// This method checks if MethodGroupName is plural of package name. 
         /// It returns false for packages not listed in dictionary 'plural'.

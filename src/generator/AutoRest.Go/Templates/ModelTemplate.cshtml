@@ -27,10 +27,10 @@
     @:switch m["@(Model.PolymorphicDiscriminator)"] {
     foreach (var dt in Model.DerivedTypes)
     {
-    @:case "@(dt.SerializedName)":
-        @:var s @(dt.Name)
-        @:err := json.Unmarshal(b, &s)
-        @:return s, err
+    @:case string(@(CodeNamerGo.Instance.PascalCase(Model.PolymorphicDiscriminator))@(dt.SerializedName)):
+        @:var @(dt.Name.FixedValue.ToIdiomaticShortName()) @(dt.Name)
+        @:err := json.Unmarshal(b, &@(dt.Name.FixedValue.ToIdiomaticShortName()))
+        @:return @(dt.Name.FixedValue.ToIdiomaticShortName()), err
     }
     @:default:
         @:return nil, errors.New("Unsupported type")
@@ -52,13 +52,13 @@ else
 {
 @:@EmptyLine
 @:// MarshalJSON is the custom marshaler for @(Model.Name).
-@:func (s @(Model.Name))MarshalJSON() ([]byte, error){
-    @:s.@(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name) = @(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name)@(Model.SerializedName)
+@:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) @(Model.Name))MarshalJSON() ([]byte, error){
+    @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name) = @(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name)@(Model.SerializedName)
     @:type Alias @(Model.Name)
     @:return json.Marshal(&struct {
         @:Alias
     @:}{
-        @:Alias: (Alias)(s),
+        @:Alias: (Alias)(@(Model.Name.FixedValue.ToIdiomaticShortName())),
     @:})
 @:}
 
@@ -66,10 +66,10 @@ foreach (var st in Model.SiblingTypes)
 {
 @:@EmptyLine
 @:// As@(st.Name) is the @(Model.BaseModelType.Name) implementation for @(Model.Name).
-@:func (s @(Model.Name)) As@(st.Name)() (*@(st.Name), bool) {
+@:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) @(Model.Name)) As@(st.Name)() (*@(st.Name), bool) {
     if (st.Equals(Model))
     {
-    @:return &s, true
+    @:return &@(Model.Name.FixedValue.ToIdiomaticShortName()), true
     }
     else
     {
@@ -81,7 +81,7 @@ foreach (var st in Model.SiblingTypes)
 
 @if (Model.HasPolymorphicFields) {
 @:// UnmarshalJSON is the custom unmarshaler for @(Model.Name) struct.
-@:func (s *@(Model.Name)) UnmarshalJSON(b []byte) error {
+@:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) *@(Model.Name)) UnmarshalJSON(b []byte) error {
 	@:var m map[string]*json.RawMessage
 	@:err := json.Unmarshal(b, &m)
 	@:if err != nil {
@@ -96,27 +96,27 @@ foreach (var st in Model.SiblingTypes)
     @:if v != nil {
         @if (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic)
         {
-        @:f, err := unmarshal@(p.ModelType.Name)(*m["@(p.SerializedName)"])
+        @:@(p.SerializedName), err := unmarshal@(p.ModelType.Name)(*m["@(p.SerializedName)"])
         }
         else
         {
-        @:var f @(p.ModelType.Name)
-        @:err = json.Unmarshal(*m["@(p.SerializedName)"], &f)
+        @:var @(p.SerializedName) @(p.ModelType.Name)
+        @:err = json.Unmarshal(*m["@(p.SerializedName)"], &@(p.SerializedName))
         }
         @:if err != nil {
             @:return err
         @:}
         @if (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic)
         {
-        @:s.@(p.Name) = f
+        @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(p.Name) = @(p.SerializedName)
         }
         else
         {
-        @:s.@(p.Name) = &f
+        @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(p.Name) = &@(p.SerializedName)
         }
     @:}
     }
-
+    @:@EmptyLine
     @:return nil
 @:}
 }
