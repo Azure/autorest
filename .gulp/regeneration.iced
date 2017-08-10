@@ -646,6 +646,7 @@ task 'regenerate-samples', '', (done) ->
             .forEach((file) -> 
               sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
               sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
+              sed "-i", /mem:\/\/\/[^: ]*/g, "mem", file                        # memory URIs (depend on timing)
               (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file)   # minify exception stack traces
               (sort file).to(file) if file.endsWith("stdout.txt") || file.endsWith("stderr.txt")
             )
@@ -653,8 +654,7 @@ task 'regenerate-samples', '', (done) ->
           (find path.join(each.path, ".."))
             .filter((file) -> file.match(/.(yaml)$/))
             .forEach((file) -> 
-              sed "-i", /.*autorest.src.*/ig, "", file  # source file names
-
+              sed "-i", /.*autorest[a-zA-Z0-9]*.src.*/ig, "", file  # source file names
             )
 
           next null

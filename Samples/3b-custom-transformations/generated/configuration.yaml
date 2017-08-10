@@ -37,13 +37,13 @@ output-artifact:
   - code-model-v1.yaml
   - pipeline.yaml
   - configuration.yaml
-  - source-file-php
   - source-file-csharp
   - source-file-go
   - source-file-java
   - source-file-python
   - source-file-nodejs
   - source-file-ruby
+  - source-file-php
   - source-file-azureresourceschema
   - source-file-jsonrpcclient
 use-extension:
@@ -119,22 +119,6 @@ pipeline:
   swagger-document/semantic-validator:
     input: swagger-document/identity
     scope: semantic-validator
-    suffixes: []
-  php/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: php
-    suffixes: []
-  php/generate:
-    plugin: php
-    input:
-      - swagger-document/identity
-      - modeler
-    output-artifact: source-file-php
-    suffixes: []
-  php/emitter:
-    input: generate
-    scope: scope-php/emitter
     suffixes: []
   csharp/modeler:
     input: swagger-document/identity
@@ -346,6 +330,22 @@ pipeline:
   ruby/emitter:
     input: transform
     scope: scope-ruby/emitter
+    suffixes: []
+  php/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: php
+    suffixes: []
+  php/generate:
+    plugin: php
+    input:
+      - swagger-document/identity
+      - modeler
+    output-artifact: source-file-php
+    suffixes: []
+  php/emitter:
+    input: generate
+    scope: scope-php/emitter
     suffixes: []
   azureresourceschema/modeler:
     input: swagger-document/identity
