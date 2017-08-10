@@ -65,11 +65,11 @@ namespace AutoRest.Php.SwaggerBuilder
         public static SchemaObject CreateDefinition(CompositeType type)
         {
             var additionalProperties = type.Properties
-                .FirstOrDefault(p => p.SerializedName.FixedValue == null);
+                .FirstOrDefault(p => p.SerializedName == null);
             var properties = type.Properties
-                .Where(p => p.SerializedName.FixedValue != null);
+                .Where(p => p.SerializedName != null);
             var swaggerProperties = properties.Select(p => Json.Property(
-                p.SerializedName.FixedValue,
+                p.SerializedName,
                 Create(p.ModelType)));
             return new SchemaObject(
                 properties: swaggerProperties,
