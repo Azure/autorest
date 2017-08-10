@@ -115,14 +115,13 @@ namespace AutoRest.Go.Model
         {
             if (!string.IsNullOrEmpty(PolymorphicDiscriminator) && Properties.All(p => p.SerializedName != PolymorphicDiscriminator))
             {
+                var enumType = CodeModel.EnumTypes.First(et => et.Name.EqualsIgnoreCase(PolymorphicDiscriminator));
                 var newProp = base.Add(New<Property>(new
                 {
                     Name = CodeNamerGo.Instance.PascalCase(PolymorphicDiscriminator),
                     SerializedName = PolymorphicDiscriminator,
-                    // Documentation = "Polymorphic Discriminator",
-                    ModelType = New<PrimaryType>(KnownPrimaryType.String)
+                    ModelType = enumType,
                 }));
-                newProp.Name.FixedValue = newProp.Name.RawValue;
             }            
         }
 
@@ -144,7 +143,6 @@ namespace AutoRest.Go.Model
             {
                 imports.Add("\"encoding/json\"");
                 imports.Add("\"errors\"");
-                imports.Add("\"github.com/Azure/go-autorest/autorest/to\"");
             }
         }
 

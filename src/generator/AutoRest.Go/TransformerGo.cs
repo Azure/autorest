@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Extensions.Azure;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Go
 {
@@ -75,6 +76,26 @@ namespace AutoRest.Go
                         cmg.Add(new EnumTypeGo(p.ModelType as EnumType));
                     }
                 };
+            }
+
+            // Add discriminators
+            foreach (var mt in cmg.ModelTypes)
+            {
+                if (mt.IsPolymorphic)
+                {
+                    var values  = new List<EnumValue>();
+                    foreach (var dt in (mt as CompositeTypeGo).DerivedTypes)
+                    {
+                        var ev = new EnumValue();
+                        ev.Name =  string.Format("{0}{1}", mt.PolymorphicDiscriminator, CodeNamerGo.Instance.PascalCase(dt.SerializedName));
+                        ev.SerializedName = dt.SerializedName;
+                        values.Add(ev);
+                    }
+                    cmg.Add(New<EnumType>(new{
+                        Name = mt.PolymorphicDiscriminator,
+                        Values = values,
+                    }));
+                }
             }
 
             // now normalize the names

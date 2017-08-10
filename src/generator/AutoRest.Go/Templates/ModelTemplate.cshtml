@@ -53,7 +53,7 @@ else
 @:@EmptyLine
 @:// MarshalJSON is the custom marshaler for @(Model.Name).
 @:func (s @(Model.Name))MarshalJSON() ([]byte, error){
-    @:s.@(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name) = to.StringPtr("@(Model.SerializedName)")
+    @:s.@(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name) = @(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name)@(Model.SerializedName)
     @:type Alias @(Model.Name)
     @:return json.Marshal(&struct {
         @:Alias
