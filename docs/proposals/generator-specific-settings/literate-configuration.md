@@ -398,7 +398,7 @@ Then, once you've installed AutoRest, you can use any arbitrary version by just 
 |maximum-version|`version: 1.999` | Specify a maximum version of AutoRest to use for the code generation |
 |azure|`azure-arm:true` | specifies that that the generation is designed to create an Azure Resource Manager SDK |
 |add-credentials| `add-credentials: true` | If true, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type.|
-|client-name| `client-name: MyClient ` |  Name to use for the generated client type. By default, uses the value of the 'Title' field from the Swagger input. |
+|override-client-name| `override-client-name: MyClient ` |  Name to use for the generated client type. By default, uses the value of the 'Title' field from the Swagger input. |
 |generation-mode| `generation-mode: ['rest-client', 'rest-server'] `| The code generation mode. Possible values: rest, rest-client, rest-server. Determines whether AutoRest generates the client or server side code for given spec.|
 |header-text| `header-text: MIT` | Text to include as a header comment in generated files. Use NONE to suppress the default header. |
 |input-file| `input-file: foo.json` | The location of the input specification. |
