@@ -33,9 +33,13 @@ task 'nuke' ,'dotnet', (done)->
       return done()
 
     .pipe where (each) ->  
-      assets = "#{folder each.path}/obj"
-      if test "-d", assets  
-        rmdir assets, -> 
+      objfolder = "#{folder each.path}/obj"
+      if test "-d", objfolder  
+        rmdir objfolder, -> 
+
+      binfolder = "#{folder each.path}/bin"
+      if test "-d", binfolder  
+        rmdir binfolder, -> 
           
   return null
 
