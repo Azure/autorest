@@ -225,6 +225,11 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// Controls whether to regenerate a pom.xml and Manager class.
         /// </summary>
         public bool RegenerateManager { get; set; }
+        
+        /// <summary>
+        /// The name of the service for which code is being generated.
+        /// </summary>
+        public string ServiceName { get; set; }
 
         /// <summary>
         /// Sets object properties from the dictionary matching keys to property names or aliases.

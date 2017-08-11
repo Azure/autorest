@@ -103,9 +103,10 @@ public class Generator : NewPlugin
         {
             Settings.Instance.PackageVersion = await GetValue("package-version");
         }
-        if (codeGenerator == "java")
+        if (codeGenerator == "java" || codeGenerator == "csharp")
         {
             Settings.Instance.RegenerateManager = await GetValue<bool?>("regenerate-manager") ?? false;
+            Settings.Instance.ServiceName = await GetValue<string>("service-name") ?? "";
         }
 
         // process

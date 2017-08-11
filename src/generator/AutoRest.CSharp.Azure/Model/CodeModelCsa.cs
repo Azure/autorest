@@ -45,9 +45,9 @@ namespace AutoRest.CSharp.Azure.Model
         {
             get
             {
-                if (Settings.Instance.CustomSettings.TryGetValue("ServiceName", out object obj))
+                if (!string.IsNullOrEmpty(Settings.Instance.ServiceName))
                 {
-                    return obj.ToString();
+                    return Settings.Instance.ServiceName;
                 }
 
                 var method = Methods[0];
