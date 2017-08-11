@@ -1,578 +1,656 @@
 {
-  "modelTypes": [
+ "modelTypes": [
+  {
+   "$id": "1",
+   "$type": "CompositeType",
+   "properties": [
     {
-      "$id": "1",
-      "$type": "CompositeType",
-      "properties": [
-        {
-          "$id": "2",
-          "isReadOnly": false,
-          "realPath": [
-            "code"
-          ],
-          "realXmlPath": [
-            "code"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "3",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#name": "code",
-          "#serializedName": "code"
-        },
-        {
-          "$id": "4",
-          "isReadOnly": false,
-          "realPath": [
-            "target"
-          ],
-          "realXmlPath": [
-            "target"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "5",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#name": "target",
-          "#serializedName": "target"
-        },
-        {
-          "$id": "6",
-          "isReadOnly": false,
-          "realPath": [
-            "message"
-          ],
-          "realXmlPath": [
-            "message"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "7",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#name": "message",
-          "#serializedName": "message"
-        }
-      ],
-      "containsConstantProperties": false,
-      "className": "ErrorDetails",
-      "declarationName": "ErrorDetails",
-      "#serializedName": "ErrorDetails",
-      "#name": "ErrorDetails"
+     "$id": "2",
+     "isReadOnly": false,
+     "realPath": [
+      "code"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "code"
+     },
+     "serializedName": "code",
+     "modelType": {
+      "$id": "3",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
     },
     {
-      "$id": "8",
-      "$type": "CompositeType",
-      "properties": [
-        {
-          "$id": "9",
-          "isReadOnly": false,
-          "realPath": [
-            "code"
-          ],
-          "realXmlPath": [
-            "code"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "10",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#name": "code",
-          "#serializedName": "code"
-        },
-        {
-          "$id": "11",
-          "isReadOnly": false,
-          "realPath": [
-            "message"
-          ],
-          "realXmlPath": [
-            "message"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "12",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#name": "message",
-          "#serializedName": "message"
-        },
-        {
-          "$id": "13",
-          "isReadOnly": false,
-          "realPath": [
-            "target"
-          ],
-          "realXmlPath": [
-            "target"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "14",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#name": "target",
-          "#serializedName": "target"
-        },
-        {
-          "$id": "15",
-          "isReadOnly": false,
-          "realPath": [
-            "details"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "IList<ErrorDetails>",
-          "modelType": {
-            "$id": "16",
-            "$type": "SequenceType",
-            "elementType": {
-              "$ref": "1"
-            },
-            "isConstant": false,
-            "className": "IList<ErrorDetails>",
-            "declarationName": "IList<ErrorDetails>"
-          },
-          "#name": "details",
-          "#serializedName": "details"
-        },
-        {
-          "$id": "17",
-          "isReadOnly": false,
-          "realPath": [
-            "innerError"
-          ],
-          "realXmlPath": [
-            "innerError"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "18",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#name": "innerError",
-          "#serializedName": "innerError"
-        }
-      ],
-      "containsConstantProperties": false,
-      "className": "Error",
-      "declarationName": "Error",
-      "#serializedName": "Error",
-      "#name": "Error"
+     "$id": "4",
+     "isReadOnly": false,
+     "realPath": [
+      "target"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "target"
+     },
+     "serializedName": "target",
+     "modelType": {
+      "$id": "5",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
     },
     {
-      "$id": "19",
-      "$type": "CompositeType",
-      "properties": [
-        {
-          "$id": "20",
-          "isReadOnly": false,
-          "realPath": [
-            "status"
-          ],
-          "realXmlPath": [
-            "status"
-          ],
-          "collectionFormat": "none",
-          "extensions": {
-            "x-ms-enum": {
-              "name": "NetworkOperationStatus",
-              "modelAsString": true
-            }
-          },
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "NetworkOperationStatus",
-          "modelType": {
-            "$id": "21",
-            "$type": "EnumType",
-            "values": [
-              {
-                "name": "InProgress",
-                "memberName": "InProgress",
-                "#serializedName": "InProgress"
-              },
-              {
-                "name": "Succeeded",
-                "memberName": "Succeeded",
-                "#serializedName": "Succeeded"
-              },
-              {
-                "name": "Failed",
-                "memberName": "Failed",
-                "#serializedName": "Failed"
-              }
-            ],
-            "modelAsString": true,
-            "declarationName": "String",
-            "extendedDocumentation": "Possible values include: 'InProgress', 'Succeeded', 'Failed'",
-            "isConstant": false,
-            "className": "NetworkOperationStatus",
-            "#serializedName": "NetworkOperationStatus",
-            "#name": "NetworkOperationStatus"
-          },
-          "#documentation": "Status of the Azure async operation. Possible values are: 'InProgress', 'Succeeded', and 'Failed'.",
-          "#name": "status",
-          "#serializedName": "status"
-        },
-        {
-          "$id": "22",
-          "isReadOnly": false,
-          "realPath": [
-            "error"
-          ],
-          "realXmlPath": [
-            "error"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "Error",
-          "modelType": {
-            "$ref": "8"
-          },
-          "#name": "error",
-          "#serializedName": "error"
-        }
-      ],
-      "documentation": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure.",
-      "containsConstantProperties": false,
-      "className": "AzureAsyncOperationResult",
-      "declarationName": "AzureAsyncOperationResult",
-      "#serializedName": "AzureAsyncOperationResult",
-      "#name": "AzureAsyncOperationResult"
-    },
-    {
-      "$id": "23",
-      "$type": "CompositeType",
-      "properties": [
-        {
-          "$id": "24",
-          "isReadOnly": false,
-          "realPath": [
-            "id"
-          ],
-          "realXmlPath": [
-            "id"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "25",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#documentation": "Resource ID.",
-          "#name": "id",
-          "#serializedName": "id"
-        },
-        {
-          "$id": "26",
-          "isReadOnly": true,
-          "realPath": [
-            "name"
-          ],
-          "realXmlPath": [
-            "name"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "27",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#documentation": "Resource name.",
-          "#name": "name",
-          "#serializedName": "name"
-        },
-        {
-          "$id": "28",
-          "isReadOnly": true,
-          "realPath": [
-            "type"
-          ],
-          "realXmlPath": [
-            "type"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "29",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#documentation": "Resource type.",
-          "#name": "type",
-          "#serializedName": "type"
-        },
-        {
-          "$id": "30",
-          "isReadOnly": false,
-          "realPath": [
-            "location"
-          ],
-          "realXmlPath": [
-            "location"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "31",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#documentation": "Resource location.",
-          "#name": "location",
-          "#serializedName": "location"
-        },
-        {
-          "$id": "32",
-          "isReadOnly": false,
-          "realPath": [
-            "tags"
-          ],
-          "realXmlPath": [
-            "tags"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "Dictionary<string,String>",
-          "modelType": {
-            "$id": "33",
-            "$type": "DictionaryType",
-            "valueType": {
-              "$id": "34",
-              "$type": "PrimaryType",
-              "knownFormat": "none",
-              "knownPrimaryType": "string",
-              "isConstant": false,
-              "className": "String",
-              "declarationName": "String",
-              "#name": "String"
-            },
-            "supportsAdditionalProperties": false,
-            "isConstant": false,
-            "className": "Dictionary<string,String>",
-            "declarationName": "Dictionary<string,String>"
-          },
-          "#documentation": "Resource tags.",
-          "#name": "tags",
-          "#serializedName": "tags"
-        }
-      ],
-      "containsConstantProperties": false,
-      "className": "Resource",
-      "declarationName": "Resource",
-      "extensions": {
-        "x-ms-azure-resource": true
-      },
-      "#serializedName": "Resource",
-      "#name": "Resource"
-    },
-    {
-      "$id": "35",
-      "$type": "CompositeType",
-      "properties": [
-        {
-          "$id": "36",
-          "isReadOnly": false,
-          "realPath": [
-            "id"
-          ],
-          "realXmlPath": [
-            "id"
-          ],
-          "collectionFormat": "none",
-          "isRequired": false,
-          "isConstant": false,
-          "modelTypeName": "String",
-          "modelType": {
-            "$id": "37",
-            "$type": "PrimaryType",
-            "knownFormat": "none",
-            "knownPrimaryType": "string",
-            "isConstant": false,
-            "className": "String",
-            "declarationName": "String",
-            "#name": "String"
-          },
-          "#documentation": "Resource ID.",
-          "#name": "id",
-          "#serializedName": "id"
-        }
-      ],
-      "containsConstantProperties": false,
-      "className": "SubResource",
-      "declarationName": "SubResource",
-      "extensions": {
-        "x-ms-azure-resource": true
-      },
-      "#serializedName": "SubResource",
-      "#name": "SubResource"
+     "$id": "6",
+     "isReadOnly": false,
+     "realPath": [
+      "message"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "message"
+     },
+     "serializedName": "message",
+     "modelType": {
+      "$id": "7",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
     }
-  ],
-  "enumTypes": [
+   ],
+   "serializedName": "ErrorDetails",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "ErrorDetails"
+   }
+  },
+  {
+   "$id": "8",
+   "$type": "CompositeType",
+   "properties": [
     {
-      "$ref": "21"
-    }
-  ],
-  "modelsName": "Models",
-  "apiVersion": "2016-12-01",
-  "baseUrl": "https://management.azure.com",
-  "documentation": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-  "shouldGenerateXmlSerialization": false,
-  "properties": [
-    {
-      "$id": "38",
-      "isReadOnly": false,
-      "realPath": [
-        "subscriptionId"
-      ],
-      "realXmlPath": [
-        "subscriptionId"
-      ],
-      "collectionFormat": "none",
-      "isRequired": true,
-      "isConstant": false,
-      "modelTypeName": "String",
-      "modelType": {
-        "$id": "39",
-        "$type": "PrimaryType",
-        "knownFormat": "none",
-        "knownPrimaryType": "string",
-        "isConstant": false,
-        "className": "String",
-        "declarationName": "String",
-        "#name": "String"
-      },
-      "#documentation": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "#name": "subscriptionId",
-      "#serializedName": "subscriptionId"
+     "$id": "9",
+     "isReadOnly": false,
+     "realPath": [
+      "code"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "code"
+     },
+     "serializedName": "code",
+     "modelType": {
+      "$id": "10",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
     },
     {
-      "$id": "40",
-      "isReadOnly": false,
-      "realPath": [
-        "api-version"
-      ],
-      "realXmlPath": [
-        "api-version"
-      ],
-      "collectionFormat": "none",
-      "isRequired": true,
-      "isConstant": false,
-      "modelTypeName": "String",
-      "modelType": {
-        "$id": "41",
-        "$type": "PrimaryType",
-        "knownFormat": "none",
-        "knownPrimaryType": "string",
-        "isConstant": false,
-        "className": "String",
-        "declarationName": "String",
-        "#name": "String"
+     "$id": "11",
+     "isReadOnly": false,
+     "realPath": [
+      "message"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "message"
+     },
+     "serializedName": "message",
+     "modelType": {
+      "$id": "12",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "13",
+     "isReadOnly": false,
+     "realPath": [
+      "target"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "target"
+     },
+     "serializedName": "target",
+     "modelType": {
+      "$id": "14",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "15",
+     "isReadOnly": false,
+     "realPath": [
+      "details"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "details"
+     },
+     "serializedName": "details",
+     "modelType": {
+      "$id": "16",
+      "$type": "SequenceType",
+      "elementType": {
+       "$ref": "1"
       },
-      "#documentation": "Client API version.",
-      "#name": "api-version",
-      "#serializedName": "api-version"
+      "name": {
+       "fixed": false
+      }
+     }
+    },
+    {
+     "$id": "17",
+     "isReadOnly": false,
+     "realPath": [
+      "innerError"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "innerError"
+     },
+     "serializedName": "innerError",
+     "modelType": {
+      "$id": "18",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
     }
-  ],
-  "#name": "NetworkManagementClient"
+   ],
+   "serializedName": "Error",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "Error"
+   }
+  },
+  {
+   "$id": "19",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "20",
+     "isReadOnly": false,
+     "realPath": [
+      "status"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Status of the Azure async operation. Possible values are: 'InProgress', 'Succeeded', and 'Failed'."
+     },
+     "extensions": {
+      "x-ms-enum": {
+       "name": "NetworkOperationStatus",
+       "modelAsString": true
+      }
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "status"
+     },
+     "serializedName": "status",
+     "modelType": {
+      "$id": "21",
+      "$type": "EnumType",
+      "values": [
+       {
+        "name": "InProgress",
+        "serializedName": "InProgress"
+       },
+       {
+        "name": "Succeeded",
+        "serializedName": "Succeeded"
+       },
+       {
+        "name": "Failed",
+        "serializedName": "Failed"
+       }
+      ],
+      "modelAsString": true,
+      "name": {
+       "fixed": false,
+       "raw": "NetworkOperationStatus"
+      }
+     }
+    },
+    {
+     "$id": "22",
+     "isReadOnly": false,
+     "realPath": [
+      "error"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "error"
+     },
+     "serializedName": "error",
+     "modelType": {
+      "$ref": "8"
+     }
+    }
+   ],
+   "serializedName": "AzureAsyncOperationResult",
+   "documentation": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "AzureAsyncOperationResult"
+   }
+  },
+  {
+   "$id": "23",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "24",
+     "isReadOnly": false,
+     "realPath": [
+      "id"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Resource ID."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "id"
+     },
+     "serializedName": "id",
+     "modelType": {
+      "$id": "25",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "26",
+     "isReadOnly": true,
+     "realPath": [
+      "name"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Resource name."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "name"
+     },
+     "serializedName": "name",
+     "modelType": {
+      "$id": "27",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "28",
+     "isReadOnly": true,
+     "realPath": [
+      "type"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Resource type."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "type"
+     },
+     "serializedName": "type",
+     "modelType": {
+      "$id": "29",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "30",
+     "isReadOnly": false,
+     "realPath": [
+      "location"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Resource location."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "location"
+     },
+     "serializedName": "location",
+     "modelType": {
+      "$id": "31",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "32",
+     "isReadOnly": false,
+     "realPath": [
+      "tags"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Resource tags."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "tags"
+     },
+     "serializedName": "tags",
+     "modelType": {
+      "$id": "33",
+      "$type": "DictionaryType",
+      "valueType": {
+       "$id": "34",
+       "$type": "PrimaryType",
+       "knownPrimaryType": "string",
+       "name": {
+        "fixed": false,
+        "raw": "String"
+       }
+      },
+      "supportsAdditionalProperties": false,
+      "name": {
+       "fixed": false
+      }
+     }
+    }
+   ],
+   "serializedName": "Resource",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "Resource"
+   },
+   "extensions": {
+    "x-ms-azure-resource": true
+   }
+  },
+  {
+   "$id": "35",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "36",
+     "isReadOnly": false,
+     "realPath": [
+      "id"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Resource ID."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "id"
+     },
+     "serializedName": "id",
+     "modelType": {
+      "$id": "37",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "SubResource",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "SubResource"
+   },
+   "extensions": {
+    "x-ms-azure-resource": true
+   }
+  }
+ ],
+ "enumTypes": [
+  {
+   "$ref": "21"
+  }
+ ],
+ "name": "NetworkManagementClient",
+ "namespace": "",
+ "modelsName": "Models",
+ "apiVersion": "2016-12-01",
+ "baseUrl": "https://management.azure.com",
+ "documentation": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+ "properties": [
+  {
+   "$id": "38",
+   "isReadOnly": false,
+   "realPath": [
+    "subscriptionId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "subscriptionId"
+   },
+   "serializedName": "subscriptionId",
+   "modelType": {
+    "$id": "39",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "40",
+   "isReadOnly": false,
+   "realPath": [
+    "api-version"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Client API version."
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "api-version"
+   },
+   "serializedName": "api-version",
+   "modelType": {
+    "$id": "41",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  }
+ ]
 }
