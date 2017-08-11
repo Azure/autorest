@@ -54,7 +54,7 @@ namespace AutoRest.Swagger
         {
             ServiceDefinition = serviceDefinition;
             
-            Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
+            Logger.Instance.Log(Category.Debug, Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
 
@@ -68,7 +68,7 @@ namespace AutoRest.Swagger
 
                 var clientProperty = New<Property>();
                 clientProperty.LoadFrom(parameter);
-                clientProperty.RealPath = new string[] { parameter.SerializedName.Value };
+                clientProperty.RealPath = new string[] { parameter.SerializedName };
 
                 CodeModel.Add(clientProperty);
             }

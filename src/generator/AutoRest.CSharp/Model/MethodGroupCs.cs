@@ -11,11 +11,9 @@ namespace AutoRest.CSharp.Model
     {
         protected MethodGroupCs() : base()
         {
-            InitProperties();
         }
         protected MethodGroupCs(string name) : base(name)
         {
-            InitProperties();
         }
 
         public override Method Add(Method method)
@@ -23,41 +21,21 @@ namespace AutoRest.CSharp.Model
             (method as MethodCs).SyncMethods = Singleton<GeneratorSettingsCs>.Instance.SyncMethods;
             return base.Add(method);
         }
-        private void InitProperties()
+
+        /// <Summary>
+        /// Accessor for <code>ExtensionTypeName</code>
+        /// </Summary>
+        public string ExtensionTypeName
         {
-            ExtensionTypeName.OnGet += value =>
+            get
             {
                 if (IsCodeModelMethodGroup)
                 {
                     return (CodeModel?.Name).Else(string.Empty);
                 }
-                
-                return
-                    CodeNamer.Instance.GetTypeName(
-                        value.Else(TypeName.Else(CodeModel?.Name.Else(NameForProperty.Else(String.Empty)))));
-            };
-        }
 
-        
-
-        /// <Summary>
-        /// Backing field for <code>ExtensionTypeName</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _extensionTypeName = new Fixable<string>();
-
-        /// <Summary>
-        /// Accessor for <code>ExtensionTypeName</code>
-        /// </Summary>
-        /// <remarks>
-        /// The Get and Set operations for this accessor may be overridden by using the 
-        /// <code>ExtensionTypeName.OnGet</code> and <code>ExtensionTypeName.OnSet</code> events in this class' constructor.
-        /// (ie <code> ExtensionTypeName.OnGet += extensionTypeName => extensionTypeName.ToUpper();</code> )
-        /// </remarks>
-        public Fixable<string> ExtensionTypeName
-        {
-            get { return _extensionTypeName; }
-            set { _extensionTypeName.CopyFrom(value); }
+                return CodeNamer.Instance.GetTypeName(TypeName.Else(CodeModel?.Name.Else(NameForProperty.Else(String.Empty))));
+            }
         }
 
         public override IEnumerable<string> Usings

@@ -12,7 +12,7 @@ namespace AutoRest.Php.SwaggerBuilder
     {
         public static Object<SchemaObject> Create(IEnumerable<CompositeType> modelTypes)
             => Json.Object(modelTypes.Select(type => Json.Property(
-                type.SerializedName.FixedValue,
+                type.SerializedName,
                 SchemaObject.CreateDefinition(type))));
     }
 }

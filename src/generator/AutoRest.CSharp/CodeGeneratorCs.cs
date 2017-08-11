@@ -120,19 +120,19 @@ namespace AutoRest.CSharp
         {
             if (Settings.Instance.CodeGenerationMode.IsNullOrEmpty() || Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest-client"))
             {
-                Logger.Instance.Log(Category.Info, "Defaulting to generate client side Code");
+                Logger.Instance.Log(Category.Debug, "Defaulting to generate client side Code");
                 await GenerateClientSideCode(codeModel);
             } 
             else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest"))
             {
-                Logger.Instance.Log(Category.Info, "Generating client side Code");
+                Logger.Instance.Log(Category.Debug, "Generating client side Code");
                 await GenerateClientSideCode(codeModel);
-                Logger.Instance.Log(Category.Info, "Generating server side Code");
+                Logger.Instance.Log(Category.Debug, "Generating server side Code");
                 await GenerateServerSideCode(codeModel);
             }
             else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest-server"))
             {
-                Logger.Instance.Log(Category.Info, "Generating server side Code");
+                Logger.Instance.Log(Category.Debug, "Generating server side Code");
                 await GenerateServerSideCode(codeModel);
             }
 
@@ -153,7 +153,7 @@ namespace AutoRest.CSharp
             }
             if (Settings.Instance.CodeGenerationMode.IsNullOrEmpty() || Settings.Instance.CodeGenerationMode.ToLower().StartsWith("rest"))
             {
-                Logger.Instance.Log(Category.Info, "Generating Rest Code");
+                Logger.Instance.Log(Category.Debug, "Generating Rest Code");
                 await GenerateRestCode(codeModel);
             }
             else

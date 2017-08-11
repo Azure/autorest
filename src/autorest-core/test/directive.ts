@@ -90,7 +90,7 @@ import { Message, Channel } from "../lib/message";
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties", from: "swagger.md" });
   }
 
-  @test @timeout(0) async "set descriptions on different levels"() {
+  @test @skip @timeout(0) async "set descriptions on different levels"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
     autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
 
@@ -116,7 +116,7 @@ import { Message, Channel } from "../lib/message";
     const codeModelSetDescr1 = await GenerateCodeModel({ directive: { from: "swagger-document", where: "$..description", set: "cowbell" } });
 
     // set descriptions in code model
-    const codeModelSetDescr2 = await GenerateCodeModel({ directive: { from: "code-model-v1", where: ["$..description", "$..documentation", "$..['#documentation']"], set: "cowbell" } });
+    const codeModelSetDescr2 = await GenerateCodeModel({ directive: { from: "code-model-v1", where: ["$..description", "$..documentation"], set: "cowbell" } });
 
     // transform descriptions in resolved swagger
     const codeModelSetDescr3 = await GenerateCodeModel({ directive: { from: "swagger-document", where: "$..description", transform: "return 'cowbell'" } });

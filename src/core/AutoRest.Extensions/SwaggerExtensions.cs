@@ -39,8 +39,6 @@ namespace AutoRest.Extensions
         public const string ExternalExtension = "x-ms-external";
         public const string HeaderCollectionPrefix = "x-ms-header-collection-prefix";
 
-        private static bool hostChecked = false;
-
         /// <summary>
         /// Normalizes client model using generic extensions.
         /// </summary>
@@ -66,9 +64,11 @@ namespace AutoRest.Extensions
                     throw new ArgumentNullException("codeModel");
                 }
 
-                if (codeModel.Extensions.ContainsKey(ParameterizedHostExtension) && !hostChecked)
+                if (codeModel.Extensions.TryGetValue(ParameterizedHostExtension, out var extensionObject) &&
+                    !codeModel.Extensions.ContainsKey(ParameterizedHostExtension + "DONE"))
                 {
-                    var hostExtension = codeModel.Extensions[ParameterizedHostExtension] as JObject;
+                    var hostExtension = extensionObject as JObject;
+                    codeModel.Extensions.Add(ParameterizedHostExtension + "DONE", true);
 
                     if (hostExtension != null)
                     {
@@ -157,7 +157,6 @@ namespace AutoRest.Extensions
                     }
                 }
             }
-            hostChecked = true;
         }
 
         /// <summary>
@@ -344,9 +343,9 @@ namespace AutoRest.Extensions
             string propertyName = property.SerializedName;
             if (escapePropertyName)
             {
-                propertyName = propertyName.Replace(".", "\\\\.");
+                propertyName = propertyName.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\");
             }
-            property.SerializedName.FixedValue = basePath + "." + propertyName;
+            property.SerializedName = basePath + "." + propertyName;
             return property;
         }
 
