@@ -78,7 +78,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     assert.notEqual(codeModel.indexOf("isConstant"), -1);
   }
 
-  @test @skip @timeout(10000) async "AutoRest.dll Generator"() {
+  @test @timeout(10000) async "AutoRest.dll Generator"() {
     const autoRest = new AutoRest(new RealFileSystem());
     autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     autoRest.AddConfiguration({
@@ -112,14 +112,14 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
       new QuickDataSource([swagger, codeModelHandle]),
       dataStore.DataSink,
       f => results.push(f),
-      m => null,
+      m => { if (m.Channel === Channel.Fatal) console.log(m.Text); },
       CancellationToken.None);
     assert.strictEqual(result, true);
 
     // check results
     assert.notEqual(results.length, 0);
-    assert.notEqual(results.filter(file => file.key.indexOf("Models/") !== -1).length, 0);
-    assert.ok(results.every(file => file.key.indexOf(".cs") !== -1));
+    assert.notEqual(results.filter(file => file.Description.indexOf("Models/") !== -1).length, 0);
+    assert.ok(results.every(file => file.Description.indexOf(".cs") !== -1));
     console.log(results);
   }
 

@@ -9,14 +9,14 @@ import * as assert from "assert";
 import * as uri from "../lib/ref/uri";
 
 @suite class Uri {
-  @test @skip async "CreateFileUri"() {
+  @test async "CreateFileUri"() {
     assert.strictEqual(uri.CreateFileUri("C:\\windows\\path\\file.txt"), "file:///C:/windows/path/file.txt");
     assert.strictEqual(uri.CreateFileUri("/linux/path/file.txt"), "file:///linux/path/file.txt");
     assert.throws(() => uri.CreateFileUri("relpath\\file.txt"));
     assert.throws(() => uri.CreateFileUri("relpath/file.txt"));
   }
 
-  @test @skip async "CreateFolderUri"() {
+  @test async "CreateFolderUri"() {
     assert.strictEqual(uri.CreateFolderUri("C:\\windows\\path\\"), "file:///C:/windows/path/");
     assert.strictEqual(uri.CreateFolderUri("/linux/path/"), "file:///linux/path/");
     assert.throws(() => uri.CreateFolderUri("relpath\\"));

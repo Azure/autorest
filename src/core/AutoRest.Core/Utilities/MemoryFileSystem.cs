@@ -121,10 +121,7 @@ namespace AutoRest.Core.Utilities
                     VirtualStore[key].ToString() != FolderKey &&
                     Regex.IsMatch(key, WildcardToRegex(filePattern)))
                 {
-                    if (!files.Contains(key))
-                    {
-                        files.Add(key);
-                    }
+                    files.Add(key.Replace('\\', '/'));
                 }
             }
             return files.ToArray();
