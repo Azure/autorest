@@ -84,6 +84,7 @@ Import
   nuget_apikey: argv.nuget_apikey or process.env.NUGET_APIKEY or null
   myget_apikey: argv.myget_apikey or process.env.MYGET_APIKEY or null
   npm_apikey:  argv.npm_apikey or process.env.NPM_APIKEY or null
+  autorest_home: process.env["autorest.home"]
   github_feed: argv.feed or "azure"
   today: moment().format('YYYYMMDD')
   now: moment().format('YYYYMMDD-HHmm')
