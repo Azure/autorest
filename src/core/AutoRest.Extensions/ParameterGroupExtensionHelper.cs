@@ -111,8 +111,7 @@ namespace AutoRest.Extensions
             if (methodList.Count == 1)
             {
                 Method method = methodList.Single();
-                return string.Format(CultureInfo.InvariantCulture, "Additional parameters for the {0} operation.",
-                    createOperationDisplayString(method.MethodGroup.Name.ToPascalCase(), method.Name));
+                return string.Format(CultureInfo.InvariantCulture, "Additional parameters for {0} operation.", method.Name);
             }
             else if (methodList.Count <= 4)
             {
