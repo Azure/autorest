@@ -33,6 +33,8 @@ namespace AutoRest.Go.Model
 
         public bool HasPolymorphicFields => Properties.Any(p => p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic);
 
+        public bool DiscriminatorEnumExists;
+
         public CompositeTypeGo()
         {
 

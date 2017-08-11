@@ -27,7 +27,14 @@
     @:switch m["@(Model.PolymorphicDiscriminator)"] {
     foreach (var dt in Model.DerivedTypes)
     {
+    @if (Model.DiscriminatorEnumExists)
+    {
+    @:case string(@(CodeNamerGo.Instance.PascalCase(dt.SerializedName))):
+    }
+    else
+    {
     @:case string(@(CodeNamerGo.Instance.PascalCase(Model.PolymorphicDiscriminator))@(CodeNamerGo.Instance.PascalCase(dt.SerializedName))):
+    }
         @:var @(dt.Name.FixedValue.ToIdiomaticShortName()) @(dt.Name)
         @:err := json.Unmarshal(b, &@(dt.Name.FixedValue.ToIdiomaticShortName()))
         @:return @(dt.Name.FixedValue.ToIdiomaticShortName()), err
@@ -53,7 +60,14 @@ else
 @:@EmptyLine
 @:// MarshalJSON is the custom marshaler for @(Model.Name).
 @:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) @(Model.Name))MarshalJSON() ([]byte, error){
+    @if ((Model.BaseModelType as CompositeTypeGo).DiscriminatorEnumExists)
+    {
+    @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@((Model.BaseModelType as CompositeTypeGo).PolymorphicDiscriminatorProperty.Name) = @(CodeNamerGo.Instance.PascalCase(Model.SerializedName))
+    }
+    else
+    {
     @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name) = @(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name)@(CodeNamerGo.Instance.PascalCase(Model.SerializedName))
+    }
     @:type Alias @(Model.Name)
     @:return json.Marshal(&struct {
         @:Alias

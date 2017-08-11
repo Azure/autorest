@@ -81,6 +81,7 @@ namespace AutoRest.Go
             // Add discriminators
             foreach (var mt in cmg.ModelTypes)
             {
+                // (mt as CompositeTypeGo).DiscriminatorEnumExists = false;
                 if (mt.IsPolymorphic)
                 {
                     var values  = new List<EnumValue>();
@@ -91,10 +92,15 @@ namespace AutoRest.Go
                         ev.SerializedName = dt.SerializedName;
                         values.Add(ev);
                     }
-                    cmg.Add(New<EnumType>(new{
-                        Name = mt.PolymorphicDiscriminator,
-                        Values = values,
-                    }));
+                    bool alreadyExists = cmg.EnumTypes.Any(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator));
+                    if (!alreadyExists)
+                    {
+                        cmg.Add(New<EnumType>(new{
+                            Name = mt.PolymorphicDiscriminator,
+                            Values = values,
+                        })); 
+                    }
+                    (mt as CompositeTypeGo).DiscriminatorEnumExists = alreadyExists;
                 }
             }
 
