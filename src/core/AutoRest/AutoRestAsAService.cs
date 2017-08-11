@@ -9,6 +9,7 @@ using Microsoft.Perks.JsonRPC;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Core.Utilities;
+using System.IO;
 
 namespace AutoRest
 {
@@ -17,9 +18,9 @@ namespace AutoRest
   {
     private Connection connection;
 
-    public async Task<int> Run()
+    public async Task<int> Run(Stream input = null)
     {
-      connection = new Connection(Console.Out, Console.OpenStandardInput());
+      connection = new Connection(Console.Out, input ?? Console.OpenStandardInput());
       // connection.OnDebug += (t) => Console.Error.WriteLine(t);
 
       connection.Dispatch<IEnumerable<string>>(nameof(GetPluginNames), GetPluginNames);

@@ -22,8 +22,13 @@ namespace AutoRest
     {
         private static int Main(string[] args)
         {
-            if(args != null && args.Length > 0 && args[0] == "--server") {
-                return new AutoRestAsAsService().Run().Result;
+            if(args != null && args.Length > 0)
+            {
+                switch (args[0])
+                {
+                    case "--server": return new AutoRestAsAsService().Run().Result;
+                    case "--test": return new AutoRestAsAsService().Run(File.OpenRead(args[1])).Result;
+                }
             }
 
             Console.WriteLine("This is not the AutoRest entry point.");

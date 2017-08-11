@@ -281,11 +281,20 @@ namespace Microsoft.Perks.JsonRPC
                             if (!string.IsNullOrEmpty(id))
                             {
                                 ICallerResponse f = null;
-                                lock( _tasks )
+                                while (true)
                                 {
-                                    f = _tasks[id];
-                                    _tasks.Remove(id);
+                                    lock (_tasks)
+                                    {
+                                        if (_tasks.TryGetValue(id, out f))
+                                        {
+                                            f = _tasks[id];
+                                            _tasks.Remove(id);
+                                            break;
+                                        }
+                                    }
+                                    await Task.Delay(200);
                                 }
+
                                 f.SetCompleted(jobject.Property("result").Value);
                             }
                         }
