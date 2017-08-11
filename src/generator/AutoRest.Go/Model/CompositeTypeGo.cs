@@ -34,6 +34,10 @@ namespace AutoRest.Go.Model
         public bool HasPolymorphicFields => Properties.Any(p => p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic);
 
         public bool DiscriminatorEnumExists;
+        public string DiscriminatorEnumName;
+
+
+        public EnumType DiscriminatorEnum => CodeModel.EnumTypes.First(et => et.Name.EqualsIgnoreCase(DiscriminatorEnumName));
 
         public CompositeTypeGo()
         {
@@ -117,12 +121,11 @@ namespace AutoRest.Go.Model
         {
             if (!string.IsNullOrEmpty(PolymorphicDiscriminator) && Properties.All(p => p.SerializedName != PolymorphicDiscriminator))
             {
-                var enumType = CodeModel.EnumTypes.First(et => et.Name.EqualsIgnoreCase(PolymorphicDiscriminator));
                 var newProp = base.Add(New<Property>(new
                 {
                     Name = CodeNamerGo.Instance.PascalCase(PolymorphicDiscriminator),
                     SerializedName = PolymorphicDiscriminator,
-                    ModelType = enumType,
+                    ModelType = DiscriminatorEnum,
                 }));
             }            
         }
