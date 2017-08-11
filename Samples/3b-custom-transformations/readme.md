@@ -69,7 +69,7 @@ directive:
   transform: >
       const url = $.methods[0]["url"];
       const res = url.split("/Microsoft.Storage/")[1].split("/")[0];
-      $["#name"] = res;
+      $.name.raw = res;
       $.summary = JSON.stringify($, null, 2);
   reason: We wanna group methods by URI.
 ```

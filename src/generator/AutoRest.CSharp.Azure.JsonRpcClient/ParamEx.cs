@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Azure.JsonRpcClient
         /// <param name="p"></param>
         /// <returns></returns>
         public static string GetParameterInfoName(this Method m, Parameter p)
-            => $"{m.Name}_{p.SerializedName.Value.Replace('-', '_').Replace('$', '_')}_ParamInfo";
+            => $"{m.Name}_{p.SerializedName.Replace('-', '_').Replace('$', '_')}_ParamInfo";
 
         /// <summary>
         /// Get a C# name of a parameter info object.

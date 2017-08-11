@@ -163,14 +163,8 @@ Modelers:
     TypeName: CompositeSwaggerModeler, AutoRest.CompositeSwagger
     </value>
   </data>
-  <data name="ErrorGeneratingClientModel" xml:space="preserve">
-    <value>Error generating client model: {0}</value>
-  </data>
   <data name="ErrorLoadingAssembly" xml:space="preserve">
     <value>Error loading {0} assembly: {1}</value>
-  </data>
-  <data name="ErrorSavingGeneratedCode" xml:space="preserve">
-    <value>Error saving generated code: {0}</value>
   </data>
   <data name="ExtensionNotFound" xml:space="preserve">
     <value>Plugin {0} not found</value>
@@ -181,29 +175,11 @@ Modelers:
   <data name="InitializingCodeGenerator" xml:space="preserve">
     <value>Initializing code generator.</value>
   </data>
-  <data name="InitializingModeler" xml:space="preserve">
-    <value>Initializing modeler.</value>
-  </data>
   <data name="LanguageDoesNotSupportSingleFileGeneration" xml:space="preserve">
     <value>'{0}' code generator does not support code generation to a single file.</value>
   </data>
-  <data name="ModelerInitialized" xml:space="preserve">
-    <value>Successfully initialized modeler {0} v {1}.</value>
-  </data>
-  <data name="NamespaceConflictReasonMessage" xml:space="preserve">
-    <value>{0} (already used in {1})</value>
-  </data>
   <data name="TypeShouldBeAssemblyQualified" xml:space="preserve">
     <value>Type '{0}' name should be assembly qualified. For example 'ClassName, AssemblyName'</value>
-  </data>
-  <data name="EmptyClientName" xml:space="preserve">
-    <value>Empty x-ms-client-name property.</value>
-  </data>
-  <data name="InvalidDefault" xml:space="preserve">
-    <value>The default value is not one of the values enumerated as valid for this element.</value>
-  </data>
-  <data name="UnknownFormat" xml:space="preserve">
-    <value>'{0}' is not a known format.</value>
   </data>
   <data name="ParameterValueIsMissing" xml:space="preserve">
     <value>Parameter '{0}' is required.</value>

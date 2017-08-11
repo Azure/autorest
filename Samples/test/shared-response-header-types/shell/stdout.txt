@@ -1,6 +1,3 @@
 (C) 2017 **Microsoft Corporation.**  
 # AutoRest code generation utility.
 https://aka.ms/autorest
-INFORMATION: Generating client model from swagger model.
-INFORMATION: Initializing code generator.
-INFORMATION: Successfully initialized Azure.CSharp Code Generator 1.2.2.0
