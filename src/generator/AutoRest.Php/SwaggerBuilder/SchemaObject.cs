@@ -199,7 +199,7 @@ namespace AutoRest.Php.SwaggerBuilder
             {
                 yield return Json.Property("additionalProperties", AdditionalProperties);
             }
-            else
+            else if (Properties != null)
             {
                 yield return Json.Property("additionalProperties", false);
             }
