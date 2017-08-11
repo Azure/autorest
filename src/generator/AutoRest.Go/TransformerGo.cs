@@ -92,13 +92,29 @@ namespace AutoRest.Go
                         ev.SerializedName = dt.SerializedName;
                         values.Add(ev);
                     }
-                    bool alreadyExists = cmg.EnumTypes.Any(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator));
+                    bool nameAlreadyExists = cmg.EnumTypes.Any(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator));
+                    bool alreadyExists = nameAlreadyExists;
+                    if (nameAlreadyExists)
+                    {
+                        var existingValues = new List<string>();
+                        foreach (var v in cmg.EnumTypes.First(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator)).Values)
+                        {
+                            existingValues.Add(v.SerializedName);
+                        }
+                        foreach (var v in values)
+                        {
+                            if (!existingValues.Any(ev => ev.Equals(v.SerializedName)))
+                            {
+                                alreadyExists = false;
+                            }
+                        }
+                    }                    
                     if (!alreadyExists)
                     {
                         cmg.Add(New<EnumType>(new{
-                            Name = mt.PolymorphicDiscriminator,
+                            Name = nameAlreadyExists ? string.Format("{0}{1}", mt.PolymorphicDiscriminator, mt.Name) :  mt.PolymorphicDiscriminator,
                             Values = values,
-                        })); 
+                    })); 
                     }
                     (mt as CompositeTypeGo).DiscriminatorEnumExists = alreadyExists;
                 }
