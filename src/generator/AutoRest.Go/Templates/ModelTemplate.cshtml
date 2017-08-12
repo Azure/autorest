@@ -29,11 +29,11 @@
     {
     @if (Model.DiscriminatorEnumExists)
     {
-    @:case string(@(CodeNamerGo.Instance.PascalCase(dt.SerializedName))):
+    @:case string(@(CodeNamerGo.Instance.GetEnumMemberName(dt.SerializedName))):
     }
     else
     {
-    @:case string(@(CodeNamerGo.Instance.PascalCase(Model.PolymorphicDiscriminator))@(CodeNamerGo.Instance.PascalCase(dt.SerializedName))):
+    @:case string(@(CodeNamerGo.Instance.PascalCase(Model.PolymorphicDiscriminator))@(CodeNamerGo.Instance.GetEnumMemberName(dt.SerializedName))):
     }
         @:var @(dt.Name.FixedValue.ToIdiomaticShortName()) @(dt.Name)
         @:err := json.Unmarshal(b, &@(dt.Name.FixedValue.ToIdiomaticShortName()))
@@ -62,11 +62,11 @@ else
 @:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) @(Model.Name))MarshalJSON() ([]byte, error){
     @if ((Model.BaseModelType as CompositeTypeGo).DiscriminatorEnumExists)
     {
-    @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@((Model.BaseModelType as CompositeTypeGo).PolymorphicDiscriminatorProperty.Name) = @(CodeNamerGo.Instance.PascalCase(Model.SerializedName))
+    @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@((Model.BaseModelType as CompositeTypeGo).PolymorphicDiscriminatorProperty.Name) = @(CodeNamerGo.Instance.GetEnumMemberName(Model.SerializedName))
     }
     else
     {
-    @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name) = @(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name)@(CodeNamerGo.Instance.PascalCase(Model.SerializedName))
+    @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name) = @(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name)@(CodeNamerGo.Instance.GetEnumMemberName(Model.SerializedName))
     }
     @:type Alias @(Model.Name)
     @:return json.Marshal(&struct {
