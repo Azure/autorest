@@ -120,7 +120,7 @@ foreach (var st in Model.SiblingTypes)
         @:if err != nil {
             @:return err
         @:}
-        @if (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic)
+        @if ((p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic) || (p.ModelType is EnumType))
         {
         @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(p.Name) = @(CodeNamerGo.Instance.GetVariableName(p.SerializedName))
         }
