@@ -13,7 +13,7 @@ import { parse } from "../lib/ref/jsonpath";
 
 @suite class Blaming {
 
-  @test @skip @timeout(0) async "end to end blaming with literate swagger"() {
+  @test @timeout(0) async "end to end blaming with literate swagger"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-composite.md"));
 
     autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
@@ -21,22 +21,24 @@ import { parse } from "../lib/ref/jsonpath";
     const view = await autoRest.view;
     assert.equal(await autoRest.Process().finish, true);
 
+    const keys = Object.keys((view.DataStore as any).store);
+    const composed = keys.filter(x => x.endsWith("swagger-document"))[0];
 
     // regular description
     {
       const blameTree = await view.DataStore.Blame(
-        "mem:///swagger-document/transform-immediate/output/swagger-document",
+        composed,
         { path: parse("$.securityDefinitions.azure_auth.description") });
-      const blameInputs = [...blameTree.BlameLeafs()];
+      const blameInputs = blameTree.BlameLeafs();
       assert.equal(blameInputs.length, 1);
     }
 
     // markdown description (blames both the swagger's json path and the markdown source of the description)
     {
       const blameTree = await view.DataStore.Blame(
-        "mem:///swagger-document/transform-immediate/output/swagger-document",
+        composed,
         { path: parse("$.definitions.SearchServiceListResult.description") });
-      const blameInputs = [...blameTree.BlameLeafs()];
+      const blameInputs = blameTree.BlameLeafs();
       assert.equal(blameInputs.length, 1);
       // assert.equal(blameInputs.length, 2); // TODO: blame configuration file segments!
     }
@@ -46,7 +48,7 @@ import { parse } from "../lib/ref/jsonpath";
       let msg = {
         Text: 'Phoney message to test', Channel: Channel.Warning, Source: [<SourceLocation>
           {
-            document: "mem:///compose/swagger.yaml",
+            document: composed,
             Position: <EnhancedPosition>{ path: parse('$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"]') }
           }]
       };
@@ -59,7 +61,7 @@ import { parse } from "../lib/ref/jsonpath";
       let msg = {
         Text: 'Phoney message to test', Channel: Channel.Warning, Source: [<SourceLocation>
           {
-            document: "mem:///compose/swagger.yaml",
+            document: composed,
             Position: <EnhancedPosition>{ path: parse('$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].get') }
           }]
       };
