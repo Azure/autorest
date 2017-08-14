@@ -175,7 +175,7 @@ namespace AutoRest.Extensions
                                 item => item.Name.RawValue == property.Name.RawValue &&
                                         item.IsReadOnly == property.IsReadOnly &&
                                         item.DefaultValue .RawValue== property.DefaultValue.RawValue &&
-                                        item.SerializedName.RawValue == property.SerializedName.RawValue);
+                                        item.SerializedName == property.SerializedName);
                         if (matchingProperty == null)
                         {
                             parameterGroupType.Add(property);

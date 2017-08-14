@@ -37,6 +37,12 @@
         "C:/work/github/azure-rest-api-specs/profile/all.md"
       ],
       "cwd": "${workspaceRoot}"
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
     }
   ]
 }

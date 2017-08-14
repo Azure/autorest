@@ -39,7 +39,7 @@ public class Modeler : NewPlugin
         var genericSerializer = new ModelSerializer<CodeModel>();
         var modelAsJson = genericSerializer.ToJson(codeModel);
 
-        WriteFile("codeMode.yaml", modelAsJson, null);
+        WriteFile("code-model-v1.yaml", modelAsJson, null);
 
         return true;
     }

@@ -57,7 +57,7 @@ namespace AutoRest.Swagger
 
             if (_swaggerParameter.Reference != null)
             {
-                var clientProperty = Modeler.CodeModel.Properties.FirstOrDefault(p => p.SerializedName.Value == unwrappedParameter.Name);
+                var clientProperty = Modeler.CodeModel.Properties.FirstOrDefault(p => p.SerializedName == unwrappedParameter.Name);
                 parameter.ClientProperty = clientProperty;
             }
 

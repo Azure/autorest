@@ -2,19 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
-using System.Linq;
-using AutoRest.Core;
-using AutoRest.Core.Logging;
-using AutoRest.Core.Utilities;
-using AutoRest.Properties;
-using AutoRest.Simplify;
-using static AutoRest.Core.Utilities.DependencyInjection;
-using System.IO;
-using AutoRest.Core.Parsing;
-using YamlDotNet.RepresentationModel;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace AutoRest
 {

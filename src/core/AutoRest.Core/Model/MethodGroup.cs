@@ -37,11 +37,7 @@ namespace AutoRest.Core.Model
         private void InitializeProperties()
         {
             Name.OnGet += value => CodeNamer.Instance.GetMethodGroupName(value.Else(string.Empty));
-            NameForProperty.OnGet += value => CodeNamer.Instance.GetPropertyName(value.Else(value.Else(IsCodeModelMethodGroup ? CodeModel?.Name.Value : Name.Value)));
-            NameForParameter.OnGet += value => CodeNamer.Instance.GetParameterName(value.Else(IsCodeModelMethodGroup ? CodeModel?.Name.Value : Name.Value));    
-            NameForVariable.OnGet += value => CodeNamer.Instance.GetVariableName(value.Else(IsCodeModelMethodGroup ? CodeModel?.Name.Value : Name.Value));
-
-            TypeName.OnGet += value => CodeNamer.Instance.GetTypeName(value.Else( IsCodeModelMethodGroup ? CodeModel?.Name.Value : Name.Value));
+            TypeName.OnGet += value => CodeNamer.Instance.GetTypeName(value.Else( IsCodeModelMethodGroup ? CodeModel?.Name : Name.Value));
         }
 
         protected MethodGroup(string name) : this()
@@ -79,51 +75,7 @@ namespace AutoRest.Core.Model
             set { _typeName.CopyFrom(value); }
         }
 
-        /// <Summary>
-        /// Backing field for <code>NameForParameter</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _nameForParameter = new Fixable<string>();
-
-        /// <Summary>
-        /// Accessor for <code>NameForParameter</code>
-        /// </Summary>
-        /// <remarks>
-        /// The Get and Set operations for this accessor may be overridden by using the 
-        /// <code>NameForParameter.OnGet</code> and <code>NameForParameter.OnSet</code> events in this class' constructor.
-        /// (ie <code> NameForParameter.OnGet += nameForParameter => nameForParameter.ToUpper();</code> )
-        /// </remarks>
-        public Fixable<string> NameForParameter
-        {
-            get { return _nameForParameter; }
-            set { _nameForParameter.CopyFrom(value); }
-        }
         public virtual HashSet<string> LocallyUsedNames => null;
-        /// <Summary>
-        /// Backing field for <code>NameForVariable</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _nameForVariable = new Fixable<string>();
-
-        /// <Summary>
-        /// Accessor for <code>NameForVariable</code>
-        /// </Summary>
-        /// <remarks>
-        /// The Get and Set operations for this accessor may be overridden by using the 
-        /// <code>NameForVariable.OnGet</code> and <code>NameForVariable.OnSet</code> events in this class' constructor.
-        /// (ie <code> NameForVariable.OnGet += nameForVariable => nameForVariable.ToUpper();</code> )
-        /// </remarks>
-        public Fixable<string> NameForVariable
-        {
-            get { return _nameForVariable; }
-            set { _nameForVariable.CopyFrom(value); }
-        }
-
-        /// <Summary>
-        /// Backing field for <code>InstanceName</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _nameForProperty = new Fixable<string>();
 
         /// <Summary>
         /// The name that an instance of the generated class should be called.
@@ -133,11 +85,7 @@ namespace AutoRest.Core.Model
         /// <code>InstanceName.OnGet</code> and <code>InstanceName.OnSet</code> events in this class' constructor.
         /// (ie <code> InstanceName.OnGet += instanceName => instanceName.ToUpper();</code> )
         /// </remarks>
-        public Fixable<string> NameForProperty
-        {
-            get { return _nameForProperty; }
-            set { _nameForProperty.CopyFrom(value); }
-        }
+        public virtual string NameForProperty => CodeNamer.Instance.GetPropertyName(IsCodeModelMethodGroup ? CodeModel?.Name : Name.Value);
 
         [JsonIgnore]
         public virtual IEnumerable<string> Usings

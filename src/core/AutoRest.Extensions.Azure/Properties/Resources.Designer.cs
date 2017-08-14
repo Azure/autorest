@@ -71,15 +71,6 @@ namespace AutoRest.Extensions.Azure.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Azure resource {0} is missing required &apos;properties&apos; property..
-        /// </summary>
-        internal static string MissingProperties {
-            get {
-                return ResourceManager.GetString("MissingProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} needs to have a value..
         /// </summary>
         internal static string ODataEmpty {
@@ -103,15 +94,6 @@ namespace AutoRest.Extensions.Azure.Properties {
         internal static string ODataInvalidReferance {
             get {
                 return ResourceManager.GetString("ODataInvalidReferance", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Schema definition for Resource type with x-ms-azure-resource extension should have following properties: {0}.
-        /// </summary>
-        internal static string ResourcePropertyMismatch {
-            get {
-                return ResourceManager.GetString("ResourcePropertyMismatch", resourceCulture);
             }
         }
     }

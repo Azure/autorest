@@ -9,10 +9,10 @@ import { ChildProcess } from "child_process";
 import { join } from "path";
 import { Artifact } from './artifact';
 import * as Constants from './constants';
-import { DataHandleRead, DataStore } from './data-store/data-store';
+import { DataHandle, DataStore } from './data-store/data-store';
 import { EventEmitter, IEvent } from './events';
 import { OperationAbortedException } from './exception';
-import { IFileSystem } from './file-system';
+import { IFileSystem, RealFileSystem } from './file-system';
 import { LazyPromise } from './lazy';
 import { Channel, Message, Range, SourceLocation } from './message';
 import { EvaluateGuard, ParseCodeBlocks } from './parsing/literate-yaml';
@@ -366,7 +366,7 @@ export class ConfigurationView {
                 if (path) {
                   this.Message({
                     Channel: Channel.Warning,
-                    Text: `Could not find the exact path ${JSON.stringify(path)} for ${JSON.stringify(m.Details)}`
+                    Text: `Could not find the exact path ${JSON.stringify(path)} for ${JSON.stringify(m.Text)}`
                   });
                   if (path.length === 0) {
                     throw e;
@@ -378,9 +378,11 @@ export class ConfigurationView {
               }
             }
           } catch (e) {
-            // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
-            //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
-            //console.log(e);
+            this.Message({
+              Channel: Channel.Warning,
+              Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
+              Details: e
+            });
             return [s];
           }
 
@@ -436,15 +438,20 @@ export class ConfigurationView {
             let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join("/")})` : ""}: ${mx.Text}`;
             for (const source of mx.Source || []) {
               if (source.Position) {
-                text += `\n    - ${source.document}`;
-                if (source.Position.line !== undefined) {
-                  text += `:${source.Position.line}`;
-                  if (source.Position.column !== undefined) {
-                    text += `:${source.Position.column}`;
+                try {
+                  const friendlyName = this.DataStore.ReadStrictSync(source.document).Description;
+                  text += `\n    - ${friendlyName}`;
+                  if (source.Position.line !== undefined) {
+                    text += `:${source.Position.line}`;
+                    if (source.Position.column !== undefined) {
+                      text += `:${source.Position.column}`;
+                    }
                   }
-                }
-                if (source.Position.path) {
-                  text += ` (${stringify(source.Position.path)})`;
+                  if (source.Position.path) {
+                    text += ` (${stringify(source.Position.path)})`;
+                  }
+                } catch (e) {
+                  // no friendly name, so nothing more specific to show
                 }
               }
             }
@@ -467,12 +474,12 @@ export class Configuration {
     private configFileOrFolderUri?: string,
   ) { }
 
-  private async ParseCodeBlocks(configFile: DataHandleRead, contextConfig: ConfigurationView, scope: string): Promise<AutoRestConfigurationImpl[]> {
+  private async ParseCodeBlocks(configFile: DataHandle, contextConfig: ConfigurationView, scope: string): Promise<AutoRestConfigurationImpl[]> {
     // load config
     const hConfig = await ParseCodeBlocks(
       contextConfig,
       configFile,
-      contextConfig.DataStore.CreateScope(scope));
+      contextConfig.DataStore.DataSink);
 
     const blocks = hConfig.map(each => {
       const block = each.data.ReadObject<AutoRestConfigurationImpl>();
@@ -503,7 +510,7 @@ export class Configuration {
     configSegments.push(...configs);
     // 2. file
     if (configFileUri !== null) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScopeFileSystem(this.fileSystem as IFileSystem);
+      const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem as IFileSystem);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(configFileUri),
         createView(),
@@ -512,7 +519,7 @@ export class Configuration {
     }
     // 3. default configuration
     if (includeDefault) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
+      const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
         createView(),
@@ -555,7 +562,7 @@ export class Configuration {
         }
 
         // merge config
-        const inputView = messageEmitter.DataStore.GetReadThroughScope(_ => true);
+        const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
         const blocks = await this.ParseCodeBlocks(
           await inputView.ReadStrict(CreateFileUri(await ext.extension.configurationPath)),
           tmpView,

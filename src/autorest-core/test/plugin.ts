@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
-import * as assert from "assert";
+import * as assert from 'assert';
 import { PumpMessagesToConsole } from './test-utility';
 
 import { Extension, ExtensionManager } from "@microsoft.azure/extension";
@@ -13,7 +13,7 @@ import { CancellationToken } from "../lib/ref/cancellation";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message, Channel } from "../lib/message";
 import { AutoRestExtension } from "../lib/pipeline/plugin-endpoint";
-import { DataStore, QuickScope } from '../lib/data-store/data-store';
+import { DataHandle, DataStore, QuickDataSource } from '../lib/data-store/data-store';
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 import { homedir } from "os";
 import { join } from "path";
@@ -60,22 +60,21 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     // load swagger
     const swagger = await LoadLiterateSwagger(
       config,
-      dataStore.GetReadThroughScope(),
+      dataStore.GetReadThroughScope(new RealFileSystem()),
       "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json",
-      dataStore.CreateScope("loader"));
+      dataStore.DataSink);
 
     // call modeler
     const autorestPlugin = await GetAutoRestDotNetPlugin();
-    const pluginScope = dataStore.CreateScope("plugin");
-    const result = await autorestPlugin.Process("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickScope([swagger]), pluginScope, m => null, CancellationToken.None);
+    const results: DataHandle[] = [];
+    const result = await autorestPlugin.Process("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickDataSource([swagger]), dataStore.DataSink, f => results.push(f), m => null, CancellationToken.None);
     assert.strictEqual(result, true);
-    const results = await pluginScope.Enum();
     if (results.length !== 1) {
       throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
     }
 
     // check results
-    const codeModel = (await pluginScope.ReadStrict(results[0])).ReadData();
+    const codeModel = results[0].ReadData();
     assert.notEqual(codeModel.indexOf("isConstant"), -1);
   }
 
@@ -95,32 +94,32 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     // load swagger
     const swagger = await LoadLiterateSwagger(
       config,
-      dataStore.GetReadThroughScope(),
+      dataStore.GetReadThroughScope(new RealFileSystem()),
       "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json",
-      dataStore.CreateScope("loader"));
+      dataStore.DataSink);
 
     // load code model
     const codeModelUri = ResolveUri(CreateFolderUri(__dirname), "../../test/resources/code-model.yaml");
-    const inputScope = dataStore.GetReadThroughScope(uri => uri === codeModelUri);
+    const inputScope = dataStore.GetReadThroughScope(new RealFileSystem());
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 
     // call generator
     const autorestPlugin = await GetAutoRestDotNetPlugin();
-    const resultScope = dataStore.CreateScope("output");
+    const results: DataHandle[] = [];
     const result = await autorestPlugin.Process(
       "csharp",
       key => config.GetEntry(key as any),
-      new QuickScope([swagger, codeModelHandle]),
-      resultScope,
-      m => null,
+      new QuickDataSource([swagger, codeModelHandle]),
+      dataStore.DataSink,
+      f => results.push(f),
+      m => { if (m.Channel === Channel.Fatal) console.log(m.Text); },
       CancellationToken.None);
     assert.strictEqual(result, true);
 
     // check results
-    const results = await resultScope.Enum();
     assert.notEqual(results.length, 0);
-    assert.notEqual(results.map(path => path.startsWith("Models")).length, 0);
-    assert.ok(results.every(path => path.endsWith(".cs")));
+    assert.notEqual(results.filter(file => file.Description.indexOf("Models/") !== -1).length, 0);
+    assert.ok(results.every(file => file.Description.indexOf(".cs") !== -1));
     console.log(results);
   }
 
@@ -128,7 +127,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
   @test @skip @timeout(0) async "custom plugin module"() {
     const cancellationToken = CancellationToken.None;
     const dataStore = new DataStore(cancellationToken);
-    const scopeInput = dataStore.GetReadThroughScope();
+    const scopeInput = dataStore.GetReadThroughScope(new RealFileSystem());
 
     const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json";
     await scopeInput.Read(inputFileUri);
@@ -137,11 +136,11 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     const pluginNames = await validationPlugin.GetPluginNames(cancellationToken);
 
     for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
-      const scopeWork = dataStore.CreateScope(`working_${pluginIndex}`);
       const result = await validationPlugin.Process(
         pluginNames[pluginIndex], _ => null,
         scopeInput,
-        scopeWork.CreateScope("output"),
+        dataStore.DataSink,
+        f => null,
         m => null,
         cancellationToken);
       assert.strictEqual(result, true);
