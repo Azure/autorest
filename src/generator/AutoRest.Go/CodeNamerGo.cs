@@ -259,11 +259,6 @@ namespace AutoRest.Go
                 : name;
         }
 
-        public override string RemoveInvalidCharacters(string name)
-        {
-            return GetValidName(name, '_', '-', '.', '/', ' ', ',');
-        }
-
         /// <summary>
         /// Formats a string to pascal case using a specific character as splitter
         /// Refactor -> Namer ... Even better if this already exists in the core :D
