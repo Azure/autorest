@@ -1,6 +1,3 @@
-   at ...
 (C) 2017 **Microsoft Corporation.**  
-[OperationAbortedException] Error occurred. Exiting.
-{ Error: [OperationAbortedException] Error occurred. Exiting.
 # AutoRest code generation utility.
 https://aka.ms/autorest
