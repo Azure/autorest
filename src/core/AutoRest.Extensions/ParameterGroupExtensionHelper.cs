@@ -110,8 +110,7 @@ namespace AutoRest.Extensions
             List<Method> methodList = methodsWhichUseGroup.ToList();
             if (methodList.Count == 1)
             {
-                Method method = methodList.Single();
-                return string.Format(CultureInfo.InvariantCulture, "Additional parameters for {0} operation.", method.Name);
+                return "Additional parameters for "+ methodList.Single().Name + " operation.";
             }
             else if (methodList.Count <= 4)
             {

@@ -297,7 +297,7 @@ namespace AutoRest.Swagger
         }
 
         public static string GetMethodNameFromOperationId(string operationId) => 
-            (operationId?.IndexOf('_') != -1) ? operationId.Split('_')[1]: operationId;
+            (operationId?.IndexOf('_') != -1) ? operationId.Split('_').Last(): operationId;
         
 
         public SwaggerParameter Unwrap(SwaggerParameter swaggerParameter)
