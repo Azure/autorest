@@ -194,10 +194,16 @@ namespace AutoRest.Php.SwaggerBuilder
             {
                 yield return Json.Property("properties", Json.Object(Properties));
             }
+
             if (AdditionalProperties != null)
             {
                 yield return Json.Property("additionalProperties", AdditionalProperties);
             }
+            else if (Properties != null)
+            {
+                yield return Json.Property("additionalProperties", false);
+            }
+
             if (Items != null)
             {
                 yield return Json.Property("items", Items);
