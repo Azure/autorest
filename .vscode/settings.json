@@ -33,6 +33,5 @@
   "files.associations": {
     "*.iced": "coffeescript"
   },
-  "tslint.alwaysShowRuleFailuresAsWarnings": true,
-  "eslint.enable": false
+  "tslint.alwaysShowRuleFailuresAsWarnings": true
 }
