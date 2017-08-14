@@ -203,9 +203,9 @@ function isAccessibleFile(localPath: string) {
 function FileUriToLocalPath(fileUri: string): string {
   const uri = parse(fileUri);
   if (!fileUri.startsWith("file:///")) {
-    throw new Error(!fileUri.startsWith("file://")
+    throw new Error((!fileUri.startsWith("file://")
       ? `Protocol '${uri.protocol}' not supported for writing.`
-      : `UNC paths not supported for writing.`);
+      : `UNC paths not supported for writing.`) + " Make sure to specify a local, absolute path as target file/folder.");
   }
   // convert to path
   let p = uri.path;

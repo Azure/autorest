@@ -235,9 +235,10 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   const clearFolders: string[] = [];
   api.GeneratedFile.Subscribe((_, artifact) => artifacts.push(artifact));
   api.ClearFolder.Subscribe((_, folder) => clearFolders.push(folder));
-  const config = (await api.view);
 
   try {
+    const config = (await api.view);
+
     // maybe a resource schema batch process
     if (config["resource-schema-batch"]) {
       return await resourceSchemaBatch(api);
@@ -253,8 +254,7 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
     }
     else {
       const result = await api.Process().finish;
-      // Just regular ol' AutoRest!
-      if (result != true) {
+      if (result !== true) {
         throw result;
       }
     }
@@ -268,6 +268,10 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
     }
   }
   catch (e) {
+    api.Message.Dispatch({
+      Channel: Channel.Fatal,
+      Text: e
+    });
     exitcode = exitcode || 1;
   }
 
