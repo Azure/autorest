@@ -123,7 +123,7 @@ namespace AutoRest.Go.Model
             {
                 var newProp = base.Add(New<Property>(new
                 {
-                    Name = CodeNamerGo.Instance.PascalCase(PolymorphicDiscriminator),
+                    Name = CodeNamerGo.Instance.GetPropertyName(PolymorphicDiscriminator),
                     SerializedName = PolymorphicDiscriminator,
                     ModelType = DiscriminatorEnum,
                 }));
