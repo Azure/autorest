@@ -54,6 +54,14 @@ namespace AutoRest.Python.Azure
                 {
                     var pageableExtension =
                         method.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+
+                    /* We don't support LRO + Paging at the same time for now */
+                    if (method.Extensions.ContainsKey(AzureExtensions.LongRunningExtension))
+                    {
+                        method.Extensions.Remove(AzureExtensions.PageableExtension);
+                        continue;
+                    }
+
                     var operationName = (string) pageableExtension["operationName"];
                     if (operationName != null)
                     {
