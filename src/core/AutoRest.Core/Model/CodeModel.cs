@@ -36,6 +36,9 @@ namespace AutoRest.Core.Model
             InitializeCollections();
         }
 
+        public IEnumerable<Parameter> HostParametersFront { get; set; }
+        public IEnumerable<Parameter> HostParametersBack { get; set; }
+
         [JsonIgnore]
         public IEnumerable<CompositeType> AllModelTypes => ModelTypes.Union(HeaderTypes).Union(ErrorTypes).ReEnumerable();
 
