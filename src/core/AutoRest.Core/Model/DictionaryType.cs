@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual bool SupportsAdditionalProperties { get; set; }
 
-        public override string RefName => "AutoRest.Core.Model.DictionaryType, AutoRest.Core";
+        [JsonIgnore]
         public override string Qualifier => "Dictionary";
         public override void Disambiguate()
         {

@@ -136,9 +136,7 @@ To create a Microsoft.Network/virtualNetworks resource, add the following JSON t
     "provisioningState": "string"
   },
   "etag": "string",
-  "resources": [
-    null
-  ]
+  "resources": []
 }
 ```
 ## Property values
@@ -157,7 +155,7 @@ The following tables describe the values you need to set in the schema.
 |  tags | object | No | Resource tags |
 |  properties | object | Yes | [VirtualNetworkPropertiesFormat object](#VirtualNetworkPropertiesFormat) |
 |  etag | string | No | Gets a unique read-only string that changes whenever the resource is updated |
-|  resources | array | No | [virtualNetworks_virtualNetworkPeerings_childResource object](#virtualNetworks_virtualNetworkPeerings_childResource) [virtualNetworks_subnets_childResource object](#virtualNetworks_subnets_childResource) |
+|  resources | array | No | [virtualNetworkPeerings](./virtualNetworks/virtualNetworkPeerings.md) [subnets](./virtualNetworks/subnets.md) |
 
 
 <a id="VirtualNetworkPropertiesFormat" />
@@ -170,30 +168,6 @@ The following tables describe the values you need to set in the schema.
 |  VirtualNetworkPeerings | array | No | Gets or sets list of peerings in a VirtualNetwork - [VirtualNetworkPeering object](#VirtualNetworkPeering) |
 |  resourceGuid | string | No | Gets or sets resource guid property of the VirtualNetwork resource |
 |  provisioningState | string | No | Gets provisioning state of the PublicIP resource Updating/Deleting/Failed |
-
-
-<a id="virtualNetworks_virtualNetworkPeerings_childResource" />
-### virtualNetworks_virtualNetworkPeerings_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | virtualNetworkPeerings |
-|  apiVersion | enum | Yes | 2016-09-01 |
-|  id | string | No | Resource Id |
-|  properties | object | Yes | [VirtualNetworkPeeringPropertiesFormat object](#VirtualNetworkPeeringPropertiesFormat) |
-|  etag | string | No | A unique read-only string that changes whenever the resource is updated |
-
-
-<a id="virtualNetworks_subnets_childResource" />
-### virtualNetworks_subnets_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | subnets |
-|  apiVersion | enum | Yes | 2016-09-01 |
-|  id | string | No | Resource Id |
-|  properties | object | Yes | [SubnetPropertiesFormat object](#SubnetPropertiesFormat) |
-|  etag | string | No | A unique read-only string that changes whenever the resource is updated |
 
 
 <a id="AddressSpace" />
@@ -230,19 +204,6 @@ The following tables describe the values you need to set in the schema.
 |  etag | string | No | A unique read-only string that changes whenever the resource is updated |
 
 
-<a id="VirtualNetworkPeeringPropertiesFormat" />
-### VirtualNetworkPeeringPropertiesFormat object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  allowVirtualNetworkAccess | boolean | No | Gets or sets whether the VMs in the linked virtual network space would be able to access all the VMs in local Virtual network space |
-|  allowForwardedTraffic | boolean | No | Gets or sets whether the forwarded traffic from the VMs in the remote virtual network will be allowed/disallowed |
-|  allowGatewayTransit | boolean | No | Gets or sets if gatewayLinks can be used in remote virtual network’s link to this virtual network |
-|  useRemoteGateways | boolean | No | Gets or sets if remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only 1 peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. |
-|  remoteVirtualNetwork | object | No | Gets or sets the reference of the remote virtual network - [SubResource object](#SubResource) |
-|  peeringState | enum | No | Gets the status of the virtual network peering. - Initiated, Connected, Disconnected |
-|  provisioningState | string | No | Gets provisioning state of the resource |
-
-
 <a id="SubnetPropertiesFormat" />
 ### SubnetPropertiesFormat object
 |  Name | Type | Required | Value |
@@ -254,11 +215,17 @@ The following tables describe the values you need to set in the schema.
 |  provisioningState | string | No | Gets provisioning state of the resource |
 
 
-<a id="SubResource" />
-### SubResource object
+<a id="VirtualNetworkPeeringPropertiesFormat" />
+### VirtualNetworkPeeringPropertiesFormat object
 |  Name | Type | Required | Value |
 |  ---- | ---- | ---- | ---- |
-|  id | string | No | Resource Id |
+|  allowVirtualNetworkAccess | boolean | No | Gets or sets whether the VMs in the linked virtual network space would be able to access all the VMs in local Virtual network space |
+|  allowForwardedTraffic | boolean | No | Gets or sets whether the forwarded traffic from the VMs in the remote virtual network will be allowed/disallowed |
+|  allowGatewayTransit | boolean | No | Gets or sets if gatewayLinks can be used in remote virtual network’s link to this virtual network |
+|  useRemoteGateways | boolean | No | Gets or sets if remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only 1 peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. |
+|  remoteVirtualNetwork | object | No | Gets or sets the reference of the remote virtual network - [SubResource object](#SubResource) |
+|  peeringState | enum | No | Gets the status of the virtual network peering. - Initiated, Connected, Disconnected |
+|  provisioningState | string | No | Gets provisioning state of the resource |
 
 
 <a id="NetworkSecurityGroup" />
@@ -290,6 +257,13 @@ The following tables describe the values you need to set in the schema.
 |  id | string | No | Resource Id |
 |  properties | object | No | [ResourceNavigationLinkFormat object](#ResourceNavigationLinkFormat) |
 |  name | string | No | Name of the resource that is unique within a resource group. This name can be used to access the resource |
+
+
+<a id="SubResource" />
+### SubResource object
+|  Name | Type | Required | Value |
+|  ---- | ---- | ---- | ---- |
+|  id | string | No | Resource Id |
 
 
 <a id="NetworkSecurityGroupPropertiesFormat" />

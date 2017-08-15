@@ -34,7 +34,8 @@ import { PlainTextVersion } from "../lib/pipeline/commonmark-documentation";
   }
 
   @test @timeout(60000) async "resolve markdown descriptions"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     autoRest.AddConfiguration({ "output-artifact": "swagger-document" });
 
     let swaggerDoc: string = "";

@@ -1,1 +1,14 @@
-
+(C) 2017 **Microsoft Corporation.**  
+# AutoRest code generation utility.
+https://aka.ms/autorest
+WARNING: 10 exported name(s) unnecessarily contains the service name. Please consider removing the service name.
+WARNING: The name 'A' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'A' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'B' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'B' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'C' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ContentTypes' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'D' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ImageType' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ImageTypeRestricted' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ImageTypeRestrictedStrings' unnecessarily contains the service name; the service name will be trimmed.

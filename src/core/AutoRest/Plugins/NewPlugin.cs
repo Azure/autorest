@@ -6,16 +6,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Perks.JsonRPC;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Core.Logging;
+using System.Linq;
 
-static class Channel
-{
-    public static readonly string Information = "information";
-    public static readonly string Warning = "warning";
-    public static readonly string Error = "error";
-    public static readonly string Debug = "debug";
-    public static readonly string Verbose = "verbose";
-    public static readonly string Fatal = "fatal";
-}
 // KEEP IN SYNC with message.ts
 public class SmartPosition
 {
@@ -35,6 +28,45 @@ public class Message
   public string Text { get; set; }
   public string[] Key { get; set; }
   public SourceLocation[] Source { get; set; }
+}
+
+class JsonRpcLogListener : ILogListener
+{
+    private Action<Message> SendMessage;
+
+    public JsonRpcLogListener(Action<Message> sendMessage)
+    {
+        SendMessage = sendMessage;
+    }
+
+    private SourceLocation[] GetSourceLocations(FileObjectPath path)
+    {
+        if (path == null)
+        {
+            return new SourceLocation[0];
+        }
+        return new[]
+        {
+            new SourceLocation
+            {
+                document = path.FilePath?.ToString(),
+                Position = new SmartPosition
+                {
+                    path = path.ObjectPath?.Path.Select(part => part.RawPath).ToArray() ?? new object[0]
+                }
+            }
+        };
+    }
+
+    public void Log(LogMessage m)
+    {
+        SendMessage(new Message
+        {
+            Text = m.Message,
+            Source = GetSourceLocations(m.Path),
+            Channel = m.Severity.ToString().ToLowerInvariant()
+        });
+    }
 }
 
 public abstract class NewPlugin :  AutoRest.Core.IHost
@@ -60,10 +92,24 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
 
     public async Task<bool> Process()
     {
+        if (true == await this.GetValue<bool?>("debugger"))
+        {
+            if (!System.Diagnostics.Debugger.IsAttached)
+            {
+                Console.Error.WriteLine($"Waiting for debugger to attach to {GetType().Name}");
+            }
+            while (!System.Diagnostics.Debugger.IsAttached)
+            {
+                System.Threading.Thread.Sleep(100);
+                Console.Error.Write(".");
+            }
+            System.Diagnostics.Debugger.Break();
+        }
         try
         {
             using (Start)
             {
+                Logger.Instance.AddListener(new JsonRpcLogListener(Message));
                 return await ProcessInternal();
             }
         }

@@ -16,51 +16,24 @@ namespace AutoRest.AzureResourceSchema.Tests
     public class AzureResourceSchemaCodeGeneratorTests
     {
         [Fact]
-        public void Description()
-        {
-            using (NewContext) {
-                new Settings();
-                Assert.Equal("Azure Resource Schema generator", CreatePlugin().Settings.Description);
-            }
-        }
-
-        [Fact]
         public void ImplementationFileExtension()
         {
-            using (NewContext) {
-                new Settings();
-                Assert.Equal(".json", CreatePlugin().CodeGenerator.ImplementationFileExtension);
-            }
-        }
-
-        [Fact]
-        public void Name()
-        {
-            using (NewContext) {
-                new Settings();
-                Assert.Equal("AzureResourceSchema", CreatePlugin().Settings.Name);
-            }
+            Assert.Equal(".json", CreatePlugin().CodeGenerator.ImplementationFileExtension);
         }
 
         [Fact]
         public void UsageInstructionsWithNoOutputFileSetting()
         {
-            using (NewContext) {
-                new Settings();
-                PluginArs plugin = CreatePlugin();
-                Assert.Equal("Your Azure Resource Schema(s) can be found in " + Settings.Instance.OutputDirectory, plugin.CodeGenerator.UsageInstructions);
-            }
+            PluginArs plugin = CreatePlugin();
+            Assert.Equal("Your Azure Resource Schema(s) can be found in " + new Settings().OutputDirectory, plugin.CodeGenerator.UsageInstructions);
         }
 
         [Fact]
         public void UsageInstructionsWithOutputFileSetting()
         {
             using (NewContext) {
-                Settings settings = new Settings() {
-                    OutputFileName = "spam.json"
-                };
+                Settings settings = new Settings() { OutputFileName = "spam.json" };
                 PluginArs plugin = CreatePlugin();
-
                 Assert.Equal("Your Azure Resource Schema(s) can be found in " + settings.OutputDirectory, plugin.CodeGenerator.UsageInstructions);
             }
         }

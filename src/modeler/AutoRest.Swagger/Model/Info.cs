@@ -1,11 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
-using AutoRest.Swagger.Validation;
-using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
@@ -19,7 +16,6 @@ namespace AutoRest.Swagger.Model
         private string _description;
         public string Title { get; set; }
 
-        [Rule(typeof(AvoidMsdnReferences))]
         public string Description
         {
             get { return _description; }
@@ -38,7 +34,6 @@ namespace AutoRest.Swagger.Model
 
         public License License { get; set; }
 
-        [Rule(typeof(APIVersionPattern))]
         public string Version { get; set; }
 
         [JsonProperty("x-ms-code-generation-settings")]

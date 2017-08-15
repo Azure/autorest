@@ -15,11 +15,12 @@ namespace AutoRest.Core.Model
     /// </summary>
     public class EnumType : ModelType
     {
+        [JsonIgnore]
         protected virtual string ModelAsStringType => New<PrimaryType>(KnownPrimaryType.String).Name;
 
-        public override string RefName => "AutoRest.Core.Model.EnumType, AutoRest.Core";
+        [JsonIgnore]
         public override string Qualifier => "Enum";
-        public override string QualifierType => "EnumType";
+        [JsonIgnore]
         public override IEnumerable<IChild> Children => Values;
 
         /// <summary>
@@ -36,26 +37,6 @@ namespace AutoRest.Core.Model
         /// </summary>
         public List<EnumValue> Values { get; private set; }
 
-        /// <Summary>
-        /// Backing field for <code>SerializedName</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _serializedName = new Fixable<string>();
-
-        /// <Summary>
-        /// The name on the wire for the Enum.
-        /// </Summary>
-        /// <remarks>
-        /// The Get and Set operations for this accessor may be overridden by using the 
-        /// <code>SerializedName.OnGet</code> and <code>SerializedName.OnSet</code> events in this class' constructor.
-        /// (ie <code> SerializedName.OnGet += serializedName => serializedName.ToUpper();</code> )
-        /// </remarks>
-        public Fixable<string> SerializedName
-        {
-            get { return _serializedName; }
-            set { _serializedName.CopyFrom(value); }
-        }
-
         public void SetName(string name)
         {
             Name = name;
@@ -66,6 +47,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         public bool ModelAsString { get; set; }
 
+        [JsonIgnore]
         public override string DeclarationName => ModelAsString ? ModelAsStringType : base.DeclarationName;
 
         /// <summary>
@@ -85,6 +67,7 @@ namespace AutoRest.Core.Model
                 ModelAsString == (other as EnumType).ModelAsString;
         }
 
+        [JsonIgnore]
         public override string ExtendedDocumentation
             => $"Possible values include: {string.Join(", ", Values.Select(v => $"'{v.Name}'"))}";
     }

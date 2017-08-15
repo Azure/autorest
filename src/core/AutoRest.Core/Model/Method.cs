@@ -23,11 +23,10 @@ namespace AutoRest.Core.Model
         private string _summary;
         private readonly Fixable<string> _name = new Fixable<string>();
         private readonly Fixable<string> _group = new Fixable<string>();
-        private readonly Fixable<string> _url = new Fixable<string>();
         private MethodGroup _parent;
 
+        [JsonIgnore]
         public string Qualifier => "Method";
-        public string QualifierType => "Method";
 
         [JsonIgnore]
         public MethodGroup MethodGroup
@@ -93,35 +92,16 @@ namespace AutoRest.Core.Model
         }
 
         /// <Summary>
-        /// Backing field for <code>SerializedName</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _serializedName = new Fixable<string>();
-
-        /// <Summary>
         /// The name on the wire for the method (the OperationId in the spec) .
         /// </Summary>
-        /// <remarks>
-        /// The Get and Set operations for this accessor may be overridden by using the 
-        /// <code>SerializedName.OnGet</code> and <code>SerializedName.OnSet</code> events in this class' constructor.
-        /// (ie <code> SerializedName.OnGet += serializedName => serializedName.ToUpper();</code> )
-        /// </remarks>
-        public Fixable<string> SerializedName
-        {
-            get { return _serializedName; }
-            set { _serializedName.CopyFrom(value); }
-        }
+        public string SerializedName { get; set; }
 
         /// <summary>
         /// Gets or sets the HTTP url.
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
             Justification = "Url might be used as a template, thus making it invalid url in certain scenarios.")]
-        public Fixable<string> Url
-        {
-            get { return _url; }
-            set { _url.CopyFrom(value); }
-        }
+        public virtual string Url { get; set; }
 
 
 

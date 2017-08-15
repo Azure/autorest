@@ -4,6 +4,11 @@ pipeline-emitter:
   configScope:
     - scope-pipeline-emitter
   inputs: []
+configuration-emitter:
+  pluginName: configuration-emitter
+  configScope:
+    - scope-configuration-emitter
+  inputs: []
 swagger-document-override/md-override-loader:
   pluginName: md-override-loader
   configScope: []
@@ -17,11 +22,16 @@ swagger-document/individual/transform:
   configScope: []
   inputs:
     - swagger-document/loader
+swagger-document/individual/identity:
+  pluginName: identity
+  configScope: []
+  inputs:
+    - swagger-document/individual/transform
 swagger-document/compose:
   pluginName: compose
   configScope: []
   inputs:
-    - swagger-document/individual/transform
+    - swagger-document/individual/identity
 swagger-document/transform-immediate:
   pluginName: transform-immediate
   configScope: []
@@ -33,44 +43,23 @@ swagger-document/transform:
   configScope: []
   inputs:
     - swagger-document/transform-immediate
+swagger-document/identity:
+  pluginName: identity
+  configScope: []
+  inputs:
+    - swagger-document/transform
 swagger-document/emitter:
   pluginName: emitter
   configScope:
     - scope-swagger-document/emitter
   inputs:
     - swagger-document/transform
-swagger-document/azure-validator:
-  pluginName: azure-validator
-  configScope:
-    - azure-validator-composed
-  inputs:
-    - swagger-document/transform
-swagger-document/individual/azure-validator:
-  pluginName: azure-validator
-  configScope:
-    - azure-validator-individual
-  inputs:
-    - swagger-document/individual/transform
-swagger-document/azure-openapi-validator:
-  pluginName: azure-openapi-validator
-  configScope:
-    - azure-validator-composed
-  inputs:
-    - swagger-document/transform
-    - swagger-document/azure-validator
-swagger-document/individual/azure-openapi-validator:
-  pluginName: azure-openapi-validator
-  configScope:
-    - azure-validator-individual
-  inputs:
-    - swagger-document/individual/transform
-    - swagger-document/individual/azure-validator
 csharp/modeler:
   pluginName: modeler
   configScope:
     - csharp
   inputs:
-    - swagger-document/transform
+    - swagger-document/identity
 csharp/commonmarker:
   pluginName: commonmarker
   configScope:
@@ -95,7 +84,7 @@ csharp/generate:
   configScope:
     - csharp
   inputs:
-    - swagger-document/transform
+    - swagger-document/identity
     - csharp/cm/transform
 csharp/simplifier:
   pluginName: csharp-simplifier
@@ -107,12 +96,38 @@ csharp/transform:
   pluginName: transform
   configScope:
     - csharp
+    - scope-transform-string
   inputs:
     - csharp/simplifier
 csharp/emitter:
   pluginName: emitter
   configScope:
     - csharp
+    - scope-transform-string
     - scope-csharp/emitter
   inputs:
     - csharp/transform
+swagger-document/classic-openapi-validator:
+  pluginName: classic-openapi-validator
+  configScope:
+    - azure-validator-composed
+  inputs:
+    - swagger-document/identity
+swagger-document/individual/classic-openapi-validator:
+  pluginName: classic-openapi-validator
+  configScope:
+    - azure-validator-individual
+  inputs:
+    - swagger-document/individual/identity
+swagger-document/openapi-validator:
+  pluginName: openapi-validator
+  configScope:
+    - azure-validator-composed
+  inputs:
+    - swagger-document/identity
+swagger-document/individual/openapi-validator:
+  pluginName: openapi-validator
+  configScope:
+    - azure-validator-individual
+  inputs:
+    - swagger-document/individual/identity

@@ -1,1 +1,9 @@
-
+    - trans_input?mem:1:0
+    - trans_input?mem:1:0
+    - trans_input?mem:1:0
+(C) 2017 **Microsoft Corporation.**  
+# AutoRest code generation utility.
+https://aka.ms/autorest
+WARNING: Custom test failed
+WARNING: Custom test failed
+WARNING: we want some cowbell - found none

@@ -66,6 +66,20 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 |`--models-name=NAME`|Name to use for the generated client models namespace and folder name. By default, uses the value of 'Models'. This is not currently supported by all code generators.|
 |`--output-file=FILENAME`|If set, will cause generated code to be output to a single file. Not supported by all code generators.|
 
+#### Authentication
+
+AutoRest supports generating from private GitHub repositories.
+There are multiple options:
+
+1) **Using the `token` query parameter**: Pass the `token` query parameter you get when clicking "Raw" on a file of a private repo, i.e. `https://github.com/<path-on-some-private-repo>/readme.md?token=<token>`.
+When such a URI is passed to AutoRest, it will automatically reuse that token for subsequent requests (e.g. querying referenced OpenAPI definitions).
+This is a quick and easy solution if you manually want to run AutoRest against private bits from time to time.
+2) **Using OAuth**: GitHub allows generating OAuth tokens under `Settings -> Personal access tokens`.
+Create one with `repo` scope.
+It can be passed to AutoRest using `--github-auth-token=<token>` or by setting the environment variable `GITHUB_AUTH_TOKEN`.
+This is the way to go for all scripts and automation.
+Needless to say, *do not put this token* into scripts directly, use Azure KeyVault or similar.
+
 #### Validation
 |Option                                                                &nbsp;| Description |
 |------------------|-------------|

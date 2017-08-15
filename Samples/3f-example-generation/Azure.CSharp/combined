@@ -1,0 +1,774 @@
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancers
+// Method: Delete
+// Example: Delete load balancer
+
+
+await client.LoadBalancers.DeleteAsync(
+    resourceGroupName: "rg1",
+    loadBalancerName: "lb");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancers
+// Method: Get
+// Example: Get load balancer
+
+
+var loadBalancer = await client.LoadBalancers.GetAsync(
+    resourceGroupName: "rg1",
+    loadBalancerName: "lb");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancers
+// Method: CreateOrUpdate
+// Example: Create load balancer
+
+var parameters = new LoadBalancer
+{
+    FrontendIPConfigurations = new List<FrontendIPConfiguration>
+    {
+        new FrontendIPConfiguration
+        {
+            InboundNatRules = new List<SubResource>
+            {
+                new SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule")
+            },
+            LoadBalancingRules = new List<SubResource>
+            {
+                new SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb")
+            },
+            Subnet = new Subnet(),
+            Name = "fe-lb"
+        }
+    },
+    BackendAddressPools = new List<BackendAddressPool>
+    {
+        new BackendAddressPool
+        {
+            LoadBalancingRules = new List<SubResource>
+            {
+                new SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb")
+            },
+            Name = "be-lb"
+        }
+    },
+    LoadBalancingRules = new List<LoadBalancingRule>
+    {
+        new LoadBalancingRule
+        {
+            FrontendIPConfiguration = new SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"),
+            BackendAddressPool = new SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb"),
+            Probe = new SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"),
+            Protocol = "Tcp",
+            LoadDistribution = "Default",
+            FrontendPort = 80,
+            BackendPort = 80,
+            IdleTimeoutInMinutes = 15,
+            EnableFloatingIP = true,
+            Name = "rulelb"
+        }
+    },
+    Probes = new List<Probe>
+    {
+        new Probe
+        {
+            LoadBalancingRules = new List<SubResource>
+            {
+                new SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb")
+            },
+            Protocol = "Http",
+            Port = 80,
+            IntervalInSeconds = 15,
+            NumberOfProbes = 2,
+            RequestPath = "healthcheck.aspx",
+            Name = "probe-lb"
+        }
+    },
+    InboundNatRules = new List<InboundNatRule>
+    {
+        new InboundNatRule
+        {
+            FrontendIPConfiguration = new SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"),
+            Protocol = "Tcp",
+            FrontendPort = 3389,
+            BackendPort = 3389,
+            IdleTimeoutInMinutes = 15,
+            EnableFloatingIP = true,
+            Name = "in-nat-rule"
+        }
+    },
+    InboundNatPools = new List<InboundNatPool>(),
+    OutboundNatRules = new List<OutboundNatRule>()
+};
+
+var loadBalancer = await client.LoadBalancers.CreateOrUpdateAsync(
+    resourceGroupName: "rg1",
+    loadBalancerName: "lb",
+    parameters: parameters);
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancers
+// Method: ListAll
+// Example: List all load balancers
+
+
+var page<LoadBalancer> = await client.LoadBalancers.ListAllAsync();
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancers
+// Method: List
+// Example: List load balancers in resource group
+
+
+var page<LoadBalancer> = await client.LoadBalancers.ListAsync(
+    resourceGroupName: "rg1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancerBackendAddressPools
+// Method: List
+// Example: LoadBalancerBackendAddressPoolList
+
+
+var page<BackendAddressPool> = await client.LoadBalancerBackendAddressPools.ListAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancerBackendAddressPools
+// Method: Get
+// Example: LoadBalancerBackendAddressPoolGet
+
+
+var backendAddressPool = await client.LoadBalancerBackendAddressPools.GetAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb",
+    backendAddressPoolName: "backend");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancerFrontendIPConfigurations
+// Method: List
+// Example: LoadBalancerFrontendIPConfigurationList
+
+
+var page<FrontendIPConfiguration> = await client.LoadBalancerFrontendIPConfigurations.ListAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancerFrontendIPConfigurations
+// Method: Get
+// Example: LoadBalancerFrontendIPConfigurationGet
+
+
+var frontendIPConfiguration = await client.LoadBalancerFrontendIPConfigurations.GetAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb",
+    frontendIPConfigurationName: "frontend");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: InboundNatRules
+// Method: List
+// Example: InboundNatRuleList
+
+
+var page<InboundNatRule> = await client.InboundNatRules.ListAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: InboundNatRules
+// Method: Delete
+// Example: InboundNatRuleDelete
+
+
+await client.InboundNatRules.DeleteAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb1",
+    inboundNatRuleName: "natRule1.1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: InboundNatRules
+// Method: Get
+// Example: InboundNatRuleGet
+
+
+var inboundNatRule = await client.InboundNatRules.GetAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb1",
+    inboundNatRuleName: "natRule1.1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: InboundNatRules
+// Method: CreateOrUpdate
+// Example: InboundNatRuleCreate
+
+var inboundNatRuleParameters = new InboundNatRule
+{
+    FrontendIPConfiguration = new SubResource("/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/ip1"),
+    Protocol = "Tcp",
+    FrontendPort = 3390,
+    BackendPort = 3389,
+    IdleTimeoutInMinutes = 4,
+    EnableFloatingIP = false
+};
+
+var inboundNatRule = await client.InboundNatRules.CreateOrUpdateAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb1",
+    inboundNatRuleName: "natRule1.1",
+    inboundNatRuleParameters: inboundNatRuleParameters);
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancerLoadBalancingRules
+// Method: List
+// Example: LoadBalancerLoadBalancingRuleList
+
+
+var page<LoadBalancingRule> = await client.LoadBalancerLoadBalancingRules.ListAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancerLoadBalancingRules
+// Method: Get
+// Example: LoadBalancerLoadBalancingRuleGet
+
+
+var loadBalancingRule = await client.LoadBalancerLoadBalancingRules.GetAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb1",
+    loadBalancingRuleName: "rule1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancerNetworkInterfaces
+// Method: List
+// Example: LoadBalancerNetworkInterfaceListVmss
+
+
+var page<NetworkInterface> = await client.LoadBalancerNetworkInterfaces.ListAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancerNetworkInterfaces
+// Method: List
+// Example: LoadBalancerNetworkInterfaceListSimple
+
+
+var page<NetworkInterface> = await client.LoadBalancerNetworkInterfaces.ListAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancerProbes
+// Method: List
+// Example: LoadBalancerProbeList
+
+
+var page<Probe> = await client.LoadBalancerProbes.ListAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: LoadBalancerProbes
+// Method: Get
+// Example: LoadBalancerProbeGet
+
+
+var probe = await client.LoadBalancerProbes.GetAsync(
+    resourceGroupName: "testrg",
+    loadBalancerName: "lb",
+    probeName: "probe1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkInterfaces
+// Method: Delete
+// Example: Delete network interface
+
+
+await client.NetworkInterfaces.DeleteAsync(
+    resourceGroupName: "rg1",
+    networkInterfaceName: "test-nic");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkInterfaces
+// Method: Get
+// Example: Get network interface
+
+
+var networkInterface = await client.NetworkInterfaces.GetAsync(
+    resourceGroupName: "rg1",
+    networkInterfaceName: "test-nic");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkInterfaces
+// Method: CreateOrUpdate
+// Example: Create network interface
+
+var parameters = new NetworkInterface
+{
+    IpConfigurations = new List<NetworkInterfaceIPConfiguration>
+    {
+        new NetworkInterfaceIPConfiguration
+        {
+            Subnet = new Subnet(),
+            PublicIPAddress = new PublicIPAddress(),
+            Name = "ipconfig1"
+        }
+    },
+    EnableAcceleratedNetworking = true
+};
+
+var networkInterface = await client.NetworkInterfaces.CreateOrUpdateAsync(
+    resourceGroupName: "rg1",
+    networkInterfaceName: "test-nic",
+    parameters: parameters);
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkInterfaces
+// Method: ListAll
+// Example: List all network interfaces
+
+
+var page<NetworkInterface> = await client.NetworkInterfaces.ListAllAsync();
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkInterfaces
+// Method: List
+// Example: List network interfaces in resource group
+
+
+var page<NetworkInterface> = await client.NetworkInterfaces.ListAsync(
+    resourceGroupName: "rg1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkInterfaces
+// Method: GetEffectiveRouteTable
+// Example: Show network interface effective route tables
+
+
+var page<EffectiveRoute> = await client.NetworkInterfaces.GetEffectiveRouteTableAsync(
+    resourceGroupName: "rg1",
+    networkInterfaceName: "nic1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkInterfaces
+// Method: ListEffectiveNetworkSecurityGroups
+// Example: List network interface effective network security groups
+
+
+var page<EffectiveNetworkSecurityGroup> = await client.NetworkInterfaces.ListEffectiveNetworkSecurityGroupsAsync(
+    resourceGroupName: "rg1",
+    networkInterfaceName: "nic1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkInterfaceIPConfigurations
+// Method: List
+// Example: NetworkInterfaceIPConfigurationList
+
+
+var page<NetworkInterfaceIPConfiguration> = await client.NetworkInterfaceIPConfigurations.ListAsync(
+    resourceGroupName: "testrg",
+    networkInterfaceName: "nic1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkInterfaceIPConfigurations
+// Method: Get
+// Example: NetworkInterfaceIPConfigurationGet
+
+
+var networkInterfaceIPConfiguration = await client.NetworkInterfaceIPConfigurations.GetAsync(
+    resourceGroupName: "testrg",
+    networkInterfaceName: "mynic",
+    ipConfigurationName: "ipconfig1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkInterfaceLoadBalancers
+// Method: List
+// Example: NetworkInterfaceLoadBalancerList
+
+
+var page<LoadBalancer> = await client.NetworkInterfaceLoadBalancers.ListAsync(
+    resourceGroupName: "testrg",
+    networkInterfaceName: "nic1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkSecurityGroups
+// Method: Delete
+// Example: Delete network security group
+
+
+await client.NetworkSecurityGroups.DeleteAsync(
+    resourceGroupName: "rg1",
+    networkSecurityGroupName: "testnsg");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkSecurityGroups
+// Method: Get
+// Example: Get network security group
+
+
+var networkSecurityGroup = await client.NetworkSecurityGroups.GetAsync(
+    resourceGroupName: "rg1",
+    networkSecurityGroupName: "testnsg");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkSecurityGroups
+// Method: CreateOrUpdate
+// Example: Create network security group
+
+var parameters = new NetworkSecurityGroup();
+
+var networkSecurityGroup = await client.NetworkSecurityGroups.CreateOrUpdateAsync(
+    resourceGroupName: "rg1",
+    networkSecurityGroupName: "testnsg",
+    parameters: parameters);
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkSecurityGroups
+// Method: CreateOrUpdate
+// Example: Create network security group with rule
+
+var parameters = new NetworkSecurityGroup
+{
+    SecurityRules = new List<SecurityRule>
+    {
+        new SecurityRule
+        {
+            Protocol = "*",
+            SourcePortRange = "*",
+            DestinationPortRange = "80",
+            SourceAddressPrefix = "*",
+            DestinationAddressPrefix = "*",
+            Access = "Allow",
+            Priority = 130,
+            Direction = "Inbound",
+            Name = "rule1"
+        }
+    }
+};
+
+var networkSecurityGroup = await client.NetworkSecurityGroups.CreateOrUpdateAsync(
+    resourceGroupName: "rg1",
+    networkSecurityGroupName: "testnsg",
+    parameters: parameters);
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkSecurityGroups
+// Method: ListAll
+// Example: List all network security groups
+
+
+var page<NetworkSecurityGroup> = await client.NetworkSecurityGroups.ListAllAsync();
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: NetworkSecurityGroups
+// Method: List
+// Example: List network security groups in resource group
+
+
+var page<NetworkSecurityGroup> = await client.NetworkSecurityGroups.ListAsync(
+    resourceGroupName: "rg1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: SecurityRules
+// Method: Delete
+// Example: Delete network security rule from network security group
+
+
+await client.SecurityRules.DeleteAsync(
+    resourceGroupName: "rg1",
+    networkSecurityGroupName: "testnsg",
+    securityRuleName: "rule1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: SecurityRules
+// Method: Get
+// Example: Get network security rule in network security group
+
+
+var securityRule = await client.SecurityRules.GetAsync(
+    resourceGroupName: "rg1",
+    networkSecurityGroupName: "testnsg",
+    securityRuleName: "rule1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: SecurityRules
+// Method: CreateOrUpdate
+// Example: Create security rule
+
+var securityRuleParameters = new SecurityRule
+{
+    Protocol = "*",
+    SourcePortRange = "*",
+    DestinationPortRange = "8080",
+    SourceAddressPrefix = "10.0.0.0/8",
+    DestinationAddressPrefix = "11.0.0.0/8",
+    Access = "Deny",
+    Priority = 100,
+    Direction = "Outbound"
+};
+
+var securityRule = await client.SecurityRules.CreateOrUpdateAsync(
+    resourceGroupName: "rg1",
+    networkSecurityGroupName: "testnsg",
+    securityRuleName: "rule1",
+    securityRuleParameters: securityRuleParameters);
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: SecurityRules
+// Method: List
+// Example: List network security rules in network security group
+
+
+var page<SecurityRule> = await client.SecurityRules.ListAsync(
+    resourceGroupName: "rg1",
+    networkSecurityGroupName: "testnsg");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: DefaultSecurityRules
+// Method: List
+// Example: DefaultSecurityRuleList
+
+
+var page<SecurityRule> = await client.DefaultSecurityRules.ListAsync(
+    resourceGroupName: "testrg",
+    networkSecurityGroupName: "nsg1");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: DefaultSecurityRules
+// Method: Get
+// Example: DefaultSecurityRuleGet
+
+
+var securityRule = await client.DefaultSecurityRules.GetAsync(
+    resourceGroupName: "testrg",
+    networkSecurityGroupName: "nsg1",
+    defaultSecurityRuleName: "AllowVnetInBound");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: PublicIPAddresses
+// Method: Delete
+// Example: Delete public IP address
+
+
+await client.PublicIPAddresses.DeleteAsync(
+    resourceGroupName: "rg1",
+    publicIpAddressName: "test-ip");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: PublicIPAddresses
+// Method: Get
+// Example: Get public IP address
+
+
+var publicIPAddress = await client.PublicIPAddresses.GetAsync(
+    resourceGroupName: "rg1",
+    publicIpAddressName: "testDNS-ip");
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: PublicIPAddresses
+// Method: CreateOrUpdate
+// Example: Create public IP address defaults
+
+var parameters = new PublicIPAddress();
+
+var publicIPAddress = await client.PublicIPAddresses.CreateOrUpdateAsync(
+    resourceGroupName: "rg1",
+    publicIpAddressName: "test-ip",
+    parameters: parameters);
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: PublicIPAddresses
+// Method: CreateOrUpdate
+// Example: Create public IP address allocation method
+
+var parameters = new PublicIPAddress
+{
+    PublicIPAllocationMethod = "Static",
+    PublicIPAddressVersion = "IPv4",
+    IdleTimeoutInMinutes = 10
+};
+
+var publicIPAddress = await client.PublicIPAddresses.CreateOrUpdateAsync(
+    resourceGroupName: "rg1",
+    publicIpAddressName: "test-ip",
+    parameters: parameters);
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: PublicIPAddresses
+// Method: CreateOrUpdate
+// Example: Create public IP address DNS
+
+var parameters = new PublicIPAddress
+{
+    DnsSettings = new PublicIPAddressDnsSettings
+    {
+        DomainNameLabel = "dnslbl"
+    }
+};
+
+var publicIPAddress = await client.PublicIPAddresses.CreateOrUpdateAsync(
+    resourceGroupName: "rg1",
+    publicIpAddressName: "test-ip",
+    parameters: parameters);
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: PublicIPAddresses
+// Method: ListAll
+// Example: List all public IP addresses
+
+
+var page<PublicIPAddress> = await client.PublicIPAddresses.ListAllAsync();
+}
+
+
+{
+// Client: NetworkManagementClient
+// Group: PublicIPAddresses
+// Method: List
+// Example: List resource group public IP addresses
+
+
+var page<PublicIPAddress> = await client.PublicIPAddresses.ListAsync(
+    resourceGroupName: "rg1");
+}

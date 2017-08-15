@@ -20,7 +20,16 @@ paths:
       operationId: Image_A
       parameters:
       - "$ref": "#/parameters/ImageStream"
-      - "$ref": "#/parameters/ImageContentType"
+      - name: Content-Type
+        x-ms-client-name: imageContentType
+        in: header
+        required: false
+        x-ms-parameter-location: method
+        description: The content type of the image.
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ImageType
       responses:
         '200': {}
   "/ProcessImage/FunctionB":
@@ -28,7 +37,78 @@ paths:
       operationId: Image_B
       parameters:
       - "$ref": "#/parameters/ImageStream"
-      - "$ref": "#/parameters/ImageContentType"
+      - name: Content-Type
+        x-ms-client-name: imageContentType
+        in: header
+        required: false
+        x-ms-parameter-location: method
+        description: The content type of the image.
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ImageType
+      responses:
+        '200': {}
+  "/ProcessImage/FunctionC":
+    post:
+      operationId: Image_C
+      parameters:
+      - "$ref": "#/parameters/ImageStream"
+      - name: Content-Type
+        x-ms-client-name: imageContentType
+        in: header
+        required: false
+        x-ms-parameter-location: method
+        description: The content type of the image.
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ImageTypeRestricted
+      consumes:
+      - image/png
+      - image/tiff
+      responses:
+        '200': {}
+  "/ProcessImage/FunctionD":
+    post:
+      operationId: Image_D
+      parameters:
+      - "$ref": "#/parameters/ImageStream"
+      - name: Content-Type
+        x-ms-client-name: imageContentType
+        in: header
+        required: false
+        x-ms-parameter-location: method
+        description: The content type of the image.
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ImageTypeRestrictedStrings
+      consumes:
+      - image/png
+      - image/tiff
+      responses:
+        '200': {}
+  "/ProcessImage/FunctionTA":
+    post:
+      consumes:
+      - text/plain
+      - text/json
+      operationId: Text_A
+      parameters:
+      - "$ref": "#/parameters/TextStream"
+      - "$ref": "#/parameters/TextContentType"
+      responses:
+        '200': {}
+  "/ProcessImage/FunctionTB":
+    post:
+      consumes:
+      - text/plain
+      - text/xml
+      operationId: Text_B
+      parameters:
+      - "$ref": "#/parameters/TextStream"
+      - "$ref": "#/parameters/TextContentType"
       responses:
         '200': {}
 parameters:
@@ -40,9 +120,16 @@ parameters:
     description: An image stream.
     schema:
       type: file
-  ImageContentType:
+  TextStream:
+    name: Text
+    in: body
+    required: true
+    x-ms-parameter-location: method
+    description: A text stream.
+    schema:
+      type: file
+  TextContentType:
     name: Content-Type
-    x-ms-client-name: imageContentType
     in: header
     required: false
     x-ms-parameter-location: method

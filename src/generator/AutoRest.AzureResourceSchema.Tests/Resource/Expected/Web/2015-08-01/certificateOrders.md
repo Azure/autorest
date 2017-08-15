@@ -85,9 +85,7 @@ To create a Microsoft.CertificateRegistration/certificateOrders resource, add th
     "lastCertificateIssuanceTime": "string",
     "expirationTime": "string"
   },
-  "resources": [
-    null
-  ]
+  "resources": []
 }
 ```
 ## Property values
@@ -106,7 +104,7 @@ The following tables describe the values you need to set in the schema.
 |  location | string | Yes | Resource Location |
 |  tags | object | No | Resource tags |
 |  properties | object | Yes | [CertificateOrder_properties object](#CertificateOrder_properties) |
-|  resources | array | No | [certificateOrders_certificates_childResource object](#certificateOrders_certificates_childResource) |
+|  resources | array | No | [certificates](./certificateOrders/certificates.md) |
 
 
 <a id="CertificateOrder_properties" />
@@ -131,20 +129,6 @@ The following tables describe the values you need to set in the schema.
 |  expirationTime | string | No | Certificate expiration time |
 
 
-<a id="certificateOrders_certificates_childResource" />
-### certificateOrders_certificates_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | certificates |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [CertificateOrderCertificate_properties object](#CertificateOrderCertificate_properties) |
-
-
 <a id="CertificateDetails" />
 ### CertificateDetails object
 |  Name | Type | Required | Value |
@@ -156,15 +140,6 @@ The following tables describe the values you need to set in the schema.
 |  type | string | No | Resource type |
 |  tags | object | No | Resource tags |
 |  properties | object | No | [CertificateDetails_properties object](#CertificateDetails_properties) |
-
-
-<a id="CertificateOrderCertificate_properties" />
-### CertificateOrderCertificate_properties object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  keyVaultId | string | No | Key Vault Csm resource Id |
-|  keyVaultSecretName | string | No | Key Vault secret name |
-|  provisioningState | enum | No | Status of the Key Vault secret. - Initialized, WaitingOnCertificateOrder, Succeeded, CertificateOrderFailed, OperationNotPermittedOnKeyVault, AzureServiceUnauthorizedToAccessKeyVault, KeyVaultDoesNotExist, KeyVaultSecretDoesNotExist, UnknownError, Unknown |
 
 
 <a id="CertificateDetails_properties" />

@@ -68,7 +68,6 @@ namespace AutoRest.Extensions.Azure
                 {
                     throw new ArgumentNullException("codeModel");
                 }
-               
 
                 // This extension from general extensions must be run prior to Azure specific extensions.
                 ProcessParameterizedHost(codeModel);
@@ -111,7 +110,7 @@ namespace AutoRest.Extensions.Azure
                 }
                 else
                 {
-                    Logger.Instance.Log(Category.Info, Resources.HeadMethodPossibleIncorrectSpecification, method.Name);
+                    Logger.Instance.Log(Category.Warning, Resources.HeadMethodPossibleIncorrectSpecification, method.Name);
                 }
             }
         }
@@ -214,6 +213,8 @@ namespace AutoRest.Extensions.Azure
                 {
                     // copy the method 
                     var m = Duplicate(method);
+                    // x-ms-examples of source method do not really apply
+                    m.Extensions.Remove(Core.Model.XmsExtensions.Examples.Name);
 
                     // change the name, remove the extension.
                     m.Name = "Begin" + m.Name.ToPascalCase();
@@ -344,6 +345,8 @@ namespace AutoRest.Extensions.Azure
                     if (nextLinkMethod == null)
                     {
                         nextLinkMethod = Duplicate<Method>(method);
+                        // x-ms-examples of source method do not apply
+                        nextLinkMethod.Extensions.Remove(Core.Model.XmsExtensions.Examples.Name);
 
                         if (!string.IsNullOrEmpty(pageableExtension.OperationName))
                         {
@@ -448,7 +451,7 @@ namespace AutoRest.Extensions.Azure
             
             var parameterGroupType = New <CompositeType>(parameterGroupName, new
             {
-                Documentation = "Additional parameters for the " + method.Name + " operation."
+                Documentation = "Additional parameters for " + SwaggerModeler.GetMethodNameFromOperationId(method.Name) + " operation."
             });
 
             //Add to the service client
@@ -490,7 +493,7 @@ namespace AutoRest.Extensions.Azure
                             bool? extensionObject = parameter.Extensions[ClientRequestIdExtension] as bool?;
                             if (extensionObject != null && extensionObject.Value)
                             {
-                                return parameter.SerializedName.Value;
+                                return parameter.SerializedName;
                             }
                             return null;
                         })

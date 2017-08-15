@@ -1,0 +1,70 @@
+---
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Swagger Petstore
+  license:
+    name: MIT
+host: petstore.swagger.io
+basePath: "/v1"
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  "/pets":
+    put:
+      summary: Add a pet
+      operationId: addPet
+      tags:
+      - pets
+      parameters:
+      - schema:
+          "$ref": "#/definitions/Pet"
+      responses:
+        '200':
+          description: OK
+definitions:
+  Pet:
+    properties:
+      petKind:
+        type: string
+      name:
+        type: string
+    discriminator: petKind
+    required:
+    - name
+    - petType
+  Cat:
+    description: A representation of a cat
+    x-ms-discriminator-value: Microsoft.PetStore.PetType
+    allOf:
+    - "$ref": "#/definitions/Pet"
+    - properties:
+        huntingSkill:
+          type: string
+          description: The measured skill for hunting
+          default: lazy
+          enum:
+          - clueless
+          - lazy
+          - adventurous
+          - aggressive
+      required:
+      - huntingSkill
+  Dog:
+    description: A representation of a dog
+    x-ms-discriminator-value: Microsoft.PetStore.PetType
+    allOf:
+    - "$ref": "#/definitions/Pet"
+    - properties:
+        packSize:
+          type: integer
+          format: int32
+          description: the size of the pack the dog is from
+          default: 0
+          minimum: 0
+      required:
+      - packSize

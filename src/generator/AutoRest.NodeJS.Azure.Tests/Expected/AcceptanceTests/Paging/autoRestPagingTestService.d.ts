@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse, ServiceClientCredentials } from 'ms-rest';
+import { ServiceClientCredentials } from 'ms-rest';
 import { AzureServiceClient, AzureServiceClientOptions } from 'ms-rest-azure';
 import * as operations from "./operations";
 

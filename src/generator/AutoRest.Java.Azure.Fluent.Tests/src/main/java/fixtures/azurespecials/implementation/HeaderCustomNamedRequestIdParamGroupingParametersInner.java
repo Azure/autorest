@@ -13,8 +13,7 @@ package fixtures.azurespecials.implementation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Additional parameters for the Header_customNamedRequestIdParamGrouping
- * operation.
+ * Additional parameters for customNamedRequestIdParamGrouping operation.
  */
 public class HeaderCustomNamedRequestIdParamGroupingParametersInner {
     /**

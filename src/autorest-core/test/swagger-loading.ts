@@ -1,6 +1,3 @@
-// polyfills for language support 
-require("../lib/polyfill.min.js");
-
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
@@ -14,14 +11,15 @@ import { Channel, Message } from "../lib/message";
 @suite class SwaggerLoading {
   @test @timeout(0) async "external reference resolving"() {
     const autoRest = new AutoRest();
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
     const swaggerFile = await LoadLiterateSwagger(
       config,
-      dataStore.GetReadThroughScope(),
+      dataStore.GetReadThroughScope(new RealFileSystem()),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/087554c4480e144f715fe92f97621ff5603cd907/specification/network/resource-manager/Microsoft.Network/2016-12-01/applicationGateway.json",
-      dataStore.CreateScope("work"));
+      dataStore.DataSink);
     const swaggerObj = swaggerFile.ReadObject<any>();
 
     // check presence of SubResource (imported from "./network.json")
@@ -31,14 +29,15 @@ import { Channel, Message } from "../lib/message";
   @test @timeout(0) async "composite Swagger"() {
     const dataStore = new DataStore();
 
-    const config = await CreateConfiguration("file:///", dataStore.GetReadThroughScope(),
+    const config = await CreateConfiguration("file:///", dataStore.GetReadThroughScope(new RealFileSystem()),
       [
         "-i", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/a2b46f557c6a17a95777a8a2f380cfecb9dac28e/arm-network/compositeNetworkClient.json",
         "-m", "CompositeSwagger",
         "-g", "None"
       ]);
-    assert.strictEqual(config["input-file"].length, 18);
+    assert.strictEqual((config["input-file"] as any).length, 18);
     const autoRest = new AutoRest(new RealFileSystem());
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     await autoRest.AddConfiguration(config);
 
     const messages: Message[] = [];

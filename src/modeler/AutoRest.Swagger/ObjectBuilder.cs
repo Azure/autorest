@@ -90,7 +90,6 @@ namespace AutoRest.Swagger
                             }
                         }
                     }
-                    enumType.SerializedName = enumType.Name;
                     if (string.IsNullOrEmpty(enumType.Name))
                     {
                         throw new InvalidOperationException(
@@ -107,9 +106,11 @@ namespace AutoRest.Swagger
                         {
                             throw new InvalidOperationException(
                                 string.Format(CultureInfo.InvariantCulture,
-                                    "Swagger document contains two or more {0} extensions with the same name '{1}' and different values.",
+                                    "Swagger document contains two or more {0} extensions with the same name '{1}' and different values: {2} vs. {3}",
                                     Core.Model.XmsExtensions.Enum.Name,
-                                    enumType.Name));
+                                    enumType.Name,
+                                    string.Join(",", existingEnum.Values.Select(x => x.SerializedName)),
+                                    string.Join(",", enumType.Values.Select(x => x.SerializedName))));
                         }
                         // Use the existing one!
                         enumType = existingEnum;
@@ -123,7 +124,6 @@ namespace AutoRest.Swagger
                 {
                     enumType.ModelAsString = true;
                     enumType.SetName( string.Empty);
-                    enumType.SerializedName = string.Empty;
                 }
                 enumType.XmlProperties = (SwaggerObject as Schema)?.Xml;
                 return enumType;
