@@ -1132,18 +1132,17 @@ namespace Petstore
 
             // Serialize Request
             string _requestContent = null;
-            MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
-            if (name != null)
+            List<KeyValuePair<string, string>> values = new List<KeyValuePair<string, string>>();
+            if(name != null)
             {
-                StringContent _name = new StringContent(name, System.Text.Encoding.UTF8);
-                _multiPartContent.Add(_name, "name");
+                values.Add("name", name);
             }
-            if (status != null)
+            if(status != null)
             {
-                StringContent _status = new StringContent(status, System.Text.Encoding.UTF8);
-                _multiPartContent.Add(_status, "status");
+                values.Add("status", status);
             }
-            _httpRequest.Content = _multiPartContent;
+            FormUrlEncodedContent _formContent = new FormUrlEncodedContent(values);
+            _httpRequest.Content = _formContent;
             // Send Request
             if (_shouldTrace)
             {
