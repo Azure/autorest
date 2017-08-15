@@ -452,7 +452,7 @@ namespace AutoRest.Extensions.Azure
             
             var parameterGroupType = New <CompositeType>(parameterGroupName, new
             {
-                Documentation = "Additional parameters for the " + method.Name + " operation."
+                Documentation = "Additional parameters for " + SwaggerModeler.GetMethodNameFromOperationId(method.Name) + " operation."
             });
 
             //Add to the service client

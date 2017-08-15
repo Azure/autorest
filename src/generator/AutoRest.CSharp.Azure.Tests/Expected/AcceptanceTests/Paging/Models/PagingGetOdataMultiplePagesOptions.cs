@@ -16,7 +16,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
     using System.Linq;
 
     /// <summary>
-    /// Additional parameters for the Paging_GetOdataMultiplePages operation.
+    /// Additional parameters for GetOdataMultiplePages operation.
     /// </summary>
     public partial class PagingGetOdataMultiplePagesOptions
     {

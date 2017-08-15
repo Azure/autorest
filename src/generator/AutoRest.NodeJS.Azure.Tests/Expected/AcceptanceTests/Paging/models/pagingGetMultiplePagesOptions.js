@@ -11,7 +11,7 @@
 'use strict';
 
 /**
- * Additional parameters for the Paging_getMultiplePages operation.
+ * Additional parameters for getMultiplePages operation.
  *
  */
 class PagingGetMultiplePagesOptions {

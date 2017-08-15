@@ -293,19 +293,12 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("operation");
             }
 
-            if (operation.OperationId == null)
-            {
-                return null;
-            }
-
-            if (operation.OperationId.IndexOf('_') == -1)
-            {
-                return operation.OperationId;
-            }
-
-            var parts = operation.OperationId.Split('_');
-            return parts[1];
+            return GetMethodNameFromOperationId(operation.OperationId);
         }
+
+        public static string GetMethodNameFromOperationId(string operationId) => 
+            (operationId?.IndexOf('_') != -1) ? operationId.Split('_').Last(): operationId;
+        
 
         public SwaggerParameter Unwrap(SwaggerParameter swaggerParameter)
         {
