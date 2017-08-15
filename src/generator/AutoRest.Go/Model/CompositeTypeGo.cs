@@ -34,10 +34,10 @@ namespace AutoRest.Go.Model
         public bool HasPolymorphicFields => Properties.Any(p => p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic);
 
         public bool DiscriminatorEnumExists;
-        public string DiscriminatorEnumName;
 
+        public EnumType DiscriminatorEnum;
 
-        public EnumType DiscriminatorEnum => CodeModel.EnumTypes.First(et => et.Name.EqualsIgnoreCase(DiscriminatorEnumName));
+        public string DiscriminatorEnumValue => (DiscriminatorEnum as EnumTypeGo).Constants.FirstOrDefault(c => c.Value.Equals(SerializedName)).Key;
 
         public CompositeTypeGo()
         {

@@ -93,9 +93,10 @@ namespace AutoRest.Go
                     }
                     bool nameAlreadyExists = cmg.EnumTypes.Any(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator));
                     bool alreadyExists = nameAlreadyExists;
+                    string discName = mt.PolymorphicDiscriminator;
                     if (nameAlreadyExists)
                     {
-                        (mt as CompositeTypeGo).DiscriminatorEnumName = cmg.EnumTypes.First(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator)).Name;
+                        discName = cmg.EnumTypes.First(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator)).Name;                        
                         var existingValues = new List<string>();
                         foreach (var v in cmg.EnumTypes.First(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator)).Values)
                         {
@@ -111,14 +112,14 @@ namespace AutoRest.Go
                     }
                     if (!alreadyExists)
                     {
-                        string discName = nameAlreadyExists ? string.Format("{0}{1}", mt.PolymorphicDiscriminator, mt.Name) :  mt.PolymorphicDiscriminator;
-                        (mt as CompositeTypeGo).DiscriminatorEnumName = discName;
+                        discName = nameAlreadyExists ? string.Format("{0}{1}", mt.PolymorphicDiscriminator, mt.Name) :  mt.PolymorphicDiscriminator;
                         cmg.Add(New<EnumType>(new{
                             Name = discName,
                             Values = values,
                     })); 
                     }
                     (mt as CompositeTypeGo).DiscriminatorEnumExists = alreadyExists;
+                    (mt as CompositeTypeGo).DiscriminatorEnum = cmg.EnumTypes.First(et => et.Name.EqualsIgnoreCase(discName));                    
                 }
             }
 
@@ -223,6 +224,18 @@ namespace AutoRest.Go
                         mtm.PreparerNeeded = cmg.NextMethodUndefined.Contains(mtm);
                     }
                 });
+
+            foreach (var mtm in cmg.ModelTypes)
+            {
+                if (mtm.IsPolymorphic)
+                {
+                    foreach (var dt in (mtm as CompositeTypeGo).DerivedTypes)
+                    {
+                        (dt as CompositeTypeGo).DiscriminatorEnum = (mtm as CompositeTypeGo).DiscriminatorEnum;
+                    }
+
+                }
+            }
         }
 
         private void TransformMethods(CodeModelGo cmg)
