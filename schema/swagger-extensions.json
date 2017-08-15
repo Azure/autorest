@@ -1107,7 +1107,15 @@
           "default": {}
         },
         "type": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/type"
+          "oneOf": [
+            {
+              "$ref": "http://json-schema.org/draft-04/schema#/properties/type"
+            }, 
+            {
+              "type" : "string",
+              "enum" : ["file"]
+            }
+          ]
         },
         "items": {
           "anyOf": [
