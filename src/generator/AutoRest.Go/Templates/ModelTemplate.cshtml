@@ -36,6 +36,25 @@
         @:return nil, errors.New("Unsupported type")
     @:}
 @:}
+
+@:func unmarshal@(Model.Name)Array(b []byte) ([]@(Model.Name), error){
+    @:var rawMessages []*json.RawMessage
+	@:err := json.Unmarshal(b, &rawMessages)
+	@:if err != nil {
+		@:return nil, err
+	@:}
+    @:@EmptyLine
+    @:@(Model.Name.FixedValue.ToIdiomaticShortName())Array := make([]@(Model.Name), len(rawMessages))
+    @:@EmptyLine
+    @:for index, rawMessage := range rawMessages {
+        @:@(Model.Name.FixedValue.ToIdiomaticShortName()), err := unmarshal@(Model.Name)(*rawMessage)
+	    @:if err != nil {
+		    @:return nil, err
+	    @:}
+        @:@(Model.Name.FixedValue.ToIdiomaticShortName())Array[index] = @(Model.Name.FixedValue.ToIdiomaticShortName())
+    @:}
+    @:return @(Model.Name.FixedValue.ToIdiomaticShortName())Array, nil
+@:}
 }
 else
 {
@@ -104,6 +123,10 @@ foreach (var st in Model.SiblingTypes)
         @if (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic)
         {
         @:@(p.SerializedName), err := unmarshal@(p.ModelType.Name)(*m["@(p.SerializedName)"])
+        }
+        else if (p.ModelType is SequenceType && (p.ModelType as SequenceTypeGo).ElementType is CompositeType && ((p.ModelType as SequenceTypeGo).ElementType as CompositeType).IsPolymorphic)
+        {
+            @: @(CodeNamerGo.Instance.GetVariableName(p.SerializedName)), err := unmarshal@((p.ModelType as SequenceTypeGo).ElementType.Name)Array(*m["@(p.SerializedName)"])
         }
         else
         {
