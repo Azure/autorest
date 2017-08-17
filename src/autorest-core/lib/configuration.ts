@@ -204,6 +204,7 @@ export class ConfigurationView {
       "directive": [],
       "input-file": [],
       "output-artifact": [],
+      "use": [],
     };
 
     this.rawConfig = MergeConfigurations(this.rawConfig, ...configs);
@@ -497,6 +498,36 @@ export class Configuration {
     return blocks;
   }
 
+  private extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"], ".autorest")));
+
+  private async DesugarRawConfig(configs: any): Promise<any> {
+    // shallow copy
+    configs = Object.assign({}, configs);
+    configs["use-extension"] = Object.assign({}, configs["use-extension"]);
+
+    // use => use-extension
+    let use = configs.use;
+    if (typeof use === "string") {
+      use = [use];
+    }
+    if (Array.isArray(use)) {
+      const extMgr = await this.extensionManager;
+      for (const useEntry of use) {
+        if (typeof useEntry === "string") {
+          const pkg = await extMgr.findPackage("foo", useEntry);
+          configs["use-extension"][pkg.name] = useEntry;
+        }
+      }
+      delete configs.use;
+    }
+
+    return configs;
+  }
+
+  private async DesugarRawConfigs(configs: any[]): Promise<any[]> {
+    return Promise.all(configs.map(c => this.DesugarRawConfig(c)));
+  }
+
   public async CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView> {
     const configFileUri = this.fileSystem && this.configFileOrFolderUri
       ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
@@ -506,8 +537,10 @@ export class Configuration {
     const createView = () => new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments);
 
     const configSegments: any[] = [];
+    const addSegments = async (configs: any[]): Promise<void> => { configSegments.push(...await this.DesugarRawConfigs(configs)); };
+
     // 1. overrides (CLI, ...)
-    configSegments.push(...configs);
+    await addSegments(configs);
     // 2. file
     if (configFileUri !== null) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem as IFileSystem);
@@ -515,7 +548,7 @@ export class Configuration {
         await inputView.ReadStrict(configFileUri),
         createView(),
         "config");
-      configSegments.push(...blocks);
+      await addSegments(blocks);
     }
     // 3. default configuration
     if (includeDefault) {
@@ -524,10 +557,10 @@ export class Configuration {
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
         createView(),
         "default-config");
-      configSegments.push(...blocks);
+      await addSegments(blocks);
     }
     // 4. resolve externals
-    const extMgr = await ExtensionManager.Create(join(process.env["autorest.home"], ".autorest"));
+    const extMgr = await this.extensionManager;
     const addedExtensions = new Set<string>();
     while (true) {
       const tmpView = createView();
@@ -567,7 +600,7 @@ export class Configuration {
           await inputView.ReadStrict(CreateFileUri(await ext.extension.configurationPath)),
           tmpView,
           `extension-config-${additionalExtension.fullyQualified}`);
-        configSegments.push(...blocks);
+        await addSegments(blocks);
       }
     }
 
