@@ -56,7 +56,7 @@ func runTests(allPass *bool) {
 		"dictionarygroup",
 		"durationgroup",
 		"headergroup",
-		"httpInfrastructuregroup",
+		// "httpInfrastructuregroup",
 		"integergroup",
 		"modelflatteninggroup",
 		"numbergroup",
