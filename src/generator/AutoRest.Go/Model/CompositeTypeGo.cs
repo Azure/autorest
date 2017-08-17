@@ -29,7 +29,18 @@ namespace AutoRest.Go.Model
 
         public IEnumerable<CompositeType> DerivedTypes => CodeModel.ModelTypes.Where(t => t.DerivesFrom(this));
 
-        public IEnumerable<CompositeType> SiblingTypes => (BaseModelType as CompositeTypeGo).DerivedTypes;
+        public IEnumerable<CompositeType> SiblingTypes
+        {
+            get
+            {
+                var st = (BaseModelType as CompositeTypeGo).DerivedTypes;
+                if (BaseModelType.BaseModelType != null && BaseModelType.BaseModelType.IsPolymorphic)
+                {
+                    st = st.Union((BaseModelType as CompositeTypeGo).SiblingTypes);
+                }
+                return st;
+            }
+        }
 
         public bool HasPolymorphicFields => Properties.Any(p => (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic) 
             || (p.ModelType is SequenceType && (p.ModelType as SequenceTypeGo).ElementType is CompositeType && ((p.ModelType as SequenceTypeGo).ElementType as CompositeType).IsPolymorphic));
