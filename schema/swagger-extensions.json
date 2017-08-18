@@ -1468,6 +1468,24 @@
         "modelAsString": {
           "type": "boolean",
           "default": false
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [ "value" ],
+            "properties": {
+              "value": {
+              },
+              "description": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
         }
       },
       "additionalProperties": false
