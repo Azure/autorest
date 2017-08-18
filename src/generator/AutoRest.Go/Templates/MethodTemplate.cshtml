@@ -28,7 +28,7 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
     @:resultChan := make(chan @(Model.MethodReturnType), 1)
     @:errChan:= make(chan error, 1)
 }
-@if (Model.ParameterValidations.Length > 0)
+@if (Model.ShouldValidate())
 {
     @:if err := validation.Validate([]validation.Validation{
     @:@(Model.ParameterValidations)}); err != nil {
