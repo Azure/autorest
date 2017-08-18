@@ -46,6 +46,7 @@ output-artifact:
   - source-file-php
   - source-file-azureresourceschema
   - source-file-jsonrpcclient
+use: []
 use-extension:
 
   '@microsoft.azure/classic-openapi-validator': '>=0.0.6-preview'
