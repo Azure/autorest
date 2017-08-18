@@ -574,17 +574,17 @@ namespace AutoRest.Ruby.Model
         /// </summary>
         /// <param name="outputVariable">Name of the output variable.</param>
         /// <returns>Mapper for the request body as string.</returns>
-        public string ConstructRequestBodyMapper(string outputVariable = "request_mapper")
+        public string ConstructRequestBodyContent(string requestContent = "request_content")
         {
             var builder = new IndentedStringBuilder("  ");
             if (RequestBody.ModelType is CompositeType)
             {
-                builder.AppendLine("{0} = {1}.mapper()", outputVariable, GetModelName(RequestBody.ModelType.Name));
+                builder.AppendLine("{0} = {1}.nil? ? nil: {1}.to_json", requestContent, RequestBody.Name);
             }
             else
             {
-                builder.AppendLine("{0} = {{{1}}}", outputVariable,
-                    RequestBody.ModelType.ConstructMapper(RequestBody.SerializedName, RequestBody, false));
+                builder.AppendLine("request_mapper = {{{0}}}", RequestBody.ModelType.ConstructMapper(RequestBody.SerializedName, RequestBody, false));
+                GenerateNewClassAndInvokeJsonable(builder, requestContent, false);
             }
             return builder.ToString();
         }
@@ -607,22 +607,42 @@ namespace AutoRest.Ruby.Model
             var builder = new IndentedStringBuilder("  ");
             if (type is CompositeType)
             {
-                builder.AppendLine("result_mapper = {0}.mapper()", GetModelName(type.Name));
+                builder.AppendLine("{0} = {1}.new.from_json({2})", valueReference, GetModelName(type.Name), responseVariable);
             }
             else
             {
                 builder.AppendLine("result_mapper = {{{0}}}", type.ConstructMapper(responseVariable, null, false));
-            }
-            if (MethodGroup.IsCodeModelMethodGroup)
-            {
-                builder.AppendLine("{1} = self.deserialize(result_mapper, {0})", responseVariable, valueReference);
-            }
-            else
-            {
-                builder.AppendLine("{1} = @client.deserialize(result_mapper, {0})", responseVariable, valueReference);
+                GenerateNewClassAndInvokeJsonable(builder, responseVariable, true, valueReference);
             }
 
             return builder.ToString();
+        }
+
+        private void GenerateNewClassAndInvokeJsonable(IndentedStringBuilder builder, String content, bool fromJson, string valueReference = null)
+        {
+            builder.AppendLine("begin");
+            builder.AppendLine("  a_new_class = Object.const_get('{0}::ANewClass')", Settings.Instance.Namespace);
+            if (fromJson)
+            {
+                builder.AppendLine("  {1} = a_new_class.new.from_json({0}, result_mapper)", content, valueReference);
+            }
+            else
+            {
+                builder.AppendLine("  {0} = a_new_class.new.to_json({{mapper: request_mapper, object: {1} }})", content, RequestBody.Name);
+            }
+            builder.AppendLine("rescue NameError => e");
+            builder.AppendLine("  current_module = Object.const_get(self.class.to_s.split( '::' )[0, self.class.to_s.split( '::' ).length-1].join)");
+            builder.AppendLine("  a_new_class = Class.new { include MsRest::JSONable }");
+            builder.AppendLine("  current_module.const_set('ANewClass', a_new_class)");
+            if (fromJson)
+            {
+                builder.AppendLine("  {1} = a_new_class.new.from_json({0}, result_mapper)", content, valueReference);
+            }
+            else
+            {
+                builder.AppendLine("  {0} = a_new_class.new.to_json({{mapper: request_mapper, object: {1} }})", content, RequestBody.Name);
+            }
+            builder.AppendLine("end");
         }
 
         /// <summary>
