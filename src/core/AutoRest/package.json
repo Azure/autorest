@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-classic-generators",
-  "version": "2.0.0-preview",
+  "version": "2.0.0",
   "description": "The collection of classic generators for the AutoRest code generator.",
   "engines": {
     "dotnet": "~1.0.5"

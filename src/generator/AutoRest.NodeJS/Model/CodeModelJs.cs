@@ -225,6 +225,6 @@ namespace AutoRest.NodeJS.Model
             }
         }
 
-        public override IEnumerable<string> MyReservedNames => new[] { Name.Value };
+        public override IEnumerable<string> MyReservedNames => new[] { Name };
     }
 }

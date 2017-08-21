@@ -15,6 +15,9 @@ using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 
 namespace AutoRest.Swagger
 {
@@ -54,7 +57,7 @@ namespace AutoRest.Swagger
         {
             ServiceDefinition = serviceDefinition;
             
-            Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
+            Logger.Instance.Log(Category.Debug, Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
 
@@ -68,7 +71,7 @@ namespace AutoRest.Swagger
 
                 var clientProperty = New<Property>();
                 clientProperty.LoadFrom(parameter);
-                clientProperty.RealPath = new string[] { parameter.SerializedName.Value };
+                clientProperty.RealPath = new string[] { parameter.SerializedName };
 
                 CodeModel.Add(clientProperty);
             }
@@ -137,6 +140,7 @@ namespace AutoRest.Swagger
                 CodeModel.Add(enumType);
             }
 
+            ProcessParameterizedHost();
             return CodeModel;
         }
 
@@ -158,7 +162,7 @@ namespace AutoRest.Swagger
         /// Initialize the base service and populate global service properties
         /// </summary>
         /// <returns>The base ServiceModel Service</returns>
-        public virtual void InitializeClientModel()
+        private void InitializeClientModel()
         {
             if (string.IsNullOrEmpty(ServiceDefinition.Swagger))
             {
@@ -189,6 +193,92 @@ namespace AutoRest.Swagger
 
             // Copy extensions
             ServiceDefinition.Extensions.ForEach(extention => CodeModel.Extensions.AddOrSet(extention.Key, extention.Value));
+        }
+
+        private void ProcessParameterizedHost()
+        {
+            if (CodeModel.Extensions.TryGetValue("x-ms-parameterized-host", out var extensionObject))
+            {
+                var hostExtension = extensionObject as JObject;
+
+                if (hostExtension != null)
+                {
+                    var hostTemplate = (string)hostExtension["hostTemplate"];
+                    var parametersJson = hostExtension["parameters"].ToString();
+                    var useSchemePrefix = true;
+                    if (hostExtension.TryGetValue("useSchemePrefix", out var value))
+                    {
+                        useSchemePrefix = bool.Parse(value.ToString());
+                    }
+
+                    var position = "first";
+
+                    if (hostExtension.TryGetValue("positionInOperation", out var textRaw))
+                    {
+                        var pat = "^(fir|la)st$";
+                        Regex r = new Regex(pat, RegexOptions.IgnoreCase);
+                        var text = textRaw.ToString();
+                        Match m = r.Match(text);
+                        if (!m.Success)
+                        {
+                            throw new InvalidOperationException(
+                                $"The value '{text}' provided for property 'positionInOperation' of extension 'x-ms-parameterized-host' is invalid. Valid values are: 'first, last'.");
+                        }
+                        position = text;
+                    }
+
+                    if (!string.IsNullOrEmpty(parametersJson))
+                    {
+                        var jsonSettings = new JsonSerializerSettings
+                        {
+                            TypeNameHandling = TypeNameHandling.None,
+                            MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                        };
+
+                        var swaggerParams = JsonConvert.DeserializeObject<List<SwaggerParameter>>(parametersJson,
+                            jsonSettings);
+                        List<Parameter> hostParamList = new List<Parameter>();
+                        foreach (var swaggerParameter in swaggerParams)
+                        {
+                            // Build parameter
+                            var parameterBuilder = new ParameterBuilder(swaggerParameter, this);
+                            var parameter = parameterBuilder.Build();
+
+                            // check to see if the parameter exists in properties, and needs to have its name normalized
+                            if (CodeModel.Properties.Any(p => p.SerializedName.EqualsIgnoreCase(parameter.SerializedName)))
+                            {
+                                parameter.ClientProperty =
+                                    CodeModel.Properties.Single(
+                                        p => p.SerializedName.Equals(parameter.SerializedName));
+                            }
+                            parameter.Extensions["hostParameter"] = true;
+                            hostParamList.Add(parameter);
+                        }
+
+                        if (position.EqualsIgnoreCase("first"))
+                        {
+                            CodeModel.HostParametersFront = hostParamList.AsEnumerable().Reverse();
+                        }
+                        else
+                        {
+                            CodeModel.HostParametersBack = hostParamList;
+                        }
+
+                        if (useSchemePrefix)
+                        {
+                            CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
+                                ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
+                                hostTemplate, ServiceDefinition.BasePath);
+                        }
+                        else
+                        {
+                            CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}{1}",
+                                hostTemplate, ServiceDefinition.BasePath);
+                        }
+
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -293,19 +383,12 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("operation");
             }
 
-            if (operation.OperationId == null)
-            {
-                return null;
-            }
-
-            if (operation.OperationId.IndexOf('_') == -1)
-            {
-                return operation.OperationId;
-            }
-
-            var parts = operation.OperationId.Split('_');
-            return parts[1];
+            return GetMethodNameFromOperationId(operation.OperationId);
         }
+
+        public static string GetMethodNameFromOperationId(string operationId) => 
+            (operationId?.IndexOf('_') != -1) ? operationId.Split('_').Last(): operationId;
+        
 
         public SwaggerParameter Unwrap(SwaggerParameter swaggerParameter)
         {

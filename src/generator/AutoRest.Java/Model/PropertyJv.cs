@@ -13,8 +13,14 @@ namespace AutoRest.Java.Model
     {
         public PropertyJv()
         {
-            SerializedName.OnGet += serializedName => (this.Extensions.ContainsKey(SwaggerExtensions.FlattenOriginalTypeName) ? serializedName : serializedName?.Replace(".", "\\\\."));
         }
+
+        public override string SerializedName
+        {
+            get => Extensions.ContainsKey(SwaggerExtensions.FlattenOriginalTypeName) ? base.SerializedName : base.SerializedName?.Replace(".", "\\\\.")?.Replace("\\\\\\\\", "\\\\");
+            set => base.SerializedName = value;
+        }
+
 
         [JsonIgnore]
         public bool WantNullable => IsXNullable ?? !IsRequired;

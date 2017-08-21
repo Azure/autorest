@@ -24,7 +24,6 @@ task 'clean' , 'typescript', (done)->
 
 
 task 'nuke' , 'typescript', (done)->
-  unlink "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core" if exists  "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core"
   typescriptProjectFolders()
     .pipe foreach (each,next)->
       rmdir "#{each.path}/node_modules/" , ->
@@ -43,7 +42,7 @@ task 'test', 'typescript',['build/typescript'], (done)->
 task "compile/typescript", '' , (done)->  
   done()
 
-task 'build', 'typescript',["pre-build"], (done)-> 
+task 'build', 'typescript', (done)-> 
   # watch for changes to these files and propogate them to the right spot.
   watcher = watchFiles ["#{basefolder}/src/autorest-core/dist/**/*.d.ts"], ["copy-dts-files"]
   
@@ -73,7 +72,6 @@ task 'build', 'typescript',["pre-build"], (done)->
     return null
 
 task 'npm-install', '', ['init-deps'], (done)-> 
-  global.threshold =1
   typescriptProjectFolders()
     .on 'end', -> 
       run 'npm-install', ->
@@ -89,18 +87,8 @@ task 'npm-install', '', ['init-deps'], (done)->
       task 'npm-install', fn,deps, (fin) ->
         echo "Running npm install for #{each.path}."
         execute "#{basefolder}/node_modules/.bin/npm install", {cwd: each.path, silent:false }, (code,stdout,stderr) ->
-          echo stderr
-          echo stdout
           fin()
 
       next null
     return null
 
-task 'pre-build', 'typescript', (done)-> 
-  # symlink the build into the target folder for the binaries.
-  if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules"
-    mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules"
-
-  if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core"
-    fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core",'junction' 
-  done()

@@ -11,7 +11,7 @@
 'use strict';
 
 /**
- * Additional parameters for the getMultiplePagesWithOffsetNext operation.
+ * Additional parameters for getMultiplePagesWithOffsetNext operation.
  *
  */
 class PagingGetMultiplePagesWithOffsetNextOptions {

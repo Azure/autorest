@@ -13,7 +13,7 @@ package fixtures.paging.implementation;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Additional parameters for the getMultiplePagesWithOffsetNext operation.
+ * Additional parameters for getMultiplePagesWithOffsetNext operation.
  */
 public class PagingGetMultiplePagesWithOffsetNextOptionsInner {
     /**

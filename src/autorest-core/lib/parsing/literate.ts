@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as commonmark from "../ref/commonmark";
+import * as commonmark from '../ref/commonmark';
 import { Mappings } from "../ref/source-map";
-import { DataHandleRead, DataStoreView } from "../data-store/data-store";
+import { DataHandle, DataSink } from '../data-store/data-store';
 
-export async function Parse(hConfigFile: DataHandleRead, intermediateScope: DataStoreView): Promise<{ data: DataHandleRead, codeBlock: commonmark.Node }[]> {
-  const result: { data: DataHandleRead, codeBlock: commonmark.Node }[] = [];
+export async function Parse(hConfigFile: DataHandle, sink: DataSink): Promise<{ data: DataHandle, codeBlock: commonmark.Node }[]> {
+  const result: { data: DataHandle, codeBlock: commonmark.Node }[] = [];
   const rawMarkdown = hConfigFile.ReadData();
   for (const codeBlock of ParseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;
@@ -16,8 +16,7 @@ export async function Parse(hConfigFile: DataHandleRead, intermediateScope: Data
     const data = codeBlock.literal || "";
     const mappings = GetSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
-    const hwCodeBlock = await intermediateScope.Write(codeBlockKey);
-    const hCodeBlock = await hwCodeBlock.WriteData(data, mappings, [hConfigFile]);
+    const hCodeBlock = await sink.WriteData(codeBlockKey, data, mappings, [hConfigFile]);
     result.push({
       data: hCodeBlock,
       codeBlock: codeBlock

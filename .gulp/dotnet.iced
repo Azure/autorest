@@ -27,12 +27,21 @@ task 'clean','dotnet', (done)->
     done()
 
 ###############################################
-task 'nuke' , 'dotnet', (done)->
+task 'nuke' ,'dotnet', (done)->
   projects()
-    .pipe where (each,next) ->  
-      assets = "#{folder each.path}/obj"
-      rmdir assets, ->
-        next null
+    .on 'end', () ->
+      return done()
+
+    .pipe where (each) ->  
+      objfolder = "#{folder each.path}/obj"
+      if test "-d", objfolder  
+        rmdir objfolder, -> 
+
+      binfolder = "#{folder each.path}/bin"
+      if test "-d", binfolder  
+        rmdir binfolder, -> 
+          
+  return null
 
 ###############################################
 task 'build','dotnet',['restore'], (done) ->

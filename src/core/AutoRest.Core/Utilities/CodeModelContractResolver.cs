@@ -31,12 +31,6 @@ namespace AutoRest.Core.Utilities
                 return (JsonConverter) Activator.CreateInstance(typeof(DependencyInjectionJsonConverter<>).MakeGenericType(objectType));
             }
 
-            // make sure all Fixable<T> types have a converter.
-            if (objectType.IsConstructedGenericType && objectType.GetGenericTypeDefinition() == typeof(Fixable<>))
-            {
-                return Fixable.Converters[objectType];
-            }
-
             // otherwise, use the default.
             return base.ResolveContractConverter(objectType);
         }
@@ -114,27 +108,6 @@ namespace AutoRest.Core.Utilities
                     p.ValueProvider = new DeserializeToExistingValueProvider(p.ValueProvider);
                     p.ObjectCreationHandling = ObjectCreationHandling.Reuse;
                 }
-
-                // Fixable properties need to have a second 'virtual' property to support #prefix.
-                if (p.PropertyType.IsConstructedGenericType &&
-                    p.PropertyType.GetGenericTypeDefinition() == typeof(Fixable<>))
-                {
-
-                    // ShouldSerialize for Fixable<> properties is smuggled in via the 
-                    // ShouldDeserialize delegate. (trying to think of a workaround)
-
-                    var newp = new JsonProperty();
-                    newp.LoadFrom(p);
-                    newp.PropertyName = $"#{p.PropertyName}";
-                    newp.ShouldSerialize = p.ShouldDeserialize;
-                    
-                    // should always deserialize  (fix smuggling)
-                    newp.ShouldDeserialize = o => true;
-                    p.ShouldDeserialize = o=>true;
-
-                    // add the virtual property
-                    properties.Add(newp);
-                }
             }
             return properties;
         }
@@ -160,66 +133,6 @@ namespace AutoRest.Core.Utilities
             if (property.PropertyType.CustomAttributes().Any(each => each.AttributeType == typeof(JsonObjectAttribute)))
             {
                 return property;
-            }
-
-            if (property.PropertyType.IsConstructedGenericType &&
-                property.PropertyType.GetGenericTypeDefinition() == typeof(Fixable<>))
-            {
-                // gotta stick this in here for a bit. 
-                property.ShouldDeserialize = property.ShouldSerialize = instance =>
-                {
-                    
-                    Fixable f = null;
-                    var m = instance.GetType().GetMember(member.Name)[0];
-                    if (m is PropertyInfo)
-                    {
-                        f = instance
-                               .GetType()
-                               .GetProperty(member.Name)
-                               .GetValue(instance, null) as Fixable;
-                    }
-                    else
-                    {
-                        f = instance
-                                 .GetType()
-                                 .GetField(member.Name)
-                                 .GetValue(instance) as Fixable;
-                    }
-
-                    if (f == null)
-                    {
-                        return false;
-                    }
-
-                    return f.ShouldSerialize && !f.IsFixed;
-                };
-
-                property.ShouldSerialize = instance =>
-                {
-                    Fixable f = null;
-                    var m = instance.GetType().GetMember(member.Name)[0];
-                    if (m is PropertyInfo)
-                    {
-                        f = instance
-                               .GetType()
-                               .GetProperty(member.Name)
-                               .GetValue(instance, null) as Fixable;
-                    }
-                    else
-                    {
-                        f = instance
-                                 .GetType()
-                                 .GetField(member.Name)
-                                 .GetValue(instance) as Fixable;
-                    }
-
-                    if (f == null)
-                    {
-                        return false;
-                    }
-
-                    return f.ShouldSerialize && f.IsFixed;
-                };
             }
 
             // if the property is an IEnumerable, put a ShouldSerialize delegate on it to check if it's empty before we bother serializing

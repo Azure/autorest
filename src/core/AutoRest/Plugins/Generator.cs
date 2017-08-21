@@ -41,10 +41,10 @@ public class Generator : NewPlugin
         var files = await ListInputs();
         if (files.Length != 2)
         {
-            throw new Exception($"Generator received incorrect number of inputs: ${files.Length} : {files.Aggregate("", (c,e)=> c+=","+e)}");
+            throw new Exception($"Generator received incorrect number of inputs: {files.Length} : {string.Join(",", files)}");
         }
 
-        var sd = Singleton<ServiceDefinition>.Instance = SwaggerParser.Parse(await ReadFile(files[0]));
+        var sd = SwaggerParser.Parse(await ReadFile(files[0]));
 
         // get internal name
         var language = new[] {
@@ -53,6 +53,7 @@ public class Generator : NewPlugin
             "NodeJS",
             "Python",
             "Go",
+            "Php",
             "Java",
             "AzureResourceSchema",
             "JsonRpcClient" }

@@ -10,7 +10,6 @@ import * as assert from "assert";
       n++;
     }
     assert.equal(n, 2);
-
     assert.equal(await f.ReadFile(MemoryFileSystem.DefaultVirtualRootUri + "other.md"), "#My Doc.");
   }
 }

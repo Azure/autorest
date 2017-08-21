@@ -85,29 +85,13 @@ namespace AutoRest.Core.Properties {
         ///  Azure.Ruby:
         ///    TypeName: PluginRba, AutoRest.Ruby.Azure
         ///  NodeJS:
-        ///    TypeName: PluginJs, Au [rest of string was truncated]&quot;;.
+        ///    TypeName: PluginJs, AutoRest.NodeJS
+        ///  Azure.NodeJS:
+        ///    TypeName: PluginJsa, AutoRest.NodeJS. [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ConfigurationKnownPlugins {
             get {
                 return ResourceManager.GetString("ConfigurationKnownPlugins", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Empty x-ms-client-name property..
-        /// </summary>
-        public static string EmptyClientName {
-            get {
-                return ResourceManager.GetString("EmptyClientName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error generating client model: {0}.
-        /// </summary>
-        public static string ErrorGeneratingClientModel {
-            get {
-                return ResourceManager.GetString("ErrorGeneratingClientModel", resourceCulture);
             }
         }
         
@@ -117,15 +101,6 @@ namespace AutoRest.Core.Properties {
         public static string ErrorLoadingAssembly {
             get {
                 return ResourceManager.GetString("ErrorLoadingAssembly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error saving generated code: {0}.
-        /// </summary>
-        public static string ErrorSavingGeneratedCode {
-            get {
-                return ResourceManager.GetString("ErrorSavingGeneratedCode", resourceCulture);
             }
         }
         
@@ -157,24 +132,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Initializing modeler..
-        /// </summary>
-        public static string InitializingModeler {
-            get {
-                return ResourceManager.GetString("InitializingModeler", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The default value is not one of the values enumerated as valid for this element..
-        /// </summary>
-        public static string InvalidDefault {
-            get {
-                return ResourceManager.GetString("InvalidDefault", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Property name {0} cannot be used as an Identifier, as it contains only invalid characters..
         /// </summary>
         public static string InvalidIdentifierName {
@@ -189,24 +146,6 @@ namespace AutoRest.Core.Properties {
         public static string LanguageDoesNotSupportSingleFileGeneration {
             get {
                 return ResourceManager.GetString("LanguageDoesNotSupportSingleFileGeneration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Successfully initialized modeler {0} v {1}..
-        /// </summary>
-        public static string ModelerInitialized {
-            get {
-                return ResourceManager.GetString("ModelerInitialized", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} (already used in {1}).
-        /// </summary>
-        public static string NamespaceConflictReasonMessage {
-            get {
-                return ResourceManager.GetString("NamespaceConflictReasonMessage", resourceCulture);
             }
         }
         
@@ -243,15 +182,6 @@ namespace AutoRest.Core.Properties {
         public static string TypeShouldBeAssemblyQualified {
             get {
                 return ResourceManager.GetString("TypeShouldBeAssemblyQualified", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;{0}&apos; is not a known format..
-        /// </summary>
-        public static string UnknownFormat {
-            get {
-                return ResourceManager.GetString("UnknownFormat", resourceCulture);
             }
         }
     }

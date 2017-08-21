@@ -22,7 +22,7 @@ namespace AutoRest.NodeJS.Model
             // methods that have no group name get the client name as their name
             Group.OnGet += groupName =>
             {
-                return groupName.IsNullOrEmpty() ? CodeModel?.Name.Value : groupName;
+                return groupName.IsNullOrEmpty() ? CodeModel?.Name : groupName;
             };
 
             OptionsParameterTemplateModel = (ParameterJs)New<Parameter>(new
@@ -341,7 +341,7 @@ namespace AutoRest.NodeJS.Model
                                 propertyParameter.ModelType = property.ModelType;
                                 propertyParameter.IsRequired = property.IsRequired;
                                 propertyParameter.Name.FixedValue = param.Name + "." + property.Name;
-                                string documentationString = string.Join(" ", (new[] { property.Summary, property.Documentation }).Where(s => !string.IsNullOrEmpty(s)));
+                                string documentationString = string.Join(" ", (new[] { property.Summary, property.Documentation.Value }).Where(s => !string.IsNullOrEmpty(s)));
                                 propertyParameter.Documentation = documentationString;
                                 traversalStack.Push(propertyParameter);
                             }
