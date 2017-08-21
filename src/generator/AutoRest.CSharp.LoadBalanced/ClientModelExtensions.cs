@@ -321,7 +321,7 @@ namespace AutoRest.CSharp.LoadBalanced
         /// <param name="valueReference">A reference to the value being validated</param>
         /// <param name="constraints">Constraints</param>
         /// <returns>The code to validate the reference of the given type</returns>
-        public static string ValidateType(this IModelType type, IChild scope, string valueReference, 
+        public static string ValidateType(this IModelType type, IChild scope, string valueReference,
             Dictionary<Constraint, string> constraints)
         {
             if (scope == null)

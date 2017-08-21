@@ -28,7 +28,7 @@ namespace @Settings.Namespace
     public partial class @clientName : ApiBase, I@{ @clientName }
     { 
 
-        private readonly Dictionary<string, string> _defaultHeaders = new Dictionary<string, string> { { "Accept" , "application/vnd.api+json"}, { "Content-Type", "application/vnd.api+json" } };
+        private readonly Dictionary<string, string> _defaultHeaders = new Dictionary<string, string> { { "Accept" , "application/json"}, { "Content-Type", "application/json" } };
 @EmptyLine
         public @clientName (
 	        string name, List<ServerSettings> settings, 

@@ -153,45 +153,6 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:public static @Model.PropertyTypeSelectionStrategy.GetPropertyTypeName(property) @property.Name { get; private set; }
         @EmptyLine
         }
-@if(@Model.ShouldValidateChain())
-{
-        @:/// <summary>
-        @:/// Validate the object.
-        @:/// </summary>
-        @:/// <exception cref="Microsoft.Rest.ValidationException">
-        @:/// Thrown if validation fails
-        @:/// </exception>
-        @:public @Model.MethodQualifier void Validate()
-        @:{/*
-            bool anythingToValidate = false;
 
-            if (Model.BaseModelType != null && Model.BaseModelType.ShouldValidateChain())
-            {
-                anythingToValidate = true;
-            @:base.Validate();
-            }
-
-            foreach (var property in Model.GetFilteredProperties().Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant && p.IsNullable() ))
-            {
-                anythingToValidate = true;
-            @:if (@property.Name == null)
-            @:{
-                @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@property.Name");
-            @:}
-            @:
-            }
-            foreach (var property in Model.GetFilteredProperties().Where(p => !p.IsConstant 
-                && (p.Constraints.Any() || !(p.ModelType is PrimaryType))))
-            {
-                anythingToValidate = true;
-            @:@property.ModelType.ValidateType(Model, $"this.{property.Name}", property.Constraints)
-            @:
-            }
-            if (!anythingToValidate)
-            {
-            @://Nothing to validate
-            }
-        @:*/}
-}
     }
 }

@@ -10,11 +10,14 @@ namespace AutoRest.CSharp.LoadBalanced.Tests
    [TestFixture]
     public class OutputTest
     {
-        [Test, Ignore("local test ")]
+        //[Test, Ignore("local test ")]
+        [Test]
         public void PassingTest()
         {
             Func<string, string> parent = path => Directory.GetParent(path).FullName;
             var currentPath = Directory.GetCurrentDirectory();
+
+            Console.WriteLine("Starting PassingTest");
 
             using (var context = new DependencyInjection.Context().Activate())
             {
@@ -26,13 +29,13 @@ namespace AutoRest.CSharp.LoadBalanced.Tests
                 }
                 catch (NullReferenceException)
                 {
-                    path = "C:\\projects\\autorest\\src\\generator\\AutoRest.CSharp.LoadBalanced.Tests";
+                    path = "C:\\DevWorkspace\\git\\autorest\\src\\generator\\AutoRest.CSharp.LoadBalanced.Tests";
                 }
 
                 var settings = new Settings
                                {
-                                   Input = "C:\\Users\\jlaszlo\\Desktop\\_test\\input.json.txt",
-                                   OutputDirectory = "C:\\Users\\jlaszlo\\Desktop\\_test",
+                                   Input = "C:\\swagger\\temp\\temp.json.txt",
+                                   OutputDirectory = "C:\\swagger\\output\\_test",
                                    CodeGenerator = "Test",
                                    Namespace = "Agoda.SAPI.Client"
                                };
