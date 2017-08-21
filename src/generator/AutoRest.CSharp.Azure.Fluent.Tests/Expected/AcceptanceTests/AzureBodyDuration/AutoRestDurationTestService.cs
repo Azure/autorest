@@ -8,9 +8,10 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
+namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDuration
 {
     using Fixtures.Azure;
+    using Fixtures.Azure.Fluent;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Microsoft.Rest.Serialization;

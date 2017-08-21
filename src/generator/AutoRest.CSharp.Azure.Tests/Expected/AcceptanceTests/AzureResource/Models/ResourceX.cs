@@ -8,11 +8,12 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource.Models
+namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
     using Fixtures.Azure;
-    using Fixtures.Azure.Fluent;
-    using Fixtures.Azure.Fluent.AcceptanceTestsAzureResource;
+    using Fixtures.Azure.AcceptanceTestsAzureResource;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Azure;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -22,24 +23,24 @@ namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource.Models
     /// Some resource
     /// <see href="http://tempuri.org" />
     /// </summary>
-    public partial class ResourceInner
+    public partial class ResourceX : IResource
     {
         /// <summary>
-        /// Initializes a new instance of the ResourceInner class.
+        /// Initializes a new instance of the ResourceX class.
         /// </summary>
-        public ResourceInner()
+        public ResourceX()
         {
           CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the ResourceInner class.
+        /// Initializes a new instance of the ResourceX class.
         /// </summary>
         /// <param name="id">Resource Id</param>
         /// <param name="type">Resource Type</param>
         /// <param name="location">Resource Location</param>
         /// <param name="name">Resource Name</param>
-        public ResourceInner(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string))
+        public ResourceX(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string))
         {
             Id = id;
             Type = type;

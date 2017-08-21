@@ -8,9 +8,10 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
+namespace Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;

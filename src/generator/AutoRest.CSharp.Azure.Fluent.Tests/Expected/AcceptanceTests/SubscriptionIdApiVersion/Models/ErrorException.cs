@@ -8,10 +8,11 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
+namespace Fixtures.Azure.Fluent.AcceptanceTestsSubscriptionIdApiVersion.Models
 {
     using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
+    using Fixtures.Azure.Fluent;
+    using Fixtures.Azure.Fluent.AcceptanceTestsSubscriptionIdApiVersion;
     using Microsoft.Rest;
 
     /// <summary>

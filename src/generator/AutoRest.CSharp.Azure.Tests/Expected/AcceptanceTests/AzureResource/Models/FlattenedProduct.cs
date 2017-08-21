@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
     using System.Linq;
 
     [JsonTransformation]
-    public partial class FlattenedProduct : Resource
+    public partial class FlattenedProduct : ResourceX
     {
         /// <summary>
         /// Initializes a new instance of the FlattenedProduct class.

@@ -34,7 +34,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='resourceArray'>
             /// External Resource as an Array to put
             /// </param>
-            public static void PutArray(this IAutoRestResourceFlatteningTestServiceClient operations, IList<Resource> resourceArray = default(IList<Resource>))
+            public static void PutArray(this IAutoRestResourceFlatteningTestServiceClient operations, IList<ResourceX> resourceArray = default(IList<ResourceX>))
             {
                 operations.PutArrayAsync(resourceArray).GetAwaiter().GetResult();
             }
@@ -52,7 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutArrayAsync(this IAutoRestResourceFlatteningTestServiceClient operations, IList<Resource> resourceArray = default(IList<Resource>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutArrayAsync(this IAutoRestResourceFlatteningTestServiceClient operations, IList<ResourceX> resourceArray = default(IList<ResourceX>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.PutArrayWithHttpMessagesAsync(resourceArray, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }

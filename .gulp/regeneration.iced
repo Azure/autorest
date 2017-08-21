@@ -344,6 +344,7 @@ task 'regenerate-csazure', '', ['regenerate-csazurecomposite','regenerate-csazur
   mappings = Object.assign({
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
+  mappings['AcceptanceTests/AzureResource'] = 'azure-resource-x.json'
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
     'inputBaseDir': 'src/dev/TestServer/swagger',
@@ -368,7 +369,7 @@ task 'regenerate-csazurefluent', '', ['regenerate-csazurefluentcomposite','regen
     'language': 'csharp',
     'azureArm': true,
     'fluent': true,
-    'nsPrefix': 'Fixtures.Azure',
+    'nsPrefix': 'Fixtures.Azure.Fluent',
     'flatteningThreshold': '1'
   },done
   return null
@@ -454,7 +455,7 @@ task 'regenerate-csazureallsync', '', (done) ->
     'outputDir': 'Expected',
     'language': 'csharp',
     'azureArm': true,
-    'nsPrefix': 'Fixtures',
+    'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
   },done
@@ -472,7 +473,7 @@ task 'regenerate-csazurefluentallsync', '', (done) ->
     'language': 'csharp',
     'azureArm': true,
     'fluent': true,
-    'nsPrefix': 'Fixtures',
+    'nsPrefix': 'Fixtures.Azure.Fluent',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
   },done
@@ -489,7 +490,7 @@ task 'regenerate-csazurenosync', '', (done) ->
     'outputDir': 'Expected',
     'language': 'csharp',
     'azureArm': true,
-    'nsPrefix': 'Fixtures',
+    'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1',
     'syncMethods': 'none'
   },done
@@ -507,7 +508,7 @@ task 'regenerate-csazurefluentnosync', '', (done) ->
     'language': 'csharp',
     'azureArm': true,
     'fluent': true,
-    'nsPrefix': 'Fixtures',
+    'nsPrefix': 'Fixtures.Azure.Fluent',
     'flatteningThreshold': '1',
     'syncMethods': 'none'
   },done
@@ -537,7 +538,7 @@ task 'regenerate-csazurecomposite', '', (done) ->
     'outputDir': 'Expected',
     'language': 'csharp',
     'azureArm': true,
-    'nsPrefix': 'Fixtures',
+    'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1',
     'override-info.version': "1.0.0",
     'override-info.title': "Azure Composite Model",
@@ -555,7 +556,7 @@ task 'regenerate-csazurefluentcomposite', '', (done) ->
     'language': 'csharp',
     'azureArm': true,
     'fluent': true,
-    'nsPrefix': 'Fixtures',
+    'nsPrefix': 'Fixtures.Azure.Fluent',
     'flatteningThreshold': '1',
     'override-info.version': "1.0.0",
     'override-info.title': "Azure Composite Model",

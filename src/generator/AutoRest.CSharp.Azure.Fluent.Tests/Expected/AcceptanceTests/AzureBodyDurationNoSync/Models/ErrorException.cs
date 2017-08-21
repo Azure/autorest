@@ -8,9 +8,11 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync.Models
+namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDurationNoSync.Models
 {
-    using Fixtures.AcceptanceTestsAzureBodyDurationNoSync;
+    using Fixtures.Azure;
+    using Fixtures.Azure.Fluent;
+    using Fixtures.Azure.Fluent.AcceptanceTestsAzureBodyDurationNoSync;
     using Microsoft.Rest;
 
     /// <summary>

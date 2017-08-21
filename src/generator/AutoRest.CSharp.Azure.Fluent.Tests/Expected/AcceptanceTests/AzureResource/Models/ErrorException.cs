@@ -8,10 +8,11 @@
 // regenerated.
 // </auto-generated>
 
-namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
+namespace Fixtures.Azure.Fluent.AcceptanceTestsAzureResource.Models
 {
     using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsAzureResource;
+    using Fixtures.Azure.Fluent;
+    using Fixtures.Azure.Fluent.AcceptanceTestsAzureResource;
     using Microsoft.Rest;
 
     /// <summary>
