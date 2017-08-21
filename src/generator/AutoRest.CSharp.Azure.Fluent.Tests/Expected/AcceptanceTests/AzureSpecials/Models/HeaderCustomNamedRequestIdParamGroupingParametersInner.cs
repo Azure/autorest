@@ -17,8 +17,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
     using System.Linq;
 
     /// <summary>
-    /// Additional parameters for the Header_CustomNamedRequestIdParamGrouping
-    /// operation.
+    /// Additional parameters for CustomNamedRequestIdParamGrouping operation.
     /// </summary>
     public partial class HeaderCustomNamedRequestIdParamGroupingParametersInner
     {

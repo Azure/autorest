@@ -3,77 +3,21 @@
 // 
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace AutoRest.Core.Utilities
 {
-    public class Fixable
-    {
-        internal static Dictionary<Type, JsonConverter> Converters = new Dictionary<Type, JsonConverter>();
-
-        public bool IsFixed { get; protected set; }
-        internal virtual bool ShouldSerialize => false;
-    }
-
     [DebuggerDisplay("{DebuggerValue,nq}")]
-    public class Fixable<T> : Fixable, ICopyFrom<T>, ICopyFrom<Fixable<T>>
+    public class Fixable<T> : ICopyFrom<T>, ICopyFrom<Fixable<T>>
     {
+        [JsonProperty("fixed")]
+        public bool IsFixed { get; protected set; }
+
+        [JsonIgnore]
         private string DebuggerValue => IsFixed || (OnGet == null) ? $"\"{Value}\"" : $"\"{Value}\" (#:\"{_value}\")";
-
-        static Fixable()
-        {
-            // make sure there is a JSON converter for this Fixable<T>
-            Converters.Add(typeof(Fixable<T>), new Converter());
-        }
-
-        internal override bool ShouldSerialize => null != _value;
-
-
-        public class Converter : JsonConverter
-        {
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-            {
-                var v = value as Fixable<T>;
-                (ReferenceEquals(v, null) ? new JObject() : JToken.FromObject(v._value)).WriteTo(writer);
-            }
-
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-                JsonSerializer serializer)
-            {
-                if (reader.TokenType == JsonToken.Null)
-                {
-                    return null;
-                }
-
-                var jtoken = JToken.Load(reader);
-
-                if (jtoken == null)
-                {
-                    return null;
-                }
-                var target = existingValue as Fixable<T>;
-                if (!ReferenceEquals(target, null))
-                {
-                    if (reader.Path[0] != '#')
-                    {
-                        target.FixedValue = jtoken.Value<T>();
-                    }
-                    else
-                    {
-                        target.Value = jtoken.Value<T>();
-                    }
-                }
-                return existingValue;
-            }
-
-            public override bool CanConvert(Type objectType) => typeof(Fixable<T>).IsAssignableFrom(objectType);
-        }
 
         private T _value;
         public event Func<T, T> OnGet;
@@ -216,6 +160,7 @@ namespace AutoRest.Core.Utilities
             return value;
         }
 
+        [JsonIgnore]
         public T Value
         {
             get
@@ -233,8 +178,10 @@ namespace AutoRest.Core.Utilities
             }
         }
 
-        public T RawValue => _value;
+        [JsonProperty("raw")]
+        public T RawValue { get => _value; set => _value = value; }
 
+        [JsonIgnore]
         public T FixedValue
         {
             get { return _value; }

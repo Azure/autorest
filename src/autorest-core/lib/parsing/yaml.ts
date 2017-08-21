@@ -7,7 +7,7 @@ import { EnhancedPosition } from "../ref/source-map";
 import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, ResolveAnchorRef } from "../ref/yaml";
 import { JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { IndexToPosition } from "./text-utility";
-import { DataHandleRead } from "../data-store/data-store";
+import { DataHandle } from "../data-store/data-store";
 
 
 /**
@@ -118,14 +118,14 @@ export function ReplaceNode(yamlAstRoot: YAMLNode, target: YAMLNode, value: YAML
 /**
  * Resolves the text position of a JSON path in raw YAML.
  */
-export function ResolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath): EnhancedPosition {
+export function ResolvePath(yamlFile: DataHandle, jsonPath: JsonPath): EnhancedPosition {
   //let node = (await (await yamlFile.ReadMetadata()).resolvePathCache)[stringify(jsonPath)];
   const yamlAst = yamlFile.ReadYamlAst();
   const node = ResolveRelativeNode(yamlAst, yamlAst, jsonPath);
   return CreateEnhancedPosition(yamlFile, jsonPath, node);
 }
 
-export function CreateEnhancedPosition(yamlFile: DataHandleRead, jsonPath: JsonPath, node: YAMLNode): EnhancedPosition {
+export function CreateEnhancedPosition(yamlFile: DataHandle, jsonPath: JsonPath, node: YAMLNode): EnhancedPosition {
   const startIdx = jsonPath.length === 0 ? 0 : node.startPosition;
   const endIdx = node.endPosition;
   const startPos = IndexToPosition(yamlFile, startIdx);

@@ -9,7 +9,7 @@ namespace AutoRest.Core.Logging
     public enum Category
     {
         Debug,
-        Info,
+        Information,
         Warning,
         Error,
         Fatal

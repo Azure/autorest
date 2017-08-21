@@ -60,7 +60,7 @@ namespace AutoRest.Go.Model
 
         public override bool IsClientProperty => base.IsClientProperty == true && !IsAPIVersion;
 
-        public virtual bool IsAPIVersion => SerializedName.Value.IsApiVersion();
+        public virtual bool IsAPIVersion => SerializedName.IsApiVersion();
 
         public virtual bool IsMethodArgument => !IsClientProperty && !IsAPIVersion;
 
@@ -73,7 +73,7 @@ namespace AutoRest.Go.Model
         {
             return IsAPIVersion
                      ? AzureExtensions.ApiVersion
-                     : SerializedName.Value;
+                     : SerializedName;
         }
 
         public bool RequiresUrlEncoding()

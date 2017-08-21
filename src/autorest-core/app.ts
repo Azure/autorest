@@ -17,7 +17,8 @@ import { ShallowCopy } from "./lib/source-map/merging";
 import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
-import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
+import { rmdir } from "@microsoft.azure/async-io"
+import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
@@ -38,7 +39,7 @@ async function legacyMain(autorestArgs: string[]): Promise<number> {
   // generate virtual config file
   const currentDirUri = CreateFolderUri(currentDirectory());
   const dataStore = new DataStore();
-  const config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(x => true /*unsafe*/), autorestArgs);
+  const config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(new RealFileSystem()), autorestArgs);
 
   // autorest init
   if (autorestArgs[0] === "init") {
@@ -81,7 +82,7 @@ ${Stringify(config).replace(/^---\n/, "")}
   const view = await api.view;
   let outstanding: Promise<void> = Promise.resolve();
   api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
-  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(async () => { try { await ClearFolder(folder); } catch (e) { } }));
+  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(async () => { try { await rmdir(folder); } catch (e) { } }));
   subscribeMessages(api, () => { });
 
   // warn about `--` arguments
@@ -234,9 +235,10 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   const clearFolders: string[] = [];
   api.GeneratedFile.Subscribe((_, artifact) => artifacts.push(artifact));
   api.ClearFolder.Subscribe((_, folder) => clearFolders.push(folder));
-  const config = (await api.view);
 
   try {
+    const config = (await api.view);
+
     // maybe a resource schema batch process
     if (config["resource-schema-batch"]) {
       return await resourceSchemaBatch(api);
@@ -252,21 +254,24 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
     }
     else {
       const result = await api.Process().finish;
-      // Just regular ol' AutoRest!
-      if (result != true) {
+      if (result !== true) {
         throw result;
       }
     }
 
     // perform file system operations.
     for (const folder of clearFolders) {
-      try { await ClearFolder(folder); } catch (e) { }
+      try { await rmdir(folder); } catch (e) { }
     }
     for (const artifact of artifacts) {
       await WriteString(artifact.uri, artifact.content);
     }
   }
   catch (e) {
+    api.Message.Dispatch({
+      Channel: Channel.Fatal,
+      Text: e
+    });
     exitcode = exitcode || 1;
   }
 

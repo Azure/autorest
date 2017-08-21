@@ -11,7 +11,7 @@
 'use strict';
 
 /**
- * Additional parameters for the Paging_getOdataMultiplePages operation.
+ * Additional parameters for getOdataMultiplePages operation.
  *
  */
 class PagingGetOdataMultiplePagesOptions {

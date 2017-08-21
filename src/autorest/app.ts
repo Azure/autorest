@@ -16,13 +16,6 @@ import * as semver from "semver";
 // Or rather left me looking in the wrong place for a file not found error on "C:\Users\jobader.autorest\x\y\z" where the problem was really in "z"
 enhanceConsole();
 
-const rootFolder: string = join(homedir(), ".autorest");
-const dotnetFolder: string = join(homedir(), ".dotnet");
-
-const corePackage = "@microsoft.azure/autorest-core"; // autorest-core"
-const minimumVersion = "^2.0.0"; // the minimum version of the core package required.
-const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder);
-
 const pkgVersion: string = require(`${__dirname}/../package.json`).version;
 
 // heavy customization, restart from scratch
@@ -94,11 +87,31 @@ const args = cli
     type: "boolean",
     group: "### Installation",
   })
+  .option("autorest.home", {
+    alias: ["home"],
+    describe: `overrides the home folder where autorest and language runtimes are installed (defaults to ${homedir()}`,
+    type: "string",
+    group: "### Installation",
+  })
   .argv;
+
+const preview: boolean = args.preview;
+const home: string = args.home || process.env["autorest.home"] || homedir();
+process.env["autorest.home"] = home;
+console.trace(`Autorest Home folder: ${process.env["autorest.home"]}`);
+const rootFolder: string = join(home, ".autorest");
+const dotnetFolder: string = join(home, ".dotnet");
+
+const basePkgVersion = pkgVersion.indexOf("-") > -1 ? pkgVersion.substring(0, pkgVersion.indexOf("-")) : pkgVersion;
+const maxPkgVersion = `${semver.major(basePkgVersion) + 1}.0.0`
+
+const corePackage = "@microsoft.azure/autorest-core"; // autorest-core"
+const versionRange = preview ? `>=${basePkgVersion}-any <${maxPkgVersion}` : `>=${basePkgVersion} <${maxPkgVersion}`; // the version range of the core package required.
+const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder);
 
 let currentVersion: Extension = null;
 const frameworkVersion: string = null;
-const preview: boolean = args.preview;
+
 let requestedVersion: string = args.version || "latest-installed";
 const showInfo: boolean = args.autorest["show-info"] || false;
 const listAvailable: boolean = args.autorest["list-available"] || false;
@@ -128,12 +141,9 @@ const availableVersions = new LazyPromise(async () => {
   if (await networkEnabled) {
     try {
       const vers = (await (await extensionManager).getPackageVersions(corePackage)).sort((b, a) => semver.compare(a, b));
-      if (preview) {
-        return vers;
-      }
       const result = new Array<string>();
       for (const ver of vers) {
-        if (!semver.prerelease(ver)) {
+        if (semver.satisfies(ver, versionRange)) {
           result.push(ver);
         }
       }
@@ -183,7 +193,7 @@ async function main() {
     process.exit(0);
   }
 
-  console.info(`Network Enabled: ${await networkEnabled}`);
+  console.trace(`Network Enabled: ${await networkEnabled}`);
 
   try {
     await asyncIO.mkdir(rootFolder);
@@ -280,7 +290,7 @@ async function main() {
       }
 
       // this will throw if there is an issue with installing the extension.
-      console.log(`**Installing package** ${corePackage}@${requestedVersion}\n[This will take a few moments...]`);
+      console.trace(`**Installing package** ${corePackage}@${requestedVersion}\n[This will take a few moments...]`);
 
       const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
       const extension = await (await extensionManager).installPackage(pkg, force, 5 * 60 * 1000, installer => installer.Message.Subscribe((s, m) => { console.trace(`Installer: ${m}`); }));

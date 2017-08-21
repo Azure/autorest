@@ -13,6 +13,7 @@ export { ConfigurationView } from "./configuration";
 import { Message, Channel } from "./message";
 import * as Constants from "./constants";
 import { Artifact } from "./artifact";
+import { homedir } from "os"
 
 export class AutoRest extends EventEmitter {
   /**
@@ -120,6 +121,8 @@ export class AutoRest extends EventEmitter {
    */
   public constructor(private fileSystem?: IFileSystem, public configFileOrFolderUri?: string) {
     super();
+    // ensure the environment variable for the home folder is set.
+    process.env["autorest.home"] = process.env["autorest.home"] || homedir();
   }
 
   public async RegenerateView(includeDefault: boolean = false): Promise<ConfigurationView> {

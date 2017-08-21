@@ -8,9 +8,9 @@
       "name": "run tests",
       "program": "${workspaceRoot}/src/autorest-core/node_modules/mocha/bin/_mocha",
       "args": [
-        "test",
+        "dist/test",
         "-g",
-        "TestConfiguration"
+        "blaming"
       ],
       "cwd": "${workspaceRoot}/src/autorest-core"
     },
@@ -37,6 +37,12 @@
         "C:/work/github/azure-rest-api-specs/profile/all.md"
       ],
       "cwd": "${workspaceRoot}"
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
     }
   ]
 }

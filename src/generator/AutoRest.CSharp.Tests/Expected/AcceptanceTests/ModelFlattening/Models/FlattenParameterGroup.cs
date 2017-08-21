@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     using System.Linq;
 
     /// <summary>
-    /// Additional parameters for the PutSimpleProductWithGrouping operation.
+    /// Additional parameters for PutSimpleProductWithGrouping operation.
     /// </summary>
     [JsonTransformation]
     public partial class FlattenParameterGroup

@@ -8,7 +8,7 @@ import { EnhancedPosition, Mappings, SmartPosition } from "../ref/source-map";
 import { Descendants, ToAst } from "../ref/yaml";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import * as yaml from "../parsing/yaml";
-import { DataHandleRead } from "../data-store/data-store";
+import { DataHandle } from "../data-store/data-store";
 
 // for carrying over rich information into the realm of line/col based source maps
 // convention: <original name (contains no `nameWithPathSeparator`)>\n(<path>)
@@ -36,7 +36,7 @@ export function EncodeEnhancedPositionInName(name: string | undefined, pos: Enha
   return (name || "") + enhancedPositionSeparator + JSON.stringify(pos, null, 2) + enhancedPositionEndMark;
 }
 
-export function CompilePosition(position: SmartPosition, yamlFile: DataHandleRead): EnhancedPosition {
+export function CompilePosition(position: SmartPosition, yamlFile: DataHandle): EnhancedPosition {
   if (!(position as EnhancedPosition).line) {
     if ((position as any).path) {
       return yaml.ResolvePath(yamlFile, (position as any).path);
@@ -48,9 +48,9 @@ export function CompilePosition(position: SmartPosition, yamlFile: DataHandleRea
   return position as EnhancedPosition;
 }
 
-export function Compile(mappings: Mappings, target: sourceMap.SourceMapGenerator, yamlFiles: DataHandleRead[] = []): void {
+export function Compile(mappings: Mappings, target: sourceMap.SourceMapGenerator, yamlFiles: DataHandle[] = []): void {
   // build lookup
-  const yamlFileLookup: { [key: string]: DataHandleRead } = {};
+  const yamlFileLookup: { [key: string]: DataHandle } = {};
   for (const yamlFile of yamlFiles) {
     yamlFileLookup[yamlFile.key] = yamlFile;
   }

@@ -624,10 +624,16 @@ task 'regenerate-ars', '', (done) ->
   return null
 
 task 'regenerate-samples', '', (done) ->
+  count = 0
   source 'Samples/*/**/readme.md'
     .pipe foreach (each,next)->
-      autorest [each.path, "--clear-output-folder"]
+      count++
+      autorest [each.path]
         , (code,stdout,stderr) ->
+          setTimeout () => 
+            count--
+            done() if( count == 0 ) 
+          , 100
           outputFolder = path.join(each.path, "../shell")
           mkdir outputFolder if !(test "-d", outputFolder)
           ShellString(code).to(path.join(outputFolder, "code.txt"))
@@ -640,14 +646,23 @@ task 'regenerate-samples', '', (done) ->
             .forEach((file) -> 
               sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
               sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
+              sed "-i", /mem:\/\/\/[^: ]*/g, "mem", file                        # memory URIs (depend on timing)
               (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file)   # minify exception stack traces
               (sort file).to(file) if file.endsWith("stdout.txt") || file.endsWith("stderr.txt")
             )
+          
+          (find path.join(each.path, ".."))
+            .filter((file) -> file.match(/.(yaml)$/))
+            .forEach((file) -> 
+              sed "-i", /.*autorest[a-zA-Z0-9]*.src.*/ig, "", file  # source file names
+            )
+
           next null
         , true # don't fail on failures (since we wanna record them)
+      return null;
   return null
 
-task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], (done) ->
+task 'regenerate', "regenerate expected code for tests", ['reset'], (done) ->
   # remove the installed autorest so that it doesn't use an old one.
   rmdir "#{os.homedir()}/.autorest" , ->
     run ['regenerate-ars',
@@ -670,21 +685,7 @@ task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], 
 
 path = require('path')
 
-task 'regenerate-delete', '', (done)->
-  rm "-rf",
-    'src/generator/AutoRest.CSharp.Tests/Expected'
-    'src/generator/AutoRest.CSharp.Azure.Tests/Expected'
-    'src/generator/AutoRest.CSharp.Azure.Fluent.Tests/Expected'
-    'src/generator/AutoRest.Go.Tests/src/tests/generated'
-    'src/generator/AutoRest.Java.Tests/src/main/java'
-    'src/generator/AutoRest.Java.Azure.Tests/src/main/java'
-    'src/generator/AutoRest.Java.Azure.Fluent.Tests/src/main/java'
-    'src/generator/AutoRest.NodeJS.Tests/Expected'
-    'src/generator/AutoRest.NodeJS.Azure.Tests/Expected'
-    'src/generator/AutoRest.Python.Tests/Expected'
-    'src/generator/AutoRest.Python.Azure.Tests/Expected'
-    'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Expected'
-  done()
+
 
 task 'autorest-preview-build', '', ->
   exec "dotnet build #{basefolder}/src/dev/AutoRest.Preview/"

@@ -47,11 +47,6 @@ namespace AutoRest.Swagger.Tests
             }
         }
 
-        public static void Null(Fixable<string> str)
-        {
-            Assert.Null(str.Value);
-        }
-
         [Fact]
         public void TestcodeModelFromSimpleSwagger()
         {

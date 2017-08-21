@@ -558,7 +558,7 @@ namespace AutoRest.Ruby
             }
             else
             {
-                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} is not a supported primary Type for {1}.", primary.KnownPrimaryType, primary.SerializedName));
+                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} is not a supported primary Type for {1}.", primary.KnownPrimaryType, primary.Name));
             }
 
             return builder.ToString();
@@ -726,7 +726,7 @@ namespace AutoRest.Ruby
                 for (var i = 0; i < composedPropertyList.Count; i++)
                 {
                     var prop = composedPropertyList[i];
-                    var serializedPropertyName = prop.SerializedName.Value;
+                    var serializedPropertyName = prop.SerializedName;
 
                     if (i != composedPropertyList.Count - 1)
                     {

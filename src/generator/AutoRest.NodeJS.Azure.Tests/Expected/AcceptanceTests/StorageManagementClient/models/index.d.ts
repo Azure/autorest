@@ -252,22 +252,6 @@ export interface StorageAccountKeys {
 
 /**
  * @class
- * Initializes a new instance of the StorageAccountListResult class.
- * @constructor
- * The list storage accounts operation response.
- *
- * @member {array} [value] Gets the list of storage accounts and their
- * properties.
- * @member {string} [nextLink] Gets the link to the next set of results.
- * Currently this will always be empty as the API does not support pagination.
- */
-export interface StorageAccountListResult {
-  value?: StorageAccount[];
-  nextLink?: string;
-}
-
-/**
- * @class
  * Initializes a new instance of the StorageAccountUpdateParameters class.
  * @constructor
  * The parameters to update on the account.
@@ -362,22 +346,6 @@ export interface UsageListResult {
  */
 export interface SubResource extends BaseResource {
   id?: string;
-}
-
-/**
- * @class
- * Initializes a new instance of the StorageAccountListResult class.
- * @constructor
- * The list storage accounts operation response.
- *
- * @member {array} [value] Gets the list of storage accounts and their
- * properties.
- * @member {string} [nextLink] Gets the link to the next set of results.
- * Currently this will always be empty as the API does not support pagination.
- */
-export interface StorageAccountListResult {
-  value?: StorageAccount[];
-  nextLink?: string;
 }
 
 

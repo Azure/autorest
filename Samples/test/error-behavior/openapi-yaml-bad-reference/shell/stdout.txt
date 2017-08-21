@@ -1,2 +1,4 @@
-INFORMATION: Generating client model from swagger model.
+(C) 2017 **Microsoft Corporation.**  
+# AutoRest code generation utility.
+https://aka.ms/autorest
 Process() Cancelled due to exception : Plugin modeler reported failure.
