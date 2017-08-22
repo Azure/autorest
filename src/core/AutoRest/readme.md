@@ -11,49 +11,6 @@ scope-transform-string:
   is-object: false
 ```
 
-## C#
-
-``` yaml
-pipeline:
-  csharp/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: csharp
-  csharp/commonmarker:
-    input: modeler
-    output-artifact: code-model-v1
-  csharp/cm/transform:
-    input: commonmarker
-    output-artifact: code-model-v1
-  csharp/cm/emitter:
-    input: transform
-    scope: scope-cm/emitter
-  csharp/generate:
-    plugin: csharp
-    input: 
-      - swagger-document/identity
-      - cm/transform
-    output-artifact: source-file-csharp
-  csharp/simplifier:
-    plugin: csharp-simplifier
-    input: generate
-    output-artifact: source-file-csharp
-  csharp/transform:
-    input: simplifier
-    output-artifact: source-file-csharp
-    scope: scope-transform-string
-  csharp/emitter:
-    input: transform
-    scope: scope-csharp/emitter
-
-scope-csharp/emitter:
-  input-artifact: source-file-csharp
-  output-uri-expr: $key
-
-output-artifact:
-- source-file-csharp
-```
-
 ## Go
 
 ``` yaml
@@ -311,33 +268,4 @@ scope-azureresourceschema/emitter:
   output-uri-expr: $key
 output-artifact:
 - source-file-azureresourceschema
-```
-
-## JSON-RPC client
-
-``` yaml
-pipeline:
-  jsonrpcclient/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: jsonrpcclient
-  jsonrpcclient/generate:
-    plugin: jsonrpcclient
-    input: 
-      - swagger-document/identity
-      - modeler
-    output-artifact: source-file-jsonrpcclient
-  jsonrpcclient/transform:
-    input: generate
-    output-artifact: source-file-jsonrpcclient
-    scope: scope-transform-string
-  jsonrpcclient/emitter:
-    input: transform
-    scope: scope-jsonrpcclient/emitter
-
-scope-jsonrpcclient/emitter:
-  input-artifact: source-file-jsonrpcclient
-  output-uri-expr: $key
-output-artifact:
-- source-file-jsonrpcclient
 ```
