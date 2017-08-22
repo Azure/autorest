@@ -335,33 +335,14 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <summary>
         /// Returns a suggestion of camel case styled string based on the string passed as parameter.
         /// </summary>
+        /// <example>
+        /// <code>URI</code> becomes <code>Uri</code>
+        /// <code>SomeURIThing</code> becomes <code>SomeUriThing</code>
+        /// </example>
         /// <param name="name">String to convert to camel case style</param>
         /// <returns>A string that conforms with camel case style based on the string passed as parameter.</returns>
         public static string GetCamelCasedSuggestion(string name)
-        {
-            StringBuilder sb = new StringBuilder(name);
-            if (sb.Length > 0)
-            {
-                sb[0] = sb[0].ToString().ToLower()[0];
-            }
-            bool firstUpper = true;
-            for (int i = 1; i<name.Length; i++)
-            {
-                if (char.IsUpper(sb[i]) && firstUpper)
-                {
-                    firstUpper = false;
-                }
-                else
-                {
-                    firstUpper = true;
-                    if (char.IsUpper(sb[i]))
-                    {
-                        sb[i] = sb[i].ToString().ToLower()[0];
-                    }
-                }
-            }
-            return sb.ToString();
-        }
+            => Regex.Replace(name, @"(?<=\p{Lu})\p{Lu}+(?=\p{Lu}|\z)", s => s.Value.ToLowerInvariant());
 
         /// <summary>
         /// Returns whether a string follows camel case style, allowing for 2 consecutive upper case characters for acronyms.
