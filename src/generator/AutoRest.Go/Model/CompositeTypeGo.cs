@@ -114,6 +114,7 @@ namespace AutoRest.Go.Model
             else
             {
                 Name += elementType.Name;
+                Name += "Wrapper";
             }
 
             // add the wrapped type as a property named Value
@@ -124,6 +125,7 @@ namespace AutoRest.Go.Model
             Add(p);
 
             _wrapper = true;
+            Console.Error.WriteLine(Name.FixedValue);
         }
 
         /// <summary>
@@ -165,7 +167,7 @@ namespace AutoRest.Go.Model
 
         public string AddHTTPResponse()
         {
-            return (IsResponseType || IsPolymorphicResponse()) ?
+            return (IsResponseType || IsWrapperType) ?
                 "autorest.Response `json:\"-\"`\n" :
                 null;
         }
@@ -175,7 +177,8 @@ namespace AutoRest.Go.Model
             {
                 return (BaseModelType as CompositeTypeGo).IsPolymorphicResponse();
             }
-            return (IsPolymorphic && IsResponseType);
+            Console.Error.WriteLine("\t" + Name.FixedValue + " poly: " + IsPolymorphic + " resp: " + IsResponseType);
+            return IsPolymorphic && IsResponseType;
         }
 
         public string Fields()

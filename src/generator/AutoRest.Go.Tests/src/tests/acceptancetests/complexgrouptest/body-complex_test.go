@@ -420,7 +420,7 @@ func (s *ComplexGroupSuite) TestGetComplexPolymorphicValid(c *chk.C) {
 	var f Fish
 	err = json.Unmarshal([]byte(validPolymorphic), &f)
 	c.Assert(err, chk.IsNil)
-	f.Response = res.Response
+	// f.Response = res.Response
 	c.Assert(res, chk.DeepEquals, f)
 }
 

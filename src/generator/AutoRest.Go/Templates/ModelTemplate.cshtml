@@ -6,6 +6,11 @@
 
 @inherits AutoRest.Core.Template<AutoRest.Go.Model.CompositeTypeGo>
 
+@if (Model.HasPolymorphicFields)
+{
+@WrapComment("// ", string.Format("{0} has poly fields!", Model.Name))
+}
+
 @WrapComment("// ", string.Format("{0} is {1}", Model.Name, Model.Documentation.ToSentence()))
 @if (Model.IsPolymorphic)
 {
@@ -102,9 +107,20 @@ foreach (var st in Model.SiblingTypes)
 }
 }
 
-@if (Model.HasPolymorphicFields && !Model.IsPolymorphic) {
+@if ((Model.HasPolymorphicFields || (Model.BaseModelType != null && if (BaseModelType as CompositeTypeGo).HasPolymorphicFields)) && !Model.IsPolymorphic)
+{
 @:// UnmarshalJSON is the custom unmarshaler for @(Model.Name) struct.
 @:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) *@(Model.Name)) UnmarshalJSON(b []byte) error {
+    @if (Model.IsWrapperType)
+    {
+    @:@(Model.BaseType.Name.FixedValue.ToIdiomaticShortName()), err := unmarshal@(Model.BaseType.Name)(b)
+	@:if err != nil {
+		@:return err
+	@:}
+    @:@(Model.Name.FixedValue.ToIdiomaticShortName()).Value = @(Model.BaseType.Name.FixedValue.ToIdiomaticShortName())
+    }
+    else
+    {
 	@:var m map[string]*json.RawMessage
 	@:err := json.Unmarshal(b, &m)
 	@:if err != nil {
@@ -142,6 +158,7 @@ foreach (var st in Model.SiblingTypes)
         @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(p.Name) = &@(CodeNamerGo.Instance.GetVariableName(p.SerializedName))
         }
     @:}
+    }
     }
     @:@EmptyLine
     @:return nil
