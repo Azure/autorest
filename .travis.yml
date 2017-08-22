@@ -77,7 +77,7 @@ script:
       git clone https://github.com/Azure/autorest $arRef
       pushd $arRef
       npm install
-      gulp build
+      travis_wait 30 gulp build
 
       # REGEN using reference AutoRest
       for gen in "${gens[@]}"
