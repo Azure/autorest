@@ -146,6 +146,7 @@ namespace AutoRest.Swagger
                             Name = h.Key,
                             SerializedName = h.Key,
                             RealPath = new[] {h.Key},
+                            Extensions = h.Value.Extensions,
                             ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
                             Documentation = h.Value.Description
                         });

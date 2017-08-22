@@ -69,8 +69,8 @@ namespace AutoRest.Extensions
                     string parameterGroupName;
                     if (specifiedGroupName == null)
                     {
-                        string postfix = extensionObject.Value<string>("postfix") ?? "Parameters";
-                        parameterGroupName = methodGroupName + "-" + methodName + "-" + postfix;
+                        string postfix = extensionObject.Value<string>("postfix")?.Capitalize() ?? "Parameters";
+                        parameterGroupName = $"{methodGroupName}{methodName.Capitalize()}{postfix}";
                     }
                     else
                     {
