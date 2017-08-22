@@ -84,10 +84,10 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             {
                 attributeBuilder.Append("DateTimeStringConverter)");
             }
-            else if (IsGuid(property))
-            {
-                attributeBuilder.Append("GuidStringConverter)");
-            }
+            //else if (IsGuid(property))
+            //{
+            //    attributeBuilder.Append("GuidStringConverter)");
+            //}
             else if (IsMoney(property))
             {
                 attributeBuilder.Append("MoneyConverter");
