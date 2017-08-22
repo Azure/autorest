@@ -163,6 +163,21 @@ namespace AutoRest.Go.Model
             }
         }
 
+        public string AddHTTPResponse()
+        {
+            return (IsResponseType || IsPolymorphicResponse()) ?
+                "autorest.Response `json:\"-\"`\n" :
+                null;
+        }
+
+        public bool IsPolymorphicResponse() {
+            if (BaseIsPolymorphic && BaseModelType != null)
+            {
+                return (BaseModelType as CompositeTypeGo).IsPolymorphicResponse();
+            }
+            return (IsPolymorphic && IsResponseType);
+        }
+
         public string Fields()
         {
             AddPolymorphicPropertyIfNecessary();

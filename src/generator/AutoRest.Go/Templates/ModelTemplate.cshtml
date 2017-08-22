@@ -59,10 +59,7 @@
 else
 {
 @:type @(Model.Name) struct {
-@if (Model.IsResponseType)
-{
-    @:autorest.Response `json:"-"`
-}
+    @(Model.AddHTTPResponse())
     @(Model.Fields())
 @:}
 }
