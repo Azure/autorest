@@ -21,7 +21,7 @@ namespace AutoRest.Php.SwaggerBuilder
 
         public IEnumerable<string> Enum { get; }
 
-        public IEnumerable<Property<SchemaObject>> Properties { get; }
+        public IEnumerable<Property<PropertyObject>> Properties { get; }
 
         public SchemaObject AdditionalProperties { get; }
 
@@ -70,7 +70,7 @@ namespace AutoRest.Php.SwaggerBuilder
                 .Where(p => p.SerializedName != null);
             var swaggerProperties = properties.Select(p => Json.Property(
                 p.SerializedName,
-                Create(p.ModelType)));
+                PropertyObject.Create(p)));
             return new SchemaObject(
                 properties: swaggerProperties,
                 additionalProperties: additionalProperties == null 
@@ -221,7 +221,7 @@ namespace AutoRest.Php.SwaggerBuilder
             string type = null,
             string format = null,
             IEnumerable<string> @enum = null,
-            IEnumerable<Property<SchemaObject>> properties = null,
+            IEnumerable<Property<PropertyObject>> properties = null,
             SchemaObject additionalProperties = null,
             SchemaObject items = null,
             IEnumerable<string> required = null)
