@@ -1,5 +1,6 @@
 # <img align="center" src="./docs/images/logo.png">  AutoRest <br>[![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest)
 
+
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
 
 
@@ -83,15 +84,12 @@ Start by reading the documentation for using AutoRest:
 Get yourself up and coding in AutoRest
 
 - [Developer Workstation Requirements](./docs/developer/workstation.md) - what do you need to install to start working with the AutoRest code
-- [Compiling AutoRest](./docs/developer/compiling-autorest.md) - compiling/testing AutoRest using the build scripts 
+- [Compiling AutoRest](./docs/developer/compiling-autorest.md) - compiling/testing AutoRest using the build scripts
+- [Debugging AutoRest](./docs/developer/debugging-autorest.md) - debugging AutoRest and its components
 
-Some information about the internal AutoRest architecture (may need updating!):
+Some information about the internal architecture:
+- [Architecture Overview](./docs/developer/architecture/) - Components that make up AutoRest itself, extension model, client runtimes, etc.
 - [Developer Guide](./docs/developer/guide/) - Notes on developing with AutoRest
-- [AutoRest and ClientRuntimes](./docs/developer/architecture/Autorest-and-Clientruntimes.md) - about the client runtime requirements for AutoRest
-- [The `CodeModel` data model](./docs/developer/architecture/CodeModel-and-the-Language-specific-Generator-Transformer-Namer.md) and the Language-specific Generator/Transformer/Namer
-- [`Fixable<T>` implementation](./docs/developer/architecture/Fixable-T----When-a-value-is-both-calculated-and-or-fixed.md) - When a value is both calculated and/or fixed
-- [LODIS](./docs/developer/architecture/Least-Offensive-Dependency-Injection-System.md) - The Least Offensive Dependency Injection System
-- [Name Disambiguation](./docs/developer/architecture/Name-Disambiguation.md) - how names don't collide in code generation.
 - [Validation Rules & Linting](./docs/developer/validation-rules/readme.md) - about the validation rules in AutoRest
 
 ---

@@ -68,7 +68,6 @@ namespace AutoRest.Extensions.Azure
                 {
                     throw new ArgumentNullException("codeModel");
                 }
-               
 
                 // This extension from general extensions must be run prior to Azure specific extensions.
                 ProcessParameterizedHost(codeModel);
@@ -111,7 +110,7 @@ namespace AutoRest.Extensions.Azure
                 }
                 else
                 {
-                    Logger.Instance.Log(Category.Info, Resources.HeadMethodPossibleIncorrectSpecification, method.Name);
+                    Logger.Instance.Log(Category.Warning, Resources.HeadMethodPossibleIncorrectSpecification, method.Name);
                 }
             }
         }
@@ -452,7 +451,7 @@ namespace AutoRest.Extensions.Azure
             
             var parameterGroupType = New <CompositeType>(parameterGroupName, new
             {
-                Documentation = "Additional parameters for the " + method.Name + " operation."
+                Documentation = "Additional parameters for " + SwaggerModeler.GetMethodNameFromOperationId(method.Name) + " operation."
             });
 
             //Add to the service client
@@ -494,7 +493,7 @@ namespace AutoRest.Extensions.Azure
                             bool? extensionObject = parameter.Extensions[ClientRequestIdExtension] as bool?;
                             if (extensionObject != null && extensionObject.Value)
                             {
-                                return parameter.SerializedName.Value;
+                                return parameter.SerializedName;
                             }
                             return null;
                         })

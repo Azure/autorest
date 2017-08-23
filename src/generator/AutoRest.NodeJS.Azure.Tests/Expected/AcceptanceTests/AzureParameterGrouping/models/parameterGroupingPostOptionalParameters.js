@@ -11,7 +11,7 @@
 'use strict';
 
 /**
- * Additional parameters for the ParameterGrouping_postOptional operation.
+ * Additional parameters for postOptional operation.
  *
  */
 class ParameterGroupingPostOptionalParameters {

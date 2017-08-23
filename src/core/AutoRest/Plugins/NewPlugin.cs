@@ -9,15 +9,6 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Core.Logging;
 using System.Linq;
 
-static class Channel
-{
-    public static readonly string Information = "information";
-    public static readonly string Warning = "warning";
-    public static readonly string Error = "error";
-    public static readonly string Debug = "debug";
-    public static readonly string Verbose = "verbose";
-    public static readonly string Fatal = "fatal";
-}
 // KEEP IN SYNC with message.ts
 public class SmartPosition
 {
@@ -48,19 +39,6 @@ class JsonRpcLogListener : ILogListener
         SendMessage = sendMessage;
     }
 
-    private string GetChannel(Category cat)
-    {
-        switch (cat)
-        {
-            case Category.Debug: return Channel.Debug;
-            case Category.Error: return Channel.Error;
-            case Category.Fatal: return Channel.Fatal;
-            case Category.Info: return Channel.Information;
-            case Category.Warning: return Channel.Warning;
-        }
-        return null;
-    }
-
     private SourceLocation[] GetSourceLocations(FileObjectPath path)
     {
         if (path == null)
@@ -82,12 +60,11 @@ class JsonRpcLogListener : ILogListener
 
     public void Log(LogMessage m)
     {
-        var message = new Message();
         SendMessage(new Message
         {
             Text = m.Message,
             Source = GetSourceLocations(m.Path),
-            Channel = GetChannel(m.Severity)
+            Channel = m.Severity.ToString().ToLowerInvariant()
         });
     }
 }
@@ -115,6 +92,19 @@ public abstract class NewPlugin :  AutoRest.Core.IHost
 
     public async Task<bool> Process()
     {
+        if (true == await this.GetValue<bool?>("debugger"))
+        {
+            if (!System.Diagnostics.Debugger.IsAttached)
+            {
+                Console.Error.WriteLine($"Waiting for debugger to attach to {GetType().Name}");
+            }
+            while (!System.Diagnostics.Debugger.IsAttached)
+            {
+                System.Threading.Thread.Sleep(100);
+                Console.Error.Write(".");
+            }
+            System.Diagnostics.Debugger.Break();
+        }
         try
         {
             using (Start)

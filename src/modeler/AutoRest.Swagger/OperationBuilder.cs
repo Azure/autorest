@@ -146,6 +146,7 @@ namespace AutoRest.Swagger
                             Name = h.Key,
                             SerializedName = h.Key,
                             RealPath = new[] {h.Key},
+                            Extensions = h.Value.Extensions,
                             ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
                             Documentation = h.Value.Description
                         });
@@ -263,9 +264,9 @@ namespace AutoRest.Swagger
                     }
                 }
 
+                CollectionFormatBuilder.OnBuildMethodParameter(method, swaggerParameter, new StringBuilder(swaggerParameter.Name));
                 var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(_swaggerModeler)).Build();
                 method.Add(parameter);
-                CollectionFormatBuilder.OnBuildMethodParameter(method, swaggerParameter, new StringBuilder(parameter.Name));
             }
         }
 

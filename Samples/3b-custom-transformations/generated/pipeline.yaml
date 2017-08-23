@@ -96,12 +96,14 @@ csharp/transform:
   pluginName: transform
   configScope:
     - csharp
+    - scope-transform-string
   inputs:
     - csharp/simplifier
 csharp/emitter:
   pluginName: emitter
   configScope:
     - csharp
+    - scope-transform-string
     - scope-csharp/emitter
   inputs:
     - csharp/transform

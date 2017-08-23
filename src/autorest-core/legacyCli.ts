@@ -5,7 +5,7 @@ import { isAbsolute } from 'path';
 *--------------------------------------------------------------------------------------------*/
 
 import { ResolveUri, GetFilenameWithoutExtension } from "./lib/ref/uri";
-import { DataStoreViewReadonly } from "./lib/data-store/data-store";
+import { DataSource } from "./lib/data-store/data-store";
 import { AutoRestConfigurationImpl } from "./lib/configuration";
 
 const regexLegacyArg = /^-[^-]/;
@@ -14,7 +14,7 @@ export function isLegacy(args: string[]): boolean {
   return args.some(arg => regexLegacyArg.test(arg));
 }
 
-async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: string, targetConfig: AutoRestConfigurationImpl): Promise<void> {
+async function ParseCompositeSwagger(inputScope: DataSource, uri: string, targetConfig: AutoRestConfigurationImpl): Promise<void> {
   const compositeSwaggerFile = await inputScope.ReadStrict(uri);
   const data = compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
   const documents = data.documents;
@@ -24,7 +24,7 @@ async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: str
   targetConfig["override-info"] = data.info;
 }
 
-export async function CreateConfiguration(baseFolderUri: string, inputScope: DataStoreViewReadonly, args: string[]): Promise<AutoRestConfigurationImpl> {
+export async function CreateConfiguration(baseFolderUri: string, inputScope: DataSource, args: string[]): Promise<AutoRestConfigurationImpl> {
   let result: AutoRestConfigurationImpl = {
     "input-file": []
   };

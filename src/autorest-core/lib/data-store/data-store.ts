@@ -43,11 +43,11 @@ type Store = { [uri: string]: Data };
  * - ensures WRITE ONCE model
  ********************************************/
 
-export abstract class DataStoreViewReadonly {
+export abstract class DataSource {
   public abstract Enum(): Promise<string[]>;
-  public abstract Read(uri: string): Promise<DataHandleRead | null>;
+  public abstract Read(uri: string): Promise<DataHandle | null>;
 
-  public async ReadStrict(uri: string): Promise<DataHandleRead> {
+  public async ReadStrict(uri: string): Promise<DataHandle> {
     const result = await this.Read(uri);
     if (result === null) {
       throw new Error(`Could not to read '${uri}'.`);
@@ -72,8 +72,8 @@ export abstract class DataStoreViewReadonly {
   }
 }
 
-export class QuickScope extends DataStoreViewReadonly {
-  public constructor(private handles: DataHandleRead[]) {
+export class QuickDataSource extends DataSource {
+  public constructor(private handles: DataHandle[]) {
     super();
   }
 
@@ -81,112 +81,32 @@ export class QuickScope extends DataStoreViewReadonly {
     return this.handles.map(x => x.key);
   }
 
-  public async Read(key: string): Promise<DataHandleRead | null> {
+  public async Read(key: string): Promise<DataHandle | null> {
     const data = this.handles.filter(x => x.key === key)[0];
     return data || null;
   }
 }
 
-export abstract class DataStoreView extends DataStoreViewReadonly {
-  public abstract get BaseUri(): string;
-
-  public abstract Write(key: string): Promise<DataHandleWrite>;
-
-  public CreateScope(name: string): DataStoreView {
-    return new DataStoreViewScope(name, this);
-  }
-
-  public AsReadonly(): DataStoreViewReadonly {
-    return this;
-  }
-}
-
-class DataStoreViewScope extends DataStoreView {
-  constructor(private name: string, private view: DataStoreView) {
-    super();
-  }
-
-  public get BaseUri(): string {
-    return ResolveUri(this.view.BaseUri, `${this.name}/`);
-  }
-
-  public Write(uri: string): Promise<DataHandleWrite> {
-    uri = ResolveUri(this.BaseUri, uri);
-    return this.view.Write(uri);
-  }
-
-  public Read(uri: string): Promise<DataHandleRead | null> {
-    uri = ResolveUri(this.BaseUri, uri);
-    if (!uri.startsWith(this.BaseUri)) {
-      throw new Error(`Cannot access '${uri}' because it is out of scope.`);
-    }
-    return this.view.Read(uri);
-  }
-
-  public async Enum(): Promise<string[]> {
-    const parentResult = await this.view.Enum();
-    return From(parentResult)
-      .Select(key => ResolveUri(this.view.BaseUri, key))
-      .Where(key => key.startsWith(this.BaseUri))
-      .Select(key => key.substr(this.BaseUri.length))
-      .ToArray();
-  }
-}
-
-class DataStoreViewReadThrough extends DataStoreViewReadonly {
+class ReadThroughDataSource extends DataSource {
   private uris: string[] = [];
+  private cache: { [uri: string]: Promise<DataHandle | null> } = {};
 
-  constructor(private storage: DataStore, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
+  constructor(private store: DataStore, private fs: IFileSystem) {
     super();
   }
 
-  public async Read(uri: string): Promise<DataHandleRead> {
-    // validation before hitting the file system or web
-    if (!this.customUriFilter(uri)) {
-      throw new Error(`Provided URI '${uri}' violated the filter`);
-    }
-
-    uri = ToRawDataUrl(uri);
-
-    // prope cache
-    const existingData = await this.storage.Read(uri);
-    if (existingData !== null) {
-      this.uris.push(uri);
-      return existingData;
-    }
-
-    // populate cache
-    const data = await ReadUri(uri);
-    const writeHandle = await this.storage.Write(uri);
-    const readHandle = await writeHandle.WriteData(data);
-    this.uris.push(uri);
-    return readHandle;
-  }
-
-  public async Enum(): Promise<string[]> {
-    return this.storage.Enum();
-  }
-}
-
-class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
-  private uris: string[] = [];
-  private cache: { [uri: string]: Promise<DataHandleRead | null> } = {};
-
-  constructor(private slave: DataStore, private fs: IFileSystem) {
-    super();
-  }
-
-  public async Read(uri: string): Promise<DataHandleRead | null> {
+  public async Read(uri: string): Promise<DataHandle | null> {
     uri = ToRawDataUrl(uri);
 
     // sync cache (inner stuff is racey!)
     if (!this.cache[uri]) {
       this.cache[uri] = (async () => {
         // probe data store
-        const existingData = await this.slave.Read(uri);
-        if (existingData !== null) {
+        try {
+          const existingData = await this.store.Read(uri);
           this.uris.push(uri);
           return existingData;
+        } catch (e) {
         }
 
         // populate cache
@@ -198,8 +118,7 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
             return null;
           }
         }
-        const writeHandle = await this.slave.Write(uri);
-        const readHandle = await writeHandle.WriteData(data);
+        const readHandle = await this.store.WriteData(uri, data);
 
         this.uris.push(uri);
         return readHandle;
@@ -210,17 +129,16 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
   }
 
   public async Enum(): Promise<string[]> {
-    return this.slave.Enum();
+    return this.uris;
   }
 }
 
-export class DataStore extends DataStoreView {
+export class DataStore {
   public static readonly BaseUri = "mem://";
   public readonly BaseUri = DataStore.BaseUri;
   private store: Store = {};
 
   public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {
-    super();
   }
 
   private ThrowIfCancelled(): void {
@@ -229,97 +147,106 @@ export class DataStore extends DataStoreView {
     }
   }
 
-  public GetReadThroughScope(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
-    return new DataStoreViewReadThrough(this, customUriFilter);
-  }
-
-  public GetReadThroughScopeFileSystem(fs: IFileSystem): DataStoreViewReadonly {
-    return new DataStoreViewReadThroughFS(this, fs);
+  public GetReadThroughScope(fs: IFileSystem): DataSource {
+    return new ReadThroughDataSource(this, fs);
   }
 
   /****************
    * Data access
    ***************/
 
-  public async Write(uri: string): Promise<DataHandleWrite> {
-    uri = ResolveUri(this.BaseUri, uri);
+  private uid = 0;
+
+  private async WriteDataInternal(uri: string, data: string, metadata: Metadata): Promise<DataHandle> {
     this.ThrowIfCancelled();
-    const setData = (data: Data) => {
-      this.ThrowIfCancelled();
-      if (this.store[uri]) {
-        throw new Error(`can only write '${uri}' once`);
-      }
-      this.store[uri] = data;
+    if (this.store[uri]) {
+      throw new Error(`can only write '${uri}' once`);
+    }
+    this.store[uri] = {
+      data: data,
+      metadata: metadata
     };
-    return new DataHandleWrite(uri, async (data, sourceMapFactory) => {
-      const storeEntry: Data = {
-        data: data,
-        metadata: <Metadata><Metadata | null>{}
-      };
-      setData(storeEntry);
 
-      // metadata
-      const result = await this.ReadStrict(uri);
-      storeEntry.metadata.sourceMap = new Lazy(() => {
-        const sourceMap = sourceMapFactory(result);
-
-        // validate
-        const inputFiles = sourceMap.sources.concat(sourceMap.file);
-        for (const inputFile of inputFiles) {
-          if (!this.store[inputFile]) {
-            throw new Error(`Source map of '${uri}' references '${inputFile}' which does not exist`);
-          }
-        }
-
-        return sourceMap;
-      });
-      storeEntry.metadata.sourceMapEachMappingByLine = new Lazy<sourceMap.MappingItem[][]>(() => {
-        const result: sourceMap.MappingItem[][] = [];
-
-        const sourceMapConsumer = new SourceMapConsumer(storeEntry.metadata.sourceMap.Value);
-
-        // const singleResult = sourceMapConsumer.originalPositionFor(position);
-        // does NOT support multiple sources :(
-        // `singleResult` has null-properties if there is no original
-
-        // get coinciding sources
-        sourceMapConsumer.eachMapping(mapping => {
-          while (result.length <= mapping.generatedLine) {
-            result.push([]);
-          }
-          result[mapping.generatedLine].push(mapping);
-        });
-
-        return result;
-      });
-      storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(uri));
-      storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(() => parseAst(data));
-      storeEntry.metadata.lineIndices = new Lazy<number[]>(() => LineIndices(data));
-      return result;
-    }, async data => {
-      setData(this.store[data.key]);
-    });
+    return this.Read(uri);
   }
 
-  public ReadStrictSync(absoluteUri: string): DataHandleRead {
+  public async WriteData(description: string, data: string, sourceMapFactory?: (self: DataHandle) => RawSourceMap): Promise<DataHandle> {
+    const uri = this.createUri(description);
+
+    // metadata
+    const metadata: Metadata = <any>{};
+    const result = await this.WriteDataInternal(uri, data, metadata);
+    metadata.sourceMap = new Lazy(() => {
+      if (!sourceMapFactory) {
+        return new SourceMapGenerator().toJSON();
+      }
+      const sourceMap = sourceMapFactory(result);
+
+      // validate
+      const inputFiles = sourceMap.sources.concat(sourceMap.file);
+      for (const inputFile of inputFiles) {
+        if (!this.store[inputFile]) {
+          throw new Error(`Source map of '${uri}' references '${inputFile}' which does not exist`);
+        }
+      }
+
+      return sourceMap;
+    });
+    metadata.sourceMapEachMappingByLine = new Lazy<sourceMap.MappingItem[][]>(() => {
+      const result: sourceMap.MappingItem[][] = [];
+
+      const sourceMapConsumer = new SourceMapConsumer(metadata.sourceMap.Value);
+
+      // const singleResult = sourceMapConsumer.originalPositionFor(position);
+      // does NOT support multiple sources :(
+      // `singleResult` has null-properties if there is no original
+
+      // get coinciding sources
+      sourceMapConsumer.eachMapping(mapping => {
+        while (result.length <= mapping.generatedLine) {
+          result.push([]);
+        }
+        result[mapping.generatedLine].push(mapping);
+      });
+
+      return result;
+    });
+    metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(uri));
+    metadata.yamlAst = new Lazy<YAMLNode>(() => parseAst(data));
+    metadata.lineIndices = new Lazy<number[]>(() => LineIndices(data));
+    return result;
+  }
+
+  private createUri(description: string): string {
+    return ResolveUri(this.BaseUri, `${this.uid++}?${encodeURIComponent(description)}`);
+  }
+
+  public get DataSink(): DataSink {
+    return new DataSink(
+      (description, data, sourceMapFactory) => this.WriteData(description, data, sourceMapFactory),
+      async (description, input) => {
+        const uri = this.createUri(description);
+        this.store[uri] = this.store[input.key];
+        return this.Read(uri);
+      }
+    );
+  }
+
+  public ReadStrictSync(absoluteUri: string): DataHandle {
     const entry = this.store[absoluteUri];
     if (entry === undefined) {
       throw new Error(`Object '${absoluteUri}' does not exist.`);
     }
-    return new DataHandleRead(absoluteUri, entry);
+    return new DataHandle(absoluteUri, entry);
   }
 
-  public async Read(uri: string): Promise<DataHandleRead | null> {
+  public async Read(uri: string): Promise<DataHandle> {
     uri = ResolveUri(this.BaseUri, uri);
     const data = this.store[uri];
     if (!data) {
-      return null;
+      throw new Error(`Could not to read '${uri}'.`);
     }
-    return new DataHandleRead(uri, data);
-  }
-
-  public async Enum(): Promise<string[]> {
-    return Object.getOwnPropertyNames(this.store);
+    return new DataHandle(uri, data);
   }
 
   public Blame(absoluteUri: string, position: SmartPosition): BlameTree {
@@ -369,30 +296,34 @@ export class DataStore extends DataStoreView {
  * - provide convenience methods
  ********************************************/
 
-export class DataHandleWrite {
-  constructor(public readonly key: string,
-    private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => RawSourceMap) => Promise<DataHandleRead>,
-    public Forward: (data: DataHandleRead) => Promise<void>) {
+export class DataSink {
+  constructor(
+    private write: (description: string, rawData: string, metadataFactory: (readHandle: DataHandle) => RawSourceMap) => Promise<DataHandle>,
+    private forward: (description: string, input: DataHandle) => Promise<DataHandle>) {
   }
 
-  public async WriteDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => RawSourceMap): Promise<DataHandleRead> {
-    return await this.write(data, sourceMapFactory);
+  public async WriteDataWithSourceMap(description: string, data: string, sourceMapFactory: (readHandle: DataHandle) => RawSourceMap): Promise<DataHandle> {
+    return await this.write(description, data, sourceMapFactory);
   }
 
-  public async WriteData(data: string, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
-    return await this.WriteDataWithSourceMap(data, readHandle => {
-      const sourceMapGenerator = new SourceMapGenerator({ file: this.key });
+  public async WriteData(description: string, data: string, mappings: Mappings = [], mappingSources: DataHandle[] = []): Promise<DataHandle> {
+    return await this.WriteDataWithSourceMap(description, data, readHandle => {
+      const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
       Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
       return sourceMapGenerator.toJSON();
     });
   }
 
-  public WriteObject<T>(obj: T, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
-    return this.WriteData(FastStringify(obj), mappings, mappingSources);
+  public WriteObject<T>(description: string, obj: T, mappings: Mappings = [], mappingSources: DataHandle[] = []): Promise<DataHandle> {
+    return this.WriteData(description, FastStringify(obj), mappings, mappingSources);
+  }
+
+  public Forward(description: string, input: DataHandle): Promise<DataHandle> {
+    return this.forward(description, input);
   }
 }
 
-export class DataHandleRead {
+export class DataHandle {
   constructor(public readonly key: string, private read: Data) {
   }
 
@@ -410,6 +341,10 @@ export class DataHandleRead {
 
   public ReadYamlAst(): YAMLNode {
     return this.ReadMetadata().yamlAst.Value;
+  }
+
+  public get Description(): string {
+    return decodeURIComponent(this.key.split('?').reverse()[0]);
   }
 
   public IsObject(): boolean {

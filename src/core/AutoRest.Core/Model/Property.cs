@@ -26,19 +26,13 @@ namespace AutoRest.Core.Model
         /// <Summary>
         ///     Backing field for Summary property.
         /// </Summary>
-        /// <remarks>
-        ///     This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T]
-        /// </remarks>
-        private readonly Fixable<string> _summary = new Fixable<string>();
+        private string _summary;
 
         /// <summary>
         ///     Creates a new instance of Property class.
         /// </summary>
         protected Property()
         {
-            // when the documentation is set strip out superflous characters.
-            _summary.OnSet += value => value.StripControlCharacters();
-
             // Name can be overriden by x-ms-client-name
             Name.OnGet += v => CodeNamer.Instance.GetPropertyName(Extensions.GetValue<string>("x-ms-client-name").Else(v));
         }
@@ -82,10 +76,10 @@ namespace AutoRest.Core.Model
         ///     <code>Summary.OnGet</code> and <code> Summary.OnSet</code> events in this class' constructor.
         ///     (ie <code> Summary.OnGet += summary => summary.ToUpper();</code> )
         /// </remarks>
-        public Fixable<string> Summary
+        public string Summary
         {
             get { return _summary; }
-            set { _summary.CopyFrom(value); }
+            set { _summary = value.StripControlCharacters(); }
         }
 
         [JsonIgnore]

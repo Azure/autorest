@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class ParameterGroupingPostMultiParamGroupsSecondParamGroup(Model):
-    """Additional parameters for the ParameterGrouping_post_multi_param_groups
-    operation.
+    """Additional parameters for post_multi_param_groups operation.
 
     :param header_two:
     :type header_two: str

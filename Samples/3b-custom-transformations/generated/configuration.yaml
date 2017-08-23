@@ -26,7 +26,7 @@ directive:
     where: '$.operations[*]'
     transform: >
       const url = $.methods[0]["url"]; const res =
-      url.split("/Microsoft.Storage/")[1].split("/")[0]; $["#name"] = res;
+      url.split("/Microsoft.Storage/")[1].split("/")[0]; $.name.raw = res;
       $.summary = JSON.stringify($, null, 2);
     reason: We wanna group methods by URI.
 input-file:
@@ -43,8 +43,14 @@ output-artifact:
   - source-file-python
   - source-file-nodejs
   - source-file-ruby
+  - source-file-php
   - source-file-azureresourceschema
   - source-file-jsonrpcclient
+use: []
+use-extension:
+
+  '@microsoft.azure/classic-openapi-validator': '>=0.0.6-preview'
+  '@microsoft.azure/openapi-validator': '>=0.1.2-preview'
 clear-output-folder: {}
 azure-arm: true
 azure-validator: true
@@ -53,10 +59,6 @@ csharp:
 __info: yaml
 output-folder: generated
 openapi-type: arm
-use-extension:
-  '@microsoft.azure/autorest-classic-generators': 2.0.0-preview1
-  '@microsoft.azure/classic-openapi-validator': 0.0.6-preview
-  '@microsoft.azure/openapi-validator': 0.1.2-preview
 pipeline:
   pipeline-emitter:
     scope: scope-pipeline-emitter
@@ -157,6 +159,7 @@ pipeline:
   csharp/transform:
     input: simplifier
     output-artifact: source-file-csharp
+    scope: scope-transform-string
     suffixes:
       - ''
   csharp/emitter:
@@ -191,6 +194,7 @@ pipeline:
   go/transform:
     input: generate
     output-artifact: source-file-go
+    scope: scope-transform-string
     suffixes: []
   go/emitter:
     input: transform
@@ -223,6 +227,7 @@ pipeline:
   java/transform:
     input: generate
     output-artifact: source-file-java
+    scope: scope-transform-string
     suffixes: []
   java/emitter:
     input: transform
@@ -255,6 +260,7 @@ pipeline:
   python/transform:
     input: generate
     output-artifact: source-file-python
+    scope: scope-transform-string
     suffixes: []
   python/emitter:
     input: transform
@@ -287,6 +293,7 @@ pipeline:
   nodejs/transform:
     input: generate
     output-artifact: source-file-nodejs
+    scope: scope-transform-string
     suffixes: []
   nodejs/emitter:
     input: transform
@@ -319,10 +326,27 @@ pipeline:
   ruby/transform:
     input: generate
     output-artifact: source-file-ruby
+    scope: scope-transform-string
     suffixes: []
   ruby/emitter:
     input: transform
     scope: scope-ruby/emitter
+    suffixes: []
+  php/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: php
+    suffixes: []
+  php/generate:
+    plugin: php
+    input:
+      - swagger-document/identity
+      - modeler
+    output-artifact: source-file-php
+    suffixes: []
+  php/emitter:
+    input: generate
+    scope: scope-php/emitter
     suffixes: []
   azureresourceschema/modeler:
     input: swagger-document/identity
@@ -351,6 +375,7 @@ pipeline:
   azureresourceschema/transform:
     input: generate
     output-artifact: source-file-azureresourceschema
+    scope: scope-transform-string
     suffixes: []
   azureresourceschema/emitter:
     input: transform
@@ -371,6 +396,7 @@ pipeline:
   jsonrpcclient/transform:
     input: generate
     output-artifact: source-file-jsonrpcclient
+    scope: scope-transform-string
     suffixes: []
   jsonrpcclient/emitter:
     input: transform
@@ -422,30 +448,35 @@ scope-cm/emitter:
   output-uri-expr: |
     "code-model-v1"
 client-side-validation: true
+scope-transform-string:
+  is-object: false
 scope-csharp/emitter:
   input-artifact: source-file-csharp
-  output-uri-expr: '$key.split("/output/")[1]'
+  output-uri-expr: $key
 scope-go/emitter:
   input-artifact: source-file-go
-  output-uri-expr: '$key.split("/output/")[1]'
+  output-uri-expr: $key
 scope-java/emitter:
   input-artifact: source-file-java
-  output-uri-expr: '$key.split("/output/")[1]'
+  output-uri-expr: $key
 scope-python/emitter:
   input-artifact: source-file-python
-  output-uri-expr: '$key.split("/output/")[1]'
+  output-uri-expr: $key
 scope-nodejs/emitter:
   input-artifact: source-file-nodejs
-  output-uri-expr: '$key.split("/output/")[1]'
+  output-uri-expr: $key
 scope-ruby/emitter:
   input-artifact: source-file-ruby
-  output-uri-expr: '$key.split("/output/")[1]'
+  output-uri-expr: $key
+scope-php/emitter:
+  input-artifact: source-file-php
+  output-uri-expr: $key
 scope-azureresourceschema/emitter:
   input-artifact: source-file-azureresourceschema
-  output-uri-expr: '$key.split("/output/")[1]'
+  output-uri-expr: $key
 scope-jsonrpcclient/emitter:
   input-artifact: source-file-jsonrpcclient
-  output-uri-expr: '$key.split("/output/")[1]'
+  output-uri-expr: $key
 azure-validator-composed:
   merge-state: composed
 azure-validator-individual:

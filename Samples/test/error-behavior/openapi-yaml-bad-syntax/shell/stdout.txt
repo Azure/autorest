@@ -1,0 +1,4 @@
+(C) 2017 **Microsoft Corporation.**  
+# AutoRest code generation utility.
+https://aka.ms/autorest
+Process() Cancelled due to exception : Syntax errors encountered.

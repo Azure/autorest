@@ -11,8 +11,7 @@
 'use strict';
 
 /**
- * Additional parameters for the ParameterGrouping_postMultiParamGroups
- * operation.
+ * Additional parameters for postMultiParamGroups operation.
  *
  */
 class ParameterGroupingPostMultiParamGroupsSecondParamGroup {

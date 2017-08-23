@@ -277,6 +277,8 @@ else
     }
     else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormData))
     {
+        if (!Model.RequestContentType.StartsWith("application/x-www-form-urlencoded"))
+        {
     @:System.Net.Http.MultipartFormDataContent _multiPartContent = new System.Net.Http.MultipartFormDataContent();
         foreach (ParameterCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
         {
@@ -306,6 +308,20 @@ else
     @:}
         }
     @:_httpRequest.Content = _multiPartContent;
+        }
+        else
+        {
+    @:List<KeyValuePair<string, string>> values = new List<KeyValuePair<string, string>>();
+        foreach (ParameterCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
+        {
+    @:if(@(parameter.Name) != null)
+    @:{
+        @:values.Add("@(parameter.SerializedName)", @parameter.Name);
+    @:}
+        }
+    @:FormUrlEncodedContent _formContent = new FormUrlEncodedContent(values);
+    @:_httpRequest.Content = _formContent;
+        }
     }
 
     @if (Settings.AddCredentials)
