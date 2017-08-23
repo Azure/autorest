@@ -46,7 +46,8 @@ namespace AutoRest
         "java",
         "azureresourceschema",
         "csharp-simplifier",
-        "jsonrpcclient"
+        "jsonrpcclient",
+        "php"
       };
     }
 
@@ -54,8 +55,6 @@ namespace AutoRest
     {
       switch (plugin)
       {
-        case "azure-validator":
-          return await new AzureValidator(connection, sessionId).Process();
         case "modeler":
           return await new Modeler(connection, sessionId).Process();
         case "csharp":
@@ -66,6 +65,7 @@ namespace AutoRest
         case "java":
         case "azureresourceschema":
         case "jsonrpcclient":
+        case "php":
           return await new Generator(plugin, connection, sessionId).Process();
         case "csharp-simplifier":
           return await new CSharpSimplifier(connection, sessionId).Process();

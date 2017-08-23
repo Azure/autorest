@@ -42,14 +42,14 @@ namespace AutoRest.Ruby.Azure
 
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, Path.Combine(GeneratorSettingsRba.Instance.sdkPath, CodeNamer.UnderscoreCase(codeModel.Name) + ImplementationFileExtension));
+            await Write(serviceClientTemplate, Path.Combine(GeneratorSettingsRb.Instance.sdkPath, CodeNamer.UnderscoreCase(codeModel.Name) + ImplementationFileExtension));
 
             // Operations
             foreach (MethodGroupRba group in codeModel.Operations.Where(each => !each.IsCodeModelMethodGroup))
             {
                 // Operation
                 var operationsTemplate = new AzureMethodGroupTemplate { Model = group };
-                await Write(operationsTemplate, Path.Combine(GeneratorSettingsRba.Instance.sdkPath, CodeNamer.UnderscoreCase(operationsTemplate.Model.TypeName) + ImplementationFileExtension));
+                await Write(operationsTemplate, Path.Combine(GeneratorSettingsRb.Instance.sdkPath, CodeNamer.UnderscoreCase(operationsTemplate.Model.TypeName) + ImplementationFileExtension));
             }
 
             // Models

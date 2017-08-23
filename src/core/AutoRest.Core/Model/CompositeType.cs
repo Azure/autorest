@@ -24,9 +24,6 @@ namespace AutoRest.Core.Model
         private string _documentation;
         private CompositeType _baseModelType;
 
-        public override string RefName => $"AutoRest.Core.Model.CompositeType, AutoRest.Core";
-
-
         partial void InitializeCollections();
         /// <summary>
         /// Initializes a new instance of CompositeType class.
@@ -43,24 +40,9 @@ namespace AutoRest.Core.Model
         }
 
         /// <Summary>
-        /// Backing field for <code>SerializedName</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _serializedName = new Fixable<string>();
-
-        /// <Summary>
         /// The name on the wire for the ModelType.
         /// </Summary>
-        /// <remarks>
-        /// The Get and Set operations for this accessor may be overridden by using the 
-        /// <code>SerializedName.OnGet</code> and <code>SerializedName.OnSet</code> events in this class' constructor.
-        /// (ie <code> SerializedName.OnGet += serializedName => serializedName.ToUpper();</code> )
-        /// </remarks>
-        public Fixable<string> SerializedName
-        {
-            get { return _serializedName; }
-            set { _serializedName.CopyFrom(value); }
-        }
+        public string SerializedName { get; set; }
 
         /// <summary>
         /// Gets the union of Parent and current type properties
@@ -189,9 +171,6 @@ namespace AutoRest.Core.Model
 
         [JsonIgnore]
         public override string Qualifier => "Model";
-
-        [JsonIgnore]
-        public override string QualifierType => "Model Type";
 
         public class CompositeTypeComparer : IComparer<CompositeType>
         {

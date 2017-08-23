@@ -37,13 +37,13 @@ namespace AutoRest.AzureResourceSchema
             {
                 if (method.HttpMethod != HttpMethod.Put ||
                     string.IsNullOrWhiteSpace(method.Url) ||
-                    !method.Url.Value.StartsWith(resourceMethodPrefix, StringComparison.OrdinalIgnoreCase) ||
-                    !method.Url.Value.EndsWith("}", StringComparison.OrdinalIgnoreCase))
+                    !method.Url.StartsWith(resourceMethodPrefix, StringComparison.OrdinalIgnoreCase) ||
+                    !method.Url.EndsWith("}", StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
 
-                string afterPrefix = method.Url.Value.Substring(resourceMethodPrefix.Length);
+                string afterPrefix = method.Url.Substring(resourceMethodPrefix.Length);
                 int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
                 string resourceProvider = afterPrefix.Substring(0, forwardSlashIndexAfterProvider);
 

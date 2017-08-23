@@ -38,8 +38,10 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 <text>
     internal static class @(Model.ClassName)EnumExtension
     {
-        internal static string ToSerializedValue(this @(Model.ClassName)? value)  =>
-            value == null ? null : ((@(Model.ClassName))value).ToSerializedValue();
+        internal static string ToSerializedValue(this @(Model.ClassName)? value)
+        {
+            return value == null ? null : ((@(Model.ClassName))value).ToSerializedValue();
+        }
 @EmptyLine
         internal static string ToSerializedValue(this @(Model.ClassName) value)
         {

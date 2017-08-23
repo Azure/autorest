@@ -2,9 +2,6 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-// polyfills for language support 
-require("../lib/polyfill.min.js");
-
 import { safeEval } from "../lib/ref/safe-eval";
 import { DataStore } from "../lib/data-store/data-store";
 import { ManipulateObject } from "../lib/pipeline/object-manipulator";
@@ -40,11 +37,10 @@ definitions:
   @test async "any hit"() {
     // setup
     const dataStore = new DataStore();
-    const inputWrite = await dataStore.Write("input.yaml");
-    const input = await inputWrite.WriteData(this.exampleObject);
+    const input = await dataStore.WriteData("mem://input.yaml", this.exampleObject);
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
-      const result = await ManipulateObject(input, await dataStore.Write(`manip${(await dataStore.Enum()).length}`), jsonQuery, (_, x) => x);
+      const result = await ManipulateObject(input, dataStore.DataSink, jsonQuery, (_, x) => x);
       assert.strictEqual(result.anyHit, anyHit, jsonQuery);
     };
 
@@ -65,11 +61,10 @@ definitions:
   @test async "removal"() {
     // setup
     const dataStore = new DataStore();
-    const inputWrite = await dataStore.Write("input.yaml");
-    const input = await inputWrite.WriteData(this.exampleObject);
+    const input = await dataStore.WriteData("mem://input.yaml", this.exampleObject);
 
     // remove all models that don't have a description
-    const result = await ManipulateObject(input, await dataStore.Write(`manip1`), "$.definitions[?(!@.description)]", (_, x) => undefined);
+    const result = await ManipulateObject(input, dataStore.DataSink, "$.definitions[?(!@.description)]", (_, x) => undefined);
     assert.strictEqual(result.anyHit, true);
     const resultRaw = result.result.ReadData();
     assert.ok(resultRaw.indexOf("NodeA") !== -1);
@@ -79,13 +74,12 @@ definitions:
   @test async "update"() {
     // setup
     const dataStore = new DataStore();
-    const inputWrite = await dataStore.Write("input.yaml");
-    const input = await inputWrite.WriteData(this.exampleObject);
+    const input = await dataStore.WriteData("mem://input.yaml", this.exampleObject);
 
     {
       // override all existing model descriptions
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, await dataStore.Write(`manip1`), "$.definitions.*.description", (_, x) => bestDescriptionEver);
+      const result = await ManipulateObject(input, dataStore.DataSink, "$.definitions.*.description", (_, x) => bestDescriptionEver);
       assert.strictEqual(result.anyHit, true);
       const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
@@ -93,7 +87,7 @@ definitions:
     {
       // override & insert all model descriptions
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, await dataStore.Write(`manip2`), "$.definitions.*", (_, x) => { x.description = bestDescriptionEver; return x; });
+      const result = await ManipulateObject(input, dataStore.DataSink, "$.definitions.*", (_, x) => { x.description = bestDescriptionEver; return x; });
       assert.strictEqual(result.anyHit, true);
       const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
@@ -102,7 +96,7 @@ definitions:
     {
       // make all descriptions upper case
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, await dataStore.Write(`manip3`), "$..description", (_, x) => (x as string).toUpperCase());
+      const result = await ManipulateObject(input, dataStore.DataSink, "$..description", (_, x) => (x as string).toUpperCase());
       assert.strictEqual(result.anyHit, true);
       const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, "DESCRIPTION");
@@ -111,7 +105,7 @@ definitions:
     {
       // make all descriptions upper case by using safe-eval
       const bestDescriptionEver = "best description ever";
-      const result = await ManipulateObject(input, await dataStore.Write(`manip4`), "$..description", (_, x) => safeEval("$.toUpperCase()", { $: x }));
+      const result = await ManipulateObject(input, dataStore.DataSink, "$..description", (_, x) => safeEval("$.toUpperCase()", { $: x }));
       assert.strictEqual(result.anyHit, true);
       const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, "DESCRIPTION");

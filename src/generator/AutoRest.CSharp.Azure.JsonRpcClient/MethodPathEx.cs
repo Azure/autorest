@@ -59,6 +59,6 @@ namespace AutoRest.CSharp.Azure.JsonRpcClient
         /// <param name="method"></param>
         /// <returns></returns>
         public static IEnumerable<Tuple<string, bool>> GetPathParts(this Method method)
-            => method.Url.Value.GetParts();
+            => method.Url.GetParts();
     }
 }

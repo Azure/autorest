@@ -7,9 +7,9 @@ import { LazyPromise } from "../lazy";
 import { EventEmitter } from "../events";
 import { fork, ChildProcess } from "child_process";
 import { Mappings, RawSourceMap, SmartPosition } from "../ref/source-map";
-import { CancellationToken } from "../ref/cancallation";
+import { CancellationToken } from "../ref/cancellation";
 import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
-import { DataStoreViewReadonly, DataStoreView } from "../data-store/data-store";
+import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
 import { Exception } from "../exception";
 import { Message } from "../message";
@@ -30,16 +30,16 @@ interface IAutoRestPluginInitiatorEndpoint {
   Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void>;
 }
 
-export class AutoRestPlugin extends EventEmitter {
+export class AutoRestExtension extends EventEmitter {
   private static lastSessionId: number = 0;
-  private static CreateSessionId(): string { return `session_${++AutoRestPlugin.lastSessionId}`; }
+  private static CreateSessionId(): string { return `session_${++AutoRestExtension.lastSessionId}`; }
 
-  public static async FromModule(modulePath: string): Promise<AutoRestPlugin> {
+  public static async FromModule(modulePath: string): Promise<AutoRestExtension> {
     const childProc = fork(modulePath, [], <any>{ silent: true });
-    return AutoRestPlugin.FromChildProcess(childProc);
+    return AutoRestExtension.FromChildProcess(modulePath, childProc);
   }
 
-  public static async FromChildProcess(childProc: ChildProcess): Promise<AutoRestPlugin> {
+  public static async FromChildProcess(extensionName: string, childProc: ChildProcess): Promise<AutoRestExtension> {
     // childProc.on("error", err => { throw err; });
     const channel = createMessageConnection(
       childProc.stdout,
@@ -47,12 +47,16 @@ export class AutoRestPlugin extends EventEmitter {
       console
     );
     childProc.stderr.pipe(process.stderr);
-    const plugin = new AutoRestPlugin(channel);
+    const plugin = new AutoRestExtension(extensionName, channel);
     channel.listen();
+    // poke the extension to detect trivial issues like process startup failure or protocol violations, ...
+    if (!Array.isArray(await plugin.GetPluginNames(CancellationToken.None))) {
+      throw new Exception(`Plugin '${extensionName}' violated the protocol ('GetPluginNames' returned unexpected object).`);
+    }
     return plugin;
   }
 
-  public constructor(channel: MessageConnection) {
+  public constructor(extensionName: string, channel: MessageConnection) {
     super();
     // initiator
     const dispatcher = (fnName: string) => async (sessionId: string, ...rest: any[]) => {
@@ -82,15 +86,16 @@ export class AutoRestPlugin extends EventEmitter {
     channel.onNotification(IAutoRestPluginInitiator_Types.WriteFile, this.apiInitiator.WriteFile);
     channel.onNotification(IAutoRestPluginInitiator_Types.Message, this.apiInitiator.Message);
 
-    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Exception("AutoRest plugin terminated.")); }));
+    const errorPromise = new Promise<never>((_, rej) => channel.onError(e => { rej(new Exception(`AutoRest extension '${extensionName}' reported error: ` + e)); }));
+    const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Exception(`AutoRest extension '${extensionName}' terminated.`)); }));
 
     // target
     this.apiTarget = {
       async GetPluginNames(cancellationToken: CancellationToken): Promise<string[]> {
-        return await Promise.race([terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken)]);
+        return await Promise.race([errorPromise, terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken)]);
       },
       async Process(pluginName: string, sessionId: string, cancellationToken: CancellationToken): Promise<boolean> {
-        return await Promise.race([terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken)]);
+        return await Promise.race([errorPromise, terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken)]);
       }
     };
   }
@@ -103,11 +108,11 @@ export class AutoRestPlugin extends EventEmitter {
     return this.apiTarget.GetPluginNames(cancellationToken);
   }
 
-  public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, onMessage: (message: Message) => void, cancellationToken: CancellationToken): Promise<boolean> {
-    const sid = AutoRestPlugin.CreateSessionId();
+  public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataSource, sink: DataSink, onFile: (data: DataHandle) => void, onMessage: (message: Message) => void, cancellationToken: CancellationToken): Promise<boolean> {
+    const sid = AutoRestExtension.CreateSessionId();
 
     // register endpoint
-    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.CreateEndpointFor(pluginName, configuration, inputScope, outputScope, onMessage, cancellationToken);
+    this.apiInitiatorEndpoints[sid] = AutoRestExtension.CreateEndpointFor(pluginName, configuration, inputScope, sink, onFile, onMessage, cancellationToken);
 
     // dispatch
     const result = await this.apiTarget.Process(pluginName, sid, cancellationToken);
@@ -121,18 +126,21 @@ export class AutoRestPlugin extends EventEmitter {
     return result;
   }
 
-  private static CreateEndpointFor(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, onMessage: (message: Message) => void, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
-    const inputFileNames = new LazyPromise(async () => inputScope.Enum());
+  private static CreateEndpointFor(pluginName: string, configuration: (key: string) => any, inputScope: DataSource, sink: DataSink, onFile: (data: DataHandle) => void, onMessage: (message: Message) => void, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
     const inputFileHandles = new LazyPromise(async () => {
-      const names = await inputFileNames;
+      const names = await inputScope.Enum();
       return await Promise.all(names.map(fn => inputScope.ReadStrict(fn)));
     });
+
+    // name transformation
+    const friendly2internal: (name: string) => Promise<string | undefined> = async name => ((await inputFileHandles).filter(h => h.Description === name)[0] || {}).key;
+    const internal2friendly: (name: string) => Promise<string | undefined> = async key => (await inputScope.Read(key) || <any>{}).Description;
 
     let finishNotifications: Promise<void> = Promise.resolve();
     const apiInitiator: IAutoRestPluginInitiatorEndpoint = {
       FinishNotifications(): Promise<void> { return finishNotifications; },
       async ReadFile(filename: string): Promise<string> {
-        const file = await inputScope.ReadStrict(filename);
+        const file = await inputScope.ReadStrict(await friendly2internal(filename) || filename);
         return file.ReadData();
       },
       async GetValue(key: string): Promise<any> {
@@ -140,7 +148,7 @@ export class AutoRestPlugin extends EventEmitter {
         return result === undefined ? null : result;
       },
       async ListInputs(): Promise<string[]> {
-        return await inputFileNames;
+        return (await inputFileHandles).map(x => x.Description);
       },
 
       async WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void> {
@@ -151,11 +159,11 @@ export class AutoRestPlugin extends EventEmitter {
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);
 
-        const file = await outputScope.Write(filename);
+        // TODO: transform mappings so friendly names are replaced by internals
         if (typeof (sourceMap as any).mappings === "string") {
-          await file.WriteDataWithSourceMap(content, () => sourceMap as any);
+          onFile(await sink.WriteDataWithSourceMap(filename, content, () => sourceMap as any));
         } else {
-          await file.WriteData(content, sourceMap as Mappings, await inputFileHandles);
+          onFile(await sink.WriteData(filename, content, sourceMap as Mappings, await inputFileHandles));
         }
 
         await finishPrev;
@@ -166,7 +174,15 @@ export class AutoRestPlugin extends EventEmitter {
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);
 
-        message.Plugin = pluginName;
+        message.Plugin = message.Plugin || pluginName;
+        // transform friendly with internals
+        if (Array.isArray(message.Source)) {
+          for (const source of message.Source) {
+            if (source.document) {
+              source.document = await friendly2internal(source.document) || source.document;
+            }
+          }
+        }
         onMessage(message);
 
         await finishPrev;

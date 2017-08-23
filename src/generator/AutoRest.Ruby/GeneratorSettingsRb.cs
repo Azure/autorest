@@ -14,8 +14,10 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Ruby
 {
-    public class GeneratorSettingsRb : IsSingleton<GeneratorSettingsRb>, IGeneratorSettings
+    public class GeneratorSettingsRb : IGeneratorSettings
     {
+        public static GeneratorSettingsRb Instance => Singleton<GeneratorSettingsRb>.Instance;
+
         private string _sdkName;
 
         /// <summary>
@@ -57,7 +59,6 @@ namespace AutoRest.Ruby
         ///     name of the SDK, otherwise the name of input swagger is converted
         ///     into Ruby style and taken as name.
         /// </summary>
-        [SettingsAlias("Name")]
         public string sdkName
         {
             get
@@ -76,15 +77,5 @@ namespace AutoRest.Ruby
         ///     Relative path to produced SDK files.
         /// </summary>
         public string sdkPath => packageName ?? sdkName;
-
-        /// <summary>
-        ///     Gets the brief description of the code generator.
-        /// </summary>
-        public virtual string Description => "Generic Ruby code generator.";
-
-        /// <summary>
-        ///     Gets the name of code generator.
-        /// </summary>
-        public virtual string Name => "Ruby";
     }
 }

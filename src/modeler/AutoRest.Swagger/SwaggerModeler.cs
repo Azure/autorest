@@ -15,11 +15,13 @@ using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Swagger.Validation.Core;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 
 namespace AutoRest.Swagger
 {
-    public class SwaggerModeler : Modeler
+    public class SwaggerModeler
     {
         private const string BaseUriParameterName = "BaseUri";
 
@@ -27,17 +29,9 @@ namespace AutoRest.Swagger
         internal Dictionary<string, CompositeType> GeneratedTypes = new Dictionary<string, CompositeType>();
         internal Dictionary<Schema, CompositeType> GeneratingTypes = new Dictionary<Schema, CompositeType>();
 
-        public SwaggerModeler() 
+        public SwaggerModeler(Settings settings = null)
         {
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
-        }
-
-        public override string Name
-        {
-            get { return "Swagger"; }
+            this.settings = settings ?? new Settings();
         }
 
         /// <summary>
@@ -45,46 +39,25 @@ namespace AutoRest.Swagger
         /// </summary>
         public ServiceDefinition ServiceDefinition { get; set; }
 
+        private Settings settings;
+
         /// <summary>
         /// Client model.
         /// </summary>
         public CodeModel CodeModel { get; set; }
 
         /// <summary>
-        /// Builds service model from swagger file.
+        /// Operations may have a content type parameter.
+        /// We collect allowed values and create a dedicated enum for convenience.
         /// </summary>
-        /// <returns></returns>
-        public override CodeModel Build()
-        {
-            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input))
-            {
-                throw ErrorManager.CreateError(Resources.InputRequired);
-            }
-            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystemInput);
-            return Build(serviceDefinition);
-        }
+        public HashSet<string> ContentTypeChoices { get; } = new HashSet<string>();
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
             ServiceDefinition = serviceDefinition;
-            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
-            {
-                // Look for semantic errors and warnings in the document.
-                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition, new ServiceDefinitionMetadata
-                {   // LEGACY MODE! set defaults for the metadata, marked to be deprecated
-                    ServiceDefinitionDocumentType = ServiceDefinitionDocumentType.ARM, 
-                    MergeState = ServiceDefinitionDocumentState.Composed
-                }))
-                {
-                    Logger.Instance.Log(validationEx);
-                }
-                return New<CodeModel>();
-            }
-
-            Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
+            
+            Logger.Instance.Log(Category.Debug, Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
 
@@ -98,7 +71,7 @@ namespace AutoRest.Swagger
 
                 var clientProperty = New<Property>();
                 clientProperty.LoadFrom(parameter);
-                clientProperty.RealPath = new string[] { parameter.SerializedName.Value };
+                clientProperty.RealPath = new string[] { parameter.SerializedName };
 
                 CodeModel.Add(clientProperty);
             }
@@ -157,7 +130,17 @@ namespace AutoRest.Swagger
             }
             CodeModel.AddRange(methods);
             
+            // Build ContentType enum
+            if (ContentTypeChoices.Count > 0)
+            {
+                var enumType = New<EnumType>();
+                enumType.ModelAsString = true;
+                enumType.SetName("ContentTypes");
+                enumType.Values.AddRange(ContentTypeChoices.Select(v => new EnumValue { Name = v, SerializedName = v }));
+                CodeModel.Add(enumType);
+            }
 
+            ProcessParameterizedHost();
             return CodeModel;
         }
 
@@ -168,10 +151,10 @@ namespace AutoRest.Swagger
                 foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
                 {
                     //Don't overwrite settings that come in from the command line
-                    if (!this.Settings.CustomSettings.ContainsKey(key))
-                        this.Settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
+                    if (!settings.CustomSettings.ContainsKey(key))
+                        settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
                 }
-                Settings.PopulateSettings(this.Settings, this.Settings.CustomSettings);
+                Settings.PopulateSettings(settings, settings.CustomSettings);
             }
         }
 
@@ -179,7 +162,7 @@ namespace AutoRest.Swagger
         /// Initialize the base service and populate global service properties
         /// </summary>
         /// <returns>The base ServiceModel Service</returns>
-        public virtual void InitializeClientModel()
+        private void InitializeClientModel()
         {
             if (string.IsNullOrEmpty(ServiceDefinition.Swagger))
             {
@@ -193,15 +176,15 @@ namespace AutoRest.Swagger
 
             CodeModel = New<CodeModel>();
 
-            if (string.IsNullOrWhiteSpace(Settings.ClientName) && ServiceDefinition.Info.Title == null)
+            if (string.IsNullOrWhiteSpace(settings.ClientName) && ServiceDefinition.Info.Title == null)
             {
                 throw ErrorManager.CreateError(Resources.TitleMissing);
             }
 
             CodeModel.Name = ServiceDefinition.Info.Title?.Replace(" ", "");
 
-            CodeModel.Namespace = Settings.Namespace;
-            CodeModel.ModelsName = Settings.ModelsName;
+            CodeModel.Namespace = settings.Namespace;
+            CodeModel.ModelsName = settings.ModelsName;
             CodeModel.ApiVersion = ServiceDefinition.Info.Version;
             CodeModel.Documentation = ServiceDefinition.Info.Description;
             CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
@@ -210,6 +193,92 @@ namespace AutoRest.Swagger
 
             // Copy extensions
             ServiceDefinition.Extensions.ForEach(extention => CodeModel.Extensions.AddOrSet(extention.Key, extention.Value));
+        }
+
+        private void ProcessParameterizedHost()
+        {
+            if (CodeModel.Extensions.TryGetValue("x-ms-parameterized-host", out var extensionObject))
+            {
+                var hostExtension = extensionObject as JObject;
+
+                if (hostExtension != null)
+                {
+                    var hostTemplate = (string)hostExtension["hostTemplate"];
+                    var parametersJson = hostExtension["parameters"].ToString();
+                    var useSchemePrefix = true;
+                    if (hostExtension.TryGetValue("useSchemePrefix", out var value))
+                    {
+                        useSchemePrefix = bool.Parse(value.ToString());
+                    }
+
+                    var position = "first";
+
+                    if (hostExtension.TryGetValue("positionInOperation", out var textRaw))
+                    {
+                        var pat = "^(fir|la)st$";
+                        Regex r = new Regex(pat, RegexOptions.IgnoreCase);
+                        var text = textRaw.ToString();
+                        Match m = r.Match(text);
+                        if (!m.Success)
+                        {
+                            throw new InvalidOperationException(
+                                $"The value '{text}' provided for property 'positionInOperation' of extension 'x-ms-parameterized-host' is invalid. Valid values are: 'first, last'.");
+                        }
+                        position = text;
+                    }
+
+                    if (!string.IsNullOrEmpty(parametersJson))
+                    {
+                        var jsonSettings = new JsonSerializerSettings
+                        {
+                            TypeNameHandling = TypeNameHandling.None,
+                            MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                        };
+
+                        var swaggerParams = JsonConvert.DeserializeObject<List<SwaggerParameter>>(parametersJson,
+                            jsonSettings);
+                        List<Parameter> hostParamList = new List<Parameter>();
+                        foreach (var swaggerParameter in swaggerParams)
+                        {
+                            // Build parameter
+                            var parameterBuilder = new ParameterBuilder(swaggerParameter, this);
+                            var parameter = parameterBuilder.Build();
+
+                            // check to see if the parameter exists in properties, and needs to have its name normalized
+                            if (CodeModel.Properties.Any(p => p.SerializedName.EqualsIgnoreCase(parameter.SerializedName)))
+                            {
+                                parameter.ClientProperty =
+                                    CodeModel.Properties.Single(
+                                        p => p.SerializedName.Equals(parameter.SerializedName));
+                            }
+                            parameter.Extensions["hostParameter"] = true;
+                            hostParamList.Add(parameter);
+                        }
+
+                        if (position.EqualsIgnoreCase("first"))
+                        {
+                            CodeModel.HostParametersFront = hostParamList.AsEnumerable().Reverse();
+                        }
+                        else
+                        {
+                            CodeModel.HostParametersBack = hostParamList;
+                        }
+
+                        if (useSchemePrefix)
+                        {
+                            CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
+                                ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
+                                hostTemplate, ServiceDefinition.BasePath);
+                        }
+                        else
+                        {
+                            CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}{1}",
+                                hostTemplate, ServiceDefinition.BasePath);
+                        }
+
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -314,19 +383,12 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("operation");
             }
 
-            if (operation.OperationId == null)
-            {
-                return null;
-            }
-
-            if (operation.OperationId.IndexOf('_') == -1)
-            {
-                return operation.OperationId;
-            }
-
-            var parts = operation.OperationId.Split('_');
-            return parts[1];
+            return GetMethodNameFromOperationId(operation.OperationId);
         }
+
+        public static string GetMethodNameFromOperationId(string operationId) => 
+            (operationId?.IndexOf('_') != -1) ? operationId.Split('_').Last(): operationId;
+        
 
         public SwaggerParameter Unwrap(SwaggerParameter swaggerParameter)
         {
@@ -358,9 +420,6 @@ namespace AutoRest.Swagger
             return swaggerParameter;
         }
 
-        public SchemaResolver Resolver
-        {
-            get { return new SchemaResolver(this); }
-        }
+        public SchemaResolver Resolver => new SchemaResolver(this);
     }
 }

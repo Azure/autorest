@@ -46,7 +46,7 @@ namespace AutoRest.Go.Model
 
             var apiVersionParam =
               from p in Parameters
-              let name = p.SerializedName.Value
+              let name = p.SerializedName
               where name != null && name.IsApiVersion()
               select p.DefaultValue.Value?.Trim(new[] { '"' });
 

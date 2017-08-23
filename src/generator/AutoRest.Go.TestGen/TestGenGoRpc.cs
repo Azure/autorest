@@ -57,7 +57,7 @@ namespace AutoRest.Go.TestGen
             file.AddChild(VariableDecl.Generate(LoggerVarName, "*log.Logger"));
             file.AddChild(new Terminal());
 
-            var rpcTypeName = cmg.Name.ToString();
+            var rpcTypeName = cmg.Name;
             var suiteDef = GetServerReceiver(rpcTypeName);
 
             file.AddChild(new Comment($"{suiteDef.Item2} is used to dispatch functions calls via JSON-RPC."));

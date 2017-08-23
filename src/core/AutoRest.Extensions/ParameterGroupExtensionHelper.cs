@@ -69,8 +69,8 @@ namespace AutoRest.Extensions
                     string parameterGroupName;
                     if (specifiedGroupName == null)
                     {
-                        string postfix = extensionObject.Value<string>("postfix") ?? "Parameters";
-                        parameterGroupName = methodGroupName + "-" + methodName + "-" + postfix;
+                        string postfix = extensionObject.Value<string>("postfix")?.Capitalize() ?? "Parameters";
+                        parameterGroupName = $"{methodGroupName}{methodName.Capitalize()}{postfix}";
                     }
                     else
                     {
@@ -110,9 +110,7 @@ namespace AutoRest.Extensions
             List<Method> methodList = methodsWhichUseGroup.ToList();
             if (methodList.Count == 1)
             {
-                Method method = methodList.Single();
-                return string.Format(CultureInfo.InvariantCulture, "Additional parameters for the {0} operation.",
-                    createOperationDisplayString(method.MethodGroup.Name.ToPascalCase(), method.Name));
+                return "Additional parameters for "+ methodList.Single().Name + " operation.";
             }
             else if (methodList.Count <= 4)
             {
@@ -177,7 +175,7 @@ namespace AutoRest.Extensions
                                 item => item.Name.RawValue == property.Name.RawValue &&
                                         item.IsReadOnly == property.IsReadOnly &&
                                         item.DefaultValue .RawValue== property.DefaultValue.RawValue &&
-                                        item.SerializedName.RawValue == property.SerializedName.RawValue);
+                                        item.SerializedName == property.SerializedName);
                         if (matchingProperty == null)
                         {
                             parameterGroupType.Add(property);

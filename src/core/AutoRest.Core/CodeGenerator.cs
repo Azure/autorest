@@ -12,6 +12,8 @@ using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace AutoRest.Core
 {
@@ -45,12 +47,60 @@ namespace AutoRest.Core
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public virtual /* async */ Task Generate(CodeModel codeModel)
+        public virtual Task Generate(CodeModel codeModel)
         {
             ResetFileList();
 
             // since we're not actually async, return a completed task.
             return "".AsResultTask();
+        }
+
+        /// <summary>
+        /// Generates example code from an x-ms-examples section.
+        /// </summary>
+        public virtual string GenerateSample(bool isolateSnippet, CodeModel cm, MethodGroup g, Method m, string exampleName, Model.XmsExtensions.Example example) => null;
+
+        /// <summary>
+        /// Generates code samples and outputs them in the file system.
+        /// </summary>
+        public async Task GenerateSamples(CodeModel codeModel)
+        {
+            var singleFile = Settings.Instance.OutputFileName != null;
+            var outputs = new List<Tuple<MethodGroup, Method, string, string>>();
+            foreach (var group in codeModel.Operations)
+            {
+                foreach (var method in group.Methods)
+                {
+                    var examplesRaw = method.Extensions.GetValue<JObject>(Model.XmsExtensions.Examples.Name);
+                    var examples = Model.XmsExtensions.Examples.FromJObject(examplesRaw);
+                    foreach (var example in examples)
+                    {
+                        Logger.Instance.Log(Category.Debug, $"Generating example '{example.Key}' of '{group.Name}/{method.Name}'");
+                        var content = GenerateSample(singleFile, codeModel, group, method, example.Key, example.Value);
+                        if (content != null)
+                        {
+                            outputs.Add(new Tuple<MethodGroup, Method, string, string>(group, method, example.Key, content));
+                        }
+                        else
+                        {
+                            Logger.Instance.Log(Category.Warning, $"Did not generate example '{example.Key}' of '{group.Name}/{method.Name}'");
+                        }
+                    }
+                }
+            }
+
+            if (singleFile)
+            {
+                await Write(string.Join("\n\n", outputs.Select(output => output.Item4)), Settings.Instance.OutputFileName);
+            }
+            else
+            {
+                foreach (var output in outputs)
+                {
+                    var folder = string.IsNullOrEmpty(output.Item1.Name) ? "" : (output.Item1.Name + "/");
+                    await Write(output.Item4, $"{folder}{output.Item2.Name} ({output.Item3}){ImplementationFileExtension}");
+                }
+            }
         }
 
         /// <summary>
@@ -61,7 +111,7 @@ namespace AutoRest.Core
         /// <returns></returns>
         public virtual async Task Write(ITemplate template, string fileName)
         {
-            Logger.Instance.Log(Category.Info, $"[WRITING] {template.GetType().Name} => {fileName}");
+            Logger.Instance.Log(Category.Debug, $"[WRITING] {template.GetType().Name} => {fileName}");
             template.Settings = Settings.Instance;
             var stringBuilder = new StringBuilder();
             using (template.TextWriter = new StringWriter(stringBuilder))
@@ -74,11 +124,11 @@ namespace AutoRest.Core
         /// <summary>
         /// Writes a template string into the specified relative path.
         /// </summary>
-        /// <param name="template"></param>
+        /// <param name="content"></param>
         /// <param name="fileName"></param>
         /// <param name="skipEmptyLines"></param>
         /// <returns></returns>
-        public async Task Write(string template, string fileName, bool skipEmptyLines)
+        public async Task Write(string content, string fileName, bool skipEmptyLines = false)
         {
             if (Settings.Instance.OutputFileName != null)
             {
@@ -105,7 +155,7 @@ namespace AutoRest.Core
 
             var lineEnding = fileName.LineEnding();
 
-            using (StringReader streamReader = new StringReader(template))
+            using (StringReader streamReader = new StringReader(content))
             using (TextWriter textWriter = Settings.Instance.FileSystemOutput.GetTextWriter(fileName))
             {
                 string line;

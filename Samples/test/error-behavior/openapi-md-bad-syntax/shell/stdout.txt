@@ -1,4 +1,4 @@
-   at ...
-{ Error: Error occurred. Exiting.
-Error occurred. Exiting.
-Process() Cancelled due to exception : Error occurred. Exiting.
+(C) 2017 **Microsoft Corporation.**  
+# AutoRest code generation utility.
+https://aka.ms/autorest
+Process() Cancelled due to exception : [OperationAbortedException] Error occurred. Exiting.

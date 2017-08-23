@@ -22,7 +22,7 @@ namespace AutoRest.Core.Model
         private string _documentation;
         private string _namespace;
         private string _modelsName;
-        private readonly Fixable<string> _name = new Fixable<string>();
+        private string _name;
 
         [JsonIgnore]
         public virtual bool IsAzure => false;
@@ -34,9 +34,10 @@ namespace AutoRest.Core.Model
         protected CodeModel()
         {
             InitializeCollections();
-
-            Name.OnGet += value => (Settings.Instance?.ClientName).Else(CodeNamer.Instance.GetClientName(value));
         }
+
+        public IEnumerable<Parameter> HostParametersFront { get; set; }
+        public IEnumerable<Parameter> HostParametersBack { get; set; }
 
         [JsonIgnore]
         public IEnumerable<CompositeType> AllModelTypes => ModelTypes.Union(HeaderTypes).Union(ErrorTypes).ReEnumerable();
@@ -71,12 +72,12 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the non-canonical name of the client model.
         /// </summary>
-        public Fixable<string> Name
+        public string Name
         {
-            get { return _name; }
+            get => (Settings.Instance?.ClientName).Else(CodeNamer.Instance.GetClientName(_name));
             set
             {
-                _name.CopyFrom(value);
+                _name = value;
                 Children.Disambiguate();
             }
         }
@@ -126,6 +127,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets the method groups.
         /// </summary>
+        [JsonIgnore]
         public virtual IEnumerable<string> MethodGroupNames => Operations.Where(group => !group.Name.IsNullOrEmpty()).Select(group => group.TypeName.Value);
 
         /// <summary>
@@ -151,6 +153,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Reference to the container of this type.
         /// </summary>
+        [JsonIgnore]
         CodeModel IParent.CodeModel => this;
 
         [JsonIgnore]
@@ -161,8 +164,8 @@ namespace AutoRest.Core.Model
         public virtual IEnumerable<IChild> Children
             => ((IEnumerable<IChild>)ModelTypes).Concat(HeaderTypes).Concat(ErrorTypes).Concat(EnumTypes).Concat(Properties);
 
+        [JsonIgnore]
         public string Qualifier => "Client";
-        public string QualifierType => "Service Client";
 
         [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames
@@ -175,6 +178,7 @@ namespace AutoRest.Core.Model
             }
         }
 
+        [JsonIgnore]
         public virtual HashSet<string> LocallyUsedNames => null;
         
         [JsonIgnore]

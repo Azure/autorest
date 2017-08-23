@@ -115,7 +115,7 @@ namespace AutoRest.Go.Model
                 var declarations = new List<string>();
                 foreach (var p in Properties)
                 {
-                    if (!p.SerializedName.FixedValue.IsApiVersion() && p.DefaultValue.FixedValue.IsNullOrEmpty())
+                    if (!p.SerializedName.IsApiVersion() && p.DefaultValue.FixedValue.IsNullOrEmpty())
                     {
                         declarations.Add(
                                 string.Format(
@@ -134,7 +134,7 @@ namespace AutoRest.Go.Model
                 var invocationParams = new List<string>();
                 foreach (var p in Properties)
                 {
-                    if (!p.SerializedName.Value.IsApiVersion() && p.DefaultValue.FixedValue.IsNullOrEmpty())
+                    if (!p.SerializedName.IsApiVersion() && p.DefaultValue.FixedValue.IsNullOrEmpty())
                     {
                         invocationParams.Add(p.Name.Value.ToSentence());
                     }
@@ -149,7 +149,7 @@ namespace AutoRest.Go.Model
                 var declarations = new List<string>();
                 foreach (var p in Properties)
                 {
-                    if (!p.SerializedName.FixedValue.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
+                    if (!p.SerializedName.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
                     {
                         declarations.Add(
                                 string.Format(
@@ -168,7 +168,7 @@ namespace AutoRest.Go.Model
                 var invocationParams = new List<string>();
                 foreach (var p in Properties)
                 {
-                    if (!p.SerializedName.Value.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
+                    if (!p.SerializedName.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
                     {
                         invocationParams.Add("Default" + p.Name.Value);
                     }
@@ -184,7 +184,7 @@ namespace AutoRest.Go.Model
                 var constDeclaration = new List<string>();
                 foreach (var p in Properties)
                 {
-                    if (!p.SerializedName.Value.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
+                    if (!p.SerializedName.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
                     {
                         constDeclaration.Add(string.Format("// Default{0} is the default value for {1}\nDefault{0} = {2}",
                             p.Name.Value,

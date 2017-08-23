@@ -4,15 +4,11 @@
 'use strict';
 
 var should = require('should');
-var http = require('http');
 var assert = require('assert');
 import * as msRest from 'ms-rest';
-import moment = require('moment');
+import * as moment from 'moment';
 import complexClient = require('../Expected/AcceptanceTests/BodyComplex/autoRestComplexTestService');
 import complexClientModels = require('../Expected/AcceptanceTests/BodyComplex/models');
-
-var dummyToken = 'dummy12321343423';
-var credentials = new msRest.TokenCredentials(dummyToken);
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';
@@ -29,7 +25,7 @@ describe('nodejs', function () {
           result.id.should.equal(2);
           result.name.should.equal('abc');
           result.color.should.equal('YELLOW');
-          testClient.basicOperations.putValid({ 'id': 2, 'name': 'abc', color: 'Magenta' }, function (error, result) {
+          testClient.basicOperations.putValid({ 'id': 2, 'name': 'abc', color: 'Magenta' }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -79,7 +75,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           result.field1.should.equal(-1);
           result.field2.should.equal(2);
-          testClient.primitive.putInt({ 'field1': -1, 'field2': 2 }, function (error, result) {
+          testClient.primitive.putInt({ 'field1': -1, 'field2': 2 }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -91,7 +87,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           result.field1.should.equal(1099511627775);
           result.field2.should.equal(-999511627788);
-          testClient.primitive.putLong({ 'field1': 1099511627775, 'field2': -999511627788 }, function (error, result) {
+          testClient.primitive.putLong({ 'field1': 1099511627775, 'field2': -999511627788 }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -103,7 +99,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           result.field1.should.equal(1.05);
           result.field2.should.equal(-0.003);
-          testClient.primitive.putFloat({ 'field1': 1.05, 'field2': -0.003 }, function (error, result) {
+          testClient.primitive.putFloat({ 'field1': 1.05, 'field2': -0.003 }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -115,7 +111,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           result.field1.should.equal(3e-100);
           result.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.should.equal(-0.000000000000000000000000000000000000000000000000000000005);
-          testClient.primitive.putDouble({ 'field1': 3e-100, 'field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose': -0.000000000000000000000000000000000000000000000000000000005 }, function (error, result) {
+          testClient.primitive.putDouble({ 'field1': 3e-100, 'field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose': -0.000000000000000000000000000000000000000000000000000000005 }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -127,7 +123,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           result.fieldTrue.should.equal(true);
           result.fieldFalse.should.equal(false);
-          testClient.primitive.putBool({ 'fieldTrue': true, 'fieldFalse': false }, function (error, result) {
+          testClient.primitive.putBool({ 'fieldTrue': true, 'fieldFalse': false }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -140,7 +136,7 @@ describe('nodejs', function () {
           result.field.should.equal('goodrequest');
           result.empty.should.equal('');
           should.not.exist(result['nullProperty']);
-          testClient.primitive.putString({ 'field': 'goodrequest', 'empty': '' }, function (error, result) {
+          testClient.primitive.putString({ 'field': 'goodrequest', 'empty': '' }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -153,7 +149,7 @@ describe('nodejs', function () {
           assert.deepEqual(result.field, new Date('0001-01-01'));
           assert.deepEqual(result.leap, new Date('2016-02-29'));
           var complexBody = <complexClientModels.DateWrapper>{ 'field': new Date('0001-01-01'), 'leap': new Date('2016-02-29') }
-          testClient.primitive.putDate(complexBody, function (error, result) {
+          testClient.primitive.putDate(complexBody, function (error) {
             should.not.exist(error);
             done();
           });
@@ -164,7 +160,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           assert.deepEqual(result.field, new Date('0001-01-01T00:00:00Z'));
           assert.deepEqual(result.now, new Date('2015-05-18T18:38:00Z'));
-          testClient.primitive.putDateTime({ 'field': new Date('0001-01-01T00:00:00Z'), 'now': new Date('2015-05-18T18:38:00Z') }, function (error, result) {
+          testClient.primitive.putDateTime({ 'field': new Date('0001-01-01T00:00:00Z'), 'now': new Date('2015-05-18T18:38:00Z') }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -182,7 +178,7 @@ describe('nodejs', function () {
 
           //Have to use moment.js to construct the date object because NodeJS default Date constructor doesn't parse "old" RFC dates right
           var fieldDate = moment.utc(timeStringOne, dateFormat).toDate();
-          testClient.primitive.putDateTimeRfc1123({ 'field': fieldDate, 'now': new Date(timeStringTwo) }, function (error, result) {
+          testClient.primitive.putDateTimeRfc1123({ 'field': fieldDate, 'now': new Date(timeStringTwo) }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -195,7 +191,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           //should.not.exist(result.field);
           assert.deepEqual(result.field, moment.duration(durationString));
-          testClient.primitive.putDuration({ field: moment.duration(durationString) }, function (error, result) {
+          testClient.primitive.putDuration({ field: moment.duration(durationString) }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -207,7 +203,7 @@ describe('nodejs', function () {
         testClient.primitive.getByte(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.field, byteBuffer);
-          testClient.primitive.putByte({ field: byteBuffer }, function (error, result) {
+          testClient.primitive.putByte({ field: byteBuffer }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -223,7 +219,7 @@ describe('nodejs', function () {
         testClient.arrayModel.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.arrayProperty, testArray);
-          testClient.arrayModel.putValid({ arrayProperty: testArray }, function (error, result) {
+          testClient.arrayModel.putValid({ arrayProperty: testArray }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -234,7 +230,7 @@ describe('nodejs', function () {
         testClient.arrayModel.getEmpty(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.arrayProperty, []);
-          testClient.arrayModel.putEmpty({ arrayProperty: [] }, function (error, result) {
+          testClient.arrayModel.putEmpty({ arrayProperty: [] }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -258,7 +254,7 @@ describe('nodejs', function () {
         testClient.dictionary.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.defaultProgram, testDictionary);
-          testClient.dictionary.putValid({ defaultProgram: testDictionary }, function (error, result) {
+          testClient.dictionary.putValid({ defaultProgram: testDictionary }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -269,7 +265,7 @@ describe('nodejs', function () {
         testClient.dictionary.getEmpty(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.defaultProgram, {});
-          testClient.dictionary.putEmpty({ defaultProgram: {} }, function (error, result) {
+          testClient.dictionary.putEmpty({ defaultProgram: {} }, function (error) {
             should.not.exist(error);
             done();
           });
@@ -301,7 +297,7 @@ describe('nodejs', function () {
         testClient.inheritance.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result, siamese);
-          testClient.inheritance.putValid(siamese, function (error, result) {
+          testClient.inheritance.putValid(siamese, function (error) {
             should.not.exist(error);
             done();
           });
@@ -315,7 +311,7 @@ describe('nodejs', function () {
       it('should get and put complex types with readonly properties', function (done) {
         testClient.readonlyproperty.getValid(function (error, result) {
           should.not.exist(error);
-          testClient.readonlyproperty.putValid(result, function (error, result) {
+          testClient.readonlyproperty.putValid(result, function (error: msRest.ServiceError) {
             should.not.exist(error);
             done();
           });
@@ -362,7 +358,7 @@ describe('nodejs', function () {
         testClient.polymorphism.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result, fish);
-          testClient.polymorphism.putValid(fish, function (error, result) {
+          testClient.polymorphism.putValid(fish, function (error: msRest.ServiceError) {
             should.not.exist(error);
             done();
           });
@@ -394,7 +390,7 @@ describe('nodejs', function () {
         ]
       };
       it('should throw when required fields are omitted from polymorphic types', function (done) {
-        testClient.polymorphism.putValidMissingRequired(badfish, function (error, result) {
+        testClient.polymorphism.putValidMissingRequired(badfish, function (error: msRest.ServiceError) {
           should.exist(error);
           error.message.should.containEql('birthday');
           error.message.should.containEql('cannot be null or undefined');
@@ -469,7 +465,7 @@ describe('nodejs', function () {
         testClient.polymorphicrecursive.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result, bigfish);
-          testClient.polymorphicrecursive.putValid(bigfish, function (error, result) {
+          testClient.polymorphicrecursive.putValid(bigfish, function (error: msRest.ServiceError) {
             should.not.exist(error);
             done();
           });

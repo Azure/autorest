@@ -11,7 +11,7 @@
 'use strict';
 
 /**
- * Additional parameters for the putSimpleProductWithGrouping operation.
+ * Additional parameters for putSimpleProductWithGrouping operation.
  *
  */
 class FlattenParameterGroup {

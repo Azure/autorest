@@ -179,7 +179,7 @@ namespace AutoRest.AzureResourceSchema
                     bool hasDescr = false;
                     if (!string.IsNullOrWhiteSpace(prop.Value.Description))
                     {
-                        sb.Append(prop.Value.Description);
+                        sb.Append(prop.Value.Description.Replace("\n", ""));
                         hasDescr = true;
                     }
 
@@ -204,7 +204,7 @@ namespace AutoRest.AzureResourceSchema
 
                         for (int i = 0; i < values.Count; ++i)
                         {
-                            sb.AppendFormat(new InlineLink(values[i], "{0} object", values[i]).ToString());
+                            sb.AppendFormat(CreateInlineLink(values[i]).ToString());
                             if (i + 1 < values.Count)
                             {
                                 sb.Append(" ");
@@ -214,7 +214,8 @@ namespace AutoRest.AzureResourceSchema
 
                             // there are a handful of objects with null properties because the properties
                             // are all read-only.  for now just skip them to avoid a crash during table creation.
-                            if (HasAdditionalProps(refSchema) && !visited.Contains(values[i]))
+                            // omit tables for child resources as they will be created in their own md file.
+                            if (HasAdditionalProps(refSchema) && !visited.Contains(values[i]) && !values[i].EndsWith("_childResource"))
                             {
                                 // add type to the queue so a table for the type is generated
                                 schemas.Enqueue(new TableQueueEntry(values[i], refSchema));
@@ -233,6 +234,23 @@ namespace AutoRest.AzureResourceSchema
             }
 
             return tables;
+        }
+
+        private InlineLink CreateInlineLink(string destination)
+        {
+            if (!destination.EndsWith("_childResource"))
+            {
+                return new InlineLink($"#{destination}", "{0} object", destination);
+            }
+            // construct the child directory
+            destination = destination.Replace("_childResource", "");
+            var parts = destination.Split(new char[] { '_' });
+            if (parts.Length > 2)
+            {
+                // take the last two elements (the subdir and the file name)
+                parts = parts.Skip(parts.Length - 2).Take(2).ToArray();
+            }
+            return new InlineLink($"./{string.Join("/", parts)}.md", $"{parts[parts.Length - 1]}");
         }
 
         /// <summary>
@@ -432,7 +450,12 @@ namespace AutoRest.AzureResourceSchema
             {
                 Debug.Assert(jsonSchema.Items != null);
                 var jarr = new JArray();
-                jarr.Add(JsonSchemaToJTokenImpl(null, jsonSchema.Items, stack));
+
+                // special-case the resources element so it always has an empty array
+                if (propName != "resources")
+                {
+                    jarr.Add(JsonSchemaToJTokenImpl(null, jsonSchema.Items, stack));
+                }
 
                 return new JProperty(propName, jarr);
             }

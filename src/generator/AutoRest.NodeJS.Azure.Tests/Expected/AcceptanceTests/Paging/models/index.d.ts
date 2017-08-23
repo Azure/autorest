@@ -42,30 +42,6 @@ export interface Product {
 
 /**
  * @class
- * Initializes a new instance of the ProductResult class.
- * @constructor
- * @member {array} [values]
- * @member {string} [nextLink]
- */
-export interface ProductResult {
-  values?: Product[];
-  nextLink?: string;
-}
-
-/**
- * @class
- * Initializes a new instance of the OdataProductResult class.
- * @constructor
- * @member {array} [values]
- * @member {string} [odatanextLink]
- */
-export interface OdataProductResult {
-  values?: Product[];
-  odatanextLink?: string;
-}
-
-/**
- * @class
  * Initializes a new instance of the OperationResult class.
  * @constructor
  * @member {string} [status] The status of the request. Possible values
@@ -80,7 +56,7 @@ export interface OperationResult {
  * @class
  * Initializes a new instance of the PagingGetMultiplePagesOptions class.
  * @constructor
- * Additional parameters for the Paging_getMultiplePages operation.
+ * Additional parameters for getMultiplePages operation.
  *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
@@ -97,7 +73,7 @@ export interface PagingGetMultiplePagesOptions {
  * @class
  * Initializes a new instance of the PagingGetOdataMultiplePagesOptions class.
  * @constructor
- * Additional parameters for the Paging_getOdataMultiplePages operation.
+ * Additional parameters for getOdataMultiplePages operation.
  *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
@@ -114,7 +90,7 @@ export interface PagingGetOdataMultiplePagesOptions {
  * @class
  * Initializes a new instance of the PagingGetMultiplePagesWithOffsetOptions class.
  * @constructor
- * Additional parameters for the Paging_getMultiplePagesWithOffset operation.
+ * Additional parameters for getMultiplePagesWithOffset operation.
  *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
@@ -149,7 +125,7 @@ export interface CustomParameterGroup {
  * @class
  * Initializes a new instance of the PagingGetMultiplePagesWithOffsetNextOptions class.
  * @constructor
- * Additional parameters for the getMultiplePagesWithOffsetNext operation.
+ * Additional parameters for getMultiplePagesWithOffsetNext operation.
  *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
@@ -160,30 +136,6 @@ export interface CustomParameterGroup {
 export interface PagingGetMultiplePagesWithOffsetNextOptions {
   maxresults?: number;
   timeout?: number;
-}
-
-/**
- * @class
- * Initializes a new instance of the ProductResult class.
- * @constructor
- * @member {array} [values]
- * @member {string} [nextLink]
- */
-export interface ProductResult {
-  values?: Product[];
-  nextLink?: string;
-}
-
-/**
- * @class
- * Initializes a new instance of the OdataProductResult class.
- * @constructor
- * @member {array} [values]
- * @member {string} [odatanextLink]
- */
-export interface OdataProductResult {
-  values?: Product[];
-  odatanextLink?: string;
 }
 
 

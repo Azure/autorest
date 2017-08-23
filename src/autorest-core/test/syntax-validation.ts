@@ -3,9 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// polyfills for language support 
-require("../lib/polyfill.min.js");
-
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
@@ -19,15 +16,15 @@ import { Parse } from "../lib/parsing/literate-yaml";
   private async GetLoaderErrors(swagger: string): Promise<Message[]> {
     const dataStore = new DataStore();
     const uri = "mem:///swagger.json";
-    const hw = await dataStore.Write(uri);
-    const h = await hw.WriteData(swagger);
+    const h = await dataStore.WriteData(uri, swagger);
 
     const autoRest = new AutoRest();
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     const messages: Message[] = [];
 
     autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Error) { messages.push(m) } });
     try {
-      await Parse(await autoRest.view, h, dataStore.CreateScope("tmp"));
+      await Parse(await autoRest.view, h, dataStore.DataSink);
     } catch (e) {
       // it'll also throw, but detailed messages are emitted first
     }
