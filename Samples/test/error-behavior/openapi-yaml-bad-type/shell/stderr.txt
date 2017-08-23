@@ -1,2 +1,2 @@
-ERROR: Error converting value "Cowbell" to type 'System.Nullable`1[AutoRest.Swagger.Model.DataType]'. Path 'type', line 2, position 19.
-ERROR: Error converting value "Cowbell" to type 'System.Nullable`1[AutoRest.Swagger.Model.DataType]'. Path 'type', line 2, position 19.
+   at ...
+{ Error: Cannot find module '/var/folders/1r/gbft_cds5s7988wxjpqbxkp40000gn/T/autorest42d80cde/.autorest/@microsoft.azure_autorest-core@2.0.0/node_modules/@microsoft.azure/autorest-core/dist/app.js'
