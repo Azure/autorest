@@ -1,13 +1,4 @@
 (C) 2017 **Microsoft Corporation.**  
 # AutoRest code generation utility.
+Failure:
 https://aka.ms/autorest
-Process() Cancelled due to exception : [OperationAbortedException] Error occurred. Exiting.
-WARNING: Could not find the exact path ["paths","/cowbell","post","parameters",0,"schema","$ref"] for "Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found"
-WARNING: Could not find the exact path ["paths","/cowbell","post","parameters",0,"schema"] for "Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found"
-WARNING: Could not find the exact path ["paths","/cowbell","post","parameters",0] for "Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found"
-WARNING: Could not find the exact path ["paths","/cowbell","post","parameters"] for "Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found"
-WARNING: Could not find the exact path ["paths","/cowbell","post"] for "Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found"
-WARNING: Could not find the exact path ["paths","/cowbell"] for "Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found"
-WARNING: Could not find the exact path ["paths"] for "Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found"
-WARNING: Could not find the exact path [] for "Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found"
-WARNING: Failed to blame {"path":[]} in '"/Samples/test/error-behavior/openapi-yaml-bad-file-reference/tiny.yaml"' (Error: Object '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/tiny.yaml' does not exist.)

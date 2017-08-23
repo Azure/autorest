@@ -223,6 +223,21 @@ namespace AutoRest.Java.Azure.Fluent.Model
             Delete
         }
 
+        private static bool HasSequenceType(IModelType mt)
+        {
+            if (mt is SequenceType)
+            {
+                return true;
+            }
+
+            if (mt is CompositeType ct)
+            {
+                return ct.Properties.Any(p => HasSequenceType(p.ModelType));
+            }
+            
+            return false;
+        }
+
         private static MethodType GetMethodType(MethodJvaf method)
         {
             Regex leading = new Regex("^/+");
@@ -233,7 +248,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 var urlSplits = methodUrl.Split('/');
                 if ((urlSplits.Count() == 5 || urlSplits.Count() == 7)
                     && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[0], "subscriptions")
-                    && method.ReturnType.Body is SequenceType)
+                    && HasSequenceType(method.ReturnType.Body))
                 {
                     if (urlSplits.Count() == 5)
                     {

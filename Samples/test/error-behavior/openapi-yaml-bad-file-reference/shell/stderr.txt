@@ -1,5 +1,2 @@
    at ...
-{ Error: [OperationAbortedException] Error occurred. Exiting.
-ERROR: Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found
-FATAL: Error: [OperationAbortedException] Error occurred. Exiting.
-FATAL: swagger-document/loader - FAILED
+{ Error: Cannot find module '/var/folders/1r/gbft_cds5s7988wxjpqbxkp40000gn/T/autorest42d80cde/.autorest/@microsoft.azure_autorest-core@2.0.0/node_modules/@microsoft.azure/autorest-core/dist/app.js'

@@ -1,3 +1,4 @@
 (C) 2017 **Microsoft Corporation.**  
 # AutoRest code generation utility.
+Failure:
 https://aka.ms/autorest
