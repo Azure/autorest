@@ -107,7 +107,7 @@ foreach (var st in Model.SiblingTypes)
 }
 }
 
-@if ((Model.HasPolymorphicFields || (Model.BaseModelType != null && if (BaseModelType as CompositeTypeGo).HasPolymorphicFields)) && !Model.IsPolymorphic)
+@if ((Model.HasPolymorphicFields || (Model.BaseModelType != null && (Model.BaseModelType as CompositeTypeGo).HasPolymorphicFields)) && !Model.IsPolymorphic)
 {
 @:// UnmarshalJSON is the custom unmarshaler for @(Model.Name) struct.
 @:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) *@(Model.Name)) UnmarshalJSON(b []byte) error {

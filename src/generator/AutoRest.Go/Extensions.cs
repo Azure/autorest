@@ -361,7 +361,8 @@ namespace AutoRest.Go
 
         public static bool ShouldBeSyntheticType(this IModelType type)
         {            
-            return(type is CompositeTypeGo && (type as CompositeTypeGo).IsPolymorphicResponse());
+            return (type is PrimaryType || type is SequenceType || type is DictionaryType || type is EnumType || 
+                (type is CompositeTypeGo && (type as CompositeTypeGo).IsPolymorphicResponse()));
         }
 
         /// <summary>
