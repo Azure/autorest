@@ -62,7 +62,7 @@ script:
   - gulp build
   - |-
     if [[ $MODE == 'main' ]]; then
-      gulp test
+      travis_wait 30  gulp test
     elif [[ $MODE == 'diffRegenExpected' ]]; then
       gulp regenerate
       git diff -w
@@ -77,7 +77,7 @@ script:
       git clone https://github.com/Azure/autorest $arRef
       pushd $arRef
       npm install
-      travis_wait 30 gulp build
+      gulp build
 
       # REGEN using reference AutoRest
       for gen in "${gens[@]}"
