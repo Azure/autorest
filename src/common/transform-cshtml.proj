@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0">
-  <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-Perks.CodeGen" Version="1.0.16" />
-    <PackageReference Include="dotnet-Perks.CodeGen" Version="1.0.16">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
-</Project>

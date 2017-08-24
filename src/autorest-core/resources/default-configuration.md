@@ -17,6 +17,10 @@ openapi-type: arm
 ``` yaml
 use-extension:
   "@microsoft.azure/autorest.csharp": "*"
+  "@microsoft.azure/autorest.java": "*"
+  "@microsoft.azure/autorest.nodejs": "*"
+  "@microsoft.azure/autorest.python": "*"
+  "@microsoft.azure/autorest.ruby": "*"
   "@microsoft.azure/classic-openapi-validator": ">=0.0.6-preview"
   "@microsoft.azure/openapi-validator": ">=0.1.2-preview"
 ```
