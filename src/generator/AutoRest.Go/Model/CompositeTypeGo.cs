@@ -42,7 +42,7 @@ namespace AutoRest.Go.Model
             }
         }
 
-        public bool HasPolymorphicFields => Properties.Any(p => (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic) 
+        public bool HasPolymorphicFields => AllProperties.Any(p => (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic) 
             || (p.ModelType is SequenceType && (p.ModelType as SequenceTypeGo).ElementType is CompositeType && ((p.ModelType as SequenceTypeGo).ElementType as CompositeType).IsPolymorphic));
 
         public bool DiscriminatorEnumExists;
@@ -125,7 +125,6 @@ namespace AutoRest.Go.Model
             Add(p);
 
             _wrapper = true;
-            Console.Error.WriteLine(Name.FixedValue);
         }
 
         /// <summary>
@@ -142,6 +141,18 @@ namespace AutoRest.Go.Model
                     ModelType = DiscriminatorEnum,
                 }));
             }            
+        }
+
+        public IEnumerable<PropertyGo> AllProperties
+        {
+            get
+            {
+                if (BaseModelType != null)
+                {
+                    return Properties.Cast<PropertyGo>().Concat((BaseModelType as CompositeTypeGo).AllProperties);
+                }
+                return Properties.Cast<PropertyGo>();
+            }
         }
 
         public override Property Add(Property item)
@@ -177,7 +188,6 @@ namespace AutoRest.Go.Model
             {
                 return (BaseModelType as CompositeTypeGo).IsPolymorphicResponse();
             }
-            Console.Error.WriteLine("\t" + Name.FixedValue + " poly: " + IsPolymorphic + " resp: " + IsResponseType);
             return IsPolymorphic && IsResponseType;
         }
 

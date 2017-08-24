@@ -6,11 +6,6 @@
 
 @inherits AutoRest.Core.Template<AutoRest.Go.Model.CompositeTypeGo>
 
-@if (Model.HasPolymorphicFields)
-{
-@WrapComment("// ", string.Format("{0} has poly fields!", Model.Name))
-}
-
 @WrapComment("// ", string.Format("{0} is {1}", Model.Name, Model.Documentation.ToSentence()))
 @if (Model.IsPolymorphic)
 {
@@ -107,7 +102,7 @@ foreach (var st in Model.SiblingTypes)
 }
 }
 
-@if ((Model.HasPolymorphicFields || (Model.BaseModelType != null && (Model.BaseModelType as CompositeTypeGo).HasPolymorphicFields)) && !Model.IsPolymorphic)
+@if (Model.HasPolymorphicFields && !Model.IsPolymorphic)
 {
 @:// UnmarshalJSON is the custom unmarshaler for @(Model.Name) struct.
 @:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) *@(Model.Name)) UnmarshalJSON(b []byte) error {
@@ -128,7 +123,7 @@ foreach (var st in Model.SiblingTypes)
 	@:}
     
     @:var v *json.RawMessage
-    foreach (var p in Model.Properties)
+    foreach (var p in Model.AllProperties)
     {
     @:@EmptyLine
     @:v = m["@(p.SerializedName)"]
@@ -139,7 +134,7 @@ foreach (var st in Model.SiblingTypes)
         }
         else if (p.ModelType is SequenceType && (p.ModelType as SequenceTypeGo).ElementType is CompositeType && ((p.ModelType as SequenceTypeGo).ElementType as CompositeType).IsPolymorphic)
         {
-            @: @(CodeNamerGo.Instance.GetVariableName(p.SerializedName)), err := unmarshal@((p.ModelType as SequenceTypeGo).ElementType.Name)Array(*m["@(p.SerializedName)"])
+        @:@(CodeNamerGo.Instance.GetVariableName(p.SerializedName)), err := unmarshal@((p.ModelType as SequenceTypeGo).ElementType.Name)Array(*m["@(p.SerializedName)"])
         }
         else
         {

@@ -253,15 +253,9 @@ namespace AutoRest.Go
                     parameter.Name = scope.GetVariableName(parameter.Name);
                 }
 
-                Console.Error.WriteLine(method.Name.FixedValue);
                 // fix up method return types
-                if (method.ReturnType != null && method.ReturnType.Body != null)
-                {                    
-                    Console.Error.WriteLine("\t" + method.ReturnType.Body.Name.FixedValue + " " + method.ReturnType.Body.GetType());
-                }
                 if (method.ReturnType.Body.ShouldBeSyntheticType())
                 {
-                    Console.Error.WriteLine("Dundundun, synthetic type!");
                     var ctg = new CompositeTypeGo(method.ReturnType.Body);
                     if (wrapperTypes.ContainsKey(ctg.Name))
                     {
