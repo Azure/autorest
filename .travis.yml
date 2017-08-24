@@ -54,7 +54,7 @@ script:
   - set -e
   - set -o pipefail
   - gulp build
-  - gulp test
+  - travis_wait 30 gulp test
 after_script:
   - |-
     echo "========== Server log: ============"
