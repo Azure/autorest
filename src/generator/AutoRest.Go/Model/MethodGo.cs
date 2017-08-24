@@ -400,7 +400,7 @@ namespace AutoRest.Go.Model
 
                 if (HasReturnValue() && !ReturnValue().Body.IsStreamType())
                 {
-                    if (((CompositeTypeGo)ReturnValue().Body).IsWrapperType)
+                    if (((CompositeTypeGo)ReturnValue().Body).IsWrapperType && !((CompositeTypeGo)ReturnValue().Body).HasPolymorphicFields)
                     {
                         decorators.Add("autorest.ByUnmarshallingJSON(&result.Value)");
                     }

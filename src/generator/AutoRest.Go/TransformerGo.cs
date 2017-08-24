@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Extensions.Azure;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Go
 {
@@ -36,8 +37,8 @@ namespace AutoRest.Go
             CodeNamerGo.Instance.ReserveNamespace(cm.Namespace);
             FixStutteringTypeNames(cmg);
             TransformEnumTypes(cmg);
-            TransformMethods(cmg);
             TransformModelTypes(cmg);
+            TransformMethods(cmg);
             AzureExtensions.ProcessParameterizedHost(cmg);
 
             return cmg;
@@ -75,6 +76,48 @@ namespace AutoRest.Go
                         cmg.Add(new EnumTypeGo(p.ModelType as EnumType));
                     }
                 };
+            }
+
+            // Add discriminators
+            foreach (var mt in cmg.ModelTypes)
+            {
+                if (mt.IsPolymorphic)
+                {
+                    var values  = new List<EnumValue>();
+                    foreach (var dt in (mt as CompositeTypeGo).DerivedTypes)
+                    {
+                        var ev = new EnumValue();
+                        ev.Name =  string.Format("{0}{1}", mt.PolymorphicDiscriminator, CodeNamerGo.Instance.PascalCase(dt.SerializedName));
+                        ev.SerializedName = dt.SerializedName;
+                        values.Add(ev);
+                    }
+                    bool nameAlreadyExists = cmg.EnumTypes.Any(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator));
+                    bool alreadyExists = nameAlreadyExists;
+                    if (nameAlreadyExists)
+                    {
+                        (mt as CompositeTypeGo).DiscriminatorEnum = cmg.EnumTypes.First(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator));                        
+                        var existingValues = new List<string>();
+                        foreach (var v in cmg.EnumTypes.First(et => et.Name.EqualsIgnoreCase(mt.PolymorphicDiscriminator)).Values)
+                        {
+                            existingValues.Add(v.SerializedName);
+                        }
+                        foreach (var v in values)
+                        {
+                            if (!existingValues.Any(ev => ev.Equals(v.SerializedName)))
+                            {
+                                alreadyExists = false;
+                            }
+                        }
+                    }
+                    if (!alreadyExists)
+                    {
+                        (mt as CompositeTypeGo).DiscriminatorEnum = cmg.Add(New<EnumType>(new{
+                            Name = nameAlreadyExists ? string.Format("{0}{1}", mt.PolymorphicDiscriminator, mt.Name) :  mt.PolymorphicDiscriminator,
+                            Values = values,
+                    })); 
+                    }
+                    (mt as CompositeTypeGo).DiscriminatorEnumExists = alreadyExists;
+                }
             }
 
             // now normalize the names
@@ -178,6 +221,18 @@ namespace AutoRest.Go
                         mtm.PreparerNeeded = cmg.NextMethodUndefined.Contains(mtm);
                     }
                 });
+
+            foreach (var mtm in cmg.ModelTypes)
+            {
+                if (mtm.IsPolymorphic)
+                {
+                    foreach (var dt in (mtm as CompositeTypeGo).DerivedTypes)
+                    {
+                        (dt as CompositeTypeGo).DiscriminatorEnum = (mtm as CompositeTypeGo).DiscriminatorEnum;
+                    }
+
+                }
+            }
         }
 
         private void TransformMethods(CodeModelGo cmg)

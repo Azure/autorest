@@ -7,12 +7,157 @@
 @inherits AutoRest.Core.Template<AutoRest.Go.Model.CompositeTypeGo>
 
 @WrapComment("// ", string.Format("{0} is {1}", Model.Name, Model.Documentation.ToSentence()))
-type @Model.Name struct {
-@if (Model.IsResponseType)
+@if (Model.IsPolymorphic)
 {
-    @:autorest.Response `json:"-"`
+@:type @(Model.Name) interface {
+    foreach (var dt in Model.DerivedTypes)
+    {
+    @:As@(dt.Name) () (*@(dt.Name), bool)
+    }
+@:}
+
+@:@EmptyLine
+@:func unmarshal@(Model.Name)(b []byte) (@(Model.Name), error){
+    @:var m map[string]interface{}
+	@:err := json.Unmarshal(b, &m)
+	@:if err != nil {
+		@:return nil, err
+	@:}
+    @:@EmptyLine
+    @:switch m["@(Model.PolymorphicDiscriminator)"] {
+    foreach (var dt in Model.DerivedTypes)
+    {
+    @:case string(@((dt as CompositeTypeGo).DiscriminatorEnumValue)):
+        @:var @(dt.Name.FixedValue.ToIdiomaticShortName()) @(dt.Name)
+        @:err := json.Unmarshal(b, &@(dt.Name.FixedValue.ToIdiomaticShortName()))
+        @:return @(dt.Name.FixedValue.ToIdiomaticShortName()), err
+    }
+    @:default:
+        @:return nil, errors.New("Unsupported type")
+    @:}
+@:}
+
+@:func unmarshal@(Model.Name)Array(b []byte) ([]@(Model.Name), error){
+    @:var rawMessages []*json.RawMessage
+	@:err := json.Unmarshal(b, &rawMessages)
+	@:if err != nil {
+		@:return nil, err
+	@:}
+    @:@EmptyLine
+    @:@(Model.Name.FixedValue.ToIdiomaticShortName())Array := make([]@(Model.Name), len(rawMessages))
+    @:@EmptyLine
+    @:for index, rawMessage := range rawMessages {
+        @:@(Model.Name.FixedValue.ToIdiomaticShortName()), err := unmarshal@(Model.Name)(*rawMessage)
+	    @:if err != nil {
+		    @:return nil, err
+	    @:}
+        @:@(Model.Name.FixedValue.ToIdiomaticShortName())Array[index] = @(Model.Name.FixedValue.ToIdiomaticShortName())
+    @:}
+    @:return @(Model.Name.FixedValue.ToIdiomaticShortName())Array, nil
+@:}
 }
+else
+{
+@:type @(Model.Name) struct {
+    @(Model.AddHTTPResponse())
     @(Model.Fields())
+@:}
+}
+
+@if (Model.BaseIsPolymorphic && !Model.IsPolymorphic)
+{
+@:@EmptyLine
+@:// MarshalJSON is the custom marshaler for @(Model.Name).
+@:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) @(Model.Name))MarshalJSON() ([]byte, error){
+    @if ((Model.BaseModelType as CompositeTypeGo).DiscriminatorEnumExists)
+    {
+    @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@((Model.BaseModelType as CompositeTypeGo).PolymorphicDiscriminatorProperty.Name) = @(Model.DiscriminatorEnumValue)
+    }
+    else
+    {
+    @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(Model.BaseModelType.PolymorphicDiscriminatorProperty.Name) = @(Model.DiscriminatorEnumValue)
+    }
+    @:type Alias @(Model.Name)
+    @:return json.Marshal(&struct {
+        @:Alias
+    @:}{
+        @:Alias: (Alias)(@(Model.Name.FixedValue.ToIdiomaticShortName())),
+    @:})
+@:}
+
+foreach (var st in Model.SiblingTypes)
+{
+@:@EmptyLine
+@:// As@(st.Name) is the @(Model.BaseModelType.Name) implementation for @(Model.Name).
+@:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) @(Model.Name)) As@(st.Name)() (*@(st.Name), bool) {
+    if (st.Equals(Model))
+    {
+    @:return &@(Model.Name.FixedValue.ToIdiomaticShortName()), true
+    }
+    else
+    {
+    @:return nil, false
+    }
+@:}
+}
+}
+
+@if (Model.HasPolymorphicFields && !Model.IsPolymorphic)
+{
+@:// UnmarshalJSON is the custom unmarshaler for @(Model.Name) struct.
+@:func (@(Model.Name.FixedValue.ToIdiomaticShortName()) *@(Model.Name)) UnmarshalJSON(b []byte) error {
+    @if (Model.IsWrapperType)
+    {
+    @:@(Model.BaseType.Name.FixedValue.ToIdiomaticShortName()), err := unmarshal@(Model.BaseType.Name)(b)
+	@:if err != nil {
+		@:return err
+	@:}
+    @:@(Model.Name.FixedValue.ToIdiomaticShortName()).Value = @(Model.BaseType.Name.FixedValue.ToIdiomaticShortName())
+    }
+    else
+    {
+	@:var m map[string]*json.RawMessage
+	@:err := json.Unmarshal(b, &m)
+	@:if err != nil {
+		@:return err
+	@:}
+    
+    @:var v *json.RawMessage
+    foreach (var p in Model.AllProperties)
+    {
+    @:@EmptyLine
+    @:v = m["@(p.SerializedName)"]
+    @:if v != nil {
+        @if (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic)
+        {
+        @:@(p.SerializedName), err := unmarshal@(p.ModelType.Name)(*m["@(p.SerializedName)"])
+        }
+        else if (p.ModelType is SequenceType && (p.ModelType as SequenceTypeGo).ElementType is CompositeType && ((p.ModelType as SequenceTypeGo).ElementType as CompositeType).IsPolymorphic)
+        {
+        @:@(CodeNamerGo.Instance.GetVariableName(p.SerializedName)), err := unmarshal@((p.ModelType as SequenceTypeGo).ElementType.Name)Array(*m["@(p.SerializedName)"])
+        }
+        else
+        {
+        @:var @(CodeNamerGo.Instance.GetVariableName(p.SerializedName)) @(p.ModelType.Name)
+        @:err = json.Unmarshal(*m["@(p.SerializedName)"], &@(CodeNamerGo.Instance.GetVariableName(p.SerializedName)))
+        }
+        @:if err != nil {
+            @:return err
+        @:}
+        @if ((p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic) || (p.ModelType is EnumType))
+        {
+        @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(p.Name) = @(CodeNamerGo.Instance.GetVariableName(p.SerializedName))
+        }
+        else
+        {
+        @:@(Model.Name.FixedValue.ToIdiomaticShortName()).@(p.Name) = &@(CodeNamerGo.Instance.GetVariableName(p.SerializedName))
+        }
+    @:}
+    }
+    }
+    @:@EmptyLine
+    @:return nil
+@:}
 }
 
 @if (!string.IsNullOrEmpty(Model.NextLink) && Model.PreparerNeeded)

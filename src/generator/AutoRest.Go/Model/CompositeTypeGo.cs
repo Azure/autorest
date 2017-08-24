@@ -7,6 +7,7 @@ using AutoRest.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Go.Model
 {
@@ -25,6 +26,30 @@ namespace AutoRest.Go.Model
         public string NextLink;
 
         public bool PreparerNeeded = false;
+
+        public IEnumerable<CompositeType> DerivedTypes => CodeModel.ModelTypes.Where(t => t.DerivesFrom(this));
+
+        public IEnumerable<CompositeType> SiblingTypes
+        {
+            get
+            {
+                var st = (BaseModelType as CompositeTypeGo).DerivedTypes;
+                if (BaseModelType.BaseModelType != null && BaseModelType.BaseModelType.IsPolymorphic)
+                {
+                    st = st.Union((BaseModelType as CompositeTypeGo).SiblingTypes);
+                }
+                return st;
+            }
+        }
+
+        public bool HasPolymorphicFields => AllProperties.Any(p => (p.ModelType is CompositeType && (p.ModelType as CompositeTypeGo).IsPolymorphic) 
+            || (p.ModelType is SequenceType && (p.ModelType as SequenceTypeGo).ElementType is CompositeType && ((p.ModelType as SequenceTypeGo).ElementType as CompositeType).IsPolymorphic));
+
+        public bool DiscriminatorEnumExists;
+
+        public EnumType DiscriminatorEnum;
+
+        public string DiscriminatorEnumValue => (DiscriminatorEnum as EnumTypeGo).Constants.FirstOrDefault(c => c.Value.Equals(SerializedName)).Key;
 
         public CompositeTypeGo()
         {
@@ -89,6 +114,7 @@ namespace AutoRest.Go.Model
             else
             {
                 Name += elementType.Name;
+                Name += "Wrapper";
             }
 
             // add the wrapped type as a property named Value
@@ -102,16 +128,72 @@ namespace AutoRest.Go.Model
         }
 
         /// <summary>
+        /// If PolymorphicDiscriminator is set, makes sure we have a PolymorphicDiscriminator property.
+        /// </summary>
+        private void AddPolymorphicPropertyIfNecessary()
+        {
+            if (!string.IsNullOrEmpty(PolymorphicDiscriminator) && Properties.All(p => p.SerializedName != PolymorphicDiscriminator))
+            {
+                var newProp = base.Add(New<Property>(new
+                {
+                    Name = CodeNamerGo.Instance.GetPropertyName(PolymorphicDiscriminator),
+                    SerializedName = PolymorphicDiscriminator,
+                    ModelType = DiscriminatorEnum,
+                }));
+            }            
+        }
+
+        public IEnumerable<PropertyGo> AllProperties
+        {
+            get
+            {
+                if (BaseModelType != null)
+                {
+                    return Properties.Cast<PropertyGo>().Concat((BaseModelType as CompositeTypeGo).AllProperties);
+                }
+                return Properties.Cast<PropertyGo>();
+            }
+        }
+
+        public override Property Add(Property item)
+        {
+            var property = base.Add(item) as PropertyGo;
+            AddPolymorphicPropertyIfNecessary();
+            return property;
+        }
+
+        /// <summary>
         /// Add imports for composite types.
         /// </summary>
         /// <param name="imports"></param>
         public void AddImports(HashSet<string> imports)
         {
             Properties.ForEach(p => p.ModelType.AddImports(imports));
+            if (BaseIsPolymorphic && !IsPolymorphic)
+            {
+                imports.Add("\"encoding/json\"");
+                imports.Add("\"errors\"");
+            }
+        }
+
+        public string AddHTTPResponse()
+        {
+            return (IsResponseType || IsWrapperType) ?
+                "autorest.Response `json:\"-\"`\n" :
+                null;
+        }
+
+        public bool IsPolymorphicResponse() {
+            if (BaseIsPolymorphic && BaseModelType != null)
+            {
+                return (BaseModelType as CompositeTypeGo).IsPolymorphicResponse();
+            }
+            return IsPolymorphic && IsResponseType;
         }
 
         public string Fields()
         {
+            AddPolymorphicPropertyIfNecessary();
             var indented = new IndentedStringBuilder("    ");
             var properties = Properties.Cast<PropertyGo>().ToList();
 
@@ -176,6 +258,10 @@ namespace AutoRest.Go.Model
                     // important, i.e. we don't want to flatten primary types like dictionaries.
                     indented.AppendFormat("*{0} {1}\n", property.ModelType.Name, property.JsonTag());
                     property.Extensions[SwaggerExtensions.FlattenOriginalTypeName] = Name;
+                }
+                else if (property.ModelType is CompositeType && (property.ModelType as CompositeTypeGo).IsPolymorphic)
+                {
+                    indented.AppendFormat("{0} {1} {2}\n", property.Name, property.ModelType.Name, property.JsonTag());
                 }
                 else
                 {

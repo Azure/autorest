@@ -2,10 +2,12 @@ package complexgrouptest
 
 import (
 	"encoding/json"
+	"net/http"
 	"testing"
 	"time"
 
 	"github.com/Azure/go-autorest/autorest/date"
+	"github.com/Azure/go-autorest/autorest/to"
 	chk "gopkg.in/check.v1"
 
 	"tests/acceptancetests/utils"
@@ -23,8 +25,9 @@ var complexArrayClient = getArrayComplexClient()
 var complexDictionaryClient = getDictionaryComplexClient()
 var complexBasicOperationsClient = getBasicOperationsClient()
 var complexInheritanceClient = getInheritanceClient()
-var complexPolymorphicClient = getPolymorphismClient()
 var complexReadOnlyClient = getReadOnlyClient()
+var complexPolymorphicClient = getPolymorphismClient()
+var complexPolymorphicRecursiveClient = getPolymorphismRecursiveClient()
 
 func getArrayComplexClient() ArrayClient {
 	c := NewArrayClient()
@@ -64,6 +67,12 @@ func getPolymorphismClient() PolymorphismClient {
 
 func getReadOnlyClient() ReadonlypropertyClient {
 	c := NewReadonlypropertyClient()
+	c.BaseURI = utils.GetBaseURI()
+	return c
+}
+
+func getPolymorphismRecursiveClient() PolymorphicrecursiveClient {
+	c := NewPolymorphicrecursiveClient()
 	c.BaseURI = utils.GetBaseURI()
 	return c
 }
@@ -381,53 +390,163 @@ func getDogObject(food string, id int32, name string) Dog {
 }
 
 // Polymorphic tests
-var validPolymorphic = `{
-  "fishtype": "salmon",
-  "location": "alaska",
-  "iswild": true,
-  "species": "king",
-  "length": 1,
-  "siblings": [
-    {
-      "fishtype": "shark",
-      "age": 6,
-      "birthday": "2012-01-05T01:00:00Z",
-      "length": 20,
-      "species": "predator"
-    },
-    {
-      "fishtype": "sawshark",
-      "age": 105,
-      "birthday": "1900-01-05T01:00:00Z",
-      "length": 10,
-      "picture": "//////4=",
-      "species": "dangerous"
-    },
-    {
-      "fishtype": "goblin",
-      "age": 1,
-      "birthday": "2015-08-08T00:00:00Z",
-      "length": 30,
-      "species": "scary",
-      "jawsize": 5
-    }
-  ]
-}`
-
-func (s *ComplexGroupSuite) TestGetComplexPolymorphicValid(c *chk.C) {
-	res, err := complexPolymorphicClient.GetValid()
-	c.Assert(err, chk.IsNil)
-	var f Fish
-	err = json.Unmarshal([]byte(validPolymorphic), &f)
-	c.Assert(err, chk.IsNil)
-	f.Response = res.Response
-	c.Assert(res, chk.DeepEquals, f)
+var f = Salmon{
+	Length:   to.Float64Ptr(1),
+	Iswild:   to.BoolPtr(true),
+	Location: to.StringPtr("alaska"),
+	Species:  to.StringPtr("king"),
+	Siblings: &[]Fish{
+		Shark{
+			Length:   to.Float64Ptr(20),
+			Birthday: &date.Time{time.Date(2012, time.January, 5, 1, 0, 0, 0, time.UTC)},
+			Age:      to.Int32Ptr(6),
+			Species:  to.StringPtr("predator"),
+		},
+		Sawshark{
+			Length:   to.Float64Ptr(10),
+			Birthday: &date.Time{time.Date(1900, time.January, 5, 1, 0, 0, 0, time.UTC)},
+			Age:      to.Int32Ptr(105),
+			Species:  to.StringPtr("dangerous"),
+			Picture:  &[]byte{255, 255, 255, 255, 254},
+		},
+		Goblinshark{
+			Length:   to.Float64Ptr(30),
+			Birthday: &date.Time{time.Date(2015, time.August, 8, 0, 0, 0, 0, time.UTC)},
+			Age:      to.Int32Ptr(1),
+			Species:  to.StringPtr("scary"),
+			Jawsize:  to.Int32Ptr(5),
+		},
+	},
 }
 
-// func (s *ComplexGroupSuite) TestPutComplexPolymorphismValid(c *chk.C) {
-// 	var f Fish
-// 	err := json.Unmarshal([]byte(validPolymorphic), &f)
-// 	c.Assert(err, chk.IsNil)
-// 	_, err = complexPolymorphicClient.PutValid(f)
-// 	c.Assert(err, chk.IsNil)
-// }
+func (s *ComplexGroupSuite) TestGetComplexPolymorphicValid(c *chk.C) {
+	resp, err := complexPolymorphicClient.GetValid()
+	c.Assert(err, chk.IsNil)
+
+	c.Assert(resp.Value, chk.FitsTypeOf, f)
+	c.Assert(*resp.Value.(Salmon).Iswild, chk.Equals, *f.Iswild)
+	c.Assert(*resp.Value.(Salmon).Location, chk.Equals, *f.Location)
+	c.Assert(*resp.Value.(Salmon).Species, chk.Equals, *f.Species)
+	c.Assert(*resp.Value.(Salmon).Length, chk.Equals, *f.Length)
+	c.Assert(*resp.Value.(Salmon).Siblings, chk.HasLen, len(*f.Siblings))
+
+	c.Assert((*resp.Value.(Salmon).Siblings)[0], chk.FitsTypeOf, (*f.Siblings)[0].(Shark))
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[0].(Shark).Length, chk.Equals, *(*f.Siblings)[0].(Shark).Length)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[0].(Shark).Birthday, chk.Equals, *(*f.Siblings)[0].(Shark).Birthday)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[0].(Shark).Age, chk.Equals, *(*f.Siblings)[0].(Shark).Age)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[0].(Shark).Species, chk.Equals, *(*f.Siblings)[0].(Shark).Species)
+
+	c.Assert((*resp.Value.(Salmon).Siblings)[1], chk.FitsTypeOf, (*f.Siblings)[1].(Sawshark))
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[1].(Sawshark).Length, chk.Equals, *(*f.Siblings)[1].(Sawshark).Length)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[1].(Sawshark).Birthday, chk.Equals, *(*f.Siblings)[1].(Sawshark).Birthday)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[1].(Sawshark).Age, chk.Equals, *(*f.Siblings)[1].(Sawshark).Age)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[1].(Sawshark).Species, chk.Equals, *(*f.Siblings)[1].(Sawshark).Species)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[1].(Sawshark).Picture, chk.DeepEquals, *(*f.Siblings)[1].(Sawshark).Picture)
+
+	c.Assert((*resp.Value.(Salmon).Siblings)[2], chk.FitsTypeOf, (*f.Siblings)[2].(Goblinshark))
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[2].(Goblinshark).Length, chk.Equals, *(*f.Siblings)[2].(Goblinshark).Length)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[2].(Goblinshark).Birthday, chk.Equals, *(*f.Siblings)[2].(Goblinshark).Birthday)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[2].(Goblinshark).Age, chk.Equals, *(*f.Siblings)[2].(Goblinshark).Age)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[2].(Goblinshark).Species, chk.Equals, *(*f.Siblings)[2].(Goblinshark).Species)
+	c.Assert(*(*resp.Value.(Salmon).Siblings)[2].(Goblinshark).Jawsize, chk.Equals, *(*f.Siblings)[2].(Goblinshark).Jawsize)
+}
+
+func (s *ComplexGroupSuite) TestPutComplexPolymorphismValid(c *chk.C) {
+	_, err := complexPolymorphicClient.PutValid(f)
+	c.Assert(err, chk.IsNil)
+}
+
+func (s *ComplexGroupSuite) TestPutComplexPolymorphismValidMissingRequired(c *chk.C) {
+	badF := Salmon{
+		Length:   to.Float64Ptr(1),
+		Iswild:   to.BoolPtr(true),
+		Location: to.StringPtr("alaska"),
+		Species:  to.StringPtr("king"),
+		Siblings: &[]Fish{
+			Shark{
+				Length:   to.Float64Ptr(20),
+				Birthday: &date.Time{time.Date(2012, time.January, 5, 1, 0, 0, 0, time.UTC)},
+				Age:      to.Int32Ptr(6),
+				Species:  to.StringPtr("predator"),
+			},
+			Sawshark{
+				Length:  to.Float64Ptr(10),
+				Age:     to.Int32Ptr(105),
+				Species: to.StringPtr("dangerous"),
+				Picture: &[]byte{255, 255, 255, 255, 254},
+			},
+		},
+	}
+	resp, err := complexPolymorphicClient.PutValidMissingRequired(badF)
+	c.Assert(err, chk.NotNil)
+	c.Assert(resp.StatusCode, chk.Equals, http.StatusBadRequest)
+}
+
+// Polymorphic recursive tests
+func (s *ComplexGroupSuite) TestGetComplexPolymorphicRecursive(c *chk.C) {
+	resp, err := complexPolymorphicRecursiveClient.GetValid()
+	c.Assert(err, chk.IsNil)
+
+	c.Assert(resp.Value, chk.FitsTypeOf, Salmon{})
+	c.Assert((*resp.Value.(Salmon).Siblings)[0], chk.FitsTypeOf, Shark{})
+	c.Assert((*(*resp.Value.(Salmon).Siblings)[0].(Shark).Siblings)[0], chk.FitsTypeOf, Salmon{})
+	c.Assert(*(*(*resp.Value.(Salmon).Siblings)[0].(Shark).Siblings)[0].(Salmon).Location, chk.FitsTypeOf, "atlantic")
+}
+
+func (s *ComplexGroupSuite) TestPutComplexPolymorphicRecursive(c *chk.C) {
+	recF := Salmon{
+		Iswild:   to.BoolPtr(true),
+		Length:   to.Float64Ptr(1),
+		Species:  to.StringPtr("king"),
+		Location: to.StringPtr("alaska"),
+		Siblings: &[]Fish{
+			Shark{
+				Age:      to.Int32Ptr(6),
+				Length:   to.Float64Ptr(20),
+				Species:  to.StringPtr("predator"),
+				Birthday: &date.Time{time.Date(2012, time.January, 5, 1, 0, 0, 0, time.UTC)},
+				Siblings: &[]Fish{
+					Salmon{
+						Iswild:   to.BoolPtr(true),
+						Length:   to.Float64Ptr(2),
+						Location: to.StringPtr("atlantic"),
+						Species:  to.StringPtr("coho"),
+						Siblings: &[]Fish{
+							Shark{
+								Age:      to.Int32Ptr(6),
+								Length:   to.Float64Ptr(20),
+								Species:  to.StringPtr("predator"),
+								Birthday: &date.Time{time.Date(2012, time.January, 5, 1, 0, 0, 0, time.UTC)},
+							},
+							Sawshark{
+								Age:      to.Int32Ptr(105),
+								Length:   to.Float64Ptr(10),
+								Birthday: &date.Time{time.Date(1900, time.January, 5, 1, 0, 0, 0, time.UTC)},
+								Species:  to.StringPtr("dangerous"),
+								Picture:  &[]byte{255, 255, 255, 255, 254},
+							},
+						},
+					},
+					Sawshark{
+						Age:      to.Int32Ptr(105),
+						Length:   to.Float64Ptr(10),
+						Species:  to.StringPtr("dangerous"),
+						Siblings: &[]Fish{},
+						Birthday: &date.Time{time.Date(1900, time.January, 5, 1, 0, 0, 0, time.UTC)},
+						Picture:  &[]byte{255, 255, 255, 255, 254},
+					},
+				},
+			},
+			Sawshark{
+				Age:      to.Int32Ptr(105),
+				Length:   to.Float64Ptr(10),
+				Species:  to.StringPtr("dangerous"),
+				Siblings: &[]Fish{},
+				Birthday: &date.Time{time.Date(1900, time.January, 5, 1, 0, 0, 0, time.UTC)},
+				Picture:  &[]byte{255, 255, 255, 255, 254},
+			},
+		},
+	}
+	_, err := complexPolymorphicRecursiveClient.PutValid(recF)
+	c.Assert(err, chk.IsNil)
+}
