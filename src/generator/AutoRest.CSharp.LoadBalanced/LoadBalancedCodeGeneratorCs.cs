@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.LoadBalanced
             {
                 var clientName = $"{client.Key.ToPascalCase()}Client";
                 var clientMethods = client.ToArray();
-                var clientClassFileName = $"{clientName}.{ImplementationFileExtension}";
+                var clientClassFileName = $"{clientName}{ImplementationFileExtension}";
                 var clientInterfaceFileName = $"I{clientClassFileName}";
 
                 var model = new Tuple<CodeModelCs, string, MethodCs[]>(codeModel, clientName, clientMethods);
