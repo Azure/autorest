@@ -62,65 +62,11 @@ namespace AutoRest.Extensions.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Head method &apos;{0}&apos; should contain only 200 level responses, or 404..
-        /// </summary>
-        internal static string HeadMethodInvalidResponses {
-            get {
-                return ResourceManager.GetString("HeadMethodInvalidResponses", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The value &apos;{0}&apos; provided for property &apos;{1}&apos; of extension &apos;{2} is invalid. Valid values are: &apos;{3}&apos;..
         /// </summary>
         internal static string InvalidExtensionProperty {
             get {
                 return ResourceManager.GetString("InvalidExtensionProperty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Azure resource {0} is missing required &apos;properties&apos; property..
-        /// </summary>
-        internal static string MissingProperties {
-            get {
-                return ResourceManager.GetString("MissingProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} needs to have a value..
-        /// </summary>
-        internal static string ODataEmpty {
-            get {
-                return ResourceManager.GetString("ODataEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Method with {0} needs to have &quot;$filter&quot; parameter..
-        /// </summary>
-        internal static string ODataFilterMissing {
-            get {
-                return ResourceManager.GetString("ODataFilterMissing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} needs to have a valid definition reference..
-        /// </summary>
-        internal static string ODataInvalidReferance {
-            get {
-                return ResourceManager.GetString("ODataInvalidReferance", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Schema definition for Resource type with x-ms-azure-resource extension should have following properties: {0}.
-        /// </summary>
-        internal static string ResourcePropertyMismatch {
-            get {
-                return ResourceManager.GetString("ResourcePropertyMismatch", resourceCulture);
             }
         }
     }

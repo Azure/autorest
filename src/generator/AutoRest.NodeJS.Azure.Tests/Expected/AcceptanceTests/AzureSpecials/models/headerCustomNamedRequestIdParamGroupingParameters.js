@@ -11,8 +11,7 @@
 'use strict';
 
 /**
- * Additional parameters for the Header_customNamedRequestIdParamGrouping
- * operation.
+ * Additional parameters for customNamedRequestIdParamGrouping operation.
  *
  */
 class HeaderCustomNamedRequestIdParamGroupingParameters {

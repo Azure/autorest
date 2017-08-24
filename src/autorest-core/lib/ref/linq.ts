@@ -5,14 +5,6 @@
 
 export { Enumerable, Enumerable as IEnumerable, From } from "linq-es2015";
 
-export async function ToArray<T>(iterable: AsyncIterable<T>): Promise<Array<T>> {
-  const result = new Array<T>();
-  for await (const each of iterable) {
-    result.push(each);
-  }
-  return result;
-}
-
 export function Push<T>(destination: Array<T>, source: any) {
   if (source) {
     if (IsIterable(source)) {

@@ -1,7 +1,10 @@
 {
-  "name": "autorest-core",
-  "version": "1.2.2",
-  "description": "AutoRest",
+  "name": "@microsoft.azure/autorest-core",
+  "version": "2.0.0",
+  "description": "AutoRest core module",
+  "engines": {
+    "node": ">=7.10.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Azure/autorest.git"
@@ -15,43 +18,44 @@
     "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
-  "main": "./index.js",
-  "bin": {
-    "autorest": "./app.js"
+  "main": "./dist/main.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha ./dist/test"
   },
-  "typings": "./index.d.ts",
+  "typings": "./dist/main.d.ts",
   "devDependencies": {
     "@types/chalk": "*",
     "@types/marked": "*",
-    "@types/commonmark": "^0.22.29",
+    "@types/commonmark": "^0.27.0",
     "@types/jsonpath": "^0.1.29",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
-    "autorest-interactive": "https://github.com/olydis/autorest-interactive",
     "bluebird": "*",
-    "mocha": "3.2.0",
-    "mocha-typescript": "1.0.22",
-    "source-map-support": "^0.4.14",
-    "typescript": "2.3.3"
+    "mocha": "3.4.2",
+    "mocha-typescript": "1.1.5",
+    "source-map-support": "^0.4.15",
+    "typescript": "2.4.1"
   },
   "dependencies": {
+    "@microsoft.azure/extension": "~1.0.69",
+    "@microsoft.azure/async-io": "~1.0.21",
+    "@microsoft.azure/openapi-validator": "^0.1.5-preview",
     "chalk": "^1.1.2",
-    "marked": "^0.3.6",
-    "marked-terminal": "^2.0.0",
     "commonmark": "^0.27.0",
     "file-url": "^2.0.2",
     "get-uri": "^2.0.0",
     "jsonpath": "^0.2.11",
-    "linq-es2015": "^2.4.13",
+    "linq-es2015": "^2.4.25",
+    "marked": "^0.3.6",
+    "marked-terminal": "^2.0.0",
     "oav": "0.4.1",
-    "@microsoft.azure/openapi-validator": "^0.1.0",
-    "pify": "^2.3.0",
+    "pify": "^3.0.0",
     "safe-eval": "^0.3.0",
     "source-map": "^0.5.6",
     "strip-bom": "^3.0.0",
-    "urijs": "^1.18.7",
-    "vscode-jsonrpc": "^3.1.0",
+    "urijs": "^1.18.10",
+    "vscode-jsonrpc": "^3.3.1",
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
-    "yargs": "^6.6.0"
+    "yargs": "^8.0.2"
   }
 }

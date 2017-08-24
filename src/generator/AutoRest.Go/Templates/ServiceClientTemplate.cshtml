@@ -44,7 +44,7 @@ type @(Model.BaseClient) struct {
     }
     @foreach (var p in Model.Properties)
     {
-        if (!p.SerializedName.FixedValue.IsApiVersion())
+        if (!p.SerializedName.IsApiVersion())
         {
             @:@(string.Format((p.IsRequired || p.ModelType.CanBeEmpty()
                                                   ? "{0} {1}" : "{0} *{1}"),
@@ -78,7 +78,7 @@ func New(@(Model.GlobalParameters))@(Model.BaseClient) {
             BaseURI: baseURI,
             @foreach (var p in Model.Properties)
             {
-                if (!p.SerializedName.Value.IsApiVersion())
+                if (!p.SerializedName.IsApiVersion())
                 {
                     if (p.DefaultValue.FixedValue.IsNullOrEmpty())
                     {
@@ -104,7 +104,7 @@ else
             Client: autorest.NewClientWithUserAgent(UserAgent()),
             @foreach(var p in Model.Properties)
             {
-                if (!p.SerializedName.Value.IsApiVersion())
+                if (!p.SerializedName.IsApiVersion())
                 {
                     @:@(string.Format("{0}: {1},", p.Name, p.Name.Value.ToSentence()))
                 }

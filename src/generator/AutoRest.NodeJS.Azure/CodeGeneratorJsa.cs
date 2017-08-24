@@ -71,7 +71,7 @@ namespace AutoRest.NodeJS.Azure
                     await Write(pageTemplate, Path.Combine("models", pageModel.Name.ToCamelCase() + ".js"));
                 }
                 
-                foreach (var modelType in codeModel.ModelTemplateModels.Where( each => !codeModel.PageTemplateModels.Any( ptm=> ptm.Name.EqualsIgnoreCase(each.Name)) ))
+                foreach (var modelType in codeModel.ModelTemplateModels)
                 {
                     var modelTemplate = new ModelTemplate { Model = modelType };
                     await Write(modelTemplate, Path.Combine("models", modelType.NameAsFileName.ToCamelCase() + ".js"));

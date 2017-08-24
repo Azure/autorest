@@ -230,8 +230,7 @@ namespace AutoRest.CSharp
                     return "\t";
                 default:
                     throw new NotSupportedException(
-                        string.Format(CultureInfo.InvariantCulture, 
-                        "Collection format {0} is not supported.", format));
+                        $"Collection format {format} is not supported.");
             }
         }
 
@@ -240,12 +239,12 @@ namespace AutoRest.CSharp
         /// </summary>
         /// <param name="t">ModelType to check</param>
         /// <returns>true if the IModelType is a kind of string</returns>
-        public static bool IsKindOfString(this IModelType t) => 
-            t is PrimaryType && 
-                ((PrimaryType) t).KnownPrimaryType == KnownPrimaryType.String && 
-                ((PrimaryType) t).KnownFormat != KnownFormat.@char ||
-            t is EnumType && 
-                ((EnumType) t).ModelAsString;
+        public static bool IsKindOfString(this IModelType t) =>
+            t is PrimaryType pt &&
+                pt.KnownPrimaryType == KnownPrimaryType.String &&
+                pt.KnownFormat != KnownFormat.@char ||
+            t is EnumType et &&
+                et.ModelAsString;
 
         /// <summary>
         /// Simple conversion of the type to string
@@ -261,9 +260,8 @@ namespace AutoRest.CSharp
                 return reference;
             }
 
-            PrimaryType primaryType = type as PrimaryType;
-            string serializationSettings = string.Format(CultureInfo.InvariantCulture, "{0}.SerializationSettings", clientReference);
-            if (primaryType != null)
+            string serializationSettings = $"{clientReference}.SerializationSettings";
+            if (type is PrimaryType primaryType)
             {
                 if (primaryType.KnownPrimaryType == KnownPrimaryType.Date)
                 {
@@ -283,10 +281,7 @@ namespace AutoRest.CSharp
                 }
             }
 
-            return string.Format(CultureInfo.InvariantCulture,
-                    "Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject({0}, {1}).Trim('\"')",
-                    reference,
-                    serializationSettings);
+            return $"Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject({reference}, {serializationSettings}).Trim('\"')";
         }
 
         /// <summary>

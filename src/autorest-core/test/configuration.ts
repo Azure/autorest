@@ -1,6 +1,3 @@
-// polyfills for language support
-require("../lib/polyfill.min.js");
-
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 import { IFileSystem, MemoryFileSystem } from "../lib/file-system"
@@ -45,6 +42,7 @@ csharp:
 `]]));
 
     const autorest = new AutoRest.AutoRest(f, MemoryFileSystem.DefaultVirtualRootUri + "readme.md");
+    autorest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     let cfg = await autorest.view;
 
     // console.log(cfg.Raw);

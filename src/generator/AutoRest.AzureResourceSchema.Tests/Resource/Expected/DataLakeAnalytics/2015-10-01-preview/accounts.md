@@ -33,9 +33,7 @@ To create a Microsoft.DataLakeAnalytics/accounts resource, add the following JSO
       }
     ]
   },
-  "resources": [
-    null
-  ]
+  "resources": []
 }
 ```
 ## Property values
@@ -52,7 +50,7 @@ The following tables describe the values you need to set in the schema.
 |  location | string | No | Gets or sets the account regional location. |
 |  tags | object | No | Gets or sets the value of custom properties. |
 |  properties | object | Yes | Gets or sets the properties defined by Data Lake Analytics all properties are specific to each resource provider. - [DataLakeAnalyticsAccountProperties object](#DataLakeAnalyticsAccountProperties) |
-|  resources | array | No | [accounts_DataLakeStoreAccounts_childResource object](#accounts_DataLakeStoreAccounts_childResource) [accounts_StorageAccounts_childResource object](#accounts_StorageAccounts_childResource) |
+|  resources | array | No | [DataLakeStoreAccounts](./accounts/DataLakeStoreAccounts.md) [StorageAccounts](./accounts/StorageAccounts.md) |
 
 
 <a id="DataLakeAnalyticsAccountProperties" />
@@ -64,26 +62,6 @@ The following tables describe the values you need to set in the schema.
 |  maxJobCount | integer | No | Gets or sets the maximum supported jobs running under the account at the same time. |
 |  dataLakeStoreAccounts | array | No | Gets or sets the list of Data Lake storage accounts associated with this account. - [DataLakeStoreAccountInfo object](#DataLakeStoreAccountInfo) |
 |  storageAccounts | array | No | Gets or sets the list of Azure Blob storage accounts associated with this account. - [StorageAccountInfo object](#StorageAccountInfo) |
-
-
-<a id="accounts_DataLakeStoreAccounts_childResource" />
-### accounts_DataLakeStoreAccounts_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | DataLakeStoreAccounts |
-|  apiVersion | enum | Yes | 2015-10-01-preview |
-|  properties | object | Yes | Gets or sets the properties for the Data Lake Store account being added. - [DataLakeStoreAccountInfoProperties object](#DataLakeStoreAccountInfoProperties) |
-
-
-<a id="accounts_StorageAccounts_childResource" />
-### accounts_StorageAccounts_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | StorageAccounts |
-|  apiVersion | enum | Yes | 2015-10-01-preview |
-|  properties | object | Yes | Gets or sets the properties for the Azure Storage account being added. - [StorageAccountProperties object](#StorageAccountProperties) |
 
 
 <a id="DataLakeStoreAccountInfo" />

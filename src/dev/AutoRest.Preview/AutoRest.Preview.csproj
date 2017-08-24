@@ -45,7 +45,6 @@
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Ruby/AutoRest.Ruby.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.Ruby.Azure/AutoRest.Ruby.Azure.csproj" />
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
-    <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.CompositeSwagger/AutoRest.CompositeSwagger.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="AutoRestPreviewForm.cs">

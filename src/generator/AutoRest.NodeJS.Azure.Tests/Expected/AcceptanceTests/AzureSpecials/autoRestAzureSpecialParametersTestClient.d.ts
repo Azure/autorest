@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-import { ServiceClient, ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse, ServiceClientCredentials } from 'ms-rest';
+import { ServiceClientCredentials } from 'ms-rest';
 import { AzureServiceClient, AzureServiceClientOptions } from 'ms-rest-azure';
 import * as operations from "./operations";
 
@@ -32,8 +32,6 @@ declare class AutoRestAzureSpecialParametersTestClient extends AzureServiceClien
    * {@link https://github.com/request/request#requestoptions-callback Options doc}
    *
    * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-   *
-   * @param {string} [options.apiVersion] - The api version, which appears in the query, the value is always '2015-07-01-preview'
    *
    * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
    *

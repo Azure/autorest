@@ -1,6 +1,3 @@
-// polyfills for language support 
-require("../lib/polyfill.min.js");
-
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
@@ -12,12 +9,14 @@ import { Message, Channel } from "../lib/message";
 @suite class Directive {
 
   @test @timeout(0) async "suppression"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     autoRest.Message.Subscribe((_, m) => m.Channel === Channel.Fatal ? console.error(m.Text) : "");
 
     // reference run
     await autoRest.ResetConfiguration();
-    await autoRest.AddConfiguration({ "azure-validator": true });
+    await autoRest.AddConfiguration({ "azure-validator": true, "openapi-type": "arm" });
+    await autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     let numWarningsRef: number;
     {
       const messages: Message[] = [];
@@ -32,8 +31,9 @@ import { Message, Channel } from "../lib/message";
 
     // muted run
     await autoRest.ResetConfiguration();
-    await autoRest.AddConfiguration({ "azure-validator": true });
+    await autoRest.AddConfiguration({ "azure-validator": true, "openapi-type": "arm" });
     await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "R4000", "PutRequestResponseScheme"] } });
+    await autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     {
       const messages: Message[] = [];
       const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
@@ -51,8 +51,9 @@ import { Message, Channel } from "../lib/message";
     // makes sure that neither all nor nothing was returned
     const pickyRun = async (directive: any) => {
       await autoRest.ResetConfiguration();
-      await autoRest.AddConfiguration({ "azure-validator": true });
+      await autoRest.AddConfiguration({ "azure-validator": true, "openapi-type": "arm" });
       await autoRest.AddConfiguration({ directive: directive });
+      await autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
       {
         const messages: Message[] = [];
         const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
@@ -89,13 +90,15 @@ import { Message, Channel } from "../lib/message";
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties", from: "swagger.md" });
   }
 
-  @test @timeout(0) async "set descriptions on different levels"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
+  @test @skip @timeout(0) async "set descriptions on different levels"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
+    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
 
     const GenerateCodeModel = async (config: any) => {
       await autoRest.ResetConfiguration();
       autoRest.AddConfiguration({ "output-artifact": "code-model-v1" });
       autoRest.AddConfiguration(config);
+      autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
 
       let resolve: (content: string) => void;
       const result = new Promise<string>(res => resolve = res);
@@ -113,7 +116,7 @@ import { Message, Channel } from "../lib/message";
     const codeModelSetDescr1 = await GenerateCodeModel({ directive: { from: "swagger-document", where: "$..description", set: "cowbell" } });
 
     // set descriptions in code model
-    const codeModelSetDescr2 = await GenerateCodeModel({ directive: { from: "code-model-v1", where: ["$..description", "$..documentation", "$..['#documentation']"], set: "cowbell" } });
+    const codeModelSetDescr2 = await GenerateCodeModel({ directive: { from: "code-model-v1", where: ["$..description", "$..documentation"], set: "cowbell" } });
 
     // transform descriptions in resolved swagger
     const codeModelSetDescr3 = await GenerateCodeModel({ directive: { from: "swagger-document", where: "$..description", transform: "return 'cowbell'" } });

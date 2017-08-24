@@ -120,9 +120,6 @@
   <data name="HeadMethodPossibleIncorrectSpecification" xml:space="preserve">
     <value>"HEAD '{0}' method missing 404 status code section -- this might be unintentional.</value>
   </data>
-  <data name="MissingProperties" xml:space="preserve">
-    <value>Azure resource {0} is missing required 'properties' property.</value>
-  </data>
   <data name="ODataEmpty" xml:space="preserve">
     <value>{0} needs to have a value.</value>
   </data>
@@ -131,8 +128,5 @@
   </data>
   <data name="ODataInvalidReferance" xml:space="preserve">
     <value>{0} needs to have a valid definition reference.</value>
-  </data>
-  <data name="ResourcePropertyMismatch" xml:space="preserve">
-    <value>Schema definition for Resource type with x-ms-azure-resource extension should have following properties: {0}</value>
   </data>
 </root>

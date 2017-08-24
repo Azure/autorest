@@ -62,6 +62,7 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual Dictionary<Constraint, string> Constraints { get; } = new Dictionary<Constraint, string>();
 
+        [JsonIgnore]
         public virtual bool? IsXNullable => Extensions.Get<bool>("x-nullable");
 
         [JsonProperty]
@@ -158,27 +159,14 @@ namespace AutoRest.Core.Model
             set { _name.CopyFrom(value); }
         }
 
+        [JsonIgnore]
         public virtual string ModelTypeName => ModelType.Name;
-
-        /// <Summary>
-        /// Backing field for <code>SerializedName</code> property. 
-        /// </Summary>
-        /// <remarks>This field should be marked as 'readonly' as write access to it's value is controlled thru Fixable[T].</remarks>
-        private readonly Fixable<string> _serializedName = new Fixable<string>();
 
         /// <Summary>
         /// The name on the wire for the variable.
         /// </Summary>
-        /// <remarks>
-        /// The Get and Set operations for this accessor may be overridden by using the 
-        /// <code>SerializedName.OnGet</code> and <code>SerializedName.OnSet</code> events in this class' constructor.
-        /// (ie <code> SerializedName.OnGet += serializedName => serializedName.ToUpper();</code> )
-        /// </remarks>
-        public Fixable<string> SerializedName
-        {
-            get { return _serializedName; }
-            set { _serializedName.CopyFrom(value); }
-        }
+        [JsonProperty]
+        public virtual string SerializedName { get; set; }
 
         /// <summary>
         /// Gets or sets the model type.
@@ -189,6 +177,7 @@ namespace AutoRest.Core.Model
             set { _modelType = value; }
         }
 
+        [JsonIgnore]
         public virtual HashSet<string> LocallyUsedNames => null;
 
         public virtual void Disambiguate()
@@ -201,12 +190,11 @@ namespace AutoRest.Core.Model
                 Name = name;
             }
         }
+
         [JsonIgnore]
         public abstract IParent Parent { get; set; }
         [JsonIgnore]
         public abstract string Qualifier { get; }
-        [JsonIgnore]
-        public virtual string QualifierType => Qualifier;
         [JsonIgnore]
         public virtual IEnumerable<string> MyReservedNames  { get { if (!string.IsNullOrEmpty(Name)) { yield return Name; } }}
     }

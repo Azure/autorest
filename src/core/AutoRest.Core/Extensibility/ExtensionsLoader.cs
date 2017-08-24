@@ -17,14 +17,9 @@ namespace AutoRest.Core.Extensibility
 {
     public static class ExtensionsLoader
     {
-        public static IAnyPlugin GetPlugin(string pluginName = null)
+        public static IAnyPlugin GetPlugin(string pluginName)
         {
-            if (pluginName == null)
-            {
-                pluginName = Settings.Instance.CodeGenerator;
-            }
-
-            Logger.Instance.Log(Category.Info, Resources.InitializingCodeGenerator);
+            Logger.Instance.Log(Category.Debug, Resources.InitializingCodeGenerator);
 
             if (string.IsNullOrEmpty(pluginName))
             {
@@ -34,59 +29,19 @@ namespace AutoRest.Core.Extensibility
             }
 
             IAnyPlugin plugin = null;
-
-            if (pluginName.EqualsIgnoreCase("None"))
-            {
-                plugin = new NoOpPlugin();
-            }
-            else
-            {
-                var config = AutoRestConfiguration.Get();
-                plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, pluginName);
-                Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
-            }
-            Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,
+            
+            var config = AutoRestConfiguration.Get();
+            plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, pluginName);
+            Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
+            Logger.Instance.Log(Category.Debug, Resources.GeneratorInitialized,
                 pluginName,
                 plugin.GetType().GetAssembly().GetName().Version);
             return plugin;
 
         }
 
-        /// <summary>
-        /// Gets the modeler specified in the provided Settings.
-        /// </summary>
-        /// <param name="settings">The code generation settings</param>
-        /// <returns>Modeler specified in Settings.Modeler</returns>
-        public static Modeler GetModeler()
-        {
-            Logger.Instance.Log(Category.Info, Resources.InitializingModeler);
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings", "settings or settings.Modeler cannot be null.");
-            }
-
-            if (string.IsNullOrEmpty(Settings.Instance.Modeler))
-            {
-                throw new ArgumentException(
-                    string.Format(CultureInfo.InvariantCulture,
-                        Resources.ParameterValueIsMissing, "Modeler"));
-            }
-
-            Modeler modeler = null;
-
-            var config = AutoRestConfiguration.Get();
-            modeler = LoadTypeFromAssembly<Modeler>(config.Modelers, Settings.Instance.Modeler);
-            Settings.PopulateSettings(modeler, Settings.Instance.CustomSettings);
-
-            Logger.Instance.Log(Category.Info, Resources.ModelerInitialized,
-                Settings.Instance.Modeler,
-                modeler.GetType().GetAssembly().GetName().Version);
-            return modeler;
-        }
-
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom")]
-        public static T LoadTypeFromAssembly<T>(IDictionary<string, AutoRestProviderConfiguration> section,
-            string key)
+        private static T LoadTypeFromAssembly<T>(IDictionary<string, AutoRestProviderConfiguration> section, string key)
         {
             T instance = default(T);
 

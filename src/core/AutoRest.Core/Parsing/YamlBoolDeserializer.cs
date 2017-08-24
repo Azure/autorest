@@ -10,7 +10,7 @@ namespace AutoRest.Core.Parsing
 {
     public class YamlBoolDeserializer : INodeDeserializer
     {
-        public bool Deserialize(EventReader reader, Type expectedType, Func<EventReader, Type, object> nestedObjectDeserializer, out object value)
+        public bool Deserialize(IParser reader, Type expectedType, Func<IParser, Type, object> nestedObjectDeserializer, out object value)
         {
             if (reader == null)
             {
@@ -19,7 +19,7 @@ namespace AutoRest.Core.Parsing
             }
 
             // only try this if we're targeting a boolean or an untyped object
-            if (expectedType == typeof(object) || expectedType == typeof(bool) ) 
+            if (expectedType == typeof(object) || expectedType == typeof(bool))
             {
                 // peek at the current token
                 Scalar scalar = reader.Peek<Scalar>();

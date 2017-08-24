@@ -109,9 +109,7 @@ To create a Microsoft.Web/hostingEnvironments resource, add the following JSON t
       }
     ]
   },
-  "resources": [
-    null
-  ]
+  "resources": []
 }
 ```
 ## Property values
@@ -130,7 +128,7 @@ The following tables describe the values you need to set in the schema.
 |  location | string | Yes | Resource Location |
 |  tags | object | No | Resource tags |
 |  properties | object | Yes | [HostingEnvironment_properties object](#HostingEnvironment_properties) |
-|  resources | array | No | [hostingEnvironments_workerPools_childResource object](#hostingEnvironments_workerPools_childResource) |
+|  resources | array | No | [workerPools](./hostingEnvironments/workerPools.md) |
 
 
 <a id="HostingEnvironment_properties" />
@@ -170,21 +168,6 @@ The following tables describe the values you need to set in the schema.
 |  suspended | boolean | No | True/false indicating whether the hostingEnvironment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available
             (most likely because NSG blocked the incoming traffic) |
 |  clusterSettings | array | No | Custom settings for changing the behavior of the hosting environment - [NameValuePair object](#NameValuePair) |
-
-
-<a id="hostingEnvironments_workerPools_childResource" />
-### hostingEnvironments_workerPools_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | workerPools |
-|  apiVersion | enum | Yes | 2015-08-01 |
-|  id | string | No | Resource Id |
-|  kind | string | No | Kind of resource |
-|  location | string | Yes | Resource Location |
-|  tags | object | No | Resource tags |
-|  properties | object | Yes | [WorkerPool_properties object](#WorkerPool_properties) |
-|  sku | object | No | [SkuDescription object](#SkuDescription) |
 
 
 <a id="VirtualNetworkProfile" />

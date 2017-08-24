@@ -14,19 +14,17 @@ import * as promisify from "pify";
 import { Readable } from "stream";
 import { parse } from "url";
 import { sep } from "path";
-// polyfills for language support
-require("../polyfill.min.js");
 
 const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");
-const getUriAsync: (uri: string) => Promise<Readable> = promisify(getUri);
+const getUriAsync: (uri: string, options: { headers: { [key: string]: string } }) => Promise<Readable> = promisify(getUri);
 
 /**
  * Loads a UTF8 string from given URI.
  */
-export async function ReadUri(uri: string): Promise<string> {
+export async function ReadUri(uri: string, headers: { [key: string]: string } = {}): Promise<string> {
   try {
-    const readable = await getUriAsync(uri);
+    const readable = await getUriAsync(uri, { headers: headers });
 
     const readAll = new Promise<string>(function (resolve, reject) {
       let result = "";
@@ -90,7 +88,7 @@ function isUriAbsolute(url: string): boolean {
  */
 export function CreateFileOrFolderUri(absolutePath: string): string {
   if (!isAbsolute(absolutePath)) {
-    throw new Error("Can only create file URIs from absolute paths.");
+    throw new Error(`Can only create file URIs from absolute paths. Got '${absolutePath}'`);
   }
   let result = fileUri(absolutePath, { resolve: false });
   // handle UNCs
@@ -106,21 +104,31 @@ export function CreateFolderUri(absolutePath: string): string {
   return EnsureIsFolderUri(CreateFileOrFolderUri(absolutePath));
 }
 
-export function EnsureIsFolderUri(uri: string) {
+export function EnsureIsFolderUri(uri: string): string {
   return EnsureIsFileUri(uri) + "/";
 }
-export function EnsureIsFileUri(uri: string) {
+export function EnsureIsFileUri(uri: string): string {
   return uri.replace(/\/$/g, "");
 }
 
-export function GetFilename(uri: string) {
+export function GetFilename(uri: string): string {
   return uri.split("/").reverse()[0].split("\\").reverse()[0];
 }
 
-export function GetFilenameWithoutExtension(uri: string) {
+export function GetFilenameWithoutExtension(uri: string): string {
   const lastPart = GetFilename(uri);
   const ext = lastPart.indexOf(".") === -1 ? "" : lastPart.split(".").reverse()[0];
   return lastPart.substr(0, lastPart.length - ext.length - 1);
+}
+
+export function ToRawDataUrl(uri: string): string {
+  // special URI handlers                                                                                        
+  // - GitHub                                                                                                    
+  if (uri.startsWith("https://github")) {
+    uri = uri.replace(/^https?:\/\/(github.com)(\/[^\/]+\/[^\/]+\/)(blob|tree)\/(.*)/ig, "https://raw.githubusercontent.com$2$4");
+  }
+
+  return uri;
 }
 
 /**
@@ -145,7 +153,16 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
     throw new Error("'pathOrUri' was detected to be relative so 'baseUri' is required");
   }
   try {
-    return new URI(pathOrUri).absoluteTo(baseUri).toString();
+    const base = new URI(baseUri);
+    const relative = new URI(pathOrUri);
+    const result = relative.absoluteTo(base);
+    // GitHub simple token forwarding, for when you pass a URI to a private repo file with `?token=` query parameter.
+    // this may be easier for quick testing than getting and passing an OAuth token.  
+    if (base.protocol() === "https" && base.hostname() === "raw.githubusercontent.com" &&
+      result.protocol() === "https" && result.hostname() === "raw.githubusercontent.com") {
+      result.query(base.query());
+    }
+    return result.toString()
   } catch (e) {
     throw new Error(`Failed resolving '${pathOrUri}' against '${baseUri}'.`);
   }
@@ -186,9 +203,9 @@ function isAccessibleFile(localPath: string) {
 function FileUriToLocalPath(fileUri: string): string {
   const uri = parse(fileUri);
   if (!fileUri.startsWith("file:///")) {
-    throw new Error(!fileUri.startsWith("file://")
+    throw new Error((!fileUri.startsWith("file://")
       ? `Protocol '${uri.protocol}' not supported for writing.`
-      : `UNC paths not supported for writing.`);
+      : `UNC paths not supported for writing.`) + " Make sure to specify a local, absolute path as target file/folder.");
   }
   // convert to path
   let p = uri.path;
@@ -202,23 +219,25 @@ function FileUriToLocalPath(fileUri: string): string {
   return decodeURI(p);
 }
 
-export async function* EnumerateFiles(folderUri: string, probeFiles: string[] = []): AsyncIterable<string> {
+export async function EnumerateFiles(folderUri: string, probeFiles: string[] = []): Promise<string[]> {
+  const results = new Array<string>();
   folderUri = EnsureIsFolderUri(folderUri);
   if (folderUri.startsWith("file:")) {
     let files: string[] = [];
     try {
       files = await readdir(FileUriToLocalPath(folderUri));
     } catch (e) { }
-    yield* files
+    results.push(...files
       .map(f => ResolveUri(folderUri, f))
-      .filter(f => isAccessibleFile(FileUriToLocalPath(f)));
+      .filter(f => isAccessibleFile(FileUriToLocalPath(f))));
   } else {
     for (const candid of probeFiles.map(f => ResolveUri(folderUri, f))) {
       if (await ExistsUri(candid)) {
-        yield candid;
+        results.push(candid);
       }
     }
   }
+  return results;
 }
 
 async function CreateDirectoryFor(filePath: string): Promise<void> {

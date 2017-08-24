@@ -15,19 +15,22 @@ namespace AutoRest.Python.Model
 {
     public class MethodPy : Method
     {
-        public MethodPy()
+        public MethodPy() { }
+
+        public override string Url
         {
-            Url.OnGet += value =>
+            get
             {
+                var value = base.Url;
                 foreach (Match m in Regex.Matches(value, @"\{[\w]+:[\w]+\}"))
                 {
                     var formatter = m.Value.Split(':').First() + '}';
                     value = value.Replace(m.Value, formatter);
                 }
                 return value;
-            };
+            }
+            set => base.Url = value;
         }
-
 
         public bool AddCustomHeader => true;
 

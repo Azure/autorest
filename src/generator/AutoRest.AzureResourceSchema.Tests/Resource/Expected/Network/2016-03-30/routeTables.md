@@ -265,9 +265,7 @@ To create a Microsoft.Network/routeTables resource, add the following JSON to th
     "provisioningState": "string"
   },
   "etag": "string",
-  "resources": [
-    null
-  ]
+  "resources": []
 }
 ```
 ## Property values
@@ -286,7 +284,7 @@ The following tables describe the values you need to set in the schema.
 |  tags | object | No | Resource tags |
 |  properties | object | Yes | [RouteTablePropertiesFormat object](#RouteTablePropertiesFormat) |
 |  etag | string | No | Gets a unique read-only string that changes whenever the resource is updated |
-|  resources | array | No | [routeTables_routes_childResource object](#routeTables_routes_childResource) |
+|  resources | array | No | [routes](./routeTables/routes.md) |
 
 
 <a id="RouteTablePropertiesFormat" />
@@ -296,18 +294,6 @@ The following tables describe the values you need to set in the schema.
 |  routes | array | No | Gets or sets Routes in a Route Table - [Route object](#Route) |
 |  subnets | array | No | Gets collection of references to subnets - [Subnet object](#Subnet) |
 |  provisioningState | string | No | Gets or sets Provisioning state of the resource Updating/Deleting/Failed |
-
-
-<a id="routeTables_routes_childResource" />
-### routeTables_routes_childResource object
-|  Name | Type | Required | Value |
-|  ---- | ---- | ---- | ---- |
-|  name | string | Yes |  |
-|  type | enum | Yes | routes |
-|  apiVersion | enum | Yes | 2016-03-30 |
-|  id | string | No | Resource Id |
-|  properties | object | Yes | [RoutePropertiesFormat object](#RoutePropertiesFormat) |
-|  etag | string | No | A unique read-only string that changes whenever the resource is updated |
 
 
 <a id="Route" />

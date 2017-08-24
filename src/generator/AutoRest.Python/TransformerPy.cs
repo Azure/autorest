@@ -106,7 +106,7 @@ namespace AutoRest.Python
                             IsConstant = true,
                             IsRequired = parameter.IsRequired,
                             Documentation = parameter.Documentation,
-                            SerializedName = parameter.SerializedName.RawValue,
+                            SerializedName = parameter.SerializedName,
                             ModelType = parameter.ModelType,
                             IsSpecialConstant = true
                         }));

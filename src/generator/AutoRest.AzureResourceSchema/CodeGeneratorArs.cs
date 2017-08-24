@@ -22,21 +22,19 @@ namespace AutoRest.AzureResourceSchema
 
         public override string UsageInstructions => $"Your Azure Resource Schema(s) can be found in {Settings.Instance.OutputDirectory}";
 
- 
         public override async Task Generate(CodeModel serviceClient)
         {
-            
-            var apiVersions = serviceClient.Methods.Select( method => method.Parameters.FirstOrDefault(p => p.SerializedName == "api-version")?.DefaultValue.Value ).ConcatSingleItem(serviceClient.ApiVersion).Where(each => each!=null).Distinct().ToArray();
+            var apiVersions = serviceClient.Methods.Select(method => method.Parameters.FirstOrDefault(p => p.SerializedName == "api-version")?.DefaultValue.Value ).ConcatSingleItem(serviceClient.ApiVersion).Where(each => each!=null).Distinct().ToArray();
 
-            foreach( var version in apiVersions ) { 
-
-                IDictionary<string, ResourceSchema> resourceSchemas = ResourceSchemaParser.Parse(serviceClient,version);
+            foreach(var version in apiVersions)
+            { 
+                IDictionary<string, ResourceSchema> resourceSchemas = ResourceSchemaParser.Parse(serviceClient, version);
 
                 foreach (string resourceProvider in resourceSchemas.Keys)
                 {
                     StringWriter stringWriter = new StringWriter();
                     ResourceSchemaWriter.Write(stringWriter, resourceSchemas[resourceProvider]);
-                    await Write(stringWriter.ToString(), Path.Combine( version , resourceProvider + ".json"), true);
+                    await Write(stringWriter.ToString(), Path.Combine(version, resourceProvider + ".json"), true);
 
                     stringWriter = new StringWriter();
                     var md = ResourceMarkdownGenerator.Generate(resourceSchemas[resourceProvider]);
@@ -44,12 +42,11 @@ namespace AutoRest.AzureResourceSchema
                     foreach (var m in md)
                     {
                         var content = m.Content.Replace("\"boolean\"", "boolean");
-                        await Write(content,Path.Combine( version , m.Type + ".md"), false);
+                        // place nested topics in subdirectories
+                        await Write(content, Path.Combine(version, m.Type.Replace('_', Path.DirectorySeparatorChar) + ".md"), false);
                     }
                 }
-
             }
-
         }
     }
 }

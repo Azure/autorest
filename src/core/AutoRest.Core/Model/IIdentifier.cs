@@ -25,12 +25,5 @@ namespace AutoRest.Core.Model
         /// </summary>
         [JsonIgnore]
         string Qualifier { get; }
-
-        /// <summary>
-        ///     The natural language type of this Identifier
-        ///     (ie "Client Name" , "Client Operation" ...etc)
-        /// </summary>
-        [JsonIgnore]
-        string QualifierType { get; }
     }
 }

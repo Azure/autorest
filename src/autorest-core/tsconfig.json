@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": false,
     "module": "commonjs",
@@ -11,20 +12,18 @@
     "strict": true,
     "declaration": true,
     "stripInternal": true,
-    "noEmitHelpers": true,
-    "target": "es2016",
+    "target": "es2017",
     "types": [
       "node"
     ],
     "lib": [
-      "dom",
-      "es2016",
       "esnext"
     ],
     "experimentalDecorators": true,
     "newLine": "LF"
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }
