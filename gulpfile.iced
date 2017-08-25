@@ -19,7 +19,7 @@ Import
   autorest: (args,done,ignoreexitcode) ->
     # Run AutoRest from the original current directory.
     echo info "Queuing up: AutoRest #{args.join(' ')}"
-    execute "node #{basefolder}/src/autorest/dist/app.js #{args.map((a) -> "\"#{a}\"").join(' ')} \"--use-extension={'@microsoft.azure/autorest-classic-generators':'#{basefolder}/src/core/AutoRest\'}\" --clear-output-folder  \"--version=#{basefolder}/src/autorest-core\" " , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
+    execute "node #{basefolder}/src/autorest/dist/app.js #{args.map((a) -> "\"#{a}\"").join(' ')} --clear-output-folder  \"--version=#{basefolder}/src/autorest-core\" " , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
       return done(code,stdout,stderr)
   
   typescriptProjectFolders: ()->
