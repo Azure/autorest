@@ -14,10 +14,6 @@
     "**/.hg": true,
     "**/.DS_Store": true
   },
-  "csharp.suppressDotnetRestoreNotification": true,
-  "[csharp]": {
-    "editor.tabSize": 4
-  },
   "[typescript]": {
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,

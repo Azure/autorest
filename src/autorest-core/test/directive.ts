@@ -10,13 +10,11 @@ import { Message, Channel } from "../lib/message";
 
   @test @timeout(0) async "suppression"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
-    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     autoRest.Message.Subscribe((_, m) => m.Channel === Channel.Fatal ? console.error(m.Text) : "");
 
     // reference run
     await autoRest.ResetConfiguration();
     await autoRest.AddConfiguration({ "azure-validator": true, "openapi-type": "arm" });
-    await autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     let numWarningsRef: number;
     {
       const messages: Message[] = [];
@@ -33,7 +31,6 @@ import { Message, Channel } from "../lib/message";
     await autoRest.ResetConfiguration();
     await autoRest.AddConfiguration({ "azure-validator": true, "openapi-type": "arm" });
     await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "R4000", "PutRequestResponseScheme"] } });
-    await autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     {
       const messages: Message[] = [];
       const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
@@ -53,7 +50,6 @@ import { Message, Channel } from "../lib/message";
       await autoRest.ResetConfiguration();
       await autoRest.AddConfiguration({ "azure-validator": true, "openapi-type": "arm" });
       await autoRest.AddConfiguration({ directive: directive });
-      await autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
       {
         const messages: Message[] = [];
         const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });
@@ -92,13 +88,11 @@ import { Message, Channel } from "../lib/message";
 
   @test @skip @timeout(0) async "set descriptions on different levels"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
-    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
 
     const GenerateCodeModel = async (config: any) => {
       await autoRest.ResetConfiguration();
       autoRest.AddConfiguration({ "output-artifact": "code-model-v1" });
       autoRest.AddConfiguration(config);
-      autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
 
       let resolve: (content: string) => void;
       const result = new Promise<string>(res => resolve = res);

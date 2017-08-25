@@ -31,7 +31,6 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
   // TODO: remodel if we figure out acquisition story
   @test @timeout(0) async "Validation Tools"() {
     const autoRest = new AutoRest(new RealFileSystem());
-    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     autoRest.AddConfiguration({ "input-file": "https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json" });
     autoRest.AddConfiguration({ "model-validator": true });
     autoRest.AddConfiguration({ "semantic-validator": true });
@@ -53,7 +52,6 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
 
   @test @timeout(10000) async "AutoRest.dll Modeler"() {
     const autoRest = new AutoRest();
-    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
@@ -80,7 +78,6 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
 
   @test @timeout(10000) async "AutoRest.dll Generator"() {
     const autoRest = new AutoRest(new RealFileSystem());
-    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     autoRest.AddConfiguration({
       namespace: "SomeNamespace",
       "license-header": null,

@@ -36,7 +36,6 @@ Install 'ghrelease', 'gulp-github-release'
 Install 'eol', 'gulp-line-ending-corrector'
 Install 'through', 'through2-parallel'
 Install 'run', 'run-sequence'
-Install 'except', './except.iced'
 
 # do a bit of monkeypatching
 _gulpStart = gulp.Gulp::start
