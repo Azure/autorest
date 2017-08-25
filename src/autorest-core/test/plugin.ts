@@ -18,10 +18,10 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 import { homedir } from "os";
 import { join } from "path";
 
-async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
+async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtension> {
   const extMgr = await ExtensionManager.Create(join(homedir(), ".autorest"));
-  const name = "@microsoft.azure/autorest-classic-generators";
-  const source = __dirname.replace(/\\/g, "/").replace("autorest-core/dist/test", "core/AutoRest");
+  const name = "@microsoft.azure/" + plugin;
+  const source = "*";
   const pack = await extMgr.findPackage(name, source);
   const ext = await extMgr.installPackage(pack);
   return AutoRestExtension.FromChildProcess(name, await ext.start());
@@ -63,7 +63,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
       dataStore.DataSink);
 
     // call modeler
-    const autorestPlugin = await GetAutoRestDotNetPlugin();
+    const autorestPlugin = await GetAutoRestDotNetPlugin("modeler");
     const results: DataHandle[] = [];
     const result = await autorestPlugin.Process("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickDataSource([swagger]), dataStore.DataSink, f => results.push(f), m => null, CancellationToken.None);
     assert.strictEqual(result, true);
@@ -101,7 +101,7 @@ async function GetAutoRestDotNetPlugin(): Promise<AutoRestExtension> {
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 
     // call generator
-    const autorestPlugin = await GetAutoRestDotNetPlugin();
+    const autorestPlugin = await GetAutoRestDotNetPlugin("csharp");
     const results: DataHandle[] = [];
     const result = await autorestPlugin.Process(
       "csharp",

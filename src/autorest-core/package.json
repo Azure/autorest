@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-core",
-  "version": "2.0.0",
+  "version": "1.9.0",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=7.10.0"
@@ -20,7 +20,8 @@
   "homepage": "https://github.com/Azure/autorest/readme.md",
   "main": "./dist/main.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./dist/test"
+    "test": "./node_modules/.bin/mocha ./dist/test",
+    "prepublishOnly": "gulp build"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
@@ -37,7 +38,7 @@
     "typescript": "2.4.1"
   },
   "dependencies": {
-    "@microsoft.azure/extension": "C:\\work\\perks.node\\src\\extension",
+    "@microsoft.azure/extension": "^1.1.0",
     "@microsoft.azure/async-io": "~1.0.21",
     "@microsoft.azure/openapi-validator": "^0.1.5-preview",
     "chalk": "^1.1.2",
