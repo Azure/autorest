@@ -16,14 +16,14 @@ openapi-type: arm
 
 ``` yaml
 use-extension:
-  "@microsoft.azure/autorest.azureresourceschema": "*"
-  "@microsoft.azure/autorest.csharp": "*"
-  "@microsoft.azure/autorest.go": "*"
-  "@microsoft.azure/autorest.java": "*"
-  "@microsoft.azure/autorest.nodejs": "*"
-  "@microsoft.azure/autorest.php": "*"
-  "@microsoft.azure/autorest.python": "*"
-  "@microsoft.azure/autorest.ruby": "*"
+  "@microsoft.azure/autorest.azureresourceschema": "1.9.3"
+  "@microsoft.azure/autorest.csharp": "1.9.0"
+  "@microsoft.azure/autorest.go": "1.9.0"
+  "@microsoft.azure/autorest.java": "1.9.0"
+  "@microsoft.azure/autorest.nodejs": "1.9.0"
+  "@microsoft.azure/autorest.php": "1.9.0"
+  "@microsoft.azure/autorest.python": "1.9.0"
+  "@microsoft.azure/autorest.ruby": "1.9.0"
   "@microsoft.azure/classic-openapi-validator": ">=0.0.6-preview"
   "@microsoft.azure/openapi-validator": ">=0.1.2-preview"
 ```    
