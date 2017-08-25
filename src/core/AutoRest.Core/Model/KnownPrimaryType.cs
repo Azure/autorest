@@ -14,6 +14,7 @@ namespace AutoRest.Core.Model
         Int,
         Long,
         Double,
+        Float,
         Decimal,
         String,
         Stream,
