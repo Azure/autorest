@@ -50,7 +50,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
     assert.strictEqual(errorMessages.length, expectedNumErrors);
   }
 
-  @test @timeout(10000) async "AutoRest.dll Modeler"() {
+  @test @skip @timeout(10000) async "AutoRest.dll Modeler"() {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
@@ -76,7 +76,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
     assert.notEqual(codeModel.indexOf("isConstant"), -1);
   }
 
-  @test @timeout(10000) async "AutoRest.dll Generator"() {
+  @test @skip @timeout(10000) async "AutoRest.dll Generator"() {
     const autoRest = new AutoRest(new RealFileSystem());
     autoRest.AddConfiguration({
       namespace: "SomeNamespace",
