@@ -37,21 +37,29 @@ output-artifact:
   - code-model-v1.yaml
   - pipeline.yaml
   - configuration.yaml
+  - source-file-azureresourceschema
   - source-file-csharp
+  - source-file-jsonrpcclient
   - source-file-go
   - source-file-java
-  - source-file-python
   - source-file-nodejs
-  - source-file-ruby
   - source-file-php
-  - source-file-azureresourceschema
-  - source-file-jsonrpcclient
+  - source-file-python
+  - source-file-ruby
 use: []
+clear-output-folder: {}
 use-extension:
-
+  '@microsoft.azure/autorest.azureresourceschema': 1.9.3
+  '@microsoft.azure/autorest.csharp': 1.9.0
+  '@microsoft.azure/autorest.go': 1.9.0
+  '@microsoft.azure/autorest.java': 1.9.0
+  '@microsoft.azure/autorest.nodejs': 1.9.0
+  '@microsoft.azure/autorest.php': 1.9.0
+  '@microsoft.azure/autorest.python': 1.9.0
+  '@microsoft.azure/autorest.ruby': 1.9.0
   '@microsoft.azure/classic-openapi-validator': '>=0.0.6-preview'
   '@microsoft.azure/openapi-validator': '>=0.1.2-preview'
-clear-output-folder: {}
+  '@microsoft.azure/autorest.modeler': 1.9.2
 azure-arm: true
 azure-validator: true
 csharp:
@@ -121,6 +129,37 @@ pipeline:
     input: swagger-document/identity
     scope: semantic-validator
     suffixes: []
+  azureresourceschema/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: azureresourceschema
+    suffixes: []
+  azureresourceschema/commonmarker:
+    input: modeler
+    output-artifact: code-model-v1
+    suffixes: []
+  azureresourceschema/cm/transform:
+    input: commonmarker
+    output-artifact: code-model-v1
+    suffixes: []
+  azureresourceschema/cm/emitter:
+    input: transform
+    scope: scope-cm/emitter
+    suffixes: []
+  azureresourceschema/generate:
+    plugin: azureresourceschema
+    input: cm/transform
+    output-artifact: source-file-azureresourceschema
+    suffixes: []
+  azureresourceschema/transform:
+    input: generate
+    output-artifact: source-file-azureresourceschema
+    scope: scope-transform-string
+    suffixes: []
+  azureresourceschema/emitter:
+    input: transform
+    scope: scope-azureresourceschema/emitter
+    suffixes: []
   csharp/modeler:
     input: swagger-document/identity
     output-artifact: code-model-v1
@@ -144,9 +183,7 @@ pipeline:
       - ''
   csharp/generate:
     plugin: csharp
-    input:
-      - swagger-document/identity
-      - cm/transform
+    input: cm/transform
     output-artifact: source-file-csharp
     suffixes:
       - ''
@@ -167,6 +204,25 @@ pipeline:
     scope: scope-csharp/emitter
     suffixes:
       - ''
+  jsonrpcclient/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: jsonrpcclient
+    suffixes: []
+  jsonrpcclient/generate:
+    plugin: jsonrpcclient
+    input: modeler
+    output-artifact: source-file-jsonrpcclient
+    suffixes: []
+  jsonrpcclient/transform:
+    input: generate
+    output-artifact: source-file-jsonrpcclient
+    scope: scope-transform-string
+    suffixes: []
+  jsonrpcclient/emitter:
+    input: transform
+    scope: scope-jsonrpcclient/emitter
+    suffixes: []
   go/modeler:
     input: swagger-document/identity
     output-artifact: code-model-v1
@@ -186,9 +242,7 @@ pipeline:
     suffixes: []
   go/generate:
     plugin: go
-    input:
-      - swagger-document/identity
-      - cm/transform
+    input: cm/transform
     output-artifact: source-file-go
     suffixes: []
   go/transform:
@@ -219,9 +273,7 @@ pipeline:
     suffixes: []
   java/generate:
     plugin: java
-    input:
-      - swagger-document/identity
-      - cm/transform
+    input: cm/transform
     output-artifact: source-file-java
     suffixes: []
   java/transform:
@@ -232,39 +284,6 @@ pipeline:
   java/emitter:
     input: transform
     scope: scope-java/emitter
-    suffixes: []
-  python/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: python
-    suffixes: []
-  python/commonmarker:
-    input: modeler
-    output-artifact: code-model-v1
-    suffixes: []
-  python/cm/transform:
-    input: commonmarker
-    output-artifact: code-model-v1
-    suffixes: []
-  python/cm/emitter:
-    input: transform
-    scope: scope-cm/emitter
-    suffixes: []
-  python/generate:
-    plugin: python
-    input:
-      - swagger-document/identity
-      - cm/transform
-    output-artifact: source-file-python
-    suffixes: []
-  python/transform:
-    input: generate
-    output-artifact: source-file-python
-    scope: scope-transform-string
-    suffixes: []
-  python/emitter:
-    input: transform
-    scope: scope-python/emitter
     suffixes: []
   nodejs/modeler:
     input: swagger-document/identity
@@ -285,9 +304,7 @@ pipeline:
     suffixes: []
   nodejs/generate:
     plugin: nodejs
-    input:
-      - swagger-document/identity
-      - cm/transform
+    input: cm/transform
     output-artifact: source-file-nodejs
     suffixes: []
   nodejs/transform:
@@ -298,6 +315,51 @@ pipeline:
   nodejs/emitter:
     input: transform
     scope: scope-nodejs/emitter
+    suffixes: []
+  php/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: php
+    suffixes: []
+  php/generate:
+    plugin: php
+    input: modeler
+    output-artifact: source-file-php
+    suffixes: []
+  php/emitter:
+    input: generate
+    scope: scope-php/emitter
+    suffixes: []
+  python/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: python
+    suffixes: []
+  python/commonmarker:
+    input: modeler
+    output-artifact: code-model-v1
+    suffixes: []
+  python/cm/transform:
+    input: commonmarker
+    output-artifact: code-model-v1
+    suffixes: []
+  python/cm/emitter:
+    input: transform
+    scope: scope-cm/emitter
+    suffixes: []
+  python/generate:
+    plugin: python
+    input: cm/transform
+    output-artifact: source-file-python
+    suffixes: []
+  python/transform:
+    input: generate
+    output-artifact: source-file-python
+    scope: scope-transform-string
+    suffixes: []
+  python/emitter:
+    input: transform
+    scope: scope-python/emitter
     suffixes: []
   ruby/modeler:
     input: swagger-document/identity
@@ -318,9 +380,7 @@ pipeline:
     suffixes: []
   ruby/generate:
     plugin: ruby
-    input:
-      - swagger-document/identity
-      - cm/transform
+    input: cm/transform
     output-artifact: source-file-ruby
     suffixes: []
   ruby/transform:
@@ -331,76 +391,6 @@ pipeline:
   ruby/emitter:
     input: transform
     scope: scope-ruby/emitter
-    suffixes: []
-  php/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: php
-    suffixes: []
-  php/generate:
-    plugin: php
-    input:
-      - swagger-document/identity
-      - modeler
-    output-artifact: source-file-php
-    suffixes: []
-  php/emitter:
-    input: generate
-    scope: scope-php/emitter
-    suffixes: []
-  azureresourceschema/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: azureresourceschema
-    suffixes: []
-  azureresourceschema/commonmarker:
-    input: modeler
-    output-artifact: code-model-v1
-    suffixes: []
-  azureresourceschema/cm/transform:
-    input: commonmarker
-    output-artifact: code-model-v1
-    suffixes: []
-  azureresourceschema/cm/emitter:
-    input: transform
-    scope: scope-cm/emitter
-    suffixes: []
-  azureresourceschema/generate:
-    plugin: azureresourceschema
-    input:
-      - swagger-document/identity
-      - cm/transform
-    output-artifact: source-file-azureresourceschema
-    suffixes: []
-  azureresourceschema/transform:
-    input: generate
-    output-artifact: source-file-azureresourceschema
-    scope: scope-transform-string
-    suffixes: []
-  azureresourceschema/emitter:
-    input: transform
-    scope: scope-azureresourceschema/emitter
-    suffixes: []
-  jsonrpcclient/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: jsonrpcclient
-    suffixes: []
-  jsonrpcclient/generate:
-    plugin: jsonrpcclient
-    input:
-      - swagger-document/identity
-      - modeler
-    output-artifact: source-file-jsonrpcclient
-    suffixes: []
-  jsonrpcclient/transform:
-    input: generate
-    output-artifact: source-file-jsonrpcclient
-    scope: scope-transform-string
-    suffixes: []
-  jsonrpcclient/emitter:
-    input: transform
-    scope: scope-jsonrpcclient/emitter
     suffixes: []
   swagger-document/classic-openapi-validator:
     input: swagger-document/identity
@@ -448,10 +438,14 @@ scope-cm/emitter:
   output-uri-expr: |
     "code-model-v1"
 client-side-validation: true
-scope-transform-string:
-  is-object: false
+scope-azureresourceschema/emitter:
+  input-artifact: source-file-azureresourceschema
+  output-uri-expr: $key
 scope-csharp/emitter:
   input-artifact: source-file-csharp
+  output-uri-expr: $key
+scope-jsonrpcclient/emitter:
+  input-artifact: source-file-jsonrpcclient
   output-uri-expr: $key
 scope-go/emitter:
   input-artifact: source-file-go
@@ -459,28 +453,24 @@ scope-go/emitter:
 scope-java/emitter:
   input-artifact: source-file-java
   output-uri-expr: $key
-scope-python/emitter:
-  input-artifact: source-file-python
-  output-uri-expr: $key
 scope-nodejs/emitter:
   input-artifact: source-file-nodejs
-  output-uri-expr: $key
-scope-ruby/emitter:
-  input-artifact: source-file-ruby
   output-uri-expr: $key
 scope-php/emitter:
   input-artifact: source-file-php
   output-uri-expr: $key
-scope-azureresourceschema/emitter:
-  input-artifact: source-file-azureresourceschema
+scope-python/emitter:
+  input-artifact: source-file-python
   output-uri-expr: $key
-scope-jsonrpcclient/emitter:
-  input-artifact: source-file-jsonrpcclient
+scope-ruby/emitter:
+  input-artifact: source-file-ruby
   output-uri-expr: $key
 azure-validator-composed:
   merge-state: composed
 azure-validator-individual:
   merge-state: individual
+scope-transform-string:
+  is-object: false
 base-folder: .
 debug: false
 verbose: false
