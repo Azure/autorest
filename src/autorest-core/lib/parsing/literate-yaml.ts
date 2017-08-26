@@ -6,7 +6,7 @@
 import { OperationAbortedException } from "../exception";
 import { ParseNode } from "../ref/yaml";
 import { MergeYamls, resolveRValue } from "../source-map/merging";
-import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
+import { DataHandle, DataSink } from "../data-store/data-store";
 import { Parse as ParseLiterate } from "./literate";
 import { IndexToPosition } from "./text-utility";
 import { ConfigurationView } from "../autorest-core";
@@ -15,49 +15,45 @@ import { safeEval } from "../ref/safe-eval";
 
 export class CodeBlock {
   info: string | null;
-  data: DataHandleRead;
+  data: DataHandle;
 }
 
 function TryMarkdown(rawMarkdownOrYaml: string): boolean {
   return /^#/gm.test(rawMarkdownOrYaml);
 }
 
-export async function Parse(config: ConfigurationView, literate: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
-  const docScope = workingScope.CreateScope(`doc_tmp`);
-  const hwRawDoc = await workingScope.Write(`doc.yaml`);
-  const hRawDoc = await ParseInternal(config, literate, hwRawDoc, docScope);
+export async function Parse(config: ConfigurationView, literate: DataHandle, sink: DataSink): Promise<DataHandle> {
+  const hRawDoc = await ParseInternal(config, literate, sink);
   return hRawDoc;
 }
 
-export async function ParseCodeBlocks(config: ConfigurationView, literate: DataHandleRead, workingScope: DataStoreView): Promise<Array<CodeBlock>> {
-  const docScope = workingScope.CreateScope(`doc_tmp`);
-  const hwRawDoc = await workingScope.Write(`doc.yaml`);
-  return await ParseCodeBlocksInternal(config, literate, hwRawDoc, docScope);
+export async function ParseCodeBlocks(config: ConfigurationView, literate: DataHandle, sink: DataSink): Promise<Array<CodeBlock>> {
+  return await ParseCodeBlocksInternal(config, literate, sink);
 }
 
-async function ParseInternal(config: ConfigurationView, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
+async function ParseInternal(config: ConfigurationView, hLiterate: DataHandle, sink: DataSink): Promise<DataHandle> {
   // merge the parsed codeblocks
-  const blocks = (await ParseCodeBlocksInternal(config, hLiterate, hResult, intermediateScope)).map(each => each.data);
-  return await MergeYamls(config, blocks, hResult);
+  const blocks = (await ParseCodeBlocksInternal(config, hLiterate, sink)).map(each => each.data);
+  return await MergeYamls(config, blocks, sink);
 }
 
-async function ParseCodeBlocksInternal(config: ConfigurationView, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<CodeBlock[]> {
+async function ParseCodeBlocksInternal(config: ConfigurationView, hLiterate: DataHandle, sink: DataSink): Promise<CodeBlock[]> {
   let hsConfigFileBlocks: CodeBlock[] = [];
 
   const rawMarkdown = hLiterate.ReadData();
 
   // try parsing as literate YAML
   if (TryMarkdown(rawMarkdown)) {
-    const hsConfigFileBlocksWithContext = await ParseLiterate(hLiterate, intermediateScope);
+    const hsConfigFileBlocksWithContext = await ParseLiterate(hLiterate, sink);
 
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
       // only consider YAML/JSON blocks
-      if (!/^(yaml|json)/i.test(codeBlock.info)) {
+      if (!/^(yaml|json)/i.test(codeBlock.info || "")) {
         continue;
       }
 
       // super-quick JSON block syntax check.
-      if (/^(json)/i.test(codeBlock.info)) {
+      if (/^(json)/i.test(codeBlock.info || "")) {
         // check syntax on JSON blocks with simple check first
         try {
           // quick check on data.

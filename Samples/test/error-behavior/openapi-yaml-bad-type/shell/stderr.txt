@@ -1,1 +1,1 @@
-
+ERROR: Error converting value "Cowbell" to type 'System.Nullable`1[AutoRest.Modeler.Model.DataType]'. Path 'type', line 2, position 19.

@@ -1,2 +1,4 @@
     - /Samples/test/error-behavior/config-bad-syntax/readme.md:6:0
+   at ...
+{ Error: [OperationAbortedException] Error occurred. Exiting.
 ERROR: Syntax error: Invalid YAML object.

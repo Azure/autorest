@@ -1,7 +1,6 @@
 {
   "version": "0.2.0",
   "configurations": [
-
     {
       "type": "node",
       "protocol": "inspector",
@@ -9,9 +8,9 @@
       "name": "run tests",
       "program": "${workspaceRoot}/src/autorest-core/node_modules/mocha/bin/_mocha",
       "args": [
-        "test",
+        "dist/test",
         "-g",
-        "TestConfiguration"
+        "blaming"
       ],
       "cwd": "${workspaceRoot}/src/autorest-core"
     },
@@ -20,9 +19,13 @@
       "protocol": "inspector",
       "request": "launch",
       "name": "run bootstrapper",
-      "program": "${workspaceRoot}/src/autorest/app.js",
-      "cwd": "${workspaceRoot}",
-      "preLaunchTask": "build/typescript"
+      "program": "${workspaceRoot}/src/autorest/dist/app.js",
+      "args": [
+        "--latest",
+        "--verbose",
+        "--debug"
+      ],
+      "cwd": "${workspaceRoot}"
     },
     {
       "type": "node",
@@ -30,10 +33,16 @@
       "request": "launch",
       "name": "run autorest",
       "program": "${workspaceRoot}/src/autorest-core/app.js",
-      "args" : [
+      "args": [
         "C:/work/github/azure-rest-api-specs/profile/all.md"
       ],
       "cwd": "${workspaceRoot}"
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
     }
   ]
 }

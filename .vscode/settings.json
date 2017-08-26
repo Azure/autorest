@@ -14,11 +14,13 @@
     "**/.hg": true,
     "**/.DS_Store": true
   },
-  "csharp.suppressDotnetRestoreNotification": true,
-  "[csharp]": {
-    "editor.tabSize": 4
-  },
   "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false
+  },
+  "[json]": {
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.tabSize": 2,
@@ -26,5 +28,6 @@
   },
   "files.associations": {
     "*.iced": "coffeescript"
-  }
+  },
+  "tslint.alwaysShowRuleFailuresAsWarnings": true
 }

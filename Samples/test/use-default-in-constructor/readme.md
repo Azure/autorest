@@ -20,7 +20,7 @@ csharp:
   - output-folder: ClientFancy
     directive:
       from: code-model-v1
-      where: $..*[?(@.$type == "AutoRest.Core.Model.CompositeType, AutoRest.Core")].properties[*]
+      where: $..*[?(@.$type == "CompositeType")].properties[*]
       transform: $.useDefaultInConstructor = true
 ```
 

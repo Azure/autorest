@@ -1,8 +1,0 @@
-﻿{
-    "sampleSwitchFalse": false,
-    "sampleSwitchTrue": true,
-    "sampleString":  "Foo",
-    "filePathArray": [ "C:\\Foo.dll", "C:\\Bar.dll" ],
-    "intArray": [ 1, 2, 3 ],
-    "intFoo": 5
-}
