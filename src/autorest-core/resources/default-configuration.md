@@ -24,7 +24,7 @@ use-extension:
   "@microsoft.azure/autorest.php": "1.9.0"
   "@microsoft.azure/autorest.python": "1.9.0"
   "@microsoft.azure/autorest.ruby": "1.9.0"
-  "@microsoft.azure/classic-openapi-validator": "1.0.2"
+  "@microsoft.azure/classic-openapi-validator": "1.0.3"
   "@microsoft.azure/openapi-validator": ">=0.1.2-preview"
 ```    
 
