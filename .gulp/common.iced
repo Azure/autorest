@@ -185,12 +185,6 @@ module.exports =
     path.basename = "#{f[1].replace(/[_]/g, '/') }/#{f[2]}"
     path.dirname = ""
 
-  except: (match) -> 
-    foreach (each,done) ->
-      return done null if each.path.match( match ) 
-      done null, each
-
-
   rmfile: (dir, file, callback) ->
     p = path.join(dir, file)
     fs.lstat p, (err, stat) ->

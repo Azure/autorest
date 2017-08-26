@@ -63,7 +63,7 @@ async function connect() {
 }
 
 @suite class TestConnectivity {
-  @test @timeout(10000) async "E2E"() {
+  @test @skip @timeout(10000) async "E2E"() {
     await connect();
   }
 }

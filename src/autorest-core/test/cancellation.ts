@@ -10,7 +10,6 @@ import { Message } from "../lib/message";
 /*@suite */ class Cancellation {
   private async CreateLongRunningAutoRest(): Promise<AutoRest> {
     const autoRest = new AutoRest(new RealFileSystem());
-    autoRest.AddConfiguration({ "use-extension": { "@microsoft.azure/autorest-classic-generators": `${__dirname}/../../../core/AutoRest` } })
     await autoRest.AddConfiguration({
       "input-file": [
         "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2017-03-01/swagger/applicationGateway.json",

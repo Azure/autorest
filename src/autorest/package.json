@@ -1,6 +1,6 @@
 {
   "name": "autorest",
-  "version": "2.0.0",
+  "version": "1.9.0",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is a spec that describes the REST API using the Open API Initiative format.",
   "engines": {
     "node": ">=7.10.0"
@@ -26,7 +26,8 @@
     "autorest": "./dist/app.js"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./dist/test"
+    "test": "./node_modules/.bin/mocha ./dist/test",
+    "prepublishOnly": "gulp build"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {

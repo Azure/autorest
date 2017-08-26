@@ -584,7 +584,7 @@ export class Configuration {
           } else {
             // acquire extension
             const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
-            const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, progressInit => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
+            const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
             // start extension
             ext = loadedExtensions[additionalExtension.fullyQualified] = {
               extension: extension,

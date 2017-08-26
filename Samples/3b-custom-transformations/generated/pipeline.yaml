@@ -84,7 +84,6 @@ csharp/generate:
   configScope:
     - csharp
   inputs:
-    - swagger-document/identity
     - csharp/cm/transform
 csharp/simplifier:
   pluginName: csharp-simplifier
