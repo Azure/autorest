@@ -4,8 +4,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-require('events').EventEmitter.prototype._maxListeners = 100;
-
 import * as asyncIO from "@microsoft.azure/async-io";
 import { cli, enhanceConsole } from "@microsoft.azure/console";
 import { Extension, ExtensionManager } from "@microsoft.azure/extension";
