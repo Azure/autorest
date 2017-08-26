@@ -4,6 +4,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+require('events').EventEmitter.prototype._maxListeners = 100;
+
 // start of autorest-ng
 // the console app starts for real here.
 
