@@ -9,10 +9,6 @@
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:40:6 ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post)
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:408:6 ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get)
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:74:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put)
-   at ...
-(node:41172) DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
-(node:41172) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 15): Error: Plugin 'model-validator' not found.
-(node:41172) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 16): Error: Plugin 'semantic-validator' not found.
 ERROR (OperationsAPIImplementation/R3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Storage/operations'.
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_CheckNameAvailability'
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Create'
@@ -24,4 +20,3 @@ ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples des
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_RegenerateKey'
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Update'
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Usage_List'
-Error: Plugin 'model-validator' not found.
