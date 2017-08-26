@@ -256,9 +256,6 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 }
 
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
-  // externals (TODO: make these dynamically loaded)
-  const oavPluginHost = await AutoRestExtension.FromModule(`${__dirname}/plugins/openapi-validation-tools`);
-
   // __status scope
   const startTime = Date.now();
   (configView.Raw as any).__status = new Proxy<any>({}, {
@@ -285,8 +282,6 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "transform": CreatePluginTransformer(),
     "transform-immediate": CreatePluginTransformerImmediate(),
     "compose": CreatePluginComposer(),
-    "model-validator": CreatePluginExternal(oavPluginHost, "model-validator"),
-    "semantic-validator": CreatePluginExternal(oavPluginHost, "semantic-validator"),
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
