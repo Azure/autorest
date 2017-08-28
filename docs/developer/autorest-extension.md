@@ -1,0 +1,65 @@
+# Working on AutoRest extensions
+
+See our [extension documentation](./architecture/AutoRest-extension.md) to learn about what an AutoRest extension is and how it interacts with the core.
+As noted there, extensions can be developed in any programming language, so there is no perfectly generic guide we can provide.
+
+However, we maintain and support a number of commonly used code generators:
+
+# Code Generators
+
+For code generation we maintain the following repositories.
+
+``` Python gives nice highlighting
+# Helping packages:
+https://github.com/Azure/autorest.common        # common functionality shared between generators
+https://github.com/Azure/autorest.testserver    # testing facility used by generators' tests 
+
+# Valid AutoRest extensions:
+https://github.com/Azure/autorest.modeler
+https://github.com/Azure/autorest.azureresourceschema
+https://github.com/Azure/autorest.csharp
+https://github.com/Azure/autorest.go
+https://github.com/Azure/autorest.java
+https://github.com/Azure/autorest.nodejs
+https://github.com/Azure/autorest.php
+https://github.com/Azure/autorest.ruby
+https://github.com/Azure/autorest.python
+https://github.com/Azure/autorest.typescript
+```
+
+## Debugging
+
+This first generation of AutoRest generators were written in C# and are not invokable as a stand-alone since they rely on previous processing steps either done by other extensions or by the AutoRest core.
+
+As a result, debugging a generator extension also requires it to be launched *through the core* like in a regular invocation of AutoRest (on the bright side, one can stay on the CLI and run exactly the command that exposes the problem to debug).
+One can then attach to the running extension process (`dotnet autorest.<something>.dll --server`) through VS Code, there is a launch configuration for that.
+The biggest problem is timing, i.e. attaching and having breakpoints in place before execution has passed the critical point.
+For this purpose, we introduced the `--debugger` flag which will cause any call to the extension to *sit and wait* until a debugger is attached.
+
+### Example
+
+Assume there is a bug in C# code generation when running:
+
+```haskell
+autorest foo\readme.md --azure-validator --fancy-setting=3 --csharp.azure-arm
+```
+
+Simply call:
+
+```haskell
+autorest foo\readme.md --azure-validator --fancy-setting=3 --csharp.azure-arm --debugger
+```
+
+In this case, the C# generator exposed by `autorest.csharp.dll` are called.
+The call will be suspended until a debugger is attached to the `dotnet` process.
+It will print something like `Waiting for debugger to attach.......` to the console.
+Happy debugging!
+
+## Further resources
+
+The following resources may be useful to understand some concepts found among those generators.
+
+- [`CodeModel` and the Language-specific Generator/Transformer/Namer](./architecture/CodeModel-and-the-Language-specific-Generator-Transformer-Namer.md)
+- [`Fixable<T>` -- When a value is both calculated and/or fixed](./architecture/Fixable-T----When-a-value-is-both-calculated-and-or-fixed.md)
+- [LODIS -- Least Offensive Dependency Injection System](./architecture/Least-Offensive-Dependency-Injection-System.md)
+- [Name Disambiguation](./architecture/Name-Disambiguation.md)

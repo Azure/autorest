@@ -53,10 +53,7 @@ gulp clean
 [13:55:16] Working directory changed to C:\work\github\autorest
 [13:55:17] Using gulpfile C:\work\github\autorest\gulpfile.iced
 [13:55:17] Starting 'clean/typescript'...
-[13:55:17] Starting 'clean/dotnet'...
-           C:\work\github\autorest :: dotnet clean C:\work\github\autorest/AutoRest.sln /nologo
 [13:55:18] Finished 'clean/typescript' after 813 ms
-[13:55:21] Finished 'clean/dotnet' after 3.95 s
 [13:55:21] Starting 'clean'...
 [13:55:21] Finished 'clean' after 19 μs
 ```
@@ -64,7 +61,7 @@ gulp clean
 ## Common `gulp` commands
 
 ### Build the whole project (c# and typescript bits)
-`gulp build` - ensures that the dotnet-cli packages are restored, then compiles the typescript and c# projects in parallel.
+`gulp build` - compiles the typescript projects.
 
 ### Clean out build artifacts from the project
 `gulp clean` - cleans the build artifacts
@@ -75,12 +72,6 @@ gulp clean
 ### Fix up line endings for some files
 `gulp fix-line-endings` - ensures that .ts files are LF not CRLF. Will be expanded in the future.
 
-### Wiping the nuget package cache 
-`gulp reset-dotnet-cache` - removes installed dotnet-packages so restore is from a perfectly clean state. WARNING: This will remove the files in `~/.nuget/*`
-
-### Restore dotnet packages 
-`gulp restore` - restores the dotnet packages for all the projects
-
 ### Restore npm packages for Typescript projects
 `gulp npm-install` - restores packages for the typescript projects
 
@@ -88,24 +79,15 @@ gulp clean
 `gulp install` - build and install the dev version of autorest
 
 ### Run AutoRest without installing it
-`gulp autorest` - runs the autorest binary directly. You can pass regular command line parameters to it.
-`gulp autorest-cli` - Runs AutoRest (via the `node` front-end. This will soon be the default.)
+`gulp autorest` - runs AutoRest binary directly. You can pass regular command line parameters to it. Note: `gulp` may interpret arguments coming after `autorest` as further `gulp` tasks. To prevent this, pass `--foo` or similar as a first argument to `gulp autorest`.
 
 ### Testing 
-`gulp regenerate` - regenerate all expected code for tests (There are many fine-grained `regenerate-*` tasks, find them with `gulp -T` if you need them. )
+`gulp regenerate` - regenerate all expected code for tests
 
 `gulp test` - runs all tests<br>
-`gulp test-dotnet` - runs dotnet tests<br>
-`gulp test-go` - runs Go tests<br>
-`gulp test-java` - runs Java tests<br>
-`gulp test-node` - runs NodeJS tests<br>
-`gulp test-python` - runs Python tests<br>
-`gulp test-ruby` - runs Ruby tests<br>
 
 ## available switches
 
-`--force`          specify when you want to force an action (restore, etc)<br>
-`--configuration`  'debug' or 'release'<br>
-`--release`        same as --configuration=release<br>
+`--force`          specify when you want to force an action (update dependencies, etc)<br>
 `--verbose`        enable verbose output<br>
 `--threshold=nn`   set parallelism threshold - default = (# of cpus in system-1)<br>

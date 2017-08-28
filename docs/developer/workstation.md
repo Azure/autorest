@@ -1,46 +1,27 @@
 # <img align="center" src="../images/logo.png"> AutoRest - Developer Workstation Requirements
 
 ## Build Prerequisites
-AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
+AutoRest is developed primarily in TypeScript but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
 
 ## Minimal Required Tools
 
-At a bare minimum, to compile autorest and run it you will need at least:
+At a bare minimum, to compile (and run) autorest and run it you will need at least:
 
-### The .NET CLI tools
+### [NodeJS](https://nodejs.org/en/) 7.10.0 or greater
 
-##### Required: [.NET CLI](https://github.com/dotnet/cli#installers-and-binaries) tools build -004812 or later (after 02/14/2017)
+|OS  |Instructions |
+|----|--------------------------|
+|Windows|You can install the [Node Version Manager for Windows](https://github.com/coreybutler/nvm-windows) <br><br>Install the latest release of the [Node Version Manager](https://github.com/coreybutler/nvm-windows/releases/download/1.1.5/nvm-setup.zip) and then run the following commands:  <br>  `nvm install 7.10.0` <br>  `nvm use 7.10.0` |
+|Linux|You can install the [Node Version Manager](https://github.com/creationix/nvm#install-script):<br><br>Run the following commands:<br>`curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash` <br>  `nvm install 7.10.0` <br> `nvm use 7.10.0`|
+|OS X|You can install the [Node Version Manager](https://github.com/creationix/nvm#install-script). <br><br>Run the following commands: <br>`touch ~/.bash_profile` <br> `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash` <br> `nvm install 7.10.0` <br> `nvm use 7.10.0` |
 
-> You want the **.NET Core SDK Binaries** for your platform <br>
->
-> `dotnet --version ` <br>
-> ` 1.0.0-rc4-004812 ` <br>
+###  [Gulp](https://github.com/gulpjs/gulp) and more
 
-### NodeJS
-
-#### Required: [Node.js](https://nodejs.org/en/) 6.9.5 or greater
-
-
-|asd |Most Users  |Technical Users |
-|----|------------|--------------------------|
-|Windows|Install [Latest NodeJS LTS build](https://nodejs.org/en/download/ ) using the <br>Windows installer.|You can install the [Node Version Manager for Windows](https://github.com/coreybutler/nvm-windows) <br><br>Install the latest release of the [Node Version Manager](https://github.com/coreybutler/nvm-windows/releases/download/1.1.2/nvm-setup.zip) and then run the following commands:  <br>  `nvm install 6.10.0` <br>  `nvm use 6.10.0` |
-|Linux|Install [Latest NodeJS LTS build](https://nodejs.org/en/download/package-manager/) via the<br> package manager instructions for <br>your version of Linux|You can install the [Node Version Manager](https://github.com/creationix/nvm#install-script):<br><br>Run the following commands:<br>`curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash` <br>  `nvm install 6.10.0` <br> `nvm use 6.10.0`|
-|OS X|Install [Latest NodeJS LTS build](https://nodejs.org/en/download/ ) using<br> the Macintosh installer<br><br>or<br><br>Use the [Instructions using a package manager](https://nodejs.org/en/download/package-manager/#osx)|You can install the [Node Version Manager](https://github.com/creationix/nvm#install-script). <br><br>Run the following commands: <br>`touch ~/.bash_profile` <br> `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash` <br> `nvm install 6.10.0` <br> `nvm use 6.10.0` |
-
-###  [Gulp](https://github.com/gulpjs/gulp) 
-
-##### Required: version 3.9.1
-
-``` powershell
-# Install Globally using 'npm': (may require root/admin depending on your configuration)
-npm install -g gulp 
-```
- 
----
+To install all remaining tools required for compilation (including `gulp`), run `npm install` in your clone of the AutoRest repo.
 
 ## Recommended Tools
 
-To actually run all the tests for the different languages, you'll also need all the tools and languages installed for your workstation:
+To actually run *all* the tests for all currently supported languages, you'll also need all the following tools and languages installed:
 
 - Visual Studio Code
 - Git 
@@ -76,12 +57,3 @@ To actually run all the tests for the different languages, you'll also need all 
    iwr https://raw.githubusercontent.com/Azure/autorest/master/Tools/setup-developerworkstation.ps1 -OutFile c:\install-software.ps1 ; c:\install-software.ps1
 ```
 > See the actual script at: https://github.com/Azure/autorest/blob/master/Tools/setup-developerworkstation.ps1 
-
-
-## Easy Linux Setup
-
-(coming soon)
-
-## Easy OS X Setup
-
-(coming soon)
