@@ -1,8 +1,24 @@
 # Working on AutoRest extensions
 
 See our [extension documentation](./architecture/AutoRest-extension.md) to learn about what an AutoRest extension is and how it interacts with the core.
-As noted there, extensions can be developed in any programming language, so there is no perfectly generic guide we can provide.
 
+All that is required to work on/test/debug an extension is a regular production installation of AutoRest, i.e. a clone of this very repo is not required!
+To make AutoRest use an extension (overrides extensions loaded via `use-extension`, so perfect for testing local changes), simply use `--use=<local path or GitHub repo>`.
+
+> **Example workflow: Testing a change to the Java generator**
+>
+> Prerequisites:
+> - AutoRest installation, i.e. have the `autorest` command available
+> - clone/fork of https://github.com/Azure/autorest.java
+>
+> Process:
+> - make changes to clone/fork
+> - test them by issuing the `autorest` command you would normally use, but add
+>   - `--use=<PATH TO YOUR CLONE>` if you wanna test your local changes or
+>   - `--use=https://github.com/<YOUR ACCOUNT>/autorest.java` if you wanna test your fork
+
+
+As noted in the extension documentation, extensions can be developed in any programming language, so there is no perfectly generic guide we can provide for working on the extension itself.
 However, we maintain and support a number of commonly used code generators:
 
 # Code Generators

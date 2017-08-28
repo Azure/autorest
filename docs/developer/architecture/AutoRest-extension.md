@@ -36,10 +36,11 @@ The `package.json` file needs to meet the following requirements:
 }
 ```
 
-2) Declare which *engines* are necessary to execute the above command. Example:
+2) Have dependencies on any runtime required for execution. Example:
 ``` json
-"engines": {
-  "dotnet": "~1.0.5"
+"dependencies": {
+  "dotnet-2.0.0": "*",
+  ...
 }
 ```
 
