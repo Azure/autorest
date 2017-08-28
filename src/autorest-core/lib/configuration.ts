@@ -570,37 +570,45 @@ export class Configuration {
       }
       // acquire additional extensions
       for (const additionalExtension of additionalExtensions) {
-        addedExtensions.add(additionalExtension.fullyQualified);
+        try {
+          addedExtensions.add(additionalExtension.fullyQualified);
 
-        let ext = loadedExtensions[additionalExtension.fullyQualified];
+          let ext = loadedExtensions[additionalExtension.fullyQualified];
 
-        if (!ext) {
-          const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
-          if (installedExtension) {
-            ext = loadedExtensions[additionalExtension.fullyQualified] = {
-              extension: installedExtension,
-              autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await installedExtension.start()))
-            };
-          } else {
-            // acquire extension
-            const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
-            const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
-            // start extension
-            ext = loadedExtensions[additionalExtension.fullyQualified] = {
-              extension: extension,
-              autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start()))
-            };
+          if (!ext) {
+            const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
+            if (installedExtension) {
+              ext = loadedExtensions[additionalExtension.fullyQualified] = {
+                extension: installedExtension,
+                autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await installedExtension.start()))
+              };
+            } else {
+              // acquire extension
+              const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
+              const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
+              // start extension
+              ext = loadedExtensions[additionalExtension.fullyQualified] = {
+                extension: extension,
+                autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start()))
+              };
+            }
+
           }
 
+          // merge config
+          const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
+          const blocks = await this.ParseCodeBlocks(
+            await inputView.ReadStrict(CreateFileUri(await ext.extension.configurationPath)),
+            tmpView,
+            `extension-config-${additionalExtension.fullyQualified}`);
+          await addSegments(blocks);
+        } catch (e) {
+          messageEmitter.Message.Dispatch({
+            Channel: Channel.Fatal,
+            Text: `Failed to install extension '${additionalExtension.name}' (${additionalExtension.source})`
+          });
+          throw e;
         }
-
-        // merge config
-        const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
-        const blocks = await this.ParseCodeBlocks(
-          await inputView.ReadStrict(CreateFileUri(await ext.extension.configurationPath)),
-          tmpView,
-          `extension-config-${additionalExtension.fullyQualified}`);
-        await addSegments(blocks);
       }
     }
 

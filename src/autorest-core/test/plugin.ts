@@ -29,7 +29,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
 
 @suite class Plugins {
   // TODO: remodel if we figure out acquisition story
-  @test @timeout(0) async "Validation Tools"() {
+  @test @skip @timeout(0) async "Validation Tools"() {
     const autoRest = new AutoRest(new RealFileSystem());
     autoRest.AddConfiguration({ "input-file": "https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json" });
     autoRest.AddConfiguration({ "model-validator": true });
