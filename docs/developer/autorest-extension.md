@@ -43,6 +43,20 @@ https://github.com/Azure/autorest.python
 https://github.com/Azure/autorest.typescript
 ```
 
+## Getting Started
+All of the above extensions have both their development and runtime dependencies (dotnet 2.0) persisted in their `package.json`, so `npm install` will install `dotnet` and make it available to the other `npm` scripts including:
+- `npm run build` to build the extension
+- `npm test` to test the extension
+
+Use these scripts and the development workflow should be as easy as:
+- clone
+- `npm install`
+- make changes
+- `npm test`
+- `npm run build`
+- run it using `autorest --use=...` (see above)
+- debug it (see below)
+
 ## Debugging
 
 This first generation of AutoRest generators were written in C# and are not invokable as a stand-alone since they rely on previous processing steps either done by other extensions or by the AutoRest core.
