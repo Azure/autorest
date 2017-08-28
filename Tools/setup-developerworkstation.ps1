@@ -318,10 +318,10 @@ if( !(get-command -ea 0 mvn.cmd) ) {
 #install go 
 if( !(get-command -ea 0 go.exe) ) { 
     write-host -fore cyan "Info: Downloading Go"
-    invoke-webrequest "https://storage.googleapis.com/golang/go1.7.1.windows-amd64.msi" -outfile  "c:\tmp\go1.7.1.windows-amd64.msi" 
-    if( !(test-path -ea 0  "c:\tmp\go1.7.1.windows-amd64.msi" ) ) { return write-error "Unable to download Go" }
+    invoke-webrequest "https://storage.googleapis.com/golang/go1.8.3.windows-amd64.msi" -outfile  "c:\tmp\go1.8.3.windows-amd64.msi" 
+    if( !(test-path -ea 0  "c:\tmp\go1.8.3.windows-amd64.msi" ) ) { return write-error "Unable to download Go" }
     write-host -fore darkcyan "      Installing Go."
-    Start-Process -wait -FilePath msiexec -ArgumentList  "/i", "C:\tmp\go1.7.1.windows-amd64.msi", "/passive"
+    Start-Process -wait -FilePath msiexec -ArgumentList  "/i", "C:\tmp\go1.8.3.windows-amd64.msi", "/passive"
     ReloadPathFromRegistry
     if( !(get-command -ea 0 go.exe) ) { return write-error "No GO in PATH." }
 }

@@ -2,7 +2,7 @@
   "name": "autorest-nuget",
   "version": "1.2.1",
   "description": "AutoRest Nuget Package",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

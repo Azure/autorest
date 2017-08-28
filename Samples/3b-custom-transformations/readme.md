@@ -12,6 +12,7 @@ output-artifact:
  - swagger-document.json
  - code-model-v1.yaml
  - pipeline.yaml
+ - configuration.yaml
 csharp:
   output-folder: Client
 ```
@@ -66,9 +67,9 @@ directive:
   from: code-model-v1
   where: $.operations[*]
   transform: >
-      const url = $.methods[0]["#url"];
+      const url = $.methods[0]["url"];
       const res = url.split("/Microsoft.Storage/")[1].split("/")[0];
-      $["#name"] = res;
+      $.name.raw = res;
       $.summary = JSON.stringify($, null, 2);
   reason: We wanna group methods by URI.
 ```

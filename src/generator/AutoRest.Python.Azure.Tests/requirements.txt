@@ -1,2 +1,0 @@
-requests>=2.14.0
-msrestazure>=0.4.7

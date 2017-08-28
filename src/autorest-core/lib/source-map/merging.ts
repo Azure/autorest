@@ -9,7 +9,7 @@ import { Channel } from "../message";
 import { JsonPath, stringify } from "../ref/jsonpath";
 import * as yaml from "../ref/yaml";
 import { Mappings } from "../ref/source-map";
-import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
+import { DataHandle, DataSink } from "../data-store/data-store";
 
 // // TODO: may want ASTy merge! (supporting circular structure and such?)
 function Merge(a: any, b: any, path: JsonPath = []): any {
@@ -204,7 +204,7 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
   return result;
 }
 
-export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
+export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHandle[], sink: DataSink): Promise<DataHandle> {
   let resultObject: any = {};
   const mappings: Mappings = [];
   let failed = false;
@@ -225,5 +225,5 @@ export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHand
   if (failed) {
     throw new Error("Syntax errors encountered.");
   }
-  return yamlOutputHandle.WriteObject(resultObject, mappings, yamlInputHandles);
+  return sink.WriteObject("merged YAMLs", resultObject, mappings, yamlInputHandles);
 }

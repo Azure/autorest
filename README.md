@@ -1,7 +1,7 @@
 # <img align="center" src="./docs/images/logo.png">  AutoRest <br>[![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest)
 
-The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
 
+The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
 
 
 ## Support Policy
@@ -12,42 +12,23 @@ AutoRest is an open source tool -- if you need assistance, first check the docum
 
 Using `npm` you can upgrade to the latest stable version of AutoRest:
 
-``` powershell
-# Install latest autorest package
-npm install -g autorest
+## Autorest 2.0 Branch
 
-# Update the generator plugins to the latest stable version
-autorest --reset
-```
+AutoRest is making a a few structural changes, along with eliminating some deprecated legacy behavior.
 
-You can still access the nightly build of the generator plugins by using `--prerelease` on the autorest command line:
+Notable changes in this branch:
+- Bumping required node.js version to 7.10 or greater. (Will add checks in to ensure that this is the case)<br> This enables us to target the `ES2017` javascript standard, vastly simplifying compiled code and has significant performance benefits. 
+- Bumping Dotnet/CLI SDK and Runtime to 2.0
+- Updated bootstrapper that implements use-extension
+- Moving common TypeScript code into the Perks.Node project so that they can be built and reused independently of building AutoRest.
+- Removing all remaining Legacy CLI features, standardizing on the `--switch` format for all cmdline operations
 
-``` powershell
-# install the latest nightly autorest generators 
-autorest --latest --prerelease 
 
-# revert back to the latest stable release of autorest generators:
-autorest --reset 
-```
+---
 
-If you're living life on the edge (and know what you're doing!) you can access the `next` version of the main autorest package from npm:
+The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
 
-``` powershell
-# install the 'next' version of the autorest package 
-npm install autorest@next 
-
-# revert to the 'stable' version of the autorest package 
-npm install autorest@latest 
-```
-Features-in-progress in AutoRest will be found in the 'next' version, and use at your own risk :D
-
-## What's Next 
-
-The finishing touches on the extension model are being made right now in the `@next` version of autorest, which will
-make it possible to install and manage extensions on a fine-grained level, as well as being able to publish a plugin written in different languages. 
-
-We've already started on the path to OpenAPI 3 support, a new code modeler, which will lead to generators for some languages, and new language support!
-
+[![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
 
 # Installing Autorest 
 
@@ -103,16 +84,14 @@ Start by reading the documentation for using AutoRest:
 Get yourself up and coding in AutoRest
 
 - [Developer Workstation Requirements](./docs/developer/workstation.md) - what do you need to install to start working with the AutoRest code
-- [Compiling AutoRest](./docs/developer/compiling-autorest.md) - compiling/testing AutoRest using the build scripts 
+- [AutoRest Extensibility](./docs/developer/architecture/AutoRest-extension.md) and [protocol](./docs/developer/architecture/AutoRest-extension-protocol.md) documentation
+- [Working on AutoRest core](./docs/developer/autorest-core.md) - compiling/testing AutoRest core using the build scripts
+- [Working on an AutoRest extension](./docs/developer/autorest-extension.md) - creating and testing AutoRest extensions
 
-Some information about the internal AutoRest architecture (may need updating!):
-- [Developer Guide](./docs/developer/guide/) - Notes on developing with AutoRest
-- [AutoRest and ClientRuntimes](./docs/developer/architecture/Autorest-and-Clientruntimes.md) - about the client runtime requirements for AutoRest
-- [The `CodeModel` data model](./docs/developer/architecture/CodeModel-and-the-Language-specific-Generator-Transformer-Namer.md) and the Language-specific Generator/Transformer/Namer
-- [`Fixable<T>` implementation](./docs/developer/architecture/Fixable-T----When-a-value-is-both-calculated-and-or-fixed.md) - When a value is both calculated and/or fixed
-- [LODIS](./docs/developer/architecture/Least-Offensive-Dependency-Injection-System.md) - The Least Offensive Dependency Injection System
-- [Name Disambiguation](./docs/developer/architecture/Name-Disambiguation.md) - how names don't collide in code generation.
+Some related information:
 - [Validation Rules & Linting](./docs/developer/validation-rules/readme.md) - about the validation rules in AutoRest
+- [Client Runtimes](./docs/developer/architecture/Autorest-and-Clientruntimes.md) - information about the client runtimes required for using code generated by AutoRest
+<!-- - [Developer Guide](./docs/developer/guide/) - Notes on developing with AutoRest -->
 
 ---
 

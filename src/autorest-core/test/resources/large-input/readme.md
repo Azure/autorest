@@ -8,4 +8,5 @@ input-file:
 - swagger.json 
 
 azure-validator: true
+openapi-type: arm
 ```

@@ -1,0 +1,636 @@
+(C) 2017 **Microsoft Corporation.**  
+# AutoRest code generation utility.
+https://aka.ms/autorest
+WARNING: 195 exported name(s) unnecessarily contains the service name. Please consider removing the service name.
+WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create load balancer' of 'LoadBalancers/create_or_update'
+WARNING: Did not generate example 'Create load balancer' of 'LoadBalancers/create_or_update'
+WARNING: Did not generate example 'Create load balancer' of 'LoadBalancers/createOrUpdate'
+WARNING: Did not generate example 'Create load balancer' of 'LoadBalancers/createOrUpdate'
+WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/createOrUpdate'
+WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/createOrUpdate'
+WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/createOrUpdate'
+WARNING: Did not generate example 'Create load balancer' of 'LoadBalancers/CreateOrUpdateMethod'
+WARNING: Did not generate example 'Create network interface' of 'networkInterfaces/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create network interface' of 'networkInterfaces/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create network interface' of 'NetworkInterfaces/create_or_update'
+WARNING: Did not generate example 'Create network interface' of 'NetworkInterfaces/create_or_update'
+WARNING: Did not generate example 'Create network interface' of 'NetworkInterfaces/createOrUpdate'
+WARNING: Did not generate example 'Create network interface' of 'NetworkInterfaces/createOrUpdate'
+WARNING: Did not generate example 'Create network interface' of 'networkInterfaces/createOrUpdate'
+WARNING: Did not generate example 'Create network interface' of 'networkInterfaces/createOrUpdate'
+WARNING: Did not generate example 'Create network interface' of 'networkInterfaces/createOrUpdate'
+WARNING: Did not generate example 'Create network interface' of 'NetworkInterfaces/CreateOrUpdateMethod'
+WARNING: Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/create_or_update'
+WARNING: Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/create_or_update'
+WARNING: Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/createOrUpdate'
+WARNING: Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/createOrUpdate'
+WARNING: Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/createOrUpdate'
+WARNING: Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/createOrUpdate'
+WARNING: Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/createOrUpdate'
+WARNING: Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/CreateOrUpdateMethod'
+WARNING: Did not generate example 'Create network security group' of 'networkSecurityGroups/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create network security group' of 'networkSecurityGroups/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create network security group' of 'NetworkSecurityGroups/create_or_update'
+WARNING: Did not generate example 'Create network security group' of 'NetworkSecurityGroups/create_or_update'
+WARNING: Did not generate example 'Create network security group' of 'NetworkSecurityGroups/createOrUpdate'
+WARNING: Did not generate example 'Create network security group' of 'NetworkSecurityGroups/createOrUpdate'
+WARNING: Did not generate example 'Create network security group' of 'networkSecurityGroups/createOrUpdate'
+WARNING: Did not generate example 'Create network security group' of 'networkSecurityGroups/createOrUpdate'
+WARNING: Did not generate example 'Create network security group' of 'networkSecurityGroups/createOrUpdate'
+WARNING: Did not generate example 'Create network security group' of 'NetworkSecurityGroups/CreateOrUpdateMethod'
+WARNING: Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/create_or_update'
+WARNING: Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/create_or_update'
+WARNING: Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/CreateOrUpdateMethod'
+WARNING: Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/create_or_update'
+WARNING: Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/create_or_update'
+WARNING: Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/CreateOrUpdateMethod'
+WARNING: Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/create_or_update'
+WARNING: Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/create_or_update'
+WARNING: Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/createOrUpdate'
+WARNING: Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/CreateOrUpdateMethod'
+WARNING: Did not generate example 'Create security rule' of 'securityRules/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create security rule' of 'securityRules/beginCreateOrUpdate'
+WARNING: Did not generate example 'Create security rule' of 'SecurityRules/create_or_update'
+WARNING: Did not generate example 'Create security rule' of 'SecurityRules/create_or_update'
+WARNING: Did not generate example 'Create security rule' of 'SecurityRules/createOrUpdate'
+WARNING: Did not generate example 'Create security rule' of 'SecurityRules/createOrUpdate'
+WARNING: Did not generate example 'Create security rule' of 'securityRules/createOrUpdate'
+WARNING: Did not generate example 'Create security rule' of 'securityRules/createOrUpdate'
+WARNING: Did not generate example 'Create security rule' of 'securityRules/createOrUpdate'
+WARNING: Did not generate example 'Create security rule' of 'SecurityRules/CreateOrUpdateMethod'
+WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'
+WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'
+WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'
+WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'
+WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'defaultSecurityRules/get'
+WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'defaultSecurityRules/get'
+WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'defaultSecurityRules/get'
+WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/GetMethod'
+WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list_as_lazy'
+WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'
+WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'
+WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'
+WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'
+WARNING: Did not generate example 'DefaultSecurityRuleList' of 'defaultSecurityRules/list'
+WARNING: Did not generate example 'DefaultSecurityRuleList' of 'defaultSecurityRules/list'
+WARNING: Did not generate example 'DefaultSecurityRuleList' of 'defaultSecurityRules/list'
+WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/ListMethod'
+WARNING: Did not generate example 'Delete load balancer' of 'loadBalancers/beginDelete'
+WARNING: Did not generate example 'Delete load balancer' of 'loadBalancers/beginDelete'
+WARNING: Did not generate example 'Delete load balancer' of 'LoadBalancers/delete'
+WARNING: Did not generate example 'Delete load balancer' of 'LoadBalancers/delete'
+WARNING: Did not generate example 'Delete load balancer' of 'loadBalancers/delete'
+WARNING: Did not generate example 'Delete load balancer' of 'loadBalancers/delete'
+WARNING: Did not generate example 'Delete load balancer' of 'loadBalancers/delete'
+WARNING: Did not generate example 'Delete load balancer' of 'LoadBalancers/DeleteMethod'
+WARNING: Did not generate example 'Delete load balancer' of 'LoadBalancers/deleteMethod'
+WARNING: Did not generate example 'Delete load balancer' of 'LoadBalancers/deleteMethod'
+WARNING: Did not generate example 'Delete network interface' of 'networkInterfaces/beginDelete'
+WARNING: Did not generate example 'Delete network interface' of 'networkInterfaces/beginDelete'
+WARNING: Did not generate example 'Delete network interface' of 'NetworkInterfaces/delete'
+WARNING: Did not generate example 'Delete network interface' of 'NetworkInterfaces/delete'
+WARNING: Did not generate example 'Delete network interface' of 'networkInterfaces/delete'
+WARNING: Did not generate example 'Delete network interface' of 'networkInterfaces/delete'
+WARNING: Did not generate example 'Delete network interface' of 'networkInterfaces/delete'
+WARNING: Did not generate example 'Delete network interface' of 'NetworkInterfaces/DeleteMethod'
+WARNING: Did not generate example 'Delete network interface' of 'NetworkInterfaces/deleteMethod'
+WARNING: Did not generate example 'Delete network interface' of 'NetworkInterfaces/deleteMethod'
+WARNING: Did not generate example 'Delete network security group' of 'networkSecurityGroups/beginDelete'
+WARNING: Did not generate example 'Delete network security group' of 'networkSecurityGroups/beginDelete'
+WARNING: Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/delete'
+WARNING: Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/delete'
+WARNING: Did not generate example 'Delete network security group' of 'networkSecurityGroups/delete'
+WARNING: Did not generate example 'Delete network security group' of 'networkSecurityGroups/delete'
+WARNING: Did not generate example 'Delete network security group' of 'networkSecurityGroups/delete'
+WARNING: Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/DeleteMethod'
+WARNING: Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/deleteMethod'
+WARNING: Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/deleteMethod'
+WARNING: Did not generate example 'Delete network security rule from network security group' of 'securityRules/beginDelete'
+WARNING: Did not generate example 'Delete network security rule from network security group' of 'securityRules/beginDelete'
+WARNING: Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/delete'
+WARNING: Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/delete'
+WARNING: Did not generate example 'Delete network security rule from network security group' of 'securityRules/delete'
+WARNING: Did not generate example 'Delete network security rule from network security group' of 'securityRules/delete'
+WARNING: Did not generate example 'Delete network security rule from network security group' of 'securityRules/delete'
+WARNING: Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/DeleteMethod'
+WARNING: Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/deleteMethod'
+WARNING: Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/deleteMethod'
+WARNING: Did not generate example 'Delete public IP address' of 'publicIPAddresses/beginDelete'
+WARNING: Did not generate example 'Delete public IP address' of 'publicIPAddresses/beginDelete'
+WARNING: Did not generate example 'Delete public IP address' of 'PublicIPAddresses/delete'
+WARNING: Did not generate example 'Delete public IP address' of 'PublicIPAddresses/delete'
+WARNING: Did not generate example 'Delete public IP address' of 'publicIPAddresses/delete'
+WARNING: Did not generate example 'Delete public IP address' of 'publicIPAddresses/delete'
+WARNING: Did not generate example 'Delete public IP address' of 'publicIPAddresses/delete'
+WARNING: Did not generate example 'Delete public IP address' of 'PublicIPAddresses/DeleteMethod'
+WARNING: Did not generate example 'Delete public IP address' of 'PublicIPAddresses/deleteMethod'
+WARNING: Did not generate example 'Delete public IP address' of 'PublicIPAddresses/deleteMethod'
+WARNING: Did not generate example 'Get load balancer' of 'LoadBalancers/get'
+WARNING: Did not generate example 'Get load balancer' of 'LoadBalancers/get'
+WARNING: Did not generate example 'Get load balancer' of 'LoadBalancers/get'
+WARNING: Did not generate example 'Get load balancer' of 'LoadBalancers/get'
+WARNING: Did not generate example 'Get load balancer' of 'loadBalancers/get'
+WARNING: Did not generate example 'Get load balancer' of 'loadBalancers/get'
+WARNING: Did not generate example 'Get load balancer' of 'loadBalancers/getByResourceGroup'
+WARNING: Did not generate example 'Get load balancer' of 'LoadBalancers/GetMethod'
+WARNING: Did not generate example 'Get network interface' of 'NetworkInterfaces/get'
+WARNING: Did not generate example 'Get network interface' of 'NetworkInterfaces/get'
+WARNING: Did not generate example 'Get network interface' of 'NetworkInterfaces/get'
+WARNING: Did not generate example 'Get network interface' of 'NetworkInterfaces/get'
+WARNING: Did not generate example 'Get network interface' of 'networkInterfaces/get'
+WARNING: Did not generate example 'Get network interface' of 'networkInterfaces/get'
+WARNING: Did not generate example 'Get network interface' of 'networkInterfaces/getByResourceGroup'
+WARNING: Did not generate example 'Get network interface' of 'NetworkInterfaces/GetMethod'
+WARNING: Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'
+WARNING: Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'
+WARNING: Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'
+WARNING: Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'
+WARNING: Did not generate example 'Get network security group' of 'networkSecurityGroups/get'
+WARNING: Did not generate example 'Get network security group' of 'networkSecurityGroups/get'
+WARNING: Did not generate example 'Get network security group' of 'networkSecurityGroups/getByResourceGroup'
+WARNING: Did not generate example 'Get network security group' of 'NetworkSecurityGroups/GetMethod'
+WARNING: Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'
+WARNING: Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'
+WARNING: Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'
+WARNING: Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'
+WARNING: Did not generate example 'Get network security rule in network security group' of 'securityRules/get'
+WARNING: Did not generate example 'Get network security rule in network security group' of 'securityRules/get'
+WARNING: Did not generate example 'Get network security rule in network security group' of 'securityRules/get'
+WARNING: Did not generate example 'Get network security rule in network security group' of 'SecurityRules/GetMethod'
+WARNING: Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'
+WARNING: Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'
+WARNING: Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'
+WARNING: Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'
+WARNING: Did not generate example 'Get public IP address' of 'publicIPAddresses/get'
+WARNING: Did not generate example 'Get public IP address' of 'publicIPAddresses/get'
+WARNING: Did not generate example 'Get public IP address' of 'publicIPAddresses/getByResourceGroup'
+WARNING: Did not generate example 'Get public IP address' of 'PublicIPAddresses/GetMethod'
+WARNING: Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/beginCreateOrUpdate'
+WARNING: Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/beginCreateOrUpdate'
+WARNING: Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/create_or_update'
+WARNING: Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/create_or_update'
+WARNING: Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/createOrUpdate'
+WARNING: Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/createOrUpdate'
+WARNING: Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/createOrUpdate'
+WARNING: Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/createOrUpdate'
+WARNING: Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/createOrUpdate'
+WARNING: Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/CreateOrUpdateMethod'
+WARNING: Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/beginDelete'
+WARNING: Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/beginDelete'
+WARNING: Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/delete'
+WARNING: Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/delete'
+WARNING: Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/delete'
+WARNING: Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/delete'
+WARNING: Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/delete'
+WARNING: Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/DeleteMethod'
+WARNING: Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/deleteMethod'
+WARNING: Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/deleteMethod'
+WARNING: Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'
+WARNING: Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'
+WARNING: Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'
+WARNING: Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'
+WARNING: Did not generate example 'InboundNatRuleGet' of 'inboundNatRules/get'
+WARNING: Did not generate example 'InboundNatRuleGet' of 'inboundNatRules/get'
+WARNING: Did not generate example 'InboundNatRuleGet' of 'inboundNatRules/get'
+WARNING: Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/GetMethod'
+WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list_as_lazy'
+WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'
+WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'
+WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'
+WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'
+WARNING: Did not generate example 'InboundNatRuleList' of 'inboundNatRules/list'
+WARNING: Did not generate example 'InboundNatRuleList' of 'inboundNatRules/list'
+WARNING: Did not generate example 'InboundNatRuleList' of 'inboundNatRules/list'
+WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/ListMethod'
+WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/list_all_as_lazy'
+WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/list_all'
+WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/list_all'
+WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/listAll'
+WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/listAll'
+WARNING: Did not generate example 'List all load balancers' of 'loadBalancers/listAll'
+WARNING: Did not generate example 'List all load balancers' of 'loadBalancers/listAll'
+WARNING: Did not generate example 'List all load balancers' of 'loadBalancers/listAll'
+WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/ListAllMethod'
+WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/list_all_as_lazy'
+WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/list_all'
+WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/list_all'
+WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/listAll'
+WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/listAll'
+WARNING: Did not generate example 'List all network interfaces' of 'networkInterfaces/listAll'
+WARNING: Did not generate example 'List all network interfaces' of 'networkInterfaces/listAll'
+WARNING: Did not generate example 'List all network interfaces' of 'networkInterfaces/listAll'
+WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/ListAllMethod'
+WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/list_all_as_lazy'
+WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/list_all'
+WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/list_all'
+WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/listAll'
+WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/listAll'
+WARNING: Did not generate example 'List all network security groups' of 'networkSecurityGroups/listAll'
+WARNING: Did not generate example 'List all network security groups' of 'networkSecurityGroups/listAll'
+WARNING: Did not generate example 'List all network security groups' of 'networkSecurityGroups/listAll'
+WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/ListAllMethod'
+WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/list_all_as_lazy'
+WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/list_all'
+WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/list_all'
+WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/listAll'
+WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/listAll'
+WARNING: Did not generate example 'List all public IP addresses' of 'publicIPAddresses/listAll'
+WARNING: Did not generate example 'List all public IP addresses' of 'publicIPAddresses/listAll'
+WARNING: Did not generate example 'List all public IP addresses' of 'publicIPAddresses/listAll'
+WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/ListAllMethod'
+WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list_as_lazy'
+WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'
+WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'
+WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'
+WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'
+WARNING: Did not generate example 'List load balancers in resource group' of 'loadBalancers/list'
+WARNING: Did not generate example 'List load balancers in resource group' of 'loadBalancers/list'
+WARNING: Did not generate example 'List load balancers in resource group' of 'loadBalancers/list'
+WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/ListMethod'
+WARNING: Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/beginListEffectiveNetworkSecurityGroups'
+WARNING: Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/beginListEffectiveNetworkSecurityGroups'
+WARNING: Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/list_effective_network_security_groups'
+WARNING: Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/list_effective_network_security_groups'
+WARNING: Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/listEffectiveNetworkSecurityGroups'
+WARNING: Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/listEffectiveNetworkSecurityGroups'
+WARNING: Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/listEffectiveNetworkSecurityGroups'
+WARNING: Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/listEffectiveNetworkSecurityGroups'
+WARNING: Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/listEffectiveNetworkSecurityGroups'
+WARNING: Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/ListEffectiveNetworkSecurityGroupsMethod'
+WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list_as_lazy'
+WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'
+WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'
+WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'
+WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'
+WARNING: Did not generate example 'List network interfaces in resource group' of 'networkInterfaces/list'
+WARNING: Did not generate example 'List network interfaces in resource group' of 'networkInterfaces/list'
+WARNING: Did not generate example 'List network interfaces in resource group' of 'networkInterfaces/list'
+WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/ListMethod'
+WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list_as_lazy'
+WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'
+WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'
+WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'
+WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'
+WARNING: Did not generate example 'List network security groups in resource group' of 'networkSecurityGroups/list'
+WARNING: Did not generate example 'List network security groups in resource group' of 'networkSecurityGroups/list'
+WARNING: Did not generate example 'List network security groups in resource group' of 'networkSecurityGroups/list'
+WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/ListMethod'
+WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/list_as_lazy'
+WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'
+WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'
+WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'
+WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'
+WARNING: Did not generate example 'List network security rules in network security group' of 'securityRules/list'
+WARNING: Did not generate example 'List network security rules in network security group' of 'securityRules/list'
+WARNING: Did not generate example 'List network security rules in network security group' of 'securityRules/list'
+WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/ListMethod'
+WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list_as_lazy'
+WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'
+WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'
+WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'
+WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'
+WARNING: Did not generate example 'List resource group public IP addresses' of 'publicIPAddresses/list'
+WARNING: Did not generate example 'List resource group public IP addresses' of 'publicIPAddresses/list'
+WARNING: Did not generate example 'List resource group public IP addresses' of 'publicIPAddresses/list'
+WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/ListMethod'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'loadBalancerBackendAddressPools/get'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'loadBalancerBackendAddressPools/get'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'loadBalancerBackendAddressPools/get'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/GetMethod'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list_as_lazy'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'loadBalancerBackendAddressPools/list'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'loadBalancerBackendAddressPools/list'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'loadBalancerBackendAddressPools/list'
+WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/ListMethod'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'loadBalancerFrontendIPConfigurations/get'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'loadBalancerFrontendIPConfigurations/get'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'loadBalancerFrontendIPConfigurations/get'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/GetMethod'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list_as_lazy'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'loadBalancerFrontendIPConfigurations/list'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'loadBalancerFrontendIPConfigurations/list'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'loadBalancerFrontendIPConfigurations/list'
+WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/ListMethod'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'loadBalancerLoadBalancingRules/get'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'loadBalancerLoadBalancingRules/get'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'loadBalancerLoadBalancingRules/get'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/GetMethod'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list_as_lazy'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'loadBalancerLoadBalancingRules/list'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'loadBalancerLoadBalancingRules/list'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'loadBalancerLoadBalancingRules/list'
+WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/ListMethod'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list_as_lazy'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'loadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'loadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'loadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/ListMethod'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list_as_lazy'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'loadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'loadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'loadBalancerNetworkInterfaces/list'
+WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/ListMethod'
+WARNING: Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'
+WARNING: Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'
+WARNING: Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'
+WARNING: Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'
+WARNING: Did not generate example 'LoadBalancerProbeGet' of 'loadBalancerProbes/get'
+WARNING: Did not generate example 'LoadBalancerProbeGet' of 'loadBalancerProbes/get'
+WARNING: Did not generate example 'LoadBalancerProbeGet' of 'loadBalancerProbes/get'
+WARNING: Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/GetMethod'
+WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list_as_lazy'
+WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'
+WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'
+WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'
+WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'
+WARNING: Did not generate example 'LoadBalancerProbeList' of 'loadBalancerProbes/list'
+WARNING: Did not generate example 'LoadBalancerProbeList' of 'loadBalancerProbes/list'
+WARNING: Did not generate example 'LoadBalancerProbeList' of 'loadBalancerProbes/list'
+WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/ListMethod'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'networkInterfaceIPConfigurations/get'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'networkInterfaceIPConfigurations/get'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'networkInterfaceIPConfigurations/get'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/GetMethod'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list_as_lazy'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'networkInterfaceIPConfigurations/list'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'networkInterfaceIPConfigurations/list'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'networkInterfaceIPConfigurations/list'
+WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/ListMethod'
+WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list_as_lazy'
+WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'
+WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'
+WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'
+WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'
+WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'networkInterfaceLoadBalancers/list'
+WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'networkInterfaceLoadBalancers/list'
+WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'networkInterfaceLoadBalancers/list'
+WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/ListMethod'
+WARNING: Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/beginGetEffectiveRouteTable'
+WARNING: Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/beginGetEffectiveRouteTable'
+WARNING: Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/get_effective_route_table'
+WARNING: Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/get_effective_route_table'
+WARNING: Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/getEffectiveRouteTable'
+WARNING: Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/getEffectiveRouteTable'
+WARNING: Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/getEffectiveRouteTable'
+WARNING: Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/getEffectiveRouteTable'
+WARNING: Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/getEffectiveRouteTable'
+WARNING: Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/GetEffectiveRouteTableMethod'
+WARNING: The name 'Access' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ApplicationGatewayBackendAddress' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ApplicationGatewayBackendAddressPool' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ApplicationGatewayBackendAddressPoolPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'AssociationType' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'AzureAsyncOperationResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'BackendAddressPool' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'BackendAddressPoolPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'CheckConnectivity' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ConnectionStatus' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ConnectivityDestination' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ConnectivityHop' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ConnectivityInformation' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ConnectivityIssue' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ConnectivityParameters' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ConnectivitySource' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Create' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'CreateOrUpdate' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'CreateOrUpdate' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'CreateOrUpdate' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'CreateOrUpdate' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'CreateOrUpdate' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'CreateOrUpdate' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'CreateOrUpdate' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Delete' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Delete' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Delete' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Delete' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Delete' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Delete' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Delete' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Delete' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Direction' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'EffectiveNetworkSecurityGroup' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'EffectiveNetworkSecurityGroupAssociation' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'EffectiveNetworkSecurityGroupListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'EffectiveNetworkSecurityRule' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'EffectiveRoute' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'EffectiveRouteListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'EffectiveRouteSource' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'EffectiveRouteState' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'EffectiveSecurityRuleProtocol' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Error' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ErrorDetails' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'FlowLogInformation' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'FlowLogProperties' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'FlowLogStatusParameters' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'FrontendIPConfiguration' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'FrontendIPConfigurationPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Get' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'GetEffectiveRouteTable' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'GetFlowLogStatus' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'GetNextHop' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'GetStatus' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'GetTopology' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'GetTroubleshooting' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'GetTroubleshootingResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'GetVMSecurityRules' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'InboundNatPool' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'InboundNatPoolPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'InboundNatRule' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'InboundNatRuleListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'InboundNatRulePropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'IPAllocationMethod' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'IPConfiguration' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'IPConfigurationPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'IPVersion' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'IssueType' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'List' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ListAll' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ListAll' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ListAll' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ListAll' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ListAll' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ListEffectiveNetworkSecurityGroups' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'LoadBalancer' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'LoadBalancerBackendAddressPoolListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'LoadBalancerFrontendIPConfigurationListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'LoadBalancerListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'LoadBalancerLoadBalancingRuleListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'LoadBalancerProbeListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'LoadBalancerPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'LoadBalancingRule' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'LoadBalancingRulePropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'LoadDistribution' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkInterface' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkInterfaceAssociation' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkInterfaceDNSSettings' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkInterfaceIPConfiguration' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkInterfaceIPConfigurationListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkInterfaceIPConfigurationPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkInterfaceListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkInterfaceLoadBalancerListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkInterfacePropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkOperationStatus' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkSecurityGroup' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkSecurityGroupListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkSecurityGroupPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkWatcher' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkWatcherListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NetworkWatcherPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NextHopParameters' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NextHopResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'NextHopType' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Origin' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'OutboundNatRule' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'OutboundNatRulePropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PacketCapture' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PacketCaptureFilter' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PacketCaptureListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PacketCaptureParameters' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PacketCaptureQueryStatusResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PacketCaptureResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PacketCaptureResultProperties' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PacketCaptureStorageLocation' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PcError' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PcProtocol' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PcStatus' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Probe' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ProbePropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ProbeProtocol' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Protocol' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ProvisioningState' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PublicIPAddress' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PublicIPAddressDNSSettings' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PublicIPAddressListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'PublicIPAddressPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'QueryTroubleshootingParameters' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Resource' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ResourceNavigationLink' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'ResourceNavigationLinkFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'RetentionPolicyParameters' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Route' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'RouteNextHopType' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'RoutePropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'RouteTable' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'RouteTablePropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SecurityGroupNetworkInterface' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SecurityGroupViewParameters' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SecurityGroupViewResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SecurityRule' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SecurityRuleAccess' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SecurityRuleAssociations' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SecurityRuleDirection' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SecurityRuleListResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SecurityRulePropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SecurityRuleProtocol' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SetFlowLogConfiguration' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Severity' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Stop' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Subnet' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SubnetAssociation' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SubnetPropertiesFormat' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'SubResource' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'Topology' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'TopologyAssociation' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'TopologyParameters' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'TopologyResource' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'TransportProtocol' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'TroubleshootingDetails' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'TroubleshootingParameters' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'TroubleshootingProperties' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'TroubleshootingRecommendedActions' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'TroubleshootingResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'VerificationIPFlowParameters' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'VerificationIPFlowResult' unnecessarily contains the service name; the service name will be trimmed.
+WARNING: The name 'VerifyIPFlow' unnecessarily contains the service name; the service name will be trimmed.
