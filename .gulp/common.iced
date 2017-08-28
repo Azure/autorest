@@ -288,8 +288,4 @@ module.exports.task 'clean', 'cleans the project files', ->
 # task for vs code
 module.exports.task 'code', 'launches vs code', -> 
   exec "code #{basefolder}"
-
-module.exports.task 'release-only', '', (done)-> 
-  Fail( "This command requires --configuration release" ) if configuration isnt "Release"
-  done()
  
