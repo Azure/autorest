@@ -68,21 +68,27 @@ For this purpose, we introduced the `--debugger` flag which will cause any call 
 
 ### Example
 
-Assume there is a bug in C# code generation when running:
+Assume a customer reports a bug in C# code generation when running
 
-```haskell
+```haskell gives nice highlighting
 autorest foo\readme.md --azure-validator --fancy-setting=3 --csharp.azure-arm
+```
+
+or you find that a feature you are working on in `autorest.csharp` behaves unexpectedly:
+
+```haskell gives nice highlighting
+autorest foo\readme.md --azure-validator --fancy-setting=3 --csharp.azure-arm --use=<local variation of autorest.csharp>
 ```
 
 Simply call:
 
-```haskell
-autorest foo\readme.md --azure-validator --fancy-setting=3 --csharp.azure-arm --debugger
+```haskell gives nice highlighting
+autorest foo\readme.md --azure-validator --fancy-setting=3 --csharp.azure-arm --use=<local copy/variation of autorest.csharp> --debugger
 ```
 
-In this case, the C# generator exposed by `autorest.csharp.dll` are called.
-The call will be suspended until a debugger is attached to the `dotnet` process.
+The call to `autorest.csharp.dll` will be suspended until a debugger is attached to the `dotnet` process.
 It will print something like `Waiting for debugger to attach.......` to the console.
+Specifying `use` to run `autorest.csharp` from disk always makes sense since this will allow VSCode to find the sources.
 Happy debugging!
 
 ## Further resources
