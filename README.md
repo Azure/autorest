@@ -1,7 +1,7 @@
 # <img align="center" src="./docs/images/logo.png">  AutoRest <br>[![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest)
 
 
-The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
+The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
 
 
 ## Support Policy
@@ -12,7 +12,7 @@ AutoRest is an open source tool -- if you need assistance, first check the docum
 
 Using `npm` you can upgrade to the latest stable version of AutoRest:
 
-## Autorest 2.0 Branch
+## AutoRest 2.0 Branch
 
 AutoRest is making a a few structural changes, along with eliminating some deprecated legacy behavior.
 
@@ -30,7 +30,7 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 
 [![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
 
-# Installing Autorest 
+# Installing AutoRest 
 
 Installing AutoRest on Windows, MacOS or Linux involves two steps:
 
@@ -44,7 +44,7 @@ Installing AutoRest on Windows, MacOS or Linux involves two steps:
   npm install -g autorest
   ```
 
-### Updating Autorest
+### Updating AutoRest
   To update AutoRest if you have previous versions installed, please run:
     
   ``` powershell
@@ -74,7 +74,7 @@ Other Linux platforms *might* work -- if the platform is listed https://github.c
 # Getting Started using AutoRest ![image](./docs/images/normal.png)
 
 Start by reading the documentation for using AutoRest:
-- [Managing Autorest](./docs/managing-autorest.md) - shows how to get new updates to AutoRest and choose which version to use for code generation
+- [Managing AutoRest](./docs/managing-autorest.md) - shows how to get new updates to AutoRest and choose which version to use for code generation
 - [Generating a Client using AutoRest](./docs/generating-a-client.md) - shows simple command line usage for generating a client library.
 - [Command Line Interface Documentation](./docs/user/cli.md) - explains common command line arguments
 - [Examples](./Samples) - full, walkthrough-style scenarios for using AutoRest
