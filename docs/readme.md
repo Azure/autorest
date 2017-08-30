@@ -34,5 +34,5 @@
 7. Contributing to the code
 
 8. OpenAPI (formerly 'Swagger') specifications:
--  [Swagger 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md)
--  [OpenAPI 2.0](https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md)
+-  [OpenAPI Spec 2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) (f.k.a. Swagger 2.0)
+-  [OpenAPI Spec 3.0.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md) 
