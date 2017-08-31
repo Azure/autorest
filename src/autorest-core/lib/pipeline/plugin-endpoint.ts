@@ -144,8 +144,12 @@ export class AutoRestExtension extends EventEmitter {
         return file.ReadData();
       },
       async GetValue(key: string): Promise<any> {
-        const result = configuration(key);
-        return result === undefined ? null : result;
+        try {
+          const result = configuration(key);
+          return result === undefined ? null : result;
+        } catch (e) {
+          return null;
+        }
       },
       async ListInputs(): Promise<string[]> {
         return (await inputFileHandles).map(x => x.Description);
