@@ -48,7 +48,6 @@
     "linq-es2015": "^2.4.25",
     "marked": "^0.3.6",
     "marked-terminal": "^2.0.0",
-    "oav": "0.4.1",
     "pify": "^3.0.0",
     "safe-eval": "^0.3.0",
     "source-map": "^0.5.6",
