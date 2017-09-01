@@ -19,7 +19,12 @@ use-extension:
   "@microsoft.azure/autorest.azureresourceschema": "1.9.6"
 ```
 
-``` yaml $(csharp) || $(jsonrpcclient)
+``` yaml $(csharp)
+use-extension:
+  "@microsoft.azure/autorest.csharp": "1.9.4"
+```
+
+``` yaml $(jsonrpcclient)
 use-extension:
   "@microsoft.azure/autorest.csharp": "1.9.4"
 ```
