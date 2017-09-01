@@ -2,7 +2,7 @@
 task 'regenerate', 'regenerate samples', (done) ->
   count = 0
   # source 'Samples/*/**/readme.md'
-  source 'Samples/test/error-behavior/openapi-json-bad-syntax/**/readme.md'
+  source 'Samples/*/**/readme.md'
     .pipe foreach (each,next)->
       count++
       autorest [each.path]
