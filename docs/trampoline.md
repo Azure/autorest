@@ -1,0 +1,17 @@
+# AutoRest repositories and packages
+
+| Repository | Package |
+| ---------- | ------- |
+| [autorest](https://github.com/Azure/autorest) | <div>[![npm version](https://badge.fury.io/js/autorest.svg)](https://badge.fury.io/js/autorest) <span style="vertical-align: top">(bootstrapper)</span><br>[![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest-core.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest-core) <span style="vertical-align: top">(core)</span></div> |
+| [autorest.common](https://github.com/Azure/autorest.common) | [![NuGet version](https://badge.fury.io/nu/autorest.common.svg)](https://badge.fury.io/nu/autorest.common) |
+| [autorest.modeler](https://github.com/Azure/autorest.modeler) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.modeler.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.modeler) |
+| [autorest.azureresourceschema](https://github.com/Azure/autorest.azureresourceschema) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.azureresourceschema.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.azureresourceschema) |
+| [autorest.csharp](https://github.com/Azure/autorest.csharp) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.csharp.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.csharp) |
+| [autorest.go](https://github.com/Azure/autorest.go) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.go.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.go) |
+| [autorest.java](https://github.com/Azure/autorest.java) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.java.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.java) |
+| [autorest.nodejs](https://github.com/Azure/autorest.nodejs) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.nodejs.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.nodejs) |
+| [autorest.php](https://github.com/Azure/autorest.php) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.php.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.php) |
+| [autorest.python](https://github.com/Azure/autorest.python) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.python.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.python) |
+| [autorest.ruby](https://github.com/Azure/autorest.ruby) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.ruby.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.ruby) |
+| [autorest.typescript](https://github.com/Azure/autorest.typescript) | <!--[![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.typescript.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.typescript)--> |
+| [autorest.testserver](https://github.com/Azure/autorest.testserver) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.testserver.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.testserver) |
