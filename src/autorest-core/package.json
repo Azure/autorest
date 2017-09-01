@@ -31,7 +31,6 @@
     "@types/jsonpath": "^0.1.29",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
-    "bluebird": "*",
     "mocha": "3.4.2",
     "mocha-typescript": "1.1.5",
     "source-map-support": "^0.4.15",
