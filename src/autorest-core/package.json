@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-core",
-  "version": "1.9.3",
+  "version": "1.9.5",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=7.10.0"
@@ -31,14 +31,13 @@
     "@types/jsonpath": "^0.1.29",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
-    "bluebird": "*",
     "mocha": "3.4.2",
     "mocha-typescript": "1.1.5",
     "source-map-support": "^0.4.15",
     "typescript": "2.4.1"
   },
   "dependencies": {
-    "@microsoft.azure/extension": "~1.1.4",
+    "@microsoft.azure/extension": "~1.1.5",
     "@microsoft.azure/async-io": "~1.0.21",
     "chalk": "^1.1.2",
     "commonmark": "^0.27.0",
@@ -48,11 +47,11 @@
     "linq-es2015": "^2.4.25",
     "marked": "^0.3.6",
     "marked-terminal": "^2.0.0",
-    "oav": "0.4.1",
     "pify": "^3.0.0",
     "safe-eval": "^0.3.0",
     "source-map": "^0.5.6",
     "strip-bom": "^3.0.0",
+    "untildify": "^3.0.2",
     "urijs": "^1.18.10",
     "vscode-jsonrpc": "^3.3.1",
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",

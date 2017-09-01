@@ -87,6 +87,7 @@ Get yourself up and coding in AutoRest
 - [AutoRest Extensibility](./docs/developer/architecture/AutoRest-extension.md) and [protocol](./docs/developer/architecture/AutoRest-extension-protocol.md) documentation
 - [Working on AutoRest core](./docs/developer/autorest-core.md) - compiling/testing AutoRest core using the build scripts
 - [Working on an AutoRest extension](./docs/developer/autorest-extension.md) - creating and testing AutoRest extensions
+- [AutoRest repositories and packages](./docs/trampoline.md) - all maintained repositories and packages on one page
 
 Some related information:
 - [Validation Rules & Linting](./docs/developer/validation-rules/readme.md) - about the validation rules in AutoRest

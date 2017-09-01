@@ -64,7 +64,7 @@ This first generation of AutoRest generators were written in C# and are not invo
 As a result, debugging a generator extension also requires it to be launched *through the core* like in a regular invocation of AutoRest (on the bright side, one can stay on the CLI and run exactly the command that exposes the problem to debug).
 One can then attach to the running extension process (`dotnet autorest.<something>.dll --server`) through VS Code, there is a launch configuration for that.
 The biggest problem is timing, i.e. attaching and having breakpoints in place before execution has passed the critical point.
-For this purpose, we introduced the `--debugger` flag which will cause any call to the extension to *sit and wait* until a debugger is attached.
+For this purpose, we introduced the `--<plugin to debug>.debugger` flag which will cause any call to the extension to *sit and wait* until a debugger is attached.
 
 ### Example
 
@@ -83,12 +83,14 @@ autorest foo\readme.md --azure-validator --fancy-setting=3 --csharp.azure-arm --
 Simply call:
 
 ```haskell gives nice highlighting
-autorest foo\readme.md --azure-validator --fancy-setting=3 --csharp.azure-arm --use=<local copy/variation of autorest.csharp> --debugger
+autorest foo\readme.md --azure-validator --fancy-setting=3 --csharp.azure-arm --use=<local copy/variation of autorest.csharp> --csharp.debugger
 ```
 
 The call to `autorest.csharp.dll` will be suspended until a debugger is attached to the `dotnet` process.
-It will print something like `Waiting for debugger to attach.......` to the console.
-Specifying `use` to run `autorest.csharp` from disk always makes sense since this will allow VSCode to find the sources.
+It will print something like `Waiting for debugger to attach to process <PID>.......` to the console.
+Specifying `use` to run `autorest.csharp` from a local directory is important in order for VSCode to find the sources.
+Open this directory in VSCode, launch the `.NET Core Attach` configuration and select the PID from the list.
+The debugging session will begin paused in a location *prior* to any of your code running, i.e. set breakpoints and hit "Continue"/F5.
 Happy debugging!
 
 ## Further resources

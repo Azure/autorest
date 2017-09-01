@@ -36,7 +36,6 @@
     "@types/semver": "^5.3.30",
     "@types/source-map": "^0.5.0",
     "@types/yargs": "^6.6.0",
-    "bluebird": "^3.5.0",
     "commonmark": "^0.27.0",
     "jsonpath": "^0.2.11",
     "mocha": "3.2.0",
