@@ -7,7 +7,6 @@ import { Extension, ExtensionManager, LocalExtension } from "@microsoft.azure/ex
 import { ChildProcess } from "child_process";
 
 import { join } from "path";
-import * as untildify from "untildify";
 import { Artifact } from './artifact';
 import * as Constants from './constants';
 import { DataHandle, DataStore } from './data-store/data-store';
@@ -27,6 +26,8 @@ import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ResolveUri } from '.
 import { BlameTree } from './source-map/blaming';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { TryDecodeEnhancedPositionFromName } from './source-map/source-map';
+
+const untildify: (path: string) => string = require("untildify");
 
 const RESOLVE_MACROS_AT_RUNTIME = true;
 
