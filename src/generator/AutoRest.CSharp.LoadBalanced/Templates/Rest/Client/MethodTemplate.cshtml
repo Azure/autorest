@@ -16,7 +16,7 @@
 [Description("@((String.IsNullOrEmpty(Model.Description) ? "" : Model.Description.EscapeXmlComment()))"), Summary("@((String.IsNullOrEmpty(Model.Summary) ? "" : Model.Summary.EscapeXmlComment()))"), Url("@(Model.FromattedUrl)"), Verb("@(Model.HttpMethod.ToString().ToUpper())"), Tags("@(string.Join(",", Model.Tags))")]
 public async @(Model.OperationResponseReturnTypeString) @(Model.Name)(@(Model.GetAsyncMethodParameterDeclaration(false)))
 {
-    var response = new Response<@(Model.Name)>();
+    var response = new Response<@(Model.OperationResponseType)>();
 
     @EmptyLine
     @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
@@ -85,14 +85,14 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)(@(Model.Ge
     @EmptyLine
     try
     {
-    var result = @(Model.GetOperationResponseReturnTypeString("InvokeNewRequest"))(Metrics.@(Model.Name), requestParameters).Result;
+    var result = await @(Model.GetOperationResponseReturnTypeString("InvokeNewRequest"))(Metrics.@(Model.Name), requestParameters);
     if (result.Result != null)
     {
     response.IsSuccessful = true;
     response.Result = result.Result;
     }
     }
-    catch (ProtocolException ex)
+    catch (Exception ex)
     {
     response.BrokenRules.Add(new BrokenRule() { Description = ex.Message, Value = ex.Message });
     }
