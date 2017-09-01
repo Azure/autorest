@@ -61,7 +61,7 @@ export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean {
 
 export function CreateObject(jsonPath: JsonPath, leafObject: any): any {
   let obj = leafObject;
-  for (const jsonPathComponent of jsonPath.reverse()) {
+  for (const jsonPathComponent of jsonPath.slice().reverse()) {
     obj = typeof jsonPathComponent === "number"
       ? (() => { const result = Array.apply(null, Array(jsonPathComponent + 1)); result[jsonPathComponent] = obj; return result; })()
       : (() => { const result: any = {}; result[jsonPathComponent] = obj; return result; })();
