@@ -116,7 +116,7 @@ const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(root
 let currentVersion: Extension = null;
 const frameworkVersion: string = null;
 
-let requestedVersion: string = args.version || "latest-installed";
+let requestedVersion: string = args.version || (args.latest && "latest") || "latest-installed";
 const showInfo: boolean = args.autorest["show-info"] || false;
 const listAvailable: boolean = args.autorest["list-available"] || false;
 let force = args.force || false;
