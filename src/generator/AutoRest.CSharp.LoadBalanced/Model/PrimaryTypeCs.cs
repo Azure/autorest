@@ -56,6 +56,9 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                     case KnownPrimaryType.Double:
                         return "double";
 
+                    case KnownPrimaryType.Float:
+                        return "float";
+
                     case KnownPrimaryType.Decimal:
                         return "decimal";
 
@@ -114,6 +117,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                     case KnownPrimaryType.TimeSpan:
                     case KnownPrimaryType.DateTimeRfc1123:
                     case KnownPrimaryType.UnixTime:
+                    case KnownPrimaryType.Float:
                     case KnownPrimaryType.Uuid:
                         return true;
 

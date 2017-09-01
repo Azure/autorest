@@ -131,14 +131,16 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
         public virtual string GetOperationResponseReturnTypeString(string typeName = "Task")
         {
+			// hardcode wrapper object for V1
+			const string wrapperTypeName = "Response"; 
+			
             if (ReturnType.Body != null)
             {
-                return $"{typeName}<{OperationResponseType}>";
+                return $"{typeName}<{wrapperTypeName}<{OperationResponseType}>>";
             }
 
             return typeName;
         }
-
 
         public string OperationResponseType
         {

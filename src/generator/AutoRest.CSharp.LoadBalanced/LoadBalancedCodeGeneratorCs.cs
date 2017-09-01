@@ -26,7 +26,6 @@ namespace AutoRest.CSharp.LoadBalanced
 
         public override bool IsSingleFileGenerationSupported => true;
 
-
         public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
             "The {0} nuget package is required to compile the generated code.", ClientRuntimePackage);
 
@@ -49,6 +48,16 @@ namespace AutoRest.CSharp.LoadBalanced
             var metricsFilePath = "Metrics.cs";
             project.FilePaths.Add(metricsFilePath);
             await Write(metricsTemplate, metricsFilePath);
+			
+            var brokenRuleTemplate = new BrokenRuleTemplate();
+            var brokenRuleFilePath = "BrokenRule.cs";
+            project.FilePaths.Add(brokenRuleFilePath);
+            await Write(brokenRuleTemplate, brokenRuleFilePath);
+			
+            var responseTemplate = new ResponseTemplate();
+            var responseFilePath = "Response.cs";
+            project.FilePaths.Add(responseFilePath);
+            await Write(responseTemplate, responseFilePath);
 
             usings.AddRange(new[]
                             {
@@ -73,7 +82,7 @@ namespace AutoRest.CSharp.LoadBalanced
             {
                 var clientName = $"{client.Key.ToPascalCase()}Client";
                 var clientMethods = client.ToArray();
-                var clientClassFileName = $"{clientName}.{ImplementationFileExtension}";
+                var clientClassFileName = $"{clientName}{ImplementationFileExtension}";
                 var clientInterfaceFileName = $"I{clientClassFileName}";
 
                 var model = new Tuple<CodeModelCs, string, MethodCs[]>(codeModel, clientName, clientMethods);
