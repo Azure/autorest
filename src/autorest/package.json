@@ -26,6 +26,7 @@
     "autorest": "./dist/app.js"
   },
   "scripts": {
+    "start": "node ./dist/app.js",
     "test": "./node_modules/.bin/mocha ./dist/test",
     "prepublishOnly": "gulp build"
   },
