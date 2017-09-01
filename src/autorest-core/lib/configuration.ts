@@ -501,7 +501,7 @@ export class Configuration {
     return blocks;
   }
 
-  private extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"], ".autorest")));
+  private extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")));
 
   private async DesugarRawConfig(configs: any): Promise<any> {
     // shallow copy
