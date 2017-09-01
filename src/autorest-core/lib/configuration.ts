@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Extension, ExtensionManager } from "@microsoft.azure/extension";
+import { Extension, ExtensionManager, LocalExtension } from "@microsoft.azure/extension";
 import { ChildProcess } from "child_process";
 
 import { join } from "path";
@@ -18,6 +18,7 @@ import { Channel, Message, Range, SourceLocation } from './message';
 import { EvaluateGuard, ParseCodeBlocks } from './parsing/literate-yaml';
 import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
+import { exists } from './ref/async';
 import { CancellationToken, CancellationTokenSource } from './ref/cancellation';
 import { stringify } from './ref/jsonpath';
 import { From } from './ref/linq';
@@ -286,7 +287,7 @@ export class ConfigurationView {
       return {
         name: name,
         source: source,
-        fullyQualified: JSON.stringify([name, useExtensions[name]])
+        fullyQualified: JSON.stringify([name, source])
       };
     });
   }
@@ -514,6 +515,7 @@ export class Configuration {
       const extMgr = await this.extensionManager;
       for (const useEntry of use) {
         if (typeof useEntry === "string") {
+          // TODO: consider resolving foo@1.33.7 too, but careful: @ is valid in paths :-/
           const pkg = await extMgr.findPackage("foo", useEntry);
           configs["use-extension"][pkg.name] = useEntry;
         }
@@ -575,28 +577,51 @@ export class Configuration {
 
           let ext = loadedExtensions[additionalExtension.fullyQualified];
 
+          // not yet loaded?
           if (!ext) {
-            const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
-            if (installedExtension) {
-              ext = loadedExtensions[additionalExtension.fullyQualified] = {
-                extension: installedExtension,
-                autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await installedExtension.start()))
-              };
-            } else {
-              // acquire extension
-              const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
+            if (await exists(additionalExtension.source)) {
+              // local package
               messageEmitter.Message.Dispatch({
                 Channel: Channel.Information,
-                Text: `Installing AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
+                Text: `Loading local AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
               });
-              const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
+
+              const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
+              const extension = new LocalExtension(pack, additionalExtension.source);
               // start extension
               ext = loadedExtensions[additionalExtension.fullyQualified] = {
                 extension: extension,
                 autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start()))
               };
             }
-
+            else {
+              // remote package
+              const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
+              if (installedExtension) {
+                messageEmitter.Message.Dispatch({
+                  Channel: Channel.Information,
+                  Text: `Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
+                });
+                // start extension
+                ext = loadedExtensions[additionalExtension.fullyQualified] = {
+                  extension: installedExtension,
+                  autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await installedExtension.start()))
+                };
+              } else {
+                // acquire extension
+                const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
+                messageEmitter.Message.Dispatch({
+                  Channel: Channel.Information,
+                  Text: `Installing AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
+                });
+                const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
+                // start extension
+                ext = loadedExtensions[additionalExtension.fullyQualified] = {
+                  extension: extension,
+                  autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start()))
+                };
+              }
+            }
           }
 
           // merge config
@@ -609,7 +634,7 @@ export class Configuration {
         } catch (e) {
           messageEmitter.Message.Dispatch({
             Channel: Channel.Fatal,
-            Text: `Failed to install extension '${additionalExtension.name}' (${additionalExtension.source})`
+            Text: `Failed to install or start extension '${additionalExtension.name}' (${additionalExtension.source})`
           });
           throw e;
         }

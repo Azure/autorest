@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-core",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=7.10.0"
@@ -38,7 +38,7 @@
     "typescript": "2.4.1"
   },
   "dependencies": {
-    "@microsoft.azure/extension": "~1.1.4",
+    "@microsoft.azure/extension": "~1.1.5",
     "@microsoft.azure/async-io": "~1.0.21",
     "chalk": "^1.1.2",
     "commonmark": "^0.27.0",
