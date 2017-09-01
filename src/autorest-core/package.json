@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-core",
-  "version": "1.9.4",
+  "version": "1.9.5",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=7.10.0"
@@ -51,6 +51,7 @@
     "safe-eval": "^0.3.0",
     "source-map": "^0.5.6",
     "strip-bom": "^3.0.0",
+    "untildify": "^3.0.2",
     "urijs": "^1.18.10",
     "vscode-jsonrpc": "^3.3.1",
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",

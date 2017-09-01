@@ -7,6 +7,7 @@ import { Extension, ExtensionManager, LocalExtension } from "@microsoft.azure/ex
 import { ChildProcess } from "child_process";
 
 import { join } from "path";
+import * as untildify from "untildify";
 import { Artifact } from './artifact';
 import * as Constants from './constants';
 import { DataHandle, DataStore } from './data-store/data-store';
@@ -579,15 +580,16 @@ export class Configuration {
 
           // not yet loaded?
           if (!ext) {
-            if (await exists(additionalExtension.source)) {
+            const localPath = untildify(additionalExtension.source);
+            if (await exists(localPath)) {
               // local package
               messageEmitter.Message.Dispatch({
                 Channel: Channel.Information,
-                Text: `Loading local AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
+                Text: `Loading local AutoRest extension '${additionalExtension.name}' (${localPath})`
               });
 
-              const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
-              const extension = new LocalExtension(pack, additionalExtension.source);
+              const pack = await extMgr.findPackage(additionalExtension.name, localPath);
+              const extension = new LocalExtension(pack, localPath);
               // start extension
               ext = loadedExtensions[additionalExtension.fullyQualified] = {
                 extension: extension,
