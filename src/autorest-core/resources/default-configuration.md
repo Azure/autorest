@@ -14,16 +14,48 @@ openapi-type: arm
 
 ### External Plugins
 
-``` yaml
+``` yaml $(azureresourceschema)
 use-extension:
   "@microsoft.azure/autorest.azureresourceschema": "1.9.6"
+```
+
+``` yaml $(csharp) || $(jsonrpcclient)
+use-extension:
   "@microsoft.azure/autorest.csharp": "1.9.4"
+```
+
+``` yaml $(go)
+use-extension:
   "@microsoft.azure/autorest.go": "1.9.2"
+```
+
+``` yaml $(java)
+use-extension:
   "@microsoft.azure/autorest.java": "1.9.2"
+```
+
+``` yaml $(nodejs)
+use-extension:
   "@microsoft.azure/autorest.nodejs": "1.9.2"
+```
+
+``` yaml $(php)
+use-extension:
   "@microsoft.azure/autorest.php": "1.9.2"
+```
+
+``` yaml $(python)
+use-extension:
   "@microsoft.azure/autorest.python": "1.9.2"
+```
+
+``` yaml $(ruby)
+use-extension:
   "@microsoft.azure/autorest.ruby": "1.9.3"
+```
+
+``` yaml
+use-extension:
   "@microsoft.azure/classic-openapi-validator": "1.0.3"
   "@microsoft.azure/openapi-validator": "0.1.2-preview"
 ```    
