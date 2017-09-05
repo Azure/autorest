@@ -41,7 +41,7 @@ use-extension:
 
 ``` yaml $(nodejs)
 use-extension:
-  "@microsoft.azure/autorest.nodejs": "1.9.2"
+  "@microsoft.azure/autorest.nodejs": "1.9.3"
 ```
 
 ``` yaml $(php)
