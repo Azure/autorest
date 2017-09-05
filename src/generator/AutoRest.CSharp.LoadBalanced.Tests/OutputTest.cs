@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.LoadBalanced.Tests
                                    Input = "C:\\swagger\\temp\\temp.json.txt",
                                    OutputDirectory = "C:\\swagger\\output\\_test",
                                    CodeGenerator = "Test",
-                                   Namespace = "Agoda.SAPI.Client"
+                                   Namespace = "Agoda.SupplyApi.Client"
                                };
 
                 var modeler = new SwaggerModeler();

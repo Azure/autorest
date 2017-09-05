@@ -14,7 +14,7 @@
     @:[System.Obsolete()]
 }
 [Description("@((String.IsNullOrEmpty(Model.Description) ? "" : Model.Description.EscapeXmlComment()))"), Summary("@((String.IsNullOrEmpty(Model.Summary) ? "" : Model.Summary.EscapeXmlComment()))"), Url("@(Model.FromattedUrl)"), Verb("@(Model.HttpMethod.ToString().ToUpper())"), Tags("@(string.Join(",", Model.Tags))")]
-public async @(Model.OperationResponseReturnTypeString) @(Model.Name)(@(Model.GetAsyncMethodParameterDeclaration(false)))
+public async @(Model.OperationResponseReturnTypeStringForMethodName) @(Model.Name)(@(Model.GetAsyncMethodParameterDeclaration(false)))
 {
     var response = new Response<@(Model.OperationResponseType)>();
 
@@ -86,10 +86,10 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)(@(Model.Ge
     try
     {
     var result = await @(Model.GetOperationResponseReturnTypeString("InvokeNewRequest"))(Metrics.@(Model.Name), requestParameters);
-    if (result.Result != null)
+    if (result != null)
     {
     response.IsSuccessful = true;
-    response.Result = result.Result;
+    response.Result = result;
     }
     }
     catch (Exception ex)
