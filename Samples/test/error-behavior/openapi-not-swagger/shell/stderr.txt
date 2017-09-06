@@ -1,0 +1,4 @@
+   at ...
+Error: File '/Samples/test/error-behavior/openapi-not-swagger/tiny.json' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')
+FATAL: Error: File '/Samples/test/error-behavior/openapi-not-swagger/tiny.json' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')
+FATAL: swagger-document/loader - FAILED
