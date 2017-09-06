@@ -29,6 +29,11 @@ directive:
       url.split("/Microsoft.Storage/")[1].split("/")[0]; $.name.raw = res;
       $.summary = JSON.stringify($, null, 2);
     reason: We wanna group methods by URI.
+  - from: swagger-document
+    where: '$.definitions.*.additionalProperties[?(typeof @ === "boolean")]'
+    transform: |
+      return $ ? { type: "object" } : undefined
+    reason: polyfill
 input-file:
   - >-
     https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json

@@ -1,0 +1,37 @@
+swagger: '2.0'
+info:
+  description: This is a sample.
+  version: 1.0.0
+  title: Cowbell University
+host: localhost
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+definitions:
+  Cowbell1a:
+    type: object
+    properties:
+      name:
+        type: string
+  Cowbell1b:
+    type: object
+    properties:
+      name:
+        type: string
+    additionalProperties: false
+  Cowbell2a:
+    type: object
+    properties:
+      name:
+        type: string
+    additionalProperties:
+      type: object
+  Cowbell2b:
+    type: object
+    properties:
+      name:
+        type: string
+    additionalProperties: true
