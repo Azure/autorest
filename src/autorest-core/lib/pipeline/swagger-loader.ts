@@ -273,6 +273,10 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
 
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
   const data = await ParseLiterateYaml(config, await inputScope.ReadStrict(inputFileUri), sink);
+  // check OpenAPI version
+  if (data.ReadObject<any>().swagger !== "2.0") {
+    throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')`);
+  }
   const externalFiles: { [uri: string]: DataHandle } = {};
   externalFiles[inputFileUri] = data;
   await EnsureCompleteDefinitionIsPresent(config,

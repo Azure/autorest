@@ -153,6 +153,21 @@ scope-cm/emitter:
     "code-model-v1"
 ```
 
+#### Polyfills
+
+Support for `additionalProperties: true/false` in `definitions` section
+
+``` yaml
+directive:
+- from: swagger-document
+  where: $.definitions.*.additionalProperties
+  transform: |
+    return typeof $ === "boolean"
+      ? ($ ? { type: "object" } : undefined)
+      : $
+  reason: polyfill
+```
+
 #### Validation
 
 ``` yaml

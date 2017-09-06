@@ -270,20 +270,8 @@ export function WriteString(fileUri: string, data: string): Promise<void> {
  * Clears a folder on the local file system.
  * @param folderUri  Folder uri.
  */
+import { rmdir } from "@microsoft.azure/async-io";
 export async function ClearFolder(folderUri: string): Promise<void> {
   const path = FileUriToLocalPath(folderUri);
-  const deleteFolderRecursive = async (path: string) => {
-    if (await exists(path)) {
-      for (const file of await readdir(path)) {
-        var curPath = path + "/" + file;
-        if (lstatSync(curPath).isDirectory()) {
-          await deleteFolderRecursive(curPath);
-        } else {
-          unlinkSync(curPath);
-        }
-      }
-      rmdirSync(path);
-    }
-  };
-  await deleteFolderRecursive(path);
+  return rmdir(path);
 }

@@ -19,8 +19,7 @@ import { ShallowCopy } from "./lib/source-map/merging";
 import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
-import { rmdir } from "@microsoft.azure/async-io"
-import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
+import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString, ClearFolder } from "./lib/ref/uri";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
@@ -84,7 +83,7 @@ ${Stringify(config).replace(/^---\n/, "")}
   const view = await api.view;
   let outstanding: Promise<void> = Promise.resolve();
   api.GeneratedFile.Subscribe((_, file) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
-  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(async () => { try { await rmdir(folder); } catch (e) { } }));
+  api.ClearFolder.Subscribe((_, folder) => outstanding = outstanding.then(async () => { try { await ClearFolder(folder); } catch (e) { } }));
   subscribeMessages(api, () => { });
 
   // warn about `--` arguments
@@ -263,7 +262,7 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
 
     // perform file system operations.
     for (const folder of clearFolders) {
-      try { await rmdir(folder); } catch (e) { }
+      try { await ClearFolder(folder); } catch (e) { }
     }
     for (const artifact of artifacts) {
       await WriteString(artifact.uri, artifact.content);
