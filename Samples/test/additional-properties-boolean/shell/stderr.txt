@@ -1,11 +1,1 @@
-   at ...
-  at ...
-  at ...
---- End of stack trace from previous location where exception was thrown ---
-{"swagger":"2.0","info":{"version":"1.0.0","title":"Cowbell University","description":"This is a sample."},"host":"localhost","schemes":["https"],"definitions":{"Cowbell1a":{"properties":{"name":{"type":"string"}}},"Cowbell1b":{"properties":{"name":{"type":"string"}},"additionalProperties":false},"Cowbell2a":{"properties":{"name":{"type":"string"}},"additionalProperties":{"type":"object"}},"Cowbell2b":{"properties":{"name":{"type":"string"}},"additionalProperties":true}}}
-{"swagger":"2.0","info":{"version":"1.0.0","title":"Cowbell University","description":"This is a sample."},"host":"localhost","schemes":["https"],"definitions":{"Cowbell1a":{"properties":{"name":{"type":"string"}}},"Cowbell1b":{"properties":{"name":{"type":"string"}},"additionalProperties":false},"Cowbell2a":{"properties":{"name":{"type":"string"}},"additionalProperties":{"type":"object"}},"Cowbell2b":{"properties":{"name":{"type":"string"}},"additionalProperties":true}}}
-Error: Plugin modeler reported failure.
-FATAL: AutoRest.Core.Logging.CodeGenerationException: Error parsing swagger file. Error converting value False to type 'AutoRest.Modeler.Model.Schema'. Path 'additionalProperties', line 7, position 31.
-FATAL: csharp/modeler - FAILED
-FATAL: Error parsing swagger file. Error converting value False to type 'AutoRest.Modeler.Model.Schema'. Path 'additionalProperties', line 7, position 31.
-FATAL: Error: Plugin modeler reported failure.
+

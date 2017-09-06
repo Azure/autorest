@@ -10,7 +10,6 @@ import * as jsonpath from "jsonpath";
 const handlers = (jsonpath as any).handlers;
 handlers.register("subscript-descendant-filter_expression", function (component: any, partial: any, count: any) {
   var src = component.expression.value.slice(1);
-  console.error("BOOP");
 
   var passable = function (key: any, value: any) {
     try {

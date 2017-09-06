@@ -30,9 +30,11 @@ directive:
       $.summary = JSON.stringify($, null, 2);
     reason: We wanna group methods by URI.
   - from: swagger-document
-    where: '$.definitions.*.additionalProperties[?(typeof @ === "boolean")]'
+    where: $.definitions.*.additionalProperties
     transform: |
-      return $ ? { type: "object" } : undefined
+      return typeof $ === "boolean"
+        ? ($ ? { type: "object" } : undefined)
+        : $
     reason: polyfill
 input-file:
   - >-
