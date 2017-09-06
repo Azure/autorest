@@ -160,12 +160,13 @@ Support for `additionalProperties: true/false` in `definitions` section
 ``` yaml
 directive:
 - from: swagger-document
-  where: $.definitions.*.additionalProperties[?(typeof @ === "boolean")]
+  where: $.definitions.*.additionalProperties
   transform: |
-    return $ ? { type: "object" } : undefined
+    return typeof $ === "boolean"
+      ? ($ ? { type: "object" } : undefined)
+      : $
   reason: polyfill
 ```
-
 
 #### Validation
 
