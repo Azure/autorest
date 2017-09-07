@@ -17,6 +17,8 @@ paths:
           schema:
             "$ref": "#/definitions/EmptyClass"
 definitions:
-  EmptyClass:
+  EmptyClass: # should generate
     type: object
     properties: {}
+  EmptyClass2: # should generate
+    type: object
