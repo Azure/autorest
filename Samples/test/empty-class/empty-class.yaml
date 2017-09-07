@@ -1,0 +1,24 @@
+swagger: '2.0'
+info:
+  version: v1
+  title: Test.API
+host: localhost
+schemes:
+- http
+paths:
+  "/test/emptyobject":
+    get:
+      operationId: Test_EmptyObject
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/EmptyClass"
+definitions:
+  EmptyClass: # should generate
+    type: object
+    properties: {}
+  EmptyClass2: # should generate
+    type: object

@@ -49,10 +49,10 @@ output-artifact:
 use: []
 clear-output-folder: {}
 use-extension:
-  '@microsoft.azure/autorest.csharp': 1.9.4
+  '@microsoft.azure/autorest.csharp': 1.9.5
   '@microsoft.azure/classic-openapi-validator': 1.0.3
   '@microsoft.azure/openapi-validator': 0.1.2-preview
-  '@microsoft.azure/autorest.modeler': 1.9.6
+  '@microsoft.azure/autorest.modeler': 1.9.7
 azure-arm: true
 azure-validator: true
 csharp:
