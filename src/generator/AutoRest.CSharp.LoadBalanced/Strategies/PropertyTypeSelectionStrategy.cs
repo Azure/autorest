@@ -130,8 +130,18 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
         public string GetPropertyTypeName(Property property)
         {
-            var typeName = _typeMappings.FirstOrDefault(m => m.Item1(property))?.Item2;
-            return !string.IsNullOrWhiteSpace(typeName) ? typeName : property.ModelTypeName;
+            var compositeType = property.ModelType as CompositeTypeCs;
+            var isCollection = compositeType != null && IsCollection(compositeType);
+
+            if (isCollection)
+            {
+                return $"List<{property.ModelTypeName.Replace("List", "")}>";
+            }
+            else
+            {
+                var typeName = _typeMappings.FirstOrDefault(m => m.Item1(property))?.Item2;
+                return !string.IsNullOrWhiteSpace(typeName) ? typeName : property.ModelTypeName;
+            }
         }
 
         public virtual IEnumerable<Property> GetPropertiesWhichRequireInitialization(CompositeTypeCs compositeType)
