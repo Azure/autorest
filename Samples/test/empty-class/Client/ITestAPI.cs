@@ -6,6 +6,7 @@
 
 namespace EmptyClass
 {
+    using Models;
     using Newtonsoft.Json;
 
     /// <summary>

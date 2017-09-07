@@ -6,6 +6,7 @@
 
 namespace EmptyClass
 {
+    using Models;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace EmptyClass
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static object EmptyObject(this ITest operations)
+            public static EmptyClass EmptyObject(this ITest operations)
             {
                 return operations.EmptyObjectAsync().GetAwaiter().GetResult();
             }
@@ -28,7 +29,7 @@ namespace EmptyClass
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> EmptyObjectAsync(this ITest operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<EmptyClass> EmptyObjectAsync(this ITest operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.EmptyObjectWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

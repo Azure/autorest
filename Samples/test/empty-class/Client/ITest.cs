@@ -7,6 +7,7 @@
 namespace EmptyClass
 {
     using Microsoft.Rest;
+    using Models;
     using System.Collections;
     using System.Collections.Generic;
     using System.Threading;
@@ -29,6 +30,6 @@ namespace EmptyClass
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<object>> EmptyObjectWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<EmptyClass>> EmptyObjectWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
