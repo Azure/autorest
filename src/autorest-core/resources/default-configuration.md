@@ -61,8 +61,8 @@ use-extension:
 
 ``` yaml $(azure-validator)
 use-extension:
-  "@microsoft.azure/classic-openapi-validator": "1.0.3"
-  "@microsoft.azure/openapi-validator": "0.1.2-preview"
+  "@microsoft.azure/classic-openapi-validator": "~1.0.3"
+  "@microsoft.azure/openapi-validator": "~1.0.0"
 ```    
 
 ### Graph

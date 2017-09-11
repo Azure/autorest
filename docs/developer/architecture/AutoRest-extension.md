@@ -54,7 +54,7 @@ Example:
 ``` yaml
 use-extension:
   # published npm package
-  "@microsoft.azure/openapi-validator": "^1.0.0"
+  "@microsoft.azure/openapi-validator": "~1.0.0"
   # GitHub repository
   autorest-interactive: https://github.com/olydis/autorest-interactive
   # tgz package file
