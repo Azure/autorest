@@ -64,6 +64,13 @@ Import
   Dependencies:
     "autorest" : ['autorest-core']
 
+task 'reset', 'clean the autorest home folder', (done) ->
+#   if test "-d" , process.env["autorest.home"] 
+#     echo "Cleaning autorest home folder for this working folder '#{process.env["autorest.home"]}'"
+#     rmdir process.env["autorest.home"] , done
+#   else
+     done()
+
 task 'install/binaries', '', (done)->
   done()
 
