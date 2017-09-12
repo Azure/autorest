@@ -588,7 +588,15 @@ export class Configuration {
 
           // not yet loaded?
           if (!ext) {
-            const localPath = untildify(additionalExtension.source);
+            let localPath = untildify(additionalExtension.source);
+
+            // try resolving the package locally (useful for self-contained)
+            try {
+              const fileProbe = "/package.json";
+              localPath = require.resolve(additionalExtension.name + fileProbe); // have to resolve specific file - resolving a package by name will fail if no 'main' is present
+              localPath = localPath.slice(0, localPath.length - fileProbe.length);
+            } catch (e) { }
+
             if (await exists(localPath)) {
               // local package
               messageEmitter.Message.Dispatch({
