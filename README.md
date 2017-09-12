@@ -3,6 +3,10 @@
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
 
+<!-- 1) returns SVGs now which aren't rendered by GitHub 2) seems to be awfully unresponsive and unreliable lately
+[![PR Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest)
+[![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
+-->
 
 ## Support Policy
 AutoRest is an open source tool -- if you need assistance, first check the documentation. If you find a bug or need some help, feel free to submit an [issue](https://github.com/Azure/autorest/issues)
@@ -12,23 +16,7 @@ AutoRest is an open source tool -- if you need assistance, first check the docum
 
 Using `npm` you can upgrade to the latest stable version of AutoRest:
 
-## AutoRest 2.0 Branch
-
-AutoRest is making a a few structural changes, along with eliminating some deprecated legacy behavior.
-
-Notable changes in this branch:
-- Bumping required node.js version to 7.10 or greater. (Will add checks in to ensure that this is the case)<br> This enables us to target the `ES2017` javascript standard, vastly simplifying compiled code and has significant performance benefits. 
-- Bumping Dotnet/CLI SDK and Runtime to 2.0
-- Updated bootstrapper that implements use-extension
-- Moving common TypeScript code into the Perks.Node project so that they can be built and reused independently of building AutoRest.
-- Removing all remaining Legacy CLI features, standardizing on the `--switch` format for all cmdline operations
-
-
 ---
-
-The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
-
-[![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
 
 # Installing AutoRest 
 
@@ -58,18 +46,10 @@ or
   For more information, run  `autorest --help`
 
 
-### Status on various platforms:
- 
-|OS | Status | 
-|---|--------|
-|Windows x64| Verified - Working|
-|OSX 10.11 x64| Verified - Working (may have to install openssl manually?)|
-|Ubuntu 14.04 x64 (any) | Verified - Working -- use the following commands first: <br>`sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install libunwind8 libicu52 -y` |
-|Ubuntu 16.04 x64 (desktop)| Verified - Working|
-|Ubuntu 16.04 x64 (server or via BashForWindows/WSL) | Verified - Working -- use the following commands first: <br>`sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install libunwind8 -y` |
-|Ubuntu 16.10 x64| Verified - Working -- use the following commands first: <br>`sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install libunwind8 -y && wget  http://mirrors.kernel.org/ubuntu/pool/main/i/icu/libicu55_55.1-7_amd64.deb && sudo dpkg -i libicu55_55.1-7_amd64.deb`   |
+### Supported Platforms
 
-Other Linux platforms *might* work -- if the platform is listed https://github.com/Azure/autorest/releases/tag/dotnet-runtime-1.0.4 -- there is a fairly good chance that it'll work. As more testing is completed, we'll ensure that we update the status here.
+While AutoRest itself runs on NodeJS, some generators use the .NET Core 2.0 runtime, which is the most limiting factor.
+See [dotnet/core/release-notes/2.0/2.0-supported-os.md](https://github.com/dotnet/core/blob/master/release-notes/2.0/2.0-supported-os.md) for a list of supported platforms.
 
 # Getting Started using AutoRest ![image](./docs/images/normal.png)
 
