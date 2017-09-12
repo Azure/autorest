@@ -36,7 +36,7 @@ use-extension:
 
 ``` yaml $(java)
 use-extension:
-  "@microsoft.azure/autorest.java": "1.9.3"
+  "@microsoft.azure/autorest.java": "1.9.4"
 ```
 
 ``` yaml $(nodejs)
