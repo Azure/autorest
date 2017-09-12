@@ -86,9 +86,9 @@ Import
   now: moment().format('YYYYMMDD-HHmm')
   force: argv.force or false
   threshold: argv.threshold or ((os.cpus().length)-1) or 1
-  verbose: argv.verbose or null
   workdir: "#{process.env.tmp}/gulp/#{guid()}"
   watch: argv.watch or false
+global.verbose = argv.verbose or null
 
 mkdir "-p", workdir if !test "-d", workdir
 
@@ -148,3 +148,25 @@ task 'fix-line-endings', 'Fixes line endings to file-type appropriate values.', 
   source "**/*.iced"
     .pipe eol {eolc: 'LF', encoding:'utf8'}
     .pipe destination '.'
+
+# CI job
+task 'testci', "more", [], (done) ->
+  # install latest AutoRest
+  await autorest ["--latest"], defer code, stderr, stdout
+
+  ## TEST SUITE
+  global.verbose = true
+  await run "test", defer _
+
+  ## REGRESSION TEST
+  global.verbose = false
+  # regenerate
+  await run "regenerate", defer _
+  # diff ('add' first so 'diff' includes untracked files)
+  await  execute "git add -A", defer code, stderr, stdout
+  await  execute "git diff --staged -w", defer code, stderr, stdout
+  # eval
+  echo stderr
+  echo stdout
+  throw "Potentially unnoticed regression (see diff above)! Run `npm run regenerate`, then review and commit the changes." if stdout.length + stderr.length > 0
+  done()
