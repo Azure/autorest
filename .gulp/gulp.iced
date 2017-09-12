@@ -151,9 +151,6 @@ task 'fix-line-endings', 'Fixes line endings to file-type appropriate values.', 
 
 # CI job
 task 'testci', "more", [], (done) ->
-  # install latest AutoRest
-  await autorest ["--latest"], defer code, stderr, stdout
-
   ## TEST SUITE
   global.verbose = true
   await run "test", defer _
