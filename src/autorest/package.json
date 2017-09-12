@@ -23,11 +23,12 @@
   "homepage": "https://github.com/Azure/autorest/blob/master/README.md",
   "main": "./dist/main.js",
   "bin": {
-    "autorest": "./dist/app.js"
+    "autorest": "./dist/static-app.js"
   },
   "scripts": {
-    "start": "node ./dist/app.js",
+    "start": "node ./dist/static-app.js",
     "test": "./node_modules/.bin/mocha ./dist/test",
+    "prepare": "shx rm -rf ./dist/ && tsc && shx cp -R ./node_modules/fs-monkey/lib/ ./dist/fs-monkey/ && cd ./static_modules && npm install",
     "prepublishOnly": "gulp build"
   },
   "typings": "./dist/main.d.ts",
@@ -44,14 +45,15 @@
     "typescript": "2.3.3",
     "@types/jsonpath": "^0.1.29",
     "vscode-jsonrpc": "^3.1.0",
-    "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz"
-  },
-  "dependencies": {
+    "shx": "^0.2.2",
+    "fs-monkey": "https://github.com/fearthecowboy/fs-monkey/releases/download/0.2.2/fs-monkey-0.2.2.tgz",
     "@microsoft.azure/async-io": "~1.0.21",
     "@microsoft.azure/console": "~1.0.31",
     "@microsoft.azure/extension": "~1.1.5",
     "@microsoft.azure/polyfill": "~1.0.17",
     "linq-es2015": "^2.4.24",
-    "semver": "^5.3.0"
-  }
+    "semver": "^5.3.0",
+    "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz"
+  },
+  "dependencies": {}
 }

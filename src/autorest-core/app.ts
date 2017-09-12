@@ -25,6 +25,10 @@ import { DataStore } from "./lib/data-store/data-store";
 import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
 import { Exception, OperationCanceledException } from "./lib/exception";
 
+// enable static modules for autorest-core
+if( (<any>global).StaticVolumeSet ) {
+  (<any>global).StaticVolumeSet.addFileSystem(`${__dirname}/static_modules.fs`)
+}
 /**
  * Legacy AutoRest
  */
