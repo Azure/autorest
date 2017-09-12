@@ -6,55 +6,37 @@
 
 package streamwithcontenttype.models;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.microsoft.rest.ExpandableStringEnum;
 
 /**
  * Defines values for ContentTypes.
  */
-public final class ContentTypes {
+public final class ContentTypes extends ExpandableStringEnum<ContentTypes> {
     /** Static value text/plain for ContentTypes. */
-    public static final ContentTypes TEXTPLAIN = new ContentTypes("text/plain");
+    public static final ContentTypes TEXTPLAIN = fromString("text/plain");
 
     /** Static value text/json for ContentTypes. */
-    public static final ContentTypes TEXTJSON = new ContentTypes("text/json");
+    public static final ContentTypes TEXTJSON = fromString("text/json");
 
     /** Static value text/xml for ContentTypes. */
-    public static final ContentTypes TEXTXML = new ContentTypes("text/xml");
-
-    private String value;
+    public static final ContentTypes TEXTXML = fromString("text/xml");
 
     /**
-     * Creates a custom value for ContentTypes.
-     * @param value the custom value
+     * Creates or finds a ContentTypes from its string representation.
+     * @param name a name to look for
+     * @return the corresponding ContentTypes
      */
-    public ContentTypes(String value) {
-        this.value = value;
+    @JsonCreator
+    public static ContentTypes fromString(String name) {
+        return fromString(name, ContentTypes.class);
     }
 
-    @JsonValue
-    @Override
-    public String toString() {
-        return value;
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof ContentTypes)) {
-            return false;
-        }
-        if (obj == this) {
-            return true;
-        }
-        ContentTypes rhs = (ContentTypes) obj;
-        if (value == null) {
-            return rhs.value == null;
-        } else {
-            return value.equals(rhs.value);
-        }
+    /**
+     * @return known ContentTypes values
+     */
+    public static Collection<ContentTypes> values() {
+        return values(ContentTypes.class);
     }
 }
