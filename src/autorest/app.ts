@@ -85,22 +85,10 @@ const args = cli
     type: "string",
     group: "### Installation",
   })
-  .option("autorest.runtimeId", {
-    alias: ["runtimeId"],
-    describe: "overrides the runtimeId for the dotnet framework",
-    type: "boolean",
-    group: "### Installation",
-  })
-  .option("autorest.home", {
-    alias: ["home"],
-    describe: `overrides the home folder where autorest and language runtimes are installed (defaults to ${homedir()}`,
-    type: "string",
-    group: "### Installation",
-  })
   .argv;
 
 const preview: boolean = args.preview;
-const home: string = args.home || process.env["autorest.home"] || homedir();
+const home: string = process.env["autorest.home"] || homedir();
 process.env["autorest.home"] = home;
 console.trace(`Autorest Home folder: ${process.env["autorest.home"]}`);
 const rootFolder: string = join(home, ".autorest");
@@ -229,6 +217,7 @@ async function main() {
       if (table) {
         console.log("|Extension Name|Version|\n|-----|-----|" + table);
       }
+      process.exit(0);
     }
 
     // 
