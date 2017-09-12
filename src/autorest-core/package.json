@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-core",
-  "version": "1.9.6",
+  "version": "1.9.7",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=7.10.0"

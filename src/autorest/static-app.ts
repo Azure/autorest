@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { StaticVolumeSet } from './static-fs'
 
 // get patchRequire
