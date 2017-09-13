@@ -185,6 +185,18 @@ async function main() {
     process.exit(0);
   }
 
+  // check to see if local installed core is available.
+  try {
+    if (!args.version) {
+      requestedVersion = dirname(require.resolve("@microsoft.azure/autorest-core/package.json"));
+    }
+  } catch (e) { }
+
+  if (await asyncIO.isDirectory(requestedVersion)) {
+    require(`${requestedVersion}/dist/app.js`);
+    return;
+  }
+
   console.trace(`Network Enabled: ${await networkEnabled}`);
 
   try {
@@ -245,6 +257,24 @@ async function main() {
     let selectedVersion = From(await installedCores).FirstOrDefault(each => each.version === requestedVersion);
     // is the requested version installed?
     while (!selectedVersion || force) {
+
+      // maybe they passed a path.
+      if (await asyncIO.exists(requestedVersion) || IsUri(requestedVersion)) {
+        console.trace(`Using package from local or uri path: '${requestedVersion}'`);
+        try {
+          const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
+
+          selectedVersion = From(await (await extensionManager).getInstalledExtensions()).FirstOrDefault(each => each.name === pkg.name && each.version === pkg.version);
+          if (selectedVersion) {
+            console.trace(`Version ${selectedVersion} is currently installed.`);
+            break;
+          }
+          console.trace(`Package Info:'${pkg.version}' `);
+        } catch (e) {
+          // doesn't appear installed or anything, we'll let it get installed.
+        }
+      }
+
       // nope -- let's try to get the version requested
       console.trace(`Requested version '${requestedVersion}' is not yet installed.`);
 
@@ -258,25 +288,7 @@ async function main() {
         requestedVersion = From(await availableVersions).FirstOrDefault();
       }
 
-      // maybe they passed a path.
-      if (await asyncIO.exists(requestedVersion) || IsUri(requestedVersion)) {
-        console.trace(`Using package from local path: '${requestedVersion}'`);
-        try {
-          const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
-
-          selectedVersion = From(await (await extensionManager).getInstalledExtensions()).FirstOrDefault(each => each.name === pkg.name && each.version === pkg.version);
-          if (selectedVersion) {
-            console.trace(`Is Installed allready`);
-            break;
-          }
-          console.trace(`Package Info:'${pkg.version}' `);
-        } catch (e) {
-          // doesn't appear installed or anything, we'll let it get installed.
-        }
-
-      } else {
-        requestedVersion = From(await availableVersions).FirstOrDefault(each => semver.satisfies(each, requestedVersion));
-      }
+      requestedVersion = From(await availableVersions).FirstOrDefault(each => semver.satisfies(each, requestedVersion));
 
       if (!requestedVersion) {
         throw new Exception(`The requested version '${requestedVersion}' is not available.`);

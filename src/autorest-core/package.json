@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-core",
-  "version": "1.9.7",
+  "version": "1.9.9",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=7.10.0"
@@ -29,6 +29,7 @@
     "@types/jsonpath": "^0.1.29",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
+    "@types/node": "^8.0.28",
     "mocha": "3.4.2",
     "mocha-typescript": "1.1.5",
     "source-map-support": "^0.4.15",
@@ -50,7 +51,6 @@
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
     "yargs": "^8.0.2"
   },
-  "dependencies": {},
   "staticDependencies": {
     "@microsoft.azure/extension": "~1.1.5",
     "@microsoft.azure/async-io": "~1.0.21",
