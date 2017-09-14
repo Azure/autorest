@@ -6,6 +6,7 @@ const fs_openSync = require("fs").openSync;
 const fs_readSync = require("fs").readSync;
 const fs_statSync = require("fs").statSync;
 const fs_realpathSync = require("fs").realpathSync;
+const fs_closeSync = require("fs").closeSync;
 
 const correctPath = require("./fs-monkey/correctPath.js").correctPath;
 
@@ -64,6 +65,11 @@ class StaticFileSystem {
     return this.intBuffer.readIntBE(0, 6);
   }
 
+  public shutdown() {
+    fs_closeSync(this.fd);
+    this.index = <Index>{};
+  }
+
   readFile(filepath: string): string | undefined {
     const item = this.index[filepath];
     if (item && item.isFile()) {
@@ -82,6 +88,7 @@ class StaticFileSystem {
   public constructor(private sourcePath: string) {
     // read the index
     this.fd = fs_openSync(sourcePath, 'r');
+    // close on process exit.
     let dataOffset = this.readInt();
 
     do {
@@ -118,6 +125,12 @@ class StaticFileSystem {
 
 export class StaticVolumeSet {
   private fileSystems: Array<StaticFileSystem> = [];
+
+  public shutdown() {
+    for (const fsystem of this.fileSystems) {
+      fsystem.shutdown();
+    }
+  }
 
   public constructor(sourcePath: string, private fallbackToDisk: boolean = false) {
     this.addFileSystem(sourcePath);

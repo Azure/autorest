@@ -24,6 +24,7 @@
   },
   "exclude": [
     "node_modules",
+    "static_modules",
     "dist"
   ]
 }

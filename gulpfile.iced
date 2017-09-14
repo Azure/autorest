@@ -64,13 +64,6 @@ Import
   Dependencies:
     "autorest" : ['autorest-core']
 
-task 'reset', 'clean the autorest home folder', (done) ->
-#   if test "-d" , process.env["autorest.home"] 
-#     echo "Cleaning autorest home folder for this working folder '#{process.env["autorest.home"]}'"
-#     rmdir process.env["autorest.home"] , done
-#   else
-     done()
-
 task 'install/binaries', '', (done)->
   done()
 
@@ -131,21 +124,19 @@ task 'init', "" ,(done)->
   typescriptProjectFolders()
     .on 'end', -> 
       if doit || force
-        run [ 'reset' ] , ->
-          rm "#{basefolder}/package-lock.json" if fileExists "#{basefolder}/package-lock.json" 
-          echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
-          echo "Running npm install for project folder."
-          exec "npm install", {cwd:basefolder,silent:true},(c,o,e)->
-            echo "Completed Running npm install for project folder."
-            done null
+        rm "#{basefolder}/package-lock.json" if fileExists "#{basefolder}/package-lock.json" 
+        echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
+        echo "Running npm install for all project folders."
+        exec "npm install", {cwd:basefolder,silent:true},(c,o,e)->
+          echo "Completed Running npm install for project folder."
+          done null
       else 
         done null
 
     .pipe foreach (each,next) -> 
       # is any of the TS projects node_modules out of date?
-      # we are forcing npm4 for actual projects because npm5 is frustrating still.
-      if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/node_modules")
-        echo "node_modules in #{each.path} may be out of date."
+      if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/package-lock.json")
+        echo warning "#{ info 'NOTE:' } '#{each.path}/node_modules' may be out of date."
         doit = true
       next null
 
