@@ -28,7 +28,7 @@
   "scripts": {
     "start": "node ./dist/static-app.js",
     "test": "./node_modules/.bin/mocha ./dist/test",
-    "prepare": "shx rm -rf ./dist/ && tsc && shx cp -R ./node_modules/fs-monkey/lib/ ./dist/fs-monkey/ && cd ./static_modules && npm install",
+    "prepare": "shx rm -rf ./dist/ && shx cp -R ./node_modules/fs-monkey/lib/ ./dist/fs-monkey/ && cd ./static_modules && npm install",
     "prepublishonly": "gulp build"
   },
   "typings": "./dist/main.d.ts",
