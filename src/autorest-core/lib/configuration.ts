@@ -508,6 +508,11 @@ export class Configuration {
     configs = Object.assign({}, configs);
     configs["use-extension"] = Object.assign({}, configs["use-extension"]);
 
+    if (configs.hasOwnProperty('licence-header')) {
+      configs['license-header'] = configs['licence-header'];
+      delete configs['licence-header'];
+    }
+
     // use => use-extension
     let use = configs.use;
     if (typeof use === "string") {
