@@ -21,7 +21,7 @@
   "main": "./dist/main.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha ./dist/test",
-    "prepare": "shx rm -rf ./dist/ && tsc && cd ./static_modules && npm install",
+    "prepare": "shx rm -rf ./dist/ && shx mkdir -p ./dist/ && tsc && cd ./static_modules && npm install",
     "prepublishonly": "gulp build"
   },
   "typings": "./dist/main.d.ts",
