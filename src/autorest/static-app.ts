@@ -17,13 +17,12 @@ patchFs(staticVolume);
 // cheat: add static volume instance to the global namespace so that autorest core can add to it.
 (<any>global).StaticVolumeSet = staticVolume;
 
-
-const p = process.exit;
-
+// hot-patch process.exit so that when it's called we shutdown the patcher early
+const process_exit = process.exit;
 process.exit = (n): never => {
   staticVolume.shutdown();
-  return p(n);
+  return process_exit(n);
 }
 
-// continue with startup
+// continue with original startup
 require("./app");
