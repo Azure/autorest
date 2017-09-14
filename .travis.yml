@@ -11,7 +11,7 @@ install:
 script:
   - set -e
   - set -o pipefail
-  - nom run build
+  - npm run build
   - npm run testci
 notifications:
   slack:
