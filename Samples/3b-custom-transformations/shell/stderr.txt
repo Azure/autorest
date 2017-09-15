@@ -13,7 +13,7 @@ ERROR (OperationsAPIImplementation/R3023/RPCViolation): Operations API must be i
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_CheckNameAvailability'
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Create'
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Delete'
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_GetProperties'
+ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_GetProperty'
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_List'
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListByResourceGroup'
 ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListKeys'
