@@ -17,11 +17,14 @@ function IsOutputArtifactOrMapRequested(config: ConfigurationView, artifactType:
 async function EmitArtifactInternal(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandle): Promise<void> {
   config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
   if (config.IsOutputArtifactRequested(artifactType)) {
-    config.GeneratedFile.Dispatch({
-      type: artifactType,
-      uri: uri,
-      content: handle.ReadData()
-    });
+    const content = handle.ReadData();
+    if (content !== "") {
+      config.GeneratedFile.Dispatch({
+        type: artifactType,
+        uri: uri,
+        content: content
+      });
+    }
   }
   if (config.IsOutputArtifactRequested(artifactType + ".map")) {
     config.GeneratedFile.Dispatch({
@@ -36,7 +39,7 @@ async function EmitArtifact(config: ConfigurationView, artifactType: string, uri
   await EmitArtifactInternal(config, artifactType, uri, handle);
 
   if (isObject) {
-    const sink = config.DataStore.DataSink;
+    const sink = config.DataStore.getDataSink();
     const object = new Lazy<any>(() => handle.ReadObject<any>());
     const ast = new Lazy<YAMLNode>(() => handle.ReadYamlAst());
 

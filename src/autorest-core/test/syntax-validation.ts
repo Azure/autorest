@@ -16,14 +16,14 @@ import { Parse } from "../lib/parsing/literate-yaml";
   private async GetLoaderErrors(swagger: string): Promise<Message[]> {
     const dataStore = new DataStore();
     const uri = "mem:///swagger.json";
-    const h = await dataStore.WriteData(uri, swagger);
+    const h = await dataStore.WriteData(uri, swagger, "input-file");
 
     const autoRest = new AutoRest();
     const messages: Message[] = [];
 
     autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Error) { messages.push(m) } });
     try {
-      await Parse(await autoRest.view, h, dataStore.DataSink);
+      await Parse(await autoRest.view, h, dataStore.getDataSink());
     } catch (e) {
       // it'll also throw, but detailed messages are emitted first
     }
