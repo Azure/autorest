@@ -193,7 +193,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 
     // derive information about given pipeline stage
     const plugin = cfg.plugin || stageName.split("/").reverse()[0];
-    const outputArtifact = cfg.outputArtifact;
+    const outputArtifact = cfg["output-artifact"];
     const scope = cfg.scope;
     const inputs: string[] = (!cfg.input ? [] : (Array.isArray(cfg.input) ? cfg.input : [cfg.input])).map((x: string) => resolvePipelineStageName(stageName, x));
 
@@ -288,8 +288,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
-    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.DataSink.WriteObject("pipeline", pipeline.pipeline)])),
-    "configuration-emitter": CreateArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.DataSink.WriteObject("configuration", configView.Raw)]))
+    "pipeline-emitter": CreateArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline)])),
+    "configuration-emitter": CreateArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("configuration", configView.Raw)]))
   };
 
   // dynamically loaded, auto-discovered plugins
@@ -314,9 +314,10 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       }
 
       // get input
-      let inputScopes: DataSource[] = await Promise.all(node.inputs.map(getTask));
+      const inputScopes: DataSource[] = await Promise.all(node.inputs.map(getTask));
+      let inputScope: DataSource;
       if (inputScopes.length === 0) {
-        inputScopes = [fsInput];
+        inputScope = fsInput;
       } else {
         const handles: DataHandle[] = [];
         for (const pscope of inputScopes) {
@@ -325,9 +326,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
             handles.push(await scope.ReadStrict(handle));
           }
         }
-        inputScopes = [new QuickDataSource(handles)];
+        inputScope = new QuickDataSource(handles);
       }
-      const inputScope = inputScopes[0];
 
       const config = pipeline.configs[stringify(node.configScope)];
       const pluginName = node.pluginName;
@@ -338,7 +338,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       try {
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START` });
 
-        const scopeResult = await plugin(config, inputScope, config.DataStore.DataSink);
+        const scopeResult = await plugin(config, inputScope, config.DataStore.getDataSink(node.outputArtifact));
 
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END` });
         return scopeResult;

@@ -21,6 +21,7 @@ import { OperationCanceledException } from "../exception";
  ********************************************/
 
 export interface Metadata {
+  artifact: string | null;
   inputSourceMap: Lazy<RawSourceMap>;
   sourceMap: Lazy<RawSourceMap>;
   sourceMapEachMappingByLine: Lazy<sourceMap.MappingItem[][]>;
@@ -117,7 +118,7 @@ class ReadThroughDataSource extends DataSource {
             return null;
           }
         }
-        const readHandle = await this.store.WriteData(uri, data);
+        const readHandle = await this.store.WriteData(uri, data, "input-file");
 
         this.uris.push(uri);
         return readHandle;
@@ -169,12 +170,13 @@ export class DataStore {
     return this.Read(uri);
   }
 
-  public async WriteData(description: string, data: string, sourceMapFactory?: (self: DataHandle) => RawSourceMap): Promise<DataHandle> {
+  public async WriteData(description: string, data: string, artifact: string | null, sourceMapFactory?: (self: DataHandle) => RawSourceMap): Promise<DataHandle> {
     const uri = this.createUri(description);
 
     // metadata
     const metadata: Metadata = <any>{};
     const result = await this.WriteDataInternal(uri, data, metadata);
+    metadata.artifact = artifact;
     metadata.sourceMap = new Lazy(() => {
       if (!sourceMapFactory) {
         return new SourceMapGenerator().toJSON();
@@ -220,9 +222,9 @@ export class DataStore {
     return ResolveUri(this.BaseUri, `${this.uid++}?${encodeURIComponent(description)}`);
   }
 
-  public get DataSink(): DataSink {
+  public getDataSink(artifact: string | null = null): DataSink {
     return new DataSink(
-      (description, data, sourceMapFactory) => this.WriteData(description, data, sourceMapFactory),
+      (description, data, sourceMapFactory) => this.WriteData(description, data, artifact, sourceMapFactory),
       async (description, input) => {
         const uri = this.createUri(description);
         this.store[uri] = this.store[input.key];
@@ -340,6 +342,10 @@ export class DataHandle {
 
   public ReadYamlAst(): YAMLNode {
     return this.ReadMetadata().yamlAst.Value;
+  }
+
+  public GetArtifact(): string | null {
+    return this.ReadMetadata().artifact;
   }
 
   public get Description(): string {
