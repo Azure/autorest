@@ -29,5 +29,6 @@
   "files.associations": {
     "*.iced": "coffeescript"
   },
-  "tslint.alwaysShowRuleFailuresAsWarnings": true
+  "tslint.alwaysShowRuleFailuresAsWarnings": true,
+  "git.ignoreLimitWarning": true
 }

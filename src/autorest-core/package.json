@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-core",
-  "version": "1.9.7",
+  "version": "2.0.3",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=7.10.0"
@@ -21,20 +21,40 @@
   "main": "./dist/main.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha ./dist/test",
-    "prepublishOnly": "gulp build"
+    "prepare": "shx rm -rf ./dist/ && shx mkdir -p ./dist/ && tsc && cd ./static_modules && npm install",
+    "prepublishonly": "gulp build"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
+    "@microsoft.azure/async-io": "~1.0.21",
+    "@microsoft.azure/extension": "~1.1.5",
     "@types/commonmark": "^0.27.0",
     "@types/jsonpath": "^0.1.29",
+    "@types/node": "^8.0.28",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
+    "@types/yargs": "^8.0.2",
+    "commonmark": "^0.27.0",
+    "file-url": "^2.0.2",
+    "get-uri": "^2.0.0",
+    "jsonpath": "^0.2.11",
+    "linq-es2015": "^2.4.25",
     "mocha": "3.4.2",
     "mocha-typescript": "1.1.5",
+    "pify": "^3.0.0",
+    "safe-eval": "^0.3.0",
+    "source-map": "^0.5.6",
     "source-map-support": "^0.4.15",
-    "typescript": "2.4.1"
+    "strip-bom": "^3.0.0",
+    "typescript": "2.4.1",
+    "untildify": "^3.0.2",
+    "urijs": "^1.18.10",
+    "shx": "^0.2.2",
+    "vscode-jsonrpc": "^3.3.1",
+    "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
+    "yargs": "^8.0.2"
   },
-  "dependencies": {
+  "staticDependencies": {
     "@microsoft.azure/async-io": "~1.0.21",
     "@microsoft.azure/extension": "~1.1.5",
     "commonmark": "^0.27.0",
@@ -52,5 +72,6 @@
     "vscode-jsonrpc": "^3.3.1",
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
     "yargs": "^8.0.2"
-  }
+  },
+  "dependencies": {}
 }

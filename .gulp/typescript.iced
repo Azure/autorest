@@ -36,7 +36,7 @@ task 'test', 'typescript',['build/typescript'], (done)->
       return test "-d", "#{each.path}/test"
 
     .pipe foreach (each,next)->
-      execute "#{basefolder}/node_modules/.bin/npm test", {cwd: each.path, silent:false }, (code,stdout,stderr) ->
+      execute "npm test", {cwd: each.path, silent:false }, (code,stdout,stderr) ->
         next null
 
 task "compile/typescript", '' , (done)->  
@@ -85,8 +85,9 @@ task 'npm-install', '', ['init-deps'], (done)->
       deps =  ("npm-install/#{d.substring(d.indexOf('/')+1)}" for d in (global.Dependencies[fn] || []) )
       
       task 'npm-install', fn,deps, (fin) ->
+        rm "#{each.path}/package-lock.json" if fileExists "#{each.path}/package-lock.json" 
         echo "Running npm install for #{each.path}."
-        execute "#{basefolder}/node_modules/.bin/npm install", {cwd: each.path, silent:false }, (code,stdout,stderr) ->
+        execute "npm install", {cwd: each.path, silent:false }, (code,stdout,stderr) ->
           fin()
 
       next null
