@@ -63,7 +63,12 @@ use-extension:
 use-extension:
   "@microsoft.azure/classic-openapi-validator": "1.0.3"
   "@microsoft.azure/openapi-validator": "0.1.2-preview"
-```    
+```
+
+``` yaml $(typescript)
+use-extension:
+  "@microsoft.azure/autorest.typescript": "0.1.0"
+```
 
 ### Graph
 
