@@ -60,12 +60,12 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
       config,
       dataStore.GetReadThroughScope(new RealFileSystem()),
       "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json",
-      dataStore.DataSink);
+      dataStore.getDataSink());
 
     // call modeler
     const autorestPlugin = await GetAutoRestDotNetPlugin("modeler");
     const results: DataHandle[] = [];
-    const result = await autorestPlugin.Process("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickDataSource([swagger]), dataStore.DataSink, f => results.push(f), m => null, CancellationToken.None);
+    const result = await autorestPlugin.Process("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickDataSource([swagger]), dataStore.getDataSink(), f => results.push(f), m => null, CancellationToken.None);
     assert.strictEqual(result, true);
     if (results.length !== 1) {
       throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
@@ -93,7 +93,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
       config,
       dataStore.GetReadThroughScope(new RealFileSystem()),
       "https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json",
-      dataStore.DataSink);
+      dataStore.getDataSink());
 
     // load code model
     const codeModelUri = ResolveUri(CreateFolderUri(__dirname), "../../test/resources/code-model.yaml");
@@ -107,7 +107,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
       "csharp",
       key => config.GetEntry(key as any),
       new QuickDataSource([swagger, codeModelHandle]),
-      dataStore.DataSink,
+      dataStore.getDataSink(),
       f => results.push(f),
       m => { if (m.Channel === Channel.Fatal) console.log(m.Text); },
       CancellationToken.None);
@@ -136,7 +136,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
       const result = await validationPlugin.Process(
         pluginNames[pluginIndex], _ => null,
         scopeInput,
-        dataStore.DataSink,
+        dataStore.getDataSink(),
         f => null,
         m => null,
         cancellationToken);

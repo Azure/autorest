@@ -6,3 +6,4 @@ tsconfig.json
 bin
 *.tgz
 test/**
+static_modules/

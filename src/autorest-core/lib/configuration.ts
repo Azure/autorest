@@ -483,7 +483,7 @@ export class Configuration {
     const hConfig = await ParseCodeBlocks(
       contextConfig,
       configFile,
-      contextConfig.DataStore.DataSink);
+      contextConfig.DataStore.getDataSink());
 
     const blocks = hConfig.map(each => {
       const block = each.data.ReadObject<AutoRestConfigurationImpl>();
@@ -508,6 +508,11 @@ export class Configuration {
     configs = Object.assign({}, configs);
     configs["use-extension"] = Object.assign({}, configs["use-extension"]);
 
+    if (configs.hasOwnProperty('licence-header')) {
+      configs['license-header'] = configs['licence-header'];
+      delete configs['licence-header'];
+    }
+
     // use => use-extension
     let use = configs.use;
     if (typeof use === "string") {
@@ -517,9 +522,16 @@ export class Configuration {
       const extMgr = await this.extensionManager;
       for (const useEntry of use) {
         if (typeof useEntry === "string") {
-          // TODO: consider resolving foo@1.33.7 too, but careful: @ is valid in paths :-/
-          const pkg = await extMgr.findPackage("foo", useEntry);
-          configs["use-extension"][pkg.name] = useEntry;
+          // attempt <package>@<version> interpretation
+          const separatorIndex = useEntry.lastIndexOf('@');
+          const versionPart = useEntry.slice(separatorIndex + 1);
+          if (separatorIndex !== -1 && require("semver-regex")().test(versionPart)) {
+            const pkg = await extMgr.findPackage(useEntry.slice(0, separatorIndex), versionPart);
+            configs["use-extension"][pkg.name] = versionPart;
+          } else {
+            const pkg = await extMgr.findPackage("foo", useEntry);
+            configs["use-extension"][pkg.name] = useEntry;
+          }
         }
       }
       delete configs.use;
@@ -581,7 +593,15 @@ export class Configuration {
 
           // not yet loaded?
           if (!ext) {
-            const localPath = untildify(additionalExtension.source);
+            let localPath = untildify(additionalExtension.source);
+
+            // try resolving the package locally (useful for self-contained)
+            try {
+              const fileProbe = "/package.json";
+              localPath = require.resolve(additionalExtension.name + fileProbe); // have to resolve specific file - resolving a package by name will fail if no 'main' is present
+              localPath = localPath.slice(0, localPath.length - fileProbe.length);
+            } catch (e) { }
+
             if (await exists(localPath)) {
               // local package
               messageEmitter.Message.Dispatch({

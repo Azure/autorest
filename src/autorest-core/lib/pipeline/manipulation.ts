@@ -20,17 +20,17 @@ export class Manipulator {
     this.transformations = From(config.Directives).ToArray();
   }
 
-  private MatchesSourceFilter(document: string, transform: DirectiveView): boolean {
+  private MatchesSourceFilter(document: string, transform: DirectiveView, artifact: string | null): boolean {
     document = "/" + document;
-
-    // console.log(document, [...transform.from]);
 
     // from
     const from = From(transform.from);
     const matchesFrom = !from.Any() || from
       .Any(d =>
-        document.endsWith("/" + d) ||
-        document.indexOf("/" + d + "/") !== -1);
+        artifact === d ||
+        document.endsWith("/" + d));
+
+    // console.log(matchesFrom, document, artifact, [...transform.from]);
 
     return matchesFrom;
   }
@@ -38,7 +38,7 @@ export class Manipulator {
   private async ProcessInternal(data: DataHandle, sink: DataSink, documentId?: string): Promise<DataHandle> {
     for (const trans of this.transformations) {
       // matches filter?
-      if (this.MatchesSourceFilter(documentId || data.key, trans)) {
+      if (this.MatchesSourceFilter(documentId || data.key, trans, data.GetArtifact())) {
         for (const w of trans.where) {
           // transform
           for (const t of trans.transform) {

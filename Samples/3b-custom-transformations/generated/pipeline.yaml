@@ -11,40 +11,48 @@ configuration-emitter:
   inputs: []
 swagger-document-override/md-override-loader:
   pluginName: md-override-loader
+  outputArtifact: immediate-config
   configScope: []
   inputs: []
 swagger-document/loader:
   pluginName: loader
+  outputArtifact: swagger-document
   configScope: []
   inputs: []
 swagger-document/individual/transform:
   pluginName: transform
+  outputArtifact: swagger-document
   configScope: []
   inputs:
     - swagger-document/loader
 swagger-document/individual/identity:
   pluginName: identity
+  outputArtifact: swagger-document
   configScope: []
   inputs:
     - swagger-document/individual/transform
 swagger-document/compose:
   pluginName: compose
+  outputArtifact: swagger-document
   configScope: []
   inputs:
     - swagger-document/individual/identity
 swagger-document/transform-immediate:
   pluginName: transform-immediate
+  outputArtifact: swagger-document
   configScope: []
   inputs:
     - swagger-document-override/md-override-loader
     - swagger-document/compose
 swagger-document/transform:
   pluginName: transform
+  outputArtifact: swagger-document
   configScope: []
   inputs:
     - swagger-document/transform-immediate
 swagger-document/identity:
   pluginName: identity
+  outputArtifact: swagger-document
   configScope: []
   inputs:
     - swagger-document/transform
@@ -56,18 +64,21 @@ swagger-document/emitter:
     - swagger-document/transform
 csharp/modeler:
   pluginName: modeler
+  outputArtifact: code-model-v1
   configScope:
     - csharp
   inputs:
     - swagger-document/identity
 csharp/commonmarker:
   pluginName: commonmarker
+  outputArtifact: code-model-v1
   configScope:
     - csharp
   inputs:
     - csharp/modeler
 csharp/cm/transform:
   pluginName: transform
+  outputArtifact: code-model-v1
   configScope:
     - csharp
   inputs:
@@ -81,18 +92,21 @@ csharp/cm/emitter:
     - csharp/cm/transform
 csharp/generate:
   pluginName: csharp
+  outputArtifact: source-file-csharp
   configScope:
     - csharp
   inputs:
     - csharp/cm/transform
 csharp/simplifier:
   pluginName: csharp-simplifier
+  outputArtifact: source-file-csharp
   configScope:
     - csharp
   inputs:
     - csharp/generate
 csharp/transform:
   pluginName: transform
+  outputArtifact: source-file-csharp
   configScope:
     - csharp
     - scope-transform-string

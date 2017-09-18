@@ -6,52 +6,34 @@
 
 package streamwithcontenttype.models;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.microsoft.rest.ExpandableStringEnum;
 
 /**
  * Defines values for ImageTypeRestrictedStrings.
  */
-public final class ImageTypeRestrictedStrings {
+public final class ImageTypeRestrictedStrings extends ExpandableStringEnum<ImageTypeRestrictedStrings> {
     /** Static value image/png for ImageTypeRestrictedStrings. */
-    public static final ImageTypeRestrictedStrings IMAGEPNG = new ImageTypeRestrictedStrings("image/png");
+    public static final ImageTypeRestrictedStrings IMAGEPNG = fromString("image/png");
 
     /** Static value image/tiff for ImageTypeRestrictedStrings. */
-    public static final ImageTypeRestrictedStrings IMAGETIFF = new ImageTypeRestrictedStrings("image/tiff");
-
-    private String value;
+    public static final ImageTypeRestrictedStrings IMAGETIFF = fromString("image/tiff");
 
     /**
-     * Creates a custom value for ImageTypeRestrictedStrings.
-     * @param value the custom value
+     * Creates or finds a ImageTypeRestrictedStrings from its string representation.
+     * @param name a name to look for
+     * @return the corresponding ImageTypeRestrictedStrings
      */
-    public ImageTypeRestrictedStrings(String value) {
-        this.value = value;
+    @JsonCreator
+    public static ImageTypeRestrictedStrings fromString(String name) {
+        return fromString(name, ImageTypeRestrictedStrings.class);
     }
 
-    @JsonValue
-    @Override
-    public String toString() {
-        return value;
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof ImageTypeRestrictedStrings)) {
-            return false;
-        }
-        if (obj == this) {
-            return true;
-        }
-        ImageTypeRestrictedStrings rhs = (ImageTypeRestrictedStrings) obj;
-        if (value == null) {
-            return rhs.value == null;
-        } else {
-            return value.equals(rhs.value);
-        }
+    /**
+     * @return known ImageTypeRestrictedStrings values
+     */
+    public static Collection<ImageTypeRestrictedStrings> values() {
+        return values(ImageTypeRestrictedStrings.class);
     }
 }

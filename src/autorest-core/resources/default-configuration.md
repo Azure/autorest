@@ -26,7 +26,7 @@ use-extension:
 
 ``` yaml $(jsonrpcclient)
 use-extension:
-  "@microsoft.azure/autorest.csharp": "1.9.4"
+  "@microsoft.azure/autorest.csharp": "1.9.5"
 ```
 
 ``` yaml $(go)
@@ -36,12 +36,12 @@ use-extension:
 
 ``` yaml $(java)
 use-extension:
-  "@microsoft.azure/autorest.java": "1.9.2"
+  "@microsoft.azure/autorest.java": "1.9.4"
 ```
 
 ``` yaml $(nodejs)
 use-extension:
-  "@microsoft.azure/autorest.nodejs": "1.9.3"
+  "@microsoft.azure/autorest.nodejs": "1.9.4"
 ```
 
 ``` yaml $(php)
@@ -63,7 +63,12 @@ use-extension:
 use-extension:
   "@microsoft.azure/classic-openapi-validator": "~1.0.3"
   "@microsoft.azure/openapi-validator": "~1.0.0"
-```    
+```
+
+``` yaml $(typescript)
+use-extension:
+  "@microsoft.azure/autorest.typescript": "0.1.0"
+```
 
 ### Graph
 

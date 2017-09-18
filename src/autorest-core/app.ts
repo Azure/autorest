@@ -4,6 +4,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+// enable static modules for autorest-core
+if ((<any>global).StaticVolumeSet) {
+  (<any>global).StaticVolumeSet.addFileSystem(`${__dirname}/static_modules.fs`)
+}
+
 require('events').EventEmitter.defaultMaxListeners = 100;
 
 // start of autorest-ng
@@ -24,10 +29,6 @@ import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
 import { Exception, OperationCanceledException } from "./lib/exception";
-
-/**
- * Legacy AutoRest
- */
 
 function awaitable(child: ChildProcess): Promise<number> {
   return new Promise<number>((resolve, reject) => {

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Tools for AutoRest build processes",
   "scripts": {
-    "test": "gulp test",
+    "test": "gulp testci",
+    "testci": "gulp testci",
     "build": "gulp build --threshold=1",
     "install": "gulp npm-install --verbose"
   },
@@ -54,7 +55,6 @@
     "vinyl-paths": "^2.1.0",
     "vinyl-fs": "^2.4.4",
     "yargs": "^6.6.0",
-    "npm": "^4.6.1",
     "@types/request": "0.0.39",
     "@types/shelljs": "^0.6.0",
     "http-proxy-agent": "^1.0.0",
