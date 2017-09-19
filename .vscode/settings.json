@@ -30,6 +30,5 @@
     "*.iced": "coffeescript"
   },
   "tslint.alwaysShowRuleFailuresAsWarnings": true,
-  "git.ignoreLimitWarning": true,
-  "eslint.enable": false
+  "git.ignoreLimitWarning": true
 }
