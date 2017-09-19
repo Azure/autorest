@@ -51,22 +51,22 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                         return Singleton<GeneratorSettingsCs>.Instance.UseDateTimeOffset ? "System.DateTimeOffset?" : "System.DateTime?";
 
                     case KnownPrimaryType.DateTimeRfc1123:
-                        return "System.DateTime?";
+                        return "System.DateTime";
 
                     case KnownPrimaryType.Double:
-                        return "double?";
+                        return "double";
 
                     case KnownPrimaryType.Float:
-                        return "float?";
+                        return "float";
 
                     case KnownPrimaryType.Decimal:
-                        return "decimal?";
+                        return "decimal";
 
                     case KnownPrimaryType.Int:
-                        return "int?";
+                        return "int";
 
                     case KnownPrimaryType.Long:
-                        return "long?";
+                        return "long";
 
                     case KnownPrimaryType.Stream:
                         return "System.IO.Stream";
@@ -91,10 +91,10 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                         return "Microsoft.Rest.ServiceClientCredentials";
 
                     case KnownPrimaryType.UnixTime:
-                        return "System.DateTime?";
+                        return "System.DateTime";
 
                     case KnownPrimaryType.Uuid:
-                        return "System.Guid?";
+                        return "System.Guid";
 
                 }
                 throw new NotImplementedException($"Primary type {KnownPrimaryType} is not implemented in {GetType().Name}");
