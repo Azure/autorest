@@ -11,7 +11,7 @@ using AutoRest.CSharp.LoadBalanced.Json;
 @{
     var property = Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs);
     var listName = property.ModelTypeName.Replace("System.Collections.Generic.List", "List");
-    var genericPart = listName.Replace("List<", "").Replace(">", "");
+    var genericPart = listName.Replace("System.Collections.Generic.List<", "").Replace(">", "");
 }
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
