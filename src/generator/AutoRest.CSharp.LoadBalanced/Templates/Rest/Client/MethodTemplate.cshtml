@@ -13,8 +13,9 @@
 {
     @:[System.Obsolete()]
 }
+
 [Description("@((String.IsNullOrEmpty(Model.Description) ? "" : Model.Description.EscapeXmlComment()))"), Summary("@((String.IsNullOrEmpty(Model.Summary) ? "" : Model.Summary.EscapeXmlComment()))"), Url("@(Model.FromattedUrl)"), Verb("@(Model.HttpMethod.ToString().ToUpper())"), Tags("@(string.Join(",", Model.Tags))")]
-public async @(Model.OperationResponseReturnTypeStringForMethodName) @(Model.Name)(@(Model.GetAsyncMethodParameterDeclaration(false)))
+public async @(Model.OperationResponseReturnTypeStringForMethodName) @(Model.NameWithoutRoute) (@(Model.GetAsyncMethodParameterDeclaration(false)))
 {
     var response = new Response<@(Model.OperationResponseType)>();
 

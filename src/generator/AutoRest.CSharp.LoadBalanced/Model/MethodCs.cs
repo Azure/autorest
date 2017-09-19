@@ -131,6 +131,13 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
         public virtual string OperationResponseReturnTypeStringForMethodName => GetOperationResponseReturnTypeStringForMethodName();
 
+        public virtual string NameWithoutRoute => ReplaceRouteWithEmpty();
+
+        public virtual string ReplaceRouteWithEmpty()
+        {
+            return Name.RawValue.Replace("Route", "");
+        }
+
         public virtual string GetOperationResponseReturnTypeString(string typeName = "Task")
         {
 			// hardcode wrapper object for V1
