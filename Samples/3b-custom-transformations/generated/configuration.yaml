@@ -84,6 +84,24 @@ output-artifact:
 output-folder: generated
 perform-load: true
 pipeline:
+<<<<<<< HEAD
+=======
+  swagger-document/reflect-api-versions-cs:
+    input:
+      - identity
+      - individual/identity
+      - csharp/emitter
+    scope: reflect-api-versions
+    suffixes: []
+  swagger-document/reflect-api-versions-cs/emitter:
+    input: reflect-api-versions-cs
+    scope: scope-reflect-api-versions-cs-emitter
+    suffixes: []
+  pipeline-emitter:
+    scope: scope-pipeline-emitter
+    suffixes:
+      - ''
+>>>>>>> regen
   configuration-emitter:
     scope: scope-configuration-emitter
     suffixes:
@@ -215,6 +233,7 @@ pipeline:
     scope: azure-validator-individual
     suffixes:
       - ''
+<<<<<<< HEAD
   swagger-document/individual/transform:
     input: loader
     output-artifact: swagger-document
@@ -258,6 +277,13 @@ scope-cm-yaml/emitter:
     "code-model-v1-yaml"
 scope-cm/emitter:
   input-artifact: code-model-v1
+=======
+scope-reflect-api-versions-cs-emitter:
+  input-artifact: source-file-csharp
+  output-uri-expr: $key
+scope-pipeline-emitter:
+  input-artifact: pipeline
+>>>>>>> regen
   is-object: true
   output-uri-expr: |
     "code-model-v1"
