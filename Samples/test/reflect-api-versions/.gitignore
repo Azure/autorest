@@ -1,2 +1,2 @@
 SdkClient/**/*.cs
-!SdkClient/SdkInfo.cs
+!SdkClient/SdkInfo_*.cs
