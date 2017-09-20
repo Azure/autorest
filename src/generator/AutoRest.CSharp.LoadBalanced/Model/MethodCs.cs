@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
         public virtual string ReplaceRouteWithEmpty()
         {
-            return Name.RawValue.Replace("Route", "");
+            return Name.Value.Replace("Route", "");
         }
 
         public virtual string GetOperationResponseReturnTypeString(string typeName = "Task")
