@@ -190,7 +190,6 @@
       "additionalProperties": {
         "$ref": "#/definitions/schema"
       },
-
       "description": "One or more JSON objects describing the schemas being consumed and produced by the API."
     },
     "parameterDefinitions": {
@@ -1460,7 +1459,9 @@
     },
     "xmsEnum": {
       "type": "object",
-      "required": [ "name" ],
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string"
@@ -1469,14 +1470,18 @@
           "type": "boolean",
           "default": false
         },
+        "default": {
+          "description": "Specifies the default value for enum"
+        },
         "values": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": [ "value" ],
+            "required": [
+              "value"
+            ],
             "properties": {
-              "value": {
-              },
+              "value": {},
               "description": {
                 "type": "string"
               },
@@ -1496,7 +1501,10 @@
           "type": "object",
           "properties": {
             "name": {
-              "type": [ "string", "null" ]
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
@@ -1505,7 +1513,10 @@
           "type": "object",
           "properties": {
             "postfix": {
-              "type": [ "string", "null" ]
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
@@ -1528,13 +1539,22 @@
       "type": "object",
       "properties": {
         "nextLinkName": {
-          "type": [ "string", "null" ]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "itemName": {
-          "type": [ "string", "null" ]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "operationName": {
-          "type": [ "string", "null" ]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "additionalProperties": false
@@ -1601,13 +1621,20 @@
     },
     "xmsParameterLocation": {
       "type": "string",
-      "enum": [ "client", "method" ]
+      "enum": [
+        "client",
+        "method"
+      ]
     },
     "xmsMutability": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [ "create", "read", "update" ]
+        "enum": [
+          "create",
+          "read",
+          "update"
+        ]
       },
       "uniqueItems": true
     },
