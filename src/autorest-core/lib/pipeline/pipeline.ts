@@ -222,7 +222,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-private static partial class SdkInfo
+internal static partial class SdkInfo
 {
     public static IEnumerable<Tuple<string, string, string>> ApiInfo_${title}
     {
@@ -230,7 +230,7 @@ private static partial class SdkInfo
         {
             return new Tuple<string, string, string>[]
             {
-${tuples.map(x => `                ${x},`).join("\n")}
+${tuples.map(x => `                  ${x},`).join("\n")}
             }.AsEnumerable();
         }
     }
