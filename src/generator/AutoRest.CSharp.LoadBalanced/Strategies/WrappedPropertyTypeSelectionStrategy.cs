@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
         private static string[] _datePostfixes = new[] {"When", "Time", "Date"};
         private static string[] _guidPostfixes = new[] { "By", "UserId", "Token" };
         private static string[] _moneyPostfixes = new[] { "Cost", "Rate", "Amount", "Price", "Discount", "Fee", "Percent" };
-		private static string[] _booleanSuffixes = new[] { "IsBreakfastIncluded", "allotmentAutoToPup", "Flag", "IsSelected", "IsActive", "IsNonHotelAccomodationMode" };
+        private static string[] _booleanSuffixes = new[] { "isBookOnRequest",  "IsBreakfastIncluded", "allotmentAutoToPup", "Flag", "IsSelected", "IsActive", "IsNonHotelAccomodationMode" };
 
         public override bool IsDateTime(Property property)
         {
