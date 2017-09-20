@@ -19,7 +19,7 @@
 | [autorest.php](https://github.com/Azure/autorest.php) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.php.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.php) |
 | [autorest.python](https://github.com/Azure/autorest.python) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.python.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.python) |
 | [autorest.ruby](https://github.com/Azure/autorest.ruby) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.ruby.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.ruby) |
-| [autorest.typescript](https://github.com/Azure/autorest.typescript) | <!--[![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.typescript.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.typescript)--> |
+| [autorest.typescript](https://github.com/Azure/autorest.typescript) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.typescript.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.typescript) |
 | [autorest.testserver](https://github.com/Azure/autorest.testserver) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.testserver.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.testserver) |
 
 ## Validation
