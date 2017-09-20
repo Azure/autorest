@@ -463,6 +463,30 @@ export class ConfigurationView {
             break;
         }
 
+        // fix the source names
+        for (const source of mx.Source || []) {
+
+          if (source.Position) {
+            try {
+              source.document = this.DataStore.ReadStrictSync(source.document).Description;
+            } catch (e) {
+
+            }
+          }
+        }
+
+        // fix the source names in Ranges too
+        for (const range of mx.Range || []) {
+          if (range.document) {
+            try {
+              range.document = this.DataStore.ReadStrictSync(range.document).Description;
+            } catch (e) {
+
+            }
+          }
+        }
+
+
         this.messageEmitter.Message.Dispatch(mx);
       }
     } catch (e) {

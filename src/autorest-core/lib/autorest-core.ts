@@ -41,17 +41,18 @@ export class AutoRest extends EventEmitter {
   }
 
   public static async LiterateToJson(content: string): Promise<string> {
+    try {
     let autorest = new AutoRest({
       EnumerateFileUris: async function (folderUri: string): Promise<Array<string>> { return []; },
-      ReadFile: async (f: string): Promise<string> => f == "mem:///foo.md" ? content : ""
+        ReadFile: async (f: string): Promise<string> => f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"
     });
     let result = "";
-    autorest.AddConfiguration({ "input-file": "mem:///foo.md", "output-artifact": ["swagger-document"] });
+      autorest.AddConfiguration({ "input-file": "none:///empty-file.md", "output-artifact": ["swagger-document"] });
     autorest.GeneratedFile.Subscribe((source, artifact) => {
       result = artifact.content;
     });
     // run autorest and wait.
-    try {
+
       await (await autorest.Process()).finish;
       return result;
     } catch (x) {
@@ -91,7 +92,6 @@ export class AutoRest extends EventEmitter {
     return Configuration.DetectConfigurationFile(fileSystem, (documentPath || null));
   }
 
-
   /**
    * Event: Signals when a Process() finishes.
    */
@@ -116,6 +116,7 @@ export class AutoRest extends EventEmitter {
   }
 
   /**
+   *  @internal
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
    */
@@ -125,6 +126,9 @@ export class AutoRest extends EventEmitter {
     process.env["autorest.home"] = process.env["autorest.home"] || homedir();
   }
 
+  public static create(fileSystem?: IFileSystem, configFileOrFolderUri?: string) {
+    return new AutoRest(fileSystem, configFileOrFolderUri);
+  }
   public async RegenerateView(includeDefault: boolean = false): Promise<ConfigurationView> {
     this.Invalidate();
     const messageEmitter = new MessageEmitter();

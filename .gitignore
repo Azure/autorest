@@ -227,3 +227,4 @@ Samples/**/*.map
 src/*/dist
 src/*/nm
 /nm/
+*.tgz
