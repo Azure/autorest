@@ -79,6 +79,25 @@ use-extension:
 
 #### Reflection
 
+##### Input API versions (azure-rest-api-specs + C# specific)
+
+``` yaml $(csharp)
+pipeline:
+  swagger-document/reflect-api-versions-cs: # emits a *.cs file containing information about the API versions involved in this call
+    input:
+    - identity
+    - individual/identity
+    - csharp/emitter # ensures delay and C# scope
+    scope: reflect-api-versions
+  swagger-document/reflect-api-versions-cs/emitter: # emits the pipeline graph
+    input: reflect-api-versions-cs
+    scope: scope-reflect-api-versions-cs-emitter
+
+scope-reflect-api-versions-cs-emitter:
+  input-artifact: source-file-csharp
+  output-uri-expr: $key
+```
+
 ##### Pipeline
 
 ``` yaml
