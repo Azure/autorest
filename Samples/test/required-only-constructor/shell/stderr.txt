@@ -1,0 +1,37 @@
+   at ...
+  at ...
+  at ...
+  at ...
+  at ...
+--- End of stack trace from previous location where exception was thrown ---
+--- End of stack trace from previous location where exception was thrown ---
+(node:17588) DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:17588) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 10): Error: Plugin modeler reported failure.
+(node:17588) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 11): Error: Plugin modeler reported failure.
+(node:17588) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 12): Error: Plugin modeler reported failure.
+(node:17588) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 13): Error: Plugin modeler reported failure.
+(node:17588) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 6): Error: Plugin modeler reported failure.
+(node:17588) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 7): Error: Plugin modeler reported failure.
+(node:17588) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 8): Error: Plugin modeler reported failure.
+(node:17588) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 9): Error: Plugin modeler reported failure.
+{"swagger":"2.0","info":{"version":"1.0.0","title":"Cowbell Portal","description":"This is a sample."},"host":"localhost","schemes":["https"],"paths":[],"definitions":{"Cowbell":{"required":["name"],"properties":{"id":{"type":"integer","format":"int64","default":"42"},"type":{"type":"string"},"name":{"type":"string","default":"shiny"},"size":{"type":"integer"}},"description":"A cowbell."}}}
+{"swagger":"2.0","info":{"version":"1.0.0","title":"Cowbell Portal","description":"This is a sample."},"host":"localhost","schemes":["https"],"paths":[],"definitions":{"Cowbell":{"required":["name"],"properties":{"id":{"type":"integer","format":"int64","default":"42"},"type":{"type":"string"},"name":{"type":"string","default":"shiny"},"size":{"type":"integer"}},"description":"A cowbell."}}}
+{"swagger":"2.0","info":{"version":"1.0.0","title":"Cowbell Portal","description":"This is a sample."},"host":"localhost","schemes":["https"],"paths":[],"definitions":{"Cowbell":{"required":["name"],"properties":{"id":{"type":"integer","format":"int64","default":"42"},"type":{"type":"string"},"name":{"type":"string","default":"shiny"},"size":{"type":"integer"}},"description":"A cowbell."}}}
+{"swagger":"2.0","info":{"version":"1.0.0","title":"Cowbell Portal","description":"This is a sample."},"host":"localhost","schemes":["https"],"paths":[],"definitions":{"Cowbell":{"required":["name"],"properties":{"id":{"type":"integer","format":"int64","default":"42"},"type":{"type":"string"},"name":{"type":"string","default":"shiny"},"size":{"type":"integer"}},"description":"A cowbell."}}}
+Error: Plugin modeler reported failure.
+FATAL: AutoRest.Core.Logging.CodeGenerationException: Error parsing swagger file. Cannot deserialize the current JSON array (e.g. [1,2,3]) into type 'System.Collections.Generic.Dictionary`2[System.String,System.Collections.Generic.Dictionary`2[System.String,AutoRest.Modeler.Model.Operation]]' because the type requires a JSON object (e.g. {"name":"value"}) to deserialize correctly.
+FATAL: AutoRest.Core.Logging.CodeGenerationException: Error parsing swagger file. Cannot deserialize the current JSON array (e.g. [1,2,3]) into type 'System.Collections.Generic.Dictionary`2[System.String,System.Collections.Generic.Dictionary`2[System.String,AutoRest.Modeler.Model.Operation]]' because the type requires a JSON object (e.g. {"name":"value"}) to deserialize correctly.
+FATAL: csharp/modeler/0 - FAILED
+FATAL: csharp/modeler/1 - FAILED
+FATAL: Error parsing swagger file. Cannot deserialize the current JSON array (e.g. [1,2,3]) into type 'System.Collections.Generic.Dictionary`2[System.String,System.Collections.Generic.Dictionary`2[System.String,AutoRest.Modeler.Model.Operation]]' because the type requires a JSON object (e.g. {"name":"value"}) to deserialize correctly.
+FATAL: Error parsing swagger file. Cannot deserialize the current JSON array (e.g. [1,2,3]) into type 'System.Collections.Generic.Dictionary`2[System.String,System.Collections.Generic.Dictionary`2[System.String,AutoRest.Modeler.Model.Operation]]' because the type requires a JSON object (e.g. {"name":"value"}) to deserialize correctly.
+FATAL: Error: Plugin modeler reported failure.
+FATAL: Error: Plugin modeler reported failure.
+Path 'paths', line 1, position 151.
+Path 'paths', line 1, position 151.
+Path 'paths', line 1, position 151.
+Path 'paths', line 1, position 151.
+To fix this error either change the JSON to a JSON object (e.g. {"name":"value"}) or change the deserialized type to an array or a type that implements a collection interface (e.g. ICollection, IList) like List<T> that can be deserialized from a JSON array. JsonArrayAttribute can also be added to the type to force it to deserialize from a JSON array.
+To fix this error either change the JSON to a JSON object (e.g. {"name":"value"}) or change the deserialized type to an array or a type that implements a collection interface (e.g. ICollection, IList) like List<T> that can be deserialized from a JSON array. JsonArrayAttribute can also be added to the type to force it to deserialize from a JSON array.
+To fix this error either change the JSON to a JSON object (e.g. {"name":"value"}) or change the deserialized type to an array or a type that implements a collection interface (e.g. ICollection, IList) like List<T> that can be deserialized from a JSON array. JsonArrayAttribute can also be added to the type to force it to deserialize from a JSON array.
+To fix this error either change the JSON to a JSON object (e.g. {"name":"value"}) or change the deserialized type to an array or a type that implements a collection interface (e.g. ICollection, IList) like List<T> that can be deserialized from a JSON array. JsonArrayAttribute can also be added to the type to force it to deserialize from a JSON array.

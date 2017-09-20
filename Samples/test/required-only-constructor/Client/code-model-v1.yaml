@@ -1,0 +1,111 @@
+---
+modelTypes:
+  - $id: '1'
+    $type: CompositeType
+    properties:
+      - $id: '2'
+        isReadOnly: false
+        realPath:
+          - id
+        collectionFormat: none
+        defaultValue:
+          fixed: false
+          raw: '42'
+        documentation:
+          fixed: false
+        isRequired: false
+        isConstant: false
+        name:
+          fixed: false
+          raw: id
+        serializedName: id
+        modelType:
+          $id: '3'
+          $type: PrimaryType
+          format: int64
+          knownPrimaryType: long
+          name:
+            fixed: false
+            raw: Long
+      - $id: '4'
+        isReadOnly: false
+        realPath:
+          - name
+        collectionFormat: none
+        defaultValue:
+          fixed: false
+          raw: shiny
+        documentation:
+          fixed: false
+        isRequired: true
+        isConstant: false
+        name:
+          fixed: false
+          raw: name
+        serializedName: name
+        modelType:
+          $id: '5'
+          $type: PrimaryType
+          knownPrimaryType: string
+          name:
+            fixed: false
+            raw: String
+    serializedName: Cowbell
+    documentation: A cowbell.
+    containsConstantProperties: false
+    name:
+      fixed: false
+      raw: Cowbell
+name: CowbellFactory
+namespace: ''
+modelsName: Models
+apiVersion: 1.0.0
+baseUrl: 'https://localhost'
+documentation: This is a sample.
+operations:
+  - methods:
+      - parameters:
+          - $id: '6'
+            location: body
+            collectionFormat: none
+            defaultValue:
+              fixed: false
+            documentation:
+              fixed: false
+            isRequired: true
+            isConstant: false
+            name:
+              fixed: false
+              raw: body
+            serializedName: body
+            modelType:
+              $ref: '1'
+        name:
+          fixed: false
+          raw: Add
+        group:
+          fixed: false
+          raw: Cowbell
+        serializedName: Cowbell_Add
+        url: /cowbell
+        isAbsoluteUrl: false
+        httpMethod: post
+        responses:
+          OK:
+            isNullable: true
+        defaultResponse:
+          isNullable: true
+        returnType:
+          isNullable: true
+        description: A good description.
+        requestContentType: application/json; charset=utf-8
+        responseContentTypes:
+          - application/json
+        deprecated: false
+        hidden: false
+    name:
+      fixed: false
+      raw: Cowbell
+    typeName:
+      fixed: false
+    nameForProperty: Cowbell

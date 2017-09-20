@@ -18,7 +18,7 @@ csharp:
 ``` yaml
 csharp:
   - output-folder: ClientFancy
-    directive:
+    directive: # one can activate it selectively, `use-default-in-constructor` is the global flag
       from: code-model-v1
       where: $..*[?(@.$type == "CompositeType")].properties[*]
       transform: $.useDefaultInConstructor = true
