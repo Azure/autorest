@@ -27,8 +27,7 @@ We use [a variation](https://github.com/Microsoft/language-server-protocol/blob/
 An AutoRest package must be an `npm` package.
 Note that it must not necessarily be *published* as an `npm` package - any source supported by npm is supported by AutoRest, including git repositories, `.tgz` files and even local folders.
 
-The `package.json` file needs to meet the following requirements:
-1) Have a `start` script that, when executed, launches the extension. Example:
+The `package.json` file needs to have a `start` script that, when executed, launches the extension. Example:
 
 ``` json
 "scripts": {
@@ -36,13 +35,7 @@ The `package.json` file needs to meet the following requirements:
 }
 ```
 
-2) Have dependencies on any runtime required for execution. Example:
-``` json
-"dependencies": {
-  "dotnet-2.0.0": "*",
-  ...
-}
-```
+Any runtimes required for execution (above: dotnet) should be provided as dependencies (these will be installed by AutoRest), so the extension works out of the box on anyones machine.
 
 ## Usage
 
