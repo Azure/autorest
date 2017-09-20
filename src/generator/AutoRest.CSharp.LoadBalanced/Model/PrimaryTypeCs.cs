@@ -45,10 +45,10 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                         return "bool";
 
                     case KnownPrimaryType.Date:
-                        return "System.DateTime?";
+                        return "System.DateTime";
                     
                     case KnownPrimaryType.DateTime:
-                        return Singleton<GeneratorSettingsCs>.Instance.UseDateTimeOffset ? "System.DateTimeOffset?" : "System.DateTime?";
+                        return Singleton<GeneratorSettingsCs>.Instance.UseDateTimeOffset ? "System.DateTimeOffset" : "System.DateTime";
 
                     case KnownPrimaryType.DateTimeRfc1123:
                         return "System.DateTime";
