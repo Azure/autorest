@@ -1,4 +1,10 @@
 import { StaticVolumeSet } from './static-fs'
+import { gt, gte } from "semver";
+
+if (!gte(process.versions.node, "7.10.0")) {
+  console.log(`AutoRest code generation utility.\n\n The version of nodejs you are running is not sufficent.\n You must have version 7.10.0 or greater.\n\nExiting.`);
+  process.exit(1);
+}
 
 export function initialize(): StaticVolumeSet {
   // only do this once, ever.
