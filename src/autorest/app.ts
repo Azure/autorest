@@ -9,7 +9,7 @@ import { cli, enhanceConsole } from "@microsoft.azure/console";
 import { Exception, LazyPromise } from "@microsoft.azure/polyfill";
 import { Enumerable as IEnumerable, From } from "./lib/ref/linq";
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
-import { gt, gte } from "semver";
+import { gt } from "semver";
 
 // Caution: This may swallow backslashes.
 // This cost me ~1h of debugging why "console.log(join(homedir(), ".autorest"));" prints "C:\Users\jobader.autorest"... 
@@ -18,12 +18,6 @@ enhanceConsole();
 
 // heavy customization, restart from scratch
 cli.reset();
-
-if (!gte(process.versions.node, "7.10.0")) {
-  console.log(`# AutoRest code generation utility.\n\n> The version of nodejs you are running is not sufficent.\n> You must have version 7.10.0 or greater.\n\nExiting.`);
-  process.exit(1);
-}
-
 
 console.log(`# AutoRest code generation utility.\n(C) 2017 **Microsoft Corporation.**  \nhttps://aka.ms/autorest`);
 const args = cli
