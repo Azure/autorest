@@ -174,11 +174,6 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                     return "dynamic";
                 }
 
-                if (typeName.EndsWith("List"))
-                {
-                    typeName = $"List<{typeName.Substring(0, typeName.Length - 4)}>";
-                }
-
                 return typeName.Replace("System.Collections.Generic.", ""); // TODO: all using namespace
             }
         } 
