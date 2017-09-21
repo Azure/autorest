@@ -83,6 +83,7 @@ Field Name | Type | Description
 name | `string` | **Required**. Specifies the name for the Enum.
 modelAsString | `boolean` | **Default: false** When set to `true` the enum will be modeled as a string. No validation will happen. When set to `false`, it will be modeled as an enum if that language supports enums. Validation will happen, irrespective of support of enums in that language.
 values | `[{ value: any, description?: string, name?: string }]` | **Default: undefined** When set, this will override the values specified with `enum`, while also enabling further customization. We recommend still specifying `enum` as a fallback for consumers that don't understand `x-ms-enum`. Each item in `x-ms-enum` corresponds to an enum item. Property `value` is mandatory and corresponds to the value one would also have specified using `enum`. Properties `description` and `name` are optional. `name` allows overriding the name of the enum value that would usually be derived from the value.
+default | `any` | Default value for the enum. It must be a valid value from one of the supported values specified in the enum array or in the `value` field of the `values` property of this extension.
 
 **Example**:
 ```yaml
@@ -97,6 +98,7 @@ accountType:
   x-ms-enum:
     name: AccountType
     modelAsString: false
+    default: Standard_LRS
     values:
     - value: Standard_LRS
       description: Locally redundant storage.
