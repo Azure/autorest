@@ -8,6 +8,9 @@ copyDtsFiles = (done) =>
   # copy *.d.ts files 
   source ["#{basefolder}/src/autorest-core/dist/**/*.d.ts","!#{basefolder}/src/autorest-core/dist/test/**" ]
     .pipe destination "#{basefolder}/src/autorest/lib/core"
+    .on 'end', () => 
+    source ["#{basefolder}/src/autorest-core/dist/**/*.d.ts","!#{basefolder}/src/autorest-core/dist/test/**" ]
+      .pipe destination "#{basefolder}/src/autorest/dist/lib/core"
     .on 'end', done
   return null
 
