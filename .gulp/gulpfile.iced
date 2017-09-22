@@ -1,21 +1,17 @@
-# set the base folder of this project
-global.basefolder = "#{__dirname}"
 
 # use our tweaked version of gulp with iced coffee.
-require './.gulp/gulp.iced'
+require './common.iced'
 semver = require 'semver'
 
 # tasks required for this build 
 Tasks "typescript",  # compiling typescript
   "regeneration" # regenerating expected files
-  "publishing"   # signing/publishing binaries to github and npm registry
+  "publishing"   # publishing binaries to npm registry
 
 # Settings
 Import
   initialized: false
   packages: "#{basefolder}/packages"
-  release_name: if argv.nightly then "#{version}-#{today}-2300-nightly"              else if argv.preview then "#{version}-#{now}-preview"              else "#{version}"
-  package_name: if argv.nightly then "autorest-#{version}-#{today}-2300-nightly.zip" else if argv.preview then "autorest-#{version}-#{now}-preview.zip" else "autorest-#{version}.zip"
   autorest: (args,done,ignoreexitcode) ->
     # Run AutoRest from the original current directory.
     echo info "Queuing up: AutoRest #{args.join(' ')}"
@@ -142,3 +138,24 @@ task 'init', "" ,(done)->
 
     return null
   return null
+
+
+# CI job
+task 'testci', "more", [], (done) ->
+  ## TEST SUITE
+  global.verbose = true
+  await run "test", defer _
+
+  ## REGRESSION TEST
+  global.verbose = false
+  # regenerate
+  await run "regenerate", defer _
+  # diff ('add' first so 'diff' includes untracked files)
+  await  execute "git add -A", defer code, stderr, stdout
+  await  execute "git diff --staged -w", defer code, stderr, stdout
+  # eval
+  echo stderr
+  echo stdout
+  throw "Potentially unnoticed regression (see diff above)! Run `npm run regenerate`, then review and commit the changes." if stdout.length + stderr.length > 0
+  done()
+

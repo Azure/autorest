@@ -1,10 +1,103 @@
+# place an object into global namespace 
+global['Import'] = (object) -> 
+  for key, value of object
+    global[key] = value 
+
+Import
+  # require into the global namespace (modulename = module)
+  Install: (modulename, module) -> 
+    global[modulename] = require module or modulename 
+
+  # require a gulp-Plugin into the global namespace 
+  Plugin: () ->
+    Install module,"gulp-#{module}" for module in arguments
+
+  # require a module, placing exports into global namespace
+  Include: () -> 
+    Import require module  for module in arguments
+
+  Tasks: () -> 
+    require "#{__dirname}/#{module}" for module in arguments
+
+###############################################
+# force-global a bunch of stuff.
+require 'shelljs/global'
 fs = require('fs')
 path = require('path')
+TerminalRenderer = require('marked-terminal')
+vfs = require('vinyl-fs');
+
+Install 'marked'
+Install 'vinyl'
+Install 'os'
+Install 'path'
+Install 'fs'
+Install 'gulp'
+Install 'util'
+Install 'moment'
+Install 'chalk'
+Install 'yargs'
+Install 'eol', 'gulp-line-ending-corrector'
+Install 'through', 'through2-parallel'
+Install 'run', 'run-sequence'
+Install 'semver'
+
+
+# force this into global namespace
+global['argv'] = yargs.argv
+global.verbose = argv.verbose or null
+
+###############################################
+# UI stuff
+
+marked.setOptions {
+  renderer: new TerminalRenderer({
+    heading: chalk.green.bold,
+    firstHeading: chalk.green.bold,
+    showSectionPrefix: false,
+    strong: chalk.bold.cyan,
+    em: chalk.cyan,
+    blockquote: chalk.magenta,
+    tab: 2
+  })
+}
+
+set '+e'
+
+Import 
+  force: argv.force or false
+  threshold: argv.threshold or ((os.cpus().length)-1) or 1
+  watch: argv.watch or false
+  error: chalk.bold.red
+  error_message: chalk.bold.cyan
+  warning: chalk.bold.yellow
+  info: chalk.bold.green
+  quiet_info: chalk.green
+
+# do a bit of monkeypatching
+_gulpStart = gulp.Gulp::start
+_runTask = gulp.Gulp::_runTask
+
+gulp.Gulp::start = (taskName) ->
+  @currentStartTaskName = taskName
+  _gulpStart.apply this, arguments
+  return
+
+gulp.Gulp::_runTask = (task) ->
+  @currentRunTaskName = task.name
+  _runTask.apply this, arguments
+  return
+
+#  echo 'this.currentStartTaskName: ' + this.currentStartTaskName
+#  echo 'this.currentRunTaskName: ' + this.currentRunTaskName
+
+# bring some gulp-Plugins along
+Plugin 'filter'
+
 
 concurrency = 0 
 queue = []
 global.completed = []
-vfs = require('vinyl-fs');
 
 module.exports =
   # lets us just handle each item in a stream easily.
@@ -226,7 +319,6 @@ module.exports =
     echo ""
     echo "#{ error 'Task Failed:' }  #{error_message text}"
     echo ""
-    rm '-rf', workdir
     process.exit(1)
 
   execute: (cmdline,options,callback, ondata)->
@@ -278,14 +370,63 @@ module.exports =
     proc.stdout.on 'data', ondata if ondata
     return proc
 
+for key, value of module.exports
+  global[key] = value 
 
 # build task for global build
-module.exports.task 'build', 'builds project', -> 
+task 'build', 'builds project', -> 
   echo "Building project in #{basefolder}"
 
-module.exports.task 'clean', 'cleans the project files', -> 
+task 'clean', 'cleans the project files', -> 
 
 # task for vs code
-module.exports.task 'code', 'launches vs code', -> 
+task 'code', 'launches vs code', -> 
   exec "code #{basefolder}"
- 
+
+configString = (s)->
+  "#{s.charAt 0 .toUpperCase()}#{s.slice 1 .toLowerCase() }"
+
+
+
+###############################################
+task 'default','', ->
+  cmds = ""
+
+  for name, t of gulp.tasks 
+    cmds += "\n  gulp **#{name}** - #{t.description}" if t.description? and t.description.length
+  switches = ""
+
+  echo marked  """
+
+# Usage
+
+## gulp commands  
+#{cmds}
+
+## available switches  
+  *--force*          specify when you want to force an action (restore, etc)
+  *--verbose*        enable verbose output
+  *--threshold=nn*   set parallelism threshold (default = 10)
+
+#{switches}
+"""
+
+task 'test', "Run Tests", ->
+  
+task 'fix-line-endings', 'Fixes line endings to file-type appropriate values.', ->
+  source "**/*.iced"
+    .pipe eol {eolc: 'LF', encoding:'utf8'}
+    .pipe destination '.'
+
+package_json = require("#{basefolder}/package.json")
+
+task 'version-number', '!', (done)->
+  if argv.version
+    global.version =  argv.version if argv.version
+    done();
+  else 
+    # git rev-list --parents HEAD --count --full-history
+    execute "git rev-list --parents HEAD --count --full-history" , {silent:true}, (c,o,e)->
+      pv = (package_json.version).trim()
+      global.version = "#{semver.major(pv)}.#{semver.minor(pv)}.#{o.trim()}"
+      done();

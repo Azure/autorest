@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-core",
-  "version": "2.0.9",
+  "version": "2.0.0",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=7.10.0"
@@ -21,7 +21,7 @@
   "main": "./dist/main.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha ./dist/test",
-    "prepare": "shx rm -rf ./dist/ && shx mkdir -p ./dist/ && tsc && cd ./static_modules && npm install",
+    "prepare": "shx mkdir -p ./dist/ && cd ./static_modules && npm install",
     "prepublishonly": "gulp build"
   },
   "typings": "./dist/main.d.ts",

@@ -1,6 +1,6 @@
 {
   "name": "static_modules",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "builds the static_modules file",
   "scripts": {
     "postinstall": "node ./create-static-fs"
