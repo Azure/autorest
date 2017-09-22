@@ -135,7 +135,10 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 
     // switch
     const key = match[1];
-    const value = Parse(match[3] || "{}");
+    let rawValue = match[3] || "{}";
+    // quote stuff beginning with '@', YAML doesn't think unquoted strings should start with that
+    rawValue = rawValue.startsWith('@') ? `'${rawValue}'` : rawValue;
+    const value = Parse(rawValue);
     result.switches.push(CreateObject(key.split("."), value));
   }
 

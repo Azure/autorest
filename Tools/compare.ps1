@@ -12,162 +12,88 @@ $baseFolder = get-fullpath "$PSScriptRoot\..\compare-results"
 $lastRoot = get-fullpath "$baseFolder\Last"
 $newRoot = get-fullpath "$baseFolder\New"
 
-if( !$noclean ) {
-  # remove last run and create folders
-  $null = rmdir -recurse -force -ea 0 $baseFolder 
-  $null = mkdir -ea 0 $baseFolder
-} else {
-  $null = rmdir -recurse -force -ea 0 $lastRoot 
-  $null = rmdir -recurse -force -ea 0 $newRoot 
-  $lastAutoRest = (dir "$baseFolder\autorest*\tools\AutoRest.exe").FullName
-}
+$lastAutoRestPropCmd = "New-Item -Force -ItemType directory -Path ar0; cd ar0; npm install autorest@latest; node_modules\.bin\autorest --latest"
+$newAutoRestPropCmd = "New-Item -Force -ItemType directory -Path ar1; cd ar1; npm install autorest@next; node_modules\.bin\autorest --latest"
+$lastAutoRestCmd = "ar0\node_modules\.bin\autorest"
+$newAutoRestCmd = "ar1\node_modules\.bin\autorest"
+
+&powershell $lastAutoRestPropCmd
+&powershell $newAutoRestPropCmd
+
+# remove last run and create folders
+$null = rmdir -recurse -force -ea 0 $baseFolder 
+$null = mkdir -ea 0 $baseFolder
   
 $null = mkdir -ea 0 $lastRoot
 $null = mkdir -ea 0 $newRoot
 
-if( -not $lastAutorest  ) {
-  # install last nightly build.
-  # write-host -fore green "Installing latest nightly autorest."
-  # $null = &"$PSScriptRoot\NuGet.exe" install autorest -source https://www.myget.org/F/autorest/api/v3/index.json -prerelease -Version 0.17.3-Nightly20161101 -outputdirectory $baseFolder
-
-  # get autorest nightly exe
-  $lastAutoRest = (Get-ChildItem "$PSScriptRoot\..\src\core\AutoRest\bin\Debug\netcoreapp1.0\node_modules\autorest-core\app.js").FullName
-}
-
-if( -not (resolve-path $lastAutoRest -ea 0 )) {
-  return write-error "Can't find last autorest exe at $lastAutoRest"
-}
-
-if( -not $newAutoRest  ) {
-  $newAutorest = (Get-ChildItem "$PSScriptRoot\..\src\core\AutoRest\bin\Debug\netcoreapp1.0\node_modules\autorest-core\app.js").FullName
-}
-
-if( -not (resolve-path $newAutorest -ea 0 )) {
-  return write-error "Can't find new autorest exe at $newAutoRest"
-}
-
-Write-host -fore green "Last: $lastAutorest"
-Write-host -fore green "New : $newAutorest"
+Write-host -fore green "Last: $lastAutoRestCmd"
+Write-host -fore green "New : $newAutoRestCmd"
 
 $procs = get-process -ea 0 autorest 
 if( $procs ) {
   write-host -fore red "Ensuring all previous jobs are completed."
   $procs.Kill()
 }
-Get-Job | remove-job -force 
 
-function ProcessBackgroundJobs() {
-  Get-Job  -state Completed |% {  
-    receive-job $_ 
-    remove-job $_ 
-  }
-}
+@(
+  @("--csharp"),
+  @("--azure-arm --csharp"),
+  @("--azure-arm --fluent --csharp"),
+  @("--java"),
+  @("--azure-arm --java"),
+  @("--azure-arm --fluent --java"),
+  @("--ruby"),
+  @("--azure-arm --ruby"),
+  @("--nodejs"),
+  @("--azure-arm --nodejs"),
+  @("--python"),
+  @("--azure-arm --python"),
+  @("--go"),
+  @("--azureresourceschema") ) |% {
 
-$scrp = { 
-  param($lastexe, $newexe, $commonFolder,$uniqueName ,$spec, $gen, $modeler, $notrim)
-  $output = "$lastexe `n-Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\Last\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
-  $output += &node $lastexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\Last\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
-  # set-content -value $output -path "$commonFolder\last\$uniqueName\output-$gen.txt"
+  $gen = $_;
+  $gensan = $gen -replace "-","" -replace " ","_"
+ 
+  get-content "$psscriptroot\all-specs" |% {
+    $spec = $_
+    $uniquename = $spec -replace "\\","_" -replace ".json",""
+    # $filename = (dir $spec ).Name
+    $name = $spec -replace ".json","" -replace ".*\\",""
+    # $specfile = (resolve-path $spec).Path
+    $specfile = "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/current/specification/$spec/readme.md"
   
-  write-output "$newexe `n-FANCY -Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\New\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
-  $output += &node $newexe -FANCY -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\New\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
-  #set-content -value $output -path "$commonFolder\new\$uniqueName\output-$gen.txt"
+    write-host -fore darkGray "Processing $name : $gen "
 
-  if( !$notrim ) {
-    (dir "$commonFolder\Last\$uniqueName\" -recurse -file).FullName  |% {
-      $ref = $_ 
-      if( $ref ) {
-        $cur = $ref -replace "\\Last\\","\New\"
-        
-        if( (test-path $ref ) -and (test-path $cur) ) {  
-          $r = (get-content $ref |% { $_ -replace "Code generated .*", "" })
-          $c = (get-content $cur |% { $_ -replace "Code generated .*", "" })
-          if( $r -and $c ) {
-            $v = compare-object $r $c 
-            if( !$v )  {
-              erase $ref
-              erase $cur
+    $cmd = "$lastAutoRestCmd $specfile --namespace=fallbacknamespace $gen.output-folder=$lastRoot\$uniqueName\$gensan"
+    Write-host -fore green "Running : $cmd"
+    $output += &powershell $cmd
+
+    $cmd = "$newAutoRestCmd $specfile --namespace=fallbacknamespace $gen.output-folder=$newRoot\$uniqueName\$gensan"
+    Write-host -fore green "Running : $cmd"
+    $output += &powershell $cmd
+  
+    if( !$notrim -and (test-path "$lastRoot\$uniqueName\") ) {
+      (dir "$lastRoot\$uniqueName\" -recurse -file).FullName  |% {
+        $ref = $_ 
+        if( $ref ) {
+          $cur = $ref -replace "\\Last\\","\New\"
+          
+          if( (test-path $ref ) -and (test-path $cur) ) {  
+            $r = (get-content $ref |% { $_ -replace "Code generated .*", "" })
+            $c = (get-content $cur |% { $_ -replace "Code generated .*", "" })
+            if( $r -and $c ) {
+              $v = compare-object $r $c 
+              if( !$v )  {
+                erase $ref
+                erase $cur
+              }
             }
           }
         }
       }
     }
   }
-}
-
-@( "CSharp",
- "Azure.CSharp",
- "Azure.CSharp.Fluent",
- "AzureResourceSchema",
- "Ruby",
- "Azure.Ruby",
- "NodeJS",
- "Azure.NodeJS",
- "Python",
- "Azure.Python",
- "Go",
- "Java",
- "Azure.Java",
- "Azure.Java.Fluent" ) |% {
-
-# @( "CSharp" ) |% {
-  $gen = $_;
- 
-
-  if( $swagger ) { 
-    $name = $swagger -replace ".json","" -replace ".*\\","" -replace ".*\/",""
-    $uniquename = $name -replace "\\","_" -replace "//","_" -replace ".json",""
-    $specfile = $swagger
-    
-    $modeler = "Swagger"
-    if( $name -match "composite" ) { 
-      $modeler = "CompositeSwagger"
-    }
-    $j = Start-Job -ScriptBlock $scrp -arg $lastAutorest, $newAutorest, $baseFolder, $uniqueName, $specfile, $gen, $modeler, $notrim
-    
-  } else {
-  
-
-    get-content "$psscriptroot\all-specs" |% {
-      $spec = $_
-      $uniquename = $spec -replace "\\","_" -replace ".json",""
-      # $filename = (dir $spec ).Name
-      $name = $spec -replace ".json","" -replace ".*\\",""
-      # $specfile = (resolve-path $spec).Path
-      $specfile = "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/$spec" -replace "\\","/"
-      
-      $modeler = "Swagger"
-      if( $name -match "composite" ) { 
-        $modeler = "CompositeSwagger"
-      }
-      write-host -fore darkGray "Processing $name : $gen "
-      
-      $j = Start-Job -ScriptBlock $scrp -arg $lastAutorest, $newAutorest, $baseFolder, $uniqueName, $specfile, $gen, $modeler, $notrim
-      sleep -milliseconds 25
-
-      # process output of completed jobs too
-      ProcessBackgroundJobs
-
-      # throttle to 10 background jobs at a time. 
-      While((Get-Job -State 'Running').Count -ge 6) {
-        sleep -milliseconds 100
-        # remove any files that are perfect matches.
-      }
-    }
-  }
-}
-
-write-host -fore green -nonewline "Finishing Up..."
-While((Get-Job -State 'Running').Count -ge 1) {
-  write-host -fore darkgreen -nonewline "."
-  ProcessBackgroundJobs
-  sleep -milliseconds 250
-}
-
-# wait for the last of the jobs to run.
-Get-Job |% {  
-  receive-job $_ 
-  remove-job $_ 
 }
 
 try {
