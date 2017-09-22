@@ -2,7 +2,7 @@ task 'publish-preview' , 'Publishes the the packages to NPM.',['version-number']
   publish_core = false
   publish_bootstrapper = false
 
-  execute 'git show --pretty="" --name-only "HEAD^1"',{silent:true}, (c,o,e)->
+  execute 'git show --pretty="" --name-only',{silent:true}, (c,o,e)->
     publish_core = true if( o.indexOf("src/") >-1 ) 
     publish_bootstrapper = true if( o.indexOf("src/autorest/") >-1 ) 
 
