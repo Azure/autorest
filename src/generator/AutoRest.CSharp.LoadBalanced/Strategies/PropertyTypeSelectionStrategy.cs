@@ -121,11 +121,11 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
             if (typeConverterName != null)
             {
-                return $"[JsonProperty(PropertyName = \"{property.SerializedName}\"), {typeConverterName}]";
+                return $"[JsonProperty(PropertyName = \"{property.SerializedName}\", NullValueHandling=NullValueHandling.Ignore), {typeConverterName}]";
             }
 
             return IsDictionary(property) ? "[JsonExtensionData]" : 
-                $"[JsonProperty(PropertyName = \"{property.SerializedName}\")]";
+                $"[JsonProperty(PropertyName = \"{property.SerializedName}\", NullValueHandling=NullValueHandling.Ignore)]";
         }
 
         public string GetPropertyTypeName(Property property)
