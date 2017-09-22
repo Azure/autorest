@@ -72,6 +72,5 @@
     "vscode-jsonrpc": "^3.3.1",
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
     "yargs": "^8.0.2"
-  },
-  "dependencies": {}
+  }
 }
