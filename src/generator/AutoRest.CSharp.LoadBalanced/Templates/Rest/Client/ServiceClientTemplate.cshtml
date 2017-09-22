@@ -30,13 +30,8 @@ namespace @Settings.Namespace
 
         private readonly Dictionary<string, string> _defaultHeaders = new Dictionary<string, string> { { "Accept" , "application/vnd.api+json"}, { "Content-Type", "application/vnd.api+json" } };
 @EmptyLine
-        public @clientName (
-	        string name, List<ServerSettings> settings, 
-	        TimeSpan ? timeout = null, 
-	        int retryCount = 1, 
-	        JsonSerializerSettings serializationSettings = null, 
-	        JsonSerializerSettings deserializationSettings = null) 
-		: base(name, settings, timeout, retryCount, serializationSettings, deserializationSettings)
+        public @clientName (IApiBaseConfig apiBaseConfig)
+		: base(apiBaseConfig)
         {
         }
 

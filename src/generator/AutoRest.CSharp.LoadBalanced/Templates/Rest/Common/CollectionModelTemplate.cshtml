@@ -10,13 +10,13 @@ using AutoRest.CSharp.LoadBalanced.Json;
 @EmptyLine
 @{
     var property = Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs);
-    var listName = property.ModelTypeName.Replace("System.Collections.Generic.IList", "List");
-    var genericPart = listName.Replace("List<", "").Replace(">", "");
+   // var listName = property.ModelTypeName.Replace("System.Collections.Generic.List", "List");
+    var genericPart = property.ModelTypeName.Replace("System.Collections.Generic.List<", "").Replace(">","");
 }
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
     [JsonConverter(typeof(WrappedListConverter<@genericPart>), "@property.Name.Value.ToCamelCase()")]
-    public partial class @Model.Name : @Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs).ModelTypeName.Replace("System.Collections.Generic.IList", "List")
+    public partial class @Model.Name : @Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs).ModelTypeName.Replace("System.Collections.Generic.List", "List")
     {
     }
 }

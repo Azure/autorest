@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
         private static string[] _datePostfixes = new[] {"When", "Time", "Date"};
         private static string[] _guidPostfixes = new[] { "By", "UserId", "Token" };
         private static string[] _moneyPostfixes = new[] { "Cost", "Rate", "Amount", "Price", "Discount", "Fee", "Percent" };
+        private static string[] _booleanSuffixes = new[] { "isBookOnRequest",  "IsBreakfastIncluded", "allotmentAutoToPup", "Flag", "IsSelected", "IsActive", "IsNonHotelAccomodationMode" };
 
         public override bool IsDateTime(Property property)
         {
@@ -23,6 +24,12 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             return base.IsDateTime(property);
         }
 
+		public override bool IsBoolean(Property property)
+        {
+            return _booleanSuffixes.Any(s => property.Name.RawValue.ToUpper().EndsWith(s.ToUpper())) && 
+                (property.ModelTypeName == "int" || property.ModelTypeName == "string");
+        }
+		
         public override bool IsMoney(Property property)
         {
             if (property.ModelType.Name == "string" && _moneyPostfixes.Any(
@@ -115,6 +122,10 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             else if (IsInt32Value(property))
             {
                 attributeBuilder.Append("Int32ValueConverter)");
+            }
+			else if (IsBoolean(property))
+            {
+                attributeBuilder.Append("BooleanStringConverter)");
             }
             else
             {
