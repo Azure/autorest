@@ -44,6 +44,7 @@ The code generation command line can be printed with `--help`
 
 ## Examples 
 
+
 ``` bash
 # install latest autorest 
 autorest --version=latest
