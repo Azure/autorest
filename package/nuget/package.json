@@ -1,6 +1,6 @@
 {
   "name": "autorest-nuget",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "AutoRest Nuget Package",
   "main": "main.js",
   "scripts": {
@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "autorest": "^1.2.2"
+    "autorest": "^2.0.0"
   }
 }
