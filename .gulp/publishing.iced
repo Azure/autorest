@@ -1,4 +1,4 @@
-task 'publish-preview' , 'Publishes the the packages to NPM.',['version-number'],  (done)->
+task 'publish-preview' , 'Publishes the the packages to NPM.',['version-number','build'],  (done)->
   publish_core = false
   publish_bootstrapper = false
 
