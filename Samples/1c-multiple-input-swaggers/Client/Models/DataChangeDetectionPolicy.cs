@@ -18,7 +18,7 @@ namespace Searchservice.Models
         /// </summary>
         public DataChangeDetectionPolicy()
         {
-          CustomInit();
+            CustomInit();
         }
 
 

@@ -18,7 +18,7 @@ namespace Petstore.Models
         /// </summary>
         public Tag()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

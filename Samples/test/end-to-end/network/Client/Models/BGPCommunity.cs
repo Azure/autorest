@@ -22,7 +22,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public BGPCommunity()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

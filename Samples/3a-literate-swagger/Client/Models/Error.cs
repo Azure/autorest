@@ -16,7 +16,7 @@ namespace Swagger.Models
         /// </summary>
         public Error()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

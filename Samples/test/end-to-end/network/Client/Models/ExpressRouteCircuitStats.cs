@@ -19,7 +19,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public ExpressRouteCircuitStats()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

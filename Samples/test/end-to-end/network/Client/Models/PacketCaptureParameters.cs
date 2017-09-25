@@ -22,7 +22,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public PacketCaptureParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

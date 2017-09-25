@@ -22,7 +22,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public ApplicationGatewayBackendHealthHttpSettings()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

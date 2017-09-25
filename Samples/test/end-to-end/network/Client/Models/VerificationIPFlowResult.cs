@@ -19,7 +19,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public VerificationIPFlowResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

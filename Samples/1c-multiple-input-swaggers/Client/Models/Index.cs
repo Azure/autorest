@@ -23,7 +23,7 @@ namespace Searchservice.Models
         /// </summary>
         public Index()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

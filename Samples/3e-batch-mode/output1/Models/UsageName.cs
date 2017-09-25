@@ -19,7 +19,7 @@ namespace Storage.Models
         /// </summary>
         public UsageName()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

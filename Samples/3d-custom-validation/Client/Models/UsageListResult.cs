@@ -21,7 +21,7 @@ namespace Storage.Models
         /// </summary>
         public UsageListResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

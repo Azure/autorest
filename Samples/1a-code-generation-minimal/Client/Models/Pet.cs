@@ -27,7 +27,7 @@ namespace Petstore.Models
         /// </summary>
         public Pet()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

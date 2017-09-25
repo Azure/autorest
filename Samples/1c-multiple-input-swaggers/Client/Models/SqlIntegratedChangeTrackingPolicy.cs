@@ -22,7 +22,7 @@ namespace Searchservice.Models
         /// </summary>
         public SqlIntegratedChangeTrackingPolicy()
         {
-          CustomInit();
+            CustomInit();
         }
 
 

@@ -26,7 +26,7 @@ namespace Storage.Models
         /// </summary>
         public StorageAccountCreateParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

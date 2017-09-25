@@ -22,7 +22,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public NetworkInterfaceAssociation()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

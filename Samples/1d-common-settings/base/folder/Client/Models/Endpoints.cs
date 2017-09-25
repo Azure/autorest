@@ -21,7 +21,7 @@ namespace AwesomeNamespace.Models
         /// </summary>
         public Endpoints()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public ApplicationGatewayFrontendIPConfiguration()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

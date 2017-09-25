@@ -23,7 +23,7 @@ namespace Searchservice.Models
         /// </summary>
         public SoftDeleteColumnDeletionDetectionPolicy()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

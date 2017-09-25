@@ -24,7 +24,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public PacketCaptureResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

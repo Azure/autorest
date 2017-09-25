@@ -18,7 +18,7 @@ namespace Searchservice.Models
         /// </summary>
         public Resource()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

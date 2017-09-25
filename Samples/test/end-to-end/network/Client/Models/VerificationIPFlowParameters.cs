@@ -21,7 +21,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public VerificationIPFlowParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

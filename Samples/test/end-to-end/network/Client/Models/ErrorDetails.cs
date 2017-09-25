@@ -16,7 +16,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public ErrorDetails()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

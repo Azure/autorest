@@ -25,7 +25,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public ApplicationGatewayBackendHttpSettings()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

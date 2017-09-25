@@ -18,7 +18,7 @@ namespace Petstore.Models
         /// </summary>
         public User()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

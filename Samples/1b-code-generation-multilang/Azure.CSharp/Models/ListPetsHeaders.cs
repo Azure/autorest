@@ -19,7 +19,7 @@ namespace Petstore.Models
         /// </summary>
         public ListPetsHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

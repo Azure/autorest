@@ -22,7 +22,7 @@ namespace Swagger.Models
         /// </summary>
         public SearchServiceCreateOrUpdateParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

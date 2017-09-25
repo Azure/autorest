@@ -17,7 +17,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public ConnectionResetSharedKey()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace Storage.Models
         /// </summary>
         public CustomDomain()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

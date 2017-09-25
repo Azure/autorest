@@ -19,7 +19,7 @@ namespace Searchservice.Models
         /// </summary>
         public UsageName()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

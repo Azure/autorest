@@ -23,7 +23,7 @@ namespace SharedHeaders.Models
         /// </summary>
         public Resource()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

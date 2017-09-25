@@ -20,7 +20,7 @@ namespace Searchservice.Models
         /// </summary>
         public Usage()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

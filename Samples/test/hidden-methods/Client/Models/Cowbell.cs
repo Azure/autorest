@@ -20,7 +20,7 @@ namespace HiddenMethods.Models
         /// </summary>
         public Cowbell()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

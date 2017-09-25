@@ -20,7 +20,7 @@ namespace Searchservice.Models
         /// </summary>
         public TagScoringParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

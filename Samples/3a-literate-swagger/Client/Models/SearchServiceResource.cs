@@ -21,7 +21,7 @@ namespace Swagger.Models
         /// </summary>
         public SearchServiceResource()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

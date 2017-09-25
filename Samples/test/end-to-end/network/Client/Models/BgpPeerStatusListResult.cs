@@ -21,7 +21,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public BgpPeerStatusListResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

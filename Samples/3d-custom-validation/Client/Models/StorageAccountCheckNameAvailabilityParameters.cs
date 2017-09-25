@@ -18,7 +18,7 @@ namespace Storage.Models
         /// </summary>
         public StorageAccountCheckNameAvailabilityParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

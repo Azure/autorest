@@ -20,7 +20,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public EffectiveNetworkSecurityGroupAssociation()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

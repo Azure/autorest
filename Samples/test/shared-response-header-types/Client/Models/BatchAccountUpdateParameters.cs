@@ -22,7 +22,7 @@ namespace SharedHeaders.Models
         /// </summary>
         public BatchAccountUpdateParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

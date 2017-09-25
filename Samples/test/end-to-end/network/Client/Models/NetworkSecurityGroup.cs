@@ -24,7 +24,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public NetworkSecurityGroup()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -22,7 +22,7 @@ namespace AwesomeNamespace.Models
         /// </summary>
         public UsageListResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

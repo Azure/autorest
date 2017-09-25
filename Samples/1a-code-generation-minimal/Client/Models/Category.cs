@@ -18,7 +18,7 @@ namespace Petstore.Models
         /// </summary>
         public Category()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

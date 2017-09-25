@@ -20,7 +20,7 @@ namespace Searchservice.Models
         /// </summary>
         public Endpoints()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

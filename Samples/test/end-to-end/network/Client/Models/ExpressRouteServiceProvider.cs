@@ -25,7 +25,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public ExpressRouteServiceProvider()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

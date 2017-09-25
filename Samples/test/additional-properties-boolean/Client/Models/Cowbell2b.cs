@@ -18,7 +18,7 @@ namespace AddPropsBool.Models
         /// </summary>
         public Cowbell2b()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

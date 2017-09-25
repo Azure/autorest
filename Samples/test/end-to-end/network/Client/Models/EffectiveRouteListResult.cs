@@ -21,7 +21,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public EffectiveRouteListResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>
