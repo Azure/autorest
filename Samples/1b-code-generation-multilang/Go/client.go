@@ -89,7 +89,7 @@ func New()ManagementClient {
     // ListPets sends the list pets request.
     //
     // limit is how many items to return at one time (max 100)
-    func (client ManagementClient) ListPets(limit *int32) (result ListPetWrapper, err error) {
+    func (client ManagementClient) ListPets(limit *int32) (result ListPet, err error) {
         req, err := client.ListPetsPreparer(limit)
         if err != nil {
             err = autorest.NewErrorWithError(err, "cowstore.ManagementClient", "ListPets", nil , "Failure preparing request")
@@ -135,7 +135,7 @@ func New()ManagementClient {
 
     // ListPetsResponder handles the response to the ListPets request. The method always
     // closes the http.Response Body.
-    func (client ManagementClient) ListPetsResponder(resp *http.Response) (result ListPetWrapper, err error) {
+    func (client ManagementClient) ListPetsResponder(resp *http.Response) (result ListPet, err error) {
         err = autorest.Respond(
                 resp,
                 client.ByInspecting(),
@@ -149,7 +149,7 @@ func New()ManagementClient {
     // ShowPetByID sends the show pet by id request.
     //
     // petID is the id of the pet to retrieve
-    func (client ManagementClient) ShowPetByID(petID string) (result ListPetWrapper, err error) {
+    func (client ManagementClient) ShowPetByID(petID string) (result ListPet, err error) {
         req, err := client.ShowPetByIDPreparer(petID)
         if err != nil {
             err = autorest.NewErrorWithError(err, "cowstore.ManagementClient", "ShowPetByID", nil , "Failure preparing request")
@@ -192,7 +192,7 @@ func New()ManagementClient {
 
     // ShowPetByIDResponder handles the response to the ShowPetByID request. The method always
     // closes the http.Response Body.
-    func (client ManagementClient) ShowPetByIDResponder(resp *http.Response) (result ListPetWrapper, err error) {
+    func (client ManagementClient) ShowPetByIDResponder(resp *http.Response) (result ListPet, err error) {
         err = autorest.Respond(
                 resp,
                 client.ByInspecting(),

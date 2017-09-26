@@ -13,8 +13,8 @@ Code *int32 `json:"code,omitempty"`
 Message *string `json:"message,omitempty"`
 }
 
-// ListPetWrapper is
-type ListPetWrapper struct {
+// ListPet is
+type ListPet struct {
 autorest.Response `json:"-"`
 Value *[]Pet `json:"value,omitempty"`
 }
