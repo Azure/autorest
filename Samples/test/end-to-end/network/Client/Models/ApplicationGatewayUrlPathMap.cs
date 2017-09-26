@@ -26,7 +26,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public ApplicationGatewayUrlPathMap()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

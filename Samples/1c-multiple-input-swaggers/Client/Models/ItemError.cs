@@ -19,7 +19,7 @@ namespace Searchservice.Models
         /// </summary>
         public ItemError()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

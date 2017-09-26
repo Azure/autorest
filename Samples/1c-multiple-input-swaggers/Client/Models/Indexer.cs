@@ -21,7 +21,7 @@ namespace Searchservice.Models
         /// </summary>
         public Indexer()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

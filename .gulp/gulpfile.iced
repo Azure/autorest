@@ -15,7 +15,8 @@ Import
   autorest: (args,done,ignoreexitcode) ->
     # Run AutoRest from the original current directory.
     echo info "Queuing up: AutoRest #{args.join(' ')}"
-    execute "node #{basefolder}/src/autorest/dist/app.js #{args.map((a) -> "\"#{a}\"").join(' ')} --clear-output-folder  \"--version=#{basefolder}/src/autorest-core\" " , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
+    args = args.concat("--clear-output-folder", "--version=#{basefolder}/src/autorest-core") if args[0] != "--reset"
+    execute "node #{basefolder}/src/autorest/dist/app.js #{args.map((a) -> "\"#{a}\"").join(' ')} " , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
       return done(code,stdout,stderr)
   
   typescriptProjectFolders: ()->
@@ -145,6 +146,9 @@ task 'testci', "more", [], (done) ->
   ## TEST SUITE
   global.verbose = true
   await run "test", defer _
+
+  ## CLEAN
+  await autorest ["--reset"], defer code,stdout,stderr
 
   ## REGRESSION TEST
   global.verbose = false

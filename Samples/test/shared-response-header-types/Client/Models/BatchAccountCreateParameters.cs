@@ -23,7 +23,7 @@ namespace SharedHeaders.Models
         /// </summary>
         public BatchAccountCreateParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace Swagger.Models
         /// </summary>
         public SearchServiceProperties()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace AwesomeNamespace.Models
         /// </summary>
         public CheckNameAvailabilityResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

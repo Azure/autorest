@@ -20,7 +20,7 @@ namespace Searchservice.Models
         /// </summary>
         public DataSourceCredentials()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace SharedHeaders.Models
         /// </summary>
         public KeyVaultReference()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

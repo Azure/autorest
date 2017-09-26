@@ -19,7 +19,7 @@ namespace SharedHeaders.Models
         /// </summary>
         public OperationDisplay()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

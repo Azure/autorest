@@ -3,6 +3,6 @@
 // regenerated.
 
 /**
- * This package contains the classes for SwaggerPetstore.
+ * This package contains the implementation classes for SwaggerPetstore.
  */
-package petstore;
+package cowstore.implementation;

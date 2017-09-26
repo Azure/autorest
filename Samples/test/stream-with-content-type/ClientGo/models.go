@@ -7,51 +7,51 @@ package
 type ContentTypesEnum string
 
 const (
-    // Textjson specifies the textjson state for content types enum.
-    Textjson ContentTypesEnum = "text/json"
-    // Textplain specifies the textplain state for content types enum.
-    Textplain ContentTypesEnum = "text/plain"
-    // Textxml specifies the textxml state for content types enum.
-    Textxml ContentTypesEnum = "text/xml"
+// Textjson specifies the textjson state for content types enum.
+Textjson ContentTypesEnum = "text/json"
+// Textplain specifies the textplain state for content types enum.
+Textplain ContentTypesEnum = "text/plain"
+// Textxml specifies the textxml state for content types enum.
+Textxml ContentTypesEnum = "text/xml"
 )
 
 // ImageTypeEnum enumerates the values for image type enum.
 type ImageTypeEnum string
 
 const (
-    // Imagebmp specifies the imagebmp state for image type enum.
-    Imagebmp ImageTypeEnum = "image/bmp"
-    // Imagegif specifies the imagegif state for image type enum.
-    Imagegif ImageTypeEnum = "image/gif"
-    // Imagejpeg specifies the imagejpeg state for image type enum.
-    Imagejpeg ImageTypeEnum = "image/jpeg"
-    // Imagepng specifies the imagepng state for image type enum.
-    Imagepng ImageTypeEnum = "image/png"
-    // Imagetiff specifies the imagetiff state for image type enum.
-    Imagetiff ImageTypeEnum = "image/tiff"
+// Imagebmp specifies the imagebmp state for image type enum.
+Imagebmp ImageTypeEnum = "image/bmp"
+// Imagegif specifies the imagegif state for image type enum.
+Imagegif ImageTypeEnum = "image/gif"
+// Imagejpeg specifies the imagejpeg state for image type enum.
+Imagejpeg ImageTypeEnum = "image/jpeg"
+// Imagepng specifies the imagepng state for image type enum.
+Imagepng ImageTypeEnum = "image/png"
+// Imagetiff specifies the imagetiff state for image type enum.
+Imagetiff ImageTypeEnum = "image/tiff"
 )
 
 // ImageTypeRestrictedEnum enumerates the values for image type restricted enum.
 type ImageTypeRestrictedEnum string
 
 const (
-    // ImageTypeRestrictedEnumImagepng specifies the image type restricted enum imagepng state for image type
-    // restricted enum.
-    ImageTypeRestrictedEnumImagepng ImageTypeRestrictedEnum = "image/png"
-    // ImageTypeRestrictedEnumImagetiff specifies the image type restricted enum imagetiff state for image type
-    // restricted enum.
-    ImageTypeRestrictedEnumImagetiff ImageTypeRestrictedEnum = "image/tiff"
+// ImageTypeRestrictedEnumImagepng specifies the image type restricted enum imagepng state for image type restricted
+// enum.
+ImageTypeRestrictedEnumImagepng ImageTypeRestrictedEnum = "image/png"
+// ImageTypeRestrictedEnumImagetiff specifies the image type restricted enum imagetiff state for image type restricted
+// enum.
+ImageTypeRestrictedEnumImagetiff ImageTypeRestrictedEnum = "image/tiff"
 )
 
 // ImageTypeRestrictedStringsEnum enumerates the values for image type restricted strings enum.
 type ImageTypeRestrictedStringsEnum string
 
 const (
-    // ImageTypeRestrictedStringsEnumImagepng specifies the image type restricted strings enum imagepng state for image
-    // type restricted strings enum.
-    ImageTypeRestrictedStringsEnumImagepng ImageTypeRestrictedStringsEnum = "image/png"
-    // ImageTypeRestrictedStringsEnumImagetiff specifies the image type restricted strings enum imagetiff state for
-    // image type restricted strings enum.
-    ImageTypeRestrictedStringsEnumImagetiff ImageTypeRestrictedStringsEnum = "image/tiff"
+// ImageTypeRestrictedStringsEnumImagepng specifies the image type restricted strings enum imagepng state for image
+// type restricted strings enum.
+ImageTypeRestrictedStringsEnumImagepng ImageTypeRestrictedStringsEnum = "image/png"
+// ImageTypeRestrictedStringsEnumImagetiff specifies the image type restricted strings enum imagetiff state for image
+// type restricted strings enum.
+ImageTypeRestrictedStringsEnumImagetiff ImageTypeRestrictedStringsEnum = "image/tiff"
 )
 

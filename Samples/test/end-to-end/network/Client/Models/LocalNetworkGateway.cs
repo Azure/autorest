@@ -24,7 +24,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public LocalNetworkGateway()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

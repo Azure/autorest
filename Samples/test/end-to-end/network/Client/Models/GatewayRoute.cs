@@ -16,7 +16,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public GatewayRoute()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

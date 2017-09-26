@@ -24,7 +24,7 @@ namespace Searchservice.Models
         /// </summary>
         public CorsOptions()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -30,7 +30,7 @@ namespace AwesomeNamespace.Models
         /// </summary>
         public StorageAccountCreateParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

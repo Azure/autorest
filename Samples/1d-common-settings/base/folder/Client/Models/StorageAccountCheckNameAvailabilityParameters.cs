@@ -19,7 +19,7 @@ namespace AwesomeNamespace.Models
         /// </summary>
         public StorageAccountCheckNameAvailabilityParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

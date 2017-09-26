@@ -19,7 +19,7 @@ namespace Searchservice.Models
         /// </summary>
         public IndexingParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

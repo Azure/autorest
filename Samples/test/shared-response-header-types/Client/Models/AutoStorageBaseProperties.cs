@@ -20,7 +20,7 @@ namespace SharedHeaders.Models
         /// </summary>
         public AutoStorageBaseProperties()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

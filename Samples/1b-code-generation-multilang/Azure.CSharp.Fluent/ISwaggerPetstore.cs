@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Petstore
+namespace cowstore
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;

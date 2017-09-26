@@ -21,7 +21,7 @@ namespace AwesomeNamespace.Models
         /// </summary>
         public StorageAccountRegenerateKeyParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

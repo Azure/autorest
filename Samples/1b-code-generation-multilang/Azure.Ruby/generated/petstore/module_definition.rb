@@ -3,4 +3,4 @@
 # Changes may cause incorrect behavior and will be lost if the code is
 # regenerated.
 
-module Petstore end
+module cowstore end

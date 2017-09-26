@@ -127,7 +127,7 @@ log-file: c:/my/output/logs.txt
 
 [JSONPath](http://goessner.net/articles/JsonPath/) will be used to reference nodes in the OpenAPI document object model.
 
-JSONPath is similar to XPath, but is designed for JSON (and YAML) documents. This will be used in conjunction with the [OpenAPI DOM Query Format](#OpenAPI-DOM-Query-Format) 
+JSONPath is similar to XPath, but is designed for JSON (and YAML) documents. This will be used in conjunction with the [OpenAPI DOM Query Format](#openapi-dom-query-format) 
 
 > ### Excerpted from the [JSONPath website](http://goessner.net/articles/JsonPath/)
 >
@@ -143,7 +143,7 @@ JSONPath is similar to XPath, but is designed for JSON (and YAML) documents. Thi
 >
 >for input pathes. Internal or output pathes will always be converted to the more general bracket–notation.
 >
->JSONPath allows the wildcard symbol * for member names and array indices. It borrows the descendant operator '..' from E4X and the array slice syntax proposal [start:end:step] from ECMASCRIPT 4.
+>JSONPath allows the wildcard symbol * for member names and array indices. It borrows the descendant operator '..' from E4X and the array slice syntax proposal [start\:end\:step] from ECMASCRIPT 4.
 >
 >Expressions of the underlying scripting language (`<expr>`) can be used as an alternative to explicit names or indices as in
 >
@@ -186,7 +186,7 @@ Or you can use a more complex expression to identify a collection of nodes:
 some-nodes: $..paths[($..operationId["blob_*"])]
 ```
 
-The applicability of the selected nodes is explained further in the section [OpenAPI DOM Query Format](#OpenAPI-DOM-Query-Format) 
+The applicability of the selected nodes is explained further in the section [OpenAPI DOM Query Format](#openapi-dom-query-format) 
 
 ## The OpenAPI DOM
 
@@ -255,7 +255,7 @@ If the `where` isn't set, the default is to apply the directive to all the nodes
 
 ### Directives - global or per-language
 
-Directives are nodes that change generation **behavior** based on the selection of a set of nodes in the OpenAPI DOM. See  [OpenAPI DOM Query Format](#OpenAPI-DOM-Query-Format)
+Directives are nodes that change generation **behavior** based on the selection of a set of nodes in the OpenAPI DOM. See  [OpenAPI DOM Query Format](#openapi-dom-query-format)
 
 Directives are specified as a collection of `directive` objects fall under the `directive:` setting.
 

@@ -16,7 +16,7 @@ namespace SharedHeaders.Models
         /// </summary>
         public RetryHeader()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

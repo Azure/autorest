@@ -19,7 +19,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public NextHopResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

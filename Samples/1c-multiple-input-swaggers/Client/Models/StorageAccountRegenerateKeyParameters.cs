@@ -18,7 +18,7 @@ namespace Searchservice.Models
         /// </summary>
         public StorageAccountRegenerateKeyParameters()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

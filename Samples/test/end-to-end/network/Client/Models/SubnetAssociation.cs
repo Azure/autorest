@@ -21,7 +21,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public SubnetAssociation()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

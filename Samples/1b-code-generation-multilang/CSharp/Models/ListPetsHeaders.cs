@@ -19,7 +19,7 @@ namespace CSharpNamespace.Models
         /// </summary>
         public ListPetsHeaders()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

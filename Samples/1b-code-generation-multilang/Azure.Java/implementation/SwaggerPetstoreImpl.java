@@ -4,12 +4,8 @@
  * regenerated.
  */
 
-package petstore.implementation;
+package cowstore.implementation;
 
-import .models.ErrorException;
-import .models.ListPetsHeaders;
-import .models.Pet;
-import .SwaggerPetstore;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
@@ -19,6 +15,10 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
+import cowstore.models.ErrorException;
+import cowstore.models.ListPetsHeaders;
+import cowstore.models.Pet;
+import cowstore.SwaggerPetstore;
 import java.io.IOException;
 import java.util.List;
 import okhttp3.ResponseBody;
@@ -175,15 +175,15 @@ public class SwaggerPetstoreImpl extends AzureServiceClient implements SwaggerPe
      * used by Retrofit to perform actually REST calls.
      */
     interface SwaggerPetstoreService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: .SwaggerPetstore listPets" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: cowstore.SwaggerPetstore listPets" })
         @GET("pets")
         Observable<Response<ResponseBody>> listPets(@Query("limit") Integer limit, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: .SwaggerPetstore createPets" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: cowstore.SwaggerPetstore createPets" })
         @POST("pets")
         Observable<Response<ResponseBody>> createPets(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: .SwaggerPetstore showPetById" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: cowstore.SwaggerPetstore showPetById" })
         @GET("pets/{petId}")
         Observable<Response<ResponseBody>> showPetById(@Path("petId") String petId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 

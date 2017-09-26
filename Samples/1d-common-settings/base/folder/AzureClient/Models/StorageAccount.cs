@@ -28,7 +28,7 @@ namespace AwesomeNamespace.Models
         /// </summary>
         public StorageAccount()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

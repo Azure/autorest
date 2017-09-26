@@ -23,7 +23,7 @@ namespace Searchservice.Models
         /// </summary>
         public HighWaterMarkChangeDetectionPolicy()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace Storage.Models
         /// </summary>
         public Resource()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

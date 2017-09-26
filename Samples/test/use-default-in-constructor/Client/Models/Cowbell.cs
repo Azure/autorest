@@ -20,7 +20,7 @@ namespace PropertyDefaults.Models
         /// </summary>
         public Cowbell()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

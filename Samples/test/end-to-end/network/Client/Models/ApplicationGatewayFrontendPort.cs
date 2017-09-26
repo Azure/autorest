@@ -23,7 +23,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public ApplicationGatewayFrontendPort()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

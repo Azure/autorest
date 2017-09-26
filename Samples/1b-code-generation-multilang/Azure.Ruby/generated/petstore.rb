@@ -19,7 +19,7 @@ require 'ms_rest'
 require 'generated/petstore/module_definition'
 require 'ms_rest_azure'
 
-module Petstore
+module cowstore
   autoload :SwaggerPetstore,                                    'generated/petstore/swagger_petstore.rb'
 
   module Models

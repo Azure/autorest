@@ -22,7 +22,7 @@ namespace AwesomeNamespace.Models
         /// </summary>
         public CustomDomain()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

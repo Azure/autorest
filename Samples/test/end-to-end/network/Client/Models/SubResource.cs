@@ -18,7 +18,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public SubResource()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

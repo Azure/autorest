@@ -22,7 +22,7 @@ namespace Swagger.Models
         /// </summary>
         public ListQueryKeysResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

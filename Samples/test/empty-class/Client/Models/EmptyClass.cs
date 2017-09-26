@@ -15,7 +15,7 @@ namespace EmptyClass.Models
         /// </summary>
         public EmptyClass()
         {
-          CustomInit();
+            CustomInit();
         }
 
 

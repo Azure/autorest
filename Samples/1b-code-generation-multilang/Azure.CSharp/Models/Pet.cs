@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Petstore.Models
+namespace cowstore.Models
 {
     using Microsoft.Rest;
     using Newtonsoft.Json;
@@ -17,7 +17,7 @@ namespace Petstore.Models
         /// </summary>
         public Pet()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

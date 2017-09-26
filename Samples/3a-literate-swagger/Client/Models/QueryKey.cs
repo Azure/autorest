@@ -20,7 +20,7 @@ namespace Swagger.Models
         /// </summary>
         public QueryKey()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

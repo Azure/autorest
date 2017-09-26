@@ -17,7 +17,7 @@ namespace CSharpNamespace.Models
         /// </summary>
         public Pet()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>

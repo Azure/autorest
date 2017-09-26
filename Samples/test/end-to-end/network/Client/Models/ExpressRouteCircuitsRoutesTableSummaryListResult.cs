@@ -23,7 +23,7 @@ namespace ApplicationGateway.Models
         /// </summary>
         public ExpressRouteCircuitsRoutesTableSummaryListResult()
         {
-          CustomInit();
+            CustomInit();
         }
 
         /// <summary>
