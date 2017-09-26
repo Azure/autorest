@@ -142,6 +142,8 @@ task 'init', "" ,(done)->
 
 # CI job
 task 'testci', "more", [], (done) ->
+  await autorest "--reset", defer code,stdout,stderr
+
   ## TEST SUITE
   global.verbose = true
   await run "test", defer _
