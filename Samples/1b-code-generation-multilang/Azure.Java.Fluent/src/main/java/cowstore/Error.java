@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package petstore;
+package cowstore;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

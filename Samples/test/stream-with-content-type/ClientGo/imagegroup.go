@@ -27,7 +27,8 @@ func NewImageGroupClient() ImageGroupClient {
 // AMethod sends the a method request.
 //
 // imageParameter is an image stream. imageParameter will be closed upon successful return. Callers should ensure
-// closure when receiving an error.imageContentType is the content type of the image.
+// closure when receiving an error.imageContentType is the content type of the image. Possible values include:
+// 'Imagegif', 'Imagejpeg', 'Imagepng', 'Imagebmp', 'Imagetiff'
 func (client ImageGroupClient) AMethod(imageParameter io.ReadCloser, imageContentType ImageTypeEnum) (result autorest.Response, err error) {
     req, err := client.AMethodPreparer(imageParameter, imageContentType)
     if err != nil {
@@ -82,7 +83,8 @@ func (client ImageGroupClient) AMethodResponder(resp *http.Response) (result aut
 // BMethod sends the b method request.
 //
 // imageParameter is an image stream. imageParameter will be closed upon successful return. Callers should ensure
-// closure when receiving an error.imageContentType is the content type of the image.
+// closure when receiving an error.imageContentType is the content type of the image. Possible values include:
+// 'Imagegif', 'Imagejpeg', 'Imagepng', 'Imagebmp', 'Imagetiff'
 func (client ImageGroupClient) BMethod(imageParameter io.ReadCloser, imageContentType ImageTypeEnum) (result autorest.Response, err error) {
     req, err := client.BMethodPreparer(imageParameter, imageContentType)
     if err != nil {
@@ -137,7 +139,8 @@ func (client ImageGroupClient) BMethodResponder(resp *http.Response) (result aut
 // CMethod sends the c method request.
 //
 // imageParameter is an image stream. imageParameter will be closed upon successful return. Callers should ensure
-// closure when receiving an error.imageContentType is the content type of the image.
+// closure when receiving an error.imageContentType is the content type of the image. Possible values include:
+// 'Imagepng', 'Imagetiff'
 func (client ImageGroupClient) CMethod(imageParameter io.ReadCloser, imageContentType ImageTypeRestrictedEnum) (result autorest.Response, err error) {
     req, err := client.CMethodPreparer(imageParameter, imageContentType)
     if err != nil {
@@ -192,7 +195,8 @@ func (client ImageGroupClient) CMethodResponder(resp *http.Response) (result aut
 // DMethod sends the d method request.
 //
 // imageParameter is an image stream. imageParameter will be closed upon successful return. Callers should ensure
-// closure when receiving an error.imageContentType is the content type of the image.
+// closure when receiving an error.imageContentType is the content type of the image. Possible values include:
+// 'Imagepng', 'Imagetiff'
 func (client ImageGroupClient) DMethod(imageParameter io.ReadCloser, imageContentType ImageTypeRestrictedStringsEnum) (result autorest.Response, err error) {
     req, err := client.DMethodPreparer(imageParameter, imageContentType)
     if err != nil {

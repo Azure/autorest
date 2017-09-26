@@ -18,7 +18,7 @@ require 'concurrent'
 require 'ms_rest'
 require 'generated/petstore/module_definition'
 
-module Petstore
+module cowstore
   autoload :SwaggerPetstore,                                    'generated/petstore/swagger_petstore.rb'
 
   module Models

@@ -3,7 +3,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is
 # regenerated.
 
-module Petstore
+module cowstore
   module Models
     #
     # Model object.

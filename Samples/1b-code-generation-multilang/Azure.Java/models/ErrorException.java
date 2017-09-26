@@ -4,7 +4,7 @@
  * regenerated.
  */
 
-package petstore.models;
+package cowstore.models;
 
 import com.microsoft.rest.RestException;
 import okhttp3.ResponseBody;

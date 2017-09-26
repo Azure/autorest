@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Petstore.Models
+namespace cowstore.Models
 {
     using Newtonsoft.Json;
     using System.Linq;

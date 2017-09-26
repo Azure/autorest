@@ -4,17 +4,17 @@
  * regenerated.
  */
 
-package petstore;
+package cowstore;
 
-import .models.ErrorException;
-import .models.ListPetsHeaders;
-import .models.Pet;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
+import cowstore.models.ErrorException;
+import cowstore.models.ListPetsHeaders;
+import cowstore.models.Pet;
 import java.io.IOException;
 import java.util.List;
 import rx.Observable;

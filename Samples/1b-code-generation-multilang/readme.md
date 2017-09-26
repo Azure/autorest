@@ -8,6 +8,7 @@ Note that `github.com` URIs are supported, i.e. their raw content is extracted.
 
 ``` yaml 
 input-file: petstore.yaml
+namespace: cowstore
 ```
 
 ## Generation

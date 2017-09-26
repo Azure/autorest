@@ -138,6 +138,8 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
     let rawValue = match[3] || "{}";
     // quote stuff beginning with '@', YAML doesn't think unquoted strings should start with that
     rawValue = rawValue.startsWith('@') ? `'${rawValue}'` : rawValue;
+    // quote numbers with decimal point, we don't have any use for non-integer numbers (while on the other hand version strings may look like decimal numbers)
+    rawValue = !isNaN(parseFloat(rawValue)) && rawValue.includes('.') ? `'${rawValue}'` : rawValue;
     const value = Parse(rawValue);
     result.switches.push(CreateObject(key.split("."), value));
   }
