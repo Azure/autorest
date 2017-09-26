@@ -41,7 +41,21 @@ async function legacyMain(autorestArgs: string[]): Promise<number> {
   // generate virtual config file
   const currentDirUri = CreateFolderUri(currentDirectory());
   const dataStore = new DataStore();
-  const config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(new RealFileSystem()), autorestArgs);
+  let config: AutoRestConfigurationImpl = {};
+  try {
+    config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(new RealFileSystem()), autorestArgs);
+  } catch (e) {
+    console.error("Error: You have provided legacy command line arguments (single-dash syntax) that seem broken.");
+    console.error("");
+    console.error(
+      "While AutoRest keeps on supporting the old CLI by converting it over to the new one internally, " +
+      "it does not have crazy logic determining *what* is wrong with arguments, should conversion fail. " +
+      "Please try fixing your arguments or consider moving to the new CLI. " +
+      "Visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI.");
+    console.error("");
+    console.error("Internal error: " + e);
+    return 1;
+  }
 
   // autorest init
   if (autorestArgs[0] === "init") {
