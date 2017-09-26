@@ -19,7 +19,7 @@ enhanceConsole();
 // heavy customization, restart from scratch
 cli.reset();
 
-console.log(`# AutoRest code generation utility.\n(C) 2017 **Microsoft Corporation.**  \nhttps://aka.ms/autorest`);
+
 const args = cli
   .app("autorest")
   .title("AutoRest code generation utility for OpenAPI")
@@ -44,6 +44,11 @@ const args = cli
   .option("info", {
     alias: ["list-installed"],
     describe: "display information about the installed version of autorest and it's extensions",
+    type: "boolean",
+    group: "### Informational",
+  })
+  .option("json", {
+    describe: "ouptut messages as json",
     type: "boolean",
     group: "### Informational",
   })
@@ -106,16 +111,20 @@ const checkBootstrapper = new LazyPromise(async () => {
 async function showAvailableCores(): Promise<number> {
   let table = "";
   let max = 10;
-  for (const v of await availableVersions()) {
+  const cores = await availableVersions();
+  for (const v of cores) {
     max--;
     table += `\n|${corePackage}|${v}|`;
     if (!max) {
       break;
     }
   }
-
-  if (table) {
-    console.log("|Extension Name|Version|\n|-----|-----|" + table);
+  if (args.json) {
+    console.log(JSON.stringify(cores, null, "  "));
+  } else {
+    if (table) {
+      console.log("|Extension Name|Version|\n|-----|-----|" + table);
+    }
   }
   return 0;
 }
@@ -129,16 +138,36 @@ async function showInstalledExtensions(): Promise<number> {
       table += `\n|${extension.name === corePackage ? "core" : "extension"}|${extension.name}|${extension.version}|${extension.location}|`;
     }
   }
-  if (table) {
-    console.log("# Showing All Installed Extensions\n\n|Type|Extension Name|Version|location|\n|-----|-----|----|" + table + "\n\n");
+  if (args.json) {
+    console.log(JSON.stringify(extensions, null, "  "));
   } else {
-    console.log("# Showing All Installed Extensions\n\n > No Extensions are currently installed.\n\n");
+    if (table) {
+      console.log("# Showing All Installed Extensions\n\n|Type|Extension Name|Version|location|\n|-----|-----|----|" + table + "\n\n");
+    } else {
+      console.log("# Showing All Installed Extensions\n\n > No Extensions are currently installed.\n\n");
+    }
   }
   return 0;
 }
 
 /** Main Entrypoint for AutoRest Bootstrapper */
 async function main() {
+
+  if (!args.json) {
+    console.log(`# AutoRest code generation utility.\n(C) 2017 **Microsoft Corporation.**  \nhttps://aka.ms/autorest`);
+  } else {
+    process.argv.push("--message-format=json");
+  }
+
+  // did they ask for what is available?
+  if (listAvailable) {
+    process.exit(await showAvailableCores());
+  }
+
+  // show what we have.
+  if (args.info) {
+    process.exit(await showInstalledExtensions());
+  }
 
   if (args.help) {
     // yargs will print the help. We can leave now.
@@ -175,15 +204,6 @@ async function main() {
     // wait for the bootstrapper check to finish.
     await checkBootstrapper;
 
-    // did they ask for what is available?
-    if (listAvailable) {
-      process.exit(await showAvailableCores());
-    }
-
-    // show what we have.
-    if (args.info) {
-      process.exit(await showInstalledExtensions());
-    }
 
     // logic to resolve and optionally install a autorest core package.
     // will throw if it's not doable.
