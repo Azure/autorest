@@ -549,7 +549,7 @@ export class Configuration {
           // attempt <package>@<version> interpretation
           const separatorIndex = useEntry.lastIndexOf('@');
           const versionPart = useEntry.slice(separatorIndex + 1);
-          if (separatorIndex !== -1 && require("semver-regex")().test(versionPart)) {
+          if (separatorIndex > 0 && /^[^/\\]+$/.test(versionPart)) {
             const pkg = await extMgr.findPackage(useEntry.slice(0, separatorIndex), versionPart);
             configs["use-extension"][pkg.name] = versionPart;
           } else {
