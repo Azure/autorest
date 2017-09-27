@@ -7,6 +7,10 @@
 
 ## Code Generation
 
+<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/default_folder.svg">
+
+![./example/example.svg](https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/default_folder.svg)
+
 | Repository | Package |
 | ---------- | ------- |
 | [autorest.common](https://github.com/Azure/autorest.common) | [![NuGet version](https://badge.fury.io/nu/autorest.common.svg)](https://badge.fury.io/nu/autorest.common) |
