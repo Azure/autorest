@@ -1,5 +1,11 @@
 const fs = require("fs");
 
+// patch const ENABLE_WORKERS = process.platform === 'darwin'
+// in .\node_modules\npm\lib\install\action\extract.js
+
+let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js',"utf8").replace("const ENABLE_WORKERS = process.platform === 'darwin'", "const ENABLE_WORKERS = false;");
+fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt );
+
 function getFileNames(path, result) {
   const files = fs.readdirSync(path);
   for (const file of files) {
