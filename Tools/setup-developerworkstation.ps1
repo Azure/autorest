@@ -73,8 +73,8 @@ if( !(get-command -ea 0 node.exe) ) {
     ([System.Environment]::SetEnvironmentVariable( "NVM_SYMLINK", "$env:ProgramFiles\nodejs",  'Machine'))
 
     set-content -Path "$env:ALLUSERSPROFILE\nvm\settings.txt" -Value "root: $env:ALLUSERSPROFILE\nvm`npath: $env:ProgramFiles\nodejs"
-    nvm install 6.9.5
-    nvm use 6.9.5 
+    nvm install 7.10.0
+    nvm use 7.10.0 
    
     ReloadPathFromRegistry
    
