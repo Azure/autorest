@@ -46,17 +46,14 @@ namespace AutoRest.CSharp.LoadBalanced
 
             var metricsTemplate = new MetricsTemplate {Model = methods};
             var metricsFilePath = "Metrics.cs";
-            project.FilePaths.Add(metricsFilePath);
             await Write(metricsTemplate, metricsFilePath);
 			
             var brokenRuleTemplate = new BrokenRuleTemplate();
             var brokenRuleFilePath = "BrokenRule.cs";
-            project.FilePaths.Add(brokenRuleFilePath);
             await Write(brokenRuleTemplate, brokenRuleFilePath);
 			
             var responseTemplate = new ResponseTemplate();
             var responseFilePath = "Response.cs";
-            project.FilePaths.Add(responseFilePath);
             await Write(responseTemplate, responseFilePath);
 
             usings.AddRange(new[]
@@ -90,18 +87,15 @@ namespace AutoRest.CSharp.LoadBalanced
                 // Service client interface
                 var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = model };
                 await Write(serviceClientInterfaceTemplate, clientInterfaceFileName);
-                project.FilePaths.Add(clientInterfaceFileName);
 
 
                 // Service client
                 var serviceClientTemplate = new ServiceClientTemplate { Model = model };
-                project.FilePaths.Add(clientClassFileName);
                 await Write(serviceClientTemplate, clientClassFileName);
             }
 
             var apiBaseTemplate = new ApiBaseTemplate {Model = codeModel};
             var apiBaseCsPath = "ApiBase.cs";
-            project.FilePaths.Add(apiBaseCsPath);
             await Write(apiBaseTemplate, apiBaseCsPath);
 
             // operations
@@ -115,7 +109,6 @@ namespace AutoRest.CSharp.LoadBalanced
                 // Operation
                 var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
                 var operationsFilePath = $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}";
-                project.FilePaths.Add(operationsFilePath);
 
                 await Write(operationsTemplate, operationsFilePath);
 
@@ -123,7 +116,6 @@ namespace AutoRest.CSharp.LoadBalanced
                 var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
                 var operationsInterfacePath =
                     $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}";
-                project.FilePaths.Add(operationsInterfacePath);
 
                 await Write(operationsInterfaceTemplate, operationsInterfacePath);
             }
@@ -151,17 +143,15 @@ namespace AutoRest.CSharp.LoadBalanced
                 }
                 
                 var modelPath = Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}");
-                project.FilePaths.Add(modelPath);
 
                 await Write(modelTemplate, modelPath);
             }
-
+			
             // Enums
             foreach (EnumTypeCs enumType in codeModel.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
                 var enumFilePath = Path.Combine(Settings.Instance.ModelsName, $"{enumTemplate.Model.Name}{ImplementationFileExtension}");
-                project.FilePaths.Add(enumFilePath);
 
                 await Write(enumTemplate, enumFilePath);
             }
@@ -172,7 +162,6 @@ namespace AutoRest.CSharp.LoadBalanced
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
                 var exceptionFilePath =
                     Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
-                project.FilePaths.Add(exceptionFilePath);
 
                 await Write(exceptionTemplate, exceptionFilePath);
             }
