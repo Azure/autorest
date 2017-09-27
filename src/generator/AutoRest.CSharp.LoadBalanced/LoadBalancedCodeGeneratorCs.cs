@@ -130,7 +130,6 @@ namespace AutoRest.CSharp.LoadBalanced
 
             // Models
             var models = codeModel.ModelTypes.Union(codeModel.HeaderTypes).Cast<CompositeTypeCs>();
-
             foreach (var model in models)
             {
                 if (model.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
@@ -175,6 +174,33 @@ namespace AutoRest.CSharp.LoadBalanced
                 project.FilePaths.Add(exceptionFilePath);
 
                 await Write(exceptionTemplate, exceptionFilePath);
+            }
+
+            // CB models
+            var couchbaseModels = codeModel.ModelTypes.Union(codeModel.HeaderTypes).Cast<CompositeTypeCs>();
+            foreach (var model in couchbaseModels)
+            {
+                model.isCouchbaseModel = true;
+                if (model.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
+                    (bool)model.Extensions[SwaggerExtensions.ExternalExtension])
+                {
+                    continue;
+                }
+
+                Template<CompositeTypeCs> modelTemplate = null;
+
+                if (model.PropertyTypeSelectionStrategy.IsCollection(model))
+                {
+                    modelTemplate = new CollectionModelTemplate { Model = model };
+                }
+                else
+                {
+                    modelTemplate = new ModelTemplate { Model = model };
+                }
+                var modelPath = Path.Combine(Settings.Instance.ModelsName, $"Couchbase/{model.Name}{ImplementationFileExtension}");
+                project.FilePaths.Add(modelPath);
+
+                await Write(modelTemplate, modelPath);
             }
 
             var projectTemplate = new CsProjTemplate { Model = project };

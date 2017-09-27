@@ -15,7 +15,7 @@ using Microsoft.Rest.Serialization;
 using AutoRest.CSharp.LoadBalanced.Json;
 using System.Collections.Generic;
 @EmptyLine
-namespace @(Settings.Namespace).@(Settings.ModelsName)
+namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsName}.Couchbase" : Settings.ModelsName)
 {
 @EmptyLine
 
@@ -137,7 +137,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:/// </remarks>
             }
            
-        @:@Model.PropertyTypeSelectionStrategy.GetJsonSerializationAttribute(property)
+        @:@(!Model.isCouchbaseModel ? Model.PropertyTypeSelectionStrategy.GetJsonSerializationAttribute(property) : "")
         @:public @Model.PropertyTypeSelectionStrategy.GetPropertyTypeName(property) @property.Name { get; @(property.IsReadOnly ? "protected " : "")set; }
         @EmptyLine
         }

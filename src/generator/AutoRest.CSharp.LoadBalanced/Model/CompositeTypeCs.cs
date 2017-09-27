@@ -120,5 +120,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
         public bool IsValueType => false;
 
+        public bool isCouchbaseModel { get; set; }
+
     }
 }

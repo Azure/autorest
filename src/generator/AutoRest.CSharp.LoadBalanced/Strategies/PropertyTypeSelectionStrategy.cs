@@ -130,12 +130,13 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
         public string GetPropertyTypeName(Property property)
         {
-            var compositeType = property.ModelType as CompositeTypeCs;
-            var isCollection = compositeType != null && IsCollection(compositeType);
-
-            if (isCollection)
+            if (IsMoney(property))
             {
-                return $"List<{property.ModelTypeName.Replace("List", "")}>";
+                return "decimal";
+            }
+            else if (IsBoolean(property))
+            {
+                return "bool";
             }
             else
             {
