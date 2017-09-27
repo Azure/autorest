@@ -7,16 +7,12 @@
 
 ## Code Generation
 
-<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/default_folder.svg">
-
-![./example/example.svg](https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/default_folder.svg)
-
-| Repository | Package |
-| ---------- | ------- |
+| Repository | Package | Language |
+| ---------- | ------- | -------- |
 | [autorest.common](https://github.com/Azure/autorest.common) | [![NuGet version](https://badge.fury.io/nu/autorest.common.svg)](https://badge.fury.io/nu/autorest.common) |
 | [autorest.modeler](https://github.com/Azure/autorest.modeler) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.modeler.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.modeler) |
 | [autorest.azureresourceschema](https://github.com/Azure/autorest.azureresourceschema) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.azureresourceschema.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.azureresourceschema) |
-| [autorest.csharp](https://github.com/Azure/autorest.csharp) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.csharp.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.csharp) |
+| [autorest.csharp](https://github.com/Azure/autorest.csharp) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.csharp.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.csharp) | <img width="20px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/default_folder.svg?sanitize=true"> |
 | [autorest.go](https://github.com/Azure/autorest.go) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.go.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.go) |
 | [autorest.java](https://github.com/Azure/autorest.java) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.java.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.java) |
 | [autorest.nodejs](https://github.com/Azure/autorest.nodejs) | [![npm version](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.nodejs.svg)](https://badge.fury.io/js/%40microsoft.azure%2Fautorest.nodejs) |
