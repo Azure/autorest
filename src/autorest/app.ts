@@ -216,7 +216,7 @@ async function main() {
 
     // use this to make the core aware that this run may be legal even without any inputs
     // this is a valid scenario for "preparation calls" to autorest like `autorest --reset` or `autorest --latest`
-    if (args.reset || args.latest) {
+    if (args.reset || args.latest || args.version == 'latest') {
       // if there is *any* other argument left, that's an indicator that the core is supposed to do something
       process.argv.push("--allow-no-input");
     }
