@@ -7,3 +7,4 @@ bin
 *.tgz
 test/**
 static_modules/
+!/preinstall-check.js 
