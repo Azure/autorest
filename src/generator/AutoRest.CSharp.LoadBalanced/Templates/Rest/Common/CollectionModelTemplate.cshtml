@@ -15,7 +15,7 @@ using AutoRest.CSharp.LoadBalanced.Json;
 }
 namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsName}.Couchbase" : Settings.ModelsName)
 {
-    @(!Model.isCouchbaseModel ? $"[JsonConverter(typeof(WrappedListConverter<{genericPart}>), {propertyNameCamelCase})]" : "")
+    @(!Model.isCouchbaseModel ? $"[JsonConverter(typeof(WrappedListConverter<{genericPart}>), \"{propertyNameCamelCase}\")]" : "")
     public partial class @Model.Name : @Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs).ModelTypeName.Replace("System.Collections.Generic.List", "List")
     {
     }
