@@ -3,6 +3,9 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+if (process.argv.indexOf("--no-static-loader") == -1) {
+  require("./static-loader").initialize();
+}
 
 import { isFile } from "@microsoft.azure/async-io";
 import { cli, enhanceConsole } from "@microsoft.azure/console";
@@ -154,7 +157,7 @@ async function showInstalledExtensions(): Promise<number> {
 async function main() {
 
   if (!args.json) {
-    console.log(`# AutoRest code generation utility.\n(C) 2017 **Microsoft Corporation.**  \nhttps://aka.ms/autorest`);
+    console.log(`# AutoRest code generation utility [version: ${pkgVersion}]\n(C) 2017 **Microsoft Corporation.**  \nhttps://aka.ms/autorest`);
   } else {
     process.argv.push("--message-format=json");
   }
