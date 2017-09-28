@@ -1,15 +1,15 @@
 # AutoRest repositories and packages
 
-| Repository | Package |         |
+| Repository | `latest` | `preview` |
 | ---------- | ------- | ------- |
 | [AutoRest bootstrapper](https://github.com/Azure/autorest/tree/master/src/autorest) | ![version](https://img.shields.io/npm/v/autorest.svg)                           | ![version](https://img.shields.io/npm/v/autorest/preview.svg)                           |
 | [AutoRest core](https://github.com/Azure/autorest/tree/master/src/autorest-core)    | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest-core.svg) | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest-core/preview.svg) |
 
 ## Code Generation
 
-| Repository | | Package |         |
+| Repository | | `latest` | `preview` |
 | ---------- |-| ------- | ------- |
-| [autorest.common](https://github.com/Azure/autorest.common)                           |                                                                                                                                          | ![version](https://img.shields.io/nuget/v/autorest.common.svg)                                 | `preview` not intended
+| [autorest.common](https://github.com/Azure/autorest.common)                           |                                                                                                                                          | ![version](https://img.shields.io/nuget/v/autorest.common.svg)                                 | not intended
 | [autorest.modeler](https://github.com/Azure/autorest.modeler)                         |                                                                                                                                          | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.modeler.svg)             | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.modeler/preview.svg)             |
 | [autorest.azureresourceschema](https://github.com/Azure/autorest.azureresourceschema) | <img width="24px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_json.svg?sanitize=true">       | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.azureresourceschema.svg) | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.azureresourceschema/preview.svg) |
 | [autorest.csharp](https://github.com/Azure/autorest.csharp)                           | <img width="24px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_csharp.svg?sanitize=true">     | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.csharp.svg)              | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.csharp/preview.svg)              |
@@ -20,11 +20,11 @@
 | [autorest.python](https://github.com/Azure/autorest.python)                           | <img width="24px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_python.svg?sanitize=true">     | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.python.svg)              | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.python/preview.svg)              |
 | [autorest.ruby](https://github.com/Azure/autorest.ruby)                               | <img width="24px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_ruby.svg?sanitize=true">       | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.ruby.svg)                | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.ruby/preview.svg)                |
 | [autorest.typescript](https://github.com/Azure/autorest.typescript)                   | <img width="24px" src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/icons/file_type_typescript.svg?sanitize=true"> | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.typescript.svg)          | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.typescript/preview.svg)          |
-| [autorest.testserver](https://github.com/Azure/autorest.testserver)                   |                                                                                                                                          | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.testserver.svg)          | `preview` not intended
+| [autorest.testserver](https://github.com/Azure/autorest.testserver)                   |                                                                                                                                          | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest.testserver.svg)          | not intended
 
 ## Validation
 
-| Repository | Package |         |
+| Repository | `latest` | `preview` |
 | ---------- | ------- | ------- |
 | [classic-openapi-validator](https://github.com/Azure/azure-openapi-validator/tree/master/src/dotnet) | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fclassic-openapi-validator.svg) | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fclassic-openapi-validator/preview.svg) |
 | [openapi-validator](https://github.com/Azure/azure-openapi-validator/tree/master/src/typescript)     | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fopenapi-validator.svg)         | ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fopenapi-validator/preview.svg)         |
