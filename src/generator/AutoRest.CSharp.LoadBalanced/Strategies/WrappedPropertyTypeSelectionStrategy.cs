@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using AutoRest.CSharp.LoadBalanced.Model;
 
 namespace AutoRest.CSharp.LoadBalanced.Strategies
@@ -26,7 +27,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
 		public override bool IsBoolean(Property property)
         {
-            return _booleanSuffixes.Any(s => property.Name.RawValue.ToUpper().EndsWith(s.ToUpper())) && 
+            return (_booleanSuffixes.Any(s => property.Name.RawValue.ToUpper().EndsWith(s.ToUpper())) || property.Name.ToLower().StartsWith("is")) && 
                 (property.ModelTypeName == "int" || property.ModelTypeName == "string");
         }
 		
