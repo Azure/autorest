@@ -22,7 +22,10 @@ enhanceConsole();
 // heavy customization, restart from scratch
 cli.reset();
 
-
+// Suppress the banner if in json mode.
+if (process.argv.indexOf("--json") == -1 && process.argv.indexOf("--message-format=json") == -1) {
+  console.log(`# AutoRest code generation utility [version: ${pkgVersion}]\n(C) 2017 **Microsoft Corporation.**  \nhttps://aka.ms/autorest`);
+}
 const args = cli
   .app("autorest")
   .title("AutoRest code generation utility for OpenAPI")
@@ -55,8 +58,7 @@ const args = cli
     type: "boolean",
     group: "### Informational",
   })
-  .option("autorest.list-available", {
-    alias: ["list-available"],
+  .option("list-available", {
     describe: "display available extensions",
     type: "boolean",
     group: "### Informational",
@@ -93,7 +95,7 @@ const args = cli
 const preview: boolean = args.preview;
 args.info = (args.version === "") || args.info; // show --info if they use unparameterized --version.
 let requestedVersion: string = args.version || (args.latest && "latest") || (args.preview && "preview") || "latest-installed";
-const listAvailable: boolean = args.autorest["list-available"] || false;
+const listAvailable: boolean = args["list-available"] || false;
 let force = args.force || false;
 
 /** Check if there is an update for the bootstrapper available. */
@@ -156,9 +158,7 @@ async function showInstalledExtensions(): Promise<number> {
 /** Main Entrypoint for AutoRest Bootstrapper */
 async function main() {
 
-  if (!args.json) {
-    console.log(`# AutoRest code generation utility [version: ${pkgVersion}]\n(C) 2017 **Microsoft Corporation.**  \nhttps://aka.ms/autorest`);
-  } else {
+  if (args.json) {
     process.argv.push("--message-format=json");
   }
 
