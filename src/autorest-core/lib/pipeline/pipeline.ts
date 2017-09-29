@@ -256,23 +256,6 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 }
 
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
-  // __status scope
-  const startTime = Date.now();
-  (configView.Raw as any).__status = new Proxy<any>({}, {
-    async get(_, key) {
-      const expr = new Buffer(key.toString(), "base64").toString("ascii");
-      try {
-        return FastStringify(safeEval(expr, {
-          pipeline: pipeline.pipeline,
-          tasks: tasks,
-          startTime: startTime,
-          blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => configView.DataStore.Blame(uri, position)
-        }));
-      } catch (e) {
-        return "" + e;
-      }
-    }
-  });
 
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
@@ -293,12 +276,33 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   };
 
   // dynamically loaded, auto-discovered plugins
+  const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
   for (const useExtension of configView.UseExtensions) {
     const extension = await GetExtension(useExtension.fullyQualified);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
       plugins[plugin] = CreatePluginExternal(extension, plugin);
+      __extensionExtension[plugin] = extension;
     }
   }
+
+  // __status scope
+  const startTime = Date.now();
+  (configView.Raw as any).__status = new Proxy<any>({}, {
+    async get(_, key) {
+      const expr = new Buffer(key.toString(), "base64").toString("ascii");
+      try {
+        return FastStringify(safeEval(expr, {
+          pipeline: pipeline.pipeline,
+          external: __extensionExtension,
+          tasks: tasks,
+          startTime: startTime,
+          blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => configView.DataStore.Blame(uri, position)
+        }));
+      } catch (e) {
+        return "" + e;
+      }
+    }
+  });
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 

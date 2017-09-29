@@ -13,6 +13,7 @@ import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
 import { Exception } from "../exception";
 import { Message } from "../message";
+import { Readable, Writable } from "stream";
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
@@ -40,24 +41,38 @@ export class AutoRestExtension extends EventEmitter {
   }
 
   public static async FromChildProcess(extensionName: string, childProc: ChildProcess): Promise<AutoRestExtension> {
-    // childProc.on("error", err => { throw err; });
-    const channel = createMessageConnection(
-      childProc.stdout,
-      childProc.stdin,
-      console
-    );
+    const plugin = new AutoRestExtension(extensionName, childProc.stdout, childProc.stdin);
     childProc.stderr.pipe(process.stderr);
-    const plugin = new AutoRestExtension(extensionName, channel);
-    channel.listen();
+
     // poke the extension to detect trivial issues like process startup failure or protocol violations, ...
     if (!Array.isArray(await plugin.GetPluginNames(CancellationToken.None))) {
       throw new Exception(`Plugin '${extensionName}' violated the protocol ('GetPluginNames' returned unexpected object).`);
     }
+
     return plugin;
   }
 
-  public constructor(extensionName: string, channel: MessageConnection) {
+  // Exposed through __status and consumed by tools like autorest-interactive.
+  private __inspectTraffic: [number, boolean /*outgoing (core => ext)*/, string][] = [];
+
+  public constructor(private extensionName: string, reader: Readable, writer: Writable) {
     super();
+
+    // hook in inspectors
+    reader.on("data", chunk => {
+      try { this.__inspectTraffic.push([Date.now(), false, chunk.toString()]); } catch (e) { }
+    });
+    const writerProxy = new Writable({
+      write: (chunk: string | Buffer, encoding: string, callback: Function) => {
+        try { this.__inspectTraffic.push([Date.now(), true, chunk.toString()]); } catch (e) { }
+        return writer.write(chunk, encoding, callback);
+      }
+    });
+
+    // create channel
+    const channel = createMessageConnection(reader, writerProxy, console);
+    channel.listen();
+
     // initiator
     const dispatcher = (fnName: string) => async (sessionId: string, ...rest: any[]) => {
       try {
