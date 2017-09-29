@@ -411,7 +411,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
       const clientPC = swagger[pc];
       if (clientPC) {
         for (const method of methods) {
-          if (typeof method.obj === "object" && !(method.obj as any)[pc]) {
+          if (typeof method.obj === "object" && !Array.isArray(method.obj) && !(method.obj as any)[pc]) {
             populate.push(() => (method.obj as any)[pc] = Clone(clientPC));
             mapping.push(...CreateAssignmentMapping(
               clientPC, inputSwagger.key,
