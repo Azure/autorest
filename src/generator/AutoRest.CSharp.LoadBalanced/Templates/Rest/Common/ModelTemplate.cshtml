@@ -137,7 +137,7 @@ namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsNam
         @:/// </remarks>
             }
            
-        @:@(!Model.isCouchbaseModel ? Model.PropertyTypeSelectionStrategy.GetJsonSerializationAttribute(property) : "")
+        @:@(Model.PropertyTypeSelectionStrategy.GetJsonSerializationAttribute(property, Model.isCouchbaseModel))
         @:public @Model.PropertyTypeSelectionStrategy.GetPropertyTypeName(property) @property.Name { get; @(property.IsReadOnly ? "protected " : "")set; }
         @EmptyLine
         }
@@ -150,7 +150,7 @@ namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsNam
         @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
             }
-        @:@Model.PropertyTypeSelectionStrategy.GetJsonSerializationAttribute(property)
+        @:@Model.PropertyTypeSelectionStrategy.GetJsonSerializationAttribute(property, Model.isCouchbaseModel)
         @:public static @Model.PropertyTypeSelectionStrategy.GetPropertyTypeName(property) @property.Name { get; private set; }
         @EmptyLine
         }

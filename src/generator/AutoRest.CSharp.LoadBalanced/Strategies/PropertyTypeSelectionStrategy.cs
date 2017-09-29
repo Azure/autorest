@@ -115,11 +115,12 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             return null;
         }
 
-        public string GetJsonSerializationAttribute(Property property)
+        public string GetJsonSerializationAttribute(Property property, bool isCouchbaseModel)
         {
+            
             var typeConverterName = GetConverterTypeName(property);
 
-            if (typeConverterName != null)
+            if (typeConverterName != null && !isCouchbaseModel)
             {
                 return $"[JsonProperty(PropertyName = \"{property.SerializedName}\", NullValueHandling=NullValueHandling.Ignore), {typeConverterName}]";
             }
