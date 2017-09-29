@@ -395,7 +395,19 @@ export class ConfigurationView {
 
         //console.log("---");
         //console.log(JSON.stringify(m.Source, null, 2));
+
         m.Source = From(blameSources).SelectMany(x => x).ToArray();
+        // get friendly names
+        for (const source of m.Source) {
+          if (source.Position) {
+            try {
+              source.document = this.DataStore.ReadStrictSync(source.document).Description;
+            } catch (e) {
+
+            }
+          }
+        }
+
         //console.log(JSON.stringify(m.Source, null, 2));
         //console.log("---");
       }
@@ -443,8 +455,7 @@ export class ConfigurationView {
             for (const source of mx.Source || []) {
               if (source.Position) {
                 try {
-                  const friendlyName = this.DataStore.ReadStrictSync(source.document).Description;
-                  text += `\n    - ${friendlyName}`;
+                  text += `\n    - ${source.document}`;
                   if (source.Position.line !== undefined) {
                     text += `:${source.Position.line}`;
                     if (source.Position.column !== undefined) {
@@ -462,31 +473,6 @@ export class ConfigurationView {
             mx.FormattedMessage = text;
             break;
         }
-
-        // fix the source names
-        for (const source of mx.Source || []) {
-
-          if (source.Position) {
-            try {
-              source.document = this.DataStore.ReadStrictSync(source.document).Description;
-            } catch (e) {
-
-            }
-          }
-        }
-
-        // fix the source names in Ranges too
-        for (const range of mx.Range || []) {
-          if (range.document) {
-            try {
-              range.document = this.DataStore.ReadStrictSync(range.document).Description;
-            } catch (e) {
-
-            }
-          }
-        }
-
-
         this.messageEmitter.Message.Dispatch(mx);
       }
     } catch (e) {
