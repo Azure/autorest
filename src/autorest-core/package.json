@@ -46,7 +46,7 @@
     "source-map": "^0.5.6",
     "source-map-support": "^0.4.15",
     "strip-bom": "^3.0.0",
-    "typescript": "2.4.1",
+    "typescript": "2.5.3",
     "untildify": "^3.0.2",
     "urijs": "^1.18.10",
     "shx": "^0.2.2",

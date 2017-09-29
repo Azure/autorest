@@ -23,10 +23,10 @@
   "homepage": "https://github.com/Azure/autorest/blob/master/README.md",
   "main": "./dist/main.js",
   "bin": {
-    "autorest": "./dist/static-app.js"
+    "autorest": "./dist/app.js"
   },
   "scripts": {
-    "start": "node ./dist/static-app.js",
+    "start": "node ./dist/app.js",
     "test": "./node_modules/.bin/mocha ./dist/test",
     "preinstall": "node ./preinstall-check",
     "prepare": "shx mkdir -p ./dist/ && shx cp -R ./node_modules/fs-monkey/lib/ ./dist/fs-monkey/ && cd ./static_modules && npm install",

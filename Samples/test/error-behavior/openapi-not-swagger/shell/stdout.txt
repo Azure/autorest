@@ -1,4 +1,4 @@
 (C) 2017 **Microsoft Corporation.**  
-# AutoRest code generation utility.
+# AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
 Process() Cancelled due to exception : File '/Samples/test/error-behavior/openapi-not-swagger/tiny.json' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')

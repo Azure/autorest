@@ -425,8 +425,8 @@ async function batch(api: AutoRest): Promise<void> {
   api.AddConfiguration(batchTaskConfigReference);
   for (const batchTaskConfig of config.GetEntry("batch" as any)) {
     config.Message({
-      Channel: Channel.Debug,
-      Text: "Processing next batch task."
+      Channel: Channel.Information,
+      Text: `Processing batch task - ${batchTaskConfig} .`
     });
 
     // update batch task config section
@@ -436,6 +436,10 @@ async function batch(api: AutoRest): Promise<void> {
 
     const result = await api.Process().finish;
     if (result !== true) {
+      config.Message({
+        Channel: Channel.Error,
+        Text: `Failure during batch task - ${batchTaskConfig} -- ${result}.`
+      });
       throw result;
     }
   }

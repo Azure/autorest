@@ -1,7 +1,6 @@
 
 // enable the static module loader
-import { initialize as initLoader } from "./static-loader";
-initLoader();
+require("./static-loader").initialize();
 
 // everything else.
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"

@@ -88,7 +88,7 @@ task 'init-deps', '', (done) ->
 task 'autorest', 'Runs AutoRest', (done)-> 
   node = process.argv.shift()
   main = process.argv.shift()
-  main = "#{basefolder}/src/autorest/dist/static-app"
+  main = "#{basefolder}/src/autorest/dist/app"
   while( arg = process.argv.shift() ) 
     break if arg == 'autorest'
 
