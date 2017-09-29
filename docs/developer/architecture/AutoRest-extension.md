@@ -26,6 +26,9 @@ We use [a variation](https://github.com/Microsoft/language-server-protocol/blob/
 
 An AutoRest package must be an `npm` package.
 Note that it must not necessarily be *published* as an `npm` package - any source supported by npm is supported by AutoRest, including git repositories, `.tgz` files and even local folders.
+The following things are required in order for AutoRest to load an extension:
+
+### `package.json`
 
 The `package.json` file needs to have a `start` script that, when executed, launches the extension. Example:
 
@@ -36,6 +39,12 @@ The `package.json` file needs to have a `start` script that, when executed, laun
 ```
 
 Any runtimes required for execution (above: dotnet) should be provided as dependencies (these will be installed by AutoRest), so the extension works out of the box on anyones machine.
+
+### `readme.md`
+
+The `readme.md` provides the configuration specifying *how* the extension is supposed to be used, i.e. how it fits into the pipeline and plays together with other plugins.
+See [autorest-extension-helloworld](https://github.com/olydis/autorest-extension-helloworld) for documentation and an example.
+
 
 ## Usage
 
