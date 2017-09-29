@@ -278,10 +278,10 @@ export class DataStore {
       for (const inputPosition of inputPositions) {
         mappings.push({
           name: inputPosition.name,
-          source: inputPosition.source,
+          source: this.ReadStrictSync(inputPosition.source).Description, // friendly name
           generated: blameTree.node,
           original: inputPosition
-        })
+        });
       }
     }
     const sourceMapGenerator = new SourceMapGenerator({ file: absoluteUri });
