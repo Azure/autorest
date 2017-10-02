@@ -31,5 +31,6 @@
   },
   "tslint.alwaysShowRuleFailuresAsWarnings": true,
   "git.ignoreLimitWarning": true,
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "eslint.enable": false
 }
