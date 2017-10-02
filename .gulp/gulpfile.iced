@@ -16,7 +16,7 @@ Import
     # Run AutoRest from the original current directory.
     echo info "Queuing up: AutoRest #{args.join(' ')}"
     args = args.concat("--clear-output-folder", "--version=#{basefolder}/src/autorest-core") if args[0] != "--reset"
-    execute "node #{basefolder}/src/autorest/dist/app.js #{args.map((a) -> "\"#{a}\"").join(' ')} " , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) ->
+    execute "node #{basefolder}/src/autorest/dist/app.js #{args.map((a) -> "\"#{a}\"").join(' ')} --no-upgrade-check" , {silent:true, ignoreexitcode: ignoreexitcode || false}, (code,stdout,stderr) -> 
       return done(code,stdout,stderr)
   
   typescriptProjectFolders: ()->

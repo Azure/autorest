@@ -54,6 +54,7 @@ use-extension:
   '@microsoft.azure/openapi-validator': ~1.0.0
   '@microsoft.azure/autorest.modeler': ~2.0.0
 
+no-upgrade-check: {}
 azure-arm: true
 azure-validator: true
 csharp:

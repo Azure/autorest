@@ -84,6 +84,11 @@ const args = cli
     type: "boolean",
     group: "### Installation",
   })
+  .option("no-upgrade-check", {
+    describe: "`disable check for new version of bootstrapper`",
+    type: "boolean",
+    group: "### Installation",
+  })
   .option("version", {
     describe: "use the specified version of the **autorest-core** extension",
     type: "string",
@@ -100,7 +105,7 @@ let force = args.force || false;
 
 /** Check if there is an update for the bootstrapper available. */
 const checkBootstrapper = new LazyPromise(async () => {
-  if (await networkEnabled) {
+  if (await networkEnabled && !args['no-upgrade-check']) {
     try {
       const pkg = await (await extensionManager).findPackage("autorest", preview ? "preview" : "latest");
       if (gt(pkg.version, pkgVersion)) {
