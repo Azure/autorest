@@ -29,7 +29,6 @@ namespace Inheritance.Models
         /// </summary>
         public CowbellBase(string name, SecureString ssn, string nickname = default(string))
         {
-            Ssn = new SecureString();
             Name = name;
             Nickname = nickname;
             Ssn = ssn;

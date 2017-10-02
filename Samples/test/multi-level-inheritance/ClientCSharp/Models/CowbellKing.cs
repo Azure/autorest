@@ -31,8 +31,6 @@ namespace Inheritance.Models
         public CowbellKing(string name, SecureString ssn, string hobby, SecureString xboxLiveCredentials, string title, string nickname = default(string), SecureString favoritePassword = default(SecureString), CowbellBase mentor = default(CowbellBase), double? throneSize = default(double?))
             : base(name, ssn, hobby, xboxLiveCredentials, nickname, favoritePassword, mentor)
         {
-            Ssn = new SecureString();
-            XboxLiveCredentials = new SecureString();
             ThroneSize = throneSize;
             Title = title;
             CustomInit();

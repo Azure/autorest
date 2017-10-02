@@ -31,8 +31,6 @@ namespace Inheritance.Models
         public Cowbell(string name, SecureString ssn, string hobby, SecureString xboxLiveCredentials, string nickname = default(string), SecureString favoritePassword = default(SecureString), CowbellBase mentor = default(CowbellBase))
             : base(name, ssn, nickname)
         {
-            Ssn = new SecureString();
-            XboxLiveCredentials = new SecureString();
             Hobby = hobby;
             FavoritePassword = favoritePassword;
             XboxLiveCredentials = xboxLiveCredentials;
