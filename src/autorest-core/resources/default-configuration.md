@@ -70,6 +70,11 @@ use-extension:
   "@microsoft.azure/autorest.typescript": "~2.0.0"
 ```
 
+``` yaml $(model-validator)
+use-extension:
+ "oav": "~0.4.14"
+```
+
 ### Graph
 
 #### Reflection

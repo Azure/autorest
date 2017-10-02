@@ -283,7 +283,6 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "transform-immediate": CreatePluginTransformerImmediate(),
     "compose": CreatePluginComposer(),
     // TODO: replace with OAV again
-    "model-validator": CreatePluginIdentity(),
     "semantic-validator": CreatePluginIdentity(),
 
     "commonmarker": CreateCommonmarkProcessor(),
