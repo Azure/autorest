@@ -1,0 +1,65 @@
+swagger: '2.0'
+info:
+  description: This is a polymorphic example.
+  version: 1.0.0
+  title: Cowbell Inspection
+host: localhost
+consumes:
+- application/json
+produces:
+- application/json
+definitions:
+  SecureString:
+    required:
+    - value
+    - type
+    properties:
+      value:
+        type: string
+      type:
+        type: string
+        enum:
+        - supersecret
+  CowbellBase:
+    discriminator: type
+    required:
+    - name
+    - ssn
+    - type
+    properties:
+      name:
+        type: string
+      nickname:
+        type: string
+      ssn:
+        $ref: '#/definitions/SecureString'
+      type:
+        type: string
+    description: A cowbell without personality.
+  Cowbell:
+    allOf:
+    - $ref: '#/definitions/CowbellBase'
+    required:
+    - hobby
+    - xboxLiveCredentials
+    properties:
+      hobby:
+        type: string
+      favoritePassword:
+        $ref: '#/definitions/SecureString'
+      xboxLiveCredentials:
+        $ref: '#/definitions/SecureString'
+      mentor:
+        $ref: '#/definitions/CowbellBase'
+    description: A cowbell with a cause.
+  CowbellKing:
+    allOf:
+    - $ref: '#/definitions/Cowbell'
+    required:
+    - title
+    properties:
+      throneSize:
+        type: number
+      title:
+        type: string
+    description: An honorable cowbell.
