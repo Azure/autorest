@@ -28,7 +28,7 @@ The directive finds method `Cowbell_Add` and removes the corresponding object gr
 
 ## Summary
 
-Add a directive as follows in order to remove an operation with operation ID `<OPERATION_ID>`:
+Add a `directive` as follows in order to remove an operation with operation ID `<OPERATION_ID>`:
 ``` yaml false
 from: swagger-document
 where: $.paths.*[?(@.operationId == "<OPERATION_ID>")]
