@@ -17,7 +17,7 @@ batch:
     output-folder: ClientFancy
     # add the following directive to your configuration to hide method `Cowbell_Add`
     directive:
-      from: swagger-document
+    - from: swagger-document
       where: $.paths.*[?(@.operationId == "Cowbell_Add")]
       transform: return undefined
     output-artifact: swagger-document.yaml
