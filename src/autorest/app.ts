@@ -236,7 +236,8 @@ async function main() {
   } catch (exception) {
     console.log("Failure:");
     console.error(exception);
-    console.error((<Error>exception).stack)
+    console.error((<Error>exception).stack);
+    process.exit(1);
   }
 }
 
