@@ -209,13 +209,13 @@ A declaration such as
 ``` yaml false
 declare-directive:
   my-directive: >-
-    parameter => [
+    [
       {
-        transform: `some transformer, parameterized with '${JSON.stringify(parameter)}'`
+        transform: `some transformer, parameterized with '${JSON.stringify($)}'`
       },
       {
         from: "code-model-v1"
-        transform: `some other transformer, parameterized with '${JSON.stringify(parameter)}'`
+        transform: `some other transformer, parameterized with '${JSON.stringify($)}'`
       }
     ]
 ```
@@ -232,8 +232,8 @@ directive:
     my-directive: 42 # together with other stuff, with a number as parameter
 ```
 
-Each `directive` entry that names `my-directive` will be expanded with whatever the declaration returns when called with the parameter.
-If an array is returned, the directives are duplicated accordingly (this enables directive declarations that transform data on multiple stages).
+Each `directive` entry that names `my-directive` will be expanded with the whatever the declaration evaluates to, where `$` is substituted with the value provided to the directive when used.
+If the declaration evaluates to an array, the directives are duplicated accordingly (this enables directive declarations that transform data on multiple stages).
 In the above example, `directive` gets expanded to:
 
 ``` yaml false
@@ -245,10 +245,12 @@ directive:
       some other transformer, parameterized with '{ "foo": \"bar\", "baz": 42 }'
   - from: a
     where: b
-    some transformer, parameterized with '42'
+    transform: >-
+      some transformer, parameterized with '42'
   - from: a
     where: b
-    some other transformer, parameterized with '42'
+    transform: >-
+      some other transformer, parameterized with '42'
 ```
 
 As can be seen in the last `directive`, `from` as specified originally was not overridden by `code-model-v1`, i.e. what was specified by the user is given higher priority.
@@ -261,5 +263,5 @@ Formerly implemented in the AutoRest core itself, `set` is now just syntactic su
 ``` yaml
 declare-directive:
   set: >-
-    value => [{ transform: `return ${JSON.stringify(value)}` }];
+    { transform: `return ${JSON.stringify($)}` };
 ```
