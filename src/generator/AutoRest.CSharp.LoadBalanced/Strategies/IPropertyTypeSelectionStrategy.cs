@@ -33,6 +33,8 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
         bool IsGuid(Property property);
 
+        bool IsBooleanString(Property property);
+
         bool IsBoolean(Property property);
 
         string GetConverterTypeName(Property property);

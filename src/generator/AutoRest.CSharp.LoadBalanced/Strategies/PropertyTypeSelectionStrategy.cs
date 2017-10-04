@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.LoadBalanced.Model;
@@ -85,9 +86,14 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             return false;
         }
 
-        public virtual bool IsBoolean(Property property)
+        public virtual bool IsBooleanString(Property property)
         {
             return false;
+        }
+
+        public virtual bool IsBoolean(Property property)
+        {
+            return property.ModelType.IsPrimaryType(KnownPrimaryType.Boolean);
         }
 
         public virtual string GetConverterTypeName(Property property)
@@ -135,7 +141,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             {
                 return "decimal";
             }
-            else if (IsBoolean(property))
+            else if (IsBooleanString(property))
             {
                 return "bool";
             }

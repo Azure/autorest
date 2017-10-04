@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             return base.IsDateTime(property);
         }
 
-		public override bool IsBoolean(Property property)
+		public override bool IsBooleanString(Property property)
         {
             return (_booleanSuffixes.Any(s => property.Name.RawValue.ToUpper().EndsWith(s.ToUpper())) ||
                 _booleanPrefixes.Any(s => property.Name.RawValue.ToUpper().StartsWith(s.ToUpper()) && !property.Name.RawValue.ToUpper().StartsWith("ISO"))) && 
@@ -101,9 +101,13 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             {
                 attributeBuilder.Append("Int32ValueConverter");
             }
-			else if (IsBoolean(property))
+            else if (IsBoolean(property))
             {
-                attributeBuilder.Append("BooleanStringConverter");
+                attributeBuilder.Append("OverridableJsonConverterDecorator), typeof(BooleanJsonConverter");
+            }
+			else if (IsBooleanString(property))
+            {
+                attributeBuilder.Append("OverridableJsonConverterDecorator), typeof(BooleanStringConverter");
             }
             else
             {

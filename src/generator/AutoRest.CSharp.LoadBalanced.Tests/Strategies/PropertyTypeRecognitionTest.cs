@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.LoadBalanced.Tests.Strategies
             yield return new object[] { UseFunc(strategy.IsBytesValue), null, true };
             yield return new object[] { UseFunc(strategy.IsMoney), null, true };
             yield return new object[] { UseFunc(strategy.IsGuid), null, true };
-            yield return new object[] { UseFunc(strategy.IsBoolean), null, true };
+            yield return new object[] { UseFunc(strategy.IsBooleanString), null, true };
         }
 
         private static Func<Property, bool> UseFunc(Func<Property, bool> func)
