@@ -194,3 +194,72 @@ On by default for backwards compatibility, but see https://github.com/Azure/auto
 ``` yaml
 client-side-validation: true
 ```
+
+# Directives
+
+The built-in `transform` directive with its filters `from` and `where` are very powerful, but can become verbose and thus hard to reuse for common patterns (e.g. rename an operation).
+Furthermore, they usually rely on precise data formats (e.g. where to find operations in the `code-model-v1`) and thus break once the data format changes.
+We propose the following mechanism of declaring directives similar to macros, which allows capturing commonly used directives in a more high-level way.
+Configuration files using these macros instead of "low-level" directives are robust against changes in the data format as the declaration in here will be adjusted accordingly.
+
+## How it works
+
+A declaration such as
+
+``` yaml false
+declare-directive:
+  my-directive: >-
+    parameter => [
+      {
+        transform: `some transformer, parameterized with '${JSON.stringify(parameter)}'`
+      },
+      {
+        from: "code-model-v1"
+        transform: `some other transformer, parameterized with '${JSON.stringify(parameter)}'`
+      }
+    ]
+```
+
+can be used by naming it in a `directive` section:
+
+``` yaml false
+directive:
+  - my-directive: # as a standalone, with an object as parameter
+      foo: bar
+      baz: 42
+  - from: a
+    where: b
+    my-directive: 42 # together with other stuff, with a number as parameter
+```
+
+Each `directive` entry that names `my-directive` will be expanded with whatever the declaration returns when called with the parameter.
+If an array is returned, the directives are duplicated accordingly (this enables directive declarations that transform data on multiple stages).
+In the above example, `directive` gets expanded to:
+
+``` yaml false
+directive:
+  - transform: >-
+      some transformer, parameterized with '{ "foo": \"bar\", "baz": 42 }'
+  - from: code-model-v1
+    transform: >-
+      some other transformer, parameterized with '{ "foo": \"bar\", "baz": 42 }'
+  - from: a
+    where: b
+    some transformer, parameterized with '42'
+  - from: a
+    where: b
+    some other transformer, parameterized with '42'
+```
+
+As can be seen in the last `directive`, `from` as specified originally was not overridden by `code-model-v1`, i.e. what was specified by the user is given higher priority.
+
+
+## `set`
+
+Formerly implemented in the AutoRest core itself, `set` is now just syntactic sugar.
+
+``` yaml
+declare-directive:
+  set: >-
+    value => [{ transform: `return ${JSON.stringify(value)}` }];
+```
