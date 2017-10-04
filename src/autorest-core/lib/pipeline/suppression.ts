@@ -13,7 +13,7 @@ export class Suppressor {
   private suppressions: DirectiveView[];
 
   public constructor(private config: ConfigurationView) {
-    this.suppressions = From(config.Directives).Where(x => [...x.suppress].length > 0).ToArray();
+    this.suppressions = config.Directives.filter(x => [...x.suppress].length > 0);
   }
 
   private MatchesSourceFilter(document: string, path: JsonPath | undefined, supression: DirectiveView): boolean {

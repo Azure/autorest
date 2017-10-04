@@ -112,6 +112,10 @@ export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolea
   let guardResult = false;
   let expressionFence: string = '';
   try {
+    if (fence.indexOf("$(") == -1) {
+      return safeEval<boolean>(fence);
+    }
+
     expressionFence = `${resolveRValue(fence, "", contextObject, null, 2)}`;
     // is there unresolved values?  May be old-style. Or the values aren't defined. 
 

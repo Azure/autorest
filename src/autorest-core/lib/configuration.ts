@@ -26,6 +26,7 @@ import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ResolveUri } from '.
 import { BlameTree } from './source-map/blaming';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { TryDecodeEnhancedPositionFromName } from './source-map/source-map';
+import { safeEval } from './ref/safe-eval';
 
 const untildify: (path: string) => string = require("untildify");
 
@@ -37,6 +38,7 @@ export interface AutoRestConfigurationImpl {
   "input-file"?: string[] | string;
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
+  "declare-directive"?: { [name: string]: string };
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
   "use-extension"?: { [extensionName: string]: string };
@@ -302,9 +304,27 @@ export class ConfigurationView {
       .ToArray();
   }
 
-  public get Directives(): Iterable<DirectiveView> {
-    return From(ValuesOf<Directive>(this.config["directive"]))
-      .Select(each => new DirectiveView(each));
+  public get Directives(): DirectiveView[] {
+    const plainDirectives = ValuesOf<Directive>(this.config["directive"]);
+    const declarations = this.config["declare-directive"] || {};
+    const expandDirective = (dir: Directive): Directive[] => {
+      const makro = Object.keys(dir).filter(makro => declarations[makro])[0];
+      if (!makro) {
+        return [dir]; // nothing to expand
+      }
+      // prepare directive
+      const parameter = (dir as any)[makro];
+      dir = Object.assign({}, dir);
+      delete (dir as any)[makro];
+      // call makro
+      let makroResults: any = safeEval(declarations[makro], { $: parameter });
+      if (!Array.isArray(makroResults)) {
+        makroResults = [makroResults];
+      }
+      return makroResults.map((result: any) => Object.assign(result, dir));
+    };
+    // makro expansion
+    return From(plainDirectives).SelectMany(expandDirective).Select(each => new DirectiveView(each)).ToArray();
   }
 
   public get InputFileUris(): string[] {

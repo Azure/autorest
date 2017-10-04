@@ -17,7 +17,7 @@ export class Manipulator {
   private ctr = 0;
 
   public constructor(private config: ConfigurationView) {
-    this.transformations = From(config.Directives).ToArray();
+    this.transformations = config.Directives;
   }
 
   private MatchesSourceFilter(document: string, transform: DirectiveView, artifact: string | null): boolean {
@@ -53,22 +53,6 @@ export class Manipulator {
               //   Channel: Channel.Warning,
               //   Details: trans,
               //   Text: `Transformation directive with 'where' clause '${w}' was not used.`
-              // });
-            }
-            data = result.result;
-          }
-          // set
-          for (const s of trans.set) {
-            const result = await ManipulateObject(data, sink, w, obj => s/*,
-              {
-                reason: trans.reason,
-                transformerSourceHandle: // TODO
-              }*/);
-            if (!result.anyHit) {
-              // this.config.Message({
-              //   Channel: Channel.Warning,
-              //   Details: trans,
-              //   Text: `Set directive with 'where' clause '${w}' was not used.`
               // });
             }
             data = result.result;
