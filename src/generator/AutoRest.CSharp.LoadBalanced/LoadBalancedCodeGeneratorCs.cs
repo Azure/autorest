@@ -122,7 +122,6 @@ namespace AutoRest.CSharp.LoadBalanced
 
             // Models
             var models = codeModel.ModelTypes.Union(codeModel.HeaderTypes).Cast<CompositeTypeCs>();
-
             foreach (var model in models)
             {
                 if (model.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
@@ -166,15 +165,42 @@ namespace AutoRest.CSharp.LoadBalanced
                 await Write(exceptionTemplate, exceptionFilePath);
             }
 
-            var projectTemplate = new CsProjTemplate { Model = project };
-            var projFilePath = $"{project.RootNameSpace}.csproj";
+            // CB models
+            var couchbaseModels = codeModel.ModelTypes.Union(codeModel.HeaderTypes).Cast<CompositeTypeCs>();
+            foreach (var model in couchbaseModels)
+            {
+                model.isCouchbaseModel = true;
+                if (model.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
+                    (bool)model.Extensions[SwaggerExtensions.ExternalExtension])
+                {
+                    continue;
+                }
 
-            var solutionTemplate = new SlnTemplate { Model = project };
-            var slnFilePath = $"{project.RootNameSpace}.sln";
+                Template<CompositeTypeCs> modelTemplate = null;
 
-            await Write(projectTemplate, projFilePath);
-            await Write(solutionTemplate, slnFilePath);
-            await Write(new PackagesTemplate(), "packages.config");
+                if (model.PropertyTypeSelectionStrategy.IsCollection(model))
+                {
+                    modelTemplate = new CollectionModelTemplate { Model = model };
+                }
+                else
+                {
+                    modelTemplate = new ModelTemplate { Model = model };
+                }
+                var modelPath = Path.Combine(Settings.Instance.ModelsName, $"Couchbase/{model.Name}{ImplementationFileExtension}");
+                project.FilePaths.Add(modelPath);
+
+                await Write(modelTemplate, modelPath);
+            }
+            // remove becuase we need to change package version config first
+            //var projectTemplate = new CsProjTemplate { Model = project };
+            //var projFilePath = $"{project.RootNameSpace}.csproj";
+
+            //var solutionTemplate = new SlnTemplate { Model = project };
+            //var slnFilePath = $"{project.RootNameSpace}.sln";
+
+            //await Write(projectTemplate, projFilePath);
+            //await Write(solutionTemplate, slnFilePath);
+            //await Write(new PackagesTemplate(), "packages.config");
         }
 
         private async Task GenerateRestCode(CodeModelCs codeModel)

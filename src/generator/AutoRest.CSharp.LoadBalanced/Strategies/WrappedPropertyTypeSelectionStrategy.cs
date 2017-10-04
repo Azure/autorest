@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using AutoRest.CSharp.LoadBalanced.Model;
 
 namespace AutoRest.CSharp.LoadBalanced.Strategies
@@ -12,8 +13,8 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
         private static string[] _datePostfixes = new[] {"When", "Time", "Date"};
         private static string[] _guidPostfixes = new[] { "By", "UserId", "Token" };
         private static string[] _moneyPostfixes = new[] { "Cost", "Rate", "Amount", "Price", "Discount", "Fee", "Percent" };
-        private static string[] _booleanSuffixes = new[] { "isBookOnRequest",  "IsBreakfastIncluded", "allotmentAutoToPup", "Flag", "IsSelected", "IsActive", "IsNonHotelAccomodationMode" };
-
+        private static string[] _booleanSuffixes = new[] {"allotmentAutoToPup", "Flag" };
+        private static string[] _booleanPrefixes = new[] {"is"};
         public override bool IsDateTime(Property property)
         {
             if(IsDateText(property))
@@ -26,7 +27,8 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
 		public override bool IsBoolean(Property property)
         {
-            return _booleanSuffixes.Any(s => property.Name.RawValue.ToUpper().EndsWith(s.ToUpper())) && 
+            return (_booleanSuffixes.Any(s => property.Name.RawValue.ToUpper().EndsWith(s.ToUpper())) ||
+                _booleanPrefixes.Any(s => property.Name.RawValue.ToUpper().StartsWith(s.ToUpper()) && !property.Name.RawValue.ToUpper().StartsWith("ISO"))) && 
                 (property.ModelTypeName == "int" || property.ModelTypeName == "string");
         }
 		
@@ -89,43 +91,19 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
             if (IsDateText(property))
             {
-                attributeBuilder.Append("DateTimeStringConverter)");
+                attributeBuilder.Append("DateTimeStringConverter");
             }
-            //else if (IsGuid(property))
-            //{
-            //    attributeBuilder.Append("GuidStringConverter)");
-            //}
             else if (IsMoney(property))
             {
                 attributeBuilder.Append("MoneyConverter");
-                var options = new List<string>();
-
-                if (property.ModelType.Name == "string")
-                {
-                    options.Add("MoneyConverterOptions.SendAsText");
-                }
-
-                if (property.IsNullable())
-                {
-                    options.Add("MoneyConverterOptions.IsNullable");
-                }
-
-                if (options.Any())
-                {
-                    attributeBuilder.Append("), ").Append(string.Join(" | ", options));
-                }
-                else
-                {
-                    attributeBuilder.Append(")");
-                }
             }
             else if (IsInt32Value(property))
             {
-                attributeBuilder.Append("Int32ValueConverter)");
+                attributeBuilder.Append("Int32ValueConverter");
             }
 			else if (IsBoolean(property))
             {
-                attributeBuilder.Append("BooleanStringConverter)");
+                attributeBuilder.Append("BooleanStringConverter");
             }
             else
             {
@@ -139,7 +117,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
                 attributeBuilder.Append($"{typeConverterName})");
             }
 
-            attributeBuilder.Append(")");
+            attributeBuilder.Append("))");
 
             return attributeBuilder.ToString();
         }

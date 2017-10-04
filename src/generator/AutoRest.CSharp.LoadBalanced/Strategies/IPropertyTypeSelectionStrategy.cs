@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 
         string GetConverterTypeName(Property property);
 
-        string GetJsonSerializationAttribute(Property property);
+        string GetJsonSerializationAttribute(Property property, bool isCouchbaseModel);
 
         string GetPropertyTypeName(Property property);
 
