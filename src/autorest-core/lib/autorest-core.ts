@@ -42,16 +42,16 @@ export class AutoRest extends EventEmitter {
 
   public static async LiterateToJson(content: string): Promise<string> {
     try {
-    let autorest = new AutoRest({
-      EnumerateFileUris: async function (folderUri: string): Promise<Array<string>> { return []; },
+      let autorest = new AutoRest({
+        EnumerateFileUris: async function (folderUri: string): Promise<Array<string>> { return []; },
         ReadFile: async (f: string): Promise<string> => f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"
-    });
-    let result = "";
+      });
+      let result = "";
       autorest.AddConfiguration({ "input-file": "none:///empty-file.md", "output-artifact": ["swagger-document"] });
-    autorest.GeneratedFile.Subscribe((source, artifact) => {
-      result = artifact.content;
-    });
-    // run autorest and wait.
+      autorest.GeneratedFile.Subscribe((source, artifact) => {
+        result = artifact.content;
+      });
+      // run autorest and wait.
 
       await (await autorest.Process()).finish;
       return result;

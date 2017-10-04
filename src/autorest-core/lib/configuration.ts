@@ -40,6 +40,7 @@ export interface AutoRestConfigurationImpl {
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
   "use-extension"?: { [extensionName: string]: string };
+  "require"?: string[] | string;
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
@@ -207,6 +208,7 @@ export class ConfigurationView {
       "directive": [],
       "input-file": [],
       "output-artifact": [],
+      "require": [],
       "use": [],
     };
 
@@ -292,6 +294,12 @@ export class ConfigurationView {
         fullyQualified: JSON.stringify([name, source])
       };
     });
+  }
+
+  public get IncludedConfigurationFiles(): string[] {
+    return From<string>(ValuesOf<string>(this.config["require"]))
+      .Select(each => this.ResolveAsPath(each))
+      .ToArray();
   }
 
   public get Directives(): Iterable<DirectiveView> {
@@ -576,7 +584,39 @@ export class Configuration {
         "config");
       await addSegments(blocks);
     }
-    // 3. default configuration
+    // 3. resolve 'require'd configuration
+    const addedConfigs = new Set<string>();
+    while (true) {
+      const tmpView = createView();
+      const additionalConfigs = tmpView.IncludedConfigurationFiles.filter(ext => !addedConfigs.has(ext));
+      if (additionalConfigs.length === 0) {
+        break;
+      }
+      // acquire additional configs
+      for (const additionalConfig of additionalConfigs) {
+        try {
+          messageEmitter.Message.Dispatch({
+            Channel: Channel.Verbose,
+            Text: `Including configuration file '${additionalConfig}'`
+          });
+          addedConfigs.add(additionalConfig);
+          // merge config
+          const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
+          const blocks = await this.ParseCodeBlocks(
+            await inputView.ReadStrict(additionalConfig),
+            tmpView,
+            `require-config-${additionalConfig}`);
+          await addSegments(blocks);
+        } catch (e) {
+          messageEmitter.Message.Dispatch({
+            Channel: Channel.Fatal,
+            Text: `Failed to acquire 'require'd configuration '${additionalConfig}'`
+          });
+          throw e;
+        }
+      }
+    }
+    // 4. default configuration
     if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
       const blocks = await this.ParseCodeBlocks(
@@ -585,7 +625,7 @@ export class Configuration {
         "default-config");
       await addSegments(blocks);
     }
-    // 4. resolve externals
+    // 5. resolve extensions
     const extMgr = await this.extensionManager;
     const addedExtensions = new Set<string>();
     while (true) {
