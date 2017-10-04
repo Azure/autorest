@@ -74,7 +74,9 @@ namespace @Settings.Namespace
                     ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                     ContractResolver = new ReadOnlyJsonContractResolver(),
                     MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
-                    Converters = new List<JsonConverter> { new Iso8601TimeSpanConverter() }
+                    Converters = new List<JsonConverter> { new Iso8601TimeSpanConverter(),
+                        new BooleanStringConverter(BooleanConverterOptions.WriteAsInt)
+                    }
                 });
 
 @EmptyLine
@@ -88,7 +90,9 @@ namespace @Settings.Namespace
                     ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                     ContractResolver = new ReadOnlyJsonContractResolver(),
                     MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
-                    Converters = new List<JsonConverter> { new Iso8601TimeSpanConverter() }
+                    Converters = new List<JsonConverter> { new Iso8601TimeSpanConverter(),
+                        new BooleanStringConverter(BooleanConverterOptions.WriteAsInt)
+                    }
                 });
 @EmptyLine
         protected async Task InvokeNewRequest(
