@@ -96,6 +96,8 @@ class ReadThroughDataSource extends DataSource {
   }
 
   public async Read(uri: string): Promise<DataHandle | null> {
+    uri = ToRawDataUrl(uri); // makes sure logical paths (like for source maps) also reference the URLs of the actual data
+
     // sync cache (inner stuff is racey!)
     if (!this.cache[uri]) {
       this.cache[uri] = (async () => {

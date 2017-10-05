@@ -48,13 +48,14 @@ output-artifact:
   - source-file-jsonrpcclient
 require: []
 use: []
-version: 'C:\work\autorest/src/autorest-core'
+clear-output-folder: {}
 use-extension:
   '@microsoft.azure/autorest.csharp': ~2.0.0
   '@microsoft.azure/classic-openapi-validator': ~1.0.3
   '@microsoft.azure/openapi-validator': ~1.0.0
   '@microsoft.azure/autorest.modeler': ~2.0.0
-foo: {}
+
+no-upgrade-check: {}
 azure-arm: true
 azure-validator: true
 csharp:
@@ -234,7 +235,23 @@ scope-cm/emitter:
     "code-model-v1"
 client-side-validation: true
 declare-directive:
-  set: '{ transform: `return ${JSON.stringify($)}` };'
+  set: '{ transform: `return ${JSON.stringify($)}` }'
+  where-operation: |-
+    (() => {
+      switch ($context.from) {
+        case "code-model-v1":
+          return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
+        case "swagger-document":
+        default:
+          return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
+      }
+    })()
+  remove-operation: |-
+    {
+      from: 'swagger-document',
+      "where-operation": $,
+      transform: 'return undefined'
+    }
 scope-csharp/emitter:
   input-artifact: source-file-csharp
   output-uri-expr: $key
