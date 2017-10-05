@@ -258,10 +258,28 @@ As can be seen in the last `directive`, `from` as specified originally was not o
 
 ## `set`
 
-Formerly implemented in the AutoRest core itself, `set` is now just syntactic sugar.
+Formerly implemented in the AutoRest core itself, `set` is now just syntactic sugar for `transform`.
 
 ``` yaml
 declare-directive:
   set: >-
     { transform: `return ${JSON.stringify($)}` };
+```
+
+## Operation selection
+
+Select operations by ID in different stages of the pipeline
+
+``` yaml
+declare-directive:
+  where-operation: >-
+    (() => {
+      switch ($context.from) {
+        case "code-model-v1":
+          return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
+        case "swagger-document":
+        default:
+          return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
+      }
+    })()
 ```

@@ -201,7 +201,6 @@ export class ConfigurationView {
     /* @internal */public configFileFolderUri: string,
     ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
   ) {
-
     // TODO: fix configuration loading, note that there was no point in passing that DataStore used
     // for loading in here as all connection to the sources is lost when passing `Array<AutoRestConfigurationImpl>` instead of `DataHandleRead`s...
     // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
@@ -239,7 +238,6 @@ export class ConfigurationView {
     } else {
       this.config = this.rawConfig;
     }
-
     this.suppressor = new Suppressor(this);
     this.Message({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
   }
@@ -248,7 +246,7 @@ export class ConfigurationView {
     return Object.getOwnPropertyNames(this.config);
   }
 
-  public Dump(title: string = "") {
+  public Dump(title: string = ""): void {
     console.log(`\n${title}\n===================================`)
     for (const each of Object.getOwnPropertyNames(this.config)) {
       console.log(`${each} : ${(<any>this.config)[each]}`);
@@ -313,14 +311,18 @@ export class ConfigurationView {
         return [dir]; // nothing to expand
       }
       // prepare directive
-      const parameter = (dir as any)[makro];
-      dir = Object.assign({}, dir);
+      let parameters = (dir as any)[makro];
+      if (!Array.isArray(parameters)) {
+        parameters = [parameters];
+      }
+      dir = { ...dir };
       delete (dir as any)[makro];
       // call makro
-      let makroResults: any = safeEval(declarations[makro], { $: parameter });
-      if (!Array.isArray(makroResults)) {
-        makroResults = [makroResults];
-      }
+      const makroResults: any = From(parameters).SelectMany(parameter => {
+        // console.log(new Error().stack);
+        const result = safeEval(declarations[makro], { $: parameter, $context: dir });
+        return Array.isArray(result) ? result : [result];
+      }).ToArray();
       return makroResults.map((result: any) => Object.assign(result, dir));
     };
     // makro expansion
@@ -418,7 +420,7 @@ export class ConfigurationView {
             return [s];
           }
 
-          return blameTree.BlameLeafs().map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
+          return blameTree.BlameLeafs().map(r => <SourceLocation>{ document: r.source, Position: { ...TryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column } });
         });
 
         //console.log("---");
@@ -544,7 +546,7 @@ export class Configuration {
   private async DesugarRawConfig(configs: any): Promise<any> {
     // shallow copy
     configs = Object.assign({}, configs);
-    configs["use-extension"] = Object.assign({}, configs["use-extension"]);
+    configs["use-extension"] = { ...configs["use-extension"] };
 
     if (configs.hasOwnProperty('licence-header')) {
       configs['license-header'] = configs['licence-header'];

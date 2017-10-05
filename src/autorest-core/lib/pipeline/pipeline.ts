@@ -256,7 +256,6 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 }
 
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
-
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     "identity": CreatePluginIdentity(),
@@ -288,7 +287,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   // __status scope
   const startTime = Date.now();
   (configView.Raw as any).__status = new Proxy<any>({}, {
-    async get(_, key) {
+    get(_, key) {
+      if (key === "__info") return false;
       const expr = new Buffer(key.toString(), "base64").toString("ascii");
       try {
         return FastStringify(safeEval(expr, {

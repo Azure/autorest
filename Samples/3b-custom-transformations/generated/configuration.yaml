@@ -46,15 +46,15 @@ output-artifact:
   - configuration.yaml
   - source-file-csharp
   - source-file-jsonrpcclient
+require: []
 use: []
-clear-output-folder: {}
+version: 'C:\work\autorest/src/autorest-core'
 use-extension:
   '@microsoft.azure/autorest.csharp': ~2.0.0
   '@microsoft.azure/classic-openapi-validator': ~1.0.3
   '@microsoft.azure/openapi-validator': ~1.0.0
   '@microsoft.azure/autorest.modeler': ~2.0.0
-
-no-upgrade-check: {}
+foo: {}
 azure-arm: true
 azure-validator: true
 csharp:
@@ -233,6 +233,8 @@ scope-cm/emitter:
   output-uri-expr: |
     "code-model-v1"
 client-side-validation: true
+declare-directive:
+  set: '{ transform: `return ${JSON.stringify($)}` };'
 scope-csharp/emitter:
   input-artifact: source-file-csharp
   output-uri-expr: $key
