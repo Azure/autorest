@@ -128,8 +128,8 @@ export function ToRawDataUrl(uri: string): string {
     uri = uri.replace(/^https?:\/\/(github.com)(\/[^\/]+\/[^\/]+\/)(blob|tree)\/(.*)$/ig, "https://raw.githubusercontent.com$2$4");
   }
   // - GitHub gist
-  if (uri.startsWith("gist:")) {
-    uri = uri.replace(/^gist:([^\/]+\/[^\/]+)$/ig, "https://gist.githubusercontent.com/$1/raw/");
+  if (uri.startsWith("gist://")) {
+    uri = uri.replace(/^gist:\/\/([^\/]+\/[^\/]+)$/ig, "https://gist.githubusercontent.com/$1/raw/");
   }
   if (uri.startsWith("https://gist.github.com")) {
     uri = uri.replace(/^https?:\/\/gist.github.com\/([^\/]+\/[^\/]+)$/ig, "https://gist.githubusercontent.com/$1/raw/");
