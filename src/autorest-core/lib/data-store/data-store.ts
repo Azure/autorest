@@ -96,8 +96,6 @@ class ReadThroughDataSource extends DataSource {
   }
 
   public async Read(uri: string): Promise<DataHandle | null> {
-    uri = ToRawDataUrl(uri);
-
     // sync cache (inner stuff is racey!)
     if (!this.cache[uri]) {
       this.cache[uri] = (async () => {

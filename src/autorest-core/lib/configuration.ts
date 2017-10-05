@@ -22,7 +22,7 @@ import { exists } from './ref/async';
 import { CancellationToken, CancellationTokenSource } from './ref/cancellation';
 import { stringify } from './ref/jsonpath';
 import { From } from './ref/linq';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ResolveUri } from './ref/uri';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from './ref/uri';
 import { BlameTree } from './source-map/blaming';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { TryDecodeEnhancedPositionFromName } from './source-map/source-map';
@@ -514,7 +514,7 @@ export class ConfigurationView {
 
 export class Configuration {
   public constructor(
-    private fileSystem?: IFileSystem,
+    private fileSystem: IFileSystem = new RealFileSystem(),
     private configFileOrFolderUri?: string,
   ) { }
 
@@ -590,16 +590,15 @@ export class Configuration {
       : null;
     const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, "./") : (this.configFileOrFolderUri || "file:///");
 
-    const createView = () => new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments);
-
     const configSegments: any[] = [];
+    const createView = () => new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments);
     const addSegments = async (configs: any[]): Promise<void> => { configSegments.push(...await this.DesugarRawConfigs(configs)); };
 
     // 1. overrides (CLI, ...)
     await addSegments(configs);
     // 2. file
     if (configFileUri !== null) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem as IFileSystem);
+      const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(configFileUri),
         createView(),
@@ -623,7 +622,7 @@ export class Configuration {
           });
           addedConfigs.add(additionalConfig);
           // merge config
-          const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
+          const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
           const blocks = await this.ParseCodeBlocks(
             await inputView.ReadStrict(additionalConfig),
             tmpView,
@@ -640,7 +639,7 @@ export class Configuration {
     }
     // 4. default configuration
     if (includeDefault) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
+      const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
         createView(),
@@ -720,7 +719,7 @@ export class Configuration {
           }
 
           // merge config
-          const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
+          const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
           const blocks = await this.ParseCodeBlocks(
             await inputView.ReadStrict(CreateFileUri(await ext.extension.configurationPath)),
             tmpView,
@@ -742,8 +741,21 @@ export class Configuration {
   public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders: boolean = false): Promise<string | null> {
     const originalConfigFileOrFolderUri = configFileOrFolderUri;
 
+    //
     if (!configFileOrFolderUri || configFileOrFolderUri.endsWith(".md")) {
       return configFileOrFolderUri;
+    }
+
+    // try querying the Uri directly
+    if (ExistsUri(configFileOrFolderUri)) {
+      try {
+        const content = await fileSystem.ReadFile(configFileOrFolderUri);
+        if (content.indexOf(Constants.MagicString) > -1) {
+          return configFileOrFolderUri;
+        }
+      } catch (e) {
+        // that didn't work... try next
+      }
     }
 
     // search for a config file, walking up the folder tree
