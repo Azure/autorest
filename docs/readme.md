@@ -29,7 +29,7 @@
 
 6. [Writing Tests](developer/guide/writing-tests.md)
 
-6. [Writing OpenAPI Validation Rules](developer/guide/writing-validation-rules.md)
+6. [Writing OpenAPI Validation Rules](https://github.com/Azure/azure-openapi-validator/blob/master/docs/developer/authoring-new-validation-rules.md)
 
 7. Contributing to the code
 
