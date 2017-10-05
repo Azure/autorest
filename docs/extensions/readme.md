@@ -449,13 +449,13 @@ by using the following OpenAPI definition:
 "definitions": {
   "template": {
     "properties": {
-	    "name": {
-	      "type": "string"
-        },
-	    "properties": {
-	      "x-ms-client-flatten": true,
-	      "$ref": "#/definitions/templateProperties"
-	    } 
+      "name": {
+        "type": "string"
+      },
+      "properties": {
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/templateProperties"
+      } 
     }
   }
 }
@@ -491,12 +491,12 @@ by using the following OpenAPI definition:
 "definitions": {
   "template": {
     "properties": {
-	    "name": {
-	      "type": "string"
-        },
-	    "properties": {
-	      "x-ms-client-flatten": true,
-	      "$ref": "#/definitions/templateProperties"
+      "name": {
+        "type": "string"
+      },
+      "properties": {
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/templateProperties"
 	    } 
     }
   }
