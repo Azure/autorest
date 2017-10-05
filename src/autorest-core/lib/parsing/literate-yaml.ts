@@ -113,7 +113,11 @@ export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolea
   let expressionFence: string = '';
   try {
     if (!fence.includes("$(")) {
-      return safeEval<boolean>(fence);
+      try {
+        return safeEval<boolean>(fence);
+      } catch (e) {
+        return false;
+      }
     }
 
     expressionFence = `${resolveRValue(fence, "", contextObject, null, 2)}`;

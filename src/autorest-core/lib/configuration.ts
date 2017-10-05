@@ -639,7 +639,7 @@ export class Configuration {
     }
     // 4. default configuration
     if (includeDefault) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
+      const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
         createView(),
@@ -719,7 +719,7 @@ export class Configuration {
           }
 
           // merge config
-          const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
+          const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
           const blocks = await this.ParseCodeBlocks(
             await inputView.ReadStrict(CreateFileUri(await ext.extension.configurationPath)),
             tmpView,
