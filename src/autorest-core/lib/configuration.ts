@@ -305,7 +305,7 @@ export class ConfigurationView {
   public get Directives(): DirectiveView[] {
     const plainDirectives = ValuesOf<Directive>(this.config["directive"]);
     const declarations = this.config["declare-directive"] || {};
-    const expandDirective = (dir: Directive): Directive[] => {
+    const expandDirective = (dir: Directive): Iterable<Directive> => {
       const makro = Object.keys(dir).filter(makro => declarations[makro])[0];
       if (!makro) {
         return [dir]; // nothing to expand
@@ -323,7 +323,7 @@ export class ConfigurationView {
         const result = safeEval(declarations[makro], { $: parameter, $context: dir });
         return Array.isArray(result) ? result : [result];
       }).ToArray();
-      return makroResults.map((result: any) => Object.assign(result, dir));
+      return From(makroResults).SelectMany((result: any) => expandDirective(Object.assign(result, dir)));
     };
     // makro expansion
     return From(plainDirectives).SelectMany(expandDirective).Select(each => new DirectiveView(each)).ToArray();

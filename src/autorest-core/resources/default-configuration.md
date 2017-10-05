@@ -263,12 +263,14 @@ Formerly implemented in the AutoRest core itself, `set` is now just syntactic su
 ``` yaml
 declare-directive:
   set: >-
-    { transform: `return ${JSON.stringify($)}` };
+    { transform: `return ${JSON.stringify($)}` }
 ```
 
-## Operation selection
+## Operations
 
-Select operations by ID in different stages of the pipeline
+### Selection
+
+Select operations by ID at different stages of the pipeline.
 
 ``` yaml
 declare-directive:
@@ -282,4 +284,18 @@ declare-directive:
           return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
       }
     })()
+```
+
+## Removal
+
+Removes an operation by ID.
+
+``` yaml
+declare-directive:
+  remove-operation: >-
+    {
+      from: 'swagger-document',
+      "where-operation": $,
+      transform: 'return undefined'
+    }
 ```
