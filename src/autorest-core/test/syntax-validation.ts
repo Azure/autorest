@@ -31,7 +31,7 @@ import { Parse } from "../lib/parsing/literate-yaml";
     return messages;
   }
 
-  @test async "syntax errors"() {
+  @test @timeout(10000) async "syntax errors"() {
     // good
     assert.strictEqual((await this.GetLoaderErrors("{ a: 3 }")).length, 0);
     assert.strictEqual((await this.GetLoaderErrors("a: 3")).length, 0);
