@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace AutoRest.CSharp.LoadBalanced.Json
 {
-    public abstract class JsonConverterBase<TModel, TDto> : JsonConverter where TModel : struct 
+    public abstract class JsonConverterBase<TModel, TDto> : JsonConverter where TModel : struct
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
@@ -23,11 +23,11 @@ namespace AutoRest.CSharp.LoadBalanced.Json
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            TDto dto = reader.Value == null ? default(TDto) : (TDto) reader.Value;
+            TDto dto = reader.Value == null ? default(TDto) : (TDto)reader.Value;
             TModel model;
             return !TryParse(dto, out model) ? existingValue : model;
         }
-       
+
         public override bool CanConvert(Type objectType)
         {
             return objectType == typeof(TModel) || objectType == typeof(TModel?);

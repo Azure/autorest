@@ -2,7 +2,7 @@
 
 namespace AutoRest.CSharp.LoadBalanced.Json
 {
-    public class SummaryAttribute: Attribute
+    public class SummaryAttribute : Attribute
     {
         public SummaryAttribute(string summary)
         {

@@ -45,6 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BooleanConverter.cs" />
+    <Compile Include="JsonConverterDecorator.cs" />
+    <Compile Include="OverridableJsonConverterDecorator.cs" />
+    <Compile Include="FacilitiesAmenitiesConverter.cs" />
+    <Compile Include="BooleanStringConverter.cs" />
     <Compile Include="DateTimeStringConverter.cs" />
     <Compile Include="GuidStringConverter.cs" />
     <Compile Include="Int32ValueConverter.cs" />

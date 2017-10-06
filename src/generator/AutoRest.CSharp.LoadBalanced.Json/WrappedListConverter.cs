@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.LoadBalanced.Json
 
             if (list == null && objectType.IsClass)
             {
-                list = (IList<T>) Activator.CreateInstance(objectType);
+                list = (IList<T>)Activator.CreateInstance(objectType);
             }
             else
             {
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.LoadBalanced.Json
 
             if (reader.Read() && reader.TokenType == JsonToken.PropertyName)
             {
-                var propertyName = (string) reader.Value;
+                var propertyName = (string)reader.Value;
 
                 if (propertyName == _collectionPropertyName)
                 {
