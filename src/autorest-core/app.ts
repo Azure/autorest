@@ -257,43 +257,34 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   api.GeneratedFile.Subscribe((_, artifact) => artifacts.push(artifact));
   api.ClearFolder.Subscribe((_, folder) => clearFolders.push(folder));
 
-  try {
-    const config = (await api.view);
+  const config = (await api.view);
 
-    // maybe a resource schema batch process
-    if (config["resource-schema-batch"]) {
-      return await resourceSchemaBatch(api);
-    }
+  // maybe a resource schema batch process
+  if (config["resource-schema-batch"]) {
+    return await resourceSchemaBatch(api);
+  }
 
-    // maybe a merge process
-    if (config["merge"]) {
-      return await merge(api);
-    }
+  // maybe a merge process
+  if (config["merge"]) {
+    return await merge(api);
+  }
 
-    if (config["batch"]) {
-      await batch(api);
-    }
-    else {
-      const result = await api.Process().finish;
-      if (result !== true) {
-        throw result;
-      }
-    }
-
-    // perform file system operations.
-    for (const folder of clearFolders) {
-      try { await ClearFolder(folder); } catch (e) { }
-    }
-    for (const artifact of artifacts) {
-      await WriteString(artifact.uri, artifact.content);
+  if (config["batch"]) {
+    await batch(api);
+  }
+  else {
+    const result = await api.Process().finish;
+    if (result !== true) {
+      throw result;
     }
   }
-  catch (e) {
-    api.Message.Dispatch({
-      Channel: Channel.Fatal,
-      Text: e
-    });
-    exitcode = exitcode || 1;
+
+  // perform file system operations.
+  for (const folder of clearFolders) {
+    try { await ClearFolder(folder); } catch (e) { }
+  }
+  for (const artifact of artifacts) {
+    await WriteString(artifact.uri, artifact.content);
   }
 
   // return the exit code to the caller.
@@ -469,26 +460,22 @@ async function main() {
       exitcode = await currentMain(autorestArgs);
     }
 
-    // for relaxed profiling (assuming that no one calls `main` from electron... use AAAL!)
-    if (require("process").versions.electron) await new Promise(_ => { });
-
     process.exit(exitcode);
   } catch (e) {
+    // be very careful about the following check:
+    // - doing the inversion (instanceof Error) doesn't reliably work since that seems to return false on Errors marshalled from safeEval
     if (e instanceof Exception) {
-      console.log(e.message);
-
-      if (autorestArgs.indexOf("--debug")) {
+      if (autorestArgs.indexOf("--debug") !== -1) {
         console.log(e);
+      } else {
+        console.log(e.message);
       }
       process.exit(e.exitCode);
     }
 
-    if (e instanceof Error) {
+    if (e !== false) {
       console.error(e);
-      process.exit(1);
     }
-
-    console.error(e);
     process.exit(1);
   }
 }

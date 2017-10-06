@@ -46,6 +46,7 @@ output-artifact:
   - configuration.yaml
   - source-file-csharp
   - source-file-jsonrpcclient
+require: []
 use: []
 clear-output-folder: {}
 use-extension:
@@ -233,6 +234,24 @@ scope-cm/emitter:
   output-uri-expr: |
     "code-model-v1"
 client-side-validation: true
+declare-directive:
+  set: '{ transform: `return ${JSON.stringify($)}` }'
+  where-operation: |-
+    (() => {
+      switch ($context.from) {
+        case "code-model-v1":
+          return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
+        case "swagger-document":
+        default:
+          return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
+      }
+    })()
+  remove-operation: |-
+    {
+      from: 'swagger-document',
+      "where-operation": $,
+      transform: 'return undefined'
+    }
 scope-csharp/emitter:
   input-artifact: source-file-csharp
   output-uri-expr: $key

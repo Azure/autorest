@@ -22,10 +22,11 @@ import { exists } from './ref/async';
 import { CancellationToken, CancellationTokenSource } from './ref/cancellation';
 import { stringify } from './ref/jsonpath';
 import { From } from './ref/linq';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ResolveUri } from './ref/uri';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from './ref/uri';
 import { BlameTree } from './source-map/blaming';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { TryDecodeEnhancedPositionFromName } from './source-map/source-map';
+import { safeEval } from './ref/safe-eval';
 
 const untildify: (path: string) => string = require("untildify");
 
@@ -37,9 +38,11 @@ export interface AutoRestConfigurationImpl {
   "input-file"?: string[] | string;
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
+  "declare-directive"?: { [name: string]: string };
   "output-artifact"?: string[] | string;
   "message-format"?: "json";
   "use-extension"?: { [extensionName: string]: string };
+  "require"?: string[] | string;
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
@@ -198,7 +201,6 @@ export class ConfigurationView {
     /* @internal */public configFileFolderUri: string,
     ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
   ) {
-
     // TODO: fix configuration loading, note that there was no point in passing that DataStore used
     // for loading in here as all connection to the sources is lost when passing `Array<AutoRestConfigurationImpl>` instead of `DataHandleRead`s...
     // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
@@ -207,6 +209,7 @@ export class ConfigurationView {
       "directive": [],
       "input-file": [],
       "output-artifact": [],
+      "require": [],
       "use": [],
     };
 
@@ -235,7 +238,6 @@ export class ConfigurationView {
     } else {
       this.config = this.rawConfig;
     }
-
     this.suppressor = new Suppressor(this);
     this.Message({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
   }
@@ -244,7 +246,7 @@ export class ConfigurationView {
     return Object.getOwnPropertyNames(this.config);
   }
 
-  public Dump(title: string = "") {
+  public Dump(title: string = ""): void {
     console.log(`\n${title}\n===================================`)
     for (const each of Object.getOwnPropertyNames(this.config)) {
       console.log(`${each} : ${(<any>this.config)[each]}`);
@@ -294,9 +296,37 @@ export class ConfigurationView {
     });
   }
 
-  public get Directives(): Iterable<DirectiveView> {
-    return From(ValuesOf<Directive>(this.config["directive"]))
-      .Select(each => new DirectiveView(each));
+  public get IncludedConfigurationFiles(): string[] {
+    return From<string>(ValuesOf<string>(this.config["require"]))
+      .Select(each => this.ResolveAsPath(each))
+      .ToArray();
+  }
+
+  public get Directives(): DirectiveView[] {
+    const plainDirectives = ValuesOf<Directive>(this.config["directive"]);
+    const declarations = this.config["declare-directive"] || {};
+    const expandDirective = (dir: Directive): Iterable<Directive> => {
+      const makro = Object.keys(dir).filter(makro => declarations[makro])[0];
+      if (!makro) {
+        return [dir]; // nothing to expand
+      }
+      // prepare directive
+      let parameters = (dir as any)[makro];
+      if (!Array.isArray(parameters)) {
+        parameters = [parameters];
+      }
+      dir = { ...dir };
+      delete (dir as any)[makro];
+      // call makro
+      const makroResults: any = From(parameters).SelectMany(parameter => {
+        // console.log(new Error().stack);
+        const result = safeEval(declarations[makro], { $: parameter, $context: dir });
+        return Array.isArray(result) ? result : [result];
+      }).ToArray();
+      return From(makroResults).SelectMany((result: any) => expandDirective(Object.assign(result, dir)));
+    };
+    // makro expansion
+    return From(plainDirectives).SelectMany(expandDirective).Select(each => new DirectiveView(each)).ToArray();
   }
 
   public get InputFileUris(): string[] {
@@ -390,7 +420,7 @@ export class ConfigurationView {
             return [s];
           }
 
-          return blameTree.BlameLeafs().map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
+          return blameTree.BlameLeafs().map(r => <SourceLocation>{ document: r.source, Position: { ...TryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column } });
         });
 
         //console.log("---");
@@ -484,7 +514,7 @@ export class ConfigurationView {
 
 export class Configuration {
   public constructor(
-    private fileSystem?: IFileSystem,
+    private fileSystem: IFileSystem = new RealFileSystem(),
     private configFileOrFolderUri?: string,
   ) { }
 
@@ -516,7 +546,7 @@ export class Configuration {
   private async DesugarRawConfig(configs: any): Promise<any> {
     // shallow copy
     configs = Object.assign({}, configs);
-    configs["use-extension"] = Object.assign({}, configs["use-extension"]);
+    configs["use-extension"] = { ...configs["use-extension"] };
 
     if (configs.hasOwnProperty('licence-header')) {
       configs['license-header'] = configs['licence-header'];
@@ -560,23 +590,54 @@ export class Configuration {
       : null;
     const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, "./") : (this.configFileOrFolderUri || "file:///");
 
-    const createView = () => new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments);
-
     const configSegments: any[] = [];
+    const createView = () => new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments);
     const addSegments = async (configs: any[]): Promise<void> => { configSegments.push(...await this.DesugarRawConfigs(configs)); };
 
     // 1. overrides (CLI, ...)
     await addSegments(configs);
     // 2. file
     if (configFileUri !== null) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem as IFileSystem);
+      const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(configFileUri),
         createView(),
         "config");
       await addSegments(blocks);
     }
-    // 3. default configuration
+    // 3. resolve 'require'd configuration
+    const addedConfigs = new Set<string>();
+    while (true) {
+      const tmpView = createView();
+      const additionalConfigs = tmpView.IncludedConfigurationFiles.filter(ext => !addedConfigs.has(ext));
+      if (additionalConfigs.length === 0) {
+        break;
+      }
+      // acquire additional configs
+      for (const additionalConfig of additionalConfigs) {
+        try {
+          messageEmitter.Message.Dispatch({
+            Channel: Channel.Verbose,
+            Text: `Including configuration file '${additionalConfig}'`
+          });
+          addedConfigs.add(additionalConfig);
+          // merge config
+          const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
+          const blocks = await this.ParseCodeBlocks(
+            await inputView.ReadStrict(additionalConfig),
+            tmpView,
+            `require-config-${additionalConfig}`);
+          await addSegments(blocks);
+        } catch (e) {
+          messageEmitter.Message.Dispatch({
+            Channel: Channel.Fatal,
+            Text: `Failed to acquire 'require'd configuration '${additionalConfig}'`
+          });
+          throw e;
+        }
+      }
+    }
+    // 4. default configuration
     if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
       const blocks = await this.ParseCodeBlocks(
@@ -585,7 +646,7 @@ export class Configuration {
         "default-config");
       await addSegments(blocks);
     }
-    // 4. resolve externals
+    // 5. resolve extensions
     const extMgr = await this.extensionManager;
     const addedExtensions = new Set<string>();
     while (true) {
@@ -680,8 +741,21 @@ export class Configuration {
   public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders: boolean = false): Promise<string | null> {
     const originalConfigFileOrFolderUri = configFileOrFolderUri;
 
+    //
     if (!configFileOrFolderUri || configFileOrFolderUri.endsWith(".md")) {
       return configFileOrFolderUri;
+    }
+
+    // try querying the Uri directly
+    if (ExistsUri(configFileOrFolderUri)) {
+      try {
+        const content = await fileSystem.ReadFile(configFileOrFolderUri);
+        if (content.indexOf(Constants.MagicString) > -1) {
+          return configFileOrFolderUri;
+        }
+      } catch (e) {
+        // that didn't work... try next
+      }
     }
 
     // search for a config file, walking up the folder tree

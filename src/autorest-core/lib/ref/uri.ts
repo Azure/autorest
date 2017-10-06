@@ -122,10 +122,17 @@ export function GetFilenameWithoutExtension(uri: string): string {
 }
 
 export function ToRawDataUrl(uri: string): string {
-  // special URI handlers                                                                                        
-  // - GitHub                                                                                                    
-  if (uri.startsWith("https://github")) {
-    uri = uri.replace(/^https?:\/\/(github.com)(\/[^\/]+\/[^\/]+\/)(blob|tree)\/(.*)/ig, "https://raw.githubusercontent.com$2$4");
+  // special URI handlers (the 'if's shouldn't be necessary but provide some additional isolation in case there is anything wrong with one of the regexes)
+  // - GitHub repo
+  if (uri.startsWith("https://github.com")) {
+    uri = uri.replace(/^https?:\/\/(github.com)(\/[^\/]+\/[^\/]+\/)(blob|tree)\/(.*)$/ig, "https://raw.githubusercontent.com$2$4");
+  }
+  // - GitHub gist
+  if (uri.startsWith("gist://")) {
+    uri = uri.replace(/^gist:\/\/([^\/]+\/[^\/]+)$/ig, "https://gist.githubusercontent.com/$1/raw/");
+  }
+  if (uri.startsWith("https://gist.github.com")) {
+    uri = uri.replace(/^https?:\/\/gist.github.com\/([^\/]+\/[^\/]+)$/ig, "https://gist.githubusercontent.com/$1/raw/");
   }
 
   return uri;
@@ -203,7 +210,7 @@ function isAccessibleFile(localPath: string) {
 function FileUriToLocalPath(fileUri: string): string {
   const uri = parse(fileUri);
   if (!fileUri.startsWith("file:///")) {
-    throw new Error((!fileUri.startsWith("file://")
+    throw new Error(`Cannot write data to '${fileUri}'. ` + (!fileUri.startsWith("file://")
       ? `Protocol '${uri.protocol}' not supported for writing.`
       : `UNC paths not supported for writing.`) + " Make sure to specify a local, absolute path as target file/folder.");
   }

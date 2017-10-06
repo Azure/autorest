@@ -6,7 +6,7 @@
 export class Exception extends Error {
   constructor(message: string, public exitCode: number = 1) {
 
-    super(message.indexOf('[') == -1 ? `[Exception] ${message}` : message);
+    super(message.includes('[') ? message : `[Exception] ${message}`);
 
     Object.setPrototypeOf(this, Exception.prototype);
   }

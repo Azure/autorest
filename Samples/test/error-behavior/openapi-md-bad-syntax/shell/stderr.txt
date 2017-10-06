@@ -2,8 +2,6 @@
     - /Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md:59:15
     - /Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md:65:18
     - /Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md:65:4
-   at ...
-{ Error: [OperationAbortedException] Error occurred. Exiting.
 ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
 ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
 ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry

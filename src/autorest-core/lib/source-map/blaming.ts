@@ -17,10 +17,7 @@ export class BlameTree {
     const enhanced = TryDecodeEnhancedPositionFromName(position.name);
     if (enhanced !== undefined) {
       for (const blame of blames) {
-        blame.name = EncodeEnhancedPositionInName(blame.name, Object.assign(
-          {},
-          enhanced,
-          TryDecodeEnhancedPositionFromName(blame.name) || {}));
+        blame.name = EncodeEnhancedPositionInName(blame.name, { ...enhanced, ...TryDecodeEnhancedPositionFromName(blame.name) });
       }
     }
 
