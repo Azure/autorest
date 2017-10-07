@@ -73,7 +73,7 @@ nodejs:
 
 ### Python
 ``` yaml 
-pyhton:
+python:
   - output-folder: Python
   - output-folder: Azure.Python
     azure-arm: true
