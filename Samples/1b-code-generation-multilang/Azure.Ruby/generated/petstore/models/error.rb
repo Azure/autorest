@@ -13,7 +13,6 @@ module cowstore
 
       include MsRestAzure
 
-      include MsRest::JSONable
       # @return [Integer]
       attr_accessor :code
 

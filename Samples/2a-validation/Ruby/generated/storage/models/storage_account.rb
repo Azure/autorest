@@ -8,11 +8,10 @@ module Storage
     #
     # The storage account.
     #
-    class StorageAccount < MsRestAzure::Resource
+    class StorageAccount < Resource
 
       include MsRestAzure
 
-      include MsRest::JSONable
       # @return [ProvisioningState] Gets the status of the storage account at
       # the time the operation was called. Possible values include: 'Creating',
       # 'ResolvingDNS', 'Succeeded'
