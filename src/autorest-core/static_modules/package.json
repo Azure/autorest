@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@microsoft.azure/extension": "~1.1.5",
+    "@microsoft.azure/extension": "~1.2.8",
     "@microsoft.azure/async-io": "~1.0.21",
     "commonmark": "^0.27.0",
     "file-url": "^2.0.2",
