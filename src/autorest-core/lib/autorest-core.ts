@@ -212,11 +212,12 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
-        this.Message.Dispatch({ Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` });
-
+        const message = { Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` };
         if (e instanceof Exception) {
+          message.Channel = Channel.Fatal;
           e = false;
         }
+        this.Message.Dispatch(message);
 
         this.Finished.Dispatch(e);
         if (view) {
