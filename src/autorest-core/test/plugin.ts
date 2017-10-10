@@ -29,7 +29,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
 
 @suite class Plugins {
   // TODO: remodel if we figure out acquisition story
-  @test @skip @timeout(0) async "Validation Tools"() {
+  @test @skip async "Validation Tools"() {
     const autoRest = new AutoRest(new RealFileSystem());
     autoRest.AddConfiguration({ "input-file": "https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json" });
     autoRest.AddConfiguration({ "model-validator": true });
@@ -50,7 +50,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
     assert.strictEqual(errorMessages.length, expectedNumErrors);
   }
 
-  @test @skip @timeout(10000) async "AutoRest.dll Modeler"() {
+  @test @skip async "AutoRest.dll Modeler"() {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
@@ -76,7 +76,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
     assert.notEqual(codeModel.indexOf("isConstant"), -1);
   }
 
-  @test @skip @timeout(10000) async "AutoRest.dll Generator"() {
+  @test @skip async "AutoRest.dll Generator"() {
     const autoRest = new AutoRest(new RealFileSystem());
     autoRest.AddConfiguration({
       namespace: "SomeNamespace",
@@ -121,7 +121,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
   }
 
   // SKIPPING because this is using a local path for now
-  @test @skip @timeout(0) async "custom plugin module"() {
+  @test @skip async "custom plugin module"() {
     const cancellationToken = CancellationToken.None;
     const dataStore = new DataStore(cancellationToken);
     const scopeInput = dataStore.GetReadThroughScope(new RealFileSystem());

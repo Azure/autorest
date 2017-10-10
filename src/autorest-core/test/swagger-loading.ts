@@ -9,7 +9,7 @@ import { RealFileSystem } from "../lib/file-system";
 import { Channel, Message } from "../lib/message";
 
 @suite class SwaggerLoading {
-  @test @timeout(0) async "external reference resolving"() {
+  @test async "external reference resolving"() {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
@@ -25,7 +25,7 @@ import { Channel, Message } from "../lib/message";
     assert.strictEqual(swaggerObj.definitions.SubResource != null, true);
   }
 
-  @test @timeout(0) async "composite Swagger"() {
+  @test async "composite Swagger"() {
     const dataStore = new DataStore();
 
     const config = await CreateConfiguration("file:///", dataStore.GetReadThroughScope(new RealFileSystem()),
