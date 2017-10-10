@@ -37,6 +37,7 @@ module Storage
     autoload :Endpoints,                                          'generated/storage/models/endpoints.rb'
     autoload :UsageListResult,                                    'generated/storage/models/usage_list_result.rb'
     autoload :CheckNameAvailabilityResult,                        'generated/storage/models/check_name_availability_result.rb'
+    autoload :Resource,                                           'generated/storage/models/resource.rb'
     autoload :StorageAccount,                                     'generated/storage/models/storage_account.rb'
     autoload :Reason,                                             'generated/storage/models/reason.rb'
     autoload :AccountType,                                        'generated/storage/models/account_type.rb'

@@ -42,16 +42,16 @@ export class AutoRest extends EventEmitter {
 
   public static async LiterateToJson(content: string): Promise<string> {
     try {
-    let autorest = new AutoRest({
-      EnumerateFileUris: async function (folderUri: string): Promise<Array<string>> { return []; },
+      let autorest = new AutoRest({
+        EnumerateFileUris: async function (folderUri: string): Promise<Array<string>> { return []; },
         ReadFile: async (f: string): Promise<string> => f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"
-    });
-    let result = "";
+      });
+      let result = "";
       autorest.AddConfiguration({ "input-file": "none:///empty-file.md", "output-artifact": ["swagger-document"] });
-    autorest.GeneratedFile.Subscribe((source, artifact) => {
-      result = artifact.content;
-    });
-    // run autorest and wait.
+      autorest.GeneratedFile.Subscribe((source, artifact) => {
+        result = artifact.content;
+      });
+      // run autorest and wait.
 
       await (await autorest.Process()).finish;
       return result;
@@ -212,25 +212,22 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
-        if (e instanceof Error) {
-          /* if (!(e instanceof OperationCanceledException)) {
-            console.error(e.message);
-          } */
-          this.Message.Dispatch({ Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` });
-          this.Finished.Dispatch(e);
-
+        if (e instanceof Exception) {
+          // console.error(e);
+          this.Finished.Dispatch(false);
           if (view) {
             view.messageEmitter.removeAllListeners();
           }
-          return e;
+          return false;
         }
 
-        // console.error(e);
-        this.Finished.Dispatch(false);
+        this.Message.Dispatch({ Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` });
+        this.Finished.Dispatch(e);
+
         if (view) {
           view.messageEmitter.removeAllListeners();
         }
-        return false;
+        return e;
       }
     };
     return {

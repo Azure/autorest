@@ -5,9 +5,8 @@
 import { MessageEmitter } from './configuration';
 import { ConfigurationView } from './autorest-core';
 import { Channel } from "./message";
-import { EnumerateFiles } from "./ref/uri";
+import { EnumerateFiles, ToRawDataUrl, ResolveUri, ReadUri, WriteString } from './ref/uri';
 import { From } from "./ref/linq";
-import { ResolveUri, ReadUri, WriteString } from "./ref/uri";
 import * as Constants from './constants';
 
 export interface IFileSystem {
@@ -70,6 +69,7 @@ export class RealFileSystem implements IFileSystem {
 }
 
 // handles:
+// - GitHub URI adjustment
 // - GitHub auth
 export class EnhancedFileSystem implements IFileSystem {
   public constructor(private githubAuthToken?: string) {
@@ -81,6 +81,8 @@ export class EnhancedFileSystem implements IFileSystem {
     ]);
   }
   async ReadFile(uri: string): Promise<string> {
+    uri = ToRawDataUrl(uri);
+
     const headers: { [key: string]: string } = {};
 
     // check for GitHub OAuth token

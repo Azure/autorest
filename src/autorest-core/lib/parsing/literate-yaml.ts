@@ -112,11 +112,19 @@ export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolea
   let guardResult = false;
   let expressionFence: string = '';
   try {
+    if (!fence.includes("$(")) {
+      try {
+        return safeEval<boolean>(fence);
+      } catch (e) {
+        return false;
+      }
+    }
+
     expressionFence = `${resolveRValue(fence, "", contextObject, null, 2)}`;
     // is there unresolved values?  May be old-style. Or the values aren't defined. 
 
     // Let's run it only if there are no unresolved values for now. 
-    if (expressionFence.indexOf("$(") == -1) {
+    if (!expressionFence.includes("$(")) {
       return safeEval<boolean>(expressionFence);
     }
   } catch (E) {
@@ -126,7 +134,7 @@ export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolea
   // is this a single $( ... ) expression ?
   match = /^\$\((.*)\)$/.exec(fence.trim());
 
-  const guardExpression = match && match[1].indexOf("$(") == -1 && match[1];
+  const guardExpression = match && !match[1].includes("$(") && match[1];
   if (!guardExpression) {
     // Nope. this isn't an old style expression.
     // at best, it can be an expression that doesn't have all the values resolved.
@@ -135,7 +143,7 @@ export function EvaluateGuard(rawFenceGuard: string, contextObject: any): boolea
   }
 
   // fall back to original behavior, where the whole expression is in the $( ... )
-  const context = Object.assign({ $: contextObject }, contextObject);
+  const context = { $: contextObject, ...contextObject };
 
   try {
     guardResult = safeEval<boolean>(guardExpression, context);

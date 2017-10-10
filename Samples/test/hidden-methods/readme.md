@@ -21,7 +21,7 @@ csharp:
   - output-folder: ClientFancy
     directive:
       from: code-model-v1
-      where: $.operations[*].methods[?(@.serializedName == "Cowbell_Add")]
+      where-operation: Cowbell_Add
       transform: $.hidden = true
 ```
 
