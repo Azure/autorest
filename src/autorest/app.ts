@@ -7,6 +7,10 @@ if (process.argv.indexOf("--no-static-loader") == -1) {
   require("./static-loader").initialize();
 }
 
+if (process.argv.indexOf("--no-upgrade-check") != -1) {
+  process.argv.push("--skip-upgrade-check");
+}
+
 import { isFile } from "@microsoft.azure/async-io";
 import { cli, enhanceConsole } from "@microsoft.azure/console";
 import { Exception, LazyPromise } from "@microsoft.azure/polyfill";
@@ -63,6 +67,12 @@ const args = cli
     type: "boolean",
     group: "### Informational",
   })
+  .option("skip-upgrade-check", {
+    describe: "disable check for new version of bootstrapper",
+    type: "boolean",
+    default: false,
+    group: "### Installation",
+  })
   .option("reset", {
     describe: "removes all autorest extensions and downloads the latest version of the autorest-core extension",
     type: "boolean",
@@ -84,11 +94,6 @@ const args = cli
     type: "boolean",
     group: "### Installation",
   })
-  .option("no-upgrade-check", {
-    describe: "`disable check for new version of bootstrapper`",
-    type: "boolean",
-    group: "### Installation",
-  })
   .option("version", {
     describe: "use the specified version of the **autorest-core** extension",
     type: "string",
@@ -105,7 +110,7 @@ let force = args.force || false;
 
 /** Check if there is an update for the bootstrapper available. */
 const checkBootstrapper = new LazyPromise(async () => {
-  if (await networkEnabled && !args['no-upgrade-check']) {
+  if (await networkEnabled && !args['skip-upgrade-check']) {
     try {
       const pkg = await (await extensionManager).findPackage("autorest", preview ? "preview" : "latest");
       if (gt(pkg.version, pkgVersion)) {
