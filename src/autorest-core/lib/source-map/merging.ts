@@ -61,7 +61,7 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
     }
   }
 
-  throw new Error(`'${stringify(path)}' has incomaptible values (${yaml.Stringify(a)}, ${yaml.Stringify(b)}).`);
+  throw new Error(`'${stringify(path)}' has incompatible values (${yaml.Stringify(a)}, ${yaml.Stringify(b)}).`);
 }
 
 export function ShallowCopy(input: any, ...filter: Array<string>): any {
