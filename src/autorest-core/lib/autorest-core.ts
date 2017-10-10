@@ -214,6 +214,7 @@ export class AutoRest extends EventEmitter {
       } catch (e) {
         const message = { Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` };
         if (e instanceof Exception) {
+          // idea: don't throw exceptions, just visibly log them and return false
           message.Channel = Channel.Fatal;
           e = false;
         }
