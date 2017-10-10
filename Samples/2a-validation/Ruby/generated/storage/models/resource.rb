@@ -6,11 +6,21 @@
 module Storage
   module Models
     #
-    # The parameters to provide for the account.
+    # Model object.
     #
-    class StorageAccountCreateParameters
+    #
+    class Resource
 
       include MsRestAzure
+
+      # @return [String] Resource Id
+      attr_accessor :id
+
+      # @return [String] Resource name
+      attr_accessor :name
+
+      # @return [String] Resource type
+      attr_accessor :type
 
       # @return [String] Resource location
       attr_accessor :location
@@ -18,26 +28,45 @@ module Storage
       # @return [Hash{String => String}] Resource tags
       attr_accessor :tags
 
-      # @return [AccountType] Gets or sets the account type. Possible values
-      # include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
-      # 'Standard_RAGRS', 'Premium_LRS'
-      attr_accessor :account_type
-
 
       #
-      # Mapper for StorageAccountCreateParameters class as Ruby Hash.
+      # Mapper for Resource class as Ruby Hash.
       # This will be used for serialization/deserialization.
       #
       def self.mapper()
         {
           required: false,
-          serialized_name: 'StorageAccountCreateParameters',
+          serialized_name: 'Resource',
           type: {
             name: 'Composite',
-            class_name: 'StorageAccountCreateParameters',
+            class_name: 'Resource',
             model_properties: {
+              id: {
+                required: false,
+                read_only: true,
+                serialized_name: 'id',
+                type: {
+                  name: 'String'
+                }
+              },
+              name: {
+                required: false,
+                read_only: true,
+                serialized_name: 'name',
+                type: {
+                  name: 'String'
+                }
+              },
+              type: {
+                required: false,
+                read_only: true,
+                serialized_name: 'type',
+                type: {
+                  name: 'String'
+                }
+              },
               location: {
-                required: true,
+                required: false,
                 serialized_name: 'location',
                 type: {
                   name: 'String'
@@ -55,14 +84,6 @@ module Storage
                         name: 'String'
                       }
                   }
-                }
-              },
-              account_type: {
-                required: true,
-                serialized_name: 'properties.accountType',
-                type: {
-                  name: 'Enum',
-                  module: 'AccountType'
                 }
               }
             }

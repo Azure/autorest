@@ -1,26 +1,21 @@
-FROM ubuntu:16.04
+FROM ubuntu:17.04
 
-MAINTAINER lmazuel
-
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+LABEL maintainer="fearthecowboy" 
 
 # Required for install
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl libunwind8 libicu57
 
 # NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
 	apt-get update && apt-get install -y nodejs && \
 	npm install npm@latest -g
 
-# Dotnet
-RUN echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" | tee /etc/apt/sources.list.d/dotnetdev.list && \
-	apt-get update && apt-get install -y dotnet-dev-1.0.0-preview2.1-003177
-
 # Autorest
-RUN npm install -g autorest
-RUN autorest --help
+RUN npm install -g autorest@preview
+RUN autorest --reset --allow-no-input --csharp --ruby --python --java --go --nodejs --typescript --azure-validator --preview
 
 # Set the locale to UTF-8
+RUN apt-get clean && apt-get update && apt-get install -y locales
 RUN locale-gen en_US.UTF-8  
 ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
