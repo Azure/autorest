@@ -45,13 +45,13 @@ import { Message } from "../lib/message";
     assert.ok(ms2 - ms1 < 500);
   }
 
-  @test @timeout(60000) async "immediate"() { await this.TestCancellationAfter(0); }
-  @test @timeout(60000) async "after 100ms"() { await this.TestCancellationAfter(100); }
-  @test @timeout(60000) async "after 1s"() { await this.TestCancellationAfter(1000); }
-  @test @timeout(60000) async "after 2s"() { await this.TestCancellationAfter(2000); }
-  @test @timeout(60000) async "after 3s"() { await this.TestCancellationAfter(3000); }
-  @test @timeout(60000) async "after 5s"() { await this.TestCancellationAfter(5000); }
-  @test @timeout(60000) async "after 8s"() { await this.TestCancellationAfter(8000); }
-  @test @timeout(60000) async "after 10s"() { await this.TestCancellationAfter(10000); }
-  @test @timeout(60000) async "after 15s"() { await this.TestCancellationAfter(15000); }
+  @test async "immediate"() { await this.TestCancellationAfter(0); }
+  @test async "after 100ms"() { await this.TestCancellationAfter(100); }
+  @test async "after 1s"() { await this.TestCancellationAfter(1000); }
+  @test async "after 2s"() { await this.TestCancellationAfter(2000); }
+  @test async "after 3s"() { await this.TestCancellationAfter(3000); }
+  @test async "after 5s"() { await this.TestCancellationAfter(5000); }
+  @test async "after 8s"() { await this.TestCancellationAfter(8000); }
+  @test async "after 10s"() { await this.TestCancellationAfter(10000); }
+  @test async "after 15s"() { await this.TestCancellationAfter(15000); }
 }

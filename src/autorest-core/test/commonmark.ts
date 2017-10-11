@@ -19,7 +19,7 @@ import { PlainTextVersion } from "../lib/pipeline/commonmark-documentation";
     return new Parser().parse(rawCommonmark);
   }
 
-  @test @timeout(30000) async "PlainTextVersion"() {
+  @test async "PlainTextVersion"() {
     const compare = (raw: string, expected: string) =>
       assert.strictEqual(PlainTextVersion(this.Parse(raw)), expected);
 
@@ -33,7 +33,7 @@ import { PlainTextVersion } from "../lib/pipeline/commonmark-documentation";
     compare("Even <code>fancier</code> <i>html</i> tags<br> and<hr> stuff", "Even fancier html tags and stuff");
   }
 
-  @test @timeout(60000) async "resolve markdown descriptions"() {
+  @test async "resolve markdown descriptions"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
     autoRest.AddConfiguration({ "output-artifact": "swagger-document" });
 

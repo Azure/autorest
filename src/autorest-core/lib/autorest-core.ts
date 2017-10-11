@@ -212,18 +212,15 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
+        const message = { Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` };
         if (e instanceof Exception) {
-          // console.error(e);
-          this.Finished.Dispatch(false);
-          if (view) {
-            view.messageEmitter.removeAllListeners();
-          }
-          return false;
+          // idea: don't throw exceptions, just visibly log them and return false
+          message.Channel = Channel.Fatal;
+          e = false;
         }
+        this.Message.Dispatch(message);
 
-        this.Message.Dispatch({ Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` });
         this.Finished.Dispatch(e);
-
         if (view) {
           view.messageEmitter.removeAllListeners();
         }

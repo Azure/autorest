@@ -18,9 +18,17 @@ task 'regenerate', 'regenerate samples', (done) ->
             ShellString(stdout).to(path.join(outputFolder, "stdout.txt"))
             ShellString(stderr).to(path.join(outputFolder, "stderr.txt"))
 
-            # sanitize generated files (source maps and shell stuff may contain file:/// paths)
+            # sanitize generated files
+
+            ## clear out generated sources; it's language owner's job to ensure quality of the content,
+            ## we just check for existence and basic structure to detect core problems (URI resolution, file emitting, ...) 
             (find path.join(each.path, ".."))
-              .filter((file) -> file.match(/.(map|txt)$/))
+              .filter((file) -> file.match(/\.(cs|go|java|js|ts|php|py|rb)$/))
+              .forEach((file) -> "SRC".to(file))
+            
+            ## source maps and shell stuff (contains platform/folder dependent stuff)
+            (find path.join(each.path, ".."))
+              .filter((file) -> file.match(/\.(map|txt)$/))
               .forEach((file) -> 
                 sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
                 sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
@@ -32,7 +40,7 @@ task 'regenerate', 'regenerate samples', (done) ->
               )
             
             (find path.join(each.path, ".."))
-              .filter((file) -> file.match(/.(yaml)$/))
+              .filter((file) -> file.match(/\.(yaml)$/))
               .forEach((file) -> 
                 sed "-i", /.*autorest[a-zA-Z0-9]*.src.*/ig, "", file  # source file names
               )

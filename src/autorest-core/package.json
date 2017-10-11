@@ -20,7 +20,7 @@
   "homepage": "https://github.com/Azure/autorest/readme.md",
   "main": "./dist/main.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./dist/test",
+    "test": "./node_modules/.bin/mocha ./dist/test --timeout 0",
     "prepare": "shx mkdir -p ./dist/ && cd ./static_modules && npm install",
     "prepublishonly": "gulp build"
   },

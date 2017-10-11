@@ -8,7 +8,7 @@ import { Message, Channel } from "../lib/message";
 
 @suite class Directive {
 
-  @test @timeout(0) async "suppression"() {
+  @test async "suppression"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
     autoRest.Message.Subscribe((_, m) => m.Channel === Channel.Fatal ? console.error(m.Text) : "");
 
@@ -86,7 +86,7 @@ import { Message, Channel } from "../lib/message";
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties", from: "swagger.md" });
   }
 
-  @test @skip @timeout(0) async "set descriptions on different levels"() {
+  @test @skip async "set descriptions on different levels"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
 
     const GenerateCodeModel = async (config: any) => {
