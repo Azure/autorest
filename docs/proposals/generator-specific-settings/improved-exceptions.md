@@ -118,7 +118,7 @@
                 => await HandleErrorResponse<NotFoundError>(_httpRequest, _httpResponse, string.Format("Operation failed, returned status code '{0}'", 404));
 
     // T is an exception class derived from HttpRestException class
-    private async Task HandleErrorResponse<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, string errorMessage) where T : HttpRestException, new()
+    private async Task HandleErrorResponse<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, string errorMessage) where T : HttpRestException
     {
         string _responseContent = null;
         // test response
@@ -137,7 +137,7 @@
 
         if (ex == null)
         {
-            ex = new T();
+            ex = System.Activator.CreateInstance(typeof(T), new string[] { errorMessage }) as T;
         }
 
         ex.Request = new HttpRequestMessageWrapper(_httpRequest, null);
@@ -183,6 +183,11 @@
     
     An example directive to specify custom base class is as below:
     ```
-    blah
+    directive:
+        from: code-model-v1
+        where: $.definitions["NotFoundError"]
+        transform: >
+            $.BaseModelType = "CustomBaseException";
+        reason: We want to model our own base classes
     ```
-    
+    The code generated will substitute `HttpRestException` with `CustomBaseException` in the code above. This can be extended to non-error models too.
