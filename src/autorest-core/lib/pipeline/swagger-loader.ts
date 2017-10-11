@@ -27,6 +27,10 @@ import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 
 let ctr = 0;
 
+function isReferenceNode(node: YAMLNodeWithPath): boolean {
+  return node.path[node.path.length - 1] === "$ref" && typeof node.node.value === "string";
+}
+
 async function EnsureCompleteDefinitionIsPresent(
   config: ConfigurationView,
   inputScope: DataSource,
@@ -66,7 +70,7 @@ async function EnsureCompleteDefinitionIsPresent(
   if (entityType == null || modelName == null) {
     // external references
     for (const node of Descendants(currentDoc)) {
-      if (node.path[node.path.length - 1] === "$ref") {
+      if (isReferenceNode(node)) {
         if (!(node.node.value as string).startsWith("#")) {
           references.push(node);
         }
@@ -76,7 +80,7 @@ async function EnsureCompleteDefinitionIsPresent(
     // references within external file
     const model = ResolveRelativeNode(currentDoc, currentDoc, [entityType, modelName]);
     for (const node of Descendants(model, [entityType, modelName])) {
-      if (node.path[node.path.length - 1] === "$ref") {
+      if (isReferenceNode(node)) {
         references.push(node);
       }
     }
@@ -157,7 +161,7 @@ async function EnsureCompleteDefinitionIsPresent(
     const dependentRefs: YAMLNodeWithPath[] = [];
     for (const node of Descendants(currentDoc)) {
       const path = node.path;
-      if (path.length > 3 && path[path.length - 3] === "allOf" && path[path.length - 1] === "$ref" && (node.node.value as string).indexOf(reference) !== -1) {
+      if (path.length > 3 && path[path.length - 3] === "allOf" && isReferenceNode(node) && (node.node.value as string).indexOf(reference) !== -1) {
         dependentRefs.push(node);
       }
     }
@@ -189,7 +193,7 @@ async function StripExternalReferences(swagger: DataHandle, sink: DataSink): Pro
   const ast = CloneAst(swagger.ReadYamlAst());
   const mapping = IdentitySourceMapping(swagger.key, ast);
   for (const node of Descendants(ast)) {
-    if (node.path[node.path.length - 1] === "$ref") {
+    if (isReferenceNode(node)) {
       const parts = (node.node.value as string).split("#");
       if (parts.length === 2) {
         node.node.value = "#" + (node.node.value as string).split("#")[1];

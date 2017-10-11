@@ -264,11 +264,6 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
     return await resourceSchemaBatch(api);
   }
 
-  // maybe a merge process
-  if (config["merge"]) {
-    return await merge(api);
-  }
-
   if (config["batch"]) {
     await batch(api);
   }
@@ -289,19 +284,6 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
 
   // return the exit code to the caller.
   return exitcode;
-}
-
-async function merge(api: AutoRest): Promise<number> {
-  // get the configuration
-  const config = await api.view;
-
-  for (const configFile of config.InputFileUris) {
-    // let's get out of here if things are not going well.
-    if (exitcode > 0) {
-      break;
-    }
-  }
-  return 0;
 }
 
 function shallowMerge(existing: any, more: any) {
