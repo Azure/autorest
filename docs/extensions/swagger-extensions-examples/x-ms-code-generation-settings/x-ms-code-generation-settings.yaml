@@ -4,10 +4,17 @@ info:
   title: PetStore Inc.
   description: Pets online.
   version: 0.0.0
-consumes:
-- application/json
-produces:
-- application/json
+  x-ms-code-generation-settings:
+    useDateTimeOffset: true
+    internalConstructors: true
+x-ms-parameterized-host:
+  hostTemplate: "{petBaseUrl}"
+  parameters:
+  - name: petBaseUrl
+    required: true
+    type: string
+    in: path
+    x-ms-skip-url-encoding: true
 paths:
   "/Pets/{petId}/GetPet":
     post:
@@ -24,12 +31,6 @@ paths:
           description: ''
           schema:
             "$ref": "#/definitions/Pet"
-        '202':
-          description: ''
-        '204':
-          description: ''
-        default:
-          description: default stuff
 definitions:
   Pet:
     properties:
