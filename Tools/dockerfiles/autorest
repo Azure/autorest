@@ -1,7 +1,0 @@
-#!/bin/bash
-if [ -z ${CmdletSessionID} ]
-then
-  export CmdletSessionID=$PPID
-fi
-SCRIPTPATH=$(dirname "$0")
-mono $SCRIPTPATH/AutoRest.exe "$@" 
