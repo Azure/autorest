@@ -182,12 +182,24 @@
     Custom base classes for specific classes can be explicitly defined in the configuration file using directives as below. It is left to the author to ensure that the assembly containing the base class is referenced accordingly at compile time and the base class has the same structure and functionalities as `HttpRestException`. 
     
     An example directive to specify custom base class is as below:
-    ```
+    ```javascript
     directive:
         from: code-model-v1
-        where: $.definitions["NotFoundError"]
+        where: $.modelTypes[?(@.name.raw=='NotFoundError')]
         transform: >
-            $.BaseModelType = "CustomBaseException";
+            const baseType = {
+                "properties":{
+
+                },
+                "name":{
+                    "fixed":false
+                    "raw":"CustomBaseException"
+                },
+                "extensions":{
+                    "x-ms-external":true
+                }
+            };
+            $.baseModelType = JSON.stringify(baseType);
         reason: We want to model our own base classes
     ```
     The code generated will substitute `HttpRestException` with `CustomBaseException` in the code above. This can be extended to non-error models too.
