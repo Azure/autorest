@@ -5,7 +5,7 @@ import * as AutoRest from "../lib/autorest-core"
 
 @suite class TestConfiguration {
 
-  @test @timeout(10000) async "Test config"() {
+  @test async "Test config"() {
     // test out subscribe
 
     let f = new MemoryFileSystem(new Map<string, string>([
