@@ -50,10 +50,10 @@ require: []
 use: []
 clear-output-folder: {}
 use-extension:
-  '@microsoft.azure/autorest.csharp': ~2.0.0
+  '@microsoft.azure/autorest.csharp': ~2.1.0
   '@microsoft.azure/classic-openapi-validator': ~1.0.3
   '@microsoft.azure/openapi-validator': ~1.0.0
-  '@microsoft.azure/autorest.modeler': ~2.0.0
+  '@microsoft.azure/autorest.modeler': 2.1.22
 
 no-upgrade-check: {}
 skip-upgrade-check: {}
