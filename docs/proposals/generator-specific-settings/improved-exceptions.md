@@ -53,36 +53,29 @@
     ```
     The model would be designed as:
     ```csharp
-    namespace Sample.Models
+    public partial class NotFoundError : HttpRestException
     {
-        using Newtonsoft.Json;
-        using System.Linq;
-
-        public partial class NotFoundError: HttpRestException
+        public NotFoundError()
         {
 
-            public NotFoundError()
-            {
-            }
-            
-            public NotFoundError(string message, string resourceName = default(string))
-                : this(message, null, resourceName)
-            {
-                CustomInit();
-            }
-            
-            private partial void CustomInit();
+        }
 
-            public NotFoundError(string message, System.Exception innerException, string resourceName = default(string))
-                : base(message, innerException)
-            {
-                ResourceName = resourceName;
-            }
-
-            [JsonProperty(PropertyName = "resourceName")]
-            public string ResourceName { get; set; }
+        public NotFoundError(string message, string resourceName = default(string))
+            : this(message, null, resourceName)
+        {
 
         }
+
+        public NotFoundError(string message, System.Exception innerException, string resourceName = default(string))
+            : base(message, innerException)
+        {
+
+            ResourceName = resourceName;
+        }
+
+       [JsonProperty(PropertyName = "resourceName")]
+        public string ResourceName { get; set; }
+
     }
 
     ```
@@ -114,21 +107,17 @@
     ```
     where `Handle404ErrorResponse` would look like:
     ```csharp
-    private async Task Handle404ErrorResponse(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
-                => await HandleErrorResponse<NotFoundError>(_httpRequest, _httpResponse, string.Format("Operation failed, returned status code '{0}'", 404));
-
-    // T is an exception class derived from HttpRestException class
     private async Task HandleErrorResponse<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, string errorMessage) where T : HttpRestException
     {
         string _responseContent = null;
-        // test response
-        _httpResponse.Content = new StringContent("{\"resourceName\":\"MyResource\"}");
+        _httpResponse.Content = new StringContent("{\"resName\":\"MyResource\"}");
 
         T ex = null;
         try
         {
             _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             ex = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent, Client.DeserializationSettings);
+            ex.SetMessage(errorMessage);
         }
         catch (JsonException)
         {
@@ -157,7 +146,7 @@
     This enables customizations that can be shared between all exceptions thrown by service(s). The custom base class should ideally inherit from `HttpRestException` or contain the properties `HttpRequest`, `HttpResponse` and `message` along with constructors that sets these properties and an empty constructor for serialization purposes. This is a contract that custom base classes should adhere to in order to ensure AutoRest generated exception classes compile successfully.
     The HttpRestException base class is designed as below:
     ```csharp
-    public abstract class HttpRestException : RestException
+    public abstract class HttpRestException : Exception
     {
         public HttpRequestMessageWrapper Request { get; set; }
 
@@ -168,14 +157,20 @@
         }
 
         public HttpRestException(string message)
-            : this(message, null)
+            : base(message, null)
         {
         }
 
         public HttpRestException(string message, System.Exception innerException)
-            : base(message, innerException)
+        : base(message, innerException)
         {
         }
+
+        private string _message;
+
+        internal void SetMessage(string message) => this._message = message;
+
+        public override string Message => this._message;
     }
     ```
     By default, all error models (exception classes) will inherit from `HttpRestException`.
