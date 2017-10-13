@@ -7,6 +7,8 @@ require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+/// <reference path="./help.d.ts" />
+
 require('events').EventEmitter.defaultMaxListeners = 100;
 process.env['ELECTRON_RUN_AS_NODE'] = "1";
 delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
