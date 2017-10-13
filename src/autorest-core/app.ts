@@ -276,12 +276,18 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
 
   if (config.HelpRequested) {
     // no fs operations on --help! Instead, format and print artifacts to console.
-    // - sort artifacts by name
-    const helpArtifacts = artifacts.sort((a, b) => a.uri === b.uri ? (a.content > b.content ? 1 : -1) /*artificial stability*/ : (a.uri > b.uri ? 1 : -1));
+    // - print boilerplate help
+    console.log("");
+    console.log("**Usage**: autorest [configuration-file.md] [...options]");
+    console.log("");
+    console.log("  See: https://aka.ms/autorest/cli for additional documentation");
+    // - sort artifacts by name (then content, just for stability)
+    const helpArtifacts = artifacts.sort((a, b) => a.uri === b.uri ? (a.content > b.content ? 1 : -1) : (a.uri > b.uri ? 1 : -1));
+    // - format and print
     for (const helpArtifact of helpArtifacts) {
       const help: Help = Parse(helpArtifact.content);
-      const activatedBySuffix = help.pluginActivationScope ? ` (activated by ${help.pluginActivationScope})` : "";
-      console.log(`# Settings for ${help.pluginFriendlyName}${activatedBySuffix}`);
+      const activatedBySuffix = help.activationScope ? ` (activated by ${help.activationScope})` : "";
+      console.log(`### ${help.categoryFriendlyName}${activatedBySuffix}`);
       if (help.description) {
         console.log(help.description);
       }
