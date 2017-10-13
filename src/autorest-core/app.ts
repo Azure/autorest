@@ -274,12 +274,35 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
     }
   }
 
-  // perform file system operations.
-  for (const folder of clearFolders) {
-    try { await ClearFolder(folder); } catch (e) { }
-  }
-  for (const artifact of artifacts) {
-    await WriteString(artifact.uri, artifact.content);
+  if (config.HelpRequested) {
+    // no fs operations on --help! Instead, format and print artifacts to console.
+    // - sort artifacts by name
+    const helpArtifacts = artifacts.sort((a, b) => a.uri === b.uri ? (a.content > b.content ? 1 : -1) /*artificial stability*/ : (a.uri > b.uri ? 1 : -1));
+    for (const helpArtifact of helpArtifacts) {
+      const help: Help = Parse(helpArtifact.content);
+      const activatedBySuffix = help.pluginActivationScope ? ` (activated by ${help.pluginActivationScope})` : "";
+      console.log(`# Settings for ${help.pluginFriendlyName}${activatedBySuffix}`);
+      if (help.description) {
+        console.log(help.description);
+      }
+      for (const settingHelp of help.settings) {
+        const keyPart = `--${settingHelp.key}`;
+        const typePart = settingHelp.type ? `=<${settingHelp.type}>` : `[=<boolean>]`;
+        let settingPart = keyPart + typePart;
+        if (settingHelp.required) {
+          settingPart = `[${settingPart}]`;
+        }
+        console.log(settingPart.padEnd(30) + settingHelp.description);
+      }
+    }
+  } else {
+    // perform file system operations.
+    for (const folder of clearFolders) {
+      try { await ClearFolder(folder); } catch (e) { }
+    }
+    for (const artifact of artifacts) {
+      await WriteString(artifact.uri, artifact.content);
+    }
   }
 
   // return the exit code to the caller.
