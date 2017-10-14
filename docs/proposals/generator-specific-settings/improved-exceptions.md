@@ -40,7 +40,7 @@
     ```
     AutoRest can generate code for each error status code (which is indicated by `x-ms-error-response` above) and deserialize the error model returned by the server independently.
 
-2.  Modeling error models as throwable exception classes themselves.
+2.  Generating `Get` methods for all properties of the underlying error model.
     For example, if in the above example, `NotFoundError` were defined as 
     ```json
     "NotFoundError":{
@@ -48,37 +48,92 @@
             "resourceName":{
             "type":"string"
             }
+        },
+        "allOf":[{
+            "$ref":"#/definitions/BaseError"
+        }]
+      },
+      "BaseError":{
+        "properties":{
+            "someBaseProp":{
+                "type":"string"
+            }
         }
+      }
+    ```
+    The models would be designed as:
+    ```csharp
+    public partial class BaseError
+    {
+        public BaseError()
+        {
+            CustomInit();
+        }
+
+        public BaseError(string someBaseProp = default(string))
+        {
+            SomeBaseProp = someBaseProp;
+            CustomInit();
+        }
+
+        partial void CustomInit();
+
+        [JsonProperty(PropertyName = "someBaseProp")]
+        public string SomeBaseProp { get; set; }
+
     }
     ```
-    The model would be designed as:
+    and
     ```csharp
-    public partial class NotFoundError : HttpRestException
+    public partial class NotFoundError : BaseError
     {
         public NotFoundError()
         {
-
+            CustomInit();
         }
 
-        public NotFoundError(string message, string resourceName = default(string))
-            : this(message, null, resourceName)
+        public NotFoundError(string someBaseProp = default(string), string resourceName = default(string))
+            : base(someBaseProp)
         {
-
-        }
-
-        public NotFoundError(string message, System.Exception innerException, string resourceName = default(string))
-            : base(message, innerException)
-        {
-
             ResourceName = resourceName;
+            CustomInit();
         }
 
-       [JsonProperty(PropertyName = "resourceName")]
+        partial void CustomInit();
+
+        [JsonProperty(PropertyName = "resourceName")]
         public string ResourceName { get; set; }
 
     }
-
     ```
+    And the Exception class is modeled as:
+    ```csharp
+    public partial class ErrorModelException : HttpRestException<ErrorModel>
+    {
+        public ErrorModelException()
+        {
+        }
+
+        public ErrorModelException(string message)
+            : this(message, null)
+        {
+        }
+
+        public ErrorModelException(string message, System.Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        public string Description => Body.Description;
+
+        public string SomeBaseProp => Body.SomeBaseProp;
+
+        public string WhatWentWrong => Body.WhatWentWrong;
+
+    }
+    ```
+    The generic type `HttpRestException<T>` indicates the error model it wraps, while the public getter methods return all the properties of wrapped model. This is a clean way of handling polymorphism of error models, deserialization and setting custom exception messages.
+
     And the Operation would be designed as:
     ```csharp
     if ((int)_statusCode != 200)
@@ -107,28 +162,25 @@
     ```
     where `Handle404ErrorResponse` would look like:
     ```csharp
-    private async Task HandleErrorResponse<T>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, string errorMessage) where T : HttpRestException
+    private async Task Handle404ErrorResponse(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse)
+        => await HandleErrorResponse<NotFoundErrorException, NotFoundError>(_httpRequest, _httpResponse, string.Format("Operation failed, returned status code '{0}'", 404));
+
+    private async Task HandleErrorResponse<T, V>(HttpRequestMessage _httpRequest, HttpResponseMessage _httpResponse, string errorMessage) where T : System.Exception, IHttpRestException<V>
     {
         string _responseContent = null;
-        _httpResponse.Content = new StringContent("{\"resName\":\"MyResource\"}");
+        _httpResponse.Content = new StringContent("{\n\r \"resourceName\":\"MyResource\"\r\n, \"SomeBaseProp\":\"GreatBaseProp\" }");
+        T ex = System.Activator.CreateInstance(typeof(T), new string[] { errorMessage }) as T;
 
-        T ex = null;
         try
         {
             _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            ex = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<T>(_responseContent, Client.DeserializationSettings);
-            ex.SetMessage(errorMessage);
+            ex.SetErrorModel(Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, Client.DeserializationSettings));
         }
         catch (JsonException)
         {
             // Ignore the exception
         }
-
-        if (ex == null)
-        {
-            ex = System.Activator.CreateInstance(typeof(T), new string[] { errorMessage }) as T;
-        }
-
+        
         ex.Request = new HttpRequestMessageWrapper(_httpRequest, null);
         ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
         _httpRequest.Dispose();
@@ -139,19 +191,25 @@
         throw ex;
     }
     ```
+    where `IHttpRestException<V>` is defined as:
+    ```csharp
+    interface IHttpRestException<V>
+    {
+        HttpRequestMessageWrapper Request { get; set; }
+        
+        HttpResponseMessageWrapper Response { get; set; }
+
+        void SetErrorModel(V model);
+    }
+    ```
     Note: `HttpRestException` is a generic base case for all exception classes as discussed in the section below. 
-    Modelling the error model as the exception class itself allows us to cleanly deserialize the response object returned by the service and bubble up all the related information in the form of properties of the exception class itself (which is `ResourceName` for `NotFoundError`)
 
 3.  Allowing Exception classes to inherit from custom base class implementations. 
-    This enables customizations that can be shared between all exceptions thrown by service(s). The custom base class should ideally inherit from `HttpRestException` or contain the properties `HttpRequest`, `HttpResponse` and `message` along with constructors that sets these properties and an empty constructor for serialization purposes. This is a contract that custom base classes should adhere to in order to ensure AutoRest generated exception classes compile successfully.
+    This enables customizations that can be shared between all exceptions thrown by service(s). The custom base class should ideally inherit from `HttpRestException<T>` or implements the interface `IHttpRequestException<T>` along with constructors that sets these properties and an empty constructor for serialization purposes. This is a contract that custom base classes should adhere to in order to ensure AutoRest generated exception classes compile successfully.
     The HttpRestException base class is designed as below:
     ```csharp
-    public abstract class HttpRestException : Exception
+    public abstract class HttpRestException<T> : RestException, IHttpRestException<T>
     {
-        public HttpRequestMessageWrapper Request { get; set; }
-
-        public HttpResponseMessageWrapper Response { get; set; }
-
         public HttpRestException()
         {
         }
@@ -166,15 +224,18 @@
         {
         }
 
-        private string _message;
+        protected T Body { get; set; }
 
-        internal void SetMessage(string message) => this._message = message;
+        public void SetErrorModel(T model) => this.Body = model;
 
-        public override string Message => this._message;
+        public HttpRequestMessageWrapper Request { get; set; }
+        
+        public HttpResponseMessageWrapper Response { get; set; }
+
     }
     ```
-    By default, all error models (exception classes) will inherit from `HttpRestException`.
-    Custom base classes for specific classes can be explicitly defined in the configuration file using directives as below. It is left to the author to ensure that the assembly containing the base class is referenced accordingly at compile time and the base class has the same structure and functionalities as `HttpRestException`. 
+    By default, all error models (exception classes) will inherit from `HttpRestException<T>`.
+    Custom base classes for specific classes can be explicitly defined in the configuration file using directives as below. It is left to the author to ensure that the assembly containing the base class is referenced accordingly at compile time and the base class has the same structure and functionalities as `HttpRestException<T>`. 
     
     An example directive to specify custom base class is as below:
     ```javascript
@@ -197,4 +258,4 @@
             $.baseModelType = JSON.stringify(baseType);
         reason: We want to model our own base classes
     ```
-    The code generated will substitute `HttpRestException` with `CustomBaseException` in the code above. This can be extended to non-error models too.
+    The code generated will substitute `HttpRestException<T>` with `CustomBaseException<T>` in the code above. This can be extended to non-error models too.
