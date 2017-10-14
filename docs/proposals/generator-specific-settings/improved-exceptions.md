@@ -205,10 +205,10 @@
     Note: `HttpRestException` is a generic base case for all exception classes as discussed in the section below. 
 
 3.  Allowing Exception classes to inherit from custom base class implementations. 
-    This enables customizations that can be shared between all exceptions thrown by service(s). The custom base class should ideally inherit from `HttpRestException<T>` or implements the interface `IHttpRequestException<T>` along with constructors that sets these properties and an empty constructor for serialization purposes. This is a contract that custom base classes should adhere to in order to ensure AutoRest generated exception classes compile successfully.
+    This enables customizations that can be shared between all exceptions thrown by service(s). The custom base class should ideally inherit from `HttpRestException<T>` or implements the interface `IHttpRequestException<V>` along with constructors that sets these properties and an empty constructor for serialization purposes. This is a contract that custom base classes should adhere to in order to ensure AutoRest generated exception classes compile successfully.
     The HttpRestException base class is designed as below:
     ```csharp
-    public abstract class HttpRestException<T> : RestException, IHttpRestException<T>
+    public abstract class HttpRestException<V> : RestException, IHttpRestException<V>
     {
         public HttpRestException()
         {
@@ -224,9 +224,9 @@
         {
         }
 
-        protected T Body { get; set; }
+        protected V Body { get; set; }
 
-        public void SetErrorModel(T model) => this.Body = model;
+        public void SetErrorModel(V model) => this.Body = model;
 
         public HttpRequestMessageWrapper Request { get; set; }
         
