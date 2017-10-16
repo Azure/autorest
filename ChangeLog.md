@@ -4,19 +4,7 @@
 * Added support for Unix time formatted dates with the `'unix-time'` format (#909)
   * Serializing/deserializing Unix time formatted dates in C# and NodeJS to DateTime (C#) and Date (NodeJS)
 * Added support for Base64Url formatted values with the `'base64url'` format (#805)
-  * Serializing/deserializing Base64Url formatted values in C# and NodeJS to byte\[\] (C#) and Buffer (NodeJS)
-* Fixed issue where the contents of the output file for SingleFileGeneration are appended instead of replaced (#667)
-* Made generated parameter group documentation more accurate for `'x-ms-parameter-grouping'` extension (#634)
-* UserAgent header in ServiceClient now includes more detailed information (#583)
-* Added the ability to specify a name in generated code for query parameters, entity headers, etc. with the [`'x-ms-client-name'`](https://github.com/Azure/autorest/blob/master/Documentation/swagger-extensions.md#x-ms-client-name)
-* Bug fixes in all code generators (#722, #742, #745, #746, #819, #820, #824, #825, #889, #896, #897, #900, #915, #923, #934, #944, #943)
-
-##2016.03.04 Version 0.15.0
-* Added Java code generator!
-* Added support for constants whenever parameters or properties are marked as required and have only one enum value (#281, #488)
-* Added ability to flatten client model properties with the extension [`'x-ms-client-flatten':true`](https://github.com/Azure/autorest/blob/master/Documentation/swagger-extensions.md#x-ms-client-flatten) (#720)
-* Support for parameterized host names (#672)
-* Added Java code generator!
+  * Serializing/deserializing Base64Url form
 * Added support for constants whenever parameters or properties are marked as required and have only one enum value (#281, #488)
 * Added ability to flatten client model properties with the extension [`'x-ms-client-flatten':true`](https://github.com/Azure/autorest/blob/master/Documentation/swagger-extensions.md#x-ms-client-flatten) (#720)
 * Support for parameterized host names (#672)
