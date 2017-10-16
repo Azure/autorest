@@ -9,13 +9,7 @@
 * Added ability to flatten client model properties with the extension [`'x-ms-client-flatten':true`](https://github.com/Azure/autorest/blob/master/Documentation/swagger-extensions.md#x-ms-client-flatten) (#720)
 * Support for parameterized host names (#672)
 * Added Python generator
-  * Based on the Python requests library.
-  * Added Python Client Runtime with support for skip token iteration, Azure Long Running operation polling and AAD token retrieval.
-  * Support for all swagger extensions.
-  * Generates reStructuredText Sphinx-compatible docstrings.
-* Significantly improved the Ruby code generator by 
-  * Introduced package version and package name
-  * Moved request building to clientruntime
+  * Based on thetruntime
   * Improved Error messaging for deserialization and http errors
   * Exposed environment variable: `export AZURE_HTTP_LOGGING=full|partial` to provide http debug logging
   * Moved skip_url_encoding and skip_query_param_encoding into generic code generator
