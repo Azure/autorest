@@ -171,14 +171,17 @@
         _httpResponse.Content = new StringContent("{\n\r \"resourceName\":\"MyResource\"\r\n, \"SomeBaseProp\":\"GreatBaseProp\" }");
         T ex = System.Activator.CreateInstance(typeof(T), new string[] { errorMessage }) as T;
 
-        try
+        if (_httpResponse.Content != null) 
         {
-            _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            ex.SetErrorModel(Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, Client.DeserializationSettings));
-        }
-        catch (JsonException)
-        {
-            // Ignore the exception
+            try
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.SetErrorModel(Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<V>(_responseContent, Client.DeserializationSettings));
+            }
+            catch (JsonException)
+            {
+                // Ignore the exception
+            }
         }
         
         ex.Request = new HttpRequestMessageWrapper(_httpRequest, null);
@@ -236,6 +239,8 @@
     ```
     By default, all error models (exception classes) will inherit from `HttpRestException<T>`.
     Custom base classes for specific classes can be explicitly defined in the configuration file using directives as below. It is left to the author to ensure that the assembly containing the base class is referenced accordingly at compile time and the base class has the same structure and functionalities as `HttpRestException<T>`. 
+    In case an error model is not provided, we can mimic the current implementation, where body will be of `CloudError` type and the exception will be of `CloudException` type.
+    
     
     An example directive to specify custom base class is as below:
     ```javascript
