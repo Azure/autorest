@@ -269,6 +269,7 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   if (config["batch"]) {
     await batch(api);
   }
+
   else {
     const result = await api.Process().finish;
     if (result !== true) {

@@ -107,25 +107,37 @@ scope-configuration-emitter:
     "configuration"
 ```
 
-#### Loading
+#### Help
 
-Note: We don't load anything if `--help` appears to be specified.
+``` yaml $(help)
+input-file: dummy # trick "no input file" checks... may wanna refactor at some point
+```
+
+Note: We don't load anything if `--help` is specified.
+
+``` yaml !$(help)
+perform-load: true # kick off loading
+```
+
+#### Loading
 
 Markdown documentation overrides:
 
-``` yaml !$(help)
+``` yaml
 pipeline:
   swagger-document-override/md-override-loader:
     output-artifact: immediate-config
+    scope: perform-load
 ```
 
 OpenAPI definitions:
 
-``` yaml !$(help)
+``` yaml
 pipeline:
   swagger-document/loader:
     # plugin: loader # IMPLICIT: default to last item if split by '/'
     output-artifact: swagger-document
+    scope: perform-load
   swagger-document/individual/transform:
     input: loader
     output-artifact: swagger-document
