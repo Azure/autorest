@@ -13,7 +13,7 @@ export function GetPlugin_HelpAutoRest(): PipelinePlugin {
   return async config => {
     config.GeneratedFile.Dispatch({
       type: "help",
-      uri: "_autorest0.json",
+      uri: "_help-autorest.0.json",
       content: JSON.stringify(<Help>{
         categoryFriendlyName: "Overall Verbosity",
         settings: [
@@ -34,7 +34,7 @@ export function GetPlugin_HelpAutoRest(): PipelinePlugin {
     });
     config.GeneratedFile.Dispatch({
       type: "help",
-      uri: "_autorest1.json",
+      uri: "_help-autorest.1.json",
       content: JSON.stringify(<Help>{
         categoryFriendlyName: "Manage Installation",
         settings: [
@@ -78,7 +78,7 @@ export function GetPlugin_HelpAutoRestCore(): PipelinePlugin {
   return async config => {
     config.GeneratedFile.Dispatch({
       type: "help",
-      uri: "_autorestCore0.json",
+      uri: "_help-autorestCore.0.json",
       content: JSON.stringify(<Help>{
         categoryFriendlyName: "Core Settings and Switches",
         settings: [
@@ -102,7 +102,7 @@ export function GetPlugin_HelpAutoRestCore(): PipelinePlugin {
           },
           {
             key: "message-format",
-            type: "\"regular\", \"json\"",
+            type: "\"regular\" | \"json\"",
             description: "format of messages (e.g. from OpenAPI validation); default: \"regular\""
           },
         ]
@@ -110,7 +110,7 @@ export function GetPlugin_HelpAutoRestCore(): PipelinePlugin {
     });
     config.GeneratedFile.Dispatch({
       type: "help",
-      uri: "_autorestCore1.json",
+      uri: "_help-autorestCore.1.json",
       content: JSON.stringify(<Help>{
         categoryFriendlyName: "Core Functionality",
         description: "While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator), we officially support and maintain the following functionality. More specific help is shown when --help is combined with the following switches.",

@@ -119,6 +119,10 @@ pipeline:
     scope: help
   help/help-autorest-core:
     scope: help
+
+output-artifact:
+  - null # so emitted help doesn't necessarily have to say its output-artifact
+  - help
 ```
 
 Note: We don't load anything if `--help` is specified.

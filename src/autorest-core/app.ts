@@ -307,7 +307,10 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
     const helpArtifacts = artifacts.sort((a, b) => a.uri === b.uri ? (a.content > b.content ? 1 : -1) : (a.uri > b.uri ? 1 : -1));
     // - format and print
     for (const helpArtifact of helpArtifacts) {
-      const help: Help = Parse(helpArtifact.content);
+      const help: Help = Parse(helpArtifact.content, (message, index) => console.error(`Parsing error at ${helpArtifact.uri}:${index}: ${message}`));
+      if (!help) {
+        continue;
+      }
       const activatedBySuffix = help.activationScope ? ` (activated by ${help.activationScope})` : "";
       console.log("");
       console.log(`### ${help.categoryFriendlyName}${activatedBySuffix}`);

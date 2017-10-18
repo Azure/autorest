@@ -178,10 +178,10 @@ function GetPlugin_ArtifactEmitter(inputOverride?: () => Promise<DataSource>): P
 
     await EmitArtifacts(
       config,
-      config.GetEntry("input-artifact" as any),
+      config.GetEntry("input-artifact" as any) || null,
       key => ResolveUri(
         config.OutputFolderUri,
-        safeEval<string>(config.GetEntry("output-uri-expr" as any), { $key: key, $config: config.Raw })),
+        safeEval<string>(config.GetEntry("output-uri-expr" as any) || "$key", { $key: key, $config: config.Raw })),
       input,
       config.GetEntry("is-object" as any));
     return new QuickDataSource([]);
