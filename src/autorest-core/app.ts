@@ -8,6 +8,25 @@ require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
  *--------------------------------------------------------------------------------------------*/
 
 
+// https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd
+if (!String.prototype.padEnd) {
+  String.prototype.padEnd = function padEnd(targetLength, padString) {
+    targetLength = targetLength >> 0; //floor if number or convert non-number to 0;
+    padString = String(padString || ' ');
+    if (this.length > targetLength) {
+      return String(this);
+    }
+    else {
+      targetLength = targetLength - this.length;
+      if (targetLength > padString.length) {
+        padString += padString.repeat(targetLength / padString.length); //append to original to ensure we are longer than needed
+      }
+      return String(this) + padString.slice(0, targetLength);
+    }
+  };
+}
+
 require('events').EventEmitter.defaultMaxListeners = 100;
 process.env['ELECTRON_RUN_AS_NODE'] = "1";
 delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
@@ -290,18 +309,20 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
     for (const helpArtifact of helpArtifacts) {
       const help: Help = Parse(helpArtifact.content);
       const activatedBySuffix = help.activationScope ? ` (activated by ${help.activationScope})` : "";
+      console.log("");
       console.log(`### ${help.categoryFriendlyName}${activatedBySuffix}`);
       if (help.description) {
         console.log(help.description);
       }
+      console.log("");
       for (const settingHelp of help.settings) {
         const keyPart = `--${settingHelp.key}`;
-        const typePart = settingHelp.type ? `=<${settingHelp.type}>` : `[=<boolean>]`;
-        let settingPart = keyPart + typePart;
-        if (settingHelp.required) {
-          settingPart = `[${settingPart}]`;
-        }
-        console.log(settingPart.padEnd(30) + settingHelp.description);
+        const typePart = settingHelp.type ? `=<${settingHelp.type}>` : ` `;//`[=<boolean>]`;
+        let settingPart = `${keyPart}\`${typePart}\``;
+        // if (!settingHelp.required) {
+        //   settingPart = `[${settingPart}]`;
+        // }
+        console.log(`  ${settingPart.padEnd(30)}  **${settingHelp.description}**`);
       }
     }
   } else {

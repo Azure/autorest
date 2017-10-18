@@ -113,6 +113,14 @@ scope-configuration-emitter:
 input-file: dummy # trick "no input file" checks... may wanna refactor at some point
 ```
 
+``` yaml
+pipeline:
+  help/help-autorest:
+    scope: help
+  help/help-autorest-core:
+    scope: help
+```
+
 Note: We don't load anything if `--help` is specified.
 
 ``` yaml !$(help)
