@@ -300,6 +300,7 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
     // no fs operations on --help! Instead, format and print artifacts to console.
     // - print boilerplate help
     console.log("");
+    console.log("");
     console.log("**Usage**: autorest [configuration-file.md] [...options]");
     console.log("");
     console.log("  See: https://aka.ms/autorest/cli for additional documentation");
