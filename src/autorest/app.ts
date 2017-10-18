@@ -27,78 +27,113 @@ cli.reset();
 
 // Suppress the banner if in json mode.
 if (process.argv.indexOf("--json") == -1 && process.argv.indexOf("--message-format=json") == -1) {
-  console.log(`# AutoRest code generation utility [version: ${pkgVersion}]\n(C) 2017 **Microsoft Corporation.**  \nhttps://aka.ms/autorest`);
+  console.log(`# AutoRest code generation utility [version: ${pkgVersion}]`);
+  console.log(``);
+  console.log(`(C) 2017 **Microsoft Corporation.**`);
+  console.log(`https://aka.ms/autorest`);
 }
-const args = cli
-  .app("autorest")
-  .title("AutoRest code generation utility for OpenAPI")
-  .copyright("(C) 2017 **Microsoft Corporation.**")
-  .usage("**\nUsage**: autorest [configuration-file.md] [...options]\n\n  See: https://aka.ms/autorest/cli for additional documentation")
-  .wrap(0)
-  .help("help", "`Show help information`")
-  .option("quiet", {
-    describe: "`suppress most output information`",
-    type: "boolean",
-    group: "### Output Verbosity",
-  }).option("verbose", {
-    describe: "`display verbose logging information`",
-    type: "boolean",
-    group: "### Output Verbosity",
-  })
-  .option("debug", {
-    describe: "`display debug logging information`",
-    type: "boolean",
-    group: "### Output Verbosity",
-  })
-  .option("info", {
-    alias: ["list-installed"],
-    describe: "display information about the installed version of autorest and it's extensions",
-    type: "boolean",
-    group: "### Informational",
-  })
-  .option("json", {
-    describe: "ouptut messages as json",
-    type: "boolean",
-    group: "### Informational",
-  })
-  .option("list-available", {
-    describe: "display available extensions",
-    type: "boolean",
-    group: "### Informational",
-  })
-  .option("skip-upgrade-check", {
-    describe: "disable check for new version of bootstrapper",
-    type: "boolean",
-    default: false,
-    group: "### Installation",
-  })
-  .option("reset", {
-    describe: "removes all autorest extensions and downloads the latest version of the autorest-core extension",
-    type: "boolean",
-    group: "### Installation",
-  })
-  .option("preview", {
-    alias: "prerelease",
-    describe: "enables using autorest extensions that are not yet released",
-    type: "boolean",
-    group: "### Installation",
-  })
-  .option("latest", {
-    describe: "installs the latest **autorest-core** extension",
-    type: "boolean",
-    group: "### Installation",
-  })
-  .option("force", {
-    describe: "force the re-installation of the **autorest-core** extension and frameworks",
-    type: "boolean",
-    group: "### Installation",
-  })
-  .option("version", {
-    describe: "use the specified version of the **autorest-core** extension",
-    type: "string",
-    group: "### Installation",
-  })
-  .argv;
+
+function parseArgs(autorestArgs: string[]): any {
+  const result: any = {};
+  for (const arg of autorestArgs) {
+    const match = /^--([^=]+)(=(.+))?$/g.exec(arg);
+
+    // configuration file?
+    if (match === null) {
+      continue;
+    }
+
+    // switch
+    const key = match[1];
+    let rawValue = match[3] || "{}";
+    let value;
+    try {
+      value = JSON.parse(rawValue);
+      // restrict allowed types (because with great type selection comes great responsibility)
+      if (typeof value !== "string" && typeof value !== "boolean") {
+        value = rawValue;
+      }
+    } catch (e) {
+      value = rawValue;
+    }
+    result[key] = value;
+  }
+
+  return result;
+}
+
+const args = parseArgs(process.argv);
+
+// const args = cli
+//   .app("autorest")
+//   .title("AutoRest code generation utility for OpenAPI")
+//   .copyright("(C) 2017 **Microsoft Corporation.**")
+//   .usage("**\nUsage**: autorest [configuration-file.md] [...options]\n\n  See: https://aka.ms/autorest/cli for additional documentation")
+//   .wrap(0)
+//   //.help("help", "`Show help information`")
+//   .option("quiet", {
+//     describe: "`suppress most output information`",
+//     type: "boolean",
+//     group: "### Output Verbosity",
+//   }).option("verbose", {
+//     describe: "`display verbose logging information`",
+//     type: "boolean",
+//     group: "### Output Verbosity",
+//   })
+//   .option("debug", {
+//     describe: "`display debug logging information`",
+//     type: "boolean",
+//     group: "### Output Verbosity",
+//   })
+//   .option("info", {
+//     alias: ["list-installed"],
+//     describe: "display information about the installed version of autorest and it's extensions",
+//     type: "boolean",
+//     group: "### Informational",
+//   })
+//   .option("json", {
+//     describe: "ouptut messages as json",
+//     type: "boolean",
+//     group: "### Informational",
+//   })
+//   .option("list-available", {
+//     describe: "display available extensions",
+//     type: "boolean",
+//     group: "### Informational",
+//   })
+//   .option("skip-upgrade-check", {
+//     describe: "disable check for new version of bootstrapper",
+//     type: "boolean",
+//     default: false,
+//     group: "### Installation",
+//   })
+//   .option("reset", {
+//     describe: "removes all autorest extensions and downloads the latest version of the autorest-core extension",
+//     type: "boolean",
+//     group: "### Installation",
+//   })
+//   .option("preview", {
+//     alias: "prerelease",
+//     describe: "enables using autorest extensions that are not yet released",
+//     type: "boolean",
+//     group: "### Installation",
+//   })
+//   .option("latest", {
+//     describe: "installs the latest **autorest-core** extension",
+//     type: "boolean",
+//     group: "### Installation",
+//   })
+//   .option("force", {
+//     describe: "force the re-installation of the **autorest-core** extension and frameworks",
+//     type: "boolean",
+//     group: "### Installation",
+//   })
+//   .option("version", {
+//     describe: "use the specified version of the **autorest-core** extension",
+//     type: "string",
+//     group: "### Installation",
+//   })
+//   .argv;
 
 // argument tweakin'
 const preview: boolean = args.preview;
@@ -179,11 +214,6 @@ async function main() {
   // show what we have.
   if (args.info) {
     process.exit(await showInstalledExtensions());
-  }
-
-  if (args.help) {
-    // yargs will print the help. We can leave now.
-    process.exit(0);
   }
 
   // check to see if local installed core is available.

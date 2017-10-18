@@ -7,7 +7,6 @@ require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-/// <reference path="./help.d.ts" />
 
 require('events').EventEmitter.defaultMaxListeners = 100;
 process.env['ELECTRON_RUN_AS_NODE'] = "1";
@@ -31,6 +30,7 @@ import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { DataStore } from "./lib/data-store/data-store";
 import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
 import { Exception, OperationCanceledException } from "./lib/exception";
+import { Help } from "./help";
 
 function awaitable(child: ChildProcess): Promise<number> {
   return new Promise<number>((resolve, reject) => {
@@ -460,12 +460,6 @@ async function main() {
     let exitcode: number = 0;
 
     autorestArgs = process.argv.slice(2);
-
-    // temporary: --help displays legacy AutoRest's -Help message
-    if (autorestArgs.indexOf("--help") !== -1) {
-      await legacyMain(["-Help"]);
-      return;
-    }
 
     if (isLegacy(autorestArgs)) {
       exitcode = await legacyMain(autorestArgs);
