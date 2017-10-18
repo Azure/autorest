@@ -311,7 +311,7 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
       if (!help) {
         continue;
       }
-      const activatedBySuffix = help.activationScope ? ` (activated by ${help.activationScope})` : "";
+      const activatedBySuffix = help.activationScope ? ` (activated by --${help.activationScope})` : "";
       console.log("");
       console.log(`### ${help.categoryFriendlyName}${activatedBySuffix}`);
       if (help.description) {
