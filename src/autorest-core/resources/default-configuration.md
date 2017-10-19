@@ -203,7 +203,7 @@ scope-openapi-document/emitter:
     $config["output-file"] || 
     ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
-scope-cm/emitter:
+scope-cm/emitter: # can remove once every generator depends on recent modeler
   input-artifact: code-model-v1
   is-object: true
   output-uri-expr: |

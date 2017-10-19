@@ -79,6 +79,8 @@ output-artifact:
   - code-model-v1.yaml
   - pipeline.yaml
   - configuration.yaml
+  - null
+  - help
   - source-file-csharp
   - source-file-jsonrpcclient
 output-folder: generated
@@ -87,7 +89,55 @@ pipeline:
     scope: scope-configuration-emitter
     suffixes:
       - ''
-  csharp/cm/emitter:
+  help/help-autorest:
+    scope: help
+    suffixes: []
+  help/help-autorest-core:
+    scope: help
+    suffixes: []
+  swagger-document-override/md-override-loader:
+    output-artifact: immediate-config
+    scope: perform-load
+    suffixes:
+      - ''
+  swagger-document/loader:
+    output-artifact: swagger-document
+    scope: perform-load
+    suffixes:
+      - ''
+  swagger-document/individual/transform:
+    input: loader
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/individual/identity:
+    input: transform
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/compose:
+    input: individual/identity
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/transform-immediate:
+    input:
+      - swagger-document-override/md-override-loader
+      - compose
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/transform:
+    input: transform-immediate
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/identity:
+    input: transform
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/emitter:
     input: transform
     scope: scope-cm/emitter
     suffixes:
@@ -258,14 +308,9 @@ scope-configuration-emitter:
   is-object: true
   output-uri-expr: |
     "configuration"
-scope-csharp/emitter:
-  input-artifact: source-file-csharp
-  output-uri-expr: $key
-scope-jsonrpcclient/emitter:
-  input-artifact: source-file-jsonrpcclient
-  output-uri-expr: $key
-scope-openapi-document/emitter:
-  input-artifact: openapi-document
+perform-load: true
+scope-swagger-document/emitter:
+  input-artifact: swagger-document
   is-object: true
   output-uri-expr: >
     $config["output-file"] || 

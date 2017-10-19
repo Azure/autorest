@@ -25,7 +25,6 @@ enhanceConsole();
 // Suppress the banner if in json mode.
 if (process.argv.indexOf("--json") == -1 && process.argv.indexOf("--message-format=json") == -1) {
   console.log(`# AutoRest code generation utility [version: ${pkgVersion}]`);
-  console.log(``);
   console.log(`(C) 2017 **Microsoft Corporation.**`);
   console.log(`https://aka.ms/autorest`);
 }

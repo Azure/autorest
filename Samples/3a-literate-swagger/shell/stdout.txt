@@ -12,7 +12,7 @@
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:43:8 ($.definitions.ErrorDetails.properties.code)
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)
-(C) 2017 **Microsoft Corporation.**  
+(C) 2017 **Microsoft Corporation.**
 # AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
 WARNING (AvoidNestedProperties/R2001/SDKViolation): Consider using x-ms-client-flatten to provide a better end user experience

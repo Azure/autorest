@@ -3,16 +3,72 @@ configuration-emitter:
   configScope:
     - scope-configuration-emitter
   inputs: []
-  pluginName: configuration-emitter
-csharp/cm/emitter:
+swagger-document-override/md-override-loader:
+  pluginName: md-override-loader
+  outputArtifact: immediate-config
   configScope:
-    - csharp
-    - scope-cm/emitter
+    - perform-load
+  inputs: []
+swagger-document/loader:
+  pluginName: loader
+  outputArtifact: swagger-document
+  configScope:
+    - perform-load
+  inputs: []
+swagger-document/individual/transform:
+  pluginName: transform
+  outputArtifact: swagger-document
+  configScope:
+    - perform-load
+  inputs:
+    - swagger-document/loader
+swagger-document/individual/identity:
+  pluginName: identity
+  outputArtifact: swagger-document
+  configScope:
+    - perform-load
+  inputs:
+    - swagger-document/individual/transform
+swagger-document/compose:
+  pluginName: compose
+  outputArtifact: swagger-document
+  configScope:
+    - perform-load
+  inputs:
+    - swagger-document/individual/identity
+swagger-document/transform-immediate:
+  pluginName: transform-immediate
+  outputArtifact: swagger-document
+  configScope:
+    - perform-load
+  inputs:
+    - swagger-document-override/md-override-loader
+    - swagger-document/compose
+swagger-document/transform:
+  pluginName: transform
+  outputArtifact: swagger-document
+  configScope:
+    - perform-load
+  inputs:
+    - swagger-document/transform-immediate
+swagger-document/identity:
+  pluginName: identity
+  outputArtifact: swagger-document
+  configScope:
+    - perform-load
+  inputs:
+    - swagger-document/transform
+swagger-document/emitter:
+  pluginName: emitter
+  configScope:
+    - perform-load
+    - scope-swagger-document/emitter
   inputs:
     - csharp/cm/transform
   pluginName: emitter
 csharp/cm/transform:
   configScope:
+    - perform-load
     - csharp
   inputs:
     - csharp/commonmarker
@@ -20,6 +76,7 @@ csharp/cm/transform:
   pluginName: transform
 csharp/commonmarker:
   configScope:
+    - perform-load
     - csharp
   inputs:
     - csharp/imodeler1
@@ -27,6 +84,7 @@ csharp/commonmarker:
   pluginName: commonmarker
 csharp/emitter:
   configScope:
+    - perform-load
     - csharp
     - scope-transform-string
     - scope-csharp/emitter
@@ -35,6 +93,7 @@ csharp/emitter:
   pluginName: emitter
 csharp/generate:
   configScope:
+    - perform-load
     - csharp
   inputs:
     - csharp/cm/transform
@@ -42,6 +101,7 @@ csharp/generate:
   pluginName: csharp
 csharp/imodeler1:
   configScope:
+    - perform-load
     - csharp
   inputs:
     - openapi-document/identity
@@ -49,6 +109,7 @@ csharp/imodeler1:
   pluginName: imodeler1
 csharp/simplifier:
   configScope:
+    - perform-load
     - csharp
   inputs:
     - csharp/generate
@@ -56,6 +117,7 @@ csharp/simplifier:
   pluginName: csharp-simplifier
 csharp/transform:
   configScope:
+    - perform-load
     - csharp
     - scope-transform-string
   inputs:
@@ -64,7 +126,10 @@ csharp/transform:
   pluginName: transform
 openapi-document/emitter:
   configScope:
-    - scope-openapi-document/emitter
+    - perform-load
+    - csharp
+    - scope-transform-string
+    - scope-csharp/emitter
   inputs:
     - openapi-document/identity
   pluginName: emitter
@@ -98,6 +163,7 @@ swagger-document-override/md-override-loader:
   pluginName: md-override-loader
 swagger-document/classic-openapi-validator:
   configScope:
+    - perform-load
     - azure-validator-composed
   inputs:
     - swagger-document/identity
@@ -134,6 +200,7 @@ swagger-document/individual/identity:
   pluginName: identity
 swagger-document/individual/openapi-validator:
   configScope:
+    - perform-load
     - azure-validator-individual
   inputs:
     - swagger-document/individual/identity
@@ -151,12 +218,14 @@ swagger-document/loader:
   pluginName: loader
 swagger-document/openapi-validator:
   configScope:
+    - perform-load
     - azure-validator-composed
   inputs:
     - swagger-document/identity
   pluginName: openapi-validator
-swagger-document/transform:
-  configScope: []
+  configScope:
+    - perform-load
+    - azure-validator-individual
   inputs:
     - swagger-document/transform-immediate
   outputArtifact: swagger-document
