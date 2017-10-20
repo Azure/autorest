@@ -127,6 +127,7 @@ If we *wanted* to realize a zero-trust relationship with servers, we would *have
 ## *How?* - Implementation
 
 For now, we assume that we have a function `disjoint(Schema, Schema): boolean` that checks two schemas for disjointness.
+An implementation will be illustrated later.
 
 ### Ignoring/Demanding/Ensuring disjointness of schemas (in **generator**)
 - Solution 0 (ignore) requires no efforts
