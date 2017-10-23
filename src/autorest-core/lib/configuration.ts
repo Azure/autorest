@@ -406,7 +406,15 @@ export class ConfigurationView {
                   if (path.length === 0) {
                     throw e;
                   }
-                  path.pop();
+                  // adjustment
+                  // 1) skip leading `$`
+                  if (path[0] === "$") {
+                    path.shift();
+                  }
+                  // 2) drop last part
+                  else {
+                    path.pop();
+                  }
                 } else {
                   throw e;
                 }
