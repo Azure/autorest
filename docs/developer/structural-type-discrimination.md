@@ -400,3 +400,5 @@ B:
 ```
 While the checks for `A` and `B` in order to decide a `oneOf` could be reduced to `A''(o) = typeof o.x !== "string"` and `B''(o) = true`, this would be incorrect for deciding an `anyOf`:
 `{ x: "hello", y: "world" }` matches *both* `A` and `B`, so the corresponding runtime type should be chosen - note however that `A''({ x: "hello", y: "world" })` as defined for `oneOf` is false.
+
+It turns out that for `anyOf`, schema checks can actually not be reduced at all. If one of the schema checks was reduced, one could always construct an "attack" object that will not be classified correctly according to the spec.
