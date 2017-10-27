@@ -13,7 +13,7 @@ export function IsUri(uri: string): boolean {
 import * as promisify from "pify";
 import { Readable } from "stream";
 import { parse } from "url";
-import { sep } from "path";
+import { sep, extname } from "path";
 
 const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");
@@ -281,4 +281,41 @@ import { rmdir } from "@microsoft.azure/async-io";
 export async function ClearFolder(folderUri: string): Promise<void> {
   const path = FileUriToLocalPath(folderUri);
   return rmdir(path);
+}
+
+
+export function NormalizeUri(uri: string): string {
+  if (uri) {
+    return uri.
+      replace("%3A", ":").
+      replace(/(.:)/ig, (v) => v.toLowerCase()).
+      replace(/^(\w*):([^/])/, "$1://$2")
+  }
+  return uri;
+}
+
+export function FileUriToPath(fileUri: string): string {
+  const uri = parse(fileUri);
+  if (uri.protocol !== "file:") {
+    throw `Protocol '${uri.protocol}' not supported for writing.`;
+  }
+  // convert to path
+  let p = uri.path;
+  if (p === undefined) {
+    throw `Cannot write to '${uri}'. Path not found.`;
+  }
+  if (sep === "\\") {
+    p = p.substr(p.startsWith("/") ? 1 : 0);
+    p = p.replace(/\//g, "\\");
+  }
+  return NormalizeUri(p);
+}
+
+
+export function GetExtension(name: string) {
+  let ext = extname(name);
+  if (ext) {
+    return ext.substr(1).toLowerCase();
+  }
+  return ext;
 }

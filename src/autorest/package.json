@@ -28,8 +28,11 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "test": "./node_modules/.bin/mocha ./dist/test",
+    "restore": "yarn install --no-lockfile && static-link --force",
+    "build": "tsc -p . && static-link",
+    "static-link": "static-link",
+    "postinstall": "static-link --force || exit 0",
     "preinstall": "node ./preinstall-check",
-    "prepare": "shx mkdir -p ./dist/ && shx cp -R ./node_modules/fs-monkey/lib/ ./dist/fs-monkey/ && cd ./static_modules && npm install",
     "prepublishonly": "gulp build"
   },
   "typings": "./dist/main.d.ts",
@@ -43,25 +46,23 @@
     "mocha-typescript": "1.0.22",
     "source-map": "^0.5.6",
     "source-map-support": "^0.4.14",
-    "typescript": "2.3.3",
+    "typescript": "2.5.3",
     "@types/jsonpath": "^0.1.29",
     "vscode-jsonrpc": "^3.1.0",
-    "shx": "^0.2.2",
-    "fs-monkey": "https://github.com/fearthecowboy/fs-monkey/releases/download/0.2.2/fs-monkey-0.2.2.tgz",
-    "@microsoft.azure/async-io": "~1.0.22",
-    "@microsoft.azure/console": "~1.0.31",
-    "@microsoft.azure/extension": "~1.2.12",
-    "@microsoft.azure/polyfill": "~1.0.17",
     "linq-es2015": "^2.4.24",
-    "semver": "^5.3.0",
+    "static-link": "c:/work/github/static/static-link/static-link-0.2.0.tgz",
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz"
   },
-  "staticDependencies": {
-    "@microsoft.azure/async-io": "~1.0.22",
-    "@microsoft.azure/console": "~1.0.31",
-    "@microsoft.azure/extension": "~1.2.12",
-    "@microsoft.azure/polyfill": "~1.0.17",
-    "linq-es2015": "^2.4.24",
-    "semver": "^5.3.0"
+  "static-link": {
+    "entrypoints": [],
+    "dependencies": {
+      "@microsoft.azure/async-io": "~1.0.22",
+      "@microsoft.azure/console": "~1.0.31",
+      "@microsoft.azure/extension": "~1.2.12",
+      "@microsoft.azure/polyfill": "~1.0.17",
+      "linq-es2015": "^2.4.24",
+      "semver": "^5.3.0"
+    },
+    "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt ); "
   }
 }

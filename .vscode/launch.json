@@ -21,7 +21,7 @@
       "name": "run bootstrapper",
       "program": "${workspaceRoot}/src/autorest/dist/app.js",
       "args": [
-        "--latest",
+        "--version=c:/work/github/autorest/autorest/src/autorest-core",
         "--verbose",
         "--debug"
       ],

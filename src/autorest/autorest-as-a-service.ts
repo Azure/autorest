@@ -7,7 +7,7 @@ import { Enumerable as IEnumerable, From } from "./lib/ref/linq";
 import { Exception, LazyPromise } from "@microsoft.azure/polyfill";
 
 import * as semver from "semver";
-import * as asyncIO from "@microsoft.azure/async-io";
+import { isFile, mkdir, isDirectory } from "@microsoft.azure/async-io";
 
 export const pkgVersion: string = require(`${__dirname}/../package.json`).version;
 const home: string = process.env["autorest.home"] || homedir();
@@ -65,21 +65,57 @@ export function resolvePathForLocalVersion(requestedVersion: string | null): str
 
 export async function tryRequire(localPath: string | null, entrypoint: string): Promise<any> {
   try {
+    return require(await resolveEntrypoint(localPath, entrypoint))
+  } catch{ }
+  return null;
+}
+
+export async function resolveEntrypoint(localPath: string | null, entrypoint: string): Promise<string | null> {
+  try {
     // did they specify the package directory directly 
-    if (await asyncIO.isDirectory(localPath)) {
-      if (require(`${localPath}/package.json`).name === corePackage) {
-        console.trace(`Using core from: '${localPath}'`);
-        return require(`${localPath}/dist/${entrypoint}`);
+    if (await isDirectory(localPath)) {
+      const pkg = require(`${localPath}/package.json`);
+
+      if (pkg.name === corePackage) {
+        switch (entrypoint) {
+          case 'main':
+          case 'main.js':
+            entrypoint = pkg.main;
+            break;
+
+          case 'language-service':
+          case 'language-service.js':
+          case 'autorest-language-service':
+            entrypoint = pkg.bin["autorest-language-service"];
+            break;
+
+          case 'autorest':
+          case 'autorest-core':
+          case 'app.js':
+          case 'app':
+            entrypoint = pkg.bin["autorest-core"];
+            break;
+
+          case 'module':
+            // special case: look for the main entrypoint
+            // but return the module folder
+            if (await isFile(`${localPath}/${pkg.main}`)) {
+              return localPath;
+            }
+        }
+        const path = `${localPath}/${entrypoint}`;
+        if (await isFile(path)) {
+          return path;
+        }
       }
     }
   } catch (e) {
-
   }
-  return false;
+  return null;
 }
 
 export async function ensureAutorestHome() {
-  await asyncIO.mkdir(rootFolder);
+  await mkdir(rootFolder);
 }
 
 export async function selectVersion(requestedVersion: string, force: boolean, minimumVersion?: string) {
@@ -111,7 +147,7 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
     }
 
     // if it's not a file, and the network isn't available, we can't continue.
-    if (!await asyncIO.isFile(requestedVersion) && !(await networkEnabled)) {
+    if (!await isFile(requestedVersion) && !(await networkEnabled)) {
       // no network enabled.
       throw new Exception(`Network access is not available, requested version '${requestedVersion}' is not installed. `);
     }

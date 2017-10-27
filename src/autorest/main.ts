@@ -1,9 +1,8 @@
-
-// enable the static module loader
-require("./static-loader").initialize();
+// load static module: ${__dirname }/static_modules.fs
+// require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
 
 // everything else.
-import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
+import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolveEntrypoint, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
 import { DocumentPatterns } from './lib/core/lib/document-type';
 import { resolve } from 'path';
 
@@ -32,15 +31,32 @@ export const AutoRest: Promise<typeof IAutoRest> = new Promise((r, j) => {
   reject_autorest = j;
 });
 
+let coreModule: any = undefined;
 let busy = false;
-let loaded = false;
+let modulePath: string | undefined = undefined;
+
+export async function getLanguageServiceEntrypoint(requestedVersion: string = "latest-installed", minimumVersion?: string): Promise<string> {
+  if (!modulePath && !busy) {
+    // if we haven't already got autorest-core, let's do that now with the default settings.
+    await initialize(requestedVersion, minimumVersion);
+  }
+  return resolveEntrypoint(modulePath, "language-service");
+}
+
+export async function getApplicationEntrypoint(requestedVersion: string = "latest-installed", minimumVersion?: string): Promise<string> {
+  if (!modulePath && !busy) {
+    // if we haven't already got autorest-core, let's do that now with the default settings.
+    await initialize(requestedVersion, minimumVersion);
+  }
+  return resolveEntrypoint(modulePath, "app");
+}
 
 export async function initialize(requestedVersion: string = "latest-installed", minimumVersion?: string) {
-  if (loaded) {
+  if (modulePath) {
     return;
   }
   if (busy) {
-    throw new Error("initialize is already called.")
+    throw new Error("initialize is already in progress.")
   }
 
   busy = true;
@@ -53,36 +69,45 @@ export async function initialize(requestedVersion: string = "latest-installed", 
       const localVersion = resolve(requestedVersion);
 
       // try to use a specified folder
-      const module = await tryRequire(localVersion, "main.js")
-      if (module) {
-        // assign the type to the Async Class Identity
-        resolve_autorest(module.AutoRest)
-        loaded = true;
+      modulePath = await resolveEntrypoint(localVersion, "module");
+
+      if (modulePath) {
         return;
       }
     } catch (E) {
       // no local version
     }
+
     // logic to resolve and optionally install a autorest core package.
     // will throw if it's not doable.
     let selectedVersion = await selectVersion(requestedVersion, false, minimumVersion);
-
-    const module = await tryRequire(await selectedVersion.modulePath, "main.js");
-    if (!module) {
+    modulePath = await resolveEntrypoint(await selectedVersion.modulePath, "module");
+    if (!modulePath) {
       reject_autorest(new Error(`Unable to start AutoRest Core from ${requestedVersion}/${await selectedVersion.modulePath}`));
       throw new Error(`Unable to start AutoRest Core from ${requestedVersion}/${await selectedVersion.modulePath}`);
     }
-
-    // assign the type to the Async Class Identity
-    resolve_autorest(module.AutoRest)
-    loaded = true;
-
   } finally {
     busy = false;
   }
 }
 
 export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: string): Promise<AutoRest> {
+  if (!modulePath && !busy) {
+    // if we haven't already got autorest-core, let's do that now with the default settings.
+    await initialize();
+  }
+
+  if (modulePath && !coreModule) {
+    // get the library entrypoint
+    coreModule = tryRequire(modulePath, "main");
+
+    // assign the type to the Async Class Identity
+    resolve_autorest(coreModule.AutoRest)
+  }
+
+  // wait for class definition
   const CAutoRest = <any>(await AutoRest);
+
+  // return new instance of the AutoRest interface.
   return new CAutoRest(fileSystem, configFileOrFolderUri);
 }
