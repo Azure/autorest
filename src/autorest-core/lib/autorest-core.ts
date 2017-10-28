@@ -88,8 +88,8 @@ export class AutoRest extends EventEmitter {
     }
   }
 
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, documentPath?: string): Promise<string | null> {
-    return Configuration.DetectConfigurationFile(fileSystem, (documentPath || null));
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, documentPath?: string, walkUpFolders?: boolean): Promise<string | null> {
+    return Configuration.DetectConfigurationFile(fileSystem, (documentPath || null), undefined, walkUpFolders);
   }
 
   /**

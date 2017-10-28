@@ -122,6 +122,9 @@ export function GetFilenameWithoutExtension(uri: string): string {
 }
 
 export function ToRawDataUrl(uri: string): string {
+  if (!uri) {
+    debugger;
+  }
   // special URI handlers (the 'if's shouldn't be necessary but provide some additional isolation in case there is anything wrong with one of the regexes)
   // - GitHub repo
   if (uri.startsWith("https://github.com")) {
@@ -162,6 +165,9 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
   try {
     const base = new URI(baseUri);
     const relative = new URI(pathOrUri);
+    if (baseUri.startsWith("untitled:///") && pathOrUri.startsWith("untitled:")) {
+      return pathOrUri;
+    }
     const result = relative.absoluteTo(base);
     // GitHub simple token forwarding, for when you pass a URI to a private repo file with `?token=` query parameter.
     // this may be easier for quick testing than getting and passing an OAuth token.  
@@ -308,7 +314,7 @@ export function FileUriToPath(fileUri: string): string {
     p = p.substr(p.startsWith("/") ? 1 : 0);
     p = p.replace(/\//g, "\\");
   }
-  return NormalizeUri(p);
+  return p;
 }
 
 

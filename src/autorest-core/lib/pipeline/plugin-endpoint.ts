@@ -14,6 +14,7 @@ import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestP
 import { Exception } from "../exception";
 import { Message } from "../message";
 import { Readable, Writable } from "stream";
+import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter"
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
@@ -148,7 +149,8 @@ export class AutoRestExtension extends EventEmitter {
     });
 
     // name transformation
-    const friendly2internal: (name: string) => Promise<string | undefined> = async name => ((await inputFileHandles).filter(h => h.Description === name)[0] || {}).key;
+    // decodeUriComponent horsehockey is there because we may have an over-decoded URI from the plugin.
+    const friendly2internal: (name: string) => Promise<string | undefined> = async name => ((await inputFileHandles).filter(h => h.Description === name || decodeURIComponent(h.Description) === decodeURIComponent(name))[0] || {}).key;
     const internal2friendly: (name: string) => Promise<string | undefined> = async key => (await inputScope.Read(key) || <any>{}).Description;
 
     let finishNotifications: Promise<void> = Promise.resolve();

@@ -3,8 +3,6 @@
 //  Licensed under the MIT License. See License.txt in the project root for license information.
 // ---------------------------------------------------------------------------------------------
 
-import { OpenApiDocumentManager } from "./document-manager";
-import { NormalizeUri } from '../lib/ref/uri'
 import { JsonPath, SourceMap } from './source-map';
 
 import { Location, Position } from 'vscode-languageserver';
@@ -20,8 +18,8 @@ import { value, stringify, parse, nodes, paths, } from "jsonpath";
  * Essentially, it provides useful mappings between logical (JSON path) and physical (line/column) locations in both directions.
  */
 export class DocumentAnalysis {
+  /*
   public static async Create(host: OpenApiDocumentManager, documentUri: string): Promise<DocumentAnalysis | null> {
-    documentUri = NormalizeUri(documentUri);
 
     const document = await host.GetFileContent(documentUri);
     if (!document) {
@@ -38,7 +36,7 @@ export class DocumentAnalysis {
       document,
       fullyResolvedAndMergedDefinition.openapiDefinition,
       new SourceMap(fullyResolvedAndMergedDefinition.openapiDefinitionMap));
-  }
+  }*/
 
   public constructor(
     private documentUri: string,

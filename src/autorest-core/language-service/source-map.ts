@@ -38,7 +38,7 @@ export class SourceMap {
   public LookupForward(file: string, line: number, column: number): { line: number, column: number, path: JsonPath | null }[] {
     const sameLineResults: sourceMap.MappingItem[] = [];
     this.consumer.eachMapping(mi => {
-      if (mi.source === file && mi.originalLine === line && mi.originalColumn <= column) {
+      if (((mi.source === file) || (decodeURIComponent(mi.source) === decodeURIComponent(file))) && mi.originalLine === line && mi.originalColumn <= column) {
         sameLineResults.push(mi);
       }
     });
