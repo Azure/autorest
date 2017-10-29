@@ -44,10 +44,7 @@
     "static-link": "^0.2.0"
   },
   "static-link": {
-    "entrypoints": [
-      "dist/app.js",
-      "dist/main.js"
-    ],
+    "entrypoints": [],
     "dependencies": {
       "@microsoft.azure/async-io": "~1.0.22",
       "@microsoft.azure/extension": "~1.2.12",
@@ -68,6 +65,6 @@
       "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
       "yargs": "^8.0.2"
     },
-    "patch": ""
+    "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt ); "
   }
 }
