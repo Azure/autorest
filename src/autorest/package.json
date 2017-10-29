@@ -31,7 +31,7 @@
     "restore": "yarn install --no-lockfile && static-link --force",
     "build": "tsc -p . && static-link",
     "static-link": "static-link",
-    "postinstall": "static-link || exit 0",
+    "postinstall": "static-link --force || exit 0",
     "preinstall": "node ./preinstall-check",
     "prepublishonly": "gulp build"
   },
