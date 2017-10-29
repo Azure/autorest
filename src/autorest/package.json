@@ -51,7 +51,7 @@
     "vscode-languageserver-protocol": "3.4.4",
     "vscode-jsonrpc": "^3.1.0",
     "linq-es2015": "^2.4.24",
-    "static-link": "c:/work/github/static/static-link/static-link-0.2.0.tgz",
+    "static-link": "^0.2.0",
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz"
   },
   "static-link": {

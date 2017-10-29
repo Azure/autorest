@@ -33,14 +33,15 @@
   "typings": "./dist/main.d.ts",
   "devDependencies": {
     "@types/commonmark": "^0.27.0",
+    "@types/js-yaml": "^3.5.31",
     "@types/jsonpath": "^0.1.29",
     "@types/node": "^8.0.28",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
     "@types/yargs": "^8.0.2",
-    "@types/js-yaml": "^3.5.31",
+    "mocha": "^4.0.1",
     "mocha-typescript": "^1.1.7",
-    "static-link": "c:/work/github/static/static-link/static-link-0.2.0.tgz"
+    "static-link": "^0.2.0"
   },
   "static-link": {
     "entrypoints": [

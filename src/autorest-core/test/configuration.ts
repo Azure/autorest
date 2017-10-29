@@ -11,7 +11,7 @@ import * as AutoRest from "../lib/autorest-core"
     let f = new MemoryFileSystem(new Map<string, string>([
       ['readme.md', `
 # this is a test
- see https://aka.ms/autorest
+> see https://aka.ms/autorest
 ~~~ yaml
 my-value: $(sample-value)
 sample-value: one
