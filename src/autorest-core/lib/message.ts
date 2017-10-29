@@ -12,6 +12,7 @@ export enum Channel {
   Debug = <any>"debug",
   Verbose = <any>"verbose",
   Fatal = <any>"fatal",
+  Hint = <any>"hint",
 }
 
 export interface SourceLocation {

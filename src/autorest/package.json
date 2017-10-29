@@ -31,7 +31,7 @@
     "restore": "yarn install --no-lockfile && static-link --force",
     "build": "tsc -p . && static-link",
     "static-link": "static-link",
-    "postinstall": "static-link --force || exit 0",
+    "postinstall": "static-link || exit 0",
     "preinstall": "node ./preinstall-check",
     "prepublishonly": "gulp build"
   },
@@ -48,6 +48,7 @@
     "source-map-support": "^0.4.14",
     "typescript": "2.5.3",
     "@types/jsonpath": "^0.1.29",
+    "vscode-languageserver-protocol": "3.4.4",
     "vscode-jsonrpc": "^3.1.0",
     "linq-es2015": "^2.4.24",
     "static-link": "c:/work/github/static/static-link/static-link-0.2.0.tgz",

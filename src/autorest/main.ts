@@ -5,6 +5,7 @@
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolveEntrypoint, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
 import { DocumentPatterns } from './lib/core/lib/document-type';
 import { resolve } from 'path';
+import { BaseLanguageClient as LanguageClient, TextDocument } from "./vscode/client";
 
 // exports the public AutoRest definitions
 export { IFileSystem, Message } from './lib/core/main';
@@ -110,4 +111,54 @@ export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: s
 
   // return new instance of the AutoRest interface.
   return new CAutoRest(fileSystem, configFileOrFolderUri);
+}
+
+export interface generated {
+  messages: Array<string>;
+  files: any;
+}
+
+export class AutoRestLanguageService {
+
+  public constructor(private languageClient: LanguageClient) {
+
+  }
+
+  public async generate(documentUri: string, language: string, configuration: any): Promise<generated> {
+    // don't call before the client is ready.
+    await this.languageClient.onReady();
+    return await this.languageClient.sendRequest<generated>("generate", { documentUri: documentUri, language: language, configuration: configuration });
+  }
+
+  public async isOpenApiDocument(contentOrUri: string): Promise<boolean> {
+    // don't call before the client is ready.
+    await this.languageClient.onReady();
+
+    return await this.languageClient.sendRequest<boolean>("isOpenApiDocument", { contentOrUri: contentOrUri });
+  }
+  public async isConfigurationFile(contentOrUri: string): Promise<boolean> {
+    // don't call before the client is ready.
+    await this.languageClient.onReady();
+
+    return await this.languageClient.sendRequest<boolean>("isConfigurationFile", { contentOrUri: contentOrUri });
+  }
+  public async toJSON(contentOrUri: string): Promise<string> {
+    // don't call before the client is ready.
+    await this.languageClient.onReady();
+
+    return await this.languageClient.sendRequest<string>("toJSON", { contentOrUri: contentOrUri });
+  }
+  public async findConfigurationFile(documentUri: string): Promise<string> {
+    // don't call before the client is ready.
+    await this.languageClient.onReady();
+
+    return await this.languageClient.sendRequest<string>("findConfigurationFile", { documentUri: documentUri });
+  }
+
+  public async isSupportedFile(languageId: string, contentOrUri: string): Promise<boolean> {
+    // don't call before the client is ready.
+    await this.languageClient.onReady();
+
+    return await this.languageClient.sendRequest<boolean>("isSupportedFile", { languageId: languageId, contentOrUri: contentOrUri });
+  }
 }

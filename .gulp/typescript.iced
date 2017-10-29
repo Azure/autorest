@@ -11,6 +11,9 @@ copyDtsFiles = (done) =>
     .on 'end', () => 
     source ["#{basefolder}/src/autorest-core/dist/**/*.d.ts","!#{basefolder}/src/autorest-core/dist/test/**" ]
       .pipe destination "#{basefolder}/src/autorest/dist/lib/core"
+    .on 'end', () =>
+     source ["#{basefolder}/src/autorest/vscode/**/*.d.ts" ]
+      .pipe destination "#{basefolder}/src/autorest/dist/vscode"
     .on 'end', done
   return null
 
