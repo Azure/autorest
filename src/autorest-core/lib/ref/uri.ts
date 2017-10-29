@@ -122,9 +122,6 @@ export function GetFilenameWithoutExtension(uri: string): string {
 }
 
 export function ToRawDataUrl(uri: string): string {
-  if (!uri) {
-    debugger;
-  }
   // special URI handlers (the 'if's shouldn't be necessary but provide some additional isolation in case there is anything wrong with one of the regexes)
   // - GitHub repo
   if (uri.startsWith("https://github.com")) {
@@ -287,17 +284,6 @@ import { rmdir } from "@microsoft.azure/async-io";
 export async function ClearFolder(folderUri: string): Promise<void> {
   const path = FileUriToLocalPath(folderUri);
   return rmdir(path);
-}
-
-
-export function NormalizeUri(uri: string): string {
-  if (uri) {
-    return uri.
-      replace("%3A", ":").
-      replace(/(.:)/ig, (v) => v.toLowerCase()).
-      replace(/^(\w*):([^/])/, "$1://$2")
-  }
-  return uri;
 }
 
 export function FileUriToPath(fileUri: string): string {
