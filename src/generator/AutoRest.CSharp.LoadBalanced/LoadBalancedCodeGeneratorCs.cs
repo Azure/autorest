@@ -191,16 +191,16 @@ namespace AutoRest.CSharp.LoadBalanced
 
                 await Write(modelTemplate, modelPath);
             }
-            // remove becuase we need to change package version config first
-            //var projectTemplate = new CsProjTemplate { Model = project };
-            //var projFilePath = $"{project.RootNameSpace}.csproj";
 
-            //var solutionTemplate = new SlnTemplate { Model = project };
-            //var slnFilePath = $"{project.RootNameSpace}.sln";
+            var projectTemplate = new CsProjTemplate { Model = project };
+            var projFilePath = $"{project.RootNameSpace}.csproj";
 
-            //await Write(projectTemplate, projFilePath);
-            //await Write(solutionTemplate, slnFilePath);
-            //await Write(new PackagesTemplate(), "packages.config");
+            var solutionTemplate = new SlnTemplate { Model = project };
+            var slnFilePath = $"{project.RootNameSpace}.sln";
+
+            await Write(projectTemplate, projFilePath);
+            await Write(solutionTemplate, slnFilePath);
+            await Write(new PackagesTemplate(), "packages.config");
         }
 
         private async Task GenerateRestCode(CodeModelCs codeModel)
