@@ -53,7 +53,7 @@ autorest --version=latest
 autorest --reset 
 
 # install a specific nightly build 
-autorest --version=1.0.1-20170222-2300-nightly
+autorest --version=2.0.4144
 
 # generate c# client library for swagger.json
 autorest --version=latest -input swagger.json 
