@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Authors>Agoda, Microsoft</Authors>
+    <Authors>Microsoft</Authors>
     <TargetFramework>net451</TargetFramework>
     <DelaySign>true</DelaySign>
-    <AssemblyName>AutoRest.CSharp.LoadBalanced.Json</AssemblyName>
+    <AssemblyName>AutoRest.AzureResourceSchema</AssemblyName>
     <AssemblyOriginatorKeyFile>../../../Tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>false</SignAssembly>
-    <PackageId>AutoRest.CSharp.LoadBalanced.Json</PackageId>
-    <PackageTags>Microsoft LoadBalance AutoRest CSharp Generator</PackageTags>
+    <PackageId>AutoRest.AzureResourceSchema</PackageId>
+    <PackageTags>Microsoft AutoRest </PackageTags>
     <PackageProjectUrl>https://github.com/Azure/AutoRest</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</PackageLicenseUrl>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
@@ -17,17 +17,18 @@
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\core\AutoRest.Core\AutoRest.Core.csproj" />
-    <ProjectReference Include="..\..\core\AutoRest.Extensions\AutoRest.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="[9.0.1,10.0)" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <Reference Include="System.Net.Http" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>

@@ -4,21 +4,18 @@
     <Authors>Agoda, Microsoft</Authors>
     <TargetFramework>net451</TargetFramework>
     <DelaySign>true</DelaySign>
-    <AssemblyName>AutoRest.CSharp.LoadBalanced.Json</AssemblyName>
+    <AssemblyName>AutoRest.CSharp.LoadBalanced</AssemblyName>
     <AssemblyOriginatorKeyFile>../../../Tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>false</SignAssembly>
-    <PackageId>AutoRest.CSharp.LoadBalanced.Json</PackageId>
+    <PackageId>AutoRest.CSharp.LoadBalanced</PackageId>
     <PackageTags>Microsoft LoadBalance AutoRest CSharp Generator</PackageTags>
     <PackageProjectUrl>https://github.com/Azure/AutoRest</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</PackageLicenseUrl>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
   </PropertyGroup>
 
   <ItemGroup>
