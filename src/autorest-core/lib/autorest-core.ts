@@ -88,8 +88,8 @@ export class AutoRest extends EventEmitter {
     }
   }
 
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, documentPath?: string): Promise<string | null> {
-    return Configuration.DetectConfigurationFile(fileSystem, (documentPath || null));
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, documentPath?: string, walkUpFolders?: boolean): Promise<string | null> {
+    return Configuration.DetectConfigurationFile(fileSystem, (documentPath || null), undefined, walkUpFolders);
   }
 
   /**
@@ -139,6 +139,10 @@ export class AutoRest extends EventEmitter {
     messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
     return this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, includeDefault, ...this._configurations);
+  }
+
+  public static async Shutdown() {
+    await Configuration.shutdown();
   }
 
   public Invalidate() {

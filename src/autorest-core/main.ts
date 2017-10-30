@@ -3,10 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// enable static modules for autorest-core
-if ((<any>global).StaticVolumeSet) {
-  (<any>global).StaticVolumeSet.addFileSystem(`${__dirname}/static_modules.fs`)
-}
+ // load static module: ${__dirname }/static_modules.fs
+require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
 
 export { IFileSystem } from "./lib/file-system"
 export { Message, Channel } from "./lib/message"

@@ -2,7 +2,6 @@ import * as cp from 'child_process';
 import * as rpc from 'vscode-jsonrpc';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 
-
 async function connect() {
   let childProcess = cp.spawn("dotnet", [`${__dirname}/../../../core/AutoRest/bin/netcoreapp1.0/AutoRest.dll`, "--server"]);
 

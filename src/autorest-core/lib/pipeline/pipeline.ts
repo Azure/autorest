@@ -361,6 +361,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   // execute pipeline
   const barrier = new OutstandingTaskAwaiter();
   const barrierRobust = new OutstandingTaskAwaiter();
+
   for (const name of Object.keys(pipeline.pipeline)) {
     const task = getTask(name);
     const taskx: { _state: "running" | "failed" | "complete", _result: () => DataHandle[], _finishedAt: number } = task as any;
@@ -372,14 +373,18 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       taskx._finishedAt = Date.now();
     }).catch(() => taskx._state = "failed");
     barrier.Await(task);
-    barrierRobust.Await(task.catch(() => null));
+    barrierRobust.Await(task.catch(() => { }));
   }
 
   try {
     await barrier.Wait();
   } catch (e) {
     // wait for outstanding nodes
-    await barrierRobust.Wait();
+    try {
+      await barrierRobust.Wait();
+    } catch {
+      // wait for others to fail or whatever...
+    }
     throw e;
   }
 }

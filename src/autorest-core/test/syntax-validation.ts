@@ -11,6 +11,7 @@ import { Message, Channel } from "../lib/message";
 import { AutoRest } from "../lib/autorest-core";
 import { MemoryFileSystem } from "../lib/file-system";
 import { Parse } from "../lib/parsing/literate-yaml";
+import { Configuration } from "../lib/configuration";
 
 @suite class SyntaxValidation {
   private async GetLoaderErrors(swagger: string): Promise<Message[]> {
@@ -50,5 +51,9 @@ import { Parse } from "../lib/parsing/literate-yaml";
     assert.deepStrictEqual(((await this.GetLoaderErrors("\n\n\n [{ a: '3 }]"))[0] as any).Source[0].Position, { line: 4, column: 13 });
     assert.deepStrictEqual(((await this.GetLoaderErrors("{ a 3 }"))[0] as any).Source[0].Position, { line: 1, column: 5 });
     assert.deepStrictEqual(((await this.GetLoaderErrors("a: [3"))[0] as any).Source[0].Position, { line: 1, column: 6 });
+  }
+
+  static after() {
+    Configuration.shutdown();
   }
 }

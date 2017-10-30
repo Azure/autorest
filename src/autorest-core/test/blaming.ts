@@ -10,6 +10,7 @@ import * as assert from "assert";
 
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { parse } from "../lib/ref/jsonpath";
+import { Configuration } from "../lib/configuration";
 
 @suite class Blaming {
 
@@ -91,5 +92,9 @@ import { parse } from "../lib/ref/jsonpath";
     autoRest.Message.Subscribe((_, m) => messages.push(m));
     assert.equal(await autoRest.Process().finish, true);
     assert.notEqual(messages.length, 0);
+  }
+
+  static after() {
+    Configuration.shutdown()
   }
 }

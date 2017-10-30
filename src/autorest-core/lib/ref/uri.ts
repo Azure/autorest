@@ -13,7 +13,7 @@ export function IsUri(uri: string): boolean {
 import * as promisify from "pify";
 import { Readable } from "stream";
 import { parse } from "url";
-import { sep } from "path";
+import { sep, extname } from "path";
 
 const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");
@@ -162,6 +162,9 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
   try {
     const base = new URI(baseUri);
     const relative = new URI(pathOrUri);
+    if (baseUri.startsWith("untitled:///") && pathOrUri.startsWith("untitled:")) {
+      return pathOrUri;
+    }
     const result = relative.absoluteTo(base);
     // GitHub simple token forwarding, for when you pass a URI to a private repo file with `?token=` query parameter.
     // this may be easier for quick testing than getting and passing an OAuth token.  
@@ -281,4 +284,30 @@ import { rmdir } from "@microsoft.azure/async-io";
 export async function ClearFolder(folderUri: string): Promise<void> {
   const path = FileUriToLocalPath(folderUri);
   return rmdir(path);
+}
+
+export function FileUriToPath(fileUri: string): string {
+  const uri = parse(fileUri);
+  if (uri.protocol !== "file:") {
+    throw `Protocol '${uri.protocol}' not supported for writing.`;
+  }
+  // convert to path
+  let p = uri.path;
+  if (p === undefined) {
+    throw `Cannot write to '${uri}'. Path not found.`;
+  }
+  if (sep === "\\") {
+    p = p.substr(p.startsWith("/") ? 1 : 0);
+    p = p.replace(/\//g, "\\");
+  }
+  return p;
+}
+
+
+export function GetExtension(name: string) {
+  let ext = extname(name);
+  if (ext) {
+    return ext.substr(1).toLowerCase();
+  }
+  return ext;
 }

@@ -11,6 +11,9 @@ copyDtsFiles = (done) =>
     .on 'end', () => 
     source ["#{basefolder}/src/autorest-core/dist/**/*.d.ts","!#{basefolder}/src/autorest-core/dist/test/**" ]
       .pipe destination "#{basefolder}/src/autorest/dist/lib/core"
+    .on 'end', () =>
+     source ["#{basefolder}/src/autorest/vscode/**/*.d.ts" ]
+      .pipe destination "#{basefolder}/src/autorest/dist/vscode"
     .on 'end', done
   return null
 
@@ -64,9 +67,9 @@ task 'build', 'typescript', (done)->
       
       task 'compile/typescript', fn, deps, (fin) ->
         copyDtsFiles ->
-          execute "#{basefolder}/node_modules/.bin/tsc --project #{each.path} ", {cwd: each.path }, (code,stdout,stderr) ->
+          execute "npm run build", {cwd: each.path }, (code,stdout,stderr) ->
             if watch
-              execute "#{basefolder}/node_modules/.bin/tsc --watch --project #{each.path}", (c,o,e) ->
+              execute "npm run watch", {cwd: each.path }, (c,o,e) ->
               echo "watching #{fn}"
               , (d) -> echo d.replace(/^src\//mig, "#{basefolder}/src/")
             fin()

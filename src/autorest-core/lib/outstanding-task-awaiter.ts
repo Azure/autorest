@@ -5,9 +5,11 @@
 
 import { OutstandingTaskAlreadyCompletedException } from "./exception";
 
+
 export class OutstandingTaskAwaiter {
   private locked: boolean = false;
   private outstandingTasks: Promise<any>[] = [];
+
 
   public async Wait(): Promise<void> {
     this.locked = true;

@@ -30,6 +30,10 @@ export class LazyPromise<T> implements PromiseLike<T> {
     return this.promise;
   }
 
+  public get hasValue(): boolean {
+    return this.promise !== null;
+  }
+
   then<TResult1, TResult2>(
     onfulfilled: (value: T) => TResult1 | PromiseLike<TResult1>,
     onrejected: (reason: any) => TResult2 | PromiseLike<TResult2>): PromiseLike<TResult1 | TResult2> {
