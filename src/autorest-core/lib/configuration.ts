@@ -395,17 +395,23 @@ export class ConfigurationView {
 
           try {
             const originalPath = JSON.stringify(s.Position.path);
+            let shouldComplain = false;
             while (blameTree === null) {
               try {
                 blameTree = this.DataStore.Blame(s.document, s.Position);
+                if (shouldComplain) {
+                  this.Message({
+                    Channel: Channel.Verbose,
+                    Text: `\nDEVELOPER-WARNING: Path '${originalPath}' was corrected to ${JSON.stringify(s.Position.path)} on MESSAGE '${JSON.stringify(m.Text)}'\n`
+                  });
+                }
               } catch (e) {
+                if (!shouldComplain) {
+                  shouldComplain = true;
+                }
                 const path = s.Position.path as string[];
                 if (path) {
                   if (path.length === 0) {
-                    this.Message({
-                      Channel: Channel.Verbose,
-                      Text: `Could not find the exact path ${originalPath} for ${JSON.stringify(m.Text)}`
-                    })
                     throw e;
                   }
                   // adjustment
@@ -595,6 +601,17 @@ export class Configuration {
     return Promise.all(configs.map(c => this.DesugarRawConfig(c)));
   }
 
+  public static async shutdown() {
+    for (const each in loadedExtensions) {
+      const ext = loadedExtensions[each];
+      if (ext.autorestExtension.hasValue) {
+        const extension = await ext.autorestExtension;
+        extension.kill();
+        delete loadedExtensions[each];
+      }
+    }
+  }
+
   public async CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView> {
     const configFileUri = this.fileSystem && this.configFileOrFolderUri
       ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
@@ -765,18 +782,17 @@ export class Configuration {
     }
 
     // try querying the Uri directly
-    if (ExistsUri(configFileOrFolderUri)) {
-      try {
-        const content = await fileSystem.ReadFile(configFileOrFolderUri);
-        if (content.indexOf(Constants.MagicString) > -1) {
-          // the file name was passed in!
-          return [configFileOrFolderUri];
-        }
-      } catch (e) {
-        // that didn't work... try next
+    try {
+      const content = await fileSystem.ReadFile(configFileOrFolderUri);
+      if (content.indexOf(Constants.MagicString) > -1) {
+        // the file name was passed in!
+        return [configFileOrFolderUri];
       }
+      // this *was* an actual file passed in, not a folder. don't make this harder than it has to be.
+      return results;
+    } catch {
+      // didn't get the file successfully, move on.
     }
-
 
     // scan the filesystem items for configurations.
     for (const name of await fileSystem.EnumerateFileUris(EnsureIsFolderUri(configFileOrFolderUri))) {

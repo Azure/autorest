@@ -141,6 +141,10 @@ export class AutoRest extends EventEmitter {
     return this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, includeDefault, ...this._configurations);
   }
 
+  public static async Shutdown() {
+    await Configuration.shutdown();
+  }
+
   public Invalidate() {
     if (this._view) {
       this._view.messageEmitter.removeAllListeners();

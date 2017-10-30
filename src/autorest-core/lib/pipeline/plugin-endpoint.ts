@@ -14,7 +14,6 @@ import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestP
 import { Exception } from "../exception";
 import { Message } from "../message";
 import { Readable, Writable } from "stream";
-import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter"
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
@@ -36,13 +35,17 @@ export class AutoRestExtension extends EventEmitter {
   private static lastSessionId: number = 0;
   private static CreateSessionId(): string { return `session_${++AutoRestExtension.lastSessionId}`; }
 
+  public kill() {
+    this.childProcess.kill();
+  }
+
   public static async FromModule(modulePath: string): Promise<AutoRestExtension> {
     const childProc = fork(modulePath, [], <any>{ silent: true });
     return AutoRestExtension.FromChildProcess(modulePath, childProc);
   }
 
   public static async FromChildProcess(extensionName: string, childProc: ChildProcess): Promise<AutoRestExtension> {
-    const plugin = new AutoRestExtension(extensionName, childProc.stdout, childProc.stdin);
+    const plugin = new AutoRestExtension(extensionName, childProc.stdout, childProc.stdin, childProc);
     childProc.stderr.pipe(process.stderr);
 
     // poke the extension to detect trivial issues like process startup failure or protocol violations, ...
@@ -56,7 +59,7 @@ export class AutoRestExtension extends EventEmitter {
   // Exposed through __status and consumed by tools like autorest-interactive.
   private __inspectTraffic: [number, boolean /*outgoing (core => ext)*/, string][] = [];
 
-  public constructor(private extensionName: string, reader: Readable, writer: Writable) {
+  public constructor(private extensionName: string, reader: Readable, writer: Writable, private childProcess: ChildProcess) {
     super();
 
     // hook in inspectors

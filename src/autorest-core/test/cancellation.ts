@@ -6,6 +6,7 @@ import { AutoRest } from "../lib/autorest-core";
 import { RealFileSystem } from "../lib/file-system";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { Message } from "../lib/message";
+import { Configuration } from "../lib/configuration";
 
 /*@suite */ class Cancellation {
   private async CreateLongRunningAutoRest(): Promise<AutoRest> {
@@ -54,4 +55,8 @@ import { Message } from "../lib/message";
   @test async "after 8s"() { await this.TestCancellationAfter(8000); }
   @test async "after 10s"() { await this.TestCancellationAfter(10000); }
   @test async "after 15s"() { await this.TestCancellationAfter(15000); }
+
+  static after() {
+    Configuration.shutdown()
+  }
 }

@@ -210,7 +210,16 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
   public settings: any = {};
 
   public get(uri: string): TextDocument {
-    return super.get(uri);
+    const content = super.get(uri);
+    if (!content) {
+      const name = decodeURIComponent(uri);
+      for (const each of super.all()) {
+        if (decodeURIComponent(each.uri) === name) {
+          return each;
+        }
+      }
+    }
+    return content;
   }
 
   constructor(private connection: IConnection) {
@@ -458,7 +467,7 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
       }
 
       let documentUri = each.uri;
-      const txt = await readFile(FileUriToPath(each.uri));
+      const txt = await this.ReadFile(each.uri);
       if (documentUri.startsWith("file://")) {
         // fake out a document for us to play with
         this.onDocumentChanged({
@@ -493,7 +502,9 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
         return doc.getText();
       }
 
-      return await readFile(FileUriToPath(fileUri));
+      const content = await readFile(FileUriToPath(fileUri));
+
+      return content;
     } catch {
     }
     return "";
@@ -582,7 +593,7 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
       const configFile = await Configuration.DetectConfigurationFile(this, rootUri, undefined, false);
 
       if (configFile) {
-        const content = await readFile(FileUriToPath(configFile));
+        const content = await this.ReadFile(configFile);
         const document = {
           uri: configFile,
           languageId: "markdown",

@@ -8,9 +8,8 @@
       "name": "run tests",
       "program": "${workspaceRoot}/src/autorest-core/node_modules/mocha/bin/_mocha",
       "args": [
-        "dist/test",
-        "-g",
-        "blaming"
+        "dist/test/blaming.js",
+        "--timeout=2000000"
       ],
       "cwd": "${workspaceRoot}/src/autorest-core"
     },
