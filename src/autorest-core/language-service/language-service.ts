@@ -11,7 +11,7 @@ import { Message, Channel } from "../lib/message"
 import { JsonPath, SourceMap } from './source-map';
 import { IFileSystem } from "../lib/file-system";
 import { Artifact } from "../lib/artifact";
-import { ResolveUri, FileUriToPath, GetExtension, IsUri } from '../lib/ref/uri';
+import { ResolveUri, FileUriToPath, GetExtension, IsUri, ParentFolderUri } from '../lib/ref/uri';
 import { From } from "linq-es2015";
 import { safeDump } from "js-yaml";
 import { DocumentAnalysis } from "./document-analysis";
@@ -281,25 +281,35 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
     return result;
   }
   public async isOpenApiDocument(contentOrUri: string): Promise<boolean> {
-    return IsUri(contentOrUri) ? await AutoRest.IsSwaggerFile(await this.ReadFile(contentOrUri)) : await AutoRest.IsSwaggerFile(contentOrUri);
+    try {
+      return IsUri(contentOrUri) ? await AutoRest.IsSwaggerFile(await this.ReadFile(contentOrUri)) : await AutoRest.IsSwaggerFile(contentOrUri);
+    } catch { }
+    return false;
   }
   public async isConfigurationFile(contentOrUri: string): Promise<boolean> {
-    return IsUri(contentOrUri) ? await AutoRest.IsConfigurationFile(await this.ReadFile(contentOrUri)) : await AutoRest.IsConfigurationFile(contentOrUri);
+    try {
+      return IsUri(contentOrUri) ? await AutoRest.IsConfigurationFile(await this.ReadFile(contentOrUri)) : await AutoRest.IsConfigurationFile(contentOrUri);
+    } catch { }
+    return false;
   }
   public async isSupportedFile(languageId: string, contentOrUri: string): Promise<boolean> {
-    if (AutoRest.IsSwaggerExtension(languageId) || AutoRest.IsConfigurationExtension(languageId)) {
-      // so far, so good.
-      const content = IsUri(contentOrUri) ? await this.ReadFile(contentOrUri) : contentOrUri;
-      const isSwag = AutoRest.IsSwaggerFile(content);
-      const isConf = AutoRest.IsConfigurationFile(content);
-      return await isSwag || await isConf;
-    }
-
+    try {
+      if (AutoRest.IsSwaggerExtension(languageId) || AutoRest.IsConfigurationExtension(languageId)) {
+        // so far, so good.
+        const content = IsUri(contentOrUri) ? await this.ReadFile(contentOrUri) : contentOrUri;
+        const isSwag = AutoRest.IsSwaggerFile(content);
+        const isConf = AutoRest.IsConfigurationFile(content);
+        return await isSwag || await isConf;
+      }
+    } catch { }
     return false;
 
   }
   public async toJSON(contentOrUri: string): Promise<string> {
-    return IsUri(contentOrUri) ? await AutoRest.LiterateToJson(await this.ReadFile(contentOrUri)) : await AutoRest.LiterateToJson(contentOrUri);
+    try {
+      return IsUri(contentOrUri) ? await AutoRest.LiterateToJson(await this.ReadFile(contentOrUri)) : await AutoRest.LiterateToJson(contentOrUri);
+    } catch { }
+    return "";
   }
   public async findConfigurationFile(documentUri: string): Promise<string> {
     return await AutoRest.DetectConfigurationFile(this, documentUri, true) || "";
@@ -501,13 +511,11 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
       if (doc) {
         return doc.getText();
       }
-
       const content = await readFile(FileUriToPath(fileUri));
-
       return content;
     } catch {
     }
-    return "";
+    throw new Error(`Unable to read ${fileUri}`);
   }
 
   private async process(configurationUrl: string) {
@@ -528,6 +536,12 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
     // is the document a config file?
     if (configFiles.length === 1 && configFiles[0] == documentUri) {
       return documentUri;
+    }
+
+    if (configFiles.length === 0) {
+      // this didn't find anything at all.
+      // maybe try to ask for the parent folder's files
+      configFiles = await Configuration.DetectConfigurationFiles(this, ParentFolderUri(documentUri), undefined, true);
     }
 
     // is there a config file that contains the document as an input?
