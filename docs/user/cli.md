@@ -65,6 +65,7 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 |`--use-datetimeoffset`|Indicates whether to use DateTimeOffset instead of DateTime to model date-time types|
 |`--models-name=NAME`|Name to use for the generated client models namespace and folder name. By default, uses the value of 'Models'. This is not currently supported by all code generators.|
 |`--output-file=FILENAME`|If set, will cause generated code to be output to a single file. Not supported by all code generators.|
+|`--message-format=regular\|json`|Specifies the format, messages will be printed as. JSON format is easier to process programmatically.|
 
 #### Authentication
 
@@ -87,6 +88,9 @@ Needless to say, *do not put this token* into scripts directly, use Azure KeyVau
 |`--openapi-type=arm│default│data-plane`|Indicates the type of configuration file being passed to the `azure-validator` so that it can run the appropriate class of validation rules accordingly.|
 |`--model-validator`|If set, validates the provided OpenAPI definition(s) against provided `examples`.|
 |`--semantic-validator`|If set, semantically verifies the provided OpenAPI definition(s), e.g. checks that a parameter's specified `default` value matches the parameter's declared type.|
+
+Example:
+Run `autorest --azure-validator --input-file=<path-to-spec> --message-format=json` to get the validation messages in JSON format.
 
 Also, see [Samples/2a-validation](../../Samples/2a-validation) for an example of validation using a configuration file.
 
