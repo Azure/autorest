@@ -25,10 +25,10 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha ./dist/test --timeout 0",
-    "build": "tsc -p . && static-link",
+    "build": "tsc -p .",
     "static-link": "static-link",
-    "postinstall": "static-link --force || exit 0",
-    "prepublishonly": "gulp build"
+    "postinstall": "node ./post-install --force",
+    "prepublishonly": "static-link --force & gulp build"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {

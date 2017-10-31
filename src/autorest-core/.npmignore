@@ -8,3 +8,4 @@ dist/test/
 package/
 .npmignore
 *.tgz
+!/post-install.js 
