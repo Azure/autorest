@@ -1,5 +1,5 @@
 // load static module: ${__dirname }/static_modules.fs
-// require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
+require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
 
 // everything else.
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolveEntrypoint, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
