@@ -190,7 +190,6 @@
       "additionalProperties": {
         "$ref": "#/definitions/schema"
       },
-
       "description": "One or more JSON objects describing the schemas being consumed and produced by the API."
     },
     "parameterDefinitions": {
@@ -487,6 +486,9 @@
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
         },
+        "x-nullable": {
+          "$ref": "#/definitions/xNullable"
+        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         },
@@ -643,6 +645,9 @@
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
         },
+        "x-nullable": {
+          "$ref": "#/definitions/xNullable"
+        },
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
         },
@@ -762,6 +767,9 @@
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
         },
+        "x-nullable": {
+          "$ref": "#/definitions/xNullable"
+        },
         "x-ms-skip-url-encoding": {
           "$ref": "#/definitions/xmsSkipUrlEncoding"
         },
@@ -872,6 +880,9 @@
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
         },
+        "x-nullable": {
+          "$ref": "#/definitions/xNullable"
+        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         }
@@ -977,6 +988,9 @@
         },
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
+        },
+        "x-nullable": {
+          "$ref": "#/definitions/xNullable"
         },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
@@ -1094,6 +1108,9 @@
         },
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
+        },
+        "x-nullable": {
+          "$ref": "#/definitions/xNullable"
         },
         "additionalProperties": {
           "anyOf": [
@@ -1279,6 +1296,9 @@
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
         },
+        "x-nullable": {
+          "$ref": "#/definitions/xNullable"
+        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         }
@@ -1458,9 +1478,15 @@
     "xmsSkipUrlEncoding": {
       "type": "boolean"
     },
+    "xNullable": {
+      "description": "Indicates whether the entity on which this extension is applied is nullable or not. `true` value indicates that it is nullable.",
+      "type": "boolean"
+    },
     "xmsEnum": {
       "type": "object",
-      "required": [ "name" ],
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string"
@@ -1473,10 +1499,11 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": [ "value" ],
+            "required": [
+              "value"
+            ],
             "properties": {
-              "value": {
-              },
+              "value": {},
               "description": {
                 "type": "string"
               },
@@ -1496,7 +1523,10 @@
           "type": "object",
           "properties": {
             "name": {
-              "type": [ "string", "null" ]
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
@@ -1505,7 +1535,10 @@
           "type": "object",
           "properties": {
             "postfix": {
-              "type": [ "string", "null" ]
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
@@ -1528,21 +1561,32 @@
       "type": "object",
       "properties": {
         "nextLinkName": {
-          "type": [ "string", "null" ]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "itemName": {
-          "type": [ "string", "null" ]
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "operationName": {
-          "type": [ "string", "null" ]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       },
       "additionalProperties": false
     },
     "xmsLongRunningOperation": {
+      "description": "Indicates whether the operation is long running (asynchronous). `true` value indicates that it is a long running operation.",
       "type": "boolean"
     },
     "xmsAzureResource": {
+      "description": "Indicates whether a model definition is an Azure Resource. `true` value indicates that it is an Azure Resource.",
       "type": "boolean"
     },
     "xmsRequestId": {
@@ -1601,13 +1645,20 @@
     },
     "xmsParameterLocation": {
       "type": "string",
-      "enum": [ "client", "method" ]
+      "enum": [
+        "client",
+        "method"
+      ]
     },
     "xmsMutability": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [ "create", "read", "update" ]
+        "enum": [
+          "create",
+          "read",
+          "update"
+        ]
       },
       "uniqueItems": true
     },
