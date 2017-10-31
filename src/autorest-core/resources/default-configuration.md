@@ -149,6 +149,7 @@ pipeline:
   swagger-document/emitter:
     input: identity
     scope: scope-swagger-document/emitter
+  # OpenAPI
   openapi-document/openapi-document-converter:
     input: swagger-document/identity
     output-artifact: openapi-document

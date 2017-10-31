@@ -18,7 +18,7 @@ import { DataHandle, DataSink, DataSource, QuickDataSource } from '../data-store
 import { IFileSystem } from "../file-system";
 import { EmitArtifacts } from "./artifact-emitter";
 import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
-import { ConvertOAI2toOAIx } from "../openapi/conversion";
+import { ConvertOAI2toOAI3 } from "../openapi/conversion";
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataSource, sink: DataSink) => Promise<DataSource>;
 interface PipelineNode {
@@ -76,7 +76,7 @@ function CreatePerFilePlugin(processorBuilder: (config: ConfigurationView) => Pr
 }
 function CreatePluginOAI2toOAIx(): PipelinePlugin {
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
-    const fileOut = await ConvertOAI2toOAIx(fileIn, sink);
+    const fileOut = await ConvertOAI2toOAI3(fileIn, sink);
     return await sink.Forward(fileIn.Description, fileOut);
   });
 }
