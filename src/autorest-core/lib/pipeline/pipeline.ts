@@ -18,6 +18,7 @@ import { DataHandle, DataSink, DataSource, QuickDataSource } from '../data-store
 import { IFileSystem } from "../file-system";
 import { EmitArtifacts } from "./artifact-emitter";
 import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
+import { ConvertOAI2toOAIx } from "../openapi/conversion";
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataSource, sink: DataSink) => Promise<DataSource>;
 interface PipelineNode {
@@ -59,19 +60,36 @@ function CreatePluginMdOverrideLoader(): PipelinePlugin {
   };
 }
 
-function CreatePluginTransformer(): PipelinePlugin {
+
+function CreatePerFilePlugin(processorBuilder: (config: ConfigurationView) => Promise<(input: DataHandle, sink: DataSink) => Promise<DataHandle>>): PipelinePlugin {
   return async (config, input, sink) => {
-    const isObject = config.GetEntry("is-object" as any) === false ? false : true;
-    const manipulator = new Manipulator(config);
+    const processor = await processorBuilder(config);
     const files = await input.Enum();
     const result: DataHandle[] = [];
     for (let file of files) {
       const fileIn = await input.ReadStrict(file);
-      const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
-      result.push(await sink.Forward(fileIn.Description, fileOut));
+      const fileOut = await processor(fileIn, sink);
+      result.push(fileOut);
     }
     return new QuickDataSource(result);
   };
+}
+function CreatePluginOAI2toOAIx(): PipelinePlugin {
+  return CreatePerFilePlugin(async config => async (fileIn, sink) => {
+    const fileOut = await ConvertOAI2toOAIx(fileIn, sink);
+    return await sink.Forward(fileIn.Description, fileOut);
+  });
+}
+
+function CreatePluginTransformer(): PipelinePlugin {
+  return CreatePerFilePlugin(async config => {
+    const isObject = config.GetEntry("is-object" as any) === false ? false : true;
+    const manipulator = new Manipulator(config);
+    return async (fileIn, sink) => {
+      const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
+      return await sink.Forward(fileIn.Description, fileOut);
+    };
+  });
 }
 function CreatePluginTransformerImmediate(): PipelinePlugin {
   return async (config, input, sink) => {
@@ -267,6 +285,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     // TODO: replace with OAV again
     "semantic-validator": CreatePluginIdentity(),
 
+    "openapi-document-converter": CreatePluginOAI2toOAIx(),
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
     "pipeline-emitter": CreateArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline)])),
