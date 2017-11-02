@@ -3,7 +3,7 @@ import { lookup } from "dns";
 import { Extension, ExtensionManager } from "@microsoft.azure/extension";
 import { homedir } from "os";
 import { dirname, join, resolve } from "path";
-import { Enumerable as IEnumerable, From } from "./lib/ref/linq";
+import { Enumerable as IEnumerable, From } from "linq-es2015";
 import { Exception, LazyPromise } from "@microsoft.azure/polyfill";
 
 import * as semver from "semver";

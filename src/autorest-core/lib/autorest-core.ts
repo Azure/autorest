@@ -15,8 +15,13 @@ import * as Constants from "./constants";
 import { Artifact } from "./artifact";
 import { homedir } from "os"
 
+/**
+ * An instance of the AutoRest generator. 
+ * 
+ * Note: to create an instance of autore
+ */
 export class AutoRest extends EventEmitter {
-  /**
+  /** 
    *  Given a file's content, does this represent a swagger file of some sort?
    *
    * @param content - the file content to evaluate
@@ -40,6 +45,7 @@ export class AutoRest extends EventEmitter {
     return false;
   }
 
+  /** @internal */
   public static async LiterateToJson(content: string): Promise<string> {
     try {
       let autorest = new AutoRest({
@@ -60,11 +66,13 @@ export class AutoRest extends EventEmitter {
     }
   }
 
+  /** @internal */
   public static async IsConfigurationFile(content: string): Promise<boolean> {
     // this checks to see if the document is an autorest markdown configuration file
     return content.indexOf(Constants.MagicString) > -1;
   }
 
+  /** @internal */
   public static IsConfigurationExtension(extension: string): boolean {
     switch (extension) {
       case "markdown":
@@ -75,6 +83,7 @@ export class AutoRest extends EventEmitter {
     }
   }
 
+  /** @internal */
   public static IsSwaggerExtension(extension: string): boolean {
     switch (extension) {
       case "yaml":
@@ -88,6 +97,7 @@ export class AutoRest extends EventEmitter {
     }
   }
 
+  /** @internal */
   public static async DetectConfigurationFile(fileSystem: IFileSystem, documentPath?: string, walkUpFolders?: boolean): Promise<string | null> {
     return Configuration.DetectConfigurationFile(fileSystem, (documentPath || null), undefined, walkUpFolders);
   }
@@ -116,7 +126,7 @@ export class AutoRest extends EventEmitter {
   }
 
   /**
-   *  @internal
+   * @internal
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
    */
@@ -126,9 +136,6 @@ export class AutoRest extends EventEmitter {
     process.env["autorest.home"] = process.env["autorest.home"] || homedir();
   }
 
-  public static create(fileSystem?: IFileSystem, configFileOrFolderUri?: string) {
-    return new AutoRest(fileSystem, configFileOrFolderUri);
-  }
   public async RegenerateView(includeDefault: boolean = false): Promise<ConfigurationView> {
     this.Invalidate();
     const messageEmitter = new MessageEmitter();
@@ -141,6 +148,7 @@ export class AutoRest extends EventEmitter {
     return this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, includeDefault, ...this._configurations);
   }
 
+  /** @internal */
   public static async Shutdown() {
     await Configuration.shutdown();
   }
@@ -161,13 +169,6 @@ export class AutoRest extends EventEmitter {
     // clear the configuratiion array.
     this._configurations.length = 0;
     this.Invalidate();
-  }
-
-  public get HasConfiguration(): Promise<boolean> {
-    return new Promise<boolean>(async (r, f) => {
-      await this.view;
-      r(false);
-    });
   }
 
   /**

@@ -203,7 +203,7 @@ export interface generated {
   files: Map<string, string>;
 }
 
-export class OpenApiLanugageService extends TextDocuments implements IFileSystem {
+class OpenApiLanugageService extends TextDocuments implements IFileSystem {
   private results = new Map</*configfile*/string, Result>();
   private diagnostics = new Map</*file*/string, Diagnostics>();
   private virtualFile = new Map<string, TextDocument>();

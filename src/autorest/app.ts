@@ -13,7 +13,7 @@ if (process.argv.indexOf("--no-upgrade-check") != -1) {
 import { isFile } from "@microsoft.azure/async-io";
 import { cli, enhanceConsole } from "@microsoft.azure/console";
 import { Exception, LazyPromise } from "@microsoft.azure/polyfill";
-import { Enumerable as IEnumerable, From } from "./lib/ref/linq";
+import { Enumerable as IEnumerable, From } from "linq-es2015";
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
 import { gt } from "semver";
 

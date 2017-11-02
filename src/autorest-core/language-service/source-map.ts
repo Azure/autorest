@@ -5,9 +5,9 @@
 
 import { RawSourceMap, SourceMapConsumer } from "source-map";
 
-export type JsonPath = (number | string)[];
+/* @internal */ export type JsonPath = (number | string)[];
 
-export class SourceMap {
+/* @internal */ export class SourceMap {
   private consumer: SourceMapConsumer;
 
   public constructor(map: RawSourceMap) {

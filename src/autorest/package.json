@@ -28,7 +28,7 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "test": "./node_modules/.bin/mocha ./dist/test",
-    "build": "tsc -p .",
+    "build": "tsc -p .&& shx mkdir -p ./dist/interfaces && shx cp -r ./interfaces/*.d.ts ./dist/interfaces ",
     "static-link": "static-link",
     "postinstall": "node ./post-install --force",
     "preinstall": "node ./preinstall-check",
@@ -47,10 +47,8 @@
     "source-map-support": "^0.4.14",
     "typescript": "2.5.3",
     "@types/jsonpath": "^0.1.29",
-    "vscode-languageserver-protocol": "3.4.4",
-    "vscode-jsonrpc": "^3.1.0",
-    "linq-es2015": "^2.4.24",
     "static-link": "^0.2.1",
+    "shx": "0.2.2",
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz"
   },
   "static-link": {
