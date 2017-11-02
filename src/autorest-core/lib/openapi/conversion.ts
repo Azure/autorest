@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSink } from '../data-store/data-store';
-const convertOAI2toOAI3 = (oa2def: OpenApi2Definition): Promise<OpenApi3Definition> => require("swagger2openapi").convert(oa2def, {});
+const convertOAI2toOAI3 = async (oa2def: OpenApi2Definition): Promise<OpenApi3Definition> => (await require("swagger2openapi").convert(oa2def, { patch: true })).openapi;
 
 export async function ConvertOAI2toOAI3(input: DataHandle, sink: DataSink): Promise<DataHandle> {
   const oa2 = input.ReadObject<OpenApi2Definition>();
