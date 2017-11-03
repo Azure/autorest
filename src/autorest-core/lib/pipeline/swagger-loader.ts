@@ -28,7 +28,8 @@ import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 let ctr = 0;
 
 function isReferenceNode(node: YAMLNodeWithPath): boolean {
-  return node.path[node.path.length - 1] === "$ref" && typeof node.node.value === "string";
+  const lastKey = node.path[node.path.length - 1];
+  return (lastKey === "$ref" || lastKey === "x-ms-odata") && typeof node.node.value === "string";
 }
 
 async function EnsureCompleteDefinitionIsPresent(

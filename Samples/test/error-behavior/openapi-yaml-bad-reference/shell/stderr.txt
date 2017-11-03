@@ -1,8 +1,25 @@
+        components: [Object] } } }
+        info: [Object],
+        paths: [Object],
+        schemes: [Object],
+        servers: [Object],
+      { openapi: '3.0.0',
+     cache: {},
+     externals: [],
+     openapi: 
+   { patch: true,
    at ...
   at ...
   at ...
 --- End of stack trace from previous location where exception was thrown ---
-Error: Plugin modeler reported failure.
+(node) DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 7): Error: Could not resolve reference #/definitions/Cowball
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 8): Error: Could not resolve reference #/definitions/Cowball
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 9): Error: Could not resolve reference #/definitions/Cowball
+{ Error: Could not resolve reference #/definitions/Cowball
 FATAL: csharp/modeler - FAILED
+FATAL: Error: Could not resolve reference #/definitions/Cowball
 FATAL: Error: Plugin modeler reported failure.
+FATAL: openapi-document/openapi-document-converter - FAILED
 FATAL: System.ArgumentException: Reference path 'Cowball' does not exist in the definition section of the Swagger document.
+options: 
