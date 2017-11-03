@@ -30,6 +30,7 @@ task 'regenerate', 'regenerate samples', (done) ->
             (find path.join(each.path, ".."))
               .filter((file) -> file.match(/\.(map|txt)$/))
               .forEach((file) -> 
+                sed "-i", /\(node:\d+\)/g, "(node)", file  # node process IDs
                 sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
                 sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
                 sed "-i", /mem:\/\/\/[^: ]*/g, "mem", file                  # memory URIs (depend on timing)
