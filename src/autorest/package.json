@@ -32,6 +32,7 @@
     "static-link": "static-link",
     "postinstall": "node ./post-install --force",
     "preinstall": "node ./preinstall-check",
+    "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
     "prepack": "static-link & npm run build"
   },
   "typings": "./dist/main.d.ts",
@@ -39,17 +40,12 @@
     "@types/commonmark": "^0.22.29",
     "@types/node": "^7.0.5",
     "@types/semver": "^5.3.30",
-    "@types/source-map": "^0.5.0",
     "@types/yargs": "^6.6.0",
     "mocha": "3.2.0",
     "mocha-typescript": "1.0.22",
-    "source-map": "^0.5.6",
-    "source-map-support": "^0.4.14",
     "typescript": "2.5.3",
-    "@types/jsonpath": "^0.1.29",
-    "static-link": "^0.2.1",
-    "shx": "0.2.2",
-    "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz"
+    "static-link": "^0.2.2",
+    "shx": "0.2.2"
   },
   "static-link": {
     "entrypoints": [],
