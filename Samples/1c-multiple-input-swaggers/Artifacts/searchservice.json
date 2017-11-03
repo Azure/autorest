@@ -1,1704 +1,71 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "Search and Storage"
-  },
-  "paths": {
-    "/datasources('{dataSourceName}')": {
-      "put": {
-        "tags": [
-          "DataSources"
-        ],
-        "operationId": "DataSources_CreateOrUpdate",
-        "description": "Creates a new Azure Search datasource or updates a datasource if it already exists.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946900.aspx"
-        },
-        "parameters": [
-          {
-            "name": "dataSourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the datasource to create or update."
-          },
-          {
-            "name": "dataSource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataSource"
-            },
-            "description": "The definition of the datasource to create or update."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DataSource"
-            }
-          },
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DataSource"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "DataSources"
-        ],
-        "operationId": "DataSources_Delete",
-        "description": "Deletes an Azure Search datasource.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946881.aspx"
-        },
-        "parameters": [
-          {
-            "name": "dataSourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the datasource to delete."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "404": {
-            "description": ""
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "DataSources"
-        ],
-        "operationId": "DataSources_Get",
-        "description": "Retrieves a datasource definition from Azure Search.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946893.aspx"
-        },
-        "parameters": [
-          {
-            "name": "dataSourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the datasource to retrieve."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DataSource"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/datasources": {
-      "get": {
-        "tags": [
-          "DataSources"
-        ],
-        "operationId": "DataSources_List",
-        "description": "Lists all datasources available for an Azure Search service.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946878.aspx"
-        },
-        "parameters": [
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DataSourceListResult"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "post": {
-        "tags": [
-          "DataSources"
-        ],
-        "operationId": "DataSources_Create",
-        "description": "Creates a new Azure Search datasource.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946876.aspx"
-        },
-        "parameters": [
-          {
-            "name": "dataSource",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataSource"
-            },
-            "description": "The definition of the datasource to create."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DataSource"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/indexers('{indexerName}')/search.reset": {
-      "post": {
-        "tags": [
-          "Indexers"
-        ],
-        "operationId": "Indexers_Reset",
-        "description": "Resets the change tracking state associated with an Azure Search indexer.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946897.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the indexer to reset."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "204": {
-            "description": ""
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/indexers('{indexerName}')/search.run": {
-      "post": {
-        "tags": [
-          "Indexers"
-        ],
-        "operationId": "Indexers_Run",
-        "description": "Runs an Azure Search indexer on-demand.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946885.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the indexer to run."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "202": {
-            "description": ""
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/indexers('{indexerName}')": {
-      "put": {
-        "tags": [
-          "Indexers"
-        ],
-        "operationId": "Indexers_CreateOrUpdate",
-        "description": "Creates a new Azure Search indexer or updates an indexer if it already exists.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946899.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the indexer to create or update."
-          },
-          {
-            "name": "indexer",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Indexer"
-            },
-            "description": "The definition of the indexer to create or update."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Indexer"
-            }
-          },
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Indexer"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Indexers"
-        ],
-        "operationId": "Indexers_Delete",
-        "description": "Deletes an Azure Search indexer.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946898.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the indexer to delete."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "404": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "Indexers"
-        ],
-        "operationId": "Indexers_Get",
-        "description": "Retrieves an indexer definition from Azure Search.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946874.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the indexer to retrieve."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Indexer"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/indexers": {
-      "get": {
-        "tags": [
-          "Indexers"
-        ],
-        "operationId": "Indexers_List",
-        "description": "Lists all indexers available for an Azure Search service.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946883.aspx"
-        },
-        "parameters": [
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/IndexerListResult"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "post": {
-        "tags": [
-          "Indexers"
-        ],
-        "operationId": "Indexers_Create",
-        "description": "Creates a new Azure Search indexer.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946899.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexer",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Indexer"
-            },
-            "description": "The definition of the indexer to create."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Indexer"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/indexers('{indexerName}')/search.status": {
-      "get": {
-        "tags": [
-          "Indexers"
-        ],
-        "operationId": "Indexers_GetStatus",
-        "description": "Returns the current status and execution history of an indexer.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn946884.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the indexer for which to retrieve status."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/IndexerExecutionInfo"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/indexes": {
-      "post": {
-        "tags": [
-          "Indexes"
-        ],
-        "operationId": "Indexes_Create",
-        "description": "Creates a new Azure Search index.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn798941.aspx"
-        },
-        "parameters": [
-          {
-            "name": "index",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Index"
-            },
-            "description": "The definition of the index to create."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Index"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "Indexes"
-        ],
-        "operationId": "Indexes_List",
-        "description": "Lists all indexes available for an Azure Search service.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn798923.aspx"
-        },
-        "parameters": [
-          {
-            "name": "$select",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Selects which properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/IndexListResult"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/indexes('{indexName}')": {
-      "put": {
-        "tags": [
-          "Indexes"
-        ],
-        "operationId": "Indexes_CreateOrUpdate",
-        "description": "Creates a new Azure Search index or updates an index if it already exists.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn800964.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The definition of the index to create or update."
-          },
-          {
-            "name": "index",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Index"
-            },
-            "description": "The definition of the index to create or update."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Index"
-            }
-          },
-          "201": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Index"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Indexes"
-        ],
-        "operationId": "Indexes_Delete",
-        "description": "Deletes an Azure Search index and all the documents it contains.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn798926.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the index to delete."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "404": {
-            "description": ""
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "Indexes"
-        ],
-        "operationId": "Indexes_Get",
-        "description": "Retrieves an index definition from Azure Search.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn798939.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the index to retrieve."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Index"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/indexes('{indexName}')/search.stats": {
-      "get": {
-        "tags": [
-          "Indexes"
-        ],
-        "operationId": "Indexes_GetStatistics",
-        "description": "Returns statistics for the given index, including a document count and storage usage.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/library/azure/dn798942.aspx"
-        },
-        "parameters": [
-          {
-            "name": "indexName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the index for which to retrieve statistics."
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "Tracking ID sent with the request to help with debugging.",
-            "x-ms-client-request-id": true,
-            "x-ms-parameter-grouping": {
-              "name": "search-request-options"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-02-28"
-            ]
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/IndexGetStatisticsResult"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_CheckNameAvailability",
-        "description": "Checks that account name is valid and is not in use.",
-        "parameters": [
-          {
-            "name": "accountName",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageAccountCheckNameAvailabilityParameters"
-            },
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResult"
-            }
-          }
-        },
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}": {
-      "put": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_Create",
-        "description": "Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned. ",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-            "maxLength": 24,
-            "minLength": 3
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageAccountCreateParameters"
-            },
-            "description": "The parameters to provide for the created account."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/StorageAccount"
-            }
-          },
-          "202": {
-            "description": ""
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      },
-      "delete": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_Delete",
-        "description": "Deletes a storage account in Microsoft Azure.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-            "maxLength": 24,
-            "minLength": 3
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
-          }
-        },
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      },
-      "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_GetProperties",
-        "description": "Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-            "maxLength": 24,
-            "minLength": 3
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/StorageAccount"
-            }
-          }
-        },
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      },
-      "patch": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_Update",
-        "description": "Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-            "maxLength": 24,
-            "minLength": 3
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageAccountUpdateParameters"
-            },
-            "description": "The parameters to update on the account. Note that only one property can be changed at a time using this API. "
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/StorageAccount"
-            }
-          }
-        },
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys": {
-      "post": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_ListKeys",
-        "description": "Lists the access keys for the specified storage account.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account.",
-            "maxLength": 24,
-            "minLength": 3
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/StorageAccountKeys"
-            }
-          }
-        },
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts": {
-      "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_List",
-        "description": "Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/StorageAccountListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts": {
-      "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_ListByResourceGroup",
-        "description": "Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/StorageAccountListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
-      "post": {
-        "tags": [
-          "StorageAccounts"
-        ],
-        "operationId": "StorageAccounts_RegenerateKey",
-        "description": "Regenerates the access keys for the specified storage account.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user's subscription."
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
-            "maxLength": 24,
-            "minLength": 3
-          },
-          {
-            "name": "regenerateKey",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageAccountRegenerateKeyParameters"
-            },
-            "description": "Specifies name of the key which should be regenerated. key1 or key2 for the default keys"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/StorageAccountKeys"
-            }
-          }
-        },
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages": {
-      "get": {
-        "tags": [
-          "Usage"
-        ],
-        "operationId": "Usage_List",
-        "description": "Gets the current usage count and the limit for the resources under the subscription.",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version.",
-            "enum": [
-              "2015-06-15"
-            ]
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/UsageListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "consumes": [
-          "application/json",
-          "text/json"
-        ]
-      }
-    }
-  },
   "definitions": {
-    "DataSourceCredentials": {
+    "CheckNameAvailabilityResult": {
+      "description": "The CheckNameAvailability operation response.",
       "properties": {
-        "connectionString": {
-          "externalDocs": {
-            "url": "https://msdn.microsoft.com/library/azure/dn946876.aspx"
-          },
+        "message": {
+          "description": "Gets an error message explaining the Reason value in more detail.",
+          "type": "string"
+        },
+        "nameAvailable": {
+          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.",
+          "enum": [
+            "AccountNameInvalid",
+            "AlreadyExists"
+          ],
           "type": "string",
-          "description": "Gets or sets the connection string for the datasource."
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "Reason"
+          }
+        }
+      }
+    },
+    "CorsOptions": {
+      "description": "Defines options to control Cross-Origin Resource Sharing (CORS) for an index.",
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798941.aspx"
+      },
+      "properties": {
+        "allowedOrigins": {
+          "description": "Gets the list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended).",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "maxAgeInSeconds": {
+          "description": "Gets or sets the duration for which browsers should cache CORS preflight responses. Defaults to 5 mintues.",
+          "format": "int64",
+          "type": "integer"
         }
       },
       "required": [
-        "connectionString"
-      ],
-      "description": "Represents credentials that can be used to connect to a datasource."
+        "allowedOrigins"
+      ]
     },
-    "DataContainer": {
+    "CustomDomain": {
+      "description": "The custom domain assigned to this storage account. This can be set via Update.",
       "properties": {
         "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the table or view (for Azure SQL data source) or collection (for DocumentDB data source) that will be indexed."
+          "description": "Gets or sets the custom domain name. Name is the CNAME source.",
+          "type": "string"
         },
-        "query": {
-          "type": "string",
-          "description": "Gets or sets a query that is applied to this data container. Only supported by DocumentDb datasources."
+        "useSubDomain": {
+          "description": "Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates",
+          "type": "boolean"
         }
       },
       "required": [
         "name"
-      ],
-      "description": "Represents information about the entity (such as Azure SQL table or DocumentDb collection) that will be indexed."
+      ]
     },
     "DataChangeDetectionPolicy": {
+      "description": "Abstract base class for data change detection policies.",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -1707,37 +74,26 @@
       },
       "required": [
         "@odata.type"
-      ],
-      "description": "Abstract base class for data change detection policies."
+      ]
     },
-    "HighWaterMarkChangeDetectionPolicy": {
-      "description": "Defines a data change detection policy that captures changes based on the value of a high water mark column.",
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataChangeDetectionPolicy"
-        }
-      ],
+    "DataContainer": {
+      "description": "Represents information about the entity (such as Azure SQL table or DocumentDb collection) that will be indexed.",
       "properties": {
-        "highWaterMarkColumnName": {
-          "type": "string",
-          "description": "Gets or sets the name of the high water mark column."
+        "name": {
+          "description": "Gets or sets the name of the table or view (for Azure SQL data source) or collection (for DocumentDB data source) that will be indexed.",
+          "type": "string"
+        },
+        "query": {
+          "description": "Gets or sets a query that is applied to this data container. Only supported by DocumentDb datasources.",
+          "type": "string"
         }
       },
       "required": [
-        "highWaterMarkColumnName"
-      ]
-    },
-    "SqlIntegratedChangeTrackingPolicy": {
-      "description": "Defines a data change detection policy that captures changes using the Integrated Change Tracking feature of Azure SQL Database.",
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataChangeDetectionPolicy"
-        }
+        "name"
       ]
     },
     "DataDeletionDetectionPolicy": {
+      "description": "Abstract base class for data deletion detection policies.",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -1746,52 +102,18 @@
       },
       "required": [
         "@odata.type"
-      ],
-      "description": "Abstract base class for data deletion detection policies."
-    },
-    "SoftDeleteColumnDeletionDetectionPolicy": {
-      "description": "Defines a data deletion detection policy that implements a soft-deletion strategy. It determines whether an item should be deleted based on the value of a designated 'soft delete' column.",
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataDeletionDetectionPolicy"
-        }
-      ],
-      "properties": {
-        "softDeleteColumnName": {
-          "type": "string",
-          "description": "Gets or sets the name of the column to use for soft-deletion detection."
-        },
-        "softDeleteMarkerValue": {
-          "type": "string",
-          "description": "Gets or sets the marker value that indentifies an item as deleted."
-        }
-      }
+      ]
     },
     "DataSource": {
+      "description": "Represents a datasource definition in Azure Search, which can be used to configure an indexer.",
       "properties": {
-        "name": {
-          "externalDocs": {
-            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
-          },
-          "type": "string",
-          "description": "Gets or sets the name of the datasource."
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the description of the datasource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the type of the datasource."
+        "container": {
+          "$ref": "#/definitions/DataContainer",
+          "description": "Gets or sets the data container for the datasource."
         },
         "credentials": {
           "$ref": "#/definitions/DataSourceCredentials",
           "description": "Gets or sets credentials for the datasource."
-        },
-        "container": {
-          "$ref": "#/definitions/DataContainer",
-          "description": "Gets or sets the data container for the datasource."
         },
         "dataChangeDetectionPolicy": {
           "$ref": "#/definitions/DataChangeDetectionPolicy",
@@ -1800,6 +122,21 @@
         "dataDeletionDetectionPolicy": {
           "$ref": "#/definitions/DataDeletionDetectionPolicy",
           "description": "Gets or sets the data deletion detection policy for the datasource."
+        },
+        "description": {
+          "description": "Gets or sets the description of the datasource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the name of the datasource.",
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets or sets the type of the datasource.",
+          "type": "string"
         }
       },
       "required": [
@@ -1807,347 +144,47 @@
         "type",
         "credentials",
         "container"
-      ],
-      "description": "Represents a datasource definition in Azure Search, which can be used to configure an indexer."
+      ]
+    },
+    "DataSourceCredentials": {
+      "description": "Represents credentials that can be used to connect to a datasource.",
+      "properties": {
+        "connectionString": {
+          "description": "Gets or sets the connection string for the datasource.",
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn946876.aspx"
+          },
+          "type": "string"
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
     },
     "DataSourceListResult": {
+      "description": "Response from a List Datasources request. If successful, it includes the full definitions of all datasources.",
       "properties": {
         "value": {
-          "type": "array",
-          "readOnly": true,
+          "description": "Gets the datasources in the Search service.",
           "items": {
             "$ref": "#/definitions/DataSource"
           },
-          "description": "Gets the datasources in the Search service."
+          "readOnly": true,
+          "type": "array"
         }
       },
-      "description": "Response from a List Datasources request. If successful, it includes the full definitions of all datasources.",
-      "x-ms-external": true
-    },
-    "IndexingSchedule": {
-      "properties": {
-        "interval": {
-          "type": "string",
-          "format": "duration",
-          "description": "Gets or sets the interval of time between indexer executions."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the time when an indexer should start running."
-        }
-      },
-      "required": [
-        "interval"
-      ],
-      "description": "Represents a schedule for indexer execution.",
-      "x-ms-external": true
-    },
-    "IndexingParameters": {
-      "properties": {
-        "maxFailedItems": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0."
-        },
-        "maxFailedItemsPerBatch": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0."
-        },
-        "base64EncodeKeys": {
-          "type": "boolean",
-          "description": "Gets or sets whether indexer will base64-encode all values that are inserted into key field of the target index. This is needed if keys can contain characters that are invalid in keys (such as dot '.'). Default is false."
-        }
-      },
-      "description": "Represents parameters for indexer execution."
-    },
-    "Indexer": {
-      "properties": {
-        "name": {
-          "externalDocs": {
-            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
-          },
-          "type": "string",
-          "description": "Gets or sets the name of the indexer."
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the description of the indexer."
-        },
-        "dataSourceName": {
-          "type": "string",
-          "description": "Gets or sets the name of the datasource from which this indexer reads data."
-        },
-        "targetIndexName": {
-          "type": "string",
-          "description": "Gets or sets the name of the index to which this indexer writes data."
-        },
-        "schedule": {
-          "$ref": "#/definitions/IndexingSchedule",
-          "description": "Gets or sets the schedule for this indexer."
-        },
-        "parameters": {
-          "$ref": "#/definitions/IndexingParameters",
-          "description": "Gets or sets parameters for indexer execution."
-        }
-      },
-      "required": [
-        "name",
-        "dataSourceName",
-        "targetIndexName"
-      ],
-      "externalDocs": {
-        "url": "https://msdn.microsoft.com/library/azure/dn946891.aspx"
-      },
-      "description": "Represents an Azure Search indexer."
-    },
-    "IndexerListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Indexer"
-          },
-          "description": "Gets the indexers in the Search service."
-        }
-      },
-      "description": "Response from a List Indexers request. If successful, it includes the full definitions of all indexers.",
-      "x-ms-external": true
-    },
-    "ItemError": {
-      "properties": {
-        "key": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the key of the item for which indexing failed."
-        },
-        "errorMessage": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the message describing the error that occurred while attempting to index the item."
-        }
-      },
-      "description": "Represents an item- or document-level indexing error."
-    },
-    "IndexerExecutionResult": {
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/IndexerExecutionStatus",
-          "readOnly": true,
-          "description": "Gets the outcome of this indexer execution."
-        },
-        "errorMessage": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the error message indicating the top-level error, if any."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "Gets the start time of this indexer execution."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "Gets the end time of this indexer execution, if the execution has already completed."
-        },
-        "errors": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ItemError"
-          },
-          "description": "Gets the item-level indexing errors"
-        },
-        "itemsProcessed": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "description": "Gets the number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed."
-        },
-        "itemsFailed": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "description": "Gets the number of items that failed to be indexed during this indexer execution."
-        },
-        "initialTrackingState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Change tracking state with which an indexer execution started."
-        },
-        "finalTrackingState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Change tracking state with which an indexer execution finished."
-        }
-      },
-      "description": "Represents result of an individual indexer execution.",
-      "x-ms-external": true
-    },
-    "IndexerExecutionStatus": {
-      "type": "string",
-      "enum": [
-        "transientFailure",
-        "success",
-        "inProgress",
-        "reset"
-      ],
-      "x-ms-enum": {
-        "name": "IndexerExecutionStatus"
-      },
-      "description": "Represents the status of an individual indexer execution."
-    },
-    "IndexerExecutionInfo": {
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/IndexerStatus",
-          "readOnly": true,
-          "description": "Overall indexer status."
-        },
-        "lastResult": {
-          "$ref": "#/definitions/IndexerExecutionResult",
-          "readOnly": true,
-          "description": "The result of the most recent or an in-progress indexer execution."
-        },
-        "executionHistory": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/IndexerExecutionResult"
-          },
-          "description": "History of the recent indexer executions, sorted in reverse chronological order."
-        }
-      },
-      "description": "Represents the current status and execution history of an indexer.",
-      "x-ms-external": true
-    },
-    "IndexerStatus": {
-      "type": "string",
-      "enum": [
-        "unknown",
-        "error",
-        "running"
-      ],
-      "x-ms-enum": {
-        "name": "IndexerStatus"
-      },
-      "description": "Represents the overall indexer status."
-    },
-    "Field": {
-      "properties": {
-        "name": {
-          "externalDocs": {
-            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
-          },
-          "type": "string",
-          "description": "Gets or sets the name of the field."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the data type of the field."
-        },
-        "analyzer": {
-          "externalDocs": {
-            "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
-          },
-          "type": "string",
-          "description": "Name of the text analyzer to use."
-        },
-        "key": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the field is the key of the index. Valid only for string fields. Every index must have exactly one key field."
-        },
-        "searchable": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the field is included in full-text searches. Valid only forstring or string collection fields. Default is false."
-        },
-        "filterable": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the field can be used in filter expressions. Default is false."
-        },
-        "sortable": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the field can be used in orderby expressions. Not valid for string collection fields. Default is false."
-        },
-        "facetable": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether it is possible to facet on this field. Not valid for geo-point fields. Default is false."
-        },
-        "retrievable": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the field can be returned in a search result. Default is true."
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ],
-      "externalDocs": {
-        "url": "https://msdn.microsoft.com/library/azure/dn798941.aspx"
-      },
-      "description": "Represents a field in an index definition in Azure Search, which describes the name, data type, and search behavior of a field.",
-      "x-ms-external": true
-    },
-    "TextWeights": {
-      "properties": {
-        "weights": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "number",
-            "format": "double"
-          },
-          "description": "Gets the dictionary of per-field weights to boost document scoring. The keys are field names and the values are the weights for each field."
-        }
-      },
-      "required": [
-        "weights"
-      ],
-      "description": "Defines weights on index fields for which matches should boost scoring in search queries.",
-      "x-ms-external": true
-    },
-    "ScoringFunction": {
-      "discriminator": "type",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "fieldName": {
-          "type": "string",
-          "description": "Gets or sets the name of the field used as input to the scoring function."
-        },
-        "boost": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets a multiplier for the raw score. Must be a positive number not equal to 1.0."
-        },
-        "interpolation": {
-          "$ref": "#/definitions/ScoringFunctionInterpolation",
-          "description": "Gets or sets a value indicating how boosting will be interpolated across document scores; defaults to \"Linear\"."
-        }
-      },
-      "required": [
-        "type",
-        "fieldName",
-        "boost"
-      ],
-      "externalDocs": {
-        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
-      },
-      "description": "Abstract base class for functions that can modify document scores during ranking.",
       "x-ms-external": true
     },
     "DistanceScoringFunction": {
-      "x-ms-discriminator-value": "distance",
       "allOf": [
         {
           "$ref": "#/definitions/ScoringFunction"
         }
       ],
+      "description": "Defines a function that boosts scores based on distance from a geographic location.",
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
+      },
       "properties": {
         "distance": {
           "$ref": "#/definitions/DistanceScoringParameters",
@@ -2157,38 +194,114 @@
       "required": [
         "distance"
       ],
-      "externalDocs": {
-        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
-      },
-      "description": "Defines a function that boosts scores based on distance from a geographic location.",
+      "x-ms-discriminator-value": "distance",
       "x-ms-external": true
     },
     "DistanceScoringParameters": {
+      "description": "Provides parameter values to a distance scoring function.",
       "properties": {
-        "referencePointParameter": {
-          "type": "string",
-          "description": "Gets or sets the name of the parameter passed in search queries to specify the reference location."
-        },
         "boostingDistance": {
-          "type": "number",
+          "description": "Gets or sets the distance in kilometers from the reference location where the boosting range ends.",
           "format": "double",
-          "description": "Gets or sets the distance in kilometers from the reference location where the boosting range ends."
+          "type": "number"
+        },
+        "referencePointParameter": {
+          "description": "Gets or sets the name of the parameter passed in search queries to specify the reference location.",
+          "type": "string"
         }
       },
       "required": [
         "referencePointParameter",
         "boostingDistance"
       ],
-      "description": "Provides parameter values to a distance scoring function.",
+      "x-ms-external": true
+    },
+    "Endpoints": {
+      "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object.",
+      "properties": {
+        "blob": {
+          "description": "Gets the blob endpoint.",
+          "type": "string"
+        },
+        "file": {
+          "description": "Gets the file endpoint.",
+          "type": "string"
+        },
+        "queue": {
+          "description": "Gets the queue endpoint.",
+          "type": "string"
+        },
+        "table": {
+          "description": "Gets the table endpoint.",
+          "type": "string"
+        }
+      }
+    },
+    "Field": {
+      "description": "Represents a field in an index definition in Azure Search, which describes the name, data type, and search behavior of a field.",
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798941.aspx"
+      },
+      "properties": {
+        "analyzer": {
+          "description": "Name of the text analyzer to use.",
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn879793.aspx"
+          },
+          "type": "string"
+        },
+        "facetable": {
+          "description": "Gets or sets a value indicating whether it is possible to facet on this field. Not valid for geo-point fields. Default is false.",
+          "type": "boolean"
+        },
+        "filterable": {
+          "description": "Gets or sets a value indicating whether the field can be used in filter expressions. Default is false.",
+          "type": "boolean"
+        },
+        "key": {
+          "description": "Gets or sets a value indicating whether the field is the key of the index. Valid only for string fields. Every index must have exactly one key field.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "Gets or sets the name of the field.",
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string"
+        },
+        "retrievable": {
+          "description": "Gets or sets a value indicating whether the field can be returned in a search result. Default is true.",
+          "type": "boolean"
+        },
+        "searchable": {
+          "description": "Gets or sets a value indicating whether the field is included in full-text searches. Valid only forstring or string collection fields. Default is false.",
+          "type": "boolean"
+        },
+        "sortable": {
+          "description": "Gets or sets a value indicating whether the field can be used in orderby expressions. Not valid for string collection fields. Default is false.",
+          "type": "boolean"
+        },
+        "type": {
+          "description": "Gets or sets the data type of the field.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
       "x-ms-external": true
     },
     "FreshnessScoringFunction": {
-      "x-ms-discriminator-value": "freshness",
       "allOf": [
         {
           "$ref": "#/definitions/ScoringFunction"
         }
       ],
+      "description": "Defines a function that boosts scores based on the value of a date-time field.",
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
+      },
       "properties": {
         "freshness": {
           "$ref": "#/definitions/FreshnessScoringParameters",
@@ -2198,33 +311,342 @@
       "required": [
         "freshness"
       ],
-      "externalDocs": {
-        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
-      },
-      "description": "Defines a function that boosts scores based on the value of a date-time field.",
+      "x-ms-discriminator-value": "freshness",
       "x-ms-external": true
     },
     "FreshnessScoringParameters": {
+      "description": "Provides parameter values to a freshness scoring function.",
       "properties": {
         "boostingDuration": {
-          "type": "string",
+          "description": "Gets or sets the expiration period after which boosting will stop for a particular document.",
           "format": "duration",
-          "description": "Gets or sets the expiration period after which boosting will stop for a particular document."
+          "type": "string"
         }
       },
       "required": [
         "boostingDuration"
       ],
-      "description": "Provides parameter values to a freshness scoring function.",
       "x-ms-external": true
     },
+    "HighWaterMarkChangeDetectionPolicy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataChangeDetectionPolicy"
+        }
+      ],
+      "description": "Defines a data change detection policy that captures changes based on the value of a high water mark column.",
+      "properties": {
+        "highWaterMarkColumnName": {
+          "description": "Gets or sets the name of the high water mark column.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "highWaterMarkColumnName"
+      ],
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy"
+    },
+    "Index": {
+      "description": "Represents an index definition in Azure Search, which describes the fields and search behavior of an index.",
+      "properties": {
+        "corsOptions": {
+          "$ref": "#/definitions/CorsOptions",
+          "description": "Gets or sets options to control Cross-Origin Resource Sharing (CORS) for the index."
+        },
+        "defaultScoringProfile": {
+          "description": "Gets or sets the name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used.",
+          "type": "string"
+        },
+        "fields": {
+          "description": "Gets or sets the fields of the index.",
+          "items": {
+            "$ref": "#/definitions/Field"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Gets or sets the name of the index.",
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string"
+        },
+        "scoringProfiles": {
+          "description": "Gets or sets the scoring profiles for the index.",
+          "items": {
+            "$ref": "#/definitions/ScoringProfile"
+          },
+          "type": "array"
+        },
+        "suggesters": {
+          "description": "Gets or sets the suggesters for the index.",
+          "items": {
+            "$ref": "#/definitions/Suggester"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "fields"
+      ]
+    },
+    "IndexGetStatisticsResult": {
+      "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.",
+      "properties": {
+        "documentCount": {
+          "description": "Gets the number of documents in the index.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "storageSize": {
+          "description": "Gets the amount of storage in bytes consumed by the index.",
+          "format": "int64",
+          "readOnly": true,
+          "type": "integer"
+        }
+      },
+      "x-ms-external": true
+    },
+    "IndexListResult": {
+      "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes.",
+      "properties": {
+        "value": {
+          "description": "Gets the indexes in the Search service.",
+          "items": {
+            "$ref": "#/definitions/Index"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "x-ms-external": true
+    },
+    "Indexer": {
+      "description": "Represents an Azure Search indexer.",
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn946891.aspx"
+      },
+      "properties": {
+        "dataSourceName": {
+          "description": "Gets or sets the name of the datasource from which this indexer reads data.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Gets or sets the description of the indexer.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the name of the indexer.",
+          "externalDocs": {
+            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          },
+          "type": "string"
+        },
+        "parameters": {
+          "$ref": "#/definitions/IndexingParameters",
+          "description": "Gets or sets parameters for indexer execution."
+        },
+        "schedule": {
+          "$ref": "#/definitions/IndexingSchedule",
+          "description": "Gets or sets the schedule for this indexer."
+        },
+        "targetIndexName": {
+          "description": "Gets or sets the name of the index to which this indexer writes data.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "dataSourceName",
+        "targetIndexName"
+      ]
+    },
+    "IndexerExecutionInfo": {
+      "description": "Represents the current status and execution history of an indexer.",
+      "properties": {
+        "executionHistory": {
+          "description": "History of the recent indexer executions, sorted in reverse chronological order.",
+          "items": {
+            "$ref": "#/definitions/IndexerExecutionResult"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "lastResult": {
+          "$ref": "#/definitions/IndexerExecutionResult",
+          "description": "The result of the most recent or an in-progress indexer execution.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/IndexerStatus",
+          "description": "Overall indexer status.",
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "IndexerExecutionResult": {
+      "description": "Represents result of an individual indexer execution.",
+      "properties": {
+        "endTime": {
+          "description": "Gets the end time of this indexer execution, if the execution has already completed.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Gets the error message indicating the top-level error, if any.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "errors": {
+          "description": "Gets the item-level indexing errors",
+          "items": {
+            "$ref": "#/definitions/ItemError"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "finalTrackingState": {
+          "description": "Change tracking state with which an indexer execution finished.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "initialTrackingState": {
+          "description": "Change tracking state with which an indexer execution started.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "itemsFailed": {
+          "description": "Gets the number of items that failed to be indexed during this indexer execution.",
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "itemsProcessed": {
+          "description": "Gets the number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed.",
+          "format": "int32",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "startTime": {
+          "description": "Gets the start time of this indexer execution.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/IndexerExecutionStatus",
+          "description": "Gets the outcome of this indexer execution.",
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "IndexerExecutionStatus": {
+      "description": "Represents the status of an individual indexer execution.",
+      "enum": [
+        "transientFailure",
+        "success",
+        "inProgress",
+        "reset"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IndexerExecutionStatus"
+      }
+    },
+    "IndexerListResult": {
+      "description": "Response from a List Indexers request. If successful, it includes the full definitions of all indexers.",
+      "properties": {
+        "value": {
+          "description": "Gets the indexers in the Search service.",
+          "items": {
+            "$ref": "#/definitions/Indexer"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "x-ms-external": true
+    },
+    "IndexerStatus": {
+      "description": "Represents the overall indexer status.",
+      "enum": [
+        "unknown",
+        "error",
+        "running"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IndexerStatus"
+      }
+    },
+    "IndexingParameters": {
+      "description": "Represents parameters for indexer execution.",
+      "properties": {
+        "base64EncodeKeys": {
+          "description": "Gets or sets whether indexer will base64-encode all values that are inserted into key field of the target index. This is needed if keys can contain characters that are invalid in keys (such as dot '.'). Default is false.",
+          "type": "boolean"
+        },
+        "maxFailedItems": {
+          "description": "Gets or sets the maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxFailedItemsPerBatch": {
+          "description": "Gets or sets the maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0.",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "IndexingSchedule": {
+      "description": "Represents a schedule for indexer execution.",
+      "properties": {
+        "interval": {
+          "description": "Gets or sets the interval of time between indexer executions.",
+          "format": "duration",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Gets or sets the time when an indexer should start running.",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "interval"
+      ],
+      "x-ms-external": true
+    },
+    "ItemError": {
+      "description": "Represents an item- or document-level indexing error.",
+      "properties": {
+        "errorMessage": {
+          "description": "Gets the message describing the error that occurred while attempting to index the item.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "key": {
+          "description": "Gets the key of the item for which indexing failed.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
     "MagnitudeScoringFunction": {
-      "x-ms-discriminator-value": "magnitude",
       "allOf": [
         {
           "$ref": "#/definitions/ScoringFunction"
         }
       ],
+      "description": "Defines a function that boosts scores based on the magnitude of a numeric field.",
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
+      },
       "properties": {
         "magnitude": {
           "$ref": "#/definitions/MagnitudeScoringParameters",
@@ -2234,119 +656,97 @@
       "required": [
         "magnitude"
       ],
-      "externalDocs": {
-        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
-      },
-      "description": "Defines a function that boosts scores based on the magnitude of a numeric field.",
+      "x-ms-discriminator-value": "magnitude",
       "x-ms-external": true
     },
     "MagnitudeScoringParameters": {
+      "description": "Provides parameter values to a magnitude scoring function.",
       "properties": {
-        "boostingRangeStart": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets the field value at which boosting starts."
-        },
         "boostingRangeEnd": {
-          "type": "number",
+          "description": "Gets or sets the field value at which boosting ends.",
           "format": "double",
-          "description": "Gets or sets the field value at which boosting ends."
+          "type": "number"
+        },
+        "boostingRangeStart": {
+          "description": "Gets or sets the field value at which boosting starts.",
+          "format": "double",
+          "type": "number"
         },
         "constantBoostBeyondRange": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether to apply a constant boost for field values beyond the range end value; default is false."
+          "description": "Gets or sets a value indicating whether to apply a constant boost for field values beyond the range end value; default is false.",
+          "type": "boolean"
         }
       },
       "required": [
         "boostingRangeStart",
         "boostingRangeEnd"
       ],
-      "description": "Provides parameter values to a magnitude scoring function.",
       "x-ms-external": true
     },
-    "TagScoringFunction": {
-      "x-ms-discriminator-value": "tag",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScoringFunction"
-        }
-      ],
+    "Resource": {
       "properties": {
-        "tag": {
-          "$ref": "#/definitions/TagScoringParameters",
-          "description": "Gets parameter values for the tag scoring function."
-        }
-      },
-      "required": [
-        "tag"
-      ],
-      "externalDocs": {
-        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
-      },
-      "description": "Defines a function that boosts scores of documents with string values matching a given list of tags.",
-      "x-ms-external": true
-    },
-    "TagScoringParameters": {
-      "properties": {
-        "tagsParameter": {
-          "type": "string",
-          "description": "Gets or sets the name of the parameter passed in search queries to specify the list of tags to compare against the target field."
-        }
-      },
-      "required": [
-        "tagsParameter"
-      ],
-      "description": "Provides parameter values to a tag scoring function."
-    },
-    "ScoringFunctionInterpolation": {
-      "type": "string",
-      "enum": [
-        "linear",
-        "constant",
-        "quadratic",
-        "logarithmic"
-      ],
-      "x-ms-enum": {
-        "name": "ScoringFunctionInterpolation"
-      },
-      "description": "Defines the function used to interpolate score boosting across a range of documents."
-    },
-    "ScoringProfile": {
-      "properties": {
+        "id": {
+          "description": "Resource Id",
+          "readOnly": true,
+          "type": "string"
+        },
+        "location": {
+          "description": "Resource location",
+          "type": "string"
+        },
         "name": {
-          "externalDocs": {
-            "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
+          "description": "Resource name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
           },
-          "type": "string",
-          "description": "Gets or sets the name of the scoring profile."
+          "description": "Resource tags",
+          "type": "object"
         },
-        "text": {
-          "$ref": "#/definitions/TextWeights",
-          "description": "Gets or sets parameters that boost scoring based on text matches in certain index fields."
-        },
-        "functions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScoringFunction"
-          },
-          "description": "Gets the collection of functions that influence the scoring of documents."
-        },
-        "functionAggregation": {
-          "$ref": "#/definitions/ScoringFunctionAggregation",
-          "description": "Gets or sets a value indicating how the results of individual scoring functions should be combined. Defaults to \"Sum\". Ignored if there are no scoring functions."
+        "type": {
+          "description": "Resource type",
+          "readOnly": true,
+          "type": "string"
         }
       },
-      "required": [
-        "name"
-      ],
+      "x-ms-azure-resource": true
+    },
+    "ScoringFunction": {
+      "description": "Abstract base class for functions that can modify document scores during ranking.",
+      "discriminator": "type",
       "externalDocs": {
         "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
       },
-      "description": "Defines parameters for an Azure Search index that influence scoring in search queries.",
+      "properties": {
+        "boost": {
+          "description": "Gets or sets a multiplier for the raw score. Must be a positive number not equal to 1.0.",
+          "format": "double",
+          "type": "number"
+        },
+        "fieldName": {
+          "description": "Gets or sets the name of the field used as input to the scoring function.",
+          "type": "string"
+        },
+        "interpolation": {
+          "$ref": "#/definitions/ScoringFunctionInterpolation",
+          "description": "Gets or sets a value indicating how boosting will be interpolated across document scores; defaults to \"Linear\"."
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "fieldName",
+        "boost"
+      ],
       "x-ms-external": true
     },
     "ScoringFunctionAggregation": {
-      "type": "string",
+      "description": "Defines the aggregation function used to combine the results of all the scoring functions in a scoring profile.",
       "enum": [
         "sum",
         "average",
@@ -2354,146 +754,99 @@
         "maximum",
         "firstMatching"
       ],
+      "type": "string",
       "x-ms-enum": {
         "name": "ScoringFunctionAggregation"
-      },
-      "description": "Defines the aggregation function used to combine the results of all the scoring functions in a scoring profile."
+      }
     },
-    "CorsOptions": {
-      "properties": {
-        "allowedOrigins": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets the list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended)."
-        },
-        "maxAgeInSeconds": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets the duration for which browsers should cache CORS preflight responses. Defaults to 5 mintues."
-        }
-      },
-      "required": [
-        "allowedOrigins"
-      ],
-      "externalDocs": {
-        "url": "https://msdn.microsoft.com/library/azure/dn798941.aspx"
-      },
-      "description": "Defines options to control Cross-Origin Resource Sharing (CORS) for an index."
-    },
-    "Suggester": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the suggester."
-        },
-        "searchMode": {
-          "$ref": "#/definitions/SuggesterSearchMode",
-          "description": "Gets or sets a value indicating the capabilities of the suggester."
-        },
-        "sourceFields": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Gets the list of field names to which the suggester applies. Each field must be searchable."
-        }
-      },
-      "required": [
-        "name",
-        "searchMode",
-        "sourceFields"
-      ],
-      "description": "Defines how the Suggest API should apply to a group of fields in the index.",
-      "x-ms-external": true
-    },
-    "SuggesterSearchMode": {
-      "type": "string",
+    "ScoringFunctionInterpolation": {
+      "description": "Defines the function used to interpolate score boosting across a range of documents.",
       "enum": [
-        "analyzingInfixMatching"
+        "linear",
+        "constant",
+        "quadratic",
+        "logarithmic"
       ],
+      "type": "string",
       "x-ms-enum": {
-        "name": "SuggesterSearchMode"
-      },
-      "description": "Describes the type of suggester to use."
+        "name": "ScoringFunctionInterpolation"
+      }
     },
-    "Index": {
+    "ScoringProfile": {
+      "description": "Defines parameters for an Azure Search index that influence scoring in search queries.",
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
+      },
       "properties": {
+        "functionAggregation": {
+          "$ref": "#/definitions/ScoringFunctionAggregation",
+          "description": "Gets or sets a value indicating how the results of individual scoring functions should be combined. Defaults to \"Sum\". Ignored if there are no scoring functions."
+        },
+        "functions": {
+          "description": "Gets the collection of functions that influence the scoring of documents.",
+          "items": {
+            "$ref": "#/definitions/ScoringFunction"
+          },
+          "type": "array"
+        },
         "name": {
+          "description": "Gets or sets the name of the scoring profile.",
           "externalDocs": {
             "url": "https://msdn.microsoft.com/library/azure/dn857353.aspx"
           },
-          "type": "string",
-          "description": "Gets or sets the name of the index."
+          "type": "string"
         },
-        "fields": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Field"
-          },
-          "description": "Gets or sets the fields of the index."
-        },
-        "scoringProfiles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScoringProfile"
-          },
-          "description": "Gets or sets the scoring profiles for the index."
-        },
-        "defaultScoringProfile": {
-          "type": "string",
-          "description": "Gets or sets the name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used."
-        },
-        "corsOptions": {
-          "$ref": "#/definitions/CorsOptions",
-          "description": "Gets or sets options to control Cross-Origin Resource Sharing (CORS) for the index."
-        },
-        "suggesters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Suggester"
-          },
-          "description": "Gets or sets the suggesters for the index."
+        "text": {
+          "$ref": "#/definitions/TextWeights",
+          "description": "Gets or sets parameters that boost scoring based on text matches in certain index fields."
         }
       },
       "required": [
-        "name",
-        "fields"
+        "name"
       ],
-      "description": "Represents an index definition in Azure Search, which describes the fields and search behavior of an index."
+      "x-ms-external": true
     },
-    "IndexGetStatisticsResult": {
+    "SoftDeleteColumnDeletionDetectionPolicy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataDeletionDetectionPolicy"
+        }
+      ],
+      "description": "Defines a data deletion detection policy that implements a soft-deletion strategy. It determines whether an item should be deleted based on the value of a designated 'soft delete' column.",
       "properties": {
-        "documentCount": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "Gets the number of documents in the index."
+        "softDeleteColumnName": {
+          "description": "Gets or sets the name of the column to use for soft-deletion detection.",
+          "type": "string"
         },
-        "storageSize": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "Gets the amount of storage in bytes consumed by the index."
+        "softDeleteMarkerValue": {
+          "description": "Gets or sets the marker value that indentifies an item as deleted.",
+          "type": "string"
         }
       },
-      "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.",
-      "x-ms-external": true
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy"
     },
-    "IndexListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Index"
-          },
-          "description": "Gets the indexes in the Search service."
+    "SqlIntegratedChangeTrackingPolicy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataChangeDetectionPolicy"
         }
-      },
-      "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes.",
-      "x-ms-external": true
+      ],
+      "description": "Defines a data change detection policy that captures changes using the Integrated Change Tracking feature of Azure SQL Database.",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy"
+    },
+    "StorageAccount": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The storage account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "StorageAccountCheckNameAvailabilityParameters": {
       "properties": {
@@ -2501,139 +854,66 @@
           "type": "string"
         },
         "type": {
-          "type": "string",
-          "default": "Microsoft.Storage/storageAccounts"
+          "default": "Microsoft.Storage/storageAccounts",
+          "type": "string"
         }
       },
       "required": [
         "name"
       ]
     },
-    "CheckNameAvailabilityResult": {
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used."
-        },
-        "reason": {
-          "type": "string",
-          "description": "Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.",
-          "enum": [
-            "AccountNameInvalid",
-            "AlreadyExists"
-          ],
-          "x-ms-enum": {
-            "name": "Reason",
-            "modelAsString": false
-          }
-        },
-        "message": {
-          "type": "string",
-          "description": "Gets an error message explaining the Reason value in more detail."
-        }
-      },
-      "description": "The CheckNameAvailability operation response."
-    },
-    "StorageAccountPropertiesCreateParameters": {
-      "properties": {
-        "accountType": {
-          "type": "string",
-          "description": "Gets or sets the account type.",
-          "enum": [
-            "Standard_LRS",
-            "Standard_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS",
-            "Premium_LRS"
-          ],
-          "x-ms-enum": {
-            "name": "AccountType",
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "accountType"
-      ]
-    },
     "StorageAccountCreateParameters": {
+      "description": "The parameters to provide for the account.",
       "properties": {
         "location": {
-          "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageAccountPropertiesCreateParameters",
+          "x-ms-client-flatten": true
         },
         "tags": {
-          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageAccountPropertiesCreateParameters"
+          "description": "Resource tags",
+          "type": "object"
         }
       },
       "required": [
         "location"
       ],
-      "x-ms-azure-resource": true,
-      "description": "The parameters to provide for the account."
+      "x-ms-azure-resource": true
     },
-    "Endpoints": {
+    "StorageAccountKeys": {
+      "description": "The access keys for the storage account.",
       "properties": {
-        "blob": {
-          "type": "string",
-          "description": "Gets the blob endpoint."
+        "key1": {
+          "description": "Gets the value of key 1.",
+          "type": "string"
         },
-        "queue": {
-          "type": "string",
-          "description": "Gets the queue endpoint."
-        },
-        "table": {
-          "type": "string",
-          "description": "Gets the table endpoint."
-        },
-        "file": {
-          "type": "string",
-          "description": "Gets the file endpoint."
+        "key2": {
+          "description": "Gets the value of key 2.",
+          "type": "string"
         }
-      },
-      "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
+      }
     },
-    "CustomDomain": {
+    "StorageAccountListResult": {
+      "description": "The list storage accounts operation response.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the custom domain name. Name is the CNAME source."
-        },
-        "useSubDomain": {
-          "type": "boolean",
-          "description": "Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates"
+        "value": {
+          "description": "Gets the list of storage accounts and their properties.",
+          "items": {
+            "$ref": "#/definitions/StorageAccount"
+          },
+          "type": "array"
         }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "The custom domain assigned to this storage account. This can be set via Update."
+      }
     },
     "StorageAccountProperties": {
       "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets the status of the storage account at the time the operation was called.",
-          "enum": [
-            "Creating",
-            "ResolvingDNS",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": false
-          }
-        },
         "accountType": {
-          "type": "string",
           "description": "Gets the type of the storage account.",
           "enum": [
             "Standard_LRS",
@@ -2642,110 +922,106 @@
             "Standard_RAGRS",
             "Premium_LRS"
           ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "AccountType",
-            "modelAsString": false
+            "modelAsString": false,
+            "name": "AccountType"
           }
+        },
+        "creationTime": {
+          "description": "Gets the creation date and time of the storage account in UTC.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "customDomain": {
+          "$ref": "#/definitions/CustomDomain",
+          "description": "Gets the user assigned custom domain assigned to this storage account."
+        },
+        "lastGeoFailoverTime": {
+          "description": "Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is StandardGRS or StandardRAGRS.",
+          "format": "date-time",
+          "type": "string"
         },
         "primaryEndpoints": {
           "$ref": "#/definitions/Endpoints",
           "description": "Gets the URLs that are used to perform a retrieval of a public blob, queue or table object.Note that StandardZRS and PremiumLRS accounts only return the blob endpoint."
         },
         "primaryLocation": {
+          "description": "Gets the location of the primary for the storage account.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Gets the status of the storage account at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "ResolvingDNS",
+            "Succeeded"
+          ],
           "type": "string",
-          "description": "Gets the location of the primary for the storage account."
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "ProvisioningState"
+          }
+        },
+        "secondaryEndpoints": {
+          "$ref": "#/definitions/Endpoints",
+          "description": "Gets the URLs that are used to perform a retrieval of a public blob, queue or table object from the secondary location of the storage account. Only available if the accountType is StandardRAGRS."
+        },
+        "secondaryLocation": {
+          "description": "Gets the location of the geo replicated secondary for the storage account. Only available if the accountType is StandardGRS or StandardRAGRS.",
+          "type": "string"
         },
         "statusOfPrimary": {
-          "type": "string",
           "description": "Gets the status indicating whether the primary location of the storage account is available or unavailable.",
           "enum": [
             "Available",
             "Unavailable"
           ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "AccountStatus",
-            "modelAsString": false
+            "modelAsString": false,
+            "name": "AccountStatus"
           }
         },
-        "lastGeoFailoverTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is StandardGRS or StandardRAGRS."
-        },
-        "secondaryLocation": {
-          "type": "string",
-          "description": "Gets the location of the geo replicated secondary for the storage account. Only available if the accountType is StandardGRS or StandardRAGRS."
-        },
         "statusOfSecondary": {
-          "type": "string",
           "description": "Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the accountType is StandardGRS or StandardRAGRS.",
           "enum": [
             "Available",
             "Unavailable"
           ],
-          "x-ms-enum": {
-            "name": "AccountStatus",
-            "modelAsString": false
-          }
-        },
-        "creationTime": {
           "type": "string",
-          "format": "date-time",
-          "description": "Gets the creation date and time of the storage account in UTC."
-        },
-        "customDomain": {
-          "$ref": "#/definitions/CustomDomain",
-          "description": "Gets the user assigned custom domain assigned to this storage account."
-        },
-        "secondaryEndpoints": {
-          "$ref": "#/definitions/Endpoints",
-          "description": "Gets the URLs that are used to perform a retrieval of a public blob, queue or table object from the secondary location of the storage account. Only available if the accountType is StandardRAGRS."
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "AccountStatus"
+          }
         }
       }
     },
-    "StorageAccount": {
+    "StorageAccountPropertiesCreateParameters": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageAccountProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "The storage account."
-    },
-    "StorageAccountKeys": {
-      "properties": {
-        "key1": {
+        "accountType": {
+          "description": "Gets or sets the account type.",
+          "enum": [
+            "Standard_LRS",
+            "Standard_ZRS",
+            "Standard_GRS",
+            "Standard_RAGRS",
+            "Premium_LRS"
+          ],
           "type": "string",
-          "description": "Gets the value of key 1."
-        },
-        "key2": {
-          "type": "string",
-          "description": "Gets the value of key 2."
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "AccountType"
+          }
         }
       },
-      "description": "The access keys for the storage account."
-    },
-    "StorageAccountListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageAccount"
-          },
-          "description": "Gets the list of storage accounts and their properties."
-        }
-      },
-      "description": "The list storage accounts operation response."
+      "required": [
+        "accountType"
+      ]
     },
     "StorageAccountPropertiesUpdateParameters": {
       "properties": {
         "accountType": {
-          "type": "string",
           "description": "Gets or sets the account type. Note that StandardZRS and PremiumLRS accounts cannot be changed to other account types, and other account types cannot be changed to StandardZRS or PremiumLRS.",
           "enum": [
             "Standard_LRS",
@@ -2754,9 +1030,10 @@
             "Standard_RAGRS",
             "Premium_LRS"
           ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "AccountType",
-            "modelAsString": false
+            "modelAsString": false,
+            "name": "AccountType"
           }
         },
         "customDomain": {
@@ -2764,23 +1041,6 @@
           "description": "User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property."
         }
       }
-    },
-    "StorageAccountUpdateParameters": {
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageAccountPropertiesUpdateParameters"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "The parameters to update on the account."
     },
     "StorageAccountRegenerateKeyParameters": {
       "properties": {
@@ -2792,23 +1052,128 @@
         "keyName"
       ]
     },
-    "UsageName": {
+    "StorageAccountUpdateParameters": {
+      "description": "The parameters to update on the account.",
       "properties": {
-        "value": {
-          "type": "string",
-          "description": "Gets a string describing the resource name."
+        "properties": {
+          "$ref": "#/definitions/StorageAccountPropertiesUpdateParameters",
+          "x-ms-client-flatten": true
         },
-        "localizedValue": {
-          "type": "string",
-          "description": "Gets a localized string describing the resource name."
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags",
+          "type": "object"
         }
       },
-      "description": "The Usage Names."
+      "x-ms-azure-resource": true
+    },
+    "Suggester": {
+      "description": "Defines how the Suggest API should apply to a group of fields in the index.",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the suggester.",
+          "type": "string"
+        },
+        "searchMode": {
+          "$ref": "#/definitions/SuggesterSearchMode",
+          "description": "Gets or sets a value indicating the capabilities of the suggester."
+        },
+        "sourceFields": {
+          "description": "Gets the list of field names to which the suggester applies. Each field must be searchable.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "searchMode",
+        "sourceFields"
+      ],
+      "x-ms-external": true
+    },
+    "SuggesterSearchMode": {
+      "description": "Describes the type of suggester to use.",
+      "enum": [
+        "analyzingInfixMatching"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SuggesterSearchMode"
+      }
+    },
+    "TagScoringFunction": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScoringFunction"
+        }
+      ],
+      "description": "Defines a function that boosts scores of documents with string values matching a given list of tags.",
+      "externalDocs": {
+        "url": "https://msdn.microsoft.com/library/azure/dn798928.aspx"
+      },
+      "properties": {
+        "tag": {
+          "$ref": "#/definitions/TagScoringParameters",
+          "description": "Gets parameter values for the tag scoring function."
+        }
+      },
+      "required": [
+        "tag"
+      ],
+      "x-ms-discriminator-value": "tag",
+      "x-ms-external": true
+    },
+    "TagScoringParameters": {
+      "description": "Provides parameter values to a tag scoring function.",
+      "properties": {
+        "tagsParameter": {
+          "description": "Gets or sets the name of the parameter passed in search queries to specify the list of tags to compare against the target field.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tagsParameter"
+      ]
+    },
+    "TextWeights": {
+      "description": "Defines weights on index fields for which matches should boost scoring in search queries.",
+      "properties": {
+        "weights": {
+          "additionalProperties": {
+            "format": "double",
+            "type": "number"
+          },
+          "description": "Gets the dictionary of per-field weights to boost document scoring. The keys are field names and the values are the weights for each field.",
+          "type": "object"
+        }
+      },
+      "required": [
+        "weights"
+      ],
+      "x-ms-external": true
     },
     "Usage": {
+      "description": "Describes Storage Resource Usage.",
       "properties": {
+        "currentValue": {
+          "description": "Gets the current count of the allocated resources in the subscription.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "limit": {
+          "description": "Gets the maximum count of the resources that can be allocated in the subscription.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "$ref": "#/definitions/UsageName",
+          "description": "Gets the name of the type of usage."
+        },
         "unit": {
-          "type": "string",
           "description": "Gets the unit of measurement.",
           "enum": [
             "Count",
@@ -2818,24 +1183,11 @@
             "CountsPerSecond",
             "BytesPerSecond"
           ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "UsageUnit",
-            "modelAsString": false
+            "modelAsString": false,
+            "name": "UsageUnit"
           }
-        },
-        "currentValue": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the current count of the allocated resources in the subscription."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the maximum count of the resources that can be allocated in the subscription."
-        },
-        "name": {
-          "$ref": "#/definitions/UsageName",
-          "description": "Gets the name of the type of usage."
         }
       },
       "required": [
@@ -2843,63 +1195,1710 @@
         "currentValue",
         "limit",
         "name"
-      ],
-      "description": "Describes Storage Resource Usage."
+      ]
     },
     "UsageListResult": {
+      "description": "The List Usages operation response.",
       "properties": {
         "value": {
-          "type": "array",
+          "description": "Gets or sets the list Storage Resource Usages.",
           "items": {
             "$ref": "#/definitions/Usage"
           },
-          "description": "Gets or sets the list Storage Resource Usages."
+          "type": "array"
         }
-      },
-      "description": "The List Usages operation response."
+      }
     },
-    "Resource": {
+    "UsageName": {
+      "description": "The Usage Names.",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id"
+        "localizedValue": {
+          "description": "Gets a localized string describing the resource name.",
+          "type": "string"
         },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
+        "value": {
+          "description": "Gets a string describing the resource name.",
+          "type": "string"
         }
-      },
-      "x-ms-azure-resource": true
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      }
     }
   },
   "host": "management.azure.com",
+  "info": {
+    "title": "Search and Storage"
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "in": "path",
+      "name": "subscriptionId",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "paths": {
+    "/datasources": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Lists all datasources available for an Azure Search service.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946878.aspx"
+        },
+        "operationId": "DataSources_List",
+        "parameters": [
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataSourceListResult"
+            }
+          }
+        },
+        "tags": [
+          "DataSources"
+        ],
+        "x-ms-request-id": "request-id"
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Creates a new Azure Search datasource.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946876.aspx"
+        },
+        "operationId": "DataSources_Create",
+        "parameters": [
+          {
+            "description": "The definition of the datasource to create.",
+            "in": "body",
+            "name": "dataSource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        },
+        "tags": [
+          "DataSources"
+        ],
+        "x-ms-request-id": "request-id"
+      }
+    },
+    "/datasources('{dataSourceName}')": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Deletes an Azure Search datasource.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946881.aspx"
+        },
+        "operationId": "DataSources_Delete",
+        "parameters": [
+          {
+            "description": "The name of the datasource to delete.",
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "DataSources"
+        ],
+        "x-ms-request-id": "request-id"
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Retrieves a datasource definition from Azure Search.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946893.aspx"
+        },
+        "operationId": "DataSources_Get",
+        "parameters": [
+          {
+            "description": "The name of the datasource to retrieve.",
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        },
+        "tags": [
+          "DataSources"
+        ],
+        "x-ms-request-id": "request-id"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Creates a new Azure Search datasource or updates a datasource if it already exists.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946900.aspx"
+        },
+        "operationId": "DataSources_CreateOrUpdate",
+        "parameters": [
+          {
+            "description": "The name of the datasource to create or update.",
+            "in": "path",
+            "name": "dataSourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The definition of the datasource to create or update.",
+            "in": "body",
+            "name": "dataSource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        },
+        "tags": [
+          "DataSources"
+        ],
+        "x-ms-request-id": "request-id"
+      }
+    },
+    "/indexers": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Lists all indexers available for an Azure Search service.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946883.aspx"
+        },
+        "operationId": "Indexers_List",
+        "parameters": [
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/IndexerListResult"
+            }
+          }
+        },
+        "tags": [
+          "Indexers"
+        ],
+        "x-ms-request-id": "request-id"
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Creates a new Azure Search indexer.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946899.aspx"
+        },
+        "operationId": "Indexers_Create",
+        "parameters": [
+          {
+            "description": "The definition of the indexer to create.",
+            "in": "body",
+            "name": "indexer",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Indexer"
+            }
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Indexer"
+            }
+          }
+        },
+        "tags": [
+          "Indexers"
+        ],
+        "x-ms-request-id": "request-id"
+      }
+    },
+    "/indexers('{indexerName}')": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Deletes an Azure Search indexer.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946898.aspx"
+        },
+        "operationId": "Indexers_Delete",
+        "parameters": [
+          {
+            "description": "The name of the indexer to delete.",
+            "in": "path",
+            "name": "indexerName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Indexers"
+        ],
+        "x-ms-request-id": "request-id"
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Retrieves an indexer definition from Azure Search.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946874.aspx"
+        },
+        "operationId": "Indexers_Get",
+        "parameters": [
+          {
+            "description": "The name of the indexer to retrieve.",
+            "in": "path",
+            "name": "indexerName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Indexer"
+            }
+          }
+        },
+        "tags": [
+          "Indexers"
+        ],
+        "x-ms-request-id": "request-id"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Creates a new Azure Search indexer or updates an indexer if it already exists.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946899.aspx"
+        },
+        "operationId": "Indexers_CreateOrUpdate",
+        "parameters": [
+          {
+            "description": "The name of the indexer to create or update.",
+            "in": "path",
+            "name": "indexerName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The definition of the indexer to create or update.",
+            "in": "body",
+            "name": "indexer",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Indexer"
+            }
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Indexer"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Indexer"
+            }
+          }
+        },
+        "tags": [
+          "Indexers"
+        ],
+        "x-ms-request-id": "request-id"
+      }
+    },
+    "/indexers('{indexerName}')/search.reset": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Resets the change tracking state associated with an Azure Search indexer.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946897.aspx"
+        },
+        "operationId": "Indexers_Reset",
+        "parameters": [
+          {
+            "description": "The name of the indexer to reset.",
+            "in": "path",
+            "name": "indexerName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Indexers"
+        ],
+        "x-ms-request-id": "request-id"
+      }
+    },
+    "/indexers('{indexerName}')/search.run": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Runs an Azure Search indexer on-demand.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946885.aspx"
+        },
+        "operationId": "Indexers_Run",
+        "parameters": [
+          {
+            "description": "The name of the indexer to run.",
+            "in": "path",
+            "name": "indexerName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Indexers"
+        ],
+        "x-ms-request-id": "request-id"
+      }
+    },
+    "/indexers('{indexerName}')/search.status": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns the current status and execution history of an indexer.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946884.aspx"
+        },
+        "operationId": "Indexers_GetStatus",
+        "parameters": [
+          {
+            "description": "The name of the indexer for which to retrieve status.",
+            "in": "path",
+            "name": "indexerName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/IndexerExecutionInfo"
+            }
+          }
+        },
+        "tags": [
+          "Indexers"
+        ],
+        "x-ms-request-id": "request-id"
+      }
+    },
+    "/indexes": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Lists all indexes available for an Azure Search service.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn798923.aspx"
+        },
+        "operationId": "Indexes_List",
+        "parameters": [
+          {
+            "description": "Selects which properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
+            "in": "query",
+            "name": "$select",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/IndexListResult"
+            }
+          }
+        },
+        "tags": [
+          "Indexes"
+        ],
+        "x-ms-request-id": "request-id"
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Creates a new Azure Search index.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn798941.aspx"
+        },
+        "operationId": "Indexes_Create",
+        "parameters": [
+          {
+            "description": "The definition of the index to create.",
+            "in": "body",
+            "name": "index",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          }
+        },
+        "tags": [
+          "Indexes"
+        ],
+        "x-ms-request-id": "request-id"
+      }
+    },
+    "/indexes('{indexName}')": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Deletes an Azure Search index and all the documents it contains.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn798926.aspx"
+        },
+        "operationId": "Indexes_Delete",
+        "parameters": [
+          {
+            "description": "The name of the index to delete.",
+            "in": "path",
+            "name": "indexName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Indexes"
+        ],
+        "x-ms-request-id": "request-id"
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Retrieves an index definition from Azure Search.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn798939.aspx"
+        },
+        "operationId": "Indexes_Get",
+        "parameters": [
+          {
+            "description": "The name of the index to retrieve.",
+            "in": "path",
+            "name": "indexName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          }
+        },
+        "tags": [
+          "Indexes"
+        ],
+        "x-ms-request-id": "request-id"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Creates a new Azure Search index or updates an index if it already exists.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn800964.aspx"
+        },
+        "operationId": "Indexes_CreateOrUpdate",
+        "parameters": [
+          {
+            "description": "The definition of the index to create or update.",
+            "in": "path",
+            "name": "indexName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The definition of the index to create or update.",
+            "in": "body",
+            "name": "index",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          }
+        },
+        "tags": [
+          "Indexes"
+        ],
+        "x-ms-request-id": "request-id"
+      }
+    },
+    "/indexes('{indexName}')/search.stats": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns statistics for the given index, including a document count and storage usage.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn798942.aspx"
+        },
+        "operationId": "Indexes_GetStatistics",
+        "parameters": [
+          {
+            "description": "The name of the index for which to retrieve statistics.",
+            "in": "path",
+            "name": "indexName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tracking ID sent with the request to help with debugging.",
+            "format": "uuid",
+            "in": "header",
+            "name": "client-request-id",
+            "required": false,
+            "type": "string",
+            "x-ms-client-request-id": true,
+            "x-ms-parameter-grouping": {
+              "name": "search-request-options"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-02-28"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/IndexGetStatisticsResult"
+            }
+          }
+        },
+        "tags": [
+          "Indexes"
+        ],
+        "x-ms-request-id": "request-id"
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Checks that account name is valid and is not in use.",
+        "operationId": "StorageAccounts_CheckNameAvailability",
+        "parameters": [
+          {
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "in": "body",
+            "name": "accountName",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountCheckNameAvailabilityParameters"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        },
+        "tags": [
+          "StorageAccounts"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.",
+        "operationId": "StorageAccounts_List",
+        "parameters": [
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountListResult"
+            }
+          }
+        },
+        "tags": [
+          "StorageAccounts"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Gets the current usage count and the limit for the resources under the subscription.",
+        "operationId": "Usage_List",
+        "parameters": [
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UsageListResult"
+            }
+          }
+        },
+        "tags": [
+          "Usage"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.",
+        "operationId": "StorageAccounts_ListByResourceGroup",
+        "parameters": [
+          {
+            "description": "The name of the resource group within the user's subscription.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountListResult"
+            }
+          }
+        },
+        "tags": [
+          "StorageAccounts"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}": {
+      "delete": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Deletes a storage account in Microsoft Azure.",
+        "operationId": "StorageAccounts_Delete",
+        "parameters": [
+          {
+            "description": "The name of the resource group within the user's subscription.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "in": "path",
+            "maxLength": 24,
+            "minLength": 3,
+            "name": "accountName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "StorageAccounts"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.",
+        "operationId": "StorageAccounts_GetProperties",
+        "parameters": [
+          {
+            "description": "The name of the resource group within the user's subscription.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "in": "path",
+            "maxLength": 24,
+            "minLength": 3,
+            "name": "accountName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StorageAccount"
+            }
+          }
+        },
+        "tags": [
+          "StorageAccounts"
+        ]
+      },
+      "patch": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.",
+        "operationId": "StorageAccounts_Update",
+        "parameters": [
+          {
+            "description": "The name of the resource group within the user's subscription.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "in": "path",
+            "maxLength": 24,
+            "minLength": 3,
+            "name": "accountName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The parameters to update on the account. Note that only one property can be changed at a time using this API. ",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountUpdateParameters"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StorageAccount"
+            }
+          }
+        },
+        "tags": [
+          "StorageAccounts"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned. ",
+        "operationId": "StorageAccounts_Create",
+        "parameters": [
+          {
+            "description": "The name of the resource group within the user's subscription.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "in": "path",
+            "maxLength": 24,
+            "minLength": 3,
+            "name": "accountName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The parameters to provide for the created account.",
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountCreateParameters"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StorageAccount"
+            }
+          },
+          "202": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "StorageAccounts"
+        ],
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Lists the access keys for the specified storage account.",
+        "operationId": "StorageAccounts_ListKeys",
+        "parameters": [
+          {
+            "description": "The name of the resource group.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the storage account.",
+            "in": "path",
+            "maxLength": 24,
+            "minLength": 3,
+            "name": "accountName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountKeys"
+            }
+          }
+        },
+        "tags": [
+          "StorageAccounts"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "description": "Regenerates the access keys for the specified storage account.",
+        "operationId": "StorageAccounts_RegenerateKey",
+        "parameters": [
+          {
+            "description": "The name of the resource group within the user's subscription.",
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  ",
+            "in": "path",
+            "maxLength": 24,
+            "minLength": 3,
+            "name": "accountName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Specifies name of the key which should be regenerated. key1 or key2 for the default keys",
+            "in": "body",
+            "name": "regenerateKey",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountRegenerateKeyParameters"
+            }
+          },
+          {
+            "description": "Client Api Version.",
+            "enum": [
+              "2015-06-15"
+            ],
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountKeys"
+            }
+          }
+        },
+        "tags": [
+          "StorageAccounts"
+        ]
+      }
+    }
+  },
   "schemes": [
     "https"
   ],
@@ -2912,13 +2911,14 @@
   ],
   "securityDefinitions": {
     "azure_auth": {
-      "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
       "scopes": {
         "user_impersonation": "impersonate your user account"
-      }
+      },
+      "type": "oauth2"
     }
-  }
+  },
+  "swagger": "2.0"
 }

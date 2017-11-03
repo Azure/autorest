@@ -1,24 +1,26 @@
 ---
+apiVersion: 1.0.0
+baseUrl: 'https://localhost'
+documentation: This is a sample.
 modelTypes:
   - $id: '1'
     $type: CompositeType
+    containsConstantProperties: false
+    documentation: A cowbell.
+    name:
+      fixed: false
+      raw: Cowbell
     properties:
       - $id: '2'
-        isReadOnly: false
-        realPath:
-          - id
         collectionFormat: none
         defaultValue:
           fixed: false
           raw: '42'
         documentation:
           fixed: false
-        isRequired: false
         isConstant: false
-        name:
-          fixed: false
-          raw: id
-        serializedName: id
+        isReadOnly: false
+        isRequired: false
         modelType:
           $id: '3'
           $type: PrimaryType
@@ -27,22 +29,22 @@ modelTypes:
           name:
             fixed: false
             raw: Long
-      - $id: '4'
-        isReadOnly: false
+        name:
+          fixed: false
+          raw: id
         realPath:
-          - name
+          - id
+        serializedName: id
+      - $id: '4'
         collectionFormat: none
         defaultValue:
           fixed: false
           raw: shiny
         documentation:
           fixed: false
-        isRequired: true
         isConstant: false
-        name:
-          fixed: false
-          raw: name
-        serializedName: name
+        isReadOnly: false
+        isRequired: true
         modelType:
           $id: '5'
           $type: PrimaryType
@@ -50,62 +52,60 @@ modelTypes:
           name:
             fixed: false
             raw: String
+        name:
+          fixed: false
+          raw: name
+        realPath:
+          - name
+        serializedName: name
     serializedName: Cowbell
-    documentation: A cowbell.
-    containsConstantProperties: false
-    name:
-      fixed: false
-      raw: Cowbell
+modelsName: Models
 name: CowbellFactory
 namespace: ''
-modelsName: Models
-apiVersion: 1.0.0
-baseUrl: 'https://localhost'
-documentation: This is a sample.
 operations:
   - methods:
-      - parameters:
+      - defaultResponse:
+          isNullable: true
+        deprecated: false
+        description: A good description.
+        group:
+          fixed: false
+          raw: Cowbell
+        hidden: true
+        httpMethod: post
+        isAbsoluteUrl: false
+        name:
+          fixed: false
+          raw: Add
+        parameters:
           - $id: '6'
-            location: body
             collectionFormat: none
             defaultValue:
               fixed: false
             documentation:
               fixed: false
-            isRequired: true
             isConstant: false
+            isRequired: true
+            location: body
+            modelType:
+              $ref: '1'
             name:
               fixed: false
               raw: body
             serializedName: body
-            modelType:
-              $ref: '1'
-        name:
-          fixed: false
-          raw: Add
-        group:
-          fixed: false
-          raw: Cowbell
-        serializedName: Cowbell_Add
-        url: /cowbell
-        isAbsoluteUrl: false
-        httpMethod: post
-        responses:
-          OK:
-            isNullable: true
-        defaultResponse:
-          isNullable: true
-        returnType:
-          isNullable: true
-        description: A good description.
         requestContentType: application/json; charset=utf-8
         responseContentTypes:
           - application/json
-        deprecated: false
-        hidden: true
+        responses:
+          OK:
+            isNullable: true
+        returnType:
+          isNullable: true
+        serializedName: Cowbell_Add
+        url: /cowbell
     name:
       fixed: false
       raw: Cowbell
+    nameForProperty: Cowbell
     typeName:
       fixed: false
-    nameForProperty: Cowbell

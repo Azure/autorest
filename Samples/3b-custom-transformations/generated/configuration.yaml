@@ -1,241 +1,25 @@
 ---
-directive:
-  - from: storage.json
-    where: >-
-      $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.description
-    set: >-
-      Checks that the account name has sufficient cowbell (in order to prevent
-      fevers).
-    reason: We've experienced a lack of cowbell in storage account names.
-  - from: storage.json
-    where: >-
-      $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.description
-    transform: $ += " Make sure you add that extra cowbell."
-    reason: Make sure people know.
-  - from: storage.json
-    where: $.definitions.Usage.description
-    transform: return $.toUpperCase()
-    reason: >-
-      Our new guidelines require upper case descriptions here. Customers love
-      it.
-  - from: swagger-document
-    where: $.paths..operationId
-    transform: 'return $.replace(/ies$/, "y")'
-    reason: I don't like plural.
-  - from: code-model-v1
-    where: '$.operations[*]'
-    transform: >
-      const url = $.methods[0]["url"]; const res =
-      url.split("/Microsoft.Storage/")[1].split("/")[0]; $.name.raw = res;
-      $.summary = JSON.stringify($, null, 2);
-    reason: We wanna group methods by URI.
-  - from: swagger-document
-    where: $.definitions.*.additionalProperties
-    transform: |
-      return typeof $ === "boolean"
-        ? ($ ? { type: "object" } : undefined)
-        : $
-    reason: polyfill
-input-file:
-  - >-
-    https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json
-output-artifact:
-  - swagger-document.json
-  - code-model-v1.yaml
-  - pipeline.yaml
-  - configuration.yaml
-  - source-file-csharp
-  - source-file-jsonrpcclient
-require: []
-use: []
-clear-output-folder: {}
-use-extension:
-  '@microsoft.azure/autorest.csharp': ~2.1.0
-  '@microsoft.azure/classic-openapi-validator': ~1.0.3
-  '@microsoft.azure/openapi-validator': ~1.0.0
-  '@microsoft.azure/autorest.modeler': 2.1.22
-
-no-upgrade-check: {}
-skip-upgrade-check: {}
+__info: yaml
+__status: {}
 azure-arm: true
 azure-validator: true
+azure-validator-composed:
+  merge-state: composed
+azure-validator-individual:
+  merge-state: individual
+base-folder: .
+clear-output-folder: {}
+client-side-validation: true
 csharp:
   output-folder: Client
-__info: yaml
-output-folder: generated
-openapi-type: arm
-pipeline:
-  pipeline-emitter:
-    scope: scope-pipeline-emitter
-    suffixes:
-      - ''
-  configuration-emitter:
-    scope: scope-configuration-emitter
-    suffixes:
-      - ''
-  swagger-document-override/md-override-loader:
-    output-artifact: immediate-config
-    suffixes:
-      - ''
-  swagger-document/loader:
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/individual/transform:
-    input: loader
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/individual/identity:
-    input: transform
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/compose:
-    input: individual/identity
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/transform-immediate:
-    input:
-      - swagger-document-override/md-override-loader
-      - compose
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/transform:
-    input: transform-immediate
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/identity:
-    input: transform
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/emitter:
-    input: transform
-    scope: scope-swagger-document/emitter
-    suffixes:
-      - ''
-  swagger-document/model-validator:
-    input: swagger-document/identity
-    scope: model-validator
-    suffixes: []
-  swagger-document/semantic-validator:
-    input: swagger-document/identity
-    scope: semantic-validator
-    suffixes: []
-  csharp/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: csharp
-    suffixes:
-      - ''
-  csharp/commonmarker:
-    input: modeler
-    output-artifact: code-model-v1
-    suffixes:
-      - ''
-  csharp/cm/transform:
-    input: commonmarker
-    output-artifact: code-model-v1
-    suffixes:
-      - ''
-  csharp/cm/emitter:
-    input: transform
-    scope: scope-cm/emitter
-    suffixes:
-      - ''
-  csharp/generate:
-    plugin: csharp
-    input: cm/transform
-    output-artifact: source-file-csharp
-    suffixes:
-      - ''
-  csharp/simplifier:
-    plugin: csharp-simplifier
-    input: generate
-    output-artifact: source-file-csharp
-    suffixes:
-      - ''
-  csharp/transform:
-    input: simplifier
-    output-artifact: source-file-csharp
-    scope: scope-transform-string
-    suffixes:
-      - ''
-  csharp/emitter:
-    input: transform
-    scope: scope-csharp/emitter
-    suffixes:
-      - ''
-  jsonrpcclient/modeler:
-    input: swagger-document/identity
-    output-artifact: code-model-v1
-    scope: jsonrpcclient
-    suffixes: []
-  jsonrpcclient/generate:
-    plugin: jsonrpcclient
-    input: modeler
-    output-artifact: source-file-jsonrpcclient
-    suffixes: []
-  jsonrpcclient/transform:
-    input: generate
-    output-artifact: source-file-jsonrpcclient
-    scope: scope-transform-string
-    suffixes: []
-  jsonrpcclient/emitter:
-    input: transform
-    scope: scope-jsonrpcclient/emitter
-    suffixes: []
-  swagger-document/classic-openapi-validator:
-    input: swagger-document/identity
-    scope: azure-validator-composed
-    suffixes:
-      - ''
-  swagger-document/individual/classic-openapi-validator:
-    input: swagger-document/individual/identity
-    scope: azure-validator-individual
-    suffixes:
-      - ''
-  swagger-document/openapi-validator:
-    input: swagger-document/identity
-    scope: azure-validator-composed
-    suffixes:
-      - ''
-  swagger-document/individual/openapi-validator:
-    input: swagger-document/individual/identity
-    scope: azure-validator-individual
-    suffixes:
-      - ''
-scope-pipeline-emitter:
-  input-artifact: pipeline
-  is-object: true
-  output-uri-expr: |
-    "pipeline"
-scope-configuration-emitter:
-  input-artifact: configuration
-  is-object: true
-  output-uri-expr: |
-    "configuration"
-scope-swagger-document/emitter:
-  input-artifact: swagger-document
-  is-object: true
-  output-uri-expr: >
-    $config["output-file"] || 
-
-    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
-
-    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
-    "")
-scope-cm/emitter:
-  input-artifact: code-model-v1
-  is-object: true
-  output-uri-expr: |
-    "code-model-v1"
-client-side-validation: true
+debug: false
 declare-directive:
+  remove-operation: |-
+    {
+      from: 'swagger-document',
+      "where-operation": $,
+      transform: 'return undefined'
+    }
   set: '{ transform: `return ${JSON.stringify($)}` }'
   where-operation: |-
     (() => {
@@ -247,26 +31,267 @@ declare-directive:
           return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
       }
     })()
-  remove-operation: |-
-    {
-      from: 'swagger-document',
-      "where-operation": $,
-      transform: 'return undefined'
-    }
+directive:
+  - from: storage.json
+    reason: We've experienced a lack of cowbell in storage account names.
+    set: >-
+      Checks that the account name has sufficient cowbell (in order to prevent
+      fevers).
+    where: >-
+      $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.description
+  - from: storage.json
+    reason: Make sure people know.
+    transform: $ += " Make sure you add that extra cowbell."
+    where: >-
+      $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.description
+  - from: storage.json
+    reason: >-
+      Our new guidelines require upper case descriptions here. Customers love
+      it.
+    transform: return $.toUpperCase()
+    where: $.definitions.Usage.description
+  - from: swagger-document
+    reason: I don't like plural.
+    transform: 'return $.replace(/ies$/, "y")'
+    where: $.paths..operationId
+  - from: code-model-v1
+    reason: We wanna group methods by URI.
+    transform: >
+      const url = $.methods[0]["url"]; const res =
+      url.split("/Microsoft.Storage/")[1].split("/")[0]; $.name.raw = res;
+      $.summary = JSON.stringify($, null, 2);
+    where: '$.operations[*]'
+  - from: swagger-document
+    reason: polyfill
+    transform: |
+      return typeof $ === "boolean"
+        ? ($ ? { type: "object" } : undefined)
+        : $
+    where: $.definitions.*.additionalProperties
+disable-validation: false
+input-file:
+  - >-
+    https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json
+no-upgrade-check: {}
+openapi-type: arm
+output-artifact:
+  - swagger-document.json
+  - code-model-v1.yaml
+  - pipeline.yaml
+  - configuration.yaml
+  - source-file-csharp
+  - source-file-jsonrpcclient
+output-folder: generated
+pipeline:
+  configuration-emitter:
+    scope: scope-configuration-emitter
+    suffixes:
+      - ''
+  csharp/cm/emitter:
+    input: transform
+    scope: scope-cm/emitter
+    suffixes:
+      - ''
+  csharp/cm/transform:
+    input: commonmarker
+    output-artifact: code-model-v1
+    suffixes:
+      - ''
+  csharp/commonmarker:
+    input: modeler
+    output-artifact: code-model-v1
+    suffixes:
+      - ''
+  csharp/emitter:
+    input: transform
+    scope: scope-csharp/emitter
+    suffixes:
+      - ''
+  csharp/generate:
+    input: cm/transform
+    output-artifact: source-file-csharp
+    plugin: csharp
+    suffixes:
+      - ''
+  csharp/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: csharp
+    suffixes:
+      - ''
+  csharp/simplifier:
+    input: generate
+    output-artifact: source-file-csharp
+    plugin: csharp-simplifier
+    suffixes:
+      - ''
+  csharp/transform:
+    input: simplifier
+    output-artifact: source-file-csharp
+    scope: scope-transform-string
+    suffixes:
+      - ''
+  jsonrpcclient/emitter:
+    input: transform
+    scope: scope-jsonrpcclient/emitter
+    suffixes: []
+  jsonrpcclient/generate:
+    input: modeler
+    output-artifact: source-file-jsonrpcclient
+    plugin: jsonrpcclient
+    suffixes: []
+  jsonrpcclient/modeler:
+    input: swagger-document/identity
+    output-artifact: code-model-v1
+    scope: jsonrpcclient
+    suffixes: []
+  jsonrpcclient/transform:
+    input: generate
+    output-artifact: source-file-jsonrpcclient
+    scope: scope-transform-string
+    suffixes: []
+  openapi-document/emitter:
+    input: identity
+    scope: scope-openapi-document/emitter
+    suffixes:
+      - ''
+  openapi-document/identity:
+    input: openapi-document-converter
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/openapi-document-converter:
+    input: swagger-document/identity
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  pipeline-emitter:
+    scope: scope-pipeline-emitter
+    suffixes:
+      - ''
+  swagger-document-override/md-override-loader:
+    output-artifact: immediate-config
+    suffixes:
+      - ''
+  swagger-document/classic-openapi-validator:
+    input: swagger-document/identity
+    scope: azure-validator-composed
+    suffixes:
+      - ''
+  swagger-document/compose:
+    input: individual/identity
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/emitter:
+    input: identity
+    scope: scope-swagger-document/emitter
+    suffixes:
+      - ''
+  swagger-document/identity:
+    input: transform
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/individual/classic-openapi-validator:
+    input: swagger-document/individual/identity
+    scope: azure-validator-individual
+    suffixes:
+      - ''
+  swagger-document/individual/identity:
+    input: transform
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/individual/openapi-validator:
+    input: swagger-document/individual/identity
+    scope: azure-validator-individual
+    suffixes:
+      - ''
+  swagger-document/individual/transform:
+    input: loader
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/loader:
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/model-validator:
+    input: swagger-document/identity
+    scope: model-validator
+    suffixes: []
+  swagger-document/openapi-validator:
+    input: swagger-document/identity
+    scope: azure-validator-composed
+    suffixes:
+      - ''
+  swagger-document/semantic-validator:
+    input: swagger-document/identity
+    scope: semantic-validator
+    suffixes: []
+  swagger-document/transform:
+    input: transform-immediate
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/transform-immediate:
+    input:
+      - swagger-document-override/md-override-loader
+      - compose
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+require: []
+scope-cm/emitter:
+  input-artifact: code-model-v1
+  is-object: true
+  output-uri-expr: |
+    "code-model-v1"
+scope-configuration-emitter:
+  input-artifact: configuration
+  is-object: true
+  output-uri-expr: |
+    "configuration"
 scope-csharp/emitter:
   input-artifact: source-file-csharp
   output-uri-expr: $key
 scope-jsonrpcclient/emitter:
   input-artifact: source-file-jsonrpcclient
   output-uri-expr: $key
-azure-validator-composed:
-  merge-state: composed
-azure-validator-individual:
-  merge-state: individual
+scope-openapi-document/emitter:
+  input-artifact: openapi-document
+  is-object: true
+  output-uri-expr: >
+    $config["output-file"] || 
+
+    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
+
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
+    "")
+scope-pipeline-emitter:
+  input-artifact: pipeline
+  is-object: true
+  output-uri-expr: |
+    "pipeline"
+scope-swagger-document/emitter:
+  input-artifact: swagger-document
+  is-object: true
+  output-uri-expr: >
+    $config["output-file"] || 
+
+    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
+
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
+    "")
 scope-transform-string:
   is-object: false
-base-folder: .
-debug: false
+skip-upgrade-check: {}
+use: []
+use-extension:
+  '@microsoft.azure/autorest.csharp': ~2.1.0
+  '@microsoft.azure/autorest.modeler': 2.1.22
+  '@microsoft.azure/classic-openapi-validator': ~1.0.3
+  '@microsoft.azure/openapi-validator': ~1.0.0
 verbose: false
-disable-validation: false
-__status: {}
+
