@@ -175,6 +175,10 @@ export interface Message {
 }
 
 }
+declare module 'autorest-core/lib/ref/array' {
+	export function pushAll<T>(target: T[], source: T[]): void;
+
+}
 declare module 'autorest-core/lib/ref/commonmark' {
 	export { Node, Parser } from "commonmark";
 
