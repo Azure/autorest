@@ -1,8 +1,8 @@
         components: [Object] } } }
         info: [Object],
         paths: [Object],
-        schemes: [Object],
-        servers: [Object],
+        schemes: [Array],
+        servers: [Array],
       { openapi: '3.0.0',
      cache: {},
      externals: [],
@@ -12,8 +12,8 @@
   at ...
   at ...
 --- End of stack trace from previous location where exception was thrown ---
-(node) DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
-(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 7): Error: Could not resolve reference #/definitions/Cowball
+(node) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 10): Error: Could not resolve reference #/definitions/Cowball
 (node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 8): Error: Could not resolve reference #/definitions/Cowball
 (node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 9): Error: Could not resolve reference #/definitions/Cowball
 { Error: Could not resolve reference #/definitions/Cowball
