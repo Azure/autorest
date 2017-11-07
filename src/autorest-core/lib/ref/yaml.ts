@@ -164,6 +164,28 @@ export function StringifyAst(ast: YAMLNode): string {
 export function Clone<T>(object: T): T {
   return Parse<T>(FastStringify(object));
 }
+/**
+ * Normalizes the order of given object's keys (sorts recursively)
+ */
+export function Normalize<T>(object: T): T {
+  const clone = Clone<T>(object);
+  const norm = (o: any) => {
+    if (Array.isArray(o)) {
+      o.forEach(norm);
+    } else if (o && typeof o == "object") {
+      const keys = Object.keys(o).sort();
+      const oo = { ...o };
+      for (const k of keys) {
+        delete o[k];
+      }
+      for (const k of keys) {
+        norm(o[k] = oo[k]);
+      }
+    }
+  };
+  norm(clone);
+  return clone;
+}
 export function ToAst<T>(object: T): YAMLNode {
   return ParseToAst(FastStringify(object));
 }

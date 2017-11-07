@@ -16,7 +16,6 @@
     - [Operations](client/ops.md)
     - [Authentication](client/auth.md)
     - [Error Handling](client/error.md)
-    - [Custom Http Pipeline](client/handlers.md)
     - [Tracing](client/tracing.md)
     - [Automatic Retries](client/retry.md)
 

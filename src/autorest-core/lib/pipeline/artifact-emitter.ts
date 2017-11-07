@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Lazy } from "../lazy";
-import { Stringify, YAMLNode } from "../ref/yaml";
+import { Stringify, YAMLNode, Normalize } from "../ref/yaml";
 import { IdentitySourceMapping } from "../source-map/merging";
 import { Channel } from "../message";
 import { ConfigurationView } from "../configuration";
@@ -44,11 +44,11 @@ async function EmitArtifact(config: ConfigurationView, artifactType: string, uri
     const ast = new Lazy<YAMLNode>(() => handle.ReadYamlAst());
 
     if (IsOutputArtifactOrMapRequested(config, artifactType + ".yaml")) {
-      const h = await sink.WriteData(`${++emitCtr}.yaml`, Stringify(object.Value), IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.yaml`, Stringify(Normalize(object.Value)), IdentitySourceMapping(handle.key, ast.Value), [handle]);
       await EmitArtifactInternal(config, artifactType + ".yaml", uri + ".yaml", h);
     }
     if (IsOutputArtifactOrMapRequested(config, artifactType + ".json")) {
-      const h = await sink.WriteData(`${++emitCtr}.json`, JSON.stringify(object.Value, null, 2), IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.json`, JSON.stringify(Normalize(object.Value), null, 2), IdentitySourceMapping(handle.key, ast.Value), [handle]);
       await EmitArtifactInternal(config, artifactType + ".json", uri + ".json", h);
     }
   }
