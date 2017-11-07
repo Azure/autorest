@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { pushAll } from '../ref/array';
 import { Lines } from "../parsing/text-utility";
 import {
   CommonmarkHeadingFollowingText,
@@ -429,7 +430,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
     }
 
     // finish source map
-    mapping.push(...IdentitySourceMapping(inputSwagger.key, ToAst(swagger)));
+    pushAll(mapping, IdentitySourceMapping(inputSwagger.key, ToAst(swagger)));
 
     // populate object
     populate.forEach(f => f());
