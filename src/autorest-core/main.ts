@@ -9,5 +9,8 @@ require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
 export { IFileSystem } from "./lib/file-system"
 export { Message, Channel } from "./lib/message"
 export { Artifact } from "./lib/artifact"
-export { AutoRest, ConfigurationView } from "./lib/autorest-core"
-export { DocumentType, DocumentExtension, DocumentPatterns } from "./lib/document-type"
+export { AutoRest, ConfigurationView, IdentifyDocument, IsConfigurationExtension, IsConfigurationDocument, IsOpenApiExtension, LiterateToJson, IsOpenApiDocument } from "./lib/autorest-core"
+export { DocumentFormat, DocumentExtension, DocumentPatterns, DocumentType } from "./lib/document-type"
+
+
+

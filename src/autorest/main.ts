@@ -5,16 +5,17 @@ require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
 
 // everything else.
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolveEntrypoint, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
-import { DocumentPatterns } from 'autorest-core/main';
 import { resolve } from 'path';
 
 import { LanguageClient } from "vscode-languageclient"
 
 // exports the public AutoRest definitions
-export { IFileSystem, Message } from 'autorest-core/main';
+export { IFileSystem, Message, Artifact } from 'autorest-core/main';
+export { GenerationResults } from 'autorest-core/language-service/language-service'
+import { GenerationResults } from 'autorest-core/language-service/language-service'
 
 // the local class definition of the AutoRest Interface and the EventEmitter signatures
-import { AutoRest as IAutoRest, Channel as IChannel, IFileSystem } from 'autorest-core/main';
+import { AutoRest as IAutoRest, IFileSystem } from 'autorest-core/main';
 
 /**
  * The Channel that a message is registered with.
@@ -40,6 +41,13 @@ export enum Channel {
 
   /** Hint messages offer guidance or support without forcing action. */
   Hint = <any>"hint",
+}
+
+export enum DocumentType {
+  OpenAPI2 = <any>"OpenAPI2",
+  OpenAPI3 = <any>"OpenAPI3",
+  LiterateConfiguration = <any>"LiterateConfiguration",
+  Unknown = <any>"Unknown"
 }
 
 let resolve_autorest: (value?: typeof IAutoRest | PromiseLike<typeof IAutoRest>) => void;
@@ -149,6 +157,7 @@ export async function initialize(requestedVersion: string = "latest-installed", 
   }
 }
 
+/** Bootstraps the core module if it's not already done and returns the AutoRest class. */
 async function ensureCoreLoaded(): Promise<typeof IAutoRest> {
 
   if (!modulePath && !busy) {
@@ -200,30 +209,52 @@ export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: s
   return new CAutoRest(fileSystem, configFileOrFolderUri);
 }
 
-export async function IsSwaggerFile(content: string): Promise<boolean> {
-  return await (await ensureCoreLoaded()).IsSwaggerFile(content);
+/** 
+  *  Given a document's content, does this represent a openapi document of some sort?
+  *
+  * @param content - the document content to evaluate
+  */
+export async function isOpenApiDocument(content: string): Promise<boolean> {
+  await ensureCoreLoaded();
+  return coreModule.IsOpenApiDocument(content);
 }
 
 /**
- * The results from calling the 'generate' method via the {@link AutoRestLanguageService/generate}
+ * Checks to see if the document is a literate configuation document.
  * 
+ * @param content the document content to check
  */
-export interface generated {
-  /** the array of messages produced from the run. */
-  messages: Array<string>;
-  /** the collection of outputted files. 
-   * 
-   * Member keys are the file names 
-   * Member values are the file contents 
-   * 
-   * To Access the files:
-   * for( const filename in generated.files ) {
-   *   const content = generated.files[filename];
-   *   /// ... 
-   * }
-   */
-  files: any;
+export async function isConfigurationDocument(content: string): Promise<boolean> {
+  await ensureCoreLoaded();
+  return coreModule.IsConfigurationDocument(content);
 }
+
+/** Determines the document type based on the content of the document
+ * 
+ * @returns Promise<DocumentType> one of:
+ *  -  DocumentType.LiterateConfiguration - contains the magic string '\n> see https://aka.ms/autorest'
+ *  -  DocumentType.OpenAPI2 - $.swagger === "2.0"
+ *  -  DocumentType.OpenAPI3 - $.openapi === "3.0"
+ *  -  DocumentType.Unknown - content does not match a known document type
+ * 
+ * @see {@link DocumentType}
+ */
+export async function identifyDocument(content: string): Promise<DocumentType> {
+  await ensureCoreLoaded();
+  return await coreModule.IdentifyDocument(content);
+}
+
+/**
+ * Processes a document (yaml, markdown or JSON) and returns the document as a JSON-encoded document text
+ * @param content - the document content
+ * 
+ * @returns the content as a JSON string (not a JSON DOM)
+ */
+export async function toJSON(content: string): Promise<string> {
+  await ensureCoreLoaded();
+  return await coreModule.LiterateToJson(content);
+}
+
 
 /** This is a convenience class for accessing the requests supported by AutoRest when used as a language service */
 export class AutoRestLanguageService {
@@ -253,10 +284,10 @@ export class AutoRestLanguageService {
    *     
    */
 
-  public async generate(documentUri: string, language: string, configuration: any): Promise<generated> {
+  public async generate(documentUri: string, language: string, configuration: any): Promise<GenerationResults> {
     // don't call before the client is ready.
     await this.languageClient.onReady();
-    return await this.languageClient.sendRequest<generated>("generate", { documentUri: documentUri, language: language, configuration: configuration });
+    return await this.languageClient.sendRequest<GenerationResults>("generate", { documentUri: documentUri, language: language, configuration: configuration });
   }
 
   /**
@@ -282,11 +313,11 @@ export class AutoRestLanguageService {
    *     true - the file is an autorest configuration file
    *     false - the file was not recognized.
    */
-  public async isConfigurationFile(contentOrUri: string): Promise<boolean> {
+  public async isConfigurationDocument(contentOrUri: string): Promise<boolean> {
     // don't call before the client is ready.
     await this.languageClient.onReady();
 
-    return await this.languageClient.sendRequest<boolean>("isConfigurationFile", { contentOrUri: contentOrUri });
+    return await this.languageClient.sendRequest<boolean>("isConfigurationDocument", { contentOrUri: contentOrUri });
   }
 
   /**
@@ -309,11 +340,11 @@ export class AutoRestLanguageService {
   * @returns async: the URI to the configuration file or an empty string if no configuration could be found.
   *
   */
-  public async findConfigurationFile(documentUri: string): Promise<string> {
+  public async detectConfigurationFile(documentUri: string): Promise<string> {
     // don't call before the client is ready.
     await this.languageClient.onReady();
 
-    return await this.languageClient.sendRequest<string>("findConfigurationFile", { documentUri: documentUri });
+    return await this.languageClient.sendRequest<string>("detectConfigurationFile", { documentUri: documentUri });
   }
 
   /**
@@ -324,10 +355,16 @@ export class AutoRestLanguageService {
   *     true - the file is a configuration file or OpenAPI (2.0) file
   *     false - the file was not recognized.
   */
-  public async isSupportedFile(languageId: string, contentOrUri: string): Promise<boolean> {
+  public async isSupportedDocument(languageId: string, contentOrUri: string): Promise<boolean> {
     // don't call before the client is ready.
     await this.languageClient.onReady();
 
-    return await this.languageClient.sendRequest<boolean>("isSupportedFile", { languageId: languageId, contentOrUri: contentOrUri });
+    return await this.languageClient.sendRequest<boolean>("isSupportedDocument", { languageId: languageId, contentOrUri: contentOrUri });
+  }
+
+  public async identifyDocument(contentOrUri: string): Promise<DocumentType> {
+    // don't call before the client is ready.
+    await this.languageClient.onReady();
+    return await this.languageClient.sendRequest<DocumentType>("identifyDocument", { contentOrUri: contentOrUri });
   }
 }

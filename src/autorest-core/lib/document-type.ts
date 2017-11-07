@@ -4,6 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 export enum DocumentType {
+  OpenAPI2 = <any>"OpenAPI2",
+  OpenAPI3 = <any>"OpenAPI3",
+  LiterateConfiguration = <any>"LiterateConfiguration",
+  Unknown = <any>"Unknown"
+}
+
+export enum DocumentFormat {
   Markdown = <any>"markdown",
   Yaml = <any>"yaml",
   Json = <any>"json",
@@ -11,11 +18,11 @@ export enum DocumentType {
 }
 
 export const DocumentExtension = {
-  "yaml": DocumentType.Yaml,
-  "yml": DocumentType.Yaml,
-  "json": DocumentType.Json,
-  "md": DocumentType.Markdown,
-  "markdown": DocumentType.Markdown
+  "yaml": DocumentFormat.Yaml,
+  "yml": DocumentFormat.Yaml,
+  "json": DocumentFormat.Json,
+  "md": DocumentFormat.Markdown,
+  "markdown": DocumentFormat.Markdown
 }
 
 export const DocumentPatterns = {
