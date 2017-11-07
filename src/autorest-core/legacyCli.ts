@@ -10,7 +10,7 @@ import { AutoRestConfigurationImpl } from "./lib/configuration";
 
 const regexLegacyArg = /^-[^-]/;
 
-export function isLegacy(args: string[]): boolean {
+/* @internal */ export function isLegacy(args: string[]): boolean {
   return args.some(arg => regexLegacyArg.test(arg));
 }
 
@@ -24,7 +24,7 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   targetConfig["override-info"] = data.info;
 }
 
-export async function CreateConfiguration(baseFolderUri: string, inputScope: DataSource, args: string[]): Promise<AutoRestConfigurationImpl> {
+/* @internal */ export async function CreateConfiguration(baseFolderUri: string, inputScope: DataSource, args: string[]): Promise<AutoRestConfigurationImpl> {
   let result: AutoRestConfigurationImpl = {
     "input-file": []
   };

@@ -24,11 +24,12 @@
     "autorest-language-service": "dist/language-service/language-service.js"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./dist/test --timeout 0",
-    "build": "tsc -p .",
+    "test": "./node_modules/.bin/mocha ./dist/test --timeout 500000",
+    "build": "tsc -p . & dts-generator --name autorest-core --project . --out ../autorest/interfaces/autorest-core.d.ts  --exclude \"test/**/*\" --exclude \"node_modules/**/*.d.ts\" --exclude \"lib/source-map/**\" --exclude \"lib/pipeline/**\" --exclude \"lib/parsing/**\" --exclude \"lib/data-store/**\" --exclude \"lib/ref/yaml.ts\"  --extern ./source-maps.d.ts",
     "static-link": "static-link",
     "postinstall": "node ./post-install --force",
-    "prepublishonly": "static-link --force & gulp build"
+    "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
+    "prepack": "static-link & npm run build"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
@@ -36,12 +37,13 @@
     "@types/js-yaml": "^3.5.31",
     "@types/jsonpath": "^0.1.29",
     "@types/node": "^8.0.28",
-    "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
     "@types/yargs": "^8.0.2",
+    "dts-generator": "^2.1.0",
     "mocha": "^4.0.1",
+    "shx": "0.2.2",
     "mocha-typescript": "^1.1.7",
-    "static-link": "^0.2.0"
+    "static-link": "^0.2.2"
   },
   "static-link": {
     "entrypoints": [],
@@ -55,7 +57,6 @@
       "get-uri": "^2.0.0",
       "jsonpath": "1.0.0",
       "linq-es2015": "^2.4.25",
-      "pify": "^3.0.0",
       "safe-eval": "^0.3.0",
       "source-map": "^0.5.6",
       "strip-bom": "^3.0.0",

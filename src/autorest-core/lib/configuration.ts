@@ -189,7 +189,7 @@ function ProxifyConfigurationView(cfgView: any) {
 }
 
 const loadedExtensions: { [fullyQualified: string]: { extension: Extension, autorestExtension: LazyPromise<AutoRestExtension> } } = {};
-export async function GetExtension(fullyQualified: string): Promise<AutoRestExtension> {
+/*@internal*/ export async function GetExtension(fullyQualified: string): Promise<AutoRestExtension> {
   return await loadedExtensions[fullyQualified].autorestExtension;
 }
 

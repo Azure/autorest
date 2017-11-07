@@ -6,11 +6,9 @@ require('../static-loader.js').load(`${__dirname}/../static_modules.fs`)
 process.env['ELECTRON_RUN_AS_NODE'] = "1";
 delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
 
-import { AutoRest } from "../lib/autorest-core";
-import { Message, Channel } from "../lib/message"
+import { Message, Channel, IFileSystem, AutoRest, Artifact, IsConfigurationExtension, IdentifyDocument, IsConfigurationDocument, IsOpenApiExtension, IsOpenApiDocument, LiterateToJson, DocumentType } from "../main"
 import { JsonPath, SourceMap } from './source-map';
-import { IFileSystem } from "../lib/file-system";
-import { Artifact } from "../lib/artifact";
+
 import { ResolveUri, FileUriToPath, GetExtension, IsUri, ParentFolderUri } from '../lib/ref/uri';
 import { From } from "linq-es2015";
 import { safeDump } from "js-yaml";
@@ -36,11 +34,12 @@ const azureValidatorRulesDocUrl = "https://github.com/Azure/azure-rest-api-specs
 
 const md5 = (content: any) => content ? createHash('md5').update(JSON.stringify(content)).digest("hex") : null;
 
+/** private per-configuration run state */
 class Result {
   private readonly onDispose = new Array<() => void>();
-  private files = new Array<string>();
-  private busy: Promise<void> = Promise.resolve();
-
+  public files = new Array<string>();
+  public busy: Promise<void> = Promise.resolve();
+  private queued = false;
   public readonly artifacts: Array<Artifact> = new Array<Artifact>();
   private readonly AutoRest: AutoRest;
   private static active = 0;
@@ -88,36 +87,45 @@ class Result {
     }));
 
     this.onDispose.push(this.AutoRest.Finished.Subscribe((a, success) => {
+      this.cancel = async () => { };
       // anything after it's done?
-      service.debug(`Finished Autorest ${success}`);
+      service.debug(`Finished Autorest ${success}\n`);
 
       // clear diagnostics for next run
-      for (const f of this.files) {
-        const diagnostics = this.service.getDiagnosticCollection(f);
-        // make sure that the last of the last is sent
-        diagnostics.send();
+      this.clearDiagnostics();
 
-        // then clear the collection it since we're sure this is the end of the run.
-        diagnostics.clear();
-      }
+      // and mark us done!
       Result.active--;
       this.updateStatus();
       this.ready();
     }));
   }
 
+  public clearDiagnostics(send: boolean = false) {
+    for (const f of this.files) {
+      const diagnostics = this.service.getDiagnosticCollection(f);
+      // make sure that the last of the last is sent
+      diagnostics.send();
+
+      // then clear the collection it since we're sure this is the end of the run.
+      diagnostics.clear(send);
+    }
+  }
+
   private updateStatus() {
     if (Result.active === 0) {
-      this.service.setStatus("idle");
+      this.service.endActivity("autorest")
       return;
     }
-    this.service.setStatus(`active:${Result.active}`);
+    this.service.startActivity("autorest", "AutoRest is running", this.service.settings.debug ? `Validating ${Result.active} ` : "Validating");
   }
 
   public async process() {
-    Result.active++;
-    this.updateStatus();
-
+    if (this.queued) {
+      // we're already waiting to start a run, no sense on going again.
+      return;
+    }
+    this.queued = true;
     // make sure we're clear to start
     await this.busy;
 
@@ -127,6 +135,10 @@ class Result {
     // ensure that we have nothing left over from before
     this.clear();
 
+    // now, update the status
+    Result.active++;
+    this.updateStatus();
+
     // set configuration
     await this.resetConfiguration(this.service.settings.configuration)
 
@@ -135,6 +147,7 @@ class Result {
 
     // start it up!
     const processResult = this.AutoRest.Process();
+    this.queued = false;
 
     this.cancel = async () => {
       // cancel only once!
@@ -142,6 +155,8 @@ class Result {
 
       // cancel the current process if running.
       processResult.cancel();
+
+      await this.busy;
     };
   }
 
@@ -198,12 +213,29 @@ class Diagnostics {
 }
 
 
-export interface generated {
+/**
+ * The results from calling the 'generate' method via the {@link AutoRestLanguageService/generate}
+ * 
+ */
+export interface GenerationResults {
+  /** the array of messages produced from the run. */
+
   messages: Array<string>;
+  /** the collection of outputted files. 
+   * 
+   * Member keys are the file names 
+   * Member values are the file contents 
+   * 
+   * To Access the files:
+   * for( const filename in generated.files ) {
+   *   const content = generated.files[filename];
+   *   /// ... 
+   * }
+   */
   files: Map<string, string>;
 }
 
-export class OpenApiLanugageService extends TextDocuments implements IFileSystem {
+class OpenApiLanugageService extends TextDocuments implements IFileSystem {
   private results = new Map</*configfile*/string, Result>();
   private diagnostics = new Map</*file*/string, Diagnostics>();
   private virtualFile = new Map<string, TextDocument>();
@@ -228,7 +260,7 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
     //  track opened, changed, saved, and closed files
     this.onDidOpen((p) => this.onDocumentChanged(p.document));
     this.onDidChangeContent((p) => this.onDocumentChanged(p.document));
-    this.onDidClose((p) => this.getDiagnosticCollection(p.document.uri).clear(true));
+    this.onDidClose((p) => this.onClosed(p.document.uri));
     this.onDidSave((p) => this.onSaving(p.document));
 
     // subscribe to client settings changes
@@ -243,22 +275,52 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
 
     connection.onInitialize(params => this.onInitialize(params));
 
-    // connection.onRequest("generate", generateArgs => onGenerate(generateArgs))
     this.setStatus("Starting Up.");
 
     // expose the features that we want to give to the client
     connection.onRequest("generate", (p) => this.generate(p.documentUri, p.language, p.configuration));
     connection.onRequest("isOpenApiDocument", (p) => this.isOpenApiDocument(p.contentOrUri));
-    connection.onRequest("isConfigurationFile", (p) => this.isConfigurationFile(p.contentOrUri));
-    connection.onRequest("isSupportedFile", (p) => this.isSupportedFile(p.languageId, p.contentOrUri));
+    connection.onRequest("identifyDocument", (p) => this.identifyDocument(p.contentOrUri));
+    connection.onRequest("isConfigurationDocument", (p) => this.isConfigurationDocument(p.contentOrUri));
+    connection.onRequest("isSupportedDocument", (p) => this.isSupportedDocument(p.languageId, p.contentOrUri));
     connection.onRequest("toJSON", (p) => this.toJSON(p.contentOrUri));
-    connection.onRequest("findConfigurationFile", p => this.findConfigurationFile(p.documentUri));
-
+    connection.onRequest("detectConfigurationFile", p => this.detectConfigurationFile(p.documentUri));
 
     this.listen(connection);
   }
 
-  public async generate(documentUri: string, language: string, configuration: any): Promise<generated> {
+  private async onClosed(documentUri: string): Promise<void> {
+
+    if (await this.isConfigurationDocument(documentUri)) {
+      // if this is a configuration, clear it's own errors
+      this.getDiagnosticCollection(documentUri).clear(true);
+
+      // and if there are no input-files open, then clear theirs too.
+      const result = this.results.get(documentUri);
+      if (result) {
+        // make sure it's not doing anything...
+        await result.busy;
+
+        // check if any files are still open
+        for (const each of result.files) {
+          if (this.get(each)) {
+            return; // yes, some file was still open, just quit from here.
+          }
+        }
+        result.clearDiagnostics(true);
+      }
+      return;
+    }
+
+    // just closing a file.
+    const configuration = await this.getConfiguration(documentUri, false);
+    if (!this.get(configuration)) {
+      // is the configuration file for this closed?
+      this.getDiagnosticCollection(documentUri).clear(true);
+    }
+  }
+
+  public async generate(documentUri: string, language: string, configuration: any): Promise<GenerationResults> {
     const cfgFile = await this.getConfiguration(documentUri);
     const autorest = new AutoRest(this, cfgFile);
     const cfg: any = {};
@@ -282,23 +344,30 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
   }
   public async isOpenApiDocument(contentOrUri: string): Promise<boolean> {
     try {
-      return IsUri(contentOrUri) ? await AutoRest.IsSwaggerFile(await this.ReadFile(contentOrUri)) : await AutoRest.IsSwaggerFile(contentOrUri);
+      return IsUri(contentOrUri) ? await IsOpenApiDocument(await this.ReadFile(contentOrUri)) : await IsOpenApiDocument(contentOrUri);
     } catch { }
     return false;
   }
-  public async isConfigurationFile(contentOrUri: string): Promise<boolean> {
+
+  public async identifyDocument(contentOrUri: string): Promise<DocumentType> {
     try {
-      return IsUri(contentOrUri) ? await AutoRest.IsConfigurationFile(await this.ReadFile(contentOrUri)) : await AutoRest.IsConfigurationFile(contentOrUri);
+      return IsUri(contentOrUri) ? await IdentifyDocument(await this.ReadFile(contentOrUri)) : await IdentifyDocument(contentOrUri);
+    } catch { }
+    return DocumentType.Unknown;
+  }
+  public async isConfigurationDocument(contentOrUri: string): Promise<boolean> {
+    try {
+      return IsUri(contentOrUri) ? await IsConfigurationDocument(await this.ReadFile(contentOrUri)) : await IsConfigurationDocument(contentOrUri);
     } catch { }
     return false;
   }
-  public async isSupportedFile(languageId: string, contentOrUri: string): Promise<boolean> {
+  public async isSupportedDocument(languageId: string, contentOrUri: string): Promise<boolean> {
     try {
-      if (AutoRest.IsSwaggerExtension(languageId) || AutoRest.IsConfigurationExtension(languageId)) {
+      if (IsOpenApiExtension(languageId) || IsConfigurationExtension(languageId)) {
         // so far, so good.
         const content = IsUri(contentOrUri) ? await this.ReadFile(contentOrUri) : contentOrUri;
-        const isSwag = AutoRest.IsSwaggerFile(content);
-        const isConf = AutoRest.IsConfigurationFile(content);
+        const isSwag = IsOpenApiDocument(content);
+        const isConf = IsConfigurationDocument(content);
         return await isSwag || await isConf;
       }
     } catch { }
@@ -307,18 +376,26 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
   }
   public async toJSON(contentOrUri: string): Promise<string> {
     try {
-      return IsUri(contentOrUri) ? await AutoRest.LiterateToJson(await this.ReadFile(contentOrUri)) : await AutoRest.LiterateToJson(contentOrUri);
+      return IsUri(contentOrUri) ? await LiterateToJson(await this.ReadFile(contentOrUri)) : await LiterateToJson(contentOrUri);
     } catch { }
     return "";
   }
-  public async findConfigurationFile(documentUri: string): Promise<string> {
-    return await AutoRest.DetectConfigurationFile(this, documentUri, true) || "";
+
+  public async detectConfigurationFile(documentUri: string): Promise<string> {
+    return await this.getConfiguration(documentUri, false);
   }
 
   public setStatus(message: string) {
     this.connection.sendNotification("status", message);
   }
 
+  public startActivity(id: string, title: string, message: string) {
+    this.connection.sendNotification("startActivity", { id: id, title: title, message: message });
+  }
+
+  public endActivity(id: string) {
+    this.connection.sendNotification("endActivity", id);
+  }
   private async onSettingsChanged(serviceSettings: any) {
     // snapshot the current autorest configuration from the client
     const hash = md5(this.settings.configuration);
@@ -355,7 +432,7 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
     const config = await this.getConfiguration(documentUri);
     const result = this.results.get(config);
     if (result) {
-      await result.ready; // wait for any current process to finish.
+      await result.busy; // wait for any current process to finish.
       const outputs = result.artifacts;
       const openapiDefinition = From(outputs).Where(x => x.type === "swagger-document.json").Select(x => JSON.parse(x.content)).FirstOrDefault();
       const openapiDefinitionMap = From(outputs).Where(x => x.type === "swagger-document.json.map").Select(x => JSON.parse(x.content)).FirstOrDefault();
@@ -467,7 +544,7 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
   }
 
   private async onFileEvents(changes: FileEvent[]) {
-    this.debug(`onFileEvents: ${changes}`);
+    this.debug(`onFileEvents: ${JSON.stringify(changes, null, "  ")}`);
     for (const each of changes) {
 
       const doc = this.get(each.uri);
@@ -498,7 +575,13 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
       const folderPath = FileUriToPath(folderUri);
       if (await isDirectory(folderPath)) {
         const items = await readdir(folderPath);
-        return From<string>(items).Where(each => AutoRest.IsConfigurationExtension(GetExtension(each))).Select(each => ResolveUri(folderUri, each)).ToArray();
+        const results = new Array<string>();
+        for (const each of items) {
+          if (await IsConfigurationExtension(GetExtension(each))) {
+            results.push(ResolveUri(folderUri, each));
+          }
+        }
+        return results;
       }
     }
 
@@ -511,7 +594,7 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
       if (doc) {
         return doc.getText();
       }
-      const content = await readFile(FileUriToPath(fileUri));
+      const content = await readFile(decodeURIComponent(FileUriToPath(fileUri)));
       return content;
     } catch {
     }
@@ -529,7 +612,7 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
     await result.process();
   }
 
-  private async getConfiguration(documentUri: string): Promise<string> {
+  private async getConfiguration(documentUri: string, generateFake: boolean = true): Promise<string> {
     // let folder = ResolveUri(documentUri, ".");
     let configFiles = await Configuration.DetectConfigurationFiles(this, documentUri, undefined, true);
 
@@ -575,14 +658,15 @@ export class OpenApiLanugageService extends TextDocuments implements IFileSystem
   private async onDocumentChanged(document: TextDocument) {
     this.debug(`onDocumentChanged: ${document.uri}`);
 
-    if (AutoRest.IsSwaggerExtension(document.languageId) && await AutoRest.IsSwaggerFile(document.getText())) {
+
+    if (await IsOpenApiExtension(document.languageId) && await IsOpenApiDocument(document.getText())) {
       // find the configuration file and activate that.
       this.process(await this.getConfiguration(document.uri));
       return;
     }
 
     // is this a config file?
-    if (AutoRest.IsConfigurationExtension(document.languageId) && await AutoRest.IsConfigurationFile(document.getText())) {
+    if (await IsConfigurationExtension(document.languageId) && await IsConfigurationDocument(document.getText())) {
       this.process(document.uri);
       return;
     }

@@ -14,84 +14,14 @@ import { Message, Channel } from "./message";
 import * as Constants from "./constants";
 import { Artifact } from "./artifact";
 import { homedir } from "os"
+import { DocumentType } from "./document-type";
 
+/**
+ * An instance of the AutoRest generator. 
+ * 
+ * Note: to create an instance of autore
+ */
 export class AutoRest extends EventEmitter {
-  /**
-   *  Given a file's content, does this represent a swagger file of some sort?
-   *
-   * @param content - the file content to evaluate
-   */
-  public static async IsSwaggerFile(content: string): Promise<boolean> {
-    // this checks to see if the document is a swagger document
-    try {
-      // quick check to see if it's json already
-      let doc = JSON.parse(content);
-      return (doc && doc.swagger && doc.swagger === "2.0")
-    } catch (e) {
-      try {
-        // maybe it's yaml or literate swagger
-        let doc = JSON.parse(await AutoRest.LiterateToJson(content));
-        return (doc && doc.swagger && doc.swagger === "2.0")
-      } catch (e) {
-        // nope
-      }
-    }
-
-    return false;
-  }
-
-  public static async LiterateToJson(content: string): Promise<string> {
-    try {
-      let autorest = new AutoRest({
-        EnumerateFileUris: async function (folderUri: string): Promise<Array<string>> { return []; },
-        ReadFile: async (f: string): Promise<string> => f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"
-      });
-      let result = "";
-      autorest.AddConfiguration({ "input-file": "none:///empty-file.md", "output-artifact": ["swagger-document"] });
-      autorest.GeneratedFile.Subscribe((source, artifact) => {
-        result = artifact.content;
-      });
-      // run autorest and wait.
-
-      await (await autorest.Process()).finish;
-      return result;
-    } catch (x) {
-      return "";
-    }
-  }
-
-  public static async IsConfigurationFile(content: string): Promise<boolean> {
-    // this checks to see if the document is an autorest markdown configuration file
-    return content.indexOf(Constants.MagicString) > -1;
-  }
-
-  public static IsConfigurationExtension(extension: string): boolean {
-    switch (extension) {
-      case "markdown":
-      case "md":
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  public static IsSwaggerExtension(extension: string): boolean {
-    switch (extension) {
-      case "yaml":
-      case "yml":
-      case "markdown":
-      case "md":
-      case "json":
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, documentPath?: string, walkUpFolders?: boolean): Promise<string | null> {
-    return Configuration.DetectConfigurationFile(fileSystem, (documentPath || null), undefined, walkUpFolders);
-  }
-
   /**
    * Event: Signals when a Process() finishes.
    */
@@ -116,7 +46,7 @@ export class AutoRest extends EventEmitter {
   }
 
   /**
-   *  @internal
+   * @internal
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
    */
@@ -126,9 +56,6 @@ export class AutoRest extends EventEmitter {
     process.env["autorest.home"] = process.env["autorest.home"] || homedir();
   }
 
-  public static create(fileSystem?: IFileSystem, configFileOrFolderUri?: string) {
-    return new AutoRest(fileSystem, configFileOrFolderUri);
-  }
   public async RegenerateView(includeDefault: boolean = false): Promise<ConfigurationView> {
     this.Invalidate();
     const messageEmitter = new MessageEmitter();
@@ -139,10 +66,6 @@ export class AutoRest extends EventEmitter {
     messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
     return this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, includeDefault, ...this._configurations);
-  }
-
-  public static async Shutdown() {
-    await Configuration.shutdown();
   }
 
   public Invalidate() {
@@ -161,13 +84,6 @@ export class AutoRest extends EventEmitter {
     // clear the configuratiion array.
     this._configurations.length = 0;
     this.Invalidate();
-  }
-
-  public get HasConfiguration(): Promise<boolean> {
-    return new Promise<boolean>(async (r, f) => {
-      await this.view;
-      r(false);
-    });
   }
 
   /**
@@ -235,5 +151,134 @@ export class AutoRest extends EventEmitter {
       cancel: () => cancel(),
       finish: processInternal()
     }
+  }
+}
+
+/** Determines the document type based on the content of the document
+ * 
+ * @returns Promise<DocumentType> one of:
+ *  -  DocumentType.LiterateConfiguration - contains the magic string '\n> see https://aka.ms/autorest'
+ *  -  DocumentType.OpenAPI2 - $.swagger === "2.0"
+ *  -  DocumentType.OpenAPI3 - $.openapi === "3.0"
+ *  -  DocumentType.Unknown - content does not match a known document type
+ * 
+ * @see {@link DocumentType}
+ */
+export async function IdentifyDocument(content: string): Promise<DocumentType> {
+  if (content) {
+
+    // check for configuratuion 
+    if (await IsConfigurationDocument(content)) {
+      return DocumentType.LiterateConfiguration;
+    }
+
+    // check for openapi document
+    let doc: any;
+    try {
+      // quick check to see if it's json already
+      doc = JSON.parse(content);
+    } catch (e) {
+      try {
+        // maybe it's yaml or literate openapip
+        doc = JSON.parse(await LiterateToJson(content));
+
+      } catch (e) {
+        // nope
+      }
+    }
+    if (doc) {
+      return (doc.swagger && doc.swagger === "2.0") ? DocumentType.OpenAPI2 :
+        (doc.openapi && doc.openapi === "3.0") ? DocumentType.OpenAPI3 :
+          DocumentType.Unknown;
+    }
+  }
+  return DocumentType.Unknown;
+}
+
+/**
+ * Processes a document (yaml, markdown or JSON) and returns the document as a JSON-encoded document text
+ * @param content - the document content
+ * 
+ * @returns the content as a JSON string (not a JSON DOM)
+ */
+export async function LiterateToJson(content: string): Promise<string> {
+  try {
+    let autorest = new AutoRest({
+      EnumerateFileUris: async function (folderUri: string): Promise<Array<string>> { return []; },
+      ReadFile: async (f: string): Promise<string> => f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"
+    });
+    let result = "";
+    autorest.AddConfiguration({ "input-file": "none:///empty-file.md", "output-artifact": ["swagger-document"] });
+    autorest.GeneratedFile.Subscribe((source, artifact) => {
+      result = artifact.content;
+    });
+    // run autorest and wait.
+
+    await (await autorest.Process()).finish;
+    return result;
+  } catch (x) {
+    return "";
+  }
+}
+
+/**
+ * Checks to see if the document is a literate configuation document.
+ * 
+ * @param content the document content to check
+ */
+export async function IsConfigurationDocument(content: string): Promise<boolean> {
+  // this checks to see if the document is an autorest markdown configuration document
+  return content.indexOf(Constants.MagicString) > -1;
+}
+
+/** 
+  *  Given a document's content, does this represent a openapi document of some sort?
+  *
+  * @param content - the document content to evaluate
+  */
+export async function IsOpenApiDocument(content: string): Promise<boolean> {
+  switch (await IdentifyDocument(content)) {
+    case DocumentType.OpenAPI2:
+    case DocumentType.OpenAPI3:
+      return true;
+  }
+  return false;
+}
+
+/**
+ * Shuts down any active autorest extension processes.
+ */
+export async function Shutdown() {
+  await Configuration.shutdown();
+}
+
+/**
+ * Checks if the file extension is a known file extension for a literate configuration document.
+ * @param extension the extension to check (no leading dot)
+ */
+export async function IsConfigurationExtension(extension: string): Promise<boolean> {
+  switch (extension) {
+    case "markdown":
+    case "md":
+      return true;
+    default:
+      return false;
+  }
+}
+
+/**
+ * Checks if the file extension is a known file extension for a OpenAPI document (yaml/json/literate markdown).
+ * @param extension the extension to check (no leading dot)
+ */
+export async function IsOpenApiExtension(extension: string): Promise<boolean> {
+  switch (extension) {
+    case "yaml":
+    case "yml":
+    case "markdown":
+    case "md":
+    case "json":
+      return true;
+    default:
+      return false;
   }
 }

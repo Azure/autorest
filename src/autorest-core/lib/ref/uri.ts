@@ -10,14 +10,16 @@ export function IsUri(uri: string): boolean {
 /***********************
  * Data aquisition
  ***********************/
-import * as promisify from "pify";
 import { Readable } from "stream";
 import { parse } from "url";
 import { sep, extname } from "path";
 
 const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");
-const getUriAsync: (uri: string, options: { headers: { [key: string]: string } }) => Promise<Readable> = promisify(getUri);
+
+function getUriAsync(uri: string, options: { headers: { [key: string]: string } }): Promise<Readable> {
+  return new Promise((r, j) => getUri(uri, options, (err: any, rs: Readable) => err ? j(err) : r(rs)));
+}
 
 /**
  * Loads a UTF8 string from given URI.

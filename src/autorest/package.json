@@ -28,30 +28,24 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "test": "./node_modules/.bin/mocha ./dist/test",
-    "build": "tsc -p .",
+    "build": "cd .. && cd autorest-core && npm run build && cd .. && cd autorest && tsc -p .&& shx mkdir -p ./dist/interfaces && shx cp -r ./interfaces/*.d.ts ./dist/interfaces ",
     "static-link": "static-link",
     "postinstall": "node ./post-install --force",
     "preinstall": "node ./preinstall-check",
-    "prepublishonly": "static-link --force & gulp build"
+    "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
+    "prepack": "static-link & npm run build"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
     "@types/commonmark": "^0.22.29",
     "@types/node": "^7.0.5",
     "@types/semver": "^5.3.30",
-    "@types/source-map": "^0.5.0",
     "@types/yargs": "^6.6.0",
     "mocha": "3.2.0",
     "mocha-typescript": "1.0.22",
-    "source-map": "^0.5.6",
-    "source-map-support": "^0.4.14",
     "typescript": "2.5.3",
-    "@types/jsonpath": "^0.1.29",
-    "vscode-languageserver-protocol": "3.4.4",
-    "vscode-jsonrpc": "^3.1.0",
-    "linq-es2015": "^2.4.24",
-    "static-link": "^0.2.1",
-    "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz"
+    "static-link": "^0.2.2",
+    "shx": "0.2.2"
   },
   "static-link": {
     "entrypoints": [],

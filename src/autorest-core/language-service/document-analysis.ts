@@ -9,6 +9,7 @@ import { Location, Position } from 'vscode-languageserver';
 import { value, stringify, parse, nodes, paths, } from "jsonpath";
 
 /**
+ * @internal
  * This class provides complex analysis for a document in relation to its peers, i.e.
  * the other documents involved in one AutoRest/validation run (configuration file, OpenAPI documents).
  * As such, it offers operations like:
@@ -18,26 +19,6 @@ import { value, stringify, parse, nodes, paths, } from "jsonpath";
  * Essentially, it provides useful mappings between logical (JSON path) and physical (line/column) locations in both directions.
  */
 export class DocumentAnalysis {
-  /*
-  public static async Create(host: OpenApiDocumentManager, documentUri: string): Promise<DocumentAnalysis | null> {
-
-    const document = await host.GetFileContent(documentUri);
-    if (!document) {
-      return null;
-    }
-
-    const fullyResolvedAndMergedDefinition = host.GetFullyResolvedAndMergedDefinitionOf(documentUri);
-    if (!fullyResolvedAndMergedDefinition) {
-      return null;
-    }
-
-    return new DocumentAnalysis(
-      documentUri,
-      document,
-      fullyResolvedAndMergedDefinition.openapiDefinition,
-      new SourceMap(fullyResolvedAndMergedDefinition.openapiDefinitionMap));
-  }*/
-
   public constructor(
     private documentUri: string,
     private document: string,

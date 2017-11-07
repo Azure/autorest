@@ -102,9 +102,6 @@ task 'autorest', 'Runs AutoRest', (done)->
 task 'init', "" ,(done)->
   Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 7.10.0" if semver.lt( process.versions.node , "7.10.0" )
 
-  # we no longer need this symlinked in place. remove it if it is there.
-  unlink "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core" if  test "-d",  "#{basefolder}/src/core/AutoRest/bin/netcoreapp1.0/node_modules/autorest-core"
-
   if (! test "-d","#{basefolder}/src/autorest-core") 
     echo warning "\n#{ error 'NOTE:' } #{ info 'src/autorest-core'} appears to be missing \n      fixing with #{ info 'git checkout src/autorest-core'}"
     echo warning "      in the future do a #{ info 'gulp clean'} before using #{ info 'git clean'} .\n"
@@ -114,27 +111,17 @@ task 'init', "" ,(done)->
   global.initialized = true
   # if the node_modules isn't created, do it.
   if fileExists "#{basefolder}/package-lock.json" 
-    doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/package-lock.json") 
-  else 
-    doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
-      
+    if (newer "#{basefolder}/package.json",  "#{basefolder}/package-lock.json") or (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules")  
+      echo warning "\n#{ info 'NOTE:' } '#{basefolder}/node_modules' may be out of date #{ info "- consider running 'npm install'" }\n"
+  
   typescriptProjectFolders()
     .on 'end', -> 
-      if doit || force
-        rm "#{basefolder}/package-lock.json" if fileExists "#{basefolder}/package-lock.json" 
-        echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
-        echo "Running npm install for all project folders."
-        exec "npm install", {cwd:basefolder,silent:true},(c,o,e)->
-          echo "Completed Running npm install for project folder."
-          done null
-      else 
-        done null
+      done null
 
     .pipe foreach (each,next) -> 
       # is any of the TS projects node_modules out of date?
       if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/package-lock.json")
-        echo warning "#{ info 'NOTE:' } '#{each.path}/node_modules' may be out of date."
-        doit = true
+        echo warning "#{ info 'NOTE:' } '#{each.path}/node_modules' may be out of date. #{ info "- consider running 'npm install'" }\n"
       next null
 
     return null

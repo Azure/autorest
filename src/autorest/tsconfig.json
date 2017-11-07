@@ -13,6 +13,9 @@
     "types": [
       "node"
     ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
     "lib": [
       "esnext"
     ]
@@ -20,6 +23,7 @@
   "exclude": [
     "dist",
     "node_modules",
+    "_lib",
     "lib/core/language-service"
   ]
 }

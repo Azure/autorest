@@ -1,22 +1,3 @@
-task 'copy-dts-files', '', (done)->
-  # this needs to run multiple times.
-  global.completed['copy-dts-files'] = false
-  copyDtsFiles(done)
-  return null
-
-copyDtsFiles = (done) =>
-  # copy *.d.ts files 
-  source ["#{basefolder}/src/autorest-core/dist/**/*.d.ts","!#{basefolder}/src/autorest-core/dist/test/**" ]
-    .pipe destination "#{basefolder}/src/autorest/lib/core"
-    .on 'end', () => 
-    source ["#{basefolder}/src/autorest-core/dist/**/*.d.ts","!#{basefolder}/src/autorest-core/dist/test/**" ]
-      .pipe destination "#{basefolder}/src/autorest/dist/lib/core"
-    .on 'end', () =>
-     source ["#{basefolder}/src/autorest/vscode/**/*.d.ts" ]
-      .pipe destination "#{basefolder}/src/autorest/dist/vscode"
-    .on 'end', done
-  return null
-
 task 'fix-line-endings', 'typescript', ->
   typescriptFiles()
     .pipe eol {eolc: 'LF', encoding:'utf8'}
@@ -49,13 +30,9 @@ task "compile/typescript", '' , (done)->
   done()
 
 task 'build', 'typescript', (done)-> 
-  # watch for changes to these files and propogate them to the right spot.
-  watcher = watchFiles ["#{basefolder}/src/autorest-core/dist/**/*.d.ts"], ["copy-dts-files"]
-  
   typescriptProjectFolders()
     .on 'end', ->
       run 'compile/typescript', ->
-        watcher._watcher.close() if !watch
         done()
 
     .pipe where (each ) ->
@@ -66,14 +43,9 @@ task 'build', 'typescript', (done)->
       deps = ("compile/typescript/#{d.substring(d.indexOf('/')+1)}" for d in (global.Dependencies[fn] || []))
       
       task 'compile/typescript', fn, deps, (fin) ->
-        copyDtsFiles ->
-          execute "npm run build", {cwd: each.path }, (code,stdout,stderr) ->
-            if watch
-              execute "npm run watch", {cwd: each.path }, (c,o,e) ->
-              echo "watching #{fn}"
-              , (d) -> echo d.replace(/^src\//mig, "#{basefolder}/src/")
-            fin()
-          return null;
+        execute "npm run build", {cwd: each.path }, (code,stdout,stderr) ->
+          fin()
+        return null;
       next null
     return null
 

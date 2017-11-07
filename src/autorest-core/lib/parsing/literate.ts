@@ -61,9 +61,6 @@ function* ParseCodeblocks(markdown: string): Iterable<commonmark.Node> {
   }
 }
 
-
-
-
 const commonmarkHeadingNodeType = "heading";
 const commonmarkHeadingMaxLevel = 1000;
 
