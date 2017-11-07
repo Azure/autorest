@@ -136,18 +136,21 @@ export class AutoRestLanguageService {
 
     return await this.languageClient.sendRequest<boolean>("isOpenApiDocument", { contentOrUri: contentOrUri });
   }
+
   public async isConfigurationFile(contentOrUri: string): Promise<boolean> {
     // don't call before the client is ready.
     await this.languageClient.onReady();
 
     return await this.languageClient.sendRequest<boolean>("isConfigurationFile", { contentOrUri: contentOrUri });
   }
+
   public async toJSON(contentOrUri: string): Promise<string> {
     // don't call before the client is ready.
     await this.languageClient.onReady();
 
     return await this.languageClient.sendRequest<string>("toJSON", { contentOrUri: contentOrUri });
   }
+
   public async findConfigurationFile(documentUri: string): Promise<string> {
     // don't call before the client is ready.
     await this.languageClient.onReady();

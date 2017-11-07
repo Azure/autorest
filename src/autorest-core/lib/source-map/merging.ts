@@ -3,11 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { pushAll } from '../ref/array';
 import { IndexToPosition } from "../parsing/text-utility";
 import { ConfigurationView } from "../configuration";
 import { Channel } from "../message";
 import { JsonPath, stringify } from "../ref/jsonpath";
-import * as yaml from "../ref/yaml";
+import * as yaml from '../ref/yaml';
 import { Mappings } from "../ref/source-map";
 import { DataHandle, DataSink } from "../data-store/data-store";
 
@@ -220,7 +221,8 @@ export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHand
         });
       }
     }) || {});
-    mappings.push(...IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
+
+    pushAll(mappings, IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
   }
   if (failed) {
     throw new Error("Syntax errors encountered.");
