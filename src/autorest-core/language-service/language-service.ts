@@ -239,7 +239,6 @@ class OpenApiLanugageService extends TextDocuments implements IFileSystem {
   private results = new Map</*configfile*/string, Result>();
   private diagnostics = new Map</*file*/string, Diagnostics>();
   private virtualFile = new Map<string, TextDocument>();
-  public inCriticalSection = false;
   public settings: any = {};
 
   public get(uri: string): TextDocument {
@@ -657,44 +656,32 @@ class OpenApiLanugageService extends TextDocuments implements IFileSystem {
   }
 
   private async onDocumentChanged(document: TextDocument) {
-    /* if (this.inCriticalSection) {
-      // try not to start two generated preciesly on top of each other
-      // this will cause subsequents to spin a bit, until we're past that part.
-
-      setTimeout(() => this.onDocumentChanged(document), 10)
-      return;
-    }
-    this.inCriticalSection = true;
-    */
     this.debug(`onDocumentChanged: ${document.uri}`);
 
-    try {
-      if (await IsOpenApiExtension(document.languageId) && await IsOpenApiDocument(document.getText())) {
-        // find the configuration file and activate that.
-        this.process(await this.getConfiguration(document.uri));
-        return;
-      }
 
-      // is this a config file?
-      if (await IsConfigurationExtension(document.languageId) && await IsConfigurationDocument(document.getText())) {
-        this.process(document.uri);
-        return;
-      }
-
-      // neither 
-      // clear any results we have for this.
-      const result = this.results.get(document.uri);
-      if (result) {
-        // this used to be a config file
-        result.cancel();
-        result.clear();
-      }
-
-      // let's clear anything we may have sent for this file.
-      this.getDiagnosticCollection(document.uri).clear(true);
-    } finally {
-      this.inCriticalSection = false;
+    if (await IsOpenApiExtension(document.languageId) && await IsOpenApiDocument(document.getText())) {
+      // find the configuration file and activate that.
+      this.process(await this.getConfiguration(document.uri));
+      return;
     }
+
+    // is this a config file?
+    if (await IsConfigurationExtension(document.languageId) && await IsConfigurationDocument(document.getText())) {
+      this.process(document.uri);
+      return;
+    }
+
+    // neither 
+    // clear any results we have for this.
+    const result = this.results.get(document.uri);
+    if (result) {
+      // this used to be a config file
+      result.cancel();
+      result.clear();
+    }
+
+    // let's clear anything we may have sent for this file.
+    this.getDiagnosticCollection(document.uri).clear(true);
   }
 
   public async onRootUriChanged(rootUri: string | null) {
