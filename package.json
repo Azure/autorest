@@ -7,7 +7,8 @@
     "testci": "gulp testci",
     "build": "gulp build --threshold=1",
     "publish-preview": "gulp publish-preview",
-    "install": "gulp npm-install --verbose"
+    "install": "gulp npm-install --verbose",
+    "regenerate": "gulp regenerate"
   },
   "repository": {
     "type": "git",
