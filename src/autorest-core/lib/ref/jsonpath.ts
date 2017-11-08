@@ -8,10 +8,10 @@ import * as jsonpath from "jsonpath";
 
 // patch in smart filter expressions
 const handlers = (jsonpath as any).handlers;
-const filterExpressionHandler = function (component: any, partial: any, count: any) {
-  var src = component.expression.value.slice(1);
+handlers.register("subscript-descendant-filter_expression", function (component: any, partial: any, count: any) {
+  const src = component.expression.value.slice(1);
 
-  var passable = function (key: any, value: any) {
+  const passable = function (key: any, value: any) {
     try {
       return safeEval(src.replace(/\@/g, "$$$$"), { "$$": value });
     } catch (e) {
@@ -20,9 +20,20 @@ const filterExpressionHandler = function (component: any, partial: any, count: a
   }
 
   return eval("this").traverse(partial, null, passable, count);
-};
-handlers.register("subscript-descendant-filter_expression", filterExpressionHandler);
-handlers.register("subscript-child-filter_expression", filterExpressionHandler);
+});
+handlers.register("subscript-child-filter_expression", function (component: any, partial: any, count: any) {
+  const src = component.expression.value.slice(1);
+
+  const passable = function (key: any, value: any) {
+    try {
+      return safeEval(src.replace(/\@/g, "$$$$"), { "$$": value });
+    } catch (e) {
+      return false;
+    }
+  }
+
+  return eval("this").descend(partial, null, passable, count);
+});
 // patch end
 
 export type JsonPathComponent = jsonpath.PathComponent;
