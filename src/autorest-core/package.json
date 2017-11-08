@@ -43,7 +43,8 @@
     "mocha": "^4.0.1",
     "shx": "0.2.2",
     "mocha-typescript": "^1.1.7",
-    "static-link": "^0.2.2"
+    "static-link": "^0.2.2",
+    "vscode-jsonrpc": "^3.3.1"
   },
   "static-link": {
     "entrypoints": [],
