@@ -52,7 +52,7 @@ class Result {
   public cancel: () => Promise<void> = async () => { };
   public ready = () => { };
 
-  constructor(private readonly service: OpenApiLanugageService, configurationUrl: string) {
+  constructor(private readonly service: OpenApiLanguageService, configurationUrl: string) {
     this.AutoRest = new AutoRest(service, configurationUrl);
 
     this.onDispose.push(this.AutoRest.GeneratedFile.Subscribe((a, artifact) => this.artifacts.push(artifact)));
@@ -235,7 +235,7 @@ export interface GenerationResults {
   files: Map<string, string>;
 }
 
-class OpenApiLanugageService extends TextDocuments implements IFileSystem {
+class OpenApiLanguageService extends TextDocuments implements IFileSystem {
   private results = new Map</*configfile*/string, Result>();
   private diagnostics = new Map</*file*/string, Diagnostics>();
   private virtualFile = new Map<string, TextDocument>();
@@ -732,7 +732,7 @@ class OpenApiLanugageService extends TextDocuments implements IFileSystem {
 
 // Create the IPC Channel for the lanaguage service.
 let connection: IConnection = createConnection(new IPCMessageReader(process), new IPCMessageWriter(process));
-let languageService = new OpenApiLanugageService(connection);
+let languageService = new OpenApiLanguageService(connection);
 
 process.on("unhandledRejection", function (err) {
   // 
