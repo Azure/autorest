@@ -43,7 +43,11 @@ export function paths<T>(obj: T, jsonQuery: string): JsonPath[] {
 export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: any }[] {
   // jsonpath only accepts objects
   if (obj instanceof Object) {
-    return jsonpath.nodes(obj, jsonQuery).map(x => { return { path: x.path.slice(1), value: x.value }; });
+    let result = jsonpath.nodes(obj, jsonQuery).map(x => { return { path: x.path.slice(1), value: x.value }; });
+    const comp = (a: string, b: string) => a < b ? -1 : (a > b ? 1 : 0);
+    result = result.sort((a, b) => comp(JSON.stringify(a.path), JSON.stringify(b.path)));
+    result = result.filter((x, i) => i === 0 || JSON.stringify(x.path) !== JSON.stringify(result[i - 1].path));
+    return result;
   } else {
     return matches(jsonQuery, []) ? [{ path: [], value: obj }] : [];
   }

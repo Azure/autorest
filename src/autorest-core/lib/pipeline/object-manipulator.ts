@@ -24,17 +24,9 @@ export async function ManipulateObject(
 
   // find paths matched by `whereJsonQuery`
   const doc = src.ReadObject<any>();
-  const allHits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
-  if (allHits.length === 0) {
+  const hits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
+  if (hits.length === 0) {
     return { anyHit: false, result: src };
-  }
-
-  // filter out sub-hits (only consider highest hit)
-  const hits: { path: JsonPath, value: any }[] = [];
-  for (const hit of allHits) {
-    if (hits.every(existingHit => !IsPrefix(existingHit.path, hit.path))) {
-      hits.push(hit);
-    }
   }
 
   // process
