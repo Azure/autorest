@@ -3,6 +3,12 @@
   "configurations": [
     {
       "type": "node",
+      "request": "attach",
+      "name": "Node.js Attach",
+      "port": 9229
+    },
+    {
+      "type": "node",
       "protocol": "inspector",
       "request": "launch",
       "name": "run tests",

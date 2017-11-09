@@ -89,7 +89,7 @@ export function ResolveAnchorRef(yamlAstRoot: YAMLNode, anchorRef: string): YAML
 /**
  * Populates yamlNode.valueFunc with a function that creates a *mutable* object (i.e. no caching of the reference or such)
  */
-function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: (message: string, index: number) => void): () => any {
+function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: (message: string, index: number) => void): (cache: WeakMap<YAMLNode, any>) => any {
   if (!yamlNode) {
     return () => null;
   }
@@ -103,19 +103,28 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
     return (yamlNode as any).valueFunc;
   }
 
+  // important for anchors!
+  const memoize = (factory: (cache: WeakMap<YAMLNode, any>) => any): ((cache: WeakMap<YAMLNode, any>) => any) =>
+    cache => {
+      if (cache.has(yamlNode)) return cache.get(yamlNode);
+      const result = factory(cache);
+      cache.set(yamlNode, result);
+      return result;
+    };
+
   switch (yamlNode.kind) {
     case Kind.SCALAR: {
       const yamlNodeScalar = yamlNode as YAMLScalar;
       return (yamlNode as any).valueFunc = yamlNodeScalar.valueObject !== undefined
-        ? () => yamlNodeScalar.valueObject
-        : () => yamlNodeScalar.value;
+        ? memoize(() => yamlNodeScalar.valueObject)
+        : memoize(() => yamlNodeScalar.value);
     }
     case Kind.MAPPING:
       onError("Syntax error: Encountered bare mapping.", yamlNode.startPosition);
       return (yamlNode as any).valueFunc = () => null;
     case Kind.MAP: {
       const yamlNodeMapping = yamlNode as YAMLMap;
-      return (yamlNode as any).valueFunc = () => {
+      return (yamlNode as any).valueFunc = memoize(cache => {
         const result = NewEmptyObject();
         for (const mapping of yamlNodeMapping.mappings) {
           if (mapping.key.kind !== Kind.SCALAR) {
@@ -123,16 +132,18 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
           } else if (mapping.value === null) {
             onError("Syntax error: No mapping value found.", mapping.key.endPosition);
           } else {
-            result[mapping.key.value] = ParseNodeInternal(yamlRootNode, mapping.value, onError)();
+            result[mapping.key.value] = ParseNodeInternal(yamlRootNode, mapping.value, onError)(cache);
           }
         }
         return result;
-      };
+      });
     }
     case Kind.SEQ: {
       const yamlNodeSequence = yamlNode as YAMLSequence;
-      return (yamlNode as any).valueFunc = () =>
-        yamlNodeSequence.items.map(item => ParseNodeInternal(yamlRootNode, item, onError)());
+      return (yamlNode as any).valueFunc = memoize(cache => {
+        if (cache.has(yamlNode)) return cache.get(yamlNode);
+        return yamlNodeSequence.items.map(item => ParseNodeInternal(yamlRootNode, item, onError)(cache));
+      });
     }
     case Kind.ANCHOR_REF: {
       const yamlNodeRef = yamlNode as YAMLAnchorReference;
@@ -148,7 +159,7 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
 
 export function ParseNode<T>(yamlNode: YAMLNode, onError: (message: string, index: number) => void = message => { throw new Error(message); }): T {
   ParseNodeInternal(yamlNode, yamlNode, onError);
-  return (yamlNode as any).valueFunc();
+  return (yamlNode as any).valueFunc(new WeakMap());
 }
 
 export function CloneAst<T extends YAMLNode>(ast: T): T {
@@ -201,9 +212,22 @@ export function Stringify<T>(object: T): string {
 }
 
 export function FastStringify<T>(obj: T): string {
-  try {
-    return JSON.stringify(obj, null, 1);
-  } catch (e) {
-    return Stringify(obj);
+  // has duplicate objects?
+  const seen = new WeakSet();
+  const losslessJsonSerializable = (o: any): boolean => {
+    if (typeof o == "object") {
+      if (seen.has(o)) return false;
+      seen.add(o);
+    }
+    if (Array.isArray(o)) {
+      return o.every(losslessJsonSerializable);
+    } else if (o && typeof o == "object") {
+      return Object.values(o).every(losslessJsonSerializable);
+    }
+    return true;
+  };
+  if (losslessJsonSerializable(obj)) {
+    try { return JSON.stringify(obj, null, 1); } catch { }
   }
+  return Stringify(obj);
 }
