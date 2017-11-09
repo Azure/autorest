@@ -68,6 +68,8 @@ operations:
           isNullable: true
         deprecated: false
         description: A good description.
+        extensions:
+          x-ms-requestBody-index: '0'
         group:
           fixed: false
           raw: Cowbell
@@ -84,6 +86,8 @@ operations:
               fixed: false
             documentation:
               fixed: false
+            extensions:
+              x-ms-requestBody-name: body
             isConstant: false
             isRequired: true
             location: body

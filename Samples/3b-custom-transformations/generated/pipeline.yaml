@@ -22,7 +22,7 @@ csharp/commonmarker:
   configScope:
     - csharp
   inputs:
-    - csharp/modeler
+    - csharp/imodeler1
   outputArtifact: code-model-v1
   pluginName: commonmarker
 csharp/emitter:
@@ -40,13 +40,13 @@ csharp/generate:
     - csharp/cm/transform
   outputArtifact: source-file-csharp
   pluginName: csharp
-csharp/modeler:
+csharp/imodeler1:
   configScope:
     - csharp
   inputs:
-    - swagger-document/identity
+    - openapi-document/identity
   outputArtifact: code-model-v1
-  pluginName: modeler
+  pluginName: imodeler1
 csharp/simplifier:
   configScope:
     - csharp
@@ -71,7 +71,7 @@ openapi-document/emitter:
 openapi-document/identity:
   configScope: []
   inputs:
-    - openapi-document/openapi-document-converter
+    - openapi-document/transform
   outputArtifact: openapi-document
   pluginName: identity
 openapi-document/openapi-document-converter:
@@ -80,6 +80,12 @@ openapi-document/openapi-document-converter:
     - swagger-document/identity
   outputArtifact: openapi-document
   pluginName: openapi-document-converter
+openapi-document/transform:
+  configScope: []
+  inputs:
+    - openapi-document/openapi-document-converter
+  outputArtifact: openapi-document
+  pluginName: transform
 pipeline-emitter:
   configScope:
     - scope-pipeline-emitter
