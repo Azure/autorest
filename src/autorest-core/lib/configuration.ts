@@ -619,8 +619,8 @@ export class Configuration {
     const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, "./") : (this.configFileOrFolderUri || "file:///");
 
     const configSegments: any[] = [];
-    const createView = () => new ConfigurationView(messageEmitter, configFileFolderUri, ...configSegments);
-    const addSegments = async (configs: any[]): Promise<void> => { configSegments.push(...await this.DesugarRawConfigs(configs)); };
+    const createView = (segments: any[] = configSegments) => new ConfigurationView(messageEmitter, configFileFolderUri, ...segments);
+    const addSegments = async (configs: any[]): Promise<any[]> => { const segs = await this.DesugarRawConfigs(configs); configSegments.push(...segs); return segs; };
 
     // 1. overrides (CLI, ...)
     await addSegments(configs);
@@ -677,11 +677,13 @@ export class Configuration {
     // 5. resolve extensions
     const extMgr = await this.extensionManager;
     const addedExtensions = new Set<string>();
-    while (true) {
-      const tmpView = createView();
+    const viewsToHandle: ConfigurationView[] = [createView()];
+    while (viewsToHandle.length > 0) {
+      const tmpView = <ConfigurationView>viewsToHandle.pop();
       const additionalExtensions = tmpView.UseExtensions.filter(ext => !addedExtensions.has(ext.fullyQualified));
+      await addSegments([{ "used-extension": tmpView.UseExtensions.map(x => x.fullyQualified) }]);
       if (additionalExtensions.length === 0) {
-        break;
+        continue;
       }
       // acquire additional extensions
       for (const additionalExtension of additionalExtensions) {
@@ -750,9 +752,9 @@ export class Configuration {
           const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
           const blocks = await this.ParseCodeBlocks(
             await inputView.ReadStrict(CreateFileUri(await ext.extension.configurationPath)),
-            tmpView,
+            createView(),
             `extension-config-${additionalExtension.fullyQualified}`);
-          await addSegments(blocks);
+          viewsToHandle.push(createView(await addSegments(blocks)));
         } catch (e) {
           messageEmitter.Message.Dispatch({
             Channel: Channel.Fatal,
