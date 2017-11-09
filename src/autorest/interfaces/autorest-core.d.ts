@@ -349,7 +349,7 @@ export class AutoRest extends EventEmitter {
  * @returns Promise<DocumentType> one of:
  *  -  DocumentType.LiterateConfiguration - contains the magic string '\n> see https://aka.ms/autorest'
  *  -  DocumentType.OpenAPI2 - $.swagger === "2.0"
- *  -  DocumentType.OpenAPI3 - $.openapi === "3.0"
+ *  -  DocumentType.OpenAPI3 - $.openapi === "3.0.0"
  *  -  DocumentType.Unknown - content does not match a known document type
  *
  * @see {@link DocumentType}
