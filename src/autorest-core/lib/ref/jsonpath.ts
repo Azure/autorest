@@ -8,10 +8,10 @@ import * as jsonpath from "jsonpath";
 
 // patch in smart filter expressions
 const handlers = (jsonpath as any).handlers;
-const filterExpressionHandler = function (component: any, partial: any, count: any) {
-  var src = component.expression.value.slice(1);
+handlers.register("subscript-descendant-filter_expression", function (component: any, partial: any, count: any) {
+  const src = component.expression.value.slice(1);
 
-  var passable = function (key: any, value: any) {
+  const passable = function (key: any, value: any) {
     try {
       return safeEval(src.replace(/\@/g, "$$$$"), { "$$": value });
     } catch (e) {
@@ -20,9 +20,20 @@ const filterExpressionHandler = function (component: any, partial: any, count: a
   }
 
   return eval("this").traverse(partial, null, passable, count);
-};
-handlers.register("subscript-descendant-filter_expression", filterExpressionHandler);
-handlers.register("subscript-child-filter_expression", filterExpressionHandler);
+});
+handlers.register("subscript-child-filter_expression", function (component: any, partial: any, count: any) {
+  const src = component.expression.value.slice(1);
+
+  const passable = function (key: any, value: any) {
+    try {
+      return safeEval(src.replace(/\@/g, "$$$$"), { "$$": value });
+    } catch (e) {
+      return false;
+    }
+  }
+
+  return eval("this").descend(partial, null, passable, count);
+});
 // patch end
 
 export type JsonPathComponent = jsonpath.PathComponent;
@@ -43,7 +54,11 @@ export function paths<T>(obj: T, jsonQuery: string): JsonPath[] {
 export function nodes<T>(obj: T, jsonQuery: string): { path: JsonPath, value: any }[] {
   // jsonpath only accepts objects
   if (obj instanceof Object) {
-    return jsonpath.nodes(obj, jsonQuery).map(x => { return { path: x.path.slice(1), value: x.value }; });
+    let result = jsonpath.nodes(obj, jsonQuery).map(x => { return { path: x.path.slice(1), value: x.value }; });
+    const comp = (a: string, b: string) => a < b ? -1 : (a > b ? 1 : 0);
+    result = result.sort((a, b) => comp(JSON.stringify(a.path), JSON.stringify(b.path)));
+    result = result.filter((x, i) => i === 0 || JSON.stringify(x.path) !== JSON.stringify(result[i - 1].path));
+    return result;
   } else {
     return matches(jsonQuery, []) ? [{ path: [], value: obj }] : [];
   }

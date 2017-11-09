@@ -294,8 +294,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
-  for (const useExtension of configView.UseExtensions) {
-    const extension = await GetExtension(useExtension.fullyQualified);
+  for (const useExtensionQualifiedName of configView.GetEntry("used-extension" as any) || []) {
+    const extension = await GetExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
       plugins[plugin] = CreatePluginExternal(extension, plugin);
       __extensionExtension[plugin] = extension;

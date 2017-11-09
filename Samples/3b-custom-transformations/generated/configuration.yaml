@@ -98,7 +98,7 @@ pipeline:
     suffixes:
       - ''
   csharp/commonmarker:
-    input: modeler
+    input: imodeler1
     output-artifact: code-model-v1
     suffixes:
       - ''
@@ -113,8 +113,8 @@ pipeline:
     plugin: csharp
     suffixes:
       - ''
-  csharp/modeler:
-    input: swagger-document/identity
+  csharp/imodeler1:
+    input: openapi-document/identity
     output-artifact: code-model-v1
     scope: csharp
     suffixes:
@@ -136,12 +136,12 @@ pipeline:
     scope: scope-jsonrpcclient/emitter
     suffixes: []
   jsonrpcclient/generate:
-    input: modeler
+    input: imodeler1
     output-artifact: source-file-jsonrpcclient
     plugin: jsonrpcclient
     suffixes: []
-  jsonrpcclient/modeler:
-    input: swagger-document/identity
+  jsonrpcclient/imodeler1:
+    input: openapi-document/identity
     output-artifact: code-model-v1
     scope: jsonrpcclient
     suffixes: []
@@ -156,12 +156,17 @@ pipeline:
     suffixes:
       - ''
   openapi-document/identity:
-    input: openapi-document-converter
+    input: transform
     output-artifact: openapi-document
     suffixes:
       - ''
   openapi-document/openapi-document-converter:
     input: swagger-document/identity
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/transform:
+    input: openapi-document-converter
     output-artifact: openapi-document
     suffixes:
       - ''
@@ -289,9 +294,14 @@ scope-transform-string:
 skip-upgrade-check: {}
 use: []
 use-extension:
-  '@microsoft.azure/autorest.csharp': ~2.1.0
-  '@microsoft.azure/autorest.modeler': 2.1.22
+  '@microsoft.azure/autorest.csharp': ~2.2.0
+  '@microsoft.azure/autorest.modeler': 2.3.31
   '@microsoft.azure/classic-openapi-validator': ~1.0.3
   '@microsoft.azure/openapi-validator': ~1.0.0
+used-extension:
+  - '["@microsoft.azure/autorest.csharp","~2.2.0"]'
+  - '["@microsoft.azure/classic-openapi-validator","~1.0.3"]'
+  - '["@microsoft.azure/openapi-validator","~1.0.0"]'
+  - '["@microsoft.azure/autorest.modeler","2.3.31"]'
 verbose: false
 
