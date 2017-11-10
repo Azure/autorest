@@ -152,7 +152,8 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
     }
     case Kind.ANCHOR_REF: {
       const yamlNodeRef = yamlNode as YAMLAnchorReference;
-      return (ResolveAnchorRef(yamlRootNode, yamlNodeRef.referencesAnchor).node as any).valueFunc;
+      const ref = ResolveAnchorRef(yamlRootNode, yamlNodeRef.referencesAnchor).node;
+      return memoize(cache => ParseNodeInternal(yamlRootNode, ref, onError)(cache));
     }
     case Kind.INCLUDE_REF:
       onError("Syntax error: INCLUDE_REF not implemented.", yamlNode.startPosition);
