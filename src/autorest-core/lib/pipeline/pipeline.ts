@@ -297,8 +297,10 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   for (const useExtensionQualifiedName of configView.GetEntry("used-extension" as any) || []) {
     const extension = await GetExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
-      plugins[plugin] = CreatePluginExternal(extension, plugin);
-      __extensionExtension[plugin] = extension;
+      if (!plugins[plugin]) {
+        plugins[plugin] = CreatePluginExternal(extension, plugin);
+        __extensionExtension[plugin] = extension;
+      }
     }
   }
 
