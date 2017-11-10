@@ -104,10 +104,10 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
   }
 
   // important for anchors!
-  const memoize = (factory: (cache: WeakMap<YAMLNode, any>) => any): ((cache: WeakMap<YAMLNode, any>) => any) =>
+  const memoize = (factory: (cache: WeakMap<YAMLNode, any>, set: (o: any) => void) => any): ((cache: WeakMap<YAMLNode, any>) => any) =>
     cache => {
       if (cache.has(yamlNode)) return cache.get(yamlNode);
-      const result = factory(cache);
+      const result = factory(cache, o => cache.set(yamlNode, o));
       cache.set(yamlNode, result);
       return result;
     };
@@ -124,8 +124,9 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
       return (yamlNode as any).valueFunc = () => null;
     case Kind.MAP: {
       const yamlNodeMapping = yamlNode as YAMLMap;
-      return (yamlNode as any).valueFunc = memoize(cache => {
+      return (yamlNode as any).valueFunc = memoize((cache, set) => {
         const result = NewEmptyObject();
+        set(result);
         for (const mapping of yamlNodeMapping.mappings) {
           if (mapping.key.kind !== Kind.SCALAR) {
             onError("Syntax error: Only scalar keys are allowed as mapping keys.", mapping.key.startPosition);
@@ -140,9 +141,13 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
     }
     case Kind.SEQ: {
       const yamlNodeSequence = yamlNode as YAMLSequence;
-      return (yamlNode as any).valueFunc = memoize(cache => {
-        if (cache.has(yamlNode)) return cache.get(yamlNode);
-        return yamlNodeSequence.items.map(item => ParseNodeInternal(yamlRootNode, item, onError)(cache));
+      return (yamlNode as any).valueFunc = memoize((cache, set) => {
+        const result: any[] = [];
+        set(result);
+        for (const item of yamlNodeSequence.items) {
+          result.push(ParseNodeInternal(yamlRootNode, item, onError)(cache));
+        }
+        return result;
       });
     }
     case Kind.ANCHOR_REF: {
@@ -215,7 +220,7 @@ export function FastStringify<T>(obj: T): string {
   // has duplicate objects?
   const seen = new WeakSet();
   const losslessJsonSerializable = (o: any): boolean => {
-    if (typeof o == "object") {
+    if (o && typeof o == "object") {
       if (seen.has(o)) return false;
       seen.add(o);
     }
