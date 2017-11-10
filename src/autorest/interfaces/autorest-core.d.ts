@@ -32,6 +32,30 @@ export function CreateObject(jsonPath: JsonPath, leafObject: any): any;
 export function matches(jsonQuery: string, jsonPath: JsonPath): boolean;
 
 }
+declare module 'autorest-core/lib/ref/source-map' {
+	export { Position } from "source-map";
+import { Position } from "source-map";
+export { RawSourceMap } from "source-map";
+import { JsonPath } from 'autorest-core/lib/ref/jsonpath';
+export interface PositionEnhancements {
+    path?: JsonPath;
+    length?: number;
+    valueOffset?: number;
+    valueLength?: number;
+}
+export type EnhancedPosition = Position & PositionEnhancements;
+export type SmartPosition = Position | {
+    path: JsonPath;
+};
+export interface Mapping {
+    generated: SmartPosition;
+    original: SmartPosition;
+    source: string;
+    name?: string;
+}
+export type Mappings = Array<Mapping>;
+
+}
 declare module 'autorest-core/lib/lazy' {
 	export class Lazy<T> {
     private factory;
@@ -99,30 +123,6 @@ export class EventEmitter extends events.EventEmitter {
     protected static Event<TSender extends EventEmitter, TArgs>(target: TSender, propertyKey: string): void;
     protected _init(t: EventEmitter): void;
 }
-
-}
-declare module 'autorest-core/lib/ref/source-map' {
-	export { Position } from "source-map";
-import { Position } from "source-map";
-export { RawSourceMap } from "source-map";
-import { JsonPath } from 'autorest-core/lib/ref/jsonpath';
-export interface PositionEnhancements {
-    path?: JsonPath;
-    length?: number;
-    valueOffset?: number;
-    valueLength?: number;
-}
-export type EnhancedPosition = Position & PositionEnhancements;
-export type SmartPosition = Position | {
-    path: JsonPath;
-};
-export interface Mapping {
-    generated: SmartPosition;
-    original: SmartPosition;
-    source: string;
-    name?: string;
-}
-export type Mappings = Array<Mapping>;
 
 }
 declare module 'autorest-core/lib/ref/cancellation' {
