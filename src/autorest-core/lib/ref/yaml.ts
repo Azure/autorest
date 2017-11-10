@@ -184,11 +184,16 @@ export function Clone<T>(object: T): T {
  * Normalizes the order of given object's keys (sorts recursively)
  */
 export function Normalize<T>(object: T): T {
+  const seen = new WeakSet();
   const clone = Clone<T>(object);
   const norm = (o: any) => {
     if (Array.isArray(o)) {
       o.forEach(norm);
     } else if (o && typeof o == "object") {
+      if (seen.has(o)) {
+        return;
+      }
+      seen.add(o);
       const keys = Object.keys(o).sort();
       const oo = { ...o };
       for (const k of keys) {
