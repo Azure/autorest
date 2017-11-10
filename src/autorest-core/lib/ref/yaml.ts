@@ -19,6 +19,8 @@ export type YAMLMap = yamlAst.YamlMap;
 export type YAMLSequence = yamlAst.YAMLSequence;
 export type YAMLAnchorReference = yamlAst.YAMLAnchorReference;
 
+export const CreateYAMLAnchorRef: (key: string) => YAMLMap = yamlAst.newAnchorRef as any;
+export const CreateYAMLMap: () => YAMLMap = yamlAst.newMap;
 export const CreateYAMLMapping: (key: YAMLScalar, value: YAMLNode) => YAMLMapping = yamlAst.newMapping;
 export const CreateYAMLScalar: (value: string) => YAMLScalar = yamlAst.newScalar;
 
@@ -152,7 +154,8 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
     }
     case Kind.ANCHOR_REF: {
       const yamlNodeRef = yamlNode as YAMLAnchorReference;
-      return (ResolveAnchorRef(yamlRootNode, yamlNodeRef.referencesAnchor).node as any).valueFunc;
+      const ref = ResolveAnchorRef(yamlRootNode, yamlNodeRef.referencesAnchor).node;
+      return memoize(cache => ParseNodeInternal(yamlRootNode, ref, onError)(cache));
     }
     case Kind.INCLUDE_REF:
       onError("Syntax error: INCLUDE_REF not implemented.", yamlNode.startPosition);
@@ -180,6 +183,7 @@ export function StringifyAst(ast: YAMLNode): string {
 export function Clone<T>(object: T): T {
   return Parse<T>(FastStringify(object));
 }
+
 /**
  * Normalizes the order of given object's keys (sorts recursively)
  */

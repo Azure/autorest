@@ -1,9 +1,10 @@
+import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '../parsing/yaml';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { FastStringify } from "../ref/yaml";
+import { Descendants, FastStringify, StringifyAst } from '../ref/yaml';
 import { JsonPath, stringify } from "../ref/jsonpath";
 import { safeEval } from "../ref/safe-eval";
 import { LazyPromise } from "../lazy";
@@ -78,6 +79,20 @@ function CreatePluginOAI2toOAIx(): PipelinePlugin {
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
     const fileOut = await ConvertOAI2toOAI3(fileIn, sink);
     return await sink.Forward(fileIn.Description, fileOut);
+  });
+}
+function CreatePluginYaml2Jsonx(): PipelinePlugin {
+  return CreatePerFilePlugin(async config => async (fileIn, sink) => {
+    let ast = fileIn.ReadYamlAst();
+    ast = ConvertYaml2Jsonx(ast);
+    return await sink.WriteData(fileIn.Description, StringifyAst(ast));
+  });
+}
+function CreatePluginJsonx2Yaml(): PipelinePlugin {
+  return CreatePerFilePlugin(async config => async (fileIn, sink) => {
+    let ast = fileIn.ReadYamlAst();
+    ast = ConvertJsonx2Yaml(ast);
+    return await sink.WriteData(fileIn.Description, StringifyAst(ast));
   });
 }
 
@@ -286,6 +301,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "semantic-validator": CreatePluginIdentity(),
 
     "openapi-document-converter": CreatePluginOAI2toOAIx(),
+    "yaml2jsonx": CreatePluginYaml2Jsonx(),
+    "jsonx2yaml": CreatePluginJsonx2Yaml(),
     "commonmarker": CreateCommonmarkProcessor(),
     "emitter": CreateArtifactEmitter(),
     "pipeline-emitter": CreateArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline)])),
@@ -297,8 +314,10 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   for (const useExtensionQualifiedName of configView.GetEntry("used-extension" as any) || []) {
     const extension = await GetExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
-      plugins[plugin] = CreatePluginExternal(extension, plugin);
-      __extensionExtension[plugin] = extension;
+      if (!plugins[plugin]) {
+        plugins[plugin] = CreatePluginExternal(extension, plugin);
+        __extensionExtension[plugin] = extension;
+      }
     }
   }
 
