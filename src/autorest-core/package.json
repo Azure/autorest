@@ -49,8 +49,8 @@
   "static-link": {
     "entrypoints": [],
     "dependencies": {
-      "@microsoft.azure/async-io": "~1.0.24",
-      "@microsoft.azure/extension": "C:/work/github/autorest/perks.node/src/extension",
+      "@microsoft.azure/async-io": "~2.0.7",
+      "@microsoft.azure/extension": "^2.0.4",
       "vscode-languageserver": "3.4.3",
       "commonmark": "^0.27.0",
       "file-url": "^2.0.2",
