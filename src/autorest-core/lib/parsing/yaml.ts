@@ -4,11 +4,34 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { EnhancedPosition } from "../ref/source-map";
-import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, ResolveAnchorRef } from "../ref/yaml";
+import {
+  CloneAst,
+  CreateYAMLAnchorRef,
+  CreateYAMLMap,
+  CreateYAMLMapping,
+  CreateYAMLScalar,
+  Descendants,
+  Kind,
+  ParseNode,
+  ResolveAnchorRef,
+  YAMLAnchorReference,
+  YAMLMap,
+  YAMLMapping,
+  YAMLNode,
+  YAMLSequence,
+} from '../ref/yaml';
 import { JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { IndexToPosition } from "./text-utility";
 import { DataHandle } from "../data-store/data-store";
 
+function ResolveMapProperty(node: YAMLMap, property: string): YAMLMapping | null {
+  for (let mapping of node.mappings) {
+    if (property === mapping.key.value) {
+      return mapping;
+    }
+  }
+  return null;
+}
 
 /**
  * Resolves the YAML node given a path PathComponent.
@@ -33,12 +56,11 @@ function ResolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPa
     }
     case Kind.MAP: {
       let astSub = yamlAstCurrent as YAMLMap;
-      for (let mapping of astSub.mappings) {
-        if (jsonPathPart.toString() === mapping.key.value) {
-          return deferResolvingMappings
-            ? mapping
-            : ResolvePathPart(yamlAstRoot, mapping, jsonPathPart, deferResolvingMappings);
-        }
+      const mapping = ResolveMapProperty(astSub, jsonPathPart.toString());
+      if (mapping !== null) {
+        return deferResolvingMappings
+          ? mapping
+          : ResolvePathPart(yamlAstRoot, mapping, jsonPathPart, deferResolvingMappings);
       }
       throw new Error(`Trying to retrieve '${jsonPathPart}' from mapping that contains no such key`);
     }
@@ -147,4 +169,61 @@ export function CreateEnhancedPosition(yamlFile: DataHandle, jsonPath: JsonPath,
   }
 
   return result;
+}
+
+/**
+ * REPRESENTATION
+ */
+
+/**
+ * rewrites anchors to $id/$$ref
+ */
+export function ConvertYaml2Jsonx(ast: YAMLNode): YAMLNode {
+  ast = CloneAst(ast);
+  for (const nodeWithPath of Descendants(ast)) {
+    const node = nodeWithPath.node;
+    if (node.anchorId) {
+      if (node.kind === Kind.MAP) {
+        const yamlNodeMapping = node as YAMLMap;
+        yamlNodeMapping.mappings.push(CreateYAMLMapping(CreateYAMLScalar("$id"), CreateYAMLScalar(node.anchorId)));
+      }
+      node.anchorId = undefined;
+    }
+    if (node.kind === Kind.ANCHOR_REF) {
+      const yamlNodeAnchor = node as YAMLAnchorReference;
+      const map = CreateYAMLMap();
+      map.mappings.push(CreateYAMLMapping(CreateYAMLScalar("$$ref"), CreateYAMLScalar(yamlNodeAnchor.referencesAnchor)));
+      ReplaceNode(ast, yamlNodeAnchor, map);
+    }
+  }
+  return ast;
+}
+
+/**
+ * rewrites $id/$ref/$$ref to anchors
+ */
+export function ConvertJsonx2Yaml(ast: YAMLNode): YAMLNode {
+  ast = CloneAst(ast);
+  for (const nodeWithPath of Descendants(ast)) {
+    const node = nodeWithPath.node;
+    if (node.kind === Kind.MAP) {
+      const yamlNodeMapping = node as YAMLMap;
+      const propId = ResolveMapProperty(yamlNodeMapping, "$id");
+      let propRef = ResolveMapProperty(yamlNodeMapping, "$ref");
+      const propReff = ResolveMapProperty(yamlNodeMapping, "$$ref");
+      if (propRef && isNaN(parseInt(ParseNode<any>(propRef.value) + ""))) {
+        propRef = null;
+      }
+      propRef = propRef || propReff;
+
+      if (propId) {
+        yamlNodeMapping.anchorId = ParseNode<any>(propId.value) + "";
+        ReplaceNode(ast, propId, undefined);
+      }
+      else if (propRef) {
+        ReplaceNode(ast, yamlNodeMapping, CreateYAMLAnchorRef(ParseNode<any>(propRef.value) + ""));
+      }
+    }
+  }
+  return ast;
 }
