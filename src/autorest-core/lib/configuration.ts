@@ -134,10 +134,6 @@ export class DirectiveView {
     return ValuesOf<string>(this.directive["suppress"]);
   }
 
-  public get set(): Iterable<string> {
-    return ValuesOf<string>(this.directive["set"]);
-  }
-
   public get transform(): Iterable<string> {
     return ValuesOf<string>(this.directive["transform"]);
   }
@@ -358,11 +354,15 @@ export class ConfigurationView {
   }
 
   public get DebugMode(): boolean {
-    return this.config["debug"] as boolean;
+    return !!this.config["debug"];
   }
 
   public get VerboseMode(): boolean {
-    return this.config["verbose"] as boolean;
+    return !!this.config["verbose"];
+  }
+
+  public get HelpRequested(): boolean {
+    return !!this.config["help"];
   }
 
   public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {

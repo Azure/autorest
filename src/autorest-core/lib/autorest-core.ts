@@ -109,17 +109,18 @@ export class AutoRest extends EventEmitter {
           }
         };
 
-        if (earlyCancel) {
-          this.Finished.Dispatch(false);
-          return false;
-        }
-
         if (view.InputFileUris.length === 0) {
           if (view.GetEntry("allow-no-input")) {
+            this.Finished.Dispatch(true);
             return true;
           } else {
             return new Exception("No input files provided.\n\nUse --help to get help information.");
           }
+        }
+
+        if (earlyCancel) {
+          this.Finished.Dispatch(false);
+          return false;
         }
 
         await Promise.race([

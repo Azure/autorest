@@ -1,4 +1,4 @@
-(C) 2017 **Microsoft Corporation.**  
+(C) 2017 **Microsoft Corporation.**
 [OperationAbortedException] Error occurred. Exiting.
 # AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
