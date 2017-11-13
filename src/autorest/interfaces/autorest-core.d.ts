@@ -270,6 +270,21 @@ export class EnhancedFileSystem implements IFileSystem {
 }
 
 }
+declare module 'autorest-core/help' {
+	export interface Help {
+    categoryFriendlyName: string;
+    activationScope?: string;
+    description?: string;
+    settings: SettingHelp[];
+}
+export interface SettingHelp {
+    required?: boolean;
+    key: string;
+    type?: string;
+    description: string;
+}
+
+}
 declare module 'autorest-core/lib/document-type' {
 	export enum DocumentType {
     OpenAPI2,
@@ -448,7 +463,6 @@ export class DirectiveView {
     readonly where: Iterable<string>;
     readonly reason: string | null;
     readonly suppress: Iterable<string>;
-    readonly set: Iterable<string>;
     readonly transform: Iterable<string>;
     readonly test: Iterable<string>;
 }
@@ -494,6 +508,7 @@ export class ConfigurationView {
     readonly Raw: AutoRestConfigurationImpl;
     readonly DebugMode: boolean;
     readonly VerboseMode: boolean;
+    readonly HelpRequested: boolean;
     GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView>;
     GetNestedConfigurationImmediate(...scope: any[]): ConfigurationView;
     Message(m: Message): void;
