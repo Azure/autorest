@@ -602,6 +602,8 @@ export class Configuration {
   }
 
   public static async shutdown() {
+    AutoRestExtension.killAll();
+
     for (const each in loadedExtensions) {
       const ext = loadedExtensions[each];
       if (ext.autorestExtension.hasValue) {

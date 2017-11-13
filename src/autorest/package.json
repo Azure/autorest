@@ -44,19 +44,19 @@
     "mocha": "3.2.0",
     "mocha-typescript": "1.0.22",
     "typescript": "2.5.3",
-    "static-link": "^0.2.2",
+    "static-link": "^0.2.3",
     "shx": "0.2.2"
   },
   "static-link": {
     "entrypoints": [],
     "dependencies": {
-      "@microsoft.azure/async-io": "~1.0.22",
-      "@microsoft.azure/console": "~1.0.31",
-      "@microsoft.azure/extension": "~1.2.12",
-      "@microsoft.azure/polyfill": "~1.0.17",
+      "@microsoft.azure/async-io": "~2.0.7",
+      "@microsoft.azure/console": "~1.0.33",
+      "@microsoft.azure/extension": "^2.0.4",
+      "@microsoft.azure/tasks": "~2.0.12",
       "linq-es2015": "^2.4.24",
       "semver": "^5.3.0"
     },
-    "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt ); "
+    "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt );   txt = fs.readFileSync('./node_modules/npm/lib/pack.js','utf8').replace(`require.main.filename`, `require.resolve('../bin/npm-cli.js')`); fs.writeFileSync('./node_modules/npm/lib/pack.js', txt ); "
   }
 }

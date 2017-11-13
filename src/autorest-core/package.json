@@ -43,14 +43,14 @@
     "mocha": "^4.0.1",
     "shx": "0.2.2",
     "mocha-typescript": "^1.1.7",
-    "static-link": "^0.2.2",
+    "static-link": "^0.2.3",
     "vscode-jsonrpc": "^3.3.1"
   },
   "static-link": {
     "entrypoints": [],
     "dependencies": {
-      "@microsoft.azure/async-io": "~1.0.22",
-      "@microsoft.azure/extension": "~1.2.12",
+      "@microsoft.azure/async-io": "~1.0.24",
+      "@microsoft.azure/extension": "C:/work/github/autorest/perks.node/src/extension",
       "vscode-languageserver": "3.4.3",
       "commonmark": "^0.27.0",
       "file-url": "^2.0.2",
@@ -68,6 +68,6 @@
       "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
       "yargs": "^8.0.2"
     },
-    "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt ); "
+    "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt );  txt = fs.readFileSync('./node_modules/npm/lib/pack.js','utf8').replace(`require.main.filename`, `require.resolve('../bin/npm-cli.js')`); fs.writeFileSync('./node_modules/npm/lib/pack.js', txt );"
   }
 }

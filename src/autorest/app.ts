@@ -12,7 +12,7 @@ if (process.argv.indexOf("--no-upgrade-check") != -1) {
 
 import { isFile } from "@microsoft.azure/async-io";
 import { cli, enhanceConsole } from "@microsoft.azure/console";
-import { Exception, LazyPromise } from "@microsoft.azure/polyfill";
+import { Exception, LazyPromise } from "@microsoft.azure/tasks";
 import { Enumerable as IEnumerable, From } from "linq-es2015";
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
 import { gt } from "semver";
@@ -210,7 +210,12 @@ async function main() {
 
     if (args.reset) {
       console.trace(`Resetting autorest extension folder '${rootFolder}'`);
-      await (await extensionManager).reset();
+      try {
+        await (await extensionManager).reset();
+      } catch (e) {
+        console.log("\n\n## The AutoRest extension folder appears to be locked.\nDo you have a process that is currently using AutoRest (perhaps the vscode extension?).\n\nUnable to reset the extension folder, exiting.");
+        process.exit(10);
+      }
     }
 
     // wait for the bootstrapper check to finish.

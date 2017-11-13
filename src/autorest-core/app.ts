@@ -11,6 +11,10 @@ require('events').EventEmitter.defaultMaxListeners = 100;
 process.env['ELECTRON_RUN_AS_NODE'] = "1";
 delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
 
+process.on("exit", () => {
+  Shutdown()
+});
+
 // start of autorest-ng
 // the console app starts for real here.
 
@@ -19,7 +23,7 @@ import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configurat
 import { Parse, Stringify } from "./lib/ref/yaml";
 import { CreateObject, nodes } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
-import { AutoRest, ConfigurationView, IsOpenApiDocument } from './lib/autorest-core';
+import { AutoRest, ConfigurationView, IsOpenApiDocument, Shutdown } from './lib/autorest-core';
 import { ShallowCopy } from "./lib/source-map/merging";
 import { Message, Channel } from "./lib/message";
 import { resolve as currentDirectory } from "path";
@@ -441,7 +445,7 @@ async function main() {
     } else {
       exitcode = await currentMain(autorestArgs);
     }
-
+    await Shutdown();
     process.exit(exitcode);
   } catch (e) {
     // be very careful about the following check:
@@ -452,12 +456,14 @@ async function main() {
       } else {
         console.log(e.message);
       }
+      await Shutdown();
       process.exit(e.exitCode);
     }
 
     if (e !== false) {
       console.error(e);
     }
+    await Shutdown();
     process.exit(1);
   }
 }

@@ -4,7 +4,7 @@ import { Extension, ExtensionManager } from "@microsoft.azure/extension";
 import { homedir } from "os";
 import { dirname, join, resolve } from "path";
 import { Enumerable as IEnumerable, From } from "linq-es2015";
-import { Exception, LazyPromise } from "@microsoft.azure/polyfill";
+import { Exception, LazyPromise } from "@microsoft.azure/tasks";
 
 import * as semver from "semver";
 import { isFile, mkdir, isDirectory } from "@microsoft.azure/async-io";

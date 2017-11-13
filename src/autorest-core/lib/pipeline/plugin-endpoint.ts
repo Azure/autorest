@@ -34,9 +34,17 @@ interface IAutoRestPluginInitiatorEndpoint {
 export class AutoRestExtension extends EventEmitter {
   private static lastSessionId: number = 0;
   private static CreateSessionId(): string { return `session_${++AutoRestExtension.lastSessionId}`; }
+  private static processes = new Array<ChildProcess>();
 
   public kill() {
     this.childProcess.kill();
+  }
+  public static killAll() {
+    for (const each of AutoRestExtension.processes) {
+      console.log(`Killing proc ${each.pid}`)
+      each.kill("SIGKILL");
+    }
+    AutoRestExtension.processes.length = 0;
   }
 
   public static async FromModule(modulePath: string): Promise<AutoRestExtension> {
@@ -47,7 +55,7 @@ export class AutoRestExtension extends EventEmitter {
   public static async FromChildProcess(extensionName: string, childProc: ChildProcess): Promise<AutoRestExtension> {
     const plugin = new AutoRestExtension(extensionName, childProc.stdout, childProc.stdin, childProc);
     childProc.stderr.pipe(process.stderr);
-
+    AutoRestExtension.processes.push(childProc);
     // poke the extension to detect trivial issues like process startup failure or protocol violations, ...
     if (!Array.isArray(await plugin.GetPluginNames(CancellationToken.None))) {
       throw new Exception(`Plugin '${extensionName}' violated the protocol ('GetPluginNames' returned unexpected object).`);
