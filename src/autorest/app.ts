@@ -67,6 +67,8 @@ function parseArgs(autorestArgs: string[]): any {
 }
 
 const args = parseArgs(process.argv);
+(<any>global).__args = args;
+
 // aliases
 args["info"] = args["info"] || args["list-installed"];
 args["preview"] = args["preview"] || args["prerelease"];
@@ -164,19 +166,25 @@ async function main() {
   // if the resolved local version is actually a file, we'll try that as a package when we get there.
   if (await isFile(localVersion)) {
     // this should try to install the file.
-    console.trace(`Found local core package file: '${localVersion}'`);
+    if (args.debug) {
+      console.log(`Found local core package file: '${localVersion}'`);
+    }
     requestedVersion = localVersion;
   }
 
   // failing that, we'll continue on and see if NPM can do something with the version.
-  console.trace(`Network Enabled: ${await networkEnabled}`);
+  if (args.debug) {
+    console.log(`Network Enabled: ${await networkEnabled}`);
+  }
 
   try {
     /* make sure we have a .autorest folder */
     await ensureAutorestHome();
 
     if (args.reset) {
-      console.trace(`Resetting autorest extension folder '${rootFolder}'`);
+      if (args.debug) {
+        console.log(`Resetting autorest extension folder '${rootFolder}'`);
+      }
       try {
         await (await extensionManager).reset();
       } catch (e) {
@@ -217,7 +225,9 @@ async function main() {
       process.argv.push("--allow-no-input");
     }
 
-    console.trace(`Starting ${corePackage} from ${await selectedVersion.location}`);
+    if (args.debug) {
+      console.log(`Starting ${corePackage} from ${await selectedVersion.location}`);
+    }
     if (!tryRequire(await selectedVersion.modulePath, "app.js")) {
       throw new Error(`Unable to start AutoRest Core from ${await selectedVersion.modulePath}`);
     }

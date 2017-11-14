@@ -12,6 +12,7 @@ import { isFile, mkdir, isDirectory } from "@microsoft.azure/async-io";
 export const pkgVersion: string = require(`${__dirname}/../package.json`).version;
 const home: string = process.env["autorest.home"] || homedir();
 process.env["autorest.home"] = home;
+const args = (<any>global).__args || {};
 
 export const rootFolder: string = join(home, ".autorest");
 
@@ -128,14 +129,21 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
   }
 
   if (currentVersion) {
-    console.trace(`The most recent installed version is ${currentVersion.version}`);
+
+    if (args.debug) {
+      console.log(`The most recent installed version is ${currentVersion.version}`);
+    }
 
     if (requestedVersion === "latest-installed" || (requestedVersion === 'latest' && false == await networkEnabled)) {
-      console.trace(`requesting current version '${currentVersion.version}'`);
+      if (args.debug) {
+        console.log(`requesting current version '${currentVersion.version}'`);
+      }
       requestedVersion = currentVersion.version;
     }
   } else {
-    console.trace(`No ${corePackage} is installed.`);
+    if (args.debug) {
+      console.log(`No ${corePackage} is installed.`);
+    }
   }
 
   let selectedVersion: any = null;
@@ -148,7 +156,9 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
   // is the requested version installed?
   if (!selectedVersion || force) {
     if (!force) {
-      console.trace(`${requestedVersion} was not satisfied directly by a previous installation.`);
+      if (args.debug) {
+        console.log(`${requestedVersion} was not satisfied directly by a previous installation.`);
+      }
     }
 
     // if it's not a file, and the network isn't available, we can't continue.
@@ -169,7 +179,9 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
 
     const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
     if (pkg) {
-      console.trace(`Selected package: ${pkg.name}@${pkg.version} => ${pkg.resolvedInfo.rawSpec} `);
+      if (args.debug) {
+        console.log(`Selected package: ${pkg.name}@${pkg.version} => ${pkg.resolvedInfo.rawSpec} `);
+      }
     } else {
       throw new Exception(`Unable to find a valid AutoRest Core package for '${requestedVersion}'.`);
     }
@@ -180,12 +192,18 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
 
     if (!selectedVersion || force) {
       // this will throw if there is an issue with installing the extension.
-      console.trace(`**Installing package** ${corePackage}@${pkg.version}\n[This will take a few moments...]`);
+      if (args.debug) {
+        console.log(`**Installing package** ${corePackage}@${pkg.version}\n[This will take a few moments...]`);
+      }
 
-      selectedVersion = await (await extensionManager).installPackage(pkg, force, 5 * 60 * 1000, installer => installer.Message.Subscribe((s, m) => { console.trace(`Installer: ${m}`); }));
-      console.trace(`Extension location: ${selectedVersion.packageJsonPath}`);
+      selectedVersion = await (await extensionManager).installPackage(pkg, force, 5 * 60 * 1000, installer => installer.Message.Subscribe((s, m) => { if (args.debug) console.log(`Installer: ${m}`); }));
+      if (args.debug) {
+        console.log(`Extension location: ${selectedVersion.packageJsonPath}`);
+      }
     } else {
-      console.trace(`AutoRest Core ${pkg.version} is available at ${selectedVersion.modulePath}`);
+      if (args.debug) {
+        console.log(`AutoRest Core ${pkg.version} is available at ${selectedVersion.modulePath}`);
+      }
     }
   }
   return selectedVersion;

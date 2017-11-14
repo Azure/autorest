@@ -1,3 +1,208 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   More specific help is shown when combining the following switches with --help .
+   More specific help is shown when combining the following switches with --help .
+   More specific help is shown when combining the following switches with --help .
+   More specific help is shown when combining the following switches with --help .
+   More specific help is shown when combining the following switches with --help .
+   we officially support and maintain the following functionality.
+   we officially support and maintain the following functionality.
+   we officially support and maintain the following functionality.
+   we officially support and maintain the following functionality.
+   we officially support and maintain the following functionality.
+   While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),
+   While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),
+   While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),
+   While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),
+   While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),
+  --azure-validator             validates an OpenAPI document against guidelines to improve quality (and optionally Azure guidelines)
+  --azure-validator             validates an OpenAPI document against guidelines to improve quality (and optionally Azure guidelines)
+  --azure-validator             validates an OpenAPI document against guidelines to improve quality (and optionally Azure guidelines)
+  --azure-validator             validates an OpenAPI document against guidelines to improve quality (and optionally Azure guidelines)
+  --azure-validator             validates an OpenAPI document against guidelines to improve quality (and optionally Azure guidelines)
+  --azureresourceschema         generate Azure resource schemas
+  --azureresourceschema         generate Azure resource schemas
+  --azureresourceschema         generate Azure resource schemas
+  --azureresourceschema         generate Azure resource schemas
+  --azureresourceschema         generate Azure resource schemas
+  --base-folder                 path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --base-folder                 path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --base-folder                 path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --base-folder                 path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --base-folder                 path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --csharp                      generate C# client code
+  --csharp                      generate C# client code
+  --csharp                      generate C# client code
+  --csharp                      generate C# client code
+  --csharp                      generate C# client code
+  --debug                       display debug logging information
+  --debug                       display debug logging information
+  --debug                       display debug logging information
+  --debug                       display debug logging information
+  --debug                       display debug logging information
+  --force                       force the re-installation of the autorest-core extension and frameworks
+  --force                       force the re-installation of the autorest-core extension and frameworks
+  --force                       force the re-installation of the autorest-core extension and frameworks
+  --force                       force the re-installation of the autorest-core extension and frameworks
+  --force                       force the re-installation of the autorest-core extension and frameworks
+  --go                          generate Go client code
+  --go                          generate Go client code
+  --go                          generate Go client code
+  --go                          generate Go client code
+  --go                          generate Go client code
+  --help                        display help (combine with flags like --csharp to get further details about specific functionality)
+  --help                        display help (combine with flags like --csharp to get further details about specific functionality)
+  --help                        display help (combine with flags like --csharp to get further details about specific functionality)
+  --help                        display help (combine with flags like --csharp to get further details about specific functionality)
+  --help                        display help (combine with flags like --csharp to get further details about specific functionality)
+  --info                        display information about the installed version of autorest and its extensions
+  --info                        display information about the installed version of autorest and its extensions
+  --info                        display information about the installed version of autorest and its extensions
+  --info                        display information about the installed version of autorest and its extensions
+  --info                        display information about the installed version of autorest and its extensions
+  --input-file=<string | string[]>  OpenAPI file to use as input (use this setting repeatedly to pass multiple filesat ...
+  --input-file=<string | string[]>  OpenAPI file to use as input (use this setting repeatedly to pass multiple filesat ...
+  --input-file=<string | string[]>  OpenAPI file to use as input (use this setting repeatedly to pass multiple filesat ...
+  --input-file=<string | string[]>  OpenAPI file to use as input (use this setting repeatedly to pass multiple filesat ...
+  --input-file=<string | string[]>  OpenAPI file to use as input (use this setting repeatedly to pass multiple filesat ...
+  --java                        generate Java client code
+  --java                        generate Java client code
+  --java                        generate Java client code
+  --java                        generate Java client code
+  --java                        generate Java client code
+  --latest                      installs the latest autorest-core extension
+  --latest                      installs the latest autorest-core extension
+  --latest                      installs the latest autorest-core extension
+  --latest                      installs the latest autorest-core extension
+  --latest                      installs the latest autorest-core extension
+  --list-available              display available AutoRest versions
+  --list-available              display available AutoRest versions
+  --list-available              display available AutoRest versions
+  --list-available              display available AutoRest versions
+  --list-available              display available AutoRest versions
+  --message-format=<"regular" | "json">  format of messages (e.g. from OpenAPI validation); default: "regular"
+  --message-format=<"regular" | "json">  format of messages (e.g. from OpenAPI validation); default: "regular"
+  --message-format=<"regular" | "json">  format of messages (e.g. from OpenAPI validation); default: "regular"
+  --message-format=<"regular" | "json">  format of messages (e.g. from OpenAPI validation); default: "regular"
+  --message-format=<"regular" | "json">  format of messages (e.g. from OpenAPI validation); default: "regular"
+  --model-validator             validates an OpenAPI document against linked examples (see https://github.com/Azure/azure-rest-api-specs/search?q=x-ms-examples )
+  --model-validator             validates an OpenAPI document against linked examples (see https://github.com/Azure/azure-rest-api-specs/search?q=x-ms-examples )
+  --model-validator             validates an OpenAPI document against linked examples (see https://github.com/Azure/azure-rest-api-specs/search?q=x-ms-examples )
+  --model-validator             validates an OpenAPI document against linked examples (see https://github.com/Azure/azure-rest-api-specs/search?q=x-ms-examples )
+  --model-validator             validates an OpenAPI document against linked examples (see https://github.com/Azure/azure-rest-api-specs/search?q=x-ms-examples )
+  --nodejs                      generate NodeJS client code
+  --nodejs                      generate NodeJS client code
+  --nodejs                      generate NodeJS client code
+  --nodejs                      generate NodeJS client code
+  --nodejs                      generate NodeJS client code
+  --php                         generate PHP client code
+  --php                         generate PHP client code
+  --php                         generate PHP client code
+  --php                         generate PHP client code
+  --php                         generate PHP client code
+  --preview                     enables using autorest extensions that are not yet released
+  --preview                     enables using autorest extensions that are not yet released
+  --preview                     enables using autorest extensions that are not yet released
+  --preview                     enables using autorest extensions that are not yet released
+  --preview                     enables using autorest extensions that are not yet released
+  --python                      generate Python client code
+  --python                      generate Python client code
+  --python                      generate Python client code
+  --python                      generate Python client code
+  --python                      generate Python client code
+  --reset                       removes all autorest extensions and downloads the latest version of the autorest-core extension
+  --reset                       removes all autorest extensions and downloads the latest version of the autorest-core extension
+  --reset                       removes all autorest extensions and downloads the latest version of the autorest-core extension
+  --reset                       removes all autorest extensions and downloads the latest version of the autorest-core extension
+  --reset                       removes all autorest extensions and downloads the latest version of the autorest-core extension
+  --ruby                        generate Ruby client code
+  --ruby                        generate Ruby client code
+  --ruby                        generate Ruby client code
+  --ruby                        generate Ruby client code
+  --ruby                        generate Ruby client code
+  --typescript                  generate TypeScript client code
+  --typescript                  generate TypeScript client code
+  --typescript                  generate TypeScript client code
+  --typescript                  generate TypeScript client code
+  --typescript                  generate TypeScript client code
+  --verbose                     display verbose logging information
+  --verbose                     display verbose logging information
+  --verbose                     display verbose logging information
+  --verbose                     display verbose logging information
+  --verbose                     display verbose logging information
+  --version=<string>            use the specified version of the autorest-core extension
+  --version=<string>            use the specified version of the autorest-core extension
+  --version=<string>            use the specified version of the autorest-core extension
+  --version=<string>            use the specified version of the autorest-core extension
+  --version=<string>            use the specified version of the autorest-core extension
+  See: https://aka.ms/autorest/cli for additional documentation
+--output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
+--output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
+--output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
+--output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
+--output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
 (C) 2017 Microsoft Corporation.
 AutoRest code generation utility [version: 2.0.0]
+Core Functionality
+Core Functionality
+Core Functionality
+Core Functionality
+Core Functionality
+Core Settings and Switches
+Core Settings and Switches
+Core Settings and Switches
+Core Settings and Switches
+Core Settings and Switches
 https://aka.ms/autorest
+Manage Installation
+Manage Installation
+Manage Installation
+Manage Installation
+Manage Installation
+Overall Verbosity
+Overall Verbosity
+Overall Verbosity
+Overall Verbosity
+Overall Verbosity
+Usage: autorest [configuration-file.md] [...options]
