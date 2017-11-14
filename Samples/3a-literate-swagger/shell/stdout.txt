@@ -1,3 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
     - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
     - /Samples/3a-literate-swagger/swagger.md:178:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete)
@@ -12,8 +26,8 @@
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:43:8 ($.definitions.ErrorDetails.properties.code)
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)
-(C) 2017 **Microsoft Corporation.**  
-# AutoRest code generation utility [version: 2.0.0]
+(C) 2017 Microsoft Corporation.
+AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
 WARNING (AvoidNestedProperties/R2001/SDKViolation): Consider using x-ms-client-flatten to provide a better end user experience
 WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.

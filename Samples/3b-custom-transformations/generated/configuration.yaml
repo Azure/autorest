@@ -79,9 +79,12 @@ output-artifact:
   - code-model-v1.yaml
   - pipeline.yaml
   - configuration.yaml
+  - null
+  - help
   - source-file-csharp
   - source-file-jsonrpcclient
 output-folder: generated
+perform-load: true
 pipeline:
   configuration-emitter:
     scope: scope-configuration-emitter
@@ -131,6 +134,12 @@ pipeline:
     scope: scope-transform-string
     suffixes:
       - ''
+  help/help-autorest:
+    scope: help
+    suffixes: []
+  help/help-autorest-core:
+    scope: help
+    suffixes: []
   jsonrpcclient/emitter:
     input: transform
     scope: scope-jsonrpcclient/emitter
@@ -176,6 +185,7 @@ pipeline:
       - ''
   swagger-document-override/md-override-loader:
     output-artifact: immediate-config
+    scope: perform-load
     suffixes:
       - ''
   swagger-document/classic-openapi-validator:
@@ -220,6 +230,7 @@ pipeline:
       - ''
   swagger-document/loader:
     output-artifact: swagger-document
+    scope: perform-load
     suffixes:
       - ''
   swagger-document/model-validator:

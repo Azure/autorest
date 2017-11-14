@@ -15,13 +15,24 @@ import {
   ParseNode,
   StringifyAst,
   YAMLMap,
-  YAMLMapping
-} from "../ref/yaml";
+  YAMLMapping,
+  YAMLNodeWithPath,
+} from '../ref/yaml';
 import { IdentitySourceMapping } from "../source-map/merging";
 import { From } from "../ref/linq";
 import { DataHandle, DataSink } from '../data-store/data-store';
 
-function IsDocumentationField(path: JsonPath) {
+function IsDocumentationField(node: YAMLNodeWithPath) {
+  if (!node || !node.node.value || !node.node.value.value || typeof node.node.value.value !== "string") {
+    return false;
+  }
+  const path = node.path;
+  if (path.length < 2) {
+    return false;
+  }
+  if (path[path.length - 2] === "x-ms-examples") {
+    return false;
+  }
   const last = path[path.length - 1];
   return last === "Description" || last === "Summary";
 }
@@ -52,7 +63,7 @@ export async function ProcessCodeModel(codeModel: DataHandle, sink: DataSink): P
 
   // transform
   for (const d of Descendants(ast, [], true)) {
-    if (d.node.kind === Kind.MAPPING && IsDocumentationField(d.path)) {
+    if (d.node.kind === Kind.MAPPING && IsDocumentationField(d)) {
       const node = d.node as YAMLMapping;
       const rawMarkdown = node.value.value;
 

@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
     - /Samples/3a-literate-swagger/swagger.md:137:0 ($.paths)
     - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
     - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)

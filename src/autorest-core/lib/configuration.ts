@@ -134,10 +134,6 @@ export class DirectiveView {
     return ValuesOf<string>(this.directive["suppress"]);
   }
 
-  public get set(): Iterable<string> {
-    return ValuesOf<string>(this.directive["set"]);
-  }
-
   public get transform(): Iterable<string> {
     return ValuesOf<string>(this.directive["transform"]);
   }
@@ -358,11 +354,15 @@ export class ConfigurationView {
   }
 
   public get DebugMode(): boolean {
-    return this.config["debug"] as boolean;
+    return !!this.config["debug"];
   }
 
   public get VerboseMode(): boolean {
-    return this.config["verbose"] as boolean;
+    return !!this.config["verbose"];
+  }
+
+  public get HelpRequested(): boolean {
+    return !!this.config["help"];
   }
 
   public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
@@ -709,7 +709,7 @@ export class Configuration {
               // local package
               messageEmitter.Message.Dispatch({
                 Channel: Channel.Information,
-                Text: `Loading local AutoRest extension '${additionalExtension.name}' (${localPath})`
+                Text: `> Loading local AutoRest extension '${additionalExtension.name}' (${localPath})`
               });
 
               const pack = await extMgr.findPackage(additionalExtension.name, localPath);
@@ -726,7 +726,7 @@ export class Configuration {
               if (installedExtension) {
                 messageEmitter.Message.Dispatch({
                   Channel: Channel.Information,
-                  Text: `Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
+                  Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
                 });
                 // start extension
                 ext = loadedExtensions[additionalExtension.fullyQualified] = {
@@ -738,7 +738,7 @@ export class Configuration {
                 const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
                 messageEmitter.Message.Dispatch({
                   Channel: Channel.Information,
-                  Text: `Installing AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
+                  Text: `> Installing AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
                 });
                 const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
                 // start extension

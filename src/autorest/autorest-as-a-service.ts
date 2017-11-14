@@ -3,7 +3,7 @@ import { lookup } from "dns";
 import { Extension, ExtensionManager } from "@microsoft.azure/extension";
 import { homedir } from "os";
 import { dirname, join, resolve } from "path";
-import { Enumerable as IEnumerable, From } from "linq-es2015";
+
 import { Exception, LazyPromise } from "@microsoft.azure/tasks";
 
 import * as semver from "semver";
@@ -120,7 +120,7 @@ export async function ensureAutorestHome() {
 
 export async function selectVersion(requestedVersion: string, force: boolean, minimumVersion?: string) {
   const installedVersions = await installedCores();
-  let currentVersion = From(installedVersions).FirstOrDefault() || null;
+  let currentVersion = installedVersions[0] || null;
 
   // the consumer can say I want the latest-installed, but at least XXX.XXX
   if (minimumVersion && currentVersion && !semver.satisfies(currentVersion.version, minimumVersion)) {
@@ -138,7 +138,12 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
     console.trace(`No ${corePackage} is installed.`);
   }
 
-  let selectedVersion = From(installedVersions).FirstOrDefault(each => semver.satisfies(each.version, requestedVersion));
+  let selectedVersion: any = null;
+  for (const each of installedVersions) {
+    if (semver.satisfies(each.version, requestedVersion)) {
+      selectedVersion = each;
+    }
+  }
 
   // is the requested version installed?
   if (!selectedVersion || force) {

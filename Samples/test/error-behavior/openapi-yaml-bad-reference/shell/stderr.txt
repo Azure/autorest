@@ -1,15 +1,3 @@
-        components: [Object] } } }
-        info: [Object],
-        paths: [Object],
-        schemes: [Array],
-        servers: [Array],
-      { openapi: '3.0.0',
-     cache: {},
-     externals: [],
-     openapi: 
-   { patch: true,
-   at ...
-{ Error: Could not resolve reference #/definitions/Cowball
+  Error: Could not resolve reference #/definitions/Cowball
 FATAL: Error: Could not resolve reference #/definitions/Cowball
 FATAL: openapi-document/openapi-document-converter - FAILED
-options: 

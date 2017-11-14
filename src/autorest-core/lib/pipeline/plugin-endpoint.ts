@@ -41,7 +41,6 @@ export class AutoRestExtension extends EventEmitter {
   }
   public static killAll() {
     for (const each of AutoRestExtension.processes) {
-      console.log(`Killing proc ${each.pid}`)
       each.kill("SIGKILL");
     }
     AutoRestExtension.processes.length = 0;

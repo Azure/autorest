@@ -30,7 +30,7 @@
     "test": "./node_modules/.bin/mocha ./dist/test",
     "build": "cd .. && cd autorest-core && npm run build && cd .. && cd autorest && tsc -p .&& shx mkdir -p ./dist/interfaces && shx cp -r ./interfaces/*.d.ts ./dist/interfaces ",
     "static-link": "static-link",
-    "postinstall": "node ./post-install --force",
+    "prepare": "node ./post-install --force",
     "preinstall": "node ./preinstall-check",
     "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
     "prepack": "static-link & npm run build"
@@ -40,7 +40,6 @@
     "@types/commonmark": "^0.22.29",
     "@types/node": "^7.0.5",
     "@types/semver": "^5.3.30",
-    "@types/yargs": "^6.6.0",
     "mocha": "3.2.0",
     "mocha-typescript": "1.0.22",
     "typescript": "2.5.3",
@@ -51,11 +50,10 @@
     "entrypoints": [],
     "dependencies": {
       "@microsoft.azure/async-io": "~2.0.7",
-      "@microsoft.azure/console": "~1.0.33",
       "@microsoft.azure/extension": "^2.0.4",
       "@microsoft.azure/tasks": "~2.0.12",
-      "linq-es2015": "^2.4.24",
-      "semver": "^5.3.0"
+      "semver": "^5.3.0",
+      "chalk": "2.3.0"
     },
     "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt );   txt = fs.readFileSync('./node_modules/npm/lib/pack.js','utf8').replace(`require.main.filename`, `require.resolve('../bin/npm-cli.js')`); fs.writeFileSync('./node_modules/npm/lib/pack.js', txt ); "
   }
