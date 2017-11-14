@@ -6,6 +6,7 @@ configuration-emitter:
   pluginName: configuration-emitter
 csharp/cm/emitter:
   configScope:
+    - perform-load
     - csharp
     - scope-cm/emitter
   inputs:
@@ -13,6 +14,7 @@ csharp/cm/emitter:
   pluginName: emitter
 csharp/cm/transform:
   configScope:
+    - perform-load
     - csharp
   inputs:
     - csharp/commonmarker
@@ -20,6 +22,7 @@ csharp/cm/transform:
   pluginName: transform
 csharp/commonmarker:
   configScope:
+    - perform-load
     - csharp
   inputs:
     - csharp/imodeler1
@@ -27,6 +30,7 @@ csharp/commonmarker:
   pluginName: commonmarker
 csharp/emitter:
   configScope:
+    - perform-load
     - csharp
     - scope-transform-string
     - scope-csharp/emitter
@@ -35,6 +39,7 @@ csharp/emitter:
   pluginName: emitter
 csharp/generate:
   configScope:
+    - perform-load
     - csharp
   inputs:
     - csharp/cm/transform
@@ -42,6 +47,7 @@ csharp/generate:
   pluginName: csharp
 csharp/imodeler1:
   configScope:
+    - perform-load
     - csharp
   inputs:
     - openapi-document/identity
@@ -49,6 +55,7 @@ csharp/imodeler1:
   pluginName: imodeler1
 csharp/simplifier:
   configScope:
+    - perform-load
     - csharp
   inputs:
     - csharp/generate
@@ -56,6 +63,7 @@ csharp/simplifier:
   pluginName: csharp-simplifier
 csharp/transform:
   configScope:
+    - perform-load
     - csharp
     - scope-transform-string
   inputs:
@@ -64,24 +72,28 @@ csharp/transform:
   pluginName: transform
 openapi-document/emitter:
   configScope:
+    - perform-load
     - scope-openapi-document/emitter
   inputs:
     - openapi-document/identity
   pluginName: emitter
 openapi-document/identity:
-  configScope: []
+  configScope:
+    - perform-load
   inputs:
     - openapi-document/transform
   outputArtifact: openapi-document
   pluginName: identity
 openapi-document/openapi-document-converter:
-  configScope: []
+  configScope:
+    - perform-load
   inputs:
     - swagger-document/identity
   outputArtifact: openapi-document
   pluginName: openapi-document-converter
 openapi-document/transform:
-  configScope: []
+  configScope:
+    - perform-load
   inputs:
     - openapi-document/openapi-document-converter
   outputArtifact: openapi-document
@@ -92,77 +104,90 @@ pipeline-emitter:
   inputs: []
   pluginName: pipeline-emitter
 swagger-document-override/md-override-loader:
-  configScope: []
+  configScope:
+    - perform-load
   inputs: []
   outputArtifact: immediate-config
   pluginName: md-override-loader
 swagger-document/classic-openapi-validator:
   configScope:
+    - perform-load
     - azure-validator-composed
   inputs:
     - swagger-document/identity
   pluginName: classic-openapi-validator
 swagger-document/compose:
-  configScope: []
+  configScope:
+    - perform-load
   inputs:
     - swagger-document/individual/identity
   outputArtifact: swagger-document
   pluginName: compose
 swagger-document/emitter:
   configScope:
+    - perform-load
     - scope-swagger-document/emitter
   inputs:
     - swagger-document/identity
   pluginName: emitter
 swagger-document/identity:
-  configScope: []
+  configScope:
+    - perform-load
   inputs:
     - swagger-document/transform
   outputArtifact: swagger-document
   pluginName: identity
 swagger-document/individual/classic-openapi-validator:
   configScope:
+    - perform-load
     - azure-validator-individual
   inputs:
     - swagger-document/individual/identity
   pluginName: classic-openapi-validator
 swagger-document/individual/identity:
-  configScope: []
+  configScope:
+    - perform-load
   inputs:
     - swagger-document/individual/transform
   outputArtifact: swagger-document
   pluginName: identity
 swagger-document/individual/openapi-validator:
   configScope:
+    - perform-load
     - azure-validator-individual
   inputs:
     - swagger-document/individual/identity
   pluginName: openapi-validator
 swagger-document/individual/transform:
-  configScope: []
+  configScope:
+    - perform-load
   inputs:
     - swagger-document/loader
   outputArtifact: swagger-document
   pluginName: transform
 swagger-document/loader:
-  configScope: []
+  configScope:
+    - perform-load
   inputs: []
   outputArtifact: swagger-document
   pluginName: loader
 swagger-document/openapi-validator:
   configScope:
+    - perform-load
     - azure-validator-composed
   inputs:
     - swagger-document/identity
   pluginName: openapi-validator
 swagger-document/transform:
-  configScope: []
+  configScope:
+    - perform-load
   inputs:
     - swagger-document/transform-immediate
   outputArtifact: swagger-document
   pluginName: transform
 swagger-document/transform-immediate:
-  configScope: []
+  configScope:
+    - perform-load
   inputs:
     - swagger-document-override/md-override-loader
     - swagger-document/compose

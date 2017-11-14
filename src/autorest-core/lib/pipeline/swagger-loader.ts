@@ -68,10 +68,11 @@ async function EnsureCompleteDefinitionIsPresent(
   }
 
   const references: YAMLNodeWithPath[] = [];
-  var currentDoc = externalFiles[currentFileUri].ReadYamlAst();
+  const currentDoc = externalFiles[currentFileUri];
+  const currentDocAst = currentDoc.ReadYamlAst();
   if (entityType == null || modelName == null) {
     // external references
-    for (const node of Descendants(currentDoc)) {
+    for (const node of Descendants(currentDocAst)) {
       if (isReferenceNode(node)) {
         if (!(node.node.value as string).startsWith("#")) {
           references.push(node);
@@ -80,7 +81,7 @@ async function EnsureCompleteDefinitionIsPresent(
     }
   } else {
     // references within external file
-    const model = ResolveRelativeNode(currentDoc, currentDoc, [entityType, modelName]);
+    const model = ResolveRelativeNode(currentDocAst, currentDocAst, [entityType, modelName]);
     for (const node of Descendants(model, [entityType, modelName])) {
       if (isReferenceNode(node)) {
         references.push(node);
@@ -91,7 +92,7 @@ async function EnsureCompleteDefinitionIsPresent(
   const inputs: DataHandle[] = [sourceDoc];
   for (const { node, path } of references) {
 
-    const complaintLocation: SourceLocation = { document: currentFileUri, Position: <any>{ path: path } };
+    const complaintLocation: SourceLocation = { document: currentDoc.key, Position: <any>{ path: path } };
 
     const refPath = node.value as string;
     if (refPath.indexOf("#") === -1) {
@@ -161,7 +162,7 @@ async function EnsureCompleteDefinitionIsPresent(
   if (entityType != null && modelName != null) {
     var reference = "#/" + entityType + "/" + modelName;
     const dependentRefs: YAMLNodeWithPath[] = [];
-    for (const node of Descendants(currentDoc)) {
+    for (const node of Descendants(currentDocAst)) {
       const path = node.path;
       if (path.length > 3 && path[path.length - 3] === "allOf" && isReferenceNode(node) && (node.node.value as string).indexOf(reference) !== -1) {
         dependentRefs.push(node);

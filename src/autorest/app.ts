@@ -11,94 +11,67 @@ if (process.argv.indexOf("--no-upgrade-check") != -1) {
 }
 
 import { isFile } from "@microsoft.azure/async-io";
-import { cli, enhanceConsole } from "@microsoft.azure/console";
-import { Exception, LazyPromise } from "@microsoft.azure/polyfill";
-import { Enumerable as IEnumerable, From } from "linq-es2015";
+import { Exception, LazyPromise } from "@microsoft.azure/tasks";
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
 import { gt } from "semver";
+import chalk from "chalk"
 
-// Caution: This may swallow backslashes.
-// This cost me ~1h of debugging why "console.log(join(homedir(), ".autorest"));" prints "C:\Users\jobader.autorest"... 
-// Or rather left me looking in the wrong place for a file not found error on "C:\Users\jobader.autorest\x\y\z" where the problem was really in "z"
-enhanceConsole();
+function color(text: string): string {
+  return text.
+    replace(/\*\*(.*?)\*\*/gm, chalk.bold(`$1`)).
+    replace(/^# (.*)/gm, chalk.greenBright('$1')).
+    replace(/^## (.*)/gm, chalk.green('$1')).
+    replace(/^### (.*)/gm, chalk.cyanBright('$1')).
+    replace(/`(.+)`/gm, chalk.gray('$1')).
+    replace(/(https?:\/\/\S*)/gm, chalk.blue.bold.underline('$1')).
+    replace(/__(.*)__/gm, chalk.italic('$1')).
+    replace(/^>(.*)/gm, chalk.cyan('  $1')).
+    replace(/^!(.*)/gm, chalk.red.bold('  $1')).
+    replace(/^(ERROR) (.*?):(.*)/gm, `\n${chalk.red.bold('$1')} ${chalk.green('$2')}:$3`).
+    replace(/^(WARNING) (.*?):(.*)/gm, `\n${chalk.yellow.bold('$1')} ${chalk.green('$2')}:$3`).
+    replace(/^(\s* - \w*:\/\/\S*):(\d*):(\d*) (.*)/gm, `${chalk.cyan('$1')}:${chalk.cyan.bold('$2')}:${chalk.cyan.bold('$3')} $4`).
+    replace(/"(.*?)"/gm, chalk.gray('"$1"')).
+    replace(/'(.*?)'/gm, chalk.gray("'$1'"))
+}
 
-// heavy customization, restart from scratch
-cli.reset();
+(<any>global).color = color;
 
 // Suppress the banner if in json mode.
 if (process.argv.indexOf("--json") == -1 && process.argv.indexOf("--message-format=json") == -1) {
-  console.log(`# AutoRest code generation utility [version: ${pkgVersion}]\n(C) 2017 **Microsoft Corporation.**  \nhttps://aka.ms/autorest`);
+  console.log(chalk.green.bold.underline(`AutoRest code generation utility [version: ${chalk.white.bold(pkgVersion)}]`));
+  console.log(color(`(C) 2017 **Microsoft Corporation.**`));
+  console.log(chalk.blue.bold.underline(`https://aka.ms/autorest`));
 }
-const args = cli
-  .app("autorest")
-  .title("AutoRest code generation utility for OpenAPI")
-  .copyright("(C) 2017 **Microsoft Corporation.**")
-  .usage("**\nUsage**: autorest [configuration-file.md] [...options]\n\n  See: https://aka.ms/autorest/cli for additional documentation")
-  .wrap(0)
-  .help("help", "`Show help information`")
-  .option("quiet", {
-    describe: "`suppress most output information`",
-    type: "boolean",
-    group: "### Output Verbosity",
-  }).option("verbose", {
-    describe: "`display verbose logging information`",
-    type: "boolean",
-    group: "### Output Verbosity",
-  })
-  .option("debug", {
-    describe: "`display debug logging information`",
-    type: "boolean",
-    group: "### Output Verbosity",
-  })
-  .option("info", {
-    alias: ["list-installed"],
-    describe: "display information about the installed version of autorest and it's extensions",
-    type: "boolean",
-    group: "### Informational",
-  })
-  .option("json", {
-    describe: "ouptut messages as json",
-    type: "boolean",
-    group: "### Informational",
-  })
-  .option("list-available", {
-    describe: "display available extensions",
-    type: "boolean",
-    group: "### Informational",
-  })
-  .option("skip-upgrade-check", {
-    describe: "disable check for new version of bootstrapper",
-    type: "boolean",
-    default: false,
-    group: "### Installation",
-  })
-  .option("reset", {
-    describe: "removes all autorest extensions and downloads the latest version of the autorest-core extension",
-    type: "boolean",
-    group: "### Installation",
-  })
-  .option("preview", {
-    alias: "prerelease",
-    describe: "enables using autorest extensions that are not yet released",
-    type: "boolean",
-    group: "### Installation",
-  })
-  .option("latest", {
-    describe: "installs the latest **autorest-core** extension",
-    type: "boolean",
-    group: "### Installation",
-  })
-  .option("force", {
-    describe: "force the re-installation of the **autorest-core** extension and frameworks",
-    type: "boolean",
-    group: "### Installation",
-  })
-  .option("version", {
-    describe: "use the specified version of the **autorest-core** extension",
-    type: "string",
-    group: "### Installation",
-  })
-  .argv;
+
+function parseArgs(autorestArgs: string[]): any {
+  const result: any = {};
+  for (const arg of autorestArgs) {
+    const match = /^--([^=]+)(=(.+))?$/g.exec(arg);
+    if (match) {
+      const key = match[1];
+      const rawValue = match[3] || "true";
+      let value;
+      try {
+        value = JSON.parse(rawValue);
+        // restrict allowed types (because with great type selection comes great responsibility)
+        if (typeof value !== "string" && typeof value !== "boolean") {
+          value = rawValue;
+        }
+      } catch (e) {
+        value = rawValue;
+      }
+      result[key] = value;
+    }
+  }
+  return result;
+}
+
+const args = parseArgs(process.argv);
+(<any>global).__args = args;
+
+// aliases
+args["info"] = args["info"] || args["list-installed"];
+args["preview"] = args["preview"] || args["prerelease"];
 
 // argument tweakin'
 const preview: boolean = args.preview;
@@ -113,7 +86,7 @@ const checkBootstrapper = new LazyPromise(async () => {
     try {
       const pkg = await (await extensionManager).findPackage("autorest", preview ? "preview" : "latest");
       if (gt(pkg.version, pkgVersion)) {
-        console.log(`\n ## There is a new version of AutoRest available (${pkg.version}).\n > You can install the newer version with with \`npm install -g autorest@${preview ? "preview" : "latest"}\`\n`);
+        console.log(color(`\n## There is a new version of AutoRest available (${pkg.version}).\n > You can install the newer version with with \`npm install -g autorest@${preview ? "preview" : "latest"}\`\n`));
       }
     } catch (e) {
       // no message then.
@@ -128,7 +101,7 @@ async function showAvailableCores(): Promise<number> {
   const cores = await availableVersions();
   for (const v of cores) {
     max--;
-    table += `\n|${corePackage}|${v}|`;
+    table += `\n ${chalk.cyan.bold(corePackage.padEnd(30, ' '))} ${chalk.grey.bold(v.padEnd(14, ' '))} `;
     if (!max) {
       break;
     }
@@ -137,7 +110,7 @@ async function showAvailableCores(): Promise<number> {
     console.log(JSON.stringify(cores, null, "  "));
   } else {
     if (table) {
-      console.log("|Extension Name|Version|\n|-----|-----|" + table);
+      console.log(`${chalk.green.bold.underline(' Extension Name'.padEnd(30, ' '))}  ${chalk.green.bold.underline('Version'.padEnd(14, ' '))}\n${table}`);
     }
   }
   return 0;
@@ -149,16 +122,17 @@ async function showInstalledExtensions(): Promise<number> {
   let table = "";
   if (extensions.length > 0) {
     for (const extension of extensions) {
-      table += `\n|${extension.name === corePackage ? "core" : "extension"}|${extension.name}|${extension.version}|${extension.location}|`;
+
+      table += `\n ${chalk.cyan((extension.name === corePackage ? "core" : "extension").padEnd(10))} ${chalk.cyan.bold(extension.name.padEnd(40))} ${chalk.cyan(extension.version.padEnd(12))} ${chalk.cyan(extension.location)}`;
     }
   }
   if (args.json) {
     console.log(JSON.stringify(extensions, null, "  "));
   } else {
     if (table) {
-      console.log("# Showing All Installed Extensions\n\n|Type|Extension Name|Version|location|\n|-----|-----|----|" + table + "\n\n");
+      console.log(color(`\n\n# Showing All Installed Extensions\n\n ${chalk.underline('Type'.padEnd(10))} ${chalk.underline('Extension Name'.padEnd(40))} ${chalk.underline('Version'.padEnd(12))} ${chalk.underline('Location')} ${table}\n\n`));
     } else {
-      console.log("# Showing All Installed Extensions\n\n > No Extensions are currently installed.\n\n");
+      console.log(color("\n\n# Showing All Installed Extensions\n\n > No Extensions are currently installed.\n\n"));
     }
   }
   return 0;
@@ -181,11 +155,6 @@ async function main() {
     process.exit(await showInstalledExtensions());
   }
 
-  if (args.help) {
-    // yargs will print the help. We can leave now.
-    process.exit(0);
-  }
-
   // check to see if local installed core is available.
   const localVersion = resolvePathForLocalVersion(args.version && args.version !== '' ? requestedVersion : null);
 
@@ -197,20 +166,31 @@ async function main() {
   // if the resolved local version is actually a file, we'll try that as a package when we get there.
   if (await isFile(localVersion)) {
     // this should try to install the file.
-    console.trace(`Found local core package file: '${localVersion}'`);
+    if (args.debug) {
+      console.log(`Found local core package file: '${localVersion}'`);
+    }
     requestedVersion = localVersion;
   }
 
   // failing that, we'll continue on and see if NPM can do something with the version.
-  console.trace(`Network Enabled: ${await networkEnabled}`);
+  if (args.debug) {
+    console.log(`Network Enabled: ${await networkEnabled}`);
+  }
 
   try {
     /* make sure we have a .autorest folder */
     await ensureAutorestHome();
 
     if (args.reset) {
-      console.trace(`Resetting autorest extension folder '${rootFolder}'`);
-      await (await extensionManager).reset();
+      if (args.debug) {
+        console.log(`Resetting autorest extension folder '${rootFolder}'`);
+      }
+      try {
+        await (await extensionManager).reset();
+      } catch (e) {
+        console.log(color("\n\n## The AutoRest extension folder appears to be locked.\nDo you have a process that is currently using AutoRest (perhaps the vscode extension?).\n\nUnable to reset the extension folder, exiting."));
+        process.exit(10);
+      }
     }
 
     // wait for the bootstrapper check to finish.
@@ -222,9 +202,21 @@ async function main() {
     let selectedVersion = await selectVersion(requestedVersion, force);
 
     // let's strip the extra stuff from the command line before we require the core module.
-    const RemoveArgs = From<string>(["--version", "--list-installed", "--list-available", "--reset", "--latest", "--latest-release", "--runtime-id"]);
-    // Remove bootstrapper args from cmdline
-    process.argv = From<string>(process.argv).Where(each => !RemoveArgs.Any(i => each === i || each.startsWith(`${i}=`) || each.startsWith(`${i}:`))).ToArray();
+    const oldArgs = process.argv;
+    const newArgs = new Array<string>();
+
+    for (const each of process.argv) {
+      let keep = true;
+      for (const discard of ["--version", "--list-installed", "--list-available", "--reset", "--latest", "--latest-release", "--runtime-id"]) {
+        if (each === discard || each.startsWith(`${discard}=`) || each.startsWith(`${discard}:`)) {
+          keep = false;
+        }
+      }
+      if (keep) {
+        newArgs.push(each);
+      }
+    }
+    process.argv = newArgs;
 
     // use this to make the core aware that this run may be legal even without any inputs
     // this is a valid scenario for "preparation calls" to autorest like `autorest --reset` or `autorest --latest`
@@ -233,14 +225,16 @@ async function main() {
       process.argv.push("--allow-no-input");
     }
 
-    console.trace(`Starting ${corePackage} from ${await selectedVersion.location}`);
+    if (args.debug) {
+      console.log(`Starting ${corePackage} from ${await selectedVersion.location}`);
+    }
     if (!tryRequire(await selectedVersion.modulePath, "app.js")) {
       throw new Error(`Unable to start AutoRest Core from ${await selectedVersion.modulePath}`);
     }
   } catch (exception) {
-    console.log("Failure:");
-    console.error(exception);
-    console.error((<Error>exception).stack);
+    console.log(chalk.redBright("Failure:"));
+    console.error(chalk.bold(exception));
+    console.error(chalk.bold((<Error>exception).stack));
     process.exit(1);
   }
 }
