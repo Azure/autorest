@@ -1,6 +1,6 @@
 {
   "name": "autorest",
-  "version": "2.0.4200",
+  "version": "2.0.0",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
   "engines": {
     "node": ">=7.10.0"
@@ -25,10 +25,20 @@
   "bin": {
     "autorest": "./dist/app.js"
   },
+  "scripts": {
+    "start": "node ./dist/app.js",
+    "test": "./node_modules/.bin/mocha ./dist/test",
+    "build": "cd .. && cd autorest-core && npm run build && cd .. && cd autorest && tsc -p .&& shx mkdir -p ./dist/interfaces && shx cp -r ./interfaces/*.d.ts ./dist/interfaces ",
+    "static-link": "static-link",
+    "prepare": "node ./post-install --force",
+    "preinstall": "node ./preinstall-check",
+    "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
+    "prepack": "static-link & npm run build"
+  },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
     "@types/commonmark": "^0.22.29",
-    "@types/node": "^7.0.5",
+    "@types/node": "^7.0.48",
     "@types/semver": "^5.3.30",
     "mocha": "3.2.0",
     "mocha-typescript": "1.0.22",
