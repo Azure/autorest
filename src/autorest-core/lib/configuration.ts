@@ -558,7 +558,8 @@ export class Configuration {
     return blocks;
   }
 
-  private extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")));
+  private get extensionManager() {return  Configuration.em };
+  private static em : LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")));
 
   private async DesugarRawConfig(configs: any): Promise<any> {
     // shallow copy
@@ -603,6 +604,13 @@ export class Configuration {
 
   public static async shutdown() {
     AutoRestExtension.killAll();
+
+    // once we shutdown those extensions, we should shutdown the EM too. 
+    const extMgr = await Configuration.em;
+    extMgr.dispose();
+
+    // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
+    Configuration.em = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")))
 
     for (const each in loadedExtensions) {
       const ext = loadedExtensions[each];
