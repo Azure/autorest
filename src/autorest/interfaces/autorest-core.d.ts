@@ -518,7 +518,7 @@ export class Configuration {
     private configFileOrFolderUri;
     constructor(fileSystem?: IFileSystem, configFileOrFolderUri?: string | undefined);
     private ParseCodeBlocks(configFile, contextConfig, scope);
-    private extensionManager;
+    private static extensionManager;
     private DesugarRawConfig(configs);
     private DesugarRawConfigs(configs);
     static shutdown(): Promise<void>;

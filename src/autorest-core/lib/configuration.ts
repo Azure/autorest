@@ -558,8 +558,7 @@ export class Configuration {
     return blocks;
   }
 
-  private get extensionManager() {return  Configuration.em };
-  private static em : LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")));
+  private static extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")));
 
   private async DesugarRawConfig(configs: any): Promise<any> {
     // shallow copy
@@ -577,7 +576,7 @@ export class Configuration {
       use = [use];
     }
     if (Array.isArray(use)) {
-      const extMgr = await this.extensionManager;
+      const extMgr = await Configuration.extensionManager;
       for (const useEntry of use) {
         if (typeof useEntry === "string") {
           // attempt <package>@<version> interpretation
@@ -606,11 +605,11 @@ export class Configuration {
     AutoRestExtension.killAll();
 
     // once we shutdown those extensions, we should shutdown the EM too. 
-    const extMgr = await Configuration.em;
+    const extMgr = await Configuration.extensionManager;
     extMgr.dispose();
 
     // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
-    Configuration.em = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")))
+    Configuration.extensionManager = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")))
 
     for (const each in loadedExtensions) {
       const ext = loadedExtensions[each];
@@ -685,7 +684,7 @@ export class Configuration {
       await addSegments(blocks);
     }
     // 5. resolve extensions
-    const extMgr = await this.extensionManager;
+    const extMgr = await Configuration.extensionManager;
     const addedExtensions = new Set<string>();
     const viewsToHandle: ConfigurationView[] = [createView()];
     while (viewsToHandle.length > 0) {
