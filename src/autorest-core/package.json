@@ -24,7 +24,7 @@
     "autorest-language-service": "dist/language-service/language-service.js"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./dist/test --timeout 500000",
+    "test": "./node_modules/.bin/mocha ./dist/test --timeout 50000",
     "build": "tsc -p . & dts-generator --name autorest-core --project . --out ../autorest/interfaces/autorest-core.d.ts  --exclude \"test/**/*\" --exclude \"node_modules/**/*.d.ts\" --exclude \"lib/source-map/**\" --exclude \"lib/pipeline/**\" --exclude \"lib/parsing/**\" --exclude \"lib/data-store/**\" --exclude \"lib/ref/yaml.ts\"  --extern ./source-maps.d.ts",
     "static-link": "static-link",
     "postinstall": "node ./post-install --force",
@@ -50,7 +50,7 @@
     "entrypoints": [],
     "dependencies": {
       "@microsoft.azure/async-io": "~2.0.7",
-      "@microsoft.azure/extension": "^2.0.4",
+      "@microsoft.azure/extension": "^2.0.18",
       "vscode-languageserver": "3.4.3",
       "commonmark": "^0.27.0",
       "file-url": "^2.0.2",

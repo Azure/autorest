@@ -1,6 +1,6 @@
 
 task 'regenerate', 'regenerate samples', (done) ->
-  execute "node #{basefolder}/src/autorest/dist/app.js --reset --no-upgrade-check --allow-no-input" , {silent:false }, (code,stdout,stderr) -> 
+  execute "node #{basefolder}/src/autorest/dist/app.js --reset --no-upgrade-check --allow-no-input --version=#{basefolder}/src/autorest-core --verbose --debug" , {silent:false }, (code,stdout,stderr) -> 
     count = 0
     # source 'Samples/*/**/readme.md'
     source 'Samples/*/**/readme.md'

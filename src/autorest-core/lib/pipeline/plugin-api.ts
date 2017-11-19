@@ -22,7 +22,7 @@ export module IAutoRestPluginInitiator_Types {
   export const GetValue = new RequestType2<string, string, any, Error, void>("GetValue");
   export const ListInputs = new RequestType1<string, string[], Error, void>("ListInputs");
   export const WriteFile = new NotificationType4<string, string, string, Mapping[] | RawSourceMap | undefined, void>("WriteFile");
-  export const Message = new NotificationType4<string, Message, SmartPosition | undefined, string | undefined, void>("Message");
+  /* @internal */export const Message = new NotificationType4<string, Message, SmartPosition | undefined, string | undefined, void>("Message");
 }
 export interface IAutoRestPluginInitiator {
   ReadFile(sessionId: string, filename: string): Promise<string>;
