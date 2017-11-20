@@ -16,22 +16,58 @@ import { networkEnabled, rootFolder, extensionManager, availableVersions, corePa
 import { gt } from "semver";
 import chalk from "chalk"
 
+function addStyle(style: string, text: string): string {
+  return `▌PUSH:${style}▐${text}▌POP▐`;
+}
+function compileStyledText(text: string): string {
+  const styleStack = ["(x => x)"];
+  let result = "";
+  let consumedUpTo = 0;
+  const appendPart = (end: number) => {
+    result += eval(styleStack[styleStack.length - 1])(text.slice(consumedUpTo, end));
+    consumedUpTo = end;
+  };
+
+  const commandRegex = /▌(.+?)▐/g;
+  let i: RegExpExecArray;
+  while (i = commandRegex.exec(text)) {
+    const startIndex = i.index;
+    const length = i[0].length;
+    const command = i[1].split(":");
+
+    // append up to here with current style
+    appendPart(startIndex);
+
+    // process command
+    consumedUpTo += length;
+    switch (command[0]) {
+      case "PUSH":
+        styleStack.push(command[1]);
+        break;
+      case "POP":
+        styleStack.pop();
+        break;
+    }
+  }
+  appendPart(text.length);
+  return result;
+}
 function color(text: string): string {
-  return text.
-    replace(/\*\*(.*?)\*\*/gm, chalk.bold(`$1`)).
-    replace(/^# (.*)/gm, chalk.greenBright('$1')).
-    replace(/^## (.*)/gm, chalk.green('$1')).
-    replace(/^### (.*)/gm, chalk.cyanBright('$1')).
-    replace(/`(.+)`/gm, chalk.gray('$1')).
-    replace(/(https?:\/\/\S*)/gm, chalk.blue.bold.underline('$1')).
-    replace(/__(.*)__/gm, chalk.italic('$1')).
-    replace(/^>(.*)/gm, chalk.cyan('  $1')).
-    replace(/^!(.*)/gm, chalk.red.bold('  $1')).
-    replace(/^(ERROR) (.*?):(.*)/gm, `\n${chalk.red.bold('$1')} ${chalk.green('$2')}:$3`).
-    replace(/^(WARNING) (.*?):(.*)/gm, `\n${chalk.yellow.bold('$1')} ${chalk.green('$2')}:$3`).
-    replace(/^(\s* - \w*:\/\/\S*):(\d*):(\d*) (.*)/gm, `${chalk.cyan('$1')}:${chalk.cyan.bold('$2')}:${chalk.cyan.bold('$3')} $4`).
-    replace(/"(.*?)"/gm, chalk.gray('"$1"')).
-    replace(/'(.*?)'/gm, chalk.gray("'$1'"))
+  return compileStyledText(text.
+    replace(/\*\*(.*?)\*\*/gm, addStyle("chalk.bold", `$1`)).
+    replace(/^# (.*)/gm, addStyle("chalk.green.bold", '$1')).
+    replace(/^## (.*)/gm, addStyle("chalk.green", '$1')).
+    replace(/^### (.*)/gm, addStyle("chalk.cyan.bold", '$1')).
+    replace(/(https?:\/\/\S*)/gm, addStyle("chalk.blue.bold.underline", '$1')).
+    replace(/__(.*)__/gm, addStyle("chalk.italic", '$1')).
+    replace(/^>(.*)/gm, addStyle("chalk.cyan", '  $1')).
+    replace(/^!(.*)/gm, addStyle("chalk.red.bold", '  $1')).
+    replace(/^(ERROR) (.*?):(.*)/gm, `\n${addStyle("chalk.red.bold", '$1')} ${addStyle("chalk.green", '$2')}:$3`).
+    replace(/^(WARNING) (.*?):(.*)/gm, `\n${addStyle("chalk.yellow.bold", '$1')} ${addStyle("chalk.green", '$2')}:$3`).
+    replace(/^(\s* - \w*:\/\/\S*):(\d*):(\d*) (.*)/gm, `${addStyle("chalk.cyan", '$1')}:${addStyle("chalk.cyan.bold", '$2')}:${addStyle("chalk.cyan.bold", '$3')} $4`).
+    replace(/`(.+?)`/gm, addStyle("chalk.gray", '$1')).
+    replace(/"(.*?)"/gm, addStyle("chalk.gray", '"$1"')).
+    replace(/'(.*?)'/gm, addStyle("chalk.gray", "'$1'")));
 }
 
 (<any>global).color = color;
