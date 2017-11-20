@@ -140,44 +140,21 @@ async function showInstalledExtensions(): Promise<number> {
 
 /** Main Entrypoint for AutoRest Bootstrapper */
 async function main() {
-
-  if (args.json) {
-    process.argv.push("--message-format=json");
-  }
-
-  // did they ask for what is available?
-  if (listAvailable) {
-    process.exit(await showAvailableCores());
-  }
-
-  // show what we have.
-  if (args.info) {
-    process.exit(await showInstalledExtensions());
-  }
-
-  // check to see if local installed core is available.
-  const localVersion = resolvePathForLocalVersion(args.version && args.version !== '' ? requestedVersion : null);
-
-  // try to use a specified folder or one in node_modules if it is there.
-  if (await tryRequire(localVersion, "app.js")) {
-    return;
-  }
-
-  // if the resolved local version is actually a file, we'll try that as a package when we get there.
-  if (await isFile(localVersion)) {
-    // this should try to install the file.
-    if (args.debug) {
-      console.log(`Found local core package file: '${localVersion}'`);
-    }
-    requestedVersion = localVersion;
-  }
-
-  // failing that, we'll continue on and see if NPM can do something with the version.
-  if (args.debug) {
-    console.log(`Network Enabled: ${await networkEnabled}`);
-  }
-
   try {
+    if (args.json) {
+      process.argv.push("--message-format=json");
+    }
+
+    // did they ask for what is available?
+    if (listAvailable) {
+      process.exit(await showAvailableCores());
+    }
+
+    // show what we have.
+    if (args.info) {
+      process.exit(await showInstalledExtensions());
+    }
+
     /* make sure we have a .autorest folder */
     await ensureAutorestHome();
 
@@ -193,9 +170,30 @@ async function main() {
       }
     }
 
+    // check to see if local installed core is available.
+    const localVersion = resolvePathForLocalVersion(args.version && args.version !== '' ? requestedVersion : null);
+
+    // try to use a specified folder or one in node_modules if it is there.
+    if (await tryRequire(localVersion, "app.js")) {
+      return;
+    }
+
+    // if the resolved local version is actually a file, we'll try that as a package when we get there.
+    if (await isFile(localVersion)) {
+      // this should try to install the file.
+      if (args.debug) {
+        console.log(`Found local core package file: '${localVersion}'`);
+      }
+      requestedVersion = localVersion;
+    }
+
+    // failing that, we'll continue on and see if NPM can do something with the version.
+    if (args.debug) {
+      console.log(`Network Enabled: ${await networkEnabled}`);
+    }
+
     // wait for the bootstrapper check to finish.
     await checkBootstrapper;
-
 
     // logic to resolve and optionally install a autorest core package.
     // will throw if it's not doable.
