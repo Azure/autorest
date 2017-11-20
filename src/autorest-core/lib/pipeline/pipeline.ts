@@ -21,7 +21,7 @@ import { EmitArtifacts } from "./artifact-emitter";
 import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 import { ConvertOAI2toOAI3 } from "../openapi/conversion";
 import { Help } from '../../help';
-import { GetPlugin_HelpAutoRest, GetPlugin_HelpAutoRestCore } from "./help";
+import { GetPlugin_Help } from "./help";
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataSource, sink: DataSink) => Promise<DataSource>;
 interface PipelineNode {
@@ -292,8 +292,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
-    "help-autorest": GetPlugin_HelpAutoRest(),
-    "help-autorest-core": GetPlugin_HelpAutoRestCore(),
+    "help": GetPlugin_Help(),
     "identity": GetPlugin_Identity(),
     "loader": GetPlugin_Loader(),
     "md-override-loader": GetPlugin_MdOverrideLoader(),
