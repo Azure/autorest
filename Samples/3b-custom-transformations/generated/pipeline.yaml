@@ -1,5 +1,4 @@
 ---
-<<<<<<< HEAD
 configuration-emitter:
   configScope:
     - scope-configuration-emitter
@@ -14,58 +13,6 @@ csharp/cm/emitter:
     - csharp/cm/transform
   pluginName: emitter
 csharp/cm/transform:
-=======
-swagger-document-override/md-override-loader:
-  pluginName: md-override-loader
-  outputArtifact: immediate-config
-  configScope: []
-  inputs: []
-swagger-document/loader:
-  pluginName: loader
-  outputArtifact: swagger-document
-  configScope: []
-  inputs: []
-swagger-document/individual/transform:
-  pluginName: transform
-  outputArtifact: swagger-document
-  configScope: []
-  inputs:
-    - swagger-document/loader
-swagger-document/individual/identity:
-  pluginName: identity
-  outputArtifact: swagger-document
-  configScope: []
-  inputs:
-    - swagger-document/individual/transform
-swagger-document/compose:
-  pluginName: compose
-  outputArtifact: swagger-document
-  configScope: []
-  inputs:
-    - swagger-document/individual/identity
-swagger-document/transform-immediate:
-  pluginName: transform-immediate
-  outputArtifact: swagger-document
-  configScope: []
-  inputs:
-    - swagger-document-override/md-override-loader
-    - swagger-document/compose
-swagger-document/transform:
-  pluginName: transform
-  outputArtifact: swagger-document
-  configScope: []
-  inputs:
-    - swagger-document/transform-immediate
-swagger-document/identity:
-  pluginName: identity
-  outputArtifact: swagger-document
-  configScope: []
-  inputs:
-    - swagger-document/transform
-csharp/modeler:
-  pluginName: modeler
-  outputArtifact: code-model-v1
->>>>>>> regen
   configScope:
     - perform-load
     - csharp
@@ -88,7 +35,6 @@ csharp/emitter:
     - scope-transform-string
     - scope-csharp/emitter
   inputs:
-<<<<<<< HEAD
     - csharp/transform
   pluginName: emitter
 csharp/generate:
@@ -97,11 +43,6 @@ csharp/generate:
     - csharp
   inputs:
     - csharp/cm/transform
-=======
-    - csharp/commonmarker
-csharp/generate:
-  pluginName: csharp
->>>>>>> regen
   outputArtifact: source-file-csharp
   pluginName: csharp
 csharp/imodeler1:
@@ -140,7 +81,6 @@ openapi-document/identity:
   configScope:
     - perform-load
   inputs:
-<<<<<<< HEAD
     - openapi-document/transform
   outputArtifact: openapi-document
   pluginName: identity
@@ -169,32 +109,6 @@ swagger-document-override/md-override-loader:
   inputs: []
   outputArtifact: immediate-config
   pluginName: md-override-loader
-=======
-    - csharp/transform
-pipeline-emitter:
-  pluginName: pipeline-emitter
-  configScope:
-    - scope-pipeline-emitter
-  inputs: []
-configuration-emitter:
-  pluginName: configuration-emitter
-  configScope:
-    - scope-configuration-emitter
-  inputs: []
-swagger-document/emitter:
-  pluginName: emitter
-  configScope:
-    - scope-swagger-document/emitter
-  inputs:
-    - swagger-document/transform
-csharp/cm/emitter:
-  pluginName: emitter
-  configScope:
-    - csharp
-    - scope-cm/emitter
-  inputs:
-    - csharp/cm/transform
->>>>>>> regen
 swagger-document/classic-openapi-validator:
   configScope:
     - perform-load
