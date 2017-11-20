@@ -259,6 +259,11 @@ pipeline:
     suffixes:
       - ''
 require: []
+scope-cm-yaml/emitter:
+  input-artifact: code-model-v1-yaml
+  is-object: true
+  output-uri-expr: |
+    "code-model-v1-yaml"
 scope-cm/emitter:
   input-artifact: code-model-v1
   is-object: true
@@ -306,13 +311,13 @@ skip-upgrade-check: {}
 use: []
 use-extension:
   '@microsoft.azure/autorest.csharp': ~2.2.0
-  '@microsoft.azure/autorest.modeler': 2.3.31
+  '@microsoft.azure/autorest.modeler': 2.3.38
   '@microsoft.azure/classic-openapi-validator': ~1.0.3
   '@microsoft.azure/openapi-validator': ~1.0.0
 used-extension:
   - '["@microsoft.azure/autorest.csharp","~2.2.0"]'
   - '["@microsoft.azure/classic-openapi-validator","~1.0.3"]'
   - '["@microsoft.azure/openapi-validator","~1.0.0"]'
-  - '["@microsoft.azure/autorest.modeler","2.3.31"]'
+  - '["@microsoft.azure/autorest.modeler","2.3.38"]'
 verbose: false
 
