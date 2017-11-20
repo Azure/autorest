@@ -8,6 +8,10 @@ enumTypes:
   - $ref: '41'
   - $ref: '48'
   - $ref: '99'
+extensions:
+  security:
+    - azure_auth:
+        - user_impersonation
 modelTypes:
   - $id: '1'
     $type: CompositeType

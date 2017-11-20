@@ -23,9 +23,7 @@ Import
     source ["src/autorest-core", "src/autorest" ]
 
   npminstalls: ()->
-    source ["src/autorest-core", 
-      "src/autorest"
-    ]
+    source ["src/autorest-core", "src/autorest" ]
 
   typescriptProjects: () -> 
     typescriptProjectFolders()
