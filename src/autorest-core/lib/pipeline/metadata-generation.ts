@@ -49,7 +49,7 @@ internal static partial class SdkInfo
         {
             return new Tuple<string, string, string>[]
             {
-${tuples.map(x => `                  ${x},`).join("\n")}
+${tuples.map(x => `                ${x},`).join("\n")}
             }.AsEnumerable();
         }
     }
