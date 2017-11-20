@@ -79,8 +79,6 @@ output-artifact:
   - code-model-v1.yaml
   - pipeline.yaml
   - configuration.yaml
-  - null
-  - help
   - source-file-csharp
   - source-file-jsonrpcclient
 output-folder: generated
@@ -134,12 +132,6 @@ pipeline:
     scope: scope-transform-string
     suffixes:
       - ''
-  help/help-autorest:
-    scope: help
-    suffixes: []
-  help/help-autorest-core:
-    scope: help
-    suffixes: []
   jsonrpcclient/emitter:
     input: transform
     scope: scope-jsonrpcclient/emitter
