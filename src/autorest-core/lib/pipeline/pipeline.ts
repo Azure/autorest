@@ -1,9 +1,9 @@
-import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '../parsing/yaml';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '../parsing/yaml';
 import { Descendants, FastStringify, StringifyAst } from '../ref/yaml';
 import { JsonPath, stringify } from "../ref/jsonpath";
 import { safeEval } from "../ref/safe-eval";
@@ -22,6 +22,7 @@ import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } f
 import { ConvertOAI2toOAI3 } from "../openapi/conversion";
 import { Help } from '../../help';
 import { GetPlugin_Help } from "./help";
+import { GetPlugin_ReflectApiVersion } from "./metadata-generation";
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataSource, sink: DataSink) => Promise<DataSource>;
 interface PipelineNode {
@@ -305,6 +306,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "openapi-document-converter": GetPlugin_OAI2toOAIx(),
     "yaml2jsonx": GetPlugin_Yaml2Jsonx(),
     "jsonx2yaml": GetPlugin_Jsonx2Yaml(),
+    "reflect-api-versions-cs": GetPlugin_ReflectApiVersion(),
     "commonmarker": GetPlugin_CommonmarkProcessor(),
     "emitter": GetPlugin_ArtifactEmitter(),
     "pipeline-emitter": GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline)])),

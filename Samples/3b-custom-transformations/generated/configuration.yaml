@@ -234,6 +234,17 @@ pipeline:
     scope: azure-validator-composed
     suffixes:
       - ''
+  swagger-document/reflect-api-versions-cs:
+    input:
+      - identity
+      - individual/identity
+      - csharp/emitter
+    scope: reflect-api-versions
+    suffixes: []
+  swagger-document/reflect-api-versions-cs/emitter:
+    input: reflect-api-versions-cs
+    scope: scope-reflect-api-versions-cs-emitter
+    suffixes: []
   swagger-document/semantic-validator:
     input: swagger-document/identity
     scope: semantic-validator
@@ -287,6 +298,9 @@ scope-pipeline-emitter:
   is-object: true
   output-uri-expr: |
     "pipeline"
+scope-reflect-api-versions-cs-emitter:
+  input-artifact: source-file-csharp
+  output-uri-expr: $key
 scope-swagger-document/emitter:
   input-artifact: swagger-document
   is-object: true
