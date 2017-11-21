@@ -66,11 +66,11 @@
   --azureresourceschema         generate Azure resource schemas
   --azureresourceschema         generate Azure resource schemas
   --azureresourceschema         generate Azure resource schemas
-  --base-folder                 path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
-  --base-folder                 path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
-  --base-folder                 path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
-  --base-folder                 path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
-  --base-folder                 path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --base-folder=<string>        path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --base-folder=<string>        path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --base-folder=<string>        path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --base-folder=<string>        path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --base-folder=<string>        path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
   --csharp                      generate C# client code
   --csharp                      generate C# client code
   --csharp                      generate C# client code
