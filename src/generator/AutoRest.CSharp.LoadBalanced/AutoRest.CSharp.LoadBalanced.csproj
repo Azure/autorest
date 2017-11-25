@@ -40,6 +40,6 @@
       <Generator>RazorGenerator</Generator>
     </None>
   </ItemGroup>
-  <Import Project="$(SolutionDir)tools\Autorest.xproj.targets"/>
+  <Import Project="..\..\..\tools\Autorest.xproj.targets" />
 
 </Project>
