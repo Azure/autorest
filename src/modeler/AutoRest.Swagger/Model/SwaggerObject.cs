@@ -169,6 +169,8 @@ namespace AutoRest.Swagger.Model
                     {
                         case KnownFormat.@decimal:
                         return New<PrimaryType>(KnownPrimaryType.Decimal);
+                        case KnownFormat.@float:
+                        return New<PrimaryType>(KnownPrimaryType.Float);
                         default:
                             return New<PrimaryType>(KnownPrimaryType.Double);
                     }

@@ -1,0 +1,734 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Agoda.Website.MVC"
+  },
+  "host": "localhost:8077",
+  "schemes": [ "http" ],
+  "paths": {
+    "/{culture}/api/Availability/Index": {
+      "get": {
+        "tags": [ "Availability" ],
+        "operationId": "availability_getAvailabilityViewModel",
+        "consumes": [],
+        "produces": [ "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/ExpressConnectAvailabilityPageViewModel" }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [ "Availability" ],
+        "operationId": "availability_saveAvailabilityViewModel",
+        "consumes": [ "application/x-www-form-urlencoded", "application/json", "text/json" ],
+        "produces": [ "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ExpressConnectAvailabilityPageViewModel" }
+          },
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/SaveAvailabilitOperationResult" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/Basic/index": {
+      "get": {
+        "tags": [ "Basic" ],
+        "operationId": "GetViewModel",
+        "consumes": [],
+        "produces": [ "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/ExpressConnectBasicPageViewModel" }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [ "Basic" ],
+        "operationId": "SaveBasicInformation",
+        "consumes": [ "application/x-www-form-urlencoded", "application/json", "text/json" ],
+        "produces": [ "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "propertyBasicInformationViewModel",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/PropertyBasicInformationViewModel" }
+          },
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/OperationResult" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/ExpressConnectApi/fetchExpressConnectPageViewModel": {
+      "get": {
+        "tags": [ "ExpressConnectApi" ],
+        "operationId": "fetchExpressConnectPageViewModel",
+        "consumes": [],
+        "produces": [ "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/ExpressConnectPageViewModel" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/LocationApi/GetLocationPageViewModel": {
+      "get": {
+        "tags": [ "LocationApi" ],
+        "operationId": "GetLocationPageViewModel",
+        "consumes": [],
+        "produces": [ "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/LocationPageViewModel" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/LocationApi/SaveLocation": {
+      "post": {
+        "tags": [ "LocationApi" ],
+        "operationId": "SaveLocation",
+        "consumes": [ "application/x-www-form-urlencoded", "application/json", "text/json" ],
+        "produces": [ "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "location",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/LocationDto" }
+          },
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/OperationResult" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/Pricing/index": {
+      "get": {
+        "tags": [ "Pricing" ],
+        "operationId": "getPricingViewModel",
+        "consumes": [],
+        "produces": [ "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/ExpressConnectPricingPageViewModel" }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [ "Pricing" ],
+        "operationId": "savePricing",
+        "consumes": [ "application/x-www-form-urlencoded", "application/json", "text/json" ],
+        "produces": [ "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "propertyPricing",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/PropertyPricing" }
+          },
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "type": "boolean" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/User/current": {
+      "get": {
+        "tags": [ "User" ],
+        "operationId": "getCurrentUser",
+        "consumes": [],
+        "produces": [ "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/UserInfo" }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "ExpressConnectAvailabilityPageViewModel": {
+      "type": "object",
+      "properties": {
+        "IsBookOnRequest": { "type": "boolean" },
+        "MaxTimeBooking": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "MinNightsPerStay": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "MaxNightsPerStay": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "IsMaxNightPerStayLimit": { "type": "boolean" },
+        "CheckInType": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "CheckInSpecificStartTime": { "type": "string" },
+        "CheckInSpecificEndTime": { "type": "string" },
+        "CheckOutSpecificStartTime": { "type": "string" },
+        "CancellationPolicy": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "IsAvailableAnyDate": { "type": "boolean" },
+        "BlockedDates": {
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "MomentLocale": { "type": "string" },
+        "AllowGuestsToBookInstantlyText": { "type": "string" },
+        "AllowGuestsToBookInstantlyDescriptionText": { "type": "string" },
+        "AndText": { "type": "string" },
+        "AnyTimeText": { "type": "string" },
+        "BetweenText": { "type": "string" },
+        "BlockedDatesText": { "type": "string" },
+        "CancellationPolicyText": { "type": "string" },
+        "CheckInCheckOutTimeText": { "type": "string" },
+        "FlexibleText": { "type": "string" },
+        "FlexibleCheckInText": { "type": "string" },
+        "FlexibleDescriptionText": { "type": "string" },
+        "HeaderDetailText": { "type": "string" },
+        "HeaderTitleText": { "type": "string" },
+        "LengthOfStayText": { "type": "string" },
+        "MaximumNightsPerStayText": { "type": "string" },
+        "MaximumTimeOfAdvanceBookingText": { "type": "string" },
+        "MinimumNightsPerStayText": { "type": "string" },
+        "ModerateText": { "type": "string" },
+        "ModerateDescriptionText": { "type": "string" },
+        "ThreeMonthsText": { "type": "string" },
+        "SixMonthsText": { "type": "string" },
+        "MyPropertyIsAvailableOnAnyDayText": { "type": "string" },
+        "MyPropertyIsUnavailableOnCertainDayText": { "type": "string" },
+        "MyPropertyIsUnavailableOnCertainDayDescriptionText": { "type": "string" },
+        "NoMaximumNightsPerStayText": { "type": "string" },
+        "ReservationRequestsText": { "type": "string" },
+        "RequestReservationRequestsDescriptionText": { "type": "string" },
+        "RequireReservationRequestsText": { "type": "string" },
+        "SelectATimeText": { "type": "string" },
+        "StrictText": { "type": "string" },
+        "StrictDescriptionText": { "type": "string" },
+        "WhatTimeWillGuestsHaveToCheckOutByText": { "type": "string" },
+        "WhenCanGuestsCheckInText": { "type": "string" },
+        "OneYearText": { "type": "string" },
+        "MonthsTextsCMS": { "type": "string" },
+        "WeekdaysTextsCMS": { "type": "string" },
+        "WeekdaysShortTextsCMS": { "type": "string" },
+        "MonthsTexts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "readOnly": true
+        },
+        "WeekdaysTexts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "readOnly": true
+        },
+        "WeekdaysShortTexts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "readOnly": true
+        },
+        "PageId": {
+          "enum": [ "Basics", "Location", "Amenities", "Photos", "Description", "Pricing", "Availability", "Publish" ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SaveAvailabilitOperationResult": {
+      "type": "object",
+      "properties": { "IsSuccess": { "type": "boolean" } }
+    },
+    "ExpressConnectBasicPageViewModel": {
+      "type": "object",
+      "properties": {
+        "AccommodatesDetailsText": { "type": "string" },
+        "BedTypeList": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/BedType" }
+        },
+        "PropertyTypeList": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/PropertyType" }
+        },
+        "AccommodatesText": { "type": "string" },
+        "Accomodates": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "AddAnotherBedTypeText": { "type": "string" },
+        "BathroomsDetailsText": { "type": "string" },
+        "BathroomsText": { "type": "string" },
+        "BedroomList": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/BedConfiguration" }
+        },
+        "BedroomsDetailsText": { "type": "string" },
+        "BedroomsText": { "type": "string" },
+        "BedroomXText": { "type": "string" },
+        "CommonSpace": { "$ref": "#/definitions/Bedroom" },
+        "CommonSpaceDetailsText": { "type": "string" },
+        "CommonSpaceList": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/BedConfiguration" }
+        },
+        "CommonSpaceText": { "type": "string" },
+        "ListOfBedrooms": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Bedroom" }
+        },
+        "NumberOfBathrooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "NumberOfBedrooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "PageDetailText": { "type": "string" },
+        "PageHeaderText": { "type": "string" },
+        "PageId": {
+          "enum": [ "Basics", "Location", "Amenities", "Photos", "Description", "Pricing", "Availability", "Publish" ],
+          "type": "string",
+          "readOnly": true
+        },
+        "PropertySizeSqm": {
+          "format": "double",
+          "type": "number"
+        },
+        "PropertySizeText": { "type": "string" },
+        "PropertySizeUnit": { "type": "string" },
+        "PropertyText": { "type": "string" },
+        "PropertyTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "PropertyTypeText": { "type": "string" },
+        "RoomsCardTitleText": { "type": "string" },
+        "SaveAndExitText": { "type": "string" },
+        "NextText": { "type": "string" },
+        "PreviousText": { "type": "string" }
+      }
+    },
+    "BedType": {
+      "type": "object",
+      "properties": {
+        "BedTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "DefaultName": { "type": "string" },
+        "DisplaySetting": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "LocalName": { "type": "string" }
+      }
+    },
+    "PropertyType": {
+      "type": "object",
+      "properties": {
+        "Description": { "type": "string" },
+        "IconClass": { "type": "string" },
+        "Name": { "type": "string" },
+        "ProductListId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "UnitName": { "type": "string" }
+      }
+    },
+    "BedConfiguration": {
+      "type": "object",
+      "properties": {
+        "BedConfigurationId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "BedroomGroupNo": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "BedTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "NoOfBeds": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "OptionId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ValidationErrors": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ValidationError" }
+        }
+      }
+    },
+    "Bedroom": {
+      "type": "object",
+      "properties": {
+        "ListBeds": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Bed" }
+        }
+      }
+    },
+    "ValidationError": {
+      "type": "object",
+      "properties": {
+        "Constraint": { "type": "string" },
+        "Description": { "type": "string" },
+        "Value": { "type": "string" }
+      }
+    },
+    "Bed": {
+      "type": "object",
+      "properties": {
+        "BedTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "NumberOfBeds": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "PropertyBasicInformationViewModel": {
+      "type": "object",
+      "properties": {
+        "PropertyTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "PropertySizeSqm": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Accomodates": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "NumberOfBathrooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "NumberofBedrooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "BedroomList": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/BedConfiguration" }
+        },
+        "CommonSpaceList": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/BedConfiguration" }
+        }
+      }
+    },
+    "OperationResult": {
+      "type": "object",
+      "properties": { "IsSuccess": { "type": "boolean" } }
+    },
+    "ExpressConnectPageViewModel": {
+      "type": "object",
+      "properties": {
+        "SidebarNavigationStatuses": {
+          "type": "object",
+          "properties": {
+            "Basics": {
+              "enum": [ "Initial", "Inprogress", "Draft", "Done" ],
+              "type": "string"
+            },
+            "Location": {
+              "enum": [ "Initial", "Inprogress", "Draft", "Done" ],
+              "type": "string"
+            },
+            "Amenities": {
+              "enum": [ "Initial", "Inprogress", "Draft", "Done" ],
+              "type": "string"
+            },
+            "Photos": {
+              "enum": [ "Initial", "Inprogress", "Draft", "Done" ],
+              "type": "string"
+            },
+            "Description": {
+              "enum": [ "Initial", "Inprogress", "Draft", "Done" ],
+              "type": "string"
+            },
+            "Pricing": {
+              "enum": [ "Initial", "Inprogress", "Draft", "Done" ],
+              "type": "string"
+            },
+            "Availability": {
+              "enum": [ "Initial", "Inprogress", "Draft", "Done" ],
+              "type": "string"
+            },
+            "Publish": {
+              "enum": [ "Initial", "Inprogress", "Draft", "Done" ],
+              "type": "string"
+            }
+          }
+        },
+        "ChildPageViewModel": { "$ref": "#/definitions/ChildPageViewModel" }
+      }
+    },
+    "ChildPageViewModel": {
+      "type": "object",
+      "properties": {
+        "PageId": {
+          "enum": [ "Basics", "Location", "Amenities", "Photos", "Description", "Pricing", "Availability", "Publish" ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LocationPageViewModel": {
+      "type": "object",
+      "properties": {
+        "CityText": { "type": "string" },
+        "CountryText": { "type": "string" },
+        "FloorAndUnitNumberText": { "type": "string" },
+        "GuestsWillOnlyReceiveYourExactAddressText": { "type": "string" },
+        "GuestWillBeShownTheGeneralLocationOfYourPropertyText": { "type": "string" },
+        "Location": { "$ref": "#/definitions/LocationDto" },
+        "LocationText": { "type": "string" },
+        "MapId": {
+          "enum": [ "GoogleMaps", "BaiduMaps" ],
+          "type": "string"
+        },
+        "MapLocationText": { "type": "string" },
+        "OptionalText": { "type": "string" },
+        "PutYourselfOnTheMapText": { "type": "string" },
+        "SelectCountryText": { "type": "string" },
+        "SelectStateOrProvinceText": { "type": "string" },
+        "StateProvinceText": { "type": "string" },
+        "StreetAddressText": { "type": "string" },
+        "WhereWillYourGuestsBeStayingText": { "type": "string" },
+        "ZipPostalCodeText": { "type": "string" }
+      }
+    },
+    "LocationDto": {
+      "type": "object",
+      "properties": {
+        "CityId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "CountryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "FloorAndUnitNumber": { "type": "string" },
+        "Latitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "Longtitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "MapZoomLevel": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "PostalCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "StateId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "StreetAddress": { "type": "string" }
+      }
+    },
+    "ExpressConnectPricingPageViewModel": {
+      "type": "object",
+      "properties": {
+        "PageHeaderText": { "type": "string" },
+        "PageDetailText": { "type": "string" },
+        "RateCardTitleText": { "type": "string" },
+        "RateCardDetailText": { "type": "string" },
+        "RateCardYourSettingsText": { "type": "string" },
+        "ChangeText": { "type": "string" },
+        "RateSettingCurrencyText": { "type": "string" },
+        "RateSettingCurrencyDetailText": { "type": "string" },
+        "RatePerNightOneGuestText": { "type": "string" },
+        "RatePerNightTwoGuestsText": { "type": "string" },
+        "RatePerNightThreeFourGuestsText": { "type": "string" },
+        "RatePerNightOneGuest": {
+          "format": "double",
+          "type": "number"
+        },
+        "RatePerNightTwoGuests": {
+          "format": "double",
+          "type": "number"
+        },
+        "RatePerNightFullGuests": {
+          "format": "double",
+          "type": "number"
+        },
+        "RatePerNightAvgInArea": {
+          "format": "double",
+          "type": "number"
+        },
+        "NoOfAccommodates": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "PageId": {
+          "enum": [ "Basics", "Location", "Amenities", "Photos", "Description", "Pricing", "Availability", "Publish" ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PropertyPricing": {
+      "type": "object",
+      "properties": {
+        "SingleRatePerNight": {
+          "format": "double",
+          "type": "number"
+        },
+        "DoubleRatePerNight": {
+          "format": "double",
+          "type": "number"
+        },
+        "FullRatePerNight": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "UserInfo": {
+      "type": "object",
+      "properties": {
+        "UserName": { "type": "string" },
+        "UserLanguage": { "type": "string" }
+      }
+    }
+  }
+}

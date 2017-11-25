@@ -1,41 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Core", "src\core\AutoRest.Core\AutoRest.Core.xproj", "{C876085F-9DC3-41F0-B7B4-17022CD84684}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{EF9E346D-70C6-45F5-8FF9-9B734F4A1298}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest", "src\core\AutoRest\AutoRest.xproj", "{F589D8B7-1B0F-4182-842B-09866A4A2CEB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modelers", "Modelers", "{02144BF6-4489-4AFC-9B2D-0306C3DD3C19}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Core.Tests", "src\core\AutoRest.Core.Tests\AutoRest.Core.Tests.xproj", "{31E6BAA3-C606-4D44-B0D7-46BE7AFAC656}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Swagger", "src\modeler\AutoRest.Swagger\AutoRest.Swagger.xproj", "{9517265E-5127-460C-9DDE-FE017D73121C}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Swagger.Tests", "src\modeler\AutoRest.Swagger.Tests\AutoRest.Swagger.Tests.xproj", "{C6C4E139-D7AF-486C-95BA-2B879F58F18D}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Azure", "src\generator\AutoRest.CSharp.Azure\AutoRest.CSharp.Azure.xproj", "{4899B527-6815-4E89-84B3-DD5A507B205A}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp", "src\generator\AutoRest.CSharp\AutoRest.CSharp.xproj", "{CC1EEC95-41EF-44B6-8761-00FA3E647248}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{03E75B1D-A443-4A12-B31F-860DB2B45140}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NodeJS", "NodeJS", "{9B87B0F7-B02C-4498-BB03-B6E282F86557}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{30F628FD-5739-49E7-B9D9-37EC93F429A9}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.NodeJS.Azure", "src\generator\AutoRest.NodeJS.Azure\AutoRest.NodeJS.Azure.xproj", "{909BF4EF-4ECA-4AC4-8E21-CDCF05393161}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.NodeJS", "src\generator\AutoRest.NodeJS\AutoRest.NodeJS.xproj", "{77E73F37-9586-44EA-91B0-F244D08467D2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ruby", "Ruby", "{DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Ruby", "src\generator\AutoRest.Ruby\AutoRest.Ruby.xproj", "{A7780698-3072-486E-A105-81EDDF552598}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Ruby.Azure", "src\generator\AutoRest.Ruby.Azure\AutoRest.Ruby.Azure.xproj", "{31931998-7543-41DA-9E58-D9670D810352}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{04E8E124-852C-4B5D-83EB-0B8ADDE825CB}"
 	ProjectSection(SolutionItems) = preProject
@@ -65,78 +41,79 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gulp", "gulp", "{9750C692-C
 		Tools\gulp\gulp-runtime-version-sync.js = Tools\gulp\gulp-runtime-version-sync.js
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Java", "Java", "{A9C01442-1E93-4C2D-9182-B61C9F53C3FF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87F4BC36-8A28-4BF7-B9C4-3EE2CD9731CD}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		NuGet.Config = NuGet.Config
 		schema\swagger-extensions.json = schema\swagger-extensions.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Extensions.Azure", "src\core\AutoRest.Extensions.Azure\AutoRest.Extensions.Azure.xproj", "{90B943AB-3879-4B64-B9FF-1A21297C0F26}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Extensions.Azure.Tests", "src\core\AutoRest.Extensions.Azure.Tests\AutoRest.Extensions.Azure.Tests.xproj", "{2C062B51-EFD0-4FDC-8F75-3D76161FBCB5}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Extensions", "src\core\AutoRest.Extensions\AutoRest.Extensions.xproj", "{7DD043EB-5E53-4180-B123-CC3CC5022E34}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Extensions.Tests", "src\core\AutoRest.Extensions.Tests\AutoRest.Extensions.Tests.xproj", "{25B049BF-66AC-4B7A-B6B1-3DC74DE3951C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Python", "Python", "{74F7C659-952F-400C-839F-90BED9BB66C3}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Python.Azure", "src\generator\AutoRest.Python.Azure\AutoRest.Python.Azure.xproj", "{E631A573-C789-4E13-ABE8-5941A8008DC9}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Python", "src\generator\AutoRest.Python\AutoRest.Python.xproj", "{B3AC3239-0B12-415A-94CE-BFF6DE1A537E}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Python.Azure.Tests", "src\generator\AutoRest.Python.Azure.Tests\AutoRest.Python.Azure.Tests.xproj", "{A29CBB5F-19A8-4E80-8D16-722B02B0CF94}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Python.Tests", "src\generator\AutoRest.Python.Tests\AutoRest.Python.Tests.xproj", "{3BA8DBC9-AF2B-4CE8-A180-803E055B2FEB}"
-EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Python.Tests", "src\generator\AutoRest.Python.Tests\Python.Tests.pyproj", "{312B07BC-A830-4289-91B4-C53A2EC37D58}"
-EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Python.Tests.Azure", "src\generator\AutoRest.Python.Azure.Tests\Python.Tests.Azure.pyproj", "{74BE0601-FF65-4B46-8A8B-E670056061C4}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CompositeSwagger", "src\modeler\AutoRest.CompositeSwagger\AutoRest.CompositeSwagger.xproj", "{31AEC9B5-35C9-4FEA-8420-4C34D3FEAAC8}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CompositeSwagger.Tests", "src\modeler\AutoRest.CompositeSwagger.Tests\AutoRest.CompositeSwagger.Tests.xproj", "{DA37E6A9-5D59-45A3-A809-ABA85031C369}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureResourceSchema", "AzureResourceSchema", "{B6A1FC1E-0779-4900-84EE-262DD0E53FF4}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.AzureResourceSchema", "src\generator\AutoRest.AzureResourceSchema\AutoRest.AzureResourceSchema.xproj", "{654344A5-0556-49C7-BFB3-59676D7440D3}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.AzureResourceSchema.Tests", "src\generator\AutoRest.AzureResourceSchema.Tests\AutoRest.AzureResourceSchema.Tests.xproj", "{1C3B4A33-E045-4C8F-9202-1B651A686567}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Tests", "src\generator\AutoRest.CSharp.Tests\AutoRest.CSharp.Tests.xproj", "{784D4B45-F12A-4B8F-A86C-35A080814A19}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Azure.Tests", "src\generator\AutoRest.CSharp.Azure.Tests\AutoRest.CSharp.Azure.Tests.xproj", "{43DFEF27-2FD7-4827-A669-DFD2DD1CBBCC}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Unit.Tests", "src\generator\AutoRest.CSharp.Unit.Tests\AutoRest.CSharp.Unit.Tests.xproj", "{8192BAA3-C606-4D44-B0D7-46BE7AFA4096}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Tooling.CSharp.Compiler", "src\dev\AutoRest.Tooling.CSharp.Compiler\AutoRest.Tooling.CSharp.Compiler.xproj", "{42DC6C97-6E79-4D0A-9A1D-DD34C99248E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Go", "Go", "{1803891D-AB39-4734-8681-A213C2F55A1E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AB891A22-A69D-46E1-8C75-DB69641D3BBD}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Go", "src\generator\AutoRest.Go\AutoRest.Go.xproj", "{BEDCF556-6CEA-4EAE-ACE3-8B9EFE0818E5}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Preview", "src\dev\AutoRest.Preview\AutoRest.Preview.xproj", "{B2BB2267-019B-43BB-9225-BCB125BCD6DC}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Azure.Fluent", "src\generator\AutoRest.CSharp.Azure.Fluent\AutoRest.CSharp.Azure.Fluent.xproj", "{8464A22C-0C8D-4C84-85A8-0ACE787BDC75}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Azure.Fluent.Tests", "src\generator\AutoRest.CSharp.Azure.Fluent.Tests\AutoRest.CSharp.Azure.Fluent.Tests.xproj", "{8464A22C-0C8E-4C84-85A8-0ACE787BDC75}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Java", "src\generator\AutoRest.Java\AutoRest.Java.xproj", "{34B82690-0083-4F4C-8ABF-2D2A09304915}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Java.Azure", "src\generator\AutoRest.Java.Azure\AutoRest.Java.Azure.xproj", "{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.Java.Azure.Fluent", "src\generator\AutoRest.Java.Azure.Fluent\AutoRest.Java.Azure.Fluent.xproj", "{D35E97FD-E360-4DAA-96D0-DA45F32150B9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TypeScript", "TypeScript", "{E9D3F4E8-BAE0-487B-89B5-6E271D9848B8}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.TypeScript.SuperAgent", "src\generator\AutoRest.TypeScript.SuperAgent\AutoRest.TypeScript.SuperAgent.xproj", "{2F19209C-3A73-4864-8DA3-3BC82BD4A061}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Core", "src\core\AutoRest.Core\AutoRest.Core.csproj", "{C876085F-9DC3-41F0-B7B4-17022CD84684}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.TypeScript.SuperAgent.Tests", "src\generator\AutoRest.TypeScript.SuperAgent.Tests\AutoRest.TypeScript.SuperAgent.Tests.xproj", "{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest", "src\core\AutoRest\AutoRest.csproj", "{F589D8B7-1B0F-4182-842B-09866A4A2CEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Core.Tests", "src\core\AutoRest.Core.Tests\AutoRest.Core.Tests.csproj", "{31E6BAA3-C606-4D44-B0D7-46BE7AFAC656}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Swagger", "src\modeler\AutoRest.Swagger\AutoRest.Swagger.csproj", "{9517265E-5127-460C-9DDE-FE017D73121C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Swagger.Tests", "src\modeler\AutoRest.Swagger.Tests\AutoRest.Swagger.Tests.csproj", "{C6C4E139-D7AF-486C-95BA-2B879F58F18D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.Azure", "src\generator\AutoRest.CSharp.Azure\AutoRest.CSharp.Azure.csproj", "{4899B527-6815-4E89-84B3-DD5A507B205A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp", "src\generator\AutoRest.CSharp\AutoRest.CSharp.csproj", "{CC1EEC95-41EF-44B6-8761-00FA3E647248}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.NodeJS.Azure", "src\generator\AutoRest.NodeJS.Azure\AutoRest.NodeJS.Azure.csproj", "{909BF4EF-4ECA-4AC4-8E21-CDCF05393161}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.NodeJS", "src\generator\AutoRest.NodeJS\AutoRest.NodeJS.csproj", "{77E73F37-9586-44EA-91B0-F244D08467D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Extensions.Azure", "src\core\AutoRest.Extensions.Azure\AutoRest.Extensions.Azure.csproj", "{90B943AB-3879-4B64-B9FF-1A21297C0F26}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Extensions.Azure.Tests", "src\core\AutoRest.Extensions.Azure.Tests\AutoRest.Extensions.Azure.Tests.csproj", "{2C062B51-EFD0-4FDC-8F75-3D76161FBCB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Extensions", "src\core\AutoRest.Extensions\AutoRest.Extensions.csproj", "{7DD043EB-5E53-4180-B123-CC3CC5022E34}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Extensions.Tests", "src\core\AutoRest.Extensions.Tests\AutoRest.Extensions.Tests.csproj", "{25B049BF-66AC-4B7A-B6B1-3DC74DE3951C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CompositeSwagger", "src\modeler\AutoRest.CompositeSwagger\AutoRest.CompositeSwagger.csproj", "{31AEC9B5-35C9-4FEA-8420-4C34D3FEAAC8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CompositeSwagger.Tests", "src\modeler\AutoRest.CompositeSwagger.Tests\AutoRest.CompositeSwagger.Tests.csproj", "{DA37E6A9-5D59-45A3-A809-ABA85031C369}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.AzureResourceSchema", "src\generator\AutoRest.AzureResourceSchema\AutoRest.AzureResourceSchema.csproj", "{654344A5-0556-49C7-BFB3-59676D7440D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.AzureResourceSchema.Tests", "src\generator\AutoRest.AzureResourceSchema.Tests\AutoRest.AzureResourceSchema.Tests.csproj", "{1C3B4A33-E045-4C8F-9202-1B651A686567}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.Tests", "src\generator\AutoRest.CSharp.Tests\AutoRest.CSharp.Tests.csproj", "{784D4B45-F12A-4B8F-A86C-35A080814A19}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.Azure.Tests", "src\generator\AutoRest.CSharp.Azure.Tests\AutoRest.CSharp.Azure.Tests.csproj", "{43DFEF27-2FD7-4827-A669-DFD2DD1CBBCC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.Unit.Tests", "src\generator\AutoRest.CSharp.Unit.Tests\AutoRest.CSharp.Unit.Tests.csproj", "{8192BAA3-C606-4D44-B0D7-46BE7AFA4096}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Tooling.CSharp.Compiler", "src\dev\AutoRest.Tooling.CSharp.Compiler\AutoRest.Tooling.CSharp.Compiler.csproj", "{42DC6C97-6E79-4D0A-9A1D-DD34C99248E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Go", "src\generator\AutoRest.Go\AutoRest.Go.csproj", "{BEDCF556-6CEA-4EAE-ACE3-8B9EFE0818E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Preview", "src\dev\AutoRest.Preview\AutoRest.Preview.csproj", "{B2BB2267-019B-43BB-9225-BCB125BCD6DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.Azure.Fluent", "src\generator\AutoRest.CSharp.Azure.Fluent\AutoRest.CSharp.Azure.Fluent.csproj", "{8464A22C-0C8D-4C84-85A8-0ACE787BDC75}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.Azure.Fluent.Tests", "src\generator\AutoRest.CSharp.Azure.Fluent.Tests\AutoRest.CSharp.Azure.Fluent.Tests.csproj", "{8464A22C-0C8E-4C84-85A8-0ACE787BDC75}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.TypeScript.SuperAgent", "src\generator\AutoRest.TypeScript.SuperAgent\AutoRest.TypeScript.SuperAgent.csproj", "{2F19209C-3A73-4864-8DA3-3BC82BD4A061}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.TypeScript.SuperAgent.Tests", "src\generator\AutoRest.TypeScript.SuperAgent.Tests\AutoRest.TypeScript.SuperAgent.Tests.csproj", "{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced", "src\generator\AutoRest.CSharp.LoadBalanced\AutoRest.CSharp.LoadBalanced.csproj", "{C024F83F-73E6-40F4-8150-128C70226301}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced.Tests", "src\generator\AutoRest.CSharp.LoadBalanced.Tests\AutoRest.CSharp.LoadBalanced.Tests.csproj", "{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced.Json", "src\generator\AutoRest.CSharp.LoadBalanced.Json\AutoRest.CSharp.LoadBalanced.Json.csproj", "{E43394E0-0E28-4743-A63B-95FCDA9609CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -180,14 +157,6 @@ Global
 		{77E73F37-9586-44EA-91B0-F244D08467D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77E73F37-9586-44EA-91B0-F244D08467D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77E73F37-9586-44EA-91B0-F244D08467D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7780698-3072-486E-A105-81EDDF552598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7780698-3072-486E-A105-81EDDF552598}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7780698-3072-486E-A105-81EDDF552598}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7780698-3072-486E-A105-81EDDF552598}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31931998-7543-41DA-9E58-D9670D810352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31931998-7543-41DA-9E58-D9670D810352}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31931998-7543-41DA-9E58-D9670D810352}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31931998-7543-41DA-9E58-D9670D810352}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90B943AB-3879-4B64-B9FF-1A21297C0F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90B943AB-3879-4B64-B9FF-1A21297C0F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90B943AB-3879-4B64-B9FF-1A21297C0F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -204,26 +173,6 @@ Global
 		{25B049BF-66AC-4B7A-B6B1-3DC74DE3951C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25B049BF-66AC-4B7A-B6B1-3DC74DE3951C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25B049BF-66AC-4B7A-B6B1-3DC74DE3951C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E631A573-C789-4E13-ABE8-5941A8008DC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E631A573-C789-4E13-ABE8-5941A8008DC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E631A573-C789-4E13-ABE8-5941A8008DC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E631A573-C789-4E13-ABE8-5941A8008DC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3AC3239-0B12-415A-94CE-BFF6DE1A537E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3AC3239-0B12-415A-94CE-BFF6DE1A537E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3AC3239-0B12-415A-94CE-BFF6DE1A537E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3AC3239-0B12-415A-94CE-BFF6DE1A537E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A29CBB5F-19A8-4E80-8D16-722B02B0CF94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A29CBB5F-19A8-4E80-8D16-722B02B0CF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A29CBB5F-19A8-4E80-8D16-722B02B0CF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A29CBB5F-19A8-4E80-8D16-722B02B0CF94}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3BA8DBC9-AF2B-4CE8-A180-803E055B2FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3BA8DBC9-AF2B-4CE8-A180-803E055B2FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3BA8DBC9-AF2B-4CE8-A180-803E055B2FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3BA8DBC9-AF2B-4CE8-A180-803E055B2FEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{312B07BC-A830-4289-91B4-C53A2EC37D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{312B07BC-A830-4289-91B4-C53A2EC37D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74BE0601-FF65-4B46-8A8B-E670056061C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74BE0601-FF65-4B46-8A8B-E670056061C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31AEC9B5-35C9-4FEA-8420-4C34D3FEAAC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{31AEC9B5-35C9-4FEA-8420-4C34D3FEAAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31AEC9B5-35C9-4FEA-8420-4C34D3FEAAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -272,18 +221,6 @@ Global
 		{8464A22C-0C8E-4C84-85A8-0ACE787BDC75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8464A22C-0C8E-4C84-85A8-0ACE787BDC75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8464A22C-0C8E-4C84-85A8-0ACE787BDC75}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34B82690-0083-4F4C-8ABF-2D2A09304915}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34B82690-0083-4F4C-8ABF-2D2A09304915}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34B82690-0083-4F4C-8ABF-2D2A09304915}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34B82690-0083-4F4C-8ABF-2D2A09304915}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D35E97FD-E360-4DAA-96D0-DA45F32150B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D35E97FD-E360-4DAA-96D0-DA45F32150B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D35E97FD-E360-4DAA-96D0-DA45F32150B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D35E97FD-E360-4DAA-96D0-DA45F32150B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F19209C-3A73-4864-8DA3-3BC82BD4A061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2F19209C-3A73-4864-8DA3-3BC82BD4A061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F19209C-3A73-4864-8DA3-3BC82BD4A061}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -292,11 +229,32 @@ Global
 		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C024F83F-73E6-40F4-8150-128C70226301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C024F83F-73E6-40F4-8150-128C70226301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C024F83F-73E6-40F4-8150-128C70226301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C024F83F-73E6-40F4-8150-128C70226301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E43394E0-0E28-4743-A63B-95FCDA9609CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E43394E0-0E28-4743-A63B-95FCDA9609CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E43394E0-0E28-4743-A63B-95FCDA9609CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E43394E0-0E28-4743-A63B-95FCDA9609CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{03E75B1D-A443-4A12-B31F-860DB2B45140} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
+		{9B87B0F7-B02C-4498-BB03-B6E282F86557} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
+		{30F628FD-5739-49E7-B9D9-37EC93F429A9} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
+		{04E8E124-852C-4B5D-83EB-0B8ADDE825CB} = {87F4BC36-8A28-4BF7-B9C4-3EE2CD9731CD}
+		{5989E210-AE15-4DF4-8CEE-DEE609740FD2} = {04E8E124-852C-4B5D-83EB-0B8ADDE825CB}
+		{9750C692-C2D0-4D0F-9F73-D45DB9E906CE} = {5989E210-AE15-4DF4-8CEE-DEE609740FD2}
+		{B6A1FC1E-0779-4900-84EE-262DD0E53FF4} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
+		{1803891D-AB39-4734-8681-A213C2F55A1E} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
+		{E9D3F4E8-BAE0-487B-89B5-6E271D9848B8} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
 		{C876085F-9DC3-41F0-B7B4-17022CD84684} = {AB891A22-A69D-46E1-8C75-DB69641D3BBD}
 		{F589D8B7-1B0F-4182-842B-09866A4A2CEB} = {AB891A22-A69D-46E1-8C75-DB69641D3BBD}
 		{31E6BAA3-C606-4D44-B0D7-46BE7AFAC656} = {AB891A22-A69D-46E1-8C75-DB69641D3BBD}
@@ -304,47 +262,30 @@ Global
 		{C6C4E139-D7AF-486C-95BA-2B879F58F18D} = {02144BF6-4489-4AFC-9B2D-0306C3DD3C19}
 		{4899B527-6815-4E89-84B3-DD5A507B205A} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{CC1EEC95-41EF-44B6-8761-00FA3E647248} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
-		{03E75B1D-A443-4A12-B31F-860DB2B45140} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
-		{9B87B0F7-B02C-4498-BB03-B6E282F86557} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
-		{30F628FD-5739-49E7-B9D9-37EC93F429A9} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
 		{909BF4EF-4ECA-4AC4-8E21-CDCF05393161} = {9B87B0F7-B02C-4498-BB03-B6E282F86557}
 		{77E73F37-9586-44EA-91B0-F244D08467D2} = {9B87B0F7-B02C-4498-BB03-B6E282F86557}
-		{DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
-		{A7780698-3072-486E-A105-81EDDF552598} = {DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}
-		{31931998-7543-41DA-9E58-D9670D810352} = {DE95444A-F6FD-46DC-BBDC-A1A6886A6F2D}
-		{04E8E124-852C-4B5D-83EB-0B8ADDE825CB} = {87F4BC36-8A28-4BF7-B9C4-3EE2CD9731CD}
-		{5989E210-AE15-4DF4-8CEE-DEE609740FD2} = {04E8E124-852C-4B5D-83EB-0B8ADDE825CB}
-		{9750C692-C2D0-4D0F-9F73-D45DB9E906CE} = {5989E210-AE15-4DF4-8CEE-DEE609740FD2}
-		{A9C01442-1E93-4C2D-9182-B61C9F53C3FF} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
 		{90B943AB-3879-4B64-B9FF-1A21297C0F26} = {30F628FD-5739-49E7-B9D9-37EC93F429A9}
 		{2C062B51-EFD0-4FDC-8F75-3D76161FBCB5} = {30F628FD-5739-49E7-B9D9-37EC93F429A9}
 		{7DD043EB-5E53-4180-B123-CC3CC5022E34} = {30F628FD-5739-49E7-B9D9-37EC93F429A9}
 		{25B049BF-66AC-4B7A-B6B1-3DC74DE3951C} = {30F628FD-5739-49E7-B9D9-37EC93F429A9}
-		{74F7C659-952F-400C-839F-90BED9BB66C3} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
-		{E631A573-C789-4E13-ABE8-5941A8008DC9} = {74F7C659-952F-400C-839F-90BED9BB66C3}
-		{B3AC3239-0B12-415A-94CE-BFF6DE1A537E} = {74F7C659-952F-400C-839F-90BED9BB66C3}
-		{A29CBB5F-19A8-4E80-8D16-722B02B0CF94} = {74F7C659-952F-400C-839F-90BED9BB66C3}
-		{3BA8DBC9-AF2B-4CE8-A180-803E055B2FEB} = {74F7C659-952F-400C-839F-90BED9BB66C3}
-		{312B07BC-A830-4289-91B4-C53A2EC37D58} = {74F7C659-952F-400C-839F-90BED9BB66C3}
-		{74BE0601-FF65-4B46-8A8B-E670056061C4} = {74F7C659-952F-400C-839F-90BED9BB66C3}
 		{31AEC9B5-35C9-4FEA-8420-4C34D3FEAAC8} = {02144BF6-4489-4AFC-9B2D-0306C3DD3C19}
 		{DA37E6A9-5D59-45A3-A809-ABA85031C369} = {02144BF6-4489-4AFC-9B2D-0306C3DD3C19}
-		{B6A1FC1E-0779-4900-84EE-262DD0E53FF4} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
 		{654344A5-0556-49C7-BFB3-59676D7440D3} = {B6A1FC1E-0779-4900-84EE-262DD0E53FF4}
 		{1C3B4A33-E045-4C8F-9202-1B651A686567} = {B6A1FC1E-0779-4900-84EE-262DD0E53FF4}
 		{784D4B45-F12A-4B8F-A86C-35A080814A19} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{43DFEF27-2FD7-4827-A669-DFD2DD1CBBCC} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{8192BAA3-C606-4D44-B0D7-46BE7AFA4096} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{42DC6C97-6E79-4D0A-9A1D-DD34C99248E2} = {AB891A22-A69D-46E1-8C75-DB69641D3BBD}
-		{1803891D-AB39-4734-8681-A213C2F55A1E} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
 		{BEDCF556-6CEA-4EAE-ACE3-8B9EFE0818E5} = {1803891D-AB39-4734-8681-A213C2F55A1E}
 		{8464A22C-0C8D-4C84-85A8-0ACE787BDC75} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{8464A22C-0C8E-4C84-85A8-0ACE787BDC75} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
-		{34B82690-0083-4F4C-8ABF-2D2A09304915} = {A9C01442-1E93-4C2D-9182-B61C9F53C3FF}
-		{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C} = {A9C01442-1E93-4C2D-9182-B61C9F53C3FF}
-		{D35E97FD-E360-4DAA-96D0-DA45F32150B9} = {A9C01442-1E93-4C2D-9182-B61C9F53C3FF}
-		{E9D3F4E8-BAE0-487B-89B5-6E271D9848B8} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
 		{2F19209C-3A73-4864-8DA3-3BC82BD4A061} = {E9D3F4E8-BAE0-487B-89B5-6E271D9848B8}
 		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B} = {E9D3F4E8-BAE0-487B-89B5-6E271D9848B8}
+		{C024F83F-73E6-40F4-8150-128C70226301} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+		{E43394E0-0E28-4743-A63B-95FCDA9609CD} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {36B0BD32-4C82-443A-9497-B3C291CCBCD4}
 	EndGlobalSection
 EndGlobal

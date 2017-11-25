@@ -124,7 +124,24 @@ namespace AutoRest.Core.Model
             set { _url.CopyFrom(value); }
         }
 
+        public Parameter[] QueryParameters
+        {
+            get
+            {
+                var parameters = LogicalParameters.Where(p => !p.IsClientProperty).ToArray();
+                return parameters;
+            }
+        }
 
+        public string FromattedUrl
+        {
+            get
+            {
+                var url = Url.TrimStart('/');
+
+                return url;
+            }
+        }
 
         /// <summary>
         /// Indicates whether the HTTP url is absolute.

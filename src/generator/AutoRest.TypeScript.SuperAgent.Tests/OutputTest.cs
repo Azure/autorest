@@ -14,7 +14,7 @@ namespace AutoRest.TypeScript.SuperAgent.Tests
         public void PassingTest()
         {
             var workingDir = Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\Resource");
-            var inputFile = Path.Combine(workingDir, "test1-tags.json");
+            var inputFile = Path.Combine(workingDir, "test1.json");
 
             using (var context = new DependencyInjection.Context().Activate())
             {

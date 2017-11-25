@@ -3,7 +3,6 @@
 
 using System.Globalization;
 using System.Linq;
-using System.Reflection.Metadata;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.CSharp.Model;
