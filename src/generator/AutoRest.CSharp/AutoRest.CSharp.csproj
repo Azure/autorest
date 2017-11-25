@@ -34,5 +34,6 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
+  <Import Project="$(SolutionDir)tools\Autorest.xproj.targets"/>
 
 </Project>
