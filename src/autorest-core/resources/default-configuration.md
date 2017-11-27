@@ -185,6 +185,9 @@ help-content: # type: Help as defined in autorest-core/help.ts
     - key: message-format
       type: "\"regular\" | \"json\""
       description: "format of messages (e.g. from OpenAPI validation); default: \"regular\""
+    - key: github-auth-token
+      type: string
+      description: OAuth token to use when pointing AutoRest at files living in a private GitHub repository
   _autorest-core-1:
     categoryFriendlyName: Core Functionality
     description: "> While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),\n> we officially support and maintain the following functionality.\n> More specific help is shown when combining the following switches with `--help` ."
