@@ -177,6 +177,8 @@ help-content: # type: Help as defined in autorest-core/help.ts
     - key: output-folder
       type: string
       description: "target folder for generated artifacts; default: \"<base folder>/generated\""
+    - key: clear-output-folder
+      description: clear the output folder before writing generated artifacts to disk (use with extreme caution!)
     - key: base-folder
       type: string
       description: "path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise"
