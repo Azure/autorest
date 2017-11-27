@@ -192,14 +192,6 @@ namespace AutoRest.CSharp.LoadBalanced
                 await Write(modelTemplate, modelPath);
             }
 
-            var projectTemplate = new CsProjTemplate { Model = project };
-            var projFilePath = $"{project.RootNameSpace}.csproj";
-
-            var solutionTemplate = new SlnTemplate { Model = project };
-            var slnFilePath = $"{project.RootNameSpace}.sln";
-
-            await Write(projectTemplate, projFilePath);
-            await Write(solutionTemplate, slnFilePath);
             await Write(new PackagesTemplate(), "packages.config");
         }
 
