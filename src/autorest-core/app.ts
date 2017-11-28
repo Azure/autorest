@@ -7,7 +7,6 @@ require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd
 if (!String.prototype.padEnd) {
