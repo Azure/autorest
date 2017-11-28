@@ -528,6 +528,10 @@ export class Configuration {
 }
 
 }
+declare module 'autorest-core/app' {
+	export function showHelp(): Promise<void>;
+
+}
 declare module 'autorest-core/main' {
 	export { IFileSystem } from 'autorest-core/lib/file-system';
 export { Message, Channel } from 'autorest-core/lib/message';
