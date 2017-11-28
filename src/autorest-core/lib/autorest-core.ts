@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { showHelp } from '../app';
 import { RunPipeline } from "./pipeline/pipeline";
 import { Push } from "./ref/linq";
 import { IEvent, EventEmitter } from "./events";
@@ -11,7 +12,7 @@ import { Exception } from "./exception";
 import { Configuration, ConfigurationView, MessageEmitter } from "./configuration";
 export { ConfigurationView } from "./configuration";
 import { Message, Channel } from "./message";
-import * as Constants from "./constants";
+import * as Constants from './constants';
 import { Artifact } from "./artifact";
 import { homedir } from "os"
 import { DocumentType } from "./document-type";
@@ -114,7 +115,9 @@ export class AutoRest extends EventEmitter {
             this.Finished.Dispatch(true);
             return true;
           } else {
-            return new Exception("No input files provided.\n\nUse --help to get help information.");
+            console.error("No input files provided.");
+            await showHelp();
+            return false;
           }
         }
 
