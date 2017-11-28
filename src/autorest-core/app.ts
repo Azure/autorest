@@ -64,7 +64,7 @@ function awaitable(child: ChildProcess): Promise<number> {
   });
 }
 
-export async function showHelp(): Promise<void> {
+async function showHelp(): Promise<void> {
   await currentMain(["--help"]);
 }
 

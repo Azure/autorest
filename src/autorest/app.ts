@@ -112,7 +112,7 @@ args["preview"] = args["preview"] || args["prerelease"];
 
 // argument tweakin'
 const preview: boolean = args.preview;
-args.info = (args.version === "") || args.info; // show --info if they use unparameterized --version.
+args.info = (args.version === "" || args.version === true) || args.info; // show --info if they use unparameterized --version.
 let requestedVersion: string = args.version || (args.latest && "latest") || (args.preview && "preview") || "latest-installed";
 const listAvailable: boolean = args["list-available"] || false;
 let force = args.force || false;
