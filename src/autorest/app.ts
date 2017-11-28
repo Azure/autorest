@@ -6,6 +6,25 @@ require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+// https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd
+if (!String.prototype.padEnd) {
+  String.prototype.padEnd = function padEnd(targetLength, padString) {
+    targetLength = targetLength >> 0; //floor if number or convert non-number to 0;
+    padString = String(padString || ' ');
+    if (this.length > targetLength) {
+      return String(this);
+    }
+    else {
+      targetLength = targetLength - this.length;
+      if (targetLength > padString.length) {
+        padString += padString.repeat(targetLength / padString.length); //append to original to ensure we are longer than needed
+      }
+      return String(this) + padString.slice(0, targetLength);
+    }
+  };
+}
+
 if (process.argv.indexOf("--no-upgrade-check") != -1) {
   process.argv.push("--skip-upgrade-check");
 }
@@ -113,7 +132,6 @@ args["preview"] = args["preview"] || args["prerelease"];
 // argument tweakin'
 const preview: boolean = args.preview;
 args.info = (args.version === "" || args.version === true) || args.info; // show --info if they use unparameterized --version.
-let requestedVersion: string = args.version || (args.latest && "latest") || (args.preview && "preview") || "latest-installed";
 const listAvailable: boolean = args["list-available"] || false;
 let force = args.force || false;
 
@@ -207,8 +225,10 @@ async function main() {
       }
     }
 
+    let requestedVersion: string = args.version || (args.latest && "latest") || (args.preview && "preview") || "latest-installed";
+
     // check to see if local installed core is available.
-    const localVersion = resolvePathForLocalVersion(args.version && args.version !== '' ? requestedVersion : null);
+    const localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
 
     // try to use a specified folder or one in node_modules if it is there.
     if (await tryRequire(localVersion, "app.js")) {

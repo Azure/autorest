@@ -1,9 +1,9 @@
 # AutoRest Extensions for OpenAPI 2.0
 
-## Introduction
+### Introduction
 The following documents describes AutoRest specific vendor extensions for [OpenAPI 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) schema. Some of the extensions are only applicable to Microsoft Azure and as such are only available in Azure code generators (e.g. Azure.CSharp, Azure.NodeJS, etc.).
 
-## Generic Extensions
+### Generic Extensions
 * [x-ms-code-generation-settings](#x-ms-code-generation-settings) - enables passing code generation settings via OpenAPI definition (*deprecated! Please use configuration files instead.*)
 * [x-ms-skip-url-encoding](#x-ms-skip-url-encoding) - skips URL encoding for path and query parameters
 * [x-ms-enum](#x-ms-enum) - additional metadata for enums
@@ -18,13 +18,15 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 * [x-ms-mutability](#x-ms-mutability) - provides insight to Autorest on how to generate code. It doesn't alter the modeling of what is actually sent on the wire.
 * [x-ms-examples](#x-ms-examples) - describes the format for specifying examples for request and response of an operation in an OpenAPI definition.
 
-## Microsoft Azure Extensions
+### Microsoft Azure Extensions (available in most generators only when using `--azure-arm`)
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
 * [x-ms-pageable](#x-ms-pageable) - allows paging through lists of data.
 * [x-ms-long-running-operation](#x-ms-long-running-operation) - indicates that the operation implemented Long Running Operation pattern as defined by the [Resource Managemer API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx).
 * [x-ms-azure-resource](#x-ms-azure-resource) - indicates that the [Definition Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject) is a resource as defined by the [Resource Managemer API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx)
 * [x-ms-request-id](#x-ms-request-id) - allows to overwrite the request id header name
 * [x-ms-client-request-id](#x-ms-client-request-id) - allows to overwrite the client request id header name
+
+# Generic Extensions
 
 ## x-ms-code-generation-settings
 `x-ms-code-generation-settings` extension on `info` element enables passing code generation settings via the OpenAPI definition.
@@ -679,6 +681,8 @@ Examples:
 Describes the format for specifying examples for request and response of an operation in an OpenAPI definition. It is a **dictionary** of different variations of the examples for a given operation.
 
 More information about this extension can be found [here](https://github.com/Azure/azure-rest-api-specs/tree/master/documentation/x-ms-examples.md).
+
+# Microsoft Azure Extensions (available in most generators only when using `--azure-arm`)
 
 ## x-ms-odata
 When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.
