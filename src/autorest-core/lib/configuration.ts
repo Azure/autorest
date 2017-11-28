@@ -824,7 +824,7 @@ export class Configuration {
     } else {
       if (messageEmitter && results.length === 0) {
         messageEmitter.Message.Dispatch({
-          Channel: Channel.Warning,
+          Channel: Channel.Verbose,
           Text: `No configuration found at '${originalConfigFileOrFolderUri}'.`
         });
       }

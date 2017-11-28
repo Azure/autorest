@@ -69,6 +69,67 @@ directive:
         : $
     where: $.definitions.*.additionalProperties
 disable-validation: false
+help-content:
+  csharp:
+    activationScope: csharp
+    categoryFriendlyName: 'C# Generator'
+    settings:
+      - description: generate code in Azure flavor
+        key: azure-arm
+      - description: generate code in fluent flavor
+        key: fluent
+      - description: determines the root namespace to be used in generated code
+        key: namespace
+        required: true
+        type: string
+      - description: >-
+          text to include as a header comment in generated files (magic strings:
+          MICROSOFT_MIT, MICROSOFT_APACHE, MICROSOFT_MIT_NO_VERSION,
+          MICROSOFT_APACHE_NO_VERSION, MICROSOFT_MIT_NO_CODEGEN)
+        key: license-header
+        type: string
+      - description: >-
+          max. number of properties in a request body. If the number of
+          properties in the request body is less than or equal to this value,
+          these properties will be represented as individual method arguments
+          instead
+        key: payload-flattening-threshold
+        type: number
+      - description: >-
+          include a credential property and constructor parameter supporting
+          different authentication behaviors
+        key: add-credentials
+      - description: >-
+          overrides the name of the client class (usually derived from
+          $.info.title)
+        key: override-client-name
+        type: string
+      - description: >-
+          generate constructors with internal instead of public visibility
+          (useful for convenience layers)
+        key: use-internal-constructors
+      - description: >-
+          determines amount of synchronous wrappers to generate; default:
+          essential
+        key: sync-methods
+        type: '"essential" | "all" | "none"'
+      - description: use DateTimeOffset instead of DateTime to model date/time types
+        key: use-datetimeoffset
+      - description: >-
+          whether to validate parameters at the client side (according to
+          OpenAPI definition) before making a request; default: true
+        key: client-side-validation
+        type: boolean
+      - description: maximum line width of comments before breaking into a new line
+        key: max-comment-columns
+        type: number
+      - description: >-
+          generate all code into the specified, single file (instead of the
+          usual folder structure)
+        key: output-file
+        type: string
+      - description: generate sample code from x-ms-examples (experimental)
+        key: sample-generation
 input-file:
   - >-
     https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json
@@ -279,10 +340,8 @@ scope-configuration-emitter:
     "configuration"
 scope-csharp/emitter:
   input-artifact: source-file-csharp
-  output-uri-expr: $key
 scope-jsonrpcclient/emitter:
   input-artifact: source-file-jsonrpcclient
-  output-uri-expr: $key
 scope-openapi-document/emitter:
   input-artifact: openapi-document
   is-object: true

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AutoRest dashboard</title>
+    <style>
+        .loading {
+            display: inline-block;
+            height: 16px;
+            width: 16px;
+            background: gray;
+            animation: loading 1s infinite ease-in-out;
+        }
+
+        @keyframes loading {
+            0% {
+                transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            }
+            50% {
+                transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            }
+            100% {
+                transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            }
+        }
+
+        details tr.optional {
+            display: none;
+        }
+        details[open] tr.optional {
+            display: initial;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        const httpGet = (url, type) => new Promise((res, rej) => $.get(url, res, type).fail(rej));
+
+        const azureBlobContainer_coverage = "https://autorestci1.blob.core.windows.net/autorest-ci-coverage-report";
+        const coverageCategories = ["General", "Azure"];
+
+        function semverCompare(v1, v2) {
+            const v1parts = v1.split('.').map(Number);
+            const v2parts = v2.split('.').map(Number);
+
+            for (var i = 0; i < Math.min(v1parts.length, v2parts.length); ++i)
+                if (v1parts[i] != v2parts[i])
+                    return v1parts[i] > v2parts[i] ? 1 : -1;
+
+            if (v1parts.length != v2parts.length)
+                return v1parts.length > v2parts.length ? 1 : -1;
+            return 0;
+        }
+
+        async function deferredUI(targetUI, operation) {
+            targetUI.empty();
+            targetUI.append($("<span class='loading' />"));
+            const resultUI = await operation();
+            targetUI.empty();
+            targetUI.append(resultUI);
+        }
+
+        async function refresh() {
+            const generatorFeatureCoverage = $("#generatorFeatureCoverage");
+
+            deferredUI(generatorFeatureCoverage, async () => {
+                const reportsXml = await httpGet(`${azureBlobContainer_coverage}?restype=container&comp=list`, "xml");
+                const reports = [...$(reportsXml).find("Name").map((i, o) => $(o).text())];
+                const reportsByRepo/*: { [repo: string]: { version: string, uri: string }[]] }*/ = {};
+                for (const report of reports) {
+                    const [match, repo, version] = /^autorest\.(.+)_(.+)\.md$/.exec(report);
+                    if (!reportsByRepo[repo]) reportsByRepo[repo] = [];
+                    reportsByRepo[repo].push({ version: version, uri: `${azureBlobContainer_coverage}/${report}` });
+                }
+
+                const result = $("<div>")
+                for (const repo of Object.keys(reportsByRepo)) {
+                    let section = $("<details>").appendTo(result);
+                    section = $("<summary>").appendTo(section);
+
+                    section.append($("<h2>").text(repo).css("display", "inline-block"));
+                    const table = $("<table>");
+                    section.append(table);
+                    table.append($("<tr>")
+                        .append($("<th>").text("Version"))
+                        .append(coverageCategories.map(cat => $("<th>").text(cat))));
+
+                    const versions = reportsByRepo[repo].sort((a, b) => semverCompare(a.version, b.version)).reverse();
+                    let subsequent = false;
+                    for (const version of versions) {
+                        const request = httpGet(version.uri, "text");
+                        const coverages = coverageCategories.map(cat => {
+                            const cell = $("<td>");
+                            deferredUI(cell, async () => {
+                                const response = await request;
+                                const coverage = / (\d+)%/.exec(response.split("\n").filter(l => l.startsWith("##") && l.includes(cat))[0])[1];
+                                return coverage + "%";
+                            });
+                            return cell;
+                        });
+                        table.append($("<tr>")
+                            .addClass(subsequent ? "optional" : "")
+                            .append($("<td>").text(version.version))
+                            .append(coverages));
+                        subsequent = true;
+                    }
+                }
+                // alert(JSON.stringify(reportsByRepo));
+
+                // const x = await httpGet("http://registry.npmjs.org/@microsoft.azure%2Fautorest.java", "json");
+                // alert(JSON.stringify(x["dist-tags"]));
+
+                return result;
+            });
+        }
+
+        $(() => refresh());
+    </script>
+</head>
+
+<body>
+    <h1>Generator Feature Coverage</h1>
+    <div id="generatorFeatureCoverage"></div>
+</body>
+
+</html>

@@ -41,6 +41,9 @@
 
 
 
+
+
+
    More specific help is shown when combining the following switches with --help .
    More specific help is shown when combining the following switches with --help .
    More specific help is shown when combining the following switches with --help .
@@ -56,6 +59,14 @@
    While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),
    While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),
    While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),
+  --add-credentials             include a credential property and constructor parameter supporting different authentication behaviors
+  --add-credentials             include a credential property and constructor parameter supporting different authentication behaviors
+  --add-credentials             include a credential property and constructor parameter supporting different authentication behaviors
+  --add-credentials             include a credential property and constructor parameter supporting different authentication behaviors. This value is frozen to true if azure-arm=true.
+  --azure-arm                   generate code in Azure flavor
+  --azure-arm                   generate code in Azure flavor
+  --azure-arm                   generate code in Azure flavor
+  --azure-arm                   generate code in Azure flavor
   --azure-validator             validates an OpenAPI document against guidelines to improve quality (and optionally Azure guidelines)
   --azure-validator             validates an OpenAPI document against guidelines to improve quality (and optionally Azure guidelines)
   --azure-validator             validates an OpenAPI document against guidelines to improve quality (and optionally Azure guidelines)
@@ -71,6 +82,16 @@
   --base-folder=<string>        path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
   --base-folder=<string>        path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
   --base-folder=<string>        path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise
+  --basic-setup-py=<bool>       If used, generate a basic setup.py to build a wheel package.
+  --clear-output-folder         clear the output folder before writing generated artifacts to disk (use with extreme caution!)
+  --clear-output-folder         clear the output folder before writing generated artifacts to disk (use with extreme caution!)
+  --clear-output-folder         clear the output folder before writing generated artifacts to disk (use with extreme caution!)
+  --clear-output-folder         clear the output folder before writing generated artifacts to disk (use with extreme caution!)
+  --clear-output-folder         clear the output folder before writing generated artifacts to disk (use with extreme caution!)
+  --client-side-validation=<boolean>  whether to validate parametersat ...
+  --client-side-validation=<boolean>  whether to validate parametersat ...
+  --client-side-validation=<boolean>  whether to validate parametersat ...
+  --client-side-validation=<boolean>  whether to validate parametersat ...
   --csharp                      generate C# client code
   --csharp                      generate C# client code
   --csharp                      generate C# client code
@@ -81,11 +102,19 @@
   --debug                       display debug logging information
   --debug                       display debug logging information
   --debug                       display debug logging information
+  --fluent                      generate code in fluent flavor
+  --fluent                      generate code in fluent flavor
+  --fluent                      generate code in fluent flavor
   --force                       force the re-installation of the autorest-core extension and frameworks
   --force                       force the re-installation of the autorest-core extension and frameworks
   --force                       force the re-installation of the autorest-core extension and frameworks
   --force                       force the re-installation of the autorest-core extension and frameworks
   --force                       force the re-installation of the autorest-core extension and frameworks
+  --github-auth-token=<string>  OAuth token to use when pointing AutoRestat ...
+  --github-auth-token=<string>  OAuth token to use when pointing AutoRestat ...
+  --github-auth-token=<string>  OAuth token to use when pointing AutoRestat ...
+  --github-auth-token=<string>  OAuth token to use when pointing AutoRestat ...
+  --github-auth-token=<string>  OAuth token to use when pointing AutoRestat ...
   --go                          generate Go client code
   --go                          generate Go client code
   --go                          generate Go client code
@@ -116,6 +145,10 @@
   --latest                      installs the latest autorest-core extension
   --latest                      installs the latest autorest-core extension
   --latest                      installs the latest autorest-core extension
+  --license-header=<string>     text to include as a header comment in generated files (magic strings: MICROSOFT_MIT, MICROSOFT_APACHE, MICROSOFT_MIT_NO_VERSION, MICROSOFT_APACHE_NO_VERSION, MICROSOFT_MIT_NO_CODEGEN)
+  --license-header=<string>     text to include as a header comment in generated files (magic strings: MICROSOFT_MIT, MICROSOFT_APACHE, MICROSOFT_MIT_NO_VERSION, MICROSOFT_APACHE_NO_VERSION, MICROSOFT_MIT_NO_CODEGEN)
+  --license-header=<string>     text to include as a header comment in generated files (magic strings: MICROSOFT_MIT, MICROSOFT_APACHE, MICROSOFT_MIT_NO_VERSION, MICROSOFT_APACHE_NO_VERSION, MICROSOFT_MIT_NO_CODEGEN)
+  --license-header=<string>     text to include as a header comment in generated files (magic strings: MICROSOFT_MIT, MICROSOFT_APACHE, MICROSOFT_MIT_NO_VERSION, MICROSOFT_APACHE_NO_VERSION, MICROSOFT_MIT_NO_CODEGEN). Should be MICROSOFT_MIT_NO_VERSION.
   --list-available              display available AutoRest versions
   --list-available              display available AutoRest versions
   --list-available              display available AutoRest versions
@@ -131,11 +164,28 @@
   --model-validator             validates an OpenAPI document against linked examples (see https://github.com/Azure/azure-rest-api-specs/search?q=x-ms-examples )
   --model-validator             validates an OpenAPI document against linked examples (see https://github.com/Azure/azure-rest-api-specs/search?q=x-ms-examples )
   --model-validator             validates an OpenAPI document against linked examples (see https://github.com/Azure/azure-rest-api-specs/search?q=x-ms-examples )
+  --namespace=<string>          determines the namespace to be used in generated code. impacts folder structure.
+  --namespace=<string>          determines the root namespace to be used in generated code
+  --namespace=<string>          determines the root namespace to be used in generated code
+  --namespace=<string>          determines the root namespace to be used in generated code
+  --no-namespace-folders=<bool>  If used, does not generate the namespace folder hierarchy, but directly the client. Useful for update.
   --nodejs                      generate NodeJS client code
   --nodejs                      generate NodeJS client code
   --nodejs                      generate NodeJS client code
   --nodejs                      generate NodeJS client code
   --nodejs                      generate NodeJS client code
+  --output-file=<string>        generate all code into the specified, single file (instead of the usual folder structure)
+  --output-file=<string>        generate all code into the specified, single file (instead of the usual folder structure)
+  --output-file=<string>        generate all code into the specified, single file (instead of the usual folder structure)
+  --override-client-name=<string>  overrides the name of the client class (usually derived from $.info.title)
+  --override-client-name=<string>  overrides the name of the client class (usually derived from $.info.title)
+  --override-client-name=<string>  overrides the name of the client class (usually derived from $.info.title)
+  --override-client-name=<string>  overrides the name of the client class (usually derived from $.info.title)
+  --package-version=<string>    Distribution package version (i.e. PyPI). Impact version and UserAgent
+  --payload-flattening-threshold=<number>  max. number of properties in a request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as individual method arguments instead
+  --payload-flattening-threshold=<number>  max. number of properties in a request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as individual method arguments instead
+  --payload-flattening-threshold=<number>  max. number of properties in a request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as individual method arguments instead
+  --payload-flattening-threshold=<number>  max. number of properties in a request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as individual method arguments instead. Should be 2.
   --php                         generate PHP client code
   --php                         generate PHP client code
   --php                         generate PHP client code
@@ -161,11 +211,23 @@
   --ruby                        generate Ruby client code
   --ruby                        generate Ruby client code
   --ruby                        generate Ruby client code
+  --sample-generation           generate sample code from x-ms-examples (experimental)
+  --sample-generation           generate sample code from x-ms-examples (experimental)
+  --sample-generation           generate sample code from x-ms-examples (experimental)
+  --sync-methods=<"essential" | "all" | "none">  determines amount of synchronous wrappers to generate; default: essential
+  --sync-methods=<"essential" | "all" | "none">  determines amount of synchronous wrappers to generate; default: essential
+  --sync-methods=<"essential" | "all" | "none">  determines amount of synchronous wrappers to generate; default: essential
   --typescript                  generate TypeScript client code
   --typescript                  generate TypeScript client code
   --typescript                  generate TypeScript client code
   --typescript                  generate TypeScript client code
   --typescript                  generate TypeScript client code
+  --use-datetimeoffset          use DateTimeOffset instead of DateTime to model date/time types
+  --use-datetimeoffset          use DateTimeOffset instead of DateTime to model date/time types
+  --use-datetimeoffset          use DateTimeOffset instead of DateTime to model date/time types
+  --use-internal-constructors   generate constructors with internal instead of public visibility (useful for convenience layers)
+  --use-internal-constructors   generate constructors with internal instead of public visibility (useful for convenience layers)
+  --use-internal-constructors   generate constructors with internal instead of public visibility (useful for convenience layers)
   --verbose                     display verbose logging information
   --verbose                     display verbose logging information
   --verbose                     display verbose logging information
@@ -177,13 +239,20 @@
   --version=<string>            use the specified version of the autorest-core extension
   --version=<string>            use the specified version of the autorest-core extension
   See: https://aka.ms/autorest/cli for additional documentation
+--max-comment-columns=<number>  maximum line width of comments before breaking into a new line
+--max-comment-columns=<number>  maximum line width of comments before breaking into a new line
+--max-comment-columns=<number>  maximum line width of comments before breaking into a new line
 --output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
 --output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
 --output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
 --output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
 --output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
+--package-name=<string>       Distribution package name (i.e. PyPI). Impact base folder and UserAgent
 (C) 2017 Microsoft Corporation.
 AutoRest code generation utility [version: 2.0.0]
+C# Generator (activated by --csharp)
+C# Generator (activated by --csharp)
+C# Generator (activated by --csharp)
 Core Functionality
 Core Functionality
 Core Functionality
@@ -205,4 +274,5 @@ Overall Verbosity
 Overall Verbosity
 Overall Verbosity
 Overall Verbosity
+Python Generator (activated by --python)
 Usage: autorest [configuration-file.md] [...options]

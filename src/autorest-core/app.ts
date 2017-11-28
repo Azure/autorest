@@ -64,6 +64,10 @@ function awaitable(child: ChildProcess): Promise<number> {
   });
 }
 
+async function showHelp(): Promise<void> {
+  await currentMain(["--help"]);
+}
+
 async function legacyMain(autorestArgs: string[]): Promise<number> {
   // generate virtual config file
   const currentDirUri = CreateFolderUri(currentDirectory());
@@ -81,6 +85,7 @@ async function legacyMain(autorestArgs: string[]): Promise<number> {
       "> isit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."));
     console.error("");
     console.error(color("!Internal error: " + e));
+    await showHelp();
     return 1;
   }
 
