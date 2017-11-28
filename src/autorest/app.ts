@@ -113,7 +113,6 @@ args["preview"] = args["preview"] || args["prerelease"];
 // argument tweakin'
 const preview: boolean = args.preview;
 args.info = (args.version === "" || args.version === true) || args.info; // show --info if they use unparameterized --version.
-let requestedVersion: string = args.version || (args.latest && "latest") || (args.preview && "preview") || "latest-installed";
 const listAvailable: boolean = args["list-available"] || false;
 let force = args.force || false;
 
@@ -207,8 +206,10 @@ async function main() {
       }
     }
 
+    let requestedVersion: string = args.version || (args.latest && "latest") || (args.preview && "preview") || "latest-installed";
+
     // check to see if local installed core is available.
-    const localVersion = resolvePathForLocalVersion(args.version && args.version !== '' ? requestedVersion : null);
+    const localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
 
     // try to use a specified folder or one in node_modules if it is there.
     if (await tryRequire(localVersion, "app.js")) {
