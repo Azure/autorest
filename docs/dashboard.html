@@ -4,6 +4,18 @@
 <head>
     <title>AutoRest dashboard</title>
     <style>
+        body, div {
+            /* padding: 30px; */
+            font-family: sans-serif;
+            text-align: center;
+        }
+        h1, h2 {
+            font-weight: regular;
+        }
+        table {
+            display: inline-block;
+        }
+
         .loading {
             display: inline-block;
             height: 16px;
@@ -77,9 +89,12 @@
                     let section = $("<details>").appendTo(result);
                     section = $("<summary>").appendTo(section);
 
-                    section.append($("<h2>").text(repo).css("display", "inline-block"));
                     const table = $("<table>");
+                    section.append($("<h2>").text(repo).css("display", "inline-block"));
+                    section.append($("<br>"));
                     section.append(table);
+                    section.append($("<br>"));
+                    section.append($("<br>"));
                     table.append($("<tr>")
                         .append($("<th>").text("Version"))
                         .append(coverageCategories.map(cat => $("<th>").text(cat))));
@@ -99,7 +114,7 @@
                         });
                         table.append($("<tr>")
                             .addClass(subsequent ? "optional" : "")
-                            .append($("<td>").text(version.version))
+                            .append($("<td>").append($("<a>").attr("href", version.uri).text(version.version)))
                             .append(coverages));
                         subsequent = true;
                     }
