@@ -16,42 +16,42 @@ openapi-type: arm
 
 ``` yaml $(azureresourceschema)
 use-extension:
-  "@microsoft.azure/autorest.azureresourceschema": "~2.0.0"
+  "@microsoft.azure/autorest.azureresourceschema": "~2.0.14"
 ```
 
 ``` yaml $(csharp)
 use-extension:
-  "@microsoft.azure/autorest.csharp": "~2.2.0"
+  "@microsoft.azure/autorest.csharp": "~2.2.45"
 ```
 
 ``` yaml $(jsonrpcclient)
 use-extension:
-  "@microsoft.azure/autorest.csharp": "~2.2.0"
+  "@microsoft.azure/autorest.csharp": "~2.2.45"
 ```
 
 ``` yaml $(go)
 use-extension:
-  "@microsoft.azure/autorest.go": "~2.0.0"
+  "@microsoft.azure/autorest.go": "~2.1.47"
 ```
 
 ``` yaml $(java)
 use-extension:
-  "@microsoft.azure/autorest.java": "~2.0.0"
+  "@microsoft.azure/autorest.java": "~2.1.32"
 ```
 
 ``` yaml $(nodejs)
 use-extension:
-  "@microsoft.azure/autorest.nodejs": "~2.0.0"
+  "@microsoft.azure/autorest.nodejs": "~2.1.25"
 ```
 
 ``` yaml $(php)
 use-extension:
-  "@microsoft.azure/autorest.php": "~2.0.0"
+  "@microsoft.azure/autorest.php": "~2.0.12"
 ```
 
 ``` yaml $(python)
 use-extension:
-  "@microsoft.azure/autorest.python": "~2.0.0"
+  "@microsoft.azure/autorest.python": "~2.1.26"
 ```
 
 ``` yaml $(ruby)
@@ -59,15 +59,15 @@ use-extension:
   "@microsoft.azure/autorest.ruby": "~2.0.0"
 ```
 
+``` yaml $(typescript)
+use-extension:
+  "@microsoft.azure/autorest.typescript": "~2.0.12"
+```
+
 ``` yaml $(azure-validator)
 use-extension:
   "@microsoft.azure/classic-openapi-validator": "~1.0.3"
   "@microsoft.azure/openapi-validator": "~1.0.0"
-```
-
-``` yaml $(typescript)
-use-extension:
-  "@microsoft.azure/autorest.typescript": "~2.0.0"
 ```
 
 ``` yaml $(model-validator)
