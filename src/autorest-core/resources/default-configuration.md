@@ -56,7 +56,7 @@ use-extension:
 
 ``` yaml $(ruby)
 use-extension:
-  "@microsoft.azure/autorest.ruby": "~2.0.0"
+  "@microsoft.azure/autorest.ruby": "~3.1.26"
 ```
 
 ``` yaml $(typescript)
