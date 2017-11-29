@@ -6,14 +6,18 @@ The purpose of this document is to record those decisions.
 
 ## application/json
 
-[The RFC](https://tools.ietf.org/html/rfc4627) seems to not require handling of primitive values or null values, it merely says that parsers have to parse "JSON text", which is either an object or array. Beyond that, parsers may apparently do as they please.
-For AutoRest, we extend the (de)serialization responsibilities as follows:
-- *any* [JSON value](https://www.json.org/) must be supported, behaving just like `JSON.stringify`/`JSON.parse` in JavaScript
-- an empty request/response payload is an alternative valid way to serialize `null`
+[RFC 4627](https://tools.ietf.org/html/rfc4627) and [RFC 7159](https://tools.ietf.org/html/rfc7159) allow parsers to actually parse more than just JSON values:
 
-Reference implementation:
+> "A JSON parser MAY accept non-JSON forms or extensions."
+
+We encountered situations in which servers send empty bodies that are meant to be interpreted as `null`, so AutoRest generated clients must deserialize such bodies as `null`.
+
+### Summary
+- any [JSON value](https://www.json.org/) must be supported (behaving just like `JSON.stringify`/`JSON.parse` in JavaScript)
+- an empty request/response payload must deserialize to `null`
+
+### Reference Implementation
 ``` TypeScript
-const serialize = (obj: any): string => JSON.stringify(obj);                     // alternative 1
-const serialize = (obj: any): string => obj === null ? "" : JSON.stringify(obj); // alternative 2
+const serialize = (obj: any): string => JSON.stringify(obj);
 const deserialize = (str: string): any => str === "" ? null : JSON.parse(str);
 ```
