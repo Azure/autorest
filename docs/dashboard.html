@@ -10,29 +10,40 @@
             text-align: center;
         }
         h1, h2 {
-            font-weight: regular;
+            font-weight: normal;
         }
         table {
             display: inline-block;
+            border-collapse: collapse;
+        }
+        th {
+            color: #aaa;
+        }
+        th, td {
+            font-weight: normal;
+            /* font-style: italic; */
+            padding: 4px;
+            border: 1px solid #ddd;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
         }
 
         .loading {
             display: inline-block;
-            height: 16px;
-            width: 16px;
+            height: 10px;
+            width: 10px;
             background: gray;
-            animation: loading 1s infinite ease-in-out;
+            animation: loading 1s infinite linear;
         }
 
         @keyframes loading {
             0% {
-                transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-            }
-            50% {
-                transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+                transform: rotate(0deg);
             }
             100% {
-                transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+                transform: rotate(359.9deg);
             }
         }
 
@@ -40,12 +51,13 @@
             display: none;
         }
         details[open] tr.optional {
-            display: initial;
+            display: table-row;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
         const httpGet = (url, type) => new Promise((res, rej) => $.get(url, res, type).fail(rej));
+        const delay = ms => new Promise(res => setTimeout(res, ms));
 
         const azureBlobContainer_coverage = "https://autorestci1.blob.core.windows.net/autorest-ci-coverage-report";
         const coverageCategories = ["General", "Azure"];
@@ -66,6 +78,7 @@
         async function deferredUI(targetUI, operation) {
             targetUI.empty();
             targetUI.append($("<span class='loading' />"));
+            // await delay(500);
             const resultUI = await operation();
             targetUI.empty();
             targetUI.append(resultUI);
@@ -97,12 +110,19 @@
                     section.append($("<br>"));
                     table.append($("<tr>")
                         .append($("<th>").text("Version"))
+                        .append($("<th>").text("Feature Set"))
                         .append(coverageCategories.map(cat => $("<th>").text(cat))));
 
                     const versions = reportsByRepo[repo].sort((a, b) => semverCompare(a.version, b.version)).reverse();
                     let subsequent = false;
                     for (const version of versions) {
                         const request = httpGet(version.uri, "text");
+                        const featureSetVersion = $("<td>");
+                        deferredUI(featureSetVersion, async () => {
+                            const response = await request;
+                            const coverage = / (\d+\.\d+\.\d+)/.exec(response.split("\n").filter(l => l.includes("feature set version"))[0])[1];
+                            return coverage;
+                        });
                         const coverages = coverageCategories.map(cat => {
                             const cell = $("<td>");
                             deferredUI(cell, async () => {
@@ -114,7 +134,8 @@
                         });
                         table.append($("<tr>")
                             .addClass(subsequent ? "optional" : "")
-                            .append($("<td>").append($("<a>").attr("href", version.uri).text(version.version)))
+                            .append($("<td>").append($("<a>").attr("href", version.uri).attr("target", "_blank").text(version.version)))
+                            .append(featureSetVersion)
                             .append(coverages));
                         subsequent = true;
                     }

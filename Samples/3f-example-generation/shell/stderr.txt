@@ -1,4 +1,1 @@
-ERROR: 'CSharp' code generator does not support code generation to a single file.
-ERROR: 'CSharp' code generator does not support code generation to a single file.
-ERROR: 'CSharp' code generator does not support code generation to a single file.
-ERROR: 'CSharp' code generator does not support code generation to a single file.
+

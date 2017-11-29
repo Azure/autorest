@@ -375,12 +375,12 @@ scope-transform-string:
 skip-upgrade-check: {}
 use: []
 use-extension:
-  '@microsoft.azure/autorest.csharp': ~2.2.0
+  '@microsoft.azure/autorest.csharp': ~2.2.45
   '@microsoft.azure/autorest.modeler': 2.3.38
   '@microsoft.azure/classic-openapi-validator': ~1.0.3
   '@microsoft.azure/openapi-validator': ~1.0.0
 used-extension:
-  - '["@microsoft.azure/autorest.csharp","~2.2.0"]'
+  - '["@microsoft.azure/autorest.csharp","~2.2.45"]'
   - '["@microsoft.azure/classic-openapi-validator","~1.0.3"]'
   - '["@microsoft.azure/openapi-validator","~1.0.0"]'
   - '["@microsoft.azure/autorest.modeler","2.3.38"]'
