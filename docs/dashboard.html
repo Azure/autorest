@@ -12,6 +12,10 @@
         h1, h2 {
             font-weight: normal;
         }
+        h2 {
+            text-align: left;
+            min-width: 40%;
+        }
         table {
             display: inline-block;
             border-collapse: collapse;
@@ -22,8 +26,13 @@
         th, td {
             font-weight: normal;
             /* font-style: italic; */
-            padding: 4px;
             border: 1px solid #ddd;
+        }
+        td {
+            padding: 0px;
+        }
+        th, td > div {
+            padding: 3px;
         }
         a {
             text-decoration: none;
@@ -127,8 +136,9 @@
                             const cell = $("<td>");
                             deferredUI(cell, async () => {
                                 const response = await request;
-                                const coverage = / (\d+)%/.exec(response.split("\n").filter(l => l.startsWith("##") && l.includes(cat))[0])[1];
-                                return coverage + "%";
+                                const coverage = +/ (\d+)%/.exec(response.split("\n").filter(l => l.startsWith("##") && l.includes(cat))[0])[1];
+                                const color = `hsl(${coverage === 100 ? 120 : Math.pow(coverage / 100, 1.8) * 70 | 0},100%,60%)`;
+                                return $("<div>").text(coverage + "%").css("background", color).css("font-weight", "bold");
                             });
                             return cell;
                         });
