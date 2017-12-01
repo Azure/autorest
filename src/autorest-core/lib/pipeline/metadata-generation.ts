@@ -21,12 +21,14 @@ export function GetPlugin_ReflectApiVersion(): PipelinePlugin {
       const apiVersion = swagger.info.version;
       const paths = { ...swagger["paths"], ...swagger["x-ms-paths"] };
       for (const path of Object.keys(paths)) {
-        const namespace = (/\/Microsoft\.(.*?)\//.exec(path) || [])[1];
-        const groups = Object.values(paths[path])
-          .map(x => x.operationId).filter(x => !!x)
-          .map(x => x.split('_')[0]).filter(x => !!x);
-        for (const group of groups) {
-          data.push({ namespace, group, apiVersion });
+        const namespace = (/\/Microsoft\.(.*?)\//i.exec(path) || [])[1];
+        if (namespace) {
+          const groups = Object.values(paths[path])
+            .map(x => x.operationId).filter(x => !!x)
+            .map(x => x.split('_')[0]).filter(x => !!x);
+          for (const group of groups) {
+            data.push({ namespace, group, apiVersion });
+          }
         }
       }
     }
