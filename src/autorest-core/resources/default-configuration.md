@@ -303,28 +303,6 @@ scope-cm/emitter: # can remove once every generator depends on recent modeler
     "code-model-v1"
 ```
 
-#### Modeler Only
-
-``` yaml $(run-modeler)
-use-extension:
-  "@microsoft.azure/autorest.modeler": "2.3.38"
-
-pipeline:
-  standalone/imodeler1:
-    input: openapi-document/identity
-    output-artifact: code-model-v1
-    scope: run-modeler
-  standalone/commonmarker:
-    input: imodeler1
-    output-artifact: code-model-v1
-  standalone/cm/transform:
-    input: commonmarker
-    output-artifact: code-model-v1
-  standalone/cm/emitter:
-    input: transform
-    scope: scope-cm/emitter
-```
-
 #### Polyfills
 
 
