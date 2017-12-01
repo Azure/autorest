@@ -246,8 +246,11 @@ pipeline:
   swagger-document/individual/transform:
     input: loader
     output-artifact: swagger-document
-  swagger-document/individual/identity:
+  swagger-document/individual/schema-validator:
     input: transform
+    output-artifact: swagger-document
+  swagger-document/individual/identity:
+    input: schema-validator
     output-artifact: swagger-document
   swagger-document/compose:
     input: individual/identity
