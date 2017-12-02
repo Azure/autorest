@@ -288,7 +288,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "transform": GetPlugin_Transformer(),
     "transform-immediate": GetPlugin_TransformerImmediate(),
     "compose": GetPlugin_Composer(),
-    "schema-validator": await GetPlugin_SchemaValidator(),
+    "schema-validator": GetPlugin_SchemaValidator(),
     // TODO: replace with OAV again
     "semantic-validator": GetPlugin_Identity(),
 

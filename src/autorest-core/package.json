@@ -25,7 +25,7 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha ./dist/test --timeout 50000",
-    "build": "tsc -p . && dts-generator --name autorest-core --project . --out ../autorest/interfaces/autorest-core.d.ts  --exclude \"test/**/*\" --exclude \"node_modules/**/*.d.ts\" --exclude \"lib/source-map/**\" --exclude \"lib/pipeline/**\" --exclude \"lib/parsing/**\" --exclude \"lib/data-store/**\" --exclude \"lib/ref/yaml.ts\"  --extern ./source-maps.d.ts",
+    "build": "tsc -p . && dts-generator --name autorest-core --project . --out ../autorest/interfaces/autorest-core.d.ts  --exclude \"test/**/*\" --exclude \"node_modules/**/*.d.ts\" --exclude \"lib/source-map/**\" --exclude \"lib/pipeline/**\" --exclude \"lib/parsing/**\" --exclude \"lib/data-store/**\" --exclude \"lib/ref/yaml.ts\"  --extern ./source-maps.d.ts && shx cp ../../schema/swagger-extensions.json dist/lib/pipeline && shx cp ../../schema/example-schema.json dist/lib/pipeline && shx cp ../../schema/swagger.json dist/lib/pipeline",
     "static-link": "static-link",
     "postinstall": "node ./post-install --force",
     "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
