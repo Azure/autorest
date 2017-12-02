@@ -94,3 +94,7 @@ export function matches(jsonQuery: string, jsonPath: JsonPath): boolean {
   // check that `jsonQuery` on that object returns the `leafNode`
   return nodes(obj, jsonQuery).some(res => res.value === leafNode);
 }
+
+export function parseJsonPointer(jsonPointer: string): JsonPath {
+  return jsonPointer.split("/").slice(1).map(part => part.replace(/~1/g, "/").replace(/~0/g, "~"));
+}

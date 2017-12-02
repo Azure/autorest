@@ -7,7 +7,7 @@ import { ReadUri, ResolveUri } from '../ref/uri';
 import { QuickDataSource } from '../data-store/data-store';
 import { Parse } from '../ref/yaml';
 import { Help } from "../../help";
-import { PipelinePlugin } from "./pipeline";
+import { PipelinePlugin } from "./common";
 
 export function GetPlugin_Help(): PipelinePlugin {
   return async config => {

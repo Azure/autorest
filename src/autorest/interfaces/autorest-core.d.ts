@@ -30,157 +30,7 @@ export function nodes<T>(obj: T, jsonQuery: string): {
 export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean;
 export function CreateObject(jsonPath: JsonPath, leafObject: any): any;
 export function matches(jsonQuery: string, jsonPath: JsonPath): boolean;
-
-}
-declare module 'autorest-core/lib/ref/source-map' {
-	export { Position } from "source-map";
-import { Position } from "source-map";
-export { RawSourceMap } from "source-map";
-import { JsonPath } from 'autorest-core/lib/ref/jsonpath';
-export interface PositionEnhancements {
-    path?: JsonPath;
-    length?: number;
-    valueOffset?: number;
-    valueLength?: number;
-}
-export type EnhancedPosition = Position & PositionEnhancements;
-export type SmartPosition = Position | {
-    path: JsonPath;
-};
-export interface Mapping {
-    generated: SmartPosition;
-    original: SmartPosition;
-    source: string;
-    name?: string;
-}
-export type Mappings = Array<Mapping>;
-
-}
-declare module 'autorest-core/lib/lazy' {
-	export class Lazy<T> {
-    private factory;
-    private promise;
-    constructor(factory: () => T);
-    readonly Value: T;
-}
-export class LazyPromise<T> implements PromiseLike<T> {
-    private factory;
-    private promise;
-    constructor(factory: () => Promise<T>);
-    private readonly Value;
-    readonly hasValue: boolean;
-    then<TResult1, TResult2>(onfulfilled: (value: T) => TResult1 | PromiseLike<TResult1>, onrejected: (reason: any) => TResult2 | PromiseLike<TResult2>): PromiseLike<TResult1 | TResult2>;
-}
-
-}
-declare module 'autorest-core/lib/exception' {
-	export class Exception extends Error {
-    exitCode: number;
-    constructor(message: string, exitCode?: number);
-}
-export class OperationCanceledException extends Exception {
-    exitCode: number;
-    constructor(message?: string, exitCode?: number);
-}
-export class OutstandingTaskAlreadyCompletedException extends Exception {
-    constructor();
-}
-export class OperationAbortedException extends Exception {
-    constructor();
-}
-
-}
-declare module 'autorest-core/lib/outstanding-task-awaiter' {
-	export class OutstandingTaskAwaiter {
-    private locked;
-    private outstandingTasks;
-    Wait(): Promise<void>;
-    Await<T>(task: Promise<T>): Promise<T>;
-}
-
-}
-declare module 'autorest-core/lib/events' {
-	/// <reference types="node" />
-import * as events from "events";
-export interface IEvent<TSender extends events.EventEmitter, TArgs> {
-    Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
-    Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void;
-    Dispatch(args: TArgs): void;
-}
-export class EventDispatcher<TSender extends EventEmitter, TArgs> implements IEvent<TSender, TArgs> {
-    private _instance;
-    private _name;
-    private _subscriptions;
-    constructor(instance: TSender, name: string);
-    UnsubscribeAll(): void;
-    Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
-    Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void;
-    Dispatch(args: TArgs): void;
-}
-export class EventEmitter extends events.EventEmitter {
-    private _subscriptions;
-    constructor();
-    protected static Event<TSender extends EventEmitter, TArgs>(target: TSender, propertyKey: string): void;
-    protected _init(t: EventEmitter): void;
-}
-
-}
-declare module 'autorest-core/lib/ref/cancellation' {
-	export { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
-
-}
-declare module 'autorest-core/lib/ref/jsonrpc' {
-	export * from "vscode-jsonrpc";
-
-}
-declare module 'autorest-core/lib/message' {
-	import { EnhancedPosition, Position } from 'autorest-core/lib/ref/source-map';
-/**
- * The Channel that a message is registered with.
- */
-export enum Channel {
-    /** Information is considered the mildest of responses; not necesarily actionable. */
-    Information,
-    /** Warnings are considered important for best practices, but not catastrophic in nature. */
-    Warning,
-    /** Errors are considered blocking issues that block a successful operation.  */
-    Error,
-    /** Debug messages are designed for the developer to communicate internal autorest implementation details. */
-    Debug,
-    /** Verbose messages give the user additional clarity on the process. */
-    Verbose,
-    /** Catastrophic failure, likely abending the process.  */
-    Fatal,
-    /** Hint messages offer guidance or support without forcing action. */
-    Hint,
-}
-export interface SourceLocation {
-    document: string;
-    Position: EnhancedPosition;
-}
-export interface Range {
-    document: string;
-    start: Position;
-    end: Position;
-}
-export interface Message {
-    Channel: Channel;
-    Key?: Iterable<string>;
-    Details?: any;
-    Text: string;
-    Source?: Array<SourceLocation>;
-    Range?: Iterable<Range>;
-    Plugin?: string;
-    FormattedMessage?: string;
-}
-
-}
-declare module 'autorest-core/lib/ref/array' {
-	export function pushAll<T>(target: T[], source: T[]): void;
-
-}
-declare module 'autorest-core/lib/ref/commonmark' {
-	export { Node, Parser } from "commonmark";
+export function parseJsonPointer(jsonPointer: string): JsonPath;
 
 }
 declare module 'autorest-core/lib/ref/async' {
@@ -239,6 +89,157 @@ export function WriteString(fileUri: string, data: string): Promise<void>;
 export function ClearFolder(folderUri: string): Promise<void>;
 export function FileUriToPath(fileUri: string): string;
 export function GetExtension(name: string): string;
+
+}
+declare module 'autorest-core/lib/ref/source-map' {
+	export { Position } from "source-map";
+import { Position } from "source-map";
+export { RawSourceMap } from "source-map";
+import { JsonPath } from 'autorest-core/lib/ref/jsonpath';
+export interface PositionEnhancements {
+    path?: JsonPath;
+    length?: number;
+    valueOffset?: number;
+    valueLength?: number;
+}
+export type EnhancedPosition = Position & PositionEnhancements;
+export type SmartPosition = Position | {
+    path: JsonPath;
+};
+export interface Mapping {
+    generated: SmartPosition;
+    original: SmartPosition;
+    source: string;
+    name?: string;
+}
+export type Mappings = Array<Mapping>;
+
+}
+declare module 'autorest-core/lib/message' {
+	import { EnhancedPosition, Position } from 'autorest-core/lib/ref/source-map';
+/**
+ * The Channel that a message is registered with.
+ */
+export enum Channel {
+    /** Information is considered the mildest of responses; not necesarily actionable. */
+    Information,
+    /** Warnings are considered important for best practices, but not catastrophic in nature. */
+    Warning,
+    /** Errors are considered blocking issues that block a successful operation.  */
+    Error,
+    /** Debug messages are designed for the developer to communicate internal autorest implementation details. */
+    Debug,
+    /** Verbose messages give the user additional clarity on the process. */
+    Verbose,
+    /** Catastrophic failure, likely abending the process.  */
+    Fatal,
+    /** Hint messages offer guidance or support without forcing action. */
+    Hint,
+}
+export interface SourceLocation {
+    document: string;
+    Position: EnhancedPosition;
+}
+export interface Range {
+    document: string;
+    start: Position;
+    end: Position;
+}
+export interface Message {
+    Channel: Channel;
+    Key?: Iterable<string>;
+    Details?: any;
+    Text: string;
+    Source?: Array<SourceLocation>;
+    Range?: Iterable<Range>;
+    Plugin?: string;
+    FormattedMessage?: string;
+}
+
+}
+declare module 'autorest-core/lib/exception' {
+	export class Exception extends Error {
+    exitCode: number;
+    constructor(message: string, exitCode?: number);
+}
+export class OperationCanceledException extends Exception {
+    exitCode: number;
+    constructor(message?: string, exitCode?: number);
+}
+export class OutstandingTaskAlreadyCompletedException extends Exception {
+    constructor();
+}
+export class OperationAbortedException extends Exception {
+    constructor();
+}
+
+}
+declare module 'autorest-core/lib/lazy' {
+	export class Lazy<T> {
+    private factory;
+    private promise;
+    constructor(factory: () => T);
+    readonly Value: T;
+}
+export class LazyPromise<T> implements PromiseLike<T> {
+    private factory;
+    private promise;
+    constructor(factory: () => Promise<T>);
+    private readonly Value;
+    readonly hasValue: boolean;
+    then<TResult1, TResult2>(onfulfilled: (value: T) => TResult1 | PromiseLike<TResult1>, onrejected: (reason: any) => TResult2 | PromiseLike<TResult2>): PromiseLike<TResult1 | TResult2>;
+}
+
+}
+declare module 'autorest-core/lib/outstanding-task-awaiter' {
+	export class OutstandingTaskAwaiter {
+    private locked;
+    private outstandingTasks;
+    Wait(): Promise<void>;
+    Await<T>(task: Promise<T>): Promise<T>;
+}
+
+}
+declare module 'autorest-core/lib/events' {
+	/// <reference types="node" />
+import * as events from "events";
+export interface IEvent<TSender extends events.EventEmitter, TArgs> {
+    Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
+    Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void;
+    Dispatch(args: TArgs): void;
+}
+export class EventDispatcher<TSender extends EventEmitter, TArgs> implements IEvent<TSender, TArgs> {
+    private _instance;
+    private _name;
+    private _subscriptions;
+    constructor(instance: TSender, name: string);
+    UnsubscribeAll(): void;
+    Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
+    Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void;
+    Dispatch(args: TArgs): void;
+}
+export class EventEmitter extends events.EventEmitter {
+    private _subscriptions;
+    constructor();
+    protected static Event<TSender extends EventEmitter, TArgs>(target: TSender, propertyKey: string): void;
+    protected _init(t: EventEmitter): void;
+}
+
+}
+declare module 'autorest-core/lib/ref/cancellation' {
+	export { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
+
+}
+declare module 'autorest-core/lib/ref/jsonrpc' {
+	export * from "vscode-jsonrpc";
+
+}
+declare module 'autorest-core/lib/ref/array' {
+	export function pushAll<T>(target: T[], source: T[]): void;
+
+}
+declare module 'autorest-core/lib/ref/commonmark' {
+	export { Node, Parser } from "commonmark";
 
 }
 declare module 'autorest-core/lib/file-system' {
