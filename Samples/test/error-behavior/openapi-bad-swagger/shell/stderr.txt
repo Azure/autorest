@@ -1,0 +1,9 @@
+    - /Samples/test/error-behavior/openapi-bad-swagger/tiny.yaml:18:6 ($.paths["/cowbell"].post.parameters)
+    - /Samples/test/error-behavior/openapi-bad-swagger/tiny.yaml:28:2 ($.definitions.Cowbell)
+    - /Samples/test/error-behavior/openapi-bad-swagger/tiny.yaml:33:8 ($.definitions.Cowbell.properties.id.type)
+ERROR: Schema violation: Additional properties not allowed: foo
+ERROR: Schema violation: Data does not match any schemas from 'anyOf'
+ERROR: Schema violation: Data does not match any schemas from 'oneOf'
+FATAL: Error: [OperationAbortedException] Error occurred. Exiting.
+FATAL: swagger-document/individual/schema-validator - FAILED
+Process() Cancelled due to exception : [OperationAbortedException] Error occurred. Exiting.

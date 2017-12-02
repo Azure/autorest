@@ -1,1 +1,7 @@
-ERROR: Error converting value "Cowbell" to type 'System.Nullable`1[AutoRest.Modeler.Model.DataType]'. Path 'requestBody.content.application/json.schema.type', line 14, position 27.
+  at ...
+  at ...
+  Error: Plugin imodeler1 reported failure.
+--- End of stack trace from previous location where exception was thrown ---
+FATAL: csharp/imodeler1 - FAILED
+FATAL: Error: Plugin imodeler1 reported failure.
+FATAL: System.ArgumentException: Reference path '#Cowbell' does not exist in the definition section of the Swagger document.

@@ -401,6 +401,9 @@
             }
           ]
         },
+        "x-ms-headers": {
+          "$ref": "#/definitions/schema"
+        },
         "headers": {
           "$ref": "#/definitions/headers"
         },

@@ -396,8 +396,7 @@ definitions:
       message:
         type: string
       details:
-        schema:
-          "$ref": "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-09-01/swagger/network.json#/definitions/ErrorDetails"
+        "$ref": "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-09-01/swagger/network.json#/definitions/ErrorDetails"
 responses:
   error:
     description: OK

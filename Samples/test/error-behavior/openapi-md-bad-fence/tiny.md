@@ -14,6 +14,7 @@ consumes:
 - application/json
 produces:
 - application/json
+paths: {}
 ```
 
 Host definition in JSON, because we can.

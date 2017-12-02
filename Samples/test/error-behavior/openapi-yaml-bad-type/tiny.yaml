@@ -20,7 +20,7 @@ paths:
         name: body
         required: true
         schema:
-          type: Cowbell
+          $ref: "#Cowbell"
       responses:
         '200':
           description: Cowbell was added.
