@@ -1,2 +1,0 @@
-#!/bin/sh
-dotnet "`dirname $0`/dotnet-autorest.dll" $*
