@@ -50,7 +50,7 @@ export abstract class DataSource {
   public async ReadStrict(uri: string): Promise<DataHandle> {
     const result = await this.Read(uri);
     if (result === null) {
-      throw new Error(`Could not to read '${uri}'.`);
+      throw new Error(`Could not read '${uri}'.`);
     }
     return result;
   }
@@ -245,7 +245,7 @@ export class DataStore {
     uri = ResolveUri(this.BaseUri, uri);
     const data = this.store[uri];
     if (!data) {
-      throw new Error(`Could not to read '${uri}'.`);
+      throw new Error(`Could not read '${uri}'.`);
     }
     return new DataHandle(uri, data);
   }
