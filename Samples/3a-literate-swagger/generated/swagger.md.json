@@ -6,9 +6,7 @@
           "type": "integer"
         },
         "details": {
-          "schema": {
-            "$ref": "#/definitions/ErrorDetails"
-          }
+          "$ref": "#/definitions/ErrorDetails"
         },
         "message": {
           "type": "string"

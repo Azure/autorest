@@ -3,8 +3,8 @@
 //  Licensed under the MIT License. See License.txt in the project root for license information.
 // ---------------------------------------------------------------------------------------------
 
+import { parseJsonPointer } from '../lib/ref/jsonpath';
 import { JsonPath, SourceMap } from './source-map';
-
 import { Location, Position } from 'vscode-languageserver';
 import { value, stringify, parse, nodes, paths, } from "jsonpath";
 
@@ -64,7 +64,7 @@ export class DocumentAnalysis {
         if (path.length > 0 && path[path.length - 1] === "$ref") {
           // lookup object
           const refValueJsonPointer: string = value(this.fullyResolvedAndMergedDefinition, stringify(path));
-          const refValueJsonPath: JsonPath = refValueJsonPointer.split("/").slice(1).map(part => part.replace(/~1/g, "/").replace(/~0/g, "~"));
+          const refValueJsonPath: JsonPath = parseJsonPointer(refValueJsonPointer);
           return stringify(refValueJsonPath);
         }
       } // else  { console.warn("no object path for that location"); return null; }

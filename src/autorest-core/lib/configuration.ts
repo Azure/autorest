@@ -784,28 +784,32 @@ export class Configuration {
   }
 
   public static async DetectConfigurationFiles(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders: boolean = false): Promise<Array<string>> {
-    const results = new Array<string>();
     const originalConfigFileOrFolderUri = configFileOrFolderUri;
 
     // null means null!
     if (!configFileOrFolderUri) {
-      return results;
+      return [];
     }
 
     // try querying the Uri directly
+    let content: string | null;
     try {
-      const content = await fileSystem.ReadFile(configFileOrFolderUri);
+      content = await fileSystem.ReadFile(configFileOrFolderUri);
+    } catch {
+      // didn't get the file successfully, move on.
+      content = null;
+    }
+    if (content !== null) {
       if (content.indexOf(Constants.MagicString) > -1) {
         // the file name was passed in!
         return [configFileOrFolderUri];
       }
       // this *was* an actual file passed in, not a folder. don't make this harder than it has to be.
-      return results;
-    } catch {
-      // didn't get the file successfully, move on.
+      throw new Error(`Specified file '${originalConfigFileOrFolderUri}' is not a valid configuration file (missing magic string, see https://github.com/Azure/autorest/blob/master/docs/user/literate-file-formats/configuration.md#the-file-format).`);
     }
 
     // scan the filesystem items for configurations.
+    const results = new Array<string>();
     for (const name of await fileSystem.EnumerateFileUris(EnsureIsFolderUri(configFileOrFolderUri))) {
       if (name.endsWith(".md")) {
         const content = await fileSystem.ReadFile(name);

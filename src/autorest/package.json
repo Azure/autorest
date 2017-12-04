@@ -33,7 +33,7 @@
     "prepare": "node ./post-install --force",
     "preinstall": "node ./preinstall-check",
     "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
-    "prepack": "static-link & npm run build"
+    "prepack": "static-link && npm run build"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {

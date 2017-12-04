@@ -267,13 +267,18 @@ pipeline:
     suffixes:
       - ''
   swagger-document/individual/identity:
-    input: transform
+    input: schema-validator
     output-artifact: swagger-document
     suffixes:
       - ''
   swagger-document/individual/openapi-validator:
     input: swagger-document/individual/identity
     scope: azure-validator-individual
+    suffixes:
+      - ''
+  swagger-document/individual/schema-validator:
+    input: transform
+    output-artifact: swagger-document
     suffixes:
       - ''
   swagger-document/individual/transform:

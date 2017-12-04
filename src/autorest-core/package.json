@@ -25,11 +25,11 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha ./dist/test --timeout 50000",
-    "build": "tsc -p . & dts-generator --name autorest-core --project . --out ../autorest/interfaces/autorest-core.d.ts  --exclude \"test/**/*\" --exclude \"node_modules/**/*.d.ts\" --exclude \"lib/source-map/**\" --exclude \"lib/pipeline/**\" --exclude \"lib/parsing/**\" --exclude \"lib/data-store/**\" --exclude \"lib/ref/yaml.ts\"  --extern ./source-maps.d.ts",
+    "build": "tsc -p . && dts-generator --name autorest-core --project . --out ../autorest/interfaces/autorest-core.d.ts  --exclude \"test/**/*\" --exclude \"node_modules/**/*.d.ts\" --exclude \"lib/source-map/**\" --exclude \"lib/pipeline/**\" --exclude \"lib/parsing/**\" --exclude \"lib/data-store/**\" --exclude \"lib/ref/yaml.ts\"  --extern ./source-maps.d.ts && shx cp ../../schema/swagger-extensions.json dist/lib/pipeline && shx cp ../../schema/example-schema.json dist/lib/pipeline && shx cp ../../schema/swagger.json dist/lib/pipeline",
     "static-link": "static-link",
     "postinstall": "node ./post-install --force",
     "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
-    "prepack": "static-link & npm run build"
+    "prepack": "static-link && npm run build"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
@@ -39,6 +39,7 @@
     "@types/node": "^8.0.53",
     "@types/source-map": "^0.5.0",
     "@types/yargs": "^8.0.2",
+    "@types/z-schema": "^3.16.31",
     "dts-generator": "^2.1.0",
     "mocha": "^4.0.1",
     "shx": "0.2.2",
@@ -65,7 +66,8 @@
       "untildify": "^3.0.2",
       "urijs": "^1.18.10",
       "vscode-jsonrpc": "^3.3.1",
-      "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz"
+      "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
+      "z-schema": "^3.19.0"
     },
     "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt );  txt = fs.readFileSync('./node_modules/npm/lib/pack.js','utf8').replace(`require.main.filename`, `require.resolve('../bin/npm-cli.js')`); fs.writeFileSync('./node_modules/npm/lib/pack.js', txt );"
   }

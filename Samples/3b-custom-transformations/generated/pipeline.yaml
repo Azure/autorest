@@ -148,7 +148,7 @@ swagger-document/individual/identity:
   configScope:
     - perform-load
   inputs:
-    - swagger-document/individual/transform
+    - swagger-document/individual/schema-validator
   outputArtifact: swagger-document
   pluginName: identity
 swagger-document/individual/openapi-validator:
@@ -158,6 +158,13 @@ swagger-document/individual/openapi-validator:
   inputs:
     - swagger-document/individual/identity
   pluginName: openapi-validator
+swagger-document/individual/schema-validator:
+  configScope:
+    - perform-load
+  inputs:
+    - swagger-document/individual/transform
+  outputArtifact: swagger-document
+  pluginName: schema-validator
 swagger-document/individual/transform:
   configScope:
     - perform-load

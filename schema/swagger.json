@@ -1,6 +1,6 @@
 {
   "title": "A JSON Schema for Swagger 2.0 API.",
-  "id": "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json#",
+  "id": "http://swagger.io/v2/schema.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "required": [
@@ -10,8 +10,8 @@
   ],
   "additionalProperties": false,
   "patternProperties": {
-    "^x-(?!ms-).*$": {
-      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
+    "^x-": {
+      "$ref": "#/definitions/vendorExtension"
     }
   },
   "properties": {
@@ -28,7 +28,7 @@
     "host": {
       "type": "string",
       "pattern": "^[^{}/ :\\\\]+(?::\\d+)?$",
-      "description": "The host (name or ip) of the API. Example: 'swagger.io"
+      "description": "The host (name or ip) of the API. Example: 'swagger.io'"
     },
     "basePath": {
       "type": "string",
@@ -36,24 +36,26 @@
       "description": "The base path to the API. Example: '/api'."
     },
     "schemes": {
-      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/schemesList"
+      "$ref": "#/definitions/schemesList"
     },
     "consumes": {
       "description": "A list of MIME types accepted by the API.",
-      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/mediaTypeList"
+      "allOf": [
+        {
+          "$ref": "#/definitions/mediaTypeList"
+        }
+      ]
     },
     "produces": {
       "description": "A list of MIME types the API can produce.",
-      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/mediaTypeList"
+      "allOf": [
+        {
+          "$ref": "#/definitions/mediaTypeList"
+        }
+      ]
     },
     "paths": {
       "$ref": "#/definitions/paths"
-    },
-    "x-ms-paths": {
-      "$ref": "#/definitions/xmsPaths"
-    },
-    "x-ms-parameterized-host": {
-      "$ref": "#/definitions/xmsParameterizedHost"
     },
     "definitions": {
       "$ref": "#/definitions/definitions"
@@ -65,10 +67,10 @@
       "$ref": "#/definitions/responseDefinitions"
     },
     "security": {
-      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/security"
+      "$ref": "#/definitions/security"
     },
     "securityDefinitions": {
-      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/securityDefinitions"
+      "$ref": "#/definitions/securityDefinitions"
     },
     "tags": {
       "type": "array",
@@ -91,7 +93,7 @@
       ],
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -117,9 +119,6 @@
         },
         "license": {
           "$ref": "#/definitions/license"
-        },
-        "x-ms-code-generation-settings": {
-          "$ref": "#/definitions/xmsCodeGenerationSettings"
         }
       }
     },
@@ -144,7 +143,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -167,7 +166,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -176,7 +175,7 @@
       "type": "object",
       "description": "Relative paths to the individual endpoints. They must be relative to the 'basePath'.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         },
         "^/": {
@@ -223,7 +222,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -243,7 +242,7 @@
       ],
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -272,11 +271,19 @@
         },
         "produces": {
           "description": "A list of MIME types the API can produce.",
-          "$ref": "#/definitions/mediaTypeList"
+          "allOf": [
+            {
+              "$ref": "#/definitions/mediaTypeList"
+            }
+          ]
         },
         "consumes": {
           "description": "A list of MIME types the API can consume.",
-          "$ref": "#/definitions/mediaTypeList"
+          "allOf": [
+            {
+              "$ref": "#/definitions/mediaTypeList"
+            }
+          ]
         },
         "parameters": {
           "$ref": "#/definitions/parametersList"
@@ -292,22 +299,7 @@
           "default": false
         },
         "security": {
-          "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/security"
-        },
-        "x-ms-odata": {
-          "$ref": "#/definitions/xmsOData"
-        },
-        "x-ms-pageable": {
-          "$ref": "#/definitions/xmsPageable"
-        },
-        "x-ms-long-running-operation": {
-          "$ref": "#/definitions/xmsLongRunningOperation"
-        },
-        "x-ms-request-id": {
-          "$ref": "#/definitions/xmsRequestId"
-        },
-        "x-ms-examples": {
-          "$ref": "#/definitions/xmsExamples"
+          "$ref": "#/definitions/security"
         }
       }
     },
@@ -315,7 +307,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -358,7 +350,7 @@
         "^([0-9]{3})$|^(default)$": {
           "$ref": "#/definitions/responseValue"
         },
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -366,7 +358,7 @@
         "type": "object",
         "additionalProperties": false,
         "patternProperties": {
-          "^x-(?!ms-).*$": {
+          "^x-": {
             "$ref": "#/definitions/vendorExtension"
           }
         }
@@ -401,9 +393,6 @@
             }
           ]
         },
-        "x-ms-headers": {
-          "$ref": "#/definitions/schema"
-        },
         "headers": {
           "$ref": "#/definitions/headers"
         },
@@ -413,7 +402,7 @@
       },
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -486,12 +475,6 @@
         "enum": {
           "$ref": "#/definitions/enum"
         },
-        "x-ms-enum": {
-          "$ref": "#/definitions/xmsEnum"
-        },
-        "x-nullable": {
-          "$ref": "#/definitions/xNullable"
-        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         },
@@ -500,7 +483,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -518,7 +501,7 @@
         "schema"
       ],
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -543,21 +526,8 @@
           "description": "Determines whether or not this parameter is required or optional.",
           "default": false
         },
-        "x-ms-parameter-grouping": {
-          "$ref": "#/definitions/xmsParameterGrouping"
-        },
-        "x-ms-parameter-location": {
-          "$ref": "#/definitions/xmsParameterLocation"
-        },
-        "x-ms-client-name": {
-          "type": "string",
-          "description": "A code-generator-friendly name for the parameter."
-        },
         "schema": {
           "$ref": "#/definitions/schema"
-        },
-        "x-ms-client-flatten": {
-          "$ref": "#/definitions/xmsClientFlatten"
         }
       },
       "additionalProperties": false
@@ -565,7 +535,7 @@
     "headerParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -645,25 +615,6 @@
         "enum": {
           "$ref": "#/definitions/enum"
         },
-        "x-ms-enum": {
-          "$ref": "#/definitions/xmsEnum"
-        },
-        "x-nullable": {
-          "$ref": "#/definitions/xNullable"
-        },
-        "x-ms-parameter-grouping": {
-          "$ref": "#/definitions/xmsParameterGrouping"
-        },
-        "x-ms-parameter-location": {
-          "$ref": "#/definitions/xmsParameterLocation"
-        },
-        "x-ms-client-name": {
-          "type": "string",
-          "description": "A code-generator-friendly name for the parameter."
-        },
-        "x-ms-client-request-id": {
-          "$ref": "#/definitions/xmsClientRequestId"
-        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         }
@@ -672,7 +623,7 @@
     "queryParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -757,25 +708,6 @@
         "enum": {
           "$ref": "#/definitions/enum"
         },
-        "x-ms-parameter-grouping": {
-          "$ref": "#/definitions/xmsParameterGrouping"
-        },
-        "x-ms-parameter-location": {
-          "$ref": "#/definitions/xmsParameterLocation"
-        },
-        "x-ms-client-name": {
-          "type": "string",
-          "description": "A code-generator-friendly name for the parameter."
-        },
-        "x-ms-enum": {
-          "$ref": "#/definitions/xmsEnum"
-        },
-        "x-nullable": {
-          "$ref": "#/definitions/xNullable"
-        },
-        "x-ms-skip-url-encoding": {
-          "$ref": "#/definitions/xmsSkipUrlEncoding"
-        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         }
@@ -784,7 +716,7 @@
     "formDataParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -870,22 +802,6 @@
         "enum": {
           "$ref": "#/definitions/enum"
         },
-        "x-ms-parameter-grouping": {
-          "$ref": "#/definitions/xmsParameterGrouping"
-        },
-        "x-ms-parameter-location": {
-          "$ref": "#/definitions/xmsParameterLocation"
-        },
-        "x-ms-client-name": {
-          "type": "string",
-          "description": "A code-generator-friendly name for the parameter."
-        },
-        "x-ms-enum": {
-          "$ref": "#/definitions/xmsEnum"
-        },
-        "x-nullable": {
-          "$ref": "#/definitions/xNullable"
-        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         }
@@ -894,7 +810,7 @@
     "pathParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -979,27 +895,8 @@
         "enum": {
           "$ref": "#/definitions/enum"
         },
-        "x-ms-parameter-grouping": {
-          "$ref": "#/definitions/xmsParameterGrouping"
-        },
-        "x-ms-parameter-location": {
-          "$ref": "#/definitions/xmsParameterLocation"
-        },
-        "x-ms-client-name": {
-          "type": "string",
-          "description": "A code-generator-friendly name for the parameter."
-        },
-        "x-ms-enum": {
-          "$ref": "#/definitions/xmsEnum"
-        },
-        "x-nullable": {
-          "$ref": "#/definitions/xNullable"
-        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
-        },
-        "x-ms-skip-url-encoding": {
-          "$ref": "#/definitions/xmsSkipUrlEncoding"
         }
       }
     },
@@ -1033,18 +930,13 @@
         {
           "$ref": "#/definitions/nonBodyParameter"
         }
-      ],
-      "properties": {
-        "x-ms-client-flatten": {
-          "$ref": "#/definitions/xmsClientFlatten"
-        }
-      }
+      ]
     },
     "schema": {
       "type": "object",
       "description": "A deterministic version of a JSON Schema object.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1109,12 +1001,6 @@
         "enum": {
           "$ref": "http://json-schema.org/draft-04/schema#/properties/enum"
         },
-        "x-ms-enum": {
-          "$ref": "#/definitions/xmsEnum"
-        },
-        "x-nullable": {
-          "$ref": "#/definitions/xNullable"
-        },
         "additionalProperties": {
           "anyOf": [
             {
@@ -1165,31 +1051,13 @@
           "type": "boolean",
           "default": false
         },
-        "x-ms-discriminator-value": {
-          "$ref": "#/definitions/xmsDiscriminatorValue"
-        },
-        "x-ms-azure-resource": {
-          "$ref": "#/definitions/xmsAzureResource"
-        },
-        "x-ms-external": {
-          "$ref": "#/definitions/xmsExternal"
-        },
         "xml": {
           "$ref": "#/definitions/xml"
         },
         "externalDocs": {
           "$ref": "#/definitions/externalDocs"
         },
-        "example": {},
-        "x-ms-client-flatten": {
-          "$ref": "#/definitions/xmsClientFlatten"
-        },
-        "x-ms-client-name": {
-          "type": "string"
-        },
-        "x-ms-mutability": {
-          "$ref": "#/definitions/xmsMutability"
-        }
+        "example": {}
       },
       "additionalProperties": false
     },
@@ -1197,7 +1065,7 @@
       "type": "object",
       "description": "A deterministic version of a JSON Schema object.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1296,20 +1164,31 @@
         "enum": {
           "$ref": "#/definitions/enum"
         },
-        "x-ms-enum": {
-          "$ref": "#/definitions/xmsEnum"
-        },
-        "x-nullable": {
-          "$ref": "#/definitions/xNullable"
-        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
+      }
+    },
+    "security": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/securityRequirement"
+      },
+      "uniqueItems": true
+    },
+    "securityRequirement": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
       }
     },
     "xml": {
@@ -1335,7 +1214,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -1358,9 +1237,255 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
+      }
+    },
+    "securityDefinitions": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "$ref": "#/definitions/basicAuthenticationSecurity"
+          },
+          {
+            "$ref": "#/definitions/apiKeySecurity"
+          },
+          {
+            "$ref": "#/definitions/oauth2ImplicitSecurity"
+          },
+          {
+            "$ref": "#/definitions/oauth2PasswordSecurity"
+          },
+          {
+            "$ref": "#/definitions/oauth2ApplicationSecurity"
+          },
+          {
+            "$ref": "#/definitions/oauth2AccessCodeSecurity"
+          }
+        ]
+      }
+    },
+    "basicAuthenticationSecurity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "basic"
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      }
+    },
+    "apiKeySecurity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "name",
+        "in"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "in": {
+          "type": "string",
+          "enum": [
+            "header",
+            "query"
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      }
+    },
+    "oauth2ImplicitSecurity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "flow",
+        "authorizationUrl"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flow": {
+          "type": "string",
+          "enum": [
+            "implicit"
+          ]
+        },
+        "scopes": {
+          "$ref": "#/definitions/oauth2Scopes"
+        },
+        "authorizationUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      }
+    },
+    "oauth2PasswordSecurity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "flow",
+        "tokenUrl"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flow": {
+          "type": "string",
+          "enum": [
+            "password"
+          ]
+        },
+        "scopes": {
+          "$ref": "#/definitions/oauth2Scopes"
+        },
+        "tokenUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      }
+    },
+    "oauth2ApplicationSecurity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "flow",
+        "tokenUrl"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flow": {
+          "type": "string",
+          "enum": [
+            "application"
+          ]
+        },
+        "scopes": {
+          "$ref": "#/definitions/oauth2Scopes"
+        },
+        "tokenUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      }
+    },
+    "oauth2AccessCodeSecurity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "flow",
+        "authorizationUrl",
+        "tokenUrl"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flow": {
+          "type": "string",
+          "enum": [
+            "accessCode"
+          ]
+        },
+        "scopes": {
+          "$ref": "#/definitions/oauth2Scopes"
+        },
+        "authorizationUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "tokenUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      }
+    },
+    "oauth2Scopes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "mediaTypeList": {
@@ -1476,215 +1601,6 @@
         "$ref": {
           "type": "string"
         }
-      }
-    },
-    "xmsSkipUrlEncoding": {
-      "type": "boolean"
-    },
-    "xNullable": {
-      "description": "Indicates whether the entity on which this extension is applied is nullable or not. `true` value indicates that it is nullable.",
-      "type": "boolean"
-    },
-    "xmsEnum": {
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "modelAsString": {
-          "type": "boolean",
-          "default": false
-        },
-        "modelAsExtensible": {
-          "type": "boolean",
-          "default": false
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "value"
-            ],
-            "properties": {
-              "value": {},
-              "description": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "allowedValues": {
-                "type": "array",
-                "items": {}
-              }
-            },
-            "additionalProperties": false
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "xmsParameterGrouping": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          },
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "properties": {
-            "postfix": {
-              "type": [
-                "string",
-                "null"
-              ]
-            }
-          },
-          "additionalProperties": false
-        }
-      ]
-    },
-    "xmsPaths": {
-      "$ref": "#/definitions/paths"
-    },
-    "xmsExternal": {
-      "type": "boolean"
-    },
-    "xmsDiscriminatorValue": {
-      "type": "string"
-    },
-    "xmsOData": {
-      "type": "string"
-    },
-    "xmsPageable": {
-      "type": "object",
-      "properties": {
-        "nextLinkName": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "itemName": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "operationName": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "xmsLongRunningOperation": {
-      "description": "Indicates whether the operation is long running (asynchronous). `true` value indicates that it is a long running operation.",
-      "type": "boolean"
-    },
-    "xmsAzureResource": {
-      "description": "Indicates whether a model definition is an Azure Resource. `true` value indicates that it is an Azure Resource.",
-      "type": "boolean"
-    },
-    "xmsRequestId": {
-      "type": "string"
-    },
-    "xmsClientRequestId": {
-      "type": "boolean"
-    },
-    "xmsCodeGenerationSettings": {
-      "additionalProperties": true
-    },
-    "xmsHostParametersList": {
-      "type": "array",
-      "description": "The parameters used in conjunction with x-ms-parameterized-host.",
-      "additionalItems": false,
-      "items": {
-        "oneOf": [
-          {
-            "$ref": "#/definitions/nonBodyParameter"
-          },
-          {
-            "$ref": "#/definitions/jsonReference"
-          }
-        ]
-      },
-      "uniqueItems": true
-    },
-    "xmsParameterizedHost": {
-      "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        }
-      },
-      "properties": {
-        "hostTemplate": {
-          "type": "string"
-        },
-        "useSchemePrefix": {
-          "type": "boolean",
-          "default": true
-        },
-        "positionInOperation": {
-          "type": "string",
-          "default": "first",
-          "pattern": "^(fir|la)st$"
-        },
-        "parameters": {
-          "$ref": "#/definitions/xmsHostParametersList"
-        }
-      }
-    },
-    "xmsClientFlatten": {
-      "type": "boolean"
-    },
-    "xmsParameterLocation": {
-      "type": "string",
-      "enum": [
-        "client",
-        "method"
-      ]
-    },
-    "xmsMutability": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "create",
-          "read",
-          "update"
-        ]
-      },
-      "uniqueItems": true
-    },
-    "xmsExamples": {
-      "type": "object",
-      "description": "Describes the 'x-ms-examples' extension.",
-      "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json#"
-          },
-          {
-            "$ref": "#/definitions/jsonReference"
-          }
-        ]
       }
     }
   }

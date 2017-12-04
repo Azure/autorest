@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { QuickDataSource } from '../data-store/data-store';
-import { PipelinePlugin } from './pipeline';
+import { PipelinePlugin } from './common';
 
 export function GetPlugin_ReflectApiVersion(): PipelinePlugin {
   return async (config, input, sink) => {

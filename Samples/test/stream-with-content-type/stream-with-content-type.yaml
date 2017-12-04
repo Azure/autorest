@@ -31,7 +31,8 @@ paths:
           modelAsString: false
           name: ImageType
       responses:
-        '200': {}
+        '200':
+          description: OK
   "/ProcessImage/FunctionB":
     post:
       operationId: Image_B
@@ -48,7 +49,8 @@ paths:
           modelAsString: false
           name: ImageType
       responses:
-        '200': {}
+        '200':
+          description: OK
   "/ProcessImage/FunctionC":
     post:
       operationId: Image_C
@@ -68,7 +70,8 @@ paths:
       - image/png
       - image/tiff
       responses:
-        '200': {}
+        '200':
+          description: OK
   "/ProcessImage/FunctionD":
     post:
       operationId: Image_D
@@ -88,7 +91,8 @@ paths:
       - image/png
       - image/tiff
       responses:
-        '200': {}
+        '200':
+          description: OK
   "/ProcessImage/FunctionTA":
     post:
       consumes:
@@ -99,7 +103,8 @@ paths:
       - "$ref": "#/parameters/TextStream"
       - "$ref": "#/parameters/TextContentType"
       responses:
-        '200': {}
+        '200':
+          description: OK
   "/ProcessImage/FunctionTB":
     post:
       consumes:
@@ -110,7 +115,8 @@ paths:
       - "$ref": "#/parameters/TextStream"
       - "$ref": "#/parameters/TextContentType"
       responses:
-        '200': {}
+        '200':
+          description: OK
 parameters:
   ImageStream:
     name: Image
@@ -119,7 +125,8 @@ parameters:
     x-ms-parameter-location: method
     description: An image stream.
     schema:
-      type: file
+      type: string
+      format: binary
   TextStream:
     name: Text
     in: body
@@ -127,7 +134,8 @@ parameters:
     x-ms-parameter-location: method
     description: A text stream.
     schema:
-      type: file
+      type: string
+      format: binary
   TextContentType:
     name: Content-Type
     in: header
