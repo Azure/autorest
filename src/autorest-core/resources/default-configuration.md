@@ -492,4 +492,14 @@ declare-directive:
       where: `$..['$ref']`,
       transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
     }]
+  remove-property: >-
+    {
+      from: 'swagger-document',
+      transform: `delete $.properties[${JSON.stringify($)}]`
+    }
+  rename-property: >-
+    {
+      from: 'swagger-document',
+      transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
+    }
 ```

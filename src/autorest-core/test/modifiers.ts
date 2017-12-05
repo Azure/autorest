@@ -96,4 +96,30 @@ import { join } from "path";
     assert.ok(code["Models/SuperCowbell.cs"]);
     assert.ok(code["Models/SuperCowbell.cs"].includes("string Name"));
   }
+
+  @test async "RemoveProperty"() {
+    const code = await this.generate({
+      "directive": {
+        "where-type": "Cowbell",
+        "remove-property": "name"
+      }
+    });
+    assert.ok(code["Models/Cowbell.cs"]);
+    assert.ok(!code["Models/Cowbell.cs"].includes("string Name"));
+  }
+
+  @test async "RenameProperty"() {
+    const code = await this.generate({
+      "directive": {
+        "where-type": "Cowbell",
+        "rename-property": {
+          from: "name",
+          to: "firstName"
+        }
+      }
+    });
+    assert.ok(code["Models/Cowbell.cs"]);
+    assert.ok(!code["Models/Cowbell.cs"].includes("string Name"));
+    assert.ok(code["Models/Cowbell.cs"].includes("string FirstName"));
+  }
 }
