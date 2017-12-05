@@ -445,6 +445,16 @@ declare-directive:
           return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
       }
     })()
+  where-type: >-
+    (() => {
+      switch ($context.from) {
+        case "code-model-v1":
+          throw "not implemented";
+        case "swagger-document":
+        default:
+          return { from: "swagger-document", where: `$.definitions[${JSON.stringify($)}]` };
+      }
+    })()
 ```
 
 ## Removal
@@ -459,4 +469,27 @@ declare-directive:
       "where-operation": $,
       transform: 'return undefined'
     }
+  rename-operation: >-
+    {
+      from: 'swagger-document',
+      "where-operation": $.from,
+      transform: `$.operationId = ${JSON.stringify($.to)}`
+    }
+  remove-type: >-
+    {
+      from: 'swagger-document',
+      "where-type": $,
+      transform: 'return undefined'
+    }
+  rename-type: >-
+    [{
+      from: 'swagger-document',
+      where: '$.definitions',
+      transform: `if ($[${JSON.stringify($.from)}]) { $[${JSON.stringify($.to)}] = $[${JSON.stringify($.from)}]; delete $[${JSON.stringify($.from)}]; }`
+    },
+    {
+      from: 'swagger-document',
+      where: `$..['$ref']`,
+      transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
+    }]
 ```

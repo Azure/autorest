@@ -18,7 +18,8 @@ import { join } from "path";
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
       "input-file": join(__dirname, "..", "..", "test", "resources", "tiny.yaml"),
-      "csharp": "true"
+      "csharp": "true",
+      "output-artifact": ["swagger-document.yaml", "openapi-document.yaml"]
     });
     autoRest.AddConfiguration(additionalConfig);
 
@@ -27,6 +28,9 @@ import { join } from "path";
     autoRest.GeneratedFile.Subscribe((sender, args) => {
       if (args.type === "source-file-csharp") {
         result[args.uri.slice("file:///generated/".length)] = args.content;
+      }
+      if (args.type === "swagger-document.yaml" || args.type === "openapi-document.yaml") {
+        // console.warn(args.content);
       }
     });
     const success = await autoRest.Process().finish;
@@ -38,14 +42,58 @@ import { join } from "path";
   @test async "Reference"() {
     const code = await this.generate({});
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Get("));
+    assert.ok(!code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
+    assert.ok(code["Models/Cowbell.cs"]);
+    assert.ok(code["Models/Cowbell.cs"].includes("string Name"));
+    assert.ok(!code["Models/SuperCowbell.cs"]);
   }
 
-  @test async "RemoveMethod"() {
+  @test async "RemoveOperation"() {
     const code = await this.generate({
       "directive": {
         "remove-operation": "Cowbell_Get"
       }
     });
     assert.ok(!code["CowbellOperationsExtensions.cs"].includes(" Get("));
+    assert.ok(!code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
+  }
+
+  @test async "RenameMethod"() {
+    const code = await this.generate({
+      "directive": {
+        "rename-operation": {
+          from: "Cowbell_Get",
+          to: "Cowbell_Retrieve"
+        }
+      }
+    });
+    assert.ok(!code["CowbellOperationsExtensions.cs"].includes(" Get("));
+    assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
+  }
+
+  @test async "RemoveType"() {
+    const code = await this.generate({
+      "directive": [
+        { "remove-type": "Cowbell" },
+        { "remove-operation": "Cowbell_Get" }, // ...or there will be
+        { "remove-operation": "Cowbell_Add" }  // broken references
+      ]
+    });
+    assert.ok(!code["Models/Cowbell.cs"]);
+    assert.ok(!code["Models/SuperCowbell.cs"]);
+  }
+
+  @test async "RenameType"() {
+    const code = await this.generate({
+      "directive": {
+        "rename-type": {
+          from: "Cowbell",
+          to: "SuperCowbell"
+        }
+      }
+    });
+    assert.ok(!code["Models/Cowbell.cs"]);
+    assert.ok(code["Models/SuperCowbell.cs"]);
+    assert.ok(code["Models/SuperCowbell.cs"].includes("string Name"));
   }
 }
