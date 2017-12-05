@@ -71,10 +71,10 @@ import { join } from "path";
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
   }
 
-  @test async "RemoveType"() {
+  @test async "RemoveModel"() {
     const code = await this.generate({
       "directive": [
-        { "remove-type": "Cowbell" },
+        { "remove-model": "Cowbell" },
         { "remove-operation": "Cowbell_Get" }, // ...or there will be
         { "remove-operation": "Cowbell_Add" }  // broken references
       ]
@@ -83,10 +83,10 @@ import { join } from "path";
     assert.ok(!code["Models/SuperCowbell.cs"]);
   }
 
-  @test async "RenameType"() {
+  @test async "RenameModel"() {
     const code = await this.generate({
       "directive": {
-        "rename-type": {
+        "rename-model": {
           from: "Cowbell",
           to: "SuperCowbell"
         }
@@ -100,7 +100,7 @@ import { join } from "path";
   @test async "RemoveProperty"() {
     const code = await this.generate({
       "directive": {
-        "where-type": "Cowbell",
+        "where-model": "Cowbell",
         "remove-property": "name"
       }
     });
@@ -111,7 +111,7 @@ import { join } from "path";
   @test async "RenameProperty"() {
     const code = await this.generate({
       "directive": {
-        "where-type": "Cowbell",
+        "where-model": "Cowbell",
         "rename-property": {
           from: "name",
           to: "firstName"

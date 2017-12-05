@@ -445,7 +445,7 @@ declare-directive:
           return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
       }
     })()
-  where-type: >-
+  where-model: >-
     (() => {
       switch ($context.from) {
         case "code-model-v1":
@@ -475,13 +475,13 @@ declare-directive:
       "where-operation": $.from,
       transform: `$.operationId = ${JSON.stringify($.to)}`
     }
-  remove-type: >-
+  remove-model: >-
     {
       from: 'swagger-document',
-      "where-type": $,
+      "where-model": $,
       transform: 'return undefined'
     }
-  rename-type: >-
+  rename-model: >-
     [{
       from: 'swagger-document',
       where: '$.definitions',
