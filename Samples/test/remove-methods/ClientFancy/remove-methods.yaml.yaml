@@ -1,39 +1,39 @@
 ---
-definitions:
-  Cowbell:
-    description: A cowbell.
-    properties:
-      id:
-        default: 42
-        format: int64
-        type: integer
-      name:
-        default: shiny
-        type: string
-    required:
-      - name
-host: localhost
+swagger: '2.0'
 info:
-  description: This is a sample.
-  title: Cowbell Factory
   version: 1.0.0
+  title: Cowbell Factory
+  description: This is a sample.
+host: localhost
+schemes:
+  - https
 paths:
   /cowbell:
     get:
-      consumes:
-        - application/json
       operationId: Cowbell_Get
       parameters:
         - in: query
           name: id
           type: string
-      produces:
-        - application/json
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/Cowbell'
-schemes:
-  - https
-swagger: '2.0'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+definitions:
+  Cowbell:
+    required:
+      - name
+    properties:
+      id:
+        type: integer
+        format: int64
+        default: 42
+      name:
+        type: string
+        default: shiny
+    description: A cowbell.

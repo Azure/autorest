@@ -15,26 +15,25 @@ export function GetPlugin_ReflectApiVersion(): PipelinePlugin {
     const title = resolvedSwagger.ReadObject<any>().info.title.replace(/[^a-zA-Z]/g, "");
 
     // collect metadata
-    const data: { namespace: string, group: string, apiVersion: string }[] = [];
+    const data: { namespace: string | null, group: string, apiVersion: string }[] = [];
     for (let file of files) {
       const swagger = (await input.ReadStrict(file)).ReadObject<any>();
       const apiVersion = swagger.info.version;
       const paths = { ...swagger["paths"], ...swagger["x-ms-paths"] };
       for (const path of Object.keys(paths)) {
-        const namespace = (/\/Microsoft\.(.*?)\//i.exec(path) || [])[1];
-        if (namespace) {
-          const groups = Object.values(paths[path])
-            .map(x => x.operationId).filter(x => !!x)
-            .map(x => x.split('_')[0]).filter(x => !!x);
-          for (const group of groups) {
-            data.push({ namespace, group, apiVersion });
-          }
+        let namespace: string | null = (/\/Microsoft\.(.*?)\//i.exec(path) || [])[1];
+        if (typeof namespace !== "string") namespace = null;
+        const groups = Object.values(paths[path])
+          .map(x => x.operationId).filter(x => !!x)
+          .map(x => x.split('_')[0]).filter(x => !!x);
+        for (const group of groups) {
+          data.push({ namespace, group, apiVersion });
         }
       }
     }
 
     // create C# metadata
-    let tuples = data.map(x => `new Tuple<string, string, string>("${x.namespace}", "${x.group}", "${x.apiVersion}")`);
+    let tuples = data.map(x => `new Tuple<string, string, string>(${JSON.stringify(x.namespace)}, "${x.group}", "${x.apiVersion}")`);
     tuples = tuples.sort();
     tuples = tuples.filter((x, i) => i === 0 || x !== tuples[i - 1]);
 

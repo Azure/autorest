@@ -37,8 +37,8 @@ To support tools unable to process multiple OpenAPI definitions or definitions w
 
 ``` yaml
 output-artifact: 
-  - swagger-document.json
-  - swagger-document.yaml
+  - swagger-document.norm.json
+  - swagger-document.norm.yaml
 ```
 
 ### Source maps
@@ -48,6 +48,6 @@ For example, AutoRest uses the source map internally in order to relate validati
 
 ``` yaml
 output-artifact:
-  - swagger-document.json.map
-  - swagger-document.yaml.map
+  - swagger-document.norm.json.map
+  - swagger-document.norm.yaml.map
 ```
