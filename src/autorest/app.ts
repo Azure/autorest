@@ -6,6 +6,8 @@ require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+const cwd = process.cwd();
+
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd
 if (!String.prototype.padEnd) {
@@ -231,6 +233,7 @@ async function main() {
     const localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
 
     // try to use a specified folder or one in node_modules if it is there.
+    process.chdir(cwd);
     if (await tryRequire(localVersion, "app.js")) {
       return;
     }
@@ -283,6 +286,7 @@ async function main() {
     if (args.debug) {
       console.log(`Starting ${corePackage} from ${await selectedVersion.location}`);
     }
+    process.chdir(cwd);
     if (!tryRequire(await selectedVersion.modulePath, "app.js")) {
       throw new Error(`Unable to start AutoRest Core from ${await selectedVersion.modulePath}`);
     }
