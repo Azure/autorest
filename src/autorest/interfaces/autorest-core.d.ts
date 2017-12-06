@@ -7,11 +7,6 @@ declare module 'autorest-core/lib/artifact' {
 }
 
 }
-declare module 'autorest-core/lib/constants' {
-	export const MagicString: string;
-export const DefaultConfiguration: string;
-
-}
 declare module 'autorest-core/lib/ref/safe-eval' {
 	export const safeEval: <T>(expression: string, context?: any) => T;
 
@@ -31,6 +26,11 @@ export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean;
 export function CreateObject(jsonPath: JsonPath, leafObject: any): any;
 export function matches(jsonQuery: string, jsonPath: JsonPath): boolean;
 export function parseJsonPointer(jsonPointer: string): JsonPath;
+
+}
+declare module 'autorest-core/lib/constants' {
+	export const MagicString: string;
+export const DefaultConfiguration: string;
 
 }
 declare module 'autorest-core/lib/ref/async' {
@@ -271,21 +271,6 @@ export class EnhancedFileSystem implements IFileSystem {
 }
 
 }
-declare module 'autorest-core/help' {
-	export interface Help {
-    categoryFriendlyName: string;
-    activationScope?: string;
-    description?: string;
-    settings: SettingHelp[];
-}
-export interface SettingHelp {
-    required?: boolean;
-    key: string;
-    type?: string;
-    description: string;
-}
-
-}
 declare module 'autorest-core/lib/document-type' {
 	export enum DocumentType {
     OpenAPI2,
@@ -312,6 +297,29 @@ export const DocumentPatterns: {
     markdown: string[];
     all: string[];
 };
+
+}
+declare module 'autorest-core/main' {
+	export { IFileSystem } from 'autorest-core/lib/file-system';
+export { Message, Channel } from 'autorest-core/lib/message';
+export { Artifact } from 'autorest-core/lib/artifact';
+export { AutoRest, ConfigurationView, IdentifyDocument, IsConfigurationExtension, IsConfigurationDocument, IsOpenApiExtension, LiterateToJson, IsOpenApiDocument } from 'autorest-core/lib/autorest-core';
+export { DocumentFormat, DocumentExtension, DocumentPatterns, DocumentType } from 'autorest-core/lib/document-type';
+
+}
+declare module 'autorest-core/help' {
+	export interface Help {
+    categoryFriendlyName: string;
+    activationScope?: string;
+    description?: string;
+    settings: SettingHelp[];
+}
+export interface SettingHelp {
+    required?: boolean;
+    key: string;
+    type?: string;
+    description: string;
+}
 
 }
 declare module 'autorest-core/lib/autorest-core' {
@@ -527,14 +535,6 @@ export class Configuration {
     static DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders?: boolean): Promise<string | null>;
     static DetectConfigurationFiles(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders?: boolean): Promise<Array<string>>;
 }
-
-}
-declare module 'autorest-core/main' {
-	export { IFileSystem } from 'autorest-core/lib/file-system';
-export { Message, Channel } from 'autorest-core/lib/message';
-export { Artifact } from 'autorest-core/lib/artifact';
-export { AutoRest, ConfigurationView, IdentifyDocument, IsConfigurationExtension, IsConfigurationDocument, IsOpenApiExtension, LiterateToJson, IsOpenApiDocument } from 'autorest-core/lib/autorest-core';
-export { DocumentFormat, DocumentExtension, DocumentPatterns, DocumentType } from 'autorest-core/lib/document-type';
 
 }
 declare module 'autorest-core/language-service/language-service' {

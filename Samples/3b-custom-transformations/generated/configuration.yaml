@@ -299,11 +299,53 @@ declare-directive:
           return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
       }
     })()
+  where-model: |-
+    (() => {
+      switch ($context.from) {
+        case "code-model-v1":
+          throw "not implemented";
+        case "swagger-document":
+        default:
+          return { from: "swagger-document", where: `$.definitions[${JSON.stringify($)}]` };
+      }
+    })()
   remove-operation: |-
     {
       from: 'swagger-document',
       "where-operation": $,
       transform: 'return undefined'
+    }
+  rename-operation: |-
+    {
+      from: 'swagger-document',
+      "where-operation": $.from,
+      transform: `$.operationId = ${JSON.stringify($.to)}`
+    }
+  remove-model: |-
+    {
+      from: 'swagger-document',
+      "where-model": $,
+      transform: 'return undefined'
+    }
+  rename-model: |-
+    [{
+      from: 'swagger-document',
+      where: '$.definitions',
+      transform: `if ($[${JSON.stringify($.from)}]) { $[${JSON.stringify($.to)}] = $[${JSON.stringify($.from)}]; delete $[${JSON.stringify($.from)}]; }`
+    }, {
+      from: 'swagger-document',
+      where: `$..['$ref']`,
+      transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
+    }]
+  remove-property: |-
+    {
+      from: 'swagger-document',
+      transform: `delete $.properties[${JSON.stringify($)}]`
+    }
+  rename-property: |-
+    {
+      from: 'swagger-document',
+      transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
     }
 used-extension:
   - '["@microsoft.azure/autorest.csharp","~2.2.45"]'
