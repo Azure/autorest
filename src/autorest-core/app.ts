@@ -285,7 +285,18 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   subscribeMessages(api, () => exitcode++);
   const artifacts: Artifact[] = [];
   const clearFolders: string[] = [];
-  api.GeneratedFile.Subscribe((_, artifact) => artifacts.push(artifact));
+  api.GeneratedFile.Subscribe((_, artifact) => {
+    if (artifact.uri.startsWith("stdout://")) {
+      config.Message({
+        Channel: Channel.Information,
+        Details: artifact,
+        Text: `Artifact '${artifact.uri.slice("stdout://".length)}' of type '${artifact.type}' has been emitted.`,
+        Plugin: "emitter"
+      });
+    } else {
+      artifacts.push(artifact);
+    }
+  });
   api.ClearFolder.Subscribe((_, folder) => clearFolders.push(folder));
 
   const config = (await api.view);
