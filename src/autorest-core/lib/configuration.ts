@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { Stringify } from './ref/yaml';
 import { Extension, ExtensionManager, LocalExtension } from "@microsoft.azure/extension";
 import { ChildProcess } from "child_process";
 
@@ -490,12 +491,15 @@ export class ConfigurationView {
                 }
                 return text;
               });
-              if (mx.Details.length > 0) {
-                mx.Details["jsonref"] = mx.Details[0];
-                mx.Details["json-path"] = mx.Details[0];
+              if (mx.Details.sources.length > 0) {
+                mx.Details["jsonref"] = mx.Details.sources[0];
+                mx.Details["json-path"] = mx.Details.sources[0];
               }
             }
             mx.FormattedMessage = JSON.stringify(mx.Details || mx, null, 2);
+            break;
+          case "yaml":
+            mx.FormattedMessage = Stringify([mx.Details || mx]).replace(/^---/, "");
             break;
           default:
             let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join("/")})` : ""}: ${mx.Text}`;
