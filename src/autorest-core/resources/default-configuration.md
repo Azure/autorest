@@ -276,8 +276,11 @@ pipeline:
   openapi-document/transform:
     input: openapi-document-converter
     output-artifact: openapi-document
-  openapi-document/identity:
+  openapi-document/component-modifiers:
     input: transform
+    output-artifact: openapi-document
+  openapi-document/identity:
+    input: component-modifiers
     output-artifact: openapi-document
   openapi-document/emitter:
     input: identity
