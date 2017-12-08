@@ -53,7 +53,7 @@ use-extension:
   '@microsoft.azure/autorest.csharp': ~2.2.45
   '@microsoft.azure/classic-openapi-validator': ~1.0.9
   '@microsoft.azure/openapi-validator': ~1.0.2
-  '@microsoft.azure/autorest.modeler': 2.3.38
+  '@microsoft.azure/autorest.modeler': 2.3.42
 
 no-upgrade-check: {}
 skip-upgrade-check: {}
@@ -146,8 +146,13 @@ pipeline:
     output-artifact: openapi-document
     suffixes:
       - ''
-  openapi-document/identity:
+  openapi-document/component-modifiers:
     input: transform
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/identity:
+    input: component-modifiers
     output-artifact: openapi-document
     suffixes:
       - ''
@@ -351,7 +356,7 @@ used-extension:
   - '["@microsoft.azure/autorest.csharp","~2.2.45"]'
   - '["@microsoft.azure/classic-openapi-validator","~1.0.9"]'
   - '["@microsoft.azure/openapi-validator","~1.0.2"]'
-  - '["@microsoft.azure/autorest.modeler","2.3.38"]'
+  - '["@microsoft.azure/autorest.modeler","2.3.42"]'
 scope-csharp/emitter:
   input-artifact: source-file-csharp
 scope-jsonrpcclient/emitter:

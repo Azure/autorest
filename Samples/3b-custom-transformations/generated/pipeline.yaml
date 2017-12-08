@@ -75,13 +75,20 @@ openapi-document/transform:
     - perform-load
   inputs:
     - openapi-document/openapi-document-converter
+openapi-document/component-modifiers:
+  pluginName: component-modifiers
+  outputArtifact: openapi-document
+  configScope:
+    - perform-load
+  inputs:
+    - openapi-document/transform
 openapi-document/identity:
   pluginName: identity
   outputArtifact: openapi-document
   configScope:
     - perform-load
   inputs:
-    - openapi-document/transform
+    - openapi-document/component-modifiers
 csharp/imodeler1:
   pluginName: imodeler1
   outputArtifact: code-model-v1
