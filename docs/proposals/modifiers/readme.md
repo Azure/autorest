@@ -91,32 +91,33 @@ components:
 
 components:
   operations: # operations to add to the code model
-    MyFunx:   # operation group
-      DoSomething: # operation name
-        forward-to: GoSomewhere # creates an alias implementation that forwards to a different method
+    - operationId: DoSomething: # operation name
+      operationGroup: MyFunx    # operation group
+      forward-to: GoSomewhere # creates an alias implementation that forwards to a different method
 
-      DoSomethingElse: # operation name
-        deprecated: true
-        visibility: 
-          - protected
-          - internal  
+    - operationId: DoSomethingElse: # operation name
+      operationGroup: MyFunx    # operation group
+      deprecated: true
+      visibility: 
+        - protected
+        - internal  
 
-        parameters: 
-         - $ref: "#/components/parameters/UserName"
-         - $ref: "#/components/parameters/Password"
+      parameters: 
+       - $ref: "#/components/parameters/UserName"
+       - $ref: "#/components/parameters/Password"
 
-        implemention: 
-          csharp: |
-            {
-              password = rot13(password);
-              return this.DoSomething(username,password);
-            }
-          python: |
-            password = bla.indentation.bla.self.bla.rot13(password)
-            return self.DoSomething(username, password)
-          ruby: |
-            password = password if rot13 
-          nodejs: |
+      implemention: 
+        csharp: |
+          {
+            password = rot13(password);
+            return this.DoSomething(username,password);
+          }
+        python: |
+          password = bla.indentation.bla.self.bla.rot13(password)
+          return self.DoSomething(username, password)
+        ruby: |
+          password = password if rot13 
+        nodejs: |
           {
             return this.DoSomething(username,rot13(password))
           }

@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { GetPlugin_ComponentModifier } from './component-modifier';
 import { GetPlugin_SchemaValidator } from './schema-validation';
 import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '../parsing/yaml';
 import { Descendants, FastStringify, StringifyAst } from '../ref/yaml';
@@ -293,6 +294,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "semantic-validator": GetPlugin_Identity(),
 
     "openapi-document-converter": GetPlugin_OAI2toOAIx(),
+    "component-modifiers": GetPlugin_ComponentModifier(),
     "yaml2jsonx": GetPlugin_Yaml2Jsonx(),
     "jsonx2yaml": GetPlugin_Jsonx2Yaml(),
     "reflect-api-versions-cs": GetPlugin_ReflectApiVersion(),

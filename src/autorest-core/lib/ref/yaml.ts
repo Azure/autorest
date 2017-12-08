@@ -181,6 +181,7 @@ export function StringifyAst(ast: YAMLNode): string {
   return FastStringify(ParseNode<any>(ast));
 }
 export function Clone<T>(object: T): T {
+  if (object === undefined) return object;
   return Parse<T>(FastStringify(object));
 }
 

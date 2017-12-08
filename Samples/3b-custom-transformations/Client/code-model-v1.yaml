@@ -10,6 +10,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
         isRequired: true
@@ -25,6 +26,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
       - $id: '4'
         isReadOnly: false
         realPath:
@@ -33,6 +35,7 @@ modelTypes:
         defaultValue:
           fixed: false
           raw: Microsoft.Storage/storageAccounts
+        deprecated: false
         documentation:
           fixed: false
         isRequired: false
@@ -48,11 +51,13 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
     serializedName: StorageAccountCheckNameAvailabilityParameters
     containsConstantProperties: false
     name:
       fixed: false
       raw: StorageAccountCheckNameAvailabilityParameters
+    deprecated: false
   - $id: '6'
     $type: CompositeType
     properties:
@@ -63,6 +68,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -82,6 +88,7 @@ modelTypes:
           name:
             fixed: false
             raw: Boolean
+          deprecated: false
       - $id: '9'
         isReadOnly: false
         realPath:
@@ -89,6 +96,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -121,9 +129,11 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
           name:
             fixed: false
             raw: Reason
+          deprecated: false
       - $id: '12'
         isReadOnly: false
         realPath:
@@ -131,6 +141,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets an error message explaining the Reason value in more detail.
@@ -147,12 +158,14 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
     serializedName: CheckNameAvailabilityResult
     documentation: The CheckNameAvailability operation response.
     containsConstantProperties: false
     name:
       fixed: false
       raw: CheckNameAvailabilityResult
+    deprecated: false
   - $id: '14'
     $type: CompositeType
     properties:
@@ -163,6 +176,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets or sets the account type.
@@ -199,14 +213,17 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
           name:
             fixed: false
             raw: AccountType
+          deprecated: false
     serializedName: StorageAccountPropertiesCreateParameters
     containsConstantProperties: false
     name:
       fixed: false
       raw: StorageAccountPropertiesCreateParameters
+    deprecated: false
   - $id: '18'
     $type: CompositeType
     properties:
@@ -217,6 +234,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Resource location
@@ -233,6 +251,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
       - $id: '21'
         isReadOnly: false
         realPath:
@@ -240,6 +259,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Resource tags
@@ -259,9 +279,11 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
           supportsAdditionalProperties: false
           name:
             fixed: false
+          deprecated: false
       - $id: '24'
         isReadOnly: false
         realPath:
@@ -269,6 +291,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
         extensions:
@@ -289,6 +312,7 @@ modelTypes:
       raw: StorageAccountCreateParameters
     extensions:
       x-ms-azure-resource: true
+    deprecated: false
   - $id: '25'
     $type: CompositeType
     properties:
@@ -299,6 +323,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the blob endpoint.
@@ -315,6 +340,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
       - $id: '28'
         isReadOnly: false
         realPath:
@@ -322,6 +348,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the queue endpoint.
@@ -338,6 +365,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
       - $id: '30'
         isReadOnly: false
         realPath:
@@ -345,6 +373,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the table endpoint.
@@ -361,6 +390,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
       - $id: '32'
         isReadOnly: false
         realPath:
@@ -368,6 +398,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the file endpoint.
@@ -384,6 +415,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
     serializedName: Endpoints
     documentation: >-
       The URIs that are used to perform a retrieval of a public blob, queue or
@@ -392,6 +424,7 @@ modelTypes:
     name:
       fixed: false
       raw: Endpoints
+    deprecated: false
   - $id: '34'
     $type: CompositeType
     properties:
@@ -402,6 +435,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets or sets the custom domain name. Name is the CNAME source.
@@ -418,6 +452,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
       - $id: '37'
         isReadOnly: false
         realPath:
@@ -425,6 +460,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -443,6 +479,7 @@ modelTypes:
           name:
             fixed: false
             raw: Boolean
+          deprecated: false
     serializedName: CustomDomain
     documentation: >-
       The custom domain assigned to this storage account. This can be set via
@@ -451,6 +488,7 @@ modelTypes:
     name:
       fixed: false
       raw: CustomDomain
+    deprecated: false
   - $id: '39'
     $type: CompositeType
     properties:
@@ -461,6 +499,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -495,9 +534,11 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
           name:
             fixed: false
             raw: ProvisioningState
+          deprecated: false
       - $id: '43'
         isReadOnly: false
         realPath:
@@ -505,6 +546,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the type of the storage account.
@@ -527,6 +569,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -548,6 +591,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the location of the primary for the storage account.
@@ -564,6 +608,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
       - $id: '47'
         isReadOnly: false
         realPath:
@@ -571,6 +616,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -603,9 +649,11 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
           name:
             fixed: false
             raw: AccountStatus
+          deprecated: false
       - $id: '50'
         isReadOnly: false
         realPath:
@@ -613,6 +661,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -634,6 +683,7 @@ modelTypes:
           name:
             fixed: false
             raw: DateTime
+          deprecated: false
       - $id: '52'
         isReadOnly: false
         realPath:
@@ -641,6 +691,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -660,6 +711,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
       - $id: '54'
         isReadOnly: false
         realPath:
@@ -667,6 +719,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -692,6 +745,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the creation date and time of the storage account in UTC.
@@ -709,6 +763,7 @@ modelTypes:
           name:
             fixed: false
             raw: DateTime
+          deprecated: false
       - $id: '57'
         isReadOnly: false
         realPath:
@@ -716,6 +771,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -736,6 +792,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -755,6 +812,7 @@ modelTypes:
     name:
       fixed: false
       raw: StorageAccountProperties
+    deprecated: false
   - $id: '59'
     $type: CompositeType
     properties:
@@ -765,6 +823,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
         extensions:
@@ -789,6 +848,7 @@ modelTypes:
           collectionFormat: none
           defaultValue:
             fixed: false
+          deprecated: false
           documentation:
             fixed: false
             raw: Resource Id
@@ -805,6 +865,7 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
         - $id: '64'
           isReadOnly: true
           realPath:
@@ -812,6 +873,7 @@ modelTypes:
           collectionFormat: none
           defaultValue:
             fixed: false
+          deprecated: false
           documentation:
             fixed: false
             raw: Resource name
@@ -828,6 +890,7 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
         - $id: '66'
           isReadOnly: true
           realPath:
@@ -835,6 +898,7 @@ modelTypes:
           collectionFormat: none
           defaultValue:
             fixed: false
+          deprecated: false
           documentation:
             fixed: false
             raw: Resource type
@@ -851,6 +915,7 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
         - $id: '68'
           isReadOnly: false
           realPath:
@@ -858,6 +923,7 @@ modelTypes:
           collectionFormat: none
           defaultValue:
             fixed: false
+          deprecated: false
           documentation:
             fixed: false
             raw: Resource location
@@ -874,6 +940,7 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
         - $id: '70'
           isReadOnly: false
           realPath:
@@ -881,6 +948,7 @@ modelTypes:
           collectionFormat: none
           defaultValue:
             fixed: false
+          deprecated: false
           documentation:
             fixed: false
             raw: Resource tags
@@ -900,9 +968,11 @@ modelTypes:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
             supportsAdditionalProperties: false
             name:
               fixed: false
+            deprecated: false
       serializedName: Resource
       containsConstantProperties: false
       name:
@@ -910,11 +980,13 @@ modelTypes:
         raw: Resource
       extensions:
         x-ms-azure-resource: true
+      deprecated: false
     documentation: The storage account.
     containsConstantProperties: false
     name:
       fixed: false
       raw: StorageAccount
+    deprecated: false
   - $id: '73'
     $type: CompositeType
     properties:
@@ -925,6 +997,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the value of key 1.
@@ -941,6 +1014,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
       - $id: '76'
         isReadOnly: false
         realPath:
@@ -948,6 +1022,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the value of key 2.
@@ -964,12 +1039,14 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
     serializedName: StorageAccountKeys
     documentation: The access keys for the storage account.
     containsConstantProperties: false
     name:
       fixed: false
       raw: StorageAccountKeys
+    deprecated: false
   - $id: '78'
     $type: CompositeType
     properties:
@@ -980,6 +1057,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the list of storage accounts and their properties.
@@ -996,12 +1074,14 @@ modelTypes:
             $ref: '59'
           name:
             fixed: false
+          deprecated: false
     serializedName: StorageAccountListResult
     documentation: The list storage accounts operation response.
     containsConstantProperties: false
     name:
       fixed: false
       raw: StorageAccountListResult
+    deprecated: false
   - $id: '81'
     $type: CompositeType
     properties:
@@ -1012,6 +1092,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -1037,6 +1118,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -1057,6 +1139,7 @@ modelTypes:
     name:
       fixed: false
       raw: StorageAccountPropertiesUpdateParameters
+    deprecated: false
   - $id: '84'
     $type: CompositeType
     properties:
@@ -1067,6 +1150,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Resource tags
@@ -1086,9 +1170,11 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
           supportsAdditionalProperties: false
           name:
             fixed: false
+          deprecated: false
       - $id: '88'
         isReadOnly: false
         realPath:
@@ -1096,6 +1182,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
         extensions:
@@ -1116,6 +1203,7 @@ modelTypes:
       raw: StorageAccountUpdateParameters
     extensions:
       x-ms-azure-resource: true
+    deprecated: false
   - $id: '89'
     $type: CompositeType
     properties:
@@ -1126,6 +1214,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
         isRequired: true
@@ -1141,11 +1230,13 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
     serializedName: StorageAccountRegenerateKeyParameters
     containsConstantProperties: false
     name:
       fixed: false
       raw: StorageAccountRegenerateKeyParameters
+    deprecated: false
   - $id: '92'
     $type: CompositeType
     properties:
@@ -1156,6 +1247,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets a string describing the resource name.
@@ -1172,6 +1264,7 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
       - $id: '95'
         isReadOnly: false
         realPath:
@@ -1179,6 +1272,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets a localized string describing the resource name.
@@ -1195,12 +1289,14 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
     serializedName: UsageName
     documentation: The Usage Names.
     containsConstantProperties: false
     name:
       fixed: false
       raw: UsageName
+    deprecated: false
   - $id: '97'
     $type: CompositeType
     properties:
@@ -1211,6 +1307,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the unit of measurement.
@@ -1249,9 +1346,11 @@ modelTypes:
             name:
               fixed: false
               raw: String
+            deprecated: false
           name:
             fixed: false
             raw: UsageUnit
+          deprecated: false
       - $id: '101'
         isReadOnly: false
         realPath:
@@ -1259,6 +1358,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -1278,6 +1378,7 @@ modelTypes:
           name:
             fixed: false
             raw: Int
+          deprecated: false
       - $id: '103'
         isReadOnly: false
         realPath:
@@ -1285,6 +1386,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: >-
@@ -1304,6 +1406,7 @@ modelTypes:
           name:
             fixed: false
             raw: Int
+          deprecated: false
       - $id: '105'
         isReadOnly: false
         realPath:
@@ -1311,6 +1414,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets the name of the type of usage.
@@ -1328,6 +1432,7 @@ modelTypes:
     name:
       fixed: false
       raw: Usage
+    deprecated: false
   - $id: '106'
     $type: CompositeType
     properties:
@@ -1338,6 +1443,7 @@ modelTypes:
         collectionFormat: none
         defaultValue:
           fixed: false
+        deprecated: false
         documentation:
           fixed: false
           raw: Gets or sets the list Storage Resource Usages.
@@ -1354,12 +1460,14 @@ modelTypes:
             $ref: '97'
           name:
             fixed: false
+          deprecated: false
     serializedName: UsageListResult
     documentation: The List Usages operation response.
     containsConstantProperties: false
     name:
       fixed: false
       raw: UsageListResult
+    deprecated: false
   - $ref: '61'
 enumTypes:
   - $ref: '10'
@@ -1385,6 +1493,7 @@ properties:
     collectionFormat: none
     defaultValue:
       fixed: false
+    deprecated: false
     documentation:
       fixed: false
       raw: >-
@@ -1404,6 +1513,7 @@ properties:
       name:
         fixed: false
         raw: String
+      deprecated: false
   - $id: '111'
     isReadOnly: false
     realPath:
@@ -1411,6 +1521,7 @@ properties:
     collectionFormat: none
     defaultValue:
       fixed: false
+    deprecated: false
     documentation:
       fixed: false
       raw: Client Api Version.
@@ -1427,6 +1538,7 @@ properties:
       name:
         fixed: false
         raw: String
+      deprecated: false
 operations:
   - methods:
       - parameters:
@@ -1435,6 +1547,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -1458,6 +1571,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: Client Api Version.
@@ -1474,6 +1588,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '116'
             clientProperty:
               $ref: '109'
@@ -1481,6 +1596,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -1500,6 +1616,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
         name:
           fixed: false
           raw: CheckNameAvailability
@@ -1539,6 +1656,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: The name of the resource group within the user's subscription.
@@ -1555,6 +1673,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '120'
             location: path
             collectionFormat: none
@@ -1563,6 +1682,7 @@ operations:
               MinLength: '3'
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -1582,11 +1702,13 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '122'
             location: body
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: The parameters to provide for the created account.
@@ -1607,6 +1729,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: Client Api Version.
@@ -1623,6 +1746,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '125'
             clientProperty:
               $ref: '109'
@@ -1630,6 +1754,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -1649,6 +1774,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
         name:
           fixed: false
           raw: Create
@@ -1695,6 +1821,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: The name of the resource group within the user's subscription.
@@ -1711,6 +1838,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '129'
             location: path
             collectionFormat: none
@@ -1719,6 +1847,7 @@ operations:
               MinLength: '3'
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -1738,6 +1867,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '131'
             clientProperty:
               $ref: '111'
@@ -1745,6 +1875,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: Client Api Version.
@@ -1761,6 +1892,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '133'
             clientProperty:
               $ref: '109'
@@ -1768,6 +1900,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -1787,6 +1920,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
         name:
           fixed: false
           raw: Delete
@@ -1819,6 +1953,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: The name of the resource group within the user's subscription.
@@ -1835,6 +1970,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '137'
             location: path
             collectionFormat: none
@@ -1843,6 +1979,7 @@ operations:
               MinLength: '3'
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -1862,6 +1999,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '139'
             clientProperty:
               $ref: '111'
@@ -1869,6 +2007,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: Client Api Version.
@@ -1885,6 +2024,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '141'
             clientProperty:
               $ref: '109'
@@ -1892,6 +2032,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -1911,6 +2052,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
         name:
           fixed: false
           raw: GetProperty
@@ -1949,6 +2091,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: The name of the resource group within the user's subscription.
@@ -1965,6 +2108,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '145'
             location: path
             collectionFormat: none
@@ -1973,6 +2117,7 @@ operations:
               MinLength: '3'
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -1992,11 +2137,13 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '147'
             location: body
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -2019,6 +2166,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: Client Api Version.
@@ -2035,6 +2183,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '150'
             clientProperty:
               $ref: '109'
@@ -2042,6 +2191,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -2061,6 +2211,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
         name:
           fixed: false
           raw: Update
@@ -2111,6 +2262,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: The name of the resource group.
@@ -2127,6 +2279,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '154'
             location: path
             collectionFormat: none
@@ -2135,6 +2288,7 @@ operations:
               MinLength: '3'
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: The name of the storage account.
@@ -2151,6 +2305,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '156'
             clientProperty:
               $ref: '111'
@@ -2158,6 +2313,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: Client Api Version.
@@ -2174,6 +2330,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '158'
             clientProperty:
               $ref: '109'
@@ -2181,6 +2338,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -2200,6 +2358,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
         name:
           fixed: false
           raw: ListKeys
@@ -2237,6 +2396,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: Client Api Version.
@@ -2253,6 +2413,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '162'
             clientProperty:
               $ref: '109'
@@ -2260,6 +2421,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -2279,6 +2441,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
         name:
           fixed: false
           raw: List
@@ -2320,6 +2483,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: The name of the resource group within the user's subscription.
@@ -2336,6 +2500,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '166'
             clientProperty:
               $ref: '111'
@@ -2343,6 +2508,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: Client Api Version.
@@ -2359,6 +2525,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '168'
             clientProperty:
               $ref: '109'
@@ -2366,6 +2533,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -2385,6 +2553,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
         name:
           fixed: false
           raw: ListByResourceGroup
@@ -2426,6 +2595,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: The name of the resource group within the user's subscription.
@@ -2442,6 +2612,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '172'
             location: path
             collectionFormat: none
@@ -2450,6 +2621,7 @@ operations:
               MinLength: '3'
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -2469,11 +2641,13 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '174'
             location: body
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -2496,6 +2670,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: Client Api Version.
@@ -2512,6 +2687,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '177'
             clientProperty:
               $ref: '109'
@@ -2519,6 +2695,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -2538,6 +2715,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
         name:
           fixed: false
           raw: RegenerateKey
@@ -2587,6 +2765,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
@@ -2615,6 +2794,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Client Api Version."
@@ -2633,7 +2813,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -2646,6 +2827,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
@@ -2664,7 +2846,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               }
             ],
@@ -2718,6 +2901,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the resource group within the user's subscription."
@@ -2736,7 +2920,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -2750,6 +2935,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
@@ -2768,7 +2954,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -2778,6 +2965,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The parameters to provide for the created account."
@@ -2806,6 +2994,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Client Api Version."
@@ -2824,7 +3013,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -2837,6 +3027,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
@@ -2855,7 +3046,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               }
             ],
@@ -2913,6 +3105,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the resource group within the user's subscription."
@@ -2931,7 +3124,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -2945,6 +3139,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
@@ -2963,7 +3158,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -2976,6 +3172,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Client Api Version."
@@ -2994,7 +3191,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3007,6 +3205,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
@@ -3025,7 +3224,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               }
             ],
@@ -3072,6 +3272,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the resource group within the user's subscription."
@@ -3090,7 +3291,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3104,6 +3306,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
@@ -3122,7 +3325,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3135,6 +3339,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Client Api Version."
@@ -3153,7 +3358,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3166,6 +3372,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
@@ -3184,7 +3391,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               }
             ],
@@ -3235,6 +3443,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the resource group within the user's subscription."
@@ -3253,7 +3462,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3267,6 +3477,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
@@ -3285,7 +3496,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3295,6 +3507,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The parameters to update on the account. Note that only one property can be changed at a time using this API. "
@@ -3323,6 +3536,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Client Api Version."
@@ -3341,7 +3555,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3354,6 +3569,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
@@ -3372,7 +3588,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               }
             ],
@@ -3426,6 +3643,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the resource group."
@@ -3444,7 +3662,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3458,6 +3677,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the storage account."
@@ -3476,7 +3696,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3489,6 +3710,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Client Api Version."
@@ -3507,7 +3729,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3520,6 +3743,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
@@ -3538,7 +3762,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               }
             ],
@@ -3592,6 +3817,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Client Api Version."
@@ -3610,7 +3836,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3623,6 +3850,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
@@ -3641,7 +3869,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               }
             ],
@@ -3697,6 +3926,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the resource group within the user's subscription."
@@ -3715,7 +3945,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3728,6 +3959,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Client Api Version."
@@ -3746,7 +3978,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3759,6 +3992,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
@@ -3777,7 +4011,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               }
             ],
@@ -3833,6 +4068,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the resource group within the user's subscription."
@@ -3851,7 +4087,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3865,6 +4102,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
@@ -3883,7 +4121,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3893,6 +4132,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Specifies name of the key which should be regenerated. key1 or key2 for the default keys"
@@ -3921,6 +4161,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Client Api Version."
@@ -3939,7 +4180,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -3952,6 +4194,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
@@ -3970,7 +4213,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               }
             ],
@@ -4034,6 +4278,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: Client Api Version.
@@ -4050,6 +4295,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
           - $id: '181'
             clientProperty:
               $ref: '109'
@@ -4057,6 +4303,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
               raw: >-
@@ -4076,6 +4323,7 @@ operations:
               name:
                 fixed: false
                 raw: String
+              deprecated: false
         name:
           fixed: false
           raw: List
@@ -4130,6 +4378,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Client Api Version."
@@ -4148,7 +4397,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               },
               {
@@ -4161,6 +4411,7 @@ operations:
                 "defaultValue": {
                   "fixed": false
                 },
+                "deprecated": false,
                 "documentation": {
                   "fixed": false,
                   "raw": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
@@ -4179,7 +4430,8 @@ operations:
                   "name": {
                     "fixed": false,
                     "raw": "String"
-                  }
+                  },
+                  "deprecated": false
                 }
               }
             ],

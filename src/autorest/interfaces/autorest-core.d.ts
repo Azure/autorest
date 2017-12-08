@@ -33,62 +33,8 @@ declare module 'autorest-core/lib/constants' {
 export const DefaultConfiguration: string;
 
 }
-declare module 'autorest-core/lib/ref/async' {
-	/// <reference types="node" />
-export function mkdir(path: string | Buffer): Promise<void>;
-export const exists: (path: string | Buffer) => Promise<boolean>;
-export function readdir(path: string): Promise<Array<string>>;
-export function close(fd: number): Promise<void>;
-export function readFile(path: string, options?: {
-    encoding?: string | null;
-    flag?: string;
-}): Promise<string | Buffer>;
-export function writeFile(filename: string, content: string): Promise<void>;
-
-}
-declare module 'autorest-core/lib/ref/uri' {
-	export function IsUri(uri: string): boolean;
-/**
- * Loads a UTF8 string from given URI.
- */
-export function ReadUri(uri: string, headers?: {
-    [key: string]: string;
-}): Promise<string>;
-export function ExistsUri(uri: string): Promise<boolean>;
-/**
- * Create a 'file:///' URI from given absolute path.
- * Examples:
- * - "C:\swagger\storage.yaml" -> "file:///C:/swagger/storage.yaml"
- * - "/input/swagger.yaml" -> "file:///input/swagger.yaml"
- */
-export function CreateFileOrFolderUri(absolutePath: string): string;
-export function CreateFileUri(absolutePath: string): string;
-export function CreateFolderUri(absolutePath: string): string;
-export function EnsureIsFolderUri(uri: string): string;
-export function EnsureIsFileUri(uri: string): string;
-export function GetFilename(uri: string): string;
-export function GetFilenameWithoutExtension(uri: string): string;
-export function ToRawDataUrl(uri: string): string;
-/**
- * The singularity of all resolving.
- * With URI as our one data type of truth, this method maps an absolute or relative path or URI to a URI using given base URI.
- * @param baseUri   Absolute base URI
- * @param pathOrUri Relative/absolute path/URI
- * @returns Absolute URI
- */
-export function ResolveUri(baseUri: string, pathOrUri: string): string;
-export function ParentFolderUri(uri: string): string | null;
-export function MakeRelativeUri(baseUri: string, absoluteUri: string): string;
-export function EnumerateFiles(folderUri: string, probeFiles?: string[]): Promise<string[]>;
-/**
- * Writes string to local file system.
- * @param fileUri  Target file uri.
- * @param data     String to write (encoding: UTF8).
- */
-export function WriteString(fileUri: string, data: string): Promise<void>;
-export function ClearFolder(folderUri: string): Promise<void>;
-export function FileUriToPath(fileUri: string): string;
-export function GetExtension(name: string): string;
+declare module 'autorest-core/lib/ref/array' {
+	export function pushAll<T>(target: T[], source: T[]): void;
 
 }
 declare module 'autorest-core/lib/ref/source-map' {
@@ -155,6 +101,64 @@ export interface Message {
     Plugin?: string;
     FormattedMessage?: string;
 }
+
+}
+declare module 'autorest-core/lib/ref/async' {
+	/// <reference types="node" />
+export function mkdir(path: string | Buffer): Promise<void>;
+export const exists: (path: string | Buffer) => Promise<boolean>;
+export function readdir(path: string): Promise<Array<string>>;
+export function close(fd: number): Promise<void>;
+export function readFile(path: string, options?: {
+    encoding?: string | null;
+    flag?: string;
+}): Promise<string | Buffer>;
+export function writeFile(filename: string, content: string): Promise<void>;
+
+}
+declare module 'autorest-core/lib/ref/uri' {
+	export function IsUri(uri: string): boolean;
+/**
+ * Loads a UTF8 string from given URI.
+ */
+export function ReadUri(uri: string, headers?: {
+    [key: string]: string;
+}): Promise<string>;
+export function ExistsUri(uri: string): Promise<boolean>;
+/**
+ * Create a 'file:///' URI from given absolute path.
+ * Examples:
+ * - "C:\swagger\storage.yaml" -> "file:///C:/swagger/storage.yaml"
+ * - "/input/swagger.yaml" -> "file:///input/swagger.yaml"
+ */
+export function CreateFileOrFolderUri(absolutePath: string): string;
+export function CreateFileUri(absolutePath: string): string;
+export function CreateFolderUri(absolutePath: string): string;
+export function EnsureIsFolderUri(uri: string): string;
+export function EnsureIsFileUri(uri: string): string;
+export function GetFilename(uri: string): string;
+export function GetFilenameWithoutExtension(uri: string): string;
+export function ToRawDataUrl(uri: string): string;
+/**
+ * The singularity of all resolving.
+ * With URI as our one data type of truth, this method maps an absolute or relative path or URI to a URI using given base URI.
+ * @param baseUri   Absolute base URI
+ * @param pathOrUri Relative/absolute path/URI
+ * @returns Absolute URI
+ */
+export function ResolveUri(baseUri: string, pathOrUri: string): string;
+export function ParentFolderUri(uri: string): string | null;
+export function MakeRelativeUri(baseUri: string, absoluteUri: string): string;
+export function EnumerateFiles(folderUri: string, probeFiles?: string[]): Promise<string[]>;
+/**
+ * Writes string to local file system.
+ * @param fileUri  Target file uri.
+ * @param data     String to write (encoding: UTF8).
+ */
+export function WriteString(fileUri: string, data: string): Promise<void>;
+export function ClearFolder(folderUri: string): Promise<void>;
+export function FileUriToPath(fileUri: string): string;
+export function GetExtension(name: string): string;
 
 }
 declare module 'autorest-core/lib/exception' {
@@ -232,10 +236,6 @@ declare module 'autorest-core/lib/ref/cancellation' {
 }
 declare module 'autorest-core/lib/ref/jsonrpc' {
 	export * from "vscode-jsonrpc";
-
-}
-declare module 'autorest-core/lib/ref/array' {
-	export function pushAll<T>(target: T[], source: T[]): void;
 
 }
 declare module 'autorest-core/lib/ref/commonmark' {

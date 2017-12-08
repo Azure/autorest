@@ -11,6 +11,7 @@ modelTypes:
         defaultValue:
           fixed: false
           raw: '42'
+        deprecated: false
         documentation:
           fixed: false
         isRequired: false
@@ -27,6 +28,7 @@ modelTypes:
           name:
             fixed: false
             raw: Long
+          deprecated: false
       - $id: '4'
         isReadOnly: false
         realPath:
@@ -35,6 +37,7 @@ modelTypes:
         defaultValue:
           fixed: false
           raw: shiny
+        deprecated: false
         documentation:
           fixed: false
         isRequired: true
@@ -50,12 +53,14 @@ modelTypes:
           name:
             fixed: false
             raw: String
+          deprecated: false
     serializedName: Cowbell
     documentation: A cowbell.
     containsConstantProperties: false
     name:
       fixed: false
       raw: Cowbell
+    deprecated: false
 name: CowbellFactory
 namespace: ''
 modelsName: Models
@@ -70,6 +75,7 @@ operations:
             collectionFormat: none
             defaultValue:
               fixed: false
+            deprecated: false
             documentation:
               fixed: false
             extensions:

@@ -492,6 +492,10 @@
         "x-nullable": {
           "$ref": "#/definitions/xNullable"
         },
+        "x-ms-client-name": {
+          "type": "string",
+          "description": "A code-generator-friendly name for the header."
+        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         },
@@ -548,6 +552,10 @@
         },
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
+        },
+        "x-ms-header-collection-prefix": {
+          "type": "string",
+          "description": "Provides the ability to specify a key value mapping, using given prefix as the prefix of all keys."
         },
         "x-ms-client-name": {
           "type": "string",
