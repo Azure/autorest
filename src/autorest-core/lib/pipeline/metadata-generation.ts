@@ -12,17 +12,16 @@ export function GetPlugin_ReflectApiVersion(): PipelinePlugin {
 
     // get resolved Swagger to determine title
     const resolvedSwagger = await input.ReadStrict(files.shift() as any);
-    const title = resolvedSwagger.ReadObject<any>().info.title.replace(/[^a-zA-Z]/g, "");
+    const title: string = resolvedSwagger.ReadObject<any>().info.title.replace(/[^a-zA-Z]/g, "");
 
     // collect metadata
-    const data: { namespace: string | null, group: string, apiVersion: string }[] = [];
+    const data: { namespace: string, group: string, apiVersion: string }[] = [];
     for (let file of files) {
       const swagger = (await input.ReadStrict(file)).ReadObject<any>();
       const apiVersion = swagger.info.version;
       const paths = { ...swagger["paths"], ...swagger["x-ms-paths"] };
       for (const path of Object.keys(paths)) {
-        let namespace: string | null = (/\/Microsoft\.(.*?)\//i.exec(path) || [])[1];
-        if (typeof namespace !== "string") namespace = null;
+        const namespace: string = (/\/Microsoft\.(.*?)\//i.exec(path) || [])[1] || title;
         const groups = Object.values(paths[path])
           .map(x => x.operationId).filter(x => !!x)
           .map(x => x.split('_')[0]).filter(x => !!x);
@@ -33,7 +32,7 @@ export function GetPlugin_ReflectApiVersion(): PipelinePlugin {
     }
 
     // create C# metadata
-    let tuples = data.map(x => `new Tuple<string, string, string>(${JSON.stringify(x.namespace)}, "${x.group}", "${x.apiVersion}")`);
+    let tuples = data.map(x => `new Tuple<string, string, string>("${x.namespace}", "${x.group}", "${x.apiVersion}")`);
     tuples = tuples.sort();
     tuples = tuples.filter((x, i) => i === 0 || x !== tuples[i - 1]);
 
