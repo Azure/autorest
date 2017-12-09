@@ -15,5 +15,5 @@ assembly_info:
   assembly_informational_version: '{version}'
 
 before_build:
-  - dotnet restore
-  - dotnet build 
+  - dotnet restore Autorest.sln
+  - dotnet build Autorest.sln
