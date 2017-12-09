@@ -1,0 +1,46 @@
+﻿@using AutoRest.CSharp.LoadBalanced.Legacy.Model
+@using AutoRest.CSharp.LoadBalanced.Legacy.Templates.Rest.Client
+@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Legacy.Model.MethodGroupCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+@foreach (var usingString in Model.Usings) {
+    @:using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    /// @(Model.TypeName) operations.
+    /// </summary>
+    public partial class @(Model.TypeName) : Microsoft.Rest.IServiceOperations<@Model.CodeModel.Name>, I@(Model.TypeName)
+    {
+        /// <summary>
+        /// Initializes a new instance of the @(Model.TypeName) class.
+        /// </summary>
+        /// <param name='client'>
+        /// Reference to the service client.
+        /// </param>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        public @(Model.TypeName)(@Model.CodeModel.Name client)
+        {
+            if (client == null) 
+            {
+                throw new System.ArgumentNullException("client");
+            }
+            this.Client = client;
+        }
+        @EmptyLine
+        /// <summary>
+        /// Gets a reference to the @Model.CodeModel.Name
+        /// </summary>
+        public @Model.CodeModel.Name Client { get; private set; }
+        @EmptyLine
+        @foreach (MethodCs method in Model.Methods)
+        {
+        @:@(Include(new MethodTemplate(), method))
+        @EmptyLine
+        }
+    }
+}

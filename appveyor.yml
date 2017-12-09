@@ -1,0 +1,19 @@
+version: 1.0.{build}
+skip_branch_with_pr: true
+image: Visual Studio 2017
+
+configuration: Release
+
+build:
+  project: autorest.sln      # path to Visual Studio solution or project
+
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+
+before_build:
+  - dotnet restore Autorest.sln
+  - dotnet build Autorest.sln && exit 0

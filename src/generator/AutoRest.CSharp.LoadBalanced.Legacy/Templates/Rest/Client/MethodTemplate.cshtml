@@ -1,0 +1,107 @@
+﻿@using System.Globalization
+@using System.Linq;
+@using System
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp
+@using AutoRest.CSharp.LoadBalanced
+@using AutoRest.CSharp.LoadBalanced.Legacy
+@using AutoRest.CSharp.LoadBalanced.Legacy.Model
+@using AutoRest.Extensions
+@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Legacy.Model.MethodCs>
+
+@if (Model.Deprecated)
+{
+    @:[System.Obsolete()]
+}
+
+[Description("@((String.IsNullOrEmpty(Model.Description) ? "" : Model.Description.EscapeXmlComment()))"), Summary("@((String.IsNullOrEmpty(Model.Summary) ? "" : Model.Summary.EscapeXmlComment()))"), Url("@(Model.FromattedUrl)"), Verb("@(Model.HttpMethod.ToString().ToUpper())"), Tags("@(string.Join(",", Model.Tags))")]
+public async @(Model.OperationResponseReturnTypeStringForMethodName) @(Model.NameWithoutRoute) (@(Model.GetAsyncMethodParameterDeclaration(false)))
+{
+    var response = new Response<@(Model.OperationResponseType)>();
+
+    @EmptyLine
+    @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
+    {
+        if (parameter.IsRequired && parameter.IsNullable())
+        {
+            @:if (@(parameter.Name) == null)
+            @:{
+            @:var ex = new ValidationException(ValidationRules.CannotBeNull, "@(parameter.Name)");
+            @:response.BrokenRules.Add(new BrokenRule() { Description = ex.Message, Value = ex.Message });
+            @:return response;
+            @:}
+            @:
+        }
+        if (parameter.CanBeValidated && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+        {
+            //@:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
+        }
+    }
+
+    @foreach (var parameter1 in Model.Parameters)
+    {
+        var parameter = (ParameterCs)parameter1;
+        if (parameter.IsConstant && !parameter.IsClientProperty)
+        {
+            @:@(parameter.ModelTypeName) @(parameter.Name) = @(parameter.DefaultValue);
+        }
+
+        if (parameter.ModelType is CompositeType
+            && !parameter.IsConstant
+            && parameter.IsRequired
+            && !parameter.IsClientProperty
+            && ((CompositeType)parameter.ModelType).ContainsConstantProperties)
+        {
+            @:if (@(parameter.Name) == null)
+            @:{
+            @:    @(parameter.Name) = new @(parameter.ModelTypeName)();
+            @:}
+        }
+
+    }
+    @Model.BuildInputMappings()
+    var verb = Verbs.@(Model.HttpMethod.ToString().ToUpper());
+    @EmptyLine
+    @if (Model.QueryParameters.Any())
+    {
+        @:    var queryParameters = new Dictionary<string, object>
+            @:    {
+    foreach (var parameter in Model.QueryParameters)
+        {
+            @:         { "@(parameter.Name.RawValue)", @(parameter.Name) },
+    }
+        @:    };
+
+    }
+
+    @EmptyLine
+    var requestParameters = new RequestParameters
+    {
+    HttpVerb = verb,
+    RestUrl = "@(Model.FromattedUrl)",
+    CustomHeaders = _defaultHeaders,
+    QueryParameters = @(Model.QueryParameters.Any() ? "queryParameters" : "new Dictionary<string, object>()")
+    @(@Model.Body == null ? "" : ", Body = body")
+    };
+    @EmptyLine
+    try
+    {
+    var result = await @(Model.GetOperationResponseReturnTypeString("InvokeNewRequest"))(Metrics.@(Model.Name), requestParameters);
+    if (result != null)
+    {
+    response.IsSuccessful = true;
+    response.Result = result;
+    }
+    }
+    catch (Exception ex)
+    {
+    response.BrokenRules.Add(new BrokenRule() { Description = ex.Message, Value = ex.Message });
+    }
+
+    @if (Model.ReturnType.Body != null)
+    {
+        @EmptyLine
+        @:    return response;
+    }
+    }

@@ -1,0 +1,160 @@
+@using System.Linq
+@using AutoRest.Core
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.LoadBalanced
+@using AutoRest.CSharp.LoadBalanced.Legacy
+@using AutoRest.Extensions
+@inherits Template<global::AutoRest.CSharp.LoadBalanced.Legacy.Model.CompositeTypeCs>
+@Header("// ")
+@EmptyLine
+using System;
+using System.Linq;
+using Newtonsoft.Json;
+using Microsoft.Rest;
+using Microsoft.Rest.Serialization;
+using AutoRest.CSharp.LoadBalanced.Json;
+using System.Collections.Generic;
+@EmptyLine
+namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsName}.Couchbase" : Settings.ModelsName)
+{
+@EmptyLine
+
+@if (!string.IsNullOrEmpty(Model.Summary) || !string.IsNullOrWhiteSpace(Model.Documentation))
+{
+    @:/// <summary>
+    @:@WrapComment("/// ", (string.IsNullOrEmpty(Model.Summary) ? Model.Documentation : Model.Summary).EscapeXmlComment())
+        if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
+        {
+    @:/// <see href="@Model.ExternalDocsUrl" />
+        }
+    @:/// </summary>
+}
+@if (!string.IsNullOrEmpty(Model.Summary) && !string.IsNullOrWhiteSpace(Model.Documentation))
+{
+    @:/// <remarks>
+    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    @:/// </remarks>
+}
+
+    @if (Model.NeedsPolymorphicConverter)
+    {
+    @:[Newtonsoft.Json.JsonObject("@Model.SerializedName")]
+    }
+
+    @if (Model.NeedsTransformationConverter)
+    {
+    @:[Microsoft.Rest.Serialization.JsonTransformation]
+    }
+
+    public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
+    {
+        /// <summary>
+        @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
+        /// </summary>
+        @if (Model.GetFilteredProperties().Any(p => p.ModelType is CompositeType && ((CompositeType)p.ModelType).ContainsConstantProperties))
+        {
+<text>
+        public @(Model.Name)()
+        {
+            @foreach(var property in Model.GetPropertiesWhichRequireInitialization())
+            {
+            @:@(property.Name) = new @(property.ModelTypeName)();
+            }
+        }
+</text>
+        }
+        else
+        {
+        @:public @(Model.Name)() { }
+        }
+
+        @EmptyLine
+
+        @if (!string.IsNullOrEmpty(Model.ConstructorParameters))
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
+        @:/// </summary>
+        foreach (var parameter in Model.ConstructorParametersDocumentation)
+        {
+        @:@WrapComment("/// ", parameter)
+        }
+        @:public @(Model.Name)(@Model.ConstructorParameters)
+            if (!string.IsNullOrEmpty(Model.BaseConstructorCall))
+            {
+            @:@(Model.BaseConstructorCall)
+            }
+        @:{
+
+            foreach (var property in Model.GetPropertiesWhichRequireInitialization())
+            {
+            @:@(property.Name) = new @(property.ModelTypeName)();
+            }
+
+            foreach (var property in Model.GetFilteredProperties().Where(p => !p.IsConstant))
+            {
+                var propName = CodeNamer.Instance.CamelCase(property.Name);
+                if (property.Name.Value.Equals(propName))
+                {
+            @:this.@(property.Name) = @propName;
+                }
+                else
+                {
+            @:@(property.Name) = @propName;
+                }
+            }            
+
+        @:}
+        }
+
+        @if (Model.GetFilteredProperties().Any(p => p.IsConstant))
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", ("Static constructor for " + Model.Name + " class.").EscapeXmlComment())
+        @:/// </summary>
+        @:static @(Model.Name)()
+        @:{
+            foreach (var property in Model.Properties.Where(p => p.IsConstant))
+            {
+            @:@(property.Name) = @(property.DefaultValue);
+            }
+        @:}
+        }
+
+        @EmptyLine
+        @foreach (var property in Model.GetFilteredProperties().Where(p => !p.IsConstant))
+        {
+            if (!string.IsNullOrWhiteSpace(property.GetFormattedPropertySummary()))
+            {
+        @:/// <summary>
+        @:@WrapComment("/// ", property.GetFormattedPropertySummary())
+        @:/// </summary>
+            }
+            if(!string.IsNullOrWhiteSpace(property.Summary) && !string.IsNullOrWhiteSpace(property.Documentation))
+            { 
+        @:/// <remarks>
+        @:@WrapComment("/// ", property.Documentation)
+        @:/// </remarks>
+            }
+           
+        @:@(Model.PropertyTypeSelectionStrategy.GetJsonSerializationAttribute(property, Model.isCouchbaseModel))
+        @:public @Model.PropertyTypeSelectionStrategy.GetPropertyTypeName(property) @property.Name { get; @(property.IsReadOnly ? "protected " : "")set; }
+        @EmptyLine
+        }
+
+        @foreach (var property in Model.GetFilteredProperties().Where(p => p.IsConstant))
+        {
+            if (!string.IsNullOrWhiteSpace(property.Documentation.EscapeXmlComment()))
+            {
+        @:/// <summary>
+        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+        @:/// </summary>
+            }
+        @:@Model.PropertyTypeSelectionStrategy.GetJsonSerializationAttribute(property, Model.isCouchbaseModel)
+        @:public static @Model.PropertyTypeSelectionStrategy.GetPropertyTypeName(property) @property.Name { get; private set; }
+        @EmptyLine
+        }
+
+    }
+}

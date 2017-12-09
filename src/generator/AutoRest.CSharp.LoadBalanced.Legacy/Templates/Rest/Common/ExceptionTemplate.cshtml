@@ -1,0 +1,91 @@
+﻿@using System.Linq
+@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Legacy.Model.CompositeTypeCs>
+@Header("// ")
+@EmptyLine
+namespace @(Settings.Namespace).@(Settings.ModelsName)
+{
+@EmptyLine
+    /// <summary>
+    @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
+    /// </summary>
+#if !PORTABLE 
+    [System.Serializable]
+#endif
+    public class @Model.ExceptionTypeDefinitionName : Microsoft.Rest.RestException
+    {
+        /// <summary>
+        /// Gets information about the associated HTTP request.
+        /// </summary>
+        public Microsoft.Rest.HttpRequestMessageWrapper Request { get; set; }
+@EmptyLine
+        /// <summary>
+        /// Gets information about the associated HTTP response.
+        /// </summary>
+        public Microsoft.Rest.HttpResponseMessageWrapper Response { get; set; }
+@EmptyLine
+        /// <summary>
+        /// Gets or sets the body object.
+        /// </summary>
+        public @Model.Name Body { get; set; }
+@EmptyLine
+        /// <summary>
+        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
+        /// </summary>
+        public @(@Model.ExceptionTypeDefinitionName)()
+        {
+        }
+@EmptyLine
+        /// <summary>
+        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public @(Model.ExceptionTypeDefinitionName)(string message)
+            : this(message, null)
+        {
+        }
+@EmptyLine
+        /// <summary>
+        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public @(Model.ExceptionTypeDefinitionName)(string message, System.Exception innerException)
+            : base(message, innerException)
+        {
+        }
+@EmptyLine
+#if !PORTABLE 
+        /// <summary>
+        /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Streaming context.</param>
+        protected @(Model.ExceptionTypeDefinitionName)(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+            : base(info, context)
+        {
+        }
+@EmptyLine
+        /// <summary>
+        /// Serializes content of the exception.
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Streaming context.</param>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            if (info == null)
+            {
+                throw new System.ArgumentNullException("info");
+            }
+@EmptyLine
+            info.AddValue("Request", Request);
+            info.AddValue("Response", Response);
+            info.AddValue("Body", Body);
+        }
+#endif
+    }
+}

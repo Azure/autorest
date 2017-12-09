@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{EF9E346D-70C6-45F5-8FF9-9B734F4A1298}"
 EndProject
@@ -109,11 +109,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.TypeScript.SuperAg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.TypeScript.SuperAgent.Tests", "src\generator\AutoRest.TypeScript.SuperAgent.Tests\AutoRest.TypeScript.SuperAgent.Tests.csproj", "{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced", "src\generator\AutoRest.CSharp.LoadBalanced\AutoRest.CSharp.LoadBalanced.csproj", "{C024F83F-73E6-40F4-8150-128C70226301}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced.Tests", "src\generator\AutoRest.CSharp.LoadBalanced.Tests\AutoRest.CSharp.LoadBalanced.Tests.csproj", "{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced.Json", "src\generator\AutoRest.CSharp.LoadBalanced.Json\AutoRest.CSharp.LoadBalanced.Json.csproj", "{E43394E0-0E28-4743-A63B-95FCDA9609CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced", "src\generator\AutoRest.CSharp.LoadBalanced\AutoRest.CSharp.LoadBalanced.csproj", "{3DBE405B-EB6F-4798-8043-EE3DCCE4D0FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced.Tests", "src\generator\AutoRest.CSharp.LoadBalanced.Tests\AutoRest.CSharp.LoadBalanced.Tests.csproj", "{EF92364F-AC46-4A88-81BC-45506378DA88}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced.Legacy", "src\generator\AutoRest.CSharp.LoadBalanced.Legacy\AutoRest.CSharp.LoadBalanced.Legacy.csproj", "{38141FEB-5F5E-46E8-A972-D1140274AE95}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced.Legacy.Tests", "src\generator\AutoRest.CSharp.LoadBalanced.Legacy.Tests\AutoRest.CSharp.LoadBalanced.Legacy.Tests.csproj", "{2824784F-FD7E-4B46-B1B3-6E23EAB52D02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -229,18 +233,26 @@ Global
 		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C024F83F-73E6-40F4-8150-128C70226301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C024F83F-73E6-40F4-8150-128C70226301}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C024F83F-73E6-40F4-8150-128C70226301}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C024F83F-73E6-40F4-8150-128C70226301}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E43394E0-0E28-4743-A63B-95FCDA9609CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E43394E0-0E28-4743-A63B-95FCDA9609CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E43394E0-0E28-4743-A63B-95FCDA9609CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E43394E0-0E28-4743-A63B-95FCDA9609CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DBE405B-EB6F-4798-8043-EE3DCCE4D0FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DBE405B-EB6F-4798-8043-EE3DCCE4D0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DBE405B-EB6F-4798-8043-EE3DCCE4D0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DBE405B-EB6F-4798-8043-EE3DCCE4D0FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF92364F-AC46-4A88-81BC-45506378DA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF92364F-AC46-4A88-81BC-45506378DA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF92364F-AC46-4A88-81BC-45506378DA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF92364F-AC46-4A88-81BC-45506378DA88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38141FEB-5F5E-46E8-A972-D1140274AE95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38141FEB-5F5E-46E8-A972-D1140274AE95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38141FEB-5F5E-46E8-A972-D1140274AE95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38141FEB-5F5E-46E8-A972-D1140274AE95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2824784F-FD7E-4B46-B1B3-6E23EAB52D02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2824784F-FD7E-4B46-B1B3-6E23EAB52D02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2824784F-FD7E-4B46-B1B3-6E23EAB52D02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2824784F-FD7E-4B46-B1B3-6E23EAB52D02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -281,9 +293,11 @@ Global
 		{8464A22C-0C8E-4C84-85A8-0ACE787BDC75} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{2F19209C-3A73-4864-8DA3-3BC82BD4A061} = {E9D3F4E8-BAE0-487B-89B5-6E271D9848B8}
 		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B} = {E9D3F4E8-BAE0-487B-89B5-6E271D9848B8}
-		{C024F83F-73E6-40F4-8150-128C70226301} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
-		{DCA3BB6A-1581-4DE6-961B-4B7B1848ADC9} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{E43394E0-0E28-4743-A63B-95FCDA9609CD} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+		{3DBE405B-EB6F-4798-8043-EE3DCCE4D0FB} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+		{EF92364F-AC46-4A88-81BC-45506378DA88} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+		{38141FEB-5F5E-46E8-A972-D1140274AE95} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+		{2824784F-FD7E-4B46-B1B3-6E23EAB52D02} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {36B0BD32-4C82-443A-9497-B3C291CCBCD4}

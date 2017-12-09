@@ -2,40 +2,38 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.LoadBalanced.Model
 @using AutoRest.CSharp.LoadBalanced.Templates.Rest.Client
-@inherits AutoRest.Core.Template<System.Tuple<CodeModelCs, string, MethodCs[]>>
+@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.CodeModelCs>
 @Header("// ")
-@{
-    var model = Model.Item1;
-    var clientName = Model.Item2;
-    var methods = Model.Item3;
-}
 @EmptyLine
-@foreach (var usingString in model.Usings)
+@foreach (var usingString in Model.Usings)
 {
-@:using @usingString;
+    @:using @usingString;
 }
 @EmptyLine
 namespace @Settings.Namespace
 {
 @EmptyLine
-    @if (!string.IsNullOrWhiteSpace(model.Documentation))
+    @if (!string.IsNullOrWhiteSpace(Model.Documentation))
     {
     @:/// <summary>
-    @:@WrapComment("/// ", model.Documentation.EscapeXmlComment())
+    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
     @:/// </summary>
     }
 
-    public partial class @clientName : ApiBase, I@{ @clientName }
+    public partial class @Model.Name : ApiBase
     { 
 
-        private readonly Dictionary<string, string> _defaultHeaders = new Dictionary<string, string> { { "Accept" , "application/vnd.api+json"}, { "Content-Type", "application/vnd.api+json" } };
-@EmptyLine
-        public @clientName (IApiBaseConfig apiBaseConfig)
-		: base(apiBaseConfig)
+    public @Model.Name (
+	    string name, List<ServerSettings> settings, 
+	    TimeSpan ? timeout = null, 
+	    int retryCount = 1, 
+	    JsonSerializerSettings serializationSettings = null, 
+	    JsonSerializerSettings deserializationSettings = null) 
+		: base(name, settings, timeout, retryCount, serializationSettings, deserializationSettings)
         {
         }
 
-    @foreach (MethodCs method in methods.Where(m => m.Group.IsNullOrEmpty()))
+    @foreach (MethodCs method in Model.Methods.Where(m => m.Group.IsNullOrEmpty()))
     {
         @:@(Include(new MethodTemplate(), method))
         @EmptyLine

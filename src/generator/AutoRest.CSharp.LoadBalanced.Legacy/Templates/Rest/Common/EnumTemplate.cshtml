@@ -1,0 +1,72 @@
+﻿@using System.Linq
+@using AutoRest.Core.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Legacy.Model.EnumTypeCs>
+@Header("// ")
+@EmptyLine
+namespace @(Settings.Namespace).@(Settings.ModelsName)
+{
+@EmptyLine
+    /// <summary>
+    @WrapComment("/// ", "Defines values for " + Model.Name + ".")
+    /// </summary>
+    @if (!Model.ModelAsString)
+    {
+    @:[Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    @:public enum @Model.ClassName
+    @:{
+        for (int i = 0; i < Model.Values.Count - 1; i++)
+        {
+@:        [System.Runtime.Serialization.EnumMember(Value = "@Model.Values[i].SerializedName")]
+@:        @(Model.Values[i].MemberName),
+        }
+@:        [System.Runtime.Serialization.EnumMember(Value = "@Model.Values.Last().SerializedName")]
+@:        @(Model.Values.Last().MemberName)
+    @:}
+    if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
+    internal static class @(Model.ClassName)EnumExtension 
+    {
+        internal static string ToSerializedValue(this @(Model.ClassName)? value )  => 
+            value == null ? null : (( @(Model.ClassName) )value).ToSerializedValue();
+@EmptyLine
+        internal static string ToSerializedValue(this @(Model.ClassName) value ) 
+        {
+            switch( value )
+            {
+            @for (int i = 0; i < Model.Values.Count; i++)
+            {<text>
+                case @(Model.ClassName).@(Model.Values[i].MemberName):
+                    return "@Model.Values[i].SerializedName";</text>
+            }
+
+            }
+            return null;
+        }
+@EmptyLine
+        internal static @(Model.ClassName)? Parse@(Model.ClassName)( this string value )
+        { 
+            switch( value )
+            {
+            @for (int i = 0; i < Model.Values.Count; i++)   
+            {<text>
+                case "@Model.Values[i].SerializedName": 
+                    return @(Model.ClassName).@(Model.Values[i].MemberName);</text>
+            }
+            }
+            return null;
+        }
+        
+    }
+</text>}
+    
+    }
+    else
+    {
+    @:public static class @Model.ClassName
+    @:{
+        foreach (var t in Model.Values)
+        {
+@:        public const string @t.MemberName = "@t.SerializedName";
+        }
+    @:}
+    }
+}

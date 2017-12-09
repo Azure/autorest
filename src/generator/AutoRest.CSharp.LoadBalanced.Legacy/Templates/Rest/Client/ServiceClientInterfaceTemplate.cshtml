@@ -1,0 +1,47 @@
+@using System
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.LoadBalanced.Legacy.Model
+@inherits AutoRest.Core.Template<Tuple<AutoRest.CSharp.LoadBalanced.Legacy.Model.CodeModelCs, string, AutoRest.CSharp.LoadBalanced.Legacy.Model.MethodCs[]>>
+@Header("// ")
+@EmptyLine
+@{
+    var model = Model.Item1;
+    var clientName = Model.Item2;
+    var methods = Model.Item3;
+}
+@foreach (var usingString in model.Usings)
+{
+@:using @usingString;
+}
+@EmptyLine
+namespace @Settings.Namespace
+{
+@EmptyLine
+    /// <summary>@(model.Documentation.EscapeXmlComment())</summary>
+    public partial interface I@(clientName) 
+    {
+     
+    @foreach(MethodCs method in methods.Where( each => each.Group.IsNullOrEmpty()) )
+    {
+        if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
+        {
+        @:/// <summary>@(String.IsNullOrEmpty(method.Summary) ? method.Description.EscapeXmlComment() : method.Summary.EscapeXmlComment())</summary>
+        }
+        if (!String.IsNullOrEmpty(method.Description) && !String.IsNullOrEmpty(method.Summary))
+        {
+        @:/// <remarks>@(method.Description.EscapeXmlComment())</remarks>
+        }
+        foreach (var parameter in method.LocalParameters)
+        {
+        @:/// <param name='@parameter.Name'>@(parameter.Documentation.EscapeXmlComment())</param>
+        }
+        @:/// <param name='customHeaders'>The headers that will be added to request.</param>
+        @:/// <param name='cancellationToken'>The cancellation token.</param>
+        @:@(method.OperationResponseReturnTypeStringForMethodName) @(method.NameWithoutRoute) (@(method.GetAsyncMethodParameterDeclaration(false)));
+        @EmptyLine
+        @:
+    }
+
+    }
+}

@@ -1,0 +1,85 @@
+﻿@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Legacy.Model.ProjectModel>
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FBBAF460-DE93-49D7-A4B7-C65FD846ED10}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>@(Model.RootNameSpace)</RootNamespace>
+    <AssemblyName>@(Model.RootNameSpace)</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Agoda.Core.Utils, Version=1.0.0.0, Culture=neutral, PublicKeyToken=78334ddf3fc02eab, processorArchitecture=MSIL">
+            <HintPath>..\..\packages\Agoda.Core.Utils.1.0.5617.775\lib\net40\Agoda.Core.Utils.dll</HintPath>
+            <Private>True</Private>
+        </Reference>
+        <Reference Include="Agoda.GenericMessaging.Client, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\..\packages\Agoda.GenericMessaging.Client.1.2.5997.973\lib\net40\Agoda.GenericMessaging.Client.dll</HintPath>
+            <Private>True</Private>
+        </Reference>
+        <Reference Include="Agoda.RoundRobin, Version=1.1.72.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\..\packages\Agoda.RoundRobin.1.1.72\lib\net45\Agoda.RoundRobin.dll</HintPath>
+            <Private>True</Private>
+        </Reference>
+        <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+            <SpecificVersion>False</SpecificVersion>
+            <HintPath>..\..\tools\Microsoft.Rest.ClientRuntime.dll</HintPath>
+        </Reference>
+        <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+            <HintPath>..\..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+            <Private>True</Private>
+        </Reference>
+        <Reference Include="AutoRest.CSharp.LoadBalanced.Json, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <SpecificVersion>False</SpecificVersion>
+            <HintPath>lib\AutoRest.CSharp.LoadBalanced.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="Agoda.Http.Client.WinHttp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+            <HintPath>..\..\packages\Agoda.Http.Client.WinHttp.1.0.0.1\lib\net46\Agoda.Http.Client.WinHttp.dll</HintPath>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="System.Data.DataSetExtensions" />
+        <Reference Include="Microsoft.CSharp" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Net.Http" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+		<Compile Include="*.cs" />
+		<Compile Include="Models\**\*.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="packages.config" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+</Project>

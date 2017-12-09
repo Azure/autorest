@@ -45,19 +45,16 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                         return "bool";
 
                     case KnownPrimaryType.Date:
-                        return "DateTime";
+                        return "System.DateTime";
                     
                     case KnownPrimaryType.DateTime:
-                        return Singleton<GeneratorSettingsCs>.Instance.UseDateTimeOffset ? "DateTimeOffset" : "DateTime";
+                        return Singleton<GeneratorSettingsCs>.Instance.UseDateTimeOffset ? "System.DateTimeOffset" : "System.DateTime";
 
                     case KnownPrimaryType.DateTimeRfc1123:
-                        return "DateTime";
+                        return "System.DateTime";
 
                     case KnownPrimaryType.Double:
                         return "double";
-
-                    case KnownPrimaryType.Float:
-                        return "float";
 
                     case KnownPrimaryType.Decimal:
                         return "decimal";
@@ -82,7 +79,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                         }
 
                     case KnownPrimaryType.TimeSpan:
-                        return "TimeSpan";
+                        return "System.TimeSpan";
 
                     case KnownPrimaryType.Object:
                         return "object";
@@ -91,10 +88,10 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                         return "Microsoft.Rest.ServiceClientCredentials";
 
                     case KnownPrimaryType.UnixTime:
-                        return "DateTime";
+                        return "System.DateTime";
 
                     case KnownPrimaryType.Uuid:
-                        return "Guid";
+                        return "System.Guid";
 
                 }
                 throw new NotImplementedException($"Primary type {KnownPrimaryType} is not implemented in {GetType().Name}");
@@ -117,7 +114,6 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                     case KnownPrimaryType.TimeSpan:
                     case KnownPrimaryType.DateTimeRfc1123:
                     case KnownPrimaryType.UnixTime:
-                    case KnownPrimaryType.Float:
                     case KnownPrimaryType.Uuid:
                         return true;
 

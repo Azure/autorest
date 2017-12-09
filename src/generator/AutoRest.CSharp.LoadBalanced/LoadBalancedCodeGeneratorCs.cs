@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,7 +12,6 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.LoadBalanced.Model;
-using AutoRest.CSharp.LoadBalanced.Strategies;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Client;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Common;
 using AutoRest.Extensions;
@@ -26,6 +24,7 @@ namespace AutoRest.CSharp.LoadBalanced
 
         public override bool IsSingleFileGenerationSupported => true;
 
+
         public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
             "The {0} nuget package is required to compile the generated code.", ClientRuntimePackage);
 
@@ -33,12 +32,9 @@ namespace AutoRest.CSharp.LoadBalanced
 
         private async Task GenerateClientSideCode(CodeModelCs codeModel)
         {
-            CompositeTypeCs.DefaultPropertyTypeSelectionStrategy = new WrappedPropertyTypeSelectionStrategy();
-
-            var usings = new List<string>();
-            var methodGroups = codeModel.Operations.Cast<MethodGroupCs>();
+            var usings = new List<string>(codeModel.Usings);
             var methods = codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()).Cast<MethodCs>().ToList();
-            
+
             var project = new ProjectModel
             {
                 RootNameSpace = codeModel.Namespace
@@ -46,83 +42,70 @@ namespace AutoRest.CSharp.LoadBalanced
 
             var metricsTemplate = new MetricsTemplate {Model = methods};
             var metricsFilePath = "Metrics.cs";
+            project.FilePaths.Add(metricsFilePath);
             await Write(metricsTemplate, metricsFilePath);
-			
-            var brokenRuleTemplate = new BrokenRuleTemplate();
-            var brokenRuleFilePath = "BrokenRule.cs";
-            await Write(brokenRuleTemplate, brokenRuleFilePath);
-			
-            var responseTemplate = new ResponseTemplate();
-            var responseFilePath = "Response.cs";
-            await Write(responseTemplate, responseFilePath);
 
-            usings.AddRange(new[]
-                            {
-                                "System", "System.Collections.Generic", "System.Linq", "System.Threading",
-                                "System.Threading.Tasks", "Microsoft.Rest", "System.IO",
-                                "Microsoft.Rest.Serialization", "Agoda.RoundRobin", "Newtonsoft.Json",
-                                $"{codeModel.Namespace}.Models", "Agoda.RoundRobin.Constants", "System.ComponentModel",
-                                "AutoRest.CSharp.LoadBalanced.Json"
-                            });
+            usings.Add("System");
+            usings.Add("System.Collections.Generic");
+            usings.Add("System.Linq");
+            usings.Add("System.Threading");
+            usings.Add("System.Threading.Tasks");
+            usings.Add("Microsoft.Rest");
+            usings.Add("System.IO");
+            usings.Add("Microsoft.Rest.Serialization");
+            usings.Add("Agoda.RoundRobin");
+            usings.Add("Newtonsoft.Json");
+            usings.Add("Agoda.SAPI.Client.Models");
 
-            usings = usings.Where(u => !string.IsNullOrWhiteSpace(u)).Distinct().ToList();
+            codeModel.Usings = usings.Where(u => !string.IsNullOrWhiteSpace(u)).Distinct();
 
-            codeModel.Usings = usings;
-            
-            var clients = methods.GroupBy(m => m.Tags.First()).ToArray();
+            // Service client
+            var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
 
-            var libPath = Path.Combine(Settings.Instance.OutputDirectory, "lib");
-            
-            await new LibFolderCreator(libPath).ExecuteAsync();
+            var clientPath = $"{codeModel.Name}{ImplementationFileExtension}";
+            project.FilePaths.Add(clientPath);
 
-            foreach (var client in clients)
-            {
-                var clientName = $"{client.Key.ToPascalCase()}Client";
-                var clientMethods = client.ToArray();
-                var clientClassFileName = $"{clientName}{ImplementationFileExtension}";
-                var clientInterfaceFileName = $"I{clientClassFileName}";
+            await Write(serviceClientTemplate, clientPath);
 
-                var model = new Tuple<CodeModelCs, string, MethodCs[]>(codeModel, clientName, clientMethods);
+            // Service client interface
+            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
 
-                // Service client interface
-                var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = model };
-                await Write(serviceClientInterfaceTemplate, clientInterfaceFileName);
+            var interfacePath = $"I{codeModel.Name}{ImplementationFileExtension}";
+            project.FilePaths.Add(interfacePath);
 
-
-                // Service client
-                var serviceClientTemplate = new ServiceClientTemplate { Model = model };
-                await Write(serviceClientTemplate, clientClassFileName);
-            }
+            await Write(serviceClientInterfaceTemplate, interfacePath);
 
             var apiBaseTemplate = new ApiBaseTemplate {Model = codeModel};
             var apiBaseCsPath = "ApiBase.cs";
+            project.FilePaths.Add(apiBaseCsPath);
             await Write(apiBaseTemplate, apiBaseCsPath);
 
             // operations
-            foreach (var methodGroup in methodGroups)
+            foreach (var methodGroup1 in codeModel.Operations)
             {
-                if (methodGroup.Name.IsNullOrEmpty())
+                var methodGroup = (MethodGroupCs) methodGroup1;
+
+                if (!methodGroup.Name.IsNullOrEmpty())
                 {
-                    continue;
+                    // Operation
+                    var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
+                    var operationsFilePath = $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}";
+                    project.FilePaths.Add(operationsFilePath);
+
+                    await Write(operationsTemplate, operationsFilePath);
+
+                    // Operation interface
+                    var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
+                    var operationsInterfacePath =
+                        $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}";
+                    project.FilePaths.Add(operationsInterfacePath);
+
+                    await Write(operationsInterfaceTemplate, operationsInterfacePath);
                 }
-
-                // Operation
-                var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                var operationsFilePath = $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}";
-
-                await Write(operationsTemplate, operationsFilePath);
-
-                // Operation interface
-                var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                var operationsInterfacePath =
-                    $"I{operationsInterfaceTemplate.Model.TypeName}{ImplementationFileExtension}";
-
-                await Write(operationsInterfaceTemplate, operationsInterfacePath);
             }
 
             // Models
-            var models = codeModel.ModelTypes.Union(codeModel.HeaderTypes).Cast<CompositeTypeCs>();
-            foreach (var model in models)
+            foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
                 if (model.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
                     (bool)model.Extensions[SwaggerExtensions.ExternalExtension])
@@ -130,27 +113,19 @@ namespace AutoRest.CSharp.LoadBalanced
                     continue;
                 }
 
-                Template<CompositeTypeCs> modelTemplate = null;
-
-                if (model.PropertyTypeSelectionStrategy.IsCollection(model))
-                {
-                    modelTemplate = new CollectionModelTemplate { Model = model };
-                }
-                else
-                {
-                    modelTemplate = new ModelTemplate { Model = model };
-                }
-                
+                var modelTemplate = new ModelTemplate{ Model = model };
                 var modelPath = Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}");
+                project.FilePaths.Add(modelPath);
 
                 await Write(modelTemplate, modelPath);
             }
-			
+
             // Enums
             foreach (EnumTypeCs enumType in codeModel.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
                 var enumFilePath = Path.Combine(Settings.Instance.ModelsName, $"{enumTemplate.Model.Name}{ImplementationFileExtension}");
+                project.FilePaths.Add(enumFilePath);
 
                 await Write(enumTemplate, enumFilePath);
             }
@@ -161,35 +136,20 @@ namespace AutoRest.CSharp.LoadBalanced
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
                 var exceptionFilePath =
                     Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
+                project.FilePaths.Add(exceptionFilePath);
 
                 await Write(exceptionTemplate, exceptionFilePath);
             }
-
-            // CB models
-            var couchbaseModels = codeModel.ModelTypes.Union(codeModel.HeaderTypes).Cast<CompositeTypeCs>();
-            foreach (var model in couchbaseModels)
+            
+            // Xml Serialization
+            if (codeModel.ShouldGenerateXmlSerialization)
             {
-                model.isCouchbaseModel = true;
-                if (model.Extensions.ContainsKey(SwaggerExtensions.ExternalExtension) &&
-                    (bool)model.Extensions[SwaggerExtensions.ExternalExtension])
-                {
-                    continue;
-                }
+                var xmlSerializationTemplate = new XmlSerializationTemplate();
+                var xmlSerializationPath = Path.Combine(Settings.Instance.ModelsName,
+                    $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}");
+                project.FilePaths.Add(xmlSerializationPath);
 
-                Template<CompositeTypeCs> modelTemplate = null;
-
-                if (model.PropertyTypeSelectionStrategy.IsCollection(model))
-                {
-                    modelTemplate = new CollectionModelTemplate { Model = model };
-                }
-                else
-                {
-                    modelTemplate = new ModelTemplate { Model = model };
-                }
-                var modelPath = Path.Combine(Settings.Instance.ModelsName, $"Couchbase/{model.Name}{ImplementationFileExtension}");
-                project.FilePaths.Add(modelPath);
-
-                await Write(modelTemplate, modelPath);
+                await Write(xmlSerializationTemplate, xmlSerializationPath);
             }
 
             var projectTemplate = new CsProjTemplate { Model = project };

@@ -1,0 +1,73 @@
+@using System
+@using System.Linq;
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.LoadBalanced
+@using AutoRest.CSharp.LoadBalanced.Legacy
+@using AutoRest.CSharp.LoadBalanced.Legacy.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Legacy.Model.MethodGroupCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+@foreach (var usingString in Model.Usings) {
+    @:using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    /// @(Model.TypeName) operations.
+    /// </summary>
+    public partial interface I@(Model.TypeName)
+    {
+    @foreach(MethodCs method in Model.Methods)
+    {
+        if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", String.IsNullOrEmpty(method.Summary) ? method.Description.EscapeXmlComment() : method.Summary.EscapeXmlComment())
+            if (!String.IsNullOrEmpty(method.ExternalDocsUrl))
+            {
+        @:/// <see href="@method.ExternalDocsUrl" />
+            }
+        @:/// </summary>
+        }
+        if (!String.IsNullOrEmpty(method.Description) && !String.IsNullOrEmpty(method.Summary))
+        {
+        @:/// <remarks>
+        @:@WrapComment("/// ", method.Description.EscapeXmlComment())
+        @:/// </remarks>
+        }
+        foreach (ParameterCs parameter in method.LocalParameters)
+        {
+        @:/// <param name='@parameter.Name'>
+        @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+        @:/// </param>
+        }
+        @:/// <param name='customHeaders'>
+        @:/// The headers that will be added to request.
+        @:/// </param>
+        @:/// <param name='cancellationToken'>
+        @:/// The cancellation token.
+        @:/// </param>
+        @:/// <exception cref="@(method.OperationExceptionTypeString)">
+        @:/// Thrown when the operation returned an invalid status code
+        @:/// </exception>
+        @if (method.Responses.Any(r => r.Value.Body != null))
+        {
+        @:/// <exception cref="Microsoft.Rest.SerializationException">
+        @:/// Thrown when unable to deserialize the response
+        @:/// </exception>
+        }
+        @if (method.Parameters.Any(p => p.IsRequired && p.IsNullable()))
+        {
+        @:/// <exception cref="Microsoft.Rest.ValidationException">
+        @:/// Thrown when a required parameter is null
+        @:/// </exception>
+        }
+        @if (method.Deprecated)
+        {
+        @:[System.Obsolete()]
+        }
+        @:System.Threading.Tasks.Task<@method.OperationResponseReturnTypeString> @(method.Name)(@(method.GetAsyncMethodParameterDeclaration(true)));
+    }
+    }
+}

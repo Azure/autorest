@@ -9,41 +9,65 @@
 @using AutoRest.Extensions
 @inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.MethodCs>
 
+@if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
+{
+@:/// <summary>
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+    if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
+    {
+@:/// <see href="@Model.ExternalDocsUrl" />
+    }
+@:/// </summary>
+}
+@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:/// <remarks>
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
+}
+@foreach (var parameter in Model.LocalParameters)
+{
+@:/// <param name='@parameter.Name'>@(parameter.Documentation.EscapeXmlComment())</param>
+}
+/// <param name='customHeaders'>Headers that will be added to request.</param>
+/// <exception cref="@(Model.OperationExceptionTypeString)">Thrown when the operation returned an invalid status code</exception>
+@if (Model.Responses.Where(r => r.Value.Body != null).Any())
+{
+@:/// <exception cref="Microsoft.Rest.SerializationException">Thrown when unable to deserialize the response</exception>
+}
+@if (Model.Parameters.Cast<ParameterCs>().Any(p => !p.IsConstant && p.IsRequired &&p.IsNullable()))
+{
+@:/// <exception cref="Microsoft.Rest.ValidationException">Thrown when a required parameter is null</exception>
+@:/// <exception cref="System.ArgumentNullException">Thrown when a required parameter is null</exception>
+    }
+/// <return>A response object containing the response body and response headers.</return>
 @if (Model.Deprecated)
 {
-    @:[System.Obsolete()]
+@:[System.Obsolete()]
 }
-
-[Description("@((String.IsNullOrEmpty(Model.Description) ? "" : Model.Description.EscapeXmlComment()))"), Summary("@((String.IsNullOrEmpty(Model.Summary) ? "" : Model.Summary.EscapeXmlComment()))"), Url("@(Model.FromattedUrl)"), Verb("@(Model.HttpMethod.ToString().ToUpper())"), Tags("@(string.Join(",", Model.Tags))")]
-public async @(Model.OperationResponseReturnTypeStringForMethodName) @(Model.NameWithoutRoute) (@(Model.GetAsyncMethodParameterDeclaration(false)))
+public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
-    var response = new Response<@(Model.OperationResponseType)>();
-
-    @EmptyLine
     @foreach (ParameterCs parameter in Model.Parameters.Where(p => !p.IsConstant))
     {
         if (parameter.IsRequired && parameter.IsNullable())
         {
-            @:if (@(parameter.Name) == null)
-            @:{
-            @:var ex = new ValidationException(ValidationRules.CannotBeNull, "@(parameter.Name)");
-            @:response.BrokenRules.Add(new BrokenRule() { Description = ex.Message, Value = ex.Message });
-            @:return response;
-            @:}
-            @:
+    @:if (@(parameter.Name) == null)
+    @:{
+        @:throw new ValidationException(ValidationRules.CannotBeNull, "@(parameter.Name)");
+    @:}
+@:
         }
-        if (parameter.CanBeValidated && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
+        if(parameter.CanBeValidated  && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
         {
-            //@:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
+    @:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
         }
     }
 
-    @foreach (var parameter1 in Model.Parameters)
+    @foreach (ParameterCs parameter in Model.Parameters)
     {
-        var parameter = (ParameterCs)parameter1;
         if (parameter.IsConstant && !parameter.IsClientProperty)
         {
-            @:@(parameter.ModelTypeName) @(parameter.Name) = @(parameter.DefaultValue);
+    @:@(parameter.ModelTypeName) @(parameter.Name) = @(parameter.DefaultValue);
         }
 
         if (parameter.ModelType is CompositeType
@@ -52,55 +76,36 @@ public async @(Model.OperationResponseReturnTypeStringForMethodName) @(Model.Nam
             && !parameter.IsClientProperty
             && ((CompositeType)parameter.ModelType).ContainsConstantProperties)
         {
-            @:if (@(parameter.Name) == null)
-            @:{
-            @:    @(parameter.Name) = new @(parameter.ModelTypeName)();
-            @:}
+    @:if (@(parameter.Name) == null)
+    @:{
+    @:    @(parameter.Name) = new @(parameter.ModelTypeName)();
+    @:}
         }
 
     }
     @Model.BuildInputMappings()
+@EmptyLine
     var verb = Verbs.@(Model.HttpMethod.ToString().ToUpper());
-    @EmptyLine
-    @if (Model.QueryParameters.Any())
-    {
-        @:    var queryParameters = new Dictionary<string, object>
-            @:    {
-    foreach (var parameter in Model.QueryParameters)
+@EmptyLine
+    var queryParameters = new Dictionary<string, object>
         {
-            @:         { "@(parameter.Name.RawValue)", @(parameter.Name) },
+    @foreach (var parameter in Model.LogicalParameters.Where(p => !p.IsClientProperty))
+    {
+@:            { "@(parameter.Name)", @(parameter.Name) },
     }
-        @:    };
-
-    }
-
-    @EmptyLine
+        };
+@EmptyLine
     var requestParameters = new RequestParameters
-    {
-    HttpVerb = verb,
-    RestUrl = "@(Model.FromattedUrl)",
-    CustomHeaders = _defaultHeaders,
-    QueryParameters = @(Model.QueryParameters.Any() ? "queryParameters" : "new Dictionary<string, object>()")
-    @(@Model.Body == null ? "" : ", Body = body")
-    };
-    @EmptyLine
-    try
-    {
-    var result = await @(Model.GetOperationResponseReturnTypeString("InvokeNewRequest"))(Metrics.@(Model.Name), requestParameters);
-    if (result != null)
-    {
-    response.IsSuccessful = true;
-    response.Result = result;
+                            {
+                                HttpVerb = verb,
+                                RestUrl = "@(Model.Url.TrimStart('/'))",
+                                CustomHeaders = customHeaders,
+                                QueryParameters = queryParameters
+                                @(@Model.Body == null ? "" : ", Body = body")
+                            };
+@EmptyLine
+    @if (Model.ReturnType.Body != null) {
+@:    return 
     }
-    }
-    catch (Exception ex)
-    {
-    response.BrokenRules.Add(new BrokenRule() { Description = ex.Message, Value = ex.Message });
-    }
-
-    @if (Model.ReturnType.Body != null)
-    {
-        @EmptyLine
-        @:    return response;
-    }
-    }
+    await @(Model.GetOperationResponseReturnTypeString("InvokeNewRequest"))(Metrics.@(Model.Name), requestParameters);
+}

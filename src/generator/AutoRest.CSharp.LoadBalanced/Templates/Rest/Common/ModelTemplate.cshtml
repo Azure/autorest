@@ -1,22 +1,18 @@
 @using System.Linq
+@using System.Runtime.Remoting.Messaging
 @using AutoRest.Core
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
+@using AutoRest.CSharp
 @using AutoRest.CSharp.LoadBalanced
+@using AutoRest.CSharp.LoadBalanced.Model
 @using AutoRest.Extensions
 @inherits Template<global::AutoRest.CSharp.LoadBalanced.Model.CompositeTypeCs>
 @Header("// ")
 @EmptyLine
-using System;
-using System.Linq;
-using Newtonsoft.Json;
-using Microsoft.Rest;
-using Microsoft.Rest.Serialization;
-using AutoRest.CSharp.LoadBalanced.Json;
-using System.Collections.Generic;
-@EmptyLine
-namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsName}.Couchbase" : Settings.ModelsName)
+namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
+    using System.Linq;
 @EmptyLine
 
 @if (!string.IsNullOrEmpty(Model.Summary) || !string.IsNullOrWhiteSpace(Model.Documentation))
@@ -51,12 +47,15 @@ namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsNam
         /// <summary>
         @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
         /// </summary>
-        @if (Model.GetFilteredProperties().Any(p => p.ModelType is CompositeType && ((CompositeType)p.ModelType).ContainsConstantProperties))
+        @if (Model.Properties.Any(p => p.ModelType is CompositeType && ((CompositeType)p.ModelType).ContainsConstantProperties))
         {
 <text>
         public @(Model.Name)()
         {
-            @foreach(var property in Model.GetPropertiesWhichRequireInitialization())
+            @foreach(var property in Model.ComposedProperties.Where(p => p.ModelType is CompositeType
+                && !p.IsConstant
+                && p.IsRequired
+                && ((CompositeType)p.ModelType).ContainsConstantProperties))
             {
             @:@(property.Name) = new @(property.ModelTypeName)();
             }
@@ -86,12 +85,15 @@ namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsNam
             }
         @:{
 
-            foreach (var property in Model.GetPropertiesWhichRequireInitialization())
+            foreach (var property in Model.ComposedProperties.Where(p => p.ModelType is CompositeType
+                     && !p.IsConstant
+                     && p.IsRequired
+                     && ((CompositeType)p.ModelType).ContainsConstantProperties))
             {
             @:@(property.Name) = new @(property.ModelTypeName)();
             }
 
-            foreach (var property in Model.GetFilteredProperties().Where(p => !p.IsConstant))
+            foreach (var property in Model.Properties.Where(p => !p.IsConstant))
             {
                 var propName = CodeNamer.Instance.CamelCase(property.Name);
                 if (property.Name.Value.Equals(propName))
@@ -107,7 +109,7 @@ namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsNam
         @:}
         }
 
-        @if (Model.GetFilteredProperties().Any(p => p.IsConstant))
+        @if (Model.Properties.Any(p => p.IsConstant))
         {
         @:/// <summary>
         @:@WrapComment("/// ", ("Static constructor for " + Model.Name + " class.").EscapeXmlComment())
@@ -122,38 +124,249 @@ namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsNam
         }
 
         @EmptyLine
-        @foreach (var property in Model.GetFilteredProperties().Where(p => !p.IsConstant))
+        @foreach (var property in Model.Properties.Where(p => !p.IsConstant))
         {
-            if (!string.IsNullOrWhiteSpace(property.GetFormattedPropertySummary()))
-            {
         @:/// <summary>
         @:@WrapComment("/// ", property.GetFormattedPropertySummary())
         @:/// </summary>
-            }
-            if(!string.IsNullOrWhiteSpace(property.Summary) && !string.IsNullOrWhiteSpace(property.Documentation))
+            if(!string.IsNullOrEmpty(property.Summary) && !string.IsNullOrEmpty(property.Documentation))
             { 
         @:/// <remarks>
         @:@WrapComment("/// ", property.Documentation)
         @:/// </remarks>
             }
-           
-        @:@(Model.PropertyTypeSelectionStrategy.GetJsonSerializationAttribute(property, Model.isCouchbaseModel))
-        @:public @Model.PropertyTypeSelectionStrategy.GetPropertyTypeName(property) @property.Name { get; @(property.IsReadOnly ? "protected " : "")set; }
+            if (property.ModelType.IsPrimaryType(KnownPrimaryType.Date))
+            {
+        @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateJsonConverter))]
+            }
+            if (property.ModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+            {
+        @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter))]
+            }
+            if (property.ModelType.IsPrimaryType(KnownPrimaryType.Base64Url))
+            {
+        @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.Base64UrlJsonConverter))]
+            }
+            if (property.ModelType.IsPrimaryType(KnownPrimaryType.UnixTime))
+            {
+        @:[Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.UnixTimeJsonConverter))]
+            }
+
+            if (property.ModelType is DictionaryType && (property.ModelType as DictionaryType).SupportsAdditionalProperties)
+            {
+        @:[Newtonsoft.Json.JsonExtensionData]
+            }
+            else
+            {
+        @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
+            }
+        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "protected " : "")set; }
         @EmptyLine
         }
 
-        @foreach (var property in Model.GetFilteredProperties().Where(p => p.IsConstant))
+        @foreach (var property in Model.Properties.Where(p => p.IsConstant))
         {
-            if (!string.IsNullOrWhiteSpace(property.Documentation.EscapeXmlComment()))
-            {
         @:/// <summary>
         @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
+            if (property.ModelType.IsPrimaryType(KnownPrimaryType.Date))
+            {
+        @:[Newtonsoft.Json.JsonConverter(typeof(DateJsonConverter))]
             }
-        @:@Model.PropertyTypeSelectionStrategy.GetJsonSerializationAttribute(property, Model.isCouchbaseModel)
-        @:public static @Model.PropertyTypeSelectionStrategy.GetPropertyTypeName(property) @property.Name { get; private set; }
+            if (property.ModelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+            {
+        @:[Newtonsoft.Json.JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
+            }
+            if (property.ModelType.IsPrimaryType(KnownPrimaryType.Base64Url))
+            {
+        @:[Newtonsoft.Json.JsonConverter(typeof(Base64UrlJsonConverter))]
+            }
+            if (property.ModelType.IsPrimaryType(KnownPrimaryType.UnixTime))
+            {
+        @:[Newtonsoft.Json.JsonConverter(typeof(UnixTimeJsonConverter))]
+            }
+        @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
+        @:public static @property.ModelTypeName @property.Name { get; private set; }
         @EmptyLine
         }
+@if(@Model.ShouldValidateChain())
+{
+        @:/// <summary>
+        @:/// Validate the object.
+        @:/// </summary>
+        @:/// <exception cref="Microsoft.Rest.ValidationException">
+        @:/// Thrown if validation fails
+        @:/// </exception>
+        @:public @Model.MethodQualifier void Validate()
+        @:{
+            bool anythingToValidate = false;
 
+            if (Model.BaseModelType != null && Model.BaseModelType.ShouldValidateChain())
+            {
+                anythingToValidate = true;
+            @:base.Validate();
+            }
+
+            foreach (PropertyCs property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant && p.IsNullable() ))
+            {
+                anythingToValidate = true;
+            @:if (@property.Name == null)
+            @:{
+                @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@property.Name");
+            @:}
+            @:
+            }
+            foreach (var property in Model.Properties.Where(p => !p.IsConstant 
+                && (p.Constraints.Any() || !(p.ModelType is PrimaryType))))
+            {
+                anythingToValidate = true;
+            @:@property.ModelType.ValidateType(Model, $"this.{property.Name}", property.Constraints)
+            @:
+            }
+            if (!anythingToValidate)
+            {
+            @://Nothing to validate
+            }
+        @:}
+}
+
+    @if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
+        /// <summary>
+        /// Serializes the object to an XML node
+        /// </summary>
+        internal System.Xml.Linq.XElement XmlSerialize(System.Xml.Linq.XElement result)
+        {</text>
+        foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {<text>
+        @if (property.IsNullable()) {<text>
+            if( null != @(property.Name) ) 
+            {</text>}
+                @if (property.ModelType is CompositeType) {<text>
+                result.Add(@(property.Name).XmlSerialize(new System.Xml.Linq.XElement( "@(property.XmlName)" )));</text>
+                }
+                else if (property.ModelType is DictionaryType)
+                {
+                    var vt = ((DictionaryType)property.ModelType).ValueType;
+                    if (vt is DictionaryType || vt is SequenceType)
+                    {
+                        // todo: nothing right now.
+                    } else if (vt is CompositeType) {<text>
+                var dict = new System.Xml.Linq.XElement("@property.XmlName");
+                foreach( var key in @(property.Name).Keys ) {
+                    dict.Add(@(property.Name)[key].XmlSerialize(new System.Xml.Linq.XElement(key) ) );
+                }
+                result.Add(dict);</text>
+                } else {<text>
+                var dict = new System.Xml.Linq.XElement("@property.XmlName");
+                foreach( var key in @(property.Name).Keys ){
+                    dict.Add(new System.Xml.Linq.XElement( key, @(property.Name)[key] ) );
+                }
+                result.Add(dict);</text>}
+                }
+                else if (property.ModelType is SequenceType)
+                {
+                    var et = ((SequenceType)property.ModelType).ElementType;
+                    if (et is DictionaryType || et is SequenceType)
+                    {
+                        // todo: nothing right now.
+                    } else if (et is CompositeType) {if ((property.ModelType as SequenceType).XmlIsWrapped) {<text>
+                var seq = new System.Xml.Linq.XElement("@property.XmlName");
+                foreach( var value in @(property.Name) ){
+                    seq.Add(value.XmlSerialize( new System.Xml.Linq.XElement( "@((property.ModelType as SequenceType).ElementXmlName)") ) );
+                }
+                result.Add(seq);</text>} 
+                else {<text>
+                foreach( var value in @(property.Name) ){
+                    result.Add(value.XmlSerialize( new System.Xml.Linq.XElement( "@property.XmlName") ) );
+                }</text>}} else {if ((property.ModelType as SequenceType).XmlIsWrapped) {<text>
+                var seq = new System.Xml.Linq.XElement("@property.XmlName");
+                foreach( var value in @(property.Name) ){
+                    seq.Add(new System.Xml.Linq.XElement( "@((property.ModelType as SequenceType).ElementXmlName)", value ) );
+                }
+                result.Add(seq);</text>} 
+                else {<text>
+                foreach( var value in @(property.Name) ){
+                    result.Add(new System.Xml.Linq.XElement( "@property.XmlName", value ) );
+                }</text>}}
+                } else if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {
+                    // serialize it as a enum type.
+                    if (property.XmlIsAttribute) {<text>
+                result.Add(new System.Xml.Linq.XAttribute("@property.XmlName", @(property.Name).ToSerializedValue()) );</text>
+                    } else {<text>
+                result.Add(new System.Xml.Linq.XElement("@property.XmlName", @(property.Name).ToSerializedValue()) );</text>
+                    }
+                } else {
+                    // serialize it as a primitive/value type.
+                    var primitiveExpression = property.Name;
+                    var knownType = (property.ModelType as PrimaryType)?.KnownPrimaryType;
+                    if (knownType == KnownPrimaryType.DateTimeRfc1123)
+                    {
+                        primitiveExpression = property.IsNullable()
+                            ? $"{primitiveExpression}?.ToUniversalTime().ToString(\"R\")"
+                            : $"{primitiveExpression}.ToUniversalTime().ToString(\"R\")";
+                    }
+                    if (property.XmlIsAttribute) {<text>
+                result.Add(new System.Xml.Linq.XAttribute("@property.XmlName", @(primitiveExpression)) );</text>
+                    } else {<text>
+                result.Add(new System.Xml.Linq.XElement("@property.XmlName", @(primitiveExpression)) );</text>
+                    }
+                }
+        @if (property.IsNullable()) {<text>
+            }
+        </text>}
+    </text>}
+    <text>
+            return result;
+        }
+
+        /// <summary>
+        /// Deserializes an XML node to an instance of @Model.Name
+        /// </summary>
+        internal static @Model.Name XmlDeserialize(string payload) 
+        {
+            // deserialize to xml and use the overload to do the work
+            return XmlDeserialize( System.Xml.Linq.XElement.Parse( payload ) );
+        }    
+
+        internal static @Model.Name XmlDeserialize(System.Xml.Linq.XElement payload) 
+        {
+            var result = new @(Model.Name)();
+        @if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && p.XmlIsAttribute)) {<text>
+            System.Xml.Linq.XAttribute attribute;</text>
+        }
+        @*@if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && !p.XmlIsAttribute)) {<text>
+            System.Xml.Linq.XElement element;</text>
+        }*@
+
+        @foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {
+            @if (property.XmlIsAttribute) {<text>
+            if( null != (attribute = payload.Attribute("@property.XmlName")))
+            {
+                @if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {<text>
+                
+                result.@(property.Name) =attribute.Value.Parse@(property.ModelType.Name)();
+                
+                </text>} else {<text> 
+                result.@(property.Name) = (@property.ModelTypeName)attribute;
+                </text>}
+            }
+            </text>
+                continue;
+            }
+            
+            var deserializerName = $"deserialize{property.Name}";
+            var resultName = $"result{property.Name}";
+
+            <text>
+            var @(deserializerName) = @(XmlSerialization.GenerateDeserializer(Model.CodeModel, property.ModelType, property.ModelTypeName));
+            @property.ModelTypeName @(resultName);
+            if (@(deserializerName)(payload, "@property.XmlName", out @(resultName)))
+            {
+                result.@(property.Name) = @(resultName);
+            }</text>
+        }
+            return result;
+        } 
+    </text>}
+    
     }
 }

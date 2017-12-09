@@ -1,0 +1,22 @@
+﻿@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.LoadBalanced.Legacy.Model
+@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Legacy.Model.CompositeTypeCs>
+@Header("// ")
+@EmptyLine
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using AutoRest.CSharp.LoadBalanced.Json;
+@EmptyLine
+@{
+    var property = Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs);
+    var genericPart = property.ModelTypeName.Replace("System.Collections.Generic.List<", "").Replace(">","");
+    var propertyNameCamelCase = property.Name.Value.ToCamelCase();
+}
+namespace @(Settings.Namespace).@(Model.isCouchbaseModel ? $"{Settings.ModelsName}.Couchbase" : Settings.ModelsName)
+{
+    @(!Model.isCouchbaseModel ? $"[JsonConverter(typeof(WrappedListConverter<{genericPart}>), \"{propertyNameCamelCase}\")]" : "")
+    public partial class @Model.Name : @Model.GetFilteredProperties().First(p => p.ModelType is SequenceTypeCs).ModelTypeName.Replace("System.Collections.Generic.List", "List")
+    {
+    }
+}

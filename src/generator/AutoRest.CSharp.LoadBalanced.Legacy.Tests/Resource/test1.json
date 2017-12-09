@@ -1,0 +1,71 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Agoda.Website.MVC"
+  },
+  "host": "localhost:59036",
+  "schemes": [ "http" ],
+  "paths": {
+    "/{culture}/api/User/current2": {
+      "get": {
+        "tags": [ "User" ],
+        "operationId": "getCurrentUser2",
+        "consumes": [],
+        "produces": [ "application/xml", "text/xml", "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aaa",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "enum": [ 11, 22, 33 ]
+          },
+          {
+            "name": "aaaaMyEnum2a",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "enum": [ 11, 22, 33 ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Res" }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Res": {
+      "type": "object",
+      "properties": {
+        "Number": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Numbers": {
+          "format": "int32",
+          "enum": [ 11, 22, 33 ],
+          "type": "integer"
+        },
+        "Stuff": {
+          "format": "int32",
+          "enum": [ 1, 2, 4, 8 ],
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

@@ -10,14 +10,11 @@ namespace AutoRest.CSharp.LoadBalanced.Tests
    [TestFixture]
     public class OutputTest
     {
-        //[Test, Ignore("local test ")]
         [Test]
         public void PassingTest()
         {
             Func<string, string> parent = path => Directory.GetParent(path).FullName;
             var currentPath = Directory.GetCurrentDirectory();
-
-            Console.WriteLine("Starting PassingTest");
 
             using (var context = new DependencyInjection.Context().Activate())
             {
@@ -29,15 +26,15 @@ namespace AutoRest.CSharp.LoadBalanced.Tests
                 }
                 catch (NullReferenceException)
                 {
-                    path = "C:\\DevWorkspace\\git\\autorest\\src\\generator\\AutoRest.CSharp.LoadBalanced.Tests";
+                    path = "C:\\projects\\autorest\\src\\generator\\AutoRest.CSharp.LoadBalanced.Tests";
                 }
 
                 var settings = new Settings
                                {
-                                   Input = "C:\\swagger\\temp\\temp.json.txt",
-                                   OutputDirectory = "C:\\swagger\\output\\_test",
+                                   Input = "http://petstore.swagger.io/v2/swagger.json",
+                                   OutputDirectory = "D:\\projects\\gen2",
                                    CodeGenerator = "Test",
-                                   Namespace = "Agoda.SupplyApi.Client"
+                                   Namespace = "Agoda.SAPI.Client"
                                };
 
                 var modeler = new SwaggerModeler();
