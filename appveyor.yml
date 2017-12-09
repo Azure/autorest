@@ -16,4 +16,4 @@ assembly_info:
 
 before_build:
   - dotnet restore Autorest.sln
-  - dotnet build Autorest.sln
+  - dotnet build Autorest.sln && exit 0
