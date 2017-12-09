@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AutoRest.CSharp.LoadBalanced.Model
+namespace AutoRest.CSharp.LoadBalanced.Legacy.Model
 {
     public class ClientCodeModelCs
     {

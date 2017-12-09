@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoRest.Core.Model;
-using AutoRest.CSharp.LoadBalanced.Model;
+using AutoRest.CSharp.LoadBalanced.Legacy.Model;
 
-namespace AutoRest.CSharp.LoadBalanced.Strategies
+namespace AutoRest.CSharp.LoadBalanced.Legacy.Strategies
 {
     public interface IPropertyTypeSelectionStrategy
     {

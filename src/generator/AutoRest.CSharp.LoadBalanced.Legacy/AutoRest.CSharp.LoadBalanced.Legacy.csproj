@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Agoda, Microsoft</Authors>
+    <TargetFramework>net451</TargetFramework>
+    <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
+    <MvcRazorExcludeViewFilesFromPublish>false</MvcRazorExcludeViewFilesFromPublish>
+    <DelaySign>true</DelaySign>
+    <AssemblyName>AutoRest.CSharp.LoadBalanced.Legacy</AssemblyName>
+    <AssemblyOriginatorKeyFile>../../../Tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>false</SignAssembly>
+    <PackageId>AutoRest.CSharp.LoadBalanced</PackageId>
+    <PackageTags>Microsoft LoadBalance AutoRest CSharp Generator</PackageTags>
+    <PackageProjectUrl>https://github.com/Azure/AutoRest</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</PackageLicenseUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\AutoRest.Core\AutoRest.Core.csproj" />
+    <ProjectReference Include="..\..\core\AutoRest.Extensions\AutoRest.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.ViewCompilation" Version="2.0.0" PrivateAssets="All" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Templates\Rest\Client\ApiBaseTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+    </None>
+    <None Update="Templates\Rest\Client\BrokenRuleTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+    </None>
+  </ItemGroup>
+  <Import Project="..\..\..\tools\Autorest.xproj.targets" />
+
+</Project>

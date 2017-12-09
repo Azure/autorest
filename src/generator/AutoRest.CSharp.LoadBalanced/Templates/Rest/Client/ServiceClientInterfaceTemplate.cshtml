@@ -2,27 +2,51 @@
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.CSharp.LoadBalanced.Model
-@inherits AutoRest.Core.Template<Tuple<CodeModelCs, string, MethodCs[]>>
+@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.CodeModelCs>
 @Header("// ")
-@EmptyLine
-@{
-    var model = Model.Item1;
-    var clientName = Model.Item2;
-    var methods = Model.Item3;
-}
-@foreach (var usingString in model.Usings)
-{
-@:using @usingString;
-}
 @EmptyLine
 namespace @Settings.Namespace
 {
+@foreach (var usingString in Model.Usings) {
+    @:using @usingString;
+}
 @EmptyLine
-    /// <summary>@(model.Documentation.EscapeXmlComment())</summary>
-    public partial interface I@(clientName) 
+    /// <summary>@(Model.Documentation.EscapeXmlComment())</summary>
+    public partial interface I@(Model.Name) : System.IDisposable
     {
+        /// <summary>The base URI of the service.</summary>
+        @if (!Model.IsCustomBaseUri)
+        {
+        @:System.Uri BaseUri { get; set; }
+        }
+        
+        @EmptyLine
+
+        /// <summary>Gets or sets json serialization settings.</summary>
+        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
+        @EmptyLine
+
+        /// <summary>Gets or sets json deserialization settings.</summary>
+        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
+        @EmptyLine
+
+        @foreach (var property in Model.Properties)
+        {
+        @:/// <summary>@(property.Documentation.EscapeXmlComment())</summary>
+        @:@property.ModelTypeName @property.Name { get;@(property.IsReadOnly || property.IsConstant ? "" : " set;") }
+        @EmptyLine
+        }
+
+        @EmptyLine
+    @foreach(var operation in Model.AllOperations)
+    {
+        @:/// <summary>Gets the I@(operation.TypeName).</summary>
+        @:I@(operation.TypeName) @(operation.NameForProperty) { get; }
+        @EmptyLine
+        @:
+    }
      
-    @foreach(MethodCs method in methods.Where( each => each.Group.IsNullOrEmpty()) )
+    @foreach(MethodCs method in Model.Methods.Where( each => each.Group.IsNullOrEmpty()) )
     {
         if (!String.IsNullOrEmpty(method.Description) || !String.IsNullOrEmpty(method.Summary))
         {
@@ -38,7 +62,7 @@ namespace @Settings.Namespace
         }
         @:/// <param name='customHeaders'>The headers that will be added to request.</param>
         @:/// <param name='cancellationToken'>The cancellation token.</param>
-        @:@(method.OperationResponseReturnTypeStringForMethodName) @(method.NameWithoutRoute) (@(method.GetAsyncMethodParameterDeclaration(false)));
+        @:Task<@(method.OperationResponseReturnTypeString)> @(method.Name)Async(@(method.GetAsyncMethodParameterDeclaration(true)));
         @EmptyLine
         @:
     }

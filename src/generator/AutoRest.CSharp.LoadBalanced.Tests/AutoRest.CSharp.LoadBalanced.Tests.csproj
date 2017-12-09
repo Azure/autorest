@@ -6,7 +6,7 @@
     <DelaySign>true</DelaySign>
     <AssemblyName>AutoRest.CSharp.LoadBalanced.Tests</AssemblyName>
     <AssemblyOriginatorKeyFile>../../../Tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <PackageId>AutoRest.CSharp.LoadBalanced.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <PackageTags>Microsoft AutoRest ClientRuntime REST</PackageTags>
@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutoRest.CSharp.LoadBalanced\AutoRest.CSharp.LoadBalanced.csproj" />
-    <ProjectReference Include="..\AutoRest.CSharp.LoadBalanced.Json\AutoRest.CSharp.LoadBalanced.Json.csproj" />
   </ItemGroup>
 
   <ItemGroup>

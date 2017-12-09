@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoRest.Core;
+﻿using AutoRest.Core;
 using AutoRest.Core.Model;
 
-namespace AutoRest.CSharp.LoadBalanced.Model
+namespace AutoRest.CSharp.LoadBalanced.Legacy.Model
 {
     internal class ConstructorParameterModel
     {

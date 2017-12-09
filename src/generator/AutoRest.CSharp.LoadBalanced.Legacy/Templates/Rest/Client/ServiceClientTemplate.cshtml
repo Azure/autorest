@@ -1,0 +1,45 @@
+﻿@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.LoadBalanced.Legacy.Model
+@using AutoRest.CSharp.LoadBalanced.Legacy.Templates.Rest.Client
+@inherits AutoRest.Core.Template<System.Tuple<AutoRest.CSharp.LoadBalanced.Legacy.Model.CodeModelCs, string, AutoRest.CSharp.LoadBalanced.Legacy.Model.MethodCs[]>>
+@Header("// ")
+@{
+    var model = Model.Item1;
+    var clientName = Model.Item2;
+    var methods = Model.Item3;
+}
+@EmptyLine
+@foreach (var usingString in model.Usings)
+{
+@:using @usingString;
+}
+@EmptyLine
+namespace @Settings.Namespace
+{
+@EmptyLine
+    @if (!string.IsNullOrWhiteSpace(model.Documentation))
+    {
+    @:/// <summary>
+    @:@WrapComment("/// ", model.Documentation.EscapeXmlComment())
+    @:/// </summary>
+    }
+
+    public partial class @clientName : ApiBase, I@{ @clientName }
+    { 
+
+        private readonly Dictionary<string, string> _defaultHeaders = new Dictionary<string, string> { { "Accept" , "application/vnd.api+json"}, { "Content-Type", "application/vnd.api+json" } };
+@EmptyLine
+        public @clientName (IApiBaseConfig apiBaseConfig)
+		: base(apiBaseConfig)
+        {
+        }
+
+    @foreach (MethodCs method in methods.Where(m => m.Group.IsNullOrEmpty()))
+    {
+        @:@(Include(new MethodTemplate(), method))
+        @EmptyLine
+        @:
+        }
+    }
+}

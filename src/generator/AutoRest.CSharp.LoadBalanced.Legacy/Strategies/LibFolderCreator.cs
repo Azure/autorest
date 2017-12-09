@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AutoRest.CSharp.LoadBalanced.Strategies
+namespace AutoRest.CSharp.LoadBalanced.Legacy.Strategies
 {
     public class LibFolderCreator
     {

@@ -1,0 +1,12 @@
+﻿@inherits AutoRest.Core.Template<System.Collections.Generic.IEnumerable<AutoRest.CSharp.LoadBalanced.Legacy.Model.MethodCs>>
+namespace @Settings.Namespace
+{
+    public static class Metrics
+    {
+        public const string Prefix = "API.";
+    @foreach (var parameter in Model)
+    {
+@:        public const string @(parameter.Name) = Prefix + "@(parameter.Name)";
+    }
+    }
+}

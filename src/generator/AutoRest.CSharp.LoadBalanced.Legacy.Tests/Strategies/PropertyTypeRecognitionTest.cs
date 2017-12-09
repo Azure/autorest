@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using AutoRest.Core.Model;
-using AutoRest.CSharp.LoadBalanced.Strategies;
 using NUnit.Framework;
+using AutoRest.CSharp.LoadBalanced.Legacy.Strategies;
 
-namespace AutoRest.CSharp.LoadBalanced.Tests.Strategies
+namespace AutoRest.CSharp.LoadBalanced.Legacy.Tests.Strategies
 {
     [TestFixture]
     public class PropertyTypeRecognitionTest

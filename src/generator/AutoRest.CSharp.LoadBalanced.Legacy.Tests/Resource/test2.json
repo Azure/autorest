@@ -1,0 +1,67 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Agoda.Website.MVC"
+  },
+  "host": "localhost:59036",
+  "schemes": [ "http" ],
+  "paths": {
+    "/{culture}/api/User/current2": {
+      "get": {
+        "tags": [ "User" ],
+        "operationId": "getCurrentUser2",
+        "consumes": [],
+        "produces": [ "application/xml", "text/xml", "application/json", "text/json" ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aaa",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [ "One", "Two", "Three" ]
+          },
+          {
+            "name": "aaaaMyEnum2a",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [ "One", "Two", "Three" ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Res" }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Res": {
+      "type": "object",
+      "properties": {
+        "Number": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Numbers": {
+          "enum": [ "One", "Two", "Three" ],
+          "type": "string"
+        },
+        "Stuff": {
+          "enum": [ "Spades", "Clubs", "Diamonds", "Hearts" ],
+          "type": "string"
+        }
+      }
+    }
+  }
+}

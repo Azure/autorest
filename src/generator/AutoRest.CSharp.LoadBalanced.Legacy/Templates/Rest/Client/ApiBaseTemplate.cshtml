@@ -1,0 +1,324 @@
+﻿@inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Legacy.Model.CodeModelCs>
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using Newtonsoft.Json;
+using Microsoft.Rest;
+using System.Threading.Tasks;
+using Agoda.RoundRobin;
+using Agoda.RoundRobin.Constants;
+using Microsoft.Rest.Serialization;
+using Agoda.Http.Client.WinHttp;
+@EmptyLine
+namespace @Settings.Namespace
+{
+@EmptyLine
+
+
+    public interface IApiBaseConfig
+    {
+        string name { get; set; }
+
+        List<ServerSettings> settings { get; set; }
+
+        TimeSpan? timeout { get; set; }
+
+        int retryCount { get; set; }
+
+        JsonSerializerSettings serializationSettings { get; set; }
+
+        JsonSerializerSettings deserializationSettings { get; set; }
+    }
+
+    public class ApiBaseConfig : IApiBaseConfig
+    {
+        public string name { get; set; }
+        public List<ServerSettings> settings { get; set; }
+        public TimeSpan? timeout { get; set; }
+        public int retryCount { get; set; }
+        public JsonSerializerSettings serializationSettings { get; set; }
+        public JsonSerializerSettings deserializationSettings { get; set; }
+    }
+
+    public abstract class ApiBase
+    {
+        private readonly List<ServerSettings> _settings;
+        private JsonSerializerSettings _serializationSettings;
+        private JsonSerializerSettings _deserializationSettings;
+        private readonly TimeSpan _timeout;
+        private readonly int _retryCount;
+        private readonly string _name;
+@EmptyLine
+        protected ApiBase(IApiBaseConfig apiBaseConfig)
+        {
+            _name = apiBaseConfig.name;
+            _timeout = apiBaseConfig.timeout ?? TimeSpan.FromMilliseconds(1000);
+            _settings = apiBaseConfig.settings;
+            _retryCount = apiBaseConfig.retryCount;
+            _serializationSettings = apiBaseConfig.serializationSettings;
+            _deserializationSettings = apiBaseConfig.deserializationSettings;
+        }
+@EmptyLine
+        public virtual JsonSerializerSettings SerializationSettings =>
+            _serializationSettings ?? (_serializationSettings =
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                    DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                    ContractResolver = new ReadOnlyJsonContractResolver(),
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
+                    Converters = new List<JsonConverter> { new Iso8601TimeSpanConverter(),
+                        new BooleanStringConverter(BooleanConverterOptions.WriteAsInt)
+                    }
+                });
+
+@EmptyLine
+        public virtual JsonSerializerSettings DeserializationSettings =>
+            _deserializationSettings ?? (_deserializationSettings =
+                new JsonSerializerSettings
+                {
+                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                    DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                    ContractResolver = new ReadOnlyJsonContractResolver(),
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
+                    Converters = new List<JsonConverter> { new Iso8601TimeSpanConverter(),
+                        new BooleanStringConverter(BooleanConverterOptions.WriteAsInt)
+                    }
+                });
+@EmptyLine
+        protected async Task InvokeNewRequest(
+            string metricName,
+            RequestParameters parameters)
+        {
+            await InvokeNewRequest<dynamic>(metricName, parameters);
+        }
+@EmptyLine
+        protected async Task<TResult> InvokeNewRequest<TResult>(
+           string metricName,
+           RequestParameters parameters)
+        {
+            var watch = Stopwatch.StartNew();
+            ExecuteResult executeResult = null;
+            try
+            {
+                var request = new HttpRequestCommand(
+                            _name,
+                            _settings,
+                            _timeout,
+                            _retryCount,
+                            SerializationSettings,
+                            parameters.HttpVerb,
+                            parameters.RestUrl,
+                            parameters.QueryParameters,
+                            parameters.CustomHeaders,
+                            parameters.Body);
+
+                executeResult = await request.ExecuteAsync();
+
+                if (!executeResult.IsOK)
+                {
+                    throw executeResult.GetExeptions();
+                }
+
+                var statusCode = executeResult.Status;
+                var responseContent = executeResult.Results;
+
+                if (statusCode != 200)
+                {
+                    throw new Exception($"Operation returned an invalid status code '{statusCode}'");
+                }
+
+                try
+                {
+                    var responseDto = JsonConvert.DeserializeObject<TResult>(responseContent, DeserializationSettings);
+                    return responseDto;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Operation returned unexpected DTO type or invalid unsupported format", ex);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorEvent?.Invoke(this, new ErrorEventArgs {Exception = ex});
+                throw;
+            }
+            finally
+            {
+                var tags = new Dictionary<string, object>();
+
+                if (executeResult != null)
+                {
+                    tags.Add("RetryCount", executeResult.RetryCount);
+                    tags.Add("Status", executeResult.Status);
+                    tags.Add("TotalReceivedBytes", executeResult.TotalReceivedBytes);
+                }
+
+                MetricSendEvent?.Invoke(this,
+                    new MetricSendEventArgs
+                    {
+                        Name = metricName,
+                        ElapsedMilliseconds = watch.ElapsedMilliseconds,
+                        Tags = tags
+                    });
+            }
+        }
+@EmptyLine
+        public event EventHandler<MetricSendEventArgs> MetricSendEvent;
+        public event EventHandler<ErrorEventArgs> ErrorEvent;
+@EmptyLine
+        public class MetricSendEventArgs : EventArgs
+        {
+            public long ElapsedMilliseconds { get; set; }
+            public string Name { get; set; }
+            public Dictionary<string, object> Tags { get; set; }
+        }
+@EmptyLine
+        public class ErrorEventArgs : EventArgs
+        {
+            public Exception Exception { get; set; }
+        }
+@EmptyLine
+        public class RequestParameters
+        {
+            public Verbs HttpVerb { get; set; }
+            public string RestUrl { get; set; }
+            public Dictionary<string, object> QueryParameters { get; set; }
+            public Dictionary<string, string> CustomHeaders { get; set; }
+            public object Body { get; set; }
+        }
+@EmptyLine
+        public class HttpRequestCommand
+        {
+            private const string JsonContentType = "application/vnd.api+json";
+            private readonly string _contentType;
+            private readonly string _name;
+            private readonly Verbs _verb;
+            private readonly Lazy<string> _url;
+            private readonly Dictionary<string, string> _customHeaders;
+            private readonly Lazy<byte[]> _requestContent;
+            private readonly JsonSerializerSettings _serializationSettings;
+            private readonly List<ServerSettings> _settings;
+            private readonly int _retryCount;
+            private readonly TimeSpan _timeout;
+
+            internal HttpRequestCommand(
+                string name,
+                List<ServerSettings> settings,
+                TimeSpan timeout,
+                int retryCount,
+                JsonSerializerSettings serializationSettings,
+                Verbs httpVerb,
+                string restUrl,
+                Dictionary<string, object> queryParameters,
+                Dictionary<string, string> customHeaders = null,
+                object body = null)
+            {
+                if (customHeaders != null && customHeaders.ContainsKey("Content-Type"))
+                {
+                    _contentType = customHeaders["Content-Type"];
+                }
+                else
+                {
+                    _contentType = JsonContentType;
+                }
+                _name = name;
+                _timeout = timeout;
+                _retryCount = retryCount;
+                _settings = settings;
+                _verb = httpVerb;
+                _url = new Lazy<string>(() => GetUrl(restUrl, queryParameters));
+                _serializationSettings = serializationSettings;
+                _customHeaders = customHeaders;
+                _requestContent = new Lazy<byte[]>(() => body == null
+                                ? new byte[0]
+                                : Encoding.UTF8.GetBytes(SafeJsonConvert.SerializeObject(body,
+                                    _serializationSettings)));
+            }
+@EmptyLine
+            internal async Task<ExecuteResult> ExecuteAsync()
+            {
+                var baseUrl = _settings.First().Url.TrimEnd('/');
+                var fullUrl = baseUrl + "/" + _url.Value.TrimStart('/');
+                var request = new HttpRequestLite
+                              {
+                                  Url = fullUrl,
+                                  ContentType = _contentType,
+                                  ContentLength = _requestContent.Value.Length
+                              };
+
+                var headers =
+                    _customHeaders.Where(k => k.Key != "Content-Type" && k.Key != "Accept")
+                        .ToDictionary(k => k.Key, k => k.Value);
+                if (_customHeaders.ContainsKey("Accept"))
+                {
+                    request.Accept = _customHeaders["Accept"];
+                }
+                foreach (var header in headers)
+                {
+                    request.Headers.Add(header.Key, header.Value);
+                }
+                request.Headers.Add("Connection", "close");
+                request.Method = _verb.ToString();
+                var result = new ExecuteResult();
+                try
+                {
+                    using (var stream = request.GetRequestStream())
+                    {
+                        stream.Write(_requestContent.Value, 0, _requestContent.Value.Length);
+                        using (var response = request.GetResponse())
+                        using (var responseStream = response.GetResponseStream())
+                        {
+                            result.Status = (int) response.StatusCode;
+                            using (var reader = new StreamReader(responseStream, Encoding.UTF8))
+                            {
+                                result.Results = reader.ReadToEnd();
+                            }
+                            return result;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+                /*
+                var httpClient = new HttpClient(_name, _settings, _contentType, (int)_timeout.TotalMilliseconds, _retryCount, "");
+                var result = await httpClient.ExecuteAsync(
+                    _verb,
+                    _url.Value,
+                    _requestContent.Value,
+                    false,
+                    new ErrorList(),
+                    true,
+                    _customHeaders);
+                return result;
+                */
+            }
+@EmptyLine
+            protected string GetUrl(string restUrl, Dictionary<string, object> queryParameters)
+            {
+                var url = restUrl;
+                foreach (var parameterName in queryParameters.Keys)
+                {
+                    var rawValue = queryParameters[parameterName];
+                    var jsonValue = SafeJsonConvert
+                        .SerializeObject(rawValue, _serializationSettings)
+                        .Trim('"');
+                    var urlValue = Uri.EscapeDataString(jsonValue);
+                    url = url.Replace($"{{{parameterName}}}", urlValue);
+                }
+                return url;
+            }
+        }
+    }
+}

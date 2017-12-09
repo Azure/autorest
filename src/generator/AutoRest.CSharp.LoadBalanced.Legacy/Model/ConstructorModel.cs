@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 
-namespace AutoRest.CSharp.LoadBalanced.Model
+namespace AutoRest.CSharp.LoadBalanced.Legacy.Model
 {
     internal class ConstructorModel
     {

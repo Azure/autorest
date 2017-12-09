@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
-using AutoRest.CSharp.LoadBalanced.Model;
+using AutoRest.CSharp.LoadBalanced.Legacy.Model;
 
-namespace AutoRest.CSharp.LoadBalanced.Strategies
+namespace AutoRest.CSharp.LoadBalanced.Legacy.Strategies
 {
     public class WrappedPropertyTypeSelectionStrategy : PropertyTypeSelectionStrategy
     {
