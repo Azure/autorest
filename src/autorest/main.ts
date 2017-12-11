@@ -1,8 +1,9 @@
 /// <reference path="interfaces/autorest-core.d.ts" />
 
-// load static module: ${__dirname }/static_modules.fs
-require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
-
+// load modules from static linker filesystem.
+if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
+  require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
+}
 // everything else.
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolveEntrypoint, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
 import { resolve } from 'path';
