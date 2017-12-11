@@ -1,6 +1,8 @@
 #!/usr/bin/env node
-// load static module: ${__dirname }/static_modules.fs
-require('../static-loader.js').load(`${__dirname}/../static_modules.fs`)
+// load modules from static linker filesystem.
+if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
+  require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
+}
 
 // Ensure that if we're running in an electron process, that things will work as if it were node.
 process.env['ELECTRON_RUN_AS_NODE'] = "1";
@@ -52,7 +54,7 @@ class Result {
   public cancel: () => Promise<void> = async () => { };
   public ready = () => { };
 
-  constructor(private readonly service: OpenApiLanguageService, configurationUrl: string) {
+  constructor(private readonly service: OpenApiLanguageService, private configurationUrl: string) {
     this.AutoRest = new AutoRest(service, configurationUrl);
 
     this.onDispose.push(this.AutoRest.GeneratedFile.Subscribe((a, artifact) => this.artifacts.push(artifact)));
@@ -102,6 +104,10 @@ class Result {
   }
 
   public clearDiagnostics(send: boolean = false) {
+    const diagnostics = this.service.getDiagnosticCollection(this.configurationUrl);
+    diagnostics.send();
+    diagnostics.clear(send);
+    
     for (const f of this.files) {
       const diagnostics = this.service.getDiagnosticCollection(f);
       // make sure that the last of the last is sent
@@ -110,6 +116,7 @@ class Result {
       // then clear the collection it since we're sure this is the end of the run.
       diagnostics.clear(send);
     }
+
   }
 
   private updateStatus() {
@@ -138,26 +145,36 @@ class Result {
     // now, update the status
     Result.active++;
     this.updateStatus();
+    try{
+      // set configuration
+      await this.resetConfiguration(this.service.settings.configuration)
 
-    // set configuration
-    await this.resetConfiguration(this.service.settings.configuration)
+      // get the list of files this is running on
+      this.files = (await this.AutoRest.view).InputFileUris;
 
-    // get the list of files this is running on
-    this.files = (await this.AutoRest.view).InputFileUris;
+      // start it up!
+      const processResult = this.AutoRest.Process();
+      this.queued = false;
 
-    // start it up!
-    const processResult = this.AutoRest.Process();
-    this.queued = false;
+      this.cancel = async () => {
+        // cancel only once!
+        this.cancel = async () => { };
 
-    this.cancel = async () => {
-      // cancel only once!
-      this.cancel = async () => { };
+        // cancel the current process if running.
+        processResult.cancel();
 
-      // cancel the current process if running.
-      processResult.cancel();
+        await this.busy;
+      };
+    } catch(E) {
+      // clear diagnostics for next run
+      this.clearDiagnostics();
 
-      await this.busy;
-    };
+       // and mark us done!
+       Result.active--;
+       this.updateStatus();
+       this.ready();
+       this.queued = false;
+    }
   }
 
   public async resetConfiguration(configuration: any) {
