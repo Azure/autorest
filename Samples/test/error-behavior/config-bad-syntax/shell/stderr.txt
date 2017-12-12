@@ -1,2 +1,26 @@
-    - /Samples/test/error-behavior/config-bad-syntax/readme.md:6:0
-ERROR: Syntax error: Invalid YAML object.
+        "column": 0
+        "column": 0
+        "column": 3
+        "line": 6,
+        "line": 6,
+        "line": 6,
+      "document": "/Samples/test/error-behavior/config-bad-syntax/readme.md",
+      "document": "/Samples/test/error-behavior/config-bad-syntax/readme.md",
+      "end": {
+      "Position": {
+      "start": {
+      }
+      }
+      },
+    {
+    {
+    }
+    }
+  "Channel": "error",
+  "Range": [
+  "Source": [
+  "Text": "Syntax error: Invalid YAML object.",
+  ]
+  ],
+{
+}

@@ -1,9 +1,57 @@
-    - trans_input?mem:1:0
-    - trans_input?mem:1:0
-    - trans_input?mem:1:0
+        "column": 0
+        "column": 0
+        "column": 0
+        "column": 0
+        "column": 3
+        "column": 3
+        "line": 1,
+        "line": 1,
+        "line": 1,
+        "line": 1,
+        "line": 1,
+        "line": 1,
+      "document": "trans_input?mem
+      "document": "trans_input?mem
+      "document": "trans_input?mem
+      "document": "trans_input?mem
+      "end": {
+      "end": {
+      "Position": {
+      "Position": {
+      "start": {
+      "start": {
+      }
+      }
+      }
+      }
+      },
+      },
+    {
+    {
+    {
+    {
+    }
+    }
+    }
+    }
+  "Channel": "warning",
+  "Channel": "warning",
+  "Details": false,
+  "Details": false,
+  "Range": [
+  "Range": [
+  "Source": [
+  "Source": [
+  "Text": "Custom test failed",
+  "Text": "Custom test failed",
+  ]
+  ]
+  ],
+  ],
 (C) 2017 Microsoft Corporation.
+{
+{
+}
+}
 AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
-WARNING: Custom test failed
-WARNING: Custom test failed
-WARNING: we want some cowbell - found none

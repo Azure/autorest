@@ -1,2 +1,27 @@
-    - trans_input?mem:1:0
-ERROR: we want some cowbell - found none
+        "column": 0
+        "column": 0
+        "column": 3
+        "line": 1,
+        "line": 1,
+        "line": 1,
+      "document": "trans_input?mem
+      "document": "trans_input?mem
+      "end": {
+      "Position": {
+      "start": {
+      }
+      }
+      },
+    {
+    {
+    }
+    }
+  "Channel": "error",
+  "Range": [
+  "Source": [
+  "Text": "we want some cowbell - found none",
+  ]
+  ],
+{
+}
+TypeError: Cannot create property 'sources' on string 'we want some cowbell - found none'

@@ -1,1 +1,25 @@
-
+  "Channel": "fatal",
+  "Channel": "fatal",
+  "Channel": "fatal",
+  "Details": null,
+  "Plugin": "imodeler1"
+  "Source": null,
+  "Text": "Error: Plugin imodeler1 reported failure."
+  "Text": "java/imodeler1/0 - FAILED"
+  "Text": "System.IndexOutOfRangeException: Index was outside the bounds of the array.\r\n  at ...
+  Error: Plugin imodeler1 reported failure.
+"Key": null,
+(node) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 68): Error: Plugin imodeler1 reported failure.
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 69): Error: Plugin imodeler1 reported failure.
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 70): Error: Plugin imodeler1 reported failure.
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 71): Error: Plugin imodeler1 reported failure.
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 72): Error: Plugin imodeler1 reported failure.
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 73): Error: Plugin imodeler1 reported failure.
+(node) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 74): Error: Plugin imodeler1 reported failure.
+{
+{
+{
+}
+}
+}

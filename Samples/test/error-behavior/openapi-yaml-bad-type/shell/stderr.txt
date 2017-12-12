@@ -1,7 +1,17 @@
-  at ...
-  at ...
+  "Channel": "fatal",
+  "Channel": "fatal",
+  "Channel": "fatal",
+  "Details": null,
+  "Plugin": "imodeler1"
+  "Source": null,
+  "Text": "csharp/imodeler1 - FAILED"
+  "Text": "Error: Plugin imodeler1 reported failure."
+  "Text": "System.ArgumentException: Reference path '#Cowbell' does not exist in the definition section of the Swagger document.\r\n  at ...
   Error: Plugin imodeler1 reported failure.
---- End of stack trace from previous location where exception was thrown ---
-FATAL: csharp/imodeler1 - FAILED
-FATAL: Error: Plugin imodeler1 reported failure.
-FATAL: System.ArgumentException: Reference path '#Cowbell' does not exist in the definition section of the Swagger document.
+"Key": null,
+{
+{
+{
+}
+}
+}

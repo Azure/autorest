@@ -1,11 +1,113 @@
-    - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:31:14
-    - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:31:15
-    - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:37:27
-    - /Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml:37:4
+        "column": 14
+        "column": 14
+        "column": 15
+        "column": 15
+        "column": 17
+        "column": 18
+        "column": 27
+        "column": 27
+        "column": 30
+        "column": 4
+        "column": 4
+        "column": 7
+        "line": 31,
+        "line": 31,
+        "line": 31,
+        "line": 31,
+        "line": 31,
+        "line": 31,
+        "line": 37,
+        "line": 37,
+        "line": 37,
+        "line": 37,
+        "line": 37,
+        "line": 37,
+      "document": "/Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml",
+      "document": "/Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml",
+      "document": "/Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml",
+      "document": "/Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml",
+      "document": "/Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml",
+      "document": "/Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml",
+      "document": "/Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml",
+      "document": "/Samples/test/error-behavior/openapi-yaml-bad-syntax/tiny.yaml",
+      "end": {
+      "end": {
+      "end": {
+      "end": {
+      "Position": {
+      "Position": {
+      "Position": {
+      "Position": {
+      "start": {
+      "start": {
+      "start": {
+      "start": {
+      }
+      }
+      }
+      }
+      }
+      }
+      }
+      }
+      },
+      },
+      },
+      },
+    {
+    {
+    {
+    {
+    {
+    {
+    {
+    {
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+  "Channel": "error",
+  "Channel": "error",
+  "Channel": "error",
+  "Channel": "error",
+  "Channel": "fatal",
+  "Channel": "fatal",
+  "Range": [
+  "Range": [
+  "Range": [
+  "Range": [
+  "Source": [
+  "Source": [
+  "Source": [
+  "Source": [
+  "Text": "Error: Syntax errors encountered."
+  "Text": "swagger-document/loader - FAILED"
+  "Text": "Syntax error: bad indentation of a mapping entry",
+  "Text": "Syntax error: bad indentation of a mapping entry",
+  "Text": "Syntax error: can not read an implicit mapping pair; a colon is missed",
+  "Text": "Syntax error: incomplete explicit mapping pair; a key node is missed",
+  ]
+  ]
+  ]
+  ]
+  ],
+  ],
+  ],
+  ],
   Error: Syntax errors encountered.
-ERROR: Syntax error: bad indentation of a mapping entry
-ERROR: Syntax error: bad indentation of a mapping entry
-ERROR: Syntax error: can not read an implicit mapping pair; a colon is missed
-ERROR: Syntax error: incomplete explicit mapping pair; a key node is missed
-FATAL: Error: Syntax errors encountered.
-FATAL: swagger-document/loader - FAILED
+{
+{
+{
+{
+{
+{
+}
+}
+}
+}
+}
+}

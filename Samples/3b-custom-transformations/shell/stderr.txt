@@ -1,33 +1,154 @@
-
-
-
-
-
-
-
-
-
-
-
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:126:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].delete)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:165:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].get)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:204:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].patch)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:254:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys"].post)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:295:6 ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts"].get)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:323:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts"].get)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:358:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:38:2 ($.paths)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:40:6 ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:408:6 ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:74:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put)
-ERROR (OperationsAPIImplementation/R3023/RPCViolation): Operations API must be implemented for '/providers/Microsoft.Storage/operations'.
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_CheckNameAvailability'
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Create'
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Delete'
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_GetProperty'
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_List'
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListByResourceGroup'
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListKeys'
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_RegenerateKey'
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Update'
-ERROR (XmsExamplesRequired/R2022/SDKViolation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Usage_List'
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:126:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].delete)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:165:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].get)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:204:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].patch)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:254:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys\"].post)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:295:6 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts\"].get)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:323:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts\"].get)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:358:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey\"].post)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:38:2 ($.paths)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:40:6 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability\"].post)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:408:6 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages\"].get)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:74:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].put)"
+  "code": "OperationsAPIImplementation",
+  "code": "XmsExamplesRequired",
+  "code": "XmsExamplesRequired",
+  "code": "XmsExamplesRequired",
+  "code": "XmsExamplesRequired",
+  "code": "XmsExamplesRequired",
+  "code": "XmsExamplesRequired",
+  "code": "XmsExamplesRequired",
+  "code": "XmsExamplesRequired",
+  "code": "XmsExamplesRequired",
+  "code": "XmsExamplesRequired",
+  "id": "R2022",
+  "id": "R2022",
+  "id": "R2022",
+  "id": "R2022",
+  "id": "R2022",
+  "id": "R2022",
+  "id": "R2022",
+  "id": "R2022",
+  "id": "R2022",
+  "id": "R2022",
+  "id": "R3023",
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:126:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].delete)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:165:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].get)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:204:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].patch)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:254:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys\"].post)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:295:6 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts\"].get)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:323:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts\"].get)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:358:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey\"].post)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:38:2 ($.paths)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:40:6 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability\"].post)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:408:6 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages\"].get)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:74:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].put)"
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:126:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].delete)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:165:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].get)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:204:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].patch)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:254:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys\"].post)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:295:6 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts\"].get)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:323:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts\"].get)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:358:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey\"].post)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:38:2 ($.paths)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:40:6 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability\"].post)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:408:6 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages\"].get)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:74:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].put)",
+  "message": "Operations API must be implemented for '/providers/Microsoft.Storage/operations'.",
+  "message": "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_CheckNameAvailability'",
+  "message": "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Create'",
+  "message": "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Delete'",
+  "message": "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_GetProperty'",
+  "message": "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_List'",
+  "message": "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListByResourceGroup'",
+  "message": "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_ListKeys'",
+  "message": "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_RegenerateKey'",
+  "message": "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'StorageAccounts_Update'",
+  "message": "Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Usage_List'",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": null,
+  "resourceType": "storageAccounts",
+  "resourceType": "storageAccounts",
+  "resourceType": "storageAccounts",
+  "resourceType": "storageAccounts",
+  "resourceType": "storageAccounts",
+  "resourceType": "storageAccounts",
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "type": "Error",
+  "type": "Error",
+  "type": "Error",
+  "type": "Error",
+  "type": "Error",
+  "type": "Error",
+  "type": "Error",
+  "type": "Error",
+  "type": "Error",
+  "type": "Error",
+  "type": "Error",
+  "validationCategory": "RPCViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}

@@ -1,11 +1,113 @@
-    - /Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md:59:14
-    - /Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md:59:15
-    - /Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md:65:18
-    - /Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md:65:4
-ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
-ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
-ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entry
-ERROR: Syntax Error Encountered: Syntax error: incomplete explicit mapping pair; a key node is missed
-FATAL: Error: [OperationAbortedException] Error occurred. Exiting.
-FATAL: swagger-document/loader - FAILED
+        "column": 14
+        "column": 14
+        "column": 15
+        "column": 15
+        "column": 17
+        "column": 18
+        "column": 18
+        "column": 18
+        "column": 21
+        "column": 4
+        "column": 4
+        "column": 7
+        "line": 59,
+        "line": 59,
+        "line": 59,
+        "line": 59,
+        "line": 59,
+        "line": 59,
+        "line": 65,
+        "line": 65,
+        "line": 65,
+        "line": 65,
+        "line": 65,
+        "line": 65,
+      "document": "/Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md",
+      "document": "/Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md",
+      "document": "/Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md",
+      "document": "/Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md",
+      "document": "/Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md",
+      "document": "/Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md",
+      "document": "/Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md",
+      "document": "/Samples/test/error-behavior/openapi-md-bad-syntax/tiny.md",
+      "end": {
+      "end": {
+      "end": {
+      "end": {
+      "Position": {
+      "Position": {
+      "Position": {
+      "Position": {
+      "start": {
+      "start": {
+      "start": {
+      "start": {
+      }
+      }
+      }
+      }
+      }
+      }
+      }
+      }
+      },
+      },
+      },
+      },
+    {
+    {
+    {
+    {
+    {
+    {
+    {
+    {
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+  "Channel": "error",
+  "Channel": "error",
+  "Channel": "error",
+  "Channel": "error",
+  "Channel": "fatal",
+  "Channel": "fatal",
+  "Range": [
+  "Range": [
+  "Range": [
+  "Range": [
+  "Source": [
+  "Source": [
+  "Source": [
+  "Source": [
+  "Text": "Error: [OperationAbortedException] Error occurred. Exiting."
+  "Text": "swagger-document/loader - FAILED"
+  "Text": "Syntax Error Encountered: Syntax error: bad indentation of a mapping entry",
+  "Text": "Syntax Error Encountered: Syntax error: bad indentation of a mapping entry",
+  "Text": "Syntax Error Encountered: Syntax error: bad indentation of a mapping entry",
+  "Text": "Syntax Error Encountered: Syntax error: incomplete explicit mapping pair; a key node is missed",
+  ]
+  ]
+  ]
+  ]
+  ],
+  ],
+  ],
+  ],
+{
+{
+{
+{
+{
+{
+}
+}
+}
+}
+}
+}
 Process() Cancelled due to exception : [OperationAbortedException] Error occurred. Exiting.
