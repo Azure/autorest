@@ -12,6 +12,9 @@
   "patternProperties": {
     "^x-(?!ms-).*$": {
       "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
+    },
+    "^x-ms-sf-.*$": {
+      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
     }
   },
   "properties": {
@@ -93,6 +96,9 @@
       "patternProperties": {
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       },
       "properties": {
@@ -146,6 +152,9 @@
       "patternProperties": {
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       }
     },
@@ -169,6 +178,9 @@
       "patternProperties": {
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       }
     },
@@ -177,6 +189,9 @@
       "description": "Relative paths to the individual endpoints. They must be relative to the 'basePath'.",
       "patternProperties": {
         "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
         },
         "^/": {
@@ -225,6 +240,9 @@
       "patternProperties": {
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       }
     },
@@ -244,6 +262,9 @@
       "additionalProperties": false,
       "patternProperties": {
         "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -317,6 +338,9 @@
       "patternProperties": {
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       },
       "properties": {
@@ -360,6 +384,9 @@
         },
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       },
       "not": {
@@ -367,6 +394,9 @@
         "additionalProperties": false,
         "patternProperties": {
           "^x-(?!ms-).*$": {
+            "$ref": "#/definitions/vendorExtension"
+          },
+          "^x-ms-sf-.*$": {
             "$ref": "#/definitions/vendorExtension"
           }
         }
@@ -414,6 +444,9 @@
       "additionalProperties": false,
       "patternProperties": {
         "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -506,6 +539,9 @@
       "patternProperties": {
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       }
     },
@@ -523,6 +559,9 @@
       ],
       "patternProperties": {
         "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -574,6 +613,9 @@
       "additionalProperties": false,
       "patternProperties": {
         "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -681,6 +723,9 @@
       "additionalProperties": false,
       "patternProperties": {
         "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -794,6 +839,9 @@
       "patternProperties": {
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       },
       "properties": {
@@ -903,6 +951,9 @@
       "additionalProperties": false,
       "patternProperties": {
         "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1053,6 +1104,9 @@
       "description": "A deterministic version of a JSON Schema object.",
       "patternProperties": {
         "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1207,6 +1261,9 @@
       "patternProperties": {
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       },
       "required": [
@@ -1317,6 +1374,9 @@
       "patternProperties": {
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       }
     },
@@ -1345,6 +1405,9 @@
       "patternProperties": {
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
+          "$ref": "#/definitions/vendorExtension"
         }
       }
     },
@@ -1367,6 +1430,9 @@
       },
       "patternProperties": {
         "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -1641,6 +1707,9 @@
       "additionalProperties": false,
       "patternProperties": {
         "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        },
+        "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
