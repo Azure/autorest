@@ -1,440 +1,3505 @@
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Channel": "warning",
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Details": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Key": null,
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "go",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "java",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "nodejs",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Plugin": "ruby",
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Range": []
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Source": [],
+  "Text": "Did not generate example 'Create load balancer' of 'loadBalancers/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create load balancer' of 'loadBalancers/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create load balancer' of 'LoadBalancers/create_or_update'",
+  "Text": "Did not generate example 'Create load balancer' of 'LoadBalancers/create_or_update'",
+  "Text": "Did not generate example 'Create load balancer' of 'LoadBalancers/createOrUpdate'",
+  "Text": "Did not generate example 'Create load balancer' of 'LoadBalancers/createOrUpdate'",
+  "Text": "Did not generate example 'Create load balancer' of 'loadBalancers/createOrUpdate'",
+  "Text": "Did not generate example 'Create load balancer' of 'loadBalancers/createOrUpdate'",
+  "Text": "Did not generate example 'Create load balancer' of 'LoadBalancers/CreateOrUpdateMethod'",
+  "Text": "Did not generate example 'Create network interface' of 'networkInterfaces/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create network interface' of 'networkInterfaces/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create network interface' of 'NetworkInterfaces/create_or_update'",
+  "Text": "Did not generate example 'Create network interface' of 'NetworkInterfaces/create_or_update'",
+  "Text": "Did not generate example 'Create network interface' of 'NetworkInterfaces/createOrUpdate'",
+  "Text": "Did not generate example 'Create network interface' of 'NetworkInterfaces/createOrUpdate'",
+  "Text": "Did not generate example 'Create network interface' of 'networkInterfaces/createOrUpdate'",
+  "Text": "Did not generate example 'Create network interface' of 'networkInterfaces/createOrUpdate'",
+  "Text": "Did not generate example 'Create network interface' of 'NetworkInterfaces/CreateOrUpdateMethod'",
+  "Text": "Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/create_or_update'",
+  "Text": "Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/create_or_update'",
+  "Text": "Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/createOrUpdate'",
+  "Text": "Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/createOrUpdate'",
+  "Text": "Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/createOrUpdate'",
+  "Text": "Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/createOrUpdate'",
+  "Text": "Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/CreateOrUpdateMethod'",
+  "Text": "Did not generate example 'Create network security group' of 'networkSecurityGroups/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create network security group' of 'networkSecurityGroups/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create network security group' of 'NetworkSecurityGroups/create_or_update'",
+  "Text": "Did not generate example 'Create network security group' of 'NetworkSecurityGroups/create_or_update'",
+  "Text": "Did not generate example 'Create network security group' of 'NetworkSecurityGroups/createOrUpdate'",
+  "Text": "Did not generate example 'Create network security group' of 'NetworkSecurityGroups/createOrUpdate'",
+  "Text": "Did not generate example 'Create network security group' of 'networkSecurityGroups/createOrUpdate'",
+  "Text": "Did not generate example 'Create network security group' of 'networkSecurityGroups/createOrUpdate'",
+  "Text": "Did not generate example 'Create network security group' of 'NetworkSecurityGroups/CreateOrUpdateMethod'",
+  "Text": "Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/create_or_update'",
+  "Text": "Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/create_or_update'",
+  "Text": "Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/CreateOrUpdateMethod'",
+  "Text": "Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/create_or_update'",
+  "Text": "Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/create_or_update'",
+  "Text": "Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/CreateOrUpdateMethod'",
+  "Text": "Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/create_or_update'",
+  "Text": "Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/create_or_update'",
+  "Text": "Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/createOrUpdate'",
+  "Text": "Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/CreateOrUpdateMethod'",
+  "Text": "Did not generate example 'Create security rule' of 'securityRules/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create security rule' of 'securityRules/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'Create security rule' of 'SecurityRules/create_or_update'",
+  "Text": "Did not generate example 'Create security rule' of 'SecurityRules/create_or_update'",
+  "Text": "Did not generate example 'Create security rule' of 'SecurityRules/createOrUpdate'",
+  "Text": "Did not generate example 'Create security rule' of 'SecurityRules/createOrUpdate'",
+  "Text": "Did not generate example 'Create security rule' of 'securityRules/createOrUpdate'",
+  "Text": "Did not generate example 'Create security rule' of 'securityRules/createOrUpdate'",
+  "Text": "Did not generate example 'Create security rule' of 'SecurityRules/CreateOrUpdateMethod'",
+  "Text": "Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'",
+  "Text": "Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'",
+  "Text": "Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'",
+  "Text": "Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'",
+  "Text": "Did not generate example 'DefaultSecurityRuleGet' of 'defaultSecurityRules/get'",
+  "Text": "Did not generate example 'DefaultSecurityRuleGet' of 'defaultSecurityRules/get'",
+  "Text": "Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/GetMethod'",
+  "Text": "Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list_as_lazy'",
+  "Text": "Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'",
+  "Text": "Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'",
+  "Text": "Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'",
+  "Text": "Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'",
+  "Text": "Did not generate example 'DefaultSecurityRuleList' of 'defaultSecurityRules/list'",
+  "Text": "Did not generate example 'DefaultSecurityRuleList' of 'defaultSecurityRules/list'",
+  "Text": "Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/ListMethod'",
+  "Text": "Did not generate example 'Delete load balancer' of 'loadBalancers/beginDelete'",
+  "Text": "Did not generate example 'Delete load balancer' of 'loadBalancers/beginDelete'",
+  "Text": "Did not generate example 'Delete load balancer' of 'LoadBalancers/delete'",
+  "Text": "Did not generate example 'Delete load balancer' of 'LoadBalancers/delete'",
+  "Text": "Did not generate example 'Delete load balancer' of 'loadBalancers/delete'",
+  "Text": "Did not generate example 'Delete load balancer' of 'loadBalancers/delete'",
+  "Text": "Did not generate example 'Delete load balancer' of 'LoadBalancers/DeleteMethod'",
+  "Text": "Did not generate example 'Delete load balancer' of 'LoadBalancers/deleteMethod'",
+  "Text": "Did not generate example 'Delete load balancer' of 'LoadBalancers/deleteMethod'",
+  "Text": "Did not generate example 'Delete network interface' of 'networkInterfaces/beginDelete'",
+  "Text": "Did not generate example 'Delete network interface' of 'networkInterfaces/beginDelete'",
+  "Text": "Did not generate example 'Delete network interface' of 'NetworkInterfaces/delete'",
+  "Text": "Did not generate example 'Delete network interface' of 'NetworkInterfaces/delete'",
+  "Text": "Did not generate example 'Delete network interface' of 'networkInterfaces/delete'",
+  "Text": "Did not generate example 'Delete network interface' of 'networkInterfaces/delete'",
+  "Text": "Did not generate example 'Delete network interface' of 'NetworkInterfaces/DeleteMethod'",
+  "Text": "Did not generate example 'Delete network interface' of 'NetworkInterfaces/deleteMethod'",
+  "Text": "Did not generate example 'Delete network interface' of 'NetworkInterfaces/deleteMethod'",
+  "Text": "Did not generate example 'Delete network security group' of 'networkSecurityGroups/beginDelete'",
+  "Text": "Did not generate example 'Delete network security group' of 'networkSecurityGroups/beginDelete'",
+  "Text": "Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/delete'",
+  "Text": "Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/delete'",
+  "Text": "Did not generate example 'Delete network security group' of 'networkSecurityGroups/delete'",
+  "Text": "Did not generate example 'Delete network security group' of 'networkSecurityGroups/delete'",
+  "Text": "Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/DeleteMethod'",
+  "Text": "Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/deleteMethod'",
+  "Text": "Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/deleteMethod'",
+  "Text": "Did not generate example 'Delete network security rule from network security group' of 'securityRules/beginDelete'",
+  "Text": "Did not generate example 'Delete network security rule from network security group' of 'securityRules/beginDelete'",
+  "Text": "Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/delete'",
+  "Text": "Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/delete'",
+  "Text": "Did not generate example 'Delete network security rule from network security group' of 'securityRules/delete'",
+  "Text": "Did not generate example 'Delete network security rule from network security group' of 'securityRules/delete'",
+  "Text": "Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/DeleteMethod'",
+  "Text": "Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/deleteMethod'",
+  "Text": "Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/deleteMethod'",
+  "Text": "Did not generate example 'Delete public IP address' of 'publicIPAddresses/beginDelete'",
+  "Text": "Did not generate example 'Delete public IP address' of 'publicIPAddresses/beginDelete'",
+  "Text": "Did not generate example 'Delete public IP address' of 'PublicIPAddresses/delete'",
+  "Text": "Did not generate example 'Delete public IP address' of 'PublicIPAddresses/delete'",
+  "Text": "Did not generate example 'Delete public IP address' of 'publicIPAddresses/delete'",
+  "Text": "Did not generate example 'Delete public IP address' of 'publicIPAddresses/delete'",
+  "Text": "Did not generate example 'Delete public IP address' of 'PublicIPAddresses/DeleteMethod'",
+  "Text": "Did not generate example 'Delete public IP address' of 'PublicIPAddresses/deleteMethod'",
+  "Text": "Did not generate example 'Delete public IP address' of 'PublicIPAddresses/deleteMethod'",
+  "Text": "Did not generate example 'Get load balancer' of 'LoadBalancers/get'",
+  "Text": "Did not generate example 'Get load balancer' of 'LoadBalancers/get'",
+  "Text": "Did not generate example 'Get load balancer' of 'LoadBalancers/get'",
+  "Text": "Did not generate example 'Get load balancer' of 'LoadBalancers/get'",
+  "Text": "Did not generate example 'Get load balancer' of 'loadBalancers/get'",
+  "Text": "Did not generate example 'Get load balancer' of 'loadBalancers/getByResourceGroup'",
+  "Text": "Did not generate example 'Get load balancer' of 'LoadBalancers/GetMethod'",
+  "Text": "Did not generate example 'Get network interface' of 'NetworkInterfaces/get'",
+  "Text": "Did not generate example 'Get network interface' of 'NetworkInterfaces/get'",
+  "Text": "Did not generate example 'Get network interface' of 'NetworkInterfaces/get'",
+  "Text": "Did not generate example 'Get network interface' of 'NetworkInterfaces/get'",
+  "Text": "Did not generate example 'Get network interface' of 'networkInterfaces/get'",
+  "Text": "Did not generate example 'Get network interface' of 'networkInterfaces/getByResourceGroup'",
+  "Text": "Did not generate example 'Get network interface' of 'NetworkInterfaces/GetMethod'",
+  "Text": "Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'",
+  "Text": "Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'",
+  "Text": "Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'",
+  "Text": "Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'",
+  "Text": "Did not generate example 'Get network security group' of 'networkSecurityGroups/get'",
+  "Text": "Did not generate example 'Get network security group' of 'networkSecurityGroups/getByResourceGroup'",
+  "Text": "Did not generate example 'Get network security group' of 'NetworkSecurityGroups/GetMethod'",
+  "Text": "Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'",
+  "Text": "Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'",
+  "Text": "Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'",
+  "Text": "Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'",
+  "Text": "Did not generate example 'Get network security rule in network security group' of 'securityRules/get'",
+  "Text": "Did not generate example 'Get network security rule in network security group' of 'securityRules/get'",
+  "Text": "Did not generate example 'Get network security rule in network security group' of 'SecurityRules/GetMethod'",
+  "Text": "Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'",
+  "Text": "Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'",
+  "Text": "Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'",
+  "Text": "Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'",
+  "Text": "Did not generate example 'Get public IP address' of 'publicIPAddresses/get'",
+  "Text": "Did not generate example 'Get public IP address' of 'publicIPAddresses/getByResourceGroup'",
+  "Text": "Did not generate example 'Get public IP address' of 'PublicIPAddresses/GetMethod'",
+  "Text": "Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/beginCreateOrUpdate'",
+  "Text": "Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/create_or_update'",
+  "Text": "Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/create_or_update'",
+  "Text": "Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/createOrUpdate'",
+  "Text": "Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/createOrUpdate'",
+  "Text": "Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/createOrUpdate'",
+  "Text": "Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/createOrUpdate'",
+  "Text": "Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/CreateOrUpdateMethod'",
+  "Text": "Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/beginDelete'",
+  "Text": "Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/beginDelete'",
+  "Text": "Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/delete'",
+  "Text": "Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/delete'",
+  "Text": "Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/delete'",
+  "Text": "Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/delete'",
+  "Text": "Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/DeleteMethod'",
+  "Text": "Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/deleteMethod'",
+  "Text": "Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/deleteMethod'",
+  "Text": "Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'",
+  "Text": "Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'",
+  "Text": "Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'",
+  "Text": "Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'",
+  "Text": "Did not generate example 'InboundNatRuleGet' of 'inboundNatRules/get'",
+  "Text": "Did not generate example 'InboundNatRuleGet' of 'inboundNatRules/get'",
+  "Text": "Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/GetMethod'",
+  "Text": "Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list_as_lazy'",
+  "Text": "Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'",
+  "Text": "Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'",
+  "Text": "Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'",
+  "Text": "Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'",
+  "Text": "Did not generate example 'InboundNatRuleList' of 'inboundNatRules/list'",
+  "Text": "Did not generate example 'InboundNatRuleList' of 'inboundNatRules/list'",
+  "Text": "Did not generate example 'InboundNatRuleList' of 'InboundNatRules/ListMethod'",
+  "Text": "Did not generate example 'List all load balancers' of 'LoadBalancers/list_all_as_lazy'",
+  "Text": "Did not generate example 'List all load balancers' of 'LoadBalancers/list_all'",
+  "Text": "Did not generate example 'List all load balancers' of 'LoadBalancers/list_all'",
+  "Text": "Did not generate example 'List all load balancers' of 'loadBalancers/list'",
+  "Text": "Did not generate example 'List all load balancers' of 'LoadBalancers/listAll'",
+  "Text": "Did not generate example 'List all load balancers' of 'LoadBalancers/listAll'",
+  "Text": "Did not generate example 'List all load balancers' of 'loadBalancers/listAll'",
+  "Text": "Did not generate example 'List all load balancers' of 'LoadBalancers/ListAllMethod'",
+  "Text": "Did not generate example 'List all network interfaces' of 'NetworkInterfaces/list_all_as_lazy'",
+  "Text": "Did not generate example 'List all network interfaces' of 'NetworkInterfaces/list_all'",
+  "Text": "Did not generate example 'List all network interfaces' of 'NetworkInterfaces/list_all'",
+  "Text": "Did not generate example 'List all network interfaces' of 'networkInterfaces/list'",
+  "Text": "Did not generate example 'List all network interfaces' of 'NetworkInterfaces/listAll'",
+  "Text": "Did not generate example 'List all network interfaces' of 'NetworkInterfaces/listAll'",
+  "Text": "Did not generate example 'List all network interfaces' of 'networkInterfaces/listAll'",
+  "Text": "Did not generate example 'List all network interfaces' of 'NetworkInterfaces/ListAllMethod'",
+  "Text": "Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/list_all_as_lazy'",
+  "Text": "Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/list_all'",
+  "Text": "Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/list_all'",
+  "Text": "Did not generate example 'List all network security groups' of 'networkSecurityGroups/list'",
+  "Text": "Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/listAll'",
+  "Text": "Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/listAll'",
+  "Text": "Did not generate example 'List all network security groups' of 'networkSecurityGroups/listAll'",
+  "Text": "Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/ListAllMethod'",
+  "Text": "Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/list_all_as_lazy'",
+  "Text": "Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/list_all'",
+  "Text": "Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/list_all'",
+  "Text": "Did not generate example 'List all public IP addresses' of 'publicIPAddresses/list'",
+  "Text": "Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/listAll'",
+  "Text": "Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/listAll'",
+  "Text": "Did not generate example 'List all public IP addresses' of 'publicIPAddresses/listAll'",
+  "Text": "Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/ListAllMethod'",
+  "Text": "Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list_as_lazy'",
+  "Text": "Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'",
+  "Text": "Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'",
+  "Text": "Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'",
+  "Text": "Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'",
+  "Text": "Did not generate example 'List load balancers in resource group' of 'loadBalancers/list'",
+  "Text": "Did not generate example 'List load balancers in resource group' of 'loadBalancers/listByResourceGroup'",
+  "Text": "Did not generate example 'List load balancers in resource group' of 'LoadBalancers/ListMethod'",
+  "Text": "Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/beginListEffectiveNetworkSecurityGroups'",
+  "Text": "Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/beginListEffectiveNetworkSecurityGroups'",
+  "Text": "Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/list_effective_network_security_groups'",
+  "Text": "Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/list_effective_network_security_groups'",
+  "Text": "Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/listEffectiveNetworkSecurityGroups'",
+  "Text": "Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/listEffectiveNetworkSecurityGroups'",
+  "Text": "Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/listEffectiveNetworkSecurityGroups'",
+  "Text": "Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/listEffectiveNetworkSecurityGroups'",
+  "Text": "Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/ListEffectiveNetworkSecurityGroupsMethod'",
+  "Text": "Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list_as_lazy'",
+  "Text": "Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'",
+  "Text": "Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'",
+  "Text": "Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'",
+  "Text": "Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'",
+  "Text": "Did not generate example 'List network interfaces in resource group' of 'networkInterfaces/list'",
+  "Text": "Did not generate example 'List network interfaces in resource group' of 'networkInterfaces/listByResourceGroup'",
+  "Text": "Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/ListMethod'",
+  "Text": "Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list_as_lazy'",
+  "Text": "Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'",
+  "Text": "Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'",
+  "Text": "Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'",
+  "Text": "Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'",
+  "Text": "Did not generate example 'List network security groups in resource group' of 'networkSecurityGroups/list'",
+  "Text": "Did not generate example 'List network security groups in resource group' of 'networkSecurityGroups/listByResourceGroup'",
+  "Text": "Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/ListMethod'",
+  "Text": "Did not generate example 'List network security rules in network security group' of 'SecurityRules/list_as_lazy'",
+  "Text": "Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'",
+  "Text": "Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'",
+  "Text": "Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'",
+  "Text": "Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'",
+  "Text": "Did not generate example 'List network security rules in network security group' of 'securityRules/list'",
+  "Text": "Did not generate example 'List network security rules in network security group' of 'securityRules/list'",
+  "Text": "Did not generate example 'List network security rules in network security group' of 'SecurityRules/ListMethod'",
+  "Text": "Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list_as_lazy'",
+  "Text": "Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'",
+  "Text": "Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'",
+  "Text": "Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'",
+  "Text": "Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'",
+  "Text": "Did not generate example 'List resource group public IP addresses' of 'publicIPAddresses/list'",
+  "Text": "Did not generate example 'List resource group public IP addresses' of 'publicIPAddresses/listByResourceGroup'",
+  "Text": "Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/ListMethod'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'loadBalancerBackendAddressPools/get'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'loadBalancerBackendAddressPools/get'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/GetMethod'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list_as_lazy'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolList' of 'loadBalancerBackendAddressPools/list'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolList' of 'loadBalancerBackendAddressPools/list'",
+  "Text": "Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/ListMethod'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'loadBalancerFrontendIPConfigurations/get'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'loadBalancerFrontendIPConfigurations/get'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/GetMethod'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list_as_lazy'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'loadBalancerFrontendIPConfigurations/list'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'loadBalancerFrontendIPConfigurations/list'",
+  "Text": "Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/ListMethod'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'loadBalancerLoadBalancingRules/get'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'loadBalancerLoadBalancingRules/get'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/GetMethod'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list_as_lazy'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'loadBalancerLoadBalancingRules/list'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'loadBalancerLoadBalancingRules/list'",
+  "Text": "Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/ListMethod'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list_as_lazy'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'loadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'loadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/ListMethod'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list_as_lazy'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'loadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'loadBalancerNetworkInterfaces/list'",
+  "Text": "Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/ListMethod'",
+  "Text": "Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'",
+  "Text": "Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'",
+  "Text": "Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'",
+  "Text": "Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'",
+  "Text": "Did not generate example 'LoadBalancerProbeGet' of 'loadBalancerProbes/get'",
+  "Text": "Did not generate example 'LoadBalancerProbeGet' of 'loadBalancerProbes/get'",
+  "Text": "Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/GetMethod'",
+  "Text": "Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list_as_lazy'",
+  "Text": "Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'",
+  "Text": "Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'",
+  "Text": "Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'",
+  "Text": "Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'",
+  "Text": "Did not generate example 'LoadBalancerProbeList' of 'loadBalancerProbes/list'",
+  "Text": "Did not generate example 'LoadBalancerProbeList' of 'loadBalancerProbes/list'",
+  "Text": "Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/ListMethod'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'networkInterfaceIPConfigurations/get'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'networkInterfaceIPConfigurations/get'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/GetMethod'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list_as_lazy'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationList' of 'networkInterfaceIPConfigurations/list'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationList' of 'networkInterfaceIPConfigurations/list'",
+  "Text": "Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/ListMethod'",
+  "Text": "Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list_as_lazy'",
+  "Text": "Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'",
+  "Text": "Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'",
+  "Text": "Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'",
+  "Text": "Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'",
+  "Text": "Did not generate example 'NetworkInterfaceLoadBalancerList' of 'networkInterfaceLoadBalancers/list'",
+  "Text": "Did not generate example 'NetworkInterfaceLoadBalancerList' of 'networkInterfaceLoadBalancers/list'",
+  "Text": "Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/ListMethod'",
+  "Text": "Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/beginGetEffectiveRouteTable'",
+  "Text": "Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/beginGetEffectiveRouteTable'",
+  "Text": "Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/get_effective_route_table'",
+  "Text": "Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/get_effective_route_table'",
+  "Text": "Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/getEffectiveRouteTable'",
+  "Text": "Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/getEffectiveRouteTable'",
+  "Text": "Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/getEffectiveRouteTable'",
+  "Text": "Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/getEffectiveRouteTable'",
+  "Text": "Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/GetEffectiveRouteTableMethod'",
 (C) 2017 Microsoft Corporation.
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
 AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
-WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create load balancer' of 'LoadBalancers/create_or_update'
-WARNING: Did not generate example 'Create load balancer' of 'LoadBalancers/create_or_update'
-WARNING: Did not generate example 'Create load balancer' of 'LoadBalancers/createOrUpdate'
-WARNING: Did not generate example 'Create load balancer' of 'LoadBalancers/createOrUpdate'
-WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/createOrUpdate'
-WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/createOrUpdate'
-WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/createOrUpdate'
-WARNING: Did not generate example 'Create load balancer' of 'LoadBalancers/CreateOrUpdateMethod'
-WARNING: Did not generate example 'Create network interface' of 'networkInterfaces/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create network interface' of 'networkInterfaces/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create network interface' of 'NetworkInterfaces/create_or_update'
-WARNING: Did not generate example 'Create network interface' of 'NetworkInterfaces/create_or_update'
-WARNING: Did not generate example 'Create network interface' of 'NetworkInterfaces/createOrUpdate'
-WARNING: Did not generate example 'Create network interface' of 'NetworkInterfaces/createOrUpdate'
-WARNING: Did not generate example 'Create network interface' of 'networkInterfaces/createOrUpdate'
-WARNING: Did not generate example 'Create network interface' of 'networkInterfaces/createOrUpdate'
-WARNING: Did not generate example 'Create network interface' of 'networkInterfaces/createOrUpdate'
-WARNING: Did not generate example 'Create network interface' of 'NetworkInterfaces/CreateOrUpdateMethod'
-WARNING: Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/create_or_update'
-WARNING: Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/create_or_update'
-WARNING: Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/createOrUpdate'
-WARNING: Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/createOrUpdate'
-WARNING: Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/createOrUpdate'
-WARNING: Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/createOrUpdate'
-WARNING: Did not generate example 'Create network security group with rule' of 'networkSecurityGroups/createOrUpdate'
-WARNING: Did not generate example 'Create network security group with rule' of 'NetworkSecurityGroups/CreateOrUpdateMethod'
-WARNING: Did not generate example 'Create network security group' of 'networkSecurityGroups/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create network security group' of 'networkSecurityGroups/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create network security group' of 'NetworkSecurityGroups/create_or_update'
-WARNING: Did not generate example 'Create network security group' of 'NetworkSecurityGroups/create_or_update'
-WARNING: Did not generate example 'Create network security group' of 'NetworkSecurityGroups/createOrUpdate'
-WARNING: Did not generate example 'Create network security group' of 'NetworkSecurityGroups/createOrUpdate'
-WARNING: Did not generate example 'Create network security group' of 'networkSecurityGroups/createOrUpdate'
-WARNING: Did not generate example 'Create network security group' of 'networkSecurityGroups/createOrUpdate'
-WARNING: Did not generate example 'Create network security group' of 'networkSecurityGroups/createOrUpdate'
-WARNING: Did not generate example 'Create network security group' of 'NetworkSecurityGroups/CreateOrUpdateMethod'
-WARNING: Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/create_or_update'
-WARNING: Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/create_or_update'
-WARNING: Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address allocation method' of 'publicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address allocation method' of 'PublicIPAddresses/CreateOrUpdateMethod'
-WARNING: Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/create_or_update'
-WARNING: Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/create_or_update'
-WARNING: Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address defaults' of 'publicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address defaults' of 'PublicIPAddresses/CreateOrUpdateMethod'
-WARNING: Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/create_or_update'
-WARNING: Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/create_or_update'
-WARNING: Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address DNS' of 'publicIPAddresses/createOrUpdate'
-WARNING: Did not generate example 'Create public IP address DNS' of 'PublicIPAddresses/CreateOrUpdateMethod'
-WARNING: Did not generate example 'Create security rule' of 'securityRules/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create security rule' of 'securityRules/beginCreateOrUpdate'
-WARNING: Did not generate example 'Create security rule' of 'SecurityRules/create_or_update'
-WARNING: Did not generate example 'Create security rule' of 'SecurityRules/create_or_update'
-WARNING: Did not generate example 'Create security rule' of 'SecurityRules/createOrUpdate'
-WARNING: Did not generate example 'Create security rule' of 'SecurityRules/createOrUpdate'
-WARNING: Did not generate example 'Create security rule' of 'securityRules/createOrUpdate'
-WARNING: Did not generate example 'Create security rule' of 'securityRules/createOrUpdate'
-WARNING: Did not generate example 'Create security rule' of 'securityRules/createOrUpdate'
-WARNING: Did not generate example 'Create security rule' of 'SecurityRules/CreateOrUpdateMethod'
-WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'
-WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'
-WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'
-WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/get'
-WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'defaultSecurityRules/get'
-WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'defaultSecurityRules/get'
-WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'defaultSecurityRules/get'
-WARNING: Did not generate example 'DefaultSecurityRuleGet' of 'DefaultSecurityRules/GetMethod'
-WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list_as_lazy'
-WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'
-WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'
-WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'
-WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/list'
-WARNING: Did not generate example 'DefaultSecurityRuleList' of 'defaultSecurityRules/list'
-WARNING: Did not generate example 'DefaultSecurityRuleList' of 'defaultSecurityRules/list'
-WARNING: Did not generate example 'DefaultSecurityRuleList' of 'defaultSecurityRules/list'
-WARNING: Did not generate example 'DefaultSecurityRuleList' of 'DefaultSecurityRules/ListMethod'
-WARNING: Did not generate example 'Delete load balancer' of 'loadBalancers/beginDelete'
-WARNING: Did not generate example 'Delete load balancer' of 'loadBalancers/beginDelete'
-WARNING: Did not generate example 'Delete load balancer' of 'LoadBalancers/delete'
-WARNING: Did not generate example 'Delete load balancer' of 'LoadBalancers/delete'
-WARNING: Did not generate example 'Delete load balancer' of 'loadBalancers/delete'
-WARNING: Did not generate example 'Delete load balancer' of 'loadBalancers/delete'
-WARNING: Did not generate example 'Delete load balancer' of 'loadBalancers/delete'
-WARNING: Did not generate example 'Delete load balancer' of 'LoadBalancers/DeleteMethod'
-WARNING: Did not generate example 'Delete load balancer' of 'LoadBalancers/deleteMethod'
-WARNING: Did not generate example 'Delete load balancer' of 'LoadBalancers/deleteMethod'
-WARNING: Did not generate example 'Delete network interface' of 'networkInterfaces/beginDelete'
-WARNING: Did not generate example 'Delete network interface' of 'networkInterfaces/beginDelete'
-WARNING: Did not generate example 'Delete network interface' of 'NetworkInterfaces/delete'
-WARNING: Did not generate example 'Delete network interface' of 'NetworkInterfaces/delete'
-WARNING: Did not generate example 'Delete network interface' of 'networkInterfaces/delete'
-WARNING: Did not generate example 'Delete network interface' of 'networkInterfaces/delete'
-WARNING: Did not generate example 'Delete network interface' of 'networkInterfaces/delete'
-WARNING: Did not generate example 'Delete network interface' of 'NetworkInterfaces/DeleteMethod'
-WARNING: Did not generate example 'Delete network interface' of 'NetworkInterfaces/deleteMethod'
-WARNING: Did not generate example 'Delete network interface' of 'NetworkInterfaces/deleteMethod'
-WARNING: Did not generate example 'Delete network security group' of 'networkSecurityGroups/beginDelete'
-WARNING: Did not generate example 'Delete network security group' of 'networkSecurityGroups/beginDelete'
-WARNING: Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/delete'
-WARNING: Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/delete'
-WARNING: Did not generate example 'Delete network security group' of 'networkSecurityGroups/delete'
-WARNING: Did not generate example 'Delete network security group' of 'networkSecurityGroups/delete'
-WARNING: Did not generate example 'Delete network security group' of 'networkSecurityGroups/delete'
-WARNING: Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/DeleteMethod'
-WARNING: Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/deleteMethod'
-WARNING: Did not generate example 'Delete network security group' of 'NetworkSecurityGroups/deleteMethod'
-WARNING: Did not generate example 'Delete network security rule from network security group' of 'securityRules/beginDelete'
-WARNING: Did not generate example 'Delete network security rule from network security group' of 'securityRules/beginDelete'
-WARNING: Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/delete'
-WARNING: Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/delete'
-WARNING: Did not generate example 'Delete network security rule from network security group' of 'securityRules/delete'
-WARNING: Did not generate example 'Delete network security rule from network security group' of 'securityRules/delete'
-WARNING: Did not generate example 'Delete network security rule from network security group' of 'securityRules/delete'
-WARNING: Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/DeleteMethod'
-WARNING: Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/deleteMethod'
-WARNING: Did not generate example 'Delete network security rule from network security group' of 'SecurityRules/deleteMethod'
-WARNING: Did not generate example 'Delete public IP address' of 'publicIPAddresses/beginDelete'
-WARNING: Did not generate example 'Delete public IP address' of 'publicIPAddresses/beginDelete'
-WARNING: Did not generate example 'Delete public IP address' of 'PublicIPAddresses/delete'
-WARNING: Did not generate example 'Delete public IP address' of 'PublicIPAddresses/delete'
-WARNING: Did not generate example 'Delete public IP address' of 'publicIPAddresses/delete'
-WARNING: Did not generate example 'Delete public IP address' of 'publicIPAddresses/delete'
-WARNING: Did not generate example 'Delete public IP address' of 'publicIPAddresses/delete'
-WARNING: Did not generate example 'Delete public IP address' of 'PublicIPAddresses/DeleteMethod'
-WARNING: Did not generate example 'Delete public IP address' of 'PublicIPAddresses/deleteMethod'
-WARNING: Did not generate example 'Delete public IP address' of 'PublicIPAddresses/deleteMethod'
-WARNING: Did not generate example 'Get load balancer' of 'LoadBalancers/get'
-WARNING: Did not generate example 'Get load balancer' of 'LoadBalancers/get'
-WARNING: Did not generate example 'Get load balancer' of 'LoadBalancers/get'
-WARNING: Did not generate example 'Get load balancer' of 'LoadBalancers/get'
-WARNING: Did not generate example 'Get load balancer' of 'loadBalancers/get'
-WARNING: Did not generate example 'Get load balancer' of 'loadBalancers/get'
-WARNING: Did not generate example 'Get load balancer' of 'loadBalancers/getByResourceGroup'
-WARNING: Did not generate example 'Get load balancer' of 'LoadBalancers/GetMethod'
-WARNING: Did not generate example 'Get network interface' of 'NetworkInterfaces/get'
-WARNING: Did not generate example 'Get network interface' of 'NetworkInterfaces/get'
-WARNING: Did not generate example 'Get network interface' of 'NetworkInterfaces/get'
-WARNING: Did not generate example 'Get network interface' of 'NetworkInterfaces/get'
-WARNING: Did not generate example 'Get network interface' of 'networkInterfaces/get'
-WARNING: Did not generate example 'Get network interface' of 'networkInterfaces/get'
-WARNING: Did not generate example 'Get network interface' of 'networkInterfaces/getByResourceGroup'
-WARNING: Did not generate example 'Get network interface' of 'NetworkInterfaces/GetMethod'
-WARNING: Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'
-WARNING: Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'
-WARNING: Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'
-WARNING: Did not generate example 'Get network security group' of 'NetworkSecurityGroups/get'
-WARNING: Did not generate example 'Get network security group' of 'networkSecurityGroups/get'
-WARNING: Did not generate example 'Get network security group' of 'networkSecurityGroups/get'
-WARNING: Did not generate example 'Get network security group' of 'networkSecurityGroups/getByResourceGroup'
-WARNING: Did not generate example 'Get network security group' of 'NetworkSecurityGroups/GetMethod'
-WARNING: Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'
-WARNING: Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'
-WARNING: Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'
-WARNING: Did not generate example 'Get network security rule in network security group' of 'SecurityRules/get'
-WARNING: Did not generate example 'Get network security rule in network security group' of 'securityRules/get'
-WARNING: Did not generate example 'Get network security rule in network security group' of 'securityRules/get'
-WARNING: Did not generate example 'Get network security rule in network security group' of 'securityRules/get'
-WARNING: Did not generate example 'Get network security rule in network security group' of 'SecurityRules/GetMethod'
-WARNING: Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'
-WARNING: Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'
-WARNING: Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'
-WARNING: Did not generate example 'Get public IP address' of 'PublicIPAddresses/get'
-WARNING: Did not generate example 'Get public IP address' of 'publicIPAddresses/get'
-WARNING: Did not generate example 'Get public IP address' of 'publicIPAddresses/get'
-WARNING: Did not generate example 'Get public IP address' of 'publicIPAddresses/getByResourceGroup'
-WARNING: Did not generate example 'Get public IP address' of 'PublicIPAddresses/GetMethod'
-WARNING: Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/beginCreateOrUpdate'
-WARNING: Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/beginCreateOrUpdate'
-WARNING: Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/create_or_update'
-WARNING: Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/create_or_update'
-WARNING: Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/createOrUpdate'
-WARNING: Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/createOrUpdate'
-WARNING: Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/createOrUpdate'
-WARNING: Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/createOrUpdate'
-WARNING: Did not generate example 'InboundNatRuleCreate' of 'inboundNatRules/createOrUpdate'
-WARNING: Did not generate example 'InboundNatRuleCreate' of 'InboundNatRules/CreateOrUpdateMethod'
-WARNING: Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/beginDelete'
-WARNING: Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/beginDelete'
-WARNING: Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/delete'
-WARNING: Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/delete'
-WARNING: Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/delete'
-WARNING: Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/delete'
-WARNING: Did not generate example 'InboundNatRuleDelete' of 'inboundNatRules/delete'
-WARNING: Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/DeleteMethod'
-WARNING: Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/deleteMethod'
-WARNING: Did not generate example 'InboundNatRuleDelete' of 'InboundNatRules/deleteMethod'
-WARNING: Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'
-WARNING: Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'
-WARNING: Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'
-WARNING: Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/get'
-WARNING: Did not generate example 'InboundNatRuleGet' of 'inboundNatRules/get'
-WARNING: Did not generate example 'InboundNatRuleGet' of 'inboundNatRules/get'
-WARNING: Did not generate example 'InboundNatRuleGet' of 'inboundNatRules/get'
-WARNING: Did not generate example 'InboundNatRuleGet' of 'InboundNatRules/GetMethod'
-WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list_as_lazy'
-WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'
-WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'
-WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'
-WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/list'
-WARNING: Did not generate example 'InboundNatRuleList' of 'inboundNatRules/list'
-WARNING: Did not generate example 'InboundNatRuleList' of 'inboundNatRules/list'
-WARNING: Did not generate example 'InboundNatRuleList' of 'inboundNatRules/list'
-WARNING: Did not generate example 'InboundNatRuleList' of 'InboundNatRules/ListMethod'
-WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/list_all_as_lazy'
-WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/list_all'
-WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/list_all'
-WARNING: Did not generate example 'List all load balancers' of 'loadBalancers/list'
-WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/listAll'
-WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/listAll'
-WARNING: Did not generate example 'List all load balancers' of 'loadBalancers/listAll'
-WARNING: Did not generate example 'List all load balancers' of 'loadBalancers/listAll'
-WARNING: Did not generate example 'List all load balancers' of 'LoadBalancers/ListAllMethod'
-WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/list_all_as_lazy'
-WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/list_all'
-WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/list_all'
-WARNING: Did not generate example 'List all network interfaces' of 'networkInterfaces/list'
-WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/listAll'
-WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/listAll'
-WARNING: Did not generate example 'List all network interfaces' of 'networkInterfaces/listAll'
-WARNING: Did not generate example 'List all network interfaces' of 'networkInterfaces/listAll'
-WARNING: Did not generate example 'List all network interfaces' of 'NetworkInterfaces/ListAllMethod'
-WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/list_all_as_lazy'
-WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/list_all'
-WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/list_all'
-WARNING: Did not generate example 'List all network security groups' of 'networkSecurityGroups/list'
-WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/listAll'
-WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/listAll'
-WARNING: Did not generate example 'List all network security groups' of 'networkSecurityGroups/listAll'
-WARNING: Did not generate example 'List all network security groups' of 'networkSecurityGroups/listAll'
-WARNING: Did not generate example 'List all network security groups' of 'NetworkSecurityGroups/ListAllMethod'
-WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/list_all_as_lazy'
-WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/list_all'
-WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/list_all'
-WARNING: Did not generate example 'List all public IP addresses' of 'publicIPAddresses/list'
-WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/listAll'
-WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/listAll'
-WARNING: Did not generate example 'List all public IP addresses' of 'publicIPAddresses/listAll'
-WARNING: Did not generate example 'List all public IP addresses' of 'publicIPAddresses/listAll'
-WARNING: Did not generate example 'List all public IP addresses' of 'PublicIPAddresses/ListAllMethod'
-WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list_as_lazy'
-WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'
-WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'
-WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'
-WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/list'
-WARNING: Did not generate example 'List load balancers in resource group' of 'loadBalancers/list'
-WARNING: Did not generate example 'List load balancers in resource group' of 'loadBalancers/list'
-WARNING: Did not generate example 'List load balancers in resource group' of 'loadBalancers/listByResourceGroup'
-WARNING: Did not generate example 'List load balancers in resource group' of 'LoadBalancers/ListMethod'
-WARNING: Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/beginListEffectiveNetworkSecurityGroups'
-WARNING: Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/beginListEffectiveNetworkSecurityGroups'
-WARNING: Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/list_effective_network_security_groups'
-WARNING: Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/list_effective_network_security_groups'
-WARNING: Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/listEffectiveNetworkSecurityGroups'
-WARNING: Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/listEffectiveNetworkSecurityGroups'
-WARNING: Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/listEffectiveNetworkSecurityGroups'
-WARNING: Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/listEffectiveNetworkSecurityGroups'
-WARNING: Did not generate example 'List network interface effective network security groups' of 'networkInterfaces/listEffectiveNetworkSecurityGroups'
-WARNING: Did not generate example 'List network interface effective network security groups' of 'NetworkInterfaces/ListEffectiveNetworkSecurityGroupsMethod'
-WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list_as_lazy'
-WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'
-WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'
-WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'
-WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/list'
-WARNING: Did not generate example 'List network interfaces in resource group' of 'networkInterfaces/list'
-WARNING: Did not generate example 'List network interfaces in resource group' of 'networkInterfaces/list'
-WARNING: Did not generate example 'List network interfaces in resource group' of 'networkInterfaces/listByResourceGroup'
-WARNING: Did not generate example 'List network interfaces in resource group' of 'NetworkInterfaces/ListMethod'
-WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list_as_lazy'
-WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'
-WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'
-WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'
-WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/list'
-WARNING: Did not generate example 'List network security groups in resource group' of 'networkSecurityGroups/list'
-WARNING: Did not generate example 'List network security groups in resource group' of 'networkSecurityGroups/list'
-WARNING: Did not generate example 'List network security groups in resource group' of 'networkSecurityGroups/listByResourceGroup'
-WARNING: Did not generate example 'List network security groups in resource group' of 'NetworkSecurityGroups/ListMethod'
-WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/list_as_lazy'
-WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'
-WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'
-WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'
-WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/list'
-WARNING: Did not generate example 'List network security rules in network security group' of 'securityRules/list'
-WARNING: Did not generate example 'List network security rules in network security group' of 'securityRules/list'
-WARNING: Did not generate example 'List network security rules in network security group' of 'securityRules/list'
-WARNING: Did not generate example 'List network security rules in network security group' of 'SecurityRules/ListMethod'
-WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list_as_lazy'
-WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'
-WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'
-WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'
-WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/list'
-WARNING: Did not generate example 'List resource group public IP addresses' of 'publicIPAddresses/list'
-WARNING: Did not generate example 'List resource group public IP addresses' of 'publicIPAddresses/list'
-WARNING: Did not generate example 'List resource group public IP addresses' of 'publicIPAddresses/listByResourceGroup'
-WARNING: Did not generate example 'List resource group public IP addresses' of 'PublicIPAddresses/ListMethod'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/get'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'loadBalancerBackendAddressPools/get'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'loadBalancerBackendAddressPools/get'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'loadBalancerBackendAddressPools/get'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolGet' of 'LoadBalancerBackendAddressPools/GetMethod'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list_as_lazy'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/list'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'loadBalancerBackendAddressPools/list'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'loadBalancerBackendAddressPools/list'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'loadBalancerBackendAddressPools/list'
-WARNING: Did not generate example 'LoadBalancerBackendAddressPoolList' of 'LoadBalancerBackendAddressPools/ListMethod'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/get'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'loadBalancerFrontendIPConfigurations/get'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'loadBalancerFrontendIPConfigurations/get'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'loadBalancerFrontendIPConfigurations/get'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationGet' of 'LoadBalancerFrontendIPConfigurations/GetMethod'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list_as_lazy'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/list'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'loadBalancerFrontendIPConfigurations/list'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'loadBalancerFrontendIPConfigurations/list'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'loadBalancerFrontendIPConfigurations/list'
-WARNING: Did not generate example 'LoadBalancerFrontendIPConfigurationList' of 'LoadBalancerFrontendIPConfigurations/ListMethod'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/get'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'loadBalancerLoadBalancingRules/get'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'loadBalancerLoadBalancingRules/get'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'loadBalancerLoadBalancingRules/get'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleGet' of 'LoadBalancerLoadBalancingRules/GetMethod'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list_as_lazy'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/list'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'loadBalancerLoadBalancingRules/list'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'loadBalancerLoadBalancingRules/list'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'loadBalancerLoadBalancingRules/list'
-WARNING: Did not generate example 'LoadBalancerLoadBalancingRuleList' of 'LoadBalancerLoadBalancingRules/ListMethod'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list_as_lazy'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'loadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'loadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'loadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListSimple' of 'LoadBalancerNetworkInterfaces/ListMethod'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list_as_lazy'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'loadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'loadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'loadBalancerNetworkInterfaces/list'
-WARNING: Did not generate example 'LoadBalancerNetworkInterfaceListVmss' of 'LoadBalancerNetworkInterfaces/ListMethod'
-WARNING: Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'
-WARNING: Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'
-WARNING: Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'
-WARNING: Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/get'
-WARNING: Did not generate example 'LoadBalancerProbeGet' of 'loadBalancerProbes/get'
-WARNING: Did not generate example 'LoadBalancerProbeGet' of 'loadBalancerProbes/get'
-WARNING: Did not generate example 'LoadBalancerProbeGet' of 'loadBalancerProbes/get'
-WARNING: Did not generate example 'LoadBalancerProbeGet' of 'LoadBalancerProbes/GetMethod'
-WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list_as_lazy'
-WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'
-WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'
-WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'
-WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/list'
-WARNING: Did not generate example 'LoadBalancerProbeList' of 'loadBalancerProbes/list'
-WARNING: Did not generate example 'LoadBalancerProbeList' of 'loadBalancerProbes/list'
-WARNING: Did not generate example 'LoadBalancerProbeList' of 'loadBalancerProbes/list'
-WARNING: Did not generate example 'LoadBalancerProbeList' of 'LoadBalancerProbes/ListMethod'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/get'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'networkInterfaceIPConfigurations/get'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'networkInterfaceIPConfigurations/get'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'networkInterfaceIPConfigurations/get'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationGet' of 'NetworkInterfaceIPConfigurations/GetMethod'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list_as_lazy'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/list'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'networkInterfaceIPConfigurations/list'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'networkInterfaceIPConfigurations/list'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'networkInterfaceIPConfigurations/list'
-WARNING: Did not generate example 'NetworkInterfaceIPConfigurationList' of 'NetworkInterfaceIPConfigurations/ListMethod'
-WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list_as_lazy'
-WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'
-WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'
-WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'
-WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/list'
-WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'networkInterfaceLoadBalancers/list'
-WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'networkInterfaceLoadBalancers/list'
-WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'networkInterfaceLoadBalancers/list'
-WARNING: Did not generate example 'NetworkInterfaceLoadBalancerList' of 'NetworkInterfaceLoadBalancers/ListMethod'
-WARNING: Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/beginGetEffectiveRouteTable'
-WARNING: Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/beginGetEffectiveRouteTable'
-WARNING: Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/get_effective_route_table'
-WARNING: Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/get_effective_route_table'
-WARNING: Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/getEffectiveRouteTable'
-WARNING: Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/getEffectiveRouteTable'
-WARNING: Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/getEffectiveRouteTable'
-WARNING: Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/getEffectiveRouteTable'
-WARNING: Did not generate example 'Show network interface effective route tables' of 'networkInterfaces/getEffectiveRouteTable'
-WARNING: Did not generate example 'Show network interface effective route tables' of 'NetworkInterfaces/GetEffectiveRouteTableMethod'
+Process() Cancelled due to exception : Plugin imodeler1 reported failure.

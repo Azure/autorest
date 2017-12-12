@@ -1,5 +1,35 @@
-    - /Samples/test/error-behavior/openapi-json-bad-syntax/tiny.json:45:6
+        "column": 6
+        "column": 6
+        "column": 9
+        "line": 45,
+        "line": 45,
+        "line": 45,
+      "document": "/Samples/test/error-behavior/openapi-json-bad-syntax/tiny.json",
+      "document": "/Samples/test/error-behavior/openapi-json-bad-syntax/tiny.json",
+      "end": {
+      "Position": {
+      "start": {
+      }
+      }
+      },
+    {
+    {
+    }
+    }
+  "Channel": "error",
+  "Channel": "fatal",
+  "Channel": "fatal",
+  "Range": [
+  "Source": [
+  "Text": "Error: Syntax errors encountered."
+  "Text": "swagger-document/loader - FAILED"
+  "Text": "Syntax error: missed comma between flow collection entries",
+  ]
+  ],
   Error: Syntax errors encountered.
-ERROR: Syntax error: missed comma between flow collection entries
-FATAL: Error: Syntax errors encountered.
-FATAL: swagger-document/loader - FAILED
+{
+{
+{
+}
+}
+}

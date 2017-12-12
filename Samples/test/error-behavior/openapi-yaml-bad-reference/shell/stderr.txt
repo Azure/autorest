@@ -1,3 +1,9 @@
+  "Channel": "fatal",
+  "Channel": "fatal",
+  "Text": "Error: Could not resolve reference #/definitions/Cowball"
+  "Text": "openapi-document/openapi-document-converter - FAILED"
   Error: Could not resolve reference #/definitions/Cowball
-FATAL: Error: Could not resolve reference #/definitions/Cowball
-FATAL: openapi-document/openapi-document-converter - FAILED
+{
+{
+}
+}

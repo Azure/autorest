@@ -1,5 +1,59 @@
-    - /Samples/test/error-behavior/openapi-yaml-bad-file-reference/tiny.yaml:23:10 ($.paths["/cowbell"].post.parameters[0].schema["$ref"])
-ERROR: Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found
-FATAL: Error: [OperationAbortedException] Error occurred. Exiting.
-FATAL: swagger-document/loader - FAILED
+          "/cowbell",
+          "/cowbell",
+          "$ref"
+          "$ref"
+          "parameters",
+          "parameters",
+          "paths",
+          "paths",
+          "post",
+          "post",
+          "schema",
+          "schema",
+          0,
+          0,
+        "column": 10,
+        "column": 10,
+        "column": 14
+        "length": 4,
+        "length": 4,
+        "line": 23,
+        "line": 23,
+        "line": 23,
+        "path": [
+        "path": [
+        "valueLength": 42
+        "valueLength": 42
+        "valueOffset": 6,
+        "valueOffset": 6,
+        ],
+        ],
+      "document": "/Samples/test/error-behavior/openapi-yaml-bad-file-reference/tiny.yaml",
+      "document": "/Samples/test/error-behavior/openapi-yaml-bad-file-reference/tiny.yaml",
+      "end": {
+      "Position": {
+      "start": {
+      }
+      }
+      },
+    {
+    {
+    }
+    }
+  "Channel": "error",
+  "Channel": "fatal",
+  "Channel": "fatal",
+  "Range": [
+  "Source": [
+  "Text": "Error: [OperationAbortedException] Error occurred. Exiting."
+  "Text": "Referenced file '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json' not found",
+  "Text": "swagger-document/loader - FAILED"
+  ]
+  ],
+{
+{
+{
+}
+}
+}
 Process() Cancelled due to exception : [OperationAbortedException] Error occurred. Exiting.

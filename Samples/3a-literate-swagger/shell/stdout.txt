@@ -1,45 +1,199 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
-    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
-    - /Samples/3a-literate-swagger/swagger.md:178:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete)
-    - /Samples/3a-literate-swagger/swagger.md:207:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get)
-    - /Samples/3a-literate-swagger/swagger.md:264:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.properties)
-    - /Samples/3a-literate-swagger/swagger.md:391:2 ($.definitions.Error)
-    - /Samples/3a-literate-swagger/swagger.md:394:6 ($.definitions.Error.properties.code)
-    - /Samples/3a-literate-swagger/swagger.md:396:6 ($.definitions.Error.properties.message)
-    - /Samples/3a-literate-swagger/swagger.md:398:6 ($.definitions.Error.properties.details)
-    - /Samples/3a-literate-swagger/swagger.md:52:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys"].get)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:41:4 ($.definitions.ErrorDetails)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:43:8 ($.definitions.ErrorDetails.properties.code)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)
+    "/Samples/3a-literate-swagger/swagger.md:139:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}\"].put)"
+    "/Samples/3a-literate-swagger/swagger.md:139:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}\"].put)"
+    "/Samples/3a-literate-swagger/swagger.md:178:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}\"].delete)"
+    "/Samples/3a-literate-swagger/swagger.md:207:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices\"].get)"
+    "/Samples/3a-literate-swagger/swagger.md:264:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.properties)"
+    "/Samples/3a-literate-swagger/swagger.md:391:2 ($.definitions.Error)"
+    "/Samples/3a-literate-swagger/swagger.md:394:6 ($.definitions.Error.properties.code)"
+    "/Samples/3a-literate-swagger/swagger.md:396:6 ($.definitions.Error.properties.message)"
+    "/Samples/3a-literate-swagger/swagger.md:398:6 ($.definitions.Error.properties.details)"
+    "/Samples/3a-literate-swagger/swagger.md:52:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys\"].get)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:41:4 ($.definitions.ErrorDetails)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:43:8 ($.definitions.ErrorDetails.properties.code)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)"
+  "code": "AvoidNestedProperties",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "OperationDescriptionOrSummaryRequired",
+  "code": "OperationDescriptionOrSummaryRequired",
+  "code": "OperationDescriptionOrSummaryRequired",
+  "code": "OperationDescriptionOrSummaryRequired",
+  "code": "PutRequestResponseScheme",
+  "id": "R2001",
+  "id": "R2017",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "json-path": "/Samples/3a-literate-swagger/swagger.md:139:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}\"].put)"
+  "json-path": "/Samples/3a-literate-swagger/swagger.md:139:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}\"].put)"
+  "json-path": "/Samples/3a-literate-swagger/swagger.md:178:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}\"].delete)"
+  "json-path": "/Samples/3a-literate-swagger/swagger.md:207:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices\"].get)"
+  "json-path": "/Samples/3a-literate-swagger/swagger.md:264:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.properties)"
+  "json-path": "/Samples/3a-literate-swagger/swagger.md:391:2 ($.definitions.Error)"
+  "json-path": "/Samples/3a-literate-swagger/swagger.md:394:6 ($.definitions.Error.properties.code)"
+  "json-path": "/Samples/3a-literate-swagger/swagger.md:396:6 ($.definitions.Error.properties.message)"
+  "json-path": "/Samples/3a-literate-swagger/swagger.md:398:6 ($.definitions.Error.properties.details)"
+  "json-path": "/Samples/3a-literate-swagger/swagger.md:52:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys\"].get)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:41:4 ($.definitions.ErrorDetails)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:43:8 ($.definitions.ErrorDetails.properties.code)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)"
+  "jsonref": "/Samples/3a-literate-swagger/swagger.md:139:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}\"].put)",
+  "jsonref": "/Samples/3a-literate-swagger/swagger.md:139:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}\"].put)",
+  "jsonref": "/Samples/3a-literate-swagger/swagger.md:178:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}\"].delete)",
+  "jsonref": "/Samples/3a-literate-swagger/swagger.md:207:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices\"].get)",
+  "jsonref": "/Samples/3a-literate-swagger/swagger.md:264:6 ($.definitions.SearchServiceCreateOrUpdateParameters.properties.properties)",
+  "jsonref": "/Samples/3a-literate-swagger/swagger.md:391:2 ($.definitions.Error)",
+  "jsonref": "/Samples/3a-literate-swagger/swagger.md:394:6 ($.definitions.Error.properties.code)",
+  "jsonref": "/Samples/3a-literate-swagger/swagger.md:396:6 ($.definitions.Error.properties.message)",
+  "jsonref": "/Samples/3a-literate-swagger/swagger.md:398:6 ($.definitions.Error.properties.details)",
+  "jsonref": "/Samples/3a-literate-swagger/swagger.md:52:4 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys\"].get)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:41:4 ($.definitions.ErrorDetails)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:43:8 ($.definitions.ErrorDetails.properties.code)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:46:8 ($.definitions.ErrorDetails.properties.target)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-09-01/swagger/network.json:49:8 ($.definitions.ErrorDetails.properties.message)",
+  "message": "'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'details' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'Error' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'ErrorDetails' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'target' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: 'Services_CreateOrUpdate' Request Model: 'SearchServiceCreateOrUpdateParameters' Response Model: 'SearchServiceResource'",
+  "message": "Consider using x-ms-client-flatten to provide a better end user experience",
+  "message": "QueryKeys_List lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.",
+  "message": "Services_CreateOrUpdate lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.",
+  "message": "Services_Delete lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.",
+  "message": "Services_List lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.",
+  "providerNamespace": "Microsoft.Search",
+  "providerNamespace": "Microsoft.Search",
+  "providerNamespace": "Microsoft.Search",
+  "providerNamespace": "Microsoft.Search",
+  "providerNamespace": "Microsoft.Search",
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "resourceType": "searchServices",
+  "resourceType": "searchServices",
+  "resourceType": "searchServices",
+  "resourceType": "searchServices",
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
 (C) 2017 Microsoft Corporation.
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
 AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
-WARNING (AvoidNestedProperties/R2001/SDKViolation): Consider using x-ms-client-flatten to provide a better end user experience
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'code' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'details' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'Error' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'ErrorDetails' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'message' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'target' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): QueryKeys_List lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
-WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): Services_CreateOrUpdate lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
-WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): Services_Delete lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
-WARNING (OperationDescriptionOrSummaryRequired/R4000/SDKViolation): Services_List lacks 'description' and 'summary' property. Consider adding a 'description'/'summary' element. Accurate description/summary is essential for maintaining reference documentation.
-WARNING (PutRequestResponseScheme/R2017/SDKViolation): A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: 'Services_CreateOrUpdate' Request Model: 'SearchServiceCreateOrUpdateParameters' Response Model: 'SearchServiceResource'

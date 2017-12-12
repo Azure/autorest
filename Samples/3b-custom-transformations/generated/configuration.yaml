@@ -57,6 +57,7 @@ use-extension:
 
 no-upgrade-check: {}
 skip-upgrade-check: {}
+message-format: json
 azure-arm: true
 azure-validator: true
 csharp:

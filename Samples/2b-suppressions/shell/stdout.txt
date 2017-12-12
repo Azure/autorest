@@ -1,57 +1,255 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:14:4 ($.consumes[1])
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:18:4 ($.produces[1])
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:412:8 ($.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages"].get.operationId)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:437:4 ($.definitions.StorageAccountCheckNameAvailabilityParameters)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:439:8 ($.definitions.StorageAccountCheckNameAvailabilityParameters.properties.name)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:442:8 ($.definitions.StorageAccountCheckNameAvailabilityParameters.properties.type)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:453:8 ($.definitions.CheckNameAvailabilityResult.properties.nameAvailable)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:476:4 ($.definitions.StorageAccountPropertiesCreateParameters)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:511:8 ($.definitions.StorageAccountCreateParameters.properties.properties)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:549:8 ($.definitions.CustomDomain.properties.useSubDomain)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:559:4 ($.definitions.StorageAccountProperties)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:647:8 ($.definitions.StorageAccount.properties.properties)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:684:4 ($.definitions.StorageAccountPropertiesUpdateParameters)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:716:8 ($.definitions.StorageAccountUpdateParameters.properties.properties)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:724:4 ($.definitions.StorageAccountRegenerateKeyParameters)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:726:8 ($.definitions.StorageAccountRegenerateKeyParameters.properties.keyName)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:74:6 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put)
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:800:4 ($.definitions.Resource)
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:14:4 ($.consumes[1])"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:18:4 ($.produces[1])"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:412:8 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages\"].get.operationId)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:437:4 ($.definitions.StorageAccountCheckNameAvailabilityParameters)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:439:8 ($.definitions.StorageAccountCheckNameAvailabilityParameters.properties.name)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:442:8 ($.definitions.StorageAccountCheckNameAvailabilityParameters.properties.type)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:453:8 ($.definitions.CheckNameAvailabilityResult.properties.nameAvailable)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:476:4 ($.definitions.StorageAccountPropertiesCreateParameters)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:511:8 ($.definitions.StorageAccountCreateParameters.properties.properties)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:549:8 ($.definitions.CustomDomain.properties.useSubDomain)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:559:4 ($.definitions.StorageAccountProperties)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:647:8 ($.definitions.StorageAccount.properties.properties)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:684:4 ($.definitions.StorageAccountPropertiesUpdateParameters)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:716:8 ($.definitions.StorageAccountUpdateParameters.properties.properties)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:724:4 ($.definitions.StorageAccountRegenerateKeyParameters)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:726:8 ($.definitions.StorageAccountRegenerateKeyParameters.properties.keyName)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:74:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].put)"
+    "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:800:4 ($.definitions.Resource)"
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "DescriptionAndTitleMissing",
+  "code": "EnumInsteadOfBoolean",
+  "code": "EnumInsteadOfBoolean",
+  "code": "NonApplicationJsonType",
+  "code": "NonApplicationJsonType",
+  "code": "OperationIdNounConflictingModelNames",
+  "code": "PutRequestResponseScheme",
+  "id": "R2004",
+  "id": "R2004",
+  "id": "R2017",
+  "id": "R2063",
+  "id": "R3018",
+  "id": "R3018",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "id": "R4000",
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:14:4 ($.consumes[1])"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:18:4 ($.produces[1])"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:412:8 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages\"].get.operationId)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:437:4 ($.definitions.StorageAccountCheckNameAvailabilityParameters)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:439:8 ($.definitions.StorageAccountCheckNameAvailabilityParameters.properties.name)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:442:8 ($.definitions.StorageAccountCheckNameAvailabilityParameters.properties.type)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:453:8 ($.definitions.CheckNameAvailabilityResult.properties.nameAvailable)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:476:4 ($.definitions.StorageAccountPropertiesCreateParameters)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:511:8 ($.definitions.StorageAccountCreateParameters.properties.properties)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:549:8 ($.definitions.CustomDomain.properties.useSubDomain)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:559:4 ($.definitions.StorageAccountProperties)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:647:8 ($.definitions.StorageAccount.properties.properties)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:684:4 ($.definitions.StorageAccountPropertiesUpdateParameters)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:716:8 ($.definitions.StorageAccountUpdateParameters.properties.properties)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:724:4 ($.definitions.StorageAccountRegenerateKeyParameters)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:726:8 ($.definitions.StorageAccountRegenerateKeyParameters.properties.keyName)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:74:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].put)"
+  "json-path": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:800:4 ($.definitions.Resource)"
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:14:4 ($.consumes[1])",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:18:4 ($.produces[1])",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:412:8 ($.paths[\"/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages\"].get.operationId)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:437:4 ($.definitions.StorageAccountCheckNameAvailabilityParameters)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:439:8 ($.definitions.StorageAccountCheckNameAvailabilityParameters.properties.name)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:442:8 ($.definitions.StorageAccountCheckNameAvailabilityParameters.properties.type)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:453:8 ($.definitions.CheckNameAvailabilityResult.properties.nameAvailable)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:476:4 ($.definitions.StorageAccountPropertiesCreateParameters)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:511:8 ($.definitions.StorageAccountCreateParameters.properties.properties)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:549:8 ($.definitions.CustomDomain.properties.useSubDomain)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:559:4 ($.definitions.StorageAccountProperties)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:647:8 ($.definitions.StorageAccount.properties.properties)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:684:4 ($.definitions.StorageAccountPropertiesUpdateParameters)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:716:8 ($.definitions.StorageAccountUpdateParameters.properties.properties)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:724:4 ($.definitions.StorageAccountRegenerateKeyParameters)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:726:8 ($.definitions.StorageAccountRegenerateKeyParameters.properties.keyName)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:74:6 ($.paths[\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}\"].put)",
+  "jsonref": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json:800:4 ($.definitions.Resource)",
+  "message": "'keyName' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'name' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'Resource' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'StorageAccountCheckNameAvailabilityParameters' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'StorageAccountProperties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'StorageAccountPropertiesCreateParameters' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'StorageAccountPropertiesUpdateParameters' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'StorageAccountRegenerateKeyParameters' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "'type' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.",
+  "message": "A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: 'StorageAccounts_Create' Request Model: 'StorageAccountCreateParameters' Response Model: 'StorageAccount'",
+  "message": "Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: nameAvailable",
+  "message": "Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: useSubDomain",
+  "message": "Only 'application/json' content-type is supported by ARM.",
+  "message": "Only 'application/json' content-type is supported by ARM.",
+  "message": "OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to 'UsageModel'. Consider using the plural form of 'Usage' to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": "Microsoft.Storage",
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "providerNamespace": null,
+  "resourceType": "storageAccounts",
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "resourceType": null,
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "sources": [
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "type": "Warning",
+  "validationCategory": "RPCViolation",
+  "validationCategory": "RPCViolation",
+  "validationCategory": "RPCViolation",
+  "validationCategory": "RPCViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  "validationCategory": "SDKViolation",
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
 (C) 2017 Microsoft Corporation.
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+{
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
 AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'keyName' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'name' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'properties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'Resource' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'StorageAccountCheckNameAvailabilityParameters' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'StorageAccountProperties' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'StorageAccountPropertiesCreateParameters' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'StorageAccountPropertiesUpdateParameters' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'StorageAccountRegenerateKeyParameters' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (DescriptionAndTitleMissing/R4000/SDKViolation): 'type' model/property lacks 'description' and 'title' property. Consider adding a 'description'/'title' element. Accurate description/title is essential for maintaining reference documentation.
-WARNING (EnumInsteadOfBoolean/R3018/RPCViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: nameAvailable
-WARNING (EnumInsteadOfBoolean/R3018/RPCViolation): Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: useSubDomain
-WARNING (NonApplicationJsonType/R2004/RPCViolation): Only 'application/json' content-type is supported by ARM.
-WARNING (NonApplicationJsonType/R2004/RPCViolation): Only 'application/json' content-type is supported by ARM.
-WARNING (OperationIdNounConflictingModelNames/R2063/SDKViolation): OperationId has a noun that conflicts with one of the model names in definitions section. The model name will be disambiguated to 'UsageModel'. Consider using the plural form of 'Usage' to avoid this. Note: If you have already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.
-WARNING (PutRequestResponseScheme/R2017/SDKViolation): A PUT operation request body schema should be the same as its 200 response schema, to allow reusing the same entity between GET and PUT. If the schema of the PUT request body is a superset of the GET response body, make sure you have a PATCH operation to make the resource updatable. Operation: 'StorageAccounts_Create' Request Model: 'StorageAccountCreateParameters' Response Model: 'StorageAccount'

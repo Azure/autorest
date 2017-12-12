@@ -1,9 +1,104 @@
-    - /Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:18:6 ($.paths["/cowbell"].post.parameters)
-    - /Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:28:2 ($.definitions.Cowbell)
-    - /Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:33:8 ($.definitions.Cowbell.properties.id.type)
-ERROR: Schema violation: Additional properties not allowed: foo
-ERROR: Schema violation: Data does not match any schemas from 'anyOf'
-ERROR: Schema violation: Data does not match any schemas from 'oneOf'
-FATAL: Error: [OperationAbortedException] Error occurred. Exiting.
-FATAL: swagger-document/individual/schema-validator - FAILED
+            "bodi"
+            "type"
+          "code": "ENUM_MISMATCH",
+          "code": "OBJECT_MISSING_REQUIRED_PROPERTY",
+          "description": "Determines the location of the parameter."
+          "message": "Missing required property: type",
+          "message": "No enum match for: bodi",
+          "params": [
+          "params": [
+          "path": "#/"
+          "path": "#/in",
+          ],
+          ],
+        "$ref"
+        "array",
+        "int"
+        "string"
+        {
+        {
+        }
+        },
+      "code": "ENUM_MISMATCH",
+      "code": "INVALID_TYPE",
+      "code": "OBJECT_MISSING_REQUIRED_PROPERTY",
+      "code": "ONE_OF_MISSING",
+      "foo"
+      "inner": [
+      "message": "Data does not match any schemas from 'oneOf'",
+      "message": "Expected type array but found type string",
+      "message": "Missing required property: $ref",
+      "message": "No enum match for: int",
+      "params": [
+      "params": [
+      "params": [
+      "params": [],
+      "path": "#/definitions/Cowbell/properties/id/type"
+      "path": "#/definitions/Cowbell/properties/id/type"
+      "path": "#/paths/~1cowbell/post/parameters/0"
+      "path": "#/paths/~1cowbell/post/parameters/0",
+      ]
+      ],
+      ],
+      ],
+    "/Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:18:6 ($.paths[\"/cowbell\"].post.parameters)"
+    "/Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:28:2 ($.definitions.Cowbell)"
+    "/Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:33:8 ($.definitions.Cowbell.properties.id.type)"
+    [
+    ]
+    {
+    {
+    {
+    {
+    }
+    }
+    },
+    },
+  "Channel": "fatal",
+  "Channel": "fatal",
+  "code": "ANY_OF_MISSING",
+  "code": "OBJECT_ADDITIONAL_PROPERTIES",
+  "code": "ONE_OF_MISSING",
+  "description": "A deterministic version of a JSON Schema object.",
+  "inner": [
+  "inner": [
+  "json-path": "/Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:18:6 ($.paths[\"/cowbell\"].post.parameters)"
+  "json-path": "/Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:28:2 ($.definitions.Cowbell)"
+  "json-path": "/Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:33:8 ($.definitions.Cowbell.properties.id.type)"
+  "jsonref": "/Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:18:6 ($.paths[\"/cowbell\"].post.parameters)",
+  "jsonref": "/Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:28:2 ($.definitions.Cowbell)",
+  "jsonref": "/Samples/test/error-behavior/openapi-bad-schema/tiny.yaml:33:8 ($.definitions.Cowbell.properties.id.type)",
+  "message": "Additional properties not allowed: foo",
+  "message": "Data does not match any schemas from 'anyOf'",
+  "message": "Data does not match any schemas from 'oneOf'",
+  "params": [
+  "params": [],
+  "params": [],
+  "path": "#/definitions/Cowbell",
+  "path": "#/definitions/Cowbell/properties/id/type",
+  "path": "#/paths/~1cowbell/post/parameters/0",
+  "schemaId": "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json#",
+  "schemaId": "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json#",
+  "schemaId": "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json#",
+  "sources": [
+  "sources": [
+  "sources": [
+  "Text": "Error: [OperationAbortedException] Error occurred. Exiting."
+  "Text": "swagger-document/individual/schema-validator - FAILED"
+  ],
+  ],
+  ],
+  ],
+  ],
+  ],
+{
+{
+{
+{
+{
+}
+}
+}
+}
+}
 Process() Cancelled due to exception : [OperationAbortedException] Error occurred. Exiting.
