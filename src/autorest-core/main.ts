@@ -3,8 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// load static module: ${__dirname }/static_modules.fs
-require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
+// load modules from static linker filesystem.
+if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
+    require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
+}
 
 export { IFileSystem } from "./lib/file-system"
 export { Message, Channel } from "./lib/message"
