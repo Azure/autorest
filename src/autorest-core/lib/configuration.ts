@@ -547,7 +547,7 @@ export class Configuration {
       contextConfig.DataStore.getDataSink());
 
     const blocks = hConfig.map(each => {
-      const block = each.data.ReadObject<AutoRestConfigurationImpl>();
+      const block = each.data.ReadObject<AutoRestConfigurationImpl>() || {};
       if (typeof block !== "object") {
         contextConfig.Message({
           Channel: Channel.Error,
