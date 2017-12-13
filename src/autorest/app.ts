@@ -29,87 +29,39 @@ if (!String.prototype.padEnd) {
   };
 }
 
-if (process.argv.indexOf("--no-upgrade-check") != -1) {
-  process.argv.push("--skip-upgrade-check");
-}
-
 import { isFile } from "@microsoft.azure/async-io";
 import { Exception, LazyPromise } from "@microsoft.azure/tasks";
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
 import { gt } from "semver";
+import { join } from "path";
+import { color } from "./coloring"
 import chalk from "chalk"
 
-function addStyle(style: string, text: string): string {
-  return `▌PUSH:${style}▐${text}▌POP▐`;
-}
-function compileStyledText(text: string): string {
-  const styleStack = ["(x => x)"];
-  let result = "";
-  let consumedUpTo = 0;
-  const appendPart = (end: number) => {
-    const CHALK = chalk;
-    result += eval(styleStack[styleStack.length - 1])(text.slice(consumedUpTo, end));
-    consumedUpTo = end;
-  };
-
-  const commandRegex = /▌(.+?)▐/g;
-  let i: RegExpExecArray;
-  while (i = commandRegex.exec(text)) {
-    const startIndex = i.index;
-    const length = i[0].length;
-    const command = i[1].split(":");
-
-    // append up to here with current style
-    appendPart(startIndex);
-
-    // process command
-    consumedUpTo += length;
-    switch (command[0]) {
-      case "PUSH":
-        styleStack.push("CHALK." + command[1]);
-        break;
-      case "POP":
-        styleStack.pop();
-        break;
-    }
-  }
-  appendPart(text.length);
-  return result;
-}
-function color(text: string): string {
-  return compileStyledText(text.
-    replace(/\*\*(.*?)\*\*/gm, addStyle("bold", `$1`)).
-    replace(/^# (.*)/gm, addStyle("greenBright", '$1')).
-    replace(/^## (.*)/gm, addStyle("green", '$1')).
-    replace(/^### (.*)/gm, addStyle("cyanBright", '$1')).
-    replace(/(https?:\/\/\S*)/gm, addStyle("blue.bold.underline", '$1')).
-    replace(/__(.*)__/gm, addStyle("italic", '$1')).
-    replace(/^>(.*)/gm, addStyle("cyan", '  $1')).
-    replace(/^!(.*)/gm, addStyle("red.bold", '  $1')).
-    replace(/^(ERROR) (.*?):(.*)/gm, `\n${addStyle("red.bold", '$1')} ${addStyle("green", '$2')}:$3`).
-    replace(/^(WARNING) (.*?):(.*)/gm, `\n${addStyle("yellow.bold", '$1')} ${addStyle("green", '$2')}:$3`).
-    replace(/^(\s* - \w*:\/\/\S*):(\d*):(\d*) (.*)/gm, `${addStyle("cyan", '$1')}:${addStyle("cyan.bold", '$2')}:${addStyle("cyan.bold", '$3')} $4`).
-    replace(/`(.+?)`/gm, addStyle("gray", '$1')).
-    replace(/"(.*?)"/gm, addStyle("gray", '"$1"')).
-    replace(/'(.*?)'/gm, addStyle("gray", "'$1'")));
+// aliases, round one.
+if (process.argv.indexOf("--no-upgrade-check") != -1) {
+  process.argv.push("--skip-upgrade-check");
 }
 
-(<any>global).color = color;
+if (process.argv.indexOf("--json") !== -1) {
+  process.argv.push("--message-format=json");
+}
 
-// Suppress the banner if in json mode.
-if (process.argv.indexOf("--json") == -1 && process.argv.indexOf("--message-format=json") == -1) {
-  console.log(chalk.green.bold.underline(`AutoRest code generation utility [version: ${chalk.white.bold(pkgVersion)}]`));
-  console.log(color(`(C) 2017 **Microsoft Corporation.**`));
-  console.log(chalk.blue.bold.underline(`https://aka.ms/autorest`));
+if (process.argv.indexOf("--yaml") !== -1) {
+  process.argv.push("--message-format=yaml");
 }
 
 function parseArgs(autorestArgs: string[]): any {
   const result: any = {};
   for (const arg of autorestArgs) {
-    const match = /^--([^=]+)(=(.+))?$/g.exec(arg);
+    const match = /^--([^=:]+)([=:](.+))?$/g.exec(arg);
     if (match) {
       const key = match[1];
-      const rawValue = match[3] || "true";
+      let rawValue = match[3] || "true";
+      if (rawValue.startsWith('.')) {
+        // starts with a . or .. -> this is a relative path to current directory
+        rawValue = join(cwd, rawValue);
+      }
+
       let value;
       try {
         value = JSON.parse(rawValue);
@@ -132,6 +84,13 @@ const args = parseArgs(process.argv);
 // aliases
 args["info"] = args["info"] || args["list-installed"];
 args["preview"] = args["preview"] || args["prerelease"];
+
+// Suppress the banner if the message-format is set to something other than regular.
+if ((!args["message-format"]) || args["message-format"] === "regular") {
+  console.log(chalk.green.bold.underline(`AutoRest code generation utility [version: ${chalk.white.bold(pkgVersion)}]`));
+  console.log(color(`(C) 2017 **Microsoft Corporation.**`));
+  console.log(chalk.blue.bold.underline(`https://aka.ms/autorest`));
+}
 
 // argument tweakin'
 const preview: boolean = args.preview;
@@ -200,10 +159,6 @@ async function showInstalledExtensions(): Promise<number> {
 /** Main Entrypoint for AutoRest Bootstrapper */
 async function main() {
   try {
-    if (args.json) {
-      process.argv.push("--message-format=json");
-    }
-
     // did they ask for what is available?
     if (listAvailable) {
       process.exit(await showAvailableCores());

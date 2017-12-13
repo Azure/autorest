@@ -49,7 +49,7 @@ import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
 import { AutoRest, ConfigurationView, IsOpenApiDocument, Shutdown } from './lib/autorest-core';
 import { ShallowCopy } from "./lib/source-map/merging";
 import { Message, Channel } from "./lib/message";
-import { resolve as currentDirectory } from "path";
+import { join, resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
 import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString, ClearFolder } from "./lib/ref/uri";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
@@ -169,7 +169,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
   };
 
   for (const arg of autorestArgs) {
-    const match = /^--([^=]+)(=(.+))?$/g.exec(arg);
+    const match = /^--([^=:]+)([=:](.+))?$/g.exec(arg);
 
     // configuration file?
     if (match === null) {
@@ -183,6 +183,12 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
     // switch
     const key = match[1];
     let rawValue = match[3] || "{}";
+
+    if (rawValue.startsWith('.')) {
+      // starts with a . or .. -> this is a relative path to current directory
+      rawValue = join(process.cwd(), rawValue);
+    }
+
     // quote stuff beginning with '@', YAML doesn't think unquoted strings should start with that
     rawValue = rawValue.startsWith('@') ? `'${rawValue}'` : rawValue;
     // quote numbers with decimal point, we don't have any use for non-integer numbers (while on the other hand version strings may look like decimal numbers)
