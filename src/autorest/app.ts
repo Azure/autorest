@@ -42,11 +42,11 @@ if (process.argv.indexOf("--no-upgrade-check") != -1) {
   process.argv.push("--skip-upgrade-check");
 }
 
-if (process.argv.indexOf("--json")) {
+if (process.argv.indexOf("--json") !== -1) {
   process.argv.push("--message-format=json");
 }
 
-if (process.argv.indexOf("--yaml")) {
+if (process.argv.indexOf("--yaml") !== -1) {
   process.argv.push("--message-format=yaml");
 }
 
@@ -86,7 +86,7 @@ args["info"] = args["info"] || args["list-installed"];
 args["preview"] = args["preview"] || args["prerelease"];
 
 // Suppress the banner if the message-format is set to something other than regular.
-if (args["message-format"] && args["message-format"] !== "regular") {
+if ((!args["message-format"]) || args["message-format"] === "regular") {
   console.log(chalk.green.bold.underline(`AutoRest code generation utility [version: ${chalk.white.bold(pkgVersion)}]`));
   console.log(color(`(C) 2017 **Microsoft Corporation.**`));
   console.log(chalk.blue.bold.underline(`https://aka.ms/autorest`));

@@ -429,7 +429,7 @@ export interface AutoRestConfigurationImpl {
         [name: string]: string;
     };
     "output-artifact"?: string[] | string;
-    "message-format"?: "json";
+    "message-format"?: "json" | "yaml" | "regular";
     "use-extension"?: {
         [extensionName: string]: string;
     };

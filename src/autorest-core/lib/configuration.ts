@@ -42,7 +42,7 @@ export interface AutoRestConfigurationImpl {
   "directive"?: Directive[] | Directive;
   "declare-directive"?: { [name: string]: string };
   "output-artifact"?: string[] | string;
-  "message-format"?: "json";
+  "message-format"?: "json" | "yaml" | "regular";
   "use-extension"?: { [extensionName: string]: string };
   "require"?: string[] | string;
   "help"?: any;
