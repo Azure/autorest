@@ -37,11 +37,17 @@ export class AutoRestExtension extends EventEmitter {
   private static processes = new Array<ChildProcess>();
 
   public kill() {
-    this.childProcess.kill();
+    if (!this.childProcess.killed) {
+      this.childProcess.once("error", (e) => { /*shhh!*/ });
+      this.childProcess.kill();
+    }
   }
   public static killAll() {
     for (const each of AutoRestExtension.processes) {
-      each.kill("SIGKILL");
+      if (!each.killed) {
+        each.once("error", (e) => { /*shhh!*/ });
+        each.kill("SIGKILL");
+      }
     }
     AutoRestExtension.processes.length = 0;
   }
