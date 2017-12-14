@@ -22,7 +22,7 @@ import { join } from "path";
       "output-artifact": ["swagger-document.yaml", "openapi-document.yaml"]
     });
     // for testing local changes:
-    if (true) {
+    if (false as any) {
       PumpMessagesToConsole(autoRest);
       autoRest.AddConfiguration({ "use": "C:\\work\\oneautorest\\autorest.modeler" });
       autoRest.AddConfiguration({ "use": "C:\\work\\oneautorest\\autorest.csharp" });
@@ -78,7 +78,7 @@ import { join } from "path";
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
   }
 
-  @test async "AddOperation"() {
+  @test @skip async "AddOperation"() {
     const code = await this.generate({
       "components": {
         "operations": [
