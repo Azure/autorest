@@ -62,7 +62,7 @@
       "safe-eval": "^0.3.0",
       "source-map": "^0.5.6",
       "strip-bom": "^3.0.0",
-      "swagger2openapi": "olydis/swagger2openapi#15da1ddb9e3b56891991788784f546967cba3f52",
+      "swagger2openapi": "olydis/swagger2openapi#1c2a0039b5649fb47ef9c4583abbd3e5d0504977",
       "untildify": "^3.0.2",
       "urijs": "^1.18.10",
       "vscode-jsonrpc": "^3.3.1",
