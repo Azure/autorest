@@ -73,6 +73,11 @@ namespace AutoRest.CSharp.LoadBalanced.Json
                 return defaultDateTime;
             }
 
+            if (DateTime.TryParseExact(dateTimeValue, "M/d/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out defaultDateTime))
+            {
+                return defaultDateTime;
+            }
+            
             if (DateTime.TryParseExact(dateTimeValue, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out defaultDateTime))
             {
                 return defaultDateTime;
