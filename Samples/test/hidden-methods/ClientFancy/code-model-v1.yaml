@@ -1,56 +1,65 @@
 ---
+$id: '1'
 modelTypes:
-  - $id: '1'
+  - $id: '2'
     $type: CompositeType
     properties:
-      - $id: '2'
+      - $id: '3'
         isReadOnly: false
         realPath:
           - id
         collectionFormat: none
         defaultValue:
+          $id: '4'
           fixed: false
           raw: '42'
         deprecated: false
         documentation:
+          $id: '5'
           fixed: false
         isRequired: false
         isConstant: false
         name:
+          $id: '6'
           fixed: false
           raw: id
         serializedName: id
         modelType:
-          $id: '3'
+          $id: '7'
           $type: PrimaryType
           format: int64
           knownPrimaryType: long
           name:
+            $id: '8'
             fixed: false
             raw: Long
           deprecated: false
-      - $id: '4'
+      - $id: '9'
         isReadOnly: false
         realPath:
           - name
         collectionFormat: none
         defaultValue:
+          $id: '10'
           fixed: false
           raw: shiny
         deprecated: false
         documentation:
+          $id: '11'
           fixed: false
         isRequired: true
         isConstant: false
         name:
+          $id: '12'
           fixed: false
           raw: name
         serializedName: name
         modelType:
-          $id: '5'
+          $id: '13'
           $type: PrimaryType
           knownPrimaryType: string
           name:
+            $id: '14'
             fixed: false
             raw: String
           deprecated: false
@@ -58,6 +67,7 @@ modelTypes:
     documentation: A cowbell.
     containsConstantProperties: false
     name:
+      $id: '15'
       fixed: false
       raw: Cowbell
     deprecated: false
@@ -68,30 +78,37 @@ apiVersion: 1.0.0
 baseUrl: 'https://localhost'
 documentation: This is a sample.
 operations:
-  - methods:
-      - parameters:
-          - $id: '6'
+  - $id: '16'
+    methods:
+      - $id: '17'
+        parameters:
+          - $id: '18'
             location: body
             collectionFormat: none
             defaultValue:
+              $id: '19'
               fixed: false
             deprecated: false
             documentation:
+              $id: '20'
               fixed: false
             extensions:
               x-ms-requestBody-name: body
             isRequired: true
             isConstant: false
             name:
+              $id: '21'
               fixed: false
               raw: body
             serializedName: body
             modelType:
-              $ref: '1'
+              $ref: '2'
         name:
+          $id: '22'
           fixed: false
           raw: Add
         group:
+          $id: '23'
           fixed: false
           raw: Cowbell
         serializedName: Cowbell_Add
@@ -100,10 +117,13 @@ operations:
         httpMethod: post
         responses:
           OK:
+            $id: '24'
             isNullable: true
         defaultResponse:
+          $id: '25'
           isNullable: true
         returnType:
+          $id: '26'
           isNullable: true
         description: A good description.
         requestContentType: application/json; charset=utf-8
@@ -114,8 +134,10 @@ operations:
         deprecated: false
         hidden: true
     name:
+      $id: '27'
       fixed: false
       raw: Cowbell
     typeName:
+      $id: '28'
       fixed: false
     nameForProperty: Cowbell

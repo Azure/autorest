@@ -50,10 +50,10 @@ require: []
 use: []
 clear-output-folder: {}
 use-extension:
-  '@microsoft.azure/autorest.csharp': ~2.2.45
+  '@microsoft.azure/autorest.csharp': ~2.2.51
   '@microsoft.azure/classic-openapi-validator': ~1.0.9
   '@microsoft.azure/openapi-validator': ~1.0.2
-  '@microsoft.azure/autorest.modeler': 2.3.42
+  '@microsoft.azure/autorest.modeler': 2.3.43
 
 no-upgrade-check: {}
 skip-upgrade-check: {}
@@ -353,10 +353,10 @@ declare-directive:
       transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
     }
 used-extension:
-  - '["@microsoft.azure/autorest.csharp","~2.2.45"]'
+  - '["@microsoft.azure/autorest.csharp","~2.2.51"]'
   - '["@microsoft.azure/classic-openapi-validator","~1.0.9"]'
   - '["@microsoft.azure/openapi-validator","~1.0.2"]'
-  - '["@microsoft.azure/autorest.modeler","2.3.42"]'
+  - '["@microsoft.azure/autorest.modeler","2.3.43"]'
 scope-csharp/emitter:
   input-artifact: source-file-csharp
 scope-jsonrpcclient/emitter:

@@ -49,9 +49,12 @@ import { join } from "path";
     const code = await this.generate({});
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Get("));
     assert.ok(!code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
-    assert.ok(!code["CowbellOperationsExtensions.cs"].includes(".Get("));
+    assert.ok(!code["CowbellOperations.cs"].includes(".GetWith"));
     assert.ok(code["Models/Cowbell.cs"]);
     assert.ok(code["Models/Cowbell.cs"].includes("string Name"));
+    assert.ok(!code["Models/Cowbell.cs"].includes("string FirstName"));
+    assert.ok(code["Models/Cowbell.cs"].includes("JsonProperty"));
+    assert.ok(!code["Models/Cowbell.cs"].includes("JsonIgnore"));
     assert.ok(!code["Models/SuperCowbell.cs"]);
   }
 
@@ -78,7 +81,7 @@ import { join } from "path";
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
   }
 
-  @test @skip async "AddOperation"() {
+  @test async "AddOperationForward"() {
     const code = await this.generate({
       "components": {
         "operations": [
@@ -91,7 +94,25 @@ import { join } from "path";
     });
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Get("));
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
-    assert.ok(code["CowbellOperationsExtensions.cs"].includes(".Get("));
+    assert.ok(code["CowbellOperations.cs"].includes(".GetWith"));
+  }
+
+  @test async "AddOperationImpl"() {
+    const implementation = "// implement me " + Math.random();
+    const code = await this.generate({
+      "components": {
+        "operations": [
+          {
+            operationId: "Cowbell_Retrieve",
+            "implementation": implementation
+          }
+        ]
+      }
+    });
+    assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Get("));
+    assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
+    assert.ok(!code["CowbellOperations.cs"].includes(".GetWith"));
+    assert.ok(code["CowbellOperations.cs"].includes(implementation));
   }
 
   @test async "RemoveModel"() {
@@ -144,5 +165,52 @@ import { join } from "path";
     assert.ok(code["Models/Cowbell.cs"]);
     assert.ok(!code["Models/Cowbell.cs"].includes("string Name"));
     assert.ok(code["Models/Cowbell.cs"].includes("string FirstName"));
+  }
+
+  @test async "AddPropertyForward"() {
+    const code = await this.generate({
+      "components": {
+        "schemas": {
+          "Cowbell": {
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "forward-to": "name"
+              }
+            }
+          }
+        }
+      }
+    });
+    assert.ok(code["Models/Cowbell.cs"]);
+    assert.ok(code["Models/Cowbell.cs"].includes("string Name"));
+    assert.ok(code["Models/Cowbell.cs"].includes("string FirstName"));
+    assert.ok(code["Models/Cowbell.cs"].includes("= value;"));
+    assert.ok(code["Models/Cowbell.cs"].includes("JsonProperty"));
+    assert.ok(code["Models/Cowbell.cs"].includes("JsonIgnore"));
+  }
+
+  @test async "AddPropertyImpl"() {
+    const implementation = "get; set; // implement me " + Math.random();
+    const code = await this.generate({
+      "components": {
+        "schemas": {
+          "Cowbell": {
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "implementation": implementation
+              }
+            }
+          }
+        }
+      }
+    });
+    assert.ok(code["Models/Cowbell.cs"]);
+    assert.ok(code["Models/Cowbell.cs"].includes("string Name"));
+    assert.ok(code["Models/Cowbell.cs"].includes("string FirstName"));
+    assert.ok(code["Models/Cowbell.cs"].includes(implementation));
+    assert.ok(code["Models/Cowbell.cs"].includes("JsonProperty"));
+    assert.ok(code["Models/Cowbell.cs"].includes("JsonIgnore"));
   }
 }

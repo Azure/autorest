@@ -5,7 +5,7 @@
 // Example: Delete load balancer
 
 
-await client.LoadBalancers.DeleteAsync(
+await this.Client.LoadBalancers.DeleteAsync(
     resourceGroupName: "rg1",
     loadBalancerName: "lb");
 }
@@ -18,7 +18,7 @@ await client.LoadBalancers.DeleteAsync(
 // Example: Get load balancer
 
 
-var loadBalancer = await client.LoadBalancers.GetAsync(
+var loadBalancer = await this.Client.LoadBalancers.GetAsync(
     resourceGroupName: "rg1",
     loadBalancerName: "lb");
 }
@@ -108,7 +108,7 @@ var parameters = new LoadBalancer
     OutboundNatRules = new List<OutboundNatRule>()
 };
 
-var loadBalancer = await client.LoadBalancers.CreateOrUpdateAsync(
+var loadBalancer = await this.Client.LoadBalancers.CreateOrUpdateAsync(
     resourceGroupName: "rg1",
     loadBalancerName: "lb",
     parameters: parameters);
@@ -122,7 +122,7 @@ var loadBalancer = await client.LoadBalancers.CreateOrUpdateAsync(
 // Example: List all load balancers
 
 
-var page<LoadBalancer> = await client.LoadBalancers.ListAllAsync();
+var page<LoadBalancer> = await this.Client.LoadBalancers.ListAllAsync();
 }
 
 
@@ -133,7 +133,7 @@ var page<LoadBalancer> = await client.LoadBalancers.ListAllAsync();
 // Example: List load balancers in resource group
 
 
-var page<LoadBalancer> = await client.LoadBalancers.ListAsync(
+var page<LoadBalancer> = await this.Client.LoadBalancers.ListAsync(
     resourceGroupName: "rg1");
 }
 
@@ -145,7 +145,7 @@ var page<LoadBalancer> = await client.LoadBalancers.ListAsync(
 // Example: LoadBalancerBackendAddressPoolList
 
 
-var page<BackendAddressPool> = await client.LoadBalancerBackendAddressPools.ListAsync(
+var page<BackendAddressPool> = await this.Client.LoadBalancerBackendAddressPools.ListAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb");
 }
@@ -158,7 +158,7 @@ var page<BackendAddressPool> = await client.LoadBalancerBackendAddressPools.List
 // Example: LoadBalancerBackendAddressPoolGet
 
 
-var backendAddressPool = await client.LoadBalancerBackendAddressPools.GetAsync(
+var backendAddressPool = await this.Client.LoadBalancerBackendAddressPools.GetAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb",
     backendAddressPoolName: "backend");
@@ -172,7 +172,7 @@ var backendAddressPool = await client.LoadBalancerBackendAddressPools.GetAsync(
 // Example: LoadBalancerFrontendIPConfigurationList
 
 
-var page<FrontendIPConfiguration> = await client.LoadBalancerFrontendIPConfigurations.ListAsync(
+var page<FrontendIPConfiguration> = await this.Client.LoadBalancerFrontendIPConfigurations.ListAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb");
 }
@@ -185,7 +185,7 @@ var page<FrontendIPConfiguration> = await client.LoadBalancerFrontendIPConfigura
 // Example: LoadBalancerFrontendIPConfigurationGet
 
 
-var frontendIPConfiguration = await client.LoadBalancerFrontendIPConfigurations.GetAsync(
+var frontendIPConfiguration = await this.Client.LoadBalancerFrontendIPConfigurations.GetAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb",
     frontendIPConfigurationName: "frontend");
@@ -199,7 +199,7 @@ var frontendIPConfiguration = await client.LoadBalancerFrontendIPConfigurations.
 // Example: InboundNatRuleList
 
 
-var page<InboundNatRule> = await client.InboundNatRules.ListAsync(
+var page<InboundNatRule> = await this.Client.InboundNatRules.ListAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb1");
 }
@@ -212,7 +212,7 @@ var page<InboundNatRule> = await client.InboundNatRules.ListAsync(
 // Example: InboundNatRuleDelete
 
 
-await client.InboundNatRules.DeleteAsync(
+await this.Client.InboundNatRules.DeleteAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb1",
     inboundNatRuleName: "natRule1.1");
@@ -226,7 +226,7 @@ await client.InboundNatRules.DeleteAsync(
 // Example: InboundNatRuleGet
 
 
-var inboundNatRule = await client.InboundNatRules.GetAsync(
+var inboundNatRule = await this.Client.InboundNatRules.GetAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb1",
     inboundNatRuleName: "natRule1.1");
@@ -249,7 +249,7 @@ var inboundNatRuleParameters = new InboundNatRule
     EnableFloatingIP = false
 };
 
-var inboundNatRule = await client.InboundNatRules.CreateOrUpdateAsync(
+var inboundNatRule = await this.Client.InboundNatRules.CreateOrUpdateAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb1",
     inboundNatRuleName: "natRule1.1",
@@ -264,7 +264,7 @@ var inboundNatRule = await client.InboundNatRules.CreateOrUpdateAsync(
 // Example: LoadBalancerLoadBalancingRuleList
 
 
-var page<LoadBalancingRule> = await client.LoadBalancerLoadBalancingRules.ListAsync(
+var page<LoadBalancingRule> = await this.Client.LoadBalancerLoadBalancingRules.ListAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb1");
 }
@@ -277,7 +277,7 @@ var page<LoadBalancingRule> = await client.LoadBalancerLoadBalancingRules.ListAs
 // Example: LoadBalancerLoadBalancingRuleGet
 
 
-var loadBalancingRule = await client.LoadBalancerLoadBalancingRules.GetAsync(
+var loadBalancingRule = await this.Client.LoadBalancerLoadBalancingRules.GetAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb1",
     loadBalancingRuleName: "rule1");
@@ -291,7 +291,7 @@ var loadBalancingRule = await client.LoadBalancerLoadBalancingRules.GetAsync(
 // Example: LoadBalancerNetworkInterfaceListVmss
 
 
-var page<NetworkInterface> = await client.LoadBalancerNetworkInterfaces.ListAsync(
+var page<NetworkInterface> = await this.Client.LoadBalancerNetworkInterfaces.ListAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb");
 }
@@ -304,7 +304,7 @@ var page<NetworkInterface> = await client.LoadBalancerNetworkInterfaces.ListAsyn
 // Example: LoadBalancerNetworkInterfaceListSimple
 
 
-var page<NetworkInterface> = await client.LoadBalancerNetworkInterfaces.ListAsync(
+var page<NetworkInterface> = await this.Client.LoadBalancerNetworkInterfaces.ListAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb");
 }
@@ -317,7 +317,7 @@ var page<NetworkInterface> = await client.LoadBalancerNetworkInterfaces.ListAsyn
 // Example: LoadBalancerProbeList
 
 
-var page<Probe> = await client.LoadBalancerProbes.ListAsync(
+var page<Probe> = await this.Client.LoadBalancerProbes.ListAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb");
 }
@@ -330,7 +330,7 @@ var page<Probe> = await client.LoadBalancerProbes.ListAsync(
 // Example: LoadBalancerProbeGet
 
 
-var probe = await client.LoadBalancerProbes.GetAsync(
+var probe = await this.Client.LoadBalancerProbes.GetAsync(
     resourceGroupName: "testrg",
     loadBalancerName: "lb",
     probeName: "probe1");
@@ -344,7 +344,7 @@ var probe = await client.LoadBalancerProbes.GetAsync(
 // Example: Delete network interface
 
 
-await client.NetworkInterfaces.DeleteAsync(
+await this.Client.NetworkInterfaces.DeleteAsync(
     resourceGroupName: "rg1",
     networkInterfaceName: "test-nic");
 }
@@ -357,7 +357,7 @@ await client.NetworkInterfaces.DeleteAsync(
 // Example: Get network interface
 
 
-var networkInterface = await client.NetworkInterfaces.GetAsync(
+var networkInterface = await this.Client.NetworkInterfaces.GetAsync(
     resourceGroupName: "rg1",
     networkInterfaceName: "test-nic");
 }
@@ -383,7 +383,7 @@ var parameters = new NetworkInterface
     EnableAcceleratedNetworking = true
 };
 
-var networkInterface = await client.NetworkInterfaces.CreateOrUpdateAsync(
+var networkInterface = await this.Client.NetworkInterfaces.CreateOrUpdateAsync(
     resourceGroupName: "rg1",
     networkInterfaceName: "test-nic",
     parameters: parameters);
@@ -397,7 +397,7 @@ var networkInterface = await client.NetworkInterfaces.CreateOrUpdateAsync(
 // Example: List all network interfaces
 
 
-var page<NetworkInterface> = await client.NetworkInterfaces.ListAllAsync();
+var page<NetworkInterface> = await this.Client.NetworkInterfaces.ListAllAsync();
 }
 
 
@@ -408,7 +408,7 @@ var page<NetworkInterface> = await client.NetworkInterfaces.ListAllAsync();
 // Example: List network interfaces in resource group
 
 
-var page<NetworkInterface> = await client.NetworkInterfaces.ListAsync(
+var page<NetworkInterface> = await this.Client.NetworkInterfaces.ListAsync(
     resourceGroupName: "rg1");
 }
 
@@ -420,7 +420,7 @@ var page<NetworkInterface> = await client.NetworkInterfaces.ListAsync(
 // Example: Show network interface effective route tables
 
 
-var page<EffectiveRoute> = await client.NetworkInterfaces.GetEffectiveRouteTableAsync(
+var page<EffectiveRoute> = await this.Client.NetworkInterfaces.GetEffectiveRouteTableAsync(
     resourceGroupName: "rg1",
     networkInterfaceName: "nic1");
 }
@@ -433,7 +433,7 @@ var page<EffectiveRoute> = await client.NetworkInterfaces.GetEffectiveRouteTable
 // Example: List network interface effective network security groups
 
 
-var page<EffectiveNetworkSecurityGroup> = await client.NetworkInterfaces.ListEffectiveNetworkSecurityGroupsAsync(
+var page<EffectiveNetworkSecurityGroup> = await this.Client.NetworkInterfaces.ListEffectiveNetworkSecurityGroupsAsync(
     resourceGroupName: "rg1",
     networkInterfaceName: "nic1");
 }
@@ -446,7 +446,7 @@ var page<EffectiveNetworkSecurityGroup> = await client.NetworkInterfaces.ListEff
 // Example: NetworkInterfaceIPConfigurationList
 
 
-var page<NetworkInterfaceIPConfiguration> = await client.NetworkInterfaceIPConfigurations.ListAsync(
+var page<NetworkInterfaceIPConfiguration> = await this.Client.NetworkInterfaceIPConfigurations.ListAsync(
     resourceGroupName: "testrg",
     networkInterfaceName: "nic1");
 }
@@ -459,7 +459,7 @@ var page<NetworkInterfaceIPConfiguration> = await client.NetworkInterfaceIPConfi
 // Example: NetworkInterfaceIPConfigurationGet
 
 
-var networkInterfaceIPConfiguration = await client.NetworkInterfaceIPConfigurations.GetAsync(
+var networkInterfaceIPConfiguration = await this.Client.NetworkInterfaceIPConfigurations.GetAsync(
     resourceGroupName: "testrg",
     networkInterfaceName: "mynic",
     ipConfigurationName: "ipconfig1");
@@ -473,7 +473,7 @@ var networkInterfaceIPConfiguration = await client.NetworkInterfaceIPConfigurati
 // Example: NetworkInterfaceLoadBalancerList
 
 
-var page<LoadBalancer> = await client.NetworkInterfaceLoadBalancers.ListAsync(
+var page<LoadBalancer> = await this.Client.NetworkInterfaceLoadBalancers.ListAsync(
     resourceGroupName: "testrg",
     networkInterfaceName: "nic1");
 }
@@ -486,7 +486,7 @@ var page<LoadBalancer> = await client.NetworkInterfaceLoadBalancers.ListAsync(
 // Example: Delete network security group
 
 
-await client.NetworkSecurityGroups.DeleteAsync(
+await this.Client.NetworkSecurityGroups.DeleteAsync(
     resourceGroupName: "rg1",
     networkSecurityGroupName: "testnsg");
 }
@@ -499,7 +499,7 @@ await client.NetworkSecurityGroups.DeleteAsync(
 // Example: Get network security group
 
 
-var networkSecurityGroup = await client.NetworkSecurityGroups.GetAsync(
+var networkSecurityGroup = await this.Client.NetworkSecurityGroups.GetAsync(
     resourceGroupName: "rg1",
     networkSecurityGroupName: "testnsg");
 }
@@ -513,7 +513,7 @@ var networkSecurityGroup = await client.NetworkSecurityGroups.GetAsync(
 
 var parameters = new NetworkSecurityGroup();
 
-var networkSecurityGroup = await client.NetworkSecurityGroups.CreateOrUpdateAsync(
+var networkSecurityGroup = await this.Client.NetworkSecurityGroups.CreateOrUpdateAsync(
     resourceGroupName: "rg1",
     networkSecurityGroupName: "testnsg",
     parameters: parameters);
@@ -545,7 +545,7 @@ var parameters = new NetworkSecurityGroup
     }
 };
 
-var networkSecurityGroup = await client.NetworkSecurityGroups.CreateOrUpdateAsync(
+var networkSecurityGroup = await this.Client.NetworkSecurityGroups.CreateOrUpdateAsync(
     resourceGroupName: "rg1",
     networkSecurityGroupName: "testnsg",
     parameters: parameters);
@@ -559,7 +559,7 @@ var networkSecurityGroup = await client.NetworkSecurityGroups.CreateOrUpdateAsyn
 // Example: List all network security groups
 
 
-var page<NetworkSecurityGroup> = await client.NetworkSecurityGroups.ListAllAsync();
+var page<NetworkSecurityGroup> = await this.Client.NetworkSecurityGroups.ListAllAsync();
 }
 
 
@@ -570,7 +570,7 @@ var page<NetworkSecurityGroup> = await client.NetworkSecurityGroups.ListAllAsync
 // Example: List network security groups in resource group
 
 
-var page<NetworkSecurityGroup> = await client.NetworkSecurityGroups.ListAsync(
+var page<NetworkSecurityGroup> = await this.Client.NetworkSecurityGroups.ListAsync(
     resourceGroupName: "rg1");
 }
 
@@ -582,7 +582,7 @@ var page<NetworkSecurityGroup> = await client.NetworkSecurityGroups.ListAsync(
 // Example: Delete network security rule from network security group
 
 
-await client.SecurityRules.DeleteAsync(
+await this.Client.SecurityRules.DeleteAsync(
     resourceGroupName: "rg1",
     networkSecurityGroupName: "testnsg",
     securityRuleName: "rule1");
@@ -596,7 +596,7 @@ await client.SecurityRules.DeleteAsync(
 // Example: Get network security rule in network security group
 
 
-var securityRule = await client.SecurityRules.GetAsync(
+var securityRule = await this.Client.SecurityRules.GetAsync(
     resourceGroupName: "rg1",
     networkSecurityGroupName: "testnsg",
     securityRuleName: "rule1");
@@ -621,7 +621,7 @@ var securityRuleParameters = new SecurityRule
     Direction = "Outbound"
 };
 
-var securityRule = await client.SecurityRules.CreateOrUpdateAsync(
+var securityRule = await this.Client.SecurityRules.CreateOrUpdateAsync(
     resourceGroupName: "rg1",
     networkSecurityGroupName: "testnsg",
     securityRuleName: "rule1",
@@ -636,7 +636,7 @@ var securityRule = await client.SecurityRules.CreateOrUpdateAsync(
 // Example: List network security rules in network security group
 
 
-var page<SecurityRule> = await client.SecurityRules.ListAsync(
+var page<SecurityRule> = await this.Client.SecurityRules.ListAsync(
     resourceGroupName: "rg1",
     networkSecurityGroupName: "testnsg");
 }
@@ -649,7 +649,7 @@ var page<SecurityRule> = await client.SecurityRules.ListAsync(
 // Example: DefaultSecurityRuleList
 
 
-var page<SecurityRule> = await client.DefaultSecurityRules.ListAsync(
+var page<SecurityRule> = await this.Client.DefaultSecurityRules.ListAsync(
     resourceGroupName: "testrg",
     networkSecurityGroupName: "nsg1");
 }
@@ -662,7 +662,7 @@ var page<SecurityRule> = await client.DefaultSecurityRules.ListAsync(
 // Example: DefaultSecurityRuleGet
 
 
-var securityRule = await client.DefaultSecurityRules.GetAsync(
+var securityRule = await this.Client.DefaultSecurityRules.GetAsync(
     resourceGroupName: "testrg",
     networkSecurityGroupName: "nsg1",
     defaultSecurityRuleName: "AllowVnetInBound");
@@ -676,7 +676,7 @@ var securityRule = await client.DefaultSecurityRules.GetAsync(
 // Example: Delete public IP address
 
 
-await client.PublicIPAddresses.DeleteAsync(
+await this.Client.PublicIPAddresses.DeleteAsync(
     resourceGroupName: "rg1",
     publicIpAddressName: "test-ip");
 }
@@ -689,7 +689,7 @@ await client.PublicIPAddresses.DeleteAsync(
 // Example: Get public IP address
 
 
-var publicIPAddress = await client.PublicIPAddresses.GetAsync(
+var publicIPAddress = await this.Client.PublicIPAddresses.GetAsync(
     resourceGroupName: "rg1",
     publicIpAddressName: "testDNS-ip");
 }
@@ -703,7 +703,7 @@ var publicIPAddress = await client.PublicIPAddresses.GetAsync(
 
 var parameters = new PublicIPAddress();
 
-var publicIPAddress = await client.PublicIPAddresses.CreateOrUpdateAsync(
+var publicIPAddress = await this.Client.PublicIPAddresses.CreateOrUpdateAsync(
     resourceGroupName: "rg1",
     publicIpAddressName: "test-ip",
     parameters: parameters);
@@ -723,7 +723,7 @@ var parameters = new PublicIPAddress
     IdleTimeoutInMinutes = 10
 };
 
-var publicIPAddress = await client.PublicIPAddresses.CreateOrUpdateAsync(
+var publicIPAddress = await this.Client.PublicIPAddresses.CreateOrUpdateAsync(
     resourceGroupName: "rg1",
     publicIpAddressName: "test-ip",
     parameters: parameters);
@@ -744,7 +744,7 @@ var parameters = new PublicIPAddress
     }
 };
 
-var publicIPAddress = await client.PublicIPAddresses.CreateOrUpdateAsync(
+var publicIPAddress = await this.Client.PublicIPAddresses.CreateOrUpdateAsync(
     resourceGroupName: "rg1",
     publicIpAddressName: "test-ip",
     parameters: parameters);
@@ -758,7 +758,7 @@ var publicIPAddress = await client.PublicIPAddresses.CreateOrUpdateAsync(
 // Example: List all public IP addresses
 
 
-var page<PublicIPAddress> = await client.PublicIPAddresses.ListAllAsync();
+var page<PublicIPAddress> = await this.Client.PublicIPAddresses.ListAllAsync();
 }
 
 
@@ -769,6 +769,6 @@ var page<PublicIPAddress> = await client.PublicIPAddresses.ListAllAsync();
 // Example: List resource group public IP addresses
 
 
-var page<PublicIPAddress> = await client.PublicIPAddresses.ListAsync(
+var page<PublicIPAddress> = await this.Client.PublicIPAddresses.ListAsync(
     resourceGroupName: "rg1");
 }

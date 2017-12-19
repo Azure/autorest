@@ -21,12 +21,12 @@ use-extension:
 
 ``` yaml $(csharp)
 use-extension:
-  "@microsoft.azure/autorest.csharp": "~2.2.45"
+  "@microsoft.azure/autorest.csharp": "~2.2.51"
 ```
 
 ``` yaml $(jsonrpcclient)
 use-extension:
-  "@microsoft.azure/autorest.csharp": "~2.2.45"
+  "@microsoft.azure/autorest.csharp": "~2.2.51"
 ```
 
 ``` yaml $(go)
