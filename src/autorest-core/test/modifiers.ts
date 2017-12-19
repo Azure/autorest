@@ -167,15 +167,15 @@ import { join } from "path";
     assert.ok(code["Models/Cowbell.cs"].includes("string FirstName"));
   }
 
-  @test @skip async "AddPropertyForward"() {
+  @test async "AddPropertyForward"() {
     const code = await this.generate({
       "components": {
         "schemas": {
           "Cowbell": {
             "properties": {
-              "FirstName": {
+              "firstName": {
                 "type": "string",
-                "forward-to": "Name"
+                "forward-to": "name"
               }
             }
           }
@@ -197,7 +197,7 @@ import { join } from "path";
         "schemas": {
           "Cowbell": {
             "properties": {
-              "FirstName": {
+              "firstName": {
                 "type": "string",
                 "implementation": implementation
               }
