@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Authors>Microsoft</Authors>
@@ -27,8 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutoRest.CSharp.LoadBalanced.Legacy\AutoRest.CSharp.LoadBalanced.Legacy.csproj" />
-    <ProjectReference Include="..\AutoRest.CSharp.LoadBalanced\AutoRest.CSharp.LoadBalanced.csproj" />
-    <ProjectReference Include="..\AutoRest.CSharp.LoadBalanced.Json\AutoRest.CSharp.LoadBalanced.Json.csproj" />
   </ItemGroup>
 
   <ItemGroup>

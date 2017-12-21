@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Authors>Microsoft</Authors>
@@ -6,7 +6,7 @@
     <DelaySign>true</DelaySign>
     <AssemblyName>AutoRest.CSharp.LoadBalanced.Tests</AssemblyName>
     <AssemblyOriginatorKeyFile>../../../Tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <PackageId>AutoRest.CSharp.LoadBalanced.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <PackageTags>Microsoft AutoRest ClientRuntime REST</PackageTags>

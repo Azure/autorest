@@ -1,7 +1,7 @@
 ﻿{
   "plugins": {
     "Test": {
-      "type": "LoadBalancedPluginCs, AutoRest.CSharp.LoadBalanced"
+      "type": "LoadBalancedLegacyPluginCs, AutoRest.CSharp.LoadBalanced.Legacy"
     }
   },
   "modelers": {

@@ -17,6 +17,7 @@
   </metadata>
   <files>
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.exe" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.exe.config" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.AzureResourceSchema.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.CompositeSwagger.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.Core.dll" target="tools" />
@@ -33,5 +34,21 @@
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.TypeScript.SuperAgent.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.CSharp.LoadBalanced.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.CSharp.LoadBalanced.Json.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.CSharp.LoadBalanced.Legacy.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.json" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.CodeAnalysis.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.CodeAnalysis.CSharp.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.CodeAnalysis.CSharp.Workspaces.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.CodeAnalysis.Workspaces.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.CodeAnalysis.Workspaces.Desktop.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Collections.Immutable.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.TypedParts.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.Runtime.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.Hosting.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.Convention.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.AttributedModel.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Reflection.Metadata.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.Rest.ClientRuntime.Azure.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.Rest.ClientRuntime.dll" target="tools" />
   </files>
 </package>  
