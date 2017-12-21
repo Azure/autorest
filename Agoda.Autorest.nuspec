@@ -40,5 +40,12 @@
     <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.CodeAnalysis.CSharp.Workspaces.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.CodeAnalysis.Workspaces.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.CodeAnalysis.Workspaces.Desktop.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Collections.Immutable.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.TypedParts.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.Runtime.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.Hosting.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.Convention.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.AttributedModel.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/System.Reflection.Metadata.dll" target="tools" />
   </files>
 </package>  
