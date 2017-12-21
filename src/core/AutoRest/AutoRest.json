@@ -6,6 +6,9 @@
     "AutoRest.CSharp.LoadBalanced": {
       "type": "LoadBalancedPluginCs, AutoRest.CSharp.LoadBalanced"
     },
+    "LoadBalancedLegacy": {
+      "type": "LoadBalancedCodeGeneratorCs, AutoRest.CSharp.LoadBalanced.Legacy"
+    },
     "CSharp": {
       "type": "PluginCs, AutoRest.CSharp"
     },
@@ -56,6 +59,9 @@
     },
     "LoadBalancedCodeGeneratorCs": {
       "type": "LoadBalancedCodeGeneratorCs, AutoRest.CSharp.LoadBalanced"
+    },
+    "LoadBalancedLegacy": {
+      "type": "LoadBalancedCodeGeneratorCs, AutoRest.CSharp.LoadBalanced.Legacy"
     },
     "Ruby": {
       "type": "RubyCodeGenerator, AutoRest.Ruby"

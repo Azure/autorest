@@ -33,5 +33,7 @@
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.TypeScript.SuperAgent.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.CSharp.LoadBalanced.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.CSharp.LoadBalanced.Json.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.CSharp.LoadBalanced.Legacy.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.json" target="tools" />
   </files>
 </package>  

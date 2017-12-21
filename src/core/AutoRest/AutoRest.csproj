@@ -28,9 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="AutoRest.json">
+    <Content Include="AutoRest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\generator\AutoRest.CSharp.LoadBalanced.Legacy\AutoRest.CSharp.LoadBalanced.Legacy.csproj" />
     <ProjectReference Include="..\AutoRest.Core\AutoRest.Core.csproj" />
     <ProjectReference Include="..\..\modeler\AutoRest.Swagger\AutoRest.Swagger.csproj" />
     <ProjectReference Include="..\..\modeler\AutoRest.CompositeSwagger\AutoRest.CompositeSwagger.csproj" />
