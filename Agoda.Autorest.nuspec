@@ -35,7 +35,6 @@
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.CSharp.LoadBalanced.Json.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.CSharp.LoadBalanced.Legacy.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.json" target="tools" />
-    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.CodeAnalysis.dll" target="tools" />
-    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.CodeAnalysis.CSharp.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.*.dll" target="tools" />
   </files>
 </package>  
