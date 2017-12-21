@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.LoadBalanced.Legacy.Tests
 
                 var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
-                var plugin = new LoadBalancedPluginCs();
+                var plugin = new LoadBalancedLegacyPluginCs();
 
                 using (plugin.Activate())
                 {

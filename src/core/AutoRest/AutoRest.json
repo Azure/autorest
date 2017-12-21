@@ -6,8 +6,8 @@
     "AutoRest.CSharp.LoadBalanced": {
       "type": "LoadBalancedPluginCs, AutoRest.CSharp.LoadBalanced"
     },
-    "LoadBalancedLegacy": {
-      "type": "LoadBalancedCodeGeneratorCs, AutoRest.CSharp.LoadBalanced.Legacy"
+    "AutoRest.CSharp.LoadBalanced.Legacy": {
+      "type": "LoadBalancedLegacyPluginCs, AutoRest.CSharp.LoadBalanced.Legacy"
     },
     "CSharp": {
       "type": "PluginCs, AutoRest.CSharp"
@@ -15,35 +15,14 @@
     "Azure.CSharp": {
       "type": "PluginCsa, AutoRest.CSharp.Azure"
     },
-    "Ruby": {
-      "type": "PluginRb, AutoRest.Ruby"
-    },
-    "Azure.Ruby": {
-      "type": "PluginRba, AutoRest.Ruby.Azure"
-    },
     "NodeJS": {
       "type": "PluginJs, AutoRest.NodeJS"
     },
     "Azure.NodeJS": {
       "type": "PluginJsa, AutoRest.NodeJS.Azure"
     },
-    "Python": {
-      "type": "PluginPy, AutoRest.Python"
-    },
-    "Azure.Python": {
-      "type": "PluginPya, AutoRest.Python.Azure"
-    },
     "Go": {
       "type": "PluginGo, AutoRest.Go"
-    },
-    "Java": {
-      "type": "PluginJv, AutoRest.Java"
-    },
-    "Azure.Java": {
-      "type": "PluginJva, AutoRest.Java.Azure"
-    },
-    "Azure.Java.Fluent": {
-      "type": "PluginJvaf, AutoRest.Java.Azure.Fluent"
     },
     "AzureResourceSchema": {
       "type": "PluginArs, AutoRest.AzureResourceSchema"
@@ -61,13 +40,7 @@
       "type": "LoadBalancedCodeGeneratorCs, AutoRest.CSharp.LoadBalanced"
     },
     "LoadBalancedLegacy": {
-      "type": "LoadBalancedCodeGeneratorCs, AutoRest.CSharp.LoadBalanced.Legacy"
-    },
-    "Ruby": {
-      "type": "RubyCodeGenerator, AutoRest.Ruby"
-    },
-    "Azure.Ruby": {
-      "type": "AzureRubyCodeGenerator, AutoRest.Ruby.Azure"
+      "type": "LoadBalancedLegacyCodeGeneratorCs, AutoRest.CSharp.LoadBalanced.Legacy"
     },
     "CSharp": {
       "type": "CSharpCodeGenerator, AutoRest.CSharp"
@@ -83,21 +56,6 @@
     },
     "Azure.NodeJS": {
       "type": "AzureNodeJSCodeGenerator, AutoRest.NodeJS.Azure"
-    },
-    "Java": {
-      "type": "JavaCodeGenerator, AutoRest.Java"
-    },
-    "Azure.Java": {
-      "type": "AzureJavaCodeGenerator, AutoRest.Java.Azure"
-    },
-    "Azure.Java.Fluent": {
-      "type": "AzureJavaFluentCodeGenerator, AutoRest.Java.Azure.Fluent"
-    },
-    "Python": {
-      "type": "PythonCodeGenerator, AutoRest.Python"
-    },
-    "Azure.Python": {
-      "type": "AzurePythonCodeGenerator, AutoRest.Python.Azure"
     },
     "AzureResourceSchema": {
       "type": "AzureResourceSchemaCodeGenerator, AutoRest.AzureResourceSchema"

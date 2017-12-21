@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Authors>Agoda, Microsoft</Authors>
@@ -6,7 +6,7 @@
     <DelaySign>true</DelaySign>
     <AssemblyName>AutoRest.CSharp.LoadBalanced</AssemblyName>
     <AssemblyOriginatorKeyFile>../../../Tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>False</SignAssembly>
     <PackageId>AutoRest.CSharp.LoadBalanced</PackageId>
     <PackageTags>Microsoft LoadBalance AutoRest CSharp Generator</PackageTags>
     <PackageProjectUrl>https://github.com/Azure/AutoRest</PackageProjectUrl>
@@ -22,15 +22,10 @@
     <ProjectReference Include="..\..\core\AutoRest.Core\AutoRest.Core.csproj" />
     <ProjectReference Include="..\..\core\AutoRest.Extensions\AutoRest.Extensions.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="AutoRest.Core" Version="1.0.0-*" />
-    <PackageReference Include="AutoRest.Extensions" Version="1.0.0-*" />
-  </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
     <Reference Include="System.Net.Http" />
     <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <Import Project="..\..\..\tools\Autorest.xproj.targets" />
 

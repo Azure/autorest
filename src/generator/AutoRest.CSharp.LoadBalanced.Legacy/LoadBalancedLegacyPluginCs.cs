@@ -11,9 +11,9 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp.LoadBalanced.Legacy
 {
-    public sealed class LoadBalancedPluginCs :Plugin<GeneratorSettingsCs, ModelSerializer<CodeModelCs>, TransformerCs, LoadBalancedCodeGeneratorCs, CodeNamerCs, CodeModelCs>
+    public sealed class LoadBalancedLegacyPluginCs :Plugin<GeneratorSettingsCs, ModelSerializer<CodeModelCs>, TransformerCs, LoadBalancedLegacyCodeGeneratorCs, CodeNamerCs, CodeModelCs>
     {
-        public LoadBalancedPluginCs()
+        public LoadBalancedLegacyPluginCs()
         {
             Context = new Context
             {
