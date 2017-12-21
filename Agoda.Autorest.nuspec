@@ -17,6 +17,7 @@
   </metadata>
   <files>
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.exe" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.exe.config" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.AzureResourceSchema.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.CompositeSwagger.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/AutoRest.Core.dll" target="tools" />
@@ -47,5 +48,7 @@
     <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.Convention.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/System.Composition.AttributedModel.dll" target="tools" />
     <file src="src/core/AutoRest/bin/Debug/net451/System.Reflection.Metadata.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.Rest.ClientRuntime.Azure.dll" target="tools" />
+    <file src="src/core/AutoRest/bin/Debug/net451/Microsoft.Rest.ClientRuntime.dll" target="tools" />
   </files>
 </package>  
