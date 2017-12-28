@@ -236,7 +236,7 @@ namespace @Settings.Namespace
                 _retryCount = retryCount;
                 _settings = settings;
                 _verb = httpVerb;
-                _url = new Lazy<string>(() => GetUrl(restUrl, queryParameters));
+                _url = new Lazy<string>(() => GetUrl(httpVerb, restUrl, queryParameters));
                 _serializationSettings = serializationSettings;
                 _customHeaders = customHeaders;
                 _requestContent = new Lazy<byte[]>(() => body == null
@@ -305,19 +305,64 @@ namespace @Settings.Namespace
                 */
             }
 @EmptyLine
-            protected string GetUrl(string restUrl, Dictionary<string, object> queryParameters)
+            protected string GetUrl(Verbs verb, string restUrl, Dictionary<string, object> queryParameters)
             {
-                var url = restUrl;
+                var path = restUrl;
+                var query = new Dictionary<string, string>();
+
+                // Substitute the path parameters.
                 foreach (var parameterName in queryParameters.Keys)
                 {
                     var rawValue = queryParameters[parameterName];
-                    var jsonValue = SafeJsonConvert
-                        .SerializeObject(rawValue, _serializationSettings)
-                        .Trim('"');
+                    string jsonValue;
+
+                    // Booleans must be passed as true and false words, using Newtonsoft converter,
+                    // rather than 0 and 1 integers, using Microsoft converter.
+                    if (rawValue is bool)
+                    {
+                        jsonValue = JsonConvert.SerializeObject(rawValue);
+                    }
+                    else
+                    {
+                        jsonValue = SafeJsonConvert
+                            .SerializeObject(rawValue, _serializationSettings)
+                            .Trim('"');
+                    }
+
                     var urlValue = Uri.EscapeDataString(jsonValue);
-                    url = url.Replace($"{{{parameterName}}}", urlValue);
+                    var placeholder = $"{{{parameterName}}}";
+
+                    if (path.Contains(placeholder))
+                    {
+                        path = path.Replace(placeholder, urlValue);
+                    }
+                    else
+                    {
+                        query[parameterName] = urlValue;
+                    }
                 }
-                return url;
+
+                var uriBuilder = new UriBuilder(null, null, -1, path);
+
+                // Append the remaining parameters as query string if this is a GET request.
+                if (verb == "GET")
+                {
+
+                    uriBuilder.Query = string.Join("&", query.Select(parameter =>
+                    {
+                        if (String.IsNullOrEmpty(parameter.Value) || parameter.Value == "null")
+                        {
+                            return null;
+                        }
+
+                        var name = HttpUtility.UrlEncode(parameter.Key);
+                        var value = HttpUtility.UrlEncode(parameter.Value);
+                        return $"{name}={value}";
+
+                    }).Where(q => q != null));
+                }
+
+                return uriBuilder.ToString();
             }
         }
     }
