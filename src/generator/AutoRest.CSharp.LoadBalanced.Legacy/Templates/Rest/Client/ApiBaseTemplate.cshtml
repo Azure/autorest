@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Web;
 using Newtonsoft.Json;
 using Microsoft.Rest;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Agoda.RoundRobin;
 using Agoda.RoundRobin.Constants;
 using Microsoft.Rest.Serialization;
 using Agoda.Http.Client.WinHttp;
+
 @EmptyLine
 namespace @Settings.Namespace
 {
@@ -95,16 +97,12 @@ namespace @Settings.Namespace
                     }
                 });
 @EmptyLine
-        protected async Task InvokeNewRequest(
-            string metricName,
-            RequestParameters parameters)
+        protected async Task InvokeNewRequest(string metricName, RequestParameters parameters)
         {
             await InvokeNewRequest<dynamic>(metricName, parameters);
         }
 @EmptyLine
-        protected async Task<TResult> InvokeNewRequest<TResult>(
-           string metricName,
-           RequestParameters parameters)
+        protected async Task<TResult> InvokeNewRequest<TResult>(string metricName, RequestParameters parameters)
         {
             var watch = Stopwatch.StartNew();
             ExecuteResult executeResult = null;
@@ -345,7 +343,7 @@ namespace @Settings.Namespace
                 var uriBuilder = new UriBuilder(null, null, -1, path);
 
                 // Append the remaining parameters as query string if this is a GET request.
-                if (verb == "GET")
+                if (verb == Verbs.GET)
                 {
 
                     uriBuilder.Query = string.Join("&", query.Select(parameter =>
