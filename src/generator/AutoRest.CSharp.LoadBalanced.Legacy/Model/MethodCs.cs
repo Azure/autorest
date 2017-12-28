@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.LoadBalanced.Legacy.Model
             List<string> declarations = new List<string>();
             foreach (var parameter in LocalParameters)
             {
-                string format = (parameter.IsRequired ? "[Description(\"{3}\")] {0} {1}" : "{0} {1} = {2}");
+                string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
 
                 string defaultValue = $"default({parameter.ModelTypeName})";
                 if (!string.IsNullOrEmpty(parameter.DefaultValue) && parameter.ModelType is PrimaryType)
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.LoadBalanced.Legacy.Model
                     defaultValue = parameter.DefaultValue;
                 }
                 declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                    format, parameter.ModelTypeName, parameter.Name, defaultValue, parameter.Documentation.EscapeXmlComment()));
+                    format, parameter.ModelTypeName, parameter.Name, defaultValue));
             }
 
             if (addCustomHeaderParameters)
@@ -148,7 +148,7 @@ namespace AutoRest.CSharp.LoadBalanced.Legacy.Model
                 return $"{typeName}<{OperationResponseType}>";
             }
 
-            return typeName;
+            return $"{typeName}<{wrapperTypeName}>";
         }
 
         public virtual string GetOperationResponseReturnTypeStringForMethodName(string typeName = "Task") {
@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.LoadBalanced.Legacy.Model
                 return $"{typeName}<{wrapperTypeName}<{OperationResponseType}>>";
             }
 
-            return typeName;
+            return $"{typeName}<{wrapperTypeName}>";
         }
 
         public string OperationResponseType

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Web;
 using Newtonsoft.Json;
 using Microsoft.Rest;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using Agoda.RoundRobin;
 using Agoda.RoundRobin.Constants;
 using Microsoft.Rest.Serialization;
 using Agoda.Http.Client.WinHttp;
+
 @EmptyLine
 namespace @Settings.Namespace
 {
@@ -95,16 +97,12 @@ namespace @Settings.Namespace
                     }
                 });
 @EmptyLine
-        protected async Task InvokeNewRequest(
-            string metricName,
-            RequestParameters parameters)
+        protected async Task InvokeNewRequest(string metricName, RequestParameters parameters)
         {
             await InvokeNewRequest<dynamic>(metricName, parameters);
         }
 @EmptyLine
-        protected async Task<TResult> InvokeNewRequest<TResult>(
-           string metricName,
-           RequestParameters parameters)
+        protected async Task<TResult> InvokeNewRequest<TResult>(string metricName, RequestParameters parameters)
         {
             var watch = Stopwatch.StartNew();
             ExecuteResult executeResult = null;
@@ -307,17 +305,57 @@ namespace @Settings.Namespace
 @EmptyLine
             protected string GetUrl(string restUrl, Dictionary<string, object> queryParameters)
             {
-                var url = restUrl;
+                var path = restUrl;
+                var query = new Dictionary<string, string>();
+
+                // Substitute the path parameters.
                 foreach (var parameterName in queryParameters.Keys)
                 {
                     var rawValue = queryParameters[parameterName];
-                    var jsonValue = SafeJsonConvert
-                        .SerializeObject(rawValue, _serializationSettings)
-                        .Trim('"');
+                    string jsonValue;
+
+                    // Booleans must be passed as true and false words, using Newtonsoft converter,
+                    // rather than 0 and 1 integers, using Microsoft converter.
+                    if (rawValue is bool)
+                    {
+                        jsonValue = JsonConvert.SerializeObject(rawValue);
+                    }
+                    else
+                    {
+                        jsonValue = SafeJsonConvert
+                            .SerializeObject(rawValue, _serializationSettings)
+                            .Trim('"');
+                    }
+
                     var urlValue = Uri.EscapeDataString(jsonValue);
-                    url = url.Replace($"{{{parameterName}}}", urlValue);
+                    var placeholder = $"{{{parameterName}}}";
+
+                    if (path.Contains(placeholder))
+                    {
+                        path = path.Replace(placeholder, urlValue);
+                    }
+                    else
+                    {
+                        query[parameterName] = urlValue;
+                    }
                 }
-                return url;
+
+                var uriBuilder = new UriBuilder(null, null, -1, path);
+
+                uriBuilder.Query = string.Join("&", query.Select(parameter =>
+                {
+                    if (String.IsNullOrEmpty(parameter.Value) || parameter.Value == "null")
+                    {
+                        return null;
+                    }
+
+                    var name = HttpUtility.UrlEncode(parameter.Key);
+                    var value = HttpUtility.UrlEncode(parameter.Value);
+                    return $"{name}={value}";
+
+                }).Where(q => q != null));
+                
+                return uriBuilder.ToString();
             }
         }
     }
