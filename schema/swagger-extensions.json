@@ -413,6 +413,9 @@
       ]
     },
     "response": {
+      "x-ms-error-response": {
+        "$ref": "#/definitions/xmsErrorResponse"
+      },
       "type": "object",
       "required": [
         "description"
@@ -1644,6 +1647,11 @@
     },
     "xmsOData": {
       "type": "string"
+    },
+    "xmsErrorResponse": {
+      "description": "Indicates whether the response is an error response.",
+      "type": "boolean",
+      "default": false
     },
     "xmsPageable": {
       "type": "object",
