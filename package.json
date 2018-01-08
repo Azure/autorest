@@ -24,9 +24,6 @@
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
   "main": "./src/AutoRest/AutoRest.js",
-  "bin": {
-    "autorest": "./bin/autorest"
-  },
   "engines": {
     "node": ">=7.10.0"
   },
