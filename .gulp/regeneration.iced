@@ -37,6 +37,7 @@ task 'regenerate', 'regenerate samples', (done) ->
                 sed "-i", /mem:\/\/\/[^: ]*/g, "mem", file                  # memory URIs (depend on timing)
                 (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file) # minify exception stack traces
                 (cat file).replace(/.* AutoRest extension '.*\n/g, "").to(file) # remove extension messages
+                (cat file).replace(/.* -> .*\n/g, "").to(file) # remove bin install messages (npm 5.6.0+)
                 (cat file).replace(/Recording package path.*\n/g, "").to(file)  # dotnet-2.0.0 installation message
                 (sort file).to(file) if file.endsWith("stdout.txt") || file.endsWith("stderr.txt")
               )
