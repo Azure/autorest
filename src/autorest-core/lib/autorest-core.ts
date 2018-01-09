@@ -114,7 +114,10 @@ export class AutoRest extends EventEmitter {
             this.Finished.Dispatch(true);
             return true;
           } else {
-            return new Exception("No input files provided.\n\nUse --help to get help information.");
+
+            if ((view.Raw as any)["perform-load"] !== false) {
+              return new Exception("No input files provided.\n\nUse --help to get help information.");
+            }
           }
         }
 
