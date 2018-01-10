@@ -140,9 +140,9 @@ ${Stringify(config).replace(/^---\n/, "")}
       view.Message({
         Channel: Channel.Warning,
         Text:
-        `The parameter ${arg} looks like it was meant for the new CLI! ` +
-        "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
-        "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."
+          `The parameter ${arg} looks like it was meant for the new CLI! ` +
+          "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
+          "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."
       });
     }
   }
@@ -200,23 +200,27 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
   return result;
 }
 
+function outputMessage(instance: AutoRest, m: Message, errorCounter: () => void) {
+  switch (m.Channel) {
+    case Channel.Debug:
+    case Channel.Verbose:
+    case Channel.Information:
+      console.log(color(m.FormattedMessage || m.Text));
+      break;
+    case Channel.Warning:
+      console.log(color(m.FormattedMessage || m.Text));
+      break;
+    case Channel.Error:
+    case Channel.Fatal:
+      errorCounter();
+      console.error(color(m.FormattedMessage || m.Text));
+      break;
+  }
+}
+
 function subscribeMessages(api: AutoRest, errorCounter: () => void) {
   api.Message.Subscribe((_, m) => {
-    switch (m.Channel) {
-      case Channel.Debug:
-      case Channel.Verbose:
-      case Channel.Information:
-        console.log(color(m.FormattedMessage || m.Text));
-        break;
-      case Channel.Warning:
-        console.log(color(m.FormattedMessage || m.Text));
-        break;
-      case Channel.Error:
-      case Channel.Fatal:
-        errorCounter();
-        console.error(color(m.FormattedMessage || m.Text));
-        break;
-    }
+    return outputMessage(_, m, errorCounter);
   });
 }
 
@@ -466,16 +470,15 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
   return exitcode;
 }
 
-
 async function batch(api: AutoRest): Promise<void> {
   const config = await api.view;
   const batchTaskConfigReference: any = {};
   api.AddConfiguration(batchTaskConfigReference);
   for (const batchTaskConfig of config.GetEntry("batch" as any)) {
-    config.Message({
+    outputMessage(api, {
       Channel: Channel.Information,
-      Text: `Processing batch task - ${batchTaskConfig} .`
-    });
+      Text: `Processing batch task - ${JSON.stringify(batchTaskConfig)} .`
+    }, () => { });
 
     // update batch task config section
     for (const key of Object.keys(batchTaskConfigReference)) delete batchTaskConfigReference[key];
@@ -484,10 +487,10 @@ async function batch(api: AutoRest): Promise<void> {
 
     const result = await api.Process().finish;
     if (result !== true) {
-      config.Message({
+      outputMessage(api, {
         Channel: Channel.Error,
-        Text: `Failure during batch task - ${batchTaskConfig} -- ${result}.`
-      });
+        Text: `Failure during batch task - ${JSON.stringify(batchTaskConfig)} -- ${result}.`
+      }, () => { });
       throw result;
     }
   }
