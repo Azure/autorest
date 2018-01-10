@@ -14,7 +14,7 @@ After generating code into an existing project directory, open the Solution Expl
 Right-click on the `Generated` folder and select `Include In Project` from the context menu.
 ![Include In Project](../images/clients-proj-setup-include.png)
 
-### Add the ClientRuntime nuget Package
+### Add the ClientRuntime Nuget Package
 AutoRest generates code that depends on the *Microsoft.Rest.ClientRuntime* nuget package. This package includes a dependency on *Newtonsoft.Json.Net*. Depending on your project profile, nuget may pull down several additional packages dependencies.
 
 Use the Package Manager UI to add *Microsoft.Rest.ClientRuntime*.
