@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // load modules from static linker filesystem.
 if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
-  require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
+  require('../static-loader.js').load(`${__dirname}/../static_modules.fs`)
 }
 
 // Ensure that if we're running in an electron process, that things will work as if it were node.
@@ -107,7 +107,7 @@ class Result {
     const diagnostics = this.service.getDiagnosticCollection(this.configurationUrl);
     diagnostics.send();
     diagnostics.clear(send);
-    
+
     for (const f of this.files) {
       const diagnostics = this.service.getDiagnosticCollection(f);
       // make sure that the last of the last is sent
@@ -145,7 +145,7 @@ class Result {
     // now, update the status
     Result.active++;
     this.updateStatus();
-    try{
+    try {
       // set configuration
       await this.resetConfiguration(this.service.settings.configuration)
 
@@ -165,15 +165,15 @@ class Result {
 
         await this.busy;
       };
-    } catch(E) {
+    } catch (E) {
       // clear diagnostics for next run
       this.clearDiagnostics();
 
-       // and mark us done!
-       Result.active--;
-       this.updateStatus();
-       this.ready();
-       this.queued = false;
+      // and mark us done!
+      Result.active--;
+      this.updateStatus();
+      this.ready();
+      this.queued = false;
     }
   }
 
