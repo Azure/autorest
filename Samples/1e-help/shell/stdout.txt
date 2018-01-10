@@ -274,5 +274,10 @@ Overall Verbosity
 Overall Verbosity
 Overall Verbosity
 Overall Verbosity
+Processing batch task - {"azure-validator":true} .
+Processing batch task - {"azureresourceschema":true,"csharp":true,"go":true,"java":true,"nodejs":true,"php":true,"python":true,"ruby":true,"typescript":true,"azure-validator":true,"model-validator":true,"semantic-validator":true} .
+Processing batch task - {"csharp":true,"azure-arm":true,"fluent":true} .
+Processing batch task - {"csharp":true} .
+Processing batch task - {} .
 Python Generator (activated by --python)
 Usage: autorest [configuration-file.md] [...options]
