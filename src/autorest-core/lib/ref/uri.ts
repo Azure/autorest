@@ -284,8 +284,7 @@ export function WriteString(fileUri: string, data: string): Promise<void> {
  */
 import { rmdir } from "@microsoft.azure/async-io";
 export async function ClearFolder(folderUri: string): Promise<void> {
-  const path = FileUriToLocalPath(folderUri);
-  return rmdir(path);
+  return await rmdir(FileUriToLocalPath(folderUri));
 }
 
 export function FileUriToPath(fileUri: string): string {
