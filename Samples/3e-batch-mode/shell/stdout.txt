@@ -1,5 +1,4 @@
 (C) 2017 Microsoft Corporation.
-AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
 Processing batch task - {"activate-csharp":true,"output-folder":"output1"} .
 Processing batch task - {"java":true,"output-folder":"output2"} .

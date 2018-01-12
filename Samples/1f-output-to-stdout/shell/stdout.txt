@@ -41,5 +41,4 @@
 }
 }
 }
-AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest

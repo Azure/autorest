@@ -1,5 +1,4 @@
 (C) 2017 Microsoft Corporation.
-AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
 WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/beginCreateOrUpdate'
 WARNING: Did not generate example 'Create load balancer' of 'loadBalancers/beginCreateOrUpdate'
