@@ -248,7 +248,6 @@
 --output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
 --output-folder=<string>      target folder for generated artifacts; default: "<base folder>/generated"
 --package-name=<string>       Distribution package name (i.e. PyPI). Impact base folder and UserAgent
-(C) 2017 Microsoft Corporation.
 C# Generator (activated by --csharp)
 C# Generator (activated by --csharp)
 C# Generator (activated by --csharp)

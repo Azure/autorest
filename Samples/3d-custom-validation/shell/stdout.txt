@@ -1,7 +1,6 @@
     - trans_input?mem:1:0
     - trans_input?mem:1:0
     - trans_input?mem:1:0
-(C) 2017 Microsoft Corporation.
 https://aka.ms/autorest
 WARNING: Custom test failed
 WARNING: Custom test failed

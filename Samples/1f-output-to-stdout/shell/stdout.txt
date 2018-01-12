@@ -26,7 +26,6 @@
   "uri": "stdout:///ICowbellOperations.cs",
   "uri": "stdout:///Models/Cowbell.cs",
 "sources": []
-(C) 2017 Microsoft Corporation.
 {
 {
 {

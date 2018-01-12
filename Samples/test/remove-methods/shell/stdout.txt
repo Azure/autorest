@@ -1,4 +1,3 @@
-(C) 2017 Microsoft Corporation.
 https://aka.ms/autorest
 Processing batch task - {"output-folder":"Client"} .
 Processing batch task - {"output-folder":"ClientFancy","directive":[{"remove-operation":"Cowbell_Add"}],"output-artifact":"swagger-document.yaml"} .

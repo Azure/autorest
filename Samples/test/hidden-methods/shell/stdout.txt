@@ -1,2 +1,1 @@
-(C) 2017 Microsoft Corporation.
 https://aka.ms/autorest
