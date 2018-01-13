@@ -87,8 +87,8 @@ args["preview"] = args["preview"] || args["prerelease"];
 
 // Suppress the banner if the message-format is set to something other than regular.
 if ((!args["message-format"]) || args["message-format"] === "regular") {
-  console.log(chalk.green.bold.underline(`AutoRest code generation utility [version: ${chalk.white.bold(pkgVersion)}]`));
-  console.log(color(`(C) 2017 **Microsoft Corporation.**`));
+  console.log(chalk.green.bold.underline(`AutoRest code generation utility [version: ${chalk.white.bold(pkgVersion)}; node: ${chalk.white.bold(process.version)}]`));
+  console.log(color(`(C) 2018 **Microsoft Corporation.**`));
   console.log(chalk.blue.bold.underline(`https://aka.ms/autorest`));
 }
 

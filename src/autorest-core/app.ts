@@ -161,11 +161,12 @@ ${Stringify(config).replace(/^---\n/, "")}
  * Current AutoRest
  */
 
-type CommandLineArgs = { configFileOrFolder?: string, switches: any[] };
+type CommandLineArgs = { configFileOrFolder?: string, switches: any[], rawSwitches: any };
 
 function parseArgs(autorestArgs: string[]): CommandLineArgs {
   const result: CommandLineArgs = {
-    switches: []
+    switches: [],
+    rawSwitches: {}
   };
 
   for (const arg of autorestArgs) {
@@ -194,6 +195,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
     // quote numbers with decimal point, we don't have any use for non-integer numbers (while on the other hand version strings may look like decimal numbers)
     rawValue = !isNaN(parseFloat(rawValue)) && rawValue.includes('.') ? `'${rawValue}'` : rawValue;
     const value = Parse(rawValue);
+    result.rawSwitches[key] = value;
     result.switches.push(CreateObject(key.split("."), value));
   }
 
@@ -286,6 +288,9 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
   // parse the args from the command line
   args = parseArgs(autorestArgs);
 
+  if ((!args.rawSwitches["message-format"]) || args.rawSwitches["message-format"] === "regular") {
+    console.log(color(`> Loading AutoRest core      '${__dirname}' (${require("../package.json").version})`));
+  }
   // identify where we are starting from.
   const currentDirUri = CreateFolderUri(currentDirectory());
 
