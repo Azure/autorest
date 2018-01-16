@@ -234,7 +234,7 @@ namespace @Settings.Namespace
                 _retryCount = retryCount;
                 _settings = settings;
                 _verb = httpVerb;
-                _url = new Lazy<string>(() => GetUrl(restUrl, queryParameters));
+                _url = new Lazy<string>(() => GetUrl(httpVerb, restUrl, queryParameters));
                 _serializationSettings = serializationSettings;
                 _customHeaders = customHeaders;
                 _requestContent = new Lazy<byte[]>(() => body == null
@@ -303,7 +303,7 @@ namespace @Settings.Namespace
                 */
             }
 @EmptyLine
-            protected string GetUrl(string restUrl, Dictionary<string, object> queryParameters)
+            protected string GetUrl(Verbs verb, string restUrl, IDictionary<string, object> queryParameters)
             {
                 var path = restUrl;
                 var query = new Dictionary<string, string>();
@@ -342,19 +342,17 @@ namespace @Settings.Namespace
 
                 var uriBuilder = new UriBuilder(null, null, -1, path);
 
-                uriBuilder.Query = string.Join("&", query.Select(parameter =>
+                // Append the remaining parameters as query string if this is a GET request.
+                if (verb == Verbs.GET)
                 {
-                    if (String.IsNullOrEmpty(parameter.Value) || parameter.Value == "null")
+                    uriBuilder.Query = string.Join("&", query.Select(parameter =>
                     {
-                        return null;
-                    }
+                        var name = HttpUtility.UrlEncode(parameter.Key);
+                        var value = HttpUtility.UrlEncode(parameter.Value);
+                        return $"{name}={value}";
+                    }));
+                }
 
-                    var name = HttpUtility.UrlEncode(parameter.Key);
-                    var value = HttpUtility.UrlEncode(parameter.Value);
-                    return $"{name}={value}";
-
-                }).Where(q => q != null));
-                
                 return uriBuilder.ToString();
             }
         }
