@@ -51,7 +51,7 @@
     "entrypoints": [],
     "dependencies": {
       "@microsoft.azure/async-io": "~2.0.7",
-      "@microsoft.azure/extension": "~2.0.22",
+      "@microsoft.azure/extension": "~2.0.24",
       "vscode-languageserver": "3.4.3",
       "commonmark": "^0.27.0",
       "file-url": "^2.0.2",
