@@ -631,17 +631,28 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
   private async getConfiguration(documentUri: string, generateFake: boolean = true): Promise<string> {
     // let folder = ResolveUri(documentUri, ".");
-    let configFiles = await Configuration.DetectConfigurationFiles(this, documentUri, undefined, true);
+    let configFiles:Array<string> = [];
 
-    // is the document a config file?
-    if (configFiles.length === 1 && configFiles[0] == documentUri) {
-      return documentUri;
+    try {
+      // passing a file that isn't a config file will throw now. 
+      configFiles = await Configuration.DetectConfigurationFiles(this, documentUri, undefined, true);
+
+      // is the document a config file?
+      if (configFiles.length === 1 && configFiles[0] === documentUri) {
+        return documentUri;
+      } 
+    } catch {
+      // the URI is a file, and it wasn't a config file. Good to know.
     }
 
     if (configFiles.length === 0) {
       // this didn't find anything at all.
       // maybe try to ask for the parent folder's files
-      configFiles = await Configuration.DetectConfigurationFiles(this, ParentFolderUri(documentUri), undefined, true);
+      try {
+        configFiles = await Configuration.DetectConfigurationFiles(this, ParentFolderUri(documentUri), undefined, true);
+      } catch {
+        // shhh. just let it go. 
+      }
     }
 
     // is there a config file that contains the document as an input?
