@@ -97,6 +97,10 @@ namespace AutoRest.CSharp.LoadBalanced.Legacy
             var apiBaseCsPath = "ApiBase.cs";
             await Write(apiBaseTemplate, apiBaseCsPath);
 
+            var badRequestExceptionTemplate = new BadRequestExceptionTemplate();
+            var badRequestPath = "BadRequestException.cs";
+            await Write(badRequestExceptionTemplate, badRequestPath);
+
             // operations
             foreach (var methodGroup in methodGroups)
             {

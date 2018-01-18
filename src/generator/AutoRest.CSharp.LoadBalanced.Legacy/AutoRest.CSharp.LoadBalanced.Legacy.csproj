@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Authors>Agoda, Microsoft</Authors>
@@ -34,6 +34,9 @@
 
   <ItemGroup>
     <None Update="Templates\Rest\Client\ApiBaseTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+    </None>
+    <None Update="Templates\Rest\Client\BadRequestExceptionTemplate.cshtml">
       <Generator>RazorGenerator</Generator>
     </None>
     <None Update="Templates\Rest\Client\BrokenRuleTemplate.cshtml">

@@ -16,5 +16,17 @@ namespace @Settings.Namespace
 		public string Value { get; set; }
 
 		public int ErrorCode { get; set; }
+
+        public int Code { get; set; }
 	}
+
+    public class BrokenRules
+    {
+        public BrokenRule[] ValidationErrors { get; set; }
+    }
+
+    public class ValidationError
+    {
+        public BrokenRules ValidationErrors { get; set; }
+    }
 }

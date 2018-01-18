@@ -94,6 +94,10 @@ public async @(Model.OperationResponseReturnTypeStringForMethodName) @(Model.Nam
         response.Result = result;
     }
     }
+    catch(BadRequestException ex)
+    {
+        response.BrokenRules = ex.BrokenRules.ValidationErrors.ValidationErrors.ToList();
+    }
     catch (Exception ex)
     {
         response.BrokenRules.Add(new BrokenRule() { Description = ex.Message, Value = ex.Message });
