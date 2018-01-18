@@ -606,23 +606,25 @@ export class Configuration {
   }
 
   public static async shutdown() {
-    AutoRestExtension.killAll();
+    try {
+      AutoRestExtension.killAll();
 
-    // once we shutdown those extensions, we should shutdown the EM too. 
-    const extMgr = await Configuration.extensionManager;
-    extMgr.dispose();
+      // once we shutdown those extensions, we should shutdown the EM too. 
+      const extMgr = await Configuration.extensionManager;
+      extMgr.dispose();
 
-    // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
-    Configuration.extensionManager = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")))
+      // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
+      Configuration.extensionManager = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")))
 
-    for (const each in loadedExtensions) {
-      const ext = loadedExtensions[each];
-      if (ext.autorestExtension.hasValue) {
-        const extension = await ext.autorestExtension;
-        extension.kill();
-        delete loadedExtensions[each];
+      for (const each in loadedExtensions) {
+        const ext = loadedExtensions[each];
+        if (ext.autorestExtension.hasValue) {
+          const extension = await ext.autorestExtension;
+          extension.kill();
+          delete loadedExtensions[each];
+        }
       }
-    }
+    } catch { }
   }
 
   public async CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView> {
