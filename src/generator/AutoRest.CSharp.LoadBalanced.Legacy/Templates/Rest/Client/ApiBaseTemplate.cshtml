@@ -14,6 +14,8 @@ using Agoda.RoundRobin;
 using Agoda.RoundRobin.Constants;
 using Microsoft.Rest.Serialization;
 using Agoda.Http.Client.WinHttp;
+using System.Web;
+using AutoRest.CSharp.LoadBalanced.Json;
 
 @EmptyLine
 namespace @Settings.Namespace
@@ -122,13 +124,20 @@ namespace @Settings.Namespace
 
                 executeResult = await request.ExecuteAsync();
 
-                if (!executeResult.IsOK)
-                {
-                    throw executeResult.GetExeptions();
-                }
-
                 var statusCode = executeResult.Status;
                 var responseContent = executeResult.Results;
+
+                if (!executeResult.IsOK)
+                {
+                    switch (statusCode)
+                    {
+                        case 400:
+                            var brokenRulesDto = JsonConvert.DeserializeObject<ValidationError>(responseContent, DeserializationSettings);
+                            throw new BadRequestException(brokenRulesDto);
+                        default:
+                            throw executeResult.GetExeptions();
+                    }
+                }
 
                 if (statusCode != 200)
                 {
