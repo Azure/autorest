@@ -434,6 +434,7 @@ export interface AutoRestConfigurationImpl {
         [extensionName: string]: string;
     };
     "require"?: string[] | string;
+    "try-require"?: string[] | string;
     "help"?: any;
     "vscode"?: any;
     "override-info"?: any;
@@ -508,7 +509,7 @@ export class ConfigurationView {
         source: string;
         fullyQualified: string;
     }>;
-    readonly IncludedConfigurationFiles: string[];
+    IncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<string[]>;
     readonly Directives: DirectiveView[];
     readonly InputFileUris: string[];
     readonly OutputFolderUri: string;
