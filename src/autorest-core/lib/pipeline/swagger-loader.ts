@@ -350,7 +350,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
   const uniqueVersion: boolean = distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.version)).length === 1;
 
   if (candidateTitles.length === 0) throw new Error(`No 'title' in provided OpenAPI definition(s).`);
-  if (candidateTitles.length > 1) throw new Error(`No unique 'title' across OpenAPI definitions: ${candidateTitles.map(x => `'${x}'`).join(", ")}. Please adjust or provide an override.`);
+  if (candidateTitles.length > 1) throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${candidateTitles.map(x => `'${x}'`).join(", ")}. Please adjust or provide an override (--title=...).`);
   if (candidateDescriptions.length !== 1) candidateDescriptions.splice(0, candidateDescriptions.length);
 
   // prepare component Swaggers (override info, lift version param, ...)
