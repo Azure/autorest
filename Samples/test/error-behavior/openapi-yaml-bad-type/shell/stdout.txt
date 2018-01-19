@@ -1,2 +1,2 @@
 https://aka.ms/autorest
-Process() Cancelled due to exception : Plugin imodeler1 reported failure.
+Process() cancelled due to exception : Plugin imodeler1 reported failure.
