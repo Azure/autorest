@@ -33,6 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\ycs.agoda.com\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <None Update="Templates\Rest\Client\ApiBaseTemplate.cshtml">
       <Generator>RazorGenerator</Generator>
     </None>

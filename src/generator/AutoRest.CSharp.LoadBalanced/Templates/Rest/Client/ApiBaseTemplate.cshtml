@@ -13,6 +13,31 @@ using Microsoft.Rest.Serialization;
 namespace @Settings.Namespace
 {
 @EmptyLine
+    public interface IApiBaseConfig
+    {
+        string name { get; set; }
+
+        List<ServerSettings> settings { get; set; }
+
+        TimeSpan? timeout { get; set; }
+
+        int retryCount { get; set; }
+
+        JsonSerializerSettings serializationSettings { get; set; }
+
+        JsonSerializerSettings deserializationSettings { get; set; }
+    }
+
+    public class ApiBaseConfig : IApiBaseConfig
+    {
+        public string name { get; set; }
+        public List<ServerSettings> settings { get; set; }
+        public TimeSpan? timeout { get; set; }
+        public int retryCount { get; set; }
+        public JsonSerializerSettings serializationSettings { get; set; }
+        public JsonSerializerSettings deserializationSettings { get; set; }
+    }
+
     public abstract class ApiBase
     {
         private readonly List<ServerSettings> _settings;
@@ -22,20 +47,14 @@ namespace @Settings.Namespace
         private readonly int _retryCount;
         private readonly string _name;
 @EmptyLine
-        protected ApiBase(
-            string name, 
-            List<ServerSettings> settings, 
-            TimeSpan? timeout = null,
-            int retryCount = 1,
-            JsonSerializerSettings serializationSettings = null, 
-            JsonSerializerSettings deserializationSettings = null)
+        protected ApiBase(IApiBaseConfig apiBaseConfig)
         {
-            _name = name;
-            _timeout = timeout ?? TimeSpan.FromMilliseconds(1000);
-            _settings = settings;
-            _retryCount = retryCount;
-            _serializationSettings = serializationSettings;
-            _deserializationSettings = deserializationSettings;
+            _name = apiBaseConfig.name;
+            _timeout = apiBaseConfig.timeout ?? TimeSpan.FromMilliseconds(1000);
+            _settings = apiBaseConfig.settings;
+            _retryCount = apiBaseConfig.retryCount;
+            _serializationSettings = apiBaseConfig.serializationSettings;
+            _deserializationSettings = apiBaseConfig.deserializationSettings;
         }
 @EmptyLine
         public virtual JsonSerializerSettings SerializationSettings =>
@@ -207,14 +226,15 @@ namespace @Settings.Namespace
 @EmptyLine
             internal async Task<ExecuteResult> ExecuteAsync()
             {
-                var httpClient = new HttpClient(_name, _settings, JsonContentType, (int)_timeout.TotalMilliseconds, _retryCount, "");
+                var timeout = (int)_timeout.TotalMilliseconds;
+                var httpClient = new HttpClient(_name, _settings, JsonContentType, timeout, _retryCount, "");
 
                 var result = await httpClient.ExecuteAsync(
-                    _verb, 
-                    _url.Value, 
-                    _requestContent.Value, 
-                    false, 
-                    new ErrorList(), 
+                    _verb,
+                    _url.Value,
+                    _requestContent.Value,
+                    false,
+                    new ErrorList(),
                     true,
                     _customHeaders);
 

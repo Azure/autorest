@@ -8,7 +8,6 @@
 @using AutoRest.CSharp.LoadBalanced.Model
 @using AutoRest.Extensions
 @inherits Template<global::AutoRest.CSharp.LoadBalanced.Model.CompositeTypeCs>
-@Header("// ")
 @EmptyLine
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
@@ -104,7 +103,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 {
             @:@(property.Name) = @propName;
                 }
-            }            
+            }
 
         @:}
         }
@@ -130,7 +129,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:@WrapComment("/// ", property.GetFormattedPropertySummary())
         @:/// </summary>
             if(!string.IsNullOrEmpty(property.Summary) && !string.IsNullOrEmpty(property.Documentation))
-            { 
+            {
         @:/// <remarks>
         @:@WrapComment("/// ", property.Documentation)
         @:/// </remarks>
@@ -216,7 +215,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             @:}
             @:
             }
-            foreach (var property in Model.Properties.Where(p => !p.IsConstant 
+            foreach (var property in Model.Properties.Where(p => !p.IsConstant
                 && (p.Constraints.Any() || !(p.ModelType is PrimaryType))))
             {
                 anythingToValidate = true;
@@ -238,7 +237,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         {</text>
         foreach(var property in Model.Properties.Where(p => !p.IsConstant && !p.WasFlattened())) {<text>
         @if (property.IsNullable()) {<text>
-            if( null != @(property.Name) ) 
+            if( null != @(property.Name) )
             {</text>}
                 @if (property.ModelType is CompositeType) {<text>
                 result.Add(@(property.Name).XmlSerialize(new System.Xml.Linq.XElement( "@(property.XmlName)" )));</text>
@@ -273,7 +272,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 foreach( var value in @(property.Name) ){
                     seq.Add(value.XmlSerialize( new System.Xml.Linq.XElement( "@((property.ModelType as SequenceType).ElementXmlName)") ) );
                 }
-                result.Add(seq);</text>} 
+                result.Add(seq);</text>}
                 else {<text>
                 foreach( var value in @(property.Name) ){
                     result.Add(value.XmlSerialize( new System.Xml.Linq.XElement( "@property.XmlName") ) );
@@ -282,7 +281,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 foreach( var value in @(property.Name) ){
                     seq.Add(new System.Xml.Linq.XElement( "@((property.ModelType as SequenceType).ElementXmlName)", value ) );
                 }
-                result.Add(seq);</text>} 
+                result.Add(seq);</text>}
                 else {<text>
                 foreach( var value in @(property.Name) ){
                     result.Add(new System.Xml.Linq.XElement( "@property.XmlName", value ) );
@@ -321,13 +320,13 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         /// <summary>
         /// Deserializes an XML node to an instance of @Model.Name
         /// </summary>
-        internal static @Model.Name XmlDeserialize(string payload) 
+        internal static @Model.Name XmlDeserialize(string payload)
         {
             // deserialize to xml and use the overload to do the work
             return XmlDeserialize( System.Xml.Linq.XElement.Parse( payload ) );
-        }    
+        }
 
-        internal static @Model.Name XmlDeserialize(System.Xml.Linq.XElement payload) 
+        internal static @Model.Name XmlDeserialize(System.Xml.Linq.XElement payload)
         {
             var result = new @(Model.Name)();
         @if (Model.Properties.Any(p => !p.IsConstant && !p.WasFlattened() && p.XmlIsAttribute)) {<text>
@@ -342,17 +341,17 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             if( null != (attribute = payload.Attribute("@property.XmlName")))
             {
                 @if (property.ModelType is EnumType && !((EnumType)property.ModelType).ModelAsString) {<text>
-                
+
                 result.@(property.Name) =attribute.Value.Parse@(property.ModelType.Name)();
-                
-                </text>} else {<text> 
+
+                </text>} else {<text>
                 result.@(property.Name) = (@property.ModelTypeName)attribute;
                 </text>}
             }
             </text>
                 continue;
             }
-            
+
             var deserializerName = $"deserialize{property.Name}";
             var resultName = $"result{property.Name}";
 
@@ -365,8 +364,8 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             }</text>
         }
             return result;
-        } 
+        }
     </text>}
-    
+
     }
 }

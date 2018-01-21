@@ -1,6 +1,5 @@
 ﻿@using System.Linq
 @inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.CompositeTypeCs>
-@Header("// ")
 @EmptyLine
 namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
@@ -8,7 +7,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     /// <summary>
     @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
     /// </summary>
-#if !PORTABLE 
+#if !PORTABLE
     [System.Serializable]
 #endif
     public class @Model.ExceptionTypeDefinitionName : Microsoft.Rest.RestException
@@ -54,7 +53,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         {
         }
 @EmptyLine
-#if !PORTABLE 
+#if !PORTABLE
         /// <summary>
         /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
         /// </summary>
