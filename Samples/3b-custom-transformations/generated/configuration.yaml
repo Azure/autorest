@@ -47,6 +47,11 @@ output-artifact:
   - source-file-csharp
   - source-file-jsonrpcclient
 require: []
+try-require:
+  - readme.clear-output-folder.md
+  - readme.no-upgrade-check.md
+  - readme.skip-upgrade-check.md
+  - ./readme.csharp.md
 use: []
 clear-output-folder: {}
 use-extension:
