@@ -1,2 +1,2 @@
 https://aka.ms/autorest
-Process() Cancelled due to exception : Syntax errors encountered.
+Process() cancelled due to exception : Syntax errors encountered.
