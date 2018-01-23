@@ -45,6 +45,7 @@ export interface AutoRestConfigurationImpl {
   "message-format"?: "json" | "yaml" | "regular";
   "use-extension"?: { [extensionName: string]: string };
   "require"?: string[] | string;
+  "try-require"?: string[] | string;
   "help"?: any;
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
@@ -209,6 +210,7 @@ export class ConfigurationView {
       "input-file": [],
       "output-artifact": [],
       "require": [],
+      "try-require": [],
       "use": [],
     };
 
@@ -295,10 +297,31 @@ export class ConfigurationView {
     });
   }
 
-  public get IncludedConfigurationFiles(): string[] {
-    return From<string>(ValuesOf<string>(this.config["require"]))
-      .Select(each => this.ResolveAsPath(each))
-      .ToArray();
+  public async IncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<string[]> {
+    const result = new Array<string>();
+    for (const each of From<string>(ValuesOf<string>(this.config["require"]))) {
+      const path = this.ResolveAsPath(each);
+      if (!ignoreFiles.has(path)) {
+        result.push(this.ResolveAsPath(each));
+      }
+    }
+
+    // for try require, see if it exists before including it in the list.
+    for (const each of From<string>(ValuesOf<string>(this.config["try-require"]))) {
+      const path = this.ResolveAsPath(each);
+      try {
+        if (!ignoreFiles.has(path) && await fileSystem.ReadFile(path)) {
+          result.push(path);
+          continue;
+        }
+      } catch {
+        // skip it.
+      }
+      ignoreFiles.add(path);
+    }
+
+    // return the aggregate list of things we're supposed to include
+    return result;
   }
 
   public get Directives(): DirectiveView[] {
@@ -650,36 +673,39 @@ export class Configuration {
     }
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
-    while (true) {
-      const tmpView = createView();
-      const additionalConfigs = tmpView.IncludedConfigurationFiles.filter(ext => !addedConfigs.has(ext));
-      if (additionalConfigs.length === 0) {
-        break;
-      }
-      // acquire additional configs
-      for (const additionalConfig of additionalConfigs) {
-        try {
-          messageEmitter.Message.Dispatch({
-            Channel: Channel.Verbose,
-            Text: `Including configuration file '${additionalConfig}'`
-          });
-          addedConfigs.add(additionalConfig);
-          // merge config
-          const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
-          const blocks = await this.ParseCodeBlocks(
-            await inputView.ReadStrict(additionalConfig),
-            tmpView,
-            `require-config-${additionalConfig}`);
-          await addSegments(blocks);
-        } catch (e) {
-          messageEmitter.Message.Dispatch({
-            Channel: Channel.Fatal,
-            Text: `Failed to acquire 'require'd configuration '${additionalConfig}'`
-          });
-          throw e;
+    const includeFn = async () => {
+      while (true) {
+        const tmpView = createView();
+        const additionalConfigs = (await tmpView.IncludedConfigurationFiles(this.fileSystem, addedConfigs));
+        if (additionalConfigs.length === 0) {
+          break;
+        }
+        // acquire additional configs
+        for (const additionalConfig of additionalConfigs) {
+          try {
+            messageEmitter.Message.Dispatch({
+              Channel: Channel.Verbose,
+              Text: `> Including configuration file '${additionalConfig}'`
+            });
+            addedConfigs.add(additionalConfig);
+            // merge config
+            const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
+            const blocks = await this.ParseCodeBlocks(
+              await inputView.ReadStrict(additionalConfig),
+              tmpView,
+              `require-config-${additionalConfig}`);
+            await addSegments(blocks);
+          } catch (e) {
+            messageEmitter.Message.Dispatch({
+              Channel: Channel.Fatal,
+              Text: `Failed to acquire 'require'd configuration '${additionalConfig}'`
+            });
+            throw e;
+          }
         }
       }
-    }
+    };
+    await includeFn();
     // 4. default configuration
     if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
@@ -689,6 +715,9 @@ export class Configuration {
         "default-config");
       await addSegments(blocks);
     }
+
+    await includeFn();
+
     // 5. resolve extensions
     const extMgr = await Configuration.extensionManager;
     const addedExtensions = new Set<string>();
@@ -764,6 +793,7 @@ export class Configuration {
               }
             }
           }
+          await includeFn();
 
           // merge config
           const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());

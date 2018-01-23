@@ -58,6 +58,9 @@ import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
 import { Exception, OperationCanceledException } from "./lib/exception";
 import { Help } from "./help";
 
+let verbose = false;
+let debug = false;
+
 function awaitable(child: ChildProcess): Promise<number> {
   return new Promise<number>((resolve, reject) => {
     child.addListener("error", reject);
@@ -205,7 +208,15 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 function outputMessage(instance: AutoRest, m: Message, errorCounter: () => void) {
   switch (m.Channel) {
     case Channel.Debug:
+      if (debug) {
+        console.log(color(m.FormattedMessage || m.Text));
+      }
+      break;
     case Channel.Verbose:
+      if (verbose) {
+        console.log(color(m.FormattedMessage || m.Text));
+      }
+      break;
     case Channel.Information:
       console.log(color(m.FormattedMessage || m.Text));
       break;
@@ -285,12 +296,25 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
     return 0;
   }
 
+  // add probes for readme.*.md files when a standalone arg is given.
+  const more = new Array<string>();
+  for (const each of autorestArgs) {
+    const match = /^--([^=:]+)([=:](.+))?$/g.exec(each);
+    if (match && !match[3]) {
+      // it's a solitary --foo (ie, no specified value) argument
+      more.push(`--try-require=readme.${match[1]}.md`);
+    }
+  }
+
   // parse the args from the command line
-  args = parseArgs(autorestArgs);
+  args = parseArgs([...autorestArgs, ...more]);
 
   if ((!args.rawSwitches["message-format"]) || args.rawSwitches["message-format"] === "regular") {
     console.log(color(`> Loading AutoRest core      '${__dirname}' (${require("../package.json").version})`));
   }
+  verbose = verbose || args.rawSwitches["verbose"];
+  debug = debug || args.rawSwitches["debug"];
+
   // identify where we are starting from.
   const currentDirUri = CreateFolderUri(currentDirectory());
 
