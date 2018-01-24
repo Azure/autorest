@@ -12,6 +12,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.CSharp.LoadBalanced.Model;
+using AutoRest.CSharp.LoadBalanced.Strategies;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Client;
 using AutoRest.CSharp.LoadBalanced.Templates.Rest.Common;
 using AutoRest.Extensions;
@@ -32,6 +33,8 @@ namespace AutoRest.CSharp.LoadBalanced
 
         private async Task GenerateClientSideCode(CodeModelCs codeModel)
         {
+            CompositeTypeCs.DefaultPropertyTypeSelectionStrategy = new WrappedPropertyTypeSelectionStrategy();
+
             var usings = new List<string>(codeModel.Usings);
             var methods = codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()).Cast<MethodCs>().ToList();
 
@@ -54,8 +57,9 @@ namespace AutoRest.CSharp.LoadBalanced
             usings.Add("System.IO");
             usings.Add("Microsoft.Rest.Serialization");
             usings.Add("Agoda.RoundRobin");
+            usings.Add("Agoda.RoundRobin.Constants");
             usings.Add("Newtonsoft.Json");
-            usings.Add("Agoda.SAPI.Client.Models");
+            usings.Add($"{codeModel.Namespace}.Models");
 
             codeModel.Usings = usings.Where(u => !string.IsNullOrWhiteSpace(u)).Distinct();
 
@@ -151,16 +155,7 @@ namespace AutoRest.CSharp.LoadBalanced
 
                 await Write(xmlSerializationTemplate, xmlSerializationPath);
             }
-
-            var projectTemplate = new CsProjTemplate { Model = project };
-            var projFilePath = $"{project.RootNameSpace}.csproj";
-
-            var solutionTemplate = new SlnTemplate { Model = project };
-            var slnFilePath = $"{project.RootNameSpace}.sln";
-
-            await Write(projectTemplate, projFilePath);
-            await Write(solutionTemplate, slnFilePath);
-            await Write(new PackagesTemplate(), "packages.config");
+            
         }
 
         private async Task GenerateRestCode(CodeModelCs codeModel)

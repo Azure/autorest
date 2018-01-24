@@ -35,11 +35,6 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
                 var usingsList = new List<string>();
 
-                if (HaveModelNamespace)
-                {
-                    usingsList.Add(ModelsName);
-                }
-
                 _usings = usingsList;
 
                 return _usings;

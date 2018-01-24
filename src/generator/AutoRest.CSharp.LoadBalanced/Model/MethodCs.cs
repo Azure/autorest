@@ -129,23 +129,46 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         /// </summary>
         public virtual string OperationResponseReturnTypeString => GetOperationResponseReturnTypeString();
 
+        public virtual string OperationResponseReturnTypeStringForMethodName => GetOperationResponseReturnTypeStringForMethodName();
+
+        public virtual string NameWithoutRoute => ReplaceRouteWithEmpty();
+
+        public virtual string ReplaceRouteWithEmpty()
+        {
+            return Name.Value.Replace("Route", "");
+        }
+
         public virtual string GetOperationResponseReturnTypeString(string typeName = "Task")
         {
+			// hardcode wrapper object for V1
+			const string wrapperTypeName = "Response"; 
+			
             if (ReturnType.Body != null)
             {
                 return $"{typeName}<{OperationResponseType}>";
             }
 
-            return typeName;
+            return $"{typeName}<{wrapperTypeName}>";
         }
 
+        public virtual string GetOperationResponseReturnTypeStringForMethodName(string typeName = "Task") {
+            // hardcode wrapper object for V1
+            const string wrapperTypeName = "Response";
+
+            if (ReturnType.Body != null)
+            {
+                return $"{typeName}<{wrapperTypeName}<{OperationResponseType}>>";
+            }
+
+            return $"{typeName}<{wrapperTypeName}>";
+        }
 
         public string OperationResponseType
         {
             get
             {
                 var typeName = ReturnType.Body?.AsNullableType(HttpMethod != HttpMethod.Head);
-
+                
                 if (string.IsNullOrWhiteSpace(typeName))
                 {
                     return "dynamic";

@@ -3,11 +3,10 @@
 @using AutoRest.CSharp.LoadBalanced.Model
 @using AutoRest.CSharp.LoadBalanced.Templates.Rest.Client
 @inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.CodeModelCs>
-@Header("// ")
 @EmptyLine
 @foreach (var usingString in Model.Usings)
 {
-    @:using @usingString;
+@:using @usingString;
 }
 @EmptyLine
 namespace @Settings.Namespace
@@ -21,15 +20,10 @@ namespace @Settings.Namespace
     }
 
     public partial class @Model.Name : ApiBase
-    { 
+    {
 
-    public @Model.Name (
-	    string name, List<ServerSettings> settings, 
-	    TimeSpan ? timeout = null, 
-	    int retryCount = 1, 
-	    JsonSerializerSettings serializationSettings = null, 
-	    JsonSerializerSettings deserializationSettings = null) 
-		: base(name, settings, timeout, retryCount, serializationSettings, deserializationSettings)
+    public @Model.Name (IApiBaseConfig apiBaseConfig)
+		: base(apiBaseConfig)
         {
         }
 
