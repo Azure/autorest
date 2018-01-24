@@ -251,6 +251,8 @@ namespace AutoRest.Swagger
                 ServiceDefinition.Schemes[0].ToString().ToLower(CultureInfo.InvariantCulture),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);
 
+            CodeModel.BasePath = ServiceDefinition.BasePath;
+
             // Copy extensions
             ServiceDefinition.Extensions.ForEach(extention => CodeModel.Extensions.AddOrSet(extention.Key, extention.Value));
         }
