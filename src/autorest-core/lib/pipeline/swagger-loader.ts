@@ -164,7 +164,7 @@ async function EnsureCompleteDefinitionIsPresent(
     const dependentRefs: YAMLNodeWithPath[] = [];
     for (const node of Descendants(currentDocAst)) {
       const path = node.path;
-      if (path.length > 3 && path[path.length - 3] === "allOf" && isReferenceNode(node) && (node.node.value as string).indexOf(reference) !== -1) {
+      if (path.length > 3 && path[path.length - 3] === "allOf" && isReferenceNode(node) && (node.node.value as string) === reference) {
         dependentRefs.push(node);
       }
     }
@@ -173,7 +173,7 @@ async function EnsureCompleteDefinitionIsPresent(
       const refs = dependentRef.path;
       const defSec = refs[0];
       const model = refs[1];
-      if (typeof defSec === "string" && typeof model === "string" && visitedEntities.indexOf(model) === -1) {
+      if (typeof defSec === "string" && typeof model === "string" && visitedEntities.indexOf(`#/${defSec}/${model}`) === -1) {
         //recursively check if the model is completely defined.
         sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, sink, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, defSec, model);
         const currentObj = externalFiles[currentFileUri].ReadObject<any>();
