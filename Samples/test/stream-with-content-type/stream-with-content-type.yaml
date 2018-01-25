@@ -125,8 +125,8 @@ parameters:
     x-ms-parameter-location: method
     description: An image stream.
     schema:
-      type: string
-      format: binary
+      type: object
+      format: file
   TextStream:
     name: Text
     in: body
@@ -134,8 +134,8 @@ parameters:
     x-ms-parameter-location: method
     description: A text stream.
     schema:
-      type: string
-      format: binary
+      type: object
+      format: file
   TextContentType:
     name: Content-Type
     in: header

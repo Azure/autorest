@@ -6,4 +6,4 @@ ERROR: Schema violation: Data does not match any schemas from 'anyOf'
 ERROR: Schema violation: Data does not match any schemas from 'oneOf'
 FATAL: Error: [OperationAbortedException] Error occurred. Exiting.
 FATAL: swagger-document/individual/schema-validator - FAILED
-Process() Cancelled due to exception : [OperationAbortedException] Error occurred. Exiting.
+Process() cancelled due to exception : [OperationAbortedException] Error occurred. Exiting.
