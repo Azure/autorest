@@ -1,10 +1,4 @@
 task 'publish-preview' , 'Publishes the the packages to NPM.',['version-number','build'],  (done)->
-  publish_necessary = false
-
-  await execute 'git show --pretty="" --name-only',{silent:true}, defer c,o,e
-  publish_necessary = true if( o.indexOf("src/") >-1 ) 
-
-  return done() if !publish_necessary # neither need publishing
 
   # update core package.json
   package_path = "#{basefolder}/src/autorest-core/package.json"
