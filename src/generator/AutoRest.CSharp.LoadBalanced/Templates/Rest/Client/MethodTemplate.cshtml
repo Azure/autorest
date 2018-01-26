@@ -10,7 +10,7 @@
 @inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.MethodCs>
 
 @{ 
-    var basePath = Model.CodeModel.BasePath.Trim('/');
+    var basePath = Model.CodeModel.BasePath?.Trim('/');
     var path = Model.Url.TrimStart('/');
     var endpoint = string.Concat(basePath, '/', path);
 }
