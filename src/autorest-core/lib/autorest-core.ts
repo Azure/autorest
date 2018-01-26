@@ -137,7 +137,7 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
-         const message = { Channel: Channel.Information, Text: `Process() cancelled due to exception : ${e.message}` };
+        const message = { Channel: Channel.Information, Text: `Process() cancelled due to exception : ${e.message}` };
         if (e instanceof Exception) {
           // idea: don't throw exceptions, just visibly log them and return false
           message.Channel = Channel.Fatal;

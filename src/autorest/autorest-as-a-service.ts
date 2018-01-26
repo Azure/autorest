@@ -8,9 +8,23 @@ import { Exception, LazyPromise } from "@microsoft.azure/tasks";
 
 import * as semver from "semver";
 import { isFile, mkdir, isDirectory } from "@microsoft.azure/async-io";
+import { statSync } from "fs";
+import { tmpdir } from "os";
 
 export const pkgVersion: string = require(`${__dirname}/../package.json`).version;
-const home: string = process.env["autorest.home"] || homedir();
+
+let home: string = process.env["autorest.home"] || homedir();
+
+try {
+  if (statSync(home).mode & 0x92) {
+    // hmm. the home directory isn't writable. let's fallback to $tmp
+    home = tmpdir();
+  }
+} catch {
+  // not even able to access the 'home' folder; let's fallback to $tmp
+  home = tmpdir();
+}
+
 process.env["autorest.home"] = home;
 const args = (<any>global).__args || {};
 

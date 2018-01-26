@@ -768,7 +768,7 @@ export class Configuration {
               if (installedExtension) {
                 messageEmitter.Message.Dispatch({
                   Channel: Channel.Information,
-                  Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
+                  Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${installedExtension.version})`
                 });
                 // start extension
                 ext = loadedExtensions[additionalExtension.fullyQualified] = {

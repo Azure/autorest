@@ -169,19 +169,26 @@ async function main() {
       process.exit(await showInstalledExtensions());
     }
 
-    /* make sure we have a .autorest folder */
-    await ensureAutorestHome();
+    try {
+      /* make sure we have a .autorest folder */
+      await ensureAutorestHome();
 
-    if (args.reset) {
-      if (args.debug) {
-        console.log(`Resetting autorest extension folder '${rootFolder}'`);
+      // if we have an autorest home folder, --reset may mean something. 
+      // if it's not there, --reset won't do anything. 
+      if (args.reset) {
+        if (args.debug) {
+          console.log(`Resetting autorest extension folder '${rootFolder}'`);
+        }
+        try {
+          await (await extensionManager).reset();
+        } catch (e) {
+          console.log(color("\n\n## The AutoRest extension folder appears to be locked.\nDo you have a process that is currently using AutoRest (perhaps the vscode extension?).\n\nUnable to reset the extension folder, exiting."));
+          process.exit(10);
+        }
       }
-      try {
-        await (await extensionManager).reset();
-      } catch (e) {
-        console.log(color("\n\n## The AutoRest extension folder appears to be locked.\nDo you have a process that is currently using AutoRest (perhaps the vscode extension?).\n\nUnable to reset the extension folder, exiting."));
-        process.exit(10);
-      }
+    }
+    catch {
+      // We have a chance to fail again later if this proves problematic.
     }
 
     let requestedVersion: string = args.version || (args.latest && "latest") || (args.preview && "preview") || "latest-installed";
