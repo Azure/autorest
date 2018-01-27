@@ -8,50 +8,6 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
 {
     public class WrappedPropertyTypeSelectionStrategy : PropertyTypeSelectionStrategy
     {
-        private static string[] _datePostfixes = new[] {"When", "Time", "Date"};
-        private static string[] _guidPostfixes = new[] { "By", "UserId", "Token" };
-        private static string[] _moneyPostfixes = new[] { "Cost", "Rate", "Amount", "Price", "Discount", "Fee", "Percent" };
-        private static string[] _booleanSuffixes = new[] {"allotmentAutoToPup", "Flag" };
-        private static string[] _booleanPrefixes = new[] {"is"};
-        public override bool IsDateTime(Property property)
-        {
-            if(IsDateText(property))
-            {
-                return true;
-            }
-
-            return base.IsDateTime(property);
-        }
-
-		public override bool IsBooleanString(Property property)
-        {
-            return (_booleanSuffixes.Any(s => property.Name.RawValue.ToUpper().EndsWith(s.ToUpper())) ||
-                _booleanPrefixes.Any(s => property.Name.RawValue.ToUpper().StartsWith(s.ToUpper()) && !property.Name.RawValue.ToUpper().StartsWith("ISO"))) && 
-                (property.ModelTypeName == "int" || property.ModelTypeName == "string");
-        }
-		
-        public override bool IsMoney(Property property)
-        {
-            if (property.ModelType.Name == "string" && _moneyPostfixes.Any(
-                p => property.Name.RawValue.ToUpper().EndsWith(p.ToUpper())))
-            {
-                return true;
-            }
-            //"type" : "integer", "format" : "int32",
-            return base.IsMoney(property);
-        }
-
-        public override bool IsGuid(Property property)
-        {
-            if (property.ModelType.Name == "string" && _guidPostfixes.Any(
-                p => property.Name.RawValue.ToUpper().EndsWith(p.ToUpper())))
-            {
-                return true;
-            }
-
-            return base.IsGuid(property);
-        }
-
         public override bool IsUInt64Value(Property property)
         {
             return false;
@@ -86,29 +42,7 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
         {
             var attributeBuilder = new StringBuilder();
             attributeBuilder.Append("JsonConverter(typeof(");
-
-            if (IsDateText(property))
-            {
-                attributeBuilder.Append("DateTimeStringConverter");
-            }
-            else if (IsMoney(property))
-            {
-                attributeBuilder.Append("MoneyConverter");
-            }
-            else if (IsInt32Value(property))
-            {
-                attributeBuilder.Append("Int32ValueConverter");
-            }
-            else if (IsBoolean(property))
-            {
-                attributeBuilder.Append("OverridableJsonConverterDecorator), typeof(BooleanJsonConverter");
-            }
-			else if (IsBooleanString(property))
-            {
-                attributeBuilder.Append("OverridableJsonConverterDecorator), typeof(BooleanStringConverter");
-            }
-            else
-            {
+            
                 var typeConverterName = base.GetConverterTypeName(property);
 
                 if (string.IsNullOrWhiteSpace(typeConverterName))
@@ -117,7 +51,6 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
                 }
 
                 attributeBuilder.Append($"{typeConverterName})");
-            }
 
             attributeBuilder.Append("))");
 
@@ -147,11 +80,6 @@ namespace AutoRest.CSharp.LoadBalanced.Strategies
             var baseProperties = base.GetPropertiesWhichRequireInitialization(compositeType).ToArray();
             return baseProperties.Where(p => p.Name.Value != "AllFields");
         }
-
-        protected bool IsDateText(Property property)
-        {
-            return property.ModelType.Name == "string" && _datePostfixes.Any(
-                       p => property.Name.RawValue.ToUpper().EndsWith(p.ToUpper()));
-        }
+        
     }
 }
