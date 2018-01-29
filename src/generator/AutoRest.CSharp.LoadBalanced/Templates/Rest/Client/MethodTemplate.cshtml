@@ -9,6 +9,12 @@
 @using AutoRest.Extensions
 @inherits AutoRest.Core.Template<AutoRest.CSharp.LoadBalanced.Model.MethodCs>
 
+@{ 
+    var basePath = Model.CodeModel.BasePath?.Trim('/');
+    var path = Model.Url.TrimStart('/');
+    var endpoint = string.Concat(basePath, '/', path);
+}
+
 @if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
 {
 @:/// <summary>
@@ -98,7 +104,7 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Mod
     var requestParameters = new RequestParameters
                             {
                                 HttpVerb = verb,
-                                RestUrl = "@(Model.Url.TrimStart('/'))",
+                                RestUrl = "@(endpoint)",
                                 CustomHeaders = customHeaders,
                                 QueryParameters = queryParameters
                                 @(@Model.Body == null ? "" : ", Body = body")
