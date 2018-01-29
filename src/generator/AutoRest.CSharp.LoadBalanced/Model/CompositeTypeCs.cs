@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         public static IPropertyTypeSelectionStrategy DefaultPropertyTypeSelectionStrategy { get; set; }
 
         [JsonIgnore]
-        public IPropertyTypeSelectionStrategy PropertyTypeSelectionStrategy => CompositeTypeCs.DefaultPropertyTypeSelectionStrategy ?? new WrappedPropertyTypeSelectionStrategy();
+        public IPropertyTypeSelectionStrategy PropertyTypeSelectionStrategy => CompositeTypeCs.DefaultPropertyTypeSelectionStrategy ?? new PropertyTypeSelectionStrategy();
 
         [JsonIgnore]
         public string MethodQualifier => (BaseModelType.ShouldValidateChain()) ? "override" : "virtual";
