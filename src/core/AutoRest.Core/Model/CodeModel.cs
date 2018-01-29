@@ -124,6 +124,11 @@ namespace AutoRest.Core.Model
         public virtual string BaseUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets the base path of the service.
+        /// </summary>
+        public virtual string BasePath { get; set; }
+
+        /// <summary>
         /// Gets the method groups.
         /// </summary>
         public virtual IEnumerable<string> MethodGroupNames => Operations.Where(group => !group.Name.IsNullOrEmpty()).Select(group => group.TypeName.Value);
