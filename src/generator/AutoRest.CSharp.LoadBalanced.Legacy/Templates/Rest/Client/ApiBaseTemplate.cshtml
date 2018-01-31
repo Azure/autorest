@@ -2,14 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Text;
+using System.Web;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Agoda.RoundRobin;
 using Agoda.RoundRobin.Constants;
+using Microsoft.Rest;
 using Microsoft.Rest.Serialization;
-using System.Linq;
-using System.Web;
+using Agoda.Http.Client.WinHttp;
 using AutoRest.CSharp.LoadBalanced.Json;
 
 @EmptyLine
@@ -249,19 +253,48 @@ namespace @Settings.Namespace
 @EmptyLine
             internal async Task<ExecuteResult> ExecuteAsync()
             {
-                var requestContent = (_requestContent.Value.Length > 0) ? _requestContent.Value : null;
-                var httpClient = new HttpClient(_name, _settings, JsonContentType, (int)_timeout.TotalMilliseconds, _retryCount, "");
-                var task = Task.Run(
-                    () => httpClient.ExecuteAsync(
-                        _verb,
-                        _url.Value.TrimStart('/'),
-                        requestContent,
-                        false,
-                        new ErrorList(),
-                        true,
-                        _customHeaders));
-                task.Wait();
-                return task.Result;
+                var baseUrl = _settings.First().Url.TrimEnd('/');
+                var fullUrl = baseUrl + "/" + _url.Value.TrimStart('/');
+                var request = new HttpRequestLite
+                {
+                    Url = fullUrl,
+                    ContentType = _contentType,
+                    ContentLength = _requestContent.Value.Length
+                };
+                var headers =
+                    _customHeaders.Where(k => k.Key != "Content-Type" && k.Key != "Accept")
+                        .ToDictionary(k => k.Key, k => k.Value);
+                if (_customHeaders.ContainsKey("Accept"))
+                {
+                    request.Accept = _customHeaders["Accept"];
+                }
+
+                foreach (var header in headers) request.Headers.Add(header.Key, header.Value);
+                request.Headers.Add("Connection", "close");
+                request.Method = _verb.ToString();
+                var result = new ExecuteResult();
+                try
+                {
+                    using (var stream = request.GetRequestStream())
+                    {
+                        stream.Write(_requestContent.Value, 0, _requestContent.Value.Length);
+                        using (var response = request.GetResponse())
+                        using (var responseStream = response.GetResponseStream())
+                        {
+                            result.Status = (int) response.StatusCode;
+                            using (var reader = new StreamReader(responseStream, Encoding.UTF8))
+                            {
+                                result.Results = reader.ReadToEnd();
+                            }
+
+                            return result;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
 @EmptyLine
             protected string GetUrl(Verbs verb, string restUrl, IDictionary<string, object> queryParameters)
