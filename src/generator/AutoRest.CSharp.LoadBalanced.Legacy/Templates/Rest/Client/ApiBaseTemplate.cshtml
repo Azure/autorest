@@ -249,9 +249,8 @@ namespace @Settings.Namespace
 @EmptyLine
             internal async Task<ExecuteResult> ExecuteAsync()
             {
-                var timeout = (int)_timeout.TotalMilliseconds;
                 var requestContent = (_requestContent.Value.Length > 0) ? _requestContent.Value : null;
-                var httpClient = new HttpClient(_name, _settings, JsonContentType, timeout, _retryCount, "");
+                var httpClient = new HttpClient(_name, _settings, JsonContentType, (int)_timeout.TotalMilliseconds, _retryCount, "");
                 var task = Task.Run(
                     () => httpClient.ExecuteAsync(
                         _verb,
