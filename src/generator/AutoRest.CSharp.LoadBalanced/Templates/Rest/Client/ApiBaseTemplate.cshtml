@@ -23,7 +23,7 @@ namespace @Settings.Namespace
 
         int retryCount { get; set; }
 
-        bool manualCalcUris { get; set; }
+        bool? manualCalcUris { get; set; }
 
         JsonSerializerSettings serializationSettings { get; set; }
 
@@ -36,7 +36,7 @@ namespace @Settings.Namespace
         public List<ServerSettings> settings { get; set; }
         public TimeSpan? timeout { get; set; }
         public int retryCount { get; set; }
-        bool manualCalcUris { get; set; }
+        bool? manualCalcUris { get; set; }
         public JsonSerializerSettings serializationSettings { get; set; }
         public JsonSerializerSettings deserializationSettings { get; set; }
     }
@@ -57,7 +57,7 @@ namespace @Settings.Namespace
             _timeout = apiBaseConfig.timeout ?? TimeSpan.FromMilliseconds(1000);
             _settings = apiBaseConfig.settings;
             _retryCount = apiBaseConfig.retryCount;
-            _manualCalcUris = apiBaseConfig.manualCalcUris;
+            _manualCalcUris = apiBaseConfig.manualCalcUris ?? false;
             _serializationSettings = apiBaseConfig.serializationSettings;
             _deserializationSettings = apiBaseConfig.deserializationSettings;
         }
