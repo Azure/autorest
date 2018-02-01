@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.LoadBalanced
 
         private async Task GenerateClientSideCode(CodeModelCs codeModel)
         {
-            CompositeTypeCs.DefaultPropertyTypeSelectionStrategy = new WrappedPropertyTypeSelectionStrategy();
+            CompositeTypeCs.DefaultPropertyTypeSelectionStrategy = new PropertyTypeSelectionStrategy();
 
             var usings = new List<string>(codeModel.Usings);
             var methods = codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()).Cast<MethodCs>().ToList();
