@@ -57,31 +57,24 @@ namespace AutoRest.CSharp.LoadBalanced.Json
                         else
                         {
                             var value = TryParse(token.ToString());
-                            return SendAsText ? (object)value.ToString() : value;
+                            return value;
                         } 
                     case JTokenType.Null:
                         if (IsNullable)
                         {
                             return null;
                         }
-                        return SendAsText ? (object)"0" : 0;
+                        return 0;
                     case JTokenType.Float:
                     case JTokenType.Integer:
-                        if (SendAsText)
-                        {
-                            return token.ToString();
-                        }
-                        else
-                        {
-                            return token.ToObject<decimal>();
-                        }
+                        return token.ToObject<decimal>();
                     default:
-                        return SendAsText ? (object)"0" : 0;
+                        return 0;
                 }
             }
             else
             {
-                return SendAsText ? (object)"0" : 0;
+                return 0;
             }
         }
 
