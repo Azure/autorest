@@ -1,71 +1,23 @@
-# An isomorphic javascript sdk for - Deprecated
-This project provides an isomorphic javascript package. Right now it supports:
-- node.js version 6.x.x or higher
-- browser javascript
+# Deprecated on operations, model types, properties and parameters
 
-## How to Install
+`deprecated` on operations is of course part of the [OpenAPI 2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#fixed-fields-5) specification. For all other constructs, we've added `x-deprecated`: It accepts `true` or an object that can specify `description` or `replaced-by` to influence the deprecation message. Of course, `x-deprecated` also works on operations for the same reason of influencing the deprecation message.
 
-- nodejs
+> see https://aka.ms/autorest
+
+``` yaml 
+input-file: deprecated.yaml
+csharp:
+  - output-folder: ClientCSharp
+go:
+  - output-folder: ClientGo
+java:
+  - output-folder: ClientJava
+nodejs:
+  - output-folder: ClientNode
+python:
+  - output-folder: ClientPython
+ruby:
+  - output-folder: ClientRuby
+typescript:
+  - output-folder: ClientTypeScript
 ```
-npm install
-```
-- browser
-```html
-<script type="text/javascript" src="/deprecatedBundle.js"></script>
-```
-
-## How to use
-
-### nodejs - Authentication, client creation and no path as an example written in TypeScript.
-
-```javascript
-import * as msRest from "ms-rest-js";
-import { Deprecated, DeprecatedModels, DeprecatedMappers } from "";
-const subscriptionId = process.env["AZURE_SUBSCRIPTION_ID"];
-
-const token = "<access_token>";
-const creds = new msRest.TokenCredentials(token);
-const client = new Deprecated(creds, subscriptionId);
-const arg = "testarg";
-client.path.no(arg).then((result) => {
-  console.log("The result is:");
-  console.log(result);
-}).catch((err) => {
-  console.log('An error ocurred:');
-  console.dir(err, {depth: null, colors: true});
-});
-```
-
-### browser - Authentication, client creation and no path as an example written in javascript.
-
-- index.html
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>My Todos</title>
-    <script type="text/javascript" src="https://raw.githubusercontent.com/Azure/ms-rest-js/master/msRestBundle.js"></script>
-    <script type="text/javascript" src="./deprecatedBundle.js"></script>
-    <script type="text/javascript">
-      document.write('hello world');
-      const subscriptionId = "<Subscription_Id>";
-      const token = "<access_token>";
-      const creds = new msRest.TokenCredentials(token);
-      const client = new Deprecated(creds, subscriptionId);
-      const arg = "testarg";
-      client.path.no(arg).then((result) => {
-        console.log("The result is:");
-        console.log(result);
-      }).catch((err) => {
-        console.log('An error ocurred:');
-        console.dir(err, { depth: null, colors: true});
-      });
-    </script>
-  </head>
-  <body>
-  </body>
-</html>
-```
-
-# Related projects
- - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
