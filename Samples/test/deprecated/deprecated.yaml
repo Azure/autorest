@@ -1,0 +1,254 @@
+swagger: "2.0"
+host: localhost
+info:
+  version: '2016-07-07'
+  title: Deprecated
+  description: Deprecated stuff mixed with non-deprecated stuff (having "yes" or "no" in it's name, respectively)
+paths:
+  '/path/no':
+    get:
+      operationId: Path_No
+      parameters:
+        - name: arg
+          in: query
+          type: string
+      responses:
+        '200':
+          description: OK
+  '/path/yes1':
+    get:
+      deprecated: true
+      operationId: Path_Yes1
+      parameters:
+        - name: arg
+          in: query
+          type: string
+      responses:
+        '200':
+          description: OK
+  '/path/yes2':
+    get:
+      x-deprecated: true
+      operationId: Path_Yes2
+      parameters:
+        - name: arg
+          in: query
+          type: string
+      responses:
+        '200':
+          description: OK
+  '/path/custom':
+    get:
+      deprecated: true
+      x-deprecated:
+        description: This operation will be removed in 2005.
+      operationId: Path_Custom
+      parameters:
+        - name: arg
+          in: query
+          type: string
+      responses:
+        '200':
+          description: OK
+  '/path/replaced':
+    get:
+      deprecated: true
+      x-deprecated:
+        replaced-by: No
+      operationId: Path_Replaced
+      parameters:
+        - name: arg
+          in: query
+          type: string
+      responses:
+        '200':
+          description: OK
+  '/path/params':
+    get:
+      deprecated: true
+      x-deprecated:
+        replaced-by: No
+      operationId: Path_Replaced
+      parameters:
+        - name: argNo
+          in: query
+          type: string
+        - name: argYes
+          in: query
+          type: string
+          x-deprecated: true
+        - name: argCustom
+          in: query
+          type: string
+          x-deprecated:
+            description: This parameter will be removed in 2005.
+        - name: argReplaced
+          in: query
+          type: string
+          x-deprecated:
+            replaced-by: argNo
+definitions:
+  PetNo:
+    properties:
+      name:
+        type: string
+        description: name of the pet
+  PetYes:
+    x-deprecated: true
+    properties:
+      name:
+        type: string
+        description: name of the pet
+  PetCustom:
+    x-deprecated:
+      description: This type will be removed in 2005.
+    properties:
+      name:
+        type: string
+        description: name of the pet
+  PetReplaced:
+    x-deprecated:
+      replaced-by: PetNo
+    properties:
+      name:
+        type: string
+        description: name of the pet
+  Pet:
+    properties:
+      nameNo:
+        type: string
+        description: name of the pet
+      nameYes:
+        x-deprecated: true
+        type: string
+        description: name of the pet
+      nameCustom:
+        x-deprecated:
+          description: This property will be removed in 2005.
+        type: string
+        description: name of the pet
+      nameReplaced:
+        x-deprecated:
+          replaced-by: nameNo
+        type: string
+        description: name of the pet
+  ChildPet:
+    description: |-
+      Properties should not inherit deprecatedness of types (type could be swapped out but property stays the same).
+      Note that service teams will get a warning at the property in the generated C# SDK, but that's exactly what you want -- bother the service team in that case, not the user.
+    properties:
+      parentNo:
+        $ref: "#/definitions/PetNo"
+      parentYes:
+        $ref: "#/definitions/PetYes"
+  Enum1No:
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsString: false
+      name: Enum1No
+  Enum1Yes:
+    x-deprecated: true
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsString: false
+      name: Enum1Yes
+  Enum1Custom:
+    x-deprecated:
+      description: This enum will be removed in 2005.
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsString: false
+      name: Enum1Custom
+  Enum1Replaced:
+    x-deprecated:
+      replaced-by: Enum1No
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsString: false
+      name: Enum1Replaced
+  Enum2No:
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsString: true
+      name: Enum2No
+  Enum2Yes:
+    x-deprecated: true
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsString: true
+      name: Enum2Yes
+  Enum2Custom:
+    x-deprecated:
+      description: This enum will be removed in 2005.
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsString: true
+      name: Enum2Custom
+  Enum2Replaced:
+    x-deprecated:
+      replaced-by: Enum2No
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsString: true
+      name: Enum2Replaced
+  Enum3No:
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsExtensible: true
+      name: Enum3No
+  Enum3Yes:
+    x-deprecated: true
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsExtensible: true
+      name: Enum3Yes
+  Enum3Custom:
+    x-deprecated:
+      description: This enum will be removed in 2005.
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsExtensible: true
+      name: Enum3Custom
+  Enum3Replaced:
+    x-deprecated:
+      replaced-by: Enum3No
+    type: string
+    enum:
+      - a
+      - b
+    x-ms-enum:
+      modelAsExtensible: true
+      name: Enum3Replaced

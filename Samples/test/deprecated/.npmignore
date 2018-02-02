@@ -1,0 +1,35 @@
+#git
+.git
+.gitignore
+#gulp
+gulpfile.js
+#documentation
+doc/
+docs/
+#dependencies
+node_modules/
+#samples
+sample/
+samples/
+#tests
+test/
+tests/
+coverage/
+#tools and scripts
+tools/
+scripts/
+#IDE settings
+*.sln
+.vscode/
+.idea
+.editorconfig
+.ntvs_analysis.*
+#build tools
+.travis.yml
+.jenkins.yml
+.codeclimate.yml
+appveyor.yml
+# Nuget packages #
+.nuget/
+packages/
+packages.config

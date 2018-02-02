@@ -1,0 +1,1 @@
+  Error: Specified file '/Samples/test/deprecated/readme.md' is not a valid configuration file (missing magic string, see https://github.com/Azure/autorest/blob/master/docs/user/literate-file-formats/configuration.md#the-file-format).
