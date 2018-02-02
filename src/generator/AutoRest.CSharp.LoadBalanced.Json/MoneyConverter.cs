@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -22,7 +23,7 @@ namespace AutoRest.CSharp.LoadBalanced.Json
             dto = model.ToString();
             return true;
         }
-    
+
         protected override bool TryParse(string dto, out decimal model)
         {
             return Decimal.TryParse(dto, out model);
@@ -38,7 +39,6 @@ namespace AutoRest.CSharp.LoadBalanced.Json
 
             object typedValue = null;
             typedValue = SendAsText ? (object)(value?.ToString() ?? "0") : (decimal)(value ?? 0);
-
             JToken.FromObject(typedValue).WriteTo(writer);
         }
 
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.LoadBalanced.Json
                 switch (token.Type)
                 {
                     case JTokenType.String:
-                        if (IsNullable &&  string.IsNullOrEmpty(token.ToString()))
+                        if (IsNullable && string.IsNullOrEmpty(token.ToString()))
                         {
                             return null;
                         }
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.LoadBalanced.Json
                         {
                             var value = TryParse(token.ToString());
                             return SendAsText ? (object)value.ToString() : value;
-                        } 
+                        }
                     case JTokenType.Null:
                         if (IsNullable)
                         {

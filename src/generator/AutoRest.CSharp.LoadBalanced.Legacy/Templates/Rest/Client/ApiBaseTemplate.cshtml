@@ -78,7 +78,9 @@ namespace @Settings.Namespace
                     ContractResolver = new ReadOnlyJsonContractResolver(),
                     MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                     Converters = new List<JsonConverter> { new Iso8601TimeSpanConverter(),
-                        new BooleanStringConverter(BooleanConverterOptions.WriteAsInt)
+                        new BooleanStringConverter(BooleanConverterOptions.WriteAsInt),
+                        new MoneyConverter(MoneyConverterOptions.SendAsText)
+
                     }
                 });
 

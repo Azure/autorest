@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{EF9E346D-70C6-45F5-8FF9-9B734F4A1298}"
 EndProject
@@ -118,6 +118,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced.Legacy", "src\generator\AutoRest.CSharp.LoadBalanced.Legacy\AutoRest.CSharp.LoadBalanced.Legacy.csproj", "{38141FEB-5F5E-46E8-A972-D1140274AE95}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.LoadBalanced.Legacy.Tests", "src\generator\AutoRest.CSharp.LoadBalanced.Legacy.Tests\AutoRest.CSharp.LoadBalanced.Legacy.Tests.csproj", "{2824784F-FD7E-4B46-B1B3-6E23EAB52D02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.CSharp.LoadBalanced.Json.Tests", "src\generator\AutoRest.CSharp.LoadBalanced.Json.Tests\AutoRest.CSharp.LoadBalanced.Json.Tests.csproj", "{FDEEC678-DE2D-4380-80D9-89E171C69B9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -253,6 +255,10 @@ Global
 		{2824784F-FD7E-4B46-B1B3-6E23EAB52D02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2824784F-FD7E-4B46-B1B3-6E23EAB52D02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2824784F-FD7E-4B46-B1B3-6E23EAB52D02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDEEC678-DE2D-4380-80D9-89E171C69B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDEEC678-DE2D-4380-80D9-89E171C69B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDEEC678-DE2D-4380-80D9-89E171C69B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDEEC678-DE2D-4380-80D9-89E171C69B9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -298,6 +304,7 @@ Global
 		{EF92364F-AC46-4A88-81BC-45506378DA88} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{38141FEB-5F5E-46E8-A972-D1140274AE95} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 		{2824784F-FD7E-4B46-B1B3-6E23EAB52D02} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
+		{FDEEC678-DE2D-4380-80D9-89E171C69B9C} = {03E75B1D-A443-4A12-B31F-860DB2B45140}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {36B0BD32-4C82-443A-9497-B3C291CCBCD4}

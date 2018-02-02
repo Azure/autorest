@@ -93,7 +93,13 @@ namespace AutoRest.CSharp.LoadBalanced.Legacy.Strategies
             }
             else if (IsMoney(property))
             {
-                attributeBuilder.Append("MoneyConverter");
+                var attrName = property.Name.Value.ToLower();
+                var appendText = "MoneyConverter";
+                if (attrName == "maximumrate" || attrName == "minimumrate" || attrName == "standardrate")
+                {
+                    appendText = "OverridableJsonConverterDecorator), typeof(MoneyConverter";
+                }
+                attributeBuilder.Append(appendText);
             }
             else if (IsInt32Value(property))
             {
