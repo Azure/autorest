@@ -18,6 +18,4 @@ python:
   - output-folder: ClientPython
 ruby:
   - output-folder: ClientRuby
-typescript:
-  - output-folder: ClientTypeScript
 ```
