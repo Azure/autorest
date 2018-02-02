@@ -87,6 +87,9 @@ paths:
           type: string
           x-deprecated:
             replaced-by: argNo
+      responses:
+        '200':
+          description: OK
 definitions:
   PetNo:
     properties:
