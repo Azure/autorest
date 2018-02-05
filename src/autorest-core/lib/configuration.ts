@@ -413,10 +413,6 @@ export class ConfigurationView {
 
     try {
       // update source locations to point to loaded Swagger
-      if (m.Source && typeof (m.Source.map) !== 'function') {
-        console.error(`OH. BAD: ${JSON.stringify(m)} `);
-
-      }
       if (m.Source && typeof (m.Source.map) === 'function') {
         const blameSources = m.Source.map(s => {
           let blameTree: BlameTree | null = null;
@@ -488,10 +484,6 @@ export class ConfigurationView {
       }
 
       // set range (dummy)
-      if (m.Source && typeof (m.Source.map) !== 'function') {
-        console.error(`OH. BAD TWO: ${JSON.stringify(m)} `)
-      }
-
       if (m.Source && typeof (m.Source.map) === 'function') {
         m.Range = m.Source.map(s => {
           const positionStart = s.Position;
