@@ -25,7 +25,7 @@ interface IAutoRestPluginInitiatorEndpoint {
 
   ReadFile(filename: string): Promise<string>;
   GetValue(key: string): Promise<any>;
-  ListInputs(): Promise<string[]>;
+  ListInputs(artifactType?:string): Promise<string[]>;
 
   WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void>;
   Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void>;
@@ -184,7 +184,7 @@ export class AutoRestExtension extends EventEmitter {
           return null;
         }
       },
-      async ListInputs(): Promise<string[]> {
+      async ListInputs(artifactType?:string): Promise<string[]> {
         return (await inputFileHandles).map(x => x.Description);
       },
 
