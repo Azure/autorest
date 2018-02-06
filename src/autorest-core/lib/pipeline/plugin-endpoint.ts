@@ -242,7 +242,7 @@ export class AutoRestExtension extends EventEmitter {
           // wire through `sink` in order to retrieve default artifact type
           const artifactMessage = message as ArtifactMessage;
           const artifact = artifactMessage.Details;
-          await writeFileToSinkAndNotify(artifact.uri, artifact.content, artifact.type);
+          await writeFileToSinkAndNotify(artifact.uri, artifact.content, artifact.type, artifact.sourceMap);
         }
 
         onMessage(message);
