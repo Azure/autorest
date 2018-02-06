@@ -204,7 +204,9 @@ export class AutoRestExtension extends EventEmitter {
         }
       },
       async ListInputs(artifactType?: string): Promise<string[]> {
-        return (await inputFileHandles).map(x => x.Description);
+        return (await inputFileHandles)
+          .filter(x => artifactType === null || artifactType === undefined || artifactType === x.GetArtifact())
+          .map(x => x.Description);
       },
 
       async WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void> {
