@@ -528,22 +528,17 @@ async function batch(api: AutoRest): Promise<void> {
 /**
  * Entry point
  */
-
-async function main() {
+async function mainImpl():Promise<number> {
   let autorestArgs: Array<string> = [];
+  let exitcode: number = 0;
 
   try {
-    let exitcode: number = 0;
-
     autorestArgs = process.argv.slice(2);
-
     if (isLegacy(autorestArgs)) {
-      exitcode = await legacyMain(autorestArgs);
+      return await legacyMain(autorestArgs);
     } else {
-      exitcode = await currentMain(autorestArgs);
+      return await currentMain(autorestArgs);
     }
-    await Shutdown();
-    process.exit(exitcode);
   } catch (e) {
     // be very careful about the following check:
     // - doing the inversion (instanceof Error) doesn't reliably work since that seems to return false on Errors marshalled from safeEval
@@ -553,15 +548,29 @@ async function main() {
       } else {
         console.log(e.message);
       }
-      await Shutdown();
-      process.exit(e.exitCode);
+      return e.exitCode
     }
-
     if (e !== false) {
       console.error(color(`!${e}`));
     }
-    await Shutdown();
-    process.exit(1);
+  }
+  return 1;
+}
+
+async function main() {
+  let exitcode = 0;
+  try {
+    exitcode = await mainImpl();
+  } catch { 
+    exitcode = 102;
+  }
+  finally {
+    try {
+      await Shutdown();
+    } catch  {
+    } finally {
+      process.exit(exitcode);
+    }
   }
 }
 
