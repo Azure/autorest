@@ -57,19 +57,19 @@ async function EmitArtifact(config: ConfigurationView, artifactType: string, uri
     const ast = new Lazy<YAMLNode>(() => handle.ReadYamlAst());
 
     if (IsOutputArtifactOrMapRequested(config, artifactType + ".yaml")) {
-      const h = await sink.WriteData(`${++emitCtr}.yaml`, Stringify(object.Value), IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.yaml`, Stringify(object.Value), artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
       await EmitArtifactInternal(config, artifactType + ".yaml", uri + ".yaml", h);
     }
     if (IsOutputArtifactOrMapRequested(config, artifactType + ".norm.yaml")) {
-      const h = await sink.WriteData(`${++emitCtr}.norm.yaml`, Stringify(Normalize(object.Value)), IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.norm.yaml`, Stringify(Normalize(object.Value)), artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
       await EmitArtifactInternal(config, artifactType + ".norm.yaml", uri + ".norm.yaml", h);
     }
     if (IsOutputArtifactOrMapRequested(config, artifactType + ".json")) {
-      const h = await sink.WriteData(`${++emitCtr}.json`, JSON.stringify(object.Value, null, 2), IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.json`, JSON.stringify(object.Value, null, 2), artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
       await EmitArtifactInternal(config, artifactType + ".json", uri + ".json", h);
     }
     if (IsOutputArtifactOrMapRequested(config, artifactType + ".norm.json")) {
-      const h = await sink.WriteData(`${++emitCtr}.norm.json`, JSON.stringify(Normalize(object.Value), null, 2), IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.norm.json`, JSON.stringify(Normalize(object.Value), null, 2), artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
       await EmitArtifactInternal(config, artifactType + ".norm.json", uri + ".norm.json", h);
     }
   }
@@ -78,6 +78,8 @@ async function EmitArtifact(config: ConfigurationView, artifactType: string, uri
 export async function EmitArtifacts(config: ConfigurationView, artifactType: string, uriResolver: (key: string) => string, scope: DataSource, isObject: boolean): Promise<void> {
   for (const key of await scope.Enum()) {
     const file = await scope.ReadStrict(key);
-    await EmitArtifact(config, artifactType, uriResolver(file.Description), file, isObject);
+    if (file.GetArtifact() === artifactType) {
+      await EmitArtifact(config, artifactType, uriResolver(file.Description), file, isObject);
+    }
   }
 }

@@ -12,8 +12,9 @@ import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
 import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
 import { Exception } from "../exception";
-import { Message } from "../message";
+import { Message, Channel, ArtifactMessage } from "../message";
 import { Readable, Writable } from "stream";
+import { Artifact } from "../artifact";
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
@@ -25,7 +26,7 @@ interface IAutoRestPluginInitiatorEndpoint {
 
   ReadFile(filename: string): Promise<string>;
   GetValue(key: string): Promise<any>;
-  ListInputs(artifactType?:string): Promise<string[]>;
+  ListInputs(artifactType?: string): Promise<string[]>;
 
   WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void>;
   Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void>;
@@ -169,6 +170,24 @@ export class AutoRestExtension extends EventEmitter {
     const friendly2internal: (name: string) => Promise<string | undefined> = async name => ((await inputFileHandles).filter(h => h.Description === name || decodeURIComponent(h.Description) === decodeURIComponent(name))[0] || {}).key;
     const internal2friendly: (name: string) => Promise<string | undefined> = async key => (await inputScope.Read(key) || <any>{}).Description;
 
+    const writeFileToSinkAndNotify = async (filename: string, content: string, artifactType?: string, sourceMap?: Mappings | RawSourceMap): Promise<Artifact> => {
+      if (!sourceMap) {
+        sourceMap = [];
+      }
+      // TODO: transform mappings so friendly names are replaced by internals
+      let handle: DataHandle;
+      if (typeof (sourceMap as any).mappings === "string") {
+        onFile(handle = await sink.WriteDataWithSourceMap(filename, content, artifactType, () => sourceMap as any));
+      } else {
+        onFile(handle = await sink.WriteData(filename, content, artifactType, sourceMap as Mappings, await inputFileHandles));
+      }
+      return {
+        uri: handle.key,
+        type: handle.GetArtifact(),
+        content: handle.ReadData()
+      };
+    };
+
     let finishNotifications: Promise<void> = Promise.resolve();
     const apiInitiator: IAutoRestPluginInitiatorEndpoint = {
       FinishNotifications(): Promise<void> { return finishNotifications; },
@@ -184,7 +203,7 @@ export class AutoRestExtension extends EventEmitter {
           return null;
         }
       },
-      async ListInputs(artifactType?:string): Promise<string[]> {
+      async ListInputs(artifactType?: string): Promise<string[]> {
         return (await inputFileHandles).map(x => x.Description);
       },
 
@@ -196,12 +215,8 @@ export class AutoRestExtension extends EventEmitter {
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);
 
-        // TODO: transform mappings so friendly names are replaced by internals
-        if (typeof (sourceMap as any).mappings === "string") {
-          onFile(await sink.WriteDataWithSourceMap(filename, content, () => sourceMap as any));
-        } else {
-          onFile(await sink.WriteData(filename, content, sourceMap as Mappings, await inputFileHandles));
-        }
+        const artifact = await writeFileToSinkAndNotify(filename, content, undefined, sourceMap);
+        onMessage(<ArtifactMessage>{ Channel: Channel.File, Details: artifact, Text: artifact.content, Plugin: pluginName, Key: [artifact.type, artifact.uri] })
 
         await finishPrev;
         notify();
@@ -220,6 +235,14 @@ export class AutoRestExtension extends EventEmitter {
             }
           }
         }
+
+        if (message.Channel === Channel.File) {
+          // wire through `sink` in order to retrieve default artifact type
+          const artifactMessage = message as ArtifactMessage;
+          const artifact = artifactMessage.Details;
+          await writeFileToSinkAndNotify(artifact.uri, artifact.content, artifact.type);
+        }
+
         onMessage(message);
 
         await finishPrev;

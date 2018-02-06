@@ -188,7 +188,7 @@ async function EnsureCompleteDefinitionIsPresent(
   }
 
   // commit back
-  externalFiles[sourceFileUri] = await sink.WriteObject("revision", sourceDocObj, sourceDocMappings, [...Object.getOwnPropertyNames(externalFiles).map(x => externalFiles[x]), sourceDoc] /* inputs */ /*TODO: fix*/);
+  externalFiles[sourceFileUri] = await sink.WriteObject("revision", sourceDocObj, undefined, sourceDocMappings, [...Object.getOwnPropertyNames(externalFiles).map(x => externalFiles[x]), sourceDoc] /* inputs */ /*TODO: fix*/);
   return sourceDocMappings;
 }
 
@@ -203,7 +203,7 @@ async function StripExternalReferences(swagger: DataHandle, sink: DataSink): Pro
       }
     }
   }
-  return await sink.WriteData("result.yaml", StringifyAst(ast), mapping, [swagger]);
+  return await sink.WriteData("result.yaml", StringifyAst(ast), undefined, mapping, [swagger]);
 }
 
 export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
@@ -275,7 +275,7 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
     state.push(...[...CommonmarkSubHeadings(x.node)].map(y => { return { node: y, query: clue || x.query }; }));
   }
 
-  return sink.WriteObject("override-directives", { directive: directives }, mappings, [commonmark]);
+  return sink.WriteObject("override-directives", { directive: directives }, undefined, mappings, [commonmark]);
 }
 
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
@@ -373,8 +373,8 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
       .Concat(getPropertyValues(getProperty({ obj: swagger, path: [] }, "x-ms-paths")));
     const methods = paths.SelectMany(getPropertyValues);
     const parameters =
-      methods.SelectMany(method => getArrayValues<any>(getProperty<any, any>(method, "parameters"))).Concat(
-        paths.SelectMany(path => getArrayValues<any>(getProperty<any, any>(path, "parameters"))));
+      methods.SelectMany((method: any) => getArrayValues<any>(getProperty<any, any>(method, "parameters"))).Concat(
+        paths.SelectMany((path: any) => getArrayValues<any>(getProperty<any, any>(path, "parameters"))));
 
     // inline api-version params
     if (!uniqueVersion) {
@@ -383,7 +383,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
       const apiVersionClientParam = apiVersionClientParamName ? clientParams[apiVersionClientParamName] : null;
       if (apiVersionClientParam) {
         const apiVersionClientParam = clientParams[apiVersionClientParamName];
-        const apiVersionParameters = parameters.Where(p => p.obj.$ref === `#/parameters/${apiVersionClientParamName}`);
+        const apiVersionParameters = parameters.Where((p: any) => p.obj.$ref === `#/parameters/${apiVersionClientParamName}`);
         for (let apiVersionParameter of apiVersionParameters) {
           delete apiVersionParameter.obj.$ref;
 
@@ -437,7 +437,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
     populate.forEach(f => f());
 
     // write back
-    inputSwaggers[i] = await sink.WriteObject("prepared", swagger, mapping, [inputSwagger]);
+    inputSwaggers[i] = await sink.WriteObject("prepared", swagger, undefined, mapping, [inputSwagger]);
   }
 
   let hSwagger = await MergeYamls(config, inputSwaggers, sink);

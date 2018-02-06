@@ -60,6 +60,6 @@ export interface Message {
   FormattedMessage?: string;
 };
 
-export interface ArtifactMessage extends Message { 
-  Details: Artifact; 
+export interface ArtifactMessage extends Message {
+  Details: Artifact;
 }
