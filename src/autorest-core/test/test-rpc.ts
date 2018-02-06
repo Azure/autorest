@@ -27,7 +27,7 @@ async function connect() {
     return `You asked for the value ${key} in the session ${sessionId}`;
   });
 
-  connection.onRequest(new rpc.RequestType1<string, Array<string>, void, void>('ListInputs'), (sessionId: string) => {
+  connection.onRequest(new rpc.RequestType2<string,string|undefined, Array<string>, void, void>('ListInputs'), (sessionId: string) => {
     return ["a.txt", "b.txt"];
   });
 

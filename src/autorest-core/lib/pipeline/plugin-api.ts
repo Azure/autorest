@@ -20,14 +20,14 @@ export interface IAutoRestPluginTarget {
 export module IAutoRestPluginInitiator_Types {
   export const ReadFile = new RequestType2<string, string, string, Error, void>("ReadFile");
   export const GetValue = new RequestType2<string, string, any, Error, void>("GetValue");
-  export const ListInputs = new RequestType1<string, string[], Error, void>("ListInputs");
+  export const ListInputs = new RequestType2<string, string|undefined, string[], Error, void>("ListInputs");
   export const WriteFile = new NotificationType4<string, string, string, Mapping[] | RawSourceMap | undefined, void>("WriteFile");
   /* @internal */export const Message = new NotificationType4<string, Message, SmartPosition | undefined, string | undefined, void>("Message");
 }
 export interface IAutoRestPluginInitiator {
   ReadFile(sessionId: string, filename: string): Promise<string>;
   GetValue(sessionId: string, key: string): Promise<any>;
-  ListInputs(sessionId: string): Promise<string[]>;
+  ListInputs(sessionId: string, artifactType?:string): Promise<string[]>;
 
   WriteFile(sessionId: string, filename: string, content: string, sourceMap?: Mapping[] | RawSourceMap): void;
   Message(sessionId: string, message: Message, path?: SmartPosition, sourceFile?: string): void;
