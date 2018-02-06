@@ -37,6 +37,9 @@ task 'regenerate', 'regenerate samples', (done) ->
                 sed "-i", /mem:\/\/\/[^: ]*/g, "mem", file                  # memory URIs (depend on timing)
                 (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file) # minify exception stack traces
                 (cat file).replace(/.*AutoRest code generation utility.*\n/g, "").to(file) # remove header message 
+                (cat file).replace(/.*DeprecationWarning.*\n/g, "(node) DeprecationWarning (trimmed)").to(file) # remove header message
+                (cat file).replace(/.*UnhandledPromiseRejectionWarning.*:n/g, "(node) UnhandledPromiseRejectionWarning:").to(file) # remove header message
+                
                 (cat file).replace(/.*\(C\) \d* Microsoft Corporation.*\n/g, "").to(file) # remove header message 
                 
                 (cat file).replace(/.* AutoRest extension '.*\n/g, "").to(file) # remove extension loading messages
