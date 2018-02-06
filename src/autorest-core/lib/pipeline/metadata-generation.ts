@@ -54,6 +54,6 @@ ${tuples.map(x => `                ${x},`).join("\n")}
         }
     }
 }
-`)]);
+`, "source-file-csharp")]);
   };
 }

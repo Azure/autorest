@@ -205,7 +205,7 @@ export class AutoRestExtension extends EventEmitter {
       },
       async ListInputs(artifactType?: string): Promise<string[]> {
         return (await inputFileHandles)
-          .filter(x => artifactType === null || artifactType === undefined || artifactType === x.GetArtifact())
+          .filter(x => typeof artifactType !== "string" || artifactType === x.GetArtifact())
           .map(x => x.Description);
       },
 
