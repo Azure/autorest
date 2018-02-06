@@ -63,6 +63,7 @@ export type Mappings = Array<Mapping>;
 }
 declare module 'autorest-core/lib/message' {
 	import { EnhancedPosition, Position } from 'autorest-core/lib/ref/source-map';
+import { Artifact } from 'autorest-core/lib/artifact';
 /**
  * The Channel that a message is registered with.
  */
@@ -81,6 +82,8 @@ export enum Channel {
     Fatal,
     /** Hint messages offer guidance or support without forcing action. */
     Hint,
+    /** File represents a file output from an extension. Details are a Artifact and are required.  */
+    File,
 }
 export interface SourceLocation {
     document: string;
@@ -100,6 +103,9 @@ export interface Message {
     Range?: Iterable<Range>;
     Plugin?: string;
     FormattedMessage?: string;
+}
+export interface ArtifactMessage extends Message {
+    Details: Artifact;
 }
 
 }
