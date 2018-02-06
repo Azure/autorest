@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { pushAll } from '../ref/array';
-import { Lines } from "../parsing/text-utility";
+import { Lines, IndexToPosition } from "../parsing/text-utility";
 import {
   CommonmarkHeadingFollowingText,
   CommonmarkHeadingText,
@@ -18,7 +18,7 @@ import { ConfigurationView } from "../autorest-core";
 import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
 import { IsPrefix, JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { ResolvePath, ResolveRelativeNode } from "../parsing/yaml";
-import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNodeWithPath } from "../ref/yaml";
+import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNodeWithPath, StrictJsonSyntaxCheck } from "../ref/yaml";
 import { ResolveUri } from "../ref/uri";
 import { From } from "../ref/linq";
 import { Mappings, Mapping } from "../ref/source-map";
@@ -279,7 +279,19 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
 }
 
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
-  const data = await ParseLiterateYaml(config, await inputScope.ReadStrict(inputFileUri), sink);
+  const handle = await inputScope.ReadStrict(inputFileUri);
+  // strict JSON check
+  if (inputFileUri.toLowerCase().endsWith(".json")) {
+    const error = StrictJsonSyntaxCheck(handle.ReadData());
+    if (error) {
+      config.Message({
+        Channel: Channel.Error,
+        Text: "Syntax Error Encountered: " + error.message,
+        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
+      });
+    }
+  }
+  const data = await ParseLiterateYaml(config, handle, sink);
   // check OpenAPI version
   if (data.ReadObject<any>().swagger !== "2.0") {
     throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')`);

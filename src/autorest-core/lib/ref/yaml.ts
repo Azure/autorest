@@ -249,3 +249,18 @@ export function FastStringify<T>(obj: T): string {
   }
   return Stringify(obj);
 }
+
+export function StrictJsonSyntaxCheck(json: string): { message: string, index: number } | null {
+  try {
+    // quick check on data.
+    JSON.parse(json);
+  } catch (e) {
+    const message = "" + e.message;
+    if (message.startsWith("SyntaxError")) {
+      try {
+        return { message: message.substring(0, message.lastIndexOf("at")).trim(), index: parseInt(e.message.substring(e.message.lastIndexOf(" ")).trim()) };
+      } catch { }
+    }
+  }
+  return null;
+}

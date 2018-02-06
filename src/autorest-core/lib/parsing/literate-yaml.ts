@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { OperationAbortedException } from "../exception";
-import { ParseNode } from "../ref/yaml";
+import { ParseNode, StrictJsonSyntaxCheck } from "../ref/yaml";
 import { MergeYamls, resolveRValue } from "../source-map/merging";
 import { DataHandle, DataSink } from "../data-store/data-store";
 import { Parse as ParseLiterate } from "./literate";
@@ -55,15 +55,12 @@ async function ParseCodeBlocksInternal(config: ConfigurationView, hLiterate: Dat
       // super-quick JSON block syntax check.
       if (/^(json)/i.test(codeBlock.info || "")) {
         // check syntax on JSON blocks with simple check first
-        try {
-          // quick check on data.
-          JSON.parse(data.ReadData());
-        } catch (e) {
-          const index = parseInt(e.message.substring(e.message.lastIndexOf(" ")).trim());
+        const error = StrictJsonSyntaxCheck(data.ReadData());
+        if (error) {
           config.Message({
             Channel: Channel.Error,
-            Text: "Syntax Error Encountered: " + e.message.substring(0, e.message.lastIndexOf("at")).trim(),
-            Source: [<SourceLocation>{ Position: IndexToPosition(data, index), document: data.key }],
+            Text: "Syntax Error Encountered: " + error.message,
+            Source: [<SourceLocation>{ Position: IndexToPosition(data, error.index), document: data.key }],
           });
           throw new OperationAbortedException();
         }
