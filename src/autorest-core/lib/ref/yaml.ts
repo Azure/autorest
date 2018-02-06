@@ -255,8 +255,8 @@ export function StrictJsonSyntaxCheck(json: string): { message: string, index: n
     // quick check on data.
     JSON.parse(json);
   } catch (e) {
-    const message = "" + e.message;
-    if (message.startsWith("SyntaxError")) {
+    if (e instanceof SyntaxError) {
+      const message = "" + e.message;
       try {
         return { message: message.substring(0, message.lastIndexOf("at")).trim(), index: parseInt(e.message.substring(e.message.lastIndexOf(" ")).trim()) };
       } catch { }
