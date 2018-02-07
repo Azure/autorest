@@ -43,6 +43,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
                     var clientMethod = new ClientMethodModel
                                        {
+                                           OperationId = method.SerializedName.ToString(),
                                            UrlTemplate = GetUrlTemplate(method),
                                            HttpMethod = method.HttpMethod.ToString().ToLower(),
                                            MethodName = method.Name.Value.Replace($"{groupName}_", "").ToCamelCase(),
