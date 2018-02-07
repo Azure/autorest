@@ -36,9 +36,6 @@ namespace AutoRest.TypeScript.SuperAgent
 
             try
             {
-                var utilsTemplate = new UtilsTemplate() {Model = null};
-                await Write(utilsTemplate, "httpUtil.ts");
-
                 var modelsBinder = new ModelsModelBinder();
                 var clientModelsBinder = new ClientGroupsModelBinder();
 
