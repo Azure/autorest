@@ -6,7 +6,7 @@ namespace @Settings.Namespace
         public const string Prefix = "API.";
     @foreach (var parameter in Model)
     {
-@:        public const string @(parameter.Name) = Prefix + "@(parameter.Name)";
+@:        public const string @(parameter.Name) = Prefix + "@(parameter.NameWithoutRoute)";
     }
     }
 }
