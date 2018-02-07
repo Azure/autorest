@@ -16,12 +16,14 @@ import { Lazy } from "../lazy";
 import { IFileSystem } from "../file-system";
 import { OperationCanceledException } from "../exception";
 
+const FALLBACK_DEFAULT_OUTPUT_ARTIFACT = "";
+
 /********************************************
  * Data model section (not exposed)
  ********************************************/
 
 export interface Metadata {
-  artifact: string | null;
+  artifact: string;
   inputSourceMap: Lazy<RawSourceMap>;
   sourceMap: Lazy<RawSourceMap>;
   sourceMapEachMappingByLine: Lazy<sourceMap.MappingItem[][]>;
@@ -170,7 +172,7 @@ export class DataStore {
     return this.Read(uri);
   }
 
-  public async WriteData(description: string, data: string, artifact: string | null, sourceMapFactory?: (self: DataHandle) => RawSourceMap): Promise<DataHandle> {
+  public async WriteData(description: string, data: string, artifact: string, sourceMapFactory?: (self: DataHandle) => RawSourceMap): Promise<DataHandle> {
     const uri = this.createUri(description);
 
     // metadata
@@ -222,9 +224,9 @@ export class DataStore {
     return ResolveUri(this.BaseUri, `${this.uid++}?${encodeURIComponent(description)}`);
   }
 
-  public getDataSink(artifact: string | null = null): DataSink {
+  public getDataSink(defaultArtifact: string = FALLBACK_DEFAULT_OUTPUT_ARTIFACT): DataSink {
     return new DataSink(
-      (description, data, sourceMapFactory) => this.WriteData(description, data, artifact, sourceMapFactory),
+      (description, data, artifact, sourceMapFactory) => this.WriteData(description, data, artifact || defaultArtifact, sourceMapFactory),
       async (description, input) => {
         const uri = this.createUri(description);
         this.store[uri] = this.store[input.key];
@@ -299,24 +301,24 @@ export class DataStore {
 
 export class DataSink {
   constructor(
-    private write: (description: string, rawData: string, metadataFactory: (readHandle: DataHandle) => RawSourceMap) => Promise<DataHandle>,
+    private write: (description: string, rawData: string, artifact: string | undefined, metadataFactory: (readHandle: DataHandle) => RawSourceMap) => Promise<DataHandle>,
     private forward: (description: string, input: DataHandle) => Promise<DataHandle>) {
   }
 
-  public async WriteDataWithSourceMap(description: string, data: string, sourceMapFactory: (readHandle: DataHandle) => RawSourceMap): Promise<DataHandle> {
-    return await this.write(description, data, sourceMapFactory);
+  public async WriteDataWithSourceMap(description: string, data: string, artifact: string | undefined, sourceMapFactory: (readHandle: DataHandle) => RawSourceMap): Promise<DataHandle> {
+    return await this.write(description, data, artifact, sourceMapFactory);
   }
 
-  public async WriteData(description: string, data: string, mappings: Mappings = [], mappingSources: DataHandle[] = []): Promise<DataHandle> {
-    return await this.WriteDataWithSourceMap(description, data, readHandle => {
+  public async WriteData(description: string, data: string, artifact?: string, mappings: Mappings = [], mappingSources: DataHandle[] = []): Promise<DataHandle> {
+    return await this.WriteDataWithSourceMap(description, data, artifact, readHandle => {
       const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
       Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
       return sourceMapGenerator.toJSON();
     });
   }
 
-  public WriteObject<T>(description: string, obj: T, mappings: Mappings = [], mappingSources: DataHandle[] = []): Promise<DataHandle> {
-    return this.WriteData(description, FastStringify(obj), mappings, mappingSources);
+  public WriteObject<T>(description: string, obj: T, artifact?: string, mappings: Mappings = [], mappingSources: DataHandle[] = []): Promise<DataHandle> {
+    return this.WriteData(description, FastStringify(obj), artifact, mappings, mappingSources);
   }
 
   public Forward(description: string, input: DataHandle): Promise<DataHandle> {
@@ -344,7 +346,7 @@ export class DataHandle {
     return this.ReadMetadata().yamlAst.Value;
   }
 
-  public GetArtifact(): string | null {
+  public GetArtifact(): string {
     return this.ReadMetadata().artifact;
   }
 

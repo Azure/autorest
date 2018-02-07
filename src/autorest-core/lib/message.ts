@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { EnhancedPosition, Position } from "./ref/source-map";
+import { EnhancedPosition, Position, Mappings, RawSourceMap } from "./ref/source-map";
 import { Artifact } from "./artifact";
 
 
@@ -60,6 +60,6 @@ export interface Message {
   FormattedMessage?: string;
 };
 
-export interface ArtifactMessage extends Message { 
-  Details: Artifact; 
+export interface ArtifactMessage extends Message {
+  Details: Artifact & { sourceMap?: Mappings | RawSourceMap };
 }
