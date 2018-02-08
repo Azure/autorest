@@ -30,8 +30,8 @@ namespace @Settings.Namespace
 
         private readonly Dictionary<string, string> _defaultHeaders = new Dictionary<string, string> { { "Accept" , "application/vnd.api+json"}, { "Content-Type", "application/vnd.api+json" } };
 @EmptyLine
-        public @clientName (IApiBaseConfig apiBaseConfig, EventHandler<MetricSendEventArgs> metricEvent, EventHandler<ErrorEventArgs> errorEvent)
-		: base(apiBaseConfig, metricEvent, errorEvent)
+        public @clientName (IApiBaseConfig apiBaseConfig)
+		: base(apiBaseConfig)
         {
         }
 
