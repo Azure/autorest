@@ -97,8 +97,11 @@ namespace AutoRest.CSharp.LoadBalanced.Json
 
         public sealed override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(decimal?) ||
-                   objectType == typeof(decimal);
+            return objectType == typeof(float?) ||
+                   objectType == typeof(decimal?) ||
+                   objectType == typeof(float) ||
+                   objectType == typeof(decimal) ||
+                   objectType == typeof(string);
         }
     }
 }

@@ -20,18 +20,8 @@ using AutoRest.CSharp.LoadBalanced.Json;
 namespace @Settings.Namespace
 {
 @EmptyLine
-    public class MetricSendEventArgs : EventArgs
-    {
-        public long ElapsedMilliseconds { get; set; }
-        public string Name { get; set; }
-        public Dictionary<string, object> Tags { get; set; }
-    }
-@EmptyLine
-    public class ErrorEventArgs : EventArgs
-    {
-        public Exception Exception { get; set; }
-    }
-@EmptyLine
+
+
     public interface IApiBaseConfig
     {
         string name { get; set; }
@@ -46,7 +36,7 @@ namespace @Settings.Namespace
 
         JsonSerializerSettings deserializationSettings { get; set; }
     }
-@EmptyLine
+
     public class ApiBaseConfig : IApiBaseConfig
     {
         public string name { get; set; }
@@ -56,7 +46,7 @@ namespace @Settings.Namespace
         public JsonSerializerSettings serializationSettings { get; set; }
         public JsonSerializerSettings deserializationSettings { get; set; }
     }
-@EmptyLine
+
     public abstract class ApiBase
     {
         private readonly List<ServerSettings> _settings;
@@ -65,9 +55,6 @@ namespace @Settings.Namespace
         private readonly TimeSpan _timeout;
         private readonly int _retryCount;
         private readonly string _name;
-        private event EventHandler<MetricSendEventArgs> _metricSendEvent;
-        private event EventHandler<ErrorEventArgs> _errorEvent;
-@EmptyLine
 @EmptyLine
         protected ApiBase(IApiBaseConfig apiBaseConfig)
         {
@@ -77,15 +64,6 @@ namespace @Settings.Namespace
             _retryCount = apiBaseConfig.retryCount;
             _serializationSettings = apiBaseConfig.serializationSettings;
             _deserializationSettings = apiBaseConfig.deserializationSettings;
-        }
-@EmptyLine
-        protected ApiBase(IApiBaseConfig apiBaseConfig, EventHandler<MetricSendEventArgs> metricEvent, EventHandler<ErrorEventArgs> errorEvent) : this(apiBaseConfig)
-        {
-            if (metricEvent != null)
-                _metricSendEvent += metricEvent;
-
-            if (errorEvent != null)
-                _errorEvent += errorEvent;
         }
 @EmptyLine
         public virtual JsonSerializerSettings SerializationSettings =>
@@ -179,7 +157,7 @@ namespace @Settings.Namespace
             }
             catch (Exception ex)
             {
-                _errorEvent?.Invoke(this, new ErrorEventArgs {Exception = ex});
+                ErrorEvent?.Invoke(this, new ErrorEventArgs {Exception = ex});
                 throw;
             }
             finally
@@ -193,7 +171,7 @@ namespace @Settings.Namespace
                     tags.Add("TotalReceivedBytes", executeResult.TotalReceivedBytes);
                 }
 
-                _metricSendEvent?.Invoke(this,
+                MetricSendEvent?.Invoke(this,
                     new MetricSendEventArgs
                     {
                         Name = metricName,
@@ -201,6 +179,21 @@ namespace @Settings.Namespace
                         Tags = tags
                     });
             }
+        }
+@EmptyLine
+        public event EventHandler<MetricSendEventArgs> MetricSendEvent;
+        public event EventHandler<ErrorEventArgs> ErrorEvent;
+@EmptyLine
+        public class MetricSendEventArgs : EventArgs
+        {
+            public long ElapsedMilliseconds { get; set; }
+            public string Name { get; set; }
+            public Dictionary<string, object> Tags { get; set; }
+        }
+@EmptyLine
+        public class ErrorEventArgs : EventArgs
+        {
+            public Exception Exception { get; set; }
         }
 @EmptyLine
         public class RequestParameters
