@@ -413,9 +413,6 @@
       ]
     },
     "response": {
-      "x-ms-error-response": {
-        "$ref": "#/definitions/xmsErrorResponse"
-      },
       "type": "object",
       "required": [
         "description"
@@ -439,6 +436,9 @@
         },
         "headers": {
           "$ref": "#/definitions/headers"
+        },
+        "x-ms-error-response": {
+          "$ref": "#/definitions/xmsErrorResponse"
         },
         "examples": {
           "$ref": "#/definitions/examples"
@@ -529,9 +529,9 @@
           "$ref": "#/definitions/xNullable"
         },
         "x-ms-header-collection-prefix": {
-            "type": "string",
-            "description": "Provides the ability to specify a key value mapping, using given prefix as the prefix of all keys."
-          },
+          "type": "string",
+          "description": "Provides the ability to specify a key value mapping, using given prefix as the prefix of all keys."
+        },
         "x-ms-client-name": {
           "type": "string",
           "description": "A code-generator-friendly name for the header."
