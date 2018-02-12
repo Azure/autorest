@@ -99,7 +99,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
             var pairs = method.Parameters.Where(p => p.Location == ParameterLocation.Query)
                 .Select(param => $"{param.Name.Value}: request.{param.Name.Value}");
 
-            return $"{{{string.Join(", ", pairs)}}}";
+            return $"{{ {string.Join(", ", pairs)} }}";
         }
     }
 }
