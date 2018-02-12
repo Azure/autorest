@@ -28,7 +28,7 @@ import * as httpUtil from './httpUtil';
 @:            return await httpUtil.req<@($"{method.RequestTypeName}, {method.ResponseTypeName}")>(request, '@(method.OperationId)')
 @:            .withUrl(`@(method.UrlTemplate)`)
 @:            .withQueryParameters(@(method.QueryStringTemplate))
-@:            .http@(method.HttpMethod.ToPascalCase())(@(method.ParamNamesInBody.Any() ? $"request.{method.ParamNamesInBody.First()}" : ""));
+@:            .http@(method.HttpMethod.ToPascalCase())(@(method.ParamNamesInBody.Any() ? $"request.{method.ParamNamesInBody.First()}" : ""), onProgress);
 @:    }
 /**/
 }
