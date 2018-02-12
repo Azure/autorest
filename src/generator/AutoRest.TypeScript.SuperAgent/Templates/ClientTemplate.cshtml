@@ -2,12 +2,11 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.TypeScript.SuperAgent.Model
 @inherits AutoRest.Core.Template<ClientGroupsModel>
-
 // API version: @Model.Header.ApiVersion
 // Tool version: @Model.Header.GeneratorVersion
 
-import * as @(Model.ModelModuleName) from "./model"
-import * as httpUtil from "./httpUtil"
+import * as model from './model';
+import * as httpUtil from './httpUtil';
 
 @foreach (var client in Model.Clients)
 {
@@ -25,11 +24,13 @@ import * as httpUtil from "./httpUtil"
 @:    }
     foreach (var method in client.Methods)
     {
-@:    async @(method.MethodName)(request: @(method.RequestTypeName)) : @(method.ResponsePromiseTypeName) {
-@:        return await httpUtil.req<@($"{method.RequestTypeName}, {method.ResponseTypeName}")>(request, '@(method.OperationId)')
-@:            .withUrl(`@(method.UrlTemplate)`) 
-@:            .http@(method.HttpMethod.ToPascalCase())(@(method.ParamNamesInBody.Any() ? $"request.{method.ParamNamesInBody.First()}" : ""));
+@:        async @(method.MethodName)(request: @(method.RequestTypeName), onProgress: httpUtil.OnProgress = null) : @(method.ResponsePromiseTypeName) {
+@:            return await httpUtil.req<@($"{method.RequestTypeName}, {method.ResponseTypeName}")>(request, '@(method.OperationId)')
+@:            .withUrl(`@(method.UrlTemplate)`)
+@:            .withQueryParameters(@(method.QueryStringTemplate))
+@:            .http@(method.HttpMethod.ToPascalCase())(@(method.ParamNamesInBody.Any() ? $"request.{method.ParamNamesInBody.First()}" : ""), onProgress);
 @:    }
-    }
+/**/
+}
 @:}
 }

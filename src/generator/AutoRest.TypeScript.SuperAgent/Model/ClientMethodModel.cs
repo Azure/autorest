@@ -16,6 +16,8 @@ namespace AutoRest.TypeScript.SuperAgent.Model
 
         public string UrlTemplate { get; set; }
 
+        public string QueryStringTemplate { get; set; }
+
         public string ResponsePromiseTypeName { get; set; }
 
         public List<string> ParamNamesInPath { get; set; }
