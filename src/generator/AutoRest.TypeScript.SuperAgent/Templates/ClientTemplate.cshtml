@@ -2,34 +2,35 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.TypeScript.SuperAgent.Model
 @inherits AutoRest.Core.Template<ClientGroupsModel>
-
 // API version: @Model.Header.ApiVersion
 // Tool version: @Model.Header.GeneratorVersion
 
-import * as @(Model.ModelModuleName) from "./model"
-import * as httpUtil from "./httpUtil"
+import * as model from './model';
+import * as httpUtil from './httpUtil';
 
 @foreach (var client in Model.Clients)
 {
-@:export interface @(client.InterfaceName) {
+    @:export interface @(client.InterfaceName) {
     foreach (var method in client.Methods)
     {
-@:    @(method.MethodName)(request: @(method.RequestTypeName)) : @(method.ResponsePromiseTypeName);
+        @:    @(method.MethodName)(request: @(method.RequestTypeName)) : @(method.ResponsePromiseTypeName);
     }
-@:}
+    @:}
 
-@:export class @(client.Name) extends httpUtil.BaseApi implements @(client.InterfaceName) {
-@:
-@:    public constructor(baseUrl: string) {
-@:        super(baseUrl);
-@:    }
+    @:export class @(client.Name) extends httpUtil.BaseApi implements @(client.InterfaceName) {
+    @:
+    @:    public constructor(baseUrl: string) {
+    @:        super(baseUrl);
+    @:    }
     foreach (var method in client.Methods)
     {
-@:    async @(method.MethodName)(request: @(method.RequestTypeName)) : @(method.ResponsePromiseTypeName) {
-@:        return await httpUtil.req<@($"{method.RequestTypeName}, {method.ResponseTypeName}")>(request, '@(method.OperationId)')
-@:            .withUrl(`@(method.UrlTemplate)`) 
+@:        async @(method.MethodName)(request: @(method.RequestTypeName), onProgress: httpUtil.OnProgress = null) : @(method.ResponsePromiseTypeName) {
+@:            return await httpUtil.req<@($"{method.RequestTypeName}, {method.ResponseTypeName}")>(request, '@(method.OperationId)')
+@:            .withUrl(`@(method.UrlTemplate)`)
+@:            .withQueryParameters(@(method.QueryStringTemplate))
 @:            .http@(method.HttpMethod.ToPascalCase())(@(method.ParamNamesInBody.Any() ? $"request.{method.ParamNamesInBody.First()}" : ""));
 @:    }
-    }
-@:}
+/**/
+}
+    @:}
 }

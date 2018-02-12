@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.TypeScript.SuperAgent.Model;
@@ -45,6 +46,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                                        {
                                            OperationId = method.SerializedName.ToString(),
                                            UrlTemplate = GetUrlTemplate(method),
+                                           QueryStringTemplate = GetQueryParameterTemplate(method),
                                            HttpMethod = method.HttpMethod.ToString().ToLower(),
                                            MethodName = method.Name.Value.Replace($"{groupName}_", "").ToCamelCase(),
                                            RequestTypeName = requestName,
@@ -89,16 +91,15 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                 url = url.Replace($"{{{param.Name.Value}}}", $"${{request.{param.Name.Value}}}");
             }
 
-            for (var index = 0;
-                index < method.Parameters.Where(p => p.Location == ParameterLocation.Query).ToArray().Length;
-                index++)
-            {
-                var param = method.Parameters.Where(p => p.Location == ParameterLocation.Query).ToArray()[index];
-                char separator = index == 0 ? '?' : '&';
-                url += $"{separator}{param.Name.Value}=${{request.{param.Name.Value}}}";
-            }
-
             return $"${{this.baseUrl}}{url}";
+        }
+
+        public string GetQueryParameterTemplate(Method method)
+        {
+            var pairs = method.Parameters.Where(p => p.Location == ParameterLocation.Query)
+                .Select(param => $"{param.Name.Value}: request.{param.Name.Value}");
+
+            return $"{{{string.Join(", ", pairs)}}}";
         }
     }
 }
