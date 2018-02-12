@@ -10,14 +10,14 @@ import * as httpUtil from './httpUtil';
 
 @foreach (var client in Model.Clients)
 {
-    @:export interface @(client.InterfaceName) {
+@:export interface @(client.InterfaceName) {
     foreach (var method in client.Methods)
     {
         @:    @(method.MethodName)(request: @(method.RequestTypeName)) : @(method.ResponsePromiseTypeName);
     }
-    @:}
+@:}
 
-    @:export class @(client.Name) extends httpUtil.BaseApi implements @(client.InterfaceName) {
+@:export class @(client.Name) extends httpUtil.BaseApi implements @(client.InterfaceName) {
     @:
     @:    public constructor(baseUrl: string) {
     @:        super(baseUrl);
