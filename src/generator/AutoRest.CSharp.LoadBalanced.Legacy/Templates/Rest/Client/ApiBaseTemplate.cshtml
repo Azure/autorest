@@ -334,7 +334,6 @@ namespace @Settings.Namespace
                         query[parameterName] = urlValue;
                     }
                 }
-
                 var uriBuilder = new UriBuilder(null, null, -1, path);
 
                 // Append the remaining parameters as query string if this is a GET request.
@@ -343,7 +342,7 @@ namespace @Settings.Namespace
                     uriBuilder.Query = string.Join("&", query.Select(parameter =>
                     {
                         var name = HttpUtility.UrlEncode(parameter.Key);
-                        var value = HttpUtility.UrlEncode(parameter.Value);
+                        var value = parameter.Value;
                         return $"{name}={value}";
                     }));
                 }
