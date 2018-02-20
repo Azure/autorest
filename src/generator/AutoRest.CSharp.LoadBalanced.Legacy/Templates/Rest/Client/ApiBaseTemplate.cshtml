@@ -334,22 +334,18 @@ namespace @Settings.Namespace
                         query[parameterName] = urlValue;
                     }
                 }
-
                 var uriBuilder = new UriBuilder(null, null, -1, path);
 
-                // Append the remaining parameters as query string.
-                var uriBuilder = new UriBuilder(null, null, -1, path)
+                // Append the remaining parameters as query string if this is a GET request.
+                if (verb == Verbs.GET)
                 {
-                    Query = string.Join(
-                        "&",
-                        query.Select(
-                            parameter =>
-                            {
-                                var name = HttpUtility.UrlEncode(parameter.Key);
-                                var value = parameter.Value;
-                                return $"{name}={value}";
-                            }))
-                };
+                    uriBuilder.Query = string.Join("&", query.Select(parameter =>
+                    {
+                        var name = HttpUtility.UrlEncode(parameter.Key);
+                        var value = parameter.Value;
+                        return $"{name}={value}";
+                    }));
+                }
 
                 return uriBuilder.ToString();
             }
