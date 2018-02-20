@@ -42,9 +42,10 @@ export interface AutoRestConfigurationImpl {
   "directive"?: Directive[] | Directive;
   "declare-directive"?: { [name: string]: string };
   "output-artifact"?: string[] | string;
-  "message-format"?: "json";
+  "message-format"?: "json" | "yaml" | "regular";
   "use-extension"?: { [extensionName: string]: string };
   "require"?: string[] | string;
+  "try-require"?: string[] | string;
   "help"?: any;
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
@@ -209,6 +210,7 @@ export class ConfigurationView {
       "input-file": [],
       "output-artifact": [],
       "require": [],
+      "try-require": [],
       "use": [],
     };
 
@@ -295,10 +297,31 @@ export class ConfigurationView {
     });
   }
 
-  public get IncludedConfigurationFiles(): string[] {
-    return From<string>(ValuesOf<string>(this.config["require"]))
-      .Select(each => this.ResolveAsPath(each))
-      .ToArray();
+  public async IncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<string[]> {
+    const result = new Array<string>();
+    for (const each of From<string>(ValuesOf<string>(this.config["require"]))) {
+      const path = this.ResolveAsPath(each);
+      if (!ignoreFiles.has(path)) {
+        result.push(this.ResolveAsPath(each));
+      }
+    }
+
+    // for try require, see if it exists before including it in the list.
+    for (const each of From<string>(ValuesOf<string>(this.config["try-require"]))) {
+      const path = this.ResolveAsPath(each);
+      try {
+        if (!ignoreFiles.has(path) && await fileSystem.ReadFile(path)) {
+          result.push(path);
+          continue;
+        }
+      } catch {
+        // skip it.
+      }
+      ignoreFiles.add(path);
+    }
+
+    // return the aggregate list of things we're supposed to include
+    return result;
   }
 
   public get Directives(): DirectiveView[] {
@@ -390,7 +413,7 @@ export class ConfigurationView {
 
     try {
       // update source locations to point to loaded Swagger
-      if (m.Source) {
+      if (m.Source && typeof (m.Source.map) === 'function') {
         const blameSources = m.Source.map(s => {
           let blameTree: BlameTree | null = null;
 
@@ -461,7 +484,7 @@ export class ConfigurationView {
       }
 
       // set range (dummy)
-      if (m.Source) {
+      if (m.Source && typeof (m.Source.map) === 'function') {
         m.Range = m.Source.map(s => {
           const positionStart = s.Position;
           const positionEnd = <sourceMap.Position>{ line: s.Position.line, column: s.Position.column + (s.Position.length || 3) };
@@ -606,23 +629,25 @@ export class Configuration {
   }
 
   public static async shutdown() {
-    AutoRestExtension.killAll();
+    try {
+      AutoRestExtension.killAll();
 
-    // once we shutdown those extensions, we should shutdown the EM too. 
-    const extMgr = await Configuration.extensionManager;
-    extMgr.dispose();
+      // once we shutdown those extensions, we should shutdown the EM too. 
+      const extMgr = await Configuration.extensionManager;
+      extMgr.dispose();
 
-    // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
-    Configuration.extensionManager = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")))
+      // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
+      Configuration.extensionManager = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")))
 
-    for (const each in loadedExtensions) {
-      const ext = loadedExtensions[each];
-      if (ext.autorestExtension.hasValue) {
-        const extension = await ext.autorestExtension;
-        extension.kill();
-        delete loadedExtensions[each];
+      for (const each in loadedExtensions) {
+        const ext = loadedExtensions[each];
+        if (ext.autorestExtension.hasValue) {
+          const extension = await ext.autorestExtension;
+          extension.kill();
+          delete loadedExtensions[each];
+        }
       }
-    }
+    } catch { }
   }
 
   public async CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView> {
@@ -648,36 +673,39 @@ export class Configuration {
     }
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
-    while (true) {
-      const tmpView = createView();
-      const additionalConfigs = tmpView.IncludedConfigurationFiles.filter(ext => !addedConfigs.has(ext));
-      if (additionalConfigs.length === 0) {
-        break;
-      }
-      // acquire additional configs
-      for (const additionalConfig of additionalConfigs) {
-        try {
-          messageEmitter.Message.Dispatch({
-            Channel: Channel.Verbose,
-            Text: `Including configuration file '${additionalConfig}'`
-          });
-          addedConfigs.add(additionalConfig);
-          // merge config
-          const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
-          const blocks = await this.ParseCodeBlocks(
-            await inputView.ReadStrict(additionalConfig),
-            tmpView,
-            `require-config-${additionalConfig}`);
-          await addSegments(blocks);
-        } catch (e) {
-          messageEmitter.Message.Dispatch({
-            Channel: Channel.Fatal,
-            Text: `Failed to acquire 'require'd configuration '${additionalConfig}'`
-          });
-          throw e;
+    const includeFn = async () => {
+      while (true) {
+        const tmpView = createView();
+        const additionalConfigs = (await tmpView.IncludedConfigurationFiles(this.fileSystem, addedConfigs));
+        if (additionalConfigs.length === 0) {
+          break;
+        }
+        // acquire additional configs
+        for (const additionalConfig of additionalConfigs) {
+          try {
+            messageEmitter.Message.Dispatch({
+              Channel: Channel.Verbose,
+              Text: `> Including configuration file '${additionalConfig}'`
+            });
+            addedConfigs.add(additionalConfig);
+            // merge config
+            const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
+            const blocks = await this.ParseCodeBlocks(
+              await inputView.ReadStrict(additionalConfig),
+              tmpView,
+              `require-config-${additionalConfig}`);
+            await addSegments(blocks);
+          } catch (e) {
+            messageEmitter.Message.Dispatch({
+              Channel: Channel.Fatal,
+              Text: `Failed to acquire 'require'd configuration '${additionalConfig}'`
+            });
+            throw e;
+          }
         }
       }
-    }
+    };
+    await includeFn();
     // 4. default configuration
     if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
@@ -687,6 +715,9 @@ export class Configuration {
         "default-config");
       await addSegments(blocks);
     }
+
+    await includeFn();
+
     // 5. resolve extensions
     const extMgr = await Configuration.extensionManager;
     const addedExtensions = new Set<string>();
@@ -737,7 +768,7 @@ export class Configuration {
               if (installedExtension) {
                 messageEmitter.Message.Dispatch({
                   Channel: Channel.Information,
-                  Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
+                  Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${installedExtension.version})`
                 });
                 // start extension
                 ext = loadedExtensions[additionalExtension.fullyQualified] = {
@@ -762,6 +793,7 @@ export class Configuration {
               }
             }
           }
+          await includeFn();
 
           // merge config
           const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());

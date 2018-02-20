@@ -49,7 +49,7 @@ import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
 import { AutoRest, ConfigurationView, IsOpenApiDocument, Shutdown } from './lib/autorest-core';
 import { ShallowCopy } from "./lib/source-map/merging";
 import { Message, Channel } from "./lib/message";
-import { resolve as currentDirectory } from "path";
+import { join, resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
 import { CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString, ClearFolder } from "./lib/ref/uri";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
@@ -57,6 +57,9 @@ import { DataStore } from "./lib/data-store/data-store";
 import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
 import { Exception, OperationCanceledException } from "./lib/exception";
 import { Help } from "./help";
+
+let verbose = false;
+let debug = false;
 
 function awaitable(child: ChildProcess): Promise<number> {
   return new Promise<number>((resolve, reject) => {
@@ -140,9 +143,9 @@ ${Stringify(config).replace(/^---\n/, "")}
       view.Message({
         Channel: Channel.Warning,
         Text:
-        `The parameter ${arg} looks like it was meant for the new CLI! ` +
-        "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
-        "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."
+          `The parameter ${arg} looks like it was meant for the new CLI! ` +
+          "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
+          "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI."
       });
     }
   }
@@ -161,15 +164,16 @@ ${Stringify(config).replace(/^---\n/, "")}
  * Current AutoRest
  */
 
-type CommandLineArgs = { configFileOrFolder?: string, switches: any[] };
+type CommandLineArgs = { configFileOrFolder?: string, switches: any[], rawSwitches: any };
 
 function parseArgs(autorestArgs: string[]): CommandLineArgs {
   const result: CommandLineArgs = {
-    switches: []
+    switches: [],
+    rawSwitches: {}
   };
 
   for (const arg of autorestArgs) {
-    const match = /^--([^=]+)(=(.+))?$/g.exec(arg);
+    const match = /^--([^=:]+)([=:](.+))?$/g.exec(arg);
 
     // configuration file?
     if (match === null) {
@@ -183,34 +187,53 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
     // switch
     const key = match[1];
     let rawValue = match[3] || "{}";
+
+    if (rawValue.startsWith('.')) {
+      // starts with a . or .. -> this is a relative path to current directory
+      rawValue = join(process.cwd(), rawValue);
+    }
+
     // quote stuff beginning with '@', YAML doesn't think unquoted strings should start with that
     rawValue = rawValue.startsWith('@') ? `'${rawValue}'` : rawValue;
     // quote numbers with decimal point, we don't have any use for non-integer numbers (while on the other hand version strings may look like decimal numbers)
     rawValue = !isNaN(parseFloat(rawValue)) && rawValue.includes('.') ? `'${rawValue}'` : rawValue;
     const value = Parse(rawValue);
+    result.rawSwitches[key] = value;
     result.switches.push(CreateObject(key.split("."), value));
   }
 
   return result;
 }
 
+function outputMessage(instance: AutoRest, m: Message, errorCounter: () => void) {
+  switch (m.Channel) {
+    case Channel.Debug:
+      if (debug) {
+        console.log(color(m.FormattedMessage || m.Text));
+      }
+      break;
+    case Channel.Verbose:
+      if (verbose) {
+        console.log(color(m.FormattedMessage || m.Text));
+      }
+      break;
+    case Channel.Information:
+      console.log(color(m.FormattedMessage || m.Text));
+      break;
+    case Channel.Warning:
+      console.log(color(m.FormattedMessage || m.Text));
+      break;
+    case Channel.Error:
+    case Channel.Fatal:
+      errorCounter();
+      console.error(color(m.FormattedMessage || m.Text));
+      break;
+  }
+}
+
 function subscribeMessages(api: AutoRest, errorCounter: () => void) {
   api.Message.Subscribe((_, m) => {
-    switch (m.Channel) {
-      case Channel.Debug:
-      case Channel.Verbose:
-      case Channel.Information:
-        console.log(color(m.FormattedMessage || m.Text));
-        break;
-      case Channel.Warning:
-        console.log(color(m.FormattedMessage || m.Text));
-        break;
-      case Channel.Error:
-      case Channel.Fatal:
-        errorCounter();
-        console.error(color(m.FormattedMessage || m.Text));
-        break;
-    }
+    return outputMessage(_, m, errorCounter);
   });
 }
 
@@ -273,8 +296,24 @@ async function currentMain(autorestArgs: string[]): Promise<number> {
     return 0;
   }
 
+  // add probes for readme.*.md files when a standalone arg is given.
+  const more = new Array<string>();
+  for (const each of autorestArgs) {
+    const match = /^--([^=:]+)([=:](.+))?$/g.exec(each);
+    if (match && !match[3]) {
+      // it's a solitary --foo (ie, no specified value) argument
+      more.push(`--try-require=readme.${match[1]}.md`);
+    }
+  }
+
   // parse the args from the command line
-  args = parseArgs(autorestArgs);
+  args = parseArgs([...autorestArgs, ...more]);
+
+  if ((!args.rawSwitches["message-format"]) || args.rawSwitches["message-format"] === "regular") {
+    console.log(color(`> Loading AutoRest core      '${__dirname}' (${require("../package.json").version})`));
+  }
+  verbose = verbose || args.rawSwitches["verbose"];
+  debug = debug || args.rawSwitches["debug"];
 
   // identify where we are starting from.
   const currentDirUri = CreateFolderUri(currentDirectory());
@@ -460,16 +499,15 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
   return exitcode;
 }
 
-
 async function batch(api: AutoRest): Promise<void> {
   const config = await api.view;
   const batchTaskConfigReference: any = {};
   api.AddConfiguration(batchTaskConfigReference);
   for (const batchTaskConfig of config.GetEntry("batch" as any)) {
-    config.Message({
+    outputMessage(api, {
       Channel: Channel.Information,
-      Text: `Processing batch task - ${batchTaskConfig} .`
-    });
+      Text: `Processing batch task - ${JSON.stringify(batchTaskConfig)} .`
+    }, () => { });
 
     // update batch task config section
     for (const key of Object.keys(batchTaskConfigReference)) delete batchTaskConfigReference[key];
@@ -478,10 +516,10 @@ async function batch(api: AutoRest): Promise<void> {
 
     const result = await api.Process().finish;
     if (result !== true) {
-      config.Message({
+      outputMessage(api, {
         Channel: Channel.Error,
-        Text: `Failure during batch task - ${batchTaskConfig} -- ${result}.`
-      });
+        Text: `Failure during batch task - ${JSON.stringify(batchTaskConfig)} -- ${result}.`
+      }, () => { });
       throw result;
     }
   }
@@ -490,22 +528,17 @@ async function batch(api: AutoRest): Promise<void> {
 /**
  * Entry point
  */
-
-async function main() {
+async function mainImpl():Promise<number> {
   let autorestArgs: Array<string> = [];
+  let exitcode: number = 0;
 
   try {
-    let exitcode: number = 0;
-
     autorestArgs = process.argv.slice(2);
-
     if (isLegacy(autorestArgs)) {
-      exitcode = await legacyMain(autorestArgs);
+      return await legacyMain(autorestArgs);
     } else {
-      exitcode = await currentMain(autorestArgs);
+      return await currentMain(autorestArgs);
     }
-    await Shutdown();
-    process.exit(exitcode);
   } catch (e) {
     // be very careful about the following check:
     // - doing the inversion (instanceof Error) doesn't reliably work since that seems to return false on Errors marshalled from safeEval
@@ -515,15 +548,29 @@ async function main() {
       } else {
         console.log(e.message);
       }
-      await Shutdown();
-      process.exit(e.exitCode);
+      return e.exitCode
     }
-
     if (e !== false) {
       console.error(color(`!${e}`));
     }
-    await Shutdown();
-    process.exit(1);
+  }
+  return 1;
+}
+
+async function main() {
+  let exitcode = 0;
+  try {
+    exitcode = await mainImpl();
+  } catch { 
+    exitcode = 102;
+  }
+  finally {
+    try {
+      await Shutdown();
+    } catch  {
+    } finally {
+      process.exit(exitcode);
+    }
   }
 }
 

@@ -42,6 +42,10 @@ export enum Channel {
 
   /** Hint messages offer guidance or support without forcing action. */
   Hint = <any>"hint",
+
+  /** File represents a file output from an extension. Details are a Artifact and are required.  */
+  File = <any>"file",
+
 }
 
 export enum DocumentType {

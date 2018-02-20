@@ -1,3 +1,4 @@
-(C) 2017 Microsoft Corporation.
-AutoRest code generation utility [version: 2.0.0]
 https://aka.ms/autorest
+Processing batch task - {"activate-csharp":true,"output-folder":"output1"} .
+Processing batch task - {"java":true,"output-folder":"output2"} .
+Processing batch task - {"ruby":true,"input-file":"https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-advisor/2017-04-19/swagger/advisor.json","title":"ComposedCowbellClient","directive":{"from":"advisor.json","where":"$","transform":"delete $.definitions.Resource;\ndelete $.securityDefinitions;"},"output-folder":"output3"} .

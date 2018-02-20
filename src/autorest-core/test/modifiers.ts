@@ -3,8 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
-import * as assert from "assert";
+import * as assert from 'assert';
 
+import { PumpMessagesToConsole } from './test-utility';
 import { matches } from "../lib/ref/jsonpath";
 import { MergeOverwriteOrAppend } from "../lib/source-map/merging";
 import { AutoRest } from "../main";
@@ -15,12 +16,17 @@ import { join } from "path";
 
   private async generate(additionalConfig: any): Promise<{ [uri: string]: string }> {
     const autoRest = new AutoRest(new RealFileSystem());
-    // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
       "input-file": join(__dirname, "..", "..", "test", "resources", "tiny.yaml"),
       "csharp": "true",
       "output-artifact": ["swagger-document.yaml", "openapi-document.yaml"]
     });
+    // for testing local changes:
+    if (false as any) {
+      PumpMessagesToConsole(autoRest);
+      autoRest.AddConfiguration({ "use": "C:\\work\\oneautorest\\autorest.modeler" });
+      autoRest.AddConfiguration({ "use": "C:\\work\\oneautorest\\autorest.csharp" });
+    }
     autoRest.AddConfiguration(additionalConfig);
 
     const result: { [uri: string]: string } = {};
@@ -43,8 +49,12 @@ import { join } from "path";
     const code = await this.generate({});
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Get("));
     assert.ok(!code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
+    assert.ok(!code["CowbellOperations.cs"].includes(".GetWith"));
     assert.ok(code["Models/Cowbell.cs"]);
     assert.ok(code["Models/Cowbell.cs"].includes("string Name"));
+    assert.ok(!code["Models/Cowbell.cs"].includes("string FirstName"));
+    assert.ok(code["Models/Cowbell.cs"].includes("JsonProperty"));
+    assert.ok(!code["Models/Cowbell.cs"].includes("JsonIgnore"));
     assert.ok(!code["Models/SuperCowbell.cs"]);
   }
 
@@ -58,7 +68,7 @@ import { join } from "path";
     assert.ok(!code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
   }
 
-  @test async "RenameMethod"() {
+  @test async "RenameOperation"() {
     const code = await this.generate({
       "directive": {
         "rename-operation": {
@@ -69,6 +79,40 @@ import { join } from "path";
     });
     assert.ok(!code["CowbellOperationsExtensions.cs"].includes(" Get("));
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
+  }
+
+  @test async "AddOperationForward"() {
+    const code = await this.generate({
+      "components": {
+        "operations": [
+          {
+            operationId: "Cowbell_Retrieve",
+            "forward-to": "Cowbell_Get"
+          }
+        ]
+      }
+    });
+    assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Get("));
+    assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
+    assert.ok(code["CowbellOperations.cs"].includes(".GetWith"));
+  }
+
+  @test async "AddOperationImpl"() {
+    const implementation = "// implement me " + Math.random();
+    const code = await this.generate({
+      "components": {
+        "operations": [
+          {
+            operationId: "Cowbell_Retrieve",
+            "implementation": implementation
+          }
+        ]
+      }
+    });
+    assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Get("));
+    assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
+    assert.ok(!code["CowbellOperations.cs"].includes(".GetWith"));
+    assert.ok(code["CowbellOperations.cs"].includes(implementation));
   }
 
   @test async "RemoveModel"() {
@@ -121,5 +165,52 @@ import { join } from "path";
     assert.ok(code["Models/Cowbell.cs"]);
     assert.ok(!code["Models/Cowbell.cs"].includes("string Name"));
     assert.ok(code["Models/Cowbell.cs"].includes("string FirstName"));
+  }
+
+  @test async "AddPropertyForward"() {
+    const code = await this.generate({
+      "components": {
+        "schemas": {
+          "Cowbell": {
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "forward-to": "name"
+              }
+            }
+          }
+        }
+      }
+    });
+    assert.ok(code["Models/Cowbell.cs"]);
+    assert.ok(code["Models/Cowbell.cs"].includes("string Name"));
+    assert.ok(code["Models/Cowbell.cs"].includes("string FirstName"));
+    assert.ok(code["Models/Cowbell.cs"].includes("= value;"));
+    assert.ok(code["Models/Cowbell.cs"].includes("JsonProperty"));
+    assert.ok(code["Models/Cowbell.cs"].includes("JsonIgnore"));
+  }
+
+  @test async "AddPropertyImpl"() {
+    const implementation = "get; set; // implement me " + Math.random();
+    const code = await this.generate({
+      "components": {
+        "schemas": {
+          "Cowbell": {
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "implementation": implementation
+              }
+            }
+          }
+        }
+      }
+    });
+    assert.ok(code["Models/Cowbell.cs"]);
+    assert.ok(code["Models/Cowbell.cs"].includes("string Name"));
+    assert.ok(code["Models/Cowbell.cs"].includes("string FirstName"));
+    assert.ok(code["Models/Cowbell.cs"].includes(implementation));
+    assert.ok(code["Models/Cowbell.cs"].includes("JsonProperty"));
+    assert.ok(code["Models/Cowbell.cs"].includes("JsonIgnore"));
   }
 }

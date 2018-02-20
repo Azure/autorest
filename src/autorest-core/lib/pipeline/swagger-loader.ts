@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { pushAll } from '../ref/array';
-import { Lines } from "../parsing/text-utility";
+import { Lines, IndexToPosition } from "../parsing/text-utility";
 import {
   CommonmarkHeadingFollowingText,
   CommonmarkHeadingText,
@@ -18,7 +18,7 @@ import { ConfigurationView } from "../autorest-core";
 import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
 import { IsPrefix, JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { ResolvePath, ResolveRelativeNode } from "../parsing/yaml";
-import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNodeWithPath } from "../ref/yaml";
+import { Clone, CloneAst, Descendants, StringifyAst, ToAst, YAMLNodeWithPath, StrictJsonSyntaxCheck } from "../ref/yaml";
 import { ResolveUri } from "../ref/uri";
 import { From } from "../ref/linq";
 import { Mappings, Mapping } from "../ref/source-map";
@@ -164,7 +164,7 @@ async function EnsureCompleteDefinitionIsPresent(
     const dependentRefs: YAMLNodeWithPath[] = [];
     for (const node of Descendants(currentDocAst)) {
       const path = node.path;
-      if (path.length > 3 && path[path.length - 3] === "allOf" && isReferenceNode(node) && (node.node.value as string).indexOf(reference) !== -1) {
+      if (path.length > 3 && path[path.length - 3] === "allOf" && isReferenceNode(node) && (node.node.value as string) === reference) {
         dependentRefs.push(node);
       }
     }
@@ -173,7 +173,7 @@ async function EnsureCompleteDefinitionIsPresent(
       const refs = dependentRef.path;
       const defSec = refs[0];
       const model = refs[1];
-      if (typeof defSec === "string" && typeof model === "string" && visitedEntities.indexOf(model) === -1) {
+      if (typeof defSec === "string" && typeof model === "string" && visitedEntities.indexOf(`#/${defSec}/${model}`) === -1) {
         //recursively check if the model is completely defined.
         sourceDocMappings = await EnsureCompleteDefinitionIsPresent(config, inputScope, sink, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, defSec, model);
         const currentObj = externalFiles[currentFileUri].ReadObject<any>();
@@ -188,7 +188,7 @@ async function EnsureCompleteDefinitionIsPresent(
   }
 
   // commit back
-  externalFiles[sourceFileUri] = await sink.WriteObject("revision", sourceDocObj, sourceDocMappings, [...Object.getOwnPropertyNames(externalFiles).map(x => externalFiles[x]), sourceDoc] /* inputs */ /*TODO: fix*/);
+  externalFiles[sourceFileUri] = await sink.WriteObject("revision", sourceDocObj, undefined, sourceDocMappings, [...Object.getOwnPropertyNames(externalFiles).map(x => externalFiles[x]), sourceDoc] /* inputs */ /*TODO: fix*/);
   return sourceDocMappings;
 }
 
@@ -203,7 +203,7 @@ async function StripExternalReferences(swagger: DataHandle, sink: DataSink): Pro
       }
     }
   }
-  return await sink.WriteData("result.yaml", StringifyAst(ast), mapping, [swagger]);
+  return await sink.WriteData("result.yaml", StringifyAst(ast), undefined, mapping, [swagger]);
 }
 
 export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
@@ -275,11 +275,23 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
     state.push(...[...CommonmarkSubHeadings(x.node)].map(y => { return { node: y, query: clue || x.query }; }));
   }
 
-  return sink.WriteObject("override-directives", { directive: directives }, mappings, [commonmark]);
+  return sink.WriteObject("override-directives", { directive: directives }, undefined, mappings, [commonmark]);
 }
 
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
-  const data = await ParseLiterateYaml(config, await inputScope.ReadStrict(inputFileUri), sink);
+  const handle = await inputScope.ReadStrict(inputFileUri);
+  // strict JSON check
+  if (inputFileUri.toLowerCase().endsWith(".json")) {
+    const error = StrictJsonSyntaxCheck(handle.ReadData());
+    if (error) {
+      config.Message({
+        Channel: Channel.Error,
+        Text: "Syntax Error Encountered: " + error.message,
+        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
+      });
+    }
+  }
+  const data = await ParseLiterateYaml(config, handle, sink);
   // check OpenAPI version
   if (data.ReadObject<any>().swagger !== "2.0") {
     throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')`);
@@ -350,7 +362,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
   const uniqueVersion: boolean = distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.version)).length === 1;
 
   if (candidateTitles.length === 0) throw new Error(`No 'title' in provided OpenAPI definition(s).`);
-  if (candidateTitles.length > 1) throw new Error(`No unique 'title' across OpenAPI definitions: ${candidateTitles.map(x => `'${x}'`).join(", ")}. Please adjust or provide an override.`);
+  if (candidateTitles.length > 1) throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${candidateTitles.map(x => `'${x}'`).join(", ")}. Please adjust or provide an override (--title=...).`);
   if (candidateDescriptions.length !== 1) candidateDescriptions.splice(0, candidateDescriptions.length);
 
   // prepare component Swaggers (override info, lift version param, ...)
@@ -373,8 +385,8 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
       .Concat(getPropertyValues(getProperty({ obj: swagger, path: [] }, "x-ms-paths")));
     const methods = paths.SelectMany(getPropertyValues);
     const parameters =
-      methods.SelectMany(method => getArrayValues<any>(getProperty<any, any>(method, "parameters"))).Concat(
-        paths.SelectMany(path => getArrayValues<any>(getProperty<any, any>(path, "parameters"))));
+      methods.SelectMany((method: any) => getArrayValues<any>(getProperty<any, any>(method, "parameters"))).Concat(
+        paths.SelectMany((path: any) => getArrayValues<any>(getProperty<any, any>(path, "parameters"))));
 
     // inline api-version params
     if (!uniqueVersion) {
@@ -383,7 +395,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
       const apiVersionClientParam = apiVersionClientParamName ? clientParams[apiVersionClientParamName] : null;
       if (apiVersionClientParam) {
         const apiVersionClientParam = clientParams[apiVersionClientParamName];
-        const apiVersionParameters = parameters.Where(p => p.obj.$ref === `#/parameters/${apiVersionClientParamName}`);
+        const apiVersionParameters = parameters.Where((p: any) => p.obj.$ref === `#/parameters/${apiVersionClientParamName}`);
         for (let apiVersionParameter of apiVersionParameters) {
           delete apiVersionParameter.obj.$ref;
 
@@ -437,7 +449,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
     populate.forEach(f => f());
 
     // write back
-    inputSwaggers[i] = await sink.WriteObject("prepared", swagger, mapping, [inputSwagger]);
+    inputSwaggers[i] = await sink.WriteObject("prepared", swagger, undefined, mapping, [inputSwagger]);
   }
 
   let hSwagger = await MergeYamls(config, inputSwaggers, sink);

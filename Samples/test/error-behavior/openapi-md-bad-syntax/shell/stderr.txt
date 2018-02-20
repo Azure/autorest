@@ -8,4 +8,4 @@ ERROR: Syntax Error Encountered: Syntax error: bad indentation of a mapping entr
 ERROR: Syntax Error Encountered: Syntax error: incomplete explicit mapping pair; a key node is missed
 FATAL: Error: [OperationAbortedException] Error occurred. Exiting.
 FATAL: swagger-document/loader - FAILED
-Process() Cancelled due to exception : [OperationAbortedException] Error occurred. Exiting.
+Process() cancelled due to exception : [OperationAbortedException] Error occurred. Exiting.

@@ -114,7 +114,11 @@ export class AutoRest extends EventEmitter {
             this.Finished.Dispatch(true);
             return true;
           } else {
-            return new Exception("No input files provided.\n\nUse --help to get help information.");
+            // if this is using perform-load we don't need to require files.
+            // if it's using batch, we might not have files in the main body 
+            if ((view.Raw as any)["perform-load"] !== false) {
+              return new Exception("No input files provided.\n\nUse --help to get help information.");
+            }
           }
         }
 
@@ -133,7 +137,7 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
-        const message = { Channel: Channel.Debug, Text: `Process() Cancelled due to exception : ${e.message}` };
+        const message = { Channel: Channel.Information, Text: `Process() cancelled due to exception : ${e.message}` };
         if (e instanceof Exception) {
           // idea: don't throw exceptions, just visibly log them and return false
           message.Channel = Channel.Fatal;

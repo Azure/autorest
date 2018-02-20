@@ -8,6 +8,7 @@
     "build": "gulp build --threshold=1",
     "publish-preview": "gulp publish-preview",
     "install": "gulp npm-install --verbose",
+    "reinstall": "shx rm -rf src/autorest/node_modules & shx rm -rf src/autorest-core/node_modules & shx rm src/autorest/package-lock.json & shx rm src/autorest-core/node_modules/package-lock.json & npm install",
     "regenerate": "gulp regenerate"
   },
   "repository": {
@@ -24,9 +25,6 @@
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
   "main": "./src/AutoRest/AutoRest.js",
-  "bin": {
-    "autorest": "./bin/autorest"
-  },
   "engines": {
     "node": ">=7.10.0"
   },
@@ -48,9 +46,10 @@
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
     "through2-parallel": "^0.1.3",
-    "typescript": "2.5.3",
+    "typescript": "2.6.2",
     "vinyl-fs": "^2.4.4",
-    "yargs": "^6.6.0"
+    "yargs": "^6.6.0",
+    "shx": "0.2.2"
   },
   "dependencies": {}
 }

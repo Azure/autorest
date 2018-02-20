@@ -3,7 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { EnhancedPosition, Position } from "./ref/source-map";
+import { EnhancedPosition, Position, Mappings, RawSourceMap } from "./ref/source-map";
+import { Artifact } from "./artifact";
 
 
 /**
@@ -30,6 +31,9 @@ export enum Channel {
 
   /** Hint messages offer guidance or support without forcing action. */
   Hint = <any>"hint",
+
+  /** File represents a file output from an extension. Details are a Artifact and are required.  */
+  File = <any>"file",
 }
 
 export interface SourceLocation {
@@ -55,3 +59,7 @@ export interface Message {
   Plugin?: string;
   FormattedMessage?: string;
 };
+
+export interface ArtifactMessage extends Message {
+  Details: Artifact & { sourceMap?: Mappings | RawSourceMap };
+}

@@ -17,51 +17,61 @@ openapi-type: arm
 ``` yaml $(azureresourceschema)
 use-extension:
   "@microsoft.azure/autorest.azureresourceschema": "~2.0.14"
+try-require: ./readme.azureresourceschema.md 
 ```
 
 ``` yaml $(csharp)
 use-extension:
-  "@microsoft.azure/autorest.csharp": "~2.2.45"
+  "@microsoft.azure/autorest.csharp": "~2.2.51"
+try-require:
+  - ./readme.csharp.md   
 ```
 
 ``` yaml $(jsonrpcclient)
 use-extension:
-  "@microsoft.azure/autorest.csharp": "~2.2.45"
+  "@microsoft.azure/autorest.csharp": "~2.2.51"
 ```
 
 ``` yaml $(go)
 use-extension:
   "@microsoft.azure/autorest.go": "~2.1.47"
+try-require: ./readme.go.md   
 ```
 
 ``` yaml $(java)
 use-extension:
   "@microsoft.azure/autorest.java": "~2.1.32"
+try-require: ./readme.java.md     
 ```
 
 ``` yaml $(nodejs)
 use-extension:
   "@microsoft.azure/autorest.nodejs": "~2.1.25"
+try-require: ./readme.nodejs.md     
 ```
 
 ``` yaml $(php)
 use-extension:
   "@microsoft.azure/autorest.php": "~2.0.12"
+try-require: ./readme.php.md     
 ```
 
 ``` yaml $(python)
 use-extension:
   "@microsoft.azure/autorest.python": "~2.1.26"
+try-require: ./readme.python.md     
 ```
 
 ``` yaml $(ruby)
 use-extension:
   "@microsoft.azure/autorest.ruby": "~3.1.26"
+try-require: ./readme.ruby.md     
 ```
 
 ``` yaml $(typescript)
 use-extension:
   "@microsoft.azure/autorest.typescript": "~2.0.12"
+try-require: ./readme.typescript.md   
 ```
 
 ``` yaml $(azure-validator)

@@ -19,15 +19,19 @@ function decorateSpecialProperties(o: any): void {
 }
 
 export function GetPlugin_ComponentModifier(): PipelinePlugin {
+  const noWireExtension = "x-ms-no-wire";
+
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
     const componentModifier = Clone((config.Raw as any).components);
     if (componentModifier) {
       const o = fileIn.ReadObject<any>();
 
+      o.components = o.components || {};
+
       // schemas:
       //  merge-override semantics, but decorate new properties so they're not serialized
       const schemasSource = componentModifier.schemas || {};
-      const schemasTarget = o.schemas = o.schemas || {};
+      const schemasTarget = o.components.schemas = o.components.schemas || {};
       for (const schemaKey of Object.keys(schemasSource)) {
         const schemaSource = schemasSource[schemaKey];
         const schemaTarget = schemasTarget[schemaKey] || {};
@@ -36,7 +40,7 @@ export function GetPlugin_ComponentModifier(): PipelinePlugin {
           for (const propertyKey of Object.keys(schemaSource.properties)) {
             const propSource = schemaSource.properties[propertyKey]
             if (!schemaTarget.properties || !schemaTarget.properties[propertyKey]) {
-              propSource["x-ms-nowire"] = true;
+              propSource[noWireExtension] = true;
             }
             decorateSpecialProperties(propSource);
           }
@@ -48,7 +52,7 @@ export function GetPlugin_ComponentModifier(): PipelinePlugin {
       // parameters:
       //  merge-override semantics
       const paramsSource = componentModifier.parameters || {};
-      const paramsTarget = o.parameters = o.parameters || {};
+      const paramsTarget = o.components.parameters = o.components.parameters || {};
       for (const paramKey of Object.keys(paramsSource)) {
         const paramSource = paramsSource[paramKey];
         const paramTarget = paramsTarget[paramKey] || {};
@@ -86,7 +90,7 @@ export function GetPlugin_ComponentModifier(): PipelinePlugin {
         if (existingOperation) {
           existingOperation.set(MergeOverwriteOrAppend(newOperation, existingOperation.get()));
         } else {
-          newOperation["x-ms-nowire"] = true;
+          newOperation[noWireExtension] = true;
           operationsTarget2[getDummyPath()] = { get: newOperation };
         }
       }
