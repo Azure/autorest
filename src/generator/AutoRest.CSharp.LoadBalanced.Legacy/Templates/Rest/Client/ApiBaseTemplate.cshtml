@@ -258,8 +258,8 @@ namespace @Settings.Namespace
                 var timeout = (int)_timeout.TotalMilliseconds;
                 var requestContent = (_requestContent.Value.Length > 0) ? _requestContent.Value : null;
                 var httpClient = new HttpClient(_name, _settings, JsonContentType, timeout, _retryCount, "");
-                var task = Task.Run(
-                    () => httpClient.ExecuteAsync(
+                
+               return await httpClient.ExecuteAsync(
                         _verb,
                         _url.Value.TrimStart('/'),
                         requestContent,
@@ -267,9 +267,8 @@ namespace @Settings.Namespace
                         new ErrorList(),
                         true,
                         _customHeaders));
-                task.Wait();
-                return task.Result;
             }
+
 @EmptyLine
             protected string GetUrl(Verbs verb, string restUrl, IDictionary<string, object> queryParameters)
             {
