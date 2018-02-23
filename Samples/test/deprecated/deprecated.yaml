@@ -68,7 +68,7 @@ paths:
       deprecated: true
       x-deprecated:
         replaced-by: No
-      operationId: Path_Replaced
+      operationId: Path_Parameters
       parameters:
         - name: argNo
           in: query
