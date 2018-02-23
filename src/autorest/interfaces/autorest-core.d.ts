@@ -546,6 +546,11 @@ export class Configuration {
 }
 
 }
+declare module 'autorest-core/app' {
+	 function main(): Promise<void>;
+export = main;
+
+}
 declare module 'autorest-core/language-service/language-service' {
 	/**
  * The results from calling the 'generate' method via the {@link AutoRestLanguageService/generate}

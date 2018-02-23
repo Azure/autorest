@@ -252,10 +252,10 @@ async function main() {
     }
     process.chdir(cwd);
     const result = await tryRequire(await selectedVersion.modulePath, "app.js");
-
-    if( !result ) {
+    if (!result) {
       throw new Error(`Unable to start AutoRest Core from ${await selectedVersion.modulePath}`);
     }
+    await result();
     console.log(chalk.redBright(`FATAL: AutoRest exited unexpectedly after launching autorest-core module ${corePackage} from ${await selectedVersion.location}`));
   } catch (exception) {
     console.log(chalk.redBright("Failure:"));
