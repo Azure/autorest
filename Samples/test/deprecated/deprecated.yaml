@@ -224,7 +224,7 @@ definitions:
       - a
       - b
     x-ms-enum:
-      modelAsExtensible: true
+      oldModelAsString: true
       name: Enum3No
   Enum3Yes:
     x-deprecated: true
@@ -233,7 +233,7 @@ definitions:
       - a
       - b
     x-ms-enum:
-      modelAsExtensible: true
+      oldModelAsString: true
       name: Enum3Yes
   Enum3Custom:
     x-deprecated:
@@ -243,7 +243,7 @@ definitions:
       - a
       - b
     x-ms-enum:
-      modelAsExtensible: true
+      oldModelAsString: true
       name: Enum3Custom
   Enum3Replaced:
     x-deprecated:
@@ -253,5 +253,5 @@ definitions:
       - a
       - b
     x-ms-enum:
-      modelAsExtensible: true
+      oldModelAsString: true
       name: Enum3Replaced

@@ -1583,7 +1583,7 @@
           "type": "boolean",
           "default": false
         },
-        "modelAsExtensible": {
+        "oldModelAsString": {
           "type": "boolean",
           "default": false
         },
