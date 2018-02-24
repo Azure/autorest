@@ -528,7 +528,7 @@ async function batch(api: AutoRest): Promise<void> {
 /**
  * Entry point
  */
-async function mainImpl():Promise<number> {
+async function mainImpl(): Promise<number> {
   let autorestArgs: Array<string> = [];
   let exitcode: number = 0;
 
@@ -561,7 +561,7 @@ async function main() {
   let exitcode = 0;
   try {
     exitcode = await mainImpl();
-  } catch { 
+  } catch {
     exitcode = 102;
   }
   finally {
