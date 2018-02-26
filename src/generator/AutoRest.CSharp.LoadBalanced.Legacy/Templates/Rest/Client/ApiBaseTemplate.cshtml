@@ -259,14 +259,19 @@ namespace @Settings.Namespace
                 var requestContent = (_requestContent.Value.Length > 0) ? _requestContent.Value : null;
                 var httpClient = new HttpClient(_name, _settings, JsonContentType, timeout, _retryCount, "");
                 
-               return await httpClient.ExecuteAsync(
+                // this will need to be called async as part of a client update. This because of
+                // unexpected deadlocks when using the current implementation.
+                var task = Task.Run(
+                    () => httpClient.ExecuteAsync(
                         _verb,
                         _url.Value.TrimStart('/'),
                         requestContent,
                         false,
                         new ErrorList(),
                         true,
-                        _customHeaders);
+                        _customHeaders));
+                task.Wait();                
+                return task.Result;
             }
 
 @EmptyLine
