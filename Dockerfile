@@ -1,9 +1,9 @@
-FROM ubuntu:17.04
+FROM ubuntu:xenial 
 
 LABEL maintainer="fearthecowboy" 
 
 # Required for install
-RUN apt-get update && apt-get install -y curl libunwind8 libicu57
+RUN apt-get update && apt-get install -y curl libunwind8
 
 # NodeJS
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
