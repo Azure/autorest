@@ -235,7 +235,6 @@ namespace @Settings.Namespace
                 _url = new Lazy<string>(() => GetUrl(restUrl, queryParameters));
                 _serializationSettings = serializationSettings;
                 _customHeaders = customHeaders;
-                var requestContent = 
                 _requestContent = new Lazy<byte[]>(() => GetRequestContent(httpVerb, body));
                 _manualCalcUris = manualCalcUris;
                 _overrideHostHeader = overrideHostHeader;
