@@ -236,7 +236,7 @@ namespace @Settings.Namespace
                 _serializationSettings = serializationSettings;
                 _customHeaders = customHeaders;
                 _requestContent = new Lazy<byte[]>(() => body == null
-                                ? new byte[0]
+                                ? null
                                 : Encoding.UTF8.GetBytes(SafeJsonConvert.SerializeObject(body,
                                     _serializationSettings)));
                 _manualCalcUris = manualCalcUris;
@@ -251,7 +251,7 @@ namespace @Settings.Namespace
                 var result = await httpClient.ExecuteAsync(
                     _verb,
                     _url.Value,
-                    _requestContent.Value,
+                    _requestContent?.Value,
                     false,
                     new ErrorList(),
                     true,
