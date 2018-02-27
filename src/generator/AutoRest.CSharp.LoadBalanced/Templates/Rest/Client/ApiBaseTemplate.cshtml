@@ -235,10 +235,8 @@ namespace @Settings.Namespace
                 _url = new Lazy<string>(() => GetUrl(restUrl, queryParameters));
                 _serializationSettings = serializationSettings;
                 _customHeaders = customHeaders;
-                _requestContent = new Lazy<byte[]>(() => body == null
-                                ? null
-                                : Encoding.UTF8.GetBytes(SafeJsonConvert.SerializeObject(body,
-                                    _serializationSettings)));
+                var requestContent = 
+                _requestContent = new Lazy<byte[]>(() => GetRequestContent(httpVerb, body));
                 _manualCalcUris = manualCalcUris;
                 _overrideHostHeader = overrideHostHeader;
             }
@@ -258,6 +256,13 @@ namespace @Settings.Namespace
                     _customHeaders);
 
                 return result;
+            }
+@EmptyLine
+            protected byte[] GetRequestContent(Verbs verb, object body)
+            {
+                if (body != null)
+                    return Encoding.UTF8.GetBytes(SafeJsonConvert.SerializeObject(body, _serializationSettings));
+                return verb == Verbs.GET ? null : new byte[0];
             }
 @EmptyLine
             protected string GetUrl(string restUrl, Dictionary<string, object> queryParameters)
