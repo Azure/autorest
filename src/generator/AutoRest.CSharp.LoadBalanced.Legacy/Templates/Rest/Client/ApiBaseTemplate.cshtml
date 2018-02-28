@@ -135,6 +135,10 @@ namespace @Settings.Namespace
                         case 400:
                             var brokenRulesDto = JsonConvert.DeserializeObject<ValidationError>(responseContent, DeserializationSettings);
                             throw new BadRequestException(brokenRulesDto);
+                        case -3:
+                            var brokenRulesDtoInner = JsonConvert.DeserializeObject<ValidationError>(
+                                executeResult.Exceptions.FirstOrDefault()?.Message, DeserializationSettings);
+                            throw new BadRequestException(brokenRulesDtoInner);
                         default:
                             throw executeResult.GetExeptions();
                     }
