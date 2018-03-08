@@ -29,10 +29,10 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
             if (requestName == null)
             {
-                requestName = method.Name.RawValue + "Request";
+                requestName = $"{method.Name.RawValue}Request";
             }
 
-            requestName = CodeNamer.Instance.PascalCase(requestName);
+            requestName = $"I{CodeNamer.Instance.PascalCase(requestName)}";
 
             if (!string.IsNullOrWhiteSpace(moduleName) && !requestName.StartsWith(moduleName))
             {
