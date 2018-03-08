@@ -13,7 +13,7 @@ import * as httpUtil from './httpUtil';
 @:export interface @(client.InterfaceName) {
     foreach (var method in client.Methods)
     {
-@:    @(method.MethodName)(request: @(method.RequestTypeName)) : @(method.ResponsePromiseTypeName);
+@:    @(method.MethodName)(request: @(method.RequestTypeName)): @(method.ResponsePromiseTypeName);
     }
 @:}
 
@@ -24,10 +24,13 @@ import * as httpUtil from './httpUtil';
 @:    }
     foreach (var method in client.Methods)
     {
-@:        async @(method.MethodName)(request: @(method.RequestTypeName), onProgress: httpUtil.OnProgress = null) : @(method.ResponsePromiseTypeName) {
-@:            return await httpUtil.req<@($"{method.RequestTypeName}, {method.ResponseTypeName}")>(request, '@(method.OperationId)')
+@:    async @(method.MethodName)(request: @(method.RequestTypeName), onProgress: httpUtil.OnProgress = null): @(method.ResponsePromiseTypeName) {
+@:        return await httpUtil.req<@($"{method.RequestTypeName}, {method.ResponseTypeName}")>(request, '@(method.OperationId)')
 @:            .withUrl(`@(method.UrlTemplate)`)
+        if (method.QueryStringTemplate != null)
+        {
 @:            .withQueryParameters(@(method.QueryStringTemplate))
+        }
 @:            .http@(method.HttpMethod.ToPascalCase())(@(method.ParamNamesInBody.Any() ? $"request.{method.ParamNamesInBody.First()}, onProgress" : "onProgress"));
 @:    }
 /**/

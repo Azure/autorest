@@ -5,22 +5,12 @@
 // API version: @Model.Header.ApiVersion
 // Tool version: @Model.Header.GeneratorVersion
 
-abstract class RequestBase {
-    validateProperty(value: any, name: string){
-        if(value === null){
-            throw new Error("Missing required property value: " + name);
-        }
-    }
-
-    abstract validate() : void;
-}
-
 @foreach (var model in Model.EnumModels)
 {
 @:export class @(model.Name) {
     foreach (var pair in model.Values)
     {
-@:    static @(pair.Key) : "@(pair.Key)";
+@:    static @(pair.Key): '@(pair.Key)';
     }
 @:}
 }
@@ -33,38 +23,30 @@ abstract class RequestBase {
     {
         if (property.IsRequired)
         {
-@:    @(property.Name) : @(property.TypeName);
+@:    @(property.Name): @(property.TypeName);
         }
         else
         {
-@:    @(property.Name)? : @(property.TypeName);
+@:    @(property.Name)?: @(property.TypeName);
         }
     }
 @:}
-@:
 }
 
 @foreach (var model in Model.RequestModels)
 {
-@:export class @(model.Name) extends RequestBase {
+@:export interface @(model.Name) {
     foreach (var property in model.Properties)
     {
         if (property.IsRequired)
         {
-@:    @(property.Name) : @(property.TypeName); 
+@:    @(property.Name): @(property.TypeName); 
         }
         else
         {
-@:    @(property.Name)? : @(property.TypeName);
+@:    @(property.Name)?: @(property.TypeName);
         }
     }
-
-@:    validate(){
-    foreach (var p in model.Properties.Where(p => p.IsRequired))
-    {
-@:        this.validateProperty(this.@(p.Name), "@(p.Name)");
-    }
-@:    }
 @:}
 }
 
