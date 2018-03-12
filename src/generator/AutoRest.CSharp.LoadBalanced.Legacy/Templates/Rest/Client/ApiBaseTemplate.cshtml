@@ -164,6 +164,10 @@ namespace @Settings.Namespace
                         case 400:
                             var brokenRulesDto = JsonConvert.DeserializeObject<ValidationError>(responseContent, DeserializationSettings);
                             throw new BadRequestException(brokenRulesDto);
+                        case -3:
+                            var brokenRulesDtoInner = JsonConvert.DeserializeObject<ValidationError>(
+                                executeResult.Exceptions.FirstOrDefault()?.Message, DeserializationSettings);
+                            throw new BadRequestException(brokenRulesDtoInner);
                         default:
                             throw executeResult.GetExeptions();
                     }
@@ -329,16 +333,13 @@ namespace @Settings.Namespace
                 }
                 var uriBuilder = new UriBuilder(null, null, -1, path);
 
-                // Append the remaining parameters as query string if this is a GET request.
-                if (verb == Verbs.GET)
+                //ignore body parameter when appending query parameter in URL
+                uriBuilder.Query = string.Join("&", query.Where(parameter => parameter.Key != "body").Select(parameter =>
                 {
-                    uriBuilder.Query = string.Join("&", query.Select(parameter =>
-                    {
-                        var name = HttpUtility.UrlEncode(parameter.Key);
-                        var value = parameter.Value;
-                        return $"{name}={value}";
-                    }));
-                }
+                var name = HttpUtility.UrlEncode(parameter.Key);
+                var value = parameter.Value;
+                return $"{name}={value}";
+                }));
 
                 return uriBuilder.ToString();
             }

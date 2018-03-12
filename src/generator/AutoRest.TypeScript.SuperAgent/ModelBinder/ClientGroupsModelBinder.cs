@@ -96,8 +96,19 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
         public string GetQueryParameterTemplate(Method method)
         {
-            var pairs = method.Parameters.Where(p => p.Location == ParameterLocation.Query)
-                .Select(param => $"{param.Name.Value}: request.{param.Name.Value}");
+            if (method == null || method.Parameters == null || method.Parameters.Count == 0)
+            {
+                return null;
+            }
+
+            var queryParameters = method.Parameters.Where(p => p.Location == ParameterLocation.Query).ToArray();
+
+            if (queryParameters.Length == 0)
+            {
+                return null;
+            }
+
+            var pairs = queryParameters.Select(param => $"{param.Name.Value}: request.{param.Name.Value}");
 
             return $"{{ {string.Join(", ", pairs)} }}";
         }
