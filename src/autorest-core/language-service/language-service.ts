@@ -25,7 +25,7 @@ import {
   InitializeParams, TextDocumentPositionParams, DidChangeConfigurationParams,
   Range, Position, DidChangeWatchedFilesParams, TextDocumentChangeEvent, Hover, Location,
   MarkedString, FileEvent, Diagnostic, createConnection,
-  InitializeResult, DidChangeConfigurationNotification, Proposed, ProposedFeatures,
+  InitializeResult, DidChangeConfigurationNotification,
   TextDocumentSyncKind, IPCMessageReader, IPCMessageWriter
 } from 'vscode-languageserver';
 
@@ -631,7 +631,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
   private async getConfiguration(documentUri: string, generateFake: boolean = true): Promise<string> {
     // let folder = ResolveUri(documentUri, ".");
-    let configFiles:Array<string> = [];
+    let configFiles: Array<string> = [];
 
     try {
       // passing a file that isn't a config file will throw now. 
@@ -640,7 +640,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
       // is the document a config file?
       if (configFiles.length === 1 && configFiles[0] === documentUri) {
         return documentUri;
-      } 
+      }
     } catch {
       // the URI is a file, and it wasn't a config file. Good to know.
     }
