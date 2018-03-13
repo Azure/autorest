@@ -21,13 +21,13 @@
 @:export interface @(model.Name) {
     foreach (var property in model.Properties)
     {
-        if (property.IsRequired)
+        if (property.IsNullable)
         {
-@:    @(property.Name): @(property.TypeName);
+@:    @(property.Name)?: @(property.TypeName);
         }
         else
         {
-@:    @(property.Name)?: @(property.TypeName);
+@:    @(property.Name): @(property.TypeName);
         }
     }
 @:}
@@ -38,13 +38,13 @@
 @:export interface @(model.Name) {
     foreach (var property in model.Properties)
     {
-        if (property.IsRequired)
+        if (property.IsNullable)
         {
-@:    @(property.Name): @(property.TypeName); 
+@:    @(property.Name)?: @(property.TypeName); 
         }
         else
         {
-@:    @(property.Name)?: @(property.TypeName);
+@:    @(property.Name): @(property.TypeName);
         }
     }
 @:}

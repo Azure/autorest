@@ -6,5 +6,6 @@
         public string TypeName { get; set; }
 
         public bool IsRequired { get; set; }
+        public bool IsNullable { get; set; }
     }
 }

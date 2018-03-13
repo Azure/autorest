@@ -55,6 +55,11 @@
           "format": "int32",
           "type": "integer"
         },
+        "NullableNumber": {
+          "format": "int32",
+          "type": "integer",
+          "x-nullable": true  
+        },
         "Numbers": {
           "format": "int32",
           "enum": [ 11, 22, 33 ],
