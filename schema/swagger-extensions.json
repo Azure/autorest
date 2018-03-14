@@ -1587,6 +1587,10 @@
           "type": "boolean",
           "default": false
         },
+        "modelAsExtensible": {
+          "type": "boolean",
+          "default": false
+        },
         "values": {
           "type": "array",
           "items": {
