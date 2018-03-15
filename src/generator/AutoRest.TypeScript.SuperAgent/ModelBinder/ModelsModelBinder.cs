@@ -43,7 +43,8 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                            {
                                Name = variable.Name.ToCamelCase(),
                                IsRequired = variable.IsRequired,
-                               TypeName = typeName ?? GetTypeText(propertyType)
+                               TypeName = typeName ?? GetTypeText(propertyType),
+                               IsNullable = variable.IsXNullable ?? false
                            };
                 };
 
