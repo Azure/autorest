@@ -304,7 +304,11 @@ namespace @Settings.Namespace
                 foreach (var parameterName in queryParameters.Keys)
                 {
                     var rawValue = queryParameters[parameterName];
-                    string jsonValue;
+                    if (parameterName == "body" || rawValue == null ) 
+					{
+						continue;
+					}
+					string jsonValue;
 
                     // Booleans must be passed as true and false words, using Newtonsoft converter,
                     // rather than 0 and 1 integers, using Microsoft converter.
@@ -334,7 +338,7 @@ namespace @Settings.Namespace
                 var uriBuilder = new UriBuilder(null, null, -1, path);
 
                 //ignore body parameter when appending query parameter in URL
-                uriBuilder.Query = string.Join("&", query.Where(parameter => parameter.Key != "body").Select(parameter =>
+                uriBuilder.Query = string.Join("&", query.Select(parameter =>
                 {
                 var name = HttpUtility.UrlEncode(parameter.Key);
                 var value = parameter.Value;
