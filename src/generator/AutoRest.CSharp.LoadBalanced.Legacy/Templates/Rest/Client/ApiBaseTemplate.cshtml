@@ -76,6 +76,8 @@ namespace @Settings.Namespace
         private JsonSerializerSettings _deserializationSettings;
         private readonly TimeSpan _timeout;
         private readonly int _retryCount;
+        private readonly bool _manualCalcUris;
+        private readonly bool _overrideHostHeader;
         private readonly string _name;
         private event EventHandler<MetricSendEventArgs> _metricSendEvent;
         private event EventHandler<ErrorEventArgs> _errorEvent;
@@ -265,6 +267,8 @@ namespace @Settings.Namespace
                 bool manualCalcUris = false,
                 bool overrideHostHeader = false)
             {
+                _manualCalcUris = manualCalcUris;
+                _overrideHostHeader = overrideHostHeader;
                 if (customHeaders != null && customHeaders.ContainsKey("Content-Type"))
                 {
                     _contentType = customHeaders["Content-Type"];
