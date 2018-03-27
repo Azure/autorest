@@ -33,7 +33,8 @@ task 'regenerate', 'regenerate samples', (done) ->
                 sed "-i", /\(node:\d+\)/g, "(node)", file  # node process IDs
                 # sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
                 sed  "-i", new RegExp("\\bfile:\\/\\/\\/#{basefolder.replace(/\\/g,'/')}/","gi") , "/", file  # blame locations
-                sed "-i", /\s\'?[^\s]+[\/\\]autorest-core\'?(?=(\b|\\n))/g, " autorest-core", file  # autorest-core path as reported by bootstrapper (configuration artifact's 'version' field)
+                sed  "-i", new RegExp("\\bversion: .*'#{basefolder.replace(/\\/g,'/')}.src.autorest-core'","gi") , "/", file  # autorest-core path as reported by bootstrapper
+                # sed "-i", /\s\'?[^\s]+[\/\\]autorest-core\'?(?=(\b|\\n))/g, " autorest-core", file  # autorest-core path as reported by bootstrapper (configuration artifact's 'version' field)
                 sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
                 sed "-i", /mem:\/\/\/[^: ]*/g, "mem", file                  # memory URIs (depend on timing)
                 (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file) # minify exception stack traces
