@@ -8,6 +8,7 @@ consumes:
 - application/json
 produces:
 - application/json
+paths: {}
 definitions:
   SecureString:
     required:
