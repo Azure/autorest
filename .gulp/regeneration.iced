@@ -39,7 +39,7 @@ task 'regenerate', 'regenerate samples', (done) ->
                 sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
                 sed "-i", /mem:\/\/\/[^: ]*/g, "mem", file                  # memory URIs (depend on timing)
                 
-                (cat file).replace(/version:.*autorest-core\'/gi, "").to(file) # minify exception stack traces
+                (cat file).replace(/^version:.*autorest-core\'/gmi, "").to(file) # don't report on version of the core!
                 (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file) # minify exception stack traces
                 (cat file).replace(/.*AutoRest code generation utility.*\n/g, "").to(file) # remove header message 
                 (cat file).replace(/.*DeprecationWarning.*\n/g, "(node) DeprecationWarning (trimmed)").to(file) # remove header message
