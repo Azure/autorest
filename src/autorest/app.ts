@@ -251,7 +251,8 @@ async function main() {
       console.log(`Starting ${corePackage} from ${await selectedVersion.location}`);
     }
     process.chdir(cwd);
-    if (!tryRequire(await selectedVersion.modulePath, "app.js")) {
+    const result = await tryRequire(await selectedVersion.modulePath, "app.js");
+    if (!result) {
       throw new Error(`Unable to start AutoRest Core from ${await selectedVersion.modulePath}`);
     }
   } catch (exception) {

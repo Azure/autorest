@@ -300,8 +300,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     "reflect-api-versions-cs": GetPlugin_ReflectApiVersion(),
     "commonmarker": GetPlugin_CommonmarkProcessor(),
     "emitter": GetPlugin_ArtifactEmitter(),
-    "pipeline-emitter": GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline)])),
-    "configuration-emitter": GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("configuration", configView.Raw)]))
+    "pipeline-emitter": GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline, "pipeline")])),
+    "configuration-emitter": GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("configuration", configView.Raw, "configuration")]))
   };
 
   // dynamically loaded, auto-discovered plugins

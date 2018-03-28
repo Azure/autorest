@@ -62,7 +62,7 @@ export type Mappings = Array<Mapping>;
 
 }
 declare module 'autorest-core/lib/message' {
-	import { EnhancedPosition, Position } from 'autorest-core/lib/ref/source-map';
+	import { EnhancedPosition, Position, Mappings, RawSourceMap } from 'autorest-core/lib/ref/source-map';
 import { Artifact } from 'autorest-core/lib/artifact';
 /**
  * The Channel that a message is registered with.
@@ -105,7 +105,9 @@ export interface Message {
     FormattedMessage?: string;
 }
 export interface ArtifactMessage extends Message {
-    Details: Artifact;
+    Details: Artifact & {
+        sourceMap?: Mappings | RawSourceMap;
+    };
 }
 
 }

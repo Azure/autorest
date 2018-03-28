@@ -48,7 +48,7 @@ export async function ManipulateObject(
       const reasonSuffix = mappingInfo ? ` (${mappingInfo.reason})` : "";
       if (mappingInfo) {
         mapping.push(
-          ...From(Descendants(newAst)).Select(descendant => {
+          ...From(Descendants(newAst)).Select((descendant: any) => {
             return <Mapping>{
               name: `Injected object at '${stringify(hit.path)}'${reasonSuffix}`,
               source: mappingInfo.transformerSourceHandle.key,
@@ -61,8 +61,8 @@ export async function ManipulateObject(
       // try to be smart and assume that nodes existing in both old and new AST have a relationship
       mapping.push(
         ...From(Descendants(newAst))
-          .Where(descendant => paths(doc, stringify(hit.path.concat(descendant.path))).length === 1)
-          .Select(descendant => {
+          .Where((descendant: any) => paths(doc, stringify(hit.path.concat(descendant.path))).length === 1)
+          .Select((descendant: any) => {
             return <Mapping>{
               name: `Original object at '${stringify(hit.path)}'${reasonSuffix}`,
               source: src.key,
@@ -74,7 +74,7 @@ export async function ManipulateObject(
   }
 
   // write back
-  const resultHandle = await target.WriteData("manipulated", StringifyAst(ast), mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
+  const resultHandle = await target.WriteData("manipulated", StringifyAst(ast), undefined, mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
   return {
     anyHit: true,
     result: resultHandle

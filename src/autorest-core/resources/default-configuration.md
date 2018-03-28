@@ -23,8 +23,7 @@ try-require: ./readme.azureresourceschema.md
 ``` yaml $(csharp)
 use-extension:
   "@microsoft.azure/autorest.csharp": "~2.2.51"
-try-require:
-  - ./readme.csharp.md   
+try-require: ./readme.csharp.md
 ```
 
 ``` yaml $(jsonrpcclient)
@@ -35,37 +34,37 @@ use-extension:
 ``` yaml $(go)
 use-extension:
   "@microsoft.azure/autorest.go": "~2.1.47"
-try-require: ./readme.go.md   
+try-require: ./readme.go.md
 ```
 
 ``` yaml $(java)
 use-extension:
   "@microsoft.azure/autorest.java": "~2.1.32"
-try-require: ./readme.java.md     
+try-require: ./readme.java.md
 ```
 
 ``` yaml $(nodejs)
 use-extension:
   "@microsoft.azure/autorest.nodejs": "~2.1.25"
-try-require: ./readme.nodejs.md     
+try-require: ./readme.nodejs.md
 ```
 
 ``` yaml $(php)
 use-extension:
   "@microsoft.azure/autorest.php": "~2.0.12"
-try-require: ./readme.php.md     
+try-require: ./readme.php.md
 ```
 
 ``` yaml $(python)
 use-extension:
   "@microsoft.azure/autorest.python": "~2.1.26"
-try-require: ./readme.python.md     
+try-require: ./readme.python.md
 ```
 
 ``` yaml $(ruby)
 use-extension:
   "@microsoft.azure/autorest.ruby": "~3.1.26"
-try-require: ./readme.ruby.md     
+try-require: ./readme.ruby.md
 ```
 
 ``` yaml $(typescript)

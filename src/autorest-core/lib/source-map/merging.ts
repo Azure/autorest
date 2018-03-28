@@ -227,5 +227,5 @@ export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHand
   if (failed) {
     throw new Error("Syntax errors encountered.");
   }
-  return sink.WriteObject("merged YAMLs", resultObject, mappings, yamlInputHandles);
+  return sink.WriteObject("merged YAMLs", resultObject, undefined, mappings, yamlInputHandles);
 }
