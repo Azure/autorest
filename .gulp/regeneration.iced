@@ -32,7 +32,7 @@ task 'regenerate', 'regenerate samples', (done) ->
               .forEach((file) -> 
                 sed "-i", /\(node:\d+\)/g, "(node)", file  # node process IDs
                 # sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
-                sed "-i", new RegExp("\\bfile:\\/\\/\\/#{basefolder.replace(/\\/g,'/')}/","gi") , "/", file  # blame locations
+                sed "-i", new RegExp("\\bfile:\\/+#{basefolder.replace(/\\/g,'/')}/","gi") , "/", file  # blame locations
                 sed "-i", /\s\'?[^\s]+[\/\\]autorest-core\'?(?=(\b|\\n))/g, " autorest-core", file  # autorest-core path as reported by bootstrapper (configuration artifact's 'version' field)
                 # sed "-i", new RegExp("version: '.*autorest-core'","gi") , "", file  # autorest-core path as reported by bootstrapper
                 sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
