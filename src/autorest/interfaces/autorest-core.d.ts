@@ -1,6 +1,6 @@
 /// <reference path="./source-maps.d.ts" />
 declare module 'autorest-core/lib/artifact' {
-	export interface Artifact {
+export interface Artifact {
     uri: string;
     type: string;
     content: string;
@@ -8,11 +8,11 @@ declare module 'autorest-core/lib/artifact' {
 
 }
 declare module 'autorest-core/lib/ref/safe-eval' {
-	export const safeEval: <T>(expression: string, context?: any) => T;
+export const safeEval: <T>(expression: string, context?: any) => T;
 
 }
 declare module 'autorest-core/lib/ref/jsonpath' {
-	import * as jsonpath from "jsonpath";
+import * as jsonpath from "jsonpath";
 export type JsonPathComponent = jsonpath.PathComponent;
 export type JsonPath = JsonPathComponent[];
 export function parse(jsonPath: string): JsonPath;
@@ -29,16 +29,16 @@ export function parseJsonPointer(jsonPointer: string): JsonPath;
 
 }
 declare module 'autorest-core/lib/constants' {
-	export const MagicString: string;
+export const MagicString: string;
 export const DefaultConfiguration: string;
 
 }
 declare module 'autorest-core/lib/ref/array' {
-	export function pushAll<T>(target: T[], source: T[]): void;
+export function pushAll<T>(target: T[], source: T[]): void;
 
 }
 declare module 'autorest-core/lib/ref/source-map' {
-	export { Position } from "source-map";
+export { Position } from "source-map";
 import { Position } from "source-map";
 export { RawSourceMap } from "source-map";
 import { JsonPath } from 'autorest-core/lib/ref/jsonpath';
@@ -62,7 +62,7 @@ export type Mappings = Array<Mapping>;
 
 }
 declare module 'autorest-core/lib/message' {
-	import { EnhancedPosition, Position, Mappings, RawSourceMap } from 'autorest-core/lib/ref/source-map';
+import { EnhancedPosition, Position, Mappings, RawSourceMap } from 'autorest-core/lib/ref/source-map';
 import { Artifact } from 'autorest-core/lib/artifact';
 /**
  * The Channel that a message is registered with.
@@ -112,7 +112,7 @@ export interface ArtifactMessage extends Message {
 
 }
 declare module 'autorest-core/lib/ref/async' {
-	/// <reference types="node" />
+/// <reference types="node" />
 export function mkdir(path: string | Buffer): Promise<void>;
 export const exists: (path: string | Buffer) => Promise<boolean>;
 export function readdir(path: string): Promise<Array<string>>;
@@ -125,7 +125,7 @@ export function writeFile(filename: string, content: string): Promise<void>;
 
 }
 declare module 'autorest-core/lib/ref/uri' {
-	export function IsUri(uri: string): boolean;
+export function IsUri(uri: string): boolean;
 /**
  * Loads a UTF8 string from given URI.
  */
@@ -170,7 +170,7 @@ export function GetExtension(name: string): string;
 
 }
 declare module 'autorest-core/lib/exception' {
-	export class Exception extends Error {
+export class Exception extends Error {
     exitCode: number;
     constructor(message: string, exitCode?: number);
 }
@@ -187,7 +187,7 @@ export class OperationAbortedException extends Exception {
 
 }
 declare module 'autorest-core/lib/lazy' {
-	export class Lazy<T> {
+export class Lazy<T> {
     private factory;
     private promise;
     constructor(factory: () => T);
@@ -204,7 +204,7 @@ export class LazyPromise<T> implements PromiseLike<T> {
 
 }
 declare module 'autorest-core/lib/outstanding-task-awaiter' {
-	export class OutstandingTaskAwaiter {
+export class OutstandingTaskAwaiter {
     private locked;
     private outstandingTasks;
     Wait(): Promise<void>;
@@ -213,7 +213,7 @@ declare module 'autorest-core/lib/outstanding-task-awaiter' {
 
 }
 declare module 'autorest-core/lib/events' {
-	/// <reference types="node" />
+/// <reference types="node" />
 import * as events from "events";
 export interface IEvent<TSender extends events.EventEmitter, TArgs> {
     Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
@@ -239,19 +239,19 @@ export class EventEmitter extends events.EventEmitter {
 
 }
 declare module 'autorest-core/lib/ref/cancellation' {
-	export { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
+export { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 
 }
 declare module 'autorest-core/lib/ref/jsonrpc' {
-	export * from "vscode-jsonrpc";
+export * from "vscode-jsonrpc";
 
 }
 declare module 'autorest-core/lib/ref/commonmark' {
-	export { Node, Parser } from "commonmark";
+export { Node, Parser } from "commonmark";
 
 }
 declare module 'autorest-core/lib/file-system' {
-	export interface IFileSystem {
+export interface IFileSystem {
     EnumerateFileUris(folderUri: string): Promise<Array<string>>;
     ReadFile(uri: string): Promise<string>;
 }
@@ -280,7 +280,7 @@ export class EnhancedFileSystem implements IFileSystem {
 
 }
 declare module 'autorest-core/lib/document-type' {
-	export enum DocumentType {
+export enum DocumentType {
     OpenAPI2,
     OpenAPI3,
     LiterateConfiguration,
@@ -308,7 +308,7 @@ export const DocumentPatterns: {
 
 }
 declare module 'autorest-core/main' {
-	export { IFileSystem } from 'autorest-core/lib/file-system';
+export { IFileSystem } from 'autorest-core/lib/file-system';
 export { Message, Channel } from 'autorest-core/lib/message';
 export { Artifact } from 'autorest-core/lib/artifact';
 export { AutoRest, ConfigurationView, IdentifyDocument, IsConfigurationExtension, IsConfigurationDocument, IsOpenApiExtension, LiterateToJson, IsOpenApiDocument } from 'autorest-core/lib/autorest-core';
@@ -316,7 +316,7 @@ export { DocumentFormat, DocumentExtension, DocumentPatterns, DocumentType } fro
 
 }
 declare module 'autorest-core/help' {
-	export interface Help {
+export interface Help {
     categoryFriendlyName: string;
     activationScope?: string;
     description?: string;
@@ -331,7 +331,7 @@ export interface SettingHelp {
 
 }
 declare module 'autorest-core/lib/autorest-core' {
-	import { IEvent, EventEmitter } from 'autorest-core/lib/events';
+import { IEvent, EventEmitter } from 'autorest-core/lib/events';
 import { ConfigurationView } from 'autorest-core/lib/configuration';
 export { ConfigurationView } from 'autorest-core/lib/configuration';
 import { Message } from 'autorest-core/lib/message';
@@ -423,7 +423,7 @@ export function IsOpenApiExtension(extension: string): Promise<boolean>;
 
 }
 declare module 'autorest-core/lib/configuration' {
-	import { Artifact } from 'autorest-core/lib/artifact';
+import { Artifact } from 'autorest-core/lib/artifact';
 import { EventEmitter, IEvent } from 'autorest-core/lib/events';
 import { IFileSystem } from 'autorest-core/lib/file-system';
 import { Message } from 'autorest-core/lib/message';
@@ -547,7 +547,7 @@ export class Configuration {
 
 }
 declare module 'autorest-core/language-service/language-service' {
-	/**
+/**
  * The results from calling the 'generate' method via the {@link AutoRestLanguageService/generate}
  *
  */
@@ -570,7 +570,7 @@ export interface GenerationResults {
 
 }
 declare module 'autorest-core/lib/sleep' {
-	export function Delay(delayMS: number): Promise<void>;
+export function Delay(delayMS: number): Promise<void>;
 
 }
 interface OpenApi2Definition {

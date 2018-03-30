@@ -31,10 +31,13 @@ task 'regenerate', 'regenerate samples', (done) ->
               .filter((file) -> file.match(/\.(map|txt)$/))
               .forEach((file) -> 
                 sed "-i", /\(node:\d+\)/g, "(node)", file  # node process IDs
-                sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
+                # sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
+                sed "-i", new RegExp("\\bfile:\\/+#{basefolder.replace(/\\/g,'/')}/","gi") , "/", file  # blame locations
                 sed "-i", /\s\'?[^\s]+[\/\\]autorest-core\'?(?=(\b|\\n))/g, " autorest-core", file  # autorest-core path as reported by bootstrapper (configuration artifact's 'version' field)
+                # sed "-i", new RegExp("version: '.*autorest-core'","gi") , "", file  # autorest-core path as reported by bootstrapper
                 sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
                 sed "-i", /mem:\/\/\/[^: ]*/g, "mem", file                  # memory URIs (depend on timing)
+                
                 (cat file).replace(/(at \.\.\.\s*)+/g, "at ...\n").to(file) # minify exception stack traces
                 (cat file).replace(/.*AutoRest code generation utility.*\n/g, "").to(file) # remove header message 
                 (cat file).replace(/.*DeprecationWarning.*\n/g, "(node) DeprecationWarning (trimmed)").to(file) # remove header message
@@ -52,7 +55,8 @@ task 'regenerate', 'regenerate samples', (done) ->
             (find path.join(each.path, ".."))
               .filter((file) -> file.match(/\.(yaml)$/))
               .forEach((file) -> 
-                sed "-i", /.*autorest[a-zA-Z0-9]*.src.*/ig, "", file  # source file names
+                sed "-i", /.*autorest[a-zA-Z0-9]*.src.*/gi, "", file  # source file names
+                sed "-i", /^version:.*autorest-core\'/gi , "", file  # autorest-core path as reported by bootstrapper again!
               )
 
             next null

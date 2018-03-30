@@ -25,7 +25,7 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha ./dist/test --timeout 100000",
-    "build": "tsc -p . && dts-generator --name autorest-core --project . --out ../autorest/interfaces/autorest-core.d.ts  --exclude \"test/**/*\" --exclude \"node_modules/**/*.d.ts\" --exclude \"lib/source-map/**\" --exclude \"lib/pipeline/**\" --exclude \"lib/parsing/**\" --exclude \"lib/data-store/**\" --exclude \"lib/ref/yaml.ts\"  --extern ./source-maps.d.ts && shx cp ../../schema/swagger-extensions.json dist/lib/pipeline && shx cp ../../schema/example-schema.json dist/lib/pipeline && shx cp ../../schema/swagger.json dist/lib/pipeline",
+    "build": "tsc -p . && dts-generator --name autorest-core --project . --out ../autorest/interfaces/autorest-core.d.ts --indent \"\" --exclude \"test/**/*\" --exclude \"node_modules/**/*.d.ts\" --exclude \"lib/source-map/**\" --exclude \"lib/pipeline/**\" --exclude \"lib/parsing/**\" --exclude \"lib/data-store/**\" --exclude \"lib/ref/yaml.ts\"  --extern ./source-maps.d.ts && shx cp ../../schema/swagger-extensions.json dist/lib/pipeline && shx cp ../../schema/example-schema.json dist/lib/pipeline && shx cp ../../schema/swagger.json dist/lib/pipeline",
     "static-link": "static-link",
     "postinstall": "node ./post-install --force",
     "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
@@ -70,5 +70,8 @@
       "z-schema": "^3.19.0"
     },
     "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt );  txt = fs.readFileSync('./node_modules/npm/lib/pack.js','utf8').replace(`require.main.filename`, `require.resolve('../bin/npm-cli.js')`); fs.writeFileSync('./node_modules/npm/lib/pack.js', txt );"
+  },
+  "dependencies": {
+    "typescript": "2.6.2"
   }
 }
