@@ -75,6 +75,7 @@ Import
   quiet_info: chalk.green
 
 # do a bit of monkeypatching
+global.threshold = 1 if os.platform() is 'linux'
 _gulpStart = gulp.Gulp::start
 _runTask = gulp.Gulp::_runTask
 
