@@ -33,6 +33,7 @@ namespace @Settings.Namespace
     public class ErrorEventArgs : EventArgs
     {
         public Exception Exception { get; set; }
+        public string RouteName { get; set; }
     }
 @EmptyLine
 
@@ -202,7 +203,7 @@ namespace @Settings.Namespace
             }
             catch (Exception ex)
             {
-                _errorEvent?.Invoke(this, new ErrorEventArgs {Exception = ex});
+                _errorEvent?.Invoke(this, new ErrorEventArgs { Exception = ex, RouteName = metricName });
                 throw;
             }
             finally
