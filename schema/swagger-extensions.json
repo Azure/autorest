@@ -104,11 +104,13 @@
       "properties": {
         "title": {
           "type": "string",
-          "description": "A unique and precise title of the API."
+          "description": "A unique and precise title of the API.",
+          "minLength": 1
         },
         "version": {
           "type": "string",
-          "description": "A semantic version number of the API."
+          "description": "A semantic version number of the API.",
+          "minLength": 1
         },
         "description": {
           "type": "string",
