@@ -172,7 +172,7 @@ async function ensureCoreLoaded(): Promise<typeof IAutoRest> {
 
   if (modulePath && !coreModule) {
     // get the library entrypoint
-    coreModule = tryRequire(modulePath, "main");
+    coreModule = await tryRequire(modulePath, "main");
 
     // assign the type to the Async Class Identity
     resolve_autorest(coreModule.AutoRest)
@@ -201,7 +201,7 @@ export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: s
 
   if (modulePath && !coreModule) {
     // get the library entrypoint
-    coreModule = tryRequire(modulePath, "main");
+    coreModule = await tryRequire(modulePath, "main");
 
     // assign the type to the Async Class Identity
     resolve_autorest(coreModule.AutoRest)
