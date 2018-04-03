@@ -10,8 +10,13 @@ task 'publish-preview' , 'Publishes the the packages to NPM.',['version-number',
   # publish core package
   await execute "npm publish --tag preview",{cwd:package_folder, silent:false }, defer c,o,e 
   echo  "\n\nPublished Core:  #{package_json.name}@#{info package_json.version} (tagged as @preview)\n\n"
+  echo stdout:
+  echo o
+  echo stderr:
+  echo e
+  
 
-  # update bootstrapepr package.json
+  # update bootstrapper package.json
   package_path = "#{basefolder}/src/autorest/package.json"
   package_folder = "#{basefolder}/src/autorest"
   package_json = require package_path
