@@ -1,4 +1,5 @@
 /// <reference path="interfaces/autorest-core.d.ts" />
+/// <reference path="interfaces/vscode.d.ts" />
 
 // load modules from static linker filesystem.
 if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
@@ -9,7 +10,6 @@ import { networkEnabled, rootFolder, extensionManager, availableVersions, corePa
 import { resolve } from 'path';
 
 import { LanguageClient } from "vscode-languageclient";
-export { LanguageClient } from "vscode-languageclient";
 
 // exports the public AutoRest definitions
 export { IFileSystem, Message, Artifact } from 'autorest-core/main';

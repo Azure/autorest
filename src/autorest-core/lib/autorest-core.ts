@@ -6,7 +6,7 @@
 import { RunPipeline } from "./pipeline/pipeline";
 import { Push } from "./ref/linq";
 import { IEvent, EventEmitter } from "./events";
-import { IFileSystem } from "./file-system";
+import { IFileSystem, RealFileSystem } from "./file-system";
 import { Exception } from "./exception";
 import { Configuration, ConfigurationView, MessageEmitter } from "./configuration";
 export { ConfigurationView } from "./configuration";
@@ -50,7 +50,7 @@ export class AutoRest extends EventEmitter {
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
    */
-  public constructor(private fileSystem?: IFileSystem, public configFileOrFolderUri?: string) {
+  public constructor(private fileSystem: IFileSystem = new RealFileSystem(), public configFileOrFolderUri?: string) {
     super();
     // ensure the environment variable for the home folder is set.
     process.env["autorest.home"] = process.env["autorest.home"] || homedir();
