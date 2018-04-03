@@ -8,12 +8,13 @@ if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolveEntrypoint, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
 import { resolve } from 'path';
 
-import { LanguageClient } from "vscode-languageclient"
+import { LanguageClient } from "vscode-languageclient";
+export { LanguageClient } from "vscode-languageclient";
 
 // exports the public AutoRest definitions
 export { IFileSystem, Message, Artifact } from 'autorest-core/main';
-export { GenerationResults } from 'autorest-core/language-service/language-service'
-import { GenerationResults } from 'autorest-core/language-service/language-service'
+export { GenerationResults } from 'autorest-core/language-service/language-service';
+import { GenerationResults } from 'autorest-core/language-service/language-service';
 
 // the local class definition of the AutoRest Interface and the EventEmitter signatures
 import { AutoRest as IAutoRest, IFileSystem } from 'autorest-core/main';
