@@ -1,0 +1,51 @@
+swagger: '2.0'
+info:
+  description: This is a sample.
+  version: 1.0.0
+  title: Cowbell Portal
+host: localhost
+schemes:
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths: {}
+definitions:
+  Cowbell:
+    required:
+    - member100
+    - member101
+    - member110
+    - member111
+    properties:
+      # memberABC
+      # A = required
+      # B = default
+      # C = readOnly
+      member000:
+        type: integer
+      member001:
+        type: integer
+        readOnly: true
+      member010:
+        type: integer
+        default: 42
+      member011:
+        type: integer
+        readOnly: true
+        default: 42
+      member100:
+        type: integer
+      # member101:
+      #   type: integer
+      #   readOnly: true
+      member110:
+        type: integer
+        default: 42
+      # member111:
+      #   type: integer
+      #   readOnly: true
+      #   default: 42
+    description: A cowbell.
+
