@@ -33,7 +33,7 @@ export interface YAMLNodeWithPath {
  * Parsing
 */
 export function ParseToAst(rawYaml: string): YAMLNode {
-  return yamlAst.safeLoad(rawYaml, null) as YAMLNode;
+  return yamlAst.safeLoad(rawYaml) as YAMLNode;
 }
 
 export function* Descendants(yamlAstNode: YAMLNode, currentPath: JsonPath = [], deferResolvingMappings: boolean = false): Iterable<YAMLNodeWithPath> {
