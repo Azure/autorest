@@ -13,7 +13,7 @@ import { JsonPath, SourceMap } from './source-map';
 
 import { ResolveUri, FileUriToPath, GetExtension, IsUri, ParentFolderUri } from '../lib/ref/uri';
 import { From } from "linq-es2015";
-import { safeDump } from "js-yaml";
+import { safeDump } from "yaml-ast-parser";
 import { DocumentAnalysis } from "./document-analysis";
 import { isFile, writeFile, isDirectory, readdir, readFile } from "@microsoft.azure/async-io"
 import { createHash } from 'crypto';
@@ -506,7 +506,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
       for (const location of docAnalysis.GetDefinitionLocations(refValueJsonPath)) {
         yield {
           language: "yaml",
-          value: safeDump(location.value)
+          value: safeDump(location.value, {})
         };
       }
     } // else {console.log("found nothing that looks like a JSON reference"); return null; }
