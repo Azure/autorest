@@ -7,15 +7,10 @@ definitions:
         description: Gets an error message explaining the Reason value in more detail.
         type: string
       nameAvailable:
-        description: >-
-          Gets a boolean value that indicates whether the name is available for
-          you to use. If true, the name is available. If false, the name has
-          already been taken or invalid and cannot be used.
+        description: 'Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used.'
         type: boolean
       reason:
-        description: >-
-          Gets the reason that a storage account name could not be used. The
-          Reason element is only returned if NameAvailable is false.
+        description: Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.
         enum:
           - AccountNameInvalid
           - AlreadyExists
@@ -24,41 +19,29 @@ definitions:
           modelAsString: false
           name: Reason
   CorsOptions:
-    description: >-
-      Defines options to control Cross-Origin Resource Sharing (CORS) for an
-      index.
+    description: Defines options to control Cross-Origin Resource Sharing (CORS) for an index.
     externalDocs:
       url: 'https://msdn.microsoft.com/library/azure/dn798941.aspx'
     properties:
       allowedOrigins:
-        description: >-
-          Gets the list of origins from which JavaScript code will be granted
-          access to your index. Can contain a list of hosts of the form
-          {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*'
-          to allow all origins (not recommended).
+        description: "Gets the list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended)."
         items:
           type: string
         type: array
       maxAgeInSeconds:
-        description: >-
-          Gets or sets the duration for which browsers should cache CORS
-          preflight responses. Defaults to 5 mintues.
+        description: Gets or sets the duration for which browsers should cache CORS preflight responses. Defaults to 5 mintues.
         format: int64
         type: integer
     required:
       - allowedOrigins
   CustomDomain:
-    description: >-
-      The custom domain assigned to this storage account. This can be set via
-      Update.
+    description: The custom domain assigned to this storage account. This can be set via Update.
     properties:
       name:
         description: Gets or sets the custom domain name. Name is the CNAME source.
         type: string
       useSubDomain:
-        description: >-
-          Indicates whether indirect CName validation is enabled. Default value
-          is false. This should only be set on updates
+        description: Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates
         type: boolean
     required:
       - name
@@ -71,19 +54,13 @@ definitions:
     required:
       - '@odata.type'
   DataContainer:
-    description: >-
-      Represents information about the entity (such as Azure SQL table or
-      DocumentDb collection) that will be indexed.
+    description: Represents information about the entity (such as Azure SQL table or DocumentDb collection) that will be indexed.
     properties:
       name:
-        description: >-
-          Gets or sets the name of the table or view (for Azure SQL data source)
-          or collection (for DocumentDB data source) that will be indexed.
+        description: Gets or sets the name of the table or view (for Azure SQL data source) or collection (for DocumentDB data source) that will be indexed.
         type: string
       query:
-        description: >-
-          Gets or sets a query that is applied to this data container. Only
-          supported by DocumentDb datasources.
+        description: Gets or sets a query that is applied to this data container. Only supported by DocumentDb datasources.
         type: string
     required:
       - name
@@ -96,9 +73,7 @@ definitions:
     required:
       - '@odata.type'
   DataSource:
-    description: >-
-      Represents a datasource definition in Azure Search, which can be used to
-      configure an indexer.
+    description: 'Represents a datasource definition in Azure Search, which can be used to configure an indexer.'
     properties:
       container:
         $ref: '#/definitions/DataContainer'
@@ -139,9 +114,7 @@ definitions:
     required:
       - connectionString
   DataSourceListResult:
-    description: >-
-      Response from a List Datasources request. If successful, it includes the
-      full definitions of all datasources.
+    description: 'Response from a List Datasources request. If successful, it includes the full definitions of all datasources.'
     properties:
       value:
         description: Gets the datasources in the Search service.
@@ -153,9 +126,7 @@ definitions:
   DistanceScoringFunction:
     allOf:
       - $ref: '#/definitions/ScoringFunction'
-    description: >-
-      Defines a function that boosts scores based on distance from a geographic
-      location.
+    description: Defines a function that boosts scores based on distance from a geographic location.
     externalDocs:
       url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
     properties:
@@ -170,24 +141,18 @@ definitions:
     description: Provides parameter values to a distance scoring function.
     properties:
       boostingDistance:
-        description: >-
-          Gets or sets the distance in kilometers from the reference location
-          where the boosting range ends.
+        description: Gets or sets the distance in kilometers from the reference location where the boosting range ends.
         format: double
         type: number
       referencePointParameter:
-        description: >-
-          Gets or sets the name of the parameter passed in search queries to
-          specify the reference location.
+        description: Gets or sets the name of the parameter passed in search queries to specify the reference location.
         type: string
     required:
       - referencePointParameter
       - boostingDistance
     x-ms-external: true
   Endpoints:
-    description: >-
-      The URIs that are used to perform a retrieval of a public blob, queue or
-      table object.
+    description: 'The URIs that are used to perform a retrieval of a public blob, queue or table object.'
     properties:
       blob:
         description: Gets the blob endpoint.
@@ -202,9 +167,7 @@ definitions:
         description: Gets the table endpoint.
         type: string
   Field:
-    description: >-
-      Represents a field in an index definition in Azure Search, which describes
-      the name, data type, and search behavior of a field.
+    description: 'Represents a field in an index definition in Azure Search, which describes the name, data type, and search behavior of a field.'
     externalDocs:
       url: 'https://msdn.microsoft.com/library/azure/dn798941.aspx'
     properties:
@@ -214,20 +177,13 @@ definitions:
           url: 'https://msdn.microsoft.com/library/azure/dn879793.aspx'
         type: string
       facetable:
-        description: >-
-          Gets or sets a value indicating whether it is possible to facet on
-          this field. Not valid for geo-point fields. Default is false.
+        description: Gets or sets a value indicating whether it is possible to facet on this field. Not valid for geo-point fields. Default is false.
         type: boolean
       filterable:
-        description: >-
-          Gets or sets a value indicating whether the field can be used in
-          filter expressions. Default is false.
+        description: Gets or sets a value indicating whether the field can be used in filter expressions. Default is false.
         type: boolean
       key:
-        description: >-
-          Gets or sets a value indicating whether the field is the key of the
-          index. Valid only for string fields. Every index must have exactly one
-          key field.
+        description: Gets or sets a value indicating whether the field is the key of the index. Valid only for string fields. Every index must have exactly one key field.
         type: boolean
       name:
         description: Gets or sets the name of the field.
@@ -235,21 +191,13 @@ definitions:
           url: 'https://msdn.microsoft.com/library/azure/dn857353.aspx'
         type: string
       retrievable:
-        description: >-
-          Gets or sets a value indicating whether the field can be returned in a
-          search result. Default is true.
+        description: Gets or sets a value indicating whether the field can be returned in a search result. Default is true.
         type: boolean
       searchable:
-        description: >-
-          Gets or sets a value indicating whether the field is included in
-          full-text searches. Valid only forstring or string collection fields.
-          Default is false.
+        description: Gets or sets a value indicating whether the field is included in full-text searches. Valid only forstring or string collection fields. Default is false.
         type: boolean
       sortable:
-        description: >-
-          Gets or sets a value indicating whether the field can be used in
-          orderby expressions. Not valid for string collection fields. Default
-          is false.
+        description: Gets or sets a value indicating whether the field can be used in orderby expressions. Not valid for string collection fields. Default is false.
         type: boolean
       type:
         description: Gets or sets the data type of the field.
@@ -261,9 +209,7 @@ definitions:
   FreshnessScoringFunction:
     allOf:
       - $ref: '#/definitions/ScoringFunction'
-    description: >-
-      Defines a function that boosts scores based on the value of a date-time
-      field.
+    description: Defines a function that boosts scores based on the value of a date-time field.
     externalDocs:
       url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
     properties:
@@ -278,9 +224,7 @@ definitions:
     description: Provides parameter values to a freshness scoring function.
     properties:
       boostingDuration:
-        description: >-
-          Gets or sets the expiration period after which boosting will stop for
-          a particular document.
+        description: Gets or sets the expiration period after which boosting will stop for a particular document.
         format: duration
         type: string
     required:
@@ -289,9 +233,7 @@ definitions:
   HighWaterMarkChangeDetectionPolicy:
     allOf:
       - $ref: '#/definitions/DataChangeDetectionPolicy'
-    description: >-
-      Defines a data change detection policy that captures changes based on the
-      value of a high water mark column.
+    description: Defines a data change detection policy that captures changes based on the value of a high water mark column.
     properties:
       highWaterMarkColumnName:
         description: Gets or sets the name of the high water mark column.
@@ -300,21 +242,13 @@ definitions:
       - highWaterMarkColumnName
     x-ms-discriminator-value: '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
   Index:
-    description: >-
-      Represents an index definition in Azure Search, which describes the fields
-      and search behavior of an index.
+    description: 'Represents an index definition in Azure Search, which describes the fields and search behavior of an index.'
     properties:
       corsOptions:
         $ref: '#/definitions/CorsOptions'
-        description: >-
-          Gets or sets options to control Cross-Origin Resource Sharing (CORS)
-          for the index.
+        description: Gets or sets options to control Cross-Origin Resource Sharing (CORS) for the index.
       defaultScoringProfile:
-        description: >-
-          Gets or sets the name of the scoring profile to use if none is
-          specified in the query. If this property is not set and no scoring
-          profile is specified in the query, then default scoring (tf-idf) will
-          be used.
+        description: 'Gets or sets the name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used.'
         type: string
       fields:
         description: Gets or sets the fields of the index.
@@ -340,9 +274,7 @@ definitions:
       - name
       - fields
   IndexGetStatisticsResult:
-    description: >-
-      Statistics for a given index. Statistics are collected periodically and
-      are not guaranteed to always be up-to-date.
+    description: Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
     properties:
       documentCount:
         description: Gets the number of documents in the index.
@@ -356,9 +288,7 @@ definitions:
         type: integer
     x-ms-external: true
   IndexListResult:
-    description: >-
-      Response from a List Indexes request. If successful, it includes the full
-      definitions of all indexes.
+    description: 'Response from a List Indexes request. If successful, it includes the full definitions of all indexes.'
     properties:
       value:
         description: Gets the indexes in the Search service.
@@ -373,9 +303,7 @@ definitions:
       url: 'https://msdn.microsoft.com/library/azure/dn946891.aspx'
     properties:
       dataSourceName:
-        description: >-
-          Gets or sets the name of the datasource from which this indexer reads
-          data.
+        description: Gets or sets the name of the datasource from which this indexer reads data.
         type: string
       description:
         description: Gets or sets the description of the indexer.
@@ -402,9 +330,7 @@ definitions:
     description: Represents the current status and execution history of an indexer.
     properties:
       executionHistory:
-        description: >-
-          History of the recent indexer executions, sorted in reverse
-          chronological order.
+        description: 'History of the recent indexer executions, sorted in reverse chronological order.'
         items:
           $ref: '#/definitions/IndexerExecutionResult'
         readOnly: true
@@ -422,9 +348,7 @@ definitions:
     description: Represents result of an individual indexer execution.
     properties:
       endTime:
-        description: >-
-          Gets the end time of this indexer execution, if the execution has
-          already completed.
+        description: 'Gets the end time of this indexer execution, if the execution has already completed.'
         format: date-time
         readOnly: true
         type: string
@@ -447,17 +371,12 @@ definitions:
         readOnly: true
         type: string
       itemsFailed:
-        description: >-
-          Gets the number of items that failed to be indexed during this indexer
-          execution.
+        description: Gets the number of items that failed to be indexed during this indexer execution.
         format: int32
         readOnly: true
         type: integer
       itemsProcessed:
-        description: >-
-          Gets the number of items that were processed during this indexer
-          execution. This includes both successfully processed items and items
-          where indexing was attempted but failed.
+        description: Gets the number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed.
         format: int32
         readOnly: true
         type: integer
@@ -482,9 +401,7 @@ definitions:
     x-ms-enum:
       name: IndexerExecutionStatus
   IndexerListResult:
-    description: >-
-      Response from a List Indexers request. If successful, it includes the full
-      definitions of all indexers.
+    description: 'Response from a List Indexers request. If successful, it includes the full definitions of all indexers.'
     properties:
       value:
         description: Gets the indexers in the Search service.
@@ -506,24 +423,14 @@ definitions:
     description: Represents parameters for indexer execution.
     properties:
       base64EncodeKeys:
-        description: >-
-          Gets or sets whether indexer will base64-encode all values that are
-          inserted into key field of the target index. This is needed if keys
-          can contain characters that are invalid in keys (such as dot '.').
-          Default is false.
+        description: "Gets or sets whether indexer will base64-encode all values that are inserted into key field of the target index. This is needed if keys can contain characters that are invalid in keys (such as dot '.'). Default is false."
         type: boolean
       maxFailedItems:
-        description: >-
-          Gets or sets the maximum number of items that can fail indexing for
-          indexer execution to still be considered successful. -1 means no
-          limit. Default is 0.
+        description: Gets or sets the maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0.
         format: int32
         type: integer
       maxFailedItemsPerBatch:
-        description: >-
-          Gets or sets the maximum number of items in a single batch that can
-          fail indexing for the batch to still be considered successful. -1
-          means no limit. Default is 0.
+        description: Gets or sets the maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0.
         format: int32
         type: integer
   IndexingSchedule:
@@ -544,9 +451,7 @@ definitions:
     description: Represents an item- or document-level indexing error.
     properties:
       errorMessage:
-        description: >-
-          Gets the message describing the error that occurred while attempting
-          to index the item.
+        description: Gets the message describing the error that occurred while attempting to index the item.
         readOnly: true
         type: string
       key:
@@ -556,9 +461,7 @@ definitions:
   MagnitudeScoringFunction:
     allOf:
       - $ref: '#/definitions/ScoringFunction'
-    description: >-
-      Defines a function that boosts scores based on the magnitude of a numeric
-      field.
+    description: Defines a function that boosts scores based on the magnitude of a numeric field.
     externalDocs:
       url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
     properties:
@@ -581,9 +484,7 @@ definitions:
         format: double
         type: number
       constantBoostBeyondRange:
-        description: >-
-          Gets or sets a value indicating whether to apply a constant boost for
-          field values beyond the range end value; default is false.
+        description: Gets or sets a value indicating whether to apply a constant boost for field values beyond the range end value; default is false.
         type: boolean
     required:
       - boostingRangeStart
@@ -613,29 +514,21 @@ definitions:
         type: string
     x-ms-azure-resource: true
   ScoringFunction:
-    description: >-
-      Abstract base class for functions that can modify document scores during
-      ranking.
+    description: Abstract base class for functions that can modify document scores during ranking.
     discriminator: type
     externalDocs:
       url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
     properties:
       boost:
-        description: >-
-          Gets or sets a multiplier for the raw score. Must be a positive number
-          not equal to 1.0.
+        description: Gets or sets a multiplier for the raw score. Must be a positive number not equal to 1.0.
         format: double
         type: number
       fieldName:
-        description: >-
-          Gets or sets the name of the field used as input to the scoring
-          function.
+        description: Gets or sets the name of the field used as input to the scoring function.
         type: string
       interpolation:
         $ref: '#/definitions/ScoringFunctionInterpolation'
-        description: >-
-          Gets or sets a value indicating how boosting will be interpolated
-          across document scores; defaults to "Linear".
+        description: 'Gets or sets a value indicating how boosting will be interpolated across document scores; defaults to "Linear".'
       type:
         type: string
     required:
@@ -644,9 +537,7 @@ definitions:
       - boost
     x-ms-external: true
   ScoringFunctionAggregation:
-    description: >-
-      Defines the aggregation function used to combine the results of all the
-      scoring functions in a scoring profile.
+    description: Defines the aggregation function used to combine the results of all the scoring functions in a scoring profile.
     enum:
       - sum
       - average
@@ -657,9 +548,7 @@ definitions:
     x-ms-enum:
       name: ScoringFunctionAggregation
   ScoringFunctionInterpolation:
-    description: >-
-      Defines the function used to interpolate score boosting across a range of
-      documents.
+    description: Defines the function used to interpolate score boosting across a range of documents.
     enum:
       - linear
       - constant
@@ -669,22 +558,15 @@ definitions:
     x-ms-enum:
       name: ScoringFunctionInterpolation
   ScoringProfile:
-    description: >-
-      Defines parameters for an Azure Search index that influence scoring in
-      search queries.
+    description: Defines parameters for an Azure Search index that influence scoring in search queries.
     externalDocs:
       url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
     properties:
       functionAggregation:
         $ref: '#/definitions/ScoringFunctionAggregation'
-        description: >-
-          Gets or sets a value indicating how the results of individual scoring
-          functions should be combined. Defaults to "Sum". Ignored if there are
-          no scoring functions.
+        description: 'Gets or sets a value indicating how the results of individual scoring functions should be combined. Defaults to "Sum". Ignored if there are no scoring functions.'
       functions:
-        description: >-
-          Gets the collection of functions that influence the scoring of
-          documents.
+        description: Gets the collection of functions that influence the scoring of documents.
         items:
           $ref: '#/definitions/ScoringFunction'
         type: array
@@ -695,24 +577,17 @@ definitions:
         type: string
       text:
         $ref: '#/definitions/TextWeights'
-        description: >-
-          Gets or sets parameters that boost scoring based on text matches in
-          certain index fields.
+        description: Gets or sets parameters that boost scoring based on text matches in certain index fields.
     required:
       - name
     x-ms-external: true
   SoftDeleteColumnDeletionDetectionPolicy:
     allOf:
       - $ref: '#/definitions/DataDeletionDetectionPolicy'
-    description: >-
-      Defines a data deletion detection policy that implements a soft-deletion
-      strategy. It determines whether an item should be deleted based on the
-      value of a designated 'soft delete' column.
+    description: "Defines a data deletion detection policy that implements a soft-deletion strategy. It determines whether an item should be deleted based on the value of a designated 'soft delete' column."
     properties:
       softDeleteColumnName:
-        description: >-
-          Gets or sets the name of the column to use for soft-deletion
-          detection.
+        description: Gets or sets the name of the column to use for soft-deletion detection.
         type: string
       softDeleteMarkerValue:
         description: Gets or sets the marker value that indentifies an item as deleted.
@@ -721,9 +596,7 @@ definitions:
   SqlIntegratedChangeTrackingPolicy:
     allOf:
       - $ref: '#/definitions/DataChangeDetectionPolicy'
-    description: >-
-      Defines a data change detection policy that captures changes using the
-      Integrated Change Tracking feature of Azure SQL Database.
+    description: Defines a data change detection policy that captures changes using the Integrated Change Tracking feature of Azure SQL Database.
     x-ms-discriminator-value: '#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy'
   StorageAccount:
     allOf:
@@ -798,26 +671,17 @@ definitions:
         $ref: '#/definitions/CustomDomain'
         description: Gets the user assigned custom domain assigned to this storage account.
       lastGeoFailoverTime:
-        description: >-
-          Gets the timestamp of the most recent instance of a failover to the
-          secondary location. Only the most recent timestamp is retained. This
-          element is not returned if there has never been a failover instance.
-          Only available if the accountType is StandardGRS or StandardRAGRS.
+        description: Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is StandardGRS or StandardRAGRS.
         format: date-time
         type: string
       primaryEndpoints:
         $ref: '#/definitions/Endpoints'
-        description: >-
-          Gets the URLs that are used to perform a retrieval of a public blob,
-          queue or table object.Note that StandardZRS and PremiumLRS accounts
-          only return the blob endpoint.
+        description: 'Gets the URLs that are used to perform a retrieval of a public blob, queue or table object.Note that StandardZRS and PremiumLRS accounts only return the blob endpoint.'
       primaryLocation:
         description: Gets the location of the primary for the storage account.
         type: string
       provisioningState:
-        description: >-
-          Gets the status of the storage account at the time the operation was
-          called.
+        description: Gets the status of the storage account at the time the operation was called.
         enum:
           - Creating
           - ResolvingDNS
@@ -828,20 +692,12 @@ definitions:
           name: ProvisioningState
       secondaryEndpoints:
         $ref: '#/definitions/Endpoints'
-        description: >-
-          Gets the URLs that are used to perform a retrieval of a public blob,
-          queue or table object from the secondary location of the storage
-          account. Only available if the accountType is StandardRAGRS.
+        description: 'Gets the URLs that are used to perform a retrieval of a public blob, queue or table object from the secondary location of the storage account. Only available if the accountType is StandardRAGRS.'
       secondaryLocation:
-        description: >-
-          Gets the location of the geo replicated secondary for the storage
-          account. Only available if the accountType is StandardGRS or
-          StandardRAGRS.
+        description: Gets the location of the geo replicated secondary for the storage account. Only available if the accountType is StandardGRS or StandardRAGRS.
         type: string
       statusOfPrimary:
-        description: >-
-          Gets the status indicating whether the primary location of the storage
-          account is available or unavailable.
+        description: Gets the status indicating whether the primary location of the storage account is available or unavailable.
         enum:
           - Available
           - Unavailable
@@ -850,10 +706,7 @@ definitions:
           modelAsString: false
           name: AccountStatus
       statusOfSecondary:
-        description: >-
-          Gets the status indicating whether the secondary location of the
-          storage account is available or unavailable. Only available if the
-          accountType is StandardGRS or StandardRAGRS.
+        description: Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the accountType is StandardGRS or StandardRAGRS.
         enum:
           - Available
           - Unavailable
@@ -880,10 +733,7 @@ definitions:
   StorageAccountPropertiesUpdateParameters:
     properties:
       accountType:
-        description: >-
-          Gets or sets the account type. Note that StandardZRS and PremiumLRS
-          accounts cannot be changed to other account types, and other account
-          types cannot be changed to StandardZRS or PremiumLRS.
+        description: 'Gets or sets the account type. Note that StandardZRS and PremiumLRS accounts cannot be changed to other account types, and other account types cannot be changed to StandardZRS or PremiumLRS.'
         enum:
           - Standard_LRS
           - Standard_ZRS
@@ -896,11 +746,7 @@ definitions:
           name: AccountType
       customDomain:
         $ref: '#/definitions/CustomDomain'
-        description: >-
-          User domain assigned to the storage account. Name is the CNAME source.
-          Only one custom domain is supported per storage account at this time.
-          To clear the existing custom domain, use an empty string for the
-          custom domain name property.
+        description: 'User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property.'
   StorageAccountRegenerateKeyParameters:
     properties:
       keyName:
@@ -920,9 +766,7 @@ definitions:
         type: object
     x-ms-azure-resource: true
   Suggester:
-    description: >-
-      Defines how the Suggest API should apply to a group of fields in the
-      index.
+    description: Defines how the Suggest API should apply to a group of fields in the index.
     properties:
       name:
         description: Gets or sets the name of the suggester.
@@ -931,9 +775,7 @@ definitions:
         $ref: '#/definitions/SuggesterSearchMode'
         description: Gets or sets a value indicating the capabilities of the suggester.
       sourceFields:
-        description: >-
-          Gets the list of field names to which the suggester applies. Each
-          field must be searchable.
+        description: Gets the list of field names to which the suggester applies. Each field must be searchable.
         items:
           type: string
         type: array
@@ -952,9 +794,7 @@ definitions:
   TagScoringFunction:
     allOf:
       - $ref: '#/definitions/ScoringFunction'
-    description: >-
-      Defines a function that boosts scores of documents with string values
-      matching a given list of tags.
+    description: Defines a function that boosts scores of documents with string values matching a given list of tags.
     externalDocs:
       url: 'https://msdn.microsoft.com/library/azure/dn798928.aspx'
     properties:
@@ -969,25 +809,18 @@ definitions:
     description: Provides parameter values to a tag scoring function.
     properties:
       tagsParameter:
-        description: >-
-          Gets or sets the name of the parameter passed in search queries to
-          specify the list of tags to compare against the target field.
+        description: Gets or sets the name of the parameter passed in search queries to specify the list of tags to compare against the target field.
         type: string
     required:
       - tagsParameter
   TextWeights:
-    description: >-
-      Defines weights on index fields for which matches should boost scoring in
-      search queries.
+    description: Defines weights on index fields for which matches should boost scoring in search queries.
     properties:
       weights:
         additionalProperties:
           format: double
           type: number
-        description: >-
-          Gets the dictionary of per-field weights to boost document scoring.
-          The keys are field names and the values are the weights for each
-          field.
+        description: Gets the dictionary of per-field weights to boost document scoring. The keys are field names and the values are the weights for each field.
         type: object
     required:
       - weights
@@ -1000,9 +833,7 @@ definitions:
         format: int32
         type: integer
       limit:
-        description: >-
-          Gets the maximum count of the resources that can be allocated in the
-          subscription.
+        description: Gets the maximum count of the resources that can be allocated in the subscription.
         format: int32
         type: integer
       name:
@@ -1048,10 +879,7 @@ info:
   title: Search and Storage
 parameters:
   SubscriptionIdParameter:
-    description: >-
-      Gets subscription credentials which uniquely identify Microsoft Azure
-      subscription. The subscription ID forms part of the URI for every service
-      call.
+    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
@@ -1132,7 +960,7 @@ paths:
       tags:
         - DataSources
       x-ms-request-id: request-id
-  '/datasources(''{dataSourceName}'')':
+  "/datasources('{dataSourceName}')":
     delete:
       consumes:
         - application/json
@@ -1214,9 +1042,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: >-
-        Creates a new Azure Search datasource or updates a datasource if it
-        already exists.
+      description: Creates a new Azure Search datasource or updates a datasource if it already exists.
       externalDocs:
         url: 'https://msdn.microsoft.com/library/azure/dn946900.aspx'
       operationId: DataSources_CreateOrUpdate
@@ -1337,7 +1163,7 @@ paths:
       tags:
         - Indexers
       x-ms-request-id: request-id
-  '/indexers(''{indexerName}'')':
+  "/indexers('{indexerName}')":
     delete:
       consumes:
         - application/json
@@ -1419,9 +1245,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: >-
-        Creates a new Azure Search indexer or updates an indexer if it already
-        exists.
+      description: Creates a new Azure Search indexer or updates an indexer if it already exists.
       externalDocs:
         url: 'https://msdn.microsoft.com/library/azure/dn946899.aspx'
       operationId: Indexers_CreateOrUpdate
@@ -1467,13 +1291,11 @@ paths:
       tags:
         - Indexers
       x-ms-request-id: request-id
-  '/indexers(''{indexerName}'')/search.reset':
+  "/indexers('{indexerName}')/search.reset":
     post:
       consumes:
         - application/json
-      description: >-
-        Resets the change tracking state associated with an Azure Search
-        indexer.
+      description: Resets the change tracking state associated with an Azure Search indexer.
       externalDocs:
         url: 'https://msdn.microsoft.com/library/azure/dn946897.aspx'
       operationId: Indexers_Reset
@@ -1507,7 +1329,7 @@ paths:
       tags:
         - Indexers
       x-ms-request-id: request-id
-  '/indexers(''{indexerName}'')/search.run':
+  "/indexers('{indexerName}')/search.run":
     post:
       consumes:
         - application/json
@@ -1545,7 +1367,7 @@ paths:
       tags:
         - Indexers
       x-ms-request-id: request-id
-  '/indexers(''{indexerName}'')/search.status':
+  "/indexers('{indexerName}')/search.status":
     get:
       consumes:
         - application/json
@@ -1594,10 +1416,7 @@ paths:
         url: 'https://msdn.microsoft.com/library/azure/dn798923.aspx'
       operationId: Indexes_List
       parameters:
-        - description: >-
-            Selects which properties of the index definitions to retrieve.
-            Specified as a comma-separated list of JSON property names, or '*'
-            for all properties. The default is all properties.
+        - description: "Selects which properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
           in: query
           name: $select
           required: false
@@ -1668,7 +1487,7 @@ paths:
       tags:
         - Indexes
       x-ms-request-id: request-id
-  '/indexes(''{indexName}'')':
+  "/indexes('{indexName}')":
     delete:
       consumes:
         - application/json
@@ -1750,9 +1569,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: >-
-        Creates a new Azure Search index or updates an index if it already
-        exists.
+      description: Creates a new Azure Search index or updates an index if it already exists.
       externalDocs:
         url: 'https://msdn.microsoft.com/library/azure/dn800964.aspx'
       operationId: Indexes_CreateOrUpdate
@@ -1798,13 +1615,11 @@ paths:
       tags:
         - Indexes
       x-ms-request-id: request-id
-  '/indexes(''{indexName}'')/search.stats':
+  "/indexes('{indexName}')/search.stats":
     get:
       consumes:
         - application/json
-      description: >-
-        Returns statistics for the given index, including a document count and
-        storage usage.
+      description: 'Returns statistics for the given index, including a document count and storage usage.'
       externalDocs:
         url: 'https://msdn.microsoft.com/library/azure/dn798942.aspx'
       operationId: Indexes_GetStatistics
@@ -1848,10 +1663,7 @@ paths:
       description: Checks that account name is valid and is not in use.
       operationId: StorageAccounts_CheckNameAvailability
       parameters:
-        - description: >-
-            The name of the storage account within the specified resource group.
-            Storage account names must be between 3 and 24 characters in length
-            and use numbers and lower-case letters only.
+        - description: The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
           in: body
           name: accountName
           required: true
@@ -1880,9 +1692,7 @@ paths:
       consumes:
         - application/json
         - text/json
-      description: >-
-        Lists all the storage accounts available under the subscription. Note
-        that storage keys are not returned; use the ListKeys operation for this.
+      description: Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
       operationId: StorageAccounts_List
       parameters:
         - description: Client Api Version.
@@ -1910,9 +1720,7 @@ paths:
       consumes:
         - application/json
         - text/json
-      description: >-
-        Gets the current usage count and the limit for the resources under the
-        subscription.
+      description: Gets the current usage count and the limit for the resources under the subscription.
       operationId: Usage_List
       parameters:
         - description: Client Api Version.
@@ -1940,13 +1748,10 @@ paths:
       consumes:
         - application/json
         - text/json
-      description: >-
-        Lists all the storage accounts available under the given resource group.
-        Note that storage keys are not returned; use the ListKeys operation for
-        this.
+      description: Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
       operationId: StorageAccounts_ListByResourceGroup
       parameters:
-        - description: The name of the resource group within the user's subscription.
+        - description: "The name of the resource group within the user's subscription."
           in: path
           name: resourceGroupName
           required: true
@@ -1979,15 +1784,12 @@ paths:
       description: Deletes a storage account in Microsoft Azure.
       operationId: StorageAccounts_Delete
       parameters:
-        - description: The name of the resource group within the user's subscription.
+        - description: "The name of the resource group within the user's subscription."
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: >-
-            The name of the storage account within the specified resource group.
-            Storage account names must be between 3 and 24 characters in length
-            and use numbers and lower-case letters only.  
+        - description: 'The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  '
           in: path
           maxLength: 24
           minLength: 3
@@ -2016,21 +1818,15 @@ paths:
       consumes:
         - application/json
         - text/json
-      description: >-
-        Returns the properties for the specified storage account including but
-        not limited to name, account type, location, and account status. The
-        ListKeys operation should be used to retrieve storage keys.
+      description: 'Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.'
       operationId: StorageAccounts_GetProperties
       parameters:
-        - description: The name of the resource group within the user's subscription.
+        - description: "The name of the resource group within the user's subscription."
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: >-
-            The name of the storage account within the specified resource group.
-            Storage account names must be between 3 and 24 characters in length
-            and use numbers and lower-case letters only.  
+        - description: 'The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  '
           in: path
           maxLength: 24
           minLength: 3
@@ -2059,40 +1855,22 @@ paths:
       consumes:
         - application/json
         - text/json
-      description: >-
-        Updates the account type or tags for a storage account. It can also be
-        used to add a custom domain (note that custom domains cannot be added
-        via the Create operation). Only one custom domain is supported per
-        storage account. In order to replace a custom domain, the old value must
-        be cleared before a new value may be set. To clear a custom domain,
-        simply update the custom domain with empty string. Then call update
-        again with the new cutsom domain name. The update API can only be used
-        to update one of tags, accountType, or customDomain per call. To update
-        multiple of these properties, call the API multiple times with one
-        change per call. This call does not change the storage keys for the
-        account. If you want to change storage account keys, use the
-        RegenerateKey operation. The location and name of the storage account
-        cannot be changed after creation.
+      description: 'Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.'
       operationId: StorageAccounts_Update
       parameters:
-        - description: The name of the resource group within the user's subscription.
+        - description: "The name of the resource group within the user's subscription."
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: >-
-            The name of the storage account within the specified resource group.
-            Storage account names must be between 3 and 24 characters in length
-            and use numbers and lower-case letters only.  
+        - description: 'The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  '
           in: path
           maxLength: 24
           minLength: 3
           name: accountName
           required: true
           type: string
-        - description: >-
-            The parameters to update on the account. Note that only one property
-            can be changed at a time using this API. 
+        - description: 'The parameters to update on the account. Note that only one property can be changed at a time using this API. '
           in: body
           name: parameters
           required: true
@@ -2120,23 +1898,15 @@ paths:
       consumes:
         - application/json
         - text/json
-      description: >-
-        Asynchronously creates a new storage account with the specified
-        parameters. Existing accounts cannot be updated with this API and should
-        instead use the Update Storage Account API. If an account is already
-        created and subsequent PUT request is issued with exact same set of
-        properties, then HTTP 200 would be returned. 
+      description: 'Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned. '
       operationId: StorageAccounts_Create
       parameters:
-        - description: The name of the resource group within the user's subscription.
+        - description: "The name of the resource group within the user's subscription."
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: >-
-            The name of the storage account within the specified resource group.
-            Storage account names must be between 3 and 24 characters in length
-            and use numbers and lower-case letters only.  
+        - description: 'The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  '
           in: path
           maxLength: 24
           minLength: 3
@@ -2216,24 +1986,19 @@ paths:
       description: Regenerates the access keys for the specified storage account.
       operationId: StorageAccounts_RegenerateKey
       parameters:
-        - description: The name of the resource group within the user's subscription.
+        - description: "The name of the resource group within the user's subscription."
           in: path
           name: resourceGroupName
           required: true
           type: string
-        - description: >-
-            The name of the storage account within the specified resource group.
-            Storage account names must be between 3 and 24 characters in length
-            and use numbers and lower-case letters only.  
+        - description: 'The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  '
           in: path
           maxLength: 24
           minLength: 3
           name: accountName
           required: true
           type: string
-        - description: >-
-            Specifies name of the key which should be regenerated. key1 or key2
-            for the default keys
+        - description: Specifies name of the key which should be regenerated. key1 or key2 for the default keys
           in: body
           name: regenerateKey
           required: true

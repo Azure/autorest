@@ -4,9 +4,12 @@
   "description": "Deprecated Library with typescript type definitions for node",
   "version": "",
   "dependencies": {
-    "ms-rest": "^2.3.3"
+    "ms-rest": "^2.3.2"
   },
-  "keywords": [ "node", "azure" ],
+  "keywords": [
+    "node",
+    "azure"
+  ],
   "license": "MIT",
   "main": "./lib/deprecated.js",
   "types": "./lib/deprecated.d.ts",

@@ -4,10 +4,13 @@
   "description": "SwaggerPetstore Library with typescript type definitions for node",
   "version": "",
   "dependencies": {
-    "ms-rest": "^2.3.3",
+    "ms-rest": "^2.3.2",
     "ms-rest-azure": "^2.5.5"
   },
-  "keywords": [ "node", "azure" ],
+  "keywords": [
+    "node",
+    "azure"
+  ],
   "license": "MIT",
   "main": "./lib/swaggerPetstore.js",
   "types": "./lib/swaggerPetstore.d.ts",
