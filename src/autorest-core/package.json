@@ -34,7 +34,6 @@
   "typings": "./dist/main.d.ts",
   "devDependencies": {
     "@types/commonmark": "^0.27.0",
-    "@types/js-yaml": "^3.10.0",
     "@types/jsonpath": "^0.1.29",
     "@types/node": "^8.0.53",
     "@types/source-map": "0.5.0",
@@ -55,7 +54,6 @@
       "vscode-languageserver": "3.5.1",
       "commonmark": "^0.27.0",
       "file-url": "^2.0.2",
-      "js-yaml": "^3.8.4",
       "get-uri": "^2.0.0",
       "jsonpath": "1.0.0",
       "linq-es2015": "^2.4.25",
@@ -66,7 +64,7 @@
       "untildify": "^3.0.2",
       "urijs": "^1.18.10",
       "vscode-jsonrpc": "^3.3.1",
-      "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
+      "yaml-ast-parser": "0.0.40",
       "z-schema": "^3.19.0"
     },
     "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt );  txt = fs.readFileSync('./node_modules/npm/lib/pack.js','utf8').replace(`require.main.filename`, `require.resolve('../bin/npm-cli.js')`); fs.writeFileSync('./node_modules/npm/lib/pack.js', txt );"

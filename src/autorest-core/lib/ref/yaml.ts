@@ -33,7 +33,7 @@ export interface YAMLNodeWithPath {
  * Parsing
 */
 export function ParseToAst(rawYaml: string): YAMLNode {
-  return yamlAst.safeLoad(rawYaml, null) as YAMLNode;
+  return yamlAst.safeLoad(rawYaml) as YAMLNode;
 }
 
 export function* Descendants(yamlAstNode: YAMLNode, currentPath: JsonPath = [], deferResolvingMappings: boolean = false): Iterable<YAMLNodeWithPath> {
@@ -95,8 +95,9 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
   if (!yamlNode) {
     return () => null;
   }
-  if (yamlNode.errors.length > 0) {
-    for (const error of yamlNode.errors) {
+  const errors = yamlNode.errors.filter(_ => !_.isWarning);
+  if (errors.length > 0) {
+    for (const error of errors) {
       onError(`Syntax error: ${error.reason}`, error.mark.position);
     }
     return (yamlNode as any).valueFunc = () => null;
