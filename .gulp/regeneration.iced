@@ -33,7 +33,7 @@ task 'regenerate', 'regenerate samples', (done) ->
                 sed "-i", /\(node:\d+\)/g, "(node)", file  # node process IDs
                 # sed "-i", /\bfile:\/\/[^\s]*\/autorest[^\/\\]*/g, "", file  # blame locations
                 sed "-i", new RegExp("\\bfile:\\/+#{basefolder.replace(/\\/g,'/')}/","gi") , "/", file  # blame locations
-                sed "-i", /\s\'?[^\s]+[\/\\]autorest-core\'?(?=(\b|\\n))/g, " autorest-core", file  # autorest-core path as reported by bootstrapper (configuration artifact's 'version' field)
+                sed "-i", /\s\'?[^\s]+[\/\\]autorest-core["']?(?=(\b|\\n))/g, " autorest-core", file  # autorest-core path as reported by bootstrapper (configuration artifact's 'version' field)
                 # sed "-i", new RegExp("version: '.*autorest-core'","gi") , "", file  # autorest-core path as reported by bootstrapper
                 sed "-i", /\sat .*/g, "at ...", file                        # exception stack traces
                 sed "-i", /mem:\/\/\/[^: ]*/g, "mem", file                  # memory URIs (depend on timing)
@@ -56,7 +56,7 @@ task 'regenerate', 'regenerate samples', (done) ->
               .filter((file) -> file.match(/\.(yaml)$/))
               .forEach((file) -> 
                 sed "-i", /.*autorest[a-zA-Z0-9]*.src.*/gi, "", file  # source file names
-                sed "-i", /^version:.*autorest-core\'/gi , "", file  # autorest-core path as reported by bootstrapper again!
+                sed "-i", /^version:.*autorest-core\'?/gi , "", file  # autorest-core path as reported by bootstrapper again!
               )
 
             next null
