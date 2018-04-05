@@ -95,8 +95,9 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode, onError: 
   if (!yamlNode) {
     return () => null;
   }
-  if (yamlNode.errors.length > 0) {
-    for (const error of yamlNode.errors) {
+  const errors = yamlNode.errors.filter(_ => _.reason !== "Using tabs can lead to unpredictable results");
+  if (errors.length > 0) {
+    for (const error of errors) {
       onError(`Syntax error: ${error.reason}`, error.mark.position);
     }
     return (yamlNode as any).valueFunc = () => null;
