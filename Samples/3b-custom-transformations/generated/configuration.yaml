@@ -1,37 +1,44 @@
 ---
 directive:
   - from: storage.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.description'
-    set: Checks that the account name has sufficient cowbell (in order to prevent fevers).
-    reason: "We've experienced a lack of cowbell in storage account names."
+    where: >-
+      $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.description
+    set: >-
+      Checks that the account name has sufficient cowbell (in order to prevent
+      fevers).
+    reason: We've experienced a lack of cowbell in storage account names.
   - from: storage.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.description'
-    transform: '$ += " Make sure you add that extra cowbell."'
+    where: >-
+      $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.description
+    transform: $ += " Make sure you add that extra cowbell."
     reason: Make sure people know.
   - from: storage.json
     where: $.definitions.Usage.description
     transform: return $.toUpperCase()
-    reason: Our new guidelines require upper case descriptions here. Customers love it.
+    reason: >-
+      Our new guidelines require upper case descriptions here. Customers love
+      it.
   - from: swagger-document
     where: $.paths..operationId
     transform: 'return $.replace(/ies$/, "y")'
-    reason: "I don't like plural."
+    reason: I don't like plural.
   - from: code-model-v1
     where: '$.operations[*]'
     transform: >
-      const url = $.methods[0]["url"]; const res
-      = url.split("/Microsoft.Storage/")[1].split("/")[0]; $.name.raw = res;
+      const url = $.methods[0]["url"]; const res =
+      url.split("/Microsoft.Storage/")[1].split("/")[0]; $.name.raw = res;
       $.summary = JSON.stringify($, null, 2);
     reason: We wanna group methods by URI.
   - from: swagger-document
-    where: '$.definitions.*.additionalProperties'
+    where: $.definitions.*.additionalProperties
     transform: |
       return typeof $ === "boolean"
         ? ($ ? { type: "object" } : undefined)
         : $
     reason: polyfill
 input-file:
-  - 'https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json'
+  - >-
+    https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json
 output-artifact:
   - swagger-document.json
   - code-model-v1.yaml
@@ -267,11 +274,23 @@ perform-load: true
 scope-swagger-document/emitter:
   input-artifact: swagger-document
   is-object: true
-  output-uri-expr: "$config[\"output-file\"] || \n($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || \n$config[\"input-file\"][0].split('/').reverse()[0].split('\\\\').reverse()[0].replace(/\\.json$/, \"\")\n"
+  output-uri-expr: >
+    $config["output-file"] || 
+
+    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
+
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
+    "")
 scope-openapi-document/emitter:
   input-artifact: openapi-document
   is-object: true
-  output-uri-expr: "$config[\"output-file\"] || \n($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || \n$config[\"input-file\"][0].split('/').reverse()[0].split('\\\\').reverse()[0].replace(/\\.json$/, \"\")\n"
+  output-uri-expr: >
+    $config["output-file"] || 
+
+    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
+
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
+    "")
 scope-cm/emitter:
   input-artifact: code-model-v1
   is-object: true
@@ -280,44 +299,25 @@ scope-cm/emitter:
 client-side-validation: true
 declare-directive:
   set: '{ transform: `return ${JSON.stringify($)}` }'
-  where-operation: >-
+  where-operation: |-
     (() => {
-
       switch ($context.from) {
-
         case "code-model-v1":
-
-          return { from: "code-model-v1", where:
-    `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
-
+          return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
         case "swagger-document":
-
         default:
-
-          return { from: "swagger-document", where: `$.paths.*[?(@.operationId ==
-    ${JSON.stringify($)})]` };
-
+          return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
       }
-
     })()
-  where-model: >-
+  where-model: |-
     (() => {
-
       switch ($context.from) {
-
         case "code-model-v1":
-
           throw "not implemented";
-
         case "swagger-document":
-
         default:
-
-          return { from: "swagger-document", where:
-    `$.definitions[${JSON.stringify($)}]` };
-
+          return { from: "swagger-document", where: `$.definitions[${JSON.stringify($)}]` };
       }
-
     })()
   remove-operation: |-
     {
@@ -337,41 +337,25 @@ declare-directive:
       "where-model": $,
       transform: 'return undefined'
     }
-  rename-model: >-
+  rename-model: |-
     [{
-
       from: 'swagger-document',
-
       where: '$.definitions',
-
-      transform: `if ($[${JSON.stringify($.from)}]) { $[${JSON.stringify($.to)}]
-    = $[${JSON.stringify($.from)}]; delete $[${JSON.stringify($.from)}]; }`
-
+      transform: `if ($[${JSON.stringify($.from)}]) { $[${JSON.stringify($.to)}] = $[${JSON.stringify($.from)}]; delete $[${JSON.stringify($.from)}]; }`
     }, {
-
       from: 'swagger-document',
-
       where: `$..['$ref']`,
-
-      transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}"
-    : $`
-
+      transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
     }]
   remove-property: |-
     {
       from: 'swagger-document',
       transform: `delete $.properties[${JSON.stringify($)}]`
     }
-  rename-property: >-
+  rename-property: |-
     {
-
       from: 'swagger-document',
-
-      transform: `if ($.properties[${JSON.stringify($.from)}])
-    { $.properties[${JSON.stringify($.to)}]
-    = $.properties[${JSON.stringify($.from)}]; delete
-    $.properties[${JSON.stringify($.from)}]; }`
-
+      transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
     }
 used-extension:
   - '["@microsoft.azure/autorest.csharp","~2.2.51"]'
@@ -396,31 +380,50 @@ help-content:
         type: string
         required: true
       - key: license-header
-        description: 'text to include as a header comment in generated files (magic strings: MICROSOFT_MIT, MICROSOFT_APACHE, MICROSOFT_MIT_NO_VERSION, MICROSOFT_APACHE_NO_VERSION, MICROSOFT_MIT_NO_CODEGEN)'
+        description: >-
+          text to include as a header comment in generated files (magic strings:
+          MICROSOFT_MIT, MICROSOFT_APACHE, MICROSOFT_MIT_NO_VERSION,
+          MICROSOFT_APACHE_NO_VERSION, MICROSOFT_MIT_NO_CODEGEN)
         type: string
       - key: payload-flattening-threshold
-        description: 'max. number of properties in a request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as individual method arguments instead'
+        description: >-
+          max. number of properties in a request body. If the number of
+          properties in the request body is less than or equal to this value,
+          these properties will be represented as individual method arguments
+          instead
         type: number
       - key: add-credentials
-        description: include a credential property and constructor parameter supporting different authentication behaviors
+        description: >-
+          include a credential property and constructor parameter supporting
+          different authentication behaviors
       - key: override-client-name
-        description: overrides the name of the client class (usually derived from $.info.title)
+        description: >-
+          overrides the name of the client class (usually derived from
+          $.info.title)
         type: string
       - key: use-internal-constructors
-        description: generate constructors with internal instead of public visibility (useful for convenience layers)
+        description: >-
+          generate constructors with internal instead of public visibility
+          (useful for convenience layers)
       - key: sync-methods
-        description: 'determines amount of synchronous wrappers to generate; default: essential'
+        description: >-
+          determines amount of synchronous wrappers to generate; default:
+          essential
         type: '"essential" | "all" | "none"'
       - key: use-datetimeoffset
         description: use DateTimeOffset instead of DateTime to model date/time types
       - key: client-side-validation
-        description: 'whether to validate parameters at the client side (according to OpenAPI definition) before making a request; default: true'
+        description: >-
+          whether to validate parameters at the client side (according to
+          OpenAPI definition) before making a request; default: true
         type: boolean
       - key: max-comment-columns
         description: maximum line width of comments before breaking into a new line
         type: number
       - key: output-file
-        description: 'generate all code into the specified, single file (instead of the usual folder structure)'
+        description: >-
+          generate all code into the specified, single file (instead of the
+          usual folder structure)
         type: string
       - key: sample-generation
         description: generate sample code from x-ms-examples (experimental)
