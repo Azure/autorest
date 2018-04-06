@@ -1,9 +1,9 @@
-import { Artifact } from '../../main';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { Artifact } from '../../main';
 import { Lazy } from "../lazy";
 import { Stringify, YAMLNode, Normalize } from "../ref/yaml";
 import { IdentitySourceMapping } from "../source-map/merging";

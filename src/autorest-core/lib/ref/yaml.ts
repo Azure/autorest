@@ -3,6 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+ // TODO: the following is only required because safeDump of "yaml-ast-parser" has this bug: https://github.com/mulesoft-labs/yaml-ast-parser/issues/30
+ // PLEASE: remove the entire dependency to js-yaml once that is fixed!
+const { safeDump } = require("js-yaml");
+
 import * as yamlAst from "yaml-ast-parser";
 import { JsonPath } from "./jsonpath";
 import { NewEmptyObject } from "../parsing/stable-object";
@@ -227,7 +231,7 @@ export function Parse<T>(rawYaml: string, onError: (message: string, index: numb
 }
 
 export function Stringify<T>(object: T): string {
-  return "---\n" + yamlAst.safeDump(object, { skipInvalid: true });
+  return "---\n" + safeDump(object, { skipInvalid: true });
 }
 
 export function FastStringify<T>(obj: T): string {
