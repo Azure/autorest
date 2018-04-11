@@ -2,7 +2,7 @@ As we mentioned, we've migrated our build system to the latest dotnet-cli build 
 
 It took several weeks of effort to make this possible, and during this time we were constantly trying to keep in sync with the master branch. 
 
-It is remotely possible there are some regressions or glitches, if you find something that isn’t right, ping @fearthecowboy or @olydis asap, and we can look into it.
+It is remotely possible there are some regressions or glitches, if you find something that isn’t right, ping @fearthecowboy asap, and we can look into it.
 
 
 The nuget nightly builds are no longer being built, and they won’t be coming back (although, the existing builds will remain in perpetuity)
