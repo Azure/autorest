@@ -43,7 +43,7 @@ Any runtimes required for execution (above: dotnet) should be provided as depend
 ### `readme.md`
 
 The `readme.md` provides the configuration specifying *how* the extension is supposed to be used, i.e. how it fits into the pipeline and plays together with other plugins.
-See [autorest-extension-helloworld](https://github.com/olydis/autorest-extension-helloworld) for documentation and an example.
+See [autorest-extension-helloworld](https://github.com/Azure/autorest-extension-helloworld) for documentation and an example.
 
 
 ## Usage
@@ -58,7 +58,7 @@ use-extension:
   # published npm package
   "@microsoft.azure/openapi-validator": "~1.0.0"
   # GitHub repository
-  autorest-interactive: https://github.com/olydis/autorest-interactive
+  autorest-interactive: https://github.com/Azure/autorest.interactive
   # tgz package file
   swift-generator: https://github.com/Azure/autorest-swift-generator/releases/download/2.1.0/autorest-swift-generator-2.1.0.tgz
   # local package
