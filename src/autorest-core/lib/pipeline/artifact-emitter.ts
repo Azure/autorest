@@ -76,11 +76,18 @@ async function EmitArtifact(config: ConfigurationView, uri: string, handle: Data
   }
 }
 
-export async function EmitArtifacts(config: ConfigurationView, artifactTypeFilter: string /* what's set on the emitter */, uriResolver: (key: string) => string, scope: DataSource, isObject: boolean): Promise<void> {
+export async function EmitArtifacts(config: ConfigurationView, artifactTypeFilter: string | Array<string> | null /* what's set on the emitter */, uriResolver: (key: string) => string, scope: DataSource, isObject: boolean): Promise<void> {
   for (const key of await scope.Enum()) {
     const file = await scope.ReadStrict(key);
     const fileArtifact = file.GetArtifact();
-    if (fileArtifact === artifactTypeFilter) {
+
+    const ok = artifactTypeFilter ?
+      typeof artifactTypeFilter === "string" ? fileArtifact === artifactTypeFilter : // A string filter is a singular type
+        Array.isArray(artifactTypeFilter) ? artifactTypeFilter.includes(fileArtifact) : // an array is any one of the types
+          true : // if it's not a string or array, just emit it (no filter)
+      true; // if it's null, just emit it.
+
+    if (ok) {
       await EmitArtifact(config, uriResolver(file.Description), file, isObject);
     }
   }
