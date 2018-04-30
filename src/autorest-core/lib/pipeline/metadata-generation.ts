@@ -41,18 +41,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-internal static partial class SdkInfo
+namespace ${config.GetEntry("namespace")}
 {
-    public static IEnumerable<Tuple<string, string, string>> ApiInfo_${title}
-    {
-        get
-        {
-            return new Tuple<string, string, string>[]
-            {
+  internal static partial class SdkInfo
+  {
+      public static IEnumerable<Tuple<string, string, string>> ApiInfo_${title}
+      {
+          get
+          {
+              return new Tuple<string, string, string>[]
+              {
 ${tuples.map(x => `                ${x},`).join("\n")}
-            }.AsEnumerable();
-        }
-    }
+              }.AsEnumerable();
+          }
+      }
+  }
 }
 `, "source-file-csharp")]);
   };
