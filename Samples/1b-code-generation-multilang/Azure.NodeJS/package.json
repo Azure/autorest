@@ -4,7 +4,7 @@
   "description": "SwaggerPetstore Library with typescript type definitions for node",
   "version": "",
   "dependencies": {
-    "ms-rest": "^2.3.2",
+    "ms-rest": "^2.3.3",
     "ms-rest-azure": "^2.5.5"
   },
   "keywords": [
