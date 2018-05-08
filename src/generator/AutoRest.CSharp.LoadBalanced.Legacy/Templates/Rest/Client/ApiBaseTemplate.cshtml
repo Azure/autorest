@@ -173,6 +173,11 @@ namespace @Settings.Namespace
 
                 if (!executeResult.IsOK)
                 {
+                    if (string.IsNullOrEmpty(responseContent))
+                    {
+                        throw executeResult.GetExeptions();
+                    }
+			
                     switch (statusCode)
                     {
                         case 400:
