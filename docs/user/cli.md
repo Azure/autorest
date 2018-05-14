@@ -104,6 +104,7 @@ Also, see [Samples/2a-validation](../../Samples/2a-validation) for an example of
 |`--java`|Runs the java code generator|
 |`--ruby`|Runs the ruby code generator|
 |`--go`|Runs the go code generator|
+|`--typescript`|Runs the typescript code generator|
 |`--azureresourceschema`|Runs the AzureResourceSchema|
 | &nbsp; | |
 |`--azure-arm`|Uses the `Azure` version of the specified code generator|
