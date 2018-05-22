@@ -7,7 +7,7 @@ import { Stringify } from './ref/yaml';
 import { Extension, ExtensionManager, LocalExtension } from "@microsoft.azure/extension";
 import { ChildProcess } from "child_process";
 
-import { join } from "path";
+import { join, basename, dirname } from "path";
 import { Artifact } from './artifact';
 import * as Constants from './constants';
 import { DataHandle, DataStore } from './data-store/data-store';
@@ -197,6 +197,8 @@ export class ConfigurationView {
   private suppressor: Suppressor;
 
   /* @internal */ constructor(
+    /* @internal */public configurationFiles: { [key: string]: any; },
+    /* @internal */public fileSystem: IFileSystem,
     /* @internal */public messageEmitter: MessageEmitter,
     /* @internal */public configFileFolderUri: string,
     ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
@@ -241,10 +243,29 @@ export class ConfigurationView {
     }
     this.suppressor = new Suppressor(this);
     // this.Message({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
+
+    // treat this as a configuration property too.
+    (<any>(this.rawConfig)).configurationFiles = configurationFiles;
   }
 
   public get Keys(): Array<string> {
     return Object.getOwnPropertyNames(this.config);
+  }
+
+  /* @internal */ public updateConfigurationFile(filename: string, content: string) {
+    // only name itself is allowed here, no path
+    filename = basename(filename);
+
+    const keys = Object.getOwnPropertyNames(this.configurationFiles);
+
+    if (keys && keys.length > 0) {
+      const path = dirname(keys[0]);
+      if (path.startsWith("file://")) {
+        // the configuration is a file path
+        // we can save the configuration file to the target location
+        this.GeneratedFile.Dispatch({ content, type: "configuration", uri: `${path}/${filename}` });
+      }
+    }
   }
 
   public Dump(title: string = ""): void {
@@ -255,6 +276,7 @@ export class ConfigurationView {
   }
 
   /* @internal */ public get Indexer(): ConfigurationView {
+
     return new Proxy<ConfigurationView>(this, {
       get: (target, property) => {
         return property in target.config ? (<any>target.config)[property] : this[property];
@@ -398,7 +420,7 @@ export class ConfigurationView {
   }
 
   public GetNestedConfigurationImmediate(...scope: any[]): ConfigurationView {
-    return new ConfigurationView(this.messageEmitter, this.configFileFolderUri, ...scope, this.config).Indexer;
+    return new ConfigurationView(this.configurationFiles, this.fileSystem, this.messageEmitter, this.configFileFolderUri, ...scope, this.config).Indexer;
   }
 
   // message pipeline (source map resolution, filter, ...)
@@ -555,7 +577,6 @@ export class ConfigurationView {
   }
 }
 
-
 export class Configuration {
   public constructor(
     private fileSystem: IFileSystem = new RealFileSystem(),
@@ -569,7 +590,12 @@ export class Configuration {
       configFile,
       contextConfig.DataStore.getDataSink());
 
-    const blocks = hConfig.map(each => {
+    if (hConfig.length === 1 && hConfig[0].info === null && configFile.Description.toLowerCase().endsWith(".md")) {
+      // this is a whole file, and it's a markdown file.
+      return [];
+    }
+
+    const blocks = hConfig.filter(each => each).map(each => {
       const block = each.data.ReadObject<AutoRestConfigurationImpl>() || {};
       if (typeof block !== "object") {
         contextConfig.Message({
@@ -656,8 +682,9 @@ export class Configuration {
       : null;
     const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, "./") : (this.configFileOrFolderUri || "file:///");
 
+    const configurationFiles: { [key: string]: any; } = {};
     const configSegments: any[] = [];
-    const createView = (segments: any[] = configSegments) => new ConfigurationView(messageEmitter, configFileFolderUri, ...segments);
+    const createView = (segments: any[] = configSegments) => new ConfigurationView(configurationFiles, this.fileSystem, messageEmitter, configFileFolderUri, ...segments);
     const addSegments = async (configs: any[]): Promise<any[]> => { const segs = await this.DesugarRawConfigs(configs); configSegments.push(...segs); return segs; };
 
     // 1. overrides (CLI, ...)
@@ -665,6 +692,10 @@ export class Configuration {
     // 2. file
     if (configFileUri !== null) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
+
+      // add loaded files to the input files.
+      configurationFiles[configFileUri] = (await inputView.ReadStrict(configFileUri)).ReadData();
+
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(configFileUri),
         createView(),
@@ -676,6 +707,8 @@ export class Configuration {
     const includeFn = async () => {
       while (true) {
         const tmpView = createView();
+
+        // add loaded files to the input files.
         const additionalConfigs = (await tmpView.IncludedConfigurationFiles(this.fileSystem, addedConfigs));
         if (additionalConfigs.length === 0) {
           break;
@@ -690,6 +723,7 @@ export class Configuration {
             addedConfigs.add(additionalConfig);
             // merge config
             const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
+            configurationFiles[additionalConfig] = (await inputView.ReadStrict(additionalConfig)).ReadData();
             const blocks = await this.ParseCodeBlocks(
               await inputView.ReadStrict(additionalConfig),
               tmpView,
@@ -811,7 +845,6 @@ export class Configuration {
         }
       }
     }
-
     return createView().Indexer;
   }
   public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders: boolean = false): Promise<string | null> {

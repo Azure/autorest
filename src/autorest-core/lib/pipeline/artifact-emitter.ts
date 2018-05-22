@@ -80,7 +80,6 @@ export async function EmitArtifacts(config: ConfigurationView, artifactTypeFilte
   for (const key of await scope.Enum()) {
     const file = await scope.ReadStrict(key);
     const fileArtifact = file.GetArtifact();
-
     const ok = artifactTypeFilter ?
       typeof artifactTypeFilter === "string" ? fileArtifact === artifactTypeFilter : // A string filter is a singular type
         Array.isArray(artifactTypeFilter) ? artifactTypeFilter.includes(fileArtifact) : // an array is any one of the types

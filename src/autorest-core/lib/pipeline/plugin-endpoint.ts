@@ -15,6 +15,10 @@ import { Exception } from "../exception";
 import { Message, Channel, ArtifactMessage } from "../message";
 import { Readable, Writable } from "stream";
 import { Artifact } from "../artifact";
+import { RealFileSystem } from "../file-system";
+import { CreateFolderUri } from "@microsoft.azure/async-io";
+import { ConfigurationView } from "../../main";
+import { EnsureIsFolderUri } from "../ref/uri";
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
@@ -141,11 +145,11 @@ export class AutoRestExtension extends EventEmitter {
     return this.apiTarget.GetPluginNames(cancellationToken);
   }
 
-  public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataSource, sink: DataSink, onFile: (data: DataHandle) => void, onMessage: (message: Message) => void, cancellationToken: CancellationToken): Promise<boolean> {
+  public async Process(pluginName: string, configuration: (key: string) => any, configurationView: ConfigurationView, inputScope: DataSource, sink: DataSink, onFile: (data: DataHandle) => void, onMessage: (message: Message) => void, cancellationToken: CancellationToken): Promise<boolean> {
     const sid = AutoRestExtension.CreateSessionId();
 
     // register endpoint
-    this.apiInitiatorEndpoints[sid] = AutoRestExtension.CreateEndpointFor(pluginName, configuration, inputScope, sink, onFile, onMessage, cancellationToken);
+    this.apiInitiatorEndpoints[sid] = AutoRestExtension.CreateEndpointFor(pluginName, configuration, configurationView, inputScope, sink, onFile, onMessage, cancellationToken);
 
     // dispatch
     const result = await this.apiTarget.Process(pluginName, sid, cancellationToken);
@@ -159,7 +163,7 @@ export class AutoRestExtension extends EventEmitter {
     return result;
   }
 
-  private static CreateEndpointFor(pluginName: string, configuration: (key: string) => any, inputScope: DataSource, sink: DataSink, onFile: (data: DataHandle) => void, onMessage: (message: Message) => void, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
+  private static CreateEndpointFor(pluginName: string, configuration: (key: string) => any, configurationView: ConfigurationView, inputScope: DataSource, sink: DataSink, onFile: (data: DataHandle) => void, onMessage: (message: Message) => void, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
     const inputFileHandles = new LazyPromise(async () => {
       const names = await inputScope.Enum();
       return await Promise.all(names.map(fn => inputScope.ReadStrict(fn)));
@@ -192,8 +196,19 @@ export class AutoRestExtension extends EventEmitter {
     const apiInitiator: IAutoRestPluginInitiatorEndpoint = {
       FinishNotifications(): Promise<void> { return finishNotifications; },
       async ReadFile(filename: string): Promise<string> {
-        const file = await inputScope.ReadStrict(await friendly2internal(filename) || filename);
-        return file.ReadData();
+        try {
+          const file = await inputScope.ReadStrict(await friendly2internal(filename) || filename);
+          return file.ReadData();
+        } catch (E) {
+          // try getting the file from the output-folder
+          try {
+            const result = await configurationView.fileSystem.ReadFile(`${configurationView.OutputFolderUri}${filename}`);
+            return result;
+          } catch (E2) {
+            // no file there!
+            throw E;
+          }
+        }
       },
       async GetValue(key: string): Promise<any> {
         try {
@@ -204,9 +219,24 @@ export class AutoRestExtension extends EventEmitter {
         }
       },
       async ListInputs(artifactType?: string): Promise<string[]> {
-        return (await inputFileHandles)
-          .filter(x => typeof artifactType !== "string" || artifactType === x.GetArtifact())
+
+        if (artifactType && typeof artifactType !== "string") {
+          artifactType = undefined;
+        }
+        const inputs = (await inputFileHandles)
+          .filter(x => {
+            return typeof artifactType !== "string" || artifactType === x.GetArtifact()
+          })
           .map(x => x.Description);
+
+        // if the request returned items, or they didn't specify a path/artifacttype
+        if (inputs.length > 0 || artifactType === null || artifactType === undefined) {
+          return inputs;
+        }
+
+        // we'd like to be able to ask the host for a file directly (but only if it's supposed to be in the output-folder)
+        const t = configurationView.OutputFolderUri.length;
+        return (await configurationView.fileSystem.EnumerateFileUris(EnsureIsFolderUri(`${configurationView.OutputFolderUri}${artifactType || ""}`))).map(each => each.substr(t));
       },
 
       async WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void> {
@@ -238,10 +268,24 @@ export class AutoRestExtension extends EventEmitter {
           }
         }
 
+        if (message.Channel === Channel.Configuration) {
+          // special case. route the output to the config 
+          if (message.Key && message.Text) {
+            const key = [...message.Key];
+            if (key.length > 0) {
+              configurationView.updateConfigurationFile(key[0], message.Text);
+            }
+          }
+
+          await finishPrev;
+          notify();
+        }
+
         if (message.Channel === Channel.File) {
           // wire through `sink` in order to retrieve default artifact type
           const artifactMessage = message as ArtifactMessage;
           const artifact = artifactMessage.Details;
+
           await writeFileToSinkAndNotify(artifact.uri, artifact.content, artifact.type, artifact.sourceMap);
         }
 

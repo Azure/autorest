@@ -515,3 +515,9 @@ declare-directive:
       transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
     }
 ```
+
+``` yaml
+# preserve files that have been asked to preserve
+output-artifact:
+  - preserved-files
+```

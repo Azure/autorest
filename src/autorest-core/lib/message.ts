@@ -34,6 +34,9 @@ export enum Channel {
 
   /** File represents a file output from an extension. Details are a Artifact and are required.  */
   File = <any>"file",
+
+  /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
+  Configuration = <any>"configuration",
 }
 
 export interface SourceLocation {

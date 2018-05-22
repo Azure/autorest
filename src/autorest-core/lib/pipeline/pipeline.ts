@@ -131,6 +131,7 @@ function GetPlugin_External(host: AutoRestExtension, pluginName: string): Pipeli
     const result = await plugin.Process(
       pluginName,
       key => config.GetEntry(key as any),
+      config,
       input,
       sink,
       f => results.push(f),
