@@ -11,7 +11,8 @@
     "stripInternal": true,
     "target": "es2017",
     "types": [
-      "node"
+      "node",
+      "mocha"
     ],
     "typeRoots": [
       "./node_modules/@types"

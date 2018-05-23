@@ -14,7 +14,8 @@
     "stripInternal": true,
     "target": "es2017",
     "types": [
-      "node"
+      "node",
+      "mocha"
     ],
     "lib": [
       "esnext"

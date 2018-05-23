@@ -65,7 +65,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
     // call modeler
     const autorestPlugin = await GetAutoRestDotNetPlugin("modeler");
     const results: DataHandle[] = [];
-    const result = await autorestPlugin.Process("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, new QuickDataSource([swagger]), dataStore.getDataSink(), f => results.push(f), m => null, CancellationToken.None);
+    const result = await autorestPlugin.Process("modeler", key => { return ({ namespace: "SomeNamespace" } as any)[key]; }, config, new QuickDataSource([swagger]), dataStore.getDataSink(), f => results.push(f), m => null, CancellationToken.None);
     assert.strictEqual(result, true);
     if (results.length !== 1) {
       throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
@@ -106,6 +106,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
     const result = await autorestPlugin.Process(
       "csharp",
       key => config.GetEntry(key as any),
+      config,
       new QuickDataSource([swagger, codeModelHandle]),
       dataStore.getDataSink(),
       f => results.push(f),
@@ -122,6 +123,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
 
   // SKIPPING because this is using a local path for now
   @test @skip async "custom plugin module"() {
+    /*
     const cancellationToken = CancellationToken.None;
     const dataStore = new DataStore(cancellationToken);
     const scopeInput = dataStore.GetReadThroughScope(new RealFileSystem());
@@ -134,7 +136,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
 
     for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
       const result = await validationPlugin.Process(
-        pluginNames[pluginIndex], _ => null,
+        pluginNames[pluginIndex], _ => null,config,
         scopeInput,
         dataStore.getDataSink(),
         f => null,
@@ -142,5 +144,6 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
         cancellationToken);
       assert.strictEqual(result, true);
     }
+    */
   }
 }

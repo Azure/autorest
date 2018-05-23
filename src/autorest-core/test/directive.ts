@@ -30,7 +30,7 @@ import { Message, Channel } from "../lib/message";
     // muted run
     await autoRest.ResetConfiguration();
     await autoRest.AddConfiguration({ "azure-validator": true, "openapi-type": "arm" });
-    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "R4000", "PutRequestResponseScheme"] } });
+    await autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "R4000", "PutRequestResponseScheme", "R2029"] } });
     {
       const messages: Message[] = [];
       const dispose = autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Warning) { messages.push(m) } });

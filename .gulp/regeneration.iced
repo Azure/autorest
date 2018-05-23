@@ -57,6 +57,7 @@ task 'regenerate', 'regenerate samples', (done) ->
               .forEach((file) -> 
                 sed "-i", /.*autorest[a-zA-Z0-9]*.src.*/gi, "", file  # source file names
                 sed "-i", /^version:.*autorest-core["']?/gi , "", file  # autorest-core path as reported by bootstrapper again!
+                sed "-i", /file\:\/\/\/.*Custom transformations.*/gi, "", file  # fix path in file
               )
 
             next null

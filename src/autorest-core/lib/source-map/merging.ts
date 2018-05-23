@@ -11,6 +11,7 @@ import { JsonPath, stringify } from "../ref/jsonpath";
 import * as yaml from '../ref/yaml';
 import { Mappings } from "../ref/source-map";
 import { DataHandle, DataSink } from "../data-store/data-store";
+import { ResolvePath } from '../parsing/yaml';
 
 // // TODO: may want ASTy merge! (supporting circular structure and such?)
 function Merge(a: any, b: any, path: JsonPath = []): any {
@@ -84,7 +85,22 @@ export function ShallowCopy(input: any, ...filter: Array<string>): any {
 }
 
 
+function toJsValue(value: any) {
+  switch (typeof (value)) {
+    case 'undefined':
+      return "undefined";
+    case "boolean":
+    case "number":
+      return value;
+    case "object":
+      if (value === null) {
+        return "null";
+      }
+      return "true";
+  }
+  return `'${value}'`;
 
+}
 // Note: I am not convinced this works precisely as it should
 // but it works well enough for my needs right now
 // I will revisit it later.
@@ -121,7 +137,9 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
         if (match[0] === match.input) {
           // the target value should be the result without string twiddling
           if (jsAware > 0) {
-            return `'${resolve(match[0], match[1])}'`;
+            return toJsValue(resolve(match[0], match[1]));
+
+            // return `'${resolve(match[0], match[1])}'`;
           }
           return resolve(match[0], match[1]);
         }
@@ -143,7 +161,8 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
     }
   }
   if (jsAware > 0) {
-    return `'${value}'`;
+
+    return toJsValue(value);
   }
   return value;
 }
@@ -205,13 +224,15 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
   return result;
 }
 
-export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHandle[], sink: DataSink): Promise<DataHandle> {
-  let resultObject: any = {};
+export async function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHandle[], sink: DataSink, verifyOAI2: boolean = false): Promise<DataHandle> {
+  let mergedGraph: any = {};
   const mappings: Mappings = [];
+  let cancel = false;
   let failed = false;
+
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = yamlInputHandle.ReadData();
-    resultObject = Merge(resultObject, yaml.Parse(rawYaml, (message, index) => {
+    const inputGraph: any = yaml.Parse(rawYaml, (message, index) => {
       failed = true;
       if (config) {
         config.Message({
@@ -220,12 +241,105 @@ export function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHand
           Source: [{ document: yamlInputHandle.key, Position: IndexToPosition(yamlInputHandle, index) }]
         });
       }
-    }) || {});
+    }) || {};
 
+    mergedGraph = Merge(mergedGraph, inputGraph);
     pushAll(mappings, IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
+
+    if (verifyOAI2) {
+      // check for non-identical duplicate models and parameters
+      if (inputGraph.definitions) {
+        for (const model in inputGraph.definitions) {
+          const merged = mergedGraph.definitions[model];
+          const individual = inputGraph.definitions[model];
+          if (!deepCompare(individual, merged)) {
+            cancel = true;
+            const mergedHandle = await sink.WriteObject("merged YAMLs", mergedGraph, undefined, mappings, yamlInputHandles);
+            config.Message({
+              Channel: Channel.Error,
+              Key: ["Fatal/DuplicateModelCollsion"],
+              Text: `Duplicated model name with non-identical definitions`,
+              Source: [{ document: mergedHandle.key, Position: ResolvePath(mergedHandle, ['definitions', model]) }]
+
+            });
+          }
+        }
+      }
+
+      if (inputGraph.parameters) {
+        for (const parameter in inputGraph.parameters) {
+          const merged = mergedGraph.parameters[parameter];
+          const individual = inputGraph.parameters[parameter];
+          if (!deepCompare(individual, merged)) {
+            cancel = true;
+            const mergedHandle = await sink.WriteObject("merged YAMLs", mergedGraph, undefined, mappings, yamlInputHandles);
+            config.Message({
+              Channel: Channel.Error,
+              Key: ["Fatal/DuplicateParameterCollision"],
+              Text: `Duplicated global non-identical parameter definitions`,
+              Source: [{ document: mergedHandle.key, Position: ResolvePath(mergedHandle, ['parameters', parameter]) }]
+            });
+          }
+        }
+      }
+    }
   }
+
   if (failed) {
     throw new Error("Syntax errors encountered.");
   }
-  return sink.WriteObject("merged YAMLs", resultObject, undefined, mappings, yamlInputHandles);
+
+  if (cancel) {
+    config.CancellationTokenSource.cancel();
+    throw new Error("Operation Cancelled");
+  }
+
+  return sink.WriteObject("merged YAMLs", mergedGraph, undefined, mappings, yamlInputHandles);
+}
+
+function deepCompare(x: any, y: any) {
+  // if both x and y are null or undefined and exactly the same
+  if (x === y) {
+    return true;
+  }
+
+  // if they are not strictly equal, they both need to be Objects
+  if (!(x instanceof Object) || !(y instanceof Object)) {
+    return false;
+  }
+
+  for (var p in x) {
+    // other properties were tested using x.constructor === y.constructor
+    if (!x.hasOwnProperty(p)) {
+      continue;
+    }
+
+    // allows to compare x[ p ] and y[ p ] when set to undefined
+    if (!y.hasOwnProperty(p)) {
+      return false;
+    }
+
+    // if they have the same strict value or identity then they are equal
+    if (x[p] === y[p]) {
+      continue;
+    }
+
+    // Numbers, Strings, Functions, Booleans must be strictly equal
+    if (typeof (x[p]) !== "object") {
+      return false;
+    }
+
+    // Objects and Arrays must be tested recursively
+    if (!deepCompare(x[p], y[p])) {
+      return false;
+    }
+  }
+
+  for (p in y) {
+    // allows x[ p ] to be set to undefined
+    if (y.hasOwnProperty(p) && !x.hasOwnProperty(p)) {
+      return false;
+    }
+  }
+  return true;
 }

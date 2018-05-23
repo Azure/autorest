@@ -40,8 +40,9 @@
     "@types/commonmark": "^0.22.29",
     "@types/node": "^7.0.48",
     "@types/semver": "^5.3.30",
-    "mocha": "3.2.0",
-    "mocha-typescript": "1.0.22",
+    "@types/mocha": "5.2.0",
+    "mocha": "5.2.0",
+    "mocha-typescript": "1.1.14",
     "typescript": "2.6.2",
     "static-link": "^0.2.3",
     "shx": "0.2.2"

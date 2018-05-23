@@ -44,6 +44,7 @@ output-artifact:
   - code-model-v1.yaml
   - pipeline.yaml
   - configuration.yaml
+  - preserved-files
   - source-file-csharp
   - source-file-jsonrpcclient
 require: []
@@ -442,4 +443,6 @@ base-folder: .
 debug: false
 verbose: false
 disable-validation: false
+configurationFiles:
+  '
 __status: {}

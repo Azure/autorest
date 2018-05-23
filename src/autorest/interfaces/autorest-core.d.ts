@@ -84,6 +84,8 @@ export enum Channel {
     Hint,
     /** File represents a file output from an extension. Details are a Artifact and are required.  */
     File,
+    /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
+    Configuration,
 }
 export interface SourceLocation {
     document: string;
@@ -246,10 +248,6 @@ declare module 'autorest-core/lib/ref/jsonrpc' {
 export * from "vscode-jsonrpc";
 
 }
-declare module 'autorest-core/lib/ref/commonmark' {
-export { Node, Parser } from "commonmark";
-
-}
 declare module 'autorest-core/lib/file-system' {
 export interface IFileSystem {
     EnumerateFileUris(folderUri: string): Promise<Array<string>>;
@@ -313,6 +311,10 @@ export { Message, Channel } from 'autorest-core/lib/message';
 export { Artifact } from 'autorest-core/lib/artifact';
 export { AutoRest, ConfigurationView, IdentifyDocument, IsConfigurationExtension, IsConfigurationDocument, IsOpenApiExtension, LiterateToJson, IsOpenApiDocument } from 'autorest-core/lib/autorest-core';
 export { DocumentFormat, DocumentExtension, DocumentPatterns, DocumentType } from 'autorest-core/lib/document-type';
+
+}
+declare module 'autorest-core/lib/ref/commonmark' {
+export { Node, Parser } from "commonmark";
 
 }
 declare module 'autorest-core/help' {
@@ -501,6 +503,10 @@ export class MessageEmitter extends EventEmitter {
     constructor();
 }
 export class ConfigurationView {
+    configurationFiles: {
+        [key: string]: any;
+    };
+    fileSystem: IFileSystem;
     messageEmitter: MessageEmitter;
     configFileFolderUri: string;
     [name: string]: any;
