@@ -452,7 +452,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
     inputSwaggers[i] = await sink.WriteObject("prepared", swagger, undefined, mapping, [inputSwagger]);
   }
 
-  let hSwagger = await MergeYamls(config, inputSwaggers, sink);
+  let hSwagger = await MergeYamls(config, inputSwaggers, sink, true);
 
   // override info section
   const info: any = { title: candidateTitles[0] };

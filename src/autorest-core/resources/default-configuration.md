@@ -14,10 +14,23 @@ openapi-type: arm
 
 ### External Plugins
 
+``` yaml $(azureresourceschema) && $(preview)
+use-extension:
+  "@microsoft.azure/autorest.azureresourceschema": "preview"
+try-require: ./readme.azureresourceschema.md 
+```
+
+
 ``` yaml $(azureresourceschema)
 use-extension:
   "@microsoft.azure/autorest.azureresourceschema": "~2.0.14"
 try-require: ./readme.azureresourceschema.md 
+```
+
+``` yaml $(csharp) && $(preview)
+use-extension:
+  "@microsoft.azure/autorest.csharp": "preview"
+try-require: ./readme.csharp.md
 ```
 
 ``` yaml $(csharp)
@@ -31,10 +44,22 @@ use-extension:
   "@microsoft.azure/autorest.csharp": "~2.2.51"
 ```
 
+``` yaml $(go) && $(preview)
+use-extension:
+  "@microsoft.azure/autorest.go": "preview"
+try-require: ./readme.go.md
+```
+
 ``` yaml $(go)
 use-extension:
   "@microsoft.azure/autorest.go": "~2.1.47"
 try-require: ./readme.go.md
+```
+
+``` yaml $(java) && $(preview)
+use-extension:
+  "@microsoft.azure/autorest.java": "~2.1.32"
+try-require: ./readme.java.md
 ```
 
 ``` yaml $(java)
@@ -43,10 +68,22 @@ use-extension:
 try-require: ./readme.java.md
 ```
 
+``` yaml $(nodejs) && $(preview)
+use-extension:
+  "@microsoft.azure/autorest.nodejs": "preview"
+try-require: ./readme.nodejs.md
+```
+
 ``` yaml $(nodejs)
 use-extension:
   "@microsoft.azure/autorest.nodejs": "~2.1.25"
 try-require: ./readme.nodejs.md
+```
+
+``` yaml $(php) && preview
+use-extension:
+  "@microsoft.azure/autorest.php": "~2.0.12"
+try-require: ./readme.php.md
 ```
 
 ``` yaml $(php)
@@ -55,16 +92,33 @@ use-extension:
 try-require: ./readme.php.md
 ```
 
-``` yaml $(python)
+``` yaml $(python) && $(preview)
+use-extension:
+  "@microsoft.azure/autorest.python": "preview"
+try-require: ./readme.python.md
+```
+
+``` yaml $(python) 
 use-extension:
   "@microsoft.azure/autorest.python": "~2.1.26"
 try-require: ./readme.python.md
 ```
 
+``` yaml $(ruby) && $(preview)
+use-extension:
+  "@microsoft.azure/autorest.ruby": "preview"
+try-require: ./readme.ruby.md
+```
 ``` yaml $(ruby)
 use-extension:
   "@microsoft.azure/autorest.ruby": "~3.1.26"
 try-require: ./readme.ruby.md
+```
+ 
+``` yaml $(typescript) && $(preview)
+use-extension:
+  "@microsoft.azure/autorest.typescript": "preview"
+try-require: ./readme.typescript.md   
 ```
 
 ``` yaml $(typescript)
