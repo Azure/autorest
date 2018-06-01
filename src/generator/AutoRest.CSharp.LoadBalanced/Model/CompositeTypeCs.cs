@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
                 baseProperties = baseProperties.Where(b => properties.Contains(b.Property)).ReEnumerable();
 
-                int depth = baseProperties.Any() ? baseProperties.Max(p => p.Depth) : 0;
+                var depth = baseProperties.Any() ? baseProperties.Max(p => p.Depth) : 0;
                 return baseProperties.Concat(GetFilteredProperties().Select(p => new InheritedPropertyInfo(p, depth)));
             }
         }
