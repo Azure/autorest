@@ -35,6 +35,7 @@ namespace @Settings.Namespace
         JsonSerializerSettings serializationSettings { get; set; }
 
         JsonSerializerSettings deserializationSettings { get; set; }
+        Dictionary<string, string> customHeaders {get; set;}
     }
 
     public class ApiBaseConfig : IApiBaseConfig
@@ -47,6 +48,7 @@ namespace @Settings.Namespace
         public bool? overrideHostHeader { get; set; }
         public JsonSerializerSettings serializationSettings { get; set; }
         public JsonSerializerSettings deserializationSettings { get; set; }
+        public Dictionary<string, string> customHeaders {get; set;}
     }
 
     public abstract class ApiBase
@@ -59,6 +61,7 @@ namespace @Settings.Namespace
         private readonly bool _manualCalcUris;
         private readonly bool _overrideHostHeader;
         private readonly string _name;
+        public readonly Dictionary<string, string> _customHeaders;
 @EmptyLine
         protected ApiBase(IApiBaseConfig apiBaseConfig)
         {
@@ -70,6 +73,7 @@ namespace @Settings.Namespace
             _overrideHostHeader = apiBaseConfig.overrideHostHeader ?? false;
             _serializationSettings = apiBaseConfig.serializationSettings;
             _deserializationSettings = apiBaseConfig.deserializationSettings;
+            _customHeaders = apiBaseConfig.customHeaders;
         }
 @EmptyLine
         public virtual JsonSerializerSettings SerializationSettings =>

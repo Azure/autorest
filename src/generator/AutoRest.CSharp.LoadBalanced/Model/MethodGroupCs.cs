@@ -56,8 +56,8 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         /// </remarks>
         public Fixable<string> ExtensionTypeName
         {
-            get { return _extensionTypeName; }
-            set { _extensionTypeName.CopyFrom(value); }
+            get => _extensionTypeName;
+            set => _extensionTypeName.CopyFrom(value);
         }
 
         public override IEnumerable<string> Usings
